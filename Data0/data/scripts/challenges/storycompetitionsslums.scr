@@ -1,0 +1,265 @@
+import "StatsStuff.scr"
+import "ChallengeClasses.scr"
+
+sub main() 
+{
+	///0 - coop najszybciej znajdx item, pierwszy airdrop
+    Challenge("storyslums_00")
+    {
+        use StoryCompetitionClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("UseTrigger")
+        {
+            Trigger("cin_airdrop_trigger");
+        }
+        Duration(120.0);
+    }
+	
+	///1 - coop najszybciej znajdx item, drugi airdrop
+    Challenge("storyslums_01")
+    {
+        use StoryCompetitionClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("CompleteQuestPhase")
+        {
+        }
+        Duration(120.0);
+    }
+	
+	///2 - Dobiegnij do Huba bez poscigu, trasa po drugim airdropie do wiezy
+    Challenge("storyslums_02")
+    {
+        use StoryCompetitionClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("CompleteQuestPhase")
+        {
+        }
+        NegativeEvent("StartPursuit")
+        {
+            Level(2);
+        }
+        Duration(360.0);
+    }
+
+	
+    ///3 - Dostan sie na szczyt anteny w coop, pierwsza antena
+    Challenge("storyslums_03")
+    {
+        use StoryCompetitionClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("CompleteQuestPhase")
+        {		
+        }
+        Duration(150.0);
+    }
+
+    ///4 - Dostan sie na szczyt anteny w coop, wspinaczka na druga antene
+    Challenge("storyslums_04")
+    {
+        use StoryCompetitionClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("CompleteQuestPhase")
+        {
+        }
+        Duration(240.0);
+    } 
+	
+	///5 - Zabij X zombie coop, wioska rybacka
+    Challenge("storyslums_05")
+    {
+        use StoryCompetitionClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            Count(0);
+			InsideSensor("courier_firshermen_village_clear_area_01;courier_firshermen_village_clear_area_02");
+        }
+        Duration(120.0);
+    }
+	
+	///6 DOSTAN SIE NA DACH SZKOLY 
+	Challenge("storyslums_06")
+    {
+        use StoryCompetitionClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("CompleteQuestPhase")
+        {
+        }
+        Duration(180.0);
+    } 
+	
+	///7 - Dojscie Stelth z  szkoly do wierzy 
+    Challenge("storyslums_07")
+    {
+        use StoryCompetitionClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("CompleteQuestPhase")
+        {
+        }
+        NegativeEvent("StartPursuit")
+        {
+            Level(1);
+        }
+        Duration(180.0);
+    }
+    
+	/// 8 Zabicie Prima
+	/*Challenge("storyslums_08")
+    {
+        use StoryCompetitionClass();
+		Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            VictimPresetName("Prime;PrimeNight");
+            Count(1);
+        }
+        MinCount(1);
+        MinRange(180.0);	
+        OnlyOnce(false);
+        OnlyOnceCompleted(true);
+    }*/
+	
+	/// 9 Run do rakima po dialogu 
+	Challenge("storyslums_09")
+    {
+        use StoryCompetitionClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("CompleteQuestPhase")
+        {
+        }
+        Duration(150.0);
+    } 
+    
+	/// 10 Kill na demolition
+    Challenge("storyslums_10")
+    {
+        use AutostartingStoryCompetitionClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            Count(0);
+		}
+    } 
+    
+	/// 11 podkladanie ladunkow 
+	Challenge("storyslums_11")
+    {
+        use AutostartingStoryCompetitionClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("CompleteQuestPhase")
+        {
+        }
+    } 
+    
+	/// ATACK NA TIRA ZABIJANIE LUDZI RAISA
+	Challenge("storyslums_12") 
+    {
+        use StoryCompetitionClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            Count(0);
+            VictimType("HUMAN");
+        }
+		NegativeEvent("TakeDamage")
+		{
+			DamageType("Fire");
+		}
+        Duration(120.0);
+    }
+    
+	/// 13 szukanie wejscia na dach do raisa
+	Challenge("storyslums_13")
+    {
+        use StoryCompetitionClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("CompleteQuestPhase")
+        {
+        }
+		Duration(180.0);
+    } 
+    
+	/// 14 Kill parking
+	Challenge("storyslums_14") 
+    {
+        use StoryCompetitionClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            Count(0);
+            ForceEventCanBeCompleted(true);
+        }
+    }
+	/// 15 Kill arena 
+	Challenge("storyslums_15") 
+    {
+        use AutostartingStoryCompetitionClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            Count(0);
+        }
+    }
+	/// 16 Escape arena 
+	Challenge("storyslums_16")
+    {
+        use AutostartingStoryCompetitionClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("CompleteQuestPhase")
+        {
+        }
+    } 
+	/// 17 Kill w saviorsach
+	Challenge("storyslums_17") 
+    {
+        use StoryCompetitionClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            Count(0);
+            ForceEventCanBeCompleted(true);
+        }
+        Multiquest(true);
+    }
+	/// 19 Kill Spitter w Demolition
+	Challenge("storyslums_19") 
+    {
+        use AutostartingStoryCompetitionClass();
+		Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            VictimPresetName("Toad_Demolition");
+            Count(1);
+        }
+        MinCount(1);
+        MinRange(10000.0);	
+    }
+	
+	/// 20 Uciekanie z wiezowca
+	Challenge("storyslums_20")
+    {
+        use AutostartingStoryCompetitionClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("CompleteQuestPhase")
+        {
+            MinDistToDestination(20.0);
+        }
+    } 
+	
+	/// 21 Kill Demolisher na Arenie
+	Challenge("storyslums_21") 
+    {
+        use AutostartingStoryCompetitionClass();
+		Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            VictimPresetName("Demolisher");
+            Count(0);
+            CountDamage(true);
+        }
+        MinCount(1);
+        MinRange(10000.0);	
+        Special(true);
+    }
+	
+}

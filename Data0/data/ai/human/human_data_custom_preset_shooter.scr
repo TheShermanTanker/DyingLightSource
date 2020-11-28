@@ -1,0 +1,158 @@
+!include("ai_data.def")
+!include("ai_timing.def")
+!include("human_shooter_params.scr")
+!include("human_shooter_common.scr")
+
+// shooting npc for scripted actions - longer sight range.
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////// CURVES //////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+Curve(CURVE_HEALTH, "shooter_health")
+
+
+
+
+////////////////////////////////////////////// DATA ///////////////////////////////////////////////
+//##############
+//#### IDLE ####
+//##############
+//## idle:pose:idle_type:item_type:scare_level:is_idle_prepare:is_idle_finish
+//##############d
+
+
+
+//################
+//#### EFFECT ####
+//################
+//## effect:type:direction:pose
+//##############
+Data("effect:burn::standing", -2, "m_npc_ak47_reactions_burn_1", -1, 1)
+Data("effect:burn::standing", -2, "m_npc_ak47_reactions_burn_2", -1, 1)
+Data("effect:burn::standing", -2, "m_npc_ak47_reactions_burn_3", -1, 1)
+
+Data("effect:poison::standing", -2, "m_npc_ak47_reactions_posion_1", -1, 1)
+Data("effect:poison::standing", -2, "m_npc_ak47_reactions_posion_2", -1, 1)
+Data("effect:poison::standing", -2, "m_npc_ak47_reactions_posion_3", -1, 1)
+
+Data("effect:electrocution::standing", -2, "m_npc_ak47_reactions_electric_1", -1, 1)
+Data("effect:electrocution::standing", -2, "m_npc_ak47_reactions_electric_3", -1, 1)
+Data("effect:electrocution::standing", -2, "m_npc_ak47_reactions_electric_3", -1, 1)
+
+//###############
+//#### DYING ####
+//###############
+//## die:pose:damage_type:body_part:direction:death_type:held_weapon:kill_weapon:run_dir
+//###############
+
+Data("die:standing::::burn:::", -2, "m_npc_ak47_reactions_burn_death_1", -1, 1)
+Data("die:standing::::burn:::", -2, "m_npc_ak47_reactions_burn_death_2", -1, 1)
+Data("die:standing::::burn:::", -2, "m_npc_ak47_reactions_burn_death_1_ragdoll", -1, 1)
+Data("die:standing::::burn:::", -2, "m_npc_ak47_reactions_burn_death_2_ragdoll", -1, 1)
+
+Data("die:standing::::electrocution:::", -2, "m_zombie_death_electrocution_01", -1, 1)
+Data("die:standing::::electrocution:::", -2, "m_zombie_death_electrocution_02", -1, 1)
+Data("die:standing:::left:electrocution:::", -2, "m_zombie_death_electrocution_01", -1, 1)
+Data("die:standing:::right:electrocution:::", -2, "m_zombie_death_electrocution_02", -1, 1)
+
+Data("die:standing::::poison:::", -2, "m_npc_ak47_reactions_posion_death_1", -1, 1) 
+Data("die:standing::::poison:::", -2, "m_npc_ak47_reactions_posion_death_2", -1, 1) 
+Data("die:standing::::poison:::", -2, "m_npc_ak47_reactions_posion_death_2_ragdoll", -1, 1) 
+
+//################
+//#### ATTACK ####
+//################
+//## idle:pose:idle_type:item_type:scare_level:is_idle_prepare:is_idle_finish
+//##############d
+
+Data("attack:standing::taunt:::", -2, "m_npc_ak47_alarming_taunt", -1, 1)
+
+///////////////////////////////////////////// PARAMS //////////////////////////////////////////////
+
+ParamFloat("min_time_btw_throws_projectile", 15.0)
+ParamFloat("sight_range_calm", 20.0) //converted
+ParamFloat("sight_range_calm_interior", 12.0) //[m]
+
+ParamFloat("sight_range", 40.0) //converted
+ParamFloat("sight_additional_range", 20.0) //converted
+
+ParamFloat("stay_in_cover_time_min", 0.5)           // shortest time ai stays in cover before next shoot
+ParamFloat("stay_in_cover_time_max", 2.5)           // longest time ai stays in cover before next shoot
+ParamFloat("stay_in_cover_total_time_max", 10.0)
+
+ParamFloat("max_time_target_invisible", 10.0)
+
+ParamFloat("full_angle_sight_range", 1.0)
+
+ParamFloat("sight_angle_at_min_dist_calm", 160)
+ParamFloat("sight_angle_at_max_dist_calm", 90)
+ParamFloat("sight_angle_min_dist_calm", 5.0)
+ParamFloat("sight_angle_max_dist_calm", 15.0)
+ParamFloat("sight_angle_at_min_dist", 200)
+ParamFloat("sight_angle_at_max_dist", 120)
+ParamFloat("sight_angle_min_dist", 10)
+ParamFloat("sight_angle_max_dist", 40)
+ParamFloat("sight_angle_at_min_dist_interior", 150)
+ParamFloat("sight_angle_at_max_dist_interior", 90)
+ParamFloat("sight_angle_min_dist_interior", 3)
+ParamFloat("sight_angle_max_dist_interior", 10)
+
+ParamFloat("enemy_keep_time_upset", 7)
+ParamFloat("enemy_keep_time_alarmed", 20)
+
+ParamFloat("base_hit_pause_time_rifle", 1.5)
+
+
+//ParamFloat("damage_mul_vs_other_ai", 3.0)
+
+
+//ParamFloat("hit_legs_stamina_mul", 1.0)								//Stamina damage dealt to legs is multiplied by this factor.
+ParamFloat("fall_on_shot_prob", 0.0)
+
+//--- HEALTH
+
+ParamFloat("pro_player_head_health_influence", 1.0)
+
+
+// head roation
+ParamFloat("head_distribution_change_time", 0.3)
+ParamFloat("head_dev_time", 1.0)
+ParamFloat("head_distribution_horz_commited", 0.732)
+ParamFloat("head_distribution_vert_up_commited", 0.8)
+ParamFloat("head_distribution_vert_down_commited", 0.2)
+ParamFloat("head_distribution_horz_commited_param", 2.221)
+ParamFloat("head_distribution_vert_up_commited_param", 1.6)
+ParamFloat("head_distribution_vert_down_commited_param", 1.0)
+ParamFloat("head_vert_min", -50.0)
+ParamFloat("head_vert_max", 50.0)
+ParamFloat("head_horz_clamp", 50.0)
+ParamFloat("head_vert_mul", 0.75)
+ParamFloat("head_vert_mul_time", 0.1)
+ParamFloat("head_horz_mul", 1.0)
+ParamFloat("head_horz_mul_time", 0.1)
+ParamFloat("head_enable_time", 1.0)
+ParamBool("head_enabled", 1)
+ParamBool("adaptive_head_tracking", 0)
+
+// arms rotation
+ParamFloat("arms_distribution_change_time", 0.3)
+ParamFloat("arms_dev_time", 0.0)
+ParamFloat("arms_distribution_horz_commited", 0.732)
+ParamFloat("arms_distribution_vert_up_commited", 0.8)
+ParamFloat("arms_distribution_vert_down_commited", 0.2)
+ParamFloat("arms_distribution_horz_commited_param", 2.221)
+ParamFloat("arms_distribution_vert_up_commited_param", 1.6)
+ParamFloat("arms_distribution_vert_down_commited_param", 1.0)
+ParamFloat("arms_vert_min", -50.0)
+ParamFloat("arms_vert_max", 50.0)
+ParamFloat("arms_horz_clamp", 50.0)
+ParamFloat("arms_vert_mul", 1.0)
+ParamFloat("arms_vert_mul_time", 0.1)
+ParamFloat("arms_horz_mul", 1.0)
+ParamFloat("arms_horz_mul_time", 0.1)
+ParamFloat("arms_enable_time", 0.5)
+ParamBool("arms_enabled", 1)
+
+ParamBool("high_alarm_level_on_sound_heard_weapon_use", 1)
+ParamFloat("min_time_to_keep_alarm_level_from_sound_heard_weapon_use", 20.0)

@@ -1,0 +1,5 @@
+Description("f_fog_near", "f:EDIT;e:EDIT|SPINNER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.0;s:1.0;c:Fog;d:Near;" )
+Description("f_fog_far", "f:EDIT;e:EDIT|SPINNER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:1.0;s:1.0;c:Fog;d:Far;" )
+Description("v_fog_clr", "f:EDIT;e:EDIT|SPINNER|EXPANDABLE|BROWSE_COLOR|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0 0 0;x:1.0 1.0 1.0;s:0.01 0.01 0.01;c:Fog;d:Color;")
+Description("f_fog_opacity", "f:EDIT;e:EDIT|SPINNER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.0;s:0.05;x:1.0;c:Fog;d:Opacity;" )
+Description("f_fog_bright", "f:EDIT;e:EDIT|SPINNER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.0;s:0.05;x:1.0;c:Fog;d:Bright;" )

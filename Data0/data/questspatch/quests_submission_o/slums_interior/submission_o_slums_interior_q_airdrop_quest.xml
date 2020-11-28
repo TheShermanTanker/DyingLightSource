@@ -1,0 +1,265 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums_interior"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST NAME : Airdrop -->
+    <!-- QUEST INFO : Looking for Suppressants from Airdrops -->
+    <!-- AFTER QUEST: Blackout -->
+    <!-- COMMENT    :  -->
+    <!-- FROM       : >> SLUMS  -->
+    <!-- TO         : >> SLUMS INT -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="AirDrop03"
+         parent="AirDrop02_2"
+         glued="true"
+         leading_portal="portal_Hub_LJ_Floor_0"
+         pxsl_line="14">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;AirDrop_OBJ_GetInTheTower&amp;"
+             pxsl_line="15">
+            <Path
+                 pxsl_line="15">
+                <Phase
+                     type="go to"
+                     name="AIRDROP - END"
+                     distance="1000"
+                     pxsl_line="16">
+                    <Destination
+                         pxsl_line="16">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="MapStart"
+                             pxsl_line="16" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="17">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="MapStart"
+                             pxsl_line="17" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <!-- PLAYER CAN SLEEP -->
+                <Phase
+                     type="player control"
+                     name="_"
+                     sleep_to_morning="false"
+                     pxsl_line="18" />
+                <Phase
+                     type="disable enable time freeze"
+                     name="_"
+                     should_freeze_time="false"
+                     pxsl_line="19" />
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="20">
+                    <Object
+                         pxsl_line="21">
+                        <QuestObject
+                             class="AppearGroup"
+                             name="rakim_brecken_room_cb_ag"
+                             pxsl_line="21" />
+                    </Object>
+                    <Object
+                         pxsl_line="22">
+                        <QuestObject
+                             class="AppearGroup"
+                             name="cin_meeting_in_hub_hide_things"
+                             pxsl_line="22" />
+                    </Object>
+                    <Object
+                         pxsl_line="23">
+                        <QuestObject
+                             class="AppearGroup"
+                             name="cin_meeting_in_hub_hide_things_b"
+                             pxsl_line="23" />
+                    </Object>
+                    <!-- Brecken Doors -->
+                    <Object
+                         pxsl_line="24">
+                        <QuestObject
+                             class="DoorDI"
+                             name="slums_thetower_Brecken_door"
+                             pxsl_line="24" />
+                    </Object>
+                </Phase>
+                <!-- CIN Door Meeting -->
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="25">
+                    <Object
+                         pxsl_line="25">
+                        <QuestObject
+                             class="MovieActor"
+                             name="cin_meetinginhub_Door"
+                             pxsl_line="25" />
+                    </Object>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <!-- PLAYERS ROOM -->
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="28">
+                    <Object
+                         pxsl_line="29">
+                        <QuestObject
+                             class="RestingPlace"
+                             name="thetower_player_room_restingplace"
+                             pxsl_line="29" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="30">
+                    <Object
+                         pxsl_line="31">
+                        <QuestObject
+                             class="RestingPlace"
+                             name="thetower_player_room_restingplace"
+                             pxsl_line="31" />
+                    </Object>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-     -->
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="34">
+            <Destination
+                 pxsl_line="34">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="MapStart"
+                     pxsl_line="34" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;AirDrop_OBJ_ReportToBrecken&amp;"
+             pxsl_line="35">
+            <Path
+                 pxsl_line="35">
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <!-- CIN - Meeting in The Tower - and decision to send Crane to Rais -->
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="39">
+                    <Object
+                         pxsl_line="39">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="cin_meetinginhub_01_trigger_qeg"
+                             pxsl_line="39" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="use"
+                     name="AIRDROP - CIN - Meeting in Hub"
+                     desired_state="on"
+                     pxsl_line="40">
+                    <Trigger
+                         pxsl_line="40">
+                        <QuestObject
+                             class="InteractiveMovieTrigger"
+                             name="cin_meetinginhub_01_trigger"
+                             pxsl_line="40" />
+                    </Trigger>
+                    <DebugPlayerPosition
+                         pxsl_line="41">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="MapStart"
+                             pxsl_line="41" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="42">
+                    <Object
+                         pxsl_line="42">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="cin_meetinginhub_01_trigger_qeg"
+                             pxsl_line="42" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="set reward"
+                     name="_"
+                     reward="StorylineReward_Airdrop_reward"
+                     pxsl_line="43" />
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="44">
+                    <Object
+                         pxsl_line="45">
+                        <QuestObject
+                             class="AppearGroup"
+                             name="cin_meeting_in_hub_hide_things"
+                             pxsl_line="45" />
+                    </Object>
+                    <Object
+                         pxsl_line="46">
+                        <QuestObject
+                             class="AppearGroup"
+                             name="cin_meeting_in_hub_hide_things_b"
+                             pxsl_line="46" />
+                    </Object>
+                    <Object
+                         pxsl_line="47">
+                        <QuestObject
+                             class="DoorDI"
+                             name="slums_thetower_Brecken_door"
+                             pxsl_line="47" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="48">
+                    <Object
+                         pxsl_line="49">
+                        <QuestObject
+                             class="MovieActor"
+                             name="cin_meetinginhub_Door"
+                             pxsl_line="49" />
+                    </Object>
+                </Phase>
+                <!-- ,disable _ DoorDI slums_thetower_Brecken_door -= locked Bracken Doors -->
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="52">
+            <Destination
+                 pxsl_line="52">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="cin_failed_mission_01_pos01"
+                     pxsl_line="52" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- GOTO - SLUMS INT - PACT WITH RAIS  -->
+</QuestsDefinitions>

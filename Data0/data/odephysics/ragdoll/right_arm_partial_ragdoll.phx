@@ -1,0 +1,92 @@
+!include("../Generic/ODEPhysicsRagdoll.phx")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+PhysicsParams()
+{
+    QuickStepNumIterations(35)
+    QuickStepSortingMethod(1)
+    
+    SetAbsorbers(0.2, 1)  
+    SetAutoDisableVels(0.2, 1, 1)
+    
+    MaxLifeTime(-1)
+    
+    AllowContinuousCollisions(0, 0)
+    SetWaterFloat(0.11)
+    SynchroMode("PhysicsDependant")
+    
+    CollisionDamageToOtherMul(0, 0)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+RagdollParams()
+{
+    Mass(10)
+    
+    StiffenStartTime(-1)
+
+    ApplyForceMod(1)
+    ApplyForceAddUp(0) 
+    
+    SynchroOwner(0)
+    AllowAnimationOfOtherElements(1)
+    ExtentsUpdateMode("expand_existing")
+    
+    AnimationBlendingTimeAfterDisable(2)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+Bones()
+{
+    UseBoneScale("spine3",              "sphere",   1,  1.1)
+    UseBone("r_upperarm",               "capsule",  1)
+    UseBone("r_forearm",                "capsule",  2)
+    UseBoneScale("r_hand",              "sphere",   1,  1.3)
+    
+    NoCollidedPair("spine3", "r_upperarm")
+    
+    SelfCollisionGeom("r_thigh",    "capsule",      1)
+    SelfCollisionGeom("pelvis",     "sphere",       1.2)
+    SelfCollisionGeom("spine1",     "sphere",       1.1)
+
+    FixBone("spine3", 0.1)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+Joints()
+{
+    // definicja jointow
+    DefineJoint("spine3",     "r_upperarm", "ball",     0,  0, -1,    0,  1,  0)
+    DefineJoint("r_upperarm", "r_forearm",  "hinge",    0,  1,  0,    0,  0,  0)
+    DefineJoint("r_forearm",  "r_hand",     "hinge",    0,  1,  0,    0,  0,  0)
+
+    // polozenie stawow
+    SetAnchorPosition("spine3 r_upperarm",      -0.60,  0.00,  0.00)  
+    SetAnchorPosition("r_upperarm r_forearm",   -0.50,  0.00,  0.00)
+    SetAnchorPosition("r_forearm r_hand",       -0.50,  0.00,  0.00)
+
+    // parametry stopu
+    Set3DOFStops("spine3 r_upperarm",       -0.10, 0.30,   -0.30, 0.10,   -0.10, 0.20,  0, 0, 0)
+    Set1DOFStops("r_upperarm r_forearm",    -0.30, 0.50,    0) 
+    Set1DOFStops("r_forearm r_hand",        -0.30, 0.40,    0) 
+
+    // sily tarcia stawow
+    SetFrictionForceAll(3)
+    SetFrictionForce("r_upperarm r_forearm", 0.5)
+    SetFrictionForce("r_forearm r_hand", 0.1)
+    
+    // wspolczynniki dopuszczalnych bledow stopow
+    SetStopERPAll(0.3)
+    
+    // wspolczynniki sprezystosci jointow po osiagnieciu stopow
+    SetStopCFMAll(0.001)
+    
+    // wspolczynniki sprezystosci jointow
+    SetCFMAll(0)
+
+    // wspolczynniki tlumienia sily oddalajacej od stopu (1 - brak tlumienia, 0.5 - sila zmniejszona dwukrotnie)
+    SetFudgeFactorAll(0)
+}
+
+
+

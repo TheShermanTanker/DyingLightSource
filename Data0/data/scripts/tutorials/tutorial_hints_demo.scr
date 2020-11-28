@@ -1,0 +1,1404 @@
+///////////////////////////////////////////////////////////////////////////////
+// Hint definitions
+///////////////////////////////////////////////////////////////////////////////
+// Standard hard-coded hint is defined by using keyword:
+//        Hint(ETutorialHints_hinttype)
+// Custom user-defined hint is added by typing:
+//        CustomHint("unique_name")
+// Custom hints can be triggered using SensorTutorialHint object or from quest system.
+// Both hint types may specify these parameters:
+//      Category(category);            values: ETutorialCategory_Combat, ETutorialCategory_Gameplay, ETutorialCategory_Btz, ETutorialCategory_Misc
+//      ShowInterval(show_interval)    interval in seconds for hints, which should be displayed multiple times, but not more often than this value
+//      RequiresAnalog();              adds "_Analog" postscript depending on controls scheme
+//      AdditionalPostfix(s);          custom postfix
+//      Disabled();                    disables hint in game
+//      TextTitle(s);                  for hints menu; if not defined standard title will be used: TutorialName_Hints_<type>, i.e. TutorialName_Hints_NaturalMovement
+//      TextBody(s);                   if not defined standard body will be used: Tutorial_Hints_<type>, i.e. Tutorial_Hints_NaturalMovement
+//      DemoOnly();                    only in demo
+//      TimeFreezing();                for time-freezing hints - requires support in code
+//      DontShowInMenu();              hint will not be visible in hints menu
+//      DontShowOnLoadingScreen();     hint will not be visible on loading screen
+//      ShowOnLoadingScreenChanceMul(f); Multipler of showing chance (default is 1.0).
+//      RequireUnlockToShowOnLoadingScreen(); Tutorial hint fires must be shown in game, to can be show on loading screen.
+//      IsTutorialLevel();             hint is displayed only on tutorial level and as such must override menu setting which disables hints and block hints player control option.
+//      HintDisplayType();             explicitly mark that this hint will not use texture for displaying. otherwise implicitly it is assumed that all time-freezing hints use texture for displaying.
+//      MinDisplayTime();              hint message show time will be max of this value and auto-calculated display time
+//      ForZombiePlayer();             hint will be displayed only for zombie player, value are overriden by SensorTutorialHint settings (if sensor is used for hint)
+//      DisableGameplayTimeS(f);       disable hint after specified gameplay time (from campaign start)
+//      DisableShownTimes(i);          disable hint after if shown this number of times
+//      ShowDelayTime(f);              delay to show hint
+//      MaxQueueTime(f);               max time hint can wait for being displayed
+//      AlwaysShow();                  show hint even if it hints are disabled in game because it is not a hint per se
+//      RequiredVarB(s, b, cmp);       player variable name, value (boolean or float), comparator;
+//      RequiredVarF(s, f, cmp);       valid comparators: EPlayerVarCmp_EQ, EPlayerVarCmp_NE, EPlayerVarCmp_LE, EPlayerVarCmp_GE, EPlayerVarCmp_LT, EPlayerVarCmp_GT
+//      ----------||-----------         i.e. RequiredVarB("SlideAvailable", true, EPlayerVarCmp_EQ); RequiredVarF("DodgeJumpHeight", 0.3, EPlayerVarCmp_GT);
+//      RequiredSkill(s);			   skill required to unlock hint.
+//      HideEvent(ETutorialEvent_type) event type which will result in hiding hint, if it is being displayed while event triggers
+//
+// Global hint parameters:
+//      CharsPerSecond(i);             estimated characters per second value that player can read; used when calculating hint display time
+//      CharsPerSecondLoading(i);      estimated characters per second value that player can read in loading screen; used when calculating hint display time
+//
+
+sub Params(int category = ETutorialCategory_Misc, float show_interval = -1.0)
+{
+    Category(category);
+    ShowInterval(show_interval);
+}
+
+sub main()
+{
+    CharsPerSecond(20);            //20 chars/s is low-average reading speed
+    CharsPerSecondLoading(10);  //10 chars/s is very low reading speed, but that's best speed for loading screen (there's no need to hurry).
+
+    // Standard hints
+    Hint(ETutorialHints_NaturalMovement)                                             //used when NM attempt fails 
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 20.0);    
+        DisableShownTimes(10);
+        DontShowOnLoadingScreen();
+    }    
+    //Hint(ETutorialHints_Loot)                                                        //shown when close to ComplexContainer
+    //{
+    //   use Params(category = ETutorialCategory_Misc);
+    //    DisableShownTimes(1);
+    //}
+    Hint(ETutorialHints_FireCrackers)                                                //when picked up firecrackers
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 60.0);
+        DisableShownTimes(3);
+        HideEvent(ETutorialEvent_FirecrackersThrown);
+		DontShowOnLoadingScreen();
+    }
+    Hint(ETutorialHints_WaveFocus)                                                    //not used in code
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        RequiredVarF("NightHordeSenseLevel", 1.0, EPlayerVarCmp_GE);
+        DisableShownTimes(10);
+        HideEvent(ETutorialEvent_Sonar);
+    }
+    Hint(ETutorialHints_WaveFocusNight)                                                //night start
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        ShowDelayTime(2.0);
+        RequiredVarF("NightHordeSenseLevel", 1.0, EPlayerVarCmp_GE);
+        DisableShownTimes(10);
+        HideEvent(ETutorialEvent_Sonar);
+    }
+    Hint(ETutorialHints_FirstWeapon)                                                //not used in code (was: melee weapon first time equipped)
+    {
+        use Params(category = ETutorialCategory_Combat);
+        DisableShownTimes(1);
+        DisableShownTimes(10);
+    }
+    Hint(ETutorialHints_StaminaLow)                                                    //when fighting stamina gets depleted
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 60.0);
+        DisableShownTimes(10);
+        ShowOnLoadingScreenChanceMul(2.0);
+    }
+    Hint(ETutorialHints_Combat)                                                        //not used in code
+    {
+        use Params(category = ETutorialCategory_Combat);
+        DisableShownTimes(10);
+        DontShowOnLoadingScreen();
+    }
+    Hint(ETutorialHints_KickAttack)                                                    //after death and respawn
+    {
+        use Params(category = ETutorialCategory_Combat);
+        DisableShownTimes(10);
+        HideEvent(ETutorialEvent_Kick);
+    }
+    Hint(ETutorialHints_Torch)                                                        //after min. 10s in darkness without flashlight
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 120.0);
+        DisableShownTimes(7);
+        HideEvent(ETutorialEvent_FlashlightSwitched);
+    }
+    Hint(ETutorialHints_EnteringCleansing)                                            //not used in code
+    {
+        use Params(category = ETutorialCategory_Misc);
+        DisableShownTimes(10);
+        DontShowOnLoadingScreen();
+    }
+    Hint(ETutorialHints_RepairWeapon)                                                //while your weapon is broken, and all requirements passed (skill, repairparts, player state)
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        ShowInterval(60.0);
+        ShowDelayTime(2.0);
+        DisableShownTimes(10);
+        HideEvent(ETutorialEvent_RepairWeaponStarted);
+    }
+    Hint(ETutorialHints_EnteringSafeZone)                                            //while entering safe yone, (shows 3 times, 30s interval)
+    {
+        use Params(category = ETutorialCategory_Misc, show_interval = 30.0);
+        DisableShownTimes(3);
+        DontShowOnLoadingScreen();
+    }
+    Hint(ETutorialHints_DemoHintInventory)                                            //demo only
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        DemoOnly();
+        DisableShownTimes(10);
+        DontShowOnLoadingScreen();
+    }
+    Hint(ETutorialHints_DemoHintControlls)                                            //demo only
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        DemoOnly();
+        DisableShownTimes(10);
+        DontShowOnLoadingScreen();
+    }
+    Hint(ETutorialHints_AvoidEnemies)                                                //demo only, after death or while low hp level
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        DemoOnly();
+        DisableShownTimes(10);
+        DontShowOnLoadingScreen();
+    }
+    Hint(ETutorialHints_RestartChallenge)                                            //not used in code
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 30.0);
+        DisableShownTimes(10);
+        DontShowOnLoadingScreen();
+        HideEvent(ETutorialEvent_RestartChallenge);
+    }
+	Hint(ETutorialHints_ConstantLoudMicNoise)                                        // shown when player noise is constantly very high for a while
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 30.0);
+        DontShowOnLoadingScreen();
+		UseAlternativeBackground();
+		TextBody("Tutorial_Hints_ConstantLoudMicNoise_$");
+        HideEvent(ETutorialEvent_RestartChallenge);
+    }
+    Hint(ETutorialHints_FocusOnObject)                                                //during air dropie while inside SensorLookAt
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 10.0);
+        DisableShownTimes(10);
+        DontShowOnLoadingScreen();
+    }
+    Hint(ETutorialHints_TimeFreeze_Movement)                                        //blocking, will be triggered by sensor
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        TimeFreezing();
+        DisableShownTimes(1);
+        DontShowInMenu();
+        DontShowOnLoadingScreen();
+    }
+    Hint(ETutorialHints_TimeFreeze_Fighting)                                        //when first enemy spotted
+    {
+        use Params(category = ETutorialCategory_Combat);
+        TimeFreezing();
+        DisableShownTimes(1);
+        DontShowInMenu();
+        DontShowOnLoadingScreen();
+    }
+    Hint(ETutorialHints_TimeFreeze_Night)                                            //will show at the first night beginning
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        TimeFreezing();
+        DisableShownTimes(1);
+        ShowDelayTime(3.0);
+        DontShowOnLoadingScreen();
+		HintDisplayType(EHintDisplayType_TextureTop);
+        Disabled(); //CustomHint("Tutorial_TimeFreeze_Night") will be shown from quest
+    }
+    Hint(ETutorialHints_TimeFreeze_RepairWeapon)                                    //when melee weapon gets damaged
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        TextBody("TimeFreeze_RepeairWeapon");
+        TimeFreezing();
+        DisableShownTimes(1);
+        ShowDelayTime(1.5);
+        DontShowOnLoadingScreen();
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }
+    Hint(ETutorialHints_TimeFreeze_Hubs)                                            //triggeered from quest, after talking to Rakim and leaving Brecken's room
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        TextBody("TimeFreeze_Hubs");
+        TimeFreezing();
+        DisableShownTimes(1);
+        DontShowOnLoadingScreen();
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }
+    Hint(ETutorialHints_TimeFreeze_SafeZones)                                        //when entering a safe zone
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        TimeFreezing();
+        DisableShownTimes(1);
+        DontShowOnLoadingScreen();
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }
+    Hint(ETutorialHints_TimeFreeze_LeftSlot)                                        //after picking up firecrackers
+    {
+        use Params(category = ETutorialCategory_Combat);
+        TextBody("Tutorial_Hints_TimeFreeze_LeftSlot");
+        TimeFreezing();
+        DisableShownTimes(1);
+        DontShowOnLoadingScreen();
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }
+    Hint(ETutorialHints_TimeFreeze_LevelUp)                                            //when receiving skill point to spend
+    {
+        use Params(category = ETutorialCategory_Misc);
+        TimeFreezing();
+        DisableShownTimes(1);
+        ShowDelayTime(4.0);
+        DontShowOnLoadingScreen();
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }
+    Hint(ETutorialHints_TimeFreeze_Mods)                                            //from quest, after collecting all items from Spike's table
+    {
+        use Params(category = ETutorialCategory_Misc);
+        TimeFreezing();
+        DisableShownTimes(1);
+        DontShowOnLoadingScreen();
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }
+    Hint(ETutorialHints_TimeFreeze_Firecrackers)                                    //if having firecrackers in inventory and close to a zombie
+    {
+        use Params(category = ETutorialCategory_Combat);
+        TimeFreezing();
+        DisableShownTimes(1);
+        ShowDelayTime(1.0);
+        DontShowOnLoadingScreen();
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }    
+    
+    Hint(ETutorialHints_TimeFreeze_Perks)                                            //after acquiring first perk
+    {
+        use Params(category = ETutorialCategory_Misc);
+        TimeFreezing();
+        TextBody("TimeFreeze_Perks_1");
+        TextBody("TimeFreeze_Perks_2");
+        DisableShownTimes(1);
+        ShowDelayTime(3.0);
+        DontShowOnLoadingScreen();
+        Disabled();
+		HintDisplayType(EHintDisplayType_NoTexture);
+    }
+
+    Hint(ETutorialHints_TimeFreeze_ImprovisedWeapons)                                //shows when first improvised weapons is being picked up
+    {
+        use Params(category = ETutorialCategory_Combat);
+        TimeFreezing();
+        DisableShownTimes(1);
+        ShowDelayTime(1.0);
+        TextBody("Tutorial_Hints_TimeFreeze_ImprovisedWeapons");
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }    
+    
+    Hint(ETutorialHints_TimeFreeze_YouAreInfected)                                    //shown the first time player gets infected
+    {
+        TimeFreezing();
+        use Params(category = ETutorialCategory_Gameplay);
+        TextTitle("TutorialTitle_YouAreInfected");
+        TextBody("Tutorial_YouAreInfected");
+        TextBody("Tutorial_YouAreInfected2");
+        DisableShownTimes(1);
+        ShowDelayTime(1.0);
+        DontShowOnLoadingScreen();
+    }
+    Hint(ETutorialHints_TimeFreeze_Flashlight)                                        //not used in code
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        TimeFreezing();
+        IsTutorialLevel();
+        DisableShownTimes(1);
+        DontShowOnLoadingScreen();
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }
+
+    // Time freeze KINECT //
+
+    Hint(ETutorialHints_TimeFreeze_Kinect_LookAtWatch)
+    {
+        TimeFreezing();
+        use Params(category = ETutorialCategory_Gameplay);
+        TextBody("Tutorial_Hints_TimeFreeze_Kinect_LookAtWatch");
+        UIAnimGroup("G_Kinect_LookAtWatch");
+        ShowInterval(10.0);
+        DisableShownTimes(666);
+        ShowDelayTime(5.0);
+        DontShowOnLoadingScreen();
+        HintDisplayType(EHintDisplayType_NoTexture);
+    }
+    Hint(ETutorialHints_TimeFreeze_Kinect_NageWaza)
+    {
+        TimeFreezing();
+        use Params(category = ETutorialCategory_Combat);
+        TextBody("Tutorial_Hints_TimeFreeze_Kinect_NageWaza");
+        DisableShownTimes(1);
+        UIAnimGroup("G_Kinect_NageWaza");
+        ShowDelayTime(0.0);
+        DontShowOnLoadingScreen();
+        HintDisplayType(EHintDisplayType_NoTexture);
+    }
+    Hint(ETutorialHints_TimeFreeze_Kinect_Grab)
+    {
+        TimeFreezing();
+        use Params(category = ETutorialCategory_Combat);
+        TextBody("Tutorial_Hints_TimeFreeze_Kinect_Grab");
+        DisableShownTimes(1);
+        UIAnimGroup("G_Kinect_Grab");
+        ShowDelayTime(0.5);
+        DontShowOnLoadingScreen();
+        HintDisplayType(EHintDisplayType_NoTexture);
+    }
+    Hint(ETutorialHints_TimeFreeze_Kinect_ChargeAttack)
+    {
+        TimeFreezing();
+        use Params(category = ETutorialCategory_Combat);
+        TextBody("Tutorial_Hints_TimeFreeze_Kinect_ChargeAttack");
+        DisableShownTimes(1);
+        UIAnimGroup("G_Kinect_ChargeAttack");
+        ShowDelayTime(0.5);
+        DontShowOnLoadingScreen();
+        HintDisplayType(EHintDisplayType_NoTexture);
+    }
+    Hint(ETutorialHints_TimeFreeze_Kinect_LightDrop)
+    {
+        TimeFreezing();
+        use Params(category = ETutorialCategory_Gameplay);
+        TextBody("Tutorial_Hints_TimeFreeze_Kinect_LightDrop");
+        UIAnimGroup("G_Kinect_LightDrop");
+        DisableShownTimes(1);
+        ShowDelayTime(0.0);
+        DontShowOnLoadingScreen();
+        HintDisplayType(EHintDisplayType_NoTexture);
+    }
+
+// removed as skill is need to have this functionality
+//     Hint(ETutorialHints_FallDamping)                                                //shows after 2 falls without damping
+//     {
+//         Category(ETutorialCategory_Gameplay);
+//         ShowInterval(60.0);
+//		   RequiredSkill("SafeLanding3")
+//         DisableShownTimes(10);
+//     }
+
+    Hint(ETutorialHints_FirearmIronsights)                                            //shows when first firearm is being equipped
+    {
+        Category(ETutorialCategory_Combat);
+        DisableShownTimes(1);
+        HideEvent(ETutorialEvent_Ironsights);
+		DontShowOnLoadingScreen();
+    }
+    Hint(ETutorialHints_LockPick)                                                    //fullscreen info when starting lockpicking for the first time
+    {
+        Category(ETutorialCategory_Gameplay);
+        DisableShownTimes(1);
+        DontShowOnLoadingScreen();
+    }
+    Hint(ETutorialHints_LockPickEnd)                                                //when first lockpick ends
+    {
+        Category(ETutorialCategory_Gameplay);
+        DisableShownTimes(1);
+        DontShowOnLoadingScreen(); 
+		ShowDelayTime(2.0);
+    }
+    Hint(ETutorialHints_Perks)                                                        //when first perk is unlocked, not active
+    {
+        Category(ETutorialCategory_Gameplay);
+        DisableShownTimes(1);
+        DontShowOnLoadingScreen();
+    }
+    Hint(ETutorialHints_Skills)                                                        //skills menu element, when entering skills menu with at least one skillpoint
+    {
+        Category(ETutorialCategory_Misc);
+        TextBody("Tutorial_Hints_Skills_1");
+        TextBody("Tutorial_Hints_Skills_2");
+        DisableShownTimes(1);
+        DontShowOnLoadingScreen();
+    }
+    Hint(ETutorialHints_SkillsSimple)                                                //skills menu element, when entering skills menu without skillpoints
+    {
+        Category(ETutorialCategory_Misc);
+        TextBody("Tutorial_Hints_SkillsSimple_1");
+        DisableShownTimes(1);
+        DontShowOnLoadingScreen();
+    }
+    Hint(ETutorialHints_CraftItemMenu)                                               //in craft item menu, when tutorial CraftItem is active
+    {
+        Category(ETutorialCategory_Misc);
+        TextBody("Tutorial_Hints_CraftItemMenu_1");
+        DontShowOnLoadingScreen();
+    }
+    Hint(ETutorialHints_FallOnDestroRoof)                                            //when falling on destroyable roof
+    {
+        Category(ETutorialCategory_Gameplay);
+        TimeFreezing();
+        DisableShownTimes(1);
+        ShowDelayTime(1.5);
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }
+    Hint(ETutorialHints_BeingChased)                                                //when being chased
+    {
+        Category(ETutorialCategory_Gameplay);
+        TimeFreezing();
+        DisableShownTimes(1);
+        ShowDelayTime(1.5);
+        DontShowOnLoadingScreen();
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }
+    Hint(ETutorialHints_EnteringVehicle)                                            //when entering a vehicle
+    {
+        Category(ETutorialCategory_Gameplay);
+        TimeFreezing();
+        DisableShownTimes(1);
+        ShowDelayTime(3.0);
+		DontShowInMenu();
+        DontShowOnLoadingScreen();
+    }
+    Hint(ETutorialHints_EnemyKilled)                                                 //when killing enemy
+    {
+        Category(ETutorialCategory_Gameplay);
+        DisableShownTimes(1);
+        HideEvent(ETutorialEvent_LootBody);
+    }
+    Hint(ETutorialHints_Medkit)                                                      //when picking up medkit
+    {
+        Category(ETutorialCategory_Gameplay);
+        DisableShownTimes(1);
+        DontShowOnLoadingScreen();
+        HideEvent(ETutorialEvent_MedkitUsed);
+    }
+    Hint(ETutorialHints_InventoryInDepot)                                            //in inventory menu when all your stuff was taken to depot
+    {
+        Category(ETutorialCategory_Misc);
+        DisableShownTimes(1);
+        Disabled();
+        DontShowOnLoadingScreen();
+    }
+    Hint(ETutorialHints_Batteries)                                                  // When picking up batteries for the first time
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        DontShowOnLoadingScreen();
+        IsTutorialLevel();
+        DisableShownTimes(1);
+        DontShowOnLoadingScreen();
+        Disabled();
+        HideEvent(ETutorialEvent_FlashlightReloaded);
+    }
+    Hint(ETutorialHints_TimeFreeze_Challenges)                                      // When discovering first challenge
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("&TutorialName_Hints_TimeFreeze_Challenges&");
+        TextBody("Tutorial_Hints_TimeFreeze_Challenges");
+        TimeFreezing();
+        IsTutorialLevel();
+        ShowDelayTime(1);
+        DisableShownTimes(1);
+        DontShowOnLoadingScreen();
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }
+    
+    Hint(ETutorialHints_GrapplingHookReminder)                                               // When on Old Town after Providers quest and player hasn't got grappling hook
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 300.0);
+        TextBody("Tutorial_GrapplingHookReminder");
+        DontShowOnLoadingScreen();
+        DontShowInMenu();
+        Disabled(); // will be enabled in quest (using ,enable-hint phase)
+        HideEvent(ETutorialEvent_HookPickedUp);
+    }
+
+	Hint(ETutorialHints_CraftingMedkits)													// When player isn't in danger, isn't in safe are, his health is below 30% and he hasn't any medkits.
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 120.0);
+        DontShowOnLoadingScreen();
+        DontShowInMenu();
+        DisableShownTimes(10);
+        ShowDelayTime(1.0);
+    }
+
+    // Custom
+    CustomHint("Tutorial_Hints_TimeFreeze_Proficiencies")                           // After leaving the hub in Tower
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("&TutorialName_Hints_TimeFreeze_Proficiencies&");
+        TextBody("Tutorial_Hints_TimeFreeze_Proficiencies");
+        TimeFreezing();
+        IsTutorialLevel();
+        ShowDelayTime(1);
+        DisableShownTimes(1);
+        DontShowOnLoadingScreen();
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }
+    CustomHint("Tutorial_TimeFreeze_Spike")                           // After completing Blackout quest
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("&TutorialName_TimeFreeze_Spike&");
+        TextBody("Tutorial_TimeFreeze_Spike");
+        TimeFreezing();
+        IsTutorialLevel();
+        ShowDelayTime(1);
+        DisableShownTimes(1);
+        RequireUnlockToShowOnLoadingScreen();
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }
+    CustomHint("Tutorial_DeadzoneCar")                                              //deadzone car (MichalS)
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextBody("Tutorial_DeadzoneCar_Body");
+        DontShowInMenu();
+        DontShowOnLoadingScreen();
+        DisableShownTimes(10);
+    }
+    
+    CustomHint("Tutorial_NightIsComing")                                            //from quest, after talking to Ray on Wasteland when the darkness falls
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("&TutorialName_Hints_NightIsComing&");
+        TextBody("Tutorial_NightIsComing_Body");
+        TimeFreezing();
+        DisableShownTimes(10);
+        DontShowOnLoadingScreen();
+		Disabled();
+		HintDisplayType(EHintDisplayType_NoTexture);
+    }
+    CustomHint("Tutorial_PrologueRadar")                                            // Prologue Hints
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("&TutorialName_TimeFreeze_PrologueRadar&");
+        TextBody("Tutorial_TimeFreeze_PrologueRadar");
+        IsTutorialLevel();
+        DisableShownTimes(1);
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }
+    CustomHint("Tutorial_PrologueWardrobe")                                            // Prologue Hints
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("&TutorialName_TimeFreeze_PrologueWardrobe&");
+        TextBody("Tutorial_TimeFreeze_PrologueWardrobe");
+        DontShowInMenu();
+        TimeFreezing();
+        IsTutorialLevel();
+        DontShowOnLoadingScreen();
+        DisableShownTimes(1);
+    }
+    CustomHint("Tutorial_PrologueLooting")                                            // Prologue Hints
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextBody("Tutorial_PrologueLooting");
+        DontShowInMenu();
+        IsTutorialLevel();
+        DontShowOnLoadingScreen();
+        DisableShownTimes(1);
+    }
+    CustomHint("Tutorial_PrologueAwarness")                                            // Prologue Hints
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("&TutorialName_TimeFreeze_PrologueAwarness&");
+        TextBody("Tutorial_TimeFreeze_PrologueAwarness");
+        DontShowInMenu();
+        TimeFreezing();
+        IsTutorialLevel();
+        DontShowOnLoadingScreen();
+        DisableShownTimes(1);
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }
+    CustomHint("Tutorial_PrologueCrafting")                                            // Prologue Hints
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("&TutorialName_TimeFreeze_PrologueCrafting&");
+        TextBody("Tutorial_TimeFreeze_PrologueCrafting");
+        TimeFreezing();
+        IsTutorialLevel();
+        DisableShownTimes(1);
+		HintDisplayType(EHintDisplayType_TextureTop);
+		DontShowOnLoadingScreen();
+    }
+    CustomHint("Tutorial_PrologueRunningProficiency")                                            // Prologue Hints
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("&TutorialName_TimeFreeze_PrologueRunningProficiency&");
+        TextBody("Tutorial_TimeFreeze_PrologueRunningProficiency");
+        TimeFreezing();
+        IsTutorialLevel();
+        DisableShownTimes(1);
+		DontShowOnLoadingScreen();
+    }
+    CustomHint("Tutorial_PrologueFlashlight")                                            // Prologue Hints
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextBody("Tutorial_PrologueFlashlight");
+        DontShowInMenu();
+        IsTutorialLevel();
+        DontShowOnLoadingScreen();
+        DisableShownTimes(1);
+        HideEvent(ETutorialEvent_FlashlightSwitched);
+    }
+    CustomHint("Tutorial_PrologueKick")                                            // Prologue Hints
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextBody("Tutorial_PrologueKick");
+        DontShowInMenu();
+        IsTutorialLevel();
+        DontShowOnLoadingScreen();
+        DisableShownTimes(1);
+        HideEvent(ETutorialEvent_Kick);
+    }
+    CustomHint("Tutorial_PrologueSprint")                                            // Prologue Hints
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextBody("Tutorial_PrologueSprint");
+        DontShowInMenu();
+        IsTutorialLevel();
+        DontShowOnLoadingScreen();
+        DisableShownTimes(1);
+    }
+    CustomHint("Tutorial_PrologueJump")                                            // Prologue Hints
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextBody("Tutorial_PrologueJump");
+        DontShowInMenu();
+        IsTutorialLevel();
+        DontShowOnLoadingScreen();
+        DisableShownTimes(1);
+        HideEvent(ETutorialEvent_Climb);
+    }
+    CustomHint("Tutorial_PrologueNMTutorialJump")                                            // Prologue Hints
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextBody("Tutorial_PrologueJump");
+        DontShowInMenu();
+        IsTutorialLevel();
+        DontShowOnLoadingScreen();
+        DisableShownTimes(1);
+        HideEvent(ETutorialEvent_Climb);
+    }
+    CustomHint("Tutorial_PrologueJumpOver")                                            // Prologue Hints
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextBody("Tutorial_PrologueJumpOver");
+        DontShowInMenu();
+        IsTutorialLevel();
+        DontShowOnLoadingScreen();
+        DisableShownTimes(1);
+        HideEvent(ETutorialEvent_EdgeHang);
+    }
+    CustomHint("Tutorial_PrologueDuck")                                            // Prologue Hints
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextBody("Tutorial_PrologueDuck");
+        DontShowInMenu();
+        IsTutorialLevel();
+        DontShowOnLoadingScreen();
+        DisableShownTimes(1);
+        HideEvent(ETutorialEvent_Duck);
+    }
+    CustomHint("Tutorial_PrologueNMTutorialDuck")                                            // Prologue Hints
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextBody("Tutorial_PrologueDuck");
+        DontShowInMenu();
+        IsTutorialLevel();
+        DontShowOnLoadingScreen();
+        DisableShownTimes(1);
+        HideEvent(ETutorialEvent_Duck);
+    }
+    CustomHint("Tutorial_PrologueClimb")                                            // Prologue Hints
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextBody("Tutorial_PrologueClimb");
+        DontShowInMenu();
+        IsTutorialLevel();
+        DontShowOnLoadingScreen();
+        DisableShownTimes(1);
+        HideEvent(ETutorialEvent_Climb);
+    }
+    CustomHint("Tutorial_PrologueShimi")                                            // Prologue Hints
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextBody("Tutorial_PrologueShimi");
+        DontShowInMenu();
+        IsTutorialLevel();
+        DontShowOnLoadingScreen();
+        DisableShownTimes(1);
+        HideEvent(ETutorialEvent_Shimmy);
+    }
+    CustomHint("Tutorial_PrologueSideJump")                                         // Prologue Hints
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextBody("Tutorial_PrologueSideJump");
+        DontShowInMenu();
+        IsTutorialLevel();
+        DontShowOnLoadingScreen();
+        DisableShownTimes(1);
+        HideEvent(ETutorialEvent_EdgeHangJump);
+    }
+    CustomHint("Tutorial_PrologueBackJump")                                         // Prologue Hints
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextBody("Tutorial_PrologueBackJump");
+        DontShowInMenu();
+        IsTutorialLevel();
+        DontShowOnLoadingScreen();
+        DisableShownTimes(1);
+        HideEvent(ETutorialEvent_EdgeHangJump);
+    }
+    CustomHint("Tutorial_ProloguePoleClimb")                                        // Prologue Hints
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextBody("Tutorial_ProloguePoleClimb");
+        DontShowInMenu();
+        IsTutorialLevel();
+        DontShowOnLoadingScreen();
+        DisableShownTimes(1);
+        HideEvent(ETutorialEvent_Climb);
+    }
+    CustomHint("Tutorial_Hints_TimeFreeze_Sleeping")
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("&TutorialName_Hints_TimeFreeze_Sleeping&");
+        TextBody("Tutorial_Hints_TimeFreeze_Sleeping");
+        TimeFreezing();
+        IsTutorialLevel();
+        DisableShownTimes(1);
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }
+    CustomHint("Tutorial_Hints_TimeFreeze_Landing")                                        // Prologue Hints
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("&TutorialName_Hints_TimeFreeze_Landing&");
+        TextBody("Tutorial_Hints_TimeFreeze_Landing");
+        TimeFreezing();
+        ShowDelayTime(6);
+        IsTutorialLevel();
+        DisableShownTimes(1);
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }
+    CustomHint("Tutorial_Hints_TimeFreeze_PrologueNM")                                                      // on the HUB roof
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("&TutorialName_TimeFreeze_PrologueNM&");
+        TextBody("Tutorial_TimeFreeze_PrologueNM");
+        IsTutorialLevel();
+        DisableShownTimes(1);
+        DontShowOnLoadingScreen();
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }
+	CustomHint("Tutorial_TimeFreeze_Prime")
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("&TutorialName_TimeFreeze_Prime&");
+        TextBody("Tutorial_TimeFreeze_Prime");
+        TimeFreezing();
+        DisableShownTimes(1);
+        DontShowOnLoadingScreen();
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }
+    CustomHint("Tutorial_TimeFreeze_SilentKill")
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("&TutorialName_TimeFreeze_SilentKill&");
+        TextBody("Tutorial_TimeFreeze_SilentKill");
+        TimeFreezing();
+        DisableShownTimes(1);
+        DontShowOnLoadingScreen();
+		HintDisplayType(EHintDisplayType_TextureTop);
+		RequiredSkill("SilentKill");
+    }
+    // Hunter invasion active warning. Called after players kill a hive in open world which will then allow a hunter to invade
+    Hint(ETutorialHints_BTZSummonZombieWarning)                                    
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 300.0);
+        MinDisplayTime(10);
+        DontShowOnLoadingScreen();
+		Disabled();
+    }
+    Hint(ETutorialHints_BTZHumanControlTheHorde)                                    //BTZ, active
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+    }
+    Hint(ETutorialHints_BTZHumanHiveDamage)                                            //BTZ, active
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+    }
+    Hint(ETutorialHints_BTZHumanLight)                                                //BTZ, active
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+    }
+    Hint(ETutorialHints_BTZHumanPing)                                                //BTZ, active
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 20.0);
+	}
+    Hint(ETutorialHints_BTZZombieHowl)                                                //BTZ, active
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 20.0);
+        ForZombiePlayer();
+    }
+    Hint(ETutorialHints_BTZZombieLight)                                                //BTZ, active
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 30.0);
+        ForZombiePlayer();
+    }
+    Hint(ETutorialHints_BTZZombieRopeLocomotion)                                    //BTZ, active
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 30.0);
+        ForZombiePlayer();
+    }
+    Hint(ETutorialHints_BTZZombieSpits)                                                //BTZ, active
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 25.0);
+        ForZombiePlayer();
+    }    
+    Hint(ETutorialHints_BTZZombieLowStamina)                                    //BTZ, active
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        MinDisplayTime(7);
+        MaxQueueTime(4);
+        ForZombiePlayer();
+    }
+    Hint(ETutorialHints_BTZHumanDrainedZombieFully)                            //BTZ, active
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 30.0);
+    }
+    // BtZ tutorial level hints
+    CustomHint("BtZ_Tutorial_Begin")                                                //BtZ tutorial, active
+    {
+        use Params(category = ETutorialCategory_Btz, show_interval = 0.0);
+        TimeFreezing();
+        IsTutorialLevel();
+        TextTitle("&BtZ_TutorialName_Begin&");
+        TextBody("BtZ_Tutorial_Begin_1");
+        DontShowOnLoadingScreen();
+    }
+    CustomHint("BtZ_Tutorial_Game_Goal")                                                //BtZ tutorial, active
+    {
+        use Params(category = ETutorialCategory_Btz, show_interval = 0.0);
+        TimeFreezing();
+        IsTutorialLevel();
+        TextTitle("&BtZ_TutorialName_Game_Goal&");
+        TextBody("BtZ_Tutorial_Game_Goal_1");
+        DontShowOnLoadingScreen();
+    }
+    CustomHint("BtZ_Tutorial_Playground")                                                //BtZ tutorial, active
+    {
+        use Params(category = ETutorialCategory_Btz, show_interval = 0.0);
+        TimeFreezing();
+        IsTutorialLevel();
+        TextTitle("&BtZ_TutorialName_Playground&");
+        TextBody("BtZ_Tutorial_Playground_1");
+        DontShowOnLoadingScreen();
+    }
+    CustomHint("BtZ_Tutorial_Locomotion")                                                //BtZ tutorial, active
+    {
+        use Params(category = ETutorialCategory_Btz, show_interval = 0.0);
+        TimeFreezing();
+        IsTutorialLevel();
+        TextTitle("&BtZ_TutorialName_Locomotion&");
+        TextBody("BtZ_Tutorial_Locomotion_1");
+        DontShowOnLoadingScreen();
+    }
+    CustomHint("BtZ_Tutorial_Stealth_Howl")                                        //BtZ tutorial, active
+    {
+        use Params(category = ETutorialCategory_Btz, show_interval = 0.0);
+        TimeFreezing();
+        IsTutorialLevel();
+        TextTitle("&BtZ_TutorialName_Stealth_Howl&");
+        TextBody("BtZ_Tutorial_Stealth_Howl_1");
+        DontShowOnLoadingScreen();
+    }
+    CustomHint("BtZ_Tutorial_Flashlight")                                            //BtZ tutorial, active
+    {
+        use Params(category = ETutorialCategory_Btz, show_interval = 0.0);
+        TimeFreezing();
+        IsTutorialLevel();
+        TextTitle("&BtZ_TutorialName_Flashlight&");
+        TextBody("BtZ_Tutorial_Flashlight_1");
+        DontShowOnLoadingScreen();
+    }
+    CustomHint("BtZ_Tutorial_Interrupted")                                            //BtZ tutorial, active
+    {
+        use Params(category = ETutorialCategory_Btz, show_interval = 0.0);
+        TimeFreezing();
+        IsTutorialLevel();
+        TextTitle("&BtZ_TutorialName_Interrupted&");
+        TextBody("BtZ_Tutorial_Interrupted_1");
+        DontShowOnLoadingScreen();
+    }
+    CustomHint("BtZ_Tutorial_Light_Disable")                                        //BtZ tutorial, active
+    {
+        use Params(category = ETutorialCategory_Btz, show_interval = 0.0);
+        TimeFreezing();
+        IsTutorialLevel();
+        TextTitle("&BtZ_TutorialName_Light_Disable&");
+        TextBody("BtZ_Tutorial_Light_Disable_1");
+		RequiredSkill("LightDisableEnable");
+        DontShowOnLoadingScreen();
+    }
+    CustomHint("BtZ_Tutorial_Melee_Fight")                                            //BtZ tutorial, active
+    {
+        use Params(category = ETutorialCategory_Btz, show_interval = 0.0);
+        TimeFreezing();
+        IsTutorialLevel();
+        TextTitle("&BtZ_TutorialName_Melee_Fight&");
+        TextBody("BtZ_Tutorial_Melee_Fight_1");
+        DontShowOnLoadingScreen();
+    }
+    CustomHint("BtZ_Tutorial_Horde_Control")                                        //BtZ tutorial, active
+    {
+        use Params(category = ETutorialCategory_Btz, show_interval = 0.0);
+        TimeFreezing();
+        IsTutorialLevel();
+        TextTitle("&BtZ_TutorialName_Horde_Control&");
+        TextBody("BtZ_Tutorial_Horde_Control_1");
+        DontShowOnLoadingScreen();
+    }
+    CustomHint("BtZ_Tutorial_Hive_Defense")                                            //BtZ tutorial, active
+    {
+        use Params(category = ETutorialCategory_Btz, show_interval = 0.0);
+        TimeFreezing();
+        IsTutorialLevel();
+        TextTitle("&BtZ_TutorialName_Hive_Defense&");
+        TextBody("BtZ_Tutorial_Hive_Defense_1");
+        DontShowOnLoadingScreen();
+    }
+    CustomHint("BtZ_Tutorial_Ground_Slam")                                            //BtZ tutorial, active
+    {
+        use Params(category = ETutorialCategory_Btz, show_interval = 0.0);
+        TimeFreezing();
+        IsTutorialLevel();
+        TextTitle("&BtZ_TutorialName_Ground_Slam&");
+        TextBody("BtZ_Tutorial_Ground_Slam_1");
+        RequiredSkill("ZombieGroundPound");
+        DontShowOnLoadingScreen();
+    }
+    CustomHint("BtZ_Tutorial_Charge")                                            //BtZ tutorial, active
+    {
+        use Params(category = ETutorialCategory_Btz, show_interval = 0.0);
+        TimeFreezing();
+        IsTutorialLevel();
+        TextTitle("&BtZ_TutorialName_Charge&");
+        TextBody("BtZ_Tutorial_Charge_1");
+        RequiredSkill("ZombieChargeAttack");
+        DontShowOnLoadingScreen();
+    }
+    CustomHint("BtZ_Tutorial_Suicide")                                            //BtZ tutorial, active
+    {
+        use Params(category = ETutorialCategory_Btz, show_interval = 0.0);
+        TimeFreezing();
+        IsTutorialLevel();
+        TextTitle("&BtZ_TutorialName_SelfDestruct&");
+        TextBody("BtZ_Tutorial_SelfDestruct_1");
+        RequiredSkill("SelfDestruct");
+        DontShowOnLoadingScreen();
+    }
+    CustomHint("BtZ_Tutorial_Rage_Pounce")                                            //BtZ tutorial, active
+    {
+        use Params(category = ETutorialCategory_Btz, show_interval = 0.0);
+        TimeFreezing();
+        IsTutorialLevel();
+        TextTitle("&BtZ_TutorialName_Rage_Pounce&");
+        TextBody("BtZ_Tutorial_Rage_Pounce_1");
+        DontShowOnLoadingScreen();
+    }
+    CustomHint("BtZ_Tutorial_HumanSafeZone")                                            //BtZ tutorial, active
+    {
+        use Params(category = ETutorialCategory_Btz, show_interval = 0.0);
+        TimeFreezing();
+        IsTutorialLevel();
+        TextTitle("&BtZ_TutorialName_SafeZone&");
+        TextBody("BtZ_Tutorial_SafeZone_1");
+        DontShowOnLoadingScreen();
+    }
+    CustomHint("BtZ_Tutorial_FlashLightPounce")                                            //BtZ tutorial, active
+    {
+        use Params(category = ETutorialCategory_Btz, show_interval = 0.0);
+        TimeFreezing();
+        IsTutorialLevel();
+        TextTitle("&BtZ_TutorialName_FlashlightPounce&");
+        TextBody("BtZ_Tutorial_FlashlightPounce_1");
+        DontShowOnLoadingScreen();
+    }
+
+
+    /////////////////////////////// Loading screen :
+
+    CustomHint("Tutorial_Loading_NaturalMovement")                                                // Loading screen only
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        TextTitle("&TutorialName_Loading_NaturalMovement&");
+        TextBody("Tutorial_Loading_NaturalMovement");
+    }
+
+    CustomHint("Tutorial_Loading_LockPickEnd")                                                // Loading screen only
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        TextTitle("&TutorialName_Loading_LockPickEnd&");
+        TextBody("Tutorial_Loading_LockPickEnd");
+    }
+
+    CustomHint("Tutorial_Loading_Skills")                                                // Loading screen only
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        TextTitle("&TutorialName_Loading_Skills&");
+        TextBody("Tutorial_Loading_Skills");
+    }
+
+    CustomHint("Tutorial_Loading_RepairWeapon_1")                                                // Loading screen only
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        TextTitle("&TutorialName_Loading_RepairWeapon_1&");
+        TextBody("Tutorial_Loading_RepeairWeapon_1");
+    }
+
+    CustomHint("Tutorial_Loading_RepairWeapon_2")                                                // Loading screen only
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        TextTitle("&TutorialName_Loading_RepairWeapon_2&");
+        TextBody("Tutorial_Loading_RepeairWeapon_2");
+    }
+
+    //CustomHint("Tutorial_Loading_PrologueWardrobe")                                                // Loading screen only
+    //{
+    //   use Params(category = ETutorialCategory_Gameplay);
+    //   TextTitle("&TutorialName_Loading_PrologueWardrobe&");
+    //    TextBody("Tutorial_Loading_PrologueWardrobe");
+	//	DontShowOnLoadingScreen();
+    //}
+
+    CustomHint("Tutorial_Loading_PrologueFightingProficiency")                                                // Loading screen only
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        TextTitle("&TutorialName_Loading_PrologueFightingProficiency&");
+        TextBody("Tutorial_Loading_PrologueFightingProficiency");
+    }
+    
+	CustomHint("Tutorial_Loading_PrologueRunningProficiency")                                                // Loading screen only
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        TextTitle("&TutorialName_Loading_PrologueRunningProficiency&");
+        TextBody("Tutorial_Loading_PrologueRunningProficiency");
+    }
+	
+	CustomHint("Tutorial_Loading_Crafting")                                                					// Loading screen only
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        TextTitle("TutorialName_Loading_Crafting");
+        TextBody("Tutorial_Loading_Crafting");
+    }
+	
+	CustomHint("Tutorial_Loading_Status")                                                					// Loading screen only
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        TextTitle("TutorialName_Loading_Status");
+        TextBody("Tutorial_Loading_Status");
+    }
+	
+	CustomHint("Tutorial_Loading_Outfits")                                                					// Loading screen only
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        TextTitle("TutorialName_Loading_Outfits");
+        TextBody("Tutorial_Loading_Outfits");
+    }
+	
+	CustomHint("Tutorial_Loading_Quartermaster")                                                					// Loading screen only
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        TextTitle("TutorialName_Loading_Quartermaster");
+        TextBody("Tutorial_Loading_Quartermaster");
+    }
+	
+	CustomHint("Tutorial_Loading_NightShop")                                                					// Loading screen only
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        TextTitle("TutorialName_Loading_NightShop");
+        TextBody("Tutorial_Loading_NightShop");
+    }
+	
+    CustomHint("Tutorial_Loading_ChallengeIntroduction")                                                // Challenge I - Loading screen only
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        TextTitle("&TutorialName_Loading_ChallengeIntroduction&");
+        TextBody("Tutorial_Loading_ChallengeIntroduction");
+		RequireUnlockToShowOnLoadingScreen();
+    }
+
+    CustomHint("Tutorial_Loading_ChallengeCombatType")                                                // Challenge II - Loading screen only
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        TextTitle("&TutorialName_Loading_ChallengeCombatType&");
+        TextBody("Tutorial_Loading_ChallengeCombatType");		
+		RequireUnlockToShowOnLoadingScreen();
+    }
+    
+    CustomHint("Tutorial_Loading_ChallengeRunningType")                                                // Challenge III - Loading screen only
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        TextTitle("&TutorialName_Loading_ChallengeRunningType&");
+        TextBody("Tutorial_Loading_ChallengeRunningType");
+		RequireUnlockToShowOnLoadingScreen();
+    }
+    
+    CustomHint("Tutorial_Loading_ChallengeDeadZoneType")                                                // Challenge IV - Loading screen only
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        TextTitle("&TutorialName_Loading_ChallengeDeadZoneType&");
+        TextBody("Tutorial_Loading_ChallengeDeadZoneType");
+		RequireUnlockToShowOnLoadingScreen();
+	}
+    
+    CustomHint("Tutorial_Loading_ChallengeTabInformations")                                                // Challenge V - Loading screen only
+    {
+        use Params(category = ETutorialCategory_Gameplay);
+        TextTitle("&TutorialName_Loading_ChallengeTabInformations&");
+        TextBody("Tutorial_Loading_ChallengeTabInformations");
+		RequireUnlockToShowOnLoadingScreen();
+	}
+    
+    
+    CustomHint("Tutorial_TimeFreeze_LightTrap")
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("TutorialName_TimeFreeze_LightTrap");
+        TextBody("Tutorial_TimeFreeze_LightTrap");
+        TimeFreezing();
+        RequireUnlockToShowOnLoadingScreen();
+        AlwaysShow();
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }
+
+    CustomHint("Tutorial_TimeFreeze_CarBomb")
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("TutorialName_TimeFreeze_CarBomb");
+        TextBody("Tutorial_TimeFreeze_CarBomb");
+        TimeFreezing();
+        RequireUnlockToShowOnLoadingScreen();
+        AlwaysShow();
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }
+    
+    CustomHint("Tutorial_TimeFreeze_ElectricFence")
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("TutorialName_TimeFreeze_ElectricFence");
+        TextBody("Tutorial_TimeFreeze_ElectricFence");
+        TimeFreezing();
+        RequireUnlockToShowOnLoadingScreen();
+        AlwaysShow();
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }
+        
+    CustomHint("Tutorial_TimeFreeze_Ziplines")
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("TutorialName_TimeFreeze_Ziplines");
+        TextBody("Tutorial_TimeFreeze_Ziplines");
+        TimeFreezing();
+        RequireUnlockToShowOnLoadingScreen();
+        AlwaysShow();
+        HintDisplayType(EHintDisplayType_TextureTop);
+    }
+        
+    CustomHint("Tutorial_TimeFreeze_Camouflage")
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("TutorialName_TimeFreeze_Camouflage");
+        TextBody("Tutorial_TimeFreeze_Camouflage");
+        TimeFreezing();
+        RequireUnlockToShowOnLoadingScreen();
+        AlwaysShow();
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }
+
+    CustomHint("Tutorial_TimeFreeze_Shield")
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("TutorialName_TimeFreeze_Shield");
+        TextBody("Tutorial_TimeFreeze_Shield");
+        TimeFreezing();
+        RequireUnlockToShowOnLoadingScreen();
+        AlwaysShow();
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }
+
+    CustomHint("Tutorial_TimeFreeze_GrapplingHook")
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("TutorialName_TimeFreeze_GrapplingHook");
+        TextBody("Tutorial_TimeFreeze_GrapplingHook");
+        TimeFreezing();
+        RequireUnlockToShowOnLoadingScreen();
+        DisableShownTimes(1);
+        //AlwaysShow();
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }    
+    
+	 //////////////////////// Outfits:
+	
+    CustomHint("Tutorial_TimeFreeze_TrainingOutfit")
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("TutorialName_TimeFreeze_TrainingOutfit");
+        TextBody("Tutorial_TimeFreeze_TrainingOutfit");
+        TimeFreezing();
+        RequireUnlockToShowOnLoadingScreen();
+        DontShowOnLoadingScreen();
+        DontShowInMenu();
+        AlwaysShow();
+		HintDisplayType(EHintDisplayType_TextureVerticalRight);
+    }
+	
+	CustomHint("Tutorial_TimeFreeze_Outfit1")
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("TutorialName_TimeFreeze_Outfit1");
+        TextBody("Tutorial_TimeFreeze_Outfit1");
+        TimeFreezing();
+        RequireUnlockToShowOnLoadingScreen();
+        DontShowOnLoadingScreen();
+        DontShowInMenu();
+        AlwaysShow();
+		HintDisplayType(EHintDisplayType_TextureVerticalRight);
+    }
+    CustomHint("Tutorial_TimeFreeze_Outfit2")
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("TutorialName_TimeFreeze_Outfit2");
+        TextBody("Tutorial_TimeFreeze_Outfit2");
+        TimeFreezing();
+        RequireUnlockToShowOnLoadingScreen();
+        DontShowOnLoadingScreen();
+        DontShowInMenu();
+        AlwaysShow();
+		HintDisplayType(EHintDisplayType_TextureVerticalRight);
+    }        
+    CustomHint("Tutorial_TimeFreeze_Outfit3")
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("TutorialName_TimeFreeze_Outfit3");
+        TextBody("Tutorial_TimeFreeze_Outfit3");
+        TimeFreezing();
+        RequireUnlockToShowOnLoadingScreen();
+        DontShowOnLoadingScreen();
+        DontShowInMenu();
+        AlwaysShow();
+		HintDisplayType(EHintDisplayType_TextureVerticalRight);
+    }    
+    CustomHint("Tutorial_TimeFreeze_Outfit4")
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("TutorialName_TimeFreeze_Outfit4");
+        TextBody("Tutorial_TimeFreeze_Outfit4");
+        TimeFreezing();
+        RequireUnlockToShowOnLoadingScreen();
+        DontShowOnLoadingScreen();
+        DontShowInMenu();
+        AlwaysShow();
+		HintDisplayType(EHintDisplayType_TextureVerticalRight);
+    }    
+    CustomHint("Tutorial_TimeFreeze_Outfit5")
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("TutorialName_TimeFreeze_Outfit5");
+        TextBody("Tutorial_TimeFreeze_Outfit5");
+        TimeFreezing();
+        RequireUnlockToShowOnLoadingScreen();
+        DontShowOnLoadingScreen();
+        DontShowInMenu();
+        AlwaysShow();
+		HintDisplayType(EHintDisplayType_TextureVerticalRight);
+    }    
+    CustomHint("Tutorial_TimeFreeze_Outfit6")
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("TutorialName_TimeFreeze_Outfit6");
+        TextBody("Tutorial_TimeFreeze_Outfit6");
+        TimeFreezing();
+        RequireUnlockToShowOnLoadingScreen();
+        DontShowOnLoadingScreen();
+        DontShowInMenu();
+        AlwaysShow();
+		HintDisplayType(EHintDisplayType_TextureVerticalRight);
+    }    
+    CustomHint("Tutorial_TimeFreeze_Outfit7")
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("TutorialName_TimeFreeze_Outfit7");
+        TextBody("Tutorial_TimeFreeze_Outfit7");
+        TimeFreezing();
+        RequireUnlockToShowOnLoadingScreen();
+        DontShowOnLoadingScreen();
+        DontShowInMenu();
+        AlwaysShow();
+		HintDisplayType(EHintDisplayType_TextureVerticalRight);
+    }
+    CustomHint("Tutorial_TimeFreeze_Outfit8")
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("TutorialName_TimeFreeze_Outfit8");
+        TextBody("Tutorial_TimeFreeze_Outfit8");
+        TimeFreezing();
+        RequireUnlockToShowOnLoadingScreen();
+        DontShowOnLoadingScreen();
+        DontShowInMenu();
+        AlwaysShow();
+		HintDisplayType(EHintDisplayType_TextureVerticalRight);
+    }
+    CustomHint("Tutorial_TimeFreeze_Outfit9")
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("TutorialName_TimeFreeze_Outfit9");
+        TextBody("Tutorial_TimeFreeze_Outfit9");
+        TimeFreezing();
+        RequireUnlockToShowOnLoadingScreen();
+        DontShowOnLoadingScreen();
+        DontShowInMenu();
+        AlwaysShow();
+		HintDisplayType(EHintDisplayType_TextureVerticalRight);
+    }
+    CustomHint("Tutorial_TimeFreeze_Night")
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("TutorialName_Hints_TimeFreeze_Night");
+        TextBody("Tutorial_Hints_TimeFreeze_Night");
+        TimeFreezing();
+        DisableShownTimes(1);
+        DontShowOnLoadingScreen();
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }
+    CustomHint("Tutorial_TimeFreeze_Quartermaster")
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("TutorialName_TimeFreeze_Quartermaster");
+        TextBody("Tutorial_TimeFreeze_Quartermaster");
+        TimeFreezing();
+        DisableShownTimes(1);
+        DontShowOnLoadingScreen();
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }
+	CustomHint("Tutorial_TimeFreeze_Airdrops")
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("TutorialName_TimeFreeze_Airdrops");
+        TextBody("Tutorial_TimeFreeze_Airdrops");
+        TimeFreezing();
+        DisableShownTimes(1);
+        DontShowOnLoadingScreen();
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }
+    CustomHint("Tutorial_TimeFreeze_SafeZoneNight")
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("TutorialName_TimeFreeze_SafeZoneNight");
+        TextBody("Tutorial_TimeFreeze_SafeZoneNight");
+        TimeFreezing();
+        DisableShownTimes(1);
+        DontShowOnLoadingScreen();
+    }
+    CustomHint("Tutorial_TimeFreeze_SafeZoneUnlocking")
+    {
+        use Params(category = ETutorialCategory_Gameplay, show_interval = 0.0);
+        TextTitle("TutorialName_TimeFreeze_SafeZoneUnlocking");
+        TextBody("Tutorial_TimeFreeze_SafeZoneUnlocking");
+        TimeFreezing();
+        DisableShownTimes(1);
+        DontShowOnLoadingScreen();
+		HintDisplayType(EHintDisplayType_TextureTop);
+    }
+}

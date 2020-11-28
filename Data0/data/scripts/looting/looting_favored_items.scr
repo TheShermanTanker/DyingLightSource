@@ -1,0 +1,38 @@
+
+
+sub main()
+{
+    ItemTypeDefinitions()
+    {
+        ItemType("RequiredByQuests")
+        {
+            ItemWeightMultiplier(10000.0);
+            ItemSetWeightMultiplier(10000.0);
+        }
+        
+        ItemType("MedkitOnLowLevelHealth")
+        {
+            ItemWeightMultiplier(10.0);
+            ItemSetWeightMultiplier(10.0);
+            
+            LevelHealthThreshold(0.35);
+            
+            Items()
+            {
+                ItemCategory("Medkit");
+            }
+        }
+    }
+
+    WeightModifiers()
+    {
+        // health threshold, mul when not needed, weight mul for min health
+        ConsumablesWeightParams(0.9, 0.5, 3.0);
+
+        // max parts needed count, prob min, prob max
+        CraftPartWeightParams(5.0, 0.5, 0.95);
+
+        // max parts needed count, prob min, prob max
+        VehicleComponentsWeightParams(5.0, 0.5, 0.95);
+    }
+}

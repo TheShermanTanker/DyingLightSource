@@ -1,0 +1,77 @@
+!include("MeshPartCloth.def")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+MeshPartCloth()
+{
+//----------------------------------------------
+// bones
+//----------------------------------------------
+    BonesGridSize(1, 4)
+
+    $XDIST(f, -1)
+    $YDIST(f, -0.98)
+
+    Bone(0, 0, "bonec_torso_a_hand_b_00", 1, XDIST, YDIST)
+    Bone(0, 1, "bonec_torso_a_hand_b_01", 0, XDIST, YDIST)
+    Bone(0, 2, "bonec_torso_a_hand_b_02", 0, XDIST, YDIST)
+    Bone(0, 3, "",                        0, XDIST, YDIST)
+    
+//----------------------------------------------
+// collisions 
+//----------------------------------------------
+
+    CollisionSlide(1)
+    CollisionBounce(0)
+    CollisionSpeedMod(1)
+    
+    CollisionShapesMoveInfluence(1)
+    
+    CollisionSegmentDivision(100)
+    CollisionNormalAngleThreshold(190)
+    
+    NodeCollisionSphereRadius(0.1)
+    ExternalCollisionAffectMul(0)
+    
+    CollisionMaxDistance(0, 1, "r_foretwist", [0.10, -0.09, 0.05], 0, 100)
+    CollisionMaxDistance(0, 2, "r_foretwist", [0.11, -0.1, 0.09], 0, 50)
+    CollisionMaxDistance(0, 3, "r_foretwist", [0.12, -0.1, 0.15], 0, 20)
+
+    CollisionMinDistance(0, 1, "r_forearm", [-0.04, 0, 0], 0.08, 0)
+    CollisionMinDistance(0, 2, "r_forearm", [-0.04, 0, 0], 0.07, 0)
+    CollisionMinDistance(0, 3, "r_forearm", [-0.04, 0, 0], 0.07, 0)
+    
+//----------------------------------------------
+// spring params 
+//----------------------------------------------
+
+    Viscous(4)
+    AirFriction(2)
+
+    StructuralStiffness(10000, 10000)
+    ShearStiffness(10000, 10000)
+    FlexionStiffness(8000, 20000)
+    
+    HorizontSpringRatio(1)
+    
+    CheckLengthsStepsPerSec(0)
+
+//----------------------------------------------
+// physical params 
+//----------------------------------------------
+    
+    Mass(1)
+    GravityMul(0.2)
+    WindInfluence(1)
+
+//----------------------------------------------
+// other params
+//----------------------------------------------
+
+    SynchroWithPhysics(0)
+    EnableAPBOut(1)
+    
+    ObjectMoveMul(1)
+    AnimationMoveMul(0.7)
+}
+
+

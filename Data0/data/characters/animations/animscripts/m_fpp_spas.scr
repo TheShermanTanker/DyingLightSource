@@ -1,0 +1,265 @@
+// nois
+SeqTrack("Fpp_Shotgun_StandNoise",	 "Fpp_Shotgun_StandNoise.anm2",					0, 340, 60, 1, 0.3)
+SeqTrack("Fpp_Shotgun_MoveNoise",	 "M_FPP_Shotgun_Doublebarrel_Walk.anm2",		0, 32, 30, 1, 0.3)
+SeqTrack("Fpp_Shotgun_SprintNoise",	 "Fpp_Shotgun_Sprint.anm2", 					0, 20, 40, 1, 0.3)
+
+// stand 
+SeqTrack("Fpp_Shotgun_Stand", 		"Fpp_Shotgun_Pose.anm2",0, 10, 30, 1, 0.3)
+SeqTrack("Fpp_Shotgun_StandEmpty", 	"Fpp_Shotgun_Pose.anm2",0, 10, 30, 1, 0.3)
+
+
+//Fast
+SeqTrack("Fpp_Shotgun_ReloadBegin", "M_FPP_Shotgun_Doublebarrel_Reload.anm2", 0, 16, 35, 1, 0.0)
+{
+	Event(5, 0, -1)
+    {
+        PlaySound2DExternal(GameVolumeSource_SoundPlayer, "rmngtn_open.wav", 1, 1, 1)
+    }	
+}
+
+SeqTrack("Fpp_Shotgun_ReloadLoop", "M_FPP_Shotgun_Doublebarrel_Reload.anm2", 16, 50, 35, 1, 0.0)
+{
+	Event(17, 0, -1)
+    {
+        PlaySound2DExternal(GameVolumeSource_SoundPlayer, "rmngtn_bullet_load.wav", 1, 1, 1)
+    }
+	    
+	Event(0, EVENT_RELOAD_FORBID_BREAK, -1)
+    Event(20, EVENT_RELOAD_ADD_BULLET, -1)
+}
+
+SeqTrack("Fpp_Shotgun_ReloadFinish", "M_FPP_Shotgun_Doublebarrel_Reload.anm2", 50, 73, 35, 1, 0.0)
+{
+	Event(4, 0, -1)
+    {
+        PlaySound2DExternal(GameVolumeSource_SoundPlayer, "rmngtn_close.wav", 1, 1, 1)
+    }
+	Event(4, EVENT_RELOAD_ALLOW_BREAK, -1)	
+	//Event(12, 0, -1)
+    //{
+    //    PlaySound2DExternal(GameVolumeSource_SoundPlayer, "rmngtn_rack.wav", 1, 1, 1)
+    //}			
+}
+
+// shoot
+SeqTrackAlias( "Fpp_Shotgun_ShotRecoil",             "Fpp_Shotgun_Stand")
+SeqTrackAlias( "Fpp_Shotgun_Aim_ShotRecoil",         "Fpp_Shotgun_Stand")
+
+SeqTrack("Fpp_Shotgun_Shot", "FPP_Shotgun_ShotNew.anm2", 0, 40, 60, 1, 0.3)
+SeqTrack("Fpp_Shotgun_ShotLast", "FPP_Shotgun_ShotNew.anm2", 0, 40, 60, 1, 0.3)
+SeqTrack("Fpp_Shotgun_ShotEmpty", "Fpp_Shotgun_ShotEmpty.anm2", 0, 40, 60, 1, 0.3)
+
+// aim
+// stand
+SeqTrack("Fpp_Shotgun_Aim_Stand", "Fpp_Shotgun_Aim_Pose.anm2",0, 10, 60, 1, 0.3) 
+SeqTrack("Fpp_Shotgun_Aim_StandEmpty", "Fpp_Shotgun_Aim_Pose.anm2", 0, 10, 60, 1, 0.3) 
+
+SeqTrack("Fpp_Shotgun_Aim_Shot", "FPP_Shotgun_Aim_Shot_R.anm2",0, 40, 60, 1, 0.3)
+SeqTrack("Fpp_Shotgun_Aim_ShotEmpty", "Fpp_Shotgun_ShotEmpty.anm2", 0, 40, 60, 1, 0.3)
+
+SeqTrack("Fpp_Shotgun_Wall", "Fpp_Shotgun_Wall.anm2", 0, 25, 60, 1, 0.3)
+
+///PUMP ACTION
+// nois
+SeqTrack("Fpp_Shotgun_PA_StandNoise",	 "M_FPP_Shotgun_PA_Idle.anm2",					0, 120, 30, 1, 0.3)
+SeqTrack("Fpp_Shotgun_PA_MoveNoise",	 "M_FPP_Shotgun_PA_MoveNoise.anm2",				0, 28, 35, 1, 0.1)
+SeqTrack("Fpp_Shotgun_PA_SprintNoise",	 "M_FPP_Shotgun_anims_13_Sprint.anm2", 			0, 20, 40, 1, 0.1)
+
+// stand 
+SeqTrack("Fpp_Shotgun_PA_Stand", 		"M_FPP_Shotgun_PA_Idle.anm2",0, 120, 30, 1, 0.3)
+SeqTrack("Fpp_Shotgun_PA_StandEmpty", 	"M_FPP_Shotgun_PA_Idle.anm2",0, 120, 30, 1, 0.3)
+
+
+//Fast
+SeqTrack("Fpp_Shotgun_PA_ReloadBegin", "M_FPP_Shotgun_PA_Reload_NoShell.anm2", 0, 10, 30, 1, 0.3)
+{
+	Event(0, 0, -1)
+    {
+        PlaySound2DExternal(GameVolumeSource_SoundPlayer, "ShotgunB_move_XX.wav", 0.7, 1, 1)
+    }	
+}
+
+SeqTrack("Fpp_Shotgun_PA_ReloadLoop", "M_FPP_Shotgun_PA_Reload_NoShell.anm2", 10, 30, 45, 1, 0.0)
+{
+	Event(0, 0, -1)
+    {
+        PlaySound2DExternal(GameVolumeSource_SoundPlayer, "ShotgunB_bullet_load_XX.wav", 1, 1, 1)
+    }
+	    
+	Event(0, EVENT_RELOAD_FORBID_BREAK, -1)
+    Event(10, EVENT_RELOAD_ADD_BULLET, -1)
+	Event(12, EVENT_RELOAD_ALLOW_BREAK, -1)	
+}
+
+SeqTrack("Fpp_Shotgun_PA_ReloadFinish", "M_FPP_Shotgun_PA_Reload_NoShell.anm2", 30, 70, 30, 1, 0.0)
+{
+	Event(0, 0, -1)
+    {
+        PlaySound2DExternal(GameVolumeSource_SoundPlayer, "ShotgunB_move_XX.wav", 0.7, 1, 1)
+    }
+	Event(22, 0, -1)
+    {
+        PlaySound2DExternal(GameVolumeSource_SoundPlayer, "ShotgunB_reload_XX.wav", 0.7, 1, 1)
+    }
+	Event(20, 0, -1)
+    {
+        PlaySound2DExternal(GameVolumeSource_SoundPlayer, "ShotgunB_move_XX.wav", 0.7, 1, 1)
+    }
+	//Event(4, EVENT_RELOAD_FORBID_BREAK, -1)
+	//Event(0, EVENT_RELOAD_ALLOW_BREAK, -1)	
+	//Event(12, 0, -1)
+    //{
+    //    PlaySound2DExternal(GameVolumeSource_SoundPlayer, "rmngtn_rack.wav", 1, 1, 1)
+    //}			
+}
+
+// shoot
+SeqTrack("Fpp_Shotgun_PA_ShotRecoil",             "M_FPP_Shotgun_PA_Idle.anm2",0, 40, 30, 1, 0.0)
+SeqTrack("Fpp_Shotgun_PA_Aim_ShotRecoil",         "M_FPP_Shotgun_PA_Aim.anm2",0, 40, 30, 1, 0.0)
+
+SeqTrack("Fpp_Shotgun_PA_Shot", "M_FPP_Shotgun_PA_Shoot.anm2", 0, 40, 30, 1, 0.0)
+{
+	Event(12, 0, -1)
+    {
+        PlaySound2DExternal(GameVolumeSource_SoundPlayer, "ShotgunB_reload_XX.wav", 1.0, 1, 1)
+    }
+}
+SeqTrack("Fpp_Shotgun_PA_ShotLast", "M_FPP_Shotgun_PA_Shoot.anm2", 0, 40, 30, 1, 0.0)
+{
+	Event(12, 0, -1)
+    {
+        PlaySound2DExternal(GameVolumeSource_SoundPlayer, "ShotgunB_reload_XX.wav", 1.0, 1, 1)
+    }
+}
+SeqTrack("Fpp_Shotgun_PA_ShotEmpty", "Fpp_Shotgun_ShotEmpty.anm2", 0, 40, 60, 1, 0.3)
+
+// aim
+// stand
+SeqTrack("Fpp_Shotgun_PA_Aim_Stand", "M_FPP_Shotgun_PA_Aim.anm2",0, 120, 30, 1, 0.3) 
+SeqTrack("Fpp_Shotgun_PA_Aim_StandEmpty", "M_FPP_Shotgun_PA_Aim.anm2", 0, 120, 30, 1, 0.3) 
+
+SeqTrack("Fpp_Shotgun_PA_Aim_Shot", "M_FPP_Shotgun_PA_Aim_Shoot.anm2",0, 40, 30, 1, 0.0)
+{
+	Event(12, 0, -1)
+    {
+        PlaySound2DExternal(GameVolumeSource_SoundPlayer, "ShotgunB_reload_XX.wav", 1.0, 1, 1)
+    }
+}
+SeqTrack("Fpp_Shotgun_PA_Aim_ShotEmpty", "Fpp_Shotgun_ShotEmpty.anm2", 0, 40, 60, 1, 0.3)
+
+SeqTrackAlias("Fpp_Shotgun_PA_Wall", "Fpp_Shotgun_PA_Aim_Stand")
+
+
+///SemiAutomatic
+// nois
+SeqTrack("Fpp_Shotgun_SA_StandNoise",	 "M_FPP_Shotgun_PA_Idle.anm2",					0, 120, 30, 1, 0.3)
+SeqTrack("Fpp_Shotgun_SA_MoveNoise",	 "M_FPP_Shotgun_PA_MoveNoise.anm2",				0, 28, 35, 1, 0.2)
+SeqTrack("Fpp_Shotgun_SA_SprintNoise",	 "M_FPP_Shotgun_anims_13_Sprint.anm2", 			0, 20, 40, 1, 0.1)
+
+// stand 
+SeqTrack("Fpp_Shotgun_SA_Stand", 		"M_FPP_Shotgun_PA_Idle.anm2",0, 120, 30, 1, 0.3)
+SeqTrack("Fpp_Shotgun_SA_StandEmpty", 	"M_FPP_Shotgun_PA_Idle.anm2",0, 120, 30, 1, 0.3)
+
+
+SeqTrack("Fpp_Shotgun_SA_ReloadBegin", "M_FPP_Shotgun_SA_Reload.anm2", 0, 10, 30, 1, 0.3)
+{
+	Event(0, 0, -1)
+    {
+        PlaySound2DExternal(GameVolumeSource_SoundPlayer, "ShotgunB_move_XX.wav", 0.7, 1, 1)
+    }	
+}
+
+SeqTrack("Fpp_Shotgun_SA_ReloadLoop", "M_FPP_Shotgun_SA_Reload.anm2", 10, 30, 45, 1, 0.0)
+{
+	Event(0, 0, -1)
+    {
+        PlaySound2DExternal(GameVolumeSource_SoundPlayer, "ShotgunB_bullet_load_XX.wav", 1, 1, 1)
+    }
+	    
+	Event(0, EVENT_RELOAD_FORBID_BREAK, -1)
+    Event(10, EVENT_RELOAD_ADD_BULLET, -1)
+	Event(12, EVENT_RELOAD_ALLOW_BREAK, -1)	
+}
+
+SeqTrack("Fpp_Shotgun_SA_ReloadFinish", "M_FPP_Shotgun_SA_Reload.anm2", 30, 70, 30, 1, 0.0)
+{
+	Event(0, 0, -1)
+    {
+        PlaySound2DExternal(GameVolumeSource_SoundPlayer, "ShotgunB_move_XX.wav", 0.7, 1, 1)
+    }
+	Event(17, 0, -1)
+    {
+        PlaySound2DExternal(GameVolumeSource_SoundPlayer, "ShotgunB_reload_XX.wav", 0.7, 1, 1)
+    }
+	Event(20, 0, -1)
+    {
+        PlaySound2DExternal(GameVolumeSource_SoundPlayer, "ShotgunB_move_XX.wav", 0.7, 1, 1)
+    }
+	//Event(4, EVENT_RELOAD_FORBID_BREAK, -1)
+	//Event(0, EVENT_RELOAD_ALLOW_BREAK, -1)	
+	//Event(12, 0, -1)
+    //{
+    //    PlaySound2DExternal(GameVolumeSource_SoundPlayer, "rmngtn_rack.wav", 1, 1, 1)
+    //}			
+}
+
+SeqTrack("Fpp_Shotgun_SA_ReloadBeginEmpty", "M_FPP_Shotgun_PA_Reload_tactical.anm2", 0, 5, 30, 1, 0.1)
+{
+}
+
+SeqTrack("Fpp_Shotgun_SA_ReloadFirstLoopEmpty", "M_FPP_Shotgun_PA_Reload_tactical.anm2", 5, 20, 30, 1, 0.0)
+{
+	Event(0, 0, -1)
+    {
+        PlaySound2DExternal(GameVolumeSource_SoundPlayer, "rmngtn_open.wav", 1, 1, 1)
+    }
+	Event(0, EVENT_RELOAD_FORBID_BREAK, -1)
+    Event(5, EVENT_RELOAD_ADD_BULLET, -1)
+	Event(7, EVENT_RELOAD_ALLOW_BREAK, -1)		
+}
+
+SeqTrack("Fpp_Shotgun_SA_ReloadLoopEmpty", "M_FPP_Shotgun_PA_Reload_tactical.anm2", 20, 40, 45, 1, 0.0)
+{
+	Event(17, 0, -1)
+    {
+        PlaySound2DExternal(GameVolumeSource_SoundPlayer, "rmngtn_bullet_load.wav", 1, 1, 1)
+    }
+	    
+	Event(0, EVENT_RELOAD_FORBID_BREAK, -1)
+    Event(10, EVENT_RELOAD_ADD_BULLET, -1)
+	Event(12, EVENT_RELOAD_ALLOW_BREAK, -1)	
+}
+
+SeqTrack("Fpp_Shotgun_SA_ReloadFinishEmpty", "M_FPP_Shotgun_PA_Reload_tactical.anm2", 40, 80, 30, 1, 0.0)
+{
+	Event(4, 0, -1)
+    {
+        PlaySound2DExternal(GameVolumeSource_SoundPlayer, "rmngtn_close.wav", 1, 1, 1)
+    }
+	//Event(4, EVENT_RELOAD_FORBID_BREAK, -1)
+	//Event(0, EVENT_RELOAD_ALLOW_BREAK, -1)	
+	//Event(12, 0, -1)
+    //{
+    //    PlaySound2DExternal(GameVolumeSource_SoundPlayer, "rmngtn_rack.wav", 1, 1, 1)
+    //}			
+}
+
+
+// shoot
+SeqTrack("Fpp_Shotgun_SA_ShotRecoil",             "M_FPP_Shotgun_SA_Shoot.anm2", 0, 25, 30, 1, 0.0)
+SeqTrack("Fpp_Shotgun_SA_Aim_ShotRecoil",         "M_FPP_Shotgun_SA_Aim_Shoot.anm2", 0, 25, 30, 1, 0.0)
+
+SeqTrack("Fpp_Shotgun_SA_Shot", 				"M_FPP_Shotgun_SA_Shoot.anm2", 0, 25, 30, 1, 0.0)
+SeqTrack("Fpp_Shotgun_SA_ShotLast", 			"M_FPP_Shotgun_SA_Shoot.anm2", 0, 25, 30, 1, 0.0)
+
+SeqTrack("Fpp_Shotgun_SA_ShotEmpty", 			"Fpp_Shotgun_ShotEmpty.anm2", 0, 40, 60, 1, 0.3)
+
+// aim
+// stand
+SeqTrack("Fpp_Shotgun_SA_Aim_Stand", "M_FPP_Shotgun_PA_Aim.anm2",0, 120, 30, 1, 0.3) 
+SeqTrack("Fpp_Shotgun_SA_Aim_StandEmpty", "M_FPP_Shotgun_PA_Aim.anm2",0, 120, 30, 1, 0.3) 
+
+SeqTrack("Fpp_Shotgun_SA_Aim_Shot", "M_FPP_Shotgun_SA_Aim_Shoot.anm2",0, 25, 30, 1, 0.0)
+SeqTrack("Fpp_Shotgun_SA_Aim_ShotEmpty", "Fpp_Shotgun_ShotEmpty.anm2", 0, 40, 60, 1, 0.3)
+
+SeqTrackAlias("Fpp_Shotgun_SA_Wall", "Fpp_Shotgun_SA_Stand")

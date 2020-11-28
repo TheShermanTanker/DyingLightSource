@@ -1,0 +1,102 @@
+!include("MeshPartCloth.def")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+MeshPartCloth()
+{
+//----------------------------------------------
+// bones
+//----------------------------------------------
+    BonesGridSize(4, 4)
+
+    $XDIST(f, -1)
+    $YDIST(f, -1)
+    
+    Mode3D(0)
+    
+    Bone(0, 0, "bone_ezgi_sleeve_l_a_01", 1, XDIST, YDIST)
+    Bone(0, 1, "bone_ezgi_sleeve_l_a_02", 0, XDIST, YDIST)
+    Bone(0, 2, "bone_ezgi_sleeve_l_a_03", 0, XDIST, YDIST)
+    Bone(0, 3, "",                        0, XDIST, YDIST)
+
+    Bone(1, 0, "bone_ezgi_sleeve_l_b_01", 1, XDIST, YDIST)
+    Bone(1, 1, "bone_ezgi_sleeve_l_b_02", 0, XDIST, YDIST)
+    Bone(1, 2, "bone_ezgi_sleeve_l_b_03", 0, XDIST, YDIST)
+    Bone(1, 3, "",                        0, XDIST, YDIST)
+
+    Bone(2, 0, "bone_ezgi_sleeve_l_c_01", 1, XDIST, YDIST)
+    Bone(2, 1, "bone_ezgi_sleeve_l_c_02", 0, XDIST, YDIST)
+    Bone(2, 2, "bone_ezgi_sleeve_l_c_03", 0, XDIST, YDIST)
+    Bone(2, 3, "",                        0, XDIST, YDIST)
+
+    Hook(3, 0, "l_upperarm",     [0.29, 0.01, 0], XDIST, YDIST)
+    Bone(3, 1, "bone_ezgi_sleeve_l_d_01", 0, XDIST, YDIST)
+    Bone(3, 2, "bone_ezgi_sleeve_l_d_02", 0, XDIST, YDIST)
+    Bone(3, 3, "bone_ezgi_sleeve_l_d_03", 0, XDIST, YDIST)
+
+    UseFlatNormalCalculations(0)
+    
+//----------------------------------------------
+// collisions 
+//----------------------------------------------
+
+    CollisionSlide(1)
+    CollisionSpeedMod(1)
+    CollisionBounce(0)
+    
+    CollisionShapesMoveInfluence(1)
+    
+    CollisionSegmentDivision(-1)
+    CollisionNormalAngleThreshold(180)
+    
+    NodeCollisionSphereRadius(0.1)
+    ExternalCollisionAffectMul(0)
+    
+    CollisionCapsule("l_upperarm", -1, -1.2)
+    
+    CollisionInteriorOfSphere("l_upperarm", [0, 0.05, -0.45], 0.5)
+    
+    //XX CollisionMinDistance(2, 1, "spine", [0, 0, 0], 0.22, 100000)
+    CollisionMinDistance(2, 2, "spine", [0, 0, 0], 0.20, 100000)
+    CollisionMinDistance(2, 3, "spine", [0, 0, 0], 0.20, 100000)
+    
+    //XX CollisionMinDistance(3, 1, "spine", [0, 0, 0], 0.22, 100000)
+    CollisionMinDistance(3, 2, "spine", [0, 0, 0], 0.18, 100000)
+    CollisionMinDistance(3, 3, "spine", [0, 0, 0], 0.21, 100000)
+    
+//----------------------------------------------
+// spring params 
+//----------------------------------------------
+
+    Viscous(3)
+    AirFriction(1)
+
+    StructuralStiffness(10000, 10000)
+    ShearStiffness(4000, 4000)
+    FlexionStiffness(1000, 1000)
+
+    HorizontSpringRatio(0.2)
+    
+    CheckLengthsStepsPerSec(0)
+
+//----------------------------------------------
+// physical params 
+//----------------------------------------------
+    
+    Mass(1)
+    GravityMul(0.6)
+    WindInfluence(1)
+
+//----------------------------------------------
+// other params
+//----------------------------------------------
+
+    SynchroWithPhysics(0)
+    EnableAPBOut(1)
+    
+    StartStabilisation(0)
+    
+    ObjectMoveMul(1)
+    AnimationMoveMul(0.8)
+}
+
+

@@ -1,0 +1,128 @@
+// RailTrolley
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Fizyka Vehicle - ustawienia domyslne
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+!include("../Include/ODEPhysicsVehicle.def")
+
+//-------------------------------------------------------------------------------------------------
+PhysicsParams()
+{
+    QuickStepNumIterations(50)    // powinno byc 500 zeby sie nie zsuwal z gorek, ale wtedy jest za kosztowne - FIXIT
+    SetPhysicsSurfaceID(SRF_METAL)
+    SetVelsGate(0, 0)
+    SetWaterFloat(0.06)
+    SetAutoDisableVels(0.08, 1, 2)      //CM2M
+    SetAbsorbers(0.4, 0.4)
+    SetMaxVels(90, 30)                  //CM2M
+    SetMaxWatchingTime(5.1)
+    AllowDepthCompression(1)
+    AllowContinuousCollisions(1, 1)
+    EnablePlatformAutoMounting(0)
+    
+    CollisionSfx(0, 0)
+}
+
+//-------------------------------------------------------------------------------------------------
+VehicleParams()
+{
+    Mass(1700)
+
+    MainGeomsMu(0.1) 
+    
+    MassScale([1, 0.5, 1])
+    //MassShift([0, -0.92, -0.1])
+    MassShift([0, -0.92, 0.25])
+
+//    AddMainGeom("coalcar_scarp", "box")
+//    AddMainGeom("coalcarcontainer_scarp", "box")
+    AddMainGeom("Top", "box")
+    AddMainGeom("Bottom", "box")
+    AddMainGeom("GlassFront", "box")
+//    AddMainGeom("ODEBox1", "box")
+//    AddMainGeom("ODEBox2", "box")
+//    AddMainGeom("ODEBoxGlassFront", "box")
+    AddWheel("wheel_fl", 0.28, 10)          //CM2M
+    AddWheel("wheel_fr", 0.28, 10)          //CM2M
+    AddWheel("wheel_rl", 0.28, 10)          //CM2M    
+    AddWheel("wheel_rr", 0.28, 10)          //CM2M
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("Terrain")
+{
+    ZeroFlags()
+    Mu(7)                  
+    
+    //SetModeFlag("dContactSoftERP")
+    //SetModeFlag("dContactSoftCFM")
+    //SoftERP(0.25) 
+    //SoftCFM(0.00001)
+
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("SimpleObjects")
+{
+    ZeroFlags()
+    Mu(7)                  
+    
+    //SetModeFlag("dContactSoftERP")
+    //SetModeFlag("dContactSoftCFM")
+    //SoftERP(0.15) 
+    //SoftCFM(0.00001)
+
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("NonODEObjects")
+{
+    ZeroFlags()
+    Mu(7)                  
+    
+    //SetModeFlag("dContactSoftERP")
+    //SetModeFlag("dContactSoftCFM")
+    //SoftERP(0.15) 
+    //SoftCFM(0.00001)
+
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("ODEObjects")
+{
+    ZeroFlags()
+    Mu(0.1)
+    
+    //SetModeFlag("dContactSoftERP")
+    //SetModeFlag("dContactSoftCFM")
+    //SoftERP(0.15) 
+    //SoftCFM(0.00001)
+
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("Water")
+{
+    ZeroFlags()
+    Mu(10)                  
+    
+    //SetModeFlag("dContactSlip1")
+    //SetModeFlag("dContactSlip2")
+    //Slip1(1)                          
+    //Slip2(1)              
+
+    //SetModeFlag("dContactSoftERP")
+    //SetModeFlag("dContactSoftCFM")
+    //SoftERP(0.25) 
+    //SoftCFM(0.0000001)
+
+    Ignore(1)
+}
+
+
+

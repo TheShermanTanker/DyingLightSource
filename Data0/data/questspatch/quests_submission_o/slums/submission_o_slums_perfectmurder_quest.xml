@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- PERFECT MURDER - START -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- quest PerfectMurder -parent=BringAntibiotics02 -reward_set=PerfectMurder_reward -quest_giver=Aziz -difficulty=medium  -->
+        <!-- ,goto _ HumanAI Aziz -distance=-5 -show=false -->
+        <!-- ,talk <<Perfect Murder - Start>> Aziz Aziz_PerfectMurder_USE -show=false -questgiver_indicator=true -->
+            <!-- ,debugpos SpawnPoint PerfectMurder_SP_Aziz -->
+        <!-- ,enable _ MapPortal portal_slums_to_slums_interior_a_perfectmurder01 -->
+        <!-- ,checkpoint _ SpawnPoint PerfectMurder_SP_Aziz -->
+    <!-- -= -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- -= PERFECT MURDER - 02 -->
+    <!-- -= -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- -= SLUMS INTERIOR A -->
+    <!-- -= -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- -= PERFECT MURDER - 03 -->
+    <!-- -= -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- quest PerfectMurder3 -parent=PerfectMurder2 -glued=true -->
+        <!-- ,BLOCK _ -obj=&PerfectMurder_OBJ_Aziz& -->
+            <!-- ,goto <<Perfect Murder - Get back to Aziz>> SpawnPoint portal_slums_interior_a_to_slums_perfectmurder01_sp -distance=50 -->
+                <!-- ,debugpos SpawnPoint portal_slums_interior_a_to_slums_perfectmurder01_sp -->
+            <!-- ,checkpoint _ SpawnPoint portal_slums_interior_a_to_slums_perfectmurder01_sp -->
+            <!-- ,goto <<Perfect Murder - END>> SpawnPoint PerfectMurder_SP_Aziz -distance=10000000 -show=false -->
+                <!-- ,debugpos SpawnPoint PerfectMurder_SP_Aziz -->
+            <!-- ,OR _ -->
+                <!-- path -->
+                    <!-- ,cnd-quest-started _ __PerfectMurder_KillToad -finished=false -->
+                    <!-- ,talk _ Aziz Aziz_PerfectMurder_A_END -->
+                <!-- path -->
+                    <!-- ,cnd-quest-started _ __PerfectMurder_KillToad -finished=true -->
+                    <!-- ,talk _ Aziz Aziz_PerfectMurder_B_END -->
+            <!-- ,reward _  -->
+        <!-- ,checkpoint _ SpawnPoint PerfectMurder_SP_Aziz -->
+</QuestsDefinitions>

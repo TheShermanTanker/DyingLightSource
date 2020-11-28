@@ -1,0 +1,17 @@
+import "render_loop.ppfx"
+
+sub ppfx()
+{ 
+	int e_path = SM51;
+	
+	use usermaps(e_path = e_path);
+
+	use opq_render(e_path = e_path, b_sky_on = TRUE);	
+
+	SetRenderTarget("backbuffer", "");
+		SetBuffer(16, "1_RGBA8_SPC");
+			Mesh("tri_screen.msh", "copy_srgb.mat", "std");
+			
+			Scene("std");//Helpers, UI
+			Scene("std2");			
+}

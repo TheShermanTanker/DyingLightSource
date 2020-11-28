@@ -1,0 +1,253 @@
+//----- animacje z beretta
+
+!include("W_TPP_Beretta.scr")
+
+SeqTrack("TPP_Submachinegun_Stand", 					"TPP_Beretta_Stand.anm2"			, 0, 192, 45, 1, 0.4)
+SeqTrack("TPP_Submachinegun_StandEmpty",				"TPP_Beretta_Stand.anm2"			, 0, 192, 45, 1, 0.4)
+SeqTrack("TPP_Submachinegun_Wall", 						"TPP_Beretta_Stand.anm2"			, 0, 192, 45, 1, 0.4)
+SeqTrack("TPP_Submachinegun_Cover_StandPos",			"TPP_Beretta_Stand.anm2"			, 0, 192, 45, 1, 0.4)
+
+SeqTrack("TPP_Submachinegun_Shot", 						"TPP_Player_Submachine_Shoot.anm2"			, 0, 20, 30, 1, 0.0)
+SeqTrack("TPP_Submachinegun_ShotLast", 					"TPP_Player_Submachine_Shoot.anm2"			, 0, 20, 30, 1, 0.0)
+SeqTrack("TPP_Submachinegun_ShotEmpty", 				"TPP_Player_Submachine_Shoot.anm2"			, 0, 20, 30, 1, 0.0)
+
+// Aim
+SeqTrack("TPP_Submachinegun_Aim_Stand", 				"TPP_Beretta_Aim.anm2"			, 0, 98, 40, 1, 0.3)
+SeqTrack("TPP_Submachinegun_Aim_StandEmpty",			"TPP_Beretta_Aim.anm2"			, 0, 98, 40, 1, 0.3)
+
+SeqTrack("TPP_Submachinegun_Aim_Shot", 					"TPP_Player_Submachine_Shoot.anm2"			, 0, 20, 30, 1, 0.0)
+SeqTrack("TPP_Submachinegun_Aim_ShotLast", 				"TPP_Player_Submachine_Shoot.anm2"			, 0, 20, 30, 1, 0.0)
+SeqTrack("TPP_Submachinegun_Aim_ShotEmpty", 			"TPP_Player_Submachine_Shoot.anm2"			, 0, 20, 30, 1, 0.0)
+
+// beretta - podstawowe
+SeqTrack("TPP_Submachinegun_ReloadBegin", 				"TPP_Player_Submachine_Reload.anm2"			, 0, 20, 30, 1, 0.3)
+{
+	Event(5, EVENT_RELOAD_FORBID_BREAK, -1)
+	Event(0, 0, 1)
+    {		
+		PlaySound3D(GameVolumeSource_SoundPlayer, "SubMachineA_offload_01.wav", 0.5, 3, "head", 1, [0, 0, 0], 1)             
+    }	
+}
+SeqTrack("TPP_Submachinegun_ReloadManage", 				"TPP_Player_Submachine_Reload.anm2"			, 20, 40, 30, 1, 0.0)
+{
+	Event(0, 0, 1)
+    {		
+		PlaySound3D(GameVolumeSource_SoundPlayer, "SubMachineA_offload_01.wav", 0.5, 3, "head", 1, [0, 0, 0], 1)             
+    }
+}
+
+SeqTrack("TPP_Submachinegun_ReloadLoop", 				"TPP_Player_Submachine_Reload.anm2"			, 20, 40, 30, 1, 0.0)
+{	
+	Event(0, 0, 1)
+    {
+		PlaySound3D(GameVolumeSource_SoundPlayer, "SubMachineA_load_01.wav", 0.5, 3, "head", 1, [0, 0, 0], 1)                     
+    }
+	Event(19,   EVENT_RELOAD_ADD_BULLET, -1)	
+}
+
+SeqTrack("TPP_Submachinegun_ReloadFinish", 				"TPP_Player_Submachine_Reload.anm2"			, 40, 100, 30, 1, 0.0)
+{	
+	Event(0, 0, 1)
+    {
+		PlaySound3D(GameVolumeSource_SoundPlayer, "SubMachineA_reload_01.wav", 0.5, 3, "head", 1, [0, 0, 0], 1)                     
+    }
+	Event(30, EVENT_RELOAD_ALLOW_BREAK, -1)
+}
+
+SeqTrack("TPP_Submachinegun_ReloadBeginEmpty", 			"TPP_Player_Submachine_Reload.anm2"			, 0, 20, 30, 1, 0.3)
+{
+	Event(5, EVENT_RELOAD_FORBID_BREAK, -1)
+	Event(0, 0, 1)
+    {		
+		PlaySound3D(GameVolumeSource_SoundPlayer, "SubMachineA_offload_01.wav", 0.5, 3, "head", 1, [0, 0, 0], 1)             
+    }
+}
+
+SeqTrack("TPP_Submachinegun_ReloadManageEmpty", 			"TPP_Player_Submachine_Reload.anm2"			, 20, 40, 30, 1, 0.0)
+{
+	Event(0, 0, 1)
+    {		
+		PlaySound3D(GameVolumeSource_SoundPlayer, "SubMachineA_load_01.wav", 0.5, 3, "head", 1, [0, 0, 0], 1)             
+    }
+}
+SeqTrack("TPP_Submachinegun_ReloadLoopEmpty", 				"TPP_Player_Submachine_Reload.anm2"			, 20, 40, 30, 1, 0.0)
+{	
+	Event(0, 0, 1)
+    {		
+		PlaySound3D(GameVolumeSource_SoundPlayer, "SubMachineA_load_01.wav", 0.5, 3, "head", 1, [0, 0, 0], 1)             
+    }
+	Event(19,   EVENT_RELOAD_ADD_BULLET, -1)	
+}
+
+SeqTrack("TPP_Submachinegun_ReloadFinishEmpty", 			"TPP_Player_Submachine_Reload.anm2"			, 40, 100, 45, 1, 0.0)
+{	
+	Event(0, 0, 1)
+    {		
+		PlaySound3D(GameVolumeSource_SoundPlayer, "SubMachineA_reload_01.wav", 0.5, 3, "head", 1, [0, 0, 0], 1)             
+    }
+	Event(7, EVENT_RELOAD_ALLOW_BREAK, -1)
+}
+
+SeqTrack("TPP_Submachinegun_Jump_Pose", 		       		"TPP_Player_Beretta_Idle.anm2"	        , 0, 45, 30, 1, 0.3)
+
+//SeqTrack( "TPP_Beretta_PelvisRotate_r",		"TPP_Player_Beretta_turn_R.anm2",           0, 34, 30, 1, 0.15)
+//SeqTrack( "TPP_Beretta_PelvisRotate_l",		"TPP_Player_Beretta_turn_L.anm2",           0, 34, 30, 1, 0.15)
+
+///FORWARD
+SeqTrack("TPP_Submachinegun_WalkForward",					"TPP_Beretta_WalkForward.anm2", 			0 , 53 , 60 , 1, 0.5 )
+{
+    Event(18, VIS_EVENT_STEP_RIGHT, -1)
+    Event(44, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("TPP_Submachinegun_RunForward",					"TPP_Beretta_RunForward.anm2", 			0 , 44 , 60 , 1, 0.5 )
+{
+    Event(14, VIS_EVENT_STEP_RIGHT, -1)
+    Event(34, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("TPP_Submachinegun_SprintForward",					"tpp_beretta_sprintforward.anm2", 		0 , 34 , 60 , 1, 0.5 )
+{
+    Event(10, VIS_EVENT_STEP_RIGHT, -1)
+    Event(25, VIS_EVENT_STEP_LEFT, -1)
+}
+///BACKWARD
+SeqTrack("TPP_Submachinegun_WalkBackward",					"TPP_Beretta_WalkBackward.anm2", 			0 , 82 , 60 , 1, 0.5 )
+{
+    Event(26, VIS_EVENT_STEP_LEFT, -1)
+    Event(62, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("TPP_Submachinegun_RunBackward",					"TPP_Beretta_RunBackward.anm2", 			0 , 45 , 60 , 1, 0.5 )
+{
+    Event(15, VIS_EVENT_STEP_LEFT, -1)
+    Event(36, VIS_EVENT_STEP_RIGHT, -1)
+}
+/// RIGHT
+SeqTrack("TPP_Submachinegun_WalkRight",						"TPP_Beretta_WalkRight.anm2", 			0 , 72 , 60 , 1, 0.5 )
+{
+    Event(20, VIS_EVENT_STEP_LEFT, -1)
+    Event(52, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("TPP_Submachinegun_RunRight",						"TPP_Beretta_RunRight.anm2", 			0 , 47 , 60 , 1, 0.5 )
+{
+    Event(13, VIS_EVENT_STEP_LEFT, -1)
+    Event(37, VIS_EVENT_STEP_RIGHT, -1)
+}
+/// LEFT
+SeqTrack("TPP_Submachinegun_WalkLeft",						"TPP_Beretta_WalkLeft.anm2", 			0 , 65 , 60 , 1, 0.5 )
+{
+    Event(14, VIS_EVENT_STEP_RIGHT, -1)
+    Event(46, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("TPP_Submachinegun_RunLeft",						"TPP_Beretta_RunLeft.anm2", 	0 , 46 , 60 , 1, 0.5 )
+{
+    Event(14, VIS_EVENT_STEP_RIGHT, -1)
+    Event(36, VIS_EVENT_STEP_LEFT, -1)
+}
+
+SeqTrackAlias("TPP_Submachinegun_Alt_Stand", 					"TPP_Submachinegun_Stand")
+SeqTrackAlias("TPP_Submachinegun_Alt_StandEmpty",				"TPP_Submachinegun_StandEmpty")
+SeqTrackAlias("TPP_Submachinegun_Alt_Wall", 					"TPP_Submachinegun_Wall")
+SeqTrackAlias("TPP_Submachinegun_Alt_Cover_StandPos",			"TPP_Submachinegun_Cover_StandPos")
+
+SeqTrackAlias("TPP_Submachinegun_Alt_Shot", 					"TPP_Submachinegun_Shot")
+SeqTrackAlias("TPP_Submachinegun_Alt_ShotLast", 				"TPP_Submachinegun_ShotLast")
+SeqTrackAlias("TPP_Submachinegun_Alt_ShotEmpty", 				"TPP_Submachinegun_ShotEmpty")
+
+// Aim
+SeqTrackAlias("TPP_Submachinegun_Alt_Aim_Stand", 				"TPP_Submachinegun_Aim_Stand")
+SeqTrackAlias("TPP_Submachinegun_Alt_Aim_StandEmpty",			"TPP_Submachinegun_Aim_StandEmpty")
+
+SeqTrackAlias("TPP_Submachinegun_Alt_Aim_Shot", 				"TPP_Submachinegun_Aim_Shot")
+SeqTrackAlias("TPP_Submachinegun_Alt_Aim_ShotLast", 			"TPP_Submachinegun_Aim_ShotLast")
+SeqTrackAlias("TPP_Submachinegun_Alt_Aim_ShotEmpty", 			"TPP_Submachinegun_Aim_ShotEmpty")
+
+// beretta - podstawowe
+SeqTrack("TPP_Submachinegun_Alt_ReloadBegin", 				"TPP_Player_Submachine_Alt_Reload.anm2"			, 0, 20, 30, 1, 0.3)
+{
+	Event(5, EVENT_RELOAD_FORBID_BREAK, -1)
+	Event(0, 0, 1)
+    {		
+		PlaySound3D(GameVolumeSource_SoundPlayer, "SubMachineB_reload_00.wav", 0.7, 3, "head", 1, [0, 0, 0], 1)             
+    }	
+}
+
+SeqTrack("TPP_Submachinegun_Alt_ReloadLoop", 				"TPP_Player_Submachine_Alt_Reload.anm2"			, 20, 40, 30, 1, 0.0)
+{	
+	Event(0, 0, 1)
+    {
+		PlaySound3D(GameVolumeSource_SoundPlayer, "SubMachineB_reload_01.wav", 0.7, 3, "head", 1, [0, 0, 0], 1)             
+    }
+	Event(19,   EVENT_RELOAD_ADD_BULLET, -1)	
+}
+
+SeqTrack("TPP_Submachinegun_Alt_ReloadFinish", 				"TPP_Player_Submachine_Alt_Reload.anm2"			, 40, 100, 45, 1, 0.0)
+{
+	Event(6, 0, 1)
+    {
+		PlaySound3D(GameVolumeSource_SoundPlayer, "SubMachineB_reload_02.wav", 0.7, 3, "head", 1, [0, 0, 0], 1)             
+    }
+
+	Event(30, EVENT_RELOAD_ALLOW_BREAK, -1)
+}
+
+SeqTrack("TPP_Submachinegun_Alt_ReloadManage", 				"TPP_Player_Submachine_Alt_Reload.anm2"			, 20, 40, 30, 1, 0.0)
+
+SeqTrackAlias("TPP_Submachinegun_Alt_ReloadBeginEmpty", "TPP_Submachinegun_Alt_ReloadBegin")
+SeqTrackAlias("TPP_Submachinegun_Alt_ReloadManageEmpty", "TPP_Submachinegun_Alt_ReloadManage")
+SeqTrackAlias("TPP_Submachinegun_Alt_ReloadLoopEmpty", "TPP_Submachinegun_Alt_ReloadLoop")
+SeqTrackAlias("TPP_Submachinegun_Alt_ReloadFinishEmpty", "TPP_Submachinegun_Alt_ReloadFinish")
+
+
+SeqTrack("TPP_Submachinegun_Alt_Jump_Pose", 		       		"TPP_Player_Beretta_Idle.anm2"	        , 0, 45, 30, 1, 0.3)
+
+//SeqTrack( "TPP_Beretta_PelvisRotate_r",		"TPP_Player_Beretta_turn_R.anm2",           0, 34, 30, 1, 0.15)
+//SeqTrack( "TPP_Beretta_PelvisRotate_l",		"TPP_Player_Beretta_turn_L.anm2",           0, 34, 30, 1, 0.15)
+
+///FORWARD
+SeqTrack("TPP_Submachinegun_Alt_WalkForward",					"TPP_Beretta_WalkForward.anm2", 			0 , 53 , 60 , 1, 0.5 )
+{
+    Event(18, VIS_EVENT_STEP_RIGHT, -1)
+    Event(44, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("TPP_Submachinegun_Alt_RunForward",					"TPP_Beretta_RunForward.anm2", 			0 , 44 , 60 , 1, 0.5 )
+{
+    Event(14, VIS_EVENT_STEP_RIGHT, -1)
+    Event(34, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("TPP_Submachinegun_Alt_SprintForward",					"tpp_beretta_sprintforward.anm2", 		0 , 34 , 60 , 1, 0.5 )
+{
+    Event(10, VIS_EVENT_STEP_RIGHT, -1)
+    Event(25, VIS_EVENT_STEP_LEFT, -1)
+}
+///BACKWARD
+SeqTrack("TPP_Submachinegun_Alt_WalkBackward",					"TPP_Beretta_WalkBackward.anm2", 			0 , 82 , 60 , 1, 0.5 )
+{
+    Event(26, VIS_EVENT_STEP_LEFT, -1)
+    Event(62, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("TPP_Submachinegun_Alt_RunBackward",					"TPP_Beretta_RunBackward.anm2", 			0 , 45 , 60 , 1, 0.5 )
+{
+    Event(15, VIS_EVENT_STEP_LEFT, -1)
+    Event(36, VIS_EVENT_STEP_RIGHT, -1)
+}
+/// RIGHT
+SeqTrack("TPP_Submachinegun_Alt_WalkRight",						"TPP_Beretta_WalkRight.anm2", 			0 , 72 , 60 , 1, 0.5 )
+{
+    Event(20, VIS_EVENT_STEP_LEFT, -1)
+    Event(52, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("TPP_Submachinegun_Alt_RunRight",						"TPP_Beretta_RunRight.anm2", 			0 , 47 , 60 , 1, 0.5 )
+{
+    Event(13, VIS_EVENT_STEP_LEFT, -1)
+    Event(37, VIS_EVENT_STEP_RIGHT, -1)
+}
+/// LEFT
+SeqTrack("TPP_Submachinegun_Alt_WalkLeft",						"TPP_Beretta_WalkLeft.anm2", 			0 , 65 , 60 , 1, 0.5 )
+{
+    Event(14, VIS_EVENT_STEP_RIGHT, -1)
+    Event(46, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("TPP_Submachinegun_Alt_RunLeft",						"TPP_Beretta_RunLeft.anm2", 	0 , 46 , 60 , 1, 0.5 )
+{
+    Event(14, VIS_EVENT_STEP_RIGHT, -1)
+    Event(36, VIS_EVENT_STEP_LEFT, -1)
+}

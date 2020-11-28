@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums_interior_a"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- DEATH SENTENCE - Way to bandits hideout -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- quest __SQ_DeathSentence_05_kill -parent=SQ_DeathSentence_04  -->
+        <!-- ,kill-multi _ -show=false -->
+            <!-- ,spawner AISpawnBoxCompound sq_deathsentence_meleeA -show=false -->
+            <!-- ,spawner AISpawnBoxCompound sq_deathsentence_meleeB -show=false -->
+            <!-- -= ,spawner AISpawnBoxCompound sq_deathsentence_meleeC -show=false -->
+            <!-- ,spawner AISpawnBoxCompound sq_deathsentence_meleeD -show=false -->
+            <!-- ,spawner AISpawnBoxCompound sq_deathsentence_meleeE -show=false -->
+            <!-- ,spawner AISpawnBoxCompound sq_deathsentence_meleeF -show=false -->
+        <!-- ,enable _ SensorAmbientMusicArea sq_deathsentence_music -state=disabled -show=false -->
+        <!--  -->
+    <!-- quest __SQ_DeathSentence_05_trap -parent=SQ_DeathSentence_04  -->
+        <!-- ,goto _ SensorGoTo sq_deathsentence_dropcrates -distance=0 -show=false -->
+        <!-- ,movie _ movie_deathsentence_blocade_02 -->
+    <!-- quest SQ_DeathSentence_05 -parent=SQ_DeathSentence_04 -glued=true -leading_portal=portal_DeathSentence_Slums_TO_Slums_Int_A -->
+        <!-- ,BLOCK _ -obj=&SQ_DSentence_05_OBJ_01& -->
+            <!-- ,goto <<Death Sentence 05 - START>> Marker m_Slums_Interior_A_01 -distance=5 -->
+                <!-- ,debugpos Marker m_Slums_Interior_A_01 -->
+            <!-- ,checkpoint _ SpawnPoint sp_DeathSentence_Slums_TO_Slums_Int_A -->
+            <!-- ,hide _ ModelObject Fake_Laser -->
+            <!-- ,show _ HumanAI Layla -->
+            <!-- ,show _ HumanAI Azyp -->
+            <!-- ,show _ HumanAI Said -->
+            <!-- ,AND _  -->
+                <!-- path -->
+                    <!-- ,wait _ 1 -->
+                    <!-- ,talk _ FAKE_DS_BanditB FAKE_DS_BanditB_SQ_DSentence_05_01 -show=false -auto=true -->
+                    <!-- ,talk _ FAKE_DS_BanditC FAKE_DS_BanditC_SQ_DSentence_05_02 -show=false -auto=true -->
+                <!-- path -->
+                    <!-- ,goto _ Marker m_DSentence_enemies_LP -distance=3 -show=false -->
+                    <!-- -= ,enable _ QuestEnableGroup qeg_DSentence_enemies_LP -state=disabled -->
+                    <!-- ,talk _ FAKE_DS_BanditD FAKE_DS_BanditD_SQ_DSentence_05_01 -show=false -auto=true -->
+                <!-- path -->
+                    <!-- ,goto _ Marker m_DSentence_Baricade_01 -distance=3 -show=false -->
+                    <!-- ,AND _ -->
+                        <!-- path -->
+                            <!-- ,movie _ movie_deathsentence_blocade_01 -->
+                        <!-- path -->
+                            <!-- ,talk _ FAKE_DS_BanditE FAKE_DS_BanditE_SQ_DSentence_05_01 -show=false -auto=true -->
+                <!-- path -->
+                    <!-- ,goto _ Marker m_DSentence05_01 -distance=5 -->
+                    <!-- ,AND _ -->
+                        <!-- path -->
+                            <!-- ,wait _ 1 -->
+                            <!-- ,show _ ModelObject Fake_Laser -->
+                        <!-- path -->
+                            <!-- ,talk _ Azyp Azyp_SQ_DSentence_05_02 -auto=true -show=false -->
+                    <!-- ,enable _ QuestEnableGroup qeg_FakeDeath -state=enabled -->
+                    <!-- ,hide _ ModelObject Fake_Laser -->
+                    <!-- ,set-lp _ NPCLifePlace lp_Azyp_Looking -state=off -->
+                    <!-- ,hide _ HumanAI Azyp -->
+                    <!-- ,teleport _ NPCLifePlace lp_Azyp_Dead -->
+                        <!-- ,ai HumanAI Azyp -->
+                    <!-- ,set-lp _ NPCLifePlace lp_Azyp_Dead -state=on -->
+                    <!-- ,show _ HumanAI Azyp -->
+                    <!-- ,enable _ QuestEnableGroup qeg_FakeDeath -state=disabled -->
+                    <!-- -= ,hide _ HumanAI Azyp -->
+                    <!-- ,AND _ -->
+                        <!-- path -->
+                            <!-- ,talk _ Layla Layla_SQ_DSentence_05_03 -auto=true -show=false -->
+                        <!-- path -->
+                            <!-- ,set-lp _ NPCLifePlace lp_Layla_Scared -state=off -->
+                        <!-- path -->
+                            <!-- ,move _ Marker m_DSentence_Layla_pos_01 -->
+                                <!-- ,ai HumanAI Layla -->
+                    <!-- ,hide _ ModelObject DSentence03_Fake_Door -->
+                    <!-- ,AND _ -->
+                        <!-- path -->
+                            <!-- ,move _ Marker m_DSentence_Said_pos_01 -->
+                                <!-- ,ai HumanAI Said -->
+                            <!-- ,talk _ Said Said_SQ_DSentence_05_04 -auto=true -show=false -->
+                        <!-- path -->
+                            <!-- ,wait _ 2 -->
+                            <!-- ,talk _ Layla Layla_SQ_DSentence_05_05 -auto=true -show=false -->
+            <!-- ,checkpoint _ SpawnPoint sp_DeathSentence_01 -->
+        <!-- ,BLOCK _ -obj=&SQ_DSentence_05_OBJ_02& -->
+            <!-- ,talk _ Said Said_SQ_DSentence_05_06 -->
+            <!-- ,enable _ QuestEnableGroup qeg_DSentence_Exit_Portal_01 -state=enabled -->
+            <!-- blablalbla -->
+</QuestsDefinitions>

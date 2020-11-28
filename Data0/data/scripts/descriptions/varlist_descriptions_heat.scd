@@ -1,0 +1,8 @@
+Description( "f_heat_strength", "f:EDIT;e:EDIT|SPINNER;m:0;x:1;s:0.001;c:Heat;d:Strength;" )
+Description( "f_heat_near", "f:EDIT;e:EDIT|SPINNER;m:0;s:100.0;c:Heat;d:Near distance;" )
+Description( "f_heat_far", "f:EDIT;e:EDIT|SPINNER;m:0;s:100.0;c:Heat;d:Far distance;" )
+Description( "f_heat_height", "f:EDIT;e:EDIT|SPINNER;m:0;s:100.0;c:Heat;d:Height;" )
+Description( "f_heat_fade_range", "f:EDIT;e:EDIT|SPINNER;m:0;s:100.0;c:Heat;d:Vertical fading range;" )
+Description( "f_heat_uv_scale_x", "f:EDIT;e:EDIT|SPINNER;m:0;s:0.05;c:Heat;d:Heat noise uv horizontal scale ;" )
+Description( "f_heat_uv_scale_y", "f:EDIT;e:EDIT|SPINNER;m:0;s:0.05;c:Heat;d:Heat noise uv vertical scale;" )
+Description( "f_heat_uv_speed", "f:EDIT;e:EDIT|SPINNER;s:0.01;c:Heat;d:Heat noise uv moving speed;" )

@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="old_town_interior_a"
+     pxsl_line="3">
+    <!-- quest sq_kids02 -parent=sq_kids01 -glued=true -leading_portal=portal_OldTown_to_OldTownInetiorA_sq_kids -->
+        <!-- ,BLOCK _ -obj=<<Follow Sami>> -->
+            <!-- ,goto <<Kids Theese Days - stairacase entrance>> SpawnPoint sp_portal_OldTownInerior_to_OldTown_sq_kids -distance=5 -->
+                <!-- ,debugpos SpawnPoint sp_portal_OldTownInerior_to_OldTown_sq_kids -->
+            <!-- ,checkpoint <<Kids Theese Days - stairacase entrance>> SpawnPoint sp_portal_OldTownInerior_to_OldTown_sq_kids -->
+            <!-- ,show _ HumanAI Sami -->
+            <!-- ,goto <<Kids Theese Days - Follow Sami>> SensorGoTo sq_kids_trigger_sami -show=false -->
+                <!-- ,debugpos SpawnPoint sq_kids_sp_action -->
+            <!-- ,talk _ sami Sami_sq_kids_01DLG01 -auto=true -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,move _  NPCLifePlace sq_kids_sami_crying_lp -style=run -->
+                        <!-- ,ai HumanAI Sami -->
+                        <!-- ,start AIEscortNode sq_kids_sami_runs -->
+                    <!-- -= ,hide _ HumanAI Sami -->
+                    <!-- ,talk _ sq_kids_boss sq_kids_boss_01DLG01 -auto=true -->
+                <!-- path -->
+                    <!-- ,wait _ 2 -->
+                    <!-- ,movie _ sq_kids_samiclosedoor -->
+                <!-- path -->
+                    <!-- ,use _ InvisibleSwitchDI sq_kids_sami_door -state=on -->
+            <!--  -->
+    <!-- quest sq_kids03 -parent=sq_kids02 -glued=true -->
+        <!-- ,wait _ 10 -->
+        <!-- ,enable _ QuestEnableGroup sq_kids_enemy_A -state=enabled -->
+        <!-- ,set _ DoorDI sq_kids_door_A -state=opened -->
+        <!-- ,wait _ 1 -->
+        <!-- ,BLOCK _ -obj=<<Defend yourself>>    -->
+    <!--  -->
+        <!-- ,kill _ AISpawnBoxNumber sq_kids_enemy_A1 -->
+        <!-- ,enable _ QuestEnableGroup sq_kids_enemy_D -state=enabled -->
+        <!-- ,set _ DoorDI sq_kids_door_D -state=opened -->
+        <!-- ,kill _ AISpawnBoxNumber sq_kids_enemy_D -->
+    <!--  -->
+        <!-- ,talk _ sq_kids_boss sq_kids_boss_01DLG02 -auto=true -->
+        <!-- ,AND _ -->
+            <!-- path -->
+                <!-- ,movie _ sq_kids_bossbreakdoor -->
+            <!-- path -->
+                <!-- ,enable _ QuestEnableGroup sq_kids_boss -state=enabled -->
+                <!-- ,wait _ 1 -->
+                <!-- ,kill _ AISpawnBoxNumber sq_kids_boss -->
+            <!-- path -->
+                <!-- ,enable _ QuestEnableGroup sq_kids_enemy_C -state=enabled -->
+                <!-- ,set _ DoorDI sq_kids_door_C -state=opened -->
+                <!-- ,kill _ AISpawnBoxNumber sq_kids_enemy_C -->
+            <!-- path -->
+                <!-- ,enable _ QuestEnableGroup sq_kids_enemy_B -state=enabled -->
+                <!-- ,set _ DoorDI sq_kids_door_B -state=opened -->
+                <!-- ,kill _ AISpawnBoxNumber sq_kids_enemy_B -->
+        <!-- ,BLOCK _ -obj=<<Find Sami>> -->
+            <!-- ,talk _ sami Sami_sq_kids_02DLG01 -->
+    <!--  -->
+    <!-- quest sq_kids03_granades -parent=sq_kids02 -->
+        <!-- ,wait _ 5 -->
+        <!-- ,AND _ -->
+            <!-- path -->
+                <!-- ,movie _ sq_kids_gasgranade -->
+            <!-- path -->
+                <!-- ,wait _ 0.5 -->
+                <!-- ,enable _ QuestEnableGroup sq_kids_gasgranade1 -state=enabled -->
+            <!-- path -->
+                <!-- ,wait _ 0.7 -->
+                <!-- ,movie _ sq_kids_gasgranade2 -->
+            <!-- path -->
+                <!-- ,wait _ 1 -->
+                <!-- ,enable _ QuestEnableGroup sq_kids_gasgranade2 -state=enabled -->
+            <!-- path -->
+                <!-- ,wait _ 2 -->
+                <!-- ,enable _ QuestEnableGroup sq_kids_fog1 -state=enabled -->
+            <!-- path -->
+                <!-- ,wait _ 4 -->
+                <!-- ,enable _ QuestEnableGroup sq_kids_fog2 -state=enabled -->
+        <!-- ,enable _ QuestEnableGroup sq_kids_fog3 -state=enabled -->
+        <!-- ,wait _ 30 -->
+        <!-- ,enable _ QuestEnableGroup sq_kids_gasgranade2 -state=disabled -->
+        <!-- ,enable _ QuestEnableGroup sq_kids_gasgranade1 -state=disabled -->
+</QuestsDefinitions>

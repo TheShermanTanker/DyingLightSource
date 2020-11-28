@@ -1,0 +1,402 @@
+!include("ai_data.def")
+!include("infected_timing_events.def")
+// suicider is not using base nor random data sets!
+!include("infected_data_params.scr")
+!include("spitter_medium_params.scr")
+
+// spitter
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////// CURVES //////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+Curve(CURVE_HEALTH, "spitter_health")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////// PARAMETERS ////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////// DATA ///////////////////////////////////////////////
+
+//###############
+//#### DYING ####
+//###############
+//## die:pose:damage_type:body_part:direction:death_type:carried_weapon:kill_weapon:run_dir
+//###############
+
+Data("die:standing:fire:::burn:::", -2, "spitter_death_burn_01", -1, 1) //IK disabled
+
+Data("idle:standing::explode:::", -2,   "spitter_explosive_reaction_01", -1, 1)
+Data("idle:standing::explode:::", -2,   "spitter_explosive_reaction_02", -1, 1)
+
+//##################
+//#### IDLE     ####
+//##################
+
+Data("idle:standing::stand:::", -2, "spitter_idle_01", -1, 1)
+Data("idle:standing::stand:::", -2, "spitter_idle_02", -1, 1)
+
+Data("idle:standing::taunt:::", -2, "spitter_taunt_01", -1, 1)
+Data("idle:standing::taunt:::", -2, "spitter_taunt_02", -1, 1)
+Data("idle:standing::taunt:::", -2, "spitter_taunt_03", -1, 1)
+
+//##################
+//#### ALARMING ####
+//##################
+//## alarming:is_standing:alarm_level:angle:direction:was_moving
+//##################
+
+
+Data("alarming:standing::alarmed:::false", -2, "spitter_taunt_01", -1, 1)
+Data("alarming:standing::alarmed:::false", -2, "spitter_taunt_02", -1, 1)
+Data("alarming:standing::alarmed:::false", -2, "spitter_taunt_03", -1, 1)
+
+
+//##################
+//#### MOVEMENT ####
+//##################
+//## movement:is_standing:movement_type:movement_direction:alarm_level:item_type:ram_type:stairs_climbing_state
+//##################
+
+Data("movement:standing:run:forward::::", -2, "spitter_run_loop_01", -1, 1) //new
+Data("movement:standing:sprint:forward::::", -2, "spitter_run_loop_01", -1, 1) //new
+
+Data("movement:standing:walk:forward::::", -2, "spitter_run_loop_01", -1, 1) //new
+Data("movement:standing:walk:left::::", -2, "spitter_strafe_left_loop", -1, 1)//new
+Data("movement:standing:walk:right::::", -2, "spitter_strafe_right_loop", -1, 1)//new
+Data("movement:standing:walk:backward::::", -2, "spitter_strafe_back_loop", -1, 1) //new
+
+// climbing, taken from infected. Currently spitter can climb onto obstacles 1.2m height 
+// (as set in max_connection_height_up parameter), so maybe some of those are never used.
+Data("movement:standing:climb:::::", -2, "spitter_mzi_upset_sprintjumpup", -1, 1)
+Data("movement:standing:climb:::::", -2, "spitter_mzi_upset_sprintjumpup_lleg", -1, 1)
+Data("movement:standing:jump_down:::::", -2, "spitter_mzi_upset_sprintjumpdown", -1, 1)
+Data("movement:standing:jump_on:::::", -2, "spitter_mzi_upset_jump_on", -1, 1)
+Data("movement:standing:jump_off:::::", -2, "spitter_mzi_upset_jump_off", -1, 1)
+Data("movement:standing:jump_over_high_low:::::", -2, "spitter_mzi_upset_sprintbarrierjumpup", -1, 1)
+Data("movement:standing:jump_over_low:::::", -2, "spitter_mzi_upset_jump_over_low_02", -1, 1)
+Data("movement:standing:jump_over_low:::::", -2, "spitter_mzi_upset_jump_over_low_02_lleg", -1, 1)
+Data("movement:standing:jump_over_low_high:::::", -2, "spitter_mzi_upset_sprintbarrierjumpdown", -1, 1)
+
+Data("movement:standing:jump_05m:::::", -2, "spitter_mzi_upset_jump_1m", -1, 1)
+Data("movement:standing:jump_1m:::::", -2, "spitter_mzi_upset_jump_1m", -1, 1)
+Data("movement:standing:jump_3m:::::", -2, "spitter_mzi_upset_jump_3_5m", -1, 1)
+Data("movement:standing:jump_3m:::::", -2, "spitter_mzi_upset_jump_3_5m_lleg", -1, 1)
+Data("movement:standing:jump_5m:::::", -2, "spitter_mzi_upset_jump_5m", -1, 1)
+Data("movement:standing:jump_through_window:forward::::", -2, "spitter_mzi_upset_jump_through_window", -1, 1)
+Data("movement:standing:jump_through_window:forward::::", -2, "spitter_mzi_upset_jump_through_window_lleg", -1, 1)
+Data("movement:standing:jump_through_car:::::", -2, "spitter_mzi_upset_jump_through_car", -1, 1)
+Data("movement:standing:jump_through_car:::::", -2, "spitter_mzi_upset_jump_through_car_lleg", -1, 1)
+
+//###############
+//#### START ####
+//###############
+//## start:is_standing:alarm_level:item_type:movement_type:angle:direction
+//##############
+
+Data("start:standing::::90:left:", -2, "spitter_run_start_90L", -1, 1)
+Data("start:standing::::90:right:", -2, "spitter_run_start_90R", -1, 1)
+Data("start:standing::::0::", -2, "spitter_run_start_front_01", -1, 1)
+Data("start:standing::::180:left:", -2, "spitter_run_start_180L", -1, 1)
+Data("start:standing::::180:right:", -2, "spitter_run_start_180R", -1, 1)
+
+Data("start:standing:::::left:true", -2, "spitter_strafe_left_start", -1, 1)
+Data("start:standing:::::right:true", -2, "spitter_strafe_right_start", -1, 1)
+Data("start:standing:::::forward:true", -2, "spitter_run_start_front_01", -1, 1)
+Data("start:standing:::::backward:true", -2, "spitter_strafe_back_start", -1, 1)
+
+//##############
+//#### STOP ####
+//##############
+//## stop:is_standing:alarm_level:item_type:movement_type:angle:direction
+//##############
+
+Data("stop:standing::::90:left:false:", -2, "spitter_run_stop_90L", -1, 1)
+Data("stop:standing::::90:right:false:", -2, "spitter_run_stop_90R", -1, 1)
+Data("stop:standing::::0::false:", -2, "spitter_run_stop_front_01", -1, 1)
+Data("stop:standing::::180:left:false:", -2, "spitter_run_stop_180L", -1, 1)
+Data("stop:standing::::180:right:false:", -2, "spitter_run_stop_180R", -1, 1)
+
+Data("stop:standing:::::left:false:true", -2, "spitter_strafe_left_stop", -1, 1)
+Data("stop:standing:::::right:false:true", -2, "spitter_strafe_right_stop", -1, 1)
+Data("stop:standing:::::forward:false:true", -2, "spitter_run_stop_front_01", -1, 1)
+Data("stop:standing:::::backward:false:true", -2, "spitter_strafe_back_stop", -1, 1)
+
+//##############
+//#### TURN ####
+//##############
+//## turn:is_standing:alarm_level:item_type:direction:angle
+//##############
+
+Data("turn:standing:::left:45", -2, "spitter_turn_90L", -1, 1)
+Data("turn:standing:::right:45", -2, "spitter_turn_90R", -1, 1)
+
+Data("turn:standing:::left:90", -2, "spitter_turn_90L", -1, 1)
+Data("turn:standing:::right:90", -2, "spitter_turn_90R", -1, 1)
+
+Data("turn:standing:::left:180", -2, "spitter_turn_180L", -1, 1)
+Data("turn:standing:::right:180", -2, "spitter_turn_180R", -1, 1)
+
+//################
+//#### ATTACK ####
+//################
+//## attack:pose:item_type:attack_type:direction:attack_range:should_change_pose
+//################
+
+//Data("attack:standing::spit:::", -2, "spitter_spit_attack_x3_01", -1, 1)
+Data("attack:standing::spit:::", -2, "spitter_spit_attack_01", -1, 1)
+Data("attack:standing::spit_empty:::", -2, "spitter_spit_attack_empty", -1, 1)
+
+Data("attack:standing::throw_projectile:::", -2, "spitter_granade_spit_v01", -1, 1)
+Data("attack:standing::recharge:::", -2, "spitter_spit_reload", -1, 1)
+Data("attack:standing::push:::", -2, "spitter_push", -1, 1)
+
+Data("attack:standing::taunt:::", -2, "spitter_taunt_01", -1, 1)
+Data("attack:standing::taunt:::", -2, "spitter_taunt_02", -1, 1)
+Data("attack:standing::taunt:::", -2, "spitter_taunt_03", -1, 1)
+
+//#######################
+//#### HIT REACTIONS ####
+//#######################
+//## hit_reaction:pose:hit_reaction:item_type:damage_type:attacker_pos:body_part:direction:severity
+//#######################
+/*
+Data("hit_reaction:standing:counter_push::all:::left:", -2, "spitter_hit_reaction_left_counter_push_01", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::left:", -2, "spitter_hit_reaction_left_counter_push_02", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::left:", -2, "spitter_hit_reaction_left_counter_push_03", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::right:", -2, "spitter_hit_reaction_right_counter_push_01", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::right:", -2, "spitter_hit_reaction_right_counter_push_02", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::up:", -2, "spitter_hit_reaction_up_counter_push_01", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::up:", -2, "spitter_hit_reaction_up_counter_push_02", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::backward:", -2, "spitter_hit_reaction_up_counter_push_01", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::backward:", -2, "spitter_hit_reaction_up_counter_push_02", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::down:", -2, "spitter_hit_reaction_down_counter_push_01", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::down:", -2, "spitter_hit_reaction_down_counter_push_02", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::backward:", -2, "spitter_hit_reaction_down_counter_push_01", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::backward:", -2, "spitter_hit_reaction_down_counter_push_02", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::forward:", -2, "spitter_hit_reaction_back_counter_push", -1, 1)
+
+Data("hit_reaction:standing:counter_push::all:::left:", -2, "spitter_hitreaction_abdomen_medium_01", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::left:", -2, "spitter_hitreaction_head_back_heavy_01", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::left:", -2, "spitter_hitreaction_head_back_light_01", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::right:", -2, "spitter_hitreaction_head_left_light_01", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::right:", -2, "spitter_hitreaction_head_right_light_01", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::up:", -2, "spitter_hitreaction_left_leg_hard_01", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::up:", -2, "spitter_hitreaction_right_leg_hard_01", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::backward:", -2, "spitter_hitreaction_stomach_front_light_01", -1, 1)
+Data("hit_reaction:standing:pain::all::torso:forward:light", 		-2, "m_zombie_hitreaction_light_torso_back_v01",-1, 1)
+
+*/
+
+
+//### MEDIUM SEVERITY ###
+
+// --- head ---
+Data("hit_reaction:standing:pain::all::head:forward:", 		-2, "spitter_hitreaction_torso_left_heavy_01",-1, 1) 
+Data("hit_reaction:standing:pain::all::head:left:", 		-2, "spitter_hitreaction_torso_left_heavy_01",-1, 1) 
+Data("hit_reaction:standing:pain::all::head:backward:", 	-2, "spitter_hitreaction_head_back_light_01",-1, 1)
+Data("hit_reaction:standing:pain::all::head:right:", 		-2, "spitter_hitreaction_head_back_light_01",-1, 1)
+
+Data("hit_reaction:standing:pain::all::head:left:light",	-2, "spitter_hitreaction_head_left_light_01",-1, 1)
+Data("hit_reaction:standing:pain::all::head:right:light",	-2, "spitter_hitreaction_head_right_light_01",-1, 1)
+
+// --- torso ---
+Data("hit_reaction:standing:pain::all::torso:forward:", 		-2, "spitter_hitreaction_torso_left_heavy_01",-1, 1)
+Data("hit_reaction:standing:pain::all::torso:backward:",	-2, "spitter_hitreaction_abdomen_medium_01",-1, 1)
+Data("hit_reaction:standing:pain::all::torso:right:", 		-2, "spitter_hitreaction_torso_right_heavy_01",-1, 1)
+Data("hit_reaction:standing:pain::all::torso:left:", 		-2, "spitter_hitreaction_torso_left_heavy_01",-1, 1)
+
+// --- legs ---
+Data("hit_reaction:standing:pain::all::legs:right:", 		-2, "spitter_hitreaction_left_leg_hard_01",-1, 1)
+Data("hit_reaction:standing:pain::all::legs:backward:", 	-2, "spitter_hitreaction_left_leg_hard_01",-1, 1)
+Data("hit_reaction:standing:pain::all::legs:forward:", 		-2, "spitter_hitreaction_right_leg_hard_01",-1, 1)
+Data("hit_reaction:standing:pain::all::legs:left:", 		-2, "spitter_hitreaction_right_leg_hard_01",-1, 1)
+Data("hit_reaction:standing:pain::all::legs::", 			-2, "spitter_hitreaction_left_leg_hard_01",-1, 1)	
+Data("hit_reaction:standing:pain::all::legs::", 			-2, "spitter_hitreaction_right_leg_hard_01",-1, 1)  
+
+//### MEDIUM SEVERITY ###
+Data("hit_reaction:standing:pain::all::torso:left:medium",		-2, "spitter_hitreaction_torso_left_heavy_02",-1, 1)
+Data("hit_reaction:standing:pain::all::torso:right:medium",		-2, "spitter_hitreaction_torso_right_heavy_02",-1, 1)
+Data("hit_reaction:standing:pain::all::torso:backward:medium",	-2, "spitter_hitreaction_torso_left_heavy_02",-1, 1)
+Data("hit_reaction:standing:pain::all::torso:forward:medium",	-2, "spitter_hitreaction_torso_left_heavy_01",-1, 1)
+
+//### HEAVY SEVERITY ###
+Data("hit_reaction:standing:pain::all::torso:left:heavy",		-2, "spitter_hitreaction_torso_left_heavy_02",-1, 1)
+Data("hit_reaction:standing:pain::all::torso:right:heavy",		-2, "spitter_hitreaction_torso_right_heavy_02",-1, 1)
+Data("hit_reaction:standing:pain::all::torso:forward:heavy",	-2, "spitter_hitreaction_torso_left_heavy_02",-1, 1)
+Data("hit_reaction:standing:pain::all::torso:backward:heavy",	-2, "spitter_hitreaction_torso_right_heavy_02",-1, 1)
+
+
+//### HEAVY SEVERITY ###
+Data("hit_reaction:standing:pain::all::torso::",		-2, "spitter_hitreaction_torso_left_heavy_02",-1, 1)
+
+Data("hit_reaction:standing:pain::all:::down:", -2, "spitter_hitreaction_torso_left_heavy_02", -1, 1)
+Data("hit_reaction:standing:pain::all:::up:", -2, "spitter_hitreaction_torso_left_heavy_02", -1, 1)
+
+
+//###########################
+//#### RECOVER FROM FALL ####
+//###########################
+//## recover_from_fall:is_standing
+//###########################
+Data("recover_from_fall:standing:", -2, "spitter_stand_up_back_01", -1, 1)
+
+Data("recover_from_fall:standing:", -2, "spitter_stand_up_front_01", -1, 1)
+
+Data("recover_from_fall:standing:", -2, "spitter_stand_up_left_01", -1, 1)
+
+Data("recover_from_fall:standing:", -2, "spitter_stand_up_right_01", -1, 1)
+
+//################
+//##### GRAB #####
+//################
+//## grab:is_standing:is_holding:grabbed_phase:grab_type
+//################
+
+// Dealy_finish
+Data("grab:standing:true:finish_win:deadly_finish:", -2, "spitter_mz_deadly_finish", -1, 1)
+Data("grab:standing:true:begin_front:deadly_finish:", -2, "spitter_mz_begin_deadly_finish", -1, 1)
+Data("grab:laying:true:finish_win:deadly_finish:", -2, "spitter_mz_deadly_finish", -1, 1)
+Data("grab:laying:true:begin_front:deadly_finish:", -2, "spitter_mz_begin_deadly_finish", -1, 1)
+
+Data("grab:standing:true:begin_front:deadly_finish_blunt:", -2, "spiter_mz_begin_deadly_finish_blunt", -1, 1)
+Data("grab:standing:true:finish_win:deadly_finish_blunt:", -2, "spiter_mz_deadly_finish_blunt", -1, 1)
+Data("grab:laying:true:begin_front:deadly_finish_blunt:", -2, "spiter_mz_begin_deadly_finish_blunt", -1, 1)
+Data("grab:laying:true:finish_win:deadly_finish_blunt:", -2, "spiter_mz_deadly_finish_blunt", -1, 1)
+
+Data("grab:standing:true:begin_front:nagewazaback:", -2, "spitter_nagewaza_begin_back", -1, 1)
+Data("grab:laying:true:begin_front:nagewazaback:", -2, "spitter_nagewaza_begin_back", -1, 1)
+Data("grab:standing:false:begin_front:nagewazaback:", -2, "spitter_nagewaza_begin_back", -1, 1)
+Data("grab:laying:false:begin_front:nagewazaback:", -2, "spitter_nagewaza_begin_back", -1, 1)
+Data("grab:standing:true:finish_win:nagewazaback:", -2, "spitter_nagewaza_finish_back", -1, 1)
+Data("grab:laying:true:finish_win:nagewazaback:", -2, "spitter_nagewaza_finish_back", -1, 1)
+
+Data("grab:standing:true:begin_front:nagewazaright:", -2, "spitter_nagewaza_begin_right", -1, 1)
+Data("grab:laying:true:begin_front:nagewazaright:", -2, "spitter_nagewaza_begin_right", -1, 1)
+Data("grab:standing:false:begin_front:nagewazaright:", -2, "spitter_nagewaza_begin_right", -1, 1)
+Data("grab:laying:false:begin_front:nagewazaright:", -2, "spitter_nagewaza_begin_right", -1, 1)
+Data("grab:standing:true:finish_win:nagewazaright:", -2, "spitter_nagewaza_finish_right", -1, 1)
+Data("grab:laying:true:finish_win:nagewazaright:", -2, "spitter_nagewaza_finish_right", -1, 1)
+
+Data("grab:standing:true:begin_front:nagewazaleft:", -2, "spitter_nagewaza_begin_left", -1, 1)
+Data("grab:laying:true:begin_front:nagewazaleft:", -2, "spitter_nagewaza_begin_left", -1, 1)
+Data("grab:standing:false:begin_front:nagewazaleft:", -2, "spitter_nagewaza_begin_left", -1, 1)
+Data("grab:laying:false:begin_front:nagewazaleft:", -2, "spitter_nagewaza_begin_left", -1, 1)
+Data("grab:standing:true:finish_win:nagewazaleft:", -2, "spitter_nagewaza_finish_left", -1, 1)
+Data("grab:laying:true:finish_win:nagewazaleft:", -2, "spitter_nagewaza_finish_left", -1, 1)
+//################
+//#### EFFECT ####
+//################
+//## effect:type:direction:pose
+//##############
+
+Data("effect:burn::standing", -2, "spitter_burn_loop_01", -1, 1)
+Data("effect:electrocution::standing", -2, "spitter_electrified_loop_01", -1, 1)
+//Data("effect:poison::standing", -2, "m_npc_poisoned_loop_01", -1, 1)
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////// PARAMETERS ////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+ParamBool("can_move_through_low_obstacles", 1)
+ParamBool("can_move_through_high_obstacles", 1)
+ParamBool("stop_in_last_node_when_path_not_found", 0)
+ParamBool("navigate_through_generic_nav_mesh_connections", 1)
+ParamBool("navigate_through_user_nav_mesh_connections", 0)
+ParamFloat("max_connection_height_down", 1.2)
+ParamFloat("max_connection_height_up", 1.2)
+ParamFloat("max_connection_horiz_dist", 1.0)
+
+ParamFloat("min_time_btw_spits", 1.0)
+ParamFloat("spit_range", 15.0)
+ParamFloat("spit_range_for_vehicle", 25.0)
+ParamFloat("spit_min_range", 10.0)
+ParamFloat("dist_to_keep_from_target", 10.0) // must be equal to spit_min_range
+ParamFloat("throw_projectile_min_range", 15.0)
+ParamFloat("throw_projectile_max_range", 22.0)
+ParamFloat("spit_speed", 18.0)
+ParamFloat("throw_projectile_prediction_accuracy", 0.0) // 0 - min accuracy (no prediction), 1 - max accuracy
+ParamInt("min_spits_to_recharge", 5)
+ParamInt("max_spits_to_recharge", 6)
+
+ParamBool("can_spit", 1)
+ParamBool("can_throw_projectile", 1)
+ParamString("projectile_name", "Throwable_SpitGrenade")
+ParamString("projectile_origin_elem", "head")
+ParamFloat("melee_range_vs_ai", 2.0)
+ParamFloat("melee_range", 2.0)
+ParamFloat("bite_range", 2.0)
+ParamFloat("humanity_hit_reaction_prob", 0.0)
+ParamFloat("spit_min_damage_range", 10.0)
+ParamFloat("spit_max_damage_range", 5.0)
+ParamFloat("throw_projectile_min_range_when_unreacheable", 10.0) // if enemy is visible but not reacheable this is min dist to throw projectile
+ParamFloat("throw_projectile_speed", 10.0)
+ParamFloat("spit_effect_duration", 2.0)
+ParamFloat("min_time_btw_throws_projectile", 0.0)
+ParamProb("taunt_prob", 1, 0) // taunt probability after failed berserker grab or target notice
+ParamFloat("taunt_prob_on_target_change", 1.0) // taunt probability after failed berserker grab
+ParamInt("zombie_type", 12)
+ParamBool("can_attack_from_move", 0)
+//ParamFloat("health_mul", 1.66)
+
+//ParamFloat("stamina_mul", 2.0)
+//ParamFloat("stamina_to_health_ratio", 1.0)
+
+ParamFloat("hearing_sensitivity_calm", 0.5)
+ParamFloat("hearing_sensitivity", 0.5)
+ParamFloat("sight_angle_at_min_dist", 160)
+ParamFloat("sight_angle_at_max_dist", 160)
+ParamFloat("sight_angle_min_dist", 40)
+ParamFloat("sight_angle_max_dist", 40)
+
+ParamFloat("counter_attack_prob_mul", 0.0)
+ParamFloat("counter_attack_from_stand_prob_mul", 0.0)
+ParamFloat("counter_push_prob_mul", 1.0)
+ParamFloat("counter_combo_prob_mul", 0.0)
+ParamFloat("counterattack_dist", 2.5)
+ParamFloat("far_counterattack_dist", -1.0)
+
+ParamBool("react_on_hit_during_push", 1)
+
+ParamFloat("push_physics_damage_heavy", 3.0)
+
+ParamFloat("throw_projectile_min_range_when_invisible", 5.0)
+ParamBool("play_hit_reaction_during_recharge", 1)
+
+ParamFloat("back_strafe_speed_mult", 1.0)
+ParamFloat("side_strafe_speed_mult", 1.0)
+
+
+//ParamFloat("head_damage_factor", 1.5)
+//ParamFloat("left_arm_damage_factor", 1.0)
+//ParamFloat("right_arm_damage_factor", 1.0)
+//ParamFloat("left_leg_damage_factor", 1.0)
+//ParamFloat("right_leg_damage_factor", 1.0)
+
+//ParamFloat("head_health_influence", 1.5)
+//ParamFloat("left_arm_health_influence", 1.0)
+//ParamFloat("right_arm_health_influence", 1.0)
+//ParamFloat("left_leg_health_influence", 1.0)
+//ParamFloat("right_leg_health_influence", 1.0)
+//ParamFloat("torso_front_health_influence", 1.0)
+//ParamFloat("torso_back_health_influence", 1.0)
+ParamBool("has_glowing_eyes", 0)
+ParamFloat("taunt_prob_on_alarm_level_change", 1.0)
+
+ParamFloat("health_mul", 1.2)
+ParamFloat("head_health_mul", 1.0)
+
+ParamFloat("xp_factor", 1.5)
+
+ParamFloat("experience_award", 150.0)
+
+ParamFloat("coop_damage_mul_2", 1.2) // damage multiplayer for 2 players coop
+ParamFloat("coop_damage_mul_3", 1.4) // damage multiplayer for 3 players coop
+ParamFloat("coop_damage_mul_4", 1.8) // damage multiplayer for 4 players coop
+
+ParamFloat("bullet_head_hit_damage_mult", 0.2)
+
+ParamFloat("min_fall_height", 1.5)
+ParamBool("can_attack_objects_from_move", 0)
+
+ParamInt("min_body_hits_to_kill", 2)

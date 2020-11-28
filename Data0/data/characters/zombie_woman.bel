@@ -1,0 +1,173 @@
+!include("body_elems.def")
+
+DestroyedHeadParts("zombie_head_part_XX.msh", 4)
+
+//////////////////////////////////////////////////////////////////////////////////// 
+// blunt meat parts
+//////////////////////////////////////////////////////////////////////////////////// 
+MeatParts(SEVERITY_LIGHT, DAMAGE_TYPE_MEAT_NO_CUT, BODY_HIT_REGION_HEAD)
+{
+	AddMeatPart("body_remains_f.msh", 1) // zab
+	AddMeatPart("body_remains_a.msh", 2) // duza czaszka
+}
+MeatParts(SEVERITY_MEDIUM, DAMAGE_TYPE_MEAT_NO_CUT, BODY_HIT_REGION_HEAD)
+{
+	AddMeatPart("body_remains_a.msh", 1) // duza czaszka
+	AddMeatPart("body_remains_f.msh", 1) // zab
+	AddMeatPart("body_remains_h.msh", 1) // maly mozg
+}
+MeatParts(SEVERITY_HEAVY, DAMAGE_TYPE_MEAT_NO_CUT, BODY_HIT_REGION_HEAD)
+{
+	AddMeatPart("body_remains_a.msh", 2) // duza czaszka
+	AddMeatPart("body_remains_e.msh", 1) // szczeka
+	AddMeatPart("body_remains_g.msh", 2) // duzy mozg
+	AddMeatPart("body_remains_f.msh", 1) // zab
+}
+// no SEVERITY_LIGHT for blunt
+MeatParts(SEVERITY_MEDIUM, DAMAGE_TYPE_MEAT_NO_CUT, BODY_HIT_REGION_NO_HEAD)
+{
+	UseWithHolesOnly()
+	AddMeatPart("body_remains_c.msh", 1) // duza kosc
+	AddMeatPart("body_remains_h.msh", 2) // male kawalki miesa
+}
+MeatParts(SEVERITY_HEAVY, DAMAGE_TYPE_MEAT_NO_CUT, BODY_HIT_REGION_NO_HEAD)
+{
+	UseWithHolesOnly()
+	AddMeatPart("body_remains_c.msh", 1) // duza kosc
+	AddMeatPart("body_remains_d.msh", 1) // mala kosc
+	AddMeatPart("body_remains_h.msh", 2) // male kawalki miesa
+}
+//////////////////////////////////////////////////////////////////////////////////// 
+// cut meat parts
+//////////////////////////////////////////////////////////////////////////////////// 
+MeatParts(SEVERITY_LIGHT, DAMAGE_TYPE_MEAT_CUT, BODY_HIT_REGION_HEAD)
+{
+	AddMeatPart("body_remains_f.msh", 1) // zab
+	AddMeatPart("body_remains_h.msh", 1) // male kawalki miesa
+}
+MeatParts(SEVERITY_MEDIUM, DAMAGE_TYPE_MEAT_CUT, BODY_HIT_REGION_HEAD)
+{
+	AddMeatPart("body_remains_j.msh", 1) // maly ciety kawalek
+	AddMeatPart("body_remains_f.msh", 1) // zab
+	AddMeatPart("body_remains_h.msh", 1) // maly mozg
+}
+MeatParts(SEVERITY_HEAVY, DAMAGE_TYPE_MEAT_CUT, BODY_HIT_REGION_HEAD)
+{
+	AddMeatPart("body_remains_a.msh", 1) // duza czaszka
+	AddMeatPart("body_remains_e.msh", 1) // szczeka
+	AddMeatPart("body_remains_i.msh", 1) // duzy ciety kawalek
+	AddMeatPart("body_remains_f.msh", 1) // zab
+}
+MeatParts(SEVERITY_LIGHT, DAMAGE_TYPE_MEAT_CUT, BODY_HIT_REGION_NO_HEAD)
+{
+	AddMeatPart("body_remains_j.msh", 1) // maly ciety kawalek
+	AddMeatPart("body_remains_h.msh", 2) // male kawalki miesa
+}
+MeatParts(SEVERITY_MEDIUM, DAMAGE_TYPE_MEAT_CUT, BODY_HIT_REGION_NO_HEAD)
+{
+	AddMeatPart("body_remains_d.msh", 1) // mala kosc
+	AddMeatPart("body_remains_i.msh", 2) // duzy ciety kawalek
+}
+MeatParts(SEVERITY_HEAVY, DAMAGE_TYPE_MEAT_CUT, BODY_HIT_REGION_NO_HEAD)
+{
+	AddMeatPart("body_remains_d.msh", 1) // mala kosc
+	AddMeatPart("body_remains_i.msh", 3) // duzy ciety kawalek
+}
+
+// OLD CUTS --------------------------------------------------------------------
+BodyElement(_HEAD, 1, 0, 100., 5., "helper_neck")
+AddRelics("Head", PHYSICS_SINGLE, "single_relic.phx", "cut_off_head_bleeding_sequence.fx", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+AddMesh2Disable("head")
+
+// BODY CUTS ----------------------------------------------------------------------
+BodyElement(_SPINE, 1, 0, 0., 55., "helper_waist")
+AddRelics("UpperBody", PHYSICS_RAGDOLL, "ragdoll_ai.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+AddMesh2Disable("spine3")
+AddMesh2DisableFromRelic("l_thigh")
+AddMesh2DisableFromRelic("r_thigh")
+AddMesh2DisableFromRelic("r_forearm")
+AddMesh2DisableFromRelic("l_forearm")
+
+BodyElement(_OBLIQUE_UPPER_BODY, 1, 0, 0., 45., "helper_slant")
+AddRelics("ObliqueUpperBody", PHYSICS_RAGDOLL, "ragdoll_ai.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+AddMesh2Disable("spine3")
+AddMesh2DisableFromRelic("l_thigh")
+AddMesh2DisableFromRelic("r_thigh")
+AddMesh2DisableFromRelic("r_forearm")
+AddMesh2DisableFromRelic("l_forearm")
+
+BodyElement(_CHEST_VERTICAL, 1, 0, 0., 45., "helper_chest_vertical")
+AddRelics("ChestVertical", PHYSICS_RAGDOLL, "ragdoll_ai.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+AddMesh2DisableFromRelic("l_upperarm")
+AddMesh2DisableFromRelic("l_thigh")
+AddMesh2Disable("r_upperarm")
+AddMesh2Disable("r_thigh")
+
+BodyElement(_CHEST_HORIZONTAL, 1, 0, 0., 45., "helper_chest_horizon")
+AddRelics("ChestHorizontal", PHYSICS_RAGDOLL, "ragdoll_ai.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+AddMesh2Disable("spine3")
+AddMesh2DisableFromRelic("l_thigh")
+AddMesh2DisableFromRelic("r_thigh")
+AddMesh2DisableFromRelic("r_forearm")
+AddMesh2DisableFromRelic("l_forearm")
+
+// NEW CUTS (generic patches) ------------------------------------------------------
+BodyElement(_ARM_LEFT_A, 1, 0, 0., 45., "patch_elem_arm_left_a")
+AddRelics("UpperArmL", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+AddMesh2Disable("l_upperarm")
+//AddRelicsWithDestroyedChild("UpperarmL", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+BodyElement(_ARM_LEFT_B, 1, 0, 0., 45., "patch_elem_arm_left_b")
+AddRelics("UpperArmL", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+AddMesh2Disable("l_upperarm")
+//AddRelicsWithDestroyedChild("UpperarmL", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+BodyElement(_ARM_LEFT_C, 1, 0, 0., 45., "patch_elem_arm_left_c")
+AddRelics("LowerArmL", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+AddMesh2Disable("l_forearm")
+//AddRelicsWithDestroyedChild("UpperarmL", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+BodyElement(_ARM_LEFT_D, 1, 0, 0., 45., "patch_elem_arm_left_d")
+AddRelics("HandL", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+
+BodyElement(_ARM_RIGHT_A, 1, 0, 0., 45., "patch_elem_arm_right_a")
+AddRelics("UpperArmR", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+AddMesh2Disable("r_upperarm")
+//AddRelicsWithDestroyedChild("UpperarmR", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+BodyElement(_ARM_RIGHT_B, 1, 0, 0., 45., "patch_elem_arm_right_b")
+AddRelics("UpperArmR", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+AddMesh2Disable("r_upperarm")
+//AddRelicsWithDestroyedChild("UpperarmR", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+BodyElement(_ARM_RIGHT_C, 1, 0, 0., 45., "patch_elem_arm_right_c")
+AddRelics("LowerArmR", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+AddMesh2Disable("r_forearm")
+//AddRelicsWithDestroyedChild("UpperarmR", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+BodyElement(_ARM_RIGHT_D, 1, 0, 0., 45., "patch_elem_arm_right_d")
+AddRelics("HandR", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+
+BodyElement(_LEG_LEFT_A, 1, 0, 0., 45., "patch_elem_leg_left_a")
+AddRelics("UpperLegL", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+AddMesh2Disable("l_thigh")
+//AddRelicsWithDestroyedChild("UpperarmL", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+BodyElement(_LEG_LEFT_B, 1, 0, 0., 45., "patch_elem_leg_left_b")
+AddRelics("LowerLegL", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+AddMesh2Disable("l_calf")
+//AddRelicsWithDestroyedChild("UpperarmL", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+BodyElement(_LEG_LEFT_C, 1, 0, 0., 45., "patch_elem_leg_left_c")
+AddRelics("LowerLegL", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+AddMesh2Disable("l_calf")
+//AddRelicsWithDestroyedChild("UpperarmL", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+BodyElement(_LEG_LEFT_D, 1, 0, 0., 45., "patch_elem_leg_left_d")
+AddRelics("FootL", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+
+BodyElement(_LEG_RIGHT_A, 1, 0, 0., 45., "patch_elem_leg_right_a")
+AddRelics("UpperLegR", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+AddMesh2Disable("r_thigh")
+//AddRelicsWithDestroyedChild("UpperarmR", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+BodyElement(_LEG_RIGHT_B, 1, 0, 0., 45., "patch_elem_leg_right_b")
+AddRelics("LowerLegR", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+AddMesh2Disable("r_calf")
+//AddRelicsWithDestroyedChild("UpperarmR", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+BodyElement(_LEG_RIGHT_C, 1, 0, 0., 45., "patch_elem_leg_right_c")
+AddRelics("LowerLegR", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+AddMesh2Disable("r_calf")
+//AddRelicsWithDestroyedChild("UpperarmR", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])
+BodyElement(_LEG_RIGHT_D, 1, 0, 0., 45., "patch_elem_leg_right_d")
+AddRelics("FootR", PHYSICS_SINGLE, "single_relic.phx", "", [0.0, 0.0, 0.0], [0.0, 0.0, 0.0])

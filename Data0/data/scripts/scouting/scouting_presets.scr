@@ -1,0 +1,421 @@
+import "color_sets.loot"
+import "scouting_missions.def"
+
+sub main()
+{
+    Preset("common")
+    {
+        MissionType(ScoutingMission_SearchWeapons)
+        {
+            StatusLevel(0)
+            {
+                Mission(ScoutingMissionDifficulty_Normal)
+                {
+                    Cost(0);
+                    
+                    ItemSet()
+                    {
+                        Item("Melee_MacheteEGen", ColorSet_MeleeFighter);
+                        Item("Melee_ShortKnifeCGen", ColorSet_MeleeFighter);
+                        Item("Melee_AxeBigEGen" , ColorSet_MeleeFighter);
+                    }
+                }
+            
+                Mission(ScoutingMissionDifficulty_Medium)
+                {
+                    Cost(100);
+                    DurationTime(450.0);
+                    SuccessProbability(0.7);
+                    ItemSet()
+                    {
+                        Item("Firearm_PistolAGen" , ColorSet_MeleeFighter);
+                        Item("Firearm_RifleAGen" , ColorSet_MeleeFighter);
+                    }
+                }
+            }
+            
+            StatusLevel(1)
+            {
+                Mission(ScoutingMissionDifficulty_Normal)
+                {
+                    Cost(0);
+                    
+                    ItemSet()
+                    {
+                        Item("Melee_MacheteEGen", ColorSet_MeleeFighter);
+                        Item("Melee_ShortKnifeCGen", ColorSet_MeleeFighter);
+                        Item("Melee_AxeBigEGen" , ColorSet_MeleeFighter);
+                    }
+                }
+            
+                Mission(ScoutingMissionDifficulty_Medium)
+                {
+                    Cost(0);
+                    DurationTime(450.0);
+                    SuccessProbability(0.7);
+                    ItemSet()
+                    {
+                        Item("Firearm_PistolAGen" , ColorSet_MeleeFighter);
+                        Item("Firearm_RifleAGen" , ColorSet_MeleeFighter);
+                    }
+                }
+                
+                Mission(ScoutingMissionDifficulty_Hard)
+                {
+                    Cost(500);
+                    DurationTime(600.0, 900.0);
+                    SuccessProbability(0.3);
+                    ItemSet()
+                    {
+                        Item("Firearm_PistolAGen" , ColorSet_MeleeFighter);
+                        Item("Firearm_RifleAGen" , ColorSet_MeleeFighter);
+                    }
+                }
+            }
+        }
+
+        MissionType(ScoutingMission_SearchCraftingMaterials)
+        {
+            StatusLevel(1)
+            {
+                Mission(ScoutingMissionDifficulty_Normal)
+                {
+                    Cost(0);
+                    ItemSet()
+                    {
+                        Item("Craft_Alcohol");
+                    }
+                }
+
+                Mission(ScoutingMissionDifficulty_Medium)
+                {
+                    Cost(100);
+                    DurationTime(450.0);
+                    SuccessProbability(0.7);
+                    ItemSet()
+                    {
+                        Item("Craft_Alcohol");						//REPLACE WITH SOMETHING MEANIGFUL
+                    }
+                }
+                
+                Mission(ScoutingMissionDifficulty_Hard)
+                {
+                    Cost(200);
+                    DurationTime(600.0, 900.0);
+                    SuccessProbability(0.3);
+                    
+                    Requirements()
+                    {
+                        BoolVariable("slums_scout_actions_test",    true);
+                    }
+                    
+                    
+                    ItemSet()
+                    {
+                        Item("Craft_Alcohol");						//REPLACE WITH SOMETHING MEANIGFUL
+                    }
+                }
+            }
+        }
+        
+        MissionType(ScoutingMission_SearchUpgradeMaterials)
+        {
+            StatusLevel(1)
+            {
+                Mission(ScoutingMissionDifficulty_Normal)
+                {
+                    Cost(0);
+                    
+                   
+                    
+                    ItemSet()
+                    {
+                        Item("Craft_Alcohol");						//REPLACE WITH SOMETHING MEANIGFUL
+                    }
+                }
+                
+                Mission(ScoutingMissionDifficulty_Medium)
+                {
+                    Cost(100);
+                    
+                    Requirements()
+                    {
+                        BoolVariable("slums_scout_actions_test",    true);
+                    }
+                    
+                    ItemSet()
+                    {
+                        Item("Craft_Alcohol");						//REPLACE WITH SOMETHING MEANIGFUL
+                    }
+                }
+                
+                Mission(ScoutingMissionDifficulty_Hard)
+                {
+                    Cost(200);
+                    
+                    Requirements()
+                    {
+                        BoolVariable("slums_scout_actions_test",    true);
+                    }
+                    
+                    ItemSet()
+                    {
+                        Item("Craft_Alcohol");						//REPLACE WITH SOMETHING MEANIGFUL
+                    }
+                }
+            }
+        }
+        
+        MissionType(ScoutingMission_SearchBlueprints)
+        {
+            StatusLevel(1)
+            {
+                Mission(ScoutingMissionDifficulty_Normal)
+                {
+                    Cost(0);
+                    
+                    Requirements()
+                    {
+                        //BoolVariable("slums_scout_actions_test",    true);
+                    }
+                    
+                    ItemSet()
+                    {
+                        Item("Craft_Alcohol");						//REPLACE WITH SOMETHING MEANIGFUL
+                    }
+                }
+            }
+        }
+		
+		MissionType(ScoutingMission_GiveGift)
+        {
+            StatusLevel(2)
+            {
+                Mission()
+                {
+                    DurationTime(240.0, 360.0);
+                    ItemSet()
+                    {
+                        Item("Melee_MacheteEGen", ColorSet_MeleeFighter);
+                        Item("Melee_ShortKnifeCGen", ColorSet_MeleeFighter);
+                        Item("Melee_AxeBigEGen" , ColorSet_MeleeFighter);
+                    }
+                }
+            }
+        }
+        
+        MissionType(ScoutingMission_RestartPursuitBreakers)
+        {
+            StatusLevel(0)
+            {
+                Mission("Car_Alarms")
+                {
+                    Cost(50);
+                    
+                    TargetMap("slums");
+                }
+            
+                Mission("Lamps")
+                {
+                    Cost(150);
+                    
+                    TargetMap("slums");
+                }
+                
+                Mission("Electric_Traps")
+                {
+                    Cost(250);
+                    
+                    TargetMap("slums");
+                }
+            }
+        }
+        
+        MissionType(ScoutingMission_MountZiplines)
+        {
+            StatusLevel(0)
+            {
+                Mission("Zone A")
+                {
+                    Cost(500);
+                    
+                    TargetMap("slums");
+                    
+                    Requirements()
+                    {
+                        BoolVariable("slums_scout_actions_test",    true);
+                        BoolVariable("slums_scout_ziplines_01_var", false);
+                    }
+                    
+                    SetBoolVariableOnFinish("slums_scout_ziplines_01_var", true);
+                }
+                
+                Mission("Zone B")
+                {
+                    Cost(600);
+                    
+                    TargetMap("slums");
+                    
+                    Requirements()
+                    {
+                        BoolVariable("slums_scout_ziplines_01_var", true);
+                        BoolVariable("slums_scout_ziplines_02_var", false);
+                    }
+                    
+                    SetBoolVariableOnFinish("slums_scout_ziplines_02_var", true);
+                }
+                
+                Mission("Zone C")
+                {
+                    Cost(700);
+                    
+                    Requirements()
+                    {
+                        BoolVariable("slums_scout_ziplines_02_var", true);
+                        BoolVariable("slums_scout_ziplines_03_var", false);
+                    }
+                    
+                    SetBoolVariableOnFinish("slums_scout_ziplines_03_var", true);
+                }
+            }
+        }
+        
+    }
+
+    Preset("slums_interior_01")
+    {
+        MissionType(ScoutingMission_SearchWeapons)
+        {
+            StatusLevel(0)
+            {
+                Mission(ScoutingMissionDifficulty_Normal)
+                {
+                    ItemSet()
+                    {
+                        Item("Melee_MacheteEGen", ColorSet_MeleeFighter);
+                        Item("Melee_ShortKnifeCGen", ColorSet_MeleeFighter);
+                        Item("Melee_AxeBigEGen" , ColorSet_MeleeFighter);
+                    }
+                }
+                
+                Mission(ScoutingMissionDifficulty_Medium)
+                {
+                    ItemSet()
+                    {
+                        Item("Firearm_PistolAGen" , ColorSet_MeleeFighter);
+                        Item("Firearm_RifleAGen" , ColorSet_MeleeFighter);
+                    }
+                }
+            }
+        }
+    
+        MissionType(ScoutingMission_RestartPursuitBreakers)
+        {
+            StatusLevel(0)
+            {
+                Mission("Car_Alarms")
+                {
+                    Cost(0);
+                    
+                    TargetMap("slums");
+                }
+            
+                Mission("Lamps")
+                {
+                    Cost(0);
+                    
+                    TargetMap("slums");
+                }
+                
+                Mission("Electric_Traps")
+                {
+                    Cost(0);
+                    
+                    TargetMap("slums");
+                }
+            }
+        }
+        
+        MissionType(ScoutingMission_MountZiplines)
+        {
+            StatusLevel(0)
+            {
+                Mission("Zone A")
+                {
+                    Cost(0);
+                    
+                    TargetMap("slums");
+                    
+                    Requirements()
+                    {
+                        BoolVariable("slums_scout_ziplines_01_var", false);
+                    }
+                    
+                    SetBoolVariableOnFinish("slums_scout_ziplines_01_var", true);
+                }
+                
+                Mission("Zone B")
+                {
+                    Cost(0);
+                    
+                    TargetMap("slums");
+                    
+                    Requirements()
+                    {
+                        BoolVariable("slums_scout_ziplines_01_var", true);
+                        BoolVariable("slums_scout_ziplines_02_var", false);
+                    }
+                    
+                    SetBoolVariableOnFinish("slums_scout_ziplines_02_var", true);
+                }
+                
+                Mission("Zone C")
+                {
+                    Cost(700);
+                    
+                    Requirements()
+                    {
+                        BoolVariable("slums_scout_ziplines_02_var", true);
+                        BoolVariable("slums_scout_ziplines_03_var", false);
+                    }
+                    
+                    SetBoolVariableOnFinish("slums_scout_ziplines_03_var", true);
+                }
+            }
+        }
+    
+    }
+
+    
+    Preset("test")
+    {
+        MissionType(ScoutingMission_SearchWeapons)
+        {
+            StatusLevel(0)
+            {
+                Mission()
+                {
+                    ItemSet()
+                    {
+                        Item("Firearm_PistolAGen", ColorSet_MeleeFighter);
+                    }
+                }
+            }
+        }
+
+        MissionType(ScoutingMission_SearchCraftingMaterials)
+        {
+            StatusLevel(0)
+            {
+                Mission()
+                {
+                    ItemSet()
+                    {
+                        Item("Craft_PutrescentLiver");
+                        Item("Craft_Nails");
+                    }
+                }
+            }
+        }
+    }
+}

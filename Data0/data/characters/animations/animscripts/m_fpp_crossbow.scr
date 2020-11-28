@@ -1,0 +1,101 @@
+// nois
+SeqTrack("Fpp_Crossbow_StandNoise",	 "M_FPP_CrossBow_StandIdle.anm2", 0, 360, 30, 1, 0.3)
+SeqTrack("Fpp_Crossbow_MoveNoise",	 "M_Fpp_CrossBow_Walk.anm2", 0, 28, 35, 1, 0.3)
+SeqTrack("Fpp_Crossbow_SprintNoise",	 "M_FPP_CrossBow_Sprint.anm2", 0, 20, 35, 1, 0.3)
+
+// stand 
+SeqTrack("Fpp_Crossbow_Stand", "M_FPP_CrossBow_StandPose.anm2", 0, 10, 30, 1, 0.3)
+SeqTrack("Fpp_Crossbow_StandEmpty", "M_FPP_CrossBow_Shoot.anm2", 9, 10, 30, 1, 0.3)
+
+
+//Fast
+SeqTrack("Fpp_Crossbow_ReloadBegin", "M_FPP_CrossBow_Shoot.anm2", 10, 38, 30, 1, 0.0)
+{
+	Event(0, EVENT_RELOAD_FORBID_BREAK, -1)
+	Event(0, 0, -1)
+    {
+        PlaySound23D(GameVolumeSource_SoundPlayer, "crossbow_load_begin_00.wav", 1.4, 3, "head", 1, [0,0,0], 0)
+    }
+}
+SeqTrack("Fpp_Crossbow_ReloadLoop", "M_FPP_CrossBow_Shoot.anm2", 38, 79, 30, 1, 0.0)
+{
+	Event(0, 0, -1)
+    {
+        PlaySound23D(GameVolumeSource_SoundPlayer, "crossbow_load_bolt_00.wav", 1.4, 3, "head", 1, [0,0,0], 0)
+    }
+	Event(25, EVENT_RELOAD_ADD_BULLET, -1)
+    
+	Event(30, EVENT_RELOAD_ALLOW_BREAK, -1)
+}
+
+SeqTrack("Fpp_Crossbow_ReloadFinish", "M_FPP_CrossBow_Shoot.anm2", 79, 104, 30, 1, 0.0)
+
+
+// shoot
+SeqTrackAlias( "Fpp_Crossbow_ShotRecoil",             "Fpp_Crossbow_Stand")
+SeqTrackAlias( "Fpp_Crossbow_Aim_ShotRecoil",         "Fpp_Crossbow_Stand")
+
+
+SeqTrack("Fpp_Crossbow_Shot", "M_FPP_Crossbow_Shoot.anm2", 0, 10, 30, 1, 0.0)
+{
+	Event(0, 0, 1)
+    {
+		PlaySound23D(GameVolumeSource_SoundPlayer, "crossbow_bolt_fly_XX.wav", 1.7, 3, "head", 1, [0,0,0], 0)
+    }
+}
+
+
+SeqTrack("Fpp_Crossbow_Shot1", "M_FPP_CrossBow_Shoot_02.anm2", 0, 10, 30, 1, 0.0)
+{
+	Event(0, 0, 1)
+    {
+		PlaySound23D(GameVolumeSource_SoundPlayer, "crossbow_bolt_fly_XX.wav", 1.0, 3, "head", 1, [0,0,0], 0)
+    }
+}
+
+SeqTrack("Fpp_Crossbow_Shot2", "M_FPP_CrossBow_Shoot_03.anm2", 0, 10, 30, 1, 0.0)
+{
+	Event(0, 0, 1)
+    {
+		PlaySound23D(GameVolumeSource_SoundPlayer, "crossbow_bolt_fly_XX.wav", 1.7, 3, "head", 1, [0,0,0], 0)
+    }
+}
+
+
+SeqTrackAlias("Fpp_Crossbow_Shot0", "Fpp_Crossbow_Shot")
+SeqTrackAlias("Fpp_Crossbow_ShotLast", "Fpp_Crossbow_Shot")
+SeqTrack("Fpp_Crossbow_ShotEmpty", "M_FPP_Crossbow_ShootEmpty.anm2", 0, 8, 30, 1, 0.0)
+{
+}
+
+SeqTrackAlias("Fpp_Crossbow_Shot0Last", "Fpp_Crossbow_Shot")
+SeqTrackAlias("Fpp_Crossbow_Shot1Last", "Fpp_Crossbow_Shot1")
+SeqTrackAlias("Fpp_Crossbow_Shot2Last", "Fpp_Crossbow_Shot2")
+SeqTrackAlias("Fpp_Crossbow_Shot0Empty", "Fpp_Crossbow_ShotEmpty")
+SeqTrackAlias("Fpp_Crossbow_Shot1Empty", "Fpp_Crossbow_ShotEmpty")
+SeqTrackAlias("Fpp_Crossbow_Shot2Empty", "Fpp_Crossbow_ShotEmpty")
+
+
+// aim
+// stand
+SeqTrack("Fpp_Crossbow_Aim_Stand", "M_Fpp_CrossBow_AimPose.anm2",0, 10, 30, 1, 0.0) 
+SeqTrack("Fpp_Crossbow_Aim_StandEmpty", "M_FPP_CrossBow_AimShoot_Empty_Pose.anm2", 0, 5, 30, 1, 0.0) 
+
+SeqTrack("Fpp_Crossbow_Aim_Shot", "M_FPP_CrossBow_AimShoot.anm2", 0, 10, 30, 1, 0.0)
+{
+	Event(0, 0, 1)
+    {
+		PlaySound23D(GameVolumeSource_SoundPlayer, "crossbow_bolt_fly_XX.wav", 1.7, 3, "head", 1, [0,0,0], 0)
+    }
+}
+SeqTrack("Fpp_Crossbow_Aim_ShotLast", "M_FPP_CrossBow_AimShoot.anm2", 0, 10, 30, 1, 0.0)
+{
+	Event(0, 0, 1)
+    {
+		PlaySound23D(GameVolumeSource_SoundPlayer, "crossbow_bolt_fly_XX.wav", 1.7, 3, "head", 1, [0,0,0], 0)
+    }
+}
+
+SeqTrack("Fpp_Crossbow_Aim_ShotEmpty", "M_FPP_CrossBow_AimShoot_Empty_Pose.anm2", 0, 8, 30, 1, 0.0) 
+{
+}

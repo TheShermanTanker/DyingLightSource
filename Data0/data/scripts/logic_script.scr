@@ -1,0 +1,148 @@
+import "logic_script_game.scr"
+
+sub main()
+{
+	// WIND ////////////////
+	
+	extern float FPS;
+	extern float TIME;
+	extern float f_wind_power;
+	extern float f_game_weather;
+	extern float f_wind_omni_power;
+	extern float f_pp_wind_offset;
+	extern float f_pp_omni_offset;
+	extern float f_pp_wind_noise;
+	extern float f_wind_time_factor;
+	extern float f_wind_omni_time_factor;
+	extern float f_pp_wind_power_current;
+
+	Set("f_pp_wind_power_current_blur", f_pp_wind_power_current);
+	Set("f_pp_wind_offset_blur", f_pp_wind_offset );
+	Set("f_pp_omni_offset_blur", f_pp_omni_offset );
+	Set("f_pp_wind_noise_blur", f_pp_wind_noise );
+
+	float fps_inv = 1.0 / max(FPS, 0.0001);
+
+	float wind_strength_min = 0.001;
+	float wind_strength_max = 1.0;
+	float wind_strength = wind_strength_min * (1.0 - f_game_weather) + wind_strength_max * f_game_weather;
+	float wind_strength = pow(wind_strength, 0.25);
+	float wind_power = wind_strength * f_wind_power;
+	Set("f_pp_wind_power", wind_power);
+	
+	float wind_noise_max_s = clamp(wind_power);
+	float wind_noise_min_s = clamp(wind_power - 0.4);
+	
+	float wntm = 1.5 ;
+	float wind_noise = (sin(f_pp_wind_offset * 1.56 * wntm) + sin(f_pp_wind_offset * 1.925 * wntm) + sin(f_pp_wind_offset * 1.131 * wntm) + sin(f_pp_wind_offset * 0.563 * wntm)) * 0.14 + 0.5;
+	float wind_power_current = wind_noise * (wind_noise_max_s - wind_noise_min_s) + wind_noise_min_s;
+	float wind_offset = wind_power_current * fps_inv * f_wind_time_factor + f_pp_wind_offset;
+	
+	Set("f_pp_wind_power_current", wind_power_current);
+	Set("f_pp_wind_noise", wind_noise);
+	Set("f_pp_wind_offset", wind_offset);
+
+	float omni_power_current = f_wind_omni_power * wind_noise;
+	Set("f_pp_omni_offset", omni_power_current * fps_inv * f_wind_omni_time_factor + f_pp_omni_offset );
+	
+	float wind_direct_power = wind_power_current * wind_power_current;
+	float wind_noise_power = pow(wind_power_current,0.5);
+	Set("f_pp_wind_direct_power", wind_direct_power);
+	Set("f_pp_wind_noise_power", wind_noise_power);
+	
+	// POSTPROCESS /////////////////////////////////////
+	
+	extern float f_pp_filmgrain_4_speed;
+	extern float f_pp_filmgrain_4_time;
+	extern float f_pp_filmgrain_8_speed;
+	extern float f_pp_filmgrain_8_time;
+	extern float f_pp_filmgrain_16_speed;
+	extern float f_pp_filmgrain_16_time;
+	Set("f_pp_filmgrain_4_time", (f_pp_filmgrain_4_speed * fps_inv) + f_pp_filmgrain_4_time);
+	Set("f_pp_filmgrain_8_time", (f_pp_filmgrain_8_speed * fps_inv) + f_pp_filmgrain_8_time);
+	Set("f_pp_filmgrain_16_time", (f_pp_filmgrain_16_speed * fps_inv) + f_pp_filmgrain_16_time);
+
+	// WEATHER START ///////////////////////////////////////////
+	extern float f_game_weather;
+
+	extern float f_weather_interior;
+	float interior = clamp(f_weather_interior);
+	float interior_inv = 1.0 - interior;
+	
+	float fog_min = 0.2;
+	float fog_max = 0.0;
+
+	float clouds_min = 0.2;
+	float clouds_max = 0.4;
+
+	float wet_min = 0.4;
+	float wet_max = 0.6;
+
+	float rain_min = 0.6;
+	float rain_max = 0.8;
+
+	float storm_min = 0.8;
+	float storm_max = 1.0;
+
+	float weight_fog = clamp((f_game_weather - fog_min) / (fog_max - fog_min)) * interior_inv;
+	float weight_clouds = clamp((f_game_weather - clouds_min) / (clouds_max - clouds_min)) * interior_inv;
+	float weight_wet = clamp((f_game_weather - wet_min) / (wet_max - wet_min)) * interior_inv;
+	float weight_rain = clamp((f_game_weather - rain_min) / (rain_max - rain_min)) * interior_inv;
+	float weight_storm = clamp((f_game_weather - storm_min) / (storm_max - storm_min));
+	float weight_rainstorm = clamp((f_game_weather - rain_min) / (storm_max - rain_min));
+	float weight_cloudsrain = clamp((f_game_weather - clouds_max) / (rain_max - clouds_max));
+
+	Set("f_weather_weight_fog", weight_fog);
+	Set("f_weather_weight_clouds", weight_clouds);
+	Set("f_weather_weight_wet", weight_wet);
+	Set("f_weather_weight_rain", weight_rain);
+	Set("f_weather_weight_storm", weight_storm);
+	Set("f_weather_weight_rainstorm", weight_rainstorm);
+	Set("f_weather_weight_cloudsrain", weight_cloudsrain);
+
+	float max_wet_time = 5000.0;
+	float max_dry_time = 5000.0;
+
+	float weather_dry_time_factor = 250.0 * fps_inv;
+	float wet_by_rain_factor = 750.0 * fps_inv;
+
+	extern float f_weather_time2dry;
+	float time2dry = max(f_weather_time2dry - weather_dry_time_factor, 0.0); //drying
+	float time2dry = time2dry + weight_rain * wet_by_rain_factor; //getting wet
+	float time2dry = min(time2dry, max_wet_time * weight_wet);
+	Set("f_weather_time2dry", time2dry);
+	float wet = clamp(time2dry / max_dry_time);
+	Set("f_weather_wet", wet);
+	Set("f_weather_shadows4rain", wet);	
+	
+	Set("f_pp_clouds_shadows", (f_game_weather < clouds_max) ? 1.0 : 0.0);
+	
+	//WEATHER END ////////////////////////////////////////////
+	
+	extern float f_screen_drops_clear;
+	extern float f_pp_screen_drops_clear_prv;
+	float screen_drops_clear_on = (f_screen_drops_clear != f_pp_screen_drops_clear_prv) ? 1.0 : 0.0;
+	Set("f_pp_screen_drops_clear_on", screen_drops_clear_on);
+	Set("f_pp_screen_drops_clear_prv", f_screen_drops_clear);
+
+	float screen_drops_time_delta_drop = fps_inv;
+	float screen_drops_time_delta_dirt = screen_drops_time_delta_drop * 0.1;
+	Set("f_pp_screen_drops_time_delta_drop", screen_drops_time_delta_drop);
+	Set("f_pp_screen_drops_time_delta_dirt", screen_drops_time_delta_dirt);
+
+	extern float f_pp_screen_drops_time_max;
+	extern float f_pp_screen_drops_time_drop2dirt;
+	float screen_drops_time_delta_current = (f_pp_screen_drops_time_max <= f_pp_screen_drops_time_drop2dirt) ? screen_drops_time_delta_dirt : screen_drops_time_delta_drop;
+	
+	float screen_drops_time_max = max(f_pp_screen_drops_time_max - screen_drops_time_delta_current, 0.0);	
+
+	extern float f_pp_screen_drops_clear_on;
+	float screen_drops_time_clear = (f_pp_screen_drops_clear_on > 0.0) ? screen_drops_time_delta_current : screen_drops_time_max; 	//screen_drops_time_delta_current instead of 0.0 lets buffer to be cleared
+	float screen_drops_time_max = min(screen_drops_time_clear, screen_drops_time_max);	
+	
+	// Set("f_pp_screen_drops_time_max", screen_drops_time_max);
+extern float f_screen_drops_on;	
+Set("f_pp_screen_drops_time_max", f_screen_drops_on); //always on - bo cos jest grubo zjebane w skryptach....
+
+	use game_modify();
+}

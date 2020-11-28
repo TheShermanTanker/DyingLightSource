@@ -1,0 +1,831 @@
+import "inputs.def"
+
+//AddAction(_ACTION_ID, EInputTarget, EInputDevice, analog, AxisOrButtonId, reverse, half_scope)
+
+// Category flags. 
+// Each key binding layouts should by assigned to one or more categories
+export int _CATEGORY_BASE = 1;      // actions used in both modes
+export int _CATEGORY_HUMAN = 2;     // actions used only by humans
+export int _CATEGORY_ZOMBIE = 4;    // actions used only as zombie
+export int _CATEGORY_BUGGY = 8;     // actions used only in buggy
+//export int _CATEGORY_FIREARM = 8;  // actions used only when player use firearm weapon
+//export int _CATEGORY_MELEE = 16;    // actions used only when player use melee weapon
+//export int _CATEGORY_CAR = 32;      // actions used only in car
+
+export int _COLLIDE_BASE = _CATEGORY_BASE;
+export int _COLLIDE_HUMAN = _CATEGORY_BASE | _CATEGORY_HUMAN;
+export int _COLLIDE_ZOMBIE = _CATEGORY_BASE | _CATEGORY_ZOMBIE;
+export int _COLLIDE_BUGGY = _CATEGORY_BUGGY;
+//export int _COLLIDE_FIREARMS = _CATEGORY_BASE | _CATEGORY_HUMAN;
+//export int _COLLIDE_MELEE = _CATEGORY_BASE | _CATEGORY_HUMAN;
+//export int _COLLIDE_CAR = _CATEGORY_CAR;
+
+sub Keyboard()
+{
+    Layout("common_keyboard", false)
+    {
+        Preset("")
+        {            
+            AddAction(_ACTION_TOGGLE_CHAT,                      EInputTarget_Module, EInputDevice_Keyboard, false, EKey__RETURN, false, true);
+            AddAction(_ACTION_TRACK_QUEST,                      EInputTarget_HUD, EInputDevice_Keyboard, false, EKey__T, false, true);
+            AddAction(_ACTION_BRIEF_CONTINUE,                   EInputTarget_HUD, EInputDevice_Keyboard, false, EKey__T, false, true);
+            AddAction(_ACTION_BRIEF_DECLINE,                    EInputTarget_HUD, EInputDevice_Keyboard, false, EKey__N, false, true);
+
+            AddAction(_ACTION_START_LOADED_LEVEL,               EInputTarget_Module, EInputDevice_Keyboard, false, EKey__SPACE_, false, false); //this action needs to be before other because we are breaking execution of other after this one
+            AddAction(_ACTION_JOIN_FAVORITE_GAME,               EInputTarget_Module, EInputDevice_Keyboard, false, EKey__J, false, false);
+            AddAction(_ACTION_SHOW_CHALLENGE_MISSION_INVITE,    EInputTarget_Module, EInputDevice_Keyboard, false, EKey__J, false, false);
+            AddAction(_ACTION_VOTE_FOR_KICK,                    EInputTarget_Module, EInputDevice_Keyboard, false, EKey__K, false, false);
+            AddAction(_ACTION_FORWARD ,                         EInputTarget_Player, EInputDevice_Keyboard, false, EKey__W, false, false);
+            AddAction(_ACTION_BACKWARD,                         EInputTarget_Player, EInputDevice_Keyboard, false, EKey__S, false, false);
+            AddAction(_ACTION_STRAFE_LEFT,                      EInputTarget_Player, EInputDevice_Keyboard, false, EKey__A, false, false);
+            AddAction(_ACTION_STRAFE_RIGHT,                     EInputTarget_Player, EInputDevice_Keyboard, false, EKey__D, false, false);
+            AddAction(_ACTION_LOCKPICKING_EXIT,                 EInputTarget_Module, EInputDevice_Keyboard, false, EKey__ESCAPE, false, true );
+
+            AddAction(_ACTION_GRAPPLE_POINT_LEFT,               EInputTarget_Player, EInputDevice_Keyboard, false, EKey__A, false, false);
+            AddAction(_ACTION_GRAPPLE_POINT_RIGHT,              EInputTarget_Player, EInputDevice_Keyboard, false, EKey__D, false, false);
+            AddAction(_ACTION_GRAPPLE_POINT_UP,                 EInputTarget_Player, EInputDevice_Keyboard, false, EKey__W, false, false);
+            AddAction(_ACTION_GRAPPLE_POINT_DOWN,               EInputTarget_Player, EInputDevice_Keyboard, false, EKey__S, false, false);
+            AddAction(_ACTION_BREAK_DIALOG,                     EInputTarget_HUD,      EInputDevice_Keyboard, false, EKey__SPACE_, false, true);
+            AddAction(_ACTION_EXIT_BREAKINGDOOR,                EInputTarget_Player, EInputDevice_Keyboard, false, EKey__F, false, true);
+            AddAction(_ACTION_EXECUTE_TRIGGER,                  EInputTarget_Player, EInputDevice_Keyboard, false, EKey__F, false, false);
+            AddAction(_ACTION_EXECUTE_TRIGGER2,                 EInputTarget_Player, EInputDevice_Keyboard, false, EKey__V, false, false);
+            AddAction(_ACTION_EXECUTE_NAGEWAZA,                 EInputTarget_Player, EInputDevice_Keyboard, false, EKey__LMENU, false, false);
+            AddAction(_ACTION_TAP_MINIGAME,                     EInputTarget_Player, EInputDevice_Keyboard, false, EKey__F, false, false);
+            //AddAction(_ACTION_EXECUTE_TRIGGER4,               EInputTarget_Player, EInputDevice_Keyboard, false, EKey__Q, false, true);
+            AddAction(_ACTION_HEAL,                             EInputTarget_Player, EInputDevice_Keyboard, false, EKey__H, false, false);
+            AddAction(_ACTION_VEHICLE_HEAL,                     EInputTarget_Player, EInputDevice_Keyboard, false, EKey__H, false, false);
+            AddAction(_ACTION_REMOTE_BREAKER,                   EInputTarget_Player, EInputDevice_Keyboard, false, EKey__V, false, false);
+            //AddAction(_ACTION_STAMINA_BOOST,                  EInputTarget_Player, EInputDevice_Keyboard, false, EKey__Q, false, false);
+
+            AddAction(_ACTION_ATTACK,                           EInputTarget_Player, EInputDevice_Keyboard, false, EKey__E, false, true);
+            AddAction(_ACTION_JUMP,                             EInputTarget_Player, EInputDevice_Keyboard, false, EKey__SPACE_, false, true);
+            AddAction(_ACTION_TOGGLE_FLASHLIGHT,                EInputTarget_Player, EInputDevice_Keyboard, false, EKey__T, false, false);
+            AddAction(_ACTION_INGAME_MENU,                      EInputTarget_Module, EInputDevice_Keyboard, false, EKey__ESCAPE, false, false);
+            AddAction(_ACTION_MF_DROPOUT_LOADLASTSAVE,          EInputTarget_Module, EInputDevice_Keyboard, false, EKey__SPACE_, false, false);
+            AddAction(_ACTION_MF_LOAD_LAST_SAVE,                EInputTarget_Module, EInputDevice_Keyboard, false, EKey__SPACE_, false, false);
+			AddAction(_ACTION_NEXT_HINT,                        EInputTarget_HUD   , EInputDevice_Keyboard, false, EKey__H, false, false);
+            AddAction(_ACTION_MF_ROLLBACK,                      EInputTarget_Module, EInputDevice_Keyboard, false, EKey__SPACE_, false, false);
+            AddAction(_ACTION_MF_QUIT,                          EInputTarget_Module, EInputDevice_Keyboard, false, EKey__ESCAPE, false, false);
+            AddAction(_ACTION_DEVELOPER_MENU,                   EInputTarget_Module, EInputDevice_Keyboard, false, EKey__MULTIPLY, false, false);
+            AddAction(_ACTION_RELOAD,                           EInputTarget_Player, EInputDevice_Keyboard, false, EKey__R, false, false);
+            AddAction(_ACTION_REPAIR_WEAPON,                    EInputTarget_Player, EInputDevice_Keyboard, false, EKey__R, false, false) { HoldTime(0.3); } // HoldTime is only to start repairing progress, then holding input is manage from RepairWeaponController.
+
+            AddAction(_ACTION_SKIP_MOVIE,                       EInputTarget_Module, EInputDevice_Keyboard, false, EKey__SPACE_, false, false);
+            AddAction(_ACTION_DROP_ITEM,                        EInputTarget_Player, EInputDevice_Keyboard, false, EKey__BACK, false, true);
+            AddAction(_ACTION_CLIMB_UP,                         EInputTarget_Player, EInputDevice_Keyboard, false, EKey__W, false, false);
+            AddAction(_ACTION_CLIMB_DOWN,                       EInputTarget_Player, EInputDevice_Keyboard, false, EKey__S, false, false);
+            AddAction(_ACTION_INVENTORY_MENU,                   EInputTarget_Module, EInputDevice_Keyboard, false, EKey__I, false, false);
+            AddAction(_ACTION_UPGRADE_MENU,                     EInputTarget_Module, EInputDevice_Keyboard, false, EKey__U, false, false);
+            AddAction(_ACTION_QUESTLOG_MENU,                    EInputTarget_Module, EInputDevice_Keyboard, false, EKey__L, false, false);
+            AddAction(_ACTION_MAP,                              EInputTarget_Module, EInputDevice_Keyboard, false, EKey__M, false, false);
+            AddAction(_ACTION_LEAVE_LADDER,                     EInputTarget_Player, EInputDevice_Keyboard, false, EKey__V, false, false);
+            AddAction(_ACTION_SLIDE_LADDER,                     EInputTarget_Player, EInputDevice_Keyboard, false, EKey__C, false, true);
+            AddAction(_ACTION_GROUND_POUND,                     EInputTarget_Player, EInputDevice_Keyboard, false, EKey__C, false, false) { HoldTime(0.3); } 
+            AddAction(_ACTION_USE_EQUIPEMENT,                   EInputTarget_Player, EInputDevice_Mouse, false, EMouse__BUTTON_3, false, false);
+			AddAction(_ACTION_CANCEL_ARROW,                     EInputTarget_Player, EInputDevice_Keyboard, false, EKey__V, false, false);
+			
+            //moved from sticks preset
+            AddAction(_ACTION_TURN_LEFT,                        EInputTarget_Player, EInputDevice_Mouse, false, EMouse__AXIS_X, false, false);
+            AddAction(_ACTION_TURN_RIGHT,                       EInputTarget_Player, EInputDevice_Mouse, false, EMouse__AXIS_X, true, false);
+            AddAction(_ACTION_LOOK_UP,                          EInputTarget_Player, EInputDevice_Mouse, false, EMouse__AXIS_Y, false, false);
+            AddAction(_ACTION_LOOK_DOWN,                        EInputTarget_Player, EInputDevice_Mouse, false, EMouse__AXIS_Y, true, false);
+			
+			AddAction(_ACTION_EYEX_TURN_LEFT,                   EInputTarget_Player, EInputDevice_Mouse, false, EMouse__EYEX_AXIS_X, false, false);
+            AddAction(_ACTION_EYEX_TURN_RIGHT,                  EInputTarget_Player, EInputDevice_Mouse, false, EMouse__EYEX_AXIS_X, true, false);
+            AddAction(_ACTION_EYEX_LOOK_UP,                     EInputTarget_Player, EInputDevice_Mouse, false, EMouse__EYEX_AXIS_Y, false, false);
+            AddAction(_ACTION_EYEX_LOOK_DOWN,                   EInputTarget_Player, EInputDevice_Mouse, false, EMouse__EYEX_AXIS_Y, true, false);
+			
+			AddAction(_ACTION_EYEX_PAUSE,						EInputTarget_Module, EInputDevice_Mouse, false, EMouse__EYEX_PAUSE, false, false);
+			AddAction(_ACTION_EYEX_TOGGLE_TRIGGERS,				EInputTarget_Player, EInputDevice_Mouse, false, EMouse__EYEX_TOGGLE_TRIGGERS, false, false);
+					
+            AddAction(_ACTION_EYEX_GAZE_X,  	                EInputTarget_Module, EInputDevice_Mouse, false, EMouse__EYEX_AXIS_X, true, false);
+            AddAction(_ACTION_EYEX_GAZE_Y,	         	        EInputTarget_Module, EInputDevice_Mouse, false, EMouse__EYEX_AXIS_Y, false, false);
+			
+			AddAction(_ACTION_EYEX_AIM_LEFT,                   	EInputTarget_Player, EInputDevice_Mouse, false, EMouse__EYEX_AXIS_X, false, false);
+            AddAction(_ACTION_EYEX_AIM_RIGHT,                  	EInputTarget_Player, EInputDevice_Mouse, false, EMouse__EYEX_AXIS_X, true, false);
+            AddAction(_ACTION_EYEX_AIM_UP,                     	EInputTarget_Player, EInputDevice_Mouse, false, EMouse__EYEX_AXIS_Y, false, false);
+            AddAction(_ACTION_EYEX_AIM_DOWN,                   	EInputTarget_Player, EInputDevice_Mouse, false, EMouse__EYEX_AXIS_Y, true, false);
+
+            AddAction(_ACTION_LOCKPICKING_SCREWDRIVER_LEFT,     EInputTarget_HUD,    EInputDevice_Keyboard, false, EKey__A,     false, false);
+            AddAction(_ACTION_LOCKPICKING_SCREWDRIVER_RIGHT,    EInputTarget_HUD,     EInputDevice_Keyboard, false, EKey__D,     false, false);
+            AddAction(_ACTION_LOCKPICKING_PICKLOCK_HORIZONTAL,  EInputTarget_HUD,     EInputDevice_Mouse, false, EMouse__AXIS_X, true, false);
+            AddAction(_ACTION_LOCKPICKING_PICKLOCK_VERTICAL,    EInputTarget_HUD,     EInputDevice_Mouse, false, EMouse__AXIS_Y, true, false);
+
+            AddAction(_ACTION_WEAPON_NEXT,                      EInputTarget_Player, EInputDevice_Mouse, false, EKey__MOUSE_WHEEL_DN, false ,false);
+            AddAction(_ACTION_WEAPON_PREV,                      EInputTarget_Player, EInputDevice_Mouse, false, EKey__MOUSE_WHEEL_UP, false ,false);
+            AddAction(_ACTION_FIRE_WEAPON,                      EInputTarget_Player, EInputDevice_Mouse, false, EMouse__BUTTON_1, false, true);
+            AddAction(_ACTION_KICK,                             EInputTarget_Player, EInputDevice_Keyboard, false, EKey__E, false, false);
+            AddAction(_ACTION_TACLE,                            EInputTarget_Player, EInputDevice_Keyboard, false, EKey__E, false, false);
+
+            AddAction(_ACTION_ATTACK_TRIGGER_R,                 EInputTarget_Player, EInputDevice_Mouse, false, EMouse__BUTTON_1, false, true);
+            AddAction(_ACTION_CHARGE_ATTACK,                    EInputTarget_Player, EInputDevice_Mouse, false, EMouse__BUTTON_1, false, true);
+
+            AddAction(_ACTION_ATTACK_TRIGGER_L,                 EInputTarget_Player, EInputDevice_Mouse, false, EMouse__BUTTON_3, false, true);
+
+            //AddAction(_ACTION_FIRE_RHAND_WEAPON,              EInputTarget_Player, EInputDevice_Mouse, false, EMouse__BUTTON_3, false, true);
+            AddAction(_ACTION_CANCEL_MULTI_THROW,               EInputTarget_Player, EInputDevice_Mouse, false, EMouse__BUTTON_1, false, true);
+            AddAction(_ACTION_SONAR_IMPULSE,                    EInputTarget_Player, EInputDevice_Keyboard, false, EKey__Q, false, false);
+            AddAction(_ACTION_VEHICLE_SONAR_IMPULSE,            EInputTarget_Player, EInputDevice_Keyboard, false, EKey__Q, false, false);
+            
+            AddAction(_ACTION_SWAP_TRIGGER,                     EInputTarget_Player, EInputDevice_Keyboard, false, EKey__F, false, true) { HoldTime(0.3); }
+            AddAction(_ACTION_THROW_CARRYING_ITEM,              EInputTarget_Player, EInputDevice_Mouse, false, EMouse__BUTTON_1, false, true);
+            AddAction(_ACTION_DROP_CARRYING_ITEM,               EInputTarget_Player, EInputDevice_Keyboard, false, EKey__F, false, true);
+            AddAction(_ACTION_APPEAR_IN_WAITING_PLACE,          EInputTarget_Player, EInputDevice_Keyboard, false, EKey__B, false, false) { HoldTime(0.5); }
+
+            AddAction(_ACTION_EQUIPEMENT_NEXT,                  EInputTarget_Player, EInputDevice_Keyboard, false, EKey__2, false, false);
+            AddAction(_ACTION_EQUIPEMENT_PREV,                  EInputTarget_Player, EInputDevice_Keyboard, false, EKey__3, false, false);
+
+
+            AddAction(_ACTION_WEAPON_SLOT1,                     EInputTarget_Player, EInputDevice_Keyboard, false, -1, false, false);
+            AddAction(_ACTION_WEAPON_SLOT2,                     EInputTarget_Player, EInputDevice_Keyboard, false, -1, false, false);
+            AddAction(_ACTION_WEAPON_SLOT3,                     EInputTarget_Player, EInputDevice_Keyboard, false, -1, false, false);
+            AddAction(_ACTION_WEAPON_SLOT4,                     EInputTarget_Player, EInputDevice_Keyboard, false, -1, false, false);
+            AddAction(_ACTION_EQUIPMENT_SLOT1,                  EInputTarget_Player, EInputDevice_Keyboard, false, -1, false, false);
+            AddAction(_ACTION_EQUIPMENT_SLOT2,                  EInputTarget_Player, EInputDevice_Keyboard, false, -1, false, false);
+            AddAction(_ACTION_EQUIPMENT_SLOT3,                  EInputTarget_Player, EInputDevice_Keyboard, false, -1, false, false);
+            AddAction(_ACTION_EQUIPMENT_SLOT4,                  EInputTarget_Player, EInputDevice_Keyboard, false, -1, false, false);
+            
+            AddAction(_ACTION_INVENTORY,                        EInputTarget_Module, EInputDevice_Keyboard, false, -1, false, false);
+            
+            AddAction(_ACTION_SELECT_PRIMARY4, EInputTarget_HUD, EInputDevice_Mouse, false, EMouse__AXIS_X, false, false);
+            AddAction(_ACTION_SELECT_PRIMARY2, EInputTarget_HUD, EInputDevice_Mouse, false, EMouse__AXIS_X, true, false);
+            AddAction(_ACTION_SELECT_PRIMARY1, EInputTarget_HUD, EInputDevice_Mouse, false, EMouse__AXIS_Y, false, false);
+            AddAction(_ACTION_SELECT_PRIMARY3, EInputTarget_HUD, EInputDevice_Mouse, false, EMouse__AXIS_Y, true, false);
+            
+            AddAction(_ACTION_SELECT_SECONDARY4, EInputTarget_HUD, EInputDevice_Mouse, false, EMouse__AXIS_X, false, false);
+            AddAction(_ACTION_SELECT_SECONDARY2, EInputTarget_HUD, EInputDevice_Mouse, false, EMouse__AXIS_X, true, false);
+            AddAction(_ACTION_SELECT_SECONDARY1, EInputTarget_HUD, EInputDevice_Mouse, false, EMouse__AXIS_Y, false, false);
+            AddAction(_ACTION_SELECT_SECONDARY3, EInputTarget_HUD, EInputDevice_Mouse, false, EMouse__AXIS_Y, true, false);
+			
+			AddAction(_ACTION_SELECT_ARROW4, EInputTarget_HUD, EInputDevice_Mouse, false, EMouse__AXIS_X, false, false);
+            AddAction(_ACTION_SELECT_ARROW2, EInputTarget_HUD, EInputDevice_Mouse, false, EMouse__AXIS_X, true, false);
+            AddAction(_ACTION_SELECT_ARROW1, EInputTarget_HUD, EInputDevice_Mouse, false, EMouse__AXIS_Y, false, false);
+            AddAction(_ACTION_SELECT_ARROW3, EInputTarget_HUD, EInputDevice_Mouse, false, EMouse__AXIS_Y, true, false);
+			
+			AddAction(_ACTION_SELECT_BOLT4, EInputTarget_HUD, EInputDevice_Mouse, false, EMouse__AXIS_X, false, false);
+            AddAction(_ACTION_SELECT_BOLT2, EInputTarget_HUD, EInputDevice_Mouse, false, EMouse__AXIS_X, true, false);
+            AddAction(_ACTION_SELECT_BOLT1, EInputTarget_HUD, EInputDevice_Mouse, false, EMouse__AXIS_Y, false, false);
+            AddAction(_ACTION_SELECT_BOLT3, EInputTarget_HUD, EInputDevice_Mouse, false, EMouse__AXIS_Y, true, false);
+
+            //AddAction(_ACTION_WEAPON_THROW, EInputTarget_Player, EInputDevice_Mouse, false, EMouse__BUTTON_3, false, false);
+
+            // This action should be at the end of the list as we don't want to get any other actions assigned to the same button
+            // after we've handled breaking the minigame.
+            // Otherwise, the player would e.g. jump after breaking the interaction minigame.
+            // This problem might potentially affect other actions as well. We need to carefully choose the order of actions
+            // or resolve this issue somehow in code.
+            AddAction(_ACTION_BREAK_MINIGAME,                   EInputTarget_Player, EInputDevice_Keyboard, false, EKey__V, false, true);
+
+
+            AddAction(_ACTION_CREATE_COOP_CHALLENGE,            EInputTarget_HUD, EInputDevice_Keyboard, false, EKey__H, false, true);
+			
+			AddAction(_ACTION_THROTTLE, 				EInputTarget_Player, EInputDevice_Keyboard, false, EKey__W, 			false, false); 
+			AddAction(_ACTION_BRAKE, 					EInputTarget_Player, EInputDevice_Keyboard, false, 	EKey__S, 			false, false);
+            AddAction(_ACTION_HANDBRAKE, 				EInputTarget_Player, EInputDevice_Keyboard, false, 	EKey__SPACE_, 		false, false);
+			AddAction(_ACTION_VEHICLE_LEAVE,			EInputTarget_Player, EInputDevice_Keyboard, false, 	EKey__F, 			false, false) { HoldTime(0.2); }
+			//AddAction(_ACTION_VEHICLE_CHANGE_CAMERA, 	EInputTarget_Player, EInputDevice_Keyboard, false, 	EKey__C, 			false, false);
+            AddAction(_ACTION_TURN_VEHICLE_LEFT, 		EInputTarget_Player, EInputDevice_Keyboard, false, 	EKey__A, 			false, false);
+            AddAction(_ACTION_TURN_VEHICLE_RIGHT, 		EInputTarget_Player, EInputDevice_Keyboard, false, 	EKey__D, 			false, false);        
+			AddAction(_ACTION_CAR_LIGHTS_TOGGLE, 		EInputTarget_Player, EInputDevice_Keyboard, false, 	EKey__T, 			false, false); 	
+			AddAction(_ACTION_BUGGY_SKILL_0,			EInputTarget_Player, EInputDevice_Keyboard, false,	EKey__LSHIFT,			false, false);
+			AddAction(_ACTION_BUGGY_SKILL_1,			EInputTarget_Player, EInputDevice_Keyboard, false,	EKey__E,			false, false);
+			AddAction(_ACTION_BUGGY_SKILL_2,			EInputTarget_Player, EInputDevice_Keyboard, false,	EKey__R,			false, false);
+			AddAction(_ACTION_VEHICLE_LOOKBACK, 		EInputTarget_Player, EInputDevice_Keyboard, false,	EKey__C,			false, false);
+            AddAction(_ACTION_VEHICLE_BREAK_GRAB, 		EInputTarget_Player, EInputDevice_Keyboard, false,	EKey__LCONTROL,			false, false);
+			
+            AddAction(_ACTION_FORCE_RESPAWN,                    EInputTarget_Player, EInputDevice_Keyboard, false, EKey__E, false, false) { HoldTime(0.3); }
+            AddAction(_ACTION_LOOKBACK,                         EInputTarget_Player, EInputDevice_Keyboard, false, EKey__B, false, false);
+            AddAction(_ACTION_DISMISS_FREEZING_TUTORIAL,        EInputTarget_Player, EInputDevice_Keyboard, false, EKey__SPACE_, false, true);
+
+
+            AddAction(_ACTION_QTE1, EInputTarget_Player,        EInputDevice_Keyboard, false, EKey__A, false, false);
+            AddAction(_ACTION_QTE2, EInputTarget_Player,        EInputDevice_Keyboard, false, EKey__S, false, false);
+            AddAction(_ACTION_QTE3, EInputTarget_Player,        EInputDevice_Keyboard, false, EKey__D, false, false);
+            AddAction(_ACTION_QTE4, EInputTarget_Player,        EInputDevice_Keyboard, false, EKey__W, false, false);
+            AddAction(_ACTION_QTE5, EInputTarget_Player,        EInputDevice_Keyboard, false, EKey__Q, false, false);
+            AddAction(_ACTION_QTE6, EInputTarget_Player,        EInputDevice_Keyboard, false, EKey__E, false, false);
+
+            AddAction(_ACTION_RECALL_VEHICLE,                   EInputTarget_Player, EInputDevice_Keyboard, false, EKey__F, false, false) { HoldTime(0.5); }
+            
+            AddAction(_ACTION_FAST_EQUIP_ITEM,                  EInputTarget_Player, EInputDevice_Keyboard, true, EKey__MINUS, false, true);
+            AddAction(_ACTION_QUICK_PRIMARY,                    EInputTarget_HUD, EInputDevice_Keyboard, false, EKey__TAB, false, true);
+            AddAction(_ACTION_QUICK_SECONDARY,                  EInputTarget_HUD, EInputDevice_Keyboard, false, EKey__1, false, true);
+			AddAction(_ACTION_QUICK_ARROWS, 					EInputTarget_HUD, EInputDevice_Keyboard, false, EKey__R, false, true);
+			AddAction(_ACTION_QUICK_BOLTS, 						EInputTarget_HUD, EInputDevice_Keyboard, false, EKey__R, false, true);	
+            //BTZ specific
+            AddAction(_ACTION_ZOMBIE_SHOW_HINT,                 EInputTarget_Player, EInputDevice_Keyboard, false, EKey__F, false, false);
+            AddAction(_ACTION_SPIT_DEFENSIVE_SMOKE,             EInputTarget_Player, EInputDevice_Keyboard, false, EKey__V, false, false);
+            AddAction(_ACTION_UV_HEAL,                          EInputTarget_Player, EInputDevice_Keyboard, false, EKey__V, false, false) { HoldTime(0.5); }
+            AddAction(_ACTION_POUNCE,                           EInputTarget_Player, EInputDevice_Keyboard, false, EKey__Q, false, false);
+            AddAction(_ACTION_PLAYERZOMBIE_CHARGE,              EInputTarget_Player, EInputDevice_Keyboard, false, EKey__E, false, false);
+            AddAction(_ACTION_ZOMBIE_HOWL,                      EInputTarget_Player, EInputDevice_Mouse, false, EMouse__BUTTON_3, false, true);
+            AddAction(_ACTION_SPIT_CONTROL_THE_HORDE,           EInputTarget_Player, EInputDevice_Keyboard, false, EKey__1, false, false);
+            AddAction(_ACTION_SPIT_LIGHT_DISABLE,               EInputTarget_Player, EInputDevice_Keyboard, false, EKey__2, false, false);
+            AddAction(_ACTION_SPIT_TOXIC,                       EInputTarget_Player, EInputDevice_Keyboard, false, EKey__4, false, false);
+            AddAction(_ACTION_SPIT_CAMO,                        EInputTarget_Player, EInputDevice_Keyboard, false, EKey__3, false, false);
+            AddAction(_ACTION_PLAYERZOMBIE_MELEE,               EInputTarget_Player, EInputDevice_Mouse, false, EMouse__BUTTON_1, false, false);
+            AddAction(_ACTION_ZOMBIE_GROUND_POUND,              EInputTarget_Player, EInputDevice_Mouse, false, EMouse__BUTTON_1, false, false) { HoldTime(0.8); }
+            AddAction(_ACTION_SPIT_GROUND_POUND,                EInputTarget_Player, EInputDevice_Keyboard, false, EKey__B, false, false) { HoldTime(0.2); }
+            AddAction(_ACTION_SPIT_GROUND_POUND2,               EInputTarget_Player, EInputDevice_Keyboard, false, EKey__B, false, false) { HoldTime(0.2); }
+            AddAction(_ACTION_ROPE_THROW,                       EInputTarget_Player, EInputDevice_Mouse, false, EMouse__BUTTON_2, false, false);
+            AddAction(_ACTION_CANCEL_CHARGING,                  EInputTarget_Player, EInputDevice_Keyboard, false, EKey__Z, false, false);
+            AddAction(_ACTION_ZOMBIE_LEAVE_VEHICLE,             EInputTarget_Player, EInputDevice_Keyboard, false, EKey__Z, false, false);
+            
+            AddAction(_ACTION_ZOMBIE_EXECUTE_TRIGGER2,          EInputTarget_Player, EInputDevice_Keyboard, false, EKey__F, false, false);
+            AddAction(_ACTION_ZOMBIE_THROW_SPIT,                EInputTarget_Player, EInputDevice_Keyboard, false, EKey__G, false, false);
+            
+        }
+    }
+
+    Layout("Keybinding_DuckMode")
+    {
+        Preset("&OptionOn&")
+        {
+            RemoveAction(_ACTION_DUCK,                          EInputDevice_Keyboard);
+            AddAction(_ACTION_DUCK_TOGGLE,                      EInputTarget_Player, EInputDevice_Keyboard, false, EKey__C, false, false);
+        }
+
+        Preset("&OptionOff&")
+        {
+            RemoveAction(_ACTION_DUCK_TOGGLE,                   EInputDevice_Keyboard);
+            AddAction(_ACTION_DUCK,                             EInputTarget_Player, EInputDevice_Keyboard, false, EKey__C, false, false);
+        }
+    }
+    Layout("Keybinding_SprintMode")
+    {
+        Preset("&OptionOn&")
+        {
+            RemoveAction(_ACTION_SPRINT,                        EInputDevice_Keyboard);
+            AddAction(_ACTION_SPRINT_TOGGLE,                    EInputTarget_Player, EInputDevice_Keyboard, false, EKey__LSHIFT, false, false);
+        }
+
+        Preset("&OptionOff&")
+        {
+            RemoveAction(_ACTION_SPRINT_TOGGLE,                 EInputDevice_Keyboard);
+            AddAction(_ACTION_SPRINT,                           EInputTarget_Player, EInputDevice_Keyboard, false, EKey__LSHIFT, false, false);
+        }
+    }
+    Layout("Keybinding_AimMode")
+    {        
+        Preset("&OptionOff&")
+        {
+            RemoveAction(_ACTION_WEAPON_AIM_TOGGLE,             EInputDevice_Mouse);
+            AddAction(_ACTION_WEAPON_ZOOM,                      EInputTarget_Player, EInputDevice_Mouse, false, EMouse__BUTTON_2, false, false);
+        }
+		Preset("&OptionOn&")
+        {
+            RemoveAction(_ACTION_WEAPON_ZOOM,                   EInputDevice_Mouse);
+            AddAction(_ACTION_WEAPON_AIM_TOGGLE,                EInputTarget_Player, EInputDevice_Mouse, false, EMouse__BUTTON_2, false, false);
+        }
+    }
+
+    Layout("invert_y_mouse")
+    {
+        Preset("&OptionOff&") {}
+        Preset("&OptionOn&")
+        {
+            SwapActions(_ACTION_LOOK_UP, _ACTION_LOOK_DOWN);
+        }
+    }
+
+    LayoutKeybinding("Keybinding_MoveForward", _CATEGORY_BASE, _COLLIDE_BASE)
+    {
+        Action(_ACTION_FORWARD ); // EInputTarget_Player, EInputDevice_Keyboard, EKey__W
+        Action(_ACTION_CLIMB_UP); // EInputTarget_Player, EInputDevice_Keyboard, EKey__W
+        Action(_ACTION_GRAPPLE_POINT_UP); // EInputTarget_Player, EInputDevice_Keyboard, EKey__W
+        Action(_ACTION_QTE4); // EInputTarget_Player, EInputDevice_Keyboard, EKey__W
+    }
+
+
+    LayoutKeybinding("Keybinding_MoveBackward", _CATEGORY_BASE, _COLLIDE_BASE)
+    {
+        Action(_ACTION_BACKWARD); // EInputTarget_Player, EInputDevice_Keyboard, EKey__S
+        Action(_ACTION_CLIMB_DOWN); // EInputTarget_Player, EInputDevice_Keyboard, EKey__S
+        Action(_ACTION_GRAPPLE_POINT_DOWN); // EInputTarget_Player, EInputDevice_Keyboard, EKey__S
+        Action(_ACTION_QTE2); // EInputTarget_Player, EInputDevice_Keyboard, EKey__S
+    }
+
+    LayoutKeybinding("Keybinding_MoveLeft", _CATEGORY_BASE, _COLLIDE_BASE)
+    {
+        Action(_ACTION_STRAFE_LEFT); // EInputTarget_Player, EInputDevice_Keyboard, EKey__A
+        Action(_ACTION_GRAPPLE_POINT_LEFT); // EInputTarget_Player, EInputDevice_Keyboard, EKey__A
+        Action(_ACTION_LOCKPICKING_SCREWDRIVER_LEFT); // EInputTarget_HUD,    EInputDevice_Keyboard, EKey__A
+        Action(_ACTION_QTE1); // EInputTarget_Player, EInputDevice_Keyboard, EKey__A
+    }
+
+    LayoutKeybinding("Keybinding_MoveRight", _CATEGORY_BASE, _COLLIDE_BASE)
+    {
+        Action(_ACTION_STRAFE_RIGHT); // EInputTarget_Player, EInputDevice_Keyboard, EKey__D
+        Action(_ACTION_GRAPPLE_POINT_RIGHT); // EInputTarget_Player, EInputDevice_Keyboard, EKey__D
+        Action(_ACTION_LOCKPICKING_SCREWDRIVER_RIGHT); // EInputTarget_HUD,     EInputDevice_Keyboard, EKey__D
+        Action(_ACTION_QTE3); // EInputTarget_Player, EInputDevice_Keyboard, EKey__D
+
+    }
+
+    LayoutKeybinding("Keybinding_Use", _CATEGORY_HUMAN, _CATEGORY_HUMAN)
+    {
+        Action(_ACTION_EXECUTE_TRIGGER); // EInputTarget_Player, EInputDevice_Keyboard, EKey__F
+        Action(_ACTION_EXIT_BREAKINGDOOR); // EInputTarget_Player, EInputDevice_Keyboard, EKey__F
+        Action(_ACTION_TAP_MINIGAME); // EInputTarget_Player, EInputDevice_Keyboard, EKey__F
+        Action(_ACTION_SWAP_TRIGGER); // EInputTarget_Player, EInputDevice_Keyboard, EKey__F) { HoldTime(0.1 }
+        Action(_ACTION_DROP_CARRYING_ITEM); // EInputTarget_Player, EInputDevice_Keyboard, EKey__F
+        Action(_ACTION_RECALL_VEHICLE); // EInputTarget_Player, EInputDevice_Keyboard, EKey__F
+    }
+
+    LayoutKeybinding("Keybinding_Use2", _CATEGORY_HUMAN, _COLLIDE_HUMAN)
+    {
+        Action(_ACTION_EXECUTE_TRIGGER2); // EInputTarget_Player, EInputDevice_Keyboard, EKey__V
+        Action(_ACTION_LEAVE_LADDER); // EInputTarget_Player, EInputDevice_Keyboard, EKey__V
+		Action(_ACTION_CANCEL_ARROW); // EInputTarget_Player, EInputDevice_Keyboard, EKey__V		
+        Action(_ACTION_REMOTE_BREAKER); // EInputTarget_Player, EInputDevice_Keyboard, EKey__V
+        Action(_ACTION_BREAK_MINIGAME); // EInputTarget_Player, EInputDevice_Keyboard, EKey__V
+    }
+
+    LayoutKeybinding("Keybinding_Chat", _CATEGORY_HUMAN, _COLLIDE_HUMAN)
+    {
+        Action(_ACTION_TOGGLE_CHAT); // EInputTarget_Module, EInputDevice_Keyboard, EKey__RETURN
+    }
+
+    LayoutKeybinding("Keybinding_TrackQuest", _CATEGORY_HUMAN, _COLLIDE_HUMAN)
+    {
+        Action(_ACTION_TRACK_QUEST); // EInputTarget_Player, EInputDevice_Keyboard, EKey__T
+    }
+
+    LayoutKeybinding("Keybinding_Nagewaza", _CATEGORY_HUMAN, _COLLIDE_HUMAN)
+    {
+        Action(_ACTION_EXECUTE_NAGEWAZA); // EInputTarget_Player, EInputDevice_Keyboard, EKey__V
+    }
+
+    LayoutKeybinding("Keybinding_Heal", _CATEGORY_HUMAN, _COLLIDE_HUMAN)
+    {
+        Action(_ACTION_HEAL); // EInputTarget_Player, EInputDevice_Keyboard, EKey__C
+    }
+
+    LayoutKeybinding("Keybinding_Jump", _CATEGORY_BASE, _COLLIDE_BASE)
+    {
+        Action(_ACTION_JUMP); // EInputTarget_Player, EInputDevice_Keyboard, EKey__SPACE_
+    }
+
+    LayoutKeybinding("Keybinding_Sprint", _CATEGORY_BASE, _COLLIDE_BASE)
+    {
+        Action(_ACTION_SPRINT_TOGGLE); //EInputTarget_Player, EInputDevice_Keyboard, EKey__LSHIFT
+        Action(_ACTION_SPRINT); //EInputTarget_Player, EInputDevice_Keyboard, EKey__LSHIFT
+    }
+
+    LayoutKeybinding("Keybinding_Flashlight", _CATEGORY_HUMAN, _COLLIDE_HUMAN)
+    {
+        Action(_ACTION_TOGGLE_FLASHLIGHT); // EInputTarget_Player, EInputDevice_Keyboard, EKey__X
+    }
+
+    LayoutKeybinding("Keybinding_ReloadRepair", _CATEGORY_HUMAN, _COLLIDE_HUMAN)
+    {
+        Action(_ACTION_RELOAD); // EInputTarget_Player, EInputDevice_Keyboard, EKey__R
+		Action(_ACTION_QUICK_ARROWS); // EInputTarget_Player, EInputDevice_Keyboard, EKey__R
+        Action(_ACTION_REPAIR_WEAPON); // EInputTarget_Player, EInputDevice_Keyboard, EKey__R
+    }
+
+    LayoutKeybinding("Keybinding_Inventory", _CATEGORY_HUMAN, _COLLIDE_HUMAN)
+    {
+        Action(_ACTION_INVENTORY_MENU); // EInputTarget_Module, EInputDevice_Keyboard, EKey__I
+    }
+
+    LayoutKeybinding("Keybinding_Skill", _CATEGORY_BASE, _COLLIDE_BASE)
+    {
+        Action(_ACTION_UPGRADE_MENU); // EInputTarget_Module, EInputDevice_Keyboard, EKey__U
+    }
+
+    LayoutKeybinding("Keybinding_QuestLog", _CATEGORY_BASE, _COLLIDE_BASE)
+    {
+        Action(_ACTION_QUESTLOG_MENU); // EInputTarget_Module, EInputDevice_Keyboard, EKey__L
+    }
+
+    LayoutKeybinding("Keybinding_Map", _CATEGORY_BASE, _COLLIDE_BASE)
+    {
+        Action(_ACTION_MAP); // EInputTarget_Module, EInputDevice_Keyboard, EKey__M
+    }
+    
+    LayoutKeybinding("Keybinding_PlayerMenu", _CATEGORY_BASE, _COLLIDE_BASE, false)
+    {
+        Action(_ACTION_INVENTORY); 
+    }
+    
+    LayoutKeybinding("Keybinding_Duck", _CATEGORY_BASE, _COLLIDE_BASE)
+    {
+        Action(_ACTION_DUCK_TOGGLE); // EInputTarget_Player, EInputDevice_Keyboard, EKey__C
+        Action(_ACTION_DUCK); //EInputTarget_Player, EInputDevice_Keyboard, EKey__C
+        Action(_ACTION_SLIDE_LADDER); // EInputTarget_Player, EInputDevice_Keyboard, EKey__C
+        Action(_ACTION_GROUND_POUND); // EInputTarget_Player, EInputDevice_Keyboard, EKey__C) { HoldTime(0.3 }
+    }
+
+    LayoutKeybinding("Keybinding_NextWeapon", _CATEGORY_HUMAN, _COLLIDE_HUMAN)
+    {
+        Action(_ACTION_WEAPON_NEXT); // EInputTarget_Player, EInputDevice_Mouse,     EKey__MOUSE_WHEEL_DN
+    }
+
+    LayoutKeybinding("Keybinding_PrevWeapon", _CATEGORY_HUMAN, _COLLIDE_HUMAN)
+    {
+        Action(_ACTION_WEAPON_PREV); // EInputTarget_Player, EInputDevice_Mouse,     EKey__MOUSE_WHEEL_UP
+    }
+
+    LayoutKeybinding("Keybinding_NextEquipment", _CATEGORY_HUMAN, _COLLIDE_HUMAN)
+    {
+        Action(_ACTION_EQUIPEMENT_NEXT); // EInputTarget_Player, EInputDevice_Keyboard, EKey__1
+    }
+
+    LayoutKeybinding("Keybinding_PrevEquipment", _CATEGORY_HUMAN, _COLLIDE_HUMAN)
+    {
+        Action(_ACTION_EQUIPEMENT_PREV); // EInputTarget_Player, EInputDevice_Keyboard, EKey__2
+    }
+
+    LayoutKeybinding("Keybinding_Kick", _CATEGORY_HUMAN, _COLLIDE_HUMAN)
+    {
+        Action(_ACTION_KICK); // EInputTarget_Player, EInputDevice_Keyboard, EKey__E
+        Action(_ACTION_TACLE); // EInputTarget_Player, EInputDevice_Keyboard, EKey__E
+        Action(_ACTION_ATTACK); // EInputTarget_Player, EInputDevice_Keyboard, EKey__E
+        Action(_ACTION_FORCE_RESPAWN); // EInputTarget_Player, EInputDevice_Keyboard, EKey__E) { HoldTime(0.3 }
+    }
+
+    LayoutKeybinding("Keybinding_QuickPrimary", _CATEGORY_HUMAN, _COLLIDE_HUMAN)
+    {
+        Action(_ACTION_QUICK_PRIMARY); // EInputTarget_HUD,      EInputDevice_Keyboard, EKey__9
+    }
+
+    LayoutKeybinding("Keybinding_QuickSecondary", _CATEGORY_HUMAN, _COLLIDE_HUMAN)
+    {
+        Action(_ACTION_QUICK_SECONDARY); // EInputTarget_HUD,      EInputDevice_Keyboard, EKey__0
+    }
+
+    LayoutKeybinding("Keybinding_Lockback", _CATEGORY_HUMAN, _COLLIDE_HUMAN)
+    {
+        Action(_ACTION_LOOKBACK); // EInputTarget_Player, EInputDevice_Keyboard, EKey__B
+    }
+
+    LayoutKeybinding("Keybinding_Sonar", _CATEGORY_HUMAN, _COLLIDE_HUMAN)
+    {
+        Action(_ACTION_SONAR_IMPULSE); // EInputTarget_Player, EInputDevice_Keyboard, EKey__TAB
+    }
+
+    LayoutKeybinding("Keybinding_BriefContinue", _CATEGORY_HUMAN, _COLLIDE_HUMAN)
+    {
+        Action(_ACTION_BRIEF_CONTINUE); // EInputTarget_Player, EInputDevice_Keyboard, EKey__T
+    }
+
+    LayoutKeybinding("Keybinding_BriefDecline", _CATEGORY_HUMAN, _COLLIDE_HUMAN)
+    {
+        Action(_ACTION_BRIEF_DECLINE); // EInputTarget_Player, EInputDevice_Keyboard, EKey__N
+    }
+
+    LayoutKeybinding("Keybinding_JoinFavoriteGame", _CATEGORY_BASE, _COLLIDE_BASE)
+    {
+        Action(_ACTION_JOIN_FAVORITE_GAME); // EInputTarget_Module, EInputDevice_Keyboard, EKey__J
+    }
+
+    LayoutKeybinding("Keybinding_ShowChallengeInvite", _CATEGORY_HUMAN, _COLLIDE_HUMAN)
+    {
+        Action(_ACTION_SHOW_CHALLENGE_MISSION_INVITE); // EInputTarget_Module, EInputDevice_Keyboard, EKey__J
+    }
+
+    LayoutKeybinding("Keybinding_VoteForKick", _CATEGORY_BASE, _COLLIDE_BASE)
+    {
+        Action(_ACTION_VOTE_FOR_KICK); // EInputTarget_Module, EInputDevice_Keyboard, EKey__K
+    }
+
+    LayoutKeybinding("Keybinding_DropItem", _CATEGORY_HUMAN, _COLLIDE_HUMAN)
+    {
+        Action(_ACTION_DROP_ITEM); // EInputTarget_Player, EInputDevice_Keyboard, EKey__BACK
+    }
+
+    LayoutKeybinding("Keybinding_CreateCoopChallenge", _CATEGORY_HUMAN, _COLLIDE_HUMAN)
+    {
+        Action(_ACTION_CREATE_COOP_CHALLENGE); // EInputTarget_Player, EInputDevice_Keyboard, EKey__H
+    }
+
+    LayoutKeybinding("Keybinding_FastEquipItem", _CATEGORY_HUMAN, _COLLIDE_HUMAN)
+    {
+        Action(_ACTION_FAST_EQUIP_ITEM); // EInputTarget_Player, EInputDevice_Keyboard, EKey__MINUS
+    }
+
+    LayoutKeybinding("Keybinding_AppearInWaitingPlace", _CATEGORY_HUMAN, _COLLIDE_HUMAN)
+    {
+        Action(_ACTION_APPEAR_IN_WAITING_PLACE); // EInputTarget_Player, EInputDevice_Keyboard, EKey__B) { HoldTime(0.5 }
+    }
+
+    LayoutKeybinding("Keybinding_Attack", _CATEGORY_HUMAN, _COLLIDE_HUMAN)
+    {
+        Action(_ACTION_FIRE_WEAPON); // EInputTarget_Player, EInputDevice_Mouse,     EMouse__BUTTON_1
+        Action(_ACTION_ATTACK_TRIGGER_R); // EInputTarget_Player, EInputDevice_Mouse,     EMouse__BUTTON_1
+        Action(_ACTION_CHARGE_ATTACK); // EInputTarget_Player, EInputDevice_Mouse,     EMouse__BUTTON_1
+        Action(_ACTION_CANCEL_MULTI_THROW); // EInputTarget_Player, EInputDevice_Mouse,     EMouse__BUTTON_1
+        Action(_ACTION_THROW_CARRYING_ITEM); // EInputTarget_Player, EInputDevice_Mouse,     EMouse__BUTTON_1
+    }
+
+    LayoutKeybinding("Keybinding_UseEquipment", _CATEGORY_HUMAN, _COLLIDE_HUMAN)
+    {
+        Action(_ACTION_USE_EQUIPEMENT); // EInputTarget_Player, EInputDevice_Mouse,     EMouse__BUTTON_2
+        Action(_ACTION_ATTACK_TRIGGER_L); // EInputTarget_Player, EInputDevice_Mouse,     EMouse__BUTTON_2
+        //Action(_ACTION_FIRE_RHAND_WEAPON); // EInputTarget_Player, EInputDevice_Mouse,     EMouse__BUTTON_2
+    }
+
+    LayoutKeybinding("Keybinding_SelectWeapon1", _CATEGORY_HUMAN, _CATEGORY_HUMAN, false)
+    {
+        Action(_ACTION_WEAPON_SLOT1);
+    }
+
+    LayoutKeybinding("Keybinding_SelectWeapon2", _CATEGORY_HUMAN, _CATEGORY_HUMAN, false)
+    {
+        Action(_ACTION_WEAPON_SLOT2);
+    }
+
+    LayoutKeybinding("Keybinding_SelectWeapon3", _CATEGORY_HUMAN, _CATEGORY_HUMAN, false)
+    {
+        Action(_ACTION_WEAPON_SLOT3);
+    }
+
+    LayoutKeybinding("Keybinding_SelectWeapon4", _CATEGORY_HUMAN, _CATEGORY_HUMAN, false)
+    {
+        Action(_ACTION_WEAPON_SLOT4);
+    }
+
+    LayoutKeybinding("Keybinding_SelectEquipment1", _CATEGORY_HUMAN, _CATEGORY_HUMAN, false)
+    {
+        Action(_ACTION_EQUIPMENT_SLOT1);
+    }
+
+    LayoutKeybinding("Keybinding_SelectEquipment2", _CATEGORY_HUMAN, _CATEGORY_HUMAN, false)
+    {
+        Action(_ACTION_EQUIPMENT_SLOT2);
+    }
+
+    LayoutKeybinding("Keybinding_SelectEquipment3", _CATEGORY_HUMAN, _CATEGORY_HUMAN, false)
+    {
+        Action(_ACTION_EQUIPMENT_SLOT3);
+    }
+
+    LayoutKeybinding("Keybinding_SelectEquipment4", _CATEGORY_HUMAN, _CATEGORY_HUMAN, false)
+    {
+        Action(_ACTION_EQUIPMENT_SLOT4);
+    }
+
+    LayoutKeybinding("Keybinding_Aim", _CATEGORY_HUMAN, _COLLIDE_HUMAN)
+    {
+        Action(_ACTION_WEAPON_ZOOM); //EInputTarget_Player, EInputDevice_Mouse, EMouse__BUTTON_2
+        Action(_ACTION_WEAPON_AIM_TOGGLE); //EInputTarget_Player, EInputDevice_Mouse, EMouse__BUTTON_2
+    }
+    
+    LayoutKeybinding("Keybinding_SplitDefensiveSmoke", _CATEGORY_ZOMBIE, _COLLIDE_ZOMBIE)
+    {
+        Action(_ACTION_SPIT_DEFENSIVE_SMOKE); 
+        Action(_ACTION_UV_HEAL); 
+    }
+    
+    LayoutKeybinding("Keybinding_Pounce", _CATEGORY_ZOMBIE, _COLLIDE_ZOMBIE)
+    {
+        Action(_ACTION_POUNCE); 
+    }
+    
+    LayoutKeybinding("Keybinding_ZombieCharge", _CATEGORY_ZOMBIE, _COLLIDE_ZOMBIE)
+    {
+        Action(_ACTION_PLAYERZOMBIE_CHARGE); 
+    }
+    
+    LayoutKeybinding("Keybinding_ZombieHowl", _CATEGORY_ZOMBIE, _COLLIDE_ZOMBIE)
+    {
+        Action(_ACTION_ZOMBIE_HOWL); 
+    }
+    
+    LayoutKeybinding("Keybinding_SpitControlTheHorde", _CATEGORY_ZOMBIE, _COLLIDE_ZOMBIE)
+    {
+        Action(_ACTION_SPIT_CONTROL_THE_HORDE); 
+    }
+    
+    LayoutKeybinding("Keybinding_SpitLightDisable", _CATEGORY_ZOMBIE, _COLLIDE_ZOMBIE)
+    {
+        Action(_ACTION_SPIT_LIGHT_DISABLE); 
+    }  
+
+    LayoutKeybinding("Keybinding_SpitCamo", _CATEGORY_ZOMBIE, _COLLIDE_ZOMBIE)
+    {
+        Action(_ACTION_SPIT_CAMO); 
+    }  
+
+    LayoutKeybinding("Keybinding_SpitToxic", _CATEGORY_ZOMBIE, _COLLIDE_ZOMBIE)
+    {
+        Action(_ACTION_SPIT_TOXIC); 
+    }      
+    
+    LayoutKeybinding("Keybinding_ZombieMelee", _CATEGORY_ZOMBIE, _COLLIDE_ZOMBIE)
+    {
+        Action(_ACTION_PLAYERZOMBIE_MELEE); 
+        Action(_ACTION_ZOMBIE_GROUND_POUND); 
+    }
+    
+    LayoutKeybinding("Keybinding_ZombieSpitPound", _CATEGORY_ZOMBIE, _COLLIDE_ZOMBIE)
+    {
+        Action(_ACTION_SPIT_GROUND_POUND); 
+        Action(_ACTION_SPIT_GROUND_POUND2); 
+    }
+              
+    LayoutKeybinding("Keybinding_RopeThrow", _CATEGORY_ZOMBIE, _COLLIDE_ZOMBIE)
+    {
+        Action(_ACTION_ROPE_THROW); 
+    }
+
+    LayoutKeybinding("Keybinding_CancelCharge", _CATEGORY_ZOMBIE, _COLLIDE_ZOMBIE)
+    {
+        Action(_ACTION_CANCEL_CHARGING); 
+        Action(_ACTION_ZOMBIE_LEAVE_VEHICLE); 
+    }
+
+    LayoutKeybinding("Keybinding_ThrowSpit", _CATEGORY_ZOMBIE, _COLLIDE_ZOMBIE)
+    {
+        Action(_ACTION_ZOMBIE_THROW_SPIT); 
+    }
+    
+    LayoutKeybinding("Keybinding_ZombieExecuteTrigger", _CATEGORY_ZOMBIE, _COLLIDE_ZOMBIE)
+    {
+        Action(_ACTION_ZOMBIE_EXECUTE_TRIGGER2); 
+    }
+    
+    LayoutKeybinding("Keybinding_BuggySonar", _CATEGORY_BUGGY, _COLLIDE_BUGGY)
+    {
+        Action(_ACTION_VEHICLE_SONAR_IMPULSE);
+    }
+    
+    LayoutKeybinding("Keybinding_BuggyHeal", _CATEGORY_BUGGY, _COLLIDE_BUGGY)
+    {
+        Action(_ACTION_VEHICLE_HEAL);
+    }
+    
+    LayoutKeybinding("Keybinding_BuggyTurnLeft", _CATEGORY_BUGGY, _COLLIDE_BUGGY)
+    {
+        Action(_ACTION_TURN_VEHICLE_LEFT);
+    }
+    
+    LayoutKeybinding("Keybinding_BuggyTurnRight", _CATEGORY_BUGGY, _COLLIDE_BUGGY)
+    {
+        Action(_ACTION_TURN_VEHICLE_RIGHT);
+    }
+    
+    LayoutKeybinding("Keybinding_BuggyThrottle", _CATEGORY_BUGGY, _COLLIDE_BUGGY)
+    {
+        Action(_ACTION_THROTTLE);
+    }
+    
+    LayoutKeybinding("Keybinding_BuggyBrake", _CATEGORY_BUGGY, _COLLIDE_BUGGY)
+    {
+        Action(_ACTION_BRAKE);
+    }
+    
+    LayoutKeybinding("Keybinding_BuggyHandbrake", _CATEGORY_BUGGY, _COLLIDE_BUGGY)
+    {
+        Action(_ACTION_HANDBRAKE);
+    }
+    
+    LayoutKeybinding("Keybinding_BuggyToggleLights", _CATEGORY_BUGGY, _COLLIDE_BUGGY)
+    {
+        Action(_ACTION_CAR_LIGHTS_TOGGLE);
+    }
+
+    LayoutKeybinding("Keybinding_BuggyLeave", _CATEGORY_BUGGY, _COLLIDE_BUGGY)
+    {
+        Action(_ACTION_VEHICLE_LEAVE);
+    }
+    
+    LayoutKeybinding("Keybinding_BuggySkill0", _CATEGORY_BUGGY, _COLLIDE_BUGGY)
+    {
+        Action(_ACTION_BUGGY_SKILL_0);
+    }
+
+    LayoutKeybinding("Keybinding_BuggySkill1", _CATEGORY_BUGGY, _COLLIDE_BUGGY)
+    {
+        Action(_ACTION_BUGGY_SKILL_1);
+    }
+    
+    LayoutKeybinding("Keybinding_BuggySkill2", _CATEGORY_BUGGY, _COLLIDE_BUGGY)
+    {
+        Action(_ACTION_BUGGY_SKILL_2);
+    }
+    
+    LayoutKeybinding("Keybinding_BuggyLookBack", _CATEGORY_BUGGY, _COLLIDE_BUGGY)
+    {
+        Action(_ACTION_VEHICLE_LOOKBACK);
+    }
+    
+    LayoutKeybinding("Keybinding_BuggyBreakGrab", _CATEGORY_BUGGY, _COLLIDE_BUGGY)
+    {
+        Action(_ACTION_VEHICLE_BREAK_GRAB);
+    }
+    
+    View("&Keybinding_View_Movement&")
+    {
+        Layout("Keybinding_MoveForward", "&Keybinding_MoveForward&");
+        Layout("Keybinding_MoveBackward", "&Keybinding_MoveBackward&");
+        Layout("Keybinding_MoveLeft", "&Keybinding_MoveLeft&");
+        Layout("Keybinding_MoveRight", "&Keybinding_MoveRight&");
+        Layout("Keybinding_DuckMode", "&Keybinding_DuckMode&");
+        Layout("Keybinding_Duck", "&Keybinding_Duck&");
+        Layout("Keybinding_SprintMode", "&Keybinding_SprintMode&");
+        Layout("Keybinding_Sprint", "&Keybinding_Sprint&");
+        Layout("Keybinding_Jump", "&Keybinding_Jump&");
+    }
+
+    View("&Keybinding_View_Actions&")
+    {
+        Layout("Keybinding_UseEquipment", "&Keybinding_UseEquipment&");
+        Layout("Keybinding_Use", "&Keybinding_Use&");
+        Layout("Keybinding_Use2", "&Keybinding_Use2&");
+        Layout("Keybinding_Sonar", "&Keybinding_Sonar&");
+        Layout("Keybinding_Lockback", "&Keybinding_Lockback&");
+        Layout("Keybinding_Attack", "&Keybinding_Attack&");
+        Layout("Keybinding_Kick", "&Keybinding_Kick&");
+        Layout("Keybinding_Nagewaza", "&Keybinding_Nagewaza&");
+        Layout("Keybinding_AimMode", "&Keybinding_AimMode&");
+        Layout("Keybinding_Aim", "&Keybinding_Aim&");
+        Layout("Keybinding_ReloadRepair", "&Keybinding_ReloadRepair&");
+    }
+
+    View("&Keybinding_View_Inventory&")
+    {
+        Layout("Keybinding_Flashlight", "&Keybinding_Flashlight&");
+        Layout("Keybinding_Heal", "&Keybinding_Heal&");
+        Layout("Keybinding_NextWeapon", "&Keybinding_NextWeapon&");
+        Layout("Keybinding_PrevWeapon", "&Keybinding_PrevWeapon&");
+        Layout("Keybinding_NextEquipment", "&Keybinding_NextEquipment&");
+        Layout("Keybinding_PrevEquipment", "&Keybinding_PrevEquipment&");
+        Layout("Keybinding_QuickPrimary", "&Keybinding_QuickPrimary&");
+        Layout("Keybinding_QuickSecondary", "&Keybinding_QuickSecondary&");
+        Layout("Keybinding_FastEquipItem", "&Keybinding_FastEquipItem&");
+        Layout("Keybinding_DropItem", "&Keybinding_DropItem&");
+    }
+
+    View("&Keybinding_View_QuickSelect&")
+    {
+        Layout("Keybinding_SelectWeapon1", "&Keybinding_SelectWeapon1&");
+        Layout("Keybinding_SelectWeapon2", "&Keybinding_SelectWeapon2&");
+        Layout("Keybinding_SelectWeapon3", "&Keybinding_SelectWeapon3&");
+        Layout("Keybinding_SelectWeapon4", "&Keybinding_SelectWeapon4&");
+        Layout("Keybinding_SelectEquipment1", "&Keybinding_SelectEquipment1&");
+        Layout("Keybinding_SelectEquipment2", "&Keybinding_SelectEquipment2&");
+        Layout("Keybinding_SelectEquipment3", "&Keybinding_SelectEquipment3&");
+        Layout("Keybinding_SelectEquipment4", "&Keybinding_SelectEquipment4&");
+    }
+
+    View("&Keybinding_View_Other&")
+    {
+        Layout("Keybinding_Inventory", "&Keybinding_Inventory&");
+        Layout("Keybinding_Map", "&Keybinding_Map&");
+        Layout("Keybinding_QuestLog", "&Keybinding_QuestLog&");
+        Layout("Keybinding_Skill", "&Keybinding_Skill&");
+        Layout("Keybinding_PlayerMenu", "&ActionName_InGamePlayerMenu&"); 
+        Layout("Keybinding_TrackQuest", "&Keybinding_TrackQuest&");
+        Layout("Keybinding_BriefContinue", "&Keybinding_BriefContinue&");
+        Layout("Keybinding_BriefDecline", "&Keybinding_BriefDecline&");
+    }
+    
+    
+    View("&Keybinding_View_Coop&")
+    {    
+        Layout("Keybinding_Chat", "&Keybinding_Chat&");
+        Layout("Keybinding_VoteForKick", "&Keybinding_VoteForKick&");
+        Layout("Keybinding_AppearInWaitingPlace", "&Keybinding_AppearInWaitingPlace&");
+        Layout("Keybinding_CreateCoopChallenge", "&Keybinding_CreateCoopChallenge&");
+        Layout("Keybinding_JoinFavoriteGame", "&Keybinding_JoinFavoriteGame&");
+        Layout("Keybinding_ShowChallengeInvite", "&Keybinding_ShowChallengeInvite&");
+    }
+
+    View("&Keybinding_View_Hunter&", "DLC1")
+    {           
+        Layout("Keybinding_SplitDefensiveSmoke", "&Keybinding_UVBlock&"); 
+        Layout("Keybinding_Pounce", "&TriggerPvPPounce&");
+        Layout("Keybinding_ZombieCharge", "&btz_stat_deaths_tackle&");
+        Layout("Keybinding_ZombieHowl", "&TutN_BtZHowl&");
+        Layout("Keybinding_SpitControlTheHorde", "&TutN_BtZHordeControl&");
+        Layout("Keybinding_SpitLightDisable", "&btz_light_disable_spit_name&");
+        Layout("Keybinding_SpitCamo", "&btz_stat_camo&");
+        Layout("Keybinding_SpitToxic", "&btz_stat_toxic&");
+        Layout("Keybinding_ZombieMelee", "&Keybinding_ZombieMelee&");
+        Layout("Keybinding_RopeThrow", "&TutN_BtZ_Locomotion_1&");
+        Layout("Keybinding_ZombieSpitPound", "&BtzZombie_SpitPound_AwardReason&");
+        Layout("Keybinding_CancelCharge", "&CancelGroundPond&");
+        Layout("Keybinding_ThrowSpit", "&TutN_BTZZombieSpits&");
+        Layout("Keybinding_ZombieExecuteTrigger", "&Keybinding_Use&");
+    }
+    
+    View("&Keybinding_View_Buggy&", "DLC17")
+    {
+        Layout("Keybinding_BuggyThrottle", "&Keybinding_BuggyThrottle&");
+        Layout("Keybinding_BuggyBrake", "&Keybinding_BuggyBrake&");
+        Layout("Keybinding_BuggyTurnLeft", "&Keybinding_BuggyTurnLeft&");
+        Layout("Keybinding_BuggyTurnRight", "&Keybinding_BuggyTurnRight&");
+        Layout("Keybinding_BuggyHandbrake", "&Keybinding_BuggyHandbrake&");
+        Layout("Keybinding_BuggyToggleLights", "&Keybinding_BuggyToggleLights&");
+        Layout("Keybinding_BuggyLeave", "&Keybinding_BuggyLeave&");
+        Layout("Keybinding_BuggySkill0", "&Keybinding_BuggySkill0&");
+        Layout("Keybinding_BuggySkill1", "&Keybinding_BuggySkill1&");
+        Layout("Keybinding_BuggySkill2", "&Keybinding_BuggySkill2&");
+        Layout("Keybinding_BuggyLookBack", "&Keybinding_BuggyLookBack&");
+        Layout("Keybinding_BuggyBreakGrab", "&Keybinding_BuggyBreakGrab&");
+        Layout("Keybinding_BuggySonar", "&Keybinding_BuggySonar&");
+        Layout("Keybinding_BuggyHeal", "&Keybinding_BuggyHeal&");
+    }
+}

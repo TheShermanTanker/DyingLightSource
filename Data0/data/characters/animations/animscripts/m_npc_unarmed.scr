@@ -1,0 +1,2149 @@
+!include("ai_timing.def")
+
+////////////////////
+//// idle   ////////
+////////////////////
+
+
+SeqTrack("m_npc_idle_01", 			            "m_npc_idle_01.anm2"		        , 0, 298, 26, 1, 1.2)
+{
+ Event(0, VIS_EVENT_IK_ENABLING_START, -1)
+     Event(10, VIS_EVENT_IK_ENABLE, -1)
+ Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+ Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+
+//----- animacje bez broni
+SeqTrack( "NPC_Unarmed_Vehicle_PassengerVehicle", "M_FPP_Beretta_CarWindowPosition.anm2",	         0, 10, 30, 1, 0.6)
+{
+    Event(0, EVENT_TURN_OFF_PHYSICS, -1)
+}
+
+SeqTrack( "NPC_Unarmed_Vehicle_PassengerVehicle_Scared", "M_NPC_Unarmed_Vehicle_PassengerVehicle_Scared.anm2",	         0, 450, 30, 1, 0.3)
+{
+    Event(0, EVENT_TURN_OFF_PHYSICS, -1)
+}
+
+//[nosek_20100729] SeqTrack( "NPC_vehicle_lb", "M_FPP_Beretta_CarWindowPosition_LB.anm2", 0, 72, 30, 1, 0.5 )
+//{
+//    Event(0, EVENT_TURN_OFF_PHYSICS, -1)
+//}
+
+//[nosek_20100729] SeqTrack( "NPC_vehicle_all", "M_FPP_Car_ALL.anm2", 29, 745, 30, 1, 0.5 )
+//{
+//    Event(0, EVENT_TURN_OFF_PHYSICS, -1)
+//}
+
+// poruszanie
+SeqTrack("M_NPC_Unarmed_Walk", 			            "M_TPP_Unarmed_Walk.anm2"		        , 0, 66, 30, 1, 0.2)
+{
+	Event(12, VIS_EVENT_STEP_RIGHT, -1)
+	Event(27, VIS_EVENT_STEP_LEFT, -1)
+	Event(44, VIS_EVENT_STEP_RIGHT, -1)
+	Event(60, VIS_EVENT_STEP_LEFT, -1)
+}
+//[nosek_20100729] SeqTrack("M_NPC_Unarmed_Walk_v02", 		            "M_TPP_Unarmed_Walk_v02.anm2"		    , 0, 68, 30, 1, 0.2)
+//{
+//	Event(9, VIS_EVENT_STEP_RIGHT, -1)
+//	Event(27, VIS_EVENT_STEP_LEFT, -1)
+//	Event(43, VIS_EVENT_STEP_RIGHT, -1)
+//	Event(61, VIS_EVENT_STEP_LEFT, -1)
+//}
+//[nosek_20100729] SeqTrack("M_NPC_Unarmed_Walk_v03", 		            "M_TPP_Unarmed_Walk_v03.anm2"		    , 0, 67, 30, 1, 0.2)
+//{
+//	Event(10, VIS_EVENT_STEP_LEFT, -1)
+//	Event(27, VIS_EVENT_STEP_RIGHT, -1)
+//	Event(43, VIS_EVENT_STEP_LEFT, -1)
+//	Event(60, VIS_EVENT_STEP_RIGHT, -1)
+//}
+
+SeqTrack("M_NPC_Unarmed_Walk_Left_v01", 		    "M_TPP_Unarmed_Walk_Left_v01.anm2"		, 0, 121, 30, 1, 0.2)
+{
+	Event(11, VIS_EVENT_STEP_LEFT, -1)
+	Event(32, VIS_EVENT_STEP_RIGHT, -1)
+	Event(51, VIS_EVENT_STEP_LEFT, -1)
+	Event(70, VIS_EVENT_STEP_RIGHT, -1)
+	Event(91, VIS_EVENT_STEP_LEFT, -1)
+	Event(109, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+SeqTrack("M_NPC_Unarmed_Walk_Right_v01", 		    "M_TPP_Unarmed_Walk_Right_v01.anm2"		, 0, 76, 30, 1, 0.2)
+{
+	Event(8, VIS_EVENT_STEP_RIGHT, -1)
+	Event(29, VIS_EVENT_STEP_LEFT, -1)
+	Event(46, VIS_EVENT_STEP_RIGHT, -1)
+	Event(66, VIS_EVENT_STEP_LEFT, -1)
+}
+
+SeqTrack("M_NPC_Unarmed_Walk_Backward", 	        "M_TPP_Unarmed_Walk_Backward.anm2"		, 0, 124, 30, 1, 0.2)
+{
+	Event(12, VIS_EVENT_STEP_RIGHT, -1)
+	Event(35, VIS_EVENT_STEP_LEFT, -1)
+	Event(55, VIS_EVENT_STEP_RIGHT, -1)
+	Event(76, VIS_EVENT_STEP_LEFT, -1)
+	Event(95, VIS_EVENT_STEP_RIGHT, -1)
+	Event(116, VIS_EVENT_STEP_LEFT, -1)
+}
+
+
+SeqTrack("M_NPC_Unarmed_Trot_L", 		            "M_TPP_Unarmed_Trot_L.anm2"		        , 0, 62, 30, 1, 0.2)
+{
+	Event(11, VIS_EVENT_STEP_LEFT, -1)
+	Event(25, VIS_EVENT_STEP_RIGHT, -1)
+	Event(40, VIS_EVENT_STEP_LEFT, -1)
+	Event(55, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("M_NPC_Unarmed_Trot_R", 		            "M_TPP_Unarmed_Trot_R.anm2"		        , 0, 62, 30, 1, 0.2)
+{
+	Event(9, VIS_EVENT_STEP_LEFT, -1)
+	Event(25, VIS_EVENT_STEP_RIGHT, -1)
+	Event(40, VIS_EVENT_STEP_LEFT, -1)
+	Event(55, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("M_NPC_Unarmed_Trot_B", 		            "M_TPP_Unarmed_Trot_B.anm2"		        , 0, 77, 30, 1, 0.2)
+{
+	Event(9, VIS_EVENT_STEP_RIGHT, -1)
+	Event(21, VIS_EVENT_STEP_LEFT, -1)
+	Event(34, VIS_EVENT_STEP_RIGHT, -1)
+	Event(47, VIS_EVENT_STEP_LEFT, -1)
+	Event(58, VIS_EVENT_STEP_RIGHT, -1)
+	Event(71, VIS_EVENT_STEP_LEFT, -1)
+}
+
+SeqTrack( "M_NPC_Unarmed_Ram_Ready",    		"M_TPP_Unarmed_Ram_Ready.anm2",      0, 32, 30, 1, 0.2)
+
+////////////////
+//// TURNS////// new  06/2013
+////////////////
+
+SeqTrack("m_npc_Turn_45L",                        "m_npc_Turn_45L.anm2",    13, 75, 30, 1, 0.3)  //no ik
+{
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(1, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(1, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(8, VIS_EVENT_STEP_LEFT, -1)
+    Event(11, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(12, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(20, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(26, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(26, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(27, VIS_EVENT_STOPANIM, -1)
+    Event(28, VIS_EVENT_STEP_RIGHT, -1)
+    Event(30, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(33, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(43, VIS_EVENT_STEP_LEFT, -1)
+    Event(43, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+SeqTrack("m_npc_Turn_45R",                        "m_npc_Turn_45R.anm2",    6, 69, 30, 1, 0.3) //no ik
+{
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(1, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(1, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(1, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(10, VIS_EVENT_STEP_LEFT, -1)
+    Event(10, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(13, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(24, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(24, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(26, VIS_EVENT_STOPANIM, -1)
+    Event(28, VIS_EVENT_STEP_RIGHT, -1)
+    Event(29, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(31, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(41, VIS_EVENT_STEP_LEFT, -1)
+    Event(44, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+SeqTrack("m_npc_Turn_90R",                        "m_npc_Turn_90R.anm2",    5, 70, 30, 1, 0.4) //no ik
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(0, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(1, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(10, VIS_EVENT_STEP_LEFT, -1)
+    Event(11, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(13, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(29, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(30, VIS_EVENT_STEP_RIGHT, -1)
+    Event(32, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(32, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(32, EVENT_FINAL_ROTATION, -1)
+    Event(33, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(33, VIS_EVENT_STOPANIM, -1)
+    Event(44, VIS_EVENT_STEP_LEFT, -1)
+    Event(46, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+SeqTrack("m_npc_Turn_90L",                        "m_npc_Turn_90L.anm2",    9, 69, 30, 1, 0.4) //no ik
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(0, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(1, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(10, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(13, VIS_EVENT_STEP_RIGHT, -1)
+    Event(13, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(27, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(27, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(27, EVENT_FINAL_ROTATION, -1)
+    Event(30, VIS_EVENT_STOPANIM, -1)
+    Event(31, VIS_EVENT_STEP_LEFT, -1)
+    Event(31, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(33, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(43, VIS_EVENT_STEP_RIGHT, -1)
+    Event(49, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+
+SeqTrack("m_npc_Turn_180L",                        "m_npc_Turn_180L.anm2",    11, 100, 30, 1, 0.6) //no ik
+{
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(0, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(3, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(15, VIS_EVENT_STEP_RIGHT, -1)
+    Event(33, VIS_EVENT_STEP_LEFT, -1)
+    Event(48, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(49, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(50, VIS_EVENT_STOPANIM, -1)
+    Event(52, VIS_EVENT_STEP_RIGHT, -1)
+    Event(64, VIS_EVENT_STEP_LEFT, -1)
+    Event(79, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+SeqTrack("m_npc_Turn_180R",                        "m_npc_Turn_180R.anm2",    11, 83, 30, 1, 0.6) //no ik
+{
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(0, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(0, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(31, VIS_EVENT_STEP_RIGHT, -1)
+    Event(46, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(46, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(47, VIS_EVENT_STOPANIM, -1)
+    Event(49, VIS_EVENT_STEP_LEFT, -1)
+    Event(60, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+
+///////////////////
+///////////////////
+///	WALKS	///
+///////////////////
+///////////////////
+
+
+
+///////////////////////
+//// walk loop ////// new  06/2013
+///////////////////////
+ 
+SeqTrack("m_npc_walk_loop_01",                        "m_npc_walk_loop_01.anm2",    0, 71, 29, 1, 0.75)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, EVENT_AVOID_COLLISION_ENABLED, -1)
+    Event(5, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(12, VIS_EVENT_STEP_RIGHT, -1)
+    Event(13, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(20, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(30, VIS_EVENT_STEP_LEFT, -1)
+    Event(30, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(40, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(48, VIS_EVENT_STEP_RIGHT, -1)
+    Event(48, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(58, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(65, VIS_EVENT_STEP_LEFT, -1)
+    Event(66, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+///////////////////////
+//// walk starts ////// 
+///////////////////////
+SeqTrack("m_npc_walk_start_Front",                   "m_npc_walk_start_Front.anm2", 0 , 63 , 32 , 1, 0.8 )
+{
+    Event( 0 , VIS_EVENT_IK_ENABLE, -1 )
+    Event( 0 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event( 0 , VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+    Event( 3 , VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+    Event(9, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(16, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(19, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event( 25 , VIS_EVENT_STEP_LEFT, -1 )
+    Event(25, EVENT_FINAL_ROTATION, -1)
+    Event( 26 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event( 37 , VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+    Event( 47 , VIS_EVENT_STEP_RIGHT, -1 )
+    Event( 47 , VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+    Event(47, VIS_EVENT_STOPANIM, -1)
+    Event( 55 , VIS_EVENT_RIGHT_FOOT_LIFT, -1 )
+}
+
+SeqTrack("m_npc_walk_start_90R",                        "m_npc_walk_start_90R.anm2",    16, 90, 32, 1, 0.8) //no ik
+{
+    Event(1, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(6, VIS_EVENT_STEP_LEFT, -1)
+    Event(19, VIS_EVENT_STEP_RIGHT, -1)
+    Event(44, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(45, VIS_EVENT_STEP_LEFT, -1)
+    Event(45, VIS_EVENT_STOPANIM, -1)
+    Event(63, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("m_npc_walk_start_90L",                        "m_npc_walk_start_90L.anm2",    3, 59, 32, 1, 0.8) //no ik
+{
+    Event(3, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(7, VIS_EVENT_STEP_RIGHT, -1)
+    Event(17, VIS_EVENT_STEP_LEFT, -1)
+    Event(28, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(39, VIS_EVENT_STEP_RIGHT, -1)
+    Event(39, VIS_EVENT_STOPANIM, -1)
+    Event(54, VIS_EVENT_STEP_LEFT, -1)
+}
+
+SeqTrack("m_npc_walk_start_180R",                   "m_npc_walk_start_180R.anm2", 0 , 90 , 32 , 1, 0.8 )
+{
+    Event( 0 , VIS_EVENT_IK_ENABLE, -1 )
+    Event( 0 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event( 0 , VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+    Event( 4 , VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+    Event( 14 , VIS_EVENT_RIGHT_FOOT_LIFT, -1 )
+    Event( 17 , VIS_EVENT_ROTATION_MOD_START, -1 )
+    Event( 18 , VIS_EVENT_STEP_LEFT, -1 )
+    Event( 18 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event( 36 , VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+    Event( 37 , VIS_EVENT_STEP_RIGHT, -1 )
+    Event( 37 , VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+    Event( 47 , VIS_EVENT_ROTATION_MOD_END, -1 )
+    Event( 47 , VIS_EVENT_RIGHT_FOOT_LIFT, -1 )
+    Event( 59 , VIS_EVENT_STEP_LEFT, -1 )
+    Event( 59 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event(59, VIS_EVENT_STOPANIM, -1)
+    Event( 67 , VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+    Event( 77 , VIS_EVENT_STEP_RIGHT, -1 )
+    Event( 77 , VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+    Event( 82 , VIS_EVENT_RIGHT_FOOT_LIFT, -1 )
+}
+
+
+SeqTrack("m_npc_walk_start_180L",						"m_npc_walk_start_180L.anm2", 0 , 60 , 32 , 1, 0.8 )
+{
+    Event( 0 , VIS_EVENT_IK_ENABLE, -1 )
+    Event( 0 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event( 0 , VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+    Event( 8 , VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+    Event( 11 , VIS_EVENT_ROTATION_MOD_START, -1 )
+    Event( 13 , VIS_EVENT_RIGHT_FOOT_LIFT, -1 )
+    Event( 24 , VIS_EVENT_STEP_LEFT, -1 )
+    Event( 24 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event( 40 , VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+    Event( 43 , VIS_EVENT_ROTATION_MOD_END, -1 )
+    Event( 46 , VIS_EVENT_STEP_RIGHT, -1 )
+    Event( 46 , VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+    Event(46, VIS_EVENT_STOPANIM, -1)
+    Event( 52 , VIS_EVENT_RIGHT_FOOT_LIFT, -1 )
+}
+
+//////////////////
+//// walk stops //
+//////////////////
+
+
+
+
+
+SeqTrack("m_npc_walk_stop_90l","m_npc_walk_stop_90l.anm2", 0 , 85 , 30 , 1, 0.7 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(11, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(18, VIS_EVENT_STEP_RIGHT, -1)
+    Event(18, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(23, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(23, EVENT_FINAL_ROTATION, -1)
+    Event(23, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(23, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(23, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(33, VIS_EVENT_STEP_LEFT, -1)
+    Event(33, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(37, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(40, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(48, EVENT_FINAL_POSITION, -1)
+    Event(49, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(49, EVENT_FINAL_ROTATION_2, -1)
+    Event(51, VIS_EVENT_STOPANIM, -1)
+    Event(51, VIS_EVENT_STEP_RIGHT, -1)
+    Event(51, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+
+SeqTrack("m_npc_walk_stop_90R","m_npc_walk_stop_90R.anm2", 0 , 86 , 30 , 1, 0.7 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(7, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(19, VIS_EVENT_STEP_RIGHT, -1)
+    Event(19, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(23, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(23, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(23, EVENT_FINAL_ROTATION, -1)
+    Event(23, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(23, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(38, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(38, VIS_EVENT_STEP_LEFT, -1)
+    Event(40, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(48, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(49, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(49, EVENT_FINAL_ROTATION_2, -1)
+    Event(51, VIS_EVENT_STOPANIM, -1)
+    Event(51, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(54, VIS_EVENT_STEP_RIGHT, -1)
+    Event(56, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(57, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(70, VIS_EVENT_STEP_LEFT, -1)
+    Event(71, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+SeqTrack("m_npc_walk_stop_180R","m_npc_walk_stop_180R.anm2", 0 , 91 , 30 , 1, 0.7 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(2, VIS_EVENT_STEP_LEFT, -1)
+    Event(13, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(19, VIS_EVENT_STEP_RIGHT, -1)
+    Event(19, EVENT_FINAL_ROTATION, -1)
+    Event(19, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(19, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(20, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(20, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(34, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(38, VIS_EVENT_STEP_LEFT, -1)
+    Event(39, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(39, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(57, VIS_EVENT_STEP_RIGHT, -1)
+    Event(60, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(61, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(72, EVENT_FINAL_POSITION, -1)
+    Event(74, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(74, EVENT_FINAL_ROTATION_2, -1)
+    Event(74, VIS_EVENT_STEP_LEFT, -1)
+    Event(75, VIS_EVENT_STOPANIM, -1)
+    Event(77, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+SeqTrack("m_npc_walk_stop_180L","m_npc_walk_stop_180L.anm2", 0 , 99 , 30 , 1, 0.7 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(1, VIS_EVENT_STEP_LEFT, -1)
+    Event(9, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(18, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(19, VIS_EVENT_STEP_RIGHT, -1)
+    Event(19, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(21, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(21, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(21, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(33, VIS_EVENT_STEP_LEFT, -1)
+    Event(33, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(34, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(50, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(51, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(51, VIS_EVENT_STEP_RIGHT, -1)
+    Event(60, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(72, VIS_EVENT_STEP_LEFT, -1)
+    Event(72, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(74, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(76, EVENT_FINAL_ROTATION, -1)
+    Event(76, EVENT_FINAL_POSITION, -1)
+    Event(84, VIS_EVENT_STOPANIM, -1)
+    Event(89, VIS_EVENT_STEP_RIGHT, -1)
+    Event(92, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+
+SeqTrack("m_npc_walk_stop_front_01","m_npc_walk_stop_front_01.anm2", 0 , 127 , 30 , 1, 0.7 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(11, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(17, VIS_EVENT_STEP_RIGHT, -1)
+    Event(17, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(32, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(35, VIS_EVENT_STEP_LEFT, -1)
+    Event(35, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(50, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(50, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(51, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(51, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(55, VIS_EVENT_STEP_RIGHT, -1)
+    Event(55, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(74, VIS_EVENT_STEP_LEFT, -1)
+    Event(76, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(83, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(83, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(83, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(99, VIS_EVENT_STOPANIM, -1)
+    Event(101, VIS_EVENT_STEP_RIGHT, -1)
+    Event(101, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(104, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(121, VIS_EVENT_STEP_LEFT, -1)
+    Event(121, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+SeqTrack("m_npc_walk_stop_front_02","m_npc_walk_stop_front_02.anm2", 0 , 127 , 30 , 1, 0.7 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(11, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(17, VIS_EVENT_STEP_LEFT, -1)
+    Event(17, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(32, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(35, VIS_EVENT_STEP_RIGHT, -1)
+    Event(35, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(50, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(54, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(55, VIS_EVENT_STEP_LEFT, -1)
+    Event(55, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(56, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(76, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(76, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(76, VIS_EVENT_STEP_RIGHT, -1)
+    Event(76, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(76, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(101, VIS_EVENT_STEP_LEFT, -1)
+    Event(101, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(101, VIS_EVENT_STOPANIM, -1)
+    Event(104, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(121, VIS_EVENT_STEP_RIGHT, -1)
+    Event(121, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+///////////////////////
+///END GENERIC WALKS///
+///////////////////////
+//#####################
+
+
+
+///////////////////
+///////////////////
+///HELPFUL WALKS///
+///////////////////
+///////////////////
+
+SeqTrack("m_npc_helpful_walk_loop_01",                        "m_npc_helpful_walk_loop_01.anm2",    0, 138, 60, 1, 0.6)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, EVENT_AVOID_COLLISION_ENABLED, -1)
+    Event(10, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(31, VIS_EVENT_STEP_LEFT, -1)
+    Event(35, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(52, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(66, VIS_EVENT_STEP_RIGHT, -1)
+    Event(66, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(87, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(100, VIS_EVENT_STEP_LEFT, -1)
+    Event(102, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(114, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(136, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(136, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+SeqTrack("m_npc_helpful_walk_fast_loop",                        "m_npc_helpful_walk_fast_loop.anm2",    0, 57, 58, 1, 0.6)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, EVENT_AVOID_COLLISION_ENABLED, -1)
+    Event(7, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(21, VIS_EVENT_STEP_RIGHT, -1)
+    Event(22, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(41, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(52, VIS_EVENT_STEP_LEFT, -1)
+    Event(52, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+SeqTrack("m_npc_helpful_walk_fast_loop_jasir",                        "m_npc_helpful_walk_fast_loop_jasir.anm2",    0, 57, 58, 1, 0.6)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, EVENT_AVOID_COLLISION_ENABLED, -1)
+    Event(7, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(21, VIS_EVENT_STEP_RIGHT, -1)
+    Event(22, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(41, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(52, VIS_EVENT_STEP_LEFT, -1)
+    Event(52, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+///////////////////
+///////////////////
+///TIRED WALKS	///
+///////////////////
+///////////////////
+
+SeqTrack("m_npc_tired_walk_loop_01",                        "m_npc_tired_walk_loop_01.anm2",    0, 72, 29, 1, 0.7)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, EVENT_AVOID_COLLISION_ENABLED, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)
+    Event(7, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(18, VIS_EVENT_STEP_LEFT, -1)
+    Event(19, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(23, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(35, VIS_EVENT_STEP_RIGHT, -1)
+    Event(35, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(41, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(53, VIS_EVENT_STEP_LEFT, -1)
+    Event(53, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(57, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(72, EVENT_AVOID_COLLISION_DISABLED, -1)
+}
+
+
+SeqTrack("m_npc_tired_walk_stop_front_01",                        "m_npc_tired_walk_stop_front_01.anm2",    0, 100, 27, 1, 0.5)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, EVENT_AVOID_COLLISION_ENABLED, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(3, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(4, VIS_EVENT_STEP_LEFT, -1)
+    Event(5, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(9, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(21, VIS_EVENT_STEP_RIGHT, -1)
+    Event(21, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(32, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(40, VIS_EVENT_STEP_LEFT, -1)
+    Event(40, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(42, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(47, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(49, EVENT_FINAL_ROTATION, -1)
+    Event(49, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(56, VIS_EVENT_STEP_RIGHT, -1)
+    Event(56, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(66, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(66, EVENT_FINAL_POSITION, -1)
+    Event(66, EVENT_FINAL_ROTATION_2, -1)
+    Event(66, EVENT_AVOID_COLLISION_DISABLED, -1)
+    Event(66, VIS_EVENT_STOPANIM, -1)
+    Event(71, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+SeqTrack("m_npc_tired_walk_stop_front_02",                        "m_npc_tired_walk_stop_front_02.anm2",    0, 100, 30, 1, 0.5)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, EVENT_AVOID_COLLISION_ENABLED, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(2, VIS_EVENT_STEP_RIGHT, -1)
+    Event(2, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(7, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(21, VIS_EVENT_STEP_LEFT, -1)
+    Event(21, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(32, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(40, VIS_EVENT_STEP_RIGHT, -1)
+    Event(40, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(41, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(47, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(49, EVENT_FINAL_ROTATION, -1)
+    Event(49, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(56, VIS_EVENT_STEP_LEFT, -1)
+    Event(56, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(66, EVENT_FINAL_ROTATION_2, -1)
+    Event(66, EVENT_FINAL_POSITION, -1)
+    Event(66, EVENT_AVOID_COLLISION_DISABLED, -1)
+    Event(66, VIS_EVENT_STOPANIM, -1)
+    Event(71, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(71, VIS_EVENT_MOVEMENT_MOD_END, -1)
+}
+
+SeqTrack("m_npc_tired_walk_stop_180l",                        "m_npc_tired_walk_stop_180l.anm2",    0, 161, 30, 1, 0.5)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, EVENT_AVOID_COLLISION_ENABLED, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(5, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(10, VIS_EVENT_STEP_RIGHT, -1)
+    Event(10, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(22, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(30, VIS_EVENT_STEP_LEFT, -1)
+    Event(30, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(46, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(47, VIS_EVENT_STEP_RIGHT, -1)
+    Event(48, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(48, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(53, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(54, EVENT_FINAL_ROTATION, -1)
+    Event(54, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(63, VIS_EVENT_STEP_LEFT, -1)
+    Event(63, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(75, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(79, VIS_EVENT_STEP_RIGHT, -1)
+    Event(79, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(83, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(99, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(100, EVENT_FINAL_POSITION, -1)
+    Event(100, EVENT_FINAL_ROTATION_2, -1)
+    Event(100, EVENT_AVOID_COLLISION_DISABLED, -1)
+    Event(100, VIS_EVENT_STOPANIM, -1)
+    Event(104, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(120, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+
+
+SeqTrack("m_npc_tired_walk_stop_180r",                        "m_npc_tired_walk_stop_180r.anm2",    0, 161, 30, 1, 0.5)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, EVENT_AVOID_COLLISION_ENABLED, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(5, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(10, VIS_EVENT_STEP_LEFT, -1)
+    Event(10, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(22, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(30, VIS_EVENT_STEP_RIGHT, -1)
+    Event(30, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(46, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(47, VIS_EVENT_STEP_LEFT, -1)
+    Event(48, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(53, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(54, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(54, EVENT_FINAL_ROTATION, -1)
+    Event(54, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(63, VIS_EVENT_STEP_RIGHT, -1)
+    Event(63, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(75, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(79, VIS_EVENT_STEP_LEFT, -1)
+    Event(79, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(85, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(99, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(100, EVENT_FINAL_POSITION, -1)
+    Event(100, EVENT_FINAL_ROTATION_2, -1)
+    Event(100, EVENT_AVOID_COLLISION_DISABLED, -1)
+    Event(100, VIS_EVENT_STOPANIM, -1)
+    Event(104, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(120, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+SeqTrack("m_npc_tired_walk_stop_90l",                        "m_npc_tired_walk_stop_90l.anm2",    0, 150, 30, 1, 0.5)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)
+    Event(0, EVENT_AVOID_COLLISION_ENABLED, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(17, VIS_EVENT_STEP_LEFT, -1)
+    Event(17, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(25, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(35, VIS_EVENT_STEP_RIGHT, -1)
+    Event(35, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(48, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(50, VIS_EVENT_STEP_LEFT, -1)
+    Event(50, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(51, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(51, EVENT_FINAL_ROTATION, -1)
+    Event(51, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(69, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(70, VIS_EVENT_STEP_RIGHT, -1)
+    Event(70, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(74, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(79, EVENT_FINAL_POSITION, -1)
+    Event(79, EVENT_FINAL_ROTATION_2, -1)
+    Event(80, EVENT_AVOID_COLLISION_DISABLED, -1)
+    Event(80, VIS_EVENT_STOPANIM, -1)
+    Event(95, VIS_EVENT_STEP_LEFT, -1)
+    Event(95, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(100, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(111, VIS_EVENT_STEP_RIGHT, -1)
+    Event(111, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+
+SeqTrack("m_npc_tired_walk_stop_90r",                        "m_npc_tired_walk_stop_90r.anm2",    0, 150, 30, 1, 0.5)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, EVENT_AVOID_COLLISION_ENABLED, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(1, VIS_EVENT_STEP_LEFT, -1)
+    Event(9, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(18, VIS_EVENT_STEP_RIGHT, -1)
+    Event(18, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(27, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(37, VIS_EVENT_STEP_LEFT, -1)
+    Event(37, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(42, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(44, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(44, EVENT_FINAL_ROTATION, -1)
+    Event(44, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(51, VIS_EVENT_STEP_RIGHT, -1)
+    Event(52, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(66, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(71, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(72, VIS_EVENT_STEP_LEFT, -1)
+    Event(72, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(82, EVENT_FINAL_ROTATION_2, -1)
+    Event(82, EVENT_FINAL_POSITION, -1)
+    Event(84, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(85, EVENT_AVOID_COLLISION_DISABLED, -1)
+    Event(85, VIS_EVENT_STOPANIM, -1)
+    Event(91, VIS_EVENT_STEP_RIGHT, -1)
+    Event(97, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(111, VIS_EVENT_STEP_LEFT, -1)
+    Event(113, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+SeqTrack("m_npc_tired_walk_stop_90l_02",                        "m_npc_tired_walk_stop_90l_02.anm2",    0, 202, 30, 1, 0.5)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, EVENT_AVOID_COLLISION_ENABLED, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(1, VIS_EVENT_STEP_RIGHT, -1)
+    Event(2, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(15, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(21, VIS_EVENT_STEP_LEFT, -1)
+    Event(21, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(36, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(41, VIS_EVENT_STEP_RIGHT, -1)
+    Event(41, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(51, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(59, VIS_EVENT_STEP_LEFT, -1)
+    Event(59, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(65, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(78, VIS_EVENT_STEP_RIGHT, -1)
+    Event(88, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(90, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(101, EVENT_FINAL_ROTATION, -1)
+    Event(101, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(105, VIS_EVENT_STEP_LEFT, -1)
+    Event(105, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(111, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(123, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(134, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(135, VIS_EVENT_STEP_RIGHT, -1)
+    Event(135, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(143, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(143, EVENT_FINAL_ROTATION_2, -1)
+    Event(143, EVENT_FINAL_POSITION, -1)
+    Event(143, EVENT_AVOID_COLLISION_DISABLED, -1)
+    Event(143, VIS_EVENT_STOPANIM, -1)
+    Event(157, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(163, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(177, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+
+SeqTrack("m_npc_tired_walk_stop_90r_02",                        "m_npc_tired_walk_stop_90r_02.anm2",    0, 202, 30, 1, 0.5)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, EVENT_AVOID_COLLISION_ENABLED, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(1, VIS_EVENT_STEP_LEFT, -1)
+    Event(2, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(15, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(21, VIS_EVENT_STEP_RIGHT, -1)
+    Event(21, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(36, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(41, VIS_EVENT_STEP_LEFT, -1)
+    Event(41, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(51, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(59, VIS_EVENT_STEP_RIGHT, -1)
+    Event(59, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(68, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(78, VIS_EVENT_STEP_LEFT, -1)
+    Event(88, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(90, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(101, EVENT_FINAL_ROTATION, -1)
+    Event(101, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(105, VIS_EVENT_STEP_RIGHT, -1)
+    Event(105, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(111, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(119, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(134, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(135, VIS_EVENT_STEP_LEFT, -1)
+    Event(135, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(143, EVENT_FINAL_POSITION, -1)
+    Event(143, EVENT_FINAL_ROTATION_2, -1)
+    Event(143, EVENT_AVOID_COLLISION_DISABLED, -1)
+    Event(143, VIS_EVENT_STOPANIM, -1)
+    Event(146, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(157, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(163, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(177, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+SeqTrack("m_npc_walk_turn_45R_01",                        "m_npc_walk_turn_45R_01.anm2",    0, 100, 30, 1, 0.5)
+{
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(1, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(4, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(18, VIS_EVENT_STEP_RIGHT, -1)
+    Event(18, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(19, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(32, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(34, VIS_EVENT_STEP_LEFT, -1)
+    Event(34, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(36, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(37, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(51, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(52, VIS_EVENT_STEP_RIGHT, -1)
+    Event(52, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(52, EVENT_FINAL_POSITION, -1)
+    Event(52, EVENT_FINAL_ROTATION, -1)
+    Event(53, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(55, VIS_EVENT_STOPANIM, -1)
+    Event(68, VIS_EVENT_STEP_LEFT, -1)
+    Event(68, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(69, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(83, VIS_EVENT_STEP_RIGHT, -1)
+    Event(83, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(85, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(100, VIS_EVENT_STEP_LEFT, -1)
+    Event(100, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+SeqTrack("m_npc_walk_turn_45L_01",                        "m_npc_walk_turn_45L_01.anm2",    0, 100, 30, 1, 0.5)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(3, VIS_EVENT_STEP_RIGHT, -1)
+    Event(3, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(5, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(19, VIS_EVENT_STEP_LEFT, -1)
+    Event(19, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(21, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(33, VIS_EVENT_STEP_RIGHT, -1)
+    Event(33, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(34, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(34, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(37, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(49, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(50, VIS_EVENT_STEP_LEFT, -1)
+    Event(50, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(50, EVENT_FINAL_POSITION, -1)
+    Event(50, EVENT_FINAL_ROTATION, -1)
+    Event(53, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(59, VIS_EVENT_STOPANIM, -1)
+    Event(67, VIS_EVENT_STEP_RIGHT, -1)
+    Event(67, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(69, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(85, VIS_EVENT_STEP_LEFT, -1)
+    Event(85, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(86, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(100, VIS_EVENT_STEP_RIGHT, -1)
+    Event(100, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+
+
+///////////////////
+///END WALKS	///
+///////////////////
+//#################
+
+
+SeqTrack("m_npc_tired_walk_start_front_01",                        "m_npc_tired_walk_start_front_01.anm2",    0, 80, 30, 1, 0.75)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, EVENT_AVOID_COLLISION_ENABLED, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(7, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(22, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(34, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(37, VIS_EVENT_STEP_RIGHT, -1)
+    Event(37, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(39, VIS_EVENT_STOPANIM, -1)
+    Event(40, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(53, VIS_EVENT_STEP_LEFT, -1)
+    Event(53, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(63, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(72, VIS_EVENT_STEP_RIGHT, -1)
+    Event(72, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(76, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+}
+SeqTrack("m_npc_tired_walk_start_180R",                        "m_npc_tired_walk_start_180R.anm2",    0, 147, 30, 1, 0.75)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, EVENT_AVOID_COLLISION_ENABLED, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(25, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(47, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(49, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(75, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(75, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(104, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(108, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(108, VIS_EVENT_STEP_RIGHT, -1)
+    Event(113, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(125, VIS_EVENT_STOPANIM, -1)
+    Event(130, VIS_EVENT_STEP_LEFT, -1)
+    Event(130, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(135, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(147, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+SeqTrack("m_npc_tired_walk_start_180L",                        "m_npc_tired_walk_start_180L.anm2",    0, 150, 30, 1, 0.75)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, EVENT_AVOID_COLLISION_ENABLED, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(9, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(9, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(19, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(26, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(38, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(61, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(81, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(81, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(82, VIS_EVENT_STEP_LEFT, -1)
+    Event(98, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(106, VIS_EVENT_STEP_RIGHT, -1)
+    Event(106, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(110, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(123, VIS_EVENT_STOPANIM, -1)
+    Event(123, VIS_EVENT_STEP_LEFT, -1)
+    Event(123, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(128, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(142, VIS_EVENT_STEP_RIGHT, -1)
+    Event(142, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(146, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+}
+
+SeqTrack("m_npc_tired_walk_start_90R",                        "m_npc_tired_walk_start_90R.anm2",    0, 49, 30, 1, 0.75)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, EVENT_AVOID_COLLISION_ENABLED, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(6, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(17, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(23, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(25, VIS_EVENT_STEP_RIGHT, -1)
+    Event(25, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(31, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(38, VIS_EVENT_STOPANIM, -1)
+    Event(39, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(45, VIS_EVENT_STEP_LEFT, -1)
+    Event(45, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+SeqTrack("m_npc_tired_walk_start_90R_02",                        "m_npc_tired_walk_start_90R_02.anm2",    0, 160, 30, 1, 0.75)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, EVENT_AVOID_COLLISION_ENABLED, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(85, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(93, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(97, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(101, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(115, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(122, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(125, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(134, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(137, VIS_EVENT_STOPANIM, -1)
+    Event(143, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(150, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+}
+SeqTrack("m_npc_tired_walk_start_90L",                        "m_npc_tired_walk_start_90L.anm2",    0, 66, 30, 1, 0.75)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, EVENT_AVOID_COLLISION_ENABLED, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(9, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(17, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(23, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(24, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(23, VIS_EVENT_STEP_LEFT, -1)
+    Event(37, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(45, VIS_EVENT_STOPANIM, -1)
+        Event(45, VIS_EVENT_STEP_RIGHT, -1)
+    Event(45, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(46, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(55, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(62, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(62, VIS_EVENT_STEP_LEFT, -1)
+}
+
+////////////////
+//// run		new 07/2013
+////////////////
+/*
+SeqTrack("m_npc_run_loop_01", "m_npc_run_loop_01.anm2", 0 , 61 , 33 , 1, 0.4 )
+{
+    Event( 0 , VIS_EVENT_IK_ENABLE, -1 )
+    //Event( 0 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event( 1 , VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+    Event( 10 , VIS_EVENT_STEP_RIGHT, -1 )
+    Event( 10 , VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+    Event( 12 , VIS_EVENT_RIGHT_FOOT_LIFT, -1 )
+    Event( 20 , VIS_EVENT_STEP_LEFT, -1 )
+    Event( 20 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event( 22 , VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+    Event( 31 , VIS_EVENT_STEP_RIGHT, -1 )
+    Event( 31 , VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+    Event( 33 , VIS_EVENT_RIGHT_FOOT_LIFT, -1 )
+    Event( 41 , VIS_EVENT_STEP_LEFT, -1 )
+    Event( 41 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event( 43 , VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+    Event( 51 , VIS_EVENT_STEP_RIGHT, -1 )
+    Event( 51 , VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+    Event( 53 , VIS_EVENT_RIGHT_FOOT_LIFT, -1 )
+    Event( 61 , VIS_EVENT_STEP_LEFT, -1 )
+    Event( 61 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+}
+*/
+SeqTrack("m_npc_run_loop_01", "m_npc_run_loop_01.anm2", 0 , 39 , 29 , 1, 0.5 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, EVENT_AVOID_COLLISION_ENABLED, -1)
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(1, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(10, VIS_EVENT_STEP_RIGHT, -1)
+    Event(10, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(11, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(20, VIS_EVENT_STEP_LEFT, -1)
+    Event(20, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(21, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(30, VIS_EVENT_STEP_RIGHT, -1)
+    Event(30, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(31, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+}
+/*
+SeqTrack("m_npc_run_loop_03", "m_npc_run_loop_03.anm2", 0 , 18 , 30 , 1, 0.3 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(14, VIS_EVENT_STEP_LEFT, -1)
+    Event(14, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(15, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(6, VIS_EVENT_STEP_RIGHT, -1)
+    Event(6, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(7, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+}
+
+*/
+SeqTrack("m_npc_run_start_90l","m_npc_run_start_90l.anm2", 5 , 59 , 33 , 1, 0.3 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)
+    Event(10, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(17, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(22, VIS_EVENT_STEP_LEFT, -1)
+    Event(22, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(31, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(33, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(41, VIS_EVENT_STEP_RIGHT, -1)
+    Event(41, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(42, VIS_EVENT_STOPANIM, -1)
+    Event(43, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(54, VIS_EVENT_STEP_LEFT, -1)
+    Event(54, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+SeqTrack("m_npc_run_start_90r","m_npc_run_start_90r.anm2", 5 , 75 , 33 , 1, 0.3 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(10, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(18, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(20, VIS_EVENT_STEP_RIGHT, -1)
+    Event(20, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(33, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(37, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(42, VIS_EVENT_STEP_LEFT, -1)
+    Event(44, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(50, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(57, VIS_EVENT_STOPANIM, -1)
+    Event(57, VIS_EVENT_STEP_RIGHT, -1)
+    Event(59, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(61, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(70, VIS_EVENT_STEP_LEFT, -1)
+    Event(70, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+SeqTrack("m_npc_run_start_front","m_npc_run_start_front.anm2", 5 , 57 , 33 , 1, 0.3 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(3, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(14, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(14, VIS_EVENT_STEP_RIGHT, -1)
+    Event(14, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(20, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(29, VIS_EVENT_STOPANIM, -1)
+    Event(29, VIS_EVENT_STEP_LEFT, -1)
+    Event(29, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(31, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(42, VIS_EVENT_STEP_RIGHT, -1)
+    Event(42, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(43, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(52, VIS_EVENT_STEP_LEFT, -1)
+    Event(52, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+SeqTrack("m_npc_run_start_180r","m_npc_run_start_180r.anm2", 5 , 79 , 33 , 1, 0.3 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(11, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(15, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(18, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(25, VIS_EVENT_STEP_LEFT, -1)
+    Event(25, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(32, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(42, VIS_EVENT_STEP_RIGHT, -1)
+    Event(42, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(44, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(47, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(54, VIS_EVENT_STOPANIM, -1)
+    Event(54, VIS_EVENT_STEP_LEFT, -1)
+    Event(54, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(55, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(63, VIS_EVENT_STEP_RIGHT, -1)
+    Event(63, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(64, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(74, VIS_EVENT_STEP_LEFT, -1)
+    Event(74, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+SeqTrack("m_npc_run_start_180l","m_npc_run_start_180l.anm2", 5 , 69 , 33 , 1, 0.3 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(8, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(12, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(13, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(17, VIS_EVENT_STEP_RIGHT, -1)
+    Event(17, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(19, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(29, VIS_EVENT_STEP_LEFT, -1)
+    Event(29, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(30, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(34, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(43, VIS_EVENT_STOPANIM, -1)
+    Event(43, VIS_EVENT_STEP_RIGHT, -1)
+    Event(43, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(45, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(53, VIS_EVENT_STEP_LEFT, -1)
+    Event(53, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(55, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(64, VIS_EVENT_STEP_RIGHT, -1)
+    Event(64, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+
+SeqTrack("m_npc_run_stop_front","m_npc_run_stop_front.anm2", 0 , 118 , 29 , 1, 0.55 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(1, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(10, VIS_EVENT_STEP_RIGHT, -1)
+    Event(10, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(12, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(20, VIS_EVENT_STEP_LEFT, -1)
+    Event(20, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(21, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(32, VIS_EVENT_STEP_RIGHT, -1)
+    Event(32, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(33, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(34, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(42, VIS_EVENT_STEP_LEFT, -1)
+    Event(44, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(47, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(52, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(56, VIS_EVENT_STEP_RIGHT, -1)
+    Event(57, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(62, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(62, EVENT_FINAL_ROTATION, -1)
+    Event(62, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(66, VIS_EVENT_STOPANIM, -1)
+    Event(68, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(69, VIS_EVENT_STEP_LEFT, -1)
+    Event(74, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(87, VIS_EVENT_STEP_RIGHT, -1)
+    Event(94, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+
+
+SeqTrack("m_npc_run_stop_90l","m_npc_run_stop_90l.anm2", 0 , 137 , 32 , 1, 0.55 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(1, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(9, VIS_EVENT_STEP_LEFT, -1)
+    Event(9, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(11, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(20, VIS_EVENT_STEP_RIGHT, -1)
+    Event(20, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(23, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(32, VIS_EVENT_STEP_LEFT, -1)
+    Event(32, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(33, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(45, VIS_EVENT_STEP_RIGHT, -1)
+    Event(45, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(47, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(58, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(58, VIS_EVENT_STEP_LEFT, -1)
+    Event(58, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(58, EVENT_FINAL_ROTATION, -1)
+    Event(58, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(65, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(79, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(82, VIS_EVENT_STEP_RIGHT, -1)
+    Event(82, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(89, EVENT_FINAL_ROTATION_2, -1)
+    Event(89, VIS_EVENT_STOPANIM, -1)
+    Event(96, VIS_EVENT_STEP_LEFT, -1)
+    Event(96, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+SeqTrack("m_npc_run_stop_90r","m_npc_run_stop_90r.anm2", 0 , 137 , 32 , 1, 0.55 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(1, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(10, VIS_EVENT_STEP_RIGHT, -1)
+    Event(10, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(12, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(20, VIS_EVENT_STEP_LEFT, -1)
+    Event(20, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(21, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(32, VIS_EVENT_STEP_RIGHT, -1)
+    Event(32, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(33, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(44, VIS_EVENT_STEP_LEFT, -1)
+    Event(44, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(48, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(49, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(49, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(49, EVENT_FINAL_ROTATION, -1)
+    Event(58, VIS_EVENT_STEP_RIGHT, -1)
+    Event(58, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(65, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(78, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(80, VIS_EVENT_STEP_LEFT, -1)
+    Event(80, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(89, EVENT_FINAL_ROTATION_2, -1)
+    Event(89, VIS_EVENT_STOPANIM, -1)
+    Event(96, VIS_EVENT_STEP_RIGHT, -1)
+    Event(96, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(98, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(110, VIS_EVENT_STEP_LEFT, -1)
+    Event(110, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+SeqTrack("m_npc_run_stop_180r","m_npc_run_stop_180r.anm2", 0 , 104 , 31 , 1, 0.55 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(1, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(10, VIS_EVENT_STEP_RIGHT, -1)
+    Event(10, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(11, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(21, VIS_EVENT_STEP_LEFT, -1)
+    Event(21, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(22, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(24, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(24, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(24, EVENT_FINAL_ROTATION, -1)
+    Event(32, VIS_EVENT_STEP_RIGHT, -1)
+    Event(32, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(34, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(46, VIS_EVENT_STEP_LEFT, -1)
+    Event(46, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(53, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(59, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(62, VIS_EVENT_STEP_RIGHT, -1)
+    Event(62, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(65, EVENT_FINAL_ROTATION_2, -1)
+    Event(65, VIS_EVENT_STOPANIM, -1)
+    Event(69, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(70, VIS_EVENT_STEP_LEFT, -1)
+    Event(73, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(94, VIS_EVENT_STEP_RIGHT, -1)
+    Event(94, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+
+SeqTrack("m_npc_run_stop_180l","m_npc_run_stop_180l.anm2", 0 , 114 , 31 , 1, 0.55 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(1, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(10, VIS_EVENT_STEP_RIGHT, -1)
+    Event(10, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(11, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(20, VIS_EVENT_STEP_LEFT, -1)
+    Event(20, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(22, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(30, VIS_EVENT_STEP_RIGHT, -1)
+    Event(31, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(31, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(31, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(31, EVENT_FINAL_ROTATION, -1)
+    Event(32, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(41, VIS_EVENT_STEP_LEFT, -1)
+    Event(42, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(44, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(53, VIS_EVENT_STEP_LEFT, -1)
+    Event(53, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(53, VIS_EVENT_STEP_RIGHT, -1)
+    Event(54, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(55, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(65, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(66, VIS_EVENT_STEP_LEFT, -1)
+    Event(67, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(69, EVENT_FINAL_ROTATION_2, -1)
+    Event(69, VIS_EVENT_STOPANIM, -1)
+    Event(71, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(79, VIS_EVENT_STEP_RIGHT, -1)
+    Event(90, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+
+/////////
+
+SeqTrack("M_NPC_Unarmed_Stand_Turn_180_L", 		    "M_TPP_Unarmed_Stand_Turn_180_L.anm2"	, 0, 40, 30, 1, 0.4)
+{
+	Event(0, VIS_EVENT_LEFT_FEET_FORWARD, -1)
+}
+SeqTrack("M_NPC_Unarmed_Stand_Turn_180_R", 		    "M_TPP_Unarmed_Stand_Turn_180_R.anm2"	, 0, 60, 30, 1, 0.4)
+{
+	Event(0, VIS_EVENT_LEFT_FEET_FORWARD, -1)
+}
+SeqTrack("M_NPC_Unarmed_Stand_Turn_90_R", 		    "M_TPP_Unarmed_Stand_Turn_90_R.anm2"		, 0, 45, 30, 1, 0.4)
+{
+    Event(0, VIS_EVENT_LEFT_FEET_FORWARD, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(8, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(19, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(20, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(35, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+SeqTrack("M_NPC_Unarmed_Stand_Turn_90_L", 		    "M_TPP_Unarmed_Stand_Turn_90_L.anm2"		, 0, 50, 30, 1, 0.4)
+{
+    Event(0, VIS_EVENT_LEFT_FEET_FORWARD, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(10, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(24, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(24, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(36, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+SeqTrack("M_NPC_Unarmed_Stand_Turn_45_R", 		    "M_TPP_Unarmed_Stand_Turn_45_R.anm2"		, 0, 40, 30, 1, 0.4)
+{
+    Event(0, VIS_EVENT_LEFT_FEET_FORWARD, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(9, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(19, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(21, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(30, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+SeqTrack("M_NPC_Unarmed_Stand_Turn_45_L", 		    "M_TPP_Unarmed_Stand_Turn_45_L.anm2"		, 0, 40, 30, 1, 0.4)
+{
+    Event(0, VIS_EVENT_LEFT_FEET_FORWARD, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(3, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(17, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(18, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(29, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+
+// mirrory obrotow
+
+SeqTrack( "M_npc_Unarmed_Stand_Turn_180r_RLeg",	"M_npc_Unarmed_Stand_Turn_180r_RLeg.anm2",	0, 40, 30, 1, 0.4)
+{
+	Event(0, VIS_EVENT_RIGHT_FEET_FORWARD, -1)
+}
+SeqTrack( "M_npc_Unarmed_Stand_Turn_180l_RLeg",	"M_npc_Unarmed_Stand_Turn_180l_RLeg.anm2",	0, 60, 30, 1, 0.4)
+{
+	Event(0, VIS_EVENT_RIGHT_FEET_FORWARD, -1)
+}
+SeqTrack( "M_npc_Unarmed_Stand_Turn_90r_RLeg",	"M_npc_Unarmed_Stand_Turn_90r_RLeg.anm2",	0, 50, 30, 1, 0.4)
+{
+	Event(0, VIS_EVENT_RIGHT_FEET_FORWARD, -1)
+}
+SeqTrack( "M_npc_Unarmed_Stand_Turn_90l_RLeg",	"M_npc_Unarmed_Stand_Turn_90l_RLeg.anm2",	0, 45, 30, 1, 0.4)
+{
+	Event(0, VIS_EVENT_RIGHT_FEET_FORWARD, -1)
+}
+SeqTrack( "M_npc_Unarmed_Stand_Turn_45r_RLeg",	"M_npc_Unarmed_Stand_Turn_45r_RLeg.anm2",	0, 40, 30, 1, 0.4)
+{
+	Event(0, VIS_EVENT_RIGHT_FEET_FORWARD, -1)
+}
+SeqTrack( "M_npc_Unarmed_Stand_Turn_45l_RLeg",	"M_npc_Unarmed_Stand_Turn_45l_RLeg.anm2",	0, 40, 30, 1, 0.4)
+{
+	Event(0, VIS_EVENT_RIGHT_FEET_FORWARD, -1)
+}
+
+
+// atak
+
+SeqTrack("NPC_Unarmed_Melee_Attack_DLR", 			"M_TPP_Unarmed_Melee_Attack_DLR.anm2"		, 0, 35, 30, 1, 0.3)
+{
+	Event(17, EVENT_APPLY_DAMAGE_RIGHT, -1)
+}
+SeqTrack("NPC_Unarmed_Melee_Attack_DRL", 			"M_TPP_Unarmed_Melee_Attack_DRL.anm2"		, 0, 37, 30, 1, 0.3)
+{
+	Event(17, EVENT_APPLY_DAMAGE_LEFT, -1)
+}
+SeqTrack("NPC_Unarmed_Melee_Attack_LDR", 			"M_TPP_Unarmed_Melee_Attack_LDR.anm2"		, 0, 33, 30, 1, 0.3)
+{
+	Event(13, EVENT_APPLY_DAMAGE_DOWN, -1)
+}
+SeqTrack("NPC_Unarmed_Melee_Attack_LR", 			"M_TPP_Unarmed_Melee_Attack_LR.anm2"		, 0, 32, 30, 1, 0.3)
+{
+	Event(15, EVENT_APPLY_DAMAGE_RIGHT, -1)
+}
+SeqTrack("NPC_Unarmed_Melee_Attack_RDL", 			"M_TPP_Unarmed_Melee_Attack_RDL.anm2"		, 0, 35, 30, 1, 0.3)
+{
+	Event(14, EVENT_APPLY_DAMAGE_DOWN, -1)
+}
+SeqTrack("NPC_Unarmed_Melee_Attack_RL", 			"M_TPP_Unarmed_Melee_Attack_RL.anm2"		, 0, 32, 30, 1, 0.3)
+{
+	Event(14, EVENT_APPLY_DAMAGE_LEFT, -1)
+}
+
+SeqTrack("NPC_Unarmed_Melee_Attack_Push", 			"mzi_upset_run_hit_push_01.anm2"		, 54, 92, 30, 1, 0.3)
+{
+	Event(10, EVENT_APPLY_DAMAGE_FORWARD, -1)
+}
+
+SeqTrack("M_NPC_Unarmed_Finisher_Stomp1C", 				"M_TPP_Unarmed_Finisher_Stomp1C.anm2", 		    32, 130, 30, 1, 0.3)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1 )
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1 )
+    Event(4, VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event(2, VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+    Event(7, VIS_EVENT_RIGHT_FOOT_LIFT, -1 )
+    Event(14, VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event(16, VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+    Event(27, VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event(28, EVENT_FINISHER_LAYING_STOMP, -1)
+    Event(37, VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+    Event(43, VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event(44, EVENT_FINISHER_LAYING_KILL, -1)
+    Event(47, VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+    Event(57, VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event(80, VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+    Event(81, VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+}
+
+SeqTrack("m_npc_unarmed_kick", 				"M_TPP_Unarmed_Finisher_Stomp1C.anm2", 		    62, 81, 25, 1, 0.3)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1 )
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1 )
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1 )
+ 	Event(0, EVENT_TRACK_DISABLE, -1)
+    Event(5, VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+    Event(14, VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event(15, EVENT_APPLY_DAMAGE_DOWN, -1)
+    Event(17, VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+	Event(19, EVENT_TRACK_ENABLE, -1)
+}
+
+// gryzienie
+SeqTrack("NPC_Unarmed_GrabNew_Begin0", 		        "M_FPP_Unarmed_GrabNew04.anm2"	        , 65, 115, 30, 1, 0.0)
+SeqTrack("NPC_Unarmed_GrabNew_Loop0", 		        "M_FPP_Unarmed_GrabNew04.anm2"	        , 115, 301, 30, 1, 0.0)
+{
+    Event(45, VIS_EVENT_GRAB_SPLAT_LEFT, -1)
+    Event(65, VIS_EVENT_GRAB_SPLAT_CENTER, -1)
+    Event(75, VIS_EVENT_GRAB_SPLAT_RIGHT, -1)
+    
+    Event(140, VIS_EVENT_GRAB_SPLAT_RIGHT, -1)
+    Event(148, VIS_EVENT_GRAB_SPLAT_CENTER, -1)
+    Event(156, VIS_EVENT_GRAB_SPLAT_LEFT, -1)
+}
+SeqTrack("NPC_Unarmed_GrabNew_FinishWins0", 		    "M_FPP_Unarmed_GrabNew04.anm2"		    , 301, 394, 30, 1, 0.0)
+{
+    Event(20, EVENT_GRAB_RELEASE, -1)
+}
+
+SeqTrack("NPC_Unarmed_GrabNew_Begin1",		"M_FPP_Unarmed_Player_ZombieGrab.anm2",		 5, 27, 30, 1, 0.2) //R
+SeqTrack("NPC_Unarmed_GrabNew_Loop1", 		"M_FPP_Unarmed_Player_ZombieGrab.anm2",		 27, 77, 30, 1, 0.0) //R
+SeqTrack("NPC_Unarmed_GrabNew_Punch1_1", 		"M_FPP_Unarmed_Player_ZombieGrab.anm2",		 77, 140, 30, 1, 0.1) //R
+SeqTrack("NPC_Unarmed_GrabNew_FinishWins1", 	"M_FPP_Unarmed_Player_ZombieGrab.anm2",		 145, 197, 30, 1, 0.1)
+
+SeqTrack("NPC_Unarmed_GrabNew_Begin2", 		        "M_FPP_Unarmed_Grab_03.anm2"	        , 0, 110, 30, 1, 0.0)
+SeqTrack("NPC_Unarmed_GrabNew_Loop2", 		        "M_FPP_Unarmed_Grab_03.anm2"	        , 110, 190, 30, 1, 0.0)
+SeqTrack("NPC_Unarmed_GrabNew_Punch1", 		        "M_FPP_Unarmed_Grab_03.anm2"	        , 190, 225, 30, 1, 0.5)
+{
+	Event(10, PUNCH_HIT, -1)
+}
+
+SeqTrack("NPC_Unarmed_GrabNew_Punch2", 		    "M_FPP_Unarmed_Grab_03_LR2Stand.anm2"		    , 0, 50, 30, 1, 0.0)
+{
+    Event(11, PUNCH_HIT, -1)
+	Event(28, PUNCH_HIT, -1)
+}
+
+SeqTrack("NPC_Unarmed_GrabNew_FinishWins2", 		    "M_FPP_Unarmed_Grab_03.anm2"		    , 226, 261, 30, 1, 0.0)
+{
+    Event(14, EVENT_GRAB_RELEASE, -1)
+}
+
+
+SeqTrack("M_NPC_Unarmed_Sprint_v01", 			    "M_TPP_Unarmed_Sprint_v01.anm2"		    , 0, 46, 30, 1, 0.2)
+{
+	Event(6, VIS_EVENT_STEP_LEFT, -1)
+	Event(14, VIS_EVENT_STEP_RIGHT, -1)
+	Event(22, VIS_EVENT_STEP_LEFT, -1)
+	Event(30, VIS_EVENT_STEP_RIGHT, -1)
+	Event(37, VIS_EVENT_STEP_LEFT, -1)
+	Event(45, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+//[nosek_20100729] SeqTrack("M_NPC_Unarmed_Sprint_R_Start_L", 		    "M_TPP_Unarmed_Sprint_R_Start_L.anm2"		, 7, 52, 30, 1, 0.3)
+//{
+//	Event(4, VIS_EVENT_STEP_RIGHT, -1)    
+//    Event(10, VIS_EVENT_ROTATION_MOD_END, -1)
+//	Event(15, VIS_EVENT_STEP_LEFT, -1)
+//	Event(24, VIS_EVENT_STEP_RIGHT, -1)
+//    Event(24, VIS_EVENT_STOPANIM, -1)
+//	Event(33, VIS_EVENT_STEP_LEFT, -1)
+//	Event(43, VIS_EVENT_STEP_RIGHT, -1)
+//}
+
+//[nosek_20100729] SeqTrack("M_NPC_Unarmed_Sprint_R_Start_R", 		    "M_TPP_Unarmed_Sprint_R_Start_R.anm2"		, 6, 50, 30, 1, 0.3)
+//{
+//	Event(5, VIS_EVENT_STEP_LEFT, -1)
+//	Event(13, VIS_EVENT_STEP_RIGHT, -1)
+//    Event(15, VIS_EVENT_ROTATION_MOD_END, -1)
+//	Event(24, VIS_EVENT_STEP_LEFT, -1)
+//    Event(24, VIS_EVENT_STOPANIM, -1)
+//	Event(34, VIS_EVENT_STEP_RIGHT, -1)
+//	Event(43, VIS_EVENT_STEP_LEFT, -1)
+//}
+
+//[nosek_20100729] SeqTrack("M_NPC_Unarmed_Sprint_R_Start_B", 		    "M_TPP_Unarmed_Sprint_R_Start_B.anm2"		, 7, 57, 30, 1, 0.3)
+//{
+//	Event(11, VIS_EVENT_STEP_RIGHT, -1)
+//    Event(18, VIS_EVENT_ROTATION_MOD_END, -1)
+//	Event(19, VIS_EVENT_STEP_LEFT, -1)
+//	Event(30, VIS_EVENT_STEP_RIGHT, -1)
+//    Event(30, VIS_EVENT_STOPANIM, -1)
+//	Event(38, VIS_EVENT_STEP_LEFT, -1)
+//	Event(48, VIS_EVENT_STEP_RIGHT, -1)
+//}
+
+//[nosek_20100729] SeqTrack("M_NPC_Unarmed_Sprint_R_Start_F", 		    "M_TPP_Unarmed_Sprint_R_Start_F.anm2"		, 4, 45, 30, 1, 0.3)
+//{
+//    Event(16, VIS_EVENT_ROTATION_MOD_END, -1)
+//	Event(19, VIS_EVENT_STEP_LEFT, -1)
+//    Event(19, VIS_EVENT_STOPANIM, -1)
+//	Event(30, VIS_EVENT_STEP_RIGHT, -1)
+//	Event(40, VIS_EVENT_STEP_LEFT, -1)
+//}
+
+SeqTrack("M_NPC_Unarmed_Sprint_Start_R", 		    "M_TPP_Unarmed_Sprint_Start_R.anm2"		, 7, 52, 30, 1, 0.3)
+{
+	Event(4, VIS_EVENT_STEP_LEFT, -1)
+    Event(15, VIS_EVENT_ROTATION_MOD_END, -1)
+	Event(15, VIS_EVENT_STEP_RIGHT, -1)
+	Event(24, VIS_EVENT_STEP_LEFT, -1)
+    Event(24, VIS_EVENT_STOPANIM, -1)
+	Event(33, VIS_EVENT_STEP_RIGHT, -1)
+	Event(43, VIS_EVENT_STEP_LEFT, -1)
+}
+
+SeqTrack("M_NPC_Unarmed_Sprint_Start_L", 		    "M_TPP_Unarmed_Sprint_Start_L.anm2"		, 6, 50, 30, 1, 0.3)
+{
+	Event(5, VIS_EVENT_STEP_RIGHT, -1)
+	Event(13, VIS_EVENT_STEP_LEFT, -1)
+    Event(17, VIS_EVENT_ROTATION_MOD_END, -1)
+	Event(24, VIS_EVENT_STEP_RIGHT, -1)
+    Event(24, VIS_EVENT_STOPANIM, -1)
+	Event(34, VIS_EVENT_STEP_LEFT, -1)
+	Event(43, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+SeqTrack("M_NPC_Unarmed_Sprint_Start_B", 		    "M_TPP_Unarmed_Sprint_Start_B.anm2"		, 6, 57, 30, 1, 0.3)
+{
+	Event(12, VIS_EVENT_STEP_LEFT, -1)
+	Event(20, VIS_EVENT_STEP_RIGHT, -1)
+    Event(24, VIS_EVENT_ROTATION_MOD_END, -1)
+	Event(31, VIS_EVENT_STEP_LEFT, -1)
+    Event(31, VIS_EVENT_STOPANIM, -1)
+	Event(39, VIS_EVENT_STEP_RIGHT, -1)
+	Event(49, VIS_EVENT_STEP_LEFT, -1)
+}
+
+SeqTrack("M_NPC_Unarmed_Sprint_Start_F", 		    "M_TPP_Unarmed_Sprint_Start_F.anm2"		, 4, 45, 30, 1, 0.3)
+{
+    Event(12, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(13, VIS_EVENT_STEP_LEFT, -1)
+    Event(20, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(20, VIS_EVENT_STEP_RIGHT, -1)
+    Event(21, VIS_EVENT_STOPANIM, -1)
+	Event(30, VIS_EVENT_STEP_LEFT, -1)
+	Event(40, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+SeqTrack("M_NPC_Unarmed_Sprint_R_Stop_L", 		    "M_TPP_Unarmed_Sprint_R_Stop_L.anm2"		, 0, 47, 30, 1, 0.3) //55
+{
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)
+	Event(8, VIS_EVENT_STEP_LEFT, -1)
+	Event(17, VIS_EVENT_STEP_RIGHT, -1)
+    Event(23, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(23, EVENT_FINAL_ROTATION, -1)
+    Event(23, VIS_EVENT_ROTATION_MOD_END, -1)
+	Event(25, VIS_EVENT_STEP_LEFT, -1)
+	Event(33, VIS_EVENT_STEP_RIGHT, -1)
+    Event(36, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(39, EVENT_FINAL_ROTATION_2, -1)
+    Event(39, VIS_EVENT_STOPANIM, -1)
+	Event(43, VIS_EVENT_STEP_LEFT, -1)
+}
+
+SeqTrack("M_NPC_Unarmed_Sprint_R_Stop_B", 		    "M_TPP_Unarmed_Sprint_R_Stop_B.anm2"		, 0, 51, 30, 1, 0.3) //59
+{
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+	Event(8, VIS_EVENT_STEP_RIGHT, -1)
+	Event(18, VIS_EVENT_STEP_LEFT, -1)
+    Event(23, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(23, EVENT_FINAL_ROTATION, -1)
+    Event(23, VIS_EVENT_ROTATION_MOD_END, -1)
+	Event(28, VIS_EVENT_STEP_RIGHT, -1)
+	Event(39, VIS_EVENT_STEP_LEFT, -1)
+    Event(40, EVENT_FINAL_ROTATION_2, -1)
+    Event(40, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(40, VIS_EVENT_STOPANIM, -1)
+	Event(51, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+SeqTrack("M_NPC_Unarmed_Sprint_R_Stop_R", 		    "M_TPP_Unarmed_Sprint_R_Stop_R.anm2"		, 0, 52, 30, 1, 0.3) //55
+{
+	Event(9, VIS_EVENT_STEP_RIGHT, -1)
+	Event(18, VIS_EVENT_STEP_LEFT, -1)
+    Event(20, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(20, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(20, EVENT_FINAL_ROTATION, -1)
+	Event(28, VIS_EVENT_STEP_RIGHT, -1)
+	Event(38, VIS_EVENT_STEP_LEFT, -1)
+    Event(40, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(44, EVENT_FINAL_ROTATION_2, -1)
+    Event(44, VIS_EVENT_STOPANIM, -1)
+	Event(46, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+SeqTrack("M_NPC_Unarmed_Sprint_R_Stop_F", 		    "M_TPP_Unarmed_Sprint_R_Stop_F.anm2"		, 0, 37, 30, 1, 0.3) //50
+{
+	Event(9, VIS_EVENT_STEP_RIGHT, -1)
+	Event(19, VIS_EVENT_STEP_LEFT, -1)
+    Event(20, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(20, VIS_EVENT_ROTATION_MOD_START, -1)
+	Event(26, VIS_EVENT_STEP_RIGHT, -1)
+    Event(31, VIS_EVENT_STOPANIM, -1)
+	Event(35, VIS_EVENT_STEP_LEFT, -1)
+}
+
+SeqTrack("M_NPC_Unarmed_Sprint_Stop_L", 		    "M_TPP_Unarmed_Sprint_Stop_L.anm2"		, 0, 47, 30, 1, 0.3) //55
+{
+	Event(9, VIS_EVENT_STEP_LEFT, -1)
+	Event(18, VIS_EVENT_STEP_RIGHT, -1)
+    Event(21, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(21, EVENT_FINAL_ROTATION, -1)
+    Event(21, VIS_EVENT_ROTATION_MOD_END, -1)
+	Event(28, VIS_EVENT_STEP_LEFT, -1)
+	Event(38, VIS_EVENT_STEP_RIGHT, -1)
+    Event(43, EVENT_FINAL_ROTATION_2, -1)
+    Event(43, VIS_EVENT_STOPANIM, -1)
+    Event(43, EVENT_FINAL_POSITION, -1)
+    Event(43, VIS_EVENT_MOVEMENT_MOD_END, -1)
+	Event(46, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("M_NPC_Unarmed_Sprint_Stop_R", 		    "M_TPP_Unarmed_Sprint_Stop_R.anm2"		, 0, 46, 30, 1, 0.3) //55
+{
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+	Event(8, VIS_EVENT_STEP_RIGHT, -1)
+	Event(17, VIS_EVENT_STEP_LEFT, -1)
+    Event(19, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(19, EVENT_FINAL_ROTATION, -1)
+    Event(19, VIS_EVENT_ROTATION_MOD_END, -1)
+	Event(25, VIS_EVENT_STEP_RIGHT, -1)
+	Event(33, VIS_EVENT_STEP_LEFT, -1)
+    Event(36, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(42, EVENT_FINAL_ROTATION_2, -1)
+    Event(42, VIS_EVENT_STOPANIM, -1)
+	Event(43, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("M_NPC_Unarmed_Sprint_Stop_B", 		    "M_TPP_Unarmed_Sprint_Stop_B.anm2"		, 0, 51, 30, 1, 0.3) //59
+{
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)
+	Event(8, VIS_EVENT_STEP_LEFT, -1)
+	Event(18, VIS_EVENT_STEP_RIGHT, -1)
+    Event(21, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(21, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(21, EVENT_FINAL_ROTATION, -1)
+	Event(28, VIS_EVENT_STEP_LEFT, -1)
+	Event(39, VIS_EVENT_STEP_RIGHT, -1)
+    Event(45, EVENT_FINAL_ROTATION_2, -1)
+    Event(45, VIS_EVENT_STOPANIM, -1)
+    Event(45, VIS_EVENT_MOVEMENT_MOD_END, -1)
+	Event(51, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("M_NPC_Unarmed_Sprint_Stop_F", 		    "M_TPP_Unarmed_Sprint_Stop_F.anm2"		, 0, 37, 30, 1, 0.3) //50
+{
+	Event(9, VIS_EVENT_STEP_LEFT, -1)
+	Event(19, VIS_EVENT_STEP_RIGHT, -1)
+    Event(20, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(20, VIS_EVENT_ROTATION_MOD_START, -1)
+	Event(26, VIS_EVENT_STEP_LEFT, -1)
+    Event(31, VIS_EVENT_STOPANIM, -1)
+	Event(35, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+SeqTrack("M_NPC_Unarmed_Sprint_Turn_90_L", 		    "M_TPP_Unarmed_Sprint_Turn_90_L.anm2"	, 0, 63, 30, 1, 0.4)
+{
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(10, VIS_EVENT_STEP_RIGHT, -1)
+    Event(20, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(20, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(20, VIS_EVENT_STEP_LEFT, -1)
+    Event(29, VIS_EVENT_STEP_RIGHT, -1)
+    Event(29, EVENT_FINAL_POSITION, -1)
+    Event(39, VIS_EVENT_STEP_LEFT, -1)
+    Event(41, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(41, VIS_EVENT_STOPANIM, -1)
+    Event(50, VIS_EVENT_STEP_RIGHT, -1)
+    Event(61, VIS_EVENT_STEP_LEFT, -1)
+}
+
+SeqTrack("M_NPC_Unarmed_Sprint_Turn_90_R_mirror", 		    "M_TPP_Unarmed_Sprint_Turn_90_L_mirror.anm2"	, 0, 63, 30, 1, 0.4)
+{
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)
+    Event(10, VIS_EVENT_STEP_LEFT, -1)
+    Event(19, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(19, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(20, VIS_EVENT_STEP_RIGHT, -1)
+    Event(29, VIS_EVENT_STEP_LEFT, -1)
+    Event(29, EVENT_FINAL_POSITION, -1)
+    Event(39, VIS_EVENT_STEP_RIGHT, -1)
+    Event(43, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(43, VIS_EVENT_STOPANIM, -1)
+    Event(50, VIS_EVENT_STEP_LEFT, -1)
+    Event(61, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+
+SeqTrack("M_NPC_Unarmed_Sprint_Turn_180_R", 		"M_TPP_Unarmed_Sprint_Turn_180_R.anm2"	, 0, 83, 30, 1, 0.4)
+{
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)
+    Event(9, VIS_EVENT_STEP_LEFT, -1)
+    Event(20, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(20, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(20, VIS_EVENT_STEP_RIGHT, -1)
+    Event(32, VIS_EVENT_STEP_LEFT, -1)
+    Event(32, EVENT_FINAL_POSITION, -1)
+    Event(49, VIS_EVENT_STEP_RIGHT, -1)
+    Event(53, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(54, VIS_EVENT_STOPANIM, -1)
+    Event(60, VIS_EVENT_STEP_LEFT, -1)
+    Event(70, VIS_EVENT_STEP_RIGHT, -1)
+    Event(81, VIS_EVENT_STEP_LEFT, -1)
+}
+
+
+SeqTrack("M_NPC_Unarmed_Sprint_Turn_180_L_mirror", 		"M_TPP_Unarmed_Sprint_Turn_180_R_mirror.anm2"	, 0, 83, 30, 1, 0.4)
+{
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(9, VIS_EVENT_STEP_RIGHT, -1)
+    Event(20, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(20, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(20, VIS_EVENT_STEP_LEFT, -1)
+    Event(32, VIS_EVENT_STEP_RIGHT, -1)
+    Event(32, EVENT_FINAL_POSITION, -1)
+    Event(49, VIS_EVENT_STEP_LEFT, -1)
+    Event(53, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(55, VIS_EVENT_STOPANIM, -1)
+    Event(60, VIS_EVENT_STEP_RIGHT, -1)
+    Event(70, VIS_EVENT_STEP_LEFT, -1)
+    Event(81, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+SeqTrack("M_NPC_Unarmed_Sprint_Turn_90_R", 		    "M_TPP_Unarmed_Sprint_Turn_90_R.anm2"	, 0, 72, 30, 1, 0.4)
+{
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(7, VIS_EVENT_STEP_RIGHT, -1)
+    Event(17, VIS_EVENT_STEP_LEFT, -1)
+    Event(26, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(26, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(26, VIS_EVENT_STEP_RIGHT, -1)
+    Event(35, VIS_EVENT_STEP_LEFT, -1)
+    Event(35, EVENT_FINAL_POSITION, -1)
+    Event(43, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(47, VIS_EVENT_STEP_RIGHT, -1)
+    Event(51, VIS_EVENT_STOPANIM, -1)
+    Event(59, VIS_EVENT_STEP_LEFT, -1)
+    Event(70, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+
+SeqTrack("M_NPC_Unarmed_Sprint_Turn_90_L_mirror", 		    "M_TPP_Unarmed_Sprint_Turn_90_R_mirror.anm2"	, 0, 72, 30, 1, 0.4)
+{
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)
+    Event(7, VIS_EVENT_STEP_LEFT, -1)
+    Event(17, VIS_EVENT_STEP_RIGHT, -1)
+    Event(23, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(23, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(26, VIS_EVENT_STEP_LEFT, -1)
+    Event(35, VIS_EVENT_STEP_RIGHT, -1)
+    Event(35, EVENT_FINAL_POSITION, -1)
+    Event(43, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(47, VIS_EVENT_STEP_LEFT, -1)
+    Event(47, VIS_EVENT_STOPANIM, -1)
+    Event(59, VIS_EVENT_STEP_RIGHT, -1)
+    Event(70, VIS_EVENT_STEP_LEFT, -1)
+}
+
+
+SeqTrack("M_NPC_Unarmed_Sprint_Turn_180_L", 		"M_TPP_Unarmed_Sprint_Turn_180_L.anm2"	, 0, 75, 30, 1, 0.4)
+{
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(10, VIS_EVENT_STEP_RIGHT, -1)
+    Event(21, VIS_EVENT_STEP_LEFT, -1)
+    Event(27, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(27, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(31, VIS_EVENT_STEP_RIGHT, -1)
+    Event(48, VIS_EVENT_STEP_LEFT, -1)
+    Event(48, EVENT_FINAL_POSITION, -1)
+    Event(59, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(59, VIS_EVENT_STOPANIM, -1)
+    Event(64, VIS_EVENT_STEP_RIGHT, -1)
+    Event(73, VIS_EVENT_STEP_LEFT, -1)
+}
+
+
+SeqTrack("M_NPC_Unarmed_Sprint_Turn_180_R_mirror", 		"M_TPP_Unarmed_Sprint_Turn_180_L_mirror.anm2"	, 0, 75, 30, 1, 0.4)
+{
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)
+    Event(10, VIS_EVENT_STEP_LEFT, -1)
+    Event(21, VIS_EVENT_STEP_RIGHT, -1)
+    Event(27, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(27, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(31, VIS_EVENT_STEP_LEFT, -1)
+    Event(48, VIS_EVENT_STEP_RIGHT, -1)
+    Event(48, EVENT_FINAL_POSITION, -1)
+    Event(59, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(59, VIS_EVENT_STOPANIM, -1)
+    Event(64, VIS_EVENT_STEP_LEFT, -1)
+    Event(73, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+SeqTrack("npc_unarmed_punch_ready", 		    "M_FPP_Fists_All.anm2",		118, 298,  30, 1, 0.6)
+SeqTrack("npc_block", 		    				"M_FPP_Fists_All.anm2",		118, 298,  30, 1, 0.3)
+
+
+// new standup animations
+//[nosek_20100729] SeqTrack("M_NPC_unarmed_standup_W_01", 	    "M_NPC_unarmed_standup_W_01.anm2",          0, 120, 30, 1, 0.5)
+//[nosek_20100729] SeqTrack("M_NPC_unarmed_standup_W_02", 	    "M_NPC_unarmed_standup_W_02.anm2",          0, 120, 30, 1, 0.5)
+//[nosek_20100729] SeqTrack("M_NPC_unarmed_standup_W_03", 	    "M_NPC_unarmed_standup_W_03.anm2",          0, 90, 30, 1, 0.5)
+//[nosek_20100729] SeqTrack("M_NPC_unarmed_standup_W_04", 	    "M_NPC_unarmed_standup_W_04.anm2",          0, 120, 30, 1, 0.5)
+
+SeqTrack("M_NPC_unarmed_standup_M_01", 	    "M_NPC_unarmed_standup_M_01.anm2",          39, 120, 30, 1, 1.5)
+{
+	Event(0, EVENT_TRACK_DISABLE, -1)
+    Event(0, EVENT_LYING_ELLIPSOID, -1)
+    Event(0, EVENT_FALL_ON_HIT_ENABLE, -1)
+    Event(30, EVENT_STAND_UP_ELLIPSOID, -1)
+    Event(35, EVENT_STOOD_UP, -1)
+    Event(35, EVENT_FALL_ON_HIT_DISABLE, -1)
+}
+SeqTrack("M_NPC_unarmed_standup_M_02", 	    "M_NPC_unarmed_standup_M_02.anm2",          15, 81, 30, 1, 1.5)//120
+{
+	Event(0, EVENT_TRACK_DISABLE, -1)
+    Event(0, EVENT_LYING_ELLIPSOID, -1)
+    Event(0, EVENT_FALL_ON_HIT_ENABLE, -1)
+    Event(45, EVENT_STAND_UP_ELLIPSOID, -1)
+    Event(48, EVENT_STOOD_UP, -1)
+    Event(48, EVENT_FALL_ON_HIT_DISABLE, -1)
+}
+SeqTrack("M_NPC_unarmed_standup_M_03", 	    "M_NPC_unarmed_standup_M_03.anm2",          4, 68, 30, 1, 1.5)//90
+{
+	Event(0, EVENT_TRACK_DISABLE, -1)
+    Event(0, EVENT_LYING_ELLIPSOID, -1)
+    Event(0, EVENT_FALL_ON_HIT_ENABLE, -1)
+    Event(23, EVENT_STAND_UP_ELLIPSOID, -1)
+    Event(35, EVENT_STOOD_UP, -1)
+    Event(35, EVENT_FALL_ON_HIT_DISABLE, -1)
+}
+SeqTrack("M_NPC_unarmed_standup_M_04", 	    "M_NPC_unarmed_standup_M_04.anm2",          15, 78, 30, 1, 1.5)//120
+{
+	Event(0, EVENT_TRACK_DISABLE, -1)
+    Event(0, EVENT_LYING_ELLIPSOID, -1)
+    Event(0, EVENT_FALL_ON_HIT_ENABLE, -1)
+    Event(27, EVENT_STAND_UP_ELLIPSOID, -1)
+    Event(39, EVENT_STOOD_UP, -1)
+    Event(39, EVENT_FALL_ON_HIT_DISABLE, -1)
+}
+
+// Nowe Animacje dodane 06.10.2010
+SeqTrack("m_npc_unarmed_run_sudden_stop", 	    "M_NPC_Unarmed_Run_Sudden_Stop.anm2",          0, 76, 30, 1, 0.5) //107
+{
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(12, VIS_EVENT_STEP_RIGHT, -1)
+    Event(23, VIS_EVENT_STEP_LEFT, -1)
+    Event(35, VIS_EVENT_STEP_RIGHT, -1)
+    Event(36, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(39, VIS_EVENT_ROTATION_MOD_START, -1)
+	Event(45, VIS_EVENT_STEP_LEFT, -1)
+	Event(53, VIS_EVENT_STEP_RIGHT, -1)
+	Event(74, VIS_EVENT_STEP_LEFT, -1)
+}
+
+SeqTrack("m_npc_unarmed_walk_sudden_stop", 	    "M_NPC_Unarmed_Walk_Sudden_Stop.anm2",          0, 54, 30, 1, 0.2) //96
+{
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(15, VIS_EVENT_STEP_RIGHT, -1)
+    Event(28, VIS_EVENT_STEP_LEFT, -1)
+    Event(35, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(35, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(40, VIS_EVENT_STEP_RIGHT, -1)
+	Event(49, VIS_EVENT_STEP_LEFT, -1)
+	
+}
+
+SeqTrack("m_npc_unarmed_walk_sudden_turn_180_r", 	    "M_NPC_Unarmed_Walk_Sudden_Turn_180R.anm2",          0, 100, 30, 1, 0.4)
+{
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+	Event(11, VIS_EVENT_STEP_RIGHT, -1)
+    Event(23, VIS_EVENT_STEP_LEFT, -1)
+    Event(32, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(32, EVENT_FINAL_POSITION, -1)
+	Event(35, VIS_EVENT_STEP_RIGHT, -1)        
+    Event(39, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(44, VIS_EVENT_STEP_LEFT, -1)
+    //Event(43, EVENT_FINAL_POSITION, -1)
+    Event(51, VIS_EVENT_ROTATION_MOD_END, -1)    
+    Event(57, VIS_EVENT_STEP_RIGHT, -1)
+    Event(62, VIS_EVENT_STOPANIM, -1)
+	Event(71, VIS_EVENT_STEP_LEFT, -1)    
+}
+
+SeqTrack("m_npc_unarmed_walk_sudden_turn_180_l", 	    "M_NPC_Unarmed_Walk_Sudden_Turn_180L.anm2",          0, 125, 30, 1, 0.4)
+{
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+	Event(12, VIS_EVENT_STEP_RIGHT, -1)
+    Event(24, VIS_EVENT_STEP_LEFT, -1)
+	Event(38, VIS_EVENT_STEP_RIGHT, -1)
+    Event(41, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(41, EVENT_FINAL_POSITION, -1)
+    Event(54, VIS_EVENT_STEP_LEFT, -1)
+    Event(48, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(54, VIS_EVENT_STEP_RIGHT, -1)
+    //Event(56, EVENT_FINAL_POSITION, -1)
+    Event(64, VIS_EVENT_ROTATION_MOD_END, -1)    	    
+	Event(66, VIS_EVENT_STEP_LEFT, -1)
+    Event(74, VIS_EVENT_STOPANIM, -1)
+	Event(83, VIS_EVENT_STEP_RIGHT, -1)
+	Event(95, VIS_EVENT_STEP_LEFT, -1)
+}
+
+SeqTrack("m_npc_unarmed_walk_sudden_turn_90_l", 	    "M_NPC_Unarmed_Walk_Sudden_Turn_90L.anm2",          0, 74, 30, 1, 0.4)
+{
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)
+	Event(13, VIS_EVENT_STEP_LEFT, -1)
+    Event(21, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(21, EVENT_FINAL_POSITION, -1)
+	Event(28, VIS_EVENT_STEP_RIGHT, -1)    
+    Event(29, VIS_EVENT_ROTATION_MOD_START, -1)    
+    //Event(33, EVENT_FINAL_POSITION, -1)
+    Event(37, VIS_EVENT_ROTATION_MOD_END, -1)    
+	Event(41, VIS_EVENT_STEP_LEFT, -1)
+    Event(50, VIS_EVENT_STOPANIM, -1)
+	Event(56, VIS_EVENT_STEP_RIGHT, -1)
+    Event(71, VIS_EVENT_STEP_LEFT, -1)
+}
+
+SeqTrack("m_npc_unarmed_walk_sudden_turn_90_r", 	    "M_NPC_Unarmed_Walk_Sudden_Turn_90R.anm2",          0, 76, 30, 1, 0.4)
+{
+    Event(0 , VIS_EVENT_STEP_LEFT, -1)
+	Event(14, VIS_EVENT_STEP_RIGHT, -1)    
+	Event(29, VIS_EVENT_STEP_LEFT, -1)
+    Event(39, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)  
+    Event(39, EVENT_FINAL_POSITION, -1)
+	Event(44, VIS_EVENT_STEP_RIGHT, -1)    
+    Event(45, VIS_EVENT_ROTATION_MOD_START, -1)
+    //Event(52, EVENT_FINAL_POSITION, -1)
+    Event(55, VIS_EVENT_ROTATION_MOD_END, -1)    
+	Event(59, VIS_EVENT_STEP_LEFT, -1)    
+    Event(64, VIS_EVENT_STOPANIM, -1)
+	Event(75, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+SeqTrack("m_npc_unarmed_run_sudden_turn_90_l", 	    "M_NPC_Unarmed_Run_Sudden_Turn_90L.anm2",          0, 52, 30, 1, 0.4)
+{
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+	Event(9, VIS_EVENT_STEP_RIGHT, -1)    
+    Event(12, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)  
+    Event(12, EVENT_FINAL_POSITION, -1)
+    Event(17, VIS_EVENT_STEP_LEFT, -1)
+    Event(18, VIS_EVENT_ROTATION_MOD_START, -1)
+	Event(23, VIS_EVENT_STEP_RIGHT, -1)
+    Event(25, VIS_EVENT_ROTATION_MOD_END, -1)
+	Event(29, VIS_EVENT_STEP_LEFT, -1)
+    Event(30, VIS_EVENT_STOPANIM, -1)
+    Event(40, VIS_EVENT_STEP_RIGHT, -1)
+    Event(50, VIS_EVENT_STEP_LEFT, -1)
+}
+
+SeqTrack("m_npc_unarmed_run_sudden_turn_90_r", 	    "M_NPC_Unarmed_Run_Sudden_Turn_90R.anm2",          0, 57, 30, 1, 0.4)
+{
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)    
+    Event(9, VIS_EVENT_STEP_LEFT, -1)
+	Event(20, VIS_EVENT_STEP_RIGHT, -1)    
+    Event(20, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)  
+    Event(20, EVENT_FINAL_POSITION, -1)
+    Event(26, VIS_EVENT_ROTATION_MOD_START, -1)
+	Event(29, VIS_EVENT_STEP_LEFT, -1)
+    Event(33, VIS_EVENT_ROTATION_MOD_END, -1)    
+    Event(36, VIS_EVENT_STEP_RIGHT, -1)
+    Event(45, VIS_EVENT_STOPANIM, -1)
+    Event(46, VIS_EVENT_STEP_LEFT, -1)    
+    Event(56, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+SeqTrack("m_npc_unarmed_run_sudden_turn_180_l", 	    "M_NPC_Unarmed_Run_Sudden_Turn_180L.anm2",          0, 90, 30, 1, 0.4)
+{
+    Event(10, VIS_EVENT_STEP_LEFT, -1)
+	Event(21, VIS_EVENT_STEP_RIGHT, -1)    
+    Event(24, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)  
+    Event(24, EVENT_FINAL_POSITION, -1)
+    Event(30, VIS_EVENT_STEP_LEFT, -1)
+    Event(32, VIS_EVENT_ROTATION_MOD_START, -1)
+	Event(37, VIS_EVENT_STEP_RIGHT, -1)    
+	Event(46, VIS_EVENT_STEP_LEFT, -1)
+    Event(46, VIS_EVENT_ROTATION_MOD_END, -1)    
+    Event(57, VIS_EVENT_STEP_RIGHT, -1)
+    Event(60, VIS_EVENT_STOPANIM, -1)
+    Event(68, VIS_EVENT_STEP_LEFT, -1)    
+    Event(78, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+SeqTrack("m_npc_unarmed_run_sudden_turn_180_r", 	    "M_NPC_Unarmed_Run_Sudden_Turn_180R.anm2",          0, 103, 30, 1, 0.4)
+{
+	Event(0, VIS_EVENT_STEP_RIGHT, -1)
+    Event(9, VIS_EVENT_STEP_LEFT, -1)
+	Event(20, VIS_EVENT_STEP_RIGHT, -1)
+	Event(30, VIS_EVENT_STEP_LEFT, -1)
+    Event(33, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(33, EVENT_FINAL_POSITION, -1)
+    Event(40, VIS_EVENT_STEP_RIGHT, -1)
+    Event(49, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(50, VIS_EVENT_STEP_LEFT, -1)
+    Event(60, VIS_EVENT_STEP_RIGHT, -1)
+    Event(63, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(70, VIS_EVENT_STEP_LEFT, -1)
+    Event(71, VIS_EVENT_STOPANIM, -1)
+    Event(81, VIS_EVENT_STEP_RIGHT, -1)
+    Event(91, VIS_EVENT_STEP_LEFT, -1)
+}

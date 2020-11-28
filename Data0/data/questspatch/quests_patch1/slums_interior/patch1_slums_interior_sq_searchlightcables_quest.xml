@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums_interior"
+     pxsl_line="3">
+    <!-- quest SearchlightCables_Mount -parent=SearchlightCables -glued=true -=leading_portal=portal_Hub_LJ_Floor_0 -->
+        <!-- ,BLOCK _ -obj=&SearchlightCables_OBJ_MountSearchlights& -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,goto <<Go to interior>> SpawnPoint MapStart -distance=1000 -->
+                        <!-- ,debugpos SpawnPoint MapStart -->
+                <!-- path -->
+                    <!-- ,show-multi <<Show spotlights>> -->
+                        <!-- ,o PhysicalSwitchDI sq_Searchlight_place_lamp_A -->
+                        <!-- ,o PhysicalSwitchDI sq_Searchlight_place_lamp_B -->
+                        <!-- ,o PhysicalSwitchDI sq_Searchlight_place_lamp_C -->
+                        <!-- ,o PhysicalSwitchDI sq_Searchlight_place_lamp_D -->
+                        <!-- ,o HumanAI Keith -->
+                        <!--  -->
+                    <!-- ,enable _ NPCLifePlace lp_Roof_Suicider -->
+                    <!--  -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,use <<Mount searchlight>> PhysicalSwitchDI sq_Searchlight_place_lamp_A -state=on -->
+                    <!-- ,show _ ModelObject sq_Searchlight_lamp_A -->
+                    <!-- ,hide _ PhysicalSwitchDI sq_Searchlight_place_lamp_A -->
+                <!-- path -->
+                    <!-- ,use <<Mount searchlight>> PhysicalSwitchDI sq_Searchlight_place_lamp_B -state=on -->
+                    <!-- ,show _ ModelObject sq_Searchlight_lamp_B -->
+                    <!-- ,hide _ PhysicalSwitchDI sq_Searchlight_place_lamp_B -->
+                <!-- path -->
+                    <!-- ,use <<Mount searchlight>> PhysicalSwitchDI sq_Searchlight_place_lamp_C -state=on -->
+                    <!-- ,show _ ModelObject sq_Searchlight_lamp_C -->
+                    <!-- ,hide _ PhysicalSwitchDI sq_Searchlight_place_lamp_C -->
+                <!-- path -->
+                    <!-- ,use <<Mount searchlight>> PhysicalSwitchDI sq_Searchlight_place_lamp_D -state=on -->
+                    <!-- ,show _ ModelObject sq_Searchlight_lamp_D -->
+                    <!-- ,hide _ PhysicalSwitchDI sq_Searchlight_place_lamp_D -->
+            <!-- ,radio-dialog _ voice2d Player_SearchlightCables_END -->
+            <!-- ,checkpoint _ SpawnPoint MapStart -->
+    <!-- quest Suicider -parent=SearchlightCables -quest_giver=Keith -reward_set=Suicider_reward -difficulty=very_easy -->
+        <!-- ,goto <<Go near the suicider>> HumanAI Keith -distance=5 -show=false -->
+            <!-- ,debugpos SpawnPoint sp_Roof_Suicider -->
+            <!--  -->
+        <!-- ,OR _ -->
+            <!-- path -->
+                <!-- ,gather _ HumanAI Keith -distance=-10 -show=false -->
+                <!-- ,wait _ 1 -->
+                <!--  -->
+                <!-- ,move _ AINode m_Suicider_FallPlace -style=run -->
+                    <!-- ,ai HumanAI Keith -->
+                    <!-- ,start AINode m_Suicider_StartPlace -->
+                <!--  -->
+                <!-- ,hide _ HumanAI Keith -->
+            <!-- path -->
+                <!-- ,talk _ Keith Keith_SearchlightCables_01DLG -show=false -->
+                <!-- ,reward _ -->
+        <!--  -->
+            <!-- ,checkpoint _ SpawnPoint sp_Roof_Suicider    -->
+            <!-- ,semaphore _ -->
+</QuestsDefinitions>

@@ -1,0 +1,1460 @@
+// PlayerZombie anims -----------------------------------------------------------------------
+!include("events.def")
+!include("anim_actions.def")
+!include("human_vis_events.def")
+!include("vessel_vis_events.def")
+!include("game_volume_source.def")
+
+!include("M_FPP_Zombie_NM.scr")
+!include("M_FPP_Zombie_Swim.scr")
+!include("M_FPP_Zombie_KnockDown.scr")
+
+// spit attack ------------------------------------------------------------------------------
+SeqTrack("FPP_Unarmed_Spit_Prepare",    "M_FPP_Unarmed_Spitting.anm2", 0, 60,  30, 1, 0.0)
+SeqTrack("FPP_Unarmed_Spit_Loop",       "M_FPP_Unarmed_Spitting.anm2", 61, 121,  30, 1, 0.0)
+SeqTrack("FPP_Unarmed_Spit_Execute",    "M_FPP_Unarmed_Spitting.anm2", 122, 155,  30, 1, 0.0)
+
+//Open Door
+SeqTrack("Zombie_FPP_PushDoor", 				"M_FPP_Zombie_Melee_RL3.anm2",         5, 30, 30, 1, 0.15)
+{
+	Event(10, EXECUTE_TRIGGER, 1)
+}
+//////////////////////////////////////////////////////////////
+//MELEE
+//////////////////////////////////////////////////////////////
+//===================================== RIGHT-LEFT ============================================
+
+
+//SeqTrack("Zombie_FPP_Fist_Melee_Attack_RL_Begin",     "M_FPP_Zombie_Melee_RL3.anm2",      0,5,30,1,0.2)
+SeqTrack("Zombie_FPP_Fist_Melee_Attack_RL_Empty",         "M_FPP_Zombie_Melee_RL3.anm2",         5, 30, 30, 1, 0.15)
+{   
+    Event(8, MELEE_SWING_RIGHT, 1)
+    Event(2, 0, 1)
+    {
+        PlayPlayerSound6(GameVolumeSource_LoudSound, "attack_XX.wav", 1.0, 1, 2, 0.5)    
+    }   
+    Event(12, PUNCH_HIT, -1) 
+    Event(9, START_GIVE_DAMAGE, -1)
+    Event(20, END_GIVE_DAMAGE, -1)  
+}
+SeqTrack("Zombie_FPP_Fist_Melee_Attack_RL_Empty_Rest",     "M_FPP_Zombie_Melee_RL3.anm2",      30,50,30,1,0.0)
+
+SeqTrackAlias("Zombie_FPP_Fist_Melee_Attack_RL_Empty1",             "Zombie_FPP_Fist_Melee_Attack_RL_Empty")
+SeqTrackAlias("Zombie_FPP_Fist_Melee_Attack_RL_Empty1_Rest",             "Zombie_FPP_Fist_Melee_Attack_RL_Empty_Rest")
+
+SeqTrackAlias("Zombie_FPP_Fist_Melee_Attack_RL_Empty2",             "Zombie_FPP_Fist_Melee_Attack_RL_Empty")
+SeqTrackAlias("Zombie_FPP_Fist_Melee_Attack_RL_Empty2_Rest",             "Zombie_FPP_Fist_Melee_Attack_RL_Empty_Rest")
+
+SeqTrack("Zombie_FPP_Fist_Melee_Attack_RL_Hit_Middle",         "M_FPP_Zombie_Melee_Both_HitWall.anm2",         0, 20, 30, 1, 0.1)
+{   
+   // Event(4, END_GIVE_DAMAGE_RIGHT, -1)   
+   // Event(4, END_GIVE_DAMAGE_LEFT, -1)
+    Event(4, END_GIVE_DAMAGE, -1)
+}
+SeqTrack("Zombie_FPP_Fist_Melee_Attack_RL_Hit_Middle_Rest",     "M_FPP_Zombie_Melee_Both_HitWall.anm2",      20,37,30,1,0.0)
+{
+    Event(0, CAN_START_CUSTOM_IDLE,1) 
+    Event(25, END_ANIMATION, 1)
+}
+SeqTrackAlias("Zombie_FPP_Fist_Melee_Attack_RL_Hit_Middle1",             "Zombie_FPP_Fist_Melee_Attack_RL_Hit_Middle")
+SeqTrackAlias("Zombie_FPP_Fist_Melee_Attack_RL_Hit_Middle1_Rest",             "Zombie_FPP_Fist_Melee_Attack_RL_Hit_Middle_Rest")
+SeqTrackAlias("Zombie_FPP_Fist_Melee_Attack_RL_Hit_Middle2",             "Zombie_FPP_Fist_Melee_Attack_RL_Hit_Middle")
+SeqTrackAlias("Zombie_FPP_Fist_Melee_Attack_RL_Hit_Middle2_Rest",             "Zombie_FPP_Fist_Melee_Attack_RL_Hit_Middle_Rest")
+
+
+//===================================== LEFT - RIGHT ============================================
+
+//SeqTrack("Zombie_FPP_Fist_Melee_Attack_LR_Begin",             "M_FPP_Zombie_Melee_LR3.anm2",          0,5,30,1,0.2)
+
+SeqTrack("Zombie_FPP_Fist_Melee_Attack_LR_Empty",             "M_FPP_Zombie_Melee_LR3.anm2",         0, 20, 30, 1, 0.15)
+{   
+    Event(7, MELEE_SWING_RIGHT, 1)
+    Event(2, 0, 1)
+    {
+        PlayPlayerSound6(GameVolumeSource_LoudSound, "attack_XX.wav", 1.0, 1, 2, 0.5)    
+    }   
+    Event(8, PUNCH_HIT, -1) 
+    Event(8, START_GIVE_DAMAGE, -1)
+    Event(18, END_GIVE_DAMAGE, -1)  
+}
+SeqTrack("Zombie_FPP_Fist_Melee_Attack_LR_Empty_Rest",     "M_FPP_Zombie_Melee_LR3.anm2",      20,45,30,1,0.0)
+
+SeqTrackAlias("Zombie_FPP_Fist_Melee_Attack_LR_Empty1",             "Zombie_FPP_Fist_Melee_Attack_LR_Empty")
+SeqTrackAlias("Zombie_FPP_Fist_Melee_Attack_LR_Empty1_Rest",             "Zombie_FPP_Fist_Melee_Attack_LR_Empty_Rest")
+
+SeqTrackAlias("Zombie_FPP_Fist_Melee_Attack_LR_Empty2",             "Zombie_FPP_Fist_Melee_Attack_LR_Empty")
+SeqTrackAlias("Zombie_FPP_Fist_Melee_Attack_LR_Empty2_Rest",             "Zombie_FPP_Fist_Melee_Attack_LR_Empty_Rest")
+
+SeqTrackAlias("Zombie_FPP_Fist_Melee_Attack_LR_Hit_Middle",             "Zombie_FPP_Fist_Melee_Attack_RL_Hit_Middle")
+SeqTrackAlias("Zombie_FPP_Fist_Melee_Attack_LR_Hit_Middle_Rest",             "Zombie_FPP_Fist_Melee_Attack_RL_Hit_Middle_Rest")
+SeqTrackAlias("Zombie_FPP_Fist_Melee_Attack_LR_Hit_Middle1",             "Zombie_FPP_Fist_Melee_Attack_RL_Hit_Middle")
+SeqTrackAlias("Zombie_FPP_Fist_Melee_Attack_LR_Hit_Middle1_Rest",             "Zombie_FPP_Fist_Melee_Attack_RL_Hit_Middle_Rest")
+SeqTrackAlias("Zombie_FPP_Fist_Melee_Attack_LR_Hit_Middle2",             "Zombie_FPP_Fist_Melee_Attack_RL_Hit_Middle")
+SeqTrackAlias("Zombie_FPP_Fist_Melee_Attack_LR_Hit_Middle2_Rest",             "Zombie_FPP_Fist_Melee_Attack_RL_Hit_Middle_Rest")
+
+//Blends
+
+
+//====================================== Exhausted =================================================
+
+SeqTrackAlias("Zombie_FPP_Fist_Melee_Attack_ExhaustedPunch_Begin",     "Zombie_FPP_Fist_Melee_Attack_RL_Empty")
+SeqTrackAlias("Zombie_FPP_Fist_Melee_Attack_ExhaustedPunch", "Zombie_FPP_Fist_Melee_Attack_RL_Empty")
+
+SeqTrackAlias("Zombie_FPP_Fist_Melee_Attack_ExhaustedPunch_Rest", "Zombie_FPP_Fist_Melee_Attack_RL_Empty_Rest")
+SeqTrack("Zombie_FPP_Unarmed_Exhausted_Idle", "M_FPP_Unarmed_LowStamina_NoBreathing_Zombie.anm2"    , 92, 142, 10, 1, 0.4)
+
+SeqTracksBlend("Zombie_FPP_Fist_Melee_Attack_ExhaustedPunch_Rest", "Zombie_FPP_Unarmed_Exhausted_Idle", 0.0)
+
+//================================== GroundPound Abort ============================================
+SeqTrackAlias("Zombie_FPP_Fist_Melee_Attack_Ground_Pound_Abort",     "Zombie_FPP_Fist_Melee_Attack_RL_Empty")
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Vertical
+//SeqTrackAlias("Zombie_FPP_Fist_Melee_Attack_UD_Begin",             "Zombie_FPP_Fist_Melee_Attack_RL_Begin")
+SeqTrackAlias("Zombie_FPP_Fist_Melee_Attack_UD_Empty",             "Zombie_FPP_Fist_Melee_Attack_RL_Empty")
+SeqTrackAlias("Zombie_FPP_Fist_Melee_Attack_UD_Empty_Rest",     "Zombie_FPP_Fist_Melee_Attack_RL_Empty_Rest")
+
+SeqTrack("Zombie_FPP_Fist_Melee_Attack_UD_Empty1",             "M_FPP_Zombie_Melee_LR3.anm2",         0, 25, 30, 1, 0.15)
+{   
+    Event(7, MELEE_SWING_RIGHT, 1)
+    Event(2, 0, 1)
+    {
+        PlayPlayerSound6(GameVolumeSource_LoudSound, "attack_XX.wav", 1.0, 1, 2, 0.5)    
+    }   
+    Event(8, PUNCH_HIT, -1) 
+    Event(8, START_GIVE_DAMAGE, -1)
+    Event(18, END_GIVE_DAMAGE, -1)  
+}
+SeqTrack("Zombie_FPP_Fist_Melee_Attack_UD_Empty1_Rest",      "M_FPP_Zombie_Melee_LR3.anm2",      25,45,30,1,0.0)
+
+
+
+// jump attack ------------------------------------------------------------------------------
+//SeqTrack("Zombie_FPP_Fist_Melee_Attack_Ja_Begin",         "M_FPP_Zombie_Melee_LR.anm2",      0,13,30,1,0.1)
+//SeqTrack("Zombie_FPP_Fist_Melee_Attack_Ja_Empty",         "M_FPP_Zombie_Melee_LR.anm2",      13,45,30,1,0.1)
+//SeqTrack("Zombie_FPP_Fist_Melee_Attack_Jump_Miss", "  .anm2", 0, 44, 30, 1, 0.0)
+
+// idles ------------------------------------------------------------------------------------
+SeqTrack("Zombie_FPP_Unarmed_Defensive",    "M_FPP_Zombie_LightReac.anm2", 0, 30, 30, 1, 0.3)
+SeqTrack("Zombie_FPP_Fist_Vigilent",    "M_FPP_Zombie_StandIdle.anm2", 0, 120, 30, 1, 0.3)
+SeqTrack("Zombie_FPP_Unarmed_Stand",        "M_FPP_Zombie_StandIdle.anm2", 0, 120, 30, 1, 0.3)
+SeqTrack("Zombie_FPP_Fist_Stand",        "M_FPP_Zombie_StandIdle.anm2", 0, 120, 30, 1, 0.3)
+SeqTrack("Zombie_FPP_Unarmed_StandMove",        "M_FPP_Unarmed_WalkForward1_Zombie.anm2",                0, 86, 30, 1, 0.5)
+SeqTrack("Zombie_FPP_Unarmed_StandSprint",        "M_FPP_zombie_Sprint.anm2",        0, 19, 30, 1, 0.3 )
+
+// taunt ------------------------------------------------------------------------------------
+// SeqTrack("Zombie_FPP_Unarmed_Taunt",        "M_FPP_Unarmed_Taunt_Zombie.anm2", 0, 76,  30, 1, 0.3)    // not used
+// move -------------------------------------------------------------------------------------
+
+/* 
+SeqTrack("Zombie_FPP_Unarmed_WalkForward",        "M_FPP_Unarmed_WalkForward_Zombie.anm2",        0, 66, 30, 1, 0.5)
+{
+    Event(10, VIS_EVENT_STEP_RIGHT, -1)
+    Event(26, VIS_EVENT_STEP_LEFT, -1)
+    Event(42, VIS_EVENT_STEP_RIGHT, -1)
+    Event(59, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("Zombie_FPP_Unarmed_WalkRight",    "M_FPP_Unarmed_WalkRight_Zombie.anm2",            0, 76, 30, 1, 0.5)
+{
+    Event(8, VIS_EVENT_STEP_RIGHT, -1)
+    Event(29, VIS_EVENT_STEP_LEFT, -1)
+    Event(46, VIS_EVENT_STEP_RIGHT, -1)
+    Event(66, VIS_EVENT_STEP_LEFT, -1)
+}
+
+SeqTrack("Zombie_FPP_Unarmed_WalkForward",        "M_FPP_Unarmed_WalkForward1_Zombie.anm2",        0, 86, 30, 1, 0.5)
+{
+    Event(9, VIS_EVENT_STEP_RIGHT, -1)
+    Event(20, VIS_EVENT_STEP_LEFT, -1)
+    Event(29, VIS_EVENT_STEP_RIGHT, -1)
+    Event(40, VIS_EVENT_STEP_LEFT, -1)
+    Event(52, VIS_EVENT_STEP_RIGHT, -1)
+    Event(63, VIS_EVENT_STEP_LEFT, -1)
+    Event(75, VIS_EVENT_STEP_RIGHT, -1)
+    Event(85, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("Zombie_FPP_Unarmed_WalkLeft",        "M_FPP_Unarmed_WalkLeft_Zombie.anm2",            0, 121, 30, 1, 0.5)
+{
+    Event(11, VIS_EVENT_STEP_LEFT, -1)
+    Event(32, VIS_EVENT_STEP_RIGHT, -1)
+    Event(51, VIS_EVENT_STEP_LEFT, -1)
+    Event(70, VIS_EVENT_STEP_RIGHT, -1)
+    Event(91, VIS_EVENT_STEP_LEFT, -1)
+    Event(109, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack( "Zombie_FPP_Unarmed_WalkBackward",        "M_FPP_Unarmed_WalkBackward_Zombie.anm2",        0, 124, 30, 1, 0.5 )
+{
+    Event(10, VIS_EVENT_STEP_RIGHT, -1)
+    Event(34, VIS_EVENT_STEP_LEFT, -1)
+    Event(54, VIS_EVENT_STEP_RIGHT, -1)
+    Event(74, VIS_EVENT_STEP_LEFT, -1)
+    Event(92, VIS_EVENT_STEP_RIGHT, -1)
+    Event(112, VIS_EVENT_STEP_LEFT, -1)
+}
+*/
+SeqTrack("Zombie_FPP_Unarmed_WalkBackward",             "M_FPP_Unarmed_WalkBackward1_Zombie.anm2"        , 0, 33, 30, 1, 0.3)
+{
+    Event(18, VIS_EVENT_STEP_LEFT, -1)
+    Event(32, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("Zombie_FPP_Unarmed_WalkForward",                         "M_FPP_Unarmed_WalkForward1_Zombie.anm2"                 , 0, 30, 30, 1, 0.3)
+{
+    Event(9, VIS_EVENT_STEP_RIGHT, -1)
+    Event(24, VIS_EVENT_STEP_LEFT, -1)
+}
+
+
+SeqTrack("Zombie_FPP_Unarmed_WalkLeft",             "M_FPP_Unarmed_WalkLeft1_Zombie.anm2"        , 0, 22, 30, 1, 0.3)
+{
+    Event(9, VIS_EVENT_STEP_LEFT, -1)
+    Event(19, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+SeqTrack("Zombie_FPP_Unarmed_WalkRight",             "M_FPP_Unarmed_WalkRight1_Zombie.anm2"        , 0, 22, 30, 1, 0.3)
+{
+    Event(9, VIS_EVENT_STEP_RIGHT, -1)
+    Event(19, VIS_EVENT_STEP_LEFT, -1)
+}
+
+SeqTrackAlias("Zombie_FPP_Unarmed_TrotForward",        "Zombie_FPP_Unarmed_WalkForward")
+SeqTrackAlias("Zombie_FPP_Unarmed_TrotLeft",        "Zombie_FPP_Unarmed_WalkLeft")
+SeqTrackAlias( "Zombie_FPP_Unarmed_TrotBackward",        "Zombie_FPP_Unarmed_WalkBackward")
+SeqTrackAlias("Zombie_FPP_Unarmed_TrotRight",        "Zombie_FPP_Unarmed_WalkRight")
+
+////////////////
+///Turn states
+////////////////
+//SeqTrack( "Zombie_FPP_Unarmed_PelvisRotate_r",        "M_TPP_Zombie_Rotate_R.anm2",           0, 34, 30, 1, 0.2)
+//SeqTrack( "Zombie_FPP_Unarmed_PelvisRotate_l",        "M_TPP_Zombie_Rotate_L.anm2",           0, 34, 30, 1, 0.2)
+
+/////////////////
+///OLD RUNS////
+///////////////
+
+/*
+SeqTrack( "Zombie_FPP_Unarmed_RunForward",            "M_FPP_Unarmed_RunForward_Zombie.anm2",            0, 21, 30, 1, 0.5 )
+{
+    Event(9, VIS_EVENT_STEP_RIGHT, -1)
+    Event(19, VIS_EVENT_STEP_LEFT, -1)
+}
+
+
+
+SeqTrack( "Zombie_FPP_Unarmed_RunLeft",            "M_FPP_Unarmed_RunLeft_Zombie.anm2",            0, 15, 30, 1, 0.5 )
+{
+    Event(4, VIS_EVENT_STEP_LEFT, -1)
+    Event(13, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+SeqTrack( "Zombie_FPP_Unarmed_RunRight",            "M_FPP_Unarmed_RunRight_Zombie.anm2",            0, 17, 30, 1, 0.5 )
+{
+    Event(4, VIS_EVENT_STEP_LEFT, -1)
+    Event(14, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+SeqTrack( "Zombie_FPP_Unarmed_RunBackward",            "M_FPP_Unarmed_RunBackward_Zombie.anm2",        0, 26, 30, 1, 0.5 )
+{
+    Event(9, VIS_EVENT_STEP_RIGHT, -1)
+    Event(21, VIS_EVENT_STEP_LEFT, -1)
+}
+*/
+
+SeqTrack("Zombie_FPP_Unarmed_RunLeft",                     "M_FPP_Unarmed_RunLeft_Zombie.anm2"                , 0, 100, 30, 1, 0.3)
+{
+    Event(7, VIS_EVENT_STEP_RIGHT, -1)
+    Event(18, VIS_EVENT_STEP_LEFT, -1)
+    Event(27, VIS_EVENT_STEP_RIGHT, -1)
+    Event(38, VIS_EVENT_STEP_LEFT, -1)
+    Event(47, VIS_EVENT_STEP_RIGHT, -1)
+    Event(58, VIS_EVENT_STEP_LEFT, -1)
+    Event(67, VIS_EVENT_STEP_RIGHT, -1)
+    Event(78, VIS_EVENT_STEP_LEFT, -1)
+    Event(87, VIS_EVENT_STEP_RIGHT, -1)
+    Event(98, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("Zombie_FPP_Unarmed_RunRight",                     "M_FPP_Unarmed_RunRight_Zombie.anm2"                , 0, 105, 30, 1, 0.3)
+{
+    Event(7, VIS_EVENT_STEP_RIGHT, -1)
+    Event(17, VIS_EVENT_STEP_LEFT, -1)
+    Event(28, VIS_EVENT_STEP_RIGHT, -1)
+    Event(38, VIS_EVENT_STEP_LEFT, -1)
+    Event(49, VIS_EVENT_STEP_RIGHT, -1)
+    Event(59, VIS_EVENT_STEP_LEFT, -1)
+    Event(70, VIS_EVENT_STEP_RIGHT, -1)
+    Event(80, VIS_EVENT_STEP_LEFT, -1)
+    Event(91, VIS_EVENT_STEP_RIGHT, -1)
+    Event(101, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("Zombie_FPP_Unarmed_RunForward",                     "M_FPP_Unarmed_RunForward_Zombie.anm2",            0, 78, 30, 1, 0.5 )
+{
+    Event(9, VIS_EVENT_STEP_LEFT, -1)
+    Event(19, VIS_EVENT_STEP_RIGHT, -1)
+    Event(28, VIS_EVENT_STEP_LEFT, -1)
+    Event(38, VIS_EVENT_STEP_RIGHT, -1)
+    Event(48, VIS_EVENT_STEP_LEFT, -1)
+    Event(58, VIS_EVENT_STEP_RIGHT, -1)
+    Event(67, VIS_EVENT_STEP_LEFT, -1)
+    Event(77, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("Zombie_FPP_Unarmed_RunBackward",                     "M_FPP_Unarmed_RunBackward_Zombie.anm2"                , 0, 112, 30, 1, 0.3)
+{
+    Event(8, VIS_EVENT_STEP_RIGHT, -1)
+    Event(19, VIS_EVENT_STEP_LEFT, -1)
+    Event(30, VIS_EVENT_STEP_RIGHT, -1)
+    Event(41, VIS_EVENT_STEP_LEFT, -1)
+    Event(53, VIS_EVENT_STEP_RIGHT, -1)
+    Event(63, VIS_EVENT_STEP_LEFT, -1)
+    Event(76, VIS_EVENT_STEP_RIGHT, -1)
+    Event(86, VIS_EVENT_STEP_LEFT, -1)
+    Event(98, VIS_EVENT_STEP_RIGHT, -1)
+    Event(109, VIS_EVENT_STEP_LEFT, -1)
+}
+
+
+SeqTrack("Zombie_FPP_Unarmed_SprintForward",        "M_FPP_zombie_Sprint.anm2",        0, 19, 30, 1, 0.3 )
+{
+    Event(6, VIS_EVENT_STEP_LEFT, -1)
+    Event(12, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+SeqTracksBlend("Zombie_FPP_Unarmed_SprintForward", "Zombie_FPP_Unarmed_Jump_Begin", 0.2)
+SeqTracksBlend("Zombie_FPP_Unarmed_SprintForward", "Zombie_FPP_Unarmed_Jump1_Begin", 0.2)
+
+// noise ------------------------------------------------------------------------------------
+//SeqTrack("Zombie_FPP_Unarmed_SprintNoise",                "M_FPP_zombie_Sprint.anm2",              0, 19, 30, 1, 0.3) 
+
+SeqTrack("Zombie_FPP_Unarmed_MoveNoise",            "M_FPP_zombie_MoveNoise.anm2",                0, 60, 30, 1, 0.5)
+
+////////////////////////////////////////////////////////////
+//Rope Locomotion
+////////////////////////////////////////////////////////////
+SeqTrack("FPP_Zombie_RopeLoco_Attaching_L",         "M_FPP_zombie_ropeloco_L.anm2",         0, 8, 25, 1, 0.2)
+{
+    Event(2, 0, 1)
+    {
+        PlayPlayerSound5(GameVolumeSource_LoudSound, "rope_left.wav", 1.0, 0, 2)
+        PlayPlayerSound7(GameVolumeSource_Speech, "attack_XX.wav", 1.0, 0, 1, 1.0, 1.0)
+    }
+    Event(4, ROPE_LOCOMOTION_ATTACH, 1)
+}
+SeqTrack("FPP_Zombie_RopeLoco_Attaching_R",         "M_FPP_zombie_ropeloco_R.anm2",         0, 8, 25, 1, 0.2)
+{
+    Event(2, 0, 1)
+    {
+        PlayPlayerSound5(GameVolumeSource_LoudSound, "rope_right.wav", 1.0, 0, 2)
+        PlayPlayerSound7(GameVolumeSource_Speech, "attack_XX.wav", 1.0, 0, 1, 1.0, 1.0)
+    }
+    Event(4, ROPE_LOCOMOTION_ATTACH, 1)
+}
+SeqTrack("FPP_Zombie_RopeLoco_Connected_L",         "M_FPP_zombie_ropeloco_L.anm2",         8, 86, 25, 1, 0.0)
+
+SeqTrack("FPP_Zombie_RopeLoco_Connected_R",         "M_FPP_zombie_ropeloco_R.anm2",         8, 86, 25, 1, 0.0)
+
+SeqTrack("FPP_Zombie_RopeLoco_Detaching_L",         "M_FPP_zombie_ropeloco_L.anm2",         90, 160, 30, 1, 0.1)
+{
+    Event(3, ROPE_LOCOMOTION_DETACH, 0)
+    {
+        PlayPlayerSound7(GameVolumeSource_Speech, "attack_XX.wav", 1.0, 0, 1, 0.5, 1.0)
+    }    
+    Event(15, ROPE_LOCOMOTION_CAN_ATTACH, 0)
+}
+SeqTrack("FPP_Zombie_RopeLoco_Detaching_R",         "M_FPP_zombie_ropeloco_R.anm2",         90, 160, 30, 1, 0.1)
+{
+    Event(3, ROPE_LOCOMOTION_DETACH, 0)
+    {
+        PlayPlayerSound7(GameVolumeSource_Speech, "attack_XX.wav", 1.0, 0, 1, 0.5, 1.0)
+    }
+    
+    Event(15, ROPE_LOCOMOTION_CAN_ATTACH, 0)
+    
+}
+
+
+SeqTrack("FPP_Zombie_RopeLoco_Falling",                "M_FPP_zombie_JumpFly.anm2"              , 10, 130, 30, 1, 0.3)
+
+SeqTrack("FPP_Zombie_RopeLoco_Attaching_R_Low",             "M_FPP_zombie_ropeloco_both.anm2",         0, 8, 30, 1, 0.2)
+{
+    Event(2, 0, 1)
+    {
+        PlayPlayerSound5(GameVolumeSource_LoudSound, "rope_right.wav", 1.0, 0, 2)
+        PlayPlayerSound7(GameVolumeSource_Speech, "attack_XX.wav", 1.0, 0, 1, 1.0, 1.0)
+    }
+    Event(4, ROPE_LOCOMOTION_ATTACH, 1)
+}
+SeqTrack("FPP_Zombie_RopeLoco_Connected_R_Low",        "M_FPP_zombie_ropeloco_both.anm2",         8, 86, 25, 1, 0.0)
+
+SeqTrack("FPP_Zombie_RopeLoco_Detaching_R_Low",       "M_FPP_zombie_ropeloco_both.anm2",         90, 160, 25, 1, 0.3)
+{
+    Event(5, ROPE_LOCOMOTION_DETACH, 0)
+    {
+        PlayPlayerSound7(GameVolumeSource_Speech, "attack_XX.wav", 1.0, 0, 1, 1.0, 1.0)
+    }
+    Event(15, ROPE_LOCOMOTION_CAN_ATTACH, 0)
+}
+
+SeqTrackAlias("FPP_Zombie_RopeLoco_Attaching_L_Low",        "FPP_Zombie_RopeLoco_Attaching_R_Low")
+SeqTrackAlias("FPP_Zombie_RopeLoco_Connected_L_Low",        "FPP_Zombie_RopeLoco_Connected_R_Low")
+SeqTrackAlias("FPP_Zombie_RopeLoco_Detaching_L_Low",        "FPP_Zombie_RopeLoco_Detaching_R_Low")
+
+SeqTrackAlias("FPP_Zombie_RopeLoco_Attaching_LR_Low",        "FPP_Zombie_RopeLoco_Attaching_R_Low")
+SeqTrackAlias("FPP_Zombie_RopeLoco_Connected_LR_Low",        "FPP_Zombie_RopeLoco_Connected_R_Low")
+SeqTrackAlias("FPP_Zombie_RopeLoco_Detaching_LR_Low",        "FPP_Zombie_RopeLoco_Detaching_R_Low")
+
+SeqTrackAlias("FPP_Zombie_RopeLoco_Attaching_L_High",       "FPP_Zombie_RopeLoco_Attaching_R_Low")
+SeqTrackAlias("FPP_Zombie_RopeLoco_Attaching_R_High",       "FPP_Zombie_RopeLoco_Attaching_R_Low")
+SeqTrackAlias("FPP_Zombie_RopeLoco_Attaching_LR_High",       "FPP_Zombie_RopeLoco_Attaching_R_Low")
+SeqTrackAlias("FPP_Zombie_RopeLoco_Connected_L_High",       "FPP_Zombie_RopeLoco_Connected_R_Low")
+SeqTrackAlias("FPP_Zombie_RopeLoco_Connected_R_High",       "FPP_Zombie_RopeLoco_Connected_R_Low")
+SeqTrackAlias("FPP_Zombie_RopeLoco_Connected_LR_High",       "FPP_Zombie_RopeLoco_Connected_R_Low")
+SeqTrackAlias("FPP_Zombie_RopeLoco_Detaching_L_High",       "FPP_Zombie_RopeLoco_Detaching_R_Low")
+SeqTrackAlias("FPP_Zombie_RopeLoco_Detaching_R_High",       "FPP_Zombie_RopeLoco_Detaching_R_Low")
+SeqTrackAlias("FPP_Zombie_RopeLoco_Detaching_LR_High",       "FPP_Zombie_RopeLoco_Detaching_R_Low")
+
+
+
+SeqTrack("FPP_Zombie_RopeLoco_Landing_Wall_L",             "M_FPP_zombie_ropeloco_to_wall.anm2",     0, 20, 30, 1, 0.15)
+{
+    Event(0, 0, 1)
+    {
+        PlayForceFeedback("Zombie_Player_Land_Heavy", 1, 1, 1) 
+        PlayPlayerSound2(GameVolumeSource_Speech, "attack_XX.wav")
+    }
+   Event(5, ROPE_LOCOMOTION_ENABLE_GRAVITY, -1)  
+}
+SeqTrack("FPP_Zombie_RopeLoco_Landing_Wall_R",             "M_FPP_zombie_ropeloco_to_wall.anm2",       0, 20, 30, 1, 0.15)
+{
+   Event(0, 0, 1)
+    {
+        PlayForceFeedback("Zombie_Player_Land_Heavy", 1, 1, 1)
+        PlayPlayerSound2(GameVolumeSource_Speech, "attack_XX.wav")
+    }
+   Event(5, ROPE_LOCOMOTION_ENABLE_GRAVITY, -1)  
+}
+
+SeqTrack("FPP_Zombie_RopeLoco_Landing_Ground_L",           "M_FPP_zombie_ropeloco_to_ground.anm2" , 0, 30, 35, 1, 0.25)
+{
+    Event(0, 0, 1)
+    {
+        PlayForceFeedback("Zombie_Player_Land_Heavy", 1, 1, 1)
+        PlayPlayerSound2(GameVolumeSource_Speech, "attack_XX.wav")
+    }
+    Event(8, ROPE_LOCOMOTION_ENABLE_GRAVITY, -1) 
+    Event(20, END_ANIMATION, 1)
+    
+}
+SeqTrack("FPP_Zombie_RopeLoco_Landing_Ground_R",           "M_FPP_zombie_ropeloco_to_ground.anm2" , 0, 30, 35, 1, 0.25)
+{
+    Event(0, 0, 1)
+    {
+        PlayForceFeedback("Zombie_Player_Land_Heavy", 1, 1, 1)
+        PlayPlayerSound2(GameVolumeSource_Speech, "attack_XX.wav")
+    }
+    Event(8, ROPE_LOCOMOTION_ENABLE_GRAVITY, -1)
+    Event(20, END_ANIMATION, 1)    
+}
+
+SeqTracksBlend("FPP_Zombie_RopeLoco_Landing_Wall_L", "Zombie_FPP_Unarmed_Stand", 0.5)
+SeqTracksBlend("FPP_Zombie_RopeLoco_Landing_Wall_R", "Zombie_FPP_Unarmed_Stand", 0.5
+)
+
+////////////////////////////////////////////////////////////
+//PVP GRAB ANIMATIONS
+////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////
+//*****CHARGE**********
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+//Zombie Charge
+////////////////////////////////////////////////////////////
+SeqTrack("FPP_PVPCharge_Attacker_Pounce",               "M_FPP_Zombie_PVP_Charge_1_Pounce_M3.anm2",        0, 45, 30, 1, 0.1)
+{    
+    Event(0, 0, 1)
+    {
+        PlayPlayerSound5(GameVolumeSource_LoudSound, "charge_pounce.wav", -1, 0, 2)
+    }
+    MustSendEvent(3, 0, 1)
+    {        
+        ActivateSlowMo(0.6, 0.3, 0.3)
+    }
+    Event(16, PVP_GRAB_POUNCE_CAN_TACKLE, -1)    
+}
+SeqTrack("FPP_PVPCharge_Attacker_Tackle",            "M_FPP_Zombie_PVP_Charge_1.anm2",        16, 24, 30, 1, 0.0)
+{
+    MustSendEvent(0, 0, 1)
+    {
+        PlayPlayerSound5(GameVolumeSource_LoudSound, "charge_tackle.wav", -1, 0, 2)
+    }
+    MustSendEvent(7, PVP_GRAB_APPLY_TACKLE_IMPULSE_AND_RELEASE, 1)
+    MustSendEvent(7, PVP_GRAB_SLAM, 1)
+}
+SeqTrack("FPP_PVPCharge_Attacker_Release",   "M_FPP_Zombie_PVP_Charge_1.anm2",        24, 60, 30, 1, 0.0)
+{
+    MustSendEvent(0, ACTIVATE_FLY_MODE, 1)
+    Event(10, PVP_GRAB_CAN_LOOK, -1)    
+    Event(15, PVP_GRAB_CAN_MOVE, -1)
+}
+SeqTrackAlias("FPP_PVPCharge_Attacker_Release_VictimDied",       "FPP_PVPCharge_Attacker_Release")
+
+
+////////////////////////////////////////////////////////////
+//Zombie Charge Interrupt
+////////////////////////////////////////////////////////////
+SeqTrack("FPP_PVPCharge_Attacker_Pounce_Interrupt",                 "M_FPP_Zombie_PVP_Charge_Evade_M3.anm2",             0, 16, 30, 1, 0.2)
+{
+    MustSendEvent(0, 0, 1)
+    {        
+        ActivateSlowMo(0.6, 0.4, 0.1)
+    }
+    Event(16, PVP_GRAB_POUNCE_CAN_TACKLE, -1)  
+}
+SeqTrack("FPP_PVPCharge_Attacker_Tackle_Interrupt",                 "M_FPP_Zombie_PVP_Charge_Evade_M3.anm2",             16, 40, 30, 1, 0.2)
+{
+    MustSendEvent(0, ACTIVATE_FLY_MODE, 1)
+    Event(1, 0, 1)
+    {        
+        ActivateSlowMo(0.6, 0.3, 0.3)
+    }
+    Event(15, PVP_GRAB_RELEASE_VICTIM, -1)       
+    Event(15, 0, 1)   
+    {
+        PlayPlayerSound10(GameVolumeSource_LoudSound, "pain_XX.wav", 1.0, 0, 2, 1.0, 1.0, PlayerSoundPriority_Medium, 6.0, 200) 
+    }
+}
+SeqTrack("FPP_SpikesHit_ChargeInterrupt",                       "M_FPP_Zombie_Death_SpikeWall_Front_Transition.anm2",   0, 30, 30, 1, 0.3)
+
+SeqTrack("FPP_PVPCharge_Attacker_Fall_Interrupt",                   "M_FPP_Zombie_PVP_Charge_Falling.anm2",   0, 30, 30, 1, 0.3)
+SeqTrack("FPP_PVPCharge_Attacker_Land_Interrupt",                   "M_FPP_Zombie_PVP_Charge_Evade.anm2",             40, 50, 30, 1, 0.2)
+SeqTrack("FPP_PVPCharge_Attacker_Release_Interrupt",                   "M_FPP_Zombie_PVP_Charge_Evade.anm2",             50, 70, 30, 1, 0.1)
+{
+    Event(1, PVP_GRAB_CAN_LOOK, -1)    
+    Event(5, PVP_GRAB_CAN_MOVE, -1)
+}
+
+
+SeqTrack("FPP_PVPCharge_Attacker_Release_AttackerWallHit_Interrupt",             "M_FPP_Zombie_HitWall.anm2",     0, 20, 30, 1, 0.3)
+{
+    Event(10, PVP_GRAB_CAN_LOOK, -1)    
+    Event(15, PVP_GRAB_CAN_MOVE, -1)
+}
+
+
+
+////////////////////////////////////////////////////////////
+//********POUNCE************
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+//Zombie HighRage
+////////////////////////////////////////////////////////////
+
+SeqTrack("FPP_PVPHighRage_Attacker_Pounce",         "M_FPP_Zombie_Grab_Basic.anm2",        0, 50, 30, 1, 0.0)
+{
+    MustSendEvent(0, 0, 1)
+    {        
+        PlayPlayerSound7(GameVolumeSource_LoudSound, "high_rage_pounce.wav", -1, 0, 2, 1.0, 1.0)      
+        PlayForceFeedback("Zombie_Player_Land_Heavy", 1, 1, 1)
+    }
+    Event(6, 0, 1)
+    {        
+        ActivateSlowMo(0.6, 0.2, 0.4)
+    }
+    Event(6, PVP_GRAB_SHOW_ROPE_VIS, 1)
+    Event(12, PVP_GRAB_ROPE_VIS_END_ANIM, 1)
+    Event(13, PVP_GRAB_POUNCE_CAN_TACKLE, -1)
+}
+SeqTrack("FPP_PVPHighRage_Attacker_Tackle",         "M_FPP_Zombie_Grab_Basic.anm2",        51, 68, 30, 1, 0.15)
+{
+    MustSendEvent(0, 0, 1)
+    {        
+        PlayPlayerSound5(GameVolumeSource_LoudSound, "pounce_tackle.wav", -1, 0, 0)
+        PlayForceFeedback("Zombie_Player_Land_Heavy", 1, 1, 1)
+    }
+    MustSendEvent(5, PVP_GRAB_HIDE_ROPE_VIS, 1)
+    MustSendEvent(8, PVP_GRAB_APPLY_TACKLE_IMPULSE, 1)
+}
+SeqTrack("FPP_PVPHighRage_Attacker_Fall",       "M_FPP_Zombie_Grab_Basic.anm2",        68, 98, 30, 1, 0.15)
+{
+    MustSendEvent(1, 0, 1)
+    {                
+        PlayPlayerSound7(GameVolumeSource_LoudSound, "pounce_fall.wav", 0.25, 1, 0, 1.0, 2.0)
+    }
+}
+
+SeqTrack("FPP_PVPHighRage_Attacker_Land",                  "M_FPP_Zombie_Grab_Basic.anm2",        98, 186, 30, 1, 0.15)
+{    
+    MustSendEvent(1, 0, 1)
+    {        
+        PlayForceFeedback("Zombie_Player_Land_Heavy", 1, 1, 1)
+    }
+    Event(5, 0, 1)
+    {        
+        PlayPlayerSound5(GameVolumeSource_LoudSound, "high_rage_plant.wav", -1, 0, 0)      
+    }   
+    Event(58, 0, 1)
+    {
+        PlayForceFeedback("Zombie_Player_Defensive_Smoke", 1, 1, 1)
+    }    
+    Event(60, 0, 1)
+    {
+        PlayForceFeedback("Zombie_Player_Defensive_Smoke", 1, 1, 1)
+    }    
+    Event(62, 0, 1)
+    {
+        PlayForceFeedback("Zombie_Player_Defensive_Smoke", 1, 1, 1)
+    }    
+    Event(64, 0, 1)
+    {
+        PlayForceFeedback("Zombie_Player_Defensive_Smoke", 1, 1, 1)
+    }    
+    Event(44, 0, 1)
+    {
+        PlayFx("grab_player_bleeding_sequence.fx", [0, -1, 0], "r_hand", 1, [0.1, 0, 0], 0)
+    }    
+}
+
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Release",              "FPP_PVPHighRage_Attacker_Release_Slam")
+
+
+
+//--Above
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Pounce_Above",              "FPP_PVPHighRage_Attacker_Pounce_Above_Slam")
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Tackle_Above",              "FPP_PVPHighRage_Attacker_Tackle_Above_Slam")
+
+//--Below
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Pounce_Below",              "FPP_PVPHighRage_Attacker_Pounce_Below_Slam")
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Tackle_Below",              "FPP_PVPHighRage_Attacker_Tackle_Below_Slam")
+
+//Pounce SLAM 
+SeqTrack("FPP_PVPHighRage_Attacker_Pounce_Slam",         "M_FPP_Zombie_Grab_Basic.anm2",        0, 50, 30, 1, 0.0)
+{
+    MustSendEvent(0, 0, 1)
+    {        
+        PlayPlayerSound7(GameVolumeSource_LoudSound, "high_rage_pounce.wav", -1, 0, 2, 1.0, 1.0)      
+        PlayForceFeedback("Zombie_Player_Land_Heavy", 1, 1, 1)
+    }
+    Event(6, PVP_GRAB_SHOW_ROPE_VIS, 1)
+    {        
+        ActivateSlowMo(0.6, 0.2, 0.4)
+    }
+    Event(12, PVP_GRAB_ROPE_VIS_END_ANIM, 1)
+    Event(13, PVP_GRAB_POUNCE_CAN_TACKLE, -1)
+}
+SeqTrack("FPP_PVPHighRage_Attacker_Tackle_Slam",         "M_FPP_Zombie_Grab_Basic.anm2",        51, 68, 30, 1, 0.15)
+{
+    MustSendEvent(0, 0, 1)
+    {        
+        PlayPlayerSound5(GameVolumeSource_LoudSound, "pounce_tackle.wav", -1, 0, 0)
+        PlayForceFeedback("Zombie_Player_Land_Heavy", 1, 1, 1)
+    }
+    MustSendEvent(5, PVP_GRAB_HIDE_ROPE_VIS, 1)
+    MustSendEvent(8, PVP_GRAB_APPLY_TACKLE_IMPULSE, 1)
+}
+SeqTrack("FPP_PVPHighRage_Attacker_Fall_Slam",       "M_FPP_Zombie_Grab_Basic.anm2",        68, 98, 30, 1, 0.15)
+{
+    Event(1, 0, 1)
+    {                
+        PlayPlayerSound7(GameVolumeSource_LoudSound, "pounce_fall.wav", 0.25, 1, 0, 1.0, 2.0)
+    }
+}
+
+SeqTrack("FPP_PVPHighRage_Attacker_Land_Slam",                   "M_FPP_Zombie_Grab_Basic.anm2",        98, 186, 30, 1, 0.15)
+{    
+ 
+    MustSendEvent(1, PVP_GRAB_SLAM, 1)
+    Event(5, 0, 1)
+    {        
+        PlayPlayerSound5(GameVolumeSource_LoudSound, "high_rage_plant.wav", -1, 0, 0)      
+    }
+    MustSendEvent(1, 0, 1)
+    {
+        PlayForceFeedback("Zombie_Player_GroundPound", 1, 1, 1)
+    }    
+    Event(44, 0, 1)
+    {
+        PlayFx("grab_player_bleeding_sequence.fx", [0, -1, 0], "r_hand", 1, [0.1, 0, 0], 0)
+    }
+    Event(58, 0, 1)
+    {
+        PlayForceFeedback("Zombie_Player_Defensive_Smoke", 1, 1, 1)
+    }    
+    Event(60, 0, 1)
+    {
+        PlayForceFeedback("Zombie_Player_Defensive_Smoke", 1, 1, 1)
+    }    
+    Event(62, 0, 1)
+    {
+        PlayForceFeedback("Zombie_Player_Defensive_Smoke", 1, 1, 1)
+    }    
+    Event(64, 0, 1)
+    {
+        PlayForceFeedback("Zombie_Player_Defensive_Smoke", 1, 1, 1)
+    }    
+}
+SeqTrack("FPP_PVPHighRage_Attacker_Release_Slam",       "M_FPP_Zombie_Grab_Basic.anm2",        186, 198, 30, 1, 0.0)
+{
+    MustSendEvent(4, PVP_GRAB_JUMP_RELEASE, 1) 
+}
+
+SeqTrack("FPP_PVPHighRage_Attacker_Pounce_Above_Slam",   "M_FPP_Zombie_Grab_Basic_Above.anm2",        0, 50, 30, 1, 0.0)
+{
+    Event(6, PVP_GRAB_SHOW_ROPE_VIS, 1)
+    {        
+        PlayPlayerSound7(GameVolumeSource_LoudSound, "high_rage_pounce.wav", -1, 0, 2, 1.0, 1.0)      
+        PlayForceFeedback("Zombie_Player_Land_Heavy", 1, 1, 1)
+    }    
+    Event(6, 0, 1)
+    {        
+        ActivateSlowMo(0.6, 0.2, 0.4)
+    }
+    Event(12, PVP_GRAB_ROPE_VIS_END_ANIM, 1)
+    Event(13, PVP_GRAB_POUNCE_CAN_TACKLE, -1)
+}
+SeqTrack("FPP_PVPHighRage_Attacker_Tackle_Above_Slam",    "M_FPP_Zombie_Grab_Basic_Above.anm2",        51, 68, 30, 1, 0.15)
+{
+    MustSendEvent(0, PVP_GRAB_HIDE_ROPE_VIS, 1)    
+    {        
+        PlayPlayerSound5(GameVolumeSource_LoudSound, "pounce_tackle.wav", -1, 0, 0)
+        PlayForceFeedback("Zombie_Player_Land_Heavy", 1, 1, 1)
+    }
+    MustSendEvent(8, PVP_GRAB_APPLY_TACKLE_IMPULSE, 1)
+}
+SeqTrack("FPP_PVPHighRage_Attacker_Pounce_Below_Slam",   "M_FPP_Zombie_Grab_Basic_Below.anm2",        0, 50, 30, 1, 0.0)
+{
+    MustSendEvent(0, 0, 1)
+    {        
+        PlayPlayerSound7(GameVolumeSource_LoudSound, "high_rage_pounce.wav", -1, 0, 2, 1.0, 1.0)      
+        PlayForceFeedback("Zombie_Player_Land_Heavy", 1, 1, 1)
+    }
+    Event(6, PVP_GRAB_SHOW_ROPE_VIS, 1)
+    {        
+        ActivateSlowMo(0.6, 0.2, 0.4)
+    }
+    Event(12, PVP_GRAB_ROPE_VIS_END_ANIM, 1)
+    Event(13, PVP_GRAB_POUNCE_CAN_TACKLE, -1)
+}
+SeqTrack("FPP_PVPHighRage_Attacker_Tackle_Below_Slam",    "M_FPP_Zombie_Grab_Basic_Below.anm2",        51, 68, 30, 1, 0.15)
+{
+    MustSendEvent(0, PVP_GRAB_HIDE_ROPE_VIS, 1)    
+    MustSendEvent(0, 0, 1)
+    {        
+        PlayPlayerSound5(GameVolumeSource_LoudSound, "pounce_tackle.wav", -1, 0, 0)
+        PlayForceFeedback("Zombie_Player_Land_Heavy", 1, 1, 1)
+    }
+    MustSendEvent(8, PVP_GRAB_APPLY_TACKLE_IMPULSE, 1)
+}
+
+
+////////////////////////////////////////////////////////////
+//Zombie Human Leapfrog
+////////////////////////////////////////////////////////////
+SeqTrack("FPP_PVPHighRage_Attacker_Pounce_Leapfrog",               "M_FPP_Zombie_Grab_Basic_Leapfrog.anm2",        0, 50, 30, 1, 0.3)
+{
+    MustSendEvent(0, 0, 1)
+    {        
+        PlayPlayerSound7(GameVolumeSource_LoudSound, "high_rage_pounce.wav", -1, 0, 2, 1.0, 1.0)      
+        PlayForceFeedback("Zombie_Player_Defensive_Smoke", 1, 1, 1)
+    }
+    Event(6, PVP_GRAB_SHOW_ROPE_VIS, 1)
+    {        
+        ActivateSlowMo(0.6, 0.2, 0.4)
+    }
+    Event(12, PVP_GRAB_ROPE_VIS_END_ANIM, 1)
+    Event(13, PVP_GRAB_POUNCE_CAN_TACKLE, -1)
+}
+
+SeqTrack("FPP_PVPHighRage_Attacker_Tackle_Leapfrog",               "M_FPP_Zombie_Grab_Basic_Leapfrog.anm2",        51, 68, 30, 1, 0.3)
+{
+    MustSendEvent(0, PVP_GRAB_HIDE_ROPE_VIS, 1)
+    {        
+        PlayPlayerSound5(GameVolumeSource_LoudSound, "pounce_tackle.wav", -1, 0, 0)
+        PlayForceFeedback("Zombie_Player_GroundPound", 1, 1, 1)
+    }
+    MustSendEvent(8, PVP_GRAB_APPLY_TACKLE_IMPULSE, 1)
+}
+
+SeqTrack("FPP_PVPHighRage_Attacker_Fall_Leapfrog",               "M_FPP_Zombie_Grab_Basic_Leapfrog.anm2",        68, 98, 30, 1, 0.15)
+{
+    MustSendEvent(1, 0, 1)
+    {                
+        PlayPlayerSound7(GameVolumeSource_LoudSound, "pounce_fall.wav", 0.25, 1, 0, 1.0, 2.0)
+    }
+}
+
+SeqTrack("FPP_PVPHighRage_Attacker_Land_Leapfrog",                  "M_FPP_Zombie_Grab_Basic_Leapfrog.anm2",        98, 110, 30, 1, 0.15)
+{    
+    Event(10, 0, 1)
+    {
+        PlayForceFeedback("Zombie_Player_GroundPound", 1, 1, 1)
+        PlayPlayerSound7(GameVolumeSource_Speech, "attack_XX.wav", 1.0, 0, 0, 1.0, 1.0)
+    }    
+}
+
+SeqTrack("FPP_PVPHighRage_Attacker_Release_Leapfrog",              "M_FPP_Zombie_Grab_Basic_Leapfrog.anm2",        110, 112, 30, 1, 0.1)
+
+//--Above
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Pounce_Above_Leapfrog",      "FPP_PVPHighRage_Attacker_Pounce_Above")
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Tackle_Above_Leapfrog",       "FPP_PVPHighRage_Attacker_Tackle_Above")
+//--Below
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Pounce_Below_Leapfrog",      "FPP_PVPHighRage_Attacker_Pounce_Below")
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Tackle_Below_Leapfrog",      "FPP_PVPHighRage_Attacker_Tackle_Below")
+
+// Slam
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Pounce_Slam_Leapfrog",               "FPP_PVPHighRage_Attacker_Pounce_Leapfrog")
+
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Tackle_Slam_Leapfrog",               "FPP_PVPHighRage_Attacker_Tackle_Leapfrog")
+
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Fall_Slam_Leapfrog",               "FPP_PVPHighRage_Attacker_Fall_Leapfrog")
+
+SeqTrack("FPP_PVPHighRage_Attacker_Land_Slam_Leapfrog",                   "M_FPP_Zombie_Grab_Basic_Leapfrog.anm2",        98, 110, 30, 1, 0.0)
+{
+    MustSendEvent(0, PVP_GRAB_SLAM, 1)
+    {
+        PlayForceFeedback("Zombie_Player_Defensive_Smoke", 1, 1, 1)
+    }
+}
+
+
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Release_Slam_Leapfrog",              "FPP_PVPHighRage_Attacker_Release_Leapfrog")
+
+//--Above
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Pounce_Above_Slam_Leapfrog",      "FPP_PVPHighRage_Attacker_Pounce_Above_Leapfrog")
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Tackle_Above_Slam_Leapfrog",       "FPP_PVPHighRage_Attacker_Tackle_Above_Leapfrog")
+//--Below
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Pounce_Below_Slam_Leapfrog",      "FPP_PVPHighRage_Attacker_Pounce_Below_Leapfrog")
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Tackle_Below_Slam_Leapfrog",      "FPP_PVPHighRage_Attacker_Tackle_Below_Leapfrog")
+
+////////////////////////////////////////////////////////////
+//Zombie HighRage Interrupt
+////////////////////////////////////////////////////////////
+SeqTrack("FPP_PVPHighRage_Attacker_Pounce_Interrupt",                 "M_FPP_Zombie_Grab_Interrupt.anm2",             0, 40, 30, 1, 0.0)
+{
+    Event(6, 0, 1)
+    {        
+        ActivateSlowMo(0.6, 0.4, 0.1)
+    }
+    MustSendEvent(7, PVP_GRAB_HIDE_ROPE_VIS, 1)
+    Event(13, PVP_GRAB_POUNCE_CAN_TACKLE, -1)
+    MustSendEvent(0, 0, 1)
+    {
+        PlayPlayerSound5(GameVolumeSource_LoudSound, "pain_light_XX.wav", 1.0, 0, 2)    
+    }    
+}
+SeqTrack("FPP_PVPHighRage_Attacker_Tackle_Interrupt",                 "M_FPP_Zombie_Grab_Interrupt.anm2",        40, 60, 25, 1, 0.2)
+{
+    MustSendEvent(0, ACTIVATE_FLY_MODE, 1)
+    MustSendEvent(3, PVP_GRAB_RELEASE_VICTIM, -1)   
+}
+SeqTrack("FPP_SpikesHit_PounceInterrupt",                        "M_FPP_Zombie_Death_SpikeWall_Front_Transition.anm2",   0, 30, 30, 1, 0.3)
+
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Fall_Interrupt",                   "FPP_PVPCharge_Attacker_Fall_Interrupt")
+SeqTrack("FPP_PVPHighRage_Attacker_Land_Interrupt",                   "M_FPP_Zombie_Grab_Interrupt.anm2",        60, 70, 30, 1, 0.1)
+{
+    MustSendEvent(4, PVP_GRAB_CAN_LOOK, -1)    
+    MustSendEvent(6, PVP_GRAB_CAN_MOVE, -1)
+}
+SeqTrack("FPP_PVPHighRage_Attacker_Release_Interrupt",                   "M_FPP_Zombie_Grab_Interrupt.anm2",        70, 90, 30, 1, 0.0)
+{
+    MustSendEvent(0, PVP_GRAB_CAN_LOOK, -1)    
+    MustSendEvent(1, PVP_GRAB_CAN_MOVE, -1)
+}
+
+
+//--Above
+SeqTrack("FPP_PVPHighRage_Attacker_Pounce_Above_Interrupt",                 "M_FPP_Zombie_Grab_Interrupt_Above.anm2",             0, 40, 30, 1, 0.0)
+{
+    Event(6, 0, 1)
+    {        
+        ActivateSlowMo(0.6, 0.4, 0.1)
+    }
+    MustSendEvent(7, PVP_GRAB_HIDE_ROPE_VIS, 1)
+    Event(13, PVP_GRAB_POUNCE_CAN_TACKLE, -1)
+    MustSendEvent(0, 0, 1)
+    {
+        PlayPlayerSound5(GameVolumeSource_LoudSound, "pain_light_XX.wav", 1.0, 0, 2)    
+    }    
+}
+SeqTrack("FPP_PVPHighRage_Attacker_Tackle_Above_Interrupt",                 "M_FPP_Zombie_Grab_Interrupt_Above.anm2",        40, 60, 20, 1, 0.2)
+{
+    MustSendEvent(0, ACTIVATE_FLY_MODE, 1)
+    MustSendEvent(3, PVP_GRAB_RELEASE_VICTIM, -1)   
+}
+
+
+//--Below
+SeqTrack("FPP_PVPHighRage_Attacker_Pounce_Below_Interrupt",                 "M_FPP_Zombie_Grab_Interrupt_Below.anm2",             0, 40, 30, 1, 0.0)
+{
+    Event(6, 0, 1)
+    {        
+        ActivateSlowMo(0.6, 0.4, 0.1)
+    }
+    MustSendEvent(7, PVP_GRAB_HIDE_ROPE_VIS, 1)
+    Event(13, PVP_GRAB_POUNCE_CAN_TACKLE, -1)
+    MustSendEvent(0, 0, 1)
+    {
+        PlayPlayerSound5(GameVolumeSource_LoudSound, "pain_light_XX.wav", 1.0, 0, 2)    
+    }    
+}
+SeqTrack("FPP_PVPHighRage_Attacker_Tackle_Below_Interrupt",                 "M_FPP_Zombie_Grab_Interrupt_Below.anm2",        40, 60, 20, 1, 0.2)
+{
+    MustSendEvent(0, ACTIVATE_FLY_MODE, 1)
+    MustSendEvent(3, PVP_GRAB_RELEASE_VICTIM, -1)   
+}
+
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Release_AttackerWallHit_Interrupt",       "FPP_PVPCharge_Attacker_Release_AttackerWallHit_Interrupt")
+
+
+
+
+
+////////////////////////////////////////////////////////////
+//Zombie HighRage ThirdParty Interrupt
+////////////////////////////////////////////////////////////
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Pounce_ThirdParty_Interrupt",               "FPP_PVPHighRage_Attacker_Pounce_Interrupt")
+
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Tackle_ThirdParty_Interrupt",              "FPP_PVPHighRage_Attacker_Tackle_Interrupt")
+
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Fall_ThirdParty_Interrupt",                "FPP_PVPHighRage_Attacker_Fall_Interrupt")
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Land_ThirdParty_Interrupt",                "FPP_PVPHighRage_Attacker_Land_Interrupt")
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Release_ThirdParty_Interrupt",               "FPP_PVPHighRage_Attacker_Release_Interrupt")
+
+
+//--Above
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Pounce_Above_ThirdParty_Interrupt",     "FPP_PVPHighRage_Attacker_Pounce_Above_Interrupt")
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Tackle_Above_ThirdParty_Interrupt",     "FPP_PVPHighRage_Attacker_Tackle_Above_Interrupt")
+
+//--Below
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Pounce_Below_ThirdParty_Interrupt",     "FPP_PVPHighRage_Attacker_Pounce_Below_Interrupt")
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Tackle_Below_ThirdParty_Interrupt",     "FPP_PVPHighRage_Attacker_Tackle_Below_Interrupt")
+
+
+
+
+
+SeqTrackAlias("FPP_PVPHighRage_Attacker_Release_AttackerWallHit_ThirdParty_Interrupt",       "FPP_PVPCharge_Attacker_Release_AttackerWallHit_Interrupt")
+
+
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+//Human Grabs
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+
+
+////////////////////////////////////////////////////////////
+//Jump Attack
+////////////////////////////////////////////////////////////
+SeqTrack("FPP_PVPHumanJumpAttack_Victim_Pounce",      "M_FPP_Zombie_PVP_DeathFromAbove.anm2",      0, 30,  30, 1, 0.0)
+{
+    Event(0, PVP_GRAB_ORIENT_START, 1)
+
+    Event(13, PVP_GRAB_ORIENT_END, 1)
+}
+
+SeqTrack("FPP_PVPHumanJumpAttack_Victim_Tackle",      "M_FPP_Zombie_PVP_DeathFromAbove.anm2",      30, 40, 30, 1, 0.0)
+
+
+SeqTrack("FPP_PVPHumanJumpAttack_Victim_Fall",        "M_FPP_Zombie_PVP_DeathFromAbove_Fall.anm2",      0, 30, 30, 1, 0.2)
+SeqTrack("FPP_PVPHumanJumpAttack_Victim_Land",        "M_FPP_Zombie_PVP_DeathFromAbove.anm2",      40, 90, 30, 1, 0.0)
+{
+    Event(8, PVP_GRAB_APPLY_DAMAGE, 1) 
+    Event(9, 0, 1)
+    {
+        PlayFx("slomotion_gunshot_wound_sequence.fx", [0, 0, -1], "Spine1", 1, [0.0, 0.0, 0], 0)
+    }     
+    Event(24, 0, 1)
+    {        
+        ActivateSlowMo(1.3, 0.3, 0.9)
+    }    
+    Event(33, PVP_GRAB_APPLY_DAMAGE, 1)
+    Event(34, 0, 1)
+    {
+        PlayFx("slomotion_gunshot_wound_sequence.fx", [0, 0.25, -1], "Spine3", 1, [0.0, 0.0, 0.0], 0)
+    }        
+}
+SeqTrack("FPP_PVPHumanJumpAttack_Victim_Release",     "M_FPP_Zombie_PVP_DeathFromAbove.anm2",      90, 120, 30, 1, 0.0)
+
+////////////////////////////////////////////////////////////
+//WrestlingKick
+////////////////////////////////////////////////////////////
+SeqTrack("FPP_PVPWrestlingKick_Victim_Pounce",             "M_FPP_Zombie_PVP_WrestlingKick.anm2",      0, 23,  30, 1, 0.1)
+{
+    Event(1, PVP_GRAB_ORIENT_START, 1)
+    Event(5, 0, 1)
+    {        
+        ActivateSlowMo(0.4, 0.3, 0.1)
+    }
+    Event(10, PVP_GRAB_ORIENT_END, 1)    
+}
+SeqTrack("FPP_PVPWrestlingKick_Victim_Tackle",             "M_FPP_Zombie_PVP_WrestlingKick.anm2",      23, 40, 30, 1, 0.0)
+{
+    MustSendEvent(0, PVP_GRAB_APPLY_DAMAGE, 1)
+    {
+        PlayFx("sharp_hit_torso_heavy_sequence.fx", [0, 0.0, -1], "spine1", 1, [0.0, 0.0, 0.0], 0)
+    }   
+}
+SeqTrack("FPP_SpikesHit_WrestlingKick",              "M_FPP_Zombie_Death_SpikeWall_Transition.anm2",      0, 90, 30, 1, 0.1)
+
+SeqTrack("FPP_PVPWrestlingKick_Victim_Fall",               "M_FPP_Zombie_PVP_WrestlingKick.anm2",      40, 70, 30, 1, 0.0)
+SeqTrack("FPP_PVPWrestlingKick_Victim_Land",               "M_FPP_Zombie_PVP_WrestlingKick.anm2",      70, 85, 30, 1, 0.0)
+SeqTrack("FPP_PVPWrestlingKick_Victim_Release",            "M_FPP_Zombie_PVP_WrestlingKick_Getup.anm2",    0, 30, 30, 1, 0.2)
+{
+    MustSendEvent(1, PVP_GRAB_CAN_MOVE, -1)
+}
+SeqTrack("FPP_PVPWrestlingKick_Victim_Fall_VictimDied",    "M_FPP_Zombie_PVP_WrestlingKick.anm2",      40, 70, 30, 1, 0.0)
+SeqTrack("FPP_PVPWrestlingKick_Victim_Land_VictimDied",    "M_FPP_Zombie_PVP_WrestlingKick.anm2",      70, 85, 30, 1, 0.0)
+SeqTrack("FPP_PVPWrestlingKick_Victim_Release_VictimDied", "M_FPP_Zombie_PVP_WrestlingKick.anm2",      85, 100, 30, 1, 0.0)
+
+SeqTrack("FPP_PVPWrestlingKick_Victim_Release_VictimWallHit", "M_FPP_Zombie_HitWall_Death.anm2",   0, 20, 30, 1, 0.0)
+{
+    Event(10, PVP_GRAB_CAN_LOOK, -1)
+    Event(15, PVP_GRAB_CAN_MOVE, -1)
+}
+SeqTrack("FPP_PVPWrestlingKick_Victim_Release_VictimWallHit_VictimDied", "M_FPP_Zombie_HitWall_Death.anm2",   0, 80, 30, 1, 0.0)
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//***********************************************************************************************************************************************
+//END POUNCE ANIMS
+//***********************************************************************************************************************************************
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    
+    
+    
+    
+    
+    
+////////////////////////////////////////////////////////////
+//Zombie Abilities Animations
+////////////////////////////////////////////////////////////
+//       Game Name,                          Anim File Name,                start frame, end frame, fps,    blend type, blend duration
+SeqTrack("FPP_Abilites_Spit_Control_The_Horde_Charging",       "M_FPP_zombie_spit_hand_L.anm2",      0,          30,        45,     1,          0.1)
+{
+    MustSendEvent(0, 0, 1)
+    {   
+        PlayPlayerSound7(GameVolumeSource_Speech, "attack_XX.wav", 1.0, 0, 0, 1.0, 1.0)
+    }   
+}
+SeqTrack("FPP_Abilites_Spit_Control_The_Horde_Charged_Loop",   "M_FPP_zombie_spit_hand_L.anm2",      30,         60,        30,     1,          0.1)
+SeqTrack("FPP_Abilites_Spit_Control_The_Horde",                "M_FPP_zombie_spit_hand_L.anm2",      60,         75,       30,     1,          0.0)
+{ 
+    MustSendEvent(0, 0, 1)
+    {
+        PlayPlayerSound5(GameVolumeSource_LoudSound, "spit_XX.wav", 1.0, 0, 2)  
+    }
+    
+    MustSendEvent(1, ABILITIES_SPIT_SHOOT, 1)
+    {
+        PlayForceFeedback("Zombie_Player_Spit", 1, 1, 1)
+        PlayFx("cth_spit_launch_sequence.fx", [0, 1, 0], "l_hand", 1, [0.0, 0, 0], 1)
+    }   
+}
+SeqTrack("FPP_Abilites_Spit_Control_The_Horde_Recovery",                "M_FPP_zombie_spit_hand_L.anm2",      75,         120,       30,     1,          0.0)
+{ 
+    MustSendEvent(15, CAN_CANCEL, 1)
+}
+SeqTrack("FPP_Abilites_Spit_Light_Disable_Charging",       "M_FPP_zombie_spit_hand_R.anm2",      0,          30,        45,     1,          0.1)
+{
+    MustSendEvent(0, 0, 1)
+    {   
+        PlayPlayerSound7(GameVolumeSource_Speech, "attack_XX.wav", 1.0, 0, 0, 1.0, 1.0)
+    }   
+}
+SeqTrack("FPP_Abilites_Spit_Light_Disable_Charged_Loop",   "M_FPP_zombie_spit_hand_R.anm2",      30,         60,        30,     1,          0.1)
+SeqTrack("FPP_Abilites_Spit_Light_Disable",                "M_FPP_zombie_spit_hand_R.anm2",      60,         75,       30,     1,          0.0)
+{ 
+    MustSendEvent(0, 0, 1)
+    {
+        PlayPlayerSound5(GameVolumeSource_LoudSound, "spit_XX.wav", 1.0, 0, 2)  
+    }
+    MustSendEvent(1, ABILITIES_SPIT_SHOOT, 1)
+    {
+        PlayForceFeedback("Zombie_Player_Spit", 1, 1, 1)
+        PlayFx("dfl_spit_launch_sequence.fx", [0, 1, 0], "r_hand", 1, [0.0, 0, 0], 1)
+    }   
+}
+SeqTrack("FPP_Abilites_Spit_Light_Disable_Recovery",                "M_FPP_zombie_spit_hand_R.anm2",      75,         120,       30,     1,          0.0)
+{ 
+    MustSendEvent(15, CAN_CANCEL, 1)
+}
+SeqTrack("FPP_Abilites_Spit_Camo",                "M_FPP_zombie_spit_hand_R.anm2",      60,         75,       30,     1,          0.0)
+{ 
+    MustSendEvent(0, 0, 1)
+    {
+        PlayPlayerSound5(GameVolumeSource_LoudSound, "spit_XX.wav", 1.0, 0, 2)  
+    }
+    MustSendEvent(1, ABILITIES_SPIT_SHOOT, 1)
+    {
+        PlayForceFeedback("Zombie_Player_Spit", 1, 1, 1)
+        PlayFx("camo_spit_launch_sequence.fx", [0, 1, 0], "r_hand", 1, [0.0, 0, 0], 1)
+    }   
+}
+SeqTrack("FPP_Abilites_Spit_Camo_Recovery",                "M_FPP_zombie_spit_hand_R.anm2",      75,         120,       30,     1,          0.0)
+{ 
+    MustSendEvent(15, CAN_CANCEL, 1)
+}
+SeqTrack("FPP_Abilites_Spit_Toxic",                "M_FPP_zombie_spit_hand_L.anm2",      60,         75,       30,     1,          0.0)
+{ 
+    MustSendEvent(0, 0, 1)
+    {
+        PlayPlayerSound5(GameVolumeSource_LoudSound, "spit_XX.wav", 1.0, 0, 2)  
+    }
+    MustSendEvent(1, ABILITIES_SPIT_SHOOT, 1)
+    {
+        PlayForceFeedback("Zombie_Player_Spit", 1, 1, 1)
+        PlayFx("toxic_spit_launch_sequence.fx", [0, 1, 0], "l_hand", 1, [0.0, 0, 0], 1)
+    }   
+}
+SeqTrack("FPP_Abilites_Spit_Toxic_Recovery",                "M_FPP_zombie_spit_hand_L.anm2",      75,         120,       30,     1,          0.0)
+{ 
+    MustSendEvent(15, CAN_CANCEL, 1)
+}
+
+SeqTrack("FPP_Abilites_Spit_Empty",                "M_FPP_zombie_spit_hand_R_empty.anm2",      0,          15,        30,     1,          0.2)
+{ 
+    MustSendEvent(0, 0, 1)
+    {
+        PlayPlayerSound5(GameVolumeSource_LoudSound, "spit_empty_XX.wav", 1.0, 0, 2)  
+    }
+}
+
+SeqTracksBlend("FPP_Abilites_Spit_Empty", "Zombie_FPP_Unarmed_Stand", 0.2)
+SeqTracksBlend("FPP_Abilites_Spit_Empty", "Zombie_FPP_Unarmed_Jump_Loop", 0.3)
+SeqTracksBlend("FPP_Abilites_Spit_Empty", "FPP_Zombie_RopeLoco_Detaching_R_Low", 0.3)
+SeqTracksBlend("FPP_Abilites_Spit_Empty", "FPP_Zombie_RopeLoco_Detaching_R", 0.3)
+SeqTracksBlend("FPP_Abilites_Spit_Empty", "FPP_Zombie_RopeLoco_Detaching_L", 0.3)
+
+SeqTrack("FPP_Abilites_Howl",       "M_FPP_Zombie_Howl.anm2",      0,           30,        30,     1,          0.2)
+
+SeqTrack("FPP_Abilites_Charge_Begin",       "M_FPP_Zombie_PVP_Charge.anm2",   0, 1, 30, 1, 0.0)
+SeqTrack("FPP_Abilites_Charge_Hit",         "M_FPP_Zombie_PVP_Charge.anm2",   1, 2, 30, 1, 0.0)
+SeqTrack("FPP_Abilites_Charge_End",             "M_FPP_Zombie_PVP_Charge.anm2",   2, 3, 30, 1, 0.0)
+
+SeqTrack("FPP_Abilites_Defensive_Smoke",    "M_FPP_Zombie_defensivesmoke.anm2",      0,          30,        30,     1,          0.2)
+{ 
+    MustSendEvent(0, 0, 1)
+    {
+
+        PlayPlayerSound5(GameVolumeSource_LoudSound, "uv_block.wav", -1, 0, 2)   
+        PlayForceFeedback("Zombie_Player_Defensive_Smoke", 1, 1, 1)
+    }
+}
+SeqTracksBlend("FPP_Abilites_Defensive_Smoke", "Zombie_FPP_Unarmed_Stand", 0.5)
+SeqTracksBlend("FPP_Abilites_Defensive_Smoke", "Zombie_FPP_Unarmed_Jump_Loop", 0.5)
+
+SeqTrackAlias("FPP_Abilites_Defensive_Smoke_Empty",    "FPP_Abilites_Spit_Empty")
+
+SeqTrack("FPP_Abilities_UvHeal_Anticipation",        "M_FPP_Zombie_UV_Heal.anm2",   22, 43, 30, 1, 0.1)
+SeqTrack("FPP_Abilities_UvHeal_Anticipation_Loop",   "M_FPP_Zombie_UV_Heal_Air.anm2",   43, 73, 30, 1, 0.3)
+SeqTrack("FPP_Abilities_UvHeal",                     "M_FPP_Zombie_UV_Heal.anm2",   43, 60, 30, 1, 0.1)
+{ 
+    MustSendEvent(0, 0, 1)
+    {
+        PlayForceFeedback("Zombie_Player_GroundPound", 1, 1, 1)
+    }
+}
+SeqTrack("FPP_Abilities_UvHeal_Loop",                "M_FPP_Zombie_UV_Heal.anm2",   60, 90, 30, 1, 0.1)
+SeqTrack("FPP_Abilities_UvHeal_Recovery",            "M_FPP_Zombie_UV_Heal.anm2",   90, 115, 30, 1, 0.1)
+{ 
+    MustSendEvent(20, 0, 1)
+    {
+        PlayForceFeedback("Zombie_Player_Defensive_Smoke", 1, 1, 1)
+    }
+}
+
+////////////////////////////////////////////////////////////
+//GroundPound
+////////////////////////////////////////////////////////////
+SeqTrack("FPP_Abilities_Ground_Pound_Windup",               "M_FPP_Zombie_Groundpound.anm2",     15, 30, 60, 1, 0.4)
+{
+    MustSendEvent(0, 0, 1)
+    {        
+        PlayPlayerSound7(GameVolumeSource_LoudSound, "ground_pound_charge.wav", 1.0, 1, 2, 1.0, 2.0)       
+    }   
+}
+SeqTrack("FPP_Abilities_Ground_Pound_Charged",              "M_FPP_Zombie_Groundpound.anm2",     35, 45, 30, 1, 0.0)
+SeqTrack("FPP_Abilities_Ground_Pound_Charged_Loop",         "M_FPP_Zombie_Groundpound.anm2",     45, 90, 30, 1, 0.0)
+SeqTrack("FPP_Abilities_Ground_Pound_InAir_Release",        "M_FPP_Zombie_Groundpound_Air.anm2", 0, 10, 30, 1, 0.0)
+{
+    MustSendEvent(0, 0, 1)
+    {   
+        PlayPlayerSound7(GameVolumeSource_LoudSound, "ground_pound_air_release.wav", 0.25, 1, 2, 1.0, 2.0)               
+    } 
+}
+SeqTrack("FPP_Abilities_Ground_Pound_InAir_Release_Loop",   "M_FPP_Zombie_Groundpound_Air.anm2", 10, 40, 30, 1, 0.0)
+SeqTrack("FPP_Abilities_Ground_Pound_Attack",               "M_FPP_Zombie_Groundpound.anm2",     90, 92, 10, 1, 0.20)
+{
+    MustSendEvent(0, 0, 1)
+    {   
+        PlayPlayerSound7(GameVolumeSource_LoudSound, "ground_pound_hit_XX.wav", 1.0, 0, 2, 1.0, 2.0)
+        PlayPlayerSound7(GameVolumeSource_Speech, "attack_XX.wav", 1.0, 0, 0, 1.0, 1.0)
+    }   
+}
+SeqTrack("FPP_Abilities_Ground_Pound_Recover_Hit",          "M_FPP_Zombie_Groundpound.anm2",     95, 120, 40, 1, 0.0)
+{   
+    MustSendEvent(0, 0, 1)
+    {         
+       ActivateSlowMo(0.7, 0.1, 0.4)
+    }
+    MustSendEvent(0, SPECIAL_EFFECT, 1)
+    {
+        PlayForceFeedback("Zombie_Player_GroundPound", 1, 1, 1)
+    }
+    Event(5, END_ANIMATION, 1)
+}
+
+SeqTrack("FPP_Abilities_Ground_Pound_Recover_Hit_Vehicle",          "M_FPP_Zombie_Groundpound.anm2",     95, 120, 40, 1, 0.0)
+{
+    MustSendEvent(0, SPECIAL_EFFECT, 1)
+    {
+        PlayForceFeedback("Zombie_Player_GroundPound", 1, 1, 1)
+    }
+}
+
+//SeqTracksBlend("FPP_Abilities_Ground_Pound_Recover_Hit", "Zombie_FPP_Unarmed_Stand", 0.8)
+
+SeqTrack("FPP_Abilities_Ground_Pound_Recover_Miss",          "M_FPP_Zombie_Groundpound.anm2",     95, 120, 10, 1, 0.0)
+{
+    MustSendEvent(0, SPECIAL_EFFECT, 1)
+    {
+        PlayForceFeedback("Zombie_Player_GroundPound", 1, 1, 1)
+    }
+}
+
+//SeqTracksBlend("FPP_Abilities_Ground_Pound_Recover_Miss", "Zombie_FPP_Unarmed_Stand", 0.8)
+
+
+////////////////////////////////////////////////////////////
+//SpitGroundPound
+////////////////////////////////////////////////////////////
+SeqTrack("FPP_Abilities_Ground_Pound_Windup_Spit",               "M_FPP_Zombie_Groundpound.anm2",     0, 30, 30, 1, 0.2)
+{
+    MustSendEvent(0, 0, 1)
+    {        
+        PlayPlayerSound7(GameVolumeSource_LoudSound, "ground_pound_charge.wav", 1.0, 1, 2, 1.0, 2.0)       
+    }   
+}
+SeqTrack("FPP_Abilities_Ground_Pound_Charged_Spit",              "M_FPP_Zombie_Groundpound.anm2",     35, 45, 30, 1, 0.0)
+SeqTrack("FPP_Abilities_Ground_Pound_Charged_Loop_Spit",         "M_FPP_Zombie_Groundpound.anm2",     45, 90, 30, 1, 0.0)
+SeqTrack("FPP_Abilities_Ground_Pound_InAir_Release_Spit",        "M_FPP_Zombie_Groundpound_Air.anm2", 0, 10, 30, 1, 0.0)
+{
+    MustSendEvent(0, 0, 1)
+    {   
+        PlayPlayerSound7(GameVolumeSource_LoudSound, "ground_pound_air_release.wav", 0.25, 1, 2, 1.0, 2.0)               
+    } 
+}
+SeqTrack("FPP_Abilities_Ground_Pound_InAir_Release_Loop_Spit",   "M_FPP_Zombie_Groundpound_Air.anm2", 10, 40, 30, 1, 0.0)
+SeqTrack("FPP_Abilities_Ground_Pound_Attack_Spit",               "M_FPP_Zombie_Groundpound.anm2",     90, 95, 30, 1, 0.0)
+{
+    MustSendEvent(0, 0, 1)
+    {   
+        PlayPlayerSound7(GameVolumeSource_LoudSound, "ground_pound_hit_XX.wav", 1.0, 0, 2, 1.0, 2.0)
+        PlayPlayerSound7(GameVolumeSource_Speech, "attack_XX.wav", 1.0, 0, 0, 1.0, 1.0)
+    }   
+}
+SeqTrack("FPP_Abilities_Ground_Pound_Recover_Hit_Spit",          "M_FPP_Zombie_Groundpound.anm2",     95, 115, 40, 1, 0.0)
+{   
+    MustSendEvent(0, 0, 1)
+    {         
+        ActivateSlowMo(0.5, 0.4, 0.1)
+    }
+    MustSendEvent(0, SPECIAL_EFFECT, 1)
+    {
+        PlayForceFeedback("Zombie_Player_GroundPound", 1, 1, 1)
+    }
+    Event(5, PVP_GRAB_CAN_LOOK, -1)  
+    Event(10, PVP_GRAB_CAN_MOVE, -1)
+}
+
+SeqTrack("FPP_Abilities_Ground_Pound_Recover_Miss_Spit",          "M_FPP_Zombie_Groundpound.anm2",     95, 120, 15, 1, 0.0)
+{
+    MustSendEvent(0, SPECIAL_EFFECT, 1)
+    {
+        PlayForceFeedback("Zombie_Player_GroundPound", 1, 1, 1)
+    }
+}
+
+/////////////////////////////
+///Hit Reactions
+///////////////////////////// 
+SeqTrack( "Zombie_FPP_Unarmed_TakeDamageHitRight",                    "M_FPP_Zombie_Takedamage.anm2",                0, 8, 30, 1, 0.1 )
+SeqTrack( "Zombie_FPP_Unarmed_TakeDamageHitRight_Rest",            "M_FPP_Zombie_Takedamage.anm2",                8, 30, 30, 1, 0.0 )
+
+SeqTrackAlias( "Zombie_FPP_Unarmed_TakeDamageHitRight1",                    "Zombie_FPP_Unarmed_TakeDamageHitRight")
+SeqTrackAlias( "Zombie_FPP_Unarmed_TakeDamageHitRight1_Rest",            "Zombie_FPP_Unarmed_TakeDamageHitRight_Rest")
+  
+SeqTrackAlias( "Zombie_FPP_Unarmed_TakeDamageHitRight2",                    "Zombie_FPP_Unarmed_TakeDamageHitRight")
+SeqTrackAlias( "Zombie_FPP_Unarmed_TakeDamageHitRight2_Rest",            "Zombie_FPP_Unarmed_TakeDamageHitRight_Rest")
+
+SeqTrack( "Zombie_FPP_Unarmed_TakeDamageHitLeft",                    "M_FPP_Zombie_TakedamageLeft.anm2",                0, 8, 30, 1, 0.1 )
+SeqTrack( "Zombie_FPP_Unarmed_TakeDamageHitLeft_Rest",            "M_FPP_Zombie_TakedamageLeft.anm2",                8, 30, 30, 1, 0.0 )
+  
+SeqTrackAlias( "Zombie_FPP_Unarmed_TakeDamageHitLeft1",                    "Zombie_FPP_Unarmed_TakeDamageHitLeft")
+SeqTrackAlias( "Zombie_FPP_Unarmed_TakeDamageHitLeft1_Rest",            "Zombie_FPP_Unarmed_TakeDamageHitLeft_Rest")
+
+SeqTrackAlias( "Zombie_FPP_Unarmed_TakeDamageHitLeft2",                    "Zombie_FPP_Unarmed_TakeDamageHitLeft")
+SeqTrackAlias( "Zombie_FPP_Unarmed_TakeDamageHitLeft2_Rest",            "Zombie_FPP_Unarmed_TakeDamageHitLeft_Rest")
+
+SeqTrackAlias( "Zombie_FPP_Unarmed_TakeDamagePvpHitRight",                    "Zombie_FPP_Unarmed_TakeDamageHitRight")
+SeqTrackAlias( "Zombie_FPP_Unarmed_TakeDamagePvpHitRight_Rest",            "Zombie_FPP_Unarmed_TakeDamageHitRight_Rest")
+
+SeqTrackAlias( "Zombie_FPP_Unarmed_TakeDamagePvpHitLeft",                    "Zombie_FPP_Unarmed_TakeDamageHitLeft")
+SeqTrackAlias( "Zombie_FPP_Unarmed_TakeDamagePvpHitLeft_Rest",            "Zombie_FPP_Unarmed_TakeDamageHitLeft_Rest")
+
+
+
+SeqTrack( "Zombie_FPP_Unarmed_TakeDamagePush",            "M_FPP_Zombie_Takedamage_Push.anm2",                0, 30, 30, 1, 0.033)
+SeqTrack( "Zombie_FPP_Unarmed_TakeDamagePush_Rest",    "M_FPP_Zombie_Takedamage_Push.anm2",                30, 60, 30, 1, 0.0)
+
+SeqTrackAlias( "Zombie_FPP_Unarmed_TakeDamagePush1",        "Zombie_FPP_Unarmed_TakeDamagePush")
+SeqTrackAlias( "Zombie_FPP_Unarmed_TakeDamagePush1_Rest",    "Zombie_FPP_Unarmed_TakeDamagePush_Rest")
+
+SeqTrackAlias( "Zombie_FPP_Unarmed_TakeDamagePush2",           "Zombie_FPP_Unarmed_TakeDamagePush")
+SeqTrackAlias( "Zombie_FPP_Unarmed_TakeDamagePush2_Rest",    "Zombie_FPP_Unarmed_TakeDamagePush_Rest")
+
+SeqTrackAlias( "Zombie_FPP_Unarmed_TakeDamagePush3",           "Zombie_FPP_Unarmed_TakeDamagePush")
+SeqTrackAlias( "Zombie_FPP_Unarmed_TakeDamagePush3_Rest",    "Zombie_FPP_Unarmed_TakeDamagePush_Rest")
+
+/////////////////
+///Death States
+////////////////
+SeqTrack( "Zombie_FPP_Unarmed_TakeDamageDeathDefault",                             "M_FPP_Zombie_PVP_Death.anm2",      0, 150, 30, 1, 0.1)
+{
+    Event(90, SHOW_DEATH_SCREEN, 1)
+}
+
+SeqTrack( "Zombie_FPP_Unarmed_TakeDamageDeathPvpHitRight",                        "M_FPP_Zombie_PVP_Death.anm2",      0, 150, 30, 1, 0.1)
+SeqTrack( "Zombie_FPP_Unarmed_TakeDamageDeathFromLethalObject",                   "M_FPP_Zombie_PVP_Death.anm2",      0, 150, 30, 1, 0.1)
+{
+	Event(30, SHOW_DEATH_SCREEN, 1)
+}
+
+SeqTrackAlias( "Zombie_FPP_Unarmed_TakeDamageDeathPvpHitLeft",                     "Zombie_FPP_Unarmed_TakeDamageDeathPvpHitRight")
+
+SeqTrack( "Zombie_FPP_Unarmed_TakeDamageDeathSpikes",             "M_FPP_Zombie_Death_SpikeWall_Back.anm2",   0, 150, 30, 1, 0.1)
+{
+    Event(7, 0, 1)
+    {        
+        ActivateSlowMo(0.2, 0.1, 0.1)
+    }
+}
+SeqTrack( "Zombie_FPP_Unarmed_TakeDamageDeathSpikesFront",             "M_FPP_Zombie_Death_SpikeWall_Front.anm2",   0, 150, 30, 1, 0.1)
+
+SeqTrack( "Zombie_FPP_VehicleAttack_Triggered",             "M_FPP_Zombie_Attach_Buggy_Triggered.anm2",                  0, 25, 30, 1, 0.2)
+SeqTrack( "Zombie_FPP_VehicleAttack_Exit_Vehicle",          "M_FPP_Zombie_Exit_Buggy.anm2",                 0, 15, 45, 1, 0.1)
+SeqTrack( "Zombie_FPP_VehicleAttack_Attaching_BackLeft",    "M_FPP_Zombie_Attach_Buggy_BackLeft.anm2",      5, 50, 30, 1, 0.1)
+{
+    Event(8, BUGGY_LAND_ATTACH_LEFT, 1) 
+}
+SeqTrack( "Zombie_FPP_VehicleAttack_Attaching_BackRight",   "M_FPP_Zombie_Attach_Buggy_BackRight.anm2",     5, 50, 30, 1, 0.1)
+{
+    Event(8, BUGGY_LAND_ATTACH_RIGHT, 1) 
+}
+SeqTrack( "Zombie_FPP_VehicleAttack_Attaching_Left",        "M_FPP_Zombie_Attach_Buggy_Left.anm2",          5, 45, 30, 1, 0.1)
+{
+    Event(8, BUGGY_LAND_ATTACH_LEFT, 1) 
+}
+SeqTrack( "Zombie_FPP_VehicleAttack_Attaching_Right",       "M_FPP_Zombie_Attach_Buggy_Right.anm2",         5, 45, 30, 1, 0.1)
+{
+    Event(8, BUGGY_LAND_ATTACH_RIGHT, 1) 
+}
+SeqTrack( "Zombie_FPP_VehicleAttack_Attaching_Front",       "M_FPP_Zombie_Attach_Buggy_Front.anm2",         3, 30, 30, 1, 0.1)
+{
+    Event(8, BUGGY_LAND_ATTACH_FRONT, 1) 
+}
+SeqTrack( "Zombie_FPP_VehicleAttack_Idle",                  "M_FPP_Zombie_Idle_Buggy.anm2",                 0, 120, 45, 1, 0.1)
+SeqTrack( "Zombie_FPP_VehicleAttack_Attack_Windup_0",         "m_FPP_Zombie_Melee_Buggy_1.anm2",              0, 20, 30, 1, 0.1)
+SeqTrack( "Zombie_FPP_VehicleAttack_Attack_0",                "m_FPP_Zombie_Melee_Buggy_1.anm2",              20, 55, 30, 1, 0.0)
+{  
+    Event(8, PUNCH_HIT, 1) 
+    {
+        PlayForceFeedback("Zombie_Player_GroundPound", 1, 1, 1) 
+        PlayPlayerSound7(GameVolumeSource_LoudSound, "ground_pound_hit_XX.wav", 1.0, 0, 2, 1.0, 2.0)
+        PlayPlayerSound7(GameVolumeSource_Speech, "attack_XX.wav", 1.0, 0, 0, 1.0, 1.0)   
+        PlayFx("shock_bullet_hit_sequence.fx", [0, 1, 0], "r_hand", 1, [0.0, 0.0, 0.0], 0)
+    }
+}
+SeqTrack( "Zombie_FPP_VehicleAttack_Attack_Fail_0",         "M_FPP_Zombie_Melee_Buggy_1_Fail.anm2",              0, 20, 30, 1, 0.1)
+
+SeqTrack( "Zombie_FPP_VehicleAttack_Attack_Windup_1",         "m_FPP_Zombie_Melee_Buggy_2.anm2",              0, 20, 30, 1, 0.1)
+SeqTrack( "Zombie_FPP_VehicleAttack_Attack_1",                "m_FPP_Zombie_Melee_Buggy_2.anm2",              20, 55, 30, 1, 0.0)
+{  
+    Event(8, PUNCH_HIT, 1) 
+    {
+        PlayForceFeedback("Zombie_Player_GroundPound", 1, 1, 1)
+        PlayPlayerSound7(GameVolumeSource_LoudSound, "ground_pound_hit_XX.wav", 1.0, 0, 2, 1.0, 2.0)
+        PlayPlayerSound7(GameVolumeSource_Speech, "attack_XX.wav", 1.0, 0, 0, 1.0, 1.0)   
+        PlayFx("shock_bullet_hit_sequence.fx", [0, 1, 0], "l_hand", 1, [0.0, 0, 0.0], 0)
+    }
+}
+SeqTrack( "Zombie_FPP_VehicleAttack_Attack_Fail_1",         "M_FPP_Zombie_Melee_Buggy_2_Fail.anm2",              0, 20, 30, 1, 0.1)
+
+SeqTracksBlend("Zombie_FPP_VehicleAttack_Attack_Windup_0", "Zombie_FPP_VehicleAttack_Idle", 0.5)
+SeqTracksBlend("Zombie_FPP_VehicleAttack_Attack_Windup_1", "Zombie_FPP_VehicleAttack_Idle", 0.5)
+
+SeqTrack("FPP_PVPBuggyKnockOff_Victim_Tackle",             "M_FPP_Zombie_PVP_WrestlingKick.anm2",      23, 40, 30, 1, 0.0)
+{
+    Event(0, PVP_GRAB_ORIENT_START, 1)
+    MustSendEvent(0, PVP_GRAB_APPLY_TACKLE_IMPULSE, 1)
+    MustSendEvent(0, PVP_GRAB_APPLY_DAMAGE, 1)
+    {
+        PlayFx("sharp_hit_torso_heavy_sequence.fx", [0, 0.0, -1], "spine1", 1, [0.0, 0.0, 0.0], 0)
+    }   
+    Event(3, PVP_GRAB_ORIENT_END, 1)    
+}
+
+SeqTrack("FPP_PVPBuggyKnockOff_Victim_Fall",               "M_FPP_Zombie_PVP_WrestlingKick.anm2",      40, 70, 30, 1, 0.0)
+SeqTrack("FPP_PVPBuggyKnockOff_Victim_Land",               "M_FPP_Zombie_PVP_WrestlingKick.anm2",      70, 85, 30, 1, 0.0)
+SeqTrack("FPP_PVPBuggyKnockOff_Victim_Release",            "M_FPP_Zombie_PVP_WrestlingKick_Getup.anm2",    0, 30, 30, 1, 0.2)
+{
+    MustSendEvent(1, PVP_GRAB_CAN_MOVE, -1)
+}
+SeqTrack("FPP_PVPBuggyKnockOff_Victim_Fall_VictimDied",    "M_FPP_Zombie_PVP_WrestlingKick.anm2",      40, 70, 30, 1, 0.0)
+SeqTrack("FPP_PVPBuggyKnockOff_Victim_Land_VictimDied",    "M_FPP_Zombie_PVP_WrestlingKick.anm2",      70, 85, 30, 1, 0.0)
+SeqTrack("FPP_PVPBuggyKnockOff_Victim_Release_VictimDied", "M_FPP_Zombie_PVP_WrestlingKick.anm2",      85, 100, 30, 1, 0.0)
+
+SeqTrack("FPP_PVPBuggyKnockOff_Victim_Release_VictimWallHit", "M_FPP_Zombie_HitWall_Death.anm2",   0, 20, 25, 1, 0.0)
+
+SeqTrack("FPP_PVPBuggyKnockOff_Victim_Release_VictimWallHit_VictimDied", "M_FPP_Zombie_HitWall_Death.anm2",   0, 80, 30, 1, 0.0)
+
+SeqTrack("FPP_Abilities_BuggyChargeAttackWindup",               "M_FPP_Zombie_Tackle_Buggy.anm2",        12, 24, 30, 1, 0.0)
+{    
+    Event(0, 0, 1)
+    {
+        PlayPlayerSound5(GameVolumeSource_LoudSound, "charge_pounce.wav", -1, 0, 2)
+    }
+}
+SeqTrack("FPP_Abilities_BuggyChargeAttackHit",            "M_FPP_Zombie_Tackle_Buggy.anm2",        25, 50, 30, 1, 0.0)
+{ 
+    MustSendEvent(0, PUNCH_HIT, 1)
+    {
+        PlayForceFeedback("Zombie_Player_Land_Heavy", 1, 1, 1)
+    }
+}
+
+SeqTrack("Zombie_FPP_VehicleAttack_Electrocuted",            "M_FPP_Zombie_Shocked_Buggy.anm2",        0, 40, 30, 1, 0.0)
+{ 
+    MustSendEvent(0, 0, 1)
+    {
+        PlayForceFeedback("Zombie_Player_GroundPound", 1, 1, 1)
+    }
+}
+
+//////////////////
+///BTZ Intro
+//////////////////
+SeqTrack( "BTZ_intro",          "BTZ_intro.anm2",                0, 580, 30, 1, 0.0 )
+SeqTrack( "BTZ_intro_ending",          "BTZ_intro.anm2",        230, 580, 30, 1, 0.0 )
+SeqTrack( "BTZ_intro_CAM",    "BTZ_intro_CAM.anm2",            0, 580, 30, 1, 0.0 )
+SeqTrack( "BTZ_intro_ending_CAM",    "BTZ_intro_CAM.anm2",  230, 580, 30, 1, 0.0 )
+
+
+
+
+
+
+
+

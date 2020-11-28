@@ -1,0 +1,6 @@
+Description("f_aberration_scale", "f:EDIT;e:EDIT|SPINNER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.0;c:Postprocess Shake Screen;d:Aberration Scale;")
+Description("f_aberration_speed", "f:EDIT;e:EDIT|SPINNER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.0;c:Postprocess Shake Screen;d:Aberration Speed;")
+Description("f_aberration_strength", "f:EDIT;e:EDIT|SPINNER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.0;x:1.0;s:0.1;c:Postprocess Shake Screen;d:Aberration Strength;")
+Description("f_shake_scale", "f:EDIT;e:EDIT|SPINNER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.0;c:Postprocess Shake Screen;d:Shake Scale;")
+Description("f_shake_speed", "f:EDIT;e:EDIT|SPINNER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.0;c:Postprocess Shake Screen;d:Shake Speed;")
+Description("f_shake_strength", "f:EDIT;e:EDIT|SPINNER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.0;x:1.0;s:0.1;c:Postprocess Shake Screen;d:Shake Strength;")

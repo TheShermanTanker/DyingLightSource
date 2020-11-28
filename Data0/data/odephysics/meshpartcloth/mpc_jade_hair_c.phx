@@ -1,0 +1,95 @@
+!include("MeshPartCloth.def")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+MeshPartCloth()
+{
+//----------------------------------------------
+// bones
+//----------------------------------------------
+    BonesGridSize(1, 6)
+
+    $XDIST(f, -1)
+    $YDIST(f, -0.9)
+	
+	//Mode3D(1)
+	
+	Bone(0, 0, "bone_hair_h_00", 1, XDIST, YDIST)
+	Bone(0, 1, "bone_hair_h_01", 0, XDIST, YDIST)
+	Bone(0, 2, "bone_hair_h_02", 0, XDIST, YDIST)
+	Bone(0, 3, "bone_hair_h_03", 0, XDIST, YDIST)
+	Bone(0, 4, "bone_hair_h_04", 0, XDIST, YDIST)
+	Bone(0, 5, "", 0, XDIST, YDIST)
+	//Hook(0, 5, "head" , [-0.1, -0.003, 0.1], XDIST , YDIST)
+
+	
+
+	
+    
+//----------------------------------------------
+// collisions 
+//----------------------------------------------
+
+    CollisionSlide(1)
+    CollisionSpeedMod(1)
+    CollisionBounce(0)
+    
+    CollisionShapesMoveInfluence(1)
+    
+    CollisionSegmentDivision(100)
+    CollisionNormalAngleThreshold(180)
+    
+    NodeCollisionSphereRadius(0.1)
+    ExternalCollisionAffectMul(0)
+	
+	
+	//CollisionSphereShift("head", [0.001, 0.0, 0.093], 0.09)
+	CollisionMaxDistance(0, 2, "head", [0.3, 0, 0.3], 0.27, 3000)
+	CollisionMaxDistance(0, 3, "head", [0.4, -0.015, 0.4], 0.43, 3000)
+	CollisionMaxDistance(0, 4, "head", [-0.05, 0.0, 0.53], 0.4, 6000)
+	
+	CollisionMinDistance(0, 1, "head", [0.001, 0.0, 0.093], 0.09, 6000)
+	CollisionMinDistance(0, 2, "head", [0.001, 0.0, 0.093], 0.09, 4000)
+	CollisionMinDistance(0, 3, "head", [0.001, 0.0, 0.093], 0.09, 2000)
+	CollisionMinDistance(0, 4, "head", [0.001, 0.0, 0.093], 0.09, 1000)
+	CollisionMaxDistance(0, 5, "head", [0.001, 0.0, 0.093], 0.095, 500)
+	
+	CollisionMaxDistance(0, 2, "head", [0.08, 0.1, 0.15], 0.105, 500)
+	CollisionMaxDistance(0, 2, "head", [0.08, -0.1, 0.15], 0.105, 500)
+	
+//	CollisionMaxDistance(0, 2, "bone_collar_a_detail_00", [0.04, -0.03, -0.04], 0.035, 3000)
+    
+//----------------------------------------------
+// spring params 
+//----------------------------------------------
+
+    Viscous(6)
+    AirFriction(1)
+
+    StructuralStiffness(12000, 8000)
+    ShearStiffness(12000, 8000)
+    FlexionStiffness(12000, 8000)
+
+    HorizontSpringRatio(0.015)
+    
+    CheckLengthsStepsPerSec(0)
+
+//----------------------------------------------
+// physical params 
+//----------------------------------------------
+    
+    Mass(1)
+    GravityMul(1)
+    WindInfluence(0.2)
+
+//----------------------------------------------
+// other params
+//----------------------------------------------
+
+    SynchroWithPhysics(0)
+    EnableAPBOut(1)
+    
+    ObjectMoveMul(1)
+    AnimationMoveMul(0.9)
+}
+
+

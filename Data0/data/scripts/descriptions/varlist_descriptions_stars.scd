@@ -1,0 +1,6 @@
+Description("s_stars", "f:EDIT|GATHER;e:EDIT|SHOW_DESCRIPTION;c:Stars;d:Texture;" )
+Description("v_stars_color", "f:EDIT;e:EDIT|SPINNER|EXPANDABLE|BROWSE_COLOR|SHOW_DESCRIPTION;m:0 0 0;x:1 1 1;s:0.05 0.05 0.05;c:Stars;d:Color;" )
+Description("f_stars_fade_scale", "f:EDIT;e:EDIT|SPINNER|SHOW_DESCRIPTION;m:0.0;s:0.05;c:Stars;d:Horizon Fade Scale;" )
+Description("f_stars_fade_bias", "f:EDIT;e:EDIT|SPINNER|SHOW_DESCRIPTION;m:0.0;s:0.05;c:Stars;d:Horizon Fade Bias;" )
+Description("v_stars_rotation", "f:EDIT;e:EDIT|SPINNER|SHOW_DESCRIPTION;s:0.01 0.01 0.01;c:Stars;d:Rotations;" )
+Description("f_stars_threshold", "f:EDIT;e:EDIT|SPINNER|SHOW_DESCRIPTION;m:0.0;x:1.0;s:0.05;c:Stars;d:Alphatest opacity threshold;" )

@@ -1,0 +1,37 @@
+// check dw/postprocess for sprite.ppfx
+sub ppfx()
+{
+    // Post Process sets backbuffer as current render target - use it
+    // Render standard UI
+    If("f_pp_screen_scaling_on", "", "", "", "")
+    {
+        If("i_pp_direct_on", "", "", "", "")
+	    {
+            SetRenderTargetsView("_CLR__STD_RENDER", "");
+        }
+        If("i_pp_direct_on", "", "", "", "not")
+	    {
+            SetRenderTargetsView("_HDR_IMAGE", "");
+        }
+	}
+		Scene("std");
+
+    If("f_pp_screen_scaling_on", "", "", "", "")
+    {
+        SetClearColor(0.0, 0.0, 0.0, 0.0);
+    	SetRenderTarget("backbuffer", "color");
+            If("i_pp_direct_on", "", "", "", "not")
+	        {
+                SetBuffer(8, "1_RGBA16F_A");
+            }
+            If("i_pp_direct_on", "", "", "", "")
+	        {
+                SetBuffer(8, "CLR");
+            }
+                Mesh("quad_screen.msh", "screen_scaling.mat", "std");
+    }
+    If("f_pp_screen_scaling_on", "", "", "", "not")
+    {
+        SetRenderTarget("backbuffer", "");
+    }
+}

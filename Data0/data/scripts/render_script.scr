@@ -1,0 +1,117 @@
+import "frame_script_def.scr"
+import "frame_script_game.scr"
+
+sub main()
+{
+	extern int Histogram_opq_nrm_diff;
+	Set("i_pp_opq_nrm_diff_on", Histogram_opq_nrm_diff);
+
+	extern float f_pp_rain;
+	int i_pp_dpt_4_on = int(ceil(f_pp_rain));
+	Set("i_pp_dpt_4_on", i_pp_dpt_4_on);
+
+	extern int Histogram_vfb;
+	Set("i_pp_vfb_on", Histogram_vfb);
+
+	extern int Histogram_nrm;
+	float f_histogram_nrm = clamp(1.0 * Histogram_nrm);
+	Set("f_pp_nrm", f_histogram_nrm);
+
+	extern int Histogram_trn_blur;
+	float f_histogram_trn_blur = clamp(1.0 * Histogram_trn_blur);
+	Set("f_pp_trn_blur", f_histogram_trn_blur);
+
+	extern int Histogram_rfr;
+	extern int Histogram_rfr2;
+	extern float f_underwater;
+	extern float f_pp_rain_drops;
+	float f_histogram_rfr = clamp(1.0 * Histogram_rfr);
+	float f_histogram_rfr2 = clamp(1.0 * Histogram_rfr2);
+
+	Set("f_pp_rfr", max(f_histogram_rfr, f_pp_rain_drops));
+	Set("f_pp_rfr2", max(f_histogram_rfr2, f_underwater));
+
+    extern int Histogram_rfr_last;
+    float f_histogram_rfr_last = clamp(1.0 * Histogram_rfr_last);
+
+	extern int Histogram_rfr3;
+	float f_histogram_rfr3 = clamp(1.0 * Histogram_rfr3);
+	Set("f_pp_rfr3", f_histogram_rfr3);
+    Set("f_pp_rfr_last", f_histogram_rfr_last);
+
+	extern int Histogram_wtr;
+	extern int Histogram_rfl;
+	extern int Histogram_ice;
+
+	int i_water_downsample_full = Histogram_wtr;
+	int i_water_downsample = Histogram_wtr + Histogram_rfl + Histogram_ice;
+
+	float f_water_downsample_full = clamp(1.0 * i_water_downsample_full);
+	float f_water_downsample = clamp(1.0 * i_water_downsample ) ;
+
+	Set("f_pp_water_downsample_full", f_water_downsample_full);
+	Set("f_pp_water_downsample", f_water_downsample);
+
+    extern vec3 CAMERA_DIR_WS;
+	extern vec3 v_pp_sun_face_dir;
+	extern float f_pp_sun_glow_on;
+	float f_dir_factor = clamp(dot(-CAMERA_DIR_WS, v_pp_sun_face_dir));
+	Set("f_pp_sun_glow_on", f_pp_sun_glow_on * f_dir_factor);
+
+	extern int Histogram_ssss;
+	extern float f_pp_ssss_factor;
+	float f_histogram_ssss = clamp(1.0 * Histogram_ssss);
+	Set("f_pp_ssss_on", max(f_histogram_ssss, f_pp_ssss_factor));
+
+
+
+	// extern vec3 CAMERA_POS_WS;
+	// extern float f_underwater_surface_level;
+	// float water_level_mask = 1.0 - clamp(CAMERA_POS_WS.y - f_underwater_surface_level);
+	// float water_level_mask = water_level_mask * water_level_mask;
+
+	// extern float f_pp_screen_drops_water;
+	// float screen_drops_water_on = max(f_pp_screen_drops_water, water_level_mask);
+
+	// extern float f_pp_screen_drops_time_water;
+	// float screen_drops_new_time = (screen_drops_water_on > 0.0) ? f_pp_screen_drops_time_water : 0.0;
+	// float screen_drops_new_time = 0.0;
+	
+	// extern float f_pp_screen_drops_splat_time;
+	// extern float f_pp_screen_drops_splat;
+
+	// float screen_drops_splat_time = f_pp_screen_drops_splat_time * clamp(f_pp_screen_drops_splat * 100000.0);
+	// float screen_drops_new_time = max(screen_drops_new_time, screen_drops_splat_time);
+
+	// extern float f_pp_screen_drops_time_max;
+	// float screen_drops_time_max = max(f_pp_screen_drops_time_max, screen_drops_new_time);
+
+// float screen_drops_time_max = 100.0;	
+	// extern float f_pp_screen_drops_on;
+	// float screen_drops_time_max = (f_pp_screen_drops_on > 0.0) ? screen_drops_time_max : 0.0;
+	// Set("f_pp_screen_drops_time_max", screen_drops_time_max);
+
+	// Set("f_pp_screen_drops_time_max", screen_drops_time_max);	
+// Set("f_pp_screen_drops_time_max", 60.0);
+	//motion blur
+/*
+    extern float f_blur_motion;
+	//NOT WORKING
+	extern vec3 CAMERA_POS_WS;
+	extern vec3 CAMERA_POS_PREV_WS;
+	float f_bm_cam_diff_max = 100.0;
+	float f_bm_cam_diff_min = 10.0;
+	vec3 v_bm_cam_pos_diff = CAMERA_POS_WS - CAMERA_POS_PREV_WS;
+	vec3 v_bm_cam_pos_diff = v_bm_cam_pos_diff * v_bm_cam_pos_diff;
+	float f_bm_cam_diff = v_bm_cam_pos_diff.x + v_bm_cam_pos_diff.y + v_bm_cam_pos_diff.z;
+	float f_bm_cam_pos_diff_factor = clamp((f_bm_cam_diff - f_bm_cam_diff_min) / (f_bm_cam_diff_max - f_bm_cam_diff_min));
+
+	extern vec3 CAMERA_DIR_WS;
+	extern vec3 CAMERA_DIR_PREV_WS;
+	vec3 v_bm_cam_dir = CAMERA_DIR_WS * CAMERA_DIR_PREV_WS;
+	float f_bm_cam_dir_diff = 1.0 - clamp(v_bm_cam_dir.x + v_bm_cam_dir.y + v_bm_cam_dir.z);
+	float f_blur_motion = f_blur_motion * max(f_bm_cam_dir_diff, f_bm_cam_pos_diff_factor);
+	extern float f_pp_prv_lrp;
+	Set("f_pp_prv_lrp", max(f_pp_prv_lrp, f_blur_motion));
+*/
+}

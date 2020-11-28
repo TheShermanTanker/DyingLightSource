@@ -1,0 +1,305 @@
+!include("ai_timing.def")
+
+
+
+SeqTrack( "TPP_Shotgun_Shot", "tpp_m16_shot.anm2", 					0,   40,    60,   1,   0.0)
+SeqTrack( "TPP_Shotgun_ShotEmpty", "tpp_m16_shot.anm2", 					0,   40,    60,   1,   0.0)
+
+SeqTrackAlias( "TPP_Shotgun_Aim_Shot", 			"TPP_Shotgun_Shot")
+SeqTrackAlias( "TPP_Shotgun_Aim_ShotEmpty", 	"TPP_Shotgun_ShotEmpty")
+
+
+SeqTrack( "TPP_Shotgun_Stand", 				"tpp_m16_stand.anm2", 				0,   192,   60,   1,   0.3)
+
+SeqTrackAlias( "TPP_Shotgun_StandEmpty", 		"TPP_Shotgun_Stand")
+SeqTrackAlias( "TPP_Shotgun_Wall", 				"TPP_Shotgun_Stand")
+SeqTrackAlias( "TPP_Shotgun_Cover_StandPos", 	"TPP_Shotgun_Stand")
+// Aim
+SeqTrackAlias( "TPP_Shotgun_Aim_Stand", 		"TPP_Shotgun_Stand")
+SeqTrackAlias( "TPP_Shotgun_Aim_StandEmpty", 	"TPP_Shotgun_Stand")
+
+// m16 - podstawowe
+SeqTrack( "TPP_Shotgun_ReloadBegin", 			"M_TPP_Shotgun_Reload.anm2", 		0, 40, 30, 1, 0.3)
+{
+	Event(2, 0, 1)
+    {
+		PlaySound3D(GameVolumeSource_SoundPlayer, "rmngtn_open.wav", 1, 3, "head", 1, [0,0,0], 1)
+    }
+}
+SeqTrack( "TPP_Shotgun_ReloadManage", 			"M_TPP_Shotgun_Reload.anm2", 		40, 60, 30, 1, 0.0)
+SeqTrack( "TPP_Shotgun_ReloadLoop", 			"M_TPP_Shotgun_Reload.anm2",		40, 60, 30, 1, 0.0)
+{
+	Event(7, 0, 1)
+    {
+		PlaySound3D(GameVolumeSource_SoundPlayer, "rmngtn_bullet_load.wav", 1, 3, "head", 1, [0,0,0], 1)
+    }
+}
+SeqTrack( "TPP_Shotgun_ReloadFinish", 			"M_TPP_Shotgun_Reload.anm2",		60, 73, 30, 1, 0.0)
+{
+	Event(0, 0, 1)
+    {
+		PlaySound3D(GameVolumeSource_SoundPlayer, "rmngtn_close.wav", 1, 3, "head", 1, [0,0,0], 1)
+    }
+}
+////////////
+////Walk////
+////////////
+
+//===================================== Jumping ============================================
+
+SeqTrack( "TPP_Shotgun_Jump_Pose", 		        "TPP_Player_rifle_idle.anm2"	        , 16, 49, 30, 1, 0.1)
+
+
+ ///FORWARD
+SeqTrack( "TPP_Shotgun_WalkForward",		"TPP_M16_WalkForward.anm2", 	0 , 53 , 60 , 1, 0.5 )
+{
+    Event(8, VIS_EVENT_STEP_RIGHT, -1)
+    Event(23, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack( "TPP_Shotgun_RunForward",		"TPP_M16_RunForward.anm2", 	0 , 44 , 60 , 1, 0.5 )
+{
+    Event(11, VIS_EVENT_STEP_LEFT, -1)
+    Event(20, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack( "TPP_Shotgun_SprintForward",	"tpp_m16_sprintforward.anm2", 	0 , 34 , 60 , 1, 0.5 )
+{
+    Event(11, VIS_EVENT_STEP_LEFT, -1)
+    Event(20, VIS_EVENT_STEP_RIGHT, -1)
+}
+///BACKWARD
+SeqTrack( "TPP_Shotgun_WalkBackward",	"TPP_M16_WalkBackward.anm2", 	0 , 82 , 60 , 1, 0.5 )
+{
+    Event(3, VIS_EVENT_STEP_RIGHT, -1)
+    Event(12, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack( "TPP_Shotgun_RunBackward",		"TPP_M16_RunBackward.anm2", 	0 , 45 , 60 , 1, 0.5 )
+{
+    Event(6, VIS_EVENT_STEP_RIGHT, -1)
+    Event(16, VIS_EVENT_STEP_LEFT, -1)
+}
+/// RIGHT
+SeqTrack( "TPP_Shotgun_WalkRight",				"TPP_M16_WalkRight.anm2", 	0 , 72 , 60 , 1, 0.5 )
+{
+    Event(9, VIS_EVENT_STEP_RIGHT, -1)
+    Event(19, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack( "TPP_Shotgun_RunRight",				"TPP_M16_RunRight.anm2", 	0 , 47 , 60 , 1, 0.5 )
+{
+	Event(7, VIS_EVENT_STEP_RIGHT, -1)
+	Event(17, VIS_EVENT_STEP_LEFT, -1)
+}
+/// LEFT
+SeqTrack( "TPP_Shotgun_WalkLeft",				"TPP_M16_WalkLeft.anm2", 	0 , 65 , 60 , 1, 0.5 )
+{
+    Event(14, VIS_EVENT_STEP_RIGHT, -1)
+    Event(46, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack( "TPP_Shotgun_RunLeft",				"TPP_M16_RunLeft.anm2", 	0 , 46 , 60 , 1, 0.5 )
+{
+	Event(8, VIS_EVENT_STEP_LEFT, -1)
+	Event(20, VIS_EVENT_STEP_RIGHT, -1)
+}
+ 
+ /// PUMP ACTION
+SeqTrack("Tpp_Shotgun_PA_Shot", 				"TPP_Player_Shotgun_PA_Shoot.anm2", 					0,   40,    30,   1,   0.0)
+{
+	Event(11, 0, 1)
+    {
+		PlaySound3D(GameVolumeSource_SoundPlayer, "ShotgunB_reload_XX.wav", 1, 3, "head", 1, [0,0,0], 1)
+    }
+}
+SeqTrackAlias("Tpp_Shotgun_PA_ShotEmpty", 			"Tpp_Shotgun_PA_Stand")
+
+SeqTrackAlias("Tpp_Shotgun_PA_Aim_Shot", 		"Tpp_Shotgun_PA_Shot")
+SeqTrackAlias("Tpp_Shotgun_PA_Aim_ShotEmpty", 	"Tpp_Shotgun_PA_Stand")
+
+
+SeqTrack("Tpp_Shotgun_PA_Stand", 				"TPP_Player_Shotgun_PA_Idle.anm2", 				0,   96,   30,   1,   0.3)
+
+SeqTrackAlias("Tpp_Shotgun_PA_StandEmpty", 		"Tpp_Shotgun_PA_Stand")
+SeqTrackAlias("Tpp_Shotgun_PA_Wall", 			"Tpp_Shotgun_PA_Stand")
+SeqTrackAlias("Tpp_Shotgun_PA_Cover_StandPos", 	"Tpp_Shotgun_PA_Stand")
+// Aim
+SeqTrackAlias("Tpp_Shotgun_PA_Aim_Stand", 		"Tpp_Shotgun_PA_Stand")
+SeqTrackAlias("Tpp_Shotgun_PA_Aim_StandEmpty", 	"Tpp_Shotgun_PA_Stand")
+
+// m16 - podstawowe
+SeqTrack("Tpp_Shotgun_PA_ReloadBegin", 			"TPP_Player_Shotgun_PA_Reload.anm2", 		0, 10, 30, 1, 0.3)
+{
+	Event(0, 0, 1)
+    {
+		PlaySound3D(GameVolumeSource_SoundPlayer, "ShotgunB_move_XX.wav", 0.7, 3, "head", 1, [0,0,0], 1)
+    }	
+}
+	
+SeqTrack("Tpp_Shotgun_PA_ReloadManage", 		"TPP_Player_Shotgun_PA_Reload.anm2", 		10, 30, 45, 1, 0.0)
+SeqTrack("Tpp_Shotgun_PA_ReloadLoop", 			"TPP_Player_Shotgun_PA_Reload.anm2",		10, 30, 45, 1, 0.0)
+{
+	Event(0, 0, 1)
+    {
+		PlaySound3D(GameVolumeSource_SoundPlayer, "ShotgunB_bullet_load_XX.wav", 0.7, 3, "head", 1, [0,0,0], 1)
+    }	
+}
+SeqTrack("Tpp_Shotgun_PA_ReloadFinish", 		"TPP_Player_Shotgun_PA_Reload.anm2",		30, 70, 30, 1, 0.0)
+{
+	Event(0, 0, 1)
+    {
+		PlaySound3D(GameVolumeSource_SoundPlayer, "ShotgunB_move_XX.wav", 0.7, 3, "head", 1, [0,0,0], 1)
+    }
+	Event(17, 0, 1)
+    {
+		PlaySound3D(GameVolumeSource_SoundPlayer, "ShotgunB_reload_XX.wav", 0.7, 3, "head", 1, [0,0,0], 1)
+    }
+	Event(20, 0, 1)
+    {
+		PlaySound3D(GameVolumeSource_SoundPlayer, "ShotgunB_move_XX.wav", 0.7, 3, "head", 1, [0,0,0], 1)
+    }
+}
+
+////////////
+////Walk////
+////////////
+
+//===================================== Jumping ============================================
+
+SeqTrack("Tpp_Shotgun_PA_Jump_Pose", 		        "TPP_Player_Shotgun_PA_Idle.anm2"	        , 0, 96, 30, 1, 0.1)
+
+
+ ///FORWARD
+SeqTrack("Tpp_Shotgun_PA_WalkForward",		"TPP_Player_Shotgun_PA_WalkForward.anm2", 	0 , 26 , 30 , 1, 0.5 )
+{
+    Event(10, VIS_EVENT_STEP_RIGHT, -1)
+    Event(22, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("Tpp_Shotgun_PA_RunForward",		"TPP_Player_Shotgun_PA_RunForward.anm2", 	0 , 22 , 30 , 1, 0.5 )
+{
+    Event(7, VIS_EVENT_STEP_RIGHT, -1)
+    Event(18, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("Tpp_Shotgun_PA_SprintForward",	"TPP_Player_Shotgun_PA_SprintForward.anm2", 	0 , 17 , 30 , 1, 0.5 )
+{
+    Event(6, VIS_EVENT_STEP_RIGHT, -1)
+    Event(14, VIS_EVENT_STEP_LEFT, -1)
+}
+///BACKWARD
+SeqTrack("Tpp_Shotgun_PA_WalkBackward",		"TPP_Player_Shotgun_PA_WalkBackward.anm2", 	0 , 41 , 30 , 1, 0.5 )
+{
+    Event(10, VIS_EVENT_STEP_LEFT, -1)
+    Event(30, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("Tpp_Shotgun_PA_RunBackward",		"TPP_Player_Shotgun_PA_RunBackward.anm2", 	0 , 22 , 30 , 1, 0.5 )
+{
+    Event(9, VIS_EVENT_STEP_LEFT, -1)
+    Event(20, VIS_EVENT_STEP_RIGHT, -1)
+}
+/// RIGHT
+SeqTrack("Tpp_Shotgun_PA_WalkRight",		"TPP_Player_Shotgun_PA_WalkRight.anm2", 	0 , 36 , 30 , 1, 0.5 )
+{
+    Event(10, VIS_EVENT_STEP_LEFT, -1)
+    Event(17, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("Tpp_Shotgun_PA_RunRight",			"TPP_Player_Shotgun_PA_RunRight.anm2", 	0 , 22 , 30 , 1, 0.5 )
+{
+	Event(7, VIS_EVENT_STEP_LEFT, -1)
+	Event(19, VIS_EVENT_STEP_RIGHT, -1)
+}
+/// LEFT
+SeqTrack("Tpp_Shotgun_PA_WalkLeft",			"TPP_Player_Shotgun_PA_WalkLeft.anm2", 	0 , 32 , 30 , 1, 0.5 )
+{
+    Event(7, VIS_EVENT_STEP_RIGHT, -1)
+    Event(22, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("Tpp_Shotgun_PA_RunLeft",			"TPP_Player_Shotgun_PA_RunLeft.anm2", 	0 , 23 , 30 , 1, 0.5 )
+{
+	Event(12, VIS_EVENT_STEP_LEFT, -1)
+	Event(21, VIS_EVENT_STEP_RIGHT, -1)
+}
+ 
+ /// SemiAutomati
+SeqTrack("Tpp_Shotgun_SA_Shot", 				"TPP_Player_Shotgun_SA_Shoot.anm2", 					0,   40,    30,   1,   0.0)
+//{
+//	Event(12, 0, 1)
+//    {
+//		PlaySound3D(GameVolumeSource_SoundPlayer, "ShotgunB_reload_XX.wav", 1.0, 3, "head", 1, [0,0,0], 1)
+//    }
+//}
+SeqTrackAlias("Tpp_Shotgun_SA_ShotEmpty", 			"Tpp_Shotgun_PA_Stand")
+
+SeqTrackAlias("Tpp_Shotgun_SA_Aim_Shot", 		"Tpp_Shotgun_SA_Shot")
+SeqTrackAlias("Tpp_Shotgun_SA_Aim_ShotEmpty", 	"Tpp_Shotgun_SA_ShotEmpty")
+
+
+SeqTrackAlias("Tpp_Shotgun_SA_Stand", 			"Tpp_Shotgun_PA_Stand")
+
+SeqTrackAlias("Tpp_Shotgun_SA_StandEmpty", 		"Tpp_Shotgun_PA_Stand")
+SeqTrackAlias("Tpp_Shotgun_SA_Wall", 			"Tpp_Shotgun_PA_Stand")
+SeqTrackAlias("Tpp_Shotgun_SA_Cover_StandPos", 	"Tpp_Shotgun_PA_Stand")
+// Aim
+SeqTrackAlias("Tpp_Shotgun_SA_Aim_Stand", 		"Tpp_Shotgun_PA_Stand")
+SeqTrackAlias("Tpp_Shotgun_SA_Aim_StandEmpty", 	"Tpp_Shotgun_PA_Stand")
+
+// m16 - podstawowe
+SeqTrack("Tpp_Shotgun_SA_ReloadBegin", 			"TPP_Player_Shotgun_PA_Reload.anm2", 		0, 10, 30, 1, 0.3)
+{
+	Event(0, 0, 1)
+    {
+		PlaySound3D(GameVolumeSource_SoundPlayer, "ShotgunB_move_XX.wav", 0.7, 3, "head", 1, [0,0,0], 1)
+    }
+}
+SeqTrack("Tpp_Shotgun_SA_ReloadManage", 		"TPP_Player_Shotgun_PA_Reload.anm2", 		10, 30, 45, 1, 0.0)
+SeqTrack("Tpp_Shotgun_SA_ReloadLoop", 			"TPP_Player_Shotgun_PA_Reload.anm2",		10, 30, 45, 1, 0.0)
+{
+	Event(0, 0, -1)
+    {
+		PlaySound3D(GameVolumeSource_SoundPlayer, "ShotgunB_bullet_load_XX.wav", 0.7, 3, "head", 1, [0,0,0], 1)
+    }	
+}
+
+SeqTrack("Tpp_Shotgun_SA_ReloadFinish", 		"TPP_Player_Shotgun_PA_Reload.anm2",		30, 70, 30, 1, 0.0)
+{
+	Event(0, 0, 1)
+    {
+		PlaySound3D(GameVolumeSource_SoundPlayer, "ShotgunB_move_XX.wav", 0.7, 3, "head", 1, [0,0,0], 1)
+    }
+	Event(17, 0, 1)
+    {
+		PlaySound3D(GameVolumeSource_SoundPlayer, "ShotgunB_reload_XX.wav", 0.7, 3, "head", 1, [0,0,0], 1)
+    }
+	Event(20, 0, 1)
+    {
+		PlaySound3D(GameVolumeSource_SoundPlayer, "ShotgunB_move_XX.wav", 0.7, 3, "head", 1, [0,0,0], 1)
+    }
+}
+
+////////////
+////Walk////
+////////////
+
+//===================================== Jumping ============================================
+
+SeqTrack("Tpp_Shotgun_SA_Jump_Pose", 		        "TPP_Player_Shotgun_PA_Idle.anm2"	        , 0, 96, 30, 1, 0.1)
+
+
+ ///FORWARD
+SeqTrackAlias("Tpp_Shotgun_SA_WalkForward",		"Tpp_Shotgun_PA_WalkForward")
+
+SeqTrackAlias("Tpp_Shotgun_SA_RunForward",		"Tpp_Shotgun_PA_RunForward")
+
+SeqTrackAlias("Tpp_Shotgun_SA_SprintForward",	"Tpp_Shotgun_PA_SprintForward")
+
+///BACKWARD
+SeqTrackAlias("Tpp_Shotgun_SA_WalkBackward",		"Tpp_Shotgun_PA_WalkBackward")
+
+SeqTrackAlias("Tpp_Shotgun_SA_RunBackward",		"Tpp_Shotgun_PA_RunBackward")
+
+/// RIGHT
+SeqTrackAlias("Tpp_Shotgun_SA_WalkRight",		"Tpp_Shotgun_PA_WalkRight")
+
+SeqTrackAlias("Tpp_Shotgun_SA_RunRight",			"Tpp_Shotgun_PA_RunRight")
+
+/// LEFT
+SeqTrackAlias("Tpp_Shotgun_SA_WalkLeft",			"Tpp_Shotgun_PA_WalkLeft")
+
+SeqTrackAlias("Tpp_Shotgun_SA_RunLeft",			"Tpp_Shotgun_PA_RunLeft")
+
+ 

@@ -1,0 +1,122 @@
+import "StatsStuff.scr"
+import "ChallengeClasses.scr"
+
+sub main() 
+{
+	// Kill screamer in projectmayhem
+	Challenge("storyoldtown_00")
+	{
+        use StoryCompetitionClass();
+		Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            VictimPresetName("Screamer");
+            Count(1);
+        }
+        MinCount(1);
+        Duration(60.0);
+        UsesQuestName(false);
+        MustBeTracked(false);
+	}
+	
+	// Run from the building in projectmayhem
+	Challenge("storyoldtown_01")
+	{
+        use StoryCompetitionClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("CompleteQuestPhase")
+        {
+        }
+        PlayChallengeMusic(true);
+	}
+    
+    // Get to the Embers hideout @ Find the Embers
+	Challenge("storyoldtown_02")
+	{
+        use StoryCompetitionClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("UseTrigger")
+        {
+            Trigger("it_cin_meetingtroy_01");
+        }
+        Duration(120.0);
+	}
+    
+    // Find the entry to the museum first @ Museum
+	Challenge("storyoldtown_04")
+	{
+        use StoryCompetitionClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("CompleteQuestPhase")
+        {
+        }
+        Duration(240.0);
+	}
+    
+    // Kill Rais's men @ Museum
+	Challenge("storyoldtown_05")
+	{
+        use AutostartingStoryCompetitionClass();
+		Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            Count(0);
+            ForceEventCanBeCompleted(true);
+        }
+	}
+    
+    // Kill most infected @ Museum
+	Challenge("storyoldtown_06")
+	{
+        use AutostartingStoryCompetitionClass();
+		Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            Count(0);
+        }
+	}
+    
+    // Find Jade in the Dream @ Museum
+	Challenge("storyoldtown_07")
+	{
+        use AutostartingStoryCompetitionClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("UseTrigger")
+        {
+            Trigger("cin_jadedies_IT");
+        }
+	}
+    
+    // Get to the radio first @ Radio
+	Challenge("storyoldtown_08")
+	{
+        use StoryCompetitionClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("CompleteQuestPhase")
+        {
+        }
+        Duration(120.0);
+	}
+    
+    // Kill Rais's men @ Radio
+	Challenge("storyoldtown_09")
+	{
+        use StoryCompetitionClass();
+		Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            Count(0);
+        }
+	}
+    
+    // Kill most zombies @ Contact
+	Challenge("storyoldtown_10")
+	{
+        use StoryCompetitionClass();
+		Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            Count(0);
+        }
+	}
+}

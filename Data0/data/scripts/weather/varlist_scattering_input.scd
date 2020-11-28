@@ -1,0 +1,15 @@
+!include("varlist_scattering_input.scr")
+
+VarFloat("f_pp_scattering_input_v", 4.0)
+VarFloat("f_pp_scattering_input_mie_turbidity", 1.0)
+VarVec3("v_pp_scattering_input_lambda", [6.8, 5.5, 4.5])
+VarVec3("v_pp_scattering_input_k", [0.686, 0.678, 0.666])
+VarFloat("f_pp_scattering_input_c", 0.2)
+VarFloat("f_pp_scattering_input_z", 20.0)
+VarFloat("f_pp_scattering_input_n", 1.0003)
+VarFloat("f_pp_scattering_input_m", 0.002545)
+VarFloat("f_pp_scattering_input_pn", 0.035)
+VarFloat("f_pp_scattering_input_mie_g", 0.990)
+
+VarFloat("f_pp_scattering_input_mie_intensity", 0.1)
+VarFloat("f_pp_scattering_input_ray_intensity", 0.25)

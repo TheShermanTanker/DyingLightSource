@@ -1,0 +1,117 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Fizyka Ragdoll dla czlowieka
+// Uzywana przez Pawn.java - w szczegolnosci zmarle AI
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+!include("../Generic/ODEPhysicsRagdoll.phx")
+
+//-------------------------------------------------------------------------------------------------
+PhysicsParams()
+{
+    QuickStepNumIterations(15)
+    QuickStepSortingMethod(2)
+    
+    AllowContinuousCollisions(0, 0)
+    SetWaterFloat(0.8)
+}
+
+RagdollParams()
+{
+    Mass(90)
+    StiffenStartTime(-1)
+    ApplyForceMod(3)
+    ApplyForceAddUp(4000)           // CM2M
+}
+
+//-------------------------------------------------------------------------------------------------
+Bones()
+{
+    UseBoneScale("Pelvis",  "capsule",    5, 1.8)
+    UseBoneScale("Spine",   "sphere",       5, 0.9)
+    UseBone("Spine1",       "capsule",    5)
+    UseBone("Head",         "sphere",       2)
+    UseBone("L Upperarm",   "capsule",    2)
+    UseBone("R Upperarm",   "capsule",    2)
+    UseBone("L Forearm",    "capsule",    1)
+    UseBone("R Forearm",    "capsule",    1)
+    UseBone("L Thigh",      "capsule",    2)
+    UseBone("R Thigh",      "capsule",    2)
+    UseBone("L Calf",       "capsule",    1)
+    UseBone("R Calf",       "capsule",    1)
+    UseBoneScale("L Hand",  "sphere",       1, 1.2)
+    UseBoneScale("R Hand",  "sphere",       1, 1.2)
+
+    CollisionHelper("L Foot", "L Calf",      1.0)
+    CollisionHelper("R Foot", "R Calf",      1.0)
+    
+    NoCollidedPair("L Thigh",    "Spine")
+    NoCollidedPair("R Thigh",    "Spine")
+    NoCollidedPair("L Thigh",    "R Thigh")
+}
+
+//-------------------------------------------------------------------------------------------------
+Joints()
+{
+    // definicja jointow
+    DefineJoint("Pelvis",     "Spine",      "ball",  0,  1,  0,    1,  0,  0)
+    DefineJoint("Spine",      "Spine1",     "ball",  0,  1,  0,    1,  0,  0)
+    DefineJoint("Spine1",     "Head",       "ball",  0,  1,  0,    1,  0,  0)
+    DefineJoint("Pelvis",     "L Thigh",    "ball",  0,  1,  0,    0,  0,  1)
+    DefineJoint("Pelvis",     "R Thigh",    "ball",  0,  1,  0,    0,  0,  1)
+    DefineJoint("L Thigh",    "L Calf",     "hinge", 0,  1,  0,    0,  0,  0)
+    DefineJoint("R Thigh",    "R Calf",     "hinge", 0,  1,  0,    0,  0,  0)
+    DefineJoint("Spine1",     "L Upperarm", "ball",  0,  0,  1,    1,  0,  0)
+    DefineJoint("Spine1",     "R Upperarm", "ball",  0,  0,  1,    1,  0,  0)
+    DefineJoint("L Upperarm", "L Forearm",  "ball",  0,  1,  0,    1,  0,  0)
+    DefineJoint("R Upperarm", "R Forearm",  "ball",  0, -1,  0,    1,  0,  0)
+    DefineJoint("L Forearm",  "L Hand",     "hinge", 0,  0,  1,    0,  0,  0)
+    DefineJoint("R Forearm",  "R Hand",     "hinge", 0,  0,  -1,    0,  0,  0)
+
+    // polozenie stawow
+    SetAnchorPosition("Pelvis Spine",          -0.50,  0.00,  0.00)
+    SetAnchorPosition("Spine Spine1",          -0.50,  0.00,  0.00)
+    SetAnchorPosition("Spine1 Head",           -0.50,  0.00,  0.00)
+    SetAnchorPosition("Pelvis L Thigh",        -0.50,  0.00,  0.00)
+    SetAnchorPosition("Pelvis R Thigh",        -0.50,  0.00,  0.00) 
+    SetAnchorPosition("L Thigh L Calf",        -0.50,  0.00,  0.00)
+    SetAnchorPosition("R Thigh R Calf",        -0.50,  0.00,  0.00)
+    SetAnchorPosition("Spine1 L Upperarm",     -0.40,  0.00,  0.00) 
+    SetAnchorPosition("Spine1 R Upperarm",     -0.40,  0.00,  0.00) 
+    SetAnchorPosition("L Upperarm L Forearm",  -0.50,  0.00,  0.00)
+    SetAnchorPosition("R Upperarm R Forearm",  -0.50,  0.00,  0.00)
+    SetAnchorPosition("L Forearm L Hand",      -0.50,  0.00,  0.00)
+    SetAnchorPosition("R Forearm R Hand",      -0.50,  0.00,  0.00)
+
+    // parametry stopu
+    Set3DOFStops("Pelvis Spine",         -0.05, 0.00,   -0.05, 0.05,   -0.10, 0.10,  0, 0, 0) 
+    Set3DOFStops("Spine Spine1",         -0.10, 0.10,   -0.10, 0.10,   -0.10, 0.10,  0, 0, 0) 
+    Set3DOFStops("Spine1 Head",          -0.20, 0.10,   -0.10, 0.10,   -0.30, 0.30,  0, 0, 0) 
+    Set3DOFStops("Pelvis L Thigh",       -0.00, 0.30,   -0.00, 0.00,   -0.00, 0.00,  0, 0, 0) 
+    Set3DOFStops("Pelvis R Thigh",       -0.00, 0.30,   -0.00, 0.00,   -0.00, 0.00,  0, 0, 0) 
+    Set1DOFStops("L Thigh L Calf",        0.00, 0.40,  0) 
+    Set1DOFStops("R Thigh R Calf",        0.00, 0.40,  0) 
+    Set3DOFStops("Spine1 L Upperarm",    -0.10, 0.20,   -0.00, 0.30,   -0.00, 0.20,  0, 0, 0) 
+    Set3DOFStops("Spine1 R Upperarm",    -0.20, 0.10,   -0.00, 0.30,   -0.00, 0.20,  0, 0, 0) 
+    Set3DOFStops("L Upperarm L Forearm", -0.00, 0.40,   -0.00, 0.20,   -0.15, 0.15,  0, 0, 0) 
+    Set3DOFStops("R Upperarm R Forearm", -0.40, 0.00,   -0.00, 0.20,   -0.15, 0.15,  0, 0, 0) 
+    Set1DOFStops("L Forearm L Hand",     -0.10, 0.15,  0) 
+    Set1DOFStops("R Forearm R Hand",     -0.10, 0.15,  0) 
+
+    // sily tarcia stawow
+    SetFrictionForceAll(0.8)
+
+    // wspolczynniki dopuszczalnych bledow stopow
+    SetStopERPAll(0.3)
+
+    // wspolczynniki sprezystosci jointow po osiagnieciu stopow
+    SetStopCFMAll(0.03)
+
+    // wspolczynniki sprezystosci jointow
+    SetCFMAll(0)
+
+    // wspolczynniki tlumienia sily oddalajacej od stopu (1 - brak tlumienia, 0.5 - sila zmniejszona dwukrotnie)
+    SetFudgeFactorAll(1)
+}
+
+
+

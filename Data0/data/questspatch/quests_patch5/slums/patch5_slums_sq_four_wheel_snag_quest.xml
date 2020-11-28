@@ -1,0 +1,221 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- Four Wheel Snag -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- quest FourWheelSnag -parent=Q_Explosives05 -reward_set=FourWheelSnag_reward -quest_giver=sulajman -difficulty=medium -->
+        <!-- ,BLOCK _ -obj=&FourWheelSnag_OBJ_StartTalk& -announce_objective=false -->
+            <!-- ,goto <<Four Wheel Snag>> SpawnPoint sp_Hub_LJ_Floor_0 -distance=1000000 -show=false -->
+            <!-- ,use-lp _ NPCLifePlace sq_tales_from_crypt_Jaffar_start_LP -teleport=true -->
+                <!-- ,ai HumanAI Jafar -->
+            <!-- ,enable _ NPCLifePlace sq_tales_from_crypt_Jaffar_start_LP     -->
+            <!-- ,checkpoint _ SpawnPoint sp_JafarsWheelstation_01  -->
+            <!-- ,show-multi _  -->
+                <!-- ,o PhysicalSwitchDI cin_slums_garage_gate_01::slums_garage_gate_after -->
+                <!-- ,o PhysicalSwitchDI cin_slums_garage_gate_02::slums_garage_gate_after -->
+                <!-- ,o PhysicalSwitchDI cin_slums_garage_gate_03::slums_garage_gate_after -->
+                <!-- ,o PhysicalSwitchDI cin_slums_garage_gate_04::slums_garage_gate_after -->
+            <!-- ,set _ PhysicalSwitchDI cin_slums_garage_gate_01::slums_garage_gate_after -state=on -remain_active=false -->
+            <!-- ,set _ PhysicalSwitchDI cin_slums_garage_gate_02::slums_garage_gate_after -state=on -remain_active=false -->
+            <!-- ,set _ PhysicalSwitchDI cin_slums_garage_gate_03::slums_garage_gate_after -state=on -remain_active=false -->
+            <!-- ,set _ PhysicalSwitchDI cin_slums_garage_gate_04::slums_garage_gate_after -state=on -remain_active=false -->
+            <!-- ,hide-multi _  -->
+                <!-- ,o ModelObject cin_slums_garage_gate_01::slums_garage_gate_before -->
+                <!-- ,o ModelObject cin_slums_garage_gate_02::slums_garage_gate_before  -->
+                <!-- ,o ModelObject cin_slums_garage_gate_03::slums_garage_gate_before -->
+                <!-- ,o ModelObject cin_slums_garage_gate_04::slums_garage_gate_before -->
+            <!-- ,checkpoint _ SpawnPoint sp_FourWheelSnag_01            -->
+            <!-- ,BLOCK <<start actions>> -->
+                <!-- ,show _ HumanAI Sulajman -->
+                <!-- ,enable _ NPCLifePlace Sulajman_hub_LP -->
+                <!-- ,use-lp _ NPCLifePlace Jahra_Qstart2_LP -teleport=true -->
+                    <!-- ,ai HumanAI Tamam    -->
+                <!-- ,show _ HumanAI Jaff_gate_opener -->
+                <!-- ,use-lp _ NPCLifePlace Jaff_gate_opener_LP -teleport=true -->
+                    <!-- ,ai HumanAI Jaff_gate_opener    -->
+                <!--  -->
+            <!-- ,talk <<Four Wheel Snag - START>> sulajman sulajman_FourWheelSnag_01USE -questgiver_indicator=true -= -follow=sulajman_FourWheelSnag_INP -->
+                <!-- ,debugpos SpawnPoint sp_FourWheelSnag_01     -->
+            <!-- ,checkpoint _ SpawnPoint sp_FourWheelSnag_01 -->
+        <!--  -->
+        <!-- ,BLOCK _ -obj=&SQ_FourWheelSnag_OBJ_GoToJafar& -= FIND JAFFAR Wheelstation  -->
+            <!-- ,goto <<Four Wheel Snag - Get To The Workshop>> SensorGoTo courier_jaffar_goto -distance=0  -= DO PODMIANKI  -->
+                <!-- ,debugpos SpawnPoint sp_JafarsWheelstation_02 -->
+            <!-- ,checkpoint _ SpawnPoint sp_JafarsWheelstation_01     -->
+            <!--  -->
+        <!-- ,BLOCK _  -obj=&SQ_FourWheelSnag_OBJ_TalkToJahra& -= Talk to Tamman  -->
+            <!-- ,talk <<Four Wheel Snag - Find Parts I>> tamam tamam_FourWheelSnag_01USE -->
+                <!-- ,debugpos SpawnPoint sp_JafarsWheelstation_01 -->
+            <!-- ,enable _ QuestEnableGroup  sq_fourwheelsnag_crowds -->
+            <!-- ,checkpoint _ SpawnPoint sp_JafarsWheelstation_01 -->
+    <!--  -->
+    <!-- -= LIGHTS AND ACUMULATOR  -->
+    <!--  -->
+    <!-- quest FourWheelSnag_Lights -parent=FourWheelSnag -glued=true -->
+        <!-- ,OR _ -->
+            <!-- path -->
+                <!-- ,BLOCK _ -obj=&SQ_FourWheelSnag_OBJ_FindAcumLights& -->
+                    <!-- ,AND <<Find Battery>> -->
+                        <!-- ,debugpos SpawnPoint sp_JafarsWheelstation_01 -->
+                        <!--  -->
+                        <!-- path -->
+                            <!-- ,goto _ NPCLifePlace Jahra_Qstart2_LP -distance=-3 -show=false -->
+                            <!-- ,wait _ 2 -->
+                            <!-- ,use-lp _ NPCLifePlace Jahra_Car_LP -style=walk -->
+                                <!-- ,ai HumanAI Tamam -->
+                        <!-- path -->
+                            <!-- ,goto _ HeavyObjectsSpawner FourWheel_Acumulator -distance=5 -show=true -->
+                            <!-- ,show _ AppearGroup Jafars_Gate01b -->
+                            <!-- ,hide _ AppearGroup Jafars_Gate01a -->
+                            <!-- ,use-lp _ NPCLifePlace Jaff_gate_opener_LP2 -teleport=false -style=walk -->
+                                <!-- ,ai HumanAI Jaff_gate_opener    -->
+                            <!-- ,enable _ PhysicalSwitchDI Jaffar_FourWheelSnag_gate -->
+                            <!-- ,enable _ QuestEnableGroup Jafars_Gate01b -->
+                            <!-- ,enable _ SafeZone FourWheel_safeZoneOutside -->
+                            <!-- ,enable _ HeavyObjectsSpawner FourWheel_Acumulator -->
+                            <!-- ,show _ ItemDropZone FourWheel_Acumulator -->
+                            <!-- ,OR _ -->
+                                <!-- path -->
+                                    <!-- ,fill-multi << FourWheel_Acumulator>>  -show=true -->
+                                        <!-- ,container ItemDropZone FourWheel_Acumulator -->
+                                        <!-- ,spawner-ho HeavyObjectsSpawner FourWheel_Acumulator -->
+                                <!-- path -->
+                                    <!-- ,goto _ SensorGoTo courier_jaffar_goto_gate -distance=0 -show=false -->
+                                    <!-- ,talk _ voice2d Player_FourWheelSnag_06DLG01 -auto=true -show=false -->
+                                    <!-- ,semaphore _ -->
+                            <!-- ,hide _ AppearGroup Jafars_Gate01b -->
+                            <!-- ,show _ AppearGroup Jafars_Gate01a -->
+                            <!-- ,disable _ PhysicalSwitchDI Jaffar_FourWheelSnag_gate -->
+                            <!-- ,disable _ SafeZone FourWheel_safeZoneOutside -->
+                            <!-- ,disable _ QuestEnableGroup Jafars_Gate01b -->
+                        <!-- path -->
+                            <!-- ,goto _     SensorGoTo FourWheel_Acumulator -show=false -->
+                            <!-- ,enable _   QuestEnableGroup  FourWheel_zombie_getup -->
+                            <!-- ,enable _  AISpawnBoxNumber battery_infected                             -->
+                    <!-- -= ,checkpoint _ SpawnPoint sp_JafarsWheelstation_01 -->
+                    <!--  -->
+                <!-- ,BLOCK _   -obj=&SQ_FourWheelSnag_OBJ_BackToJahra& -->
+                    <!-- ,AND <<Four Wheel Snag - Find Parts II>> -->
+                        <!-- ,debugpos SpawnPoint sp_JafarsWheelstation_01     -->
+                        <!--  -->
+                        <!-- path -->
+                            <!-- ,use-lp _ NPCLifePlace Jaff_gate_opener_LP -teleport=false -style=walk -->
+                                <!-- ,ai HumanAI Jaff_gate_opener -->
+                        <!-- path  -->
+                            <!-- ,goto _ NPCLifePlace Jahra_Car_LP -distance=9 -show=false -->
+                            <!-- ,disable _ NPCLifePlace Jahra_Car_LP -->
+                            <!-- ,wait _ 4 -->
+                            <!-- ,use-lp _ NPCLifePlace Jahra_Car_LP2 -style=walk -->
+                                <!-- ,ai HumanAI Tamam -->
+                        <!-- path  -->
+                            <!-- ,goto _ NPCLifePlace Jahra_Car_LP -distance=2 -->
+                        <!--  -->
+                    <!-- ,talk _ tamam tamam_FourWheelSnag_02USE -show=true     -->
+                    <!-- ,enable _ QuestEnableGroup FourWheel_ConatainerGate::qeg_Hit_Door_Sound -->
+            <!-- path         -->
+                <!-- ,cnd-quest-started _ Q_Demolition05 -finished=true -->
+        <!-- ,disable _   QuestEnableGroup  FourWheel_zombie_getup         -->
+        <!-- ,checkpoint _ SpawnPoint sp_JafarsWheelstation_01 -->
+    <!--  -->
+    <!-- -= WELDING TORCH -->
+    <!--  -->
+    <!-- quest FourWheelSnag_Torch -parent=FourWheelSnag_Lights -glued=true -->
+        <!-- ,OR _ -->
+            <!-- path -->
+                <!-- ,BLOCK _     -obj=&SQ_FourWheelSnag_OBJ_FindWeldingTorch& -->
+                    <!-- ,enable _  QuestEnableGroup FourWheelSnag_QEG_metal_door -->
+                    <!-- ,AND <<Four Wheel Snag - Find Parts Burner>> -->
+                        <!-- ,debugpos SpawnPoint sp_FourWheels_BarsArea -->
+                        <!--  -->
+                        <!-- path -->
+                            <!-- ,gather _ NPCLifePlace Jahra_Car_LP2 -distance=-3 -show=false -->
+                            <!-- ,wait _ 2 -->
+                            <!-- ,use-lp _ NPCLifePlace Jahra_Car_LP3 -style=walk -->
+                                <!-- ,ai HumanAI Tamam -->
+                        <!-- path -->
+                            <!-- ,take _ QuestInventoryItemDI FourWheel_Burner -show=false -->
+                                <!-- ,area ZoneBox zone_FourWheel_FindBarsArea -->
+                        <!-- path -->
+                            <!-- ,goto _ Marker marker_FourWheell_ZombieContainer -distance=13 -show=false -->
+                            <!-- ,disable _ QuestEnableGroup FourWheel_ConatainerGate::qeg_Hit_Door_Sound -->
+                            <!-- ,enable _ AISpawnBoxNumber FourWheel_ContainerZombies -->
+                            <!-- ,enable _ AISpawnBoxNumber FourWheel_ContainerZombies2 -->
+                            <!-- ,wait _ 1 -->
+                            <!-- ,enable _ QuestEnableGroup FourWheel_ConatainerGate::qeg_Break_Door_Actions -->
+                            <!-- ,movie _ FourWheel_ConatainerGate::mov_container_doors_break_down -->
+                            <!-- ,disable _ QuestEnableGroup FourWheel_ConatainerGate::qeg_Break_Door_Actions -->
+                        <!-- path -->
+                            <!-- ,enable _ QuestEnableGroup FourWheel_Lamp_zombies -->
+                            <!-- ,AND _ -->
+                                <!-- path -->
+                                    <!-- ,take _ QuestInventoryItemDI FourWheel_Lamp01 -->
+                                <!-- path -->
+                                    <!-- ,take _ QuestInventoryItemDI FourWheel_Lamp02      -->
+                                <!-- path -->
+                                    <!-- ,take _ QuestInventoryItemDI FourWheel_Lamp03 -->
+                                <!-- path -->
+                                    <!-- ,take _ QuestInventoryItemDI FourWheel_Lamp04      -->
+                <!-- -= ,checkpoint _ SpawnPoint sp_FourWheels_BarsArea -->
+                <!--  -->
+                <!-- ,BLOCK _  -obj=&SQ_FourWheelSnag_OBJ_BackToJahra& -->
+                    <!-- ,use-lp _ NPCLifePlace Jahra_Car_LP4 -style=walk -->
+                        <!-- ,ai HumanAI Tamam -->
+                    <!-- ,talk <<Four Wheel Snag - Go Away>> tamam tamam_FourWheelSnag_03USE -->
+                        <!-- ,debugpos SpawnPoint sp_JafarsWheelstation_01 -->
+                    <!-- ,reward _     -->
+                    <!-- -= ,checkpoint _ SpawnPoint sp_JafarsWheelstation_01 -->
+                    <!--  -->
+                <!-- ,BLOCK _  -obj=&SQ_FourWheelSnag_OBJ_TalkToSulejman&    -->
+                    <!-- ,talk <<Four Wheel Snag - End>> sulajman sulajman_FourWheelSnag_END -->
+                        <!-- ,debugpos SpawnPoint sp_FourWheelSnag_01 -->
+            <!-- path       -->
+                <!-- ,cnd-quest-started _ Q_Demolition05 -finished=true -->
+        <!-- ,disable _ QuestEnableGroup FourWheel_Lamp_zombies         -->
+        <!-- ,disable _ AISpawnBoxNumber FourWheel_ContainerZombies -->
+        <!-- ,disable _ QuestEnableGroup sq_fourwheelsnag_InfQEG         -->
+        <!-- ,checkpoint _ SpawnPoint sp_FourWheelSnag_01 -->
+            <!--  -->
+    <!-- quest __FourWheelSnag_after -parent=FourWheelSnag_Torch -->
+        <!-- ,OR _ -->
+            <!-- path -->
+                <!-- ,wait _ 3 -->
+                <!-- ,gather _ Marker FourWheel_Marker -distance=-100 -show=false -->
+                <!-- ,hide-multi _  -->
+                    <!-- ,o ModelObject cin_slums_garage_gate_01::slums_garage_gate_before -->
+                    <!-- ,o ModelObject cin_slums_garage_gate_02::slums_garage_gate_before  -->
+                    <!-- ,o PhysicalSwitchDI   cin_slums_garage_gate_05::slums_garage_gate_after -->
+                <!-- ,show-multi _  -->
+                    <!-- ,o ModelObject jaffar_sedan_4wheel -->
+                    <!-- ,o ModelObject jaffar_sedan_4wheel_bonnet -->
+                    <!-- ,o PhysicalSwitchDI cin_slums_garage_gate_01::slums_garage_gate_after -->
+                    <!-- ,o PhysicalSwitchDI cin_slums_garage_gate_02::slums_garage_gate_after -->
+                    <!-- ,o ModelObject cin_slums_garage_gate_05::slums_garage_gate_before -->
+                <!-- ,use-lp _ NPCLifePlace Jahra_Qstart2_LP -teleport=true -->
+                    <!-- ,ai HumanAI Tamam -->
+            <!-- path -->
+                <!-- ,cnd-quest-started _ Q_Demolition05 -finished=true -->
+        <!-- ,checkpoint _ SpawnPoint sp_FourWheelSnag_01        -->
+        <!-- ,BLOCK _   -obj=&SQ_FourWheelSnag_OBJ_ComeBackToJahra& -->
+            <!-- ,use-lp _ NPCLifePlace Jahra_Car_LP5 -teleport=true -->
+                <!-- ,ai HumanAI Tamam -->
+            <!-- ,hide-multi _  -->
+                <!-- ,o ModelObject jaffar_sedan_4wheel -->
+                <!-- ,o ModelObject jaffar_sedan_4wheel_bonnet -->
+                <!-- ,o PhysicalSwitchDI cin_slums_garage_gate_01::slums_garage_gate_after -->
+                <!-- ,o PhysicalSwitchDI cin_slums_garage_gate_02::slums_garage_gate_after -->
+                <!-- ,o PhysicalSwitchDI cin_slums_garage_gate_03::slums_garage_gate_after -->
+                <!-- ,o PhysicalSwitchDI cin_slums_garage_gate_04::slums_garage_gate_after -->
+                <!-- ,o ModelObject cin_slums_garage_gate_05::slums_garage_gate_before -->
+            <!-- ,hide _ AppearGroup Jafars_Gate01b -->
+            <!-- ,show-multi _  -->
+                <!-- ,o ModelObject cin_slums_garage_gate_01::slums_garage_gate_before -->
+                <!-- ,o ModelObject cin_slums_garage_gate_02::slums_garage_gate_before  -->
+                <!-- ,o ModelObject cin_slums_garage_gate_03::slums_garage_gate_before -->
+                <!-- ,o ModelObject cin_slums_garage_gate_04::slums_garage_gate_before -->
+                <!-- ,o PhysicalSwitchDI   cin_slums_garage_gate_05::slums_garage_gate_after -->
+            <!-- ,talk _ tamam Jahra_FourWheelSnag_END -show=true -->
+            <!-- ,enable _ PhysicalSwitchDI   cin_slums_garage_gate_05::slums_garage_gate_after     -->
+        <!-- ,checkpoint _ SpawnPoint sp_JafarsWheelstation_01 -->
+</QuestsDefinitions>

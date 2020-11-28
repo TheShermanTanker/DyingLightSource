@@ -1,0 +1,48 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Definicja polecen fizyki ODE
+// Ze skryptu korzysta CODEManager.cpp
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+!include("..\\..\\surface.def")
+
+//-------------------------------------------------------------------------------------------------
+!WorldParams()                              // parametry globalne swiata ODE
+!EnableRenderOnStart(i)                     // wlacza/wylacza renderowanie geometrii ODE i kontaktow kolizyjnych na starcie programu
+!SetGravity(v3)                             // grawitacja swiata ODE [m/s^2]
+!SetERP(f)                                  // wspolczynnik ERP dla jointow
+!SetCFM(f)                                  // wspolczynnik CFM dla jointow
+!QuickStepNumIterations(i)                  // liczba iteracji quick step
+!QuickStepOverRelaxation(f)                 // parametr over-relaxation quick step
+!QuickStepSortSkip(i)                       // liczba iteracji, w ktorych sortowanie po jointach (operacja czasochlonna) jest omijane
+!QuickStepSortingMethod(i)                  // method of sorting used by quickstep solver:
+                                            // 0 - no sorting,
+                                            // 1 - randomize joints (default),
+                                            // 2 - sort joints (accurate but costs a lot of time),
+!Step(f)                                    // krok symulacji (domyslnie 0.02 = 50Hz)
+!EnableSkipContactConnected(i)              // wlacza/wylacza kolizje cial polaczonych jointem
+!DepthThreshold(f)                          // contact depth threshold [m]
+!ContinuousCollisions(i)                    // enable/disable continuous collisions
+!ContactDepthMul(f)                         // mnoznik glebokosci kontaktu (zmiekczenie kolizji)
+!MinMomentumToWakeUp(f)                     // kolizje z pedem mniejszym nizta wartsc nie powoduja obudzenia obiektu
+!PlodParams(f,f,f)                          // physics LOD parameters:
+                                            // f - LOD 0 / LOD 1 transition distance (near/far)
+                                            // f - LOD 1 / LOD 2 transition distance (far/outside)
+                                            // f - not in frustum on LOD influence
+!EnableMiniThreads(i)                       // set ode mini threads mode
+                                            // 0 - disabled, 1 - enabled, 2 - performance test mode
+!EnableSpu(i)                               // set ode spu mode (only PS3)
+                                            // 0 - disabled, 1 - enabled, 2 - performance test mode
+
+//-------------------------------------------------------------------------------------------------
+!CacheParams()                              // parametry cache'a kolizji ODE (enable, EachGeomHasOwnCache, Freq)
+                                            // enable - 1-enable tri cache, 0-disable
+                                            // EachGeomHasOwnCache - czy kazda geometria ma miec swoj osobny cache
+                                            //                       jezeli nie to cache ma extenty sumy extentow wszystkich geometrii
+                                            // Freq - czestotliwosc [Hz] pobierania trojkatow
+                                            // rozmiar cache'a jest dynamicznie obliczany na podstawie predkosci calej fizyki
+!TerrainCacheParams(i,i,f)                  // parametry cache'a dla terenu
+!StaticMeshCacheParams(i,i,f)               // parametry cache'a dla obiektow static
+!TreesCacheParams(i,i,f)                    // parametry cache'a dla drzew
+!ScriptCache(i)                             // czy skrypty fizyki maja byc cacheowane - odczytywane tylko za pierwszym razem
+
+

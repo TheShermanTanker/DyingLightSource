@@ -1,0 +1,117 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Fizyka Boat - ustawienia domyslne
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+!include("../Include/ODEPhysicsBoat.def")
+
+//-------------------------------------------------------------------------------------------------
+PhysicsParams()
+{
+    SetPhysicsSurfaceID(SRF_METAL)
+    SetVelsGate(0, 0)
+    SetWaterFloat(0.14)
+    SetAutoDisableVels(0, 0, 0)
+    SetAbsorbers(0.5, 0.5)
+    SetMaxVels(90, 30)                  // CM2M
+    SetMaxWatchingTime(0.1)
+    AllowDepthCompression(1)
+    SynchroMeshExtrapolation(0)
+    EnablePlatformAutoMounting(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+BoatParams()
+{
+    Mass(100)
+
+//    AddMainGeom("chassis", "box")
+//    AddMainGeom("glassf", "box")                   // test
+
+    MassScale([1, 0.5, 1])
+    MassShift([0, -0.9, 0])
+
+    //AddMainGeom("OH_Box01", "box")
+    AddMainGeom("bottom", "box")
+    AddMainGeom("sphere1", "sphere")
+    AddMainGeom("sphere2", "sphere")
+    AddMainGeom("sphere3", "sphere")
+    AddMainGeom("sphere4", "sphere")
+    AddMainGeom("sphere5", "sphere")
+    AddMainGeom("sphere6", "sphere")
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("Terrain")
+{
+    ZeroFlags()
+    Mu(0.1)                  
+    
+    //SetModeFlag("dContactSoftERP")
+    //SetModeFlag("dContactSoftCFM")
+    //SoftERP(1) 
+    //SoftCFM(0.01)
+
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("SimpleObjects")
+{
+    ZeroFlags()
+    Mu(7)                  
+    
+    //SetModeFlag("dContactSoftERP")
+    //SetModeFlag("dContactSoftCFM")
+    //SoftERP(0.35) 
+    //SoftCFM(0.0000001)
+
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("NonODEObjects")
+{
+    ZeroFlags()
+    Mu(7)                  
+    
+    //SetModeFlag("dContactSoftERP")
+    //SetModeFlag("dContactSoftCFM")
+    //SoftERP(0.25) 
+    //SoftCFM(0.0000001)
+
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("ODEObjects")
+{
+    ZeroFlags()
+    Mu(7)                  
+    
+    //SetModeFlag("dContactSoftERP")
+    //SetModeFlag("dContactSoftCFM")
+    //SoftERP(0.25) 
+    //SoftCFM(0.0000001)
+
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("Water")
+{
+    ZeroFlags()
+    Mu(0.001)                  
+    
+    //SetModeFlag("dContactSlip1")
+    //SetModeFlag("dContactSlip2")
+    //Slip1(1)                          
+    //Slip2(1)              
+
+    //SetModeFlag("dContactSoftERP")
+    //SetModeFlag("dContactSoftCFM")
+    //SoftERP(0.25) 
+    //SoftCFM(0.0000001)
+
+    Ignore(0)
+}
+

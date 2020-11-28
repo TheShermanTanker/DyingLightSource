@@ -1,0 +1,5 @@
+Description("v_fx_fnd_dust_color", "f:EDIT;e:EDIT|SPINNER|EXPANDABLE|BROWSE_COLOR|SHOW_DESCRIPTION;m:0 0 0;x:1 1 1;s:0.05 0.05 0.05;c:FX Fire & Dust;d:Dust color;" )
+Description("f_fx_fnd_rt_scale", "f:EDIT;e:EDIT|SPINNER|EXPANDABLE|SHOW_DESCRIPTION;m:0;s:1.0;c:FX Fire & Dust;d:Rendertarget scale;" )
+Description("s_fx_fnd_fire_curve_0", "f:EDIT;e:EDIT|SHOW_DESCRIPTION;c:FX Fire & Dust;d:Fire courve 0;" )
+Description("s_fx_fnd_fire_curve_1", "f:EDIT;e:EDIT|SHOW_DESCRIPTION;c:FX Fire & Dust;d:Fire courve 1;" )
+Description("s_fx_fnd_fire_curve_2", "f:EDIT;e:EDIT|SHOW_DESCRIPTION;c:FX Fire & Dust;d:Fire courve 2;" )

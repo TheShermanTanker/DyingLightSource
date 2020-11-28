@@ -1,0 +1,55 @@
+!include("ai_data.def")
+!include("ai_timing.def")
+!include("human_data_custom_preset_melee_fighter_a.scr")
+
+// pro melee fighter, (newer animations set). the same as human_data_custom_preset_melee_fighter_a but with some parameters tweaked so it will be harder - ENCOUNTERS VERSION
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////// CURVES //////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+Curve(CURVE_HEALTH, "human_melee_leader_health")
+
+////////////////////////////////////////////// DATA ///////////////////////////////////////////////
+
+//#######################
+//#### HIT REACTIONS ####
+//#######################
+//## hit_reaction:pose:hit_reaction:item_type:damage_type:attacker_pos:body_part:direction:severity
+//#######################
+
+// we want hard melee fighter to play less heavy reactions
+Data("hit_reaction:standing:pain::all::head:backward:",  -2, "m_melee_fighter_a_light_hitreaction_head_front_01", -1, 1)
+Data("hit_reaction:standing:pain::all::head:right:", -2,    "M_MELEE_FIGHTER_A_light_hitreaction_torso_right_01", -1, 1)
+
+Data("hit_reaction:standing:pain::all::torso:left:", -2,     "m_melee_fighter_a_light_hitreaction_torso_left_01", -1, 1)
+Data("hit_reaction:standing:pain::all::torso:right:", -2,    "M_MELEE_FIGHTER_A_light_hitreaction_torso_right_01", -1, 1)
+Data("hit_reaction:standing:pain::all::torso:backward:",  -2, "M_MELEE_FIGHTER_A_hitreaction_kick_medium_01", -1, 1)  
+
+/////////////////////////////////////////// PARAMETERS ////////////////////////////////////////////
+
+ParamFloat("dodge_prob_mul", 1.0)
+ParamFloat("group_behavior_keep_distance_optimal_dist", 9.0)
+ParamFloat("group_behavior_keep_distance_optimal_dist_ai", 4.5)
+ParamFloat("time_to_throw_back_enemy", 1.25)
+ParamFloat("time_to_throw_back_ai_enemy", 2.5)
+ParamFloat("air_kick_knockdown_prob", 0.05)
+
+ParamFloat("dist_to_keep_from_target", 4.0)
+
+ParamFloat("min_time_btw_dodge_jump", 2.0)
+ParamFloat("max_time_btw_dodge_jump", 4.0)
+
+ParamFloat("min_time_outside_enemy_sight_range_to_attack", 15.0)
+ParamFloat("max_time_awaiting_attack", 30.0)
+ParamFloat("stalk_prob_in_combat_idle", 0.1) 						// probability of stalking enemy in combat idle
+ParamFloat("stalk_prob_in_group", 0.0) 								// probability of stalking enemy in group
+ParamFloat("defend_area_range", 20.0)
+ParamBool("allow_group_broadcast_attack", 1)
+
+ParamFloat("sight_range_calm", 20.0) //converted
+ParamFloat("sight_range", 25.0) //converted
+ParamFloat("sight_additional_range", 1.0)
+
+//ParamFloat("hit_legs_stamina_mul", 4.0)								//Stamina damage dealt to legs is multiplied by this factor.
+
+ParamFloat("parry_bullet_prob", 0.5)

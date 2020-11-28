@@ -1,0 +1,105 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Fizyka WalkFly - ustawienia domyslne
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+!include("../Include/ODEPhysicsWalkFly.def")
+
+//-------------------------------------------------------------------------------------------------
+PhysicsParams()
+{
+    // more accurate than other physics
+    QuickStepNumIterations(100)
+    QuickStepSortingMethod(2)
+
+    SetPhysicsSurfaceID(SRF_FLESH)
+    SetVelsGate(0, 0)
+    SetWaterFloat(0.06)
+    SetAutoDisableVels(0, 0, 0)
+    SetAbsorbers(0, 0)
+    SetMaxVels(40, 10)
+    SetExtraGravity(0, -7, 0)
+    EnableMassPoint(1)
+    
+    AllowDepthCompression(1)
+    AllowContinuousCollisions(0, 0)
+    
+    CollisionDamageToOtherMul(1, 1)
+    CollisionDamageToOtherSpeedThreshold(0, 0)
+    CollisionDamageToMeMul(1, 1)
+    CollisionDamageToMeSpeedThreshold(15, 15)
+    
+    CollisionSfx(0, 0)
+    
+}
+
+//-------------------------------------------------------------------------------------------------
+PhysicsWalkParams()
+{
+    Mass(80)
+    MaxGroundDEGToWalk(40)
+    MaxGroundDEGToJump(35)
+    WalkAcceleration(40)        
+    WalkDeceleration(20)        
+    StairHeight(0.35)           
+    AirControlFactor(0.0)
+    PotencyFactor(0.19)
+    MaxClimbSpeed(2)            
+    ClimbMaxLookAroundAngleDEG(180)
+    Shape("YEllipsoid")
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("Terrain")
+{
+    ZeroFlags()
+    Mu(8)                  
+    SetModeFlag("dContactFDir1")
+    
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("SimpleObjects")
+{
+    ZeroFlags()
+    Mu(8)                  
+    SetModeFlag("dContactFDir1")
+    
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("NonODEObjects")
+{
+    ZeroFlags()
+    Mu(8)                  
+    SetModeFlag("dContactFDir1")
+
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("ODEObjects")
+{
+    ZeroFlags()
+    Mu(8)                  
+    SetModeFlag("dContactFDir1")
+    
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("Water")
+{
+    ZeroFlags()
+    Mu(10)                  
+    
+    SetModeFlag("dContactSoftERP")
+    SetModeFlag("dContactSoftCFM")
+    SoftERP(0.25) 
+    SoftCFM(0.0001)
+
+    Ignore(1)
+}
+
+

@@ -1,0 +1,40 @@
+export int MOVIE_OFFSET = 332;
+
+export int QTE_BEGIN = 4660;
+export int QTE_END = 4826;
+
+export int REFUSED_BEGIN = 4826;
+export int REFUSED_END = 6663;
+
+export int AGREED_BEGIN = 6694;
+export int AGREED_END = 7275;
+sub main()
+{
+    PlayMovie("cin_mother_01", 0, QTE_BEGIN);
+	Checkpoint();
+	PlayMovie("cin_mother_01", QTE_BEGIN, QTE_END)
+    {
+        QTE()
+        {   
+            Type(3); //Press button
+			Button("_ACTION_QTE5");
+            HUDPos([-0.75, -0.188, 0.0]);
+			Text("&Bossfight_Choose_Accept&");
+			
+			Button2("_ACTION_QTE6");
+            HUDPos2([0.75, -0.188, 0.0]);
+			Text2("&Bossfight_Choose_Reject&");
+            Looped(true);
+            JumpToPhaseAfterFail("Refused");
+			BreakMovie(true);
+        }
+    }
+    
+    PlayMovie("cin_mother_01", AGREED_BEGIN, AGREED_END);
+	SetVariable("DLC17_FINAL_PlayerAgreed", true); 
+	Stop(true);
+    
+    PlayMovie("cin_mother_01", REFUSED_BEGIN, REFUSED_END ) { Name("Refused"); } 
+	SetVariable("DLC17_FINAL_PlayerRefused", true); 
+    Stop(true);
+}

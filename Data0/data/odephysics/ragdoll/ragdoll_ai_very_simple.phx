@@ -1,0 +1,114 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Fizyka Ragdoll dla czlowieka - wersja uproszczona, np. do multiplayera
+// Uzywana przez Pawn.java - w szczegolnosci zmarle AI
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+!include("ODEPhysicsRagdoll.phx")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+PhysicsParams()
+{
+    QuickStepNumIterations(12)       
+    QuickStepSortingMethod(0)
+    
+    CollisionDamageToMeMul(0, 0)
+    AllowContinuousCollisions(0, 0)
+    SetWaterFloat(1.7)
+
+    SetAutoDisableVels(0.14, 4, 0.5)                // CM2M
+    SetAbsorbers(0.3, 0.5) 
+    SetMaxWatchingTime(0.5)
+    SetVelsGate(0, 0)
+    SetMaxVels(50, 100)
+    MaxLifeTime(12)
+    
+    SetExtraGravity(0, -1, 0)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+RagdollParams()
+{
+    Mass(90)
+    StiffenStartTime(-1)
+    ApplyForceMod(1)
+    ApplyForceAddUp(0)
+    
+    BlendingOfNonPhysicalBonesTime(0.5)
+    
+    //BehaviorSet("RagdollBehaviors.phx")
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+Bones()
+{
+    UseBoneScale("pelvis",      "sphere",           3,   0.9)
+    
+    UseBoneScale("l_upperarm",  "sphere",           2, 0.6)
+    UseBoneScale("r_upperarm",  "sphere",           2, 0.6)
+    UseBoneScale("l_forearm",   "capsule",          2, 1.5)
+    UseBoneScale("r_forearm",   "capsule",          2, 1.5)
+    UseBoneScale("l_thigh",     "sphere",           3, 0.6)
+    UseBoneScale("r_thigh",     "sphere",           3, 0.6)
+    UseBoneScale("l_calf",      "capsule",          2, 1.2)
+    UseBoneScale("r_calf",      "capsule",          2, 1.2)
+	
+    RootSynchro("bip01", "pelvis")
+    
+    BoneSynchro("pelvis", "spine")
+    BoneSynchro("pelvis", "spine2")
+    BoneSynchro("pelvis", "neck1")
+
+    
+    NoCollidedPair("l_thigh", "r_thigh")
+    
+    CollisionHelper("spine2", "pelvis", 1.4)
+    CollisionHelper("head", "pelvis", 1.4)
+    //CollisionHelper("spin3", "pelvis", 1.2)
+    
+    
+    GeomFrictionMul("l_forearm", 0.02)
+    GeomFrictionMul("r_forearm", 0.02)
+    GeomFrictionMul("l_calf", 0.1)
+    GeomFrictionMul("r_calf", 0.1)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+Joints()
+{
+    // definicja jointow
+    DefineJoint("pelvis",     "l_thigh",    "hinge",  0,  1, -0.4,  0,  0,  0)
+    DefineJoint("pelvis",     "r_thigh",    "hinge",  0,  1,  0.4,  0,  0,  0)
+    DefineJoint("l_thigh",    "l_calf",     "hinge",  0,  1,  0,    0,  0,  0)
+    DefineJoint("r_thigh",    "r_calf",     "hinge",  0,  1,  0,    0,  0,  0)
+    DefineJoint("pelvis",     "l_upperarm", "hinge", -1,  1,  0,    0,  0,  0)
+    DefineJoint("pelvis",     "r_upperarm", "hinge",  1,  1,  0,    0,  0,  0)
+    DefineJoint("l_upperarm", "l_forearm",  "hinge",  0,  1,  0,    0,  0,  0)
+    DefineJoint("r_upperarm", "r_forearm",  "hinge",  0, -1,  0,    0,  0,  0)
+
+    // parametry stopu
+    Set1DOFStops("pelvis l_thigh",       -0.30, 0.00,  0)
+    Set1DOFStops("pelvis r_thigh",       -0.30, 0.00,  0)
+    Set1DOFStops("l_thigh l_calf",        0.00, 0.40,  0) 
+    Set1DOFStops("r_thigh r_calf",        0.00, 0.40,  0) 
+    Set1DOFStops("pelvis l_upperarm",    -0.25, 0.40,  0)
+    Set1DOFStops("pelvis r_upperarm",    -0.40, 0.25,  0)
+    Set1DOFStops("l_upperarm l_forearm", -0.05, 0.25,  0)
+    Set1DOFStops("r_upperarm r_forearm", -0.25, 0.05,  0)
+
+    SetFrictionForceAll(2)
+    
+    // wspolczynniki dopuszczalnych bledow stopow
+    SetStopERPAll(0.1)
+
+    // wspolczynniki sprezystosci jointow po osiagnieciu stopow
+    SetStopCFMAll(0.1)
+    
+    // wspolczynniki sprezystosci jointow
+    SetCFMAll(0)
+
+    // wspolczynniki tlumienia sily oddalajacej od stopu (1 - brak tlumienia, 0.5 - sila zmniejszona dwukrotnie)
+    SetFudgeFactorAll(0)
+}
+
+
+

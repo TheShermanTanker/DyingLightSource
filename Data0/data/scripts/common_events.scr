@@ -1,0 +1,755 @@
+!include("map_events.def")
+
+//Warning: All common settings should be added here!
+RaytraceEventPlaces(1)
+
+EncounterManagerMapSettings()
+{
+	PointsModyfier("Reputation", 0.0)
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//EVENTS COMMON
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Event("RunningMission")
+{
+	Type("RUNNING_MISSION")
+	
+	Category("Challenge")
+    
+    // Time btw event randomize [s]
+    TimeBtw(0.)		
+
+    // Probability of the event will draw in [%]    
+    Probability(100.)
+    
+    // The actions used by this Event.
+    Action()
+    {
+        RunningMission()
+        {
+
+        }
+    }
+}
+
+Event("AirDrop")
+{
+	Type("AIR_DROP")
+
+	Category("Time")
+	DayTimeCondition(9.95)    // godzina wystepowania - uwaga po kropce nie sa minuty tylko ulamek godziny tzn 19:15 powinna byc zapisana jako 19.25
+//	DayTimeCondition(11.95) // wylaczone po skroceniu dnia do pol godziny
+	DayTimeCondition(15.95)
+//	DayTimeCondition(17.95) // wylaczone po skroceniu dnia do pol godziny
+
+	DayTimeCondition(23.30)
+
+// 	Category("Frequency")
+// 	TimeBtw(500.)			    // time btw event radnomize [s]
+// 	Probability(50.)			// prawdopodobienstwo ze wylosuje sie event [%]
+
+	CreatePlace("Air_Drop_Place")
+	{
+		//Condition("place of discharge", 0.5)
+		Condition("air drop", 1.)
+		IncludePrevInSuitabilityValue(0)
+		DistanceFrom("Player", 150., 100., 200.)				//optymalna odleglosc od innego punktu - nazwa "Player" uzywana do okreslenia aktualnej pozycji gracza
+	}
+
+	CreatePlace("Punk_Hideout_Place")
+	{
+		Condition("hideout", 1.)
+
+		DistanceFrom("Air_Drop_Place", 100., 0., 300.)			//optymalna odleglosc od innego punktu
+	}
+
+	Action()
+	{
+		AirDrop()
+		{
+			UsePlace("Air_Drop_Place")
+			
+			PlaneMeshAndSound("ve_hercules_a.msh", "airplane_hercules_passing.wav", 16.)
+			ParcelMesh("military_cargo_a.msh")
+			
+			ParachuteMesh("ve_parachute_a.msh")
+			ParachuteLandingAnim("landing")
+			ParachuteDropStartAnim("drop_seq")
+			DistToMugging(30.) 		//dystans do ograbienia skrzyni
+			TimeOfMugging(120.) 		// czas po jakim patrol i skrzynki zniknie jak user nie podejdzie na odlegloscia DistToMugging
+			DistOfPatrolSpawn(75.)	// Dystans przy ktorym wyspawnujemy patrol 
+			
+			TrayMesh("military_cargo_b.msh")
+			ItemContinerMesh("military_box_a.msh", "AirDropBox", [0.488892, 0.211380, 0.234924],   [0.000000, 53.000015, 0.000000])
+			ItemContinerMesh("military_box_a.msh", "AirDropBox", [-0.167236, 0.659706, -0.230927], [-0.971390, -36.217014, 30.917274])
+			ItemContinerMesh("military_box_a.msh", "AirDropBox", [1.760803, 0.097336, 0.467224],   [79.633415, 68.637077, -78.961716])
+			
+			NoItems(1, 3)  //liczba przedmiotow ktore maja sie pojawic
+			
+		}
+	}
+}
+
+
+
+// Events for Quest use
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+Event("demo_night_airdrop")
+{
+	Type("AIR_DROP")
+
+	CreatePlace("Air_Drop_Place")
+	{
+		//Condition("place of discharge", 0.5)
+		Condition("demo_night_airdrop", 1.)
+		IncludePrevInSuitabilityValue(0)
+		DistanceFrom("Player", 100., 0., 200.)				//optymalna odleglosc od innego punktu - nazwa "Player" uzywana do okreslenia aktualnej pozycji gracza
+	}
+
+	CreatePlace("Punk_Hideout_Place")
+	{
+		Condition("hideout", 1.)
+
+		DistanceFrom("Air_Drop_Place", 100., 0.,  300.)			//optymalna odleglosc od innego punktu
+	}
+
+	Action()
+	{
+		AirDrop()
+		{
+			UsePlace("Air_Drop_Place")
+			
+			PlaneMeshAndSound("ve_hercules_a.msh", "airplane_hercules_passing.wav", 18.)
+			ParcelMesh("military_cargo_a.msh")
+			
+			ParachuteMesh("ve_parachute_a.msh")
+			ParachuteLandingAnim("landing")
+			ParachuteDropStartAnim("drop_seq")
+			DistToMugging(25.) 		//dystans do ograbienia skrzyni
+			TimeOfMugging(60.) 		// czas po jakim patrol i skrzynki zniknie jak user nie podejdzie na odlegloscia DistToMugging
+			DistOfPatrolSpawn(35.)	// Dystans przy ktorym wyspawnujemy patrol 
+			
+			TrayMesh("military_cargo_b.msh")
+			ItemContinerMesh("military_box_a.msh", "AirDropBox", [0.488892, 0.211380, 0.234924],   [0.000000, 53.000015, 0.000000])
+			ItemContinerMesh("military_box_a.msh", "AirDropBox", [-0.167236, 0.659706, -0.230927], [-0.971390, -36.217014, 30.917274])
+			ItemContinerMesh("military_box_a.msh", "AirDropBox", [1.760803, 0.097336, 0.467224],   [79.633415, 68.637077, -78.961716])
+			
+			NoItems(1, 3)  //liczba przedmiotow ktore maja sie pojawic
+			
+		}
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+Event("Armored_Starter")
+{
+	Type("NONE")
+
+	CreateSpawnPlace("Spawn_Point", "Armored")
+	{
+		DistanceFrom("Player", 35., 0., 45.)				
+	}
+
+ 
+	Action()
+	{
+		SpawnAI()
+		{
+			Preset("Armored")
+			SetSpawnPlace("Spawn_Point")
+			FailDist(75.)
+			WaitingTime(0.)
+		}
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Event("Spitter_Starter")
+{
+	Type("NONE")
+
+	CreateSpawnPlace("Spawn_Point", "z_Spitter")
+	{
+		DistanceFrom("Player", 10., 0., 25.)				
+	}
+
+	Action()
+	{
+		SpawnAI()
+		{
+			Preset("z_Spitter")
+			SetSpawnPlace("Spawn_Point")
+		}
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Event("Thug_Starter")
+{
+	Type("NONE")
+
+	CreateSpawnPlace("Spawn_Point", "Thug")
+	{
+		DistanceFrom("Player", 10., 0., 25.)					
+	}
+
+	Action()
+	{
+		SpawnAI()
+		{
+			Preset("Thug")
+			SetSpawnPlace("Spawn_Point")
+		}
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Event("Vessel_Starter")
+{
+	Type("NONE")
+
+	CreateSpawnPlace("Spawn_Point", "Vessel")
+	{
+		DistanceFrom("Player", 10., 0., 25.)						
+	}
+
+	Action()
+	{
+		SpawnAI()
+		{
+			Preset("Vessel")
+			SetSpawnPlace("Spawn_Point")
+		}
+	}
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Event("Infected_Starter")
+{
+	Type("NONE")
+
+	CreateSpawnPlace("Spawn_Point", "Infected")
+	{
+		DistanceFrom("Player", 10., 0., 25.)					
+	}
+
+	Action()
+	{
+		SpawnAI()
+		{
+			Preset("Infected")
+			SetSpawnPlace("Spawn_Point")
+		}
+	}
+}
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Event("SafeNpcAsksForHelp")
+{
+	Type("HELP_SAFE_NPC")
+	Category("Place")
+    BlockPlace()
+	Probability(0.5)
+	TimeBtw(500.)					// It used to be 700, changed for E3.
+	DayPhaseBegin("morning")
+	DayPhaseEnd("evening")
+
+	Action()
+	{
+		HelpSafeNPC()
+		{
+		}
+	}
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Event("AssistEvent")
+{
+	Type("ASSIST")
+	Category("Place")
+	Probability(1.0)
+	TimeBtw(500.)				
+	DayPhaseBegin("morning")
+	DayPhaseEnd("evening")
+	BlockDuringAssist()
+	BlockDuringCoop()
+	Action()
+	{
+		Assist()
+		{
+		}
+	}
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Event("GenericAssistEvent")
+{
+	Type("GENERIC_ASSIST")
+	Category("Place")
+	Probability(1.0)
+	TimeBtw(500.)				
+	DayPhaseBegin("morning")
+	DayPhaseEnd("evening")
+	BlockDuringAssist()
+	BlockDuringCoop()
+	Action()
+	{
+		GenericAssist()
+		{
+		}
+	}
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Event("SafeGrabbedNpcAsksForHelp")
+{
+	Type("HELP_SAFE_GRABBED_NPC")
+	Category("Place")
+    BlockPlace()
+	Probability(0.5)
+	TimeBtw(500.)					// It used to be 700, changed for E3.
+	DayPhaseBegin("morning")
+	DayPhaseEnd("evening")
+
+	Action()
+	{
+		HelpSafeGrabbedNPC()
+		{
+		}
+	}
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Event("FightingGroupsEvent")
+{
+	Type("FIGHTING_GROUPS")
+	Category("Place")
+    BlockPlace()
+	Probability(0.5)
+	TimeBtw(500.)					// It used to be 700, changed for E3.
+	DayPhaseBegin("morning")
+	DayPhaseEnd("evening")
+
+	Action()
+	{
+		FightingGroups()
+		{
+		}
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Event("BattleAreaEvent")
+{
+	Type("BATTLE_AREA")
+	Category("Place")
+	Probability(1.0)
+	TimeBtw(0.)				
+	DayPhaseBegin("morning")
+	DayPhaseEnd("evening")
+
+	Action()
+	{
+		BattleArea()
+		{
+		}
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Event("PatrolEvent")
+{
+	Type("PATROL")
+	Category("Place")
+    BlockPlace()
+	Probability(0.5)
+	TimeBtw(500.)					// It used to be 700, changed for E3.
+	DayPhaseBegin("morning")
+	DayPhaseEnd("evening")
+
+	Action()
+	{
+		Patrol()
+		{
+		}
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Event("ForcedPatrolEvent")
+{
+	Type("FORCED_PATROL")
+	Category("Place")
+ 	Probability(0.5)
+	TimeBtw(500.)					// It used to be 700, changed for E3.
+	DayPhaseBegin("morning")
+	DayPhaseEnd("evening")
+
+	Action()
+	{
+		ForcedPatrol()
+		{
+		}
+	}
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Event("DeadBodiesEvent")
+{
+	Type("DEAD_BODIES")
+	Category("Place")
+    BlockPlace()
+	Probability(0.5)
+	TimeBtw(70.)
+	DayPhaseBegin("morning")
+	DayPhaseEnd("evening")
+
+	Action()
+	{
+		DeadBodies()
+		{
+		}
+	}
+}
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Event("CBRadioEvent")
+{
+	Type("CB_RADIO")
+	Category("Place")
+    BlockPlace()
+	Probability(0.5)
+	TimeBtw(360.)					// It used to be 700, changed for E3.
+	DayPhaseBegin("morning")
+	DayPhaseEnd("evening")
+
+	Action()
+	{
+		CBRadio()
+		{
+		}
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Event("PrimeEvent")
+{
+	Type("PRIME")
+	Category("Place")
+    BlockPlace()
+	Probability(0.3)
+	TimeBtw(900.)
+    DayPhaseBegin("morning")
+	DayPhaseEnd("evening")
+
+	Action()
+	{
+		Prime()
+		{
+		}
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Event("PrimeNightEvent")
+{
+	Type("PRIME_NIGHT")
+	Category("Place")
+	Probability(0.0)
+	TimeBtw(0.)
+    DayPhaseBegin("night_start")
+	DayPhaseEnd("night_final")
+
+	Action()
+	{
+		PrimeNight()
+		{
+		}
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Event("PrisonersEvent")
+{
+	Type("Prisoners")
+	Category("Place")
+    BlockPlace()
+	Probability(0.8)
+	TimeBtw(500.)					// It used to be 700, changed for E3.
+	DayPhaseBegin("morning")
+	DayPhaseEnd("evening")
+
+	Action()
+	{
+		Prisoners()
+		{
+		}
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Event("TrapEvent")
+{
+	Type("Trap")
+	Category("Place")
+    BlockPlace()
+	Probability(0.8)
+	TimeBtw(500.)					// It used to be 700, changed for E3.
+	DayPhaseBegin("morning")
+	DayPhaseEnd("evening")
+
+	Action()
+	{
+		Trap()
+		{
+		}
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Event("ShopEvent")
+{
+	Type("Shop")
+	Category("Place")
+	Probability(0.8)
+	TimeBtw(500.)					// It used to be 700, changed for E3.
+	DayPhaseBegin("morning")
+	DayPhaseEnd("evening")
+
+	Action()
+	{
+		Shop()
+		{
+		}
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Event("NightShopEvent")
+{
+	Type("SHOP_NIGHT")
+	Category("Place")
+	Probability(1.0)
+	DayPhaseBegin("night_start")
+	DayPhaseEnd("night_final")
+    
+	Action()
+	{
+		ShopNight()
+		{
+		}
+	}
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+Event("StoryTellerEvent")
+{
+	Type("STORY_TELLER")
+	Category("Place")
+	Probability(0.8)
+	TimeBtw(500.)					// It used to be 700, changed for E3.
+	DayPhaseBegin("morning")
+	DayPhaseEnd("evening")
+
+	Action()
+	{
+		StoryTeller()
+		{
+		}
+	}
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//GROUPS COMMON
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+EventsGroup("Air_Events")
+{
+	//BlockGroup()
+	AddEvent("AirDrop")
+	Exclusive()				// Only one of these type of events can be running at the same time.
+}
+
+EventsGroup("Quest")
+{
+	BlockGroup()
+	AddEvent("Thug_Starter")
+    AddEvent("Armored_Starter")
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//GROUPS Encounter
+//
+// Single event groups are used to enable/disable certain event types from quests.
+// ExclusiveEncounters is used for enforcing mutual exlusion between different event types.
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+EventsGroup("NpcHelp")
+{
+	AddEvent("SafeNpcAsksForHelp")
+}
+
+EventsGroup("NpcGrabbedHelp")
+{
+	AddEvent("SafeGrabbedNpcAsksForHelp")
+}
+
+EventsGroup("EncounterFightingGroups")
+{
+	AddEvent("FightingGroupsEvent")
+}
+
+EventsGroup("EncounterBattleArea")
+{
+	AddEvent("BattleAreaEvent")
+}
+
+EventsGroup("EncounterAssist")
+{
+	AddEvent("AssistEvent")
+}
+EventsGroup("EncounterGenericAssist")
+{
+	AddEvent("GenericAssistEvent")
+}
+
+EventsGroup("EncounterPatrol")
+{
+	AddEvent("PatrolEvent")
+}
+
+EventsGroup("EncounterForcedPatrol")
+{
+	AddEvent("ForcedPatrolEvent")
+}
+
+EventsGroup("EncounterDeadBodies")
+{
+	BlockGroup()
+	AddEvent("DeadBodiesEvent")
+}
+
+EventsGroup("EncounterCBRadio")
+{
+	AddEvent("CBRadioEvent")
+}
+
+EventsGroup("EncounterPrime")
+{
+	AddEvent("PrimeEvent")
+	Exclusive() 
+}
+
+EventsGroup("EncounterPrimeNight")
+{
+	AddEvent("PrimeNightEvent")
+}
+
+EventsGroup("EncounterPrisoners")
+{
+	AddEvent("PrisonersEvent")
+}
+
+EventsGroup("EncounterTrap")
+{
+	AddEvent("TrapEvent")
+}
+
+EventsGroup("EncounterShop")
+{
+	AddEvent("ShopEvent")
+    Exclusive() 
+}
+
+EventsGroup("EncounterStoryTeller")
+{
+	AddEvent("StoryTellerEvent")
+    Exclusive() 
+}
+
+EventsGroup("EncounterNightShop")
+{
+	AddEvent("NightShopEvent")
+}
+
+EventsGroup("E3DisabledEncounters")
+{
+	AddEvent("PrimeEvent")
+	AddEvent("CBRadioEvent")
+	AddEvent("FightingGroupsEvent")
+	AddEvent("SafeGrabbedNpcAsksForHelp")
+	
+}
+
+EventsGroup("AllEncounters")
+{
+	AddEvent("PrimeNightEvent")
+	AddEvent("PrimeEvent")
+	AddEvent("CBRadioEvent")
+	AddEvent("FightingGroupsEvent")
+	AddEvent("PrisonersEvent")
+	AddEvent("PatrolEvent")
+	AddEvent("SafeGrabbedNpcAsksForHelp")
+	AddEvent("SafeNpcAsksForHelp")
+	AddEvent("TrapEvent")
+    AddEvent("ShopEvent")
+	AddEvent("StoryTellerEvent")
+	AddEvent("GenericAssistEvent")
+}
+
+EventsGroup("ExclusiveEncounters")
+{
+	//BlockGroup()
+	EncounterGroup()
+	TimeBtw(300.)							// It used to be 300, changed for E3
+	AddEvent("SafeNpcAsksForHelp")
+	AddEvent("SafeGrabbedNpcAsksForHelp")
+	AddEvent("FightingGroupsEvent")
+	AddEvent("PatrolEvent")
+	AddEvent("CBRadioEvent")
+	AddEvent("PrisonersEvent")
+	AddEvent("TrapEvent")
+    AddEvent("ShopEvent")
+	AddEvent("StoryTellerEvent")
+	AddEvent("GenericAssistEvent")
+	Exclusive()         // nie wystepuje z innymi z grupy
+}
+
+EventsGroup("Disabled_Events")
+{
+	BlockGroup()
+	//AddEvent("NightShopEvent")
+	//AddEvent("ShopEvent")
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//RESOURCES COMMON
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+AddResource("ve_hercules_a.msh")
+AddResource("airplane_hercules_passing.wav")
+AddResource("military_cargo_a.msh")
+AddResource("military_cargo_b.msh")
+AddResource("military_box_a.msh")
+AddResource("crate_full_a.msh")
+AddResource("tools_box_anm.msh")
+AddResource("ve_parachute_a.msh")
+AddResource("hercules_engine_smoke_sequence.fx")
+AddResource("airbox_dust_sequence.fx")
+AddResource("ve_parachute_a_drop.anm2")
+AddResource("ve_parachute_a_landing.anm2")
+AddResource("ve_parachute_a_fall_loop.anm2")
+AddResource("car_hit_ground_end_00.wav")
+AddResource("car_hit_ground_sequence.fx")
+AddResource("armored_hit_car_dust.fx")
+AddResource("car_throw_00.wav")
+
+AddResource("Flare_gun_falling_sequence.fx")
+AddResource("magnesium_flare_loop_sequence.fx")
+AddResource("magnesium_flare_end_sequence.fx")

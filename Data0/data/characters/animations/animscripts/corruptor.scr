@@ -1,0 +1,1028 @@
+!include("events.def")
+!include("anim_actions.def")
+!include("ai_timing.def")
+!include("human_vis_events.def")
+!include("vessel_vis_events.def")
+!include("human_sound_events.def")
+!include("vessel_sound_events.def")
+
+
+// ============================ Corruptor =================================
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_strike_right_hand1
+//SeqTrack("corruptor_strike_right_hand1", 			"corruptor_strike_right_hand1.anm2",        5, 104, 30, 1, 0.3)
+//{
+//	Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(1, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(5, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(17, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(19, EVENT_REACT_ON_HIT_DISABLED, -1)
+//    Event(19, SOUND_EVENT_ATTACK, -1)
+//    Event(29, EVENT_APPLY_DAMAGE_DOWN, -1)
+//    Event(30, EVENT_REACT_ON_HIT_ENABLED, -1)
+//    Event(35, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(38, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(52, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_strike_right_hand2
+//SeqTrack("corruptor_strike_right_hand2", 			"corruptor_strike_right_hand2.anm2",        0, 89, 30, 1, 0.3)
+//{
+//	Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(11, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(18, EVENT_REACT_ON_HIT_DISABLED, -1)
+//    Event(19, SOUND_EVENT_ATTACK, -1)
+//    Event(23, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(27, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(28, EVENT_APPLY_DAMAGE_UP, -1)
+//    Event(29, EVENT_REACT_ON_HIT_ENABLED, -1)
+//    Event(31, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(38, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(47, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(48, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(51, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(57, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(65, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(82, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(89, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_strike_left_hand1
+//SeqTrack("corruptor_strike_left_hand1", 			"corruptor_strike_left_hand1.anm2",        38, 138, 30, 1, 0.3)
+//{
+//	Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(18, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(19, EVENT_REACT_ON_HIT_DISABLED, -1)
+//    Event(19, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(21, SOUND_EVENT_ATTACK, -1)
+//    Event(21, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(29, EVENT_APPLY_DAMAGE_RIGHT, -1)
+//    Event(30, EVENT_REACT_ON_HIT_ENABLED, -1)
+//    Event(49, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(58, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(64, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(74, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_strike_left_hand2
+//SeqTrack("corruptor_strike_left_hand2", 			"corruptor_strike_left_hand2.anm2",        8, 87, 30, 1, 0.3)
+//{
+//	Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(10, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(13, EVENT_REACT_ON_HIT_DISABLED, -1)
+//    Event(16, SOUND_EVENT_ATTACK, -1)
+//    Event(23, EVENT_APPLY_DAMAGE_RIGHT, -1)
+//    Event(24, EVENT_REACT_ON_HIT_ENABLED, -1)
+//    Event(25, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(26, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(33, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(34, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(51, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(53, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(79, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_burn_loop1
+//SeqTrack("corruptor_burn_loop1", 		        	"corruptor_burn_loop1.anm2",               0, 195, 30, 1, 0.3)
+//{
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(18, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(18, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(23, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(27, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(27, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(45, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(50, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(54, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(58, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(66, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(71, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(75, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(78, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(81, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(90, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(94, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(96, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(105, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(127, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(140, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(147, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(157, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(159, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(169, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(169, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(177, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(179, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(185, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(188, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(195, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_burn_loop2
+//SeqTrack("corruptor_burn_loop2", 		        	"corruptor_burn_loop2.anm2",               0, 153, 30, 1, 0.3)
+//{
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(10, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(24, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(29, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(36, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(36, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(43, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(44, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(50, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(53, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(66, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(66, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(76, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(86, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(96, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(98, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(103, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(107, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(115, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(122, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(123, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(139, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(140, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(150, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_burn_to_death1
+//SeqTrack("corruptor_burn_to_death1", 		      	"corruptor_burn_to_death1.anm2",           0, 193, 30, 1, 0.3)
+//{
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(5, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(8, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(13, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(14, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(17, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(37, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(38, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(46, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(65, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(69, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(69, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(78, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(84, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(84, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(96, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(105, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(109, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(114, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(118, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(118, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(119, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(128, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(128, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(135, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(143, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(147, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(148, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(149, VIS_EVENT_IK_DISABLING_START, -1)
+//    Event(161, VIS_EVENT_IK_DISABLE, -1)
+//} //295
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_burn_to_death2
+//SeqTrack("corruptor_burn_to_death2", 		      	"corruptor_burn_to_death2.anm2",           0, 254, 30, 1, 0.3)
+//{
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(7, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(7, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(17, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(22, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(22, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(23, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(35, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(40, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(42, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(51, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(62, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(66, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(72, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(83, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(83, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(85, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(89, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(90, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(94, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(98, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(106, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(106, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(113, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(114, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(119, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(120, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(126, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(127, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(136, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(138, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(139, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(142, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(144, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(146, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(156, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(157, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(165, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(165, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(175, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(175, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(183, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(185, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(185, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(188, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(194, VIS_EVENT_IK_DISABLING_START, -1)
+//    Event(197, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(197, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(198, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(202, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(205, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(206, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(214, VIS_EVENT_IK_DISABLE, -1)
+//} //295
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_stand_up1
+//SeqTrack("corruptor_stand_up1", 		         	"corruptor_stand_up1.anm2",                0, 216, 30, 1, 1.5)
+//{
+//	Event(0, EVENT_CAN_BE_FINISHED_START, -1)
+//    Event(0, EVENT_LYING_ELLIPSOID, -1)
+//    Event(0, EVENT_FALL_ON_HIT_ENABLE, -1)
+//    Event(0, VIS_EVENT_IK_DISABLE, -1)
+//    Event(77, EVENT_CAN_BE_FINISHED_END, -1)
+//    Event(122, EVENT_STAND_UP_ELLIPSOID, -1)
+//    Event(153, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(154, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(185, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(188, EVENT_FALL_ON_HIT_DISABLE, -1)
+//    Event(188, EVENT_STOOD_UP, -1)
+//    Event(188, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(196, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(199, VIS_EVENT_IK_ENABLING_START, -1)
+//    Event(215, VIS_EVENT_IK_ENABLE, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_stand_up2
+//SeqTrack("corruptor_stand_up2", 		         	"corruptor_stand_up2.anm2",                0, 181, 30, 1, 1.5)
+//{
+//	Event(0, EVENT_CAN_BE_FINISHED_START, -1)
+//    Event(0, EVENT_LYING_ELLIPSOID, -1)
+//    Event(0, EVENT_FALL_ON_HIT_ENABLE, -1)
+//    Event(0, VIS_EVENT_IK_DISABLE, -1)
+//    Event(66, EVENT_CAN_BE_FINISHED_END, -1)
+//    Event(101, EVENT_STAND_UP_ELLIPSOID, -1)
+//    Event(130, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(145, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(152, EVENT_FALL_ON_HIT_DISABLE, -1)
+//    Event(152, EVENT_STOOD_UP, -1)
+//    Event(155, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(160, VIS_EVENT_IK_ENABLING_START, -1)
+//    Event(161, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(165, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(167, VIS_EVENT_IK_ENABLE, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corrupter_idle1
+//SeqTrack("corrupter_idle1", 		      	"corrupter_idle1.anm2",           0, 279, 30, 1, 0.6)
+//{
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corrupter_idle2
+//SeqTrack("corrupter_idle2", 		      	"corrupter_idle2.anm2",           0, 150, 30, 1, 0.6)
+//{
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corrupter_walk1
+//SeqTrack("corrupter_walk1", 		      	"corrupter_walk1.anm2",           0, 136, 30, 1, 0.2)
+//{
+//	Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(7, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(8, VIS_EVENT_STEP_RIGHT, -1)
+//    Event(25, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(29, VIS_EVENT_STEP_LEFT, -1)
+//    Event(29, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(38, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(42, VIS_EVENT_STEP_RIGHT, -1)
+//    Event(42, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(46, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(60, VIS_EVENT_STEP_LEFT, -1)
+//    Event(60, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(74, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(77, VIS_EVENT_STEP_RIGHT, -1)
+//    Event(77, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(89, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(97, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(98, VIS_EVENT_STEP_LEFT, -1)
+//    Event(107, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(109, VIS_EVENT_STEP_RIGHT, -1)
+//    Event(109, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(125, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(127, VIS_EVENT_STEP_LEFT, -1)
+//    Event(128, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corrupter_walk2
+//SeqTrack("corrupter_walk2", 		      	"corrupter_walk2.anm2",           0, 187, 30, 1, 0.2)
+//{
+//	Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(7, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(7, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(8, VIS_EVENT_STEP_RIGHT, -1)
+//    Event(41, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(43, VIS_EVENT_STEP_LEFT, -1)
+//    Event(44, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(45, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(59, VIS_EVENT_STEP_RIGHT, -1)
+//    Event(59, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(65, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(78, VIS_EVENT_STEP_LEFT, -1)
+//    Event(78, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(96, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(100, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(101, VIS_EVENT_STEP_RIGHT, -1)
+//    Event(113, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(116, VIS_EVENT_STEP_LEFT, -1)
+//    Event(116, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(126, VIS_EVENT_STEP_RIGHT, -1)
+//    Event(126, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(126, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(129, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(148, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(149, VIS_EVENT_STEP_LEFT, -1)
+//    Event(158, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(162, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(163, VIS_EVENT_STEP_RIGHT, -1)
+//    Event(167, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(180, VIS_EVENT_STEP_LEFT, -1)
+//    Event(180, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corrupter_rotate90r
+//SeqTrack("corrupter_rotate90r", 		      	"corrupter_rotate90r.anm2",           0, 64, 30, 1, 0.4)
+//{
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(5, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(16, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(17, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(38, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(40, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(48, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corrupter_rotate90l
+//SeqTrack("corrupter_rotate90l", 		      	"corrupter_rotate90l.anm2",           0, 74, 30, 1, 0.4)
+//{
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(1, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(24, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(26, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(37, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(44, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(55, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corrupter_rotate180l
+//SeqTrack("corrupter_rotate180l", 		      	"corrupter_rotate180l.anm2",           0, 84, 30, 1, 0.4)
+//{
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(4, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(11, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(11, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(34, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(37, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(40, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(48, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(70, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(71, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(74, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corrupter_rotate180r
+//SeqTrack("corrupter_rotate180r", 		      	"corrupter_rotate180r.anm2",           0, 89, 30, 1, 0.4)
+//{
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(10, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(19, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(19, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(42, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(43, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(59, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(60, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(78, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(79, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(85, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corrupter_spit1
+//SeqTrack("corrupter_spit1", 		      	"corrupter_spit1.anm2",           0, 53, 30, 1, 0.3)
+//{
+//	Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(10, SOUND_EVENT_SPIT, -1)
+//    Event(22, EVENT_APPLY_DAMAGE_FORWARD, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corrupter_spit2
+//SeqTrack("corrupter_spit2", 		      	"corrupter_spit2.anm2",           0, 89, 30, 1, 0.3)
+//{
+//	Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(19, SOUND_EVENT_SPIT, -1)
+//    Event(27, EVENT_APPLY_DAMAGE_FORWARD, -1)
+//}
+
+
+SeqTrack("caster_timed_explosion_death", 	"corruptor_electrified_death_01.anm2",  	0, 226, 30, 1, 0.3)
+{
+    Event(150, EVENT_HANDLE_DEATH_EFFECT, -1)
+    Event(226, EVENT_FALL, -1)
+}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence caster_spit
+//SeqTrack("caster_spit", 		      	"corrupter_spit2.anm2",           0, 89, 15, 1, 0.3)
+//{
+//	Event(19, SOUND_EVENT_SPIT, -1)
+//	Event(27, EVENT_APPLY_DAMAGE_FORWARD, -1)
+//}
+
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence caster_emit_aoe
+//SeqTrack("caster_emit_aoe", 		      	"corrupter_puke1.anm2",           25, 142, 25, 1, 0.3)
+//{	
+//	Event(110, EVENT_START_GAS_ATTACK, -1)
+//}
+
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence caster_throw
+//SeqTrack("caster_throw", 		      	"corruptor_strike_right_hand1.anm2",           0, 103, 15, 1, 0.6)
+//{
+//	Event(1, EVENT_AI_THROWABLE_PREPARE, -1)
+//	Event(32, EVENT_AI_THROWABLE_THROW, -1)
+//}
+
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corrupter_puke1
+//SeqTrack("corrupter_puke1", 		      	"corrupter_puke1.anm2",           25, 142, 25, 1, 0.3)
+//{
+//	Event(0, EVENT_TRACK_DISABLE, -1)
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(2, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(3, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(14, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(18, VIS_EVENT_PUKE_ATTACK, -1)
+//    Event(18, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(24, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(25, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(29, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(30, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(36, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(38, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(50, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(52, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(53, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(73, VIS_EVENT_PUKE_ATTACK_END, -1)
+//    Event(75, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(81, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(81, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(85, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(86, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(110, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(115, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corrupter_puke2
+//SeqTrack("corrupter_puke2", 		      	"corrupter_puke2.anm2",           44, 153, 25, 1, 0.3)
+//{
+//	Event(0, EVENT_TRACK_DISABLE, -1)
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(2, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(17, VIS_EVENT_PUKE_ATTACK, -1)
+//    Event(21, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(26, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(57, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(59, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(63, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(78, VIS_EVENT_PUKE_ATTACK_END, -1)
+//    Event(90, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(93, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corrupter_startwalk_90l
+//SeqTrack("corrupter_startwalk_90l", 		      	"corrupter_startwalk_90l.anm2",           0, 94, 30, 1, 0.3)
+//{
+//	Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(6, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(6, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(18, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(29, VIS_EVENT_STEP_RIGHT, -1)
+//    Event(29, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(33, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(44, VIS_EVENT_STEP_LEFT, -1)
+//    Event(44, VIS_EVENT_ROTATION_MOD_END, -1)
+//    Event(44, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(45, VIS_EVENT_STOPANIM, -1)
+//    Event(48, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(60, VIS_EVENT_STEP_RIGHT, -1)
+//    Event(60, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(65, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(72, VIS_EVENT_STEP_LEFT, -1)
+//    Event(72, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(74, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(89, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(90, VIS_EVENT_STEP_RIGHT, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corrupter_startwalk_90r
+//SeqTrack("corrupter_startwalk_90r", 		      	"corrupter_startwalk_90r.anm2",           0, 94, 30, 1, 0.3)
+//{
+//	Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(5, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(6, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(18, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(29, VIS_EVENT_STEP_LEFT, -1)
+//    Event(29, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(38, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(44, VIS_EVENT_STEP_RIGHT, -1)
+//    Event(44, VIS_EVENT_ROTATION_MOD_END, -1)
+//    Event(44, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(45, VIS_EVENT_STOPANIM, -1)
+//    Event(47, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(59, VIS_EVENT_STEP_LEFT, -1)
+//    Event(60, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(65, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(72, VIS_EVENT_STEP_RIGHT, -1)
+//    Event(72, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(74, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(89, VIS_EVENT_STEP_LEFT, -1)
+//    Event(91, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corrupter_startwalk_180l
+//SeqTrack("corrupter_startwalk_180l", 		      	"corrupter_startwalk_180l.anm2",           0, 138, 30, 1, 0.3)
+//{
+//	Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(6, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(23, VIS_EVENT_STEP_LEFT, -1)
+//    Event(23, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(24, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(40, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(47, VIS_EVENT_STEP_RIGHT, -1)
+//    Event(47, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(49, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(61, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(62, VIS_EVENT_STEP_LEFT, -1)
+//    Event(62, VIS_EVENT_ROTATION_MOD_END, -1)
+//    Event(63, VIS_EVENT_STOPANIM, -1)
+//    Event(78, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(80, VIS_EVENT_STEP_RIGHT, -1)
+//    Event(81, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(85, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(97, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(98, VIS_EVENT_STEP_LEFT, -1)
+//    Event(116, VIS_EVENT_STEP_RIGHT, -1)
+//    Event(116, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(116, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(128, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(130, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(131, VIS_EVENT_STEP_LEFT, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corrupter_startwalk_180r
+//SeqTrack("corrupter_startwalk_180r", 		      	"corrupter_startwalk_180r.anm2",           0, 138, 30, 1, 0.3)
+//{
+//	Event(0, VIS_EVENT_IK_ENABLE, -1)
+//	Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(23, VIS_EVENT_STEP_RIGHT, -1)
+//    Event(23, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(23, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(40, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(47, VIS_EVENT_STEP_LEFT, -1)
+//    Event(47, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(49, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(61, VIS_EVENT_STEP_RIGHT, -1)
+//    Event(61, VIS_EVENT_ROTATION_MOD_END, -1)
+//    Event(61, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(62, VIS_EVENT_STOPANIM, -1)
+//    Event(77, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(81, VIS_EVENT_STEP_LEFT, -1)
+//    Event(81, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(85, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(97, VIS_EVENT_STEP_RIGHT, -1)
+//    Event(97, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(116, VIS_EVENT_STEP_LEFT, -1)
+//    Event(116, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(117, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(129, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(130, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corrupter_startwalk
+//SeqTrack("corrupter_startwalk", 		      	"corrupter_startwalk.anm2",           0, 153, 30, 1, 0.3)
+//{
+//	Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(4, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(6, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(18, VIS_EVENT_STEP_LEFT, -1)
+//    Event(18, VIS_EVENT_ROTATION_MOD_END, -1)
+//    Event(18, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(28, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(34, VIS_EVENT_STEP_RIGHT, -1)
+//    Event(34, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(35, VIS_EVENT_STOPANIM, -1)
+//    Event(39, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(52, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(53, VIS_EVENT_STEP_LEFT, -1)
+//    Event(62, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(70, VIS_EVENT_STEP_RIGHT, -1)
+//    Event(70, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(87, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(94, VIS_EVENT_STEP_LEFT, -1)
+//    Event(94, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(105, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(110, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(124, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(127, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(141, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(142, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_light_hit_reaction_01
+//SeqTrack("corruptor_light_hit_reaction_01", 		      	"corruptor_light_hit_reaction_01.anm2",           8, 72, 30, 1, 0.27)
+//{
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(24, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_light_hit_reaction_02
+//SeqTrack("corruptor_light_hit_reaction_02", 		      	"corruptor_light_hit_reaction_02.anm2",           10, 66, 30, 1, 0.27)
+//{
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(39, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_light_hit_reaction_03
+//SeqTrack("corruptor_light_hit_reaction_03", 		      	"corruptor_light_hit_reaction_03.anm2",           8, 56, 30, 1, 0.27)
+//{
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_light_hit_reaction_04
+//SeqTrack("corruptor_light_hit_reaction_04", 		      	"corruptor_light_hit_reaction_04.anm2",           19, 60, 30, 1, 0.27)
+//{
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_light_hit_reaction_05
+//SeqTrack("corruptor_light_hit_reaction_05", 		      	"corruptor_light_hit_reaction_05.anm2",           5, 68, 30, 1, 0.27)
+//{
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_light_hit_reaction_06
+//SeqTrack("corruptor_light_hit_reaction_06", 		      	"corruptor_light_hit_reaction_06.anm2",           5, 63, 30, 1, 0.27)
+//{
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(4, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(4, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_light_hit_reaction_07
+//SeqTrack("corruptor_light_hit_reaction_07", 		      	"corruptor_light_hit_reaction_07.anm2",           13, 49, 30, 1, 0.27)
+//{
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(1, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(25, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(27, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_light_hit_reaction_08
+//SeqTrack("corruptor_light_hit_reaction_08", 		      	"corruptor_light_hit_reaction_08.anm2",           7, 42, 30, 1, 0.27)
+//{
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_light_hit_reaction_09
+//SeqTrack("corruptor_light_hit_reaction_09", 		      	"corruptor_light_hit_reaction_09.anm2",           7, 66, 30, 1, 0.27)
+//{
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(11, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(17, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(18, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(20, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(25, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(40, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(46, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(51, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(53, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(59, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_light_hit_reaction_10
+//SeqTrack("corruptor_light_hit_reaction_10", 		      	"corruptor_light_hit_reaction_10.anm2",           2, 63, 30, 1, 0.27)
+//{
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_strong_hit_reaction_01
+//SeqTrack("corruptor_strong_hit_reaction_01", 		      	"corruptor_strong_hit_reaction_01.anm2",           7, 78, 30, 1, 0.27)
+//{
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(4, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(10, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(15, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(20, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(25, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(32, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(34, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(39, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(44, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(52, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(56, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(60, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_strong_hit_reaction_02
+//SeqTrack("corruptor_strong_hit_reaction_02", 		      	"corruptor_strong_hit_reaction_02.anm2",           20, 83, 30, 1, 0.27)
+//{
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(4, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(13, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(17, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(24, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(24, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(29, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(32, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(42, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(44, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(44, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(48, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_strong_hit_reaction_03
+//SeqTrack("corruptor_strong_hit_reaction_03", 		      	"corruptor_strong_hit_reaction_03.anm2",           6, 97, 30, 1, 0.27)
+//{
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(18, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(27, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(32, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(49, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(51, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(57, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(62, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(68, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(85, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(91, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_strong_hit_reaction_04
+//SeqTrack("corruptor_strong_hit_reaction_04", 		      	"corruptor_strong_hit_reaction_04.anm2",           5, 70, 30, 1, 0.27)
+//{
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(19, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(30, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(31, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(37, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(48, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(54, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_strong_hit_reaction_05
+//SeqTrack("corruptor_strong_hit_reaction_05", 		      	"corruptor_strong_hit_reaction_05.anm2",           2, 65, 30, 1, 0.27)
+//{
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(6, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(11, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(17, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(26, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(27, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(39, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(39, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(46, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//} //88
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_strong_hit_reaction_06
+//SeqTrack("corruptor_strong_hit_reaction_06", 		      	"corruptor_strong_hit_reaction_06.anm2",           2, 51, 30, 1, 0.27)
+//{
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(6, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(13, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(17, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(26, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(29, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(41, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(41, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(49, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_strong_hit_reaction_07
+//SeqTrack("corruptor_strong_hit_reaction_07", 		      	"corruptor_strong_hit_reaction_07.anm2",           2, 65, 30, 1, 0.27)
+//{
+//    Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(4, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(4, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(7, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(11, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(14, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(24, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(26, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(38, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(39, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(49, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(54, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(56, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//}
+
+//[2013-10-11] k_nosek - semi-automated removal of unused anims - removing sequence corruptor_walk_stop
+//SeqTrack("corruptor_walk_stop", 			      	"corruptor_walk_stop.anm2",  		          0, 85, 30, 1, 0.3)
+//{
+//	Event(0, VIS_EVENT_IK_ENABLE, -1)
+//    Event(2, VIS_EVENT_STEP_LEFT, -1)
+//    Event(2, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(3, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(17, VIS_EVENT_STEP_RIGHT, -1)
+//    Event(18, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(20, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+//    Event(34, VIS_EVENT_STEP_LEFT, -1)
+//    Event(35, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+//    Event(35, VIS_EVENT_ROTATION_MOD_START, -1)
+//    Event(35, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(36, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(48, VIS_EVENT_STEP_RIGHT, -1)
+//    Event(48, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//    Event(48, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+//    Event(48, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+//    Event(85, VIS_EVENT_LEFT_FOOT_LAND, -1)
+//}
+
+SeqTrack("corruptor_electrified_loop_01", 			      	"corruptor_electrified_loop_01.anm2",  		          0, 149, 30, 1, 0.3)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(1, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(2, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(4, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(7, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(8, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(12, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(12, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(15, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(20, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(20, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(27, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(28, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(28, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(33, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(37, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(38, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(39, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(41, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(45, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(45, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(45, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(46, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(54, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(54, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(55, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(55, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(59, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(63, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(64, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(69, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(71, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(77, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(78, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(80, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(84, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(85, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(87, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(87, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(90, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(90, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(104, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(105, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(105, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(108, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(111, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(113, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(113, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(113, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(118, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(118, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(120, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(120, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(128, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(130, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(134, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(135, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(135, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(149, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+SeqTrack("corruptor_electrified_death_01", 			      	"corruptor_electrified_death_01.anm2",  		          0, 226, 30, 1, 0.3)
+{
+	Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(4, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(5, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(8, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(9, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(16, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(17, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(22, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(23, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(26, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(27, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(39, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(39, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(45, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(45, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(48, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(51, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(52, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(53, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(64, VIS_EVENT_IK_DISABLING_START, -1)
+    Event(69, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(69, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(79, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(81, VIS_EVENT_IK_DISABLE, -1)
+    Event(82, EVENT_HANDLE_DEATH_EFFECT, -1)
+    Event(83, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(163, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(198, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(226, EVENT_FALL, -1)
+}

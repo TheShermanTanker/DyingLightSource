@@ -1,0 +1,410 @@
+!ContextFilters( s )
+!Filter( s , s )
+!Path( s )
+!Extension( s )
+
+// Fave params
+// 1 - Name
+// 2 - Filter
+// 3 - Path
+// 4 - Name of selected filter
+!Fave( s , s, s, s )
+
+
+!DebugMode()
+DebugMode()
+
+// Remember!
+// First filter is set as the default one.
+
+// Rule 1
+// Path have to end with /
+
+// Rule 2
+// Use 4 spaces instead of tab
+
+//===========================================================================
+// Open File Dialog
+//===========================================================================
+
+// Open map file - "Open" panel
+ContextFilters("CDocumentOpenView::OnCommandmap")
+{
+    Path("data/maps/")
+
+    Filter("Maps",      ".map -.ba -autosave")
+    Filter("Autosaves",	".map -.ba autosave")
+    Filter("Backups", 	".map .ba -autosave")
+
+    Fave( "Maps", "", "data/maps/", "Maps" )
+}
+
+// Open map file executed via toolbar
+ContextFilters("CMainFrame::OnFileOpenmap")
+{
+    Path("data/maps/")
+
+    Filter("Maps",      ".map -.ba -autosave")
+    Filter("Autosaves",	".map -.ba autosave")
+    Filter("Backups", 	".map .ba -autosave")
+
+    Fave( "Maps", "", "data/maps/", "Maps" )
+}
+
+
+// Open map file executed via Document menu
+ContextFilters("CMainFrame::OnRecentFilemap")
+{
+    Path("data/maps/")
+
+    Filter("Maps",      ".map -.ba -autosave")
+    Filter("Autosaves",	".map -.ba autosave")
+    Filter("Backups", 	".map .ba -autosave")
+
+    Fave( "Maps", "", "data/maps/", "Maps" )
+}
+
+// Open quest file - "Open" panel
+ContextFilters("CDocumentOpenView::OnCommandquest")
+{
+    Path("data/quests/")
+    Filter("quests",      ".pxsl -.tmp")
+}
+
+// Open quest file executed via toolbar
+ContextFilters("CMainFrame::OnFileOpenquest")
+{
+    Path("data/quests/")
+    Filter("quests",      ".pxsl -.tmp")
+}
+
+
+// Open quest file executed via Document menu
+ContextFilters("CMainFrame::OnRecentFilequest")
+{
+    Path("data/quests/")
+    Filter("quests",      ".pxsl -.tmp")
+}
+
+// Open dialogue file executed via toolbar
+ContextFilters("CMainFrame::OnFileOpendialog")
+{
+    Path("data/dialogs/")
+
+    Filter("Dialogs",      "dlg .xml")
+    Filter("XML",      ".xml")
+
+    Fave( "Dialogs", "", "data/dialogs/", "Dialogs" )
+}
+
+// Open dialogue file - "Open" panel
+ContextFilters("CDocumentOpenView::OnCommanddialog")
+{
+    Path("data/dialogs/")
+
+    Filter("Dialogs",      "dlg .xml")
+    Filter("XML",      ".xml")
+
+    Fave( "Dialogs", "", "data/dialogs/", "Dialogs" )
+}
+
+// Open dialogue file via Document menu
+ContextFilters("CMainFrame::OnRecentFiledialog")
+{
+    Path("data/dialogs/")
+
+    Filter("Dialogs",      "dlg .xml")
+    Filter("XML",      ".xml")
+
+    Fave( "Dialogs", "", "data/dialogs/", "Dialogs" )
+}
+
+// Open dialogue file via Open panel
+ContextFilters("CDocumentOpenView::OnCommandcharacter")
+{
+    Path("data/")
+
+    Filter("Characters",    ".character")
+    Filter("All files",     "")
+
+    Fave( "Characters", "", "data/characters/", "Characters" )
+}
+
+
+// Open dialogue file via Document menu
+ContextFilters("CMainFrame::OnFileOpencharacter")
+{
+    Path("data/")
+
+    Filter("Characters",    ".character")
+    Filter("All files",     "")
+
+    Fave( "Characters", "", "data/characters/", "Characters" )
+}
+
+//===========================================================================
+
+// Open map file - editor startup
+ContextFilters("CEditorStartupDlg::OnBnClickedButtonLoadMap")
+{
+    Path("data/maps/")
+
+    Filter("Maps",      ".map -.ba -autosave")
+    Filter("Autosaves",	".map -.ba autosave")
+    Filter("Backups", 	".map .ba -autosave")
+
+    Fave( "Maps", "", "data/maps/", "Maps" )
+}
+
+// Open map file executed vial toolbar or file menu
+ContextFilters("CEdytorDoc::OnFileOpen")
+{
+    Path("data/maps/")
+
+    Filter("Maps",      ".map -.ba -autosave")
+    Filter("Autosaves",	".map -.ba autosave")
+    Filter("Backups", 	".map .ba -autosave")
+
+    Fave( "Maps", "", "data/maps/", "Maps" )
+}
+
+//===========================================================================
+
+// Open file dialog executed from Terrain tab in Level settings
+ContextFilters("CTerrainDialog::GetFileName")
+{
+    Path("data/maps/")
+
+    //Filter("Height maps",      ".height")
+
+    Fave( "Maps", "", "data/maps/", "Maps" )
+}
+
+// Open height map to merge - "merge height maps" tool
+ContextFilters("CMergeHeightmapDlg::OnBrowseHeightmap")
+{
+    Path("data/maps/")
+
+    Filter("Height maps",      ".height")
+
+    Fave( "Maps", "", "data/maps/", "Height maps" )
+}
+
+// Open common ancestor height map - "merge height maps" tool
+ContextFilters("CMergeHeightmapDlg::OnBrowseCommonAncestor")
+{
+    Path("data/maps/")
+
+    Filter("Height maps",      ".height")
+
+    Fave( "Maps", "", "data/maps/", "Height maps" )
+}
+
+// Choose mesh dialog
+ContextFilters("IEditorImpl::ShowChooseMeshDlg")
+{	
+    Filter("Meshes", 	".msh -.log")	
+    Filter("All files", 	"")
+
+    Fave( "Objects", "", "data/objects/", "Meshes" )
+}
+
+// Choose mesh dialog
+ContextFilters("CSkyDialog::OnSkyMeshBrowse")
+{
+    Filter("Meshes",	".msh -.log")
+    Filter("All files", 	"")
+
+    Fave( "Objects", "", "data/objects/", "Meshes" )
+}
+
+// Open flare FX (level attributes)
+ContextFilters("CSkyDialog::OnButtonBrowseSunFlareFx")
+{
+    Path("data/fx/sun/")
+
+    Filter("FX Files",	".fx")
+    Filter("All files", 	"")
+
+    Fave( "FX", "", "data/FX/", "FX Files" )
+}
+
+// Choose brush from Edit Bitmap on Terrain
+ContextFilters("CTerrain2DDrawDlgBitmapButton::OnLButtonDown")
+{
+    Path("data/brushes/")
+
+    Filter("PNG", 	".png")    
+    Filter("All files", 	"")
+
+    Fave( "Brushes", "", "data/brushes/", "PNG" )
+}
+
+// Choose brush from Terrain plugin
+ContextFilters("CTerrainEdBitmapButton::OnLButtonDown")
+{
+    Path("data/brushes/")
+
+    Filter("PNG", 	".png")    
+    Filter("All files", 	"")
+
+    Fave( "Brushes", "", "data/brushes/", "PNG" )
+}
+
+// Choose brush from Brushes plugin
+ContextFilters("CBrushesDlg::OnClickedImageButton")
+{
+    Path("data/brushes/")
+
+    Filter("PNG", 	".png")
+    Filter("All files", 	"")
+
+    Fave( "Brushes", "", "data/brushes/", "PNG" )
+}
+
+// Choose brush from Forester plugin
+ContextFilters("CForesterBitmapButton::OnLButtonDown")
+{
+    Path("data/brushes/")
+
+    Filter("PNG", 	".png")
+    Filter("All files", 	"")
+
+    Fave( "Brushes", "", "data/brushes/", "PNG" )
+}
+
+// Open mask for dynamic light projector 
+ContextFilters("CDynLightAttribs::OnButtonBrowse")
+{
+    Filter("DDS", 	".dds")
+    Filter("PNG", 	".png")
+    
+    Filter("All files", 	"")
+
+    Fave( "Brushes", "", "data/brushes/", "PNG" )
+}
+
+// Open weather script
+ContextFilters("CWeatherAndDayTimeDlg::OnBrowseScript")
+{
+    Path("data/")
+
+    Filter("Scripts (.scr)", 	".scr -.log")
+    Filter("All files", 	"")
+
+    Fave( "Scripts", "", "data/scripts/", "Scripts" )
+    Fave( "Weather", "weather", "data/", "Scripts" )
+}
+
+// Append varlist
+ContextFilters("CAppendVarlistDlg::OnBrowseVarlistFileName")
+{
+    Path("data/")
+
+    Filter("Scripts (.scr)", 	".scr -.log")
+    Filter("All files", 	"")
+}
+
+// Open varlist
+ContextFilters("CVarlistDlg::OnVarlistLoad")
+{
+    Path("data/")
+
+    Filter("Scripts (.scr)", 	".scr -.log")
+    Filter("All files", 	"")
+}
+
+// Edit bitmap on terrain - choose texture
+ContextFilters("CTerrain2DDrawDlg::OnButtonBrowseTerrainTypeFile")
+{
+    Path("data/maps/")
+    Filter("DDS", ".dds")
+}
+
+// Edit bitmap on terrain - choose terrain material
+ContextFilters("CTerrain2DDrawDlg::OnBnClickedButtonBrowseTerrainMaterial")
+{
+    Path("data/interface/terrain/")
+    Filter("Material", ".mat")
+
+    Fave( "Terrain materials", "", "data/interface/terrain", "Material" )
+}
+
+// TEMPORARY DEFAULT FILE TYPE
+ContextFilters("BrowseFile")
+{
+    Path("data/")
+
+    Filter("All files", "")
+    Filter("SCR",    	".scr")
+    Filter("DDS", 	    ".dds")
+    Filter("OGG", 	    ".ogg")
+    Filter("WAV", 	    ".wav")
+
+    Fave( "Maps", ".msh -.log", "data/maps/", "All files" )
+    Fave( "Sounds", "", "data/sounds/", "OGG" )
+    Fave( "Music", "", "data/music/", "OGG" )
+    Fave( "Scripts", "", "data/", "SCR" )
+}
+
+//===========================================================================
+// Save File Dialog
+//===========================================================================
+
+// Save varlist
+ContextFilters("CVarlistDlg::OnVarlistSave")
+{
+    Path("data/")
+    Extension(".scr")
+}
+
+// Generate mesh from lofter
+ContextFilters("CLoftersDlg::OnBnGenerateMesh")
+{
+    Path("data/")
+    Extension(".msh")
+
+    Fave( "Maps", "", "data/maps/", ".msh" )
+    Fave( "Objects", "", "data/objects/", ".msh" )
+}
+
+// Save film to file
+ContextFilters("IPluginImpl::OnCmdExportMovie")
+{
+    Path("data/")
+    Extension(".cem")
+
+    Fave( "Maps", "", "data/maps/", ".cem" )
+    Fave( "Objects", "", "data/objects/", ".cem" )
+}
+
+// Link selection into msh
+ContextFilters("CSelectionsDlg::OnGeometryLinkerLink")
+{
+    Path("data/")
+    Extension(".msh")
+
+    Fave( "Maps", "", "data/maps/", ".msh" )
+    Fave( "Objects", "", "data/objects/", ".msh" )
+    Fave( "Selections", "", "data/Selections/", ".msh" )
+}
+
+// Export selection to eds
+ContextFilters("CSelectionsDlg::OnSelectionsExport")
+{
+    Path("data/")
+    Extension(".eds")
+
+    Fave( "Selections", "", "data/selections/", ".eds" )
+    Fave( "Maps", "", "data/maps/", ".eds" )
+}
+
+// Quick create option for hierarchical selections
+ContextFilters("CSelectionsDlg::OnQuickCreate")
+{
+    Path("data/")
+    Extension(".eds")
+
+    Fave( "Selections", "", "data/selections/", ".eds" )
+    Fave( "Maps", "", "data/maps/", ".eds" )
+}

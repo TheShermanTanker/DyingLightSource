@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="old_town"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST NAME : Q_OutOfTheAir -->
+    <!-- QUEST INFO : Out Of The Air -->
+    <!-- COMMENT    :  -->
+    <!-- FROM       : SEWERS -->
+    <!-- TO         : OLD TOWN -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- OUT OF THE AIR -->
+    <!--  -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- quest OutOfTheAir01 -parent=OldTown_Outpost_Start -difficulty=hard -quest_giver=Troy -reward_set=OutOfTheAir_reward   -= -new_chapter=Chapter09  -->
+        <!-- -=  -->
+        <!-- ,BLOCK _ -= -obj=&OutOfTheAir_OBJ_EnterSewers& -->
+            <!-- ,goto <<OUT OF THE AIR - Radio Start>> MapPortal Portal_Radio_OldTown_To_Radio -distance=50 -->
+                <!-- ,debugpos SpawnPoint sp_Radio_Portal_RadioInt00_To_OldTown -->
+            <!-- ,enable _ MapPortal Portal_Radio_OldTown_To_Radio -->
+        <!-- ,checkpoint _ SpawnPoint SP_OutOfTheAir_OldTown_from_Sewers -->
+    <!-- leading_portal=OutOfTheAir_Portal_RadioInt_To_OldTown -->
+    <Quest
+         name="__OldTown_OP_Radio_End"
+         parent="OldTown_OP_Radio"
+         pxsl_line="26">
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="27">
+            <Object
+                 pxsl_line="28">
+                <QuestObject
+                     class="DoorDI"
+                     name="Radio_Hub_Door01"
+                     pxsl_line="28" />
+            </Object>
+            <Object
+                 pxsl_line="29">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="sp_Radiostation"
+                     pxsl_line="29" />
+            </Object>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="30">
+            <Object
+                 pxsl_line="31">
+                <QuestObject
+                     class="MapMarker"
+                     name="OutPost_Radio"
+                     pxsl_line="31" />
+            </Object>
+            <Object
+                 pxsl_line="32">
+                <QuestObject
+                     class="Encounter::EncounterBlockArea"
+                     name="OutPost_EBA_Radio"
+                     pxsl_line="32" />
+            </Object>
+            <Object
+                 pxsl_line="33">
+                <QuestObject
+                     class="MapPortal"
+                     name="Portal_Radio_OldTown_To_Radio"
+                     pxsl_line="33" />
+            </Object>
+        </Phase>
+        <Phase
+             type="wait guard"
+             name="_"
+             time="3"
+             pxsl_line="34" />
+        <Phase
+             type="set state"
+             name="_"
+             desired_state="closed"
+             pxsl_line="35">
+            <Trigger
+                 pxsl_line="35">
+                <QuestObject
+                     class="DoorDI"
+                     name="Radio_Hub_Door01"
+                     pxsl_line="35" />
+            </Trigger>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="36">
+            <Object
+                 pxsl_line="37">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="Radio_QEG_SafeZone"
+                     pxsl_line="37" />
+            </Object>
+            <Object
+                 pxsl_line="38">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="Radio_BlueLights"
+                     pxsl_line="38" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="39">
+            <Destination
+                 pxsl_line="39">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="sp_Radiostation"
+                     pxsl_line="39" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- END OF OUT OF THE AIR -= -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-= -->
+</QuestsDefinitions>

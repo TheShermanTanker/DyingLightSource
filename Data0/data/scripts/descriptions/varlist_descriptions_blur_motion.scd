@@ -1,0 +1,5 @@
+Description("f_blur_motion", "f:EDIT;e:EDIT|SPINNER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.0;x:1.0;s:0.1;c:Temporal Blur;d:Power;")
+Description("f_blur_motion_camera", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.0;s:0.01;x:1.0;c:Motion Blur;d:Camera Factor;")
+Description("f_blur_motion_object", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.0;s:0.01;x:1.0;c:Motion Blur;d:Object Factor;")
+Description("f_blur_motion_camera_near", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.0;s:0.1;x:10.0;c:Motion Blur;d:Camera mask near;")
+Description("f_blur_motion_camera_far", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.01;s:0.1;x:10.01;c:Motion Blur;d:Camera mask far;")

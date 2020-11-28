@@ -1,0 +1,31 @@
+import "init_game_effects.scr"
+
+sub Buffers()
+{
+	int e_path = SM53;
+
+	use BuffersDX9(e_path = e_path, b_editor_on = TRUE);
+
+    use GameBuffers(e_path = e_path);
+
+	use EditorBuffers(e_path = e_path);
+}
+
+// Effect(name, path, execute in frame script)
+sub Postprocess()
+{
+	int e_path = SM53;
+
+    Effect("normal", "normal53editor.ppfx", true);
+    Effect("null",   "null.ppfx", true);
+    Effect("simple", "simple53.ppfx", true);
+    Effect("top",    "top53.ppfx", true);
+	Effect("indoor", "indoor53editor.ppfx", true);
+    Effect("sprite", "sprite53.ppfx", true);
+    Effect("editor", "editor53.ppfx", true);
+    Effect("info",   "normal53info.ppfx", true);
+	Effect("editor_top", "editor53top.ppfx", true);
+
+	use GameEffects(e_path = e_path);
+	use EditorEffects(e_path = e_path);
+}

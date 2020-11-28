@@ -1,0 +1,35 @@
+sub metal_detector_gate()
+{
+Preset("metal_detector_gate")
+    {
+	
+	OnLevelStart()
+	{
+		StoreSkin(0); 
+        Enable(1, false);
+	}
+	
+	TimedEvent(0.0, 0.0)
+	{	
+        Enable(1, true);
+        SetSkin(0, "Alarm");			
+	}
+
+	TimedEvent(0.5, 0.0)
+	{
+        Enable(1, false);
+		SetSkin(0, "Stanby");			
+	}    
+	
+    GoToBegin(1.0)
+    {
+    }
+    
+	OnDisable()
+	{
+		RestoreSkin(0);
+        Enable(1, false);
+	}
+	}
+  
+}

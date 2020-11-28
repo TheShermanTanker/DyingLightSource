@@ -1,0 +1,17 @@
+!include("varlist_screen_drops.scr")
+
+VarFloat("f_pp_screen_drops_on", 1.0)
+VarFloat("f_pp_screen_drops_clear_on", 0.0)
+VarFloat("f_pp_screen_drops_clear_prv", 0.0)
+VarFloat("f_pp_screen_drops_water", 0.0)
+VarFloat("f_pp_screen_drops_splat", 0.0)
+VarFloat("f_pp_screen_drops_splat_time", 0.0)
+VarFloat("f_pp_screen_drops_splat_emissive", 0.0)
+VarFloat("f_pp_screen_drops_splat_move", 0.0)
+VarVec4("v_pp_screen_drops_splat_xform", [0.0, 0.0, 0.0, 1.0] )
+VarFloat("f_pp_screen_drops_time_max", 100000.0)
+VarFloat("f_pp_screen_drops_time_delta_drop", 0.0)
+VarFloat("f_pp_screen_drops_time_delta_dirt", 0.0)
+VarFloat("f_pp_screen_drops_time_drop2dirt", 1.0)
+VarFloat("f_pp_screen_drops_time_water", 3.0)
+VarFloat("f_pp_screen_drops_water_level_on", 0.0) //remove

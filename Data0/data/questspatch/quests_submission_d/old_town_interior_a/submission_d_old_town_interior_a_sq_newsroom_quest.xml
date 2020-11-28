@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="old_town_interior_a"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- Newsroom -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=      -->
+    <!-- OLD NEWSROOM - POLICE STATION !!DO NOT DELETE!!! -->
+        <!-- quest sq_Newsroom03_bonus -parent=sq_Newsroom02 -glued=false -->
+            <!-- ,use _ PhysicalSwitchDI Newsroom_IT_KnockWindow01::trigger_knocking_01 -state=on -show=false -->
+            <!-- ,wait _ 1 -->
+            <!-- ,talk _ voice2d Player_Newsroom_03DLG -auto=true -show=false -->
+            <!-- ,checkpoint _ SpawnPoint sp_Newsroom_To_Interior -->
+        <!--  -->
+        <!-- quest sq_Newsroom03 -parent=sq_Newsroom02 -glued=true -leading_portal=mp_Newsroom_To_Interior -->
+            <!-- ,BLOCK _ -obj=&sq_Newsroom_OBJ_FindSource& -->
+                <!-- ,AND <<Localize The Source Of Interferences>> -->
+                    <!-- path -->
+                        <!-- ,enable-multi _ -->
+                            <!-- ,o QuestEnableGroup Newsroom_QEG_Zombie01 -->
+                            <!-- ,o QuestEnableGroup Newsroom_QEG_Music -->
+                            <!-- ,o QuestEnableGroup Newsroom_QEG_Zombie02 -->
+                            <!-- ,o QuestHub Newsroom_QH_01 -->
+                    <!-- path -->
+                        <!-- ,goto _ SpawnPoint sp_Newsroom_To_Interior -distance=100 -show=true -->
+                    <!-- ,debugpos SpawnPoint sp_Newsroom_To_Interior -->
+                <!-- ,checkpoint _ SpawnPoint sp_Newsroom_To_Interior -->
+                <!-- ,use _ PhysicalSwitchDI Newsroom_IT_Fuse_01::trigger_fuse_box -state=on -->
+                <!-- ,use _ PhysicalSwitchDI Newsroom_IT_Lever_01::trigger_vertical_lever -state=on -->
+                <!-- ,wait _ 1 -->
+                <!-- ,AND _ -->
+                    <!-- path -->
+                        <!-- ,movie _ CIN_PrisonDoor_Slide_01::Movie_PrisonDoor_Slide -->
+                    <!-- path -->
+                        <!-- ,movie _ CIN_PrisonDoor_Slide_02::Movie_PrisonDoor_Slide -->
+                    <!-- path -->
+                        <!-- ,movie _ CIN_PrisonDoor_Slide_03::Movie_PrisonDoor_Slide -->
+                    <!-- path -->
+                        <!-- ,movie _ CIN_PrisonDoor_Slide_04::Movie_PrisonDoor_Slide -->
+                    <!-- path -->
+                        <!-- ,movie _ CIN_PrisonDoor_Slide_05::Movie_PrisonDoor_Slide -->
+                    <!-- path -->
+                        <!-- ,movie _ CIN_PrisonDoor_Rotate_01::Movie_PrisonDoor_Rotate -->
+                    <!-- path -->
+                        <!-- ,movie _ CIN_PrisonDoor_Rotate_02::Movie_PrisonDoor_Rotate -->
+                    <!-- path -->
+                        <!-- ,enable _ QuestEnableGroup Newsroom_QEG_WarningLight -->
+                    <!-- path -->
+                        <!-- ,disable _ QuestEnableGroup Newsroom_QEG_VA01 -->
+                <!-- ,checkpoint _ SpawnPoint sp_Newsroom_To_Interior -->
+                <!-- ,use _ PhysicalSwitchDI Newsroom_IT_Jake01 -state=on -->
+                <!-- ,wait _ 1 -->
+                <!-- ,talk _ voice2d Player_Newsroom_07DLG -auto=true -show=false -->
+                <!-- ,wait _ 1 -->
+                <!-- ,talk _ voice2d Player_Newsroom_01DLG -auto=true -show=false -->
+                <!-- ,use _ InvisibleSwitchDI Newsroom_IS_Music01 -state=on -->
+                <!-- ,wait _ 1 -->
+                <!-- ,disable-multi _ -->
+                    <!-- ,o QuestEnableGroup Newsroom_QEG_Music -->
+                    <!-- ,o QuestEnableGroup Newsroom_QEG_WarningLight -->
+                <!-- ,checkpoint _ SpawnPoint sp_Newsroom_To_Interior -->
+                <!-- ,wait _ 2 -->
+                <!-- ,talk _ voice2d Player_Newsroom_02DLG -auto=true -show=false -->
+                <!-- ,checkpoint _ SpawnPoint sp_Newsroom_To_Interior -->
+                <!--  -->
+        <!-- quest sq_Newsroom03_post -parent=sq_Newsroom03 -->
+            <!-- ,disable-multi _ -->
+                <!-- ,o QuestEnableGroup Newsroom_QEG_Zombie01 -->
+                <!-- ,o QuestEnableGroup Newsroom_QEG_Zombie02 -->
+                <!-- ,o QuestHub Newsroom_QH_01 -->
+            <!-- ,checkpoint _ SpawnPoint sp_Newsroom_To_Interior -->
+        <!-- quest sq_Newsroom03_door_unlock -parent=sq_Newsroom02 -->
+            <!-- ,take _ QuestInventoryItemDI Newsroom_QII_Pipe_001 -show=false -->
+            <!-- ,set _ DoorDI Newsroom_Door_002 -state=closed -->
+            <!-- ,checkpoint _ SpawnPoint sp_Newsroom_To_Interior -->
+        <!-- quest sq_Newsroom03_knock_window -parent=sq_Newsroom02 -->
+            <!-- ,OR _ -->
+                <!-- path -->
+                    <!-- ,use _ PhysicalSwitchDI Newsroom_IT_Knock_001::trigger_knocking_01 -state=on -show=false -->
+                    <!-- ,wait _ 1 -->
+                    <!-- ,talk _ voice2d Player_Newsroom_03DLG -auto=true -show=false -->
+                <!-- path -->
+                    <!-- ,goto _ SensorGoTo Newsroom_GoTo_001 -distance=0 -show=false -->
+            <!-- ,checkpoint _ SpawnPoint sp_Newsroom_To_Interior -->
+</QuestsDefinitions>

@@ -1,0 +1,99 @@
+// defines set of XFaders for engine
+!EngineSound(s)
+
+// path to the place with sounds
+!Path(s)
+
+//fGain, fXFade, fMax
+!XFaderLoadLow(f, f, f)
+
+//fGain, fMin, fXFade
+!XFaderLoadHigh(f, f, f)
+
+//fBaseRPM, sWave, fGain, fXFadeLeft, fMax
+!XFaderLeft(f, s, f, f, f)
+
+//fBaseRPM, sWave, fGain, fMin, fXFadeLeft, fXFadeRight, fMax
+!XFader(f, s, f, f, f, f, f)
+
+//fBaseRPM, sWave, fGain, fMin, fXFadeRight
+!XFaderRight(f, s, f, f, f)
+
+!XFaderTurbo(s, f, f, f, f, f)
+!XFaderHiss(s, f, f, f)
+
+!XFaderWhineLoadLowInside(f, f, f)
+!XFaderWhineLoadHighInside(f, f, f)
+!XFaderWhineLoadLowOutside(f, f, f)
+!XFaderWhineLoadHighOutside(f, f, f)
+
+// audibility range of car engine sound
+!EngineSoundRange(f)
+
+// sound of gear shifting when inside car view
+!GearShiftUpInsideSound(s)
+// sound of gear shifting when inside car view
+!GearShiftDownInsideSound(s)
+
+// turbo blow off sounds
+!TurboPopOff(f)
+// min, med, max pressure sound, fDistRange
+!TurboPopOffSound(s, s, s, f)
+
+!BackfireRumbleSoundNoFX(s, f, f)
+!BackfireRumbleSoundFX(s, f, f)
+
+// engine rpm will be scaled to match this max rpm
+!MaxRPM(f)
+
+// Modifier of engine sound. It sets characteristic of sound depending on displacement of the engine.
+// Params: min displacement, max displacement, lower xfader gain, higher xfader gain, rpm sound modifier
+// If displacement of an engine is between min and max displacement - mathematically <min, max), param will be applayed // to this engine
+!XFaderEngineModifier(f, f, f, f, f)
+
+!XFaderWhineModifier(f, f, f)
+
+// generic sound (from old V6)
+EngineSound("GenericEngine")
+{
+    Path("Data/Sounds/Car/")
+    EngineSoundRange(500.0)
+    XFaderLoadLow(0.85, 0.68, 0.77)
+    {
+	    XFaderLeft(1199.0, "GenericEngine/generic_idle.wav", 1.0, 1731.0, 2222.0)
+	    XFader(2996.0, "GenericEngine/generic_offlow.wav", 1.0, 1239.0, 1731.0, 4028.0, 4637.0)
+	    XFaderRight(6501.0, "GenericEngine/generic_offhigh.wav", 1.0, 3419.0, 4028.0)
+    }
+
+    XFaderLoadHigh(0.85, 0.59, 0.68)
+    {
+            XFaderLeft(2998.0, "GenericEngine/generic_onlow.wav", 1.0, 1731.0, 2222.0)
+	    XFader(2998.0, "GenericEngine/generic_onlow.wav", 1.0, 1239.0, 1731.0, 4028.0, 4637.0)
+	    XFaderRight(6501.0, "GenericEngine/generic_onhigh.wav", 1.0, 3419.0, 4028.0)
+    }
+/*  XFaderTurbo("Turbo/turbo_whine.wav", 0.0, 0.1, 0.8, 1.2, 3.5)
+    XFaderHiss("Turbo/turbo_hiss.wav", 0.0, 1, 0.6)
+
+    XFaderWhineLoadLowInside(0.35, 0.62, 0.71)
+    {
+	XFaderRight(5000.0, "Transwhine/Trans_offload_st.wav", 0.6, 2000, 2500)
+    }
+    XFaderWhineLoadHighInside(0.5, 0.54, 0.62)
+    {
+	XFaderRight(5000.0, "Transwhine/Trans_onload_st.wav", 0.6, 2000, 2500)
+    }
+    XFaderWhineLoadLowOutside(0.7, 0.62, 0.71)
+    {
+	XFaderRight(5000.0, "Transwhine/Trans_offloadeq.wav", 0.6, 2000, 2500)
+    }
+    XFaderWhineLoadHighOutside(1.0, 0.54, 0.62)
+    {
+	XFaderRight(5000.0, "Transwhine/Trans_onloadeq.wav", 0.6, 2000, 2500)
+    }
+    XFaderWhineModifier(0,     10000,  0.4)
+*/
+    XFaderEngineModifier(0,    10000,  1.0,  1.0,  1.0)
+    MaxRPM(5500.0)
+}
+
+

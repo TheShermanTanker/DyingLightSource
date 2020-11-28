@@ -1,0 +1,194 @@
+export float BOTTLE_EMPTY_DENSITY		= 100.0;
+export float CARTON_BOX_DENSITY			= 5.0;
+export float METAL_BOX_LIGHT_DENSITY 	= 100.0;
+export float METAL_BOX_DENSITY			= 200.0;
+export float METAL_BOX_HEAVY_DENSITY 	= 500.0;
+export float PLASTIC_BOX_LIGHT_DENSITY	= 10.0;
+export float PLASTIC_BOX_DENSITY		= 25.0;
+export float WOODEN_BOX_DENSITY			= 50.0;
+export float CONCRETE_DENSITY 			= 2000.0;
+
+// Collision type.
+/* Make sure, that are synchronized with FCollisionGroup::TYPE enum. */
+export int LARGE	= 2;		//< Collisions with all objects.
+export int AVERAGE	= 4;		//< Collisions with all objects except of SMALL, TINY and RAGDOLL.
+export int SMALL	= 8;	    //< No collisions with TINY, AVERAGE, PLAYER, AI, RAGDOLL. Collides with other SMALL.
+export int TINY		= 16;	    //< No collisions with SMALL, AVERAGE, PLAYER, AI, RAGDOLL. Doesn't collide with other TINY.
+export int SPECIAL_LARGE	= 4194304; //< The same as LARGE, except that SPECIAL_LARGE doesn't collide with SPECIAL_LARGE.
+
+// Activation/deactivation ranges for simulation.
+/* Make sure, that are synchronized with DynamicModelObject::??_RANGE. */
+export float SMALL_OBJ_ENABLE_RANGE     = 2500.0;
+export float SMALL_OBJ_DISABLE_RANGE    = 3000.0;
+export float AVERAGE_OBJ_ENABLE_RANGE   = 4000.0;
+export float AVERAGE_OBJ_DISABLE_RANGE  = 4500.0;
+export float LARGE_OBJ_ENABLE_RANGE     = 5500.0;
+export float LARGE_OBJ_DISABLE_RANGE    = 6000.0;
+
+// ODE geom types.
+/** Make sure, that are synchronized with EODESingleVolume enum. */
+export int SPHERE                     = 0;
+export int BOX                        = 1;
+export int CAPSULE                    = 2;
+export int CYLINDER                   = 3;
+export int YELLIPSOID                 = 9; 
+export int HAT                        = 10;
+export int BARREL                     = 11;
+export int PYRAMID                    = 12;
+export int FROM_MESH_HELPERS          = 13;
+export int SIMPLE_CHAIR               = 14;
+
+// ODE joint types.
+/** Make sure, that are synchronized with EODESingleJointType enum */
+export int JOINT_NONE                     = 0;
+export int JOINT_DIGIN                    = 1;
+export int JOINT_BALL                     = 2;
+export int JOINT_HINGE                    = 3;
+export int JOINT_SLIDER                   = 4;
+export int JOINT_FIXED                    = 5;
+export int JOINT_UNIVERSAL                = 6;
+
+// ODE joint position.
+/** Make sure, that are synchronized with EODESingleJointPos enum */
+export int JPOS_UNKNOWN	                = -1;
+export int JPOS_MESH_BASE                = 0;
+export int JPOS_LEFT                     = 1;
+export int JPOS_RIGHT                    = 2;
+export int JPOS_TOP                      = 3;
+export int JPOS_BOTTOM                   = 4;
+export int JPOS_FRONT                    = 5;
+export int JPOS_BACK                     = 6;
+export int JPOS_CENTER                   = 7;
+
+// ODE joint axis.
+/** Make sure, that are synchronized with EODESingleJointAxis	*/
+export int JAXIS_X                        = 0;
+export int JAXIS_Y                        = 1;
+export int JAXIS_Z                        = 2;
+
+// Damage types.
+export int BULLET						  = 1;
+export int BLAST						  = 2;
+export int GATLING						  = 4;
+export int PLAYER_HANGING				  = 8;
+export int ALL							  = 255;
+
+// Detach damage
+export float GUN_DETACH_DAMAGE     		= 20.0;
+
+// 	Materials density [kg/cm3]:
+//
+//	wood			0.0005
+//	oil				0.0008
+//	water			0.001
+//	plastic			0.0015
+//	brick			0.0016
+//	concrete		0.0022
+//	aluminium		0.00272
+//	glass			0.0025
+//	steel			0.0078
+//
+//	Recommended density for objects:
+//
+//	carton box (empty)				0.000007
+//	plastic bin (empty)				0.00008
+//	plastic bin with some rubbish	0.00025
+//	metal bin (empty)				0.00005
+//	bottle (empty)					0.00045	
+
+	
+
+// Physics()			- section with physics params.
+// @@ TODO: add information about default values.
+		
+// Density(0.0005)		- density of the object, will be used to calculate its mass.
+// EnablePhysicsThreshold(0.0)	- minimal physical damage that must be given to the object to enable its physic, can be used to symulate objects fixed to the ground, that can be moved by giving them significant damage. After EnablePhysicsThreshold is exceeded object will have its physic enabled, unless WakeUpPhysicsThreshold is set. If set to default value then isn't taken into consideration. Exception for ChunkObjects - if set to other value then the default one, then ChunkObject doesn't have any physic set at all.
+// WakeUpPhysicsThreshold(0.0)	- minimal physical damage that must be given to the object to wake up ist physic, can be used to avoid enabling objects physics if the object was just 'touched'. To enable/wake up objects physic WakeUpPhysicsThreshold must be exceeded every time, when the physis gets destroyed. If set to default value then isn't taken into consideration. This param isn't used by ChunkObjects.
+// CollisionsType(0)		- type of collisions, the same type is going to be set as well to dynamicaly created objects as relevant simple objects.
+// CollisionFx("")			- not in use so far.
+// CollisionSound("")		- collision sound that is played on collision with CarDI, when the vehicle has low speed.
+// CollisionSoundBig("")	- collision sound that is played on collision with CarDI, when the vehicle has higher speed.
+// PhysicsScript("")		- physics script that should be used by the object. The script must be listed in Preloaded_scripts.phx
+// PhysicsVolumeType(BOX)	- collision hull used by the object.
+// DynamicSkinPostfix("")	- postfix that should be added to original skin name to create skin name for dynamic object
+
+
+// CollisionDamage()		- collision damage setup
+
+// DamageCollidingObjects(true)		- enables/disables damaging colliding objects
+// SpeedThreshold(8.0)				- when colliding at lower velocity no damage will be given
+// SpeedToDamage(10.0)				- damage_given = impact_velocity * SpeedToDamage
+// SpeedToForce(1000.0)				- force_given = impact_velocity * SpeedToForce
+// SpeedToPhysicsDamage(10.0)		- physics_damage_given = impact_velocity * SpeedToPhysicsDamage
+// CollisionDirectionThreshold(0.2)	- controlls angle of damage 
+// KillZombiesInsteadOfDamage(true)	- when set to true, zombies hit by dynamic objects will die instead of being damaged
+
+// Destroyable()		- section with destroyable params.
+
+// Health(0.0)			- health of object. Max value 1000.0. Given damage decreases health. Health decreased to 0.0 means objects death/destruction. When set to default value then object cannot be destroyed. Exception for ChunkObject: any value different then the default one means that ChunkObject will be destroyed with taking first acceptable damage.
+// TakeDamageThreshold(0.0)	- minimal damage that must be given to the object to decrease its health.
+// HurtFx("")			- fx played when object gets acceptable damage.
+// HurtSound("")		- sound played when object gets acceptable damage.
+// DeathFx("")			- fx played when object destroyed.
+// DeathSound("")		- sound played when object destoyed.
+// DeathSkinPostfix("")	- skin that is applied to the object when the object gets destroyed. If not set then destroyed object will disappear.
+
+// NavMesh()							- section with navmesh modification params
+
+// ModifyNavMeshWhenInactive(false)		- enables/disables navmesh modification when object is inactive (static)
+// ModifyNavMeshWhenActive(false)    	- enables/disables navmesh modification before object is destroyed (but when active)
+// ModifyNavMeshWhenDestroyed(false, scale_mul)	
+//                                      - enables/disables navmesh modification when object is destroyed
+//                                      - scale multiplier (float, default 1.0) of navmesh hole can be defined (optional)
+
+// DamageType(ALL)		- sets flags with types of damage that object can accept, default value is ALL & ~PLAYER_HANGING.
+	
+// Visibility()			- section with visibility params.
+
+// VanishTime(0.0)		- after this time, counted from the moment of its creation, ChunkObjects will disappear. It is given in seconds. If set to default value, then it isn't taken into consideration.
+// VanishRange(0.0)		- distance given in centimeters. If distance between player and the object exceeds VanishRange then ChunkObject will disappear. If set to default value, then it isn't taken into consideration.
+// EnableRelevanceRange(0.0)	- distance given in centimeters to enable relevance. If not set, then the volume will be used to calculate the distance.
+// DisableRelevanceRange(0.0)	- distance given in centimeters to disable relevance. If not set, then the volume will be used to calculate the distance.
+
+
+
+// Attachable()			- section with params related to attaching objects.
+
+// Attach(false)		- ability to attach other objects. If this param set to true then the object will attach all dynamic objects in its extents and objects placed on its top.
+// DetachAngle(0.0)		- condition to detach already attached objects. If objects angle to Y axis exceeds DetachAngle then all attached objects will be detached. If set to the default value equal 0.0 then change of the angle doesn't affect attaching.
+// DetachSpeed(0.0)		- condition to detach already attached objects. If objests speed exceeds DetachSpeed then all attached objects will be detached. If set to the default value equal 0.0 then change of the speed doesn't affect attaching.
+// DetachDamage(0.0)		- condition to detach already attached objects. Currently the damage must be given to attached objects. Required damage is equal DeatachDamage for objects at the bottom of attaching object and it is linear decreasing for objects closer to the top of the attaching object. A physical damaged is here taken into condideration. If DetachDamage set to default value 0.0 then objects can not be detached by giving them any damage.
+
+
+
+// Chunk(extention, class, preset) 	- section related to chunk child objects, created after parents object death. Chunks inherit its parents setting. The setting can be over writen. If Chunk section not present, then destroyed object won't create chunks. Chunk children objects can have their own chunks.
+// ChunkWithSkin(extention, class, preset, skin) 	- section related to chunk child objects, created after parents object death. Chunks inherit its parents setting. The setting can be over writen. If Chunk section not present, then destroyed object won't create chunks. Chunk children objects can have their own chunks.
+// extention			- string added to name of parents mesh, to create chunk child mesh name. 
+// class				- string with class of the chunk child object.
+// preset				- string with preset of the chunk child object.
+
+
+
+// Joint()					- section with joint type objects parameters. Allows to describe params about joint, which allows us to attach object to world with bendable joint.
+
+//Type(JOINT_HINGE);		- Joint type from ODE documentation.
+//Position(JPOS_RIGHT);		- Joint position on Mesh.
+//Shift([0.0, 0.0, 0.0]);	- Joint shift reffered to Position() param.
+//Axis(JAXIS_Y);			- Joint working axis - depends on joint type.
+//LowLimit(-90.0);			- Joint lowest angle in degrees, says how much jointed object can bend.
+//HighLimit(90.0);			- Joint highest angle in degrees, says how much jointed object can bend.
+//Springyness(1.0);			- Joint springyness.
+//Durability(10000.0);		- Says how big damage joint need to take, to break itself. If 0 joint is unbreakable.
+
+// Mpc()					- Section with MPC (MeshPartCloth) parameters.
+
+//Script("")				- Name of .phx script with MPC definition.
+//Joint()					- Subsection with external join data.
+// -MeshElement("")			- Name of mesh element or bone where joint is created.
+
+
+// Transform()				- Section with transform parameters.
+
+//Scale([1.0, 1.0, 1.0])	- Local scale.
+//Translate([0.0, 0.0, 0.0]) - Transform in parents local coordinates.
+//Rotation([0.0, 0.0, 0.0]) - Rotation in parents local coordinates.

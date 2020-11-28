@@ -1,0 +1,236 @@
+export int MOVIE_OFFSET = 332;
+
+export int FIRST_CHECKPOINT = 894 - MOVIE_OFFSET;
+export int FIRST_QTE_BEGIN = 1290 - MOVIE_OFFSET;
+export int FIRST_QTE_END = 1327 - MOVIE_OFFSET;
+export int FIRST_QTE_FAIL_START = 10827 - MOVIE_OFFSET;
+export int FIRST_QTE_FAIL_END = 10924 - MOVIE_OFFSET;
+
+export int SECOND_CHECKPOINT = 2413 - MOVIE_OFFSET;
+export int SECOND_QTE_BEGIN = 2518 - MOVIE_OFFSET;
+export int SECOND_QTE_END = 2656 - MOVIE_OFFSET;
+export int SECOND_QTE_FAIL_START = 11156 - MOVIE_OFFSET;
+export int SECOND_QTE_FAIL_END = 11200 - MOVIE_OFFSET;
+
+export int THIRD_CHECKPOINT = 6465 - MOVIE_OFFSET;
+export int THIRD_QTE_BEGIN = 6611 - MOVIE_OFFSET;
+export int THIRD_QTE_END = 6658 - MOVIE_OFFSET;
+export int THIRD_QTE_FAIL_START = 11309 - MOVIE_OFFSET;
+export int THIRD_QTE_FAIL_END = 11415 - MOVIE_OFFSET;
+
+export int FOURTH_CHECKPOINT = 1320;
+export int FOURTH_QTE_BEGIN = 1420;
+export int FOURTH_QTE_END = 1450;
+export int FOURTH_QTE_FAIL_START = 1450;
+export int FOURTH_QTE_FAIL_END = 1481;
+
+export int FIFTH_QTE_BEGIN = 1589;
+export int FIFTH_QTE_END = 1619;
+export int FIFTH_QTE_FAIL_START = 1619;
+export int FIFTH_QTE_FAIL_END = 1650;
+
+export int SIXTH_QTE_BEGIN = 1762;
+export int SIXTH_QTE_END = 1792;
+export int SIXTH_QTE_FAIL_START = 1792;
+export int SIXTH_QTE_FAIL_END = 1823;
+
+export int SEVENTH_QTE_BEGIN = 1861;
+export int SEVENTH_QTE_END = 1886;
+export int SEVENTH_QTE_FAIL_START = 1886;
+export int SEVENTH_QTE_FAIL_END = 1907;
+
+export int EIGHTH_QTE_BEGIN = 2006;
+export int EIGHTH_QTE_END = 2026;
+export int EIGHTH_QTE_FAIL_START = 2026;
+export int EIGHTH_QTE_FAIL_END = 2057;
+
+//export int MOVIE_END = 10562 - MOVIE_OFFSET;
+export int MOVIE_END = 10185;
+export int CREDITS = 10050;  // obsolete
+export int AYO_SPEECH_BEGIN = 22185;
+export int AYO_SPEECH_END = 22446;
+
+sub main()
+{
+
+    PlayMovie("cin_raisdeathoutro_01", 0, FIRST_CHECKPOINT );
+    
+    Checkpoint();
+    
+    PlayMovie("cin_raisdeathoutro_01", FIRST_CHECKPOINT, FIRST_QTE_BEGIN );
+    
+    PlayMovie("cin_raisdeathoutro_01", FIRST_QTE_BEGIN, FIRST_QTE_END)
+    {
+        QTE()
+        {   
+            Type(2); //Press button
+            Button("_ACTION_QTE1");
+            Looped(false);
+            JumpToPhaseAfterFail("Fail1");
+            HUDPos([0.25, -0.188, 0.0]);
+        }
+    }
+    
+    PlayMovie("cin_raisdeathoutro_01", FIRST_QTE_END, FOURTH_CHECKPOINT);
+    
+    Checkpoint();
+	
+	PlayMovie("cin_raisdeathoutro_01", FOURTH_CHECKPOINT, FOURTH_QTE_BEGIN); 
+    
+	PlayMovie("cin_raisdeathoutro_01", FOURTH_QTE_BEGIN, FOURTH_QTE_END)
+    {
+        QTE()
+        {   
+            Type(2); //Press button
+            Button("_ACTION_QTE2");
+            Looped(false);
+            JumpToPhaseAfterFail("Fail4");
+            HUDPos([0.0, 0.33, 0.0]);
+        }
+    }
+    
+	PlayMovie("cin_raisdeathoutro_01", FOURTH_QTE_END, FIFTH_QTE_BEGIN); 
+    
+	PlayMovie("cin_raisdeathoutro_01", FIFTH_QTE_BEGIN, FIFTH_QTE_END)
+    {
+        QTE()
+        {   
+            Type(2); //Press button
+            Looped(false);
+            Button("_ACTION_QTE3");
+            JumpToPhaseAfterFail("Fail5");
+            HUDPos([0.0, 0.33, 0.0]);
+        }
+    }
+	
+	PlayMovie("cin_raisdeathoutro_01", FIFTH_QTE_END, SIXTH_QTE_BEGIN); 
+    
+	PlayMovie("cin_raisdeathoutro_01", SIXTH_QTE_BEGIN, SIXTH_QTE_END)
+    {
+        QTE()
+        {   
+            Type(2); //Press button
+            Button("_ACTION_QTE4");
+            Looped(false);
+            JumpToPhaseAfterFail("Fail6");
+            HUDPos([0.0, 0.33, 0.0]);
+        }
+    }
+	
+	PlayMovie("cin_raisdeathoutro_01", SIXTH_QTE_END, SEVENTH_QTE_BEGIN); 
+    
+	PlayMovie("cin_raisdeathoutro_01", SEVENTH_QTE_BEGIN, SEVENTH_QTE_END)
+    {
+        QTE()
+        {   
+            Type(2); //Press button
+			Button("_ACTION_QTE1");
+            Looped(false);
+            JumpToPhaseAfterFail("Fail7");
+            HUDPos([0.0, 0.33, 0.0]);
+        }
+    }
+	
+	PlayMovie("cin_raisdeathoutro_01", SEVENTH_QTE_END, EIGHTH_QTE_BEGIN); 
+    
+	PlayMovie("cin_raisdeathoutro_01", EIGHTH_QTE_BEGIN, EIGHTH_QTE_END)
+    {
+        QTE()
+        {   
+            Type(2); //Press button
+			Button("_ACTION_QTE1");
+            Looped(false);
+            JumpToPhaseAfterFail("Fail8");
+            HUDPos([0.0, 0.33, 0.0]);
+        }
+    }
+    
+	PlayMovie("cin_raisdeathoutro_01", EIGHTH_QTE_END, SECOND_CHECKPOINT);
+
+    Checkpoint();
+
+    PlayMovie("cin_raisdeathoutro_01", SECOND_CHECKPOINT, SECOND_QTE_BEGIN); 
+  
+    PlayMovie("cin_raisdeathoutro_01", SECOND_QTE_BEGIN, SECOND_QTE_END)
+    {
+        QTE()
+        {   
+            Type(1); //Smash button
+			Button("_ACTION_TAP_MINIGAME");
+            Looped(false);
+            JumpToPhaseAfterFail("Fail2");
+            HUDPos([0.0, 0.33, 0.0]);
+        }
+    }
+    
+    PlayMovie("cin_raisdeathoutro_01", SECOND_QTE_END, THIRD_CHECKPOINT);
+    
+    Checkpoint();
+    
+    PlayMovie("cin_raisdeathoutro_01", THIRD_CHECKPOINT, THIRD_QTE_BEGIN);
+   
+    PlayMovie("cin_raisdeathoutro_01", THIRD_QTE_BEGIN, THIRD_QTE_END)
+    {
+        QTE()
+        {   
+            Type(1); //Smash button
+			Button("_ACTION_TAP_MINIGAME");
+            Looped(false);
+            JumpToPhaseAfterFail("Fail3");
+            HUDPos([0.0, 0.33, 0.0]);
+        }
+    }
+   
+    PlayMovie("cin_raisdeathoutro_01", THIRD_QTE_END, MOVIE_END);
+	PlayMovie("cin_raisdeathoutro_01", AYO_SPEECH_BEGIN, AYO_SPEECH_END );
+	CreditsScreen();	
+	PlayMovie("cin_raisdeathoutro_01", AYO_SPEECH_END, -1 );
+
+	
+	Stop(false);
+    
+    PlayMovie("cin_raisdeathoutro_01", FIRST_QTE_FAIL_START, FIRST_QTE_FAIL_END ) { Name("Fail1"); } 
+    DeathScreen();
+    PlayMovie("cin_raisdeathoutro_01", FIRST_QTE_FAIL_END, FIRST_QTE_FAIL_END + 36);
+    Stop(false);
+
+    PlayMovie("cin_raisdeathoutro_01", SECOND_QTE_FAIL_START, SECOND_QTE_FAIL_END ) { Name("Fail2"); }
+    DeathScreen();
+    PlayMovie("cin_raisdeathoutro_01", SECOND_QTE_FAIL_END, SECOND_QTE_FAIL_END + 36);
+    Stop(false);
+    
+    PlayMovie("cin_raisdeathoutro_01", THIRD_QTE_FAIL_START, THIRD_QTE_FAIL_END ) { Name("Fail3"); } 
+    DeathScreen();
+    PlayMovie("cin_raisdeathoutro_01", THIRD_QTE_FAIL_END, THIRD_QTE_FAIL_END +36);
+    Stop(false);
+
+    Hit(-45.0, 4.0) { Name("Fail4"); }
+    PlayMovie("cin_raisdeathoutro_01", FOURTH_QTE_FAIL_START, FOURTH_QTE_FAIL_END );
+	DeathScreen();
+    PlayMovie("cin_raisdeathoutro_01", FOURTH_QTE_FAIL_END, FOURTH_QTE_FAIL_END +36);
+    Stop(false);
+	
+    Hit(65.0, 5.0) { Name("Fail5"); }
+	PlayMovie("cin_raisdeathoutro_01", FIFTH_QTE_FAIL_START, FIFTH_QTE_FAIL_END );
+	DeathScreen();
+    PlayMovie("cin_raisdeathoutro_01", FIFTH_QTE_FAIL_END, FIFTH_QTE_FAIL_END +36);
+    Stop(false);
+
+    Hit(-15.0, 5.0) { Name("Fail6"); }
+	PlayMovie("cin_raisdeathoutro_01", SIXTH_QTE_FAIL_START, SIXTH_QTE_FAIL_END );
+	DeathScreen();
+    PlayMovie("cin_raisdeathoutro_01", SIXTH_QTE_FAIL_END, SIXTH_QTE_FAIL_END +36);
+    Stop(false);
+
+	Hit(-35.0, 7.0) { Name("Fail7"); }
+	PlayMovie("cin_raisdeathoutro_01", SEVENTH_QTE_FAIL_START, SEVENTH_QTE_FAIL_END );
+	DeathScreen();
+    PlayMovie("cin_raisdeathoutro_01", SEVENTH_QTE_FAIL_END, SEVENTH_QTE_FAIL_END +36);
+    Stop(false);
+
+	Hit(-45.0, 4.0) { Name("Fail8"); }
+	PlayMovie("cin_raisdeathoutro_01", EIGHTH_QTE_FAIL_START, EIGHTH_QTE_FAIL_END );
+	DeathScreen();
+    PlayMovie("cin_raisdeathoutro_01", EIGHTH_QTE_FAIL_END, EIGHTH_QTE_FAIL_END +36);
+    Stop(false);
+}

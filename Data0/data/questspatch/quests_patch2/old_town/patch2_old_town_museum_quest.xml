@@ -1,0 +1,550 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="old_town"
+     pxsl_line="3">
+    <Quest
+         name="Museum01"
+         parent="MeetingWithJade"
+         quest_giver="Troy"
+         new_chapter="Chapter10"
+         reward_set="StorylineReward_Museum_reward"
+         pxsl_line="5">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Museum_OBJ_FindCustodian&amp;"
+             pxsl_line="6">
+            <Path
+                 pxsl_line="6">
+                <!-- ACTIONS WITH TARIQ -->
+                <Phase
+                     type="go to"
+                     name="Museum - START - Talk with Tariq"
+                     distance="0"
+                     pxsl_line="8">
+                    <Destination
+                         pxsl_line="8">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="sgt_Museum_Meet_Tariq"
+                             pxsl_line="8" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="9">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Ghost_SP_01"
+                             pxsl_line="9" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="set lifeplace"
+                     name="_"
+                     interact_dist="7"
+                     pxsl_line="10">
+                    <LifePlace
+                         pxsl_line="10">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Ghost_LP_Tariq_001"
+                             pxsl_line="10" />
+                    </LifePlace>
+                </Phase>
+                <Phase
+                     type="use life place"
+                     name="_"
+                     teleport="true"
+                     pxsl_line="11">
+                    <LifePlace
+                         pxsl_line="11">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Ghost_LP_Mira_001"
+                             pxsl_line="11" />
+                    </LifePlace>
+                    <AI
+                         pxsl_line="12">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Mira"
+                             pxsl_line="12" />
+                    </AI>
+                </Phase>
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_Museum_12DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="13" />
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="Tariq"
+                     group="Tariq_Museum_12DLG02"
+                     auto_start="true"
+                     pxsl_line="14" />
+                <Phase
+                     type="set lifeplace"
+                     name="_"
+                     interact_dist="0"
+                     pxsl_line="15">
+                    <LifePlace
+                         pxsl_line="15">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Ghost_LP_Tariq_001"
+                             pxsl_line="15" />
+                    </LifePlace>
+                </Phase>
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="Tariq"
+                     group="Tariq_Museum_12DLG03"
+                     gather_radius="3"
+                     pxsl_line="16" />
+                <Phase
+                     type="set lifeplace"
+                     name="_"
+                     interact_dist="0"
+                     pxsl_line="17">
+                    <LifePlace
+                         pxsl_line="17">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Museum_LP_Tariq_After"
+                             pxsl_line="17" />
+                    </LifePlace>
+                </Phase>
+                <Phase
+                     type="use life place"
+                     name="_"
+                     pxsl_line="18">
+                    <LifePlace
+                         pxsl_line="18">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Museum_LP_Tariq_After"
+                             pxsl_line="18" />
+                    </LifePlace>
+                    <AI
+                         pxsl_line="19">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Tariq"
+                             pxsl_line="19" />
+                    </AI>
+                </Phase>
+                <!-- CHECKPOINT!! -=-=-= -->
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="21">
+                    <Destination
+                         pxsl_line="21">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Ghost_SP_01"
+                             pxsl_line="21" />
+                    </Destination>
+                </Phase>
+                <!-- CHECKPOINT!! -=-=- -->
+            </Path>
+        </Phase>
+    </Quest>
+    <Quest
+         name="Museum01a"
+         parent="Museum01"
+         glued="true"
+         pxsl_line="24">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Museum_OBJ_TunnelEntrance&amp;"
+             pxsl_line="25">
+            <Path
+                 pxsl_line="25">
+                <!-- ,goto <<Museum - Sneak into the museum>> SpawnPoint sp_Museum01 -distance=10 -->
+                    <!-- ,debugpos SpawnPoint sp_Museum01 -->
+                <!-- ,enable _ SpawnPoint sp_Museum01 -->
+                <!-- ,disable _ SpawnPoint sp_MeetingWithJade_Restaurant -->
+                <!-- ,checkpoint _ SpawnPoint sp_Museum01 -->
+                <Phase
+                     type="AND"
+                     name="Museum - Find tunnel"
+                     pxsl_line="31">
+                    <DebugPlayerPosition
+                         pxsl_line="32">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="sp_RoofGarden_FastTravel"
+                             pxsl_line="32" />
+                    </DebugPlayerPosition>
+                    <Path
+                         pxsl_line="33">
+                        <Phase
+                             type="enable challengesensor"
+                             name="_"
+                             state="true"
+                             pxsl_line="34">
+                            <Object
+                                 pxsl_line="34">
+                                <QuestObject
+                                     class="SensorCoopChallengeTrigger"
+                                     name="storyoldtown_04"
+                                     pxsl_line="34" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="35">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="36">
+                            <Destination
+                                 pxsl_line="36">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="sgt_FindAntio_Tunel"
+                                     pxsl_line="36" />
+                            </Destination>
+                            <SpecificLocation
+                                 pxsl_line="37">
+                                <QuestObject
+                                     class="ZoneBox"
+                                     name="zone_FindAntio_Tunel"
+                                     pxsl_line="37" />
+                            </SpecificLocation>
+                        </Phase>
+                        <Phase
+                             type="AND"
+                             name="_"
+                             pxsl_line="38">
+                            <Path
+                                 pxsl_line="38">
+                                <SpecificLocation
+                                     pxsl_line="39">
+                                    <QuestObject
+                                         class="ZoneBox"
+                                         name="Underwater_Tunner_Zone_01"
+                                         pxsl_line="39" />
+                                </SpecificLocation>
+                                <!-- ,area ZoneBox Underwater_Tunner_Zone_02 -->
+                                <!-- ,area ZoneBox Underwater_Tunner_Zone_03 -->
+                                <!-- ,area ZoneBox Underwater_Tunner_Zone_04 -->
+                                <!-- ,area ZoneBox Underwater_Tunner_Zone_05 -->
+                                <!-- ,goto _ SensorGoTo sgt_FindAntio_Tunel_01 -distance=0 -show=false -->
+                                <!-- ,goto _ SensorGoTo sgt_FindAntio_Tunel_02 -distance=0 -show=false -->
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="0"
+                                     show_locations="false"
+                                     complete_challenge="storyoldtown_04"
+                                     pxsl_line="46">
+                                    <Destination
+                                         pxsl_line="46">
+                                        <QuestObject
+                                             class="SensorGoTo"
+                                             name="sgt_FindAntio_Tunel_03"
+                                             pxsl_line="46" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                    </Path>
+                    <!-- path -->
+                        <!-- ,disable-multi _ -->
+                            <!-- ,o FXEmitter ProjectMayhem_Smiley_Centre -->
+                            <!-- ,o FXEmitter ProjectMayhem_Smiley_Left -->
+                            <!-- ,o FXEmitter ProjectMayhem_Smiley_Right -->
+                            <!-- ,o FXEmitter ProjectMayhem_FX_building_explosion -->
+                            <!-- ,o QuestEnableGroup Fire -->
+                    <Path
+                         pxsl_line="55">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             complete_challenge="storyoldtown_04"
+                             pxsl_line="56">
+                            <Destination
+                                 pxsl_line="56">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="sgt_FindAntio_Tunel_03"
+                                     pxsl_line="56" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="5"
+                     pxsl_line="57">
+                    <Destination
+                         pxsl_line="57">
+                        <QuestObject
+                             class="MapPortal"
+                             name="portal_FindAntio_OldTown_TO_Museum_Tunel"
+                             pxsl_line="57" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="58">
+                    <Object
+                         pxsl_line="58">
+                        <QuestObject
+                             class="MapPortal"
+                             name="portal_FindAntio_OldTown_TO_Museum_Tunel"
+                             pxsl_line="58" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable challengesensor"
+                     name="_"
+                     state="false"
+                     pxsl_line="59">
+                    <Object
+                         pxsl_line="59">
+                        <QuestObject
+                             class="SensorCoopChallengeTrigger"
+                             name="storyoldtown_04"
+                             pxsl_line="59" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="62">
+                    <Destination
+                         pxsl_line="62">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="sp_portal_FindAntio_Museum_TO_OldTown_Tunel"
+                             pxsl_line="62" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <!-- In the future we may want to chenge this quest to simple and separete one  -->
+    <Quest
+         name="Museum05"
+         parent="Museum04"
+         glued="true"
+         pxsl_line="65">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Museum_OBJ_LeaveMuseum&amp;"
+             pxsl_line="66">
+            <Path
+                 pxsl_line="66">
+                <Phase
+                     type="AND"
+                     name="Museum - Leave museum"
+                     pxsl_line="67">
+                    <DebugPlayerPosition
+                         pxsl_line="68">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="sp_portal_FindAntio_Museum_TO_OldTown_Main"
+                             pxsl_line="68" />
+                    </DebugPlayerPosition>
+                    <Path
+                         pxsl_line="69">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="5"
+                             pxsl_line="70">
+                            <Destination
+                                 pxsl_line="70">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="sp_portal_FindAntio_Museum_TO_OldTown_Main"
+                                     pxsl_line="70" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="71">
+                            <Object
+                                 pxsl_line="71">
+                                <QuestObject
+                                     class="MapPortal"
+                                     name="portal_FindAntio_OldTown_TO_Museum_Tunel"
+                                     pxsl_line="71" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="3"
+                             pxsl_line="72" />
+                        <Phase
+                             type="set reward"
+                             name="_"
+                             reward="StorylineReward_Museum_reward"
+                             pxsl_line="73" />
+                    </Path>
+                    <Path
+                         pxsl_line="74">
+                        <Phase
+                             type="set weather"
+                             name="_"
+                             weather_type="clear"
+                             duration="1"
+                             interpolation="00.00"
+                             pxsl_line="75" />
+                        <Phase
+                             type="set weather scenario"
+                             name="_"
+                             scenario_name="0"
+                             reset="true"
+                             pxsl_line="76" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="78">
+                            <Object
+                                 pxsl_line="78">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="sp_Museum01"
+                                     pxsl_line="78" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="79">
+                            <Object
+                                 pxsl_line="79">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Museum_SafeZone_QEG"
+                                     pxsl_line="79" />
+                            </Object>
+                        </Phase>
+                        <!-- ,use-lp _ NPCLifePlace LP_OutOfTheAir_Savvy -teleport=true -->
+                            <!-- ,ai HumanAI Savvy    -->
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="Troy"
+                             pxsl_line="82" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="83">
+                            <Object
+                                 pxsl_line="83">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="sp_Contact_Start"
+                                     pxsl_line="83" />
+                            </Object>
+                        </Phase>
+                        <!-- ,use-lp _ NPCLifePlace LP_Contact_Savvy -teleport=true -->
+                            <!-- ,ai HumanAI Savvy      -->
+                        <Phase
+                             type="use life place"
+                             name="_"
+                             teleport="true"
+                             pxsl_line="86">
+                            <LifePlace
+                                 pxsl_line="86">
+                                <QuestObject
+                                     class="NPCLifePlace"
+                                     name="Contact_LP_Troy_001"
+                                     pxsl_line="86" />
+                            </LifePlace>
+                            <AI
+                                 pxsl_line="87">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Troy"
+                                     pxsl_line="87" />
+                            </AI>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="88">
+                    <Destination
+                         pxsl_line="88">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="sp_portal_FindAntio_Museum_TO_OldTown_Main"
+                             pxsl_line="88" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="wait guard"
+             name="_"
+             time="5"
+             pxsl_line="90" />
+        <Phase
+             type="talk"
+             name="_"
+             speaker="voice2d"
+             group="Player_Museum_22DLG01"
+             show_locations="false"
+             auto_start="true"
+             pxsl_line="91" />
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Museum_OBJ_MeetWithTroy&amp;"
+             pxsl_line="93">
+            <Path
+                 pxsl_line="93">
+                <Phase
+                     type="talk"
+                     name="Contact - START - Talk to Troy"
+                     speaker="Troy"
+                     group="Troy_Contact_00DLG01"
+                     gather_radius="3"
+                     pxsl_line="94">
+                    <DebugPlayerPosition
+                         pxsl_line="95">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="sp_Contact_Start"
+                             pxsl_line="95" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="96">
+                    <Destination
+                         pxsl_line="96">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="blue_tower::SafeZone_sp"
+                             pxsl_line="96" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+</QuestsDefinitions>

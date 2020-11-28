@@ -1,0 +1,67 @@
+sub main()
+{
+// FreezePlayer                = 0x00000002,      // freeze main player during movie
+// Subtitles                   = 0x00000004,      // turning on subtitles during movie
+// Skippable                   = 0x00000010,      // user can skip the movie
+// HidePlayers                 = 0x00000040,      // game hides players
+// UseLevelTrack               = 0x00000080,      // level track of movie will be played
+// SetPlayerPosFromCameraOnEnd = 0x00000100,      // player's position will be copied from camera on movie end
+// HideHud                     = 0x00001000,      // hud is hidden during movie
+// BlockSaves                  = 0x00002000,      // saves are blocked during movie
+// BlockChatter                = 0x00004000,      // chatter system are blocked during movie
+// BlockGameplayMenu           = 0x00008000,      // gameplay menus are blocked during movie 
+
+//Keep this synchronized with FMovieOptions enum!
+
+//Flags for "Ingame" preset
+// "0x00000000" = 0
+
+
+//Flags for "Cutscene" preset
+// "0x0000f0d6"; = 61654
+// FreezePlayer                = 0x00000002,      // freeze main player during movie
+// Subtitles                   = 0x00000004,      // turning on subtitles during movie
+// Skippable                   = 0x00000010,      // user can skip the movie
+// UseLevelTrack               = 0x00000080,      // level track of movie will be played
+// HidePlayers                 = 0x00000040,      // game hides players
+// HideHud                     = 0x00001000,      // hud is hidden during movie
+// BlockSaves                  = 0x00002000,      // saves are blocked during movie
+// BlockChatter                = 0x00004000,      // chatter system are blocked during movie
+// BlockGameplayMenu           = 0x00008000,      // gameplay menus are blocked during movie 
+
+    PresetDef("Type")
+    {
+        Description("");
+    
+        AddField("m_FadeOnStart", "0", true);
+        AddField("m_FadeOutOnStartTime", "0.5", true);
+        AddField("m_FadeInOnStartTime", "1.0", true);
+
+        AddField("m_FadeOnEnd", "0", true);
+        AddField("m_FadeOutOnEndTime", "0.5", true);
+        AddField("m_FadeInOnEndTime", "1.0", true);
+
+
+        AddField("m_MovieFlags", "0", true); 
+
+        Preset("Ingame")
+        {
+            SetField("m_FadeOnStart", "0");
+            SetField("m_FadeOnEnd", "0");
+            SetField("m_MovieFlags", "0");
+        }
+
+        Preset("Cutscene")
+        {
+            SetField("m_FadeOnStart", "1");
+            SetField("m_FadeOutOnStartTime", "0.5");
+            SetField("m_FadeInOnStartTime", "1.0");
+
+            SetField("m_FadeOnEnd", "1");
+            SetField("m_FadeOutOnEndTime", "0.5");
+            SetField("m_FadeInOnEndTime", "1.0");
+
+            SetField("m_MovieFlags", "61654");
+        }
+    }  
+}

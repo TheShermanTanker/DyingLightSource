@@ -1,0 +1,16 @@
+import "values.mtt"
+
+sub logo(int e_path = -1)
+{
+	SetTextureVar(101, "s_game_postproces_logo");
+	SetTextureVar(102, "s_game_postproces_logo_msk");
+	SetTextureVar(103, "s_game_postproces_logo_shadow");
+	SetTextureVar(104, "s_game_postproces_logo_background");
+	SetTextureVar(105, "s_game_postproces_logo_vignette");
+	
+    SetRenderTarget("backbuffer", "color stencil depth");
+		Mesh("tri_screen.msh", "logo.mat", "std");
+	
+	// There must be at least one scene
+	Scene("std");
+}

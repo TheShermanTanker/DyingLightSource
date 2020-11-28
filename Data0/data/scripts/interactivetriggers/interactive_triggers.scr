@@ -1,0 +1,2127 @@
+import "interactive_triggers_syntax.def"
+
+///////////////////////////////////////////////////////////////////////////////
+// Objects
+///////////////////////////////////////////////////////////////////////////////
+
+sub main()
+{
+    Object("kitchen_oven")
+    {
+        UsePoint("", 0, 0.8, 0.9);
+
+        use ClampDeviationHSym(horz = 25.0, min_vert = -10.0, max_vert = 60.0);
+
+        use PlayerAnimationForActionMB(action = TurnOn, animation = "kitchen_oven_unscrewing", moveto_animation = "Kitchen_Oven_Unscrewing_MoveTo");
+        use PlayerAnimationForActionMB(action = TurnOff, animation = "kitchen_oven_unscrewing", moveto_animation = "Kitchen_Oven_Unscrewing_MoveTo");
+    }
+
+    Object("wagon_door")
+    {
+        // Offset looks "strange" as the bone orientation is twisted (45 deg relative to the object).
+        UsePoint("bone_wagon_root", 1, -6, 0);
+        UseReference(Icon);
+        UseAngleSpan(-80, 80, -90, 90);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        Dynamic(true);
+
+        use SingleStageDynamicActionMB(action = TurnOn, player_start = "unarmed_triggerwagondooropen_player", item_start = "m_fpp_unarmed_triggerwagondooropen_door", player_start_moveto = "");
+    }
+
+    Object("hangar_door")
+    {
+        // Offset looks "strange" as the bone orientation is twisted (45 deg relative to the object).
+        UsePoint("bone_wagon_root", 0.99, -7, 0);
+        UseReference(Icon);
+        UseAngleSpan(-70, 70, -90, 90);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        Dynamic(true);
+
+        use SingleStageDynamicActionMB(action = TurnOn, player_start = "unarmed_triggerwagondooropen_player", item_start = "m_fpp_unarmed_triggerwagondooropen_door", player_start_moveto = "");
+    }
+
+    Object("wagon_door_minigame_v1")
+    {
+        // Offset looks "strange" as the bone orientation is twisted (45 deg relative to the object).
+        UsePoint("bone_wagon_root", 1, -6, 0);
+        UseReference(Icon);
+        UseAngleSpan(-45, 125, -90, 90);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        Dynamic(true);
+
+        Action(TurnOn)
+        {
+            CompletionStage("Success");
+
+            HandlerDefinition("Minigame", "MinigameButtonTapping");
+
+            Stage("Start")
+            {
+                use PlayerAnimationMax(animation = "WagonDoor_MiniGame_Begin");
+
+                Transition(SignalStageCompleted, "Idle");
+            }
+
+            Stage("Idle")
+            {
+                Handler("Minigame");
+
+                use PlayerAnimationMax(animation = "WagonDoor_MiniGame_Idle");
+
+                Transition(SignalGameInteracting, "Loop");
+            }
+
+            Stage("Loop")
+            {
+                Handler("Minigame");
+
+                use PlayerAnimationMax(animation = "WagonDoor_MiniGame_Try");
+
+                Transition(SignalGameIdle, "Idle");
+                Transition(SignalStageCompleted, "Success");
+            }
+
+            Stage("Success")
+            {
+                use PlayerAnimationMax(animation = "WagonDoor_MiniGame_Success");
+
+                Item()
+                {
+                    Animation("M_FPP_WagonDoor_MiniGame_Door_Success");
+                    BlockPaths(false);
+                }
+
+                Transition(SignalStageCompleted, "Finish");
+            }
+
+            Stage("Finish")
+            {
+            }
+        }
+    }
+
+    Object("wagon_door_minigame")
+    {
+        // Offset looks "strange" as the bone orientation is twisted (45 deg relative to the object).
+        UsePoint("bone_wagon_root", 1, -6, 0);
+        UseReference(Icon);
+        UseAngleSpan(-45, 125, -90, 90);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        Dynamic(true);
+
+        Action(TurnOn)
+        {
+            CompletionStage("Success");
+
+            HandlerDefinition("Minigame", "MinigameGaugeFilling");
+
+            Stage("Start")
+            {
+                use PlayerAnimationMax(animation = "WagonDoor_MiniGame_Begin");
+
+                Transition(SignalStageCompleted, "Idle");
+            }
+
+            Stage("Idle")
+            {
+                Handler("Minigame");
+
+                use PlayerAnimationMax(animation = "WagonDoor_MiniGame_Idle");
+
+                Transition(SignalGameInteracting, "Loop");
+            }
+
+            Stage("Loop")
+            {
+                Handler("Minigame");
+
+                use PlayerAnimationMax(animation = "WagonDoor_MiniGame_v2_Loop1");
+
+                Item()
+                {
+                    Animation("M_FPP_WagonDoor_MiniGame_v2_Door_Loop1");
+                }
+
+                Transition(SignalGameIdle, "Idle");
+                Transition(SignalGameHalfCompleted, "Loop2");
+            }
+
+            Stage("Loop2")
+            {
+                Handler("Minigame");
+
+                use PlayerAnimationMax(animation = "WagonDoor_MiniGame_v2_Loop2");
+
+                Item()
+                {
+                    Animation("M_FPP_WagonDoor_MiniGame_v2_Door_Loop2");
+                }
+
+                Transition(SignalGameIdle, "Idle");
+                Transition(SignalStageCompleted, "Loop3");
+            }
+
+            Stage("Loop3")
+            {
+                Handler("Minigame");
+
+                use PlayerAnimationMax(animation = "WagonDoor_MiniGame_v2_Loop3");
+
+                Item()
+                {
+                    Animation("M_FPP_WagonDoor_MiniGame_v2_Door_Loop3");
+                }
+
+                Transition(SignalGameIdle, "Loop3ToIdle");
+                Transition(SignalGameFullCompleted, "Success");
+            }
+
+            Stage("Loop3ToIdle")
+            {
+                Handler("Minigame");
+
+                use PlayerAnimationMax(animation = "WagonDoor_MiniGame_v2_Door_Fail");
+
+                Item()
+                {
+                    Animation("M_FPP_WagonDoor_MiniGame_v2_Door_Fail");
+                }
+
+                Transition(SignalStageCompleted, "Idle");
+            }
+
+            Stage("Success")
+            {
+                use PlayerAnimationMax(animation = "WagonDoor_MiniGame_v2_Success");
+
+                Item()
+                {
+                    Animation("M_FPP_WagonDoor_MiniGame_v2_Door_Success");
+                    BlockPaths(false);
+                }
+
+                Transition(SignalStageCompleted, "Finish");
+            }
+
+            Stage("Finish")
+            {
+            }
+        }
+    }
+
+    Object("turned_body")
+    {
+        PoseAnimation("M_TPP_Body_Inspection_Pose");
+
+        UsePoint("spine2", 0, 0, 0);
+        UseAngleSpan(180);
+
+        use SingleStageActionMax(action = TurnOn, player_start = "Body_Inspection", item_start = "M_TPP_Body_Inspection", player_start_moveto = "Body_Inspection_MoveTo");
+    }
+
+    Object("military_box")
+    {
+        UsePoint("bone_root", 0, 1.5, 0);
+
+        use ClampDeviationHSym(horz = 40.0, min_vert = -10.0, max_vert = 60.0);
+
+        use SingleStageActionMax(action = TurnOn, player_start = "MilitaryCargo_Trigger", item_start = "MilitaryCargo_Trigger_open", player_start_moveto = "MilitaryCargo_Trigger_MoveTo");
+        use SingleStageActionMax(action = Open,   player_start = "MilitaryCargo_Trigger", item_start = "MilitaryCargo_Trigger_open", player_start_moveto = "MilitaryCargo_Trigger_MoveTo");
+    }
+
+    Object("military_box_underwater")
+    {
+        UsePoint("bone_root", 0, 1.5, 0);
+
+        use ClampDeviationHSym(horz = 40.0, min_vert = -25.0, max_vert = 60.0);
+
+        use SingleStageActionMax(action = TurnOn, player_start = "MilitaryCargo_UnderwaterTrigger", item_start = "OpenUnderwater", player_start_moveto = "MilitaryCargo_UnderwaterTrigger_MoveTo");
+        use SingleStageActionMax(action = Open,   player_start = "MilitaryCargo_UnderwaterTrigger", item_start = "OpenUnderwater", player_start_moveto = "MilitaryCargo_UnderwaterTrigger_MoveTo");
+    }
+
+    Object("military_box_underwater_fast")
+    {
+        UsePoint("bone_root", 0, 1.5, 0);
+
+        use ClampDeviationHSym(horz = 40.0, min_vert = -25.0, max_vert = 60.0);
+
+        use SingleStageActionMax(action = TurnOn, player_start = "MilitaryCargo_UnderwaterTriggerFast", item_start = "OpenUnderwaterFast", player_start_moveto = "MilitaryCargo_UnderwaterTriggerFast_MoveTo");
+        use SingleStageActionMax(action = Open,   player_start = "MilitaryCargo_UnderwaterTriggerFast", item_start = "OpenUnderwaterFast", player_start_moveto = "MilitaryCargo_UnderwaterTriggerFast_MoveTo");
+    }
+
+    Object("military_box_fast")
+    {
+        UsePoint("bone_root", 0, 1.5, 0);
+
+        use ClampDeviationHSym(horz = 40.0, min_vert = -10.0, max_vert = 60.0);
+
+        use SingleStageActionMB(action = TurnOn, player_start = "MilitaryCargoQuick_Trigger", item_start = "MilitaryCargoQuick_Trigger_open", player_start_moveto = "MilitaryCargoQuick_Trigger_MoveTo");
+        use SingleStageActionMB(action = Open,   player_start = "MilitaryCargoQuick_Trigger", item_start = "MilitaryCargoQuick_Trigger_open", player_start_moveto = "MilitaryCargoQuick_Trigger_MoveTo");
+    }
+
+    Object("wardrobe_door_opening")
+    {
+        UsePoint("furniture_int_b", 0, 0.15, 0.9);
+        UseAngleSpan(45);
+        UseDistance(1.6);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageActionMax(action = TurnOn, player_start = "Unarmed_Wardrobe_Opening", item_start = "Wardrobe_Opening", player_start_moveto = "Unarmed_Wardrobe_Opening_MoveTo");
+    }
+
+    Object("wardrobe_door_opening_use_at_start")
+    {
+        UsePoint("furniture_int_b", 0, 0.15, 0.9);
+        UseAngleSpan(45);
+        UseDistance(1.6);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageActionMax(action = TurnOn, player_start = "Unarmed_Wardrobe_Opening_UseAtStart", item_start = "Wardrobe_Opening", player_start_moveto = "Unarmed_Wardrobe_Opening_MoveTo");
+    }
+
+    Object("encounter_wardrobe_door_opening")
+    {
+        UsePoint("furniture_int_b", 0, 0.15, 0.9);
+        UseAngleSpan(45);
+        UseDistance(1.6);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageActionMax(action = TurnOn, player_start = "Unarmed_Wardrobe_Encounter", item_start = "Wardrobe_Opening_Short", player_start_moveto = "Unarmed_Wardrobe_Encounter_MoveTo");
+    }
+
+    Object("encounter_wardrobe_door_opening_use_at_start")
+    {
+        UsePoint("furniture_int_b", 0, 0.15, 0.9);
+        UseAngleSpan(45);
+        UseDistance(1.6);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageActionMax(action = TurnOn, player_start = "Unarmed_Wardrobe_Encounter_UseAtStart", item_start = "Wardrobe_Opening_Short", player_start_moveto = "Unarmed_Wardrobe_Encounter_MoveTo");
+    }
+
+    Object("loot_wardrobe")
+    {
+        UsePoint("loot_wardrobe_anm", 0, 0.15, 0.9);
+        UseAngleSpan(45);
+        UseDistance(1.6);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageActionMax(action = Open, player_start = "Unarmed_Wardrobe_Loot", item_start = "Wardrobe_Opening_Short", player_start_moveto = "Unarmed_Wardrobe_Loot_MoveTo");
+    }
+
+    Object("blocked_door")
+    {
+        UsePoint("", 0, 0.3, 0);
+        UseDistance(1.5);
+
+        use ClampDeviationHSym(horz = 40.0, min_vert = 0.0, max_vert = 50.0);
+
+        // PhysicalSwitchDI actions.
+        use SingleStageActionMax(action = TurnOn,  player_start = "Unarmed_Doors_OpenTry",        item_start = "Doors_OpenTry", player_start_moveto = "Unarmed_Doors_OpenTry_MoveTo");
+        use SingleStageActionMax(action = TurnOff, player_start = "Unarmed_Doors_OpenTry",        item_start = "Doors_OpenTry", player_start_moveto = "Unarmed_Doors_OpenTry_MoveTo");
+
+        use SingleStageActionMax(action = TurnOn,  player_start = "Unarmed_Doors_OpenTry_Inside", item_start = "Doors_OpenTry", player_start_moveto = "Unarmed_Doors_OpenTry_Inside_MoveTo");
+        use SingleStageActionMax(action = TurnOff, player_start = "Unarmed_Doors_OpenTry_Inside", item_start = "Doors_OpenTry", player_start_moveto = "Unarmed_Doors_OpenTry_Inside_MoveTo");
+
+        // DoorDI actions.
+        use SingleStageActionMax(action = CheckLocked,  player_start = "Unarmed_Doors_OpenTry",        item_start = "Doors_OpenTry", player_start_moveto = "Unarmed_Doors_OpenTry_MoveTo");
+        use SingleStageActionMax(action = CheckLocked,  player_start = "Unarmed_Doors_OpenTry_Inside", item_start = "Doors_OpenTry", player_start_moveto = "Unarmed_Doors_OpenTry_Inside_MoveTo");
+    }
+
+    Object("blocked_door_fast")
+    {
+        UsePoint("", 0, 0.3, 0);
+        UseDistance(1.5);
+
+        use ClampDeviationHSym(horz = 40.0, min_vert = 0.0, max_vert = 50.0);
+
+        // PhysicalSwitchDI actions.
+        use SingleStageActionMax(action = TurnOn,  player_start = "Unarmed_Doors_OpenTry_Fast",        item_start = "Doors_OpenTry", player_start_moveto = "Unarmed_Doors_OpenTry_MoveTo");
+        use SingleStageActionMax(action = TurnOff, player_start = "Unarmed_Doors_OpenTry_Fast",        item_start = "Doors_OpenTry", player_start_moveto = "Unarmed_Doors_OpenTry_MoveTo");
+
+        use SingleStageActionMax(action = TurnOn,  player_start = "Unarmed_Doors_OpenTry_Inside", item_start = "Doors_OpenTry", player_start_moveto = "Unarmed_Doors_OpenTry_Inside_MoveTo");
+        use SingleStageActionMax(action = TurnOff, player_start = "Unarmed_Doors_OpenTry_Inside", item_start = "Doors_OpenTry", player_start_moveto = "Unarmed_Doors_OpenTry_Inside_MoveTo");
+
+        // DoorDI actions.
+        use SingleStageActionMax(action = CheckLocked,  player_start = "Unarmed_Doors_OpenTry_Fast",        item_start = "Doors_OpenTry", player_start_moveto = "Unarmed_Doors_OpenTry_MoveTo");
+        use SingleStageActionMax(action = CheckLocked,  player_start = "Unarmed_Doors_OpenTry_Inside", item_start = "Doors_OpenTry", player_start_moveto = "Unarmed_Doors_OpenTry_Inside_MoveTo");
+    }
+
+    Object("blocked_door_inside")
+    {
+        UsePoint("", 0, 0.3, 0);
+        UseDistance(1.5);
+
+        use ClampDeviationHSym(horz = 40.0, min_vert = 0.0, max_vert = 50.0);
+
+        use SingleStageActionMax(action = TurnOn,  player_start = "Unarmed_Doors_OpenTry",        item_start = "Doors_OpenTry", player_start_moveto = "Unarmed_Doors_OpenTry_MoveTo");
+        use SingleStageActionMax(action = TurnOff, player_start = "Unarmed_Doors_OpenTry",        item_start = "Doors_OpenTry", player_start_moveto = "Unarmed_Doors_OpenTry_MoveTo");
+
+        use SingleStageActionMax(action = TurnOn,  player_start = "Unarmed_Doors_OpenTry_Inside", item_start = "Doors_OpenTry", player_start_moveto = "Unarmed_Doors_OpenTry_Inside_MoveTo");
+        use SingleStageActionMax(action = TurnOff, player_start = "Unarmed_Doors_OpenTry_Inside", item_start = "Doors_OpenTry", player_start_moveto = "Unarmed_Doors_OpenTry_Inside_MoveTo");
+
+        // DoorDI actions.
+        use SingleStageActionMax(action = CheckLocked,  player_start = "Unarmed_Doors_OpenTry",        item_start = "Doors_OpenTry", player_start_moveto = "Unarmed_Doors_OpenTry_MoveTo");
+        use SingleStageActionMax(action = CheckLocked,  player_start = "Unarmed_Doors_OpenTry_Inside", item_start = "Doors_OpenTry", player_start_moveto = "Unarmed_Doors_OpenTry_Inside_MoveTo");
+    }
+
+    Object("blocked_door_wooden")
+    {
+        UsePoint("", 0, 0.3, 0);
+        UseDistance(1.5);
+
+        use ClampDeviationHSym(horz = 40.0, min_vert = 0.0, max_vert = 50.0);
+
+        // PhysicalSwitchDI actions.
+        use SingleStageActionMax(action = TurnOn,  player_start = "Unarmed_Doors_Wooden_OpenTry",        item_start = "Doors_OpenTry", player_start_moveto = "Unarmed_Doors_OpenTry_MoveTo");
+        use SingleStageActionMax(action = TurnOff, player_start = "Unarmed_Doors_Wooden_OpenTry",        item_start = "Doors_OpenTry", player_start_moveto = "Unarmed_Doors_OpenTry_MoveTo");
+
+        use SingleStageActionMax(action = TurnOn,  player_start = "Unarmed_Doors_Wooden_OpenTry_Inside", item_start = "Doors_OpenTry", player_start_moveto = "Unarmed_Doors_OpenTry_Inside_MoveTo");
+        use SingleStageActionMax(action = TurnOff, player_start = "Unarmed_Doors_Wooden_OpenTry_Inside", item_start = "Doors_OpenTry", player_start_moveto = "Unarmed_Doors_OpenTry_Inside_MoveTo");
+
+        // DoorDI actions.
+        use SingleStageActionMax(action = CheckLocked,  player_start = "Unarmed_Doors_Wooden_OpenTry",        item_start = "Doors_OpenTry", player_start_moveto = "Unarmed_Doors_OpenTry_MoveTo");
+        use SingleStageActionMax(action = CheckLocked,  player_start = "Unarmed_Doors_Wooden_OpenTry_Inside", item_start = "Doors_OpenTry", player_start_moveto = "Unarmed_Doors_OpenTry_Inside_MoveTo");
+    }
+
+    Object("garage_shutter")
+    {
+        UsePoint("bone_01", 1, 0, 0);
+
+        UseDistance(1.6);
+
+        PoseAnimation("InitialPose");
+
+        use ClampDeviationHSym(horz = 40.0, min_vert = 0.0, max_vert = 50.0);
+
+        Dynamic(true);
+
+        use SingleStageDynamicActionMax(action = TurnOn, player_start = "GarageShutter_Open",        item_start = "Open", player_start_moveto = "GarageShutter_Open_MoveTo");
+        use SingleStageDynamicActionMax(action = TurnOn, player_start = "GarageShutter_Inside_Open", item_start = "Open", player_start_moveto = "GarageShutter_Inside_Open_MoveTo");
+    }
+
+    Object("garage_shutter_use_at_start")
+    {
+        UsePoint("bone_01", 1, 0, 0);
+
+        UseDistance(1.6);
+
+        PoseAnimation("InitialPose");
+
+        use ClampDeviationHSym(horz = 40.0, min_vert = 0.0, max_vert = 50.0);
+
+        Dynamic(true);
+
+        use SingleStageDynamicActionMax(action = TurnOn, player_start = "GarageShutter_Open_UseAtStart",        item_start = "Open", player_start_moveto = "GarageShutter_Open_MoveTo");
+        use SingleStageDynamicActionMax(action = TurnOn, player_start = "GarageShutter_Inside_Open_UseAtStart", item_start = "Open", player_start_moveto = "GarageShutter_Inside_Open_MoveTo");
+    }
+
+    Object("garage_shutter_inside")
+    {
+        UsePoint("bone_01", 1, 0, 0);
+
+        UseDistance(1.6);
+
+        PoseAnimation("InitialPose");
+
+        use ClampDeviationHSym(horz = 40.0, min_vert = 0.0, max_vert = 50.0);
+
+        Dynamic(true);
+
+        use SingleStageDynamicActionMax(action = TurnOn, player_start = "GarageShutter_Open",        item_start = "Open", player_start_moveto = "GarageShutter_Open_MoveTo");
+        use SingleStageDynamicActionMax(action = TurnOn, player_start = "GarageShutter_Inside_Open", item_start = "Open", player_start_moveto = "GarageShutter_Inside_Open_MoveTo");
+    }
+
+    Object("fence_construction_gate")
+    {
+        UsePoint("bone_fence_gate", -1, 3, 0);
+
+        use ClampDeviationHSym(horz = 30.0, min_vert = -10.0, max_vert = 50.0);
+
+        Dynamic(true);
+
+        use SingleStageDynamicActionMB(action = TurnOn, player_start = "TriggerFence_Front_Open",   item_start = "TriggerFence_Open", player_start_moveto = "TriggerFence_Front_Open_MoveTo");
+        use SingleStageDynamicActionMB(action = TurnOn, player_start = "TriggerFence_Back_Open",    item_start = "TriggerFence_Open", player_start_moveto = "TriggerFence_Back_Open_MoveTo");
+
+        use SingleStageDynamicActionMB(action = TurnOff, player_start = "TriggerFence_Front_Close", item_start = "TriggerFence_Close", player_start_moveto = "TriggerFence_Front_Close_MoveTo");
+        use SingleStageDynamicActionMB(action = TurnOff, player_start = "TriggerFence_Back_Close",  item_start = "TriggerFence_Close", player_start_moveto = "TriggerFence_Back_Close_MoveTo");
+    }
+
+    Object("fence_construction_gate_long")
+    {
+        UsePoint("bone_fence_gate", -1, 3, 0);
+
+        use ClampDeviationHSym(horz = 30.0, min_vert = -10.0, max_vert = 50.0);
+
+        Dynamic(true);
+
+        use SingleStageDynamicActionMB(action = TurnOn, player_start = "TriggerFence_Long_Front_Open",   item_start = "TriggerFence_Long_Open", player_start_moveto = "TriggerFence_Long_Front_Open_MoveTo");
+        use SingleStageDynamicActionMB(action = TurnOn, player_start = "TriggerFence_Long_Back_Open",    item_start = "TriggerFence_Long_Open", player_start_moveto = "TriggerFence_Long_Back_Open_MoveTo");
+
+        use SingleStageDynamicActionMB(action = TurnOff, player_start = "TriggerFence_Long_Front_Close", item_start = "TriggerFence_Long_Close", player_start_moveto = "TriggerFence_Long_Front_Close_MoveTo");
+        use SingleStageDynamicActionMB(action = TurnOff, player_start = "TriggerFence_Long_Back_Close",  item_start = "TriggerFence_Long_Close", player_start_moveto = "TriggerFence_Long_Back_Close_MoveTo");
+    }
+
+    Object("cuffed_survivor_kneeling")
+    {
+        UsePoint("l_forearm", 0.9, 0, 0);
+
+        use ClampDeviationHSym(horz = 40.0, min_vert = -10.0, max_vert = 50.0);
+
+        use PlayerAnimationForActionMB(action = FreeSurvivor, animation = "Prisoner_Release_01", moveto_animation = "Prisoner_Release_01_MoveTo");
+    }
+
+    Object("kicked_survivor_help")
+    {
+        UsePoint("spine1", 0, 1, -1);
+        UseAngleSpan(45);
+        UseDistance(1.5);
+
+        use ClampDeviationHSym(horz = 30.0, min_vert = -10.0, max_vert = 50.0);
+
+        use PlayerAnimationForActionMB(action = FreeSurvivor, animation = "encounter_kicking_help", moveto_animation = "encounter_kicking_MoveTo");
+    }
+
+    Object("valve")
+    {
+        UsePoint("bone_rotate", -0.5, 0, 0);
+
+        use ClampDeviationHSym(horz = 40.0, min_vert = -10.0, max_vert = 50.0);
+
+        Action(TurnOn)
+        {
+            CompletionStage("Success");
+
+            HandlerDefinition("Minigame", "MinigameButtonTapping");
+
+            Stage("Start")
+            {
+                use PlayerAnimationMax(animation = "Unarmed_ValveMinigame_Start", moveto_animation = "Unarmed_ValveMinigame_Start_MoveTo");
+
+                Item()
+                {
+                    Animation("ValveMinigame_Start");
+                }
+
+                Transition(SignalStageCompleted, "Idle");
+            }
+
+            Stage("Idle")
+            {
+                Handler("Minigame");
+
+                use PlayerAnimationMax(animation = "Unarmed_ValveMinigame_Idle");
+
+                Item()
+                {
+                    Animation("ValveMinigame_Idle");
+                }
+
+                Transition(SignalGameInteracting, "Loop");
+                Transition(SignalGameBreak, "Break");
+            }
+
+            Stage("Loop")
+            {
+                Handler("Minigame");
+
+                use PlayerAnimationMax(animation = "Unarmed_ValveMinigame_Struggle");
+
+                Item()
+                {
+                    Animation("ValveMinigame_Struggle");
+                }
+
+                Transition(SignalGameIdle, "Idle");
+                Transition(SignalGameBreak, "Break");
+                Transition(SignalStageCompleted, "Success");
+            }
+
+            Stage("Break")
+            {
+                use PlayerAnimationMax(animation = "Unarmed_ValveMinigame_Release");
+
+                Transition(SignalStageCompleted, "Finish");
+            }
+
+            Stage("Success")
+            {
+                use PlayerAnimationMax(animation = "Unarmed_ValveMinigame_Success");
+
+                Item()
+                {
+                    Animation("ValveMinigame_Success");
+                }
+
+                Transition(SignalStageCompleted, "Finish");
+            }
+
+            Stage("Finish")
+            {
+            }
+        }
+
+		use MinigameActionMax(
+			action              = TurnOff,
+			minigame            = "MinigameButtonTapping",
+			start_player        = "Unarmed_ValveMinigameTighten_Start",
+			start_player_moveto = "Unarmed_ValveMinigameTighten_Start_MoveTo",
+			start_item          = "ValveMinigameTighten_Start",
+			idle_player         = "Unarmed_ValveMinigameTighten_Idle",
+			idle_item           = "ValveMinigameTighten_Idle",
+			struggle_player     = "Unarmed_ValveMinigameTighten_Struggle",
+			struggle_item       = "ValveMinigameTighten_Struggle",
+			success_player      = "Unarmed_ValveMinigameTighten_Success",
+			success_item        = "ValveMinigameTighten_Success");
+    }
+
+    Object("fuse_box")
+    {
+        UsePoint("bone_fuse_boxe", 0, 0, 0);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+		use MinigameActionMB(
+			action              = TurnOn,
+			minigame            = "MinigameButtonTapping",
+			start_player        = "Unarmed_TriggerFusebox_Start",
+			start_player_moveto = "Unarmed_TriggerFusebox_Start_MoveTo",
+			start_item          = "TriggerFusebox_Start",
+			idle_player         = "Unarmed_TriggerFusebox_Idle",
+			idle_item           = "TriggerFusebox_Idle",
+			struggle_player     = "Unarmed_TriggerFusebox_Struggle",
+			struggle_item       = "TriggerFusebox_Struggle",
+			success_player      = "Unarmed_TriggerFusebox_Success",
+			success_item        = "TriggerFusebox_Success");
+    }
+
+    Object("fuse_box_big")
+    {
+        UsePoint("bone_fuse_boxe", 0.5, -0.25, -0.9);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+		use MinigameActionMB(
+			action              = TurnOn,
+			minigame            = "MinigameButtonTapping",
+			start_player        = "Unarmed_TriggerFuseboxBig_Start",
+			start_player_moveto = "Unarmed_TriggerFuseboxBig_Start_MoveTo",
+			start_item          = "TriggerFusebox_Start",
+			idle_player         = "Unarmed_TriggerFuseboxBig_Idle",
+			idle_item           = "TriggerFusebox_Idle",
+			struggle_player     = "Unarmed_TriggerFuseboxBig_Struggle",
+			struggle_item       = "TriggerFusebox_Struggle",
+			success_player      = "Unarmed_TriggerFuseboxBig_Success",
+			success_item        = "TriggerFusebox_Success");
+    }
+
+    Object("vertical_lever")
+    {
+        UsePoint("bone_fuse", 0, 0, 0);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageActionMax(action = TurnOn, player_start = "Unarmed_TriggerFusebox_Pull", item_start = "LeverTrigger_Pull", player_start_moveto = "Unarmed_TriggerFusebox_Pull_MoveTo");
+
+        // It's not a mistake, animation in the opposite direction has been created using a different package (Max vs. MB).
+        use SingleStageActionMB(action = TurnOff, player_start = "Unarmed_TriggerFusebox_Pull_Up", item_start = "LeverTrigger_Pull_Up", player_start_moveto = "Unarmed_TriggerFusebox_Pull_Up_MoveTo");
+    }
+
+    Object("knocking")
+    {
+        UsePoint("", 0, 0.3, 0);
+        UseDistance(1.3);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        // PhysicalSwitchDI actions.
+        use PlayerAnimationForActionMax(action = TurnOn,      animation = "Unarmed_Door_Knock_Metal",        moveto_animation = "Unarmed_Door_Knock_MoveTo");
+        use PlayerAnimationForActionMax(action = TurnOn,      animation = "Unarmed_Door_Knock_Metal_Mirror", moveto_animation = "Unarmed_Door_Knock_Mirror_MoveTo");
+        use PlayerAnimationForActionMax(action = TurnOff,     animation = "Unarmed_Door_Knock_Metal",        moveto_animation = "Unarmed_Door_Knock_MoveTo");
+        use PlayerAnimationForActionMax(action = TurnOff,     animation = "Unarmed_Door_Knock_Metal_Mirror", moveto_animation = "Unarmed_Door_Knock_Mirror_MoveTo");
+
+        // DoorDI actions.
+        use PlayerAnimationForActionMax(action = CheckLocked, animation = "Unarmed_Door_Knock_Metal",        moveto_animation = "Unarmed_Door_Knock_MoveTo");
+        use PlayerAnimationForActionMax(action = CheckLocked, animation = "Unarmed_Door_Knock_Metal_Mirror", moveto_animation = "Unarmed_Door_Knock_Mirror_MoveTo");
+    }
+
+    Object("knocking_fourtimes")
+    {
+        UsePoint("", 0, 0.3, 0);
+        UseDistance(1.3);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        // PhysicalSwitchDI actions.
+        use PlayerAnimationForActionMax(action = TurnOn,      animation = "Unarmed_Door_Knock_Four_Times",        moveto_animation = "Unarmed_Door_Knock_Four_Times_MoveTo");
+        use PlayerAnimationForActionMax(action = TurnOn,      animation = "Unarmed_Door_Knock_Four_Times", moveto_animation = "Unarmed_Door_Knock_Mirror_MoveTo");
+        use PlayerAnimationForActionMax(action = TurnOff,     animation = "Unarmed_Door_Knock_Four_Times",        moveto_animation = "Unarmed_Door_Knock_Four_Times_MoveTo");
+        use PlayerAnimationForActionMax(action = TurnOff,     animation = "Unarmed_Door_Knock_Four_Times", moveto_animation = "Unarmed_Door_Knock_Mirror_MoveTo");
+
+        // DoorDI actions.
+        use PlayerAnimationForActionMax(action = CheckLocked, animation = "Unarmed_Door_Knock_Four_Times",        moveto_animation = "Unarmed_Door_Knock_Four_Times_MoveTo");
+        use PlayerAnimationForActionMax(action = CheckLocked, animation = "Unarmed_Door_Knock_Four_Times", moveto_animation = "Unarmed_Door_Knock_Mirror_MoveTo");
+    }
+
+	Object("dialog_knocking")
+    {
+        UsePoint("", 0, 0.3, 0);
+        UseDistance(1.3);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        // PhysicalSwitchDI actions.
+        use PlayerAnimationForActionMax(action = Talk,        animation = "Unarmed_Door_Knock_Metal",        moveto_animation = "Unarmed_Door_Knock_MoveTo");
+        use PlayerAnimationForActionMax(action = Talk,        animation = "Unarmed_Door_Knock_Metal_Mirror", moveto_animation = "Unarmed_Door_Knock_Mirror_MoveTo");
+        use PlayerAnimationForActionMax(action = TurnOff,     animation = "Unarmed_Door_Knock_Metal",        moveto_animation = "Unarmed_Door_Knock_MoveTo");
+        use PlayerAnimationForActionMax(action = TurnOff,     animation = "Unarmed_Door_Knock_Metal_Mirror", moveto_animation = "Unarmed_Door_Knock_Mirror_MoveTo");
+
+        // DoorDI actions.
+        use PlayerAnimationForActionMax(action = CheckLocked, animation = "Unarmed_Door_Knock_Metal",        moveto_animation = "Unarmed_Door_Knock_MoveTo");
+        use PlayerAnimationForActionMax(action = CheckLocked, animation = "Unarmed_Door_Knock_Metal_Mirror", moveto_animation = "Unarmed_Door_Knock_Mirror_MoveTo");
+    }
+
+    Object("knocking_wood")
+    {
+        UsePoint("", 0, 0.3, 0);
+        UseDistance(1.3);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        // PhysicalSwitchDI actions.
+        use PlayerAnimationForActionMax(action = TurnOn,      animation = "Unarmed_Door_Knock_Wood",        moveto_animation = "Unarmed_Door_Knock_MoveTo");
+        use PlayerAnimationForActionMax(action = TurnOn,      animation = "Unarmed_Door_Knock_Wood_Mirror", moveto_animation = "Unarmed_Door_Knock_Mirror_MoveTo");
+        use PlayerAnimationForActionMax(action = TurnOff,     animation = "Unarmed_Door_Knock_Wood",        moveto_animation = "Unarmed_Door_Knock_MoveTo");
+        use PlayerAnimationForActionMax(action = TurnOff,     animation = "Unarmed_Door_Knock_Wood_Mirror", moveto_animation = "Unarmed_Door_Knock_Mirror_MoveTo");
+
+        // DoorDI actions.
+        use PlayerAnimationForActionMax(action = CheckLocked, animation = "Unarmed_Door_Knock_Wood",        moveto_animation = "Unarmed_Door_Knock_MoveTo");
+        use PlayerAnimationForActionMax(action = CheckLocked, animation = "Unarmed_Door_Knock_Wood_Mirror", moveto_animation = "Unarmed_Door_Knock_Mirror_MoveTo");
+    }
+
+
+    Object("button_push")
+    {
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use PlayerAnimationForActionMax(action = TurnOn, animation = "Unarmed_Button_Push", moveto_animation = "Unarmed_Button_Push_MoveTo");
+        use PlayerAnimationForActionMax(action = TurnOff, animation = "Unarmed_Button_Push", moveto_animation = "Unarmed_Button_Push_MoveTo");
+    }
+
+    Object("car_alarm_arming")
+    {
+        use ClampDeviationHSym(horz = 40.0, min_vert = 0.0, max_vert = 60.0);
+
+        use SingleStageActionMB(action = TurnOn, player_start = "Car_Alarm_Arming_Player_01", item_start = "FPP_Car_Alarm_Arming_Car_01", player_start_moveto = "Car_Alarm_Arming_Player_01_MoveTo");
+        use SingleStageActionMB(action = Use, player_start = "Car_Alarm_Arming_Player_01", item_start = "FPP_Car_Alarm_Arming_Car_01", player_start_moveto = "Car_Alarm_Arming_Player_01_MoveTo");
+    }
+
+    Object("pursuit_breaker_box_enabling")
+    {
+        UsePoint("bone_root", 0, 1, 0);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageActionMax(action = TurnOn, player_start = "Pursuit_Breaker_Box_Player_01", item_start = "Pursuit_Breaker_Box_Player_01", player_start_moveto = "Pursuit_Breaker_Box_Player_01_MoveTo");
+        use SingleStageActionMax(action = Use,    player_start = "Pursuit_Breaker_Box_Player_01", item_start = "Pursuit_Breaker_Box_Player_01", player_start_moveto = "Pursuit_Breaker_Box_Player_01_MoveTo");
+    }
+
+    Object("lift_door_opening")
+    {
+        UsePoint("", 0, 0.3, 0);
+
+        use ClampDeviation(min_horz = -10.0, max_horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        Action(TurnOn)
+        {
+            CompletionStage("Success");
+
+            HandlerDefinition("Minigame", "MinigameButtonTapping");
+
+            Stage("Start")
+            {
+                use PlayerAnimationMax(animation = "LiftDoorOpening_Start");
+
+                Item()
+                {
+                    Animation("LiftDoorOpening_Start");
+                }
+
+                Transition(SignalStageCompleted, "Idle");
+            }
+
+            Stage("Idle")
+            {
+                Handler("Minigame");
+
+                use PlayerAnimationMax(animation = "LiftDoorOpening_Idle");
+
+                Item()
+                {
+                    Animation("LiftDoorOpening_Idle");
+                }
+
+                Transition(SignalGameInteracting, "Struggle");
+            }
+
+            Stage("Struggle")
+            {
+                Handler("Minigame");
+
+                use PlayerAnimationMax(animation = "LiftDoorOpening_Struggle");
+
+                Item()
+                {
+                    Animation("LiftDoorOpening_Struggle");
+                }
+
+                Transition(SignalGameIdle, "StruggleToIdle");
+                Transition(SignalStageCompleted, "Success");
+            }
+
+            Stage("StruggleToIdle")
+            {
+                Handler("Minigame");
+
+                use PlayerAnimationMax(animation = "LiftDoorOpening_Fail");
+
+                Item()
+                {
+                    Animation("LiftDoorOpening_Fail");
+                }
+
+                Transition(SignalStageCompleted, "Finish");
+            }
+
+            Stage("Success")
+            {
+                use PlayerAnimationMax(animation = "LiftDoorOpening_Success");
+
+                Item()
+                {
+                    Animation("LiftDoorOpening_Success");
+                }
+
+                Transition(SignalStageCompleted, "Finish");
+            }
+
+            Stage("Finish")
+            {
+            }
+        }
+    }
+
+    Object("blocked_door_with_bolts")
+    {
+        UsePoint("", 0, 0.3, 0);
+        UseDistance(1.5);
+
+        use ClampDeviationHSym(horz = 30.0, min_vert = 0.0, max_vert = 50.0);
+
+        // PhysicalSwitchDI actions.
+        use SingleStageActionMax    (action = TurnOn,  player_start = "DoorBolt_Unlocking",    item_start = "DoorBolt_Unlocking", player_start_moveto = "");
+        use SingleStageActionFailMax(action = TurnOn,  player_start = "Unarmed_Doors_OpenTry", item_start = "DoorBolt_OpenTry",   player_start_moveto = "Unarmed_Doors_OpenTry_MoveTo");
+
+        // DoorDI actions.
+        use SingleStageActionMax    (action = CheckLocked,       player_start = "DoorBolt_Unlocking",    item_start = "DoorBolt_Unlocking", player_start_moveto = "");
+        use SingleStageActionMax    (action = CheckLocked,       player_start = "Unarmed_Doors_OpenTry", item_start = "DoorBolt_OpenTry",   player_start_moveto = "Unarmed_Doors_OpenTry_MoveTo");
+
+        use SingleStageActionMax    (action = CheckLockedAgain,  player_start = "DoorBolt_Unlocking",    item_start = "DoorBolt_Unlocking", player_start_moveto = "");
+
+        // Workaround for DoorDI which automatically switch state to CLOSED after invoking CheckLocked.
+        use SingleStageActionFailMax(action = Close,             player_start = "",                      item_start = "",                   player_start_moveto = "");
+    }
+
+    Object("pipe_pulling_out")
+    {
+        UsePoint("bone_pipe", 0, 0, 0);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        OnReset()
+        {
+            HideElement("pipe_destroyed");
+            ShowElement("zpipe_anim");
+        }
+
+        Action(Take)
+        {
+            Stage("Start")
+            {
+                use PlayerAnimationMax(animation = "PipeTrigger_PullOut", moveto_animation = "");
+
+                Item()
+                {
+                    Animation("PipeTrigger_PullOut");
+                }
+
+                OnLeave()
+                {
+                    ShowElement("pipe_destroyed");
+                    HideElement("zpipe_anim");
+                }
+
+                Transition(SignalStageCompleted, "Finish");
+            }
+
+            Stage("Finish")
+            {
+            }
+        }
+    }
+
+    Object("pipe_pulling_out_minigame")
+    {
+        UsePoint("bone_pipe", 0, 0, 0);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        OnReset()
+        {
+            HideElement("pipe_destroyed");
+            ShowElement("zpipe_anim");
+        }
+
+        Action(Take)
+        {
+            CompletionStage("Success");
+
+            HandlerDefinition("Minigame", "MinigameButtonTapping");
+
+            Stage("Start")
+            {
+                use PlayerAnimationMax(animation = "PipeTrigger_PullOut_Minigame_Start", moveto_animation = "");
+
+                Item()
+                {
+                    Animation("PipeTrigger_PullOut_Minigame_Start");
+                }
+
+                Transition(SignalStageCompleted, "Idle");
+            }
+
+            Stage("Idle")
+            {
+                Handler("Minigame");
+
+                use PlayerAnimationMax(animation = "PipeTrigger_PullOut_Minigame_Idle");
+
+                Item()
+                {
+                    Animation("PipeTrigger_PullOut_Minigame_Idle");
+                }
+
+                Transition(SignalGameInteracting, "Struggle");
+            }
+
+            Stage("Struggle")
+            {
+                Handler("Minigame");
+
+                use PlayerAnimationMax(animation = "PipeTrigger_PullOut_Minigame_Struggle");
+
+                Item()
+                {
+                    Animation("PipeTrigger_PullOut_Minigame_Struggle");
+                }
+
+                Transition(SignalGameIdle, "Idle");
+                Transition(SignalStageCompleted, "Success");
+            }
+
+            Stage("Success")
+            {
+                use PlayerAnimationMax(animation = "PipeTrigger_PullOut_Minigame_Success");
+
+                Item()
+                {
+                    Animation("PipeTrigger_PullOut_Minigame_Success");
+                }
+
+                OnLeave()
+                {
+                    ShowElement("pipe_destroyed");
+                    HideElement("zpipe_anim");
+                }
+
+                Transition(SignalStageCompleted, "Finish");
+            }
+
+            Stage("Finish")
+            {
+            }
+        }
+    }
+
+    Object("sedan_b_trunk_opening")
+    {
+        UsePoint("", 0, 0.5, -0.4);
+
+        PoseAnimation("SedanTrunk_InitialPose");
+
+        use ClampDeviationHSym(horz = 30.0, min_vert = 0.0, max_vert = 60.0);
+
+        // Action for PhysicalSwitchDI.
+        use SingleStageActionMB(action = TurnOn,  player_start = "SedanTrunk_Open", item_start = "SedanTrunk_Open", player_start_moveto = "SedanTrunk_Open_MoveTo");
+
+        // Action for ComplexContainer.
+        use SingleStageActionMB(action = Open,    player_start = "SedanTrunk_Open", item_start = "SedanTrunk_Open", player_start_moveto = "SedanTrunk_Open_MoveTo");
+    }
+
+    Object("sedan_b_trunk_opening_underwater")
+    {
+        UsePoint("", 0, 0.5, -0.4);
+
+        PoseAnimation("SedanTrunk_InitialPose");
+
+        use ClampDeviationHSym(horz = 30.0, min_vert = 0.0, max_vert = 60.0);
+
+        // Action for PhysicalSwitchDI.
+        use SingleStageActionMB(action = TurnOn,  player_start = "SedanTrunk_Open", item_start = "SedanTrunk_OpenUnderwater", player_start_moveto = "SedanTrunk_Open_MoveTo");
+
+        // Action for ComplexContainer.
+        use SingleStageActionMB(action = Open,    player_start = "SedanTrunk_Open", item_start = "SedanTrunk_OpenUnderwater", player_start_moveto = "SedanTrunk_Open_MoveTo");
+    }
+
+    Object("sedan_a_trunk_opening")
+    {
+        UsePoint("dlockpick_lock", 0, 0, -0.5);
+
+        PoseAnimation("SedanTrunk_InitialPose");
+
+        use ClampDeviationHSym(horz = 30.0, min_vert = 0.0, max_vert = 60.0);
+
+        // Action for PhysicalSwitchDI.
+        use SingleStageActionMB(action = TurnOn,  player_start = "SedanTrunk_A_Open", item_start = "SedanTrunk_Open", player_start_moveto = "SedanTrunk_A_Open_MoveTo");
+
+        // Action for ComplexContainer.
+        use SingleStageActionMB(action = Open,    player_start = "SedanTrunk_A_Open", item_start = "SedanTrunk_Open", player_start_moveto = "SedanTrunk_A_Open_MoveTo");
+    }
+
+    Object("van_door_opening")
+    {
+		UsePoint("trigger_icon", 0, 2, 1.7);
+	
+		AllowOffsetHelperAnimation();
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        // Action for PhysicalSwitchDI.
+        use SingleStageActionMB(action = TurnOn,  player_start = "VanDoor_Open", item_start = "VanDoor_Open", player_start_moveto = "VanDoor_Open_MoveTo");
+
+        // Action for ComplexContainer.
+        use SingleStageActionMB(action = Open,    player_start = "VanDoor_Open", item_start = "VanDoor_Open", player_start_moveto = "VanDoor_Open_MoveTo");
+    }
+
+    Object("van_door_opening_try")
+    {
+		AllowOffsetHelperAnimation();
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageActionMB(action = TurnOn,  player_start = "VanDoor_Open_Try", item_start = "VanDoor_Open_Try", player_start_moveto = "VanDoor_Open_MoveTo");
+    }
+
+    Object("fridge_opening")
+    {
+        UsePoint("Trigger_icon", 0, 0, 0);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageActionMB(action = TurnOn,  player_start = "FridgeDoor_Open", item_start = "FridgeDoor_Open", player_start_moveto = "FridgeDoor_Open_MoveTo");
+        use SingleStageActionMB(action = Open,    player_start = "FridgeDoor_Open", item_start = "FridgeDoor_Open", player_start_moveto = "FridgeDoor_Open_MoveTo");
+    }
+
+    Object("fridge_closed_opening")
+    {
+        UsePoint("bone_door", 0, 0.4, -0.65);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageActionMB(action = TurnOn,  player_start = "FridgeAClosed_Open", item_start = "FridgeAClosed_Open", player_start_moveto = "FridgeAClosed_Open_MoveTo");
+        use SingleStageActionMB(action = Open,    player_start = "FridgeAClosed_Open", item_start = "FridgeAClosed_Open", player_start_moveto = "FridgeAClosed_Open_MoveTo");
+    }
+
+    Object("basket_cover_removing")
+    {
+        UsePoint("bone_flap", 0, 0, 1);
+
+        use ClampDeviationHSym(horz = 40.0, min_vert = -10.0, max_vert = 60.0);
+
+        use SingleStageActionMB(action = TurnOn,  player_start = "BasketB_Open", item_start = "BasketB_Open", player_start_moveto = "BasketB_Open_MoveTo");
+        use SingleStageActionMB(action = Open,    player_start = "BasketB_Open", item_start = "BasketB_Open", player_start_moveto = "BasketB_Open_MoveTo");
+    }
+
+    Object("basket_opening")
+    {
+        UsePoint("", 0, 0.85, 0);
+
+        use ClampDeviationHSym(horz = 25.0, min_vert = 0.0, max_vert = 60.0);
+
+        use SingleStageActionMB(action = TurnOn,  player_start = "BasketC_Open", item_start = "BasketC_Open", player_start_moveto = "BasketC_Open_MoveTo");
+        use SingleStageActionMB(action = Open,    player_start = "BasketC_Open", item_start = "BasketC_Open", player_start_moveto = "BasketC_Open_MoveTo");
+    }
+
+    Object("door_with_window_struggle")
+    {
+        UsePoint("bone_handle", -0.8, 0, 0);
+
+        use ClampDeviation(min_horz = 0.0, max_horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        // PhysicalSwitchDI actions.
+        use SingleStageActionMB    (action = TurnOn,      player_start = "DoorWithWindow_Struggle", item_start = "DoorWithWindow_Struggle", player_start_moveto = "DoorWithWindow_Struggle_MoveTo");
+
+        // DoorDI actions.
+        use SingleStageActionMB    (action = CheckLocked, player_start = "DoorWithWindow_Struggle", item_start = "DoorWithWindow_Struggle", player_start_moveto = "DoorWithWindow_Struggle_MoveTo");
+    }
+
+    Object("door_with_window_struggle_scared")
+    {
+        UsePoint("bone_handle", -0.8, 0, 0);
+
+        use ClampDeviation(min_horz = 0.0, max_horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        // PhysicalSwitchDI actions.
+        use SingleStageActionMB    (action = TurnOn,      player_start = "DoorWithWindow_Struggle_Scared", item_start = "DoorWithWindow_Struggle", player_start_moveto = "DoorWithWindow_Struggle_Scared_MoveTo");
+
+        // DoorDI actions.
+        use SingleStageActionMB    (action = CheckLocked, player_start = "DoorWithWindow_Struggle_Scared", item_start = "DoorWithWindow_Struggle", player_start_moveto = "DoorWithWindow_Struggle_Scared_MoveTo");
+    }
+
+    Object("door_with_window_struggle_scared_jump")
+    {
+        UsePoint("bone_handle", -0.8, 0, 0);
+
+        use ClampDeviation(min_horz = 0.0, max_horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        // PhysicalSwitchDI actions.
+        use SingleStageActionMB    (action = TurnOn,      player_start = "DoorWithWindow_Struggle_Scared_Jump", item_start = "DoorWithWindow_Struggle", player_start_moveto = "DoorWithWindow_Struggle_Scared_Jump_MoveTo");
+
+        // DoorDI actions.
+        use SingleStageActionMB    (action = CheckLocked, player_start = "DoorWithWindow_Struggle_Scared_Jump", item_start = "DoorWithWindow_Struggle", player_start_moveto = "DoorWithWindow_Struggle_Scared_Jump_MoveTo");
+    }
+
+    Object("steel_locker_opening")
+    {
+        UsePoint("bone_root", 0, 0.3, 0);
+        UseReference(Icon);
+        UseAngleSpan(-80, 75, -90, 90);
+
+        use ClampDeviationHSym(horz = 30.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageActionMB(action = TurnOn,  player_start = "SteelLocker_Open", item_start = "SteelLocker_Open", player_start_moveto = "SteelLocker_Open_MoveTo");
+        use SingleStageActionMB(action = Open,    player_start = "SteelLocker_Open", item_start = "SteelLocker_Open", player_start_moveto = "SteelLocker_Open_MoveTo");
+    }
+
+    Object("furniture_a_opening")
+    {
+        UsePoint("bone_front_l", 0, 0, 0.1);
+
+        use ClampDeviationHSym(horz = 20.0, min_vert = 0.0, max_vert = 50.0);
+
+        use SingleStageActionMB(action = TurnOn,  player_start = "FurnitureA_Open", item_start = "FurnitureA_Open", player_start_moveto = "FurnitureA_Open_MoveTo");
+        use SingleStageActionMB(action = Open,    player_start = "FurnitureA_Open", item_start = "FurnitureA_Open", player_start_moveto = "FurnitureA_Open_MoveTo");
+    }
+
+    Object("furniture_j_opening")
+    {
+        UsePoint("furniture_int_j_anm", -1, 0, 0);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageActionMB(action = TurnOn,  player_start = "FurnitureJ_Open", item_start = "FurnitureJ_Open", player_start_moveto = "FurnitureJ_Open_MoveTo");
+        use SingleStageActionMB(action = Open,    player_start = "FurnitureJ_Open", item_start = "FurnitureJ_Open", player_start_moveto = "FurnitureJ_Open_MoveTo");
+    }
+
+    Object("furniture_chest_a_opening")
+    {
+        UsePoint("bone_root", 0.8, 0, 0);
+
+        use ClampDeviationHSym(horz = 35.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageActionMB(action = TurnOn,  player_start = "FurnitureChestA_Open", item_start = "FurnitureChestA_Open", player_start_moveto = "FurnitureChestA_Open_MoveTo");
+        use SingleStageActionMB(action = Open,    player_start = "FurnitureChestA_Open", item_start = "FurnitureChestA_Open", player_start_moveto = "FurnitureChestA_Open_MoveTo");
+    }
+
+    Object("keyboard_typing")
+    {
+        UsePoint("", 0, 1, 0);
+        UseDistance(1.5);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        // No TurnOff definition as it would cause the initial item pose to be incorrect (as the end of the item animation is not the same as the beginning).
+        use SingleStageActionMax(action = TurnOn,   player_start = "KeyboardTyping_Type", item_start = "KeyboardTyping_Type", player_start_moveto = "KeyboardTyping_Type_MoveTo");
+    }
+
+    Object("wall_breaking")
+    {
+        UsePoint("skaly", 0, 0.3, 0);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+		use MinigameActionMax(
+			action              = TurnOn,
+			minigame            = "MinigameButtonTapping",
+			start_player        = "BreakeWall_MiniGame_Begin",
+			start_player_moveto = "BreakeWall_Minigame_MoveTo",
+			start_item          = "BreakeWall_MiniGame_Begin",
+			idle_player         = "BreakeWall_MiniGame_Idle",
+			idle_item           = "BreakeWall_MiniGame_Idle",
+			struggle_player     = "BreakeWall_MiniGame_Try",
+			struggle_item       = "BreakeWall_MiniGame_Try",
+			success_player      = "BreakeWall_MiniGame_Success",
+			success_item        = "BreakeWall_MiniGame_Success");
+    }
+
+    Object("microphone_stand_talking")
+    {
+        UsePoint("bone_microphone", 1, 0, -1.5);
+        UseDistance(1.5);
+
+        use ClampDeviationHSym(horz = 30.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageActionMB(action = TurnOn,   player_start = "MicrophoneStand_Talk", item_start = "MicrophoneStand_Talk", player_start_moveto = "MicrophoneStand_Talk_MoveTo");
+    }
+
+    Object("photo_watching")
+    {
+        UsePoint("", 0, 0, 0.5);
+        UseAngleSpan(40);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageActionMB(action = TurnOn,   player_start = "Look_At_Photo", item_start = "", player_start_moveto = "Look_At_Photo_MoveTo");
+    }
+
+    Object("photo_watching_use_at_start")
+    {
+        UsePoint("", 0, 0, 0.5);
+        UseAngleSpan(40);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageActionMB(action = TurnOn,   player_start = "Look_At_Photo_UseOnStart", item_start = "", player_start_moveto = "Look_At_Photo_MoveTo");
+    }
+
+    Object("barn_cellar_door_opening")
+    {
+        UsePoint("bone_root", -0.1, -0.5, 1);
+        UseReference(Icon);
+        UseAngleSpan(-60, 60, -90, 90);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageActionMax(action = TurnOn, player_start = "BarnPlatformTrapdoor_Open", item_start = "OpenTrigger", player_start_moveto = "BarnPlatformTrapdoor_Open_MoveTo");
+    }
+
+    Object("barn_cellar_door_opening_indoor")
+    {
+        UsePoint("bone_root", -0.1, -0.5, 1);
+        UseReference(Icon);
+        UseAngleSpan(-60, 60, -90, 90);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageActionMax(action = TurnOn, player_start = "BarnPlatformTrapdoor_Open", item_start = "OpenTriggerIndoor", player_start_moveto = "BarnPlatformTrapdoor_Open_MoveTo");
+    }
+
+    Object("card_reader_scan_right")
+    {
+        UsePoint("", 0, 0, -1.2);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use CardReaderScanMB(user_scan_animation = "RightCardReader_Use", user_scan_animation_moveto = "RightCardReader_Use_MoveTo", user_holder_element = "r_handholder");
+    }
+
+    Object("card_reader_scan_left")
+    {
+        UsePoint("", 0, 0, -1.2);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use CardReaderScanMB(user_scan_animation = "LeftCardReader_Use", user_scan_animation_moveto = "LeftCardReader_Use_MoveTo", user_holder_element = "l_handholder");
+    }
+
+    Object("toolbox_opening")
+    {
+        UsePoint("bone_hinge", 0, 0, 1);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        // PhysicalSwitchDI action.
+        use SingleStageActionMB(action = TurnOn,   player_start = "Tools_Box_Open", item_start = "Tools_Box_Open", player_start_moveto = "Tools_Box_Open_MoveTo");
+
+        // ComplexContainer action.
+        use SingleStageActionMB(action = Open,     player_start = "Tools_Box_Open", item_start = "Tools_Box_Open", player_start_moveto = "Tools_Box_Open_MoveTo");
+    }
+
+    Object("first_aid_box_opening")
+    {
+        UsePoint("bone_door", 0, 0, 0.75);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        // PhysicalSwitchDI action.
+        use SingleStageActionMB(action = TurnOn,   player_start = "First_Aid_Open", item_start = "First_Aid_Open", player_start_moveto = "First_Aid_Open_MoveTo");
+
+        // ComplexContainer action.
+        use SingleStageActionMB(action = Open,     player_start = "First_Aid_Open", item_start = "First_Aid_Open", player_start_moveto = "First_Aid_Open_MoveTo");
+    }
+
+    Object("rolling_pipe_push")
+    {
+        UsePoint("", 0, 0, 1.0);
+        UseReference(Icon);
+        UseAngleSpan(-20, 120, -90, 90);
+
+        Dynamic(true);
+
+        use SingleStageDynamicActionMB(action = TurnOn, player_start = "iTrigger_PipePush", item_start = "", player_start_moveto = "iTrigger_PipePush_MoveTo");
+    }
+
+    Object("boat_push")
+    {
+        UsePoint("", 0, 0.75, 1.0);
+
+        use SingleStageActionMB(action = TurnOn, player_start = "iTrigger_BoatPush_NoSound", item_start = "", player_start_moveto = "iTrigger_PipePush_MoveTo");
+    }
+
+    Object("dummy_push")
+    {
+        UsePoint("", 0, 0.75, 1.0);
+        UseReference(Icon);
+        UseAngleSpan(-20, 120, -90, 90);
+
+        use SingleStageActionMB(action = TurnOn, player_start = "iTrigger_PipePush_NoSound", item_start = "", player_start_moveto = "iTrigger_PipePush_MoveTo");
+    }
+
+    Object("dummy_kick")
+    {
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+        use SingleStageActionMB(action = TurnOn,   player_start = "Tools_Box_Open", item_start = "", player_start_moveto = "Tools_Box_Open_MoveTo");
+    }
+
+    Object("wardrobe_push")
+    {
+        UsePoint("", 0, 0.75, 1.0);
+        UseReference(Icon);
+        UseAngleSpan(-20, 120, -90, 90);
+
+        use SingleStageActionMB(action = TurnOn, player_start = "iTrigger_PipePush_Wardrobe", item_start = "", player_start_moveto = "iTrigger_PipePush_MoveTo");
+    }
+
+    Object("wardrobe_pushing_minigame")
+    {
+        UsePoint("furniture_int_b", 1, 0.5, 0);
+        AllowOffsetHelperAnimation();
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        Action(TurnOn)
+        {
+            CompletionStage("Success");
+            HandlerDefinition("Minigame", "MinigameButtonTapping");
+
+            Stage("Start")
+            {
+                use PlayerAnimationMax(animation = "WardrobePushing_Start", moveto_animation = "WardrobePushing_MoveTo");
+
+                Item()
+                {
+                    Animation("WardrobePushing_Start");
+                }
+
+                Transition(SignalStageCompleted, "Idle");
+            }
+
+            Stage("Idle")
+            {
+                Handler("Minigame");
+
+                use PlayerAnimationMax(animation = "WardrobePushing_Idle");
+
+                Item()
+                {
+                    Animation("WardrobePushing_Idle");
+                }
+
+                Transition(SignalGameInteracting, "Struggle");
+            }
+
+            Stage("Struggle")
+            {
+                Handler("Minigame");
+
+                use PlayerAnimationMax(animation = "WardrobePushing_Struggle");
+
+                Item()
+                {
+                    Animation("WardrobePushing_Struggle");
+                }
+
+                Transition(SignalGameIdle, "StruggleToIdle");
+                Transition(SignalStageCompleted, "Success");
+            }
+
+            Stage("StruggleToIdle")
+            {
+                Handler("Minigame");
+
+                use PlayerAnimationMax(animation = "WardrobePushing_Fail");
+
+                Item()
+                {
+                    Animation("WardrobePushing_Fail");
+                }
+
+                Transition(SignalStageCompleted, "Finish");
+            }
+
+            Stage("Success")
+            {
+                use PlayerAnimationMax(animation = "WardrobePushing_Success");
+
+                Item()
+                {
+                    Animation("WardrobePushing_Success");
+                }
+
+                Transition(SignalStageCompleted, "Finish");
+            }
+
+            Stage("Finish")
+            {
+            }
+        }
+    }
+
+    Object("dz_restaurant_wardrobe_push")
+    {
+        UsePoint("", 0, 0.75, 1.0);
+        UseReference(Icon);
+        UseAngleSpan(-20, 120, -90, 90);
+
+        use SingleStageActionMB(action = TurnOn, player_start = "iTrigger_PipePush_RestaurantWardrobe", item_start = "", player_start_moveto = "iTrigger_PipePush_MoveTo");
+    }
+
+    Object("circuit_box_switching")
+    {
+        UsePoint("bone_root", 0, 0.15, 0);
+
+        use ClampDeviationHSym(horz = 40.0, min_vert = -10.0, max_vert = 50.0);
+
+        use CircuitPanelActionMax(action = TurnOn,  player_animation = "Circuit_Box_Panel_A_ON",  item_animation = "Circuit_Box_Panel_A_ON",  player_animation_moveto = "Circuit_Box_Panel_A_ON_MoveTo",  new_skin = "Emissive");
+        use CircuitPanelActionMax(action = TurnOff, player_animation = "Circuit_Box_Panel_A_OFF", item_animation = "Circuit_Box_Panel_A_OFF", player_animation_moveto = "Circuit_Box_Panel_A_OFF_MoveTo", new_skin = "");
+    }
+
+    Object("circuit_box_fuse_panel_screwing")
+    {
+        use ClampDeviationHSym(horz = 30.0, min_vert = -10.0, max_vert = 50.0);
+
+        PoseAnimation("Screwing_the_fuses_InitialPose");
+
+        use SingleStageActionMax(action = TurnOn, player_start = "Circuit_Box_Screwing_The_Fuses", item_start = "screwing_the_fuses", player_start_moveto = "Circuit_Box_Screwing_The_Fuses_MoveTo");
+    }
+
+    Object("radio_module_replace")
+    {
+        UsePoint("", 0, 0, 1);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageActionMax(action = TurnOn, player_start = "RadioModule_PlugIn", item_start = "RadioModule_PlugIn", player_start_moveto = "RadioModule_PlugIn_MoveTo");
+    }
+
+    Object("radio_module_plug_out")
+    {
+        UsePoint("", 0, 0, 0.8);
+        UseReference(Icon);
+        UseAngleSpan(-75, 75, -90, 90);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageActionMax(action = TurnOn, player_start = "RadioModule_Unplug", item_start = "RadioModule_Unplug", player_start_moveto = "RadioModule_Unplug_MoveTo");
+    }
+
+    Object("wardrobe_sliding")
+    {
+        UsePoint("furniture_int_b", 1, 0.4, 0);
+
+        AllowOffsetHelperAnimation();
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageActionMax(action = TurnOn, player_start = "Wardrobe_Sliding", item_start = "Wardrobe_Sliding", player_start_moveto = "Wardrobe_Sliding_MoveTo");
+    }
+
+    Object("bridge_lamp_removing")
+    {
+        UsePoint("bone_hatch_a", 0, 0, 0);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageActionMax(action = TurnOn, player_start = "BridgeLamp_Remove", item_start = "BridgeLamp_Trigger", player_start_moveto = "BridgeLamp_Remove_MoveTo");
+    }
+
+    Object("door_unlocking_with_key")
+    {
+        UsePoint("", 0, 0.3, 0);
+        UseDistance(1.3);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = 0.0, max_vert = 50.0);
+
+        // PhysicalSwitchDI
+        use DoorUnlockingWithKeyMax(action = TurnOn,      user_animation = "KeyInKeyhole",        user_animation_moveto = "KeyInKeyhole_MoveTo",        key_animation = "KeyInKeyhole", user_holder_element = "r_handholder");
+        use DoorUnlockingWithKeyMax(action = TurnOn,      user_animation = "KeyInKeyhole_Mirror", user_animation_moveto = "KeyInKeyhole_Mirror_MoveTo", key_animation = "KeyInKeyhole", user_holder_element = "r_handholder");
+
+        // DoorDI
+        use DoorUnlockingWithKeyMax(action = CheckLocked, user_animation = "KeyInKeyhole",        user_animation_moveto = "KeyInKeyhole_MoveTo",        key_animation = "KeyInKeyhole", user_holder_element = "r_handholder");
+        use DoorUnlockingWithKeyMax(action = CheckLocked, user_animation = "KeyInKeyhole_Mirror", user_animation_moveto = "KeyInKeyhole_Mirror_MoveTo", key_animation = "KeyInKeyhole", user_holder_element = "r_handholder");
+
+        // Workaround for DoorDI which automatically switch state to CLOSED after invoking CheckLocked.
+        use SingleStageActionFailMax(action = Close, player_start = "", item_start = "", player_start_moveto = "");
+    }
+
+    Object("door_unlocking_with_key_metal")
+    {
+        UsePoint("", 0, 0.3, 0);
+        UseDistance(1.3);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = 0.0, max_vert = 50.0);
+
+        // PhysicalSwitchDI
+        use DoorUnlockingWithKeyMax(action = TurnOn,      user_animation = "KeyInKeyhole_Metal",        user_animation_moveto = "KeyInKeyhole_Metal_MoveTo",        key_animation = "KeyInKeyhole", user_holder_element = "r_handholder");
+        use DoorUnlockingWithKeyMax(action = TurnOn,      user_animation = "KeyInKeyhole_Metal_Mirror", user_animation_moveto = "KeyInKeyhole_Metal_Mirror_MoveTo", key_animation = "KeyInKeyhole", user_holder_element = "r_handholder");
+
+        // DoorDI
+        use DoorUnlockingWithKeyMax(action = CheckLocked, user_animation = "KeyInKeyhole_Metal",        user_animation_moveto = "KeyInKeyhole_Metal_MoveTo",        key_animation = "KeyInKeyhole", user_holder_element = "r_handholder");
+        use DoorUnlockingWithKeyMax(action = CheckLocked, user_animation = "KeyInKeyhole_Metal_Mirror", user_animation_moveto = "KeyInKeyhole_Metal_Mirror_MoveTo", key_animation = "KeyInKeyhole", user_holder_element = "r_handholder");
+
+        // Workaround for DoorDI which automatically switch state to CLOSED after invoking CheckLocked.
+        use SingleStageActionFailMax(action = Close, player_start = "", item_start = "", player_start_moveto = "");
+    }
+
+    Object("door_unlocking_with_key_gatebars")
+    {
+        UsePoint("trigger_icon", 0, 0, 0);
+        UseDistance(1.3);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = 0.0, max_vert = 50.0);
+
+        // PhysicalSwitchDI
+        use DoorUnlockingWithKeyMax(action = TurnOn,      user_animation = "KeyInKeyhole_Metal",        user_animation_moveto = "KeyInKeyhole_Metal_MoveTo",        key_animation = "KeyInKeyhole", user_holder_element = "r_handholder");
+        use DoorUnlockingWithKeyMax(action = TurnOn,      user_animation = "KeyInKeyhole_Metal_Mirror", user_animation_moveto = "KeyInKeyhole_Metal_Mirror_MoveTo", key_animation = "KeyInKeyhole", user_holder_element = "r_handholder");
+
+        // DoorDI
+        use DoorUnlockingWithKeyMax(action = CheckLocked, user_animation = "KeyInKeyhole_Metal",        user_animation_moveto = "KeyInKeyhole_Metal_MoveTo",        key_animation = "KeyInKeyhole", user_holder_element = "r_handholder");
+        use DoorUnlockingWithKeyMax(action = CheckLocked, user_animation = "KeyInKeyhole_Metal_Mirror", user_animation_moveto = "KeyInKeyhole_Metal_Mirror_MoveTo", key_animation = "KeyInKeyhole", user_holder_element = "r_handholder");
+
+        // Workaround for DoorDI which automatically switch state to CLOSED after invoking CheckLocked.
+        use SingleStageActionFailMax(action = Close, player_start = "", item_start = "", player_start_moveto = "");
+    }
+
+    Object("planting_bomb_on_stove")
+    {
+        UsePoint("bone_root", 0, 1, 0);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageActionSkinChangeMax(action = TurnOn, player_animation = "PMayhem_KitchenTrigger", player_animation_moveto = "PMayhem_KitchenTrigger_MoveTo", item_animation = "PMayhem_KitchenTrigger", new_skin = "Electric_Default_ied_on");
+    }
+
+    Object("pipe_entrance_opening")
+    {
+        UsePoint("doors", -0.75, 0.075, -1.03);
+        UseReference(Icon);
+        UseAngleSpan(-70, 70, -90, 90);
+
+        Dynamic(true);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageDynamicActionMax(action = TurnOn, player_start = "Grating_Open", item_start = "grating_open", player_start_moveto = "Grating_MoveTo");
+    }
+
+    Object("bus_door_opening")
+    {
+		UsePoint("bone_handle", 0, -0.8, -0.6);
+
+		Dynamic(true);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = 0.0, max_vert = 50.0);
+
+		// For PhysicalSwitchDI
+        use SingleStageDynamicActionMax(action = TurnOn, player_start = "BusDoors_Open", item_start = "busdoors_open", player_start_moveto = "BusDoors_Open_MoveTo");
+
+		// For ComplexContainer
+		use SingleStageDynamicActionMax(action = Open, player_start = "BusDoors_Open", item_start = "busdoors_open", player_start_moveto = "BusDoors_Open_MoveTo");
+    }
+
+    Object("crate_opening")
+    {
+        UsePoint("bone_hatch", 0.25, 0, 0);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use MinigameActionMB(
+			action              = TurnOn,
+			minigame            = "MinigameButtonTapping",
+			start_player        = "Unarmed_iTrigger_Box_MiniGame_Start",
+			start_player_moveto = "Unarmed_iTrigger_Box_MiniGame_Start_MoveTo",
+			start_item          = "iTrigger_Box_MiniGame_Start",
+			idle_player         = "Unarmed_iTrigger_Box_MiniGame_Idle",
+			idle_item           = "iTrigger_Box_MiniGame_Idle",
+			struggle_player     = "Unarmed_iTrigger_Box_MiniGame_Struggle",
+			struggle_item       = "iTrigger_Box_MiniGame_Struggle",
+			success_player      = "Unarmed_iTrigger_Box_MiniGame_Success",
+			success_item        = "iTrigger_Box_MiniGame_Success");
+
+        use MinigameActionMB(
+			action              = Open,
+			minigame            = "MinigameButtonTapping",
+			start_player        = "Unarmed_iTrigger_Box_MiniGame_Start",
+			start_player_moveto = "Unarmed_iTrigger_Box_MiniGame_Start_MoveTo",
+			start_item          = "iTrigger_Box_MiniGame_Start",
+			idle_player         = "Unarmed_iTrigger_Box_MiniGame_Idle",
+			idle_item           = "iTrigger_Box_MiniGame_Idle",
+			struggle_player     = "Unarmed_iTrigger_Box_MiniGame_Struggle",
+			struggle_item       = "iTrigger_Box_MiniGame_Struggle",
+			success_player      = "Unarmed_iTrigger_Box_MiniGame_Success",
+			success_item        = "iTrigger_Box_MiniGame_Success");
+    }
+
+    Object("crate_trying")
+    {
+        UsePoint("bone_hatch", 0.25, 0, 0);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+		use SingleStageActionMB(action = TurnOn, player_start = "Unarmed_iTrigger_Box_MiniGame_Trying", item_start = "iTrigger_Box_MiniGame_Trying", player_start_moveto = "Unarmed_iTrigger_Box_MiniGame_Start_MoveTo");
+    }
+
+    Object("crate_card")
+    {
+        UsePoint("bone_root", 0, 0, 0);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+		use SingleStageActionMB(action = TurnOn, player_start = "Card_Crate_Use", item_start = "Card_Crate_Start", player_start_moveto = "Card_Crate_MoveTo");
+    }
+
+    Object("crate_contents_destroying")
+    {
+        UsePoint("bone_root", 0, 1, 0);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageActionSkinChangeMB(action = TurnOn, player_animation = "Unarmed_iTrigger_BoxFill01", player_animation_moveto = "Unarmed_iTrigger_BoxFill01_MoveTo", item_animation = "iTrigger_BoxFill01", new_skin = "broken");
+    }
+
+    Object("crate_contents_destroying_hammerfist")
+    {
+        UsePoint("bone_root", 0, 1, 0);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageActionSkinChangeMB(action = TurnOn, player_animation = "Unarmed_iTrigger_BoxFill03", player_animation_moveto = "Unarmed_iTrigger_BoxFill03_MoveTo", item_animation = "iTrigger_BoxFill01", new_skin = "broken");
+    }
+
+    Object("crate_contents_destroying_kick")
+    {
+        UsePoint("bone_root", 0, 1, 0);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageActionSkinChangeMB(action = TurnOn, player_animation = "Unarmed_iTrigger_BoxFill02", player_animation_moveto = "Unarmed_iTrigger_BoxFill02_MoveTo", item_animation = "iTrigger_BoxFill01", new_skin = "broken");
+    }
+
+    Object("wagon_door_hold_handle")
+    {
+        // Offset looks "strange" as the bone orientation is twisted (45 deg relative to the object).
+        UsePoint("bone_wagon_root", 1, -6, 0);
+        UseReference(Icon);
+        UseAngleSpan(-45, 125, -90, 90);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageActionMax(action = TurnOn, player_start = "WagonDoor_HoldHandle", item_start = "WagonDoor_HoldHandle", player_start_moveto = "WagonDoor_HoldHandle_MoveTo");
+    }
+
+    Object("cable_fixing")
+    {
+        UsePoint("", 0, 0, 0);
+		UseAngleSpan(180);
+
+		use SingleStageActionSkinChangeWithItemMax(
+			action                  = TurnOn,
+			player_animation        = "Scotch_Tape_Use",
+			player_animation_moveto = "Scotch_Tape_MoveTo",
+			item_animation          = "",
+			player_holder_element   = "r_handholder",
+			object_mesh_name        = "anim_tape_a.msh",
+			object_skin_name        = "",
+			object_animation        = "Scotch_Tape_Use",
+			new_skin                = "",
+			initial_skin            = "Invisible");
+    }
+
+    Object("algae_picking_minigame")
+    {
+		UsePoint("bone011", 0, 0, 0);
+		UseAngleSpan(180);
+		
+		AllowOffsetHelperAnimation();
+
+        OnReset()
+        {
+            ShowElement("pnacze");
+        }
+
+        use MinigameActionWithElementHidingMax(
+			action               = TurnOn,
+			minigame             = "MinigameButtonTapping",
+			start_player         = "Algae_MiniGame_Begin",
+			start_player_moveto  = "Algae_MoveTo",
+			start_item           = "Algae_Minigame_Start",
+			idle_player          = "Algae_MiniGame_Idle",
+			idle_item            = "Algae_Minigame_Idle",
+			struggle_player      = "Algae_MiniGame_Try",
+			struggle_item        = "Algae_Minigame_Struggle",
+			success_player       = "Algae_MiniGame_Success",
+			success_item         = "Algae_Minigame_Success",
+			item_element_to_hide = "pnacze");
+
+        use MinigameActionWithElementHidingMax(
+			action               = TurnOn,
+			minigame             = "MinigameButtonTapping",
+			start_player         = "Algae_MiniGame_Begin1",
+			start_player_moveto  = "Algae_MoveTo",
+			start_item           = "Algae_Minigame_Start",
+			idle_player          = "Algae_MiniGame_Idle",
+			idle_item            = "Algae_Minigame_Idle",
+			struggle_player      = "Algae_MiniGame_Try",
+			struggle_item        = "Algae_Minigame_Struggle",
+			success_player       = "Algae_MiniGame_Success",
+			success_item         = "Algae_Minigame_Success",
+			item_element_to_hide = "pnacze");
+			
+        use MinigameActionWithElementHidingMax(
+			action               = TurnOn,
+			minigame             = "MinigameButtonTapping",
+			start_player         = "Algae_MiniGame_Begin2",
+			start_player_moveto  = "Algae_MoveTo",
+			start_item           = "Algae_Minigame_Start",
+			idle_player          = "Algae_MiniGame_Idle",
+			idle_item            = "Algae_Minigame_Idle",
+			struggle_player      = "Algae_MiniGame_Try",
+			struggle_item        = "Algae_Minigame_Struggle",
+			success_player       = "Algae_MiniGame_Success",
+			success_item         = "Algae_Minigame_Success",
+			item_element_to_hide = "pnacze");
+			
+        use MinigameActionWithElementHidingMax(
+			action               = Take,
+			minigame             = "MinigameButtonTapping",
+			start_player         = "Algae_MiniGame_Begin",
+			start_player_moveto  = "Algae_MoveTo",
+			start_item           = "Algae_Minigame_Start",
+			idle_player          = "Algae_MiniGame_Idle",
+			idle_item            = "Algae_Minigame_Idle",
+			struggle_player      = "Algae_MiniGame_Try",
+			struggle_item        = "Algae_Minigame_Struggle",
+			success_player       = "Algae_MiniGame_Success",
+			success_item         = "Algae_Minigame_Success",
+			item_element_to_hide = "pnacze");
+			
+        use MinigameActionWithElementHidingMax(
+			action               = Take,
+			minigame             = "MinigameButtonTapping",
+			start_player         = "Algae_MiniGame_Begin1",
+			start_player_moveto  = "Algae_MoveTo",
+			start_item           = "Algae_Minigame_Start",
+			idle_player          = "Algae_MiniGame_Idle",
+			idle_item            = "Algae_Minigame_Idle",
+			struggle_player      = "Algae_MiniGame_Try",
+			struggle_item        = "Algae_Minigame_Struggle",
+			success_player       = "Algae_MiniGame_Success",
+			success_item         = "Algae_Minigame_Success",
+			item_element_to_hide = "pnacze");
+			
+        use MinigameActionWithElementHidingMax(
+			action               = Take,
+			minigame             = "MinigameButtonTapping",
+			start_player         = "Algae_MiniGame_Begin2",
+			start_player_moveto  = "Algae_MoveTo",
+			start_item           = "Algae_Minigame_Start",
+			idle_player          = "Algae_MiniGame_Idle",
+			idle_item            = "Algae_Minigame_Idle",
+			struggle_player      = "Algae_MiniGame_Try",
+			struggle_item        = "Algae_Minigame_Struggle",
+			success_player       = "Algae_MiniGame_Success",
+			success_item         = "Algae_Minigame_Success",
+			item_element_to_hide = "pnacze");
+    }	
+
+    Object("well_opening_minigame")
+    {
+        UsePoint("bone_well", 0.25, 0, 0.95);
+		UseReference(Icon);
+		UseAngleSpan(60);
+
+		use MinigameActionMax(
+			action              = TurnOn,
+			minigame            = "MinigameButtonTapping",
+			start_player        = "Well_MiniGame_Begin",
+			start_player_moveto = "Well_MoveTo",
+			start_item          = "AccessToTheWell_Start",
+			idle_player         = "Well_MiniGame_Idle",
+			idle_item           = "AccessToTheWell_Idle",
+			struggle_player     = "Well_MiniGame_Try",
+			struggle_item       = "AccessToTheWell_Struggle",
+			success_player      = "Well_MiniGame_Success",
+			success_item        = "AccessToTheWell_Success");
+    }
+
+    Object("pipe_flang_fixing_minigame")
+    {
+        UsePoint("dlc_pipe_flang_a_anim_b", 0, 1, 0);
+		UseAngleSpan(180);
+
+        OnReset()
+        {
+            HideElement("dlc_pipe_wrench_a");
+        }
+
+		use MinigameActionWithElementShowingAndHidingMax(
+			action                   = TurnOn,
+			minigame                 = "MinigameButtonTapping",
+			start_player             = "PipeFix_MiniGame_Begin",
+			start_player_moveto      = "PipeFix_MoveTo",
+			start_item               = "PipeFix_Minigame_Start",
+			idle_player              = "PipeFix_MiniGame_Idle",
+			idle_item                = "PipeFix_Minigame_Idle",
+			struggle_player          = "PipeFix_MiniGame_Try",
+			struggle_item            = "PipeFix_Minigame_Struggle",
+			success_player           = "PipeFix_MiniGame_Success",
+			success_item             = "PipeFix_Minigame_Success",
+			item_element_to_showhide = "dlc_pipe_wrench_a");
+    }
+
+    Object("pipe_flang_fixing")
+    {
+        UsePoint("dlc_pipe_flang_a_anim_b", 0, 1, 0);
+		UseAngleSpan(180);
+
+		use SingleStageActionMax(action = TurnOn, player_start = "PipeFix_MiniGame_Short", item_start = "PipeFix_Minigame_Short", player_start_moveto = "PipeFix_MoveTo");
+	}
+
+    Object("hacking_crate")
+    {
+        UsePoint("lock_a", 0, 0, 0);
+		UseAngleSpan(80);
+
+		use ContainerHackingMB(
+			action                  = TurnOn,
+			player_animation        = "Unarmed_Hacking_Crate",
+			player_animation_moveto = "Unarmed_Hacking_Crate_MoveTo",
+			item_animation          = "Hacking_Crate_Box",
+			player_holder_element   = "l_handholder",
+			object_mesh_name        = "dlc_geiger_device_a.msh",
+			object_skin_name        = "HackingTool",
+			object_animation        = "hacking_crate_device",
+			object_holder           = "bone_root");
+	}
+
+    Object("pipe_flang_fixing_vertical_minigame")
+    {
+        UsePoint("dlc_pipe_flang_a_anim_c", -0.1, 1, -1);
+		UseAngleSpan(90);
+
+        OnReset()
+        {
+            HideElement("dlc_pipe_wrench");
+        }
+
+		use MinigameActionWithElementShowingAndHidingMax(
+			action                   = TurnOn,
+			minigame                 = "MinigameButtonTapping",
+			start_player             = "VerticalPipeFix_MiniGame_Begin",
+			start_player_moveto      = "VerticalPipeFix_MoveTo",
+			start_item               = "VerticalPipeFix_Minigame_Start",
+			idle_player              = "VerticalPipeFix_MiniGame_Idle",
+			idle_item                = "VerticalPipeFix_Minigame_Idle",
+			struggle_player          = "VerticalPipeFix_MiniGame_Try",
+			struggle_item            = "VerticalPipeFix_Minigame_Struggle",
+			success_player           = "VerticalPipeFix_MiniGame_Success",
+			success_item             = "VerticalPipeFix_Minigame_Success",
+			item_element_to_showhide = "dlc_pipe_wrench");
+    }
+
+    Object("underwater_barrier_minigame")
+    {
+        UsePoint("bone_root", 0, 0, -0.25);
+		UseAngleSpan(80);
+
+		use MinigameActionMB(
+			action              = TurnOn,
+			minigame            = "MinigameButtonTapping",
+			start_player        = "Unarmed_Underwater_Barrier_Minigame_Begin",
+			start_player_moveto = "Unarmed_Underwater_Barrier_Minigame_MoveTo",
+			start_item          = "VerticalPipeFix_Minigame_Start",
+			idle_player         = "Unarmed_Underwater_Barrier_Minigame_Idle",
+			idle_item           = "Underwater_Barricade_Minigame_Idle",
+			struggle_player     = "Unarmed_Underwater_Barrier_Minigame_Try",
+			struggle_item       = "Underwater_Barricade_Minigame_Struggle",
+			success_player      = "Unarmed_Underwater_Barrier_Minigame_Success",
+			success_item        = "Underwater_Barricade_Minigame_Success");
+    }
+
+    Object("using_keys")
+    {
+        UsePoint("", 0.8, -0.05, 0);
+        UseDistance(1.3);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = 0.0, max_vert = 50.0);
+        use DoorUnlockingWithKeyMax(action = TurnOn,      user_animation = "KeyInKeyhole",        user_animation_moveto = "KeyInKeyhole_MoveTo",        key_animation = "KeyInKeyhole", user_holder_element = "r_handholder");
+    }
+
+    Object("using_keys_van_doors")
+    {
+        UsePoint("", 0.8, -0.05, 0);
+        UseDistance(1.3);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = 0.0, max_vert = 50.0);
+        use DoorUnlockingWithKeyMax(action = TurnOn,      user_animation = "KeyInKeyhole",        user_animation_moveto = "KeyInKeyhole_MoveTo",        key_animation = "KeyInKeyholeVan", user_holder_element = "r_handholder");
+    }
+
+    Object("object_pickup")
+    {
+        UsePoint("bone_device", 0, -0.2, 0);
+		UseAngleSpan(180);
+		
+		PoseAnimation("InitialPose");
+
+		use SingleStageActionSkinChangeWithItemMax(
+			action                  = TurnOn,
+			player_animation        = "Geiger_Use",
+			player_animation_moveto = "Geiger_MoveTo",
+			item_animation          = "Geiger_Start",
+			player_holder_element   = "r_handholder",
+			object_mesh_name        = "",
+			object_skin_name        = "",
+			object_animation        = "",
+			new_skin                = "Invisible",
+			initial_skin            = "");
+    }
+
+    Object("showcase_pipe_flang_wrench")
+    {
+        UsePoint("dlc_pipe_flang_wrench", 0.6, 0, -1);
+		UseAngleSpan(180);
+		
+		PoseAnimation("InitialPose");
+		
+		use SingleStageActionElementHidingMB(
+			action                  = TurnOn,
+			player_animation        = "Flang_Wrench_Use",
+			player_animation_moveto = "Flang_Wrench_MoveTo",
+			item_animation          = "Flang_Wrench_Start",
+			element_a_name          = "dlc_pipe_flang_wrench",
+			element_b_name          = "");
+	}
+
+    Object("showcase_acolyte_mask")
+    {
+        UsePoint("bone_mask", 0, 0.25, 0);
+		UseReference(Icon);
+		UseAngleSpan(80);
+
+		use SingleStageActionSkinChangeWithItemMB(
+			action                  = TurnOn,
+			player_animation        = "Acolyte_Mask_Use",
+			player_animation_moveto = "Acolyte_Mask_MoveTo",
+			item_animation          = "Acolyte_Mask_Start",
+			player_holder_element   = "",
+			object_mesh_name        = "",
+			object_skin_name        = "",
+			object_animation        = "",
+			new_skin                = "Invisible",
+			initial_skin            = "");
+	}
+
+    Object("tombstone_minigame")
+    {
+		UsePoint("monument_concrete_plate", 0, 0, 0);
+		UseAngleSpan(180);
+		
+		use MinigameActionMB(
+			action              = TurnOn,
+			minigame            = "MinigameButtonTapping",
+			start_player        = "Unarmed_Tombstone_Plate_Minigame_Begin",
+			start_player_moveto = "Unarmed_Tombstone_Plate_Minigame_MoveTo",
+			start_item          = "Tombstone_Plate_Minigame_Start",
+			idle_player         = "Unarmed_Tombstone_Plate_Minigame_Idle",
+			idle_item           = "Tombstone_Plate_Minigame_Idle",
+			struggle_player     = "Unarmed_Tombstone_Plate_Minigame_Try",
+			struggle_item       = "Tombstone_Plate_Minigame_Struggle",
+			success_player      = "Unarmed_Tombstone_Plate_Minigame_Success",
+			success_item        = "Tombstone_Plate_Minigame_Success");
+    }
+
+    Object("isolator_minigame")
+    {
+		UsePoint("monument_concrete_plate", 0, 0, 0);
+		UseAngleSpan(180);
+		
+		use MinigameActionMB(
+			action              = TurnOn,
+			minigame            = "MinigameButtonTapping",
+			start_player        = "Unarmed_Isolator_Kick_Minigame_Begin",
+			start_player_moveto = "Unarmed_Isolator_Kick_Minigame_MoveTo",
+			start_item          = "Isolator_Minigame_Start",
+			idle_player         = "Unarmed_Isolator_Kick_Minigame_Idle",
+			idle_item           = "Isolator_Minigame_Idle",
+			struggle_player     = "Unarmed_Isolator_Kick_Minigame_Try",
+			struggle_item       = "Isolator_Minigame_Struggle",
+			success_player      = "Unarmed_Isolator_Kick_Minigame_Success",
+			success_item        = "Isolator_Minigame_Success");
+    }
+
+    Object("drink_from_fountain")
+    {
+        UsePoint("", 0, 0.8, 0);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageSymmetricActionWithTwoItemsMax(
+			action                  = Use,
+			player_animation        = "Unarmed_Drink_From_Fountain",
+			player_animation_moveto = "Unarmed_Drink_From_Fountain_MoveTo",
+			item_animation          = "",
+			player_holder_element_a = "l_handholder",
+			object_a_mesh_name      = "cup_c_anim.msh",
+			object_a_skin_name      = "",
+			object_a_holder         = "holder",
+			player_holder_element_b = "",
+			object_b_mesh_name      = "",
+			object_b_skin_name      = "");
+    }
+
+    Object("drink_from_fountain_with_selfie")
+    {
+        UsePoint("", 0, 0.8, 0);
+
+        use ClampDeviationHSym(horz = 50.0, min_vert = -10.0, max_vert = 50.0);
+
+        use SingleStageSymmetricActionWithTwoItemsMax(
+			action                  = Use,
+			player_animation        = "Unarmed_Drink_From_Fountain_Selfie",
+			player_animation_moveto = "Unarmed_Drink_From_Fountain_Selfie_MoveTo",
+			item_animation          = "",
+			player_holder_element_a = "l_handholder",
+			object_a_mesh_name      = "cup_c_anim.msh",
+			object_a_skin_name      = "",
+			object_a_holder         = "holder",
+			player_holder_element_b = "r_handholder",
+			object_b_mesh_name      = "mobile_phone_a_anim.msh",
+			object_b_skin_name      = "",
+			object_b_holder         = "holder");
+    }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // Prototypes
+    ///////////////////////////////////////////////////////////////////////////
+
+    // Prototype for opening the door to the cellar on Wasteland.
+    Object("cellar_door_left")
+    {
+        //UsePoint("bone_fuse", 0, 0, 0);
+
+        use SingleStageActionMax(action = TurnOn, player_start = "Unarmed_Wardrobe_Encounter", item_start = "OpenL", player_start_moveto = "Unarmed_Wardrobe_Encounter_MoveTo");
+    }
+
+    Object("cellar_door_right")
+    {
+        //UsePoint("bone_fuse", 0, 0, 0);
+
+        use SingleStageActionMax(action = TurnOn, player_start = "Unarmed_Wardrobe_Encounter", item_start = "OpenR", player_start_moveto = "Unarmed_Wardrobe_Encounter_MoveTo");
+    }
+
+    Object("shop_shutter")
+    {
+        UseDistance(1.5);
+
+        use ClampDeviationHSym(horz = 40.0, min_vert = 0.0, max_vert = 50.0);
+
+        PoseAnimation("InitialPose");
+
+        Dynamic(true);
+
+        use SingleStageDynamicActionMax(action = TurnOn, player_start = "GarageShutter_Open",        item_start = "Curtain_Open", player_start_moveto = "GarageShutter_Open_MoveTo");
+        use SingleStageDynamicActionMax(action = TurnOn, player_start = "GarageShutter_Inside_Open", item_start = "Curtain_Open", player_start_moveto = "GarageShutter_Inside_Open_MoveTo");
+    }
+
+    Object("shop_shutter_at_middle")
+    {
+        UseDistance(1.5);
+
+        use ClampDeviationHSym(horz = 40.0, min_vert = 0.0, max_vert = 50.0);
+
+        PoseAnimation("InitialPose");
+
+        Dynamic(true);
+
+        use SingleStageDynamicActionMax(action = TurnOn, player_start = "GarageShutter_Open_UseAtMiddle",        item_start = "Curtain_Open", player_start_moveto = "GarageShutter_Open_MoveTo");
+        use SingleStageDynamicActionMax(action = TurnOn, player_start = "GarageShutter_Inside_Open_UseAtMiddle", item_start = "Curtain_Open", player_start_moveto = "GarageShutter_Inside_Open_MoveTo");
+    }
+
+    Object("basement_entrance")
+    {
+        UsePoint("wl_basement_door", 0, -0.5, 0.25);
+        UseAngleSpan(40);
+
+        Dynamic(true);
+
+        use SingleStageDynamicActionMax(action = TurnOn, player_start = "BasementEntrance_Outside_Open",  item_start = "OpenOutside", player_start_moveto = "BasementEntrance_Outside_Open_MoveTo");
+        use SingleStageDynamicActionMax(action = TurnOn, player_start = "BasementEntrance_Inside_Open",   item_start = "OpenInside",  player_start_moveto = "BasementEntrance_Inside_Open_MoveTo");
+    }
+
+    Object("TEST_basement_entrance")
+    {
+        UseAngleSpan(40);
+
+        Dynamic(true);
+
+        //use SingleStageDynamicActionMax(action = TurnOn, player_start = "BasementEntrance_Outside_Open",  item_start = "OpenOutside", player_start_moveto = "BasementEntrance_Outside_Open_MoveTo");
+        use SingleStageDynamicActionMax(action = TurnOn, player_start = "BasementEntrance_Inside_Open",   item_start = "OpenInside",  player_start_moveto = "BasementEntrance_Inside_Open_MoveTo");
+    }
+
+	Object("van_push")
+    {
+        UsePoint("", 0, 0.75, 1.0);
+        UseReference(Icon);
+        UseAngleSpan(-20, 120, -90, 90);
+
+        use SingleStageActionMB(action = TurnOn, player_start = "Van_Push", item_start = "", player_start_moveto = "iTrigger_PipePush_MoveTo");
+    }
+
+	Object("bookshelf_push")
+    {
+        UsePoint("", 0, 0.75, 1.0);
+        UseReference(Icon);
+        UseAngleSpan(-20, 120, -90, 90);
+
+        use SingleStageActionMB(action = TurnOn, player_start = "Bookshelf_Push", item_start = "", player_start_moveto = "iTrigger_PipePush_MoveTo");
+    }
+}

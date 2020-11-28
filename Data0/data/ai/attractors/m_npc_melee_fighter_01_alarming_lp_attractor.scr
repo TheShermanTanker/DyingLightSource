@@ -1,0 +1,29 @@
+!include("ai_data.def")
+!include("ai_timing.def")
+!include("ai_goals.def")
+
+SnapDist(2)
+StrongAttractor()
+ReleaseDist(3)
+PeriodBtwSpecialAnims(12.0)
+InteractionLevel(3) //full - allow aiming and looking at
+
+Slot("", 1, 1, 1, 0, 0, 0, 0.0, 0.0, 1.0, 1.5)
+{
+	AiTypeDataSet("human")
+    {
+		Data("idle:standing::idle:::", -2, "m_npc_melee_fighter_01_idle", -1, 1)
+		Data("idle:standing::special:::", -2, "m_npc_melee_fighter_01_special", -1, 1)
+		Data("idle:standing:upset:idle:::", -2, "m_npc_melee_fighter_01_alarming_idle", -1, 1)
+        Data("idle:standing:upset:stand:::", -2, "m_npc_melee_fighter_01_alarming_idle", -1, 1)
+        
+        Data("alarming:standing::upset:0::", -2, "m_npc_melee_fighter_01_prepare_alarming", -1, 1)
+        
+        Data("alarming:standing::calm:::", -2, "m_npc_melee_fighter_01_alarming_calm", -1, 1)
+        
+		ParamBool("disable_chatter_system", 1)
+	}
+	
+    DiscardOn(GoalAttack)
+}
+

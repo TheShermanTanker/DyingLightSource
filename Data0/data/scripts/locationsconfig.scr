@@ -1,0 +1,1444 @@
+sub main()
+{
+    CategoryDefinitions()
+    {
+        Priority("Objective", 10000);
+        Priority("Encounter",  0);
+        Priority("Threat",     0);
+        Priority("Coop",       0);
+        Priority("Friendly",   0);
+        Priority("Neutral",    0);
+    }
+    //LocationDef(type, default_icon)
+    //ShowPointOnRadar(); //location will show on radar if its a point
+    //ShowAreaOnRadar();  //location will show on radar if its a area
+    //ShowOnRadar();      // equals to ShowPointOnRadar() and ShowAreaOnRadar()
+    //ShowOnMap(default_description_on_map); //location will show on map with this description
+    //ShowOnMapEdge(); //location will show on map edge
+    //ShowOnMapEdgeWhenObjective(); //location will show on map edge when its current objective
+    //IgnoreFogOfWar();   //location will ignore fog of war on map if it should be shown on map (ShowOnMap)
+    //NeutralIcon(icon)     // icon displayed on map and radar when the location m_Category is ELocationCategory::Neutral
+    //FriendlyIcon(icon)    // ELocationCategory::Friendly
+    //ObjectiveIcon(icon)   // ELocationCategory::Objective
+    //EncounterIcon(icon)    // ELocationCategory::Encounter
+    //ThreatIcon(icon)        // ELocationCategory::Threat
+    //CoopIcon(icon)        // ELocationCategory::Coop
+    //AreaColor([R,G,B,A])        //sets AREA colors for all ELocationCategory (default)
+    //NeutralAreaColor([R,G,B,A])      //sets AREA color when the location m_Category is ELocationCategory::Neutral
+    //ObjectiveAreaColor([R,G,B,A])
+    //EncounterAreaColor([R,G,B,A])
+    //FriendlyAreaColor([R,G,B,A])
+    //ThreatAreaColor([R,G,B,A])
+    //CoopAreaColor([R,G,B,A])
+    //CanBeHiddenByInvisibilityZone(); //if INVISIBILITY_ZONE_FUNCTIONALITY is turned on, then this flag indicates that the icon can be hidden by GroupingMapMarker objects
+    //RotateToObject() //icon will try to rotate to object
+    //DoNotClampToRadius() //icon will not be turned to arrow when outside of radar
+    //PriorityModifier(int)   // type priority component used in calculating location priority
+    
+    LocationDef("FakePlayerLocation", "map_icon_player")
+    {
+        ShowOnMap("&FakePlayerLocation&");
+        IgnoreFogOfWar();
+    }
+    
+    LocationDef("AirDrop", "map_encounter_airdrop")
+    {    
+        EncounterIcon("map_encounter_airdrop");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_AirDrop&");
+        IgnoreFogOfWar();
+		PriorityModifier(700);
+    }
+    
+    LocationDef("ChallengeMissionWaypoint", "map_challenge_destination")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_ChallengeMissionWaypoint&");
+		PriorityModifier(1000);
+    }
+    
+    LocationDef("ChallengePoint", "map_objective_location")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_ChallengePoint&");
+    }
+    
+    LocationDef("ChallengeTriggerAgility", "map_challenge_runner")
+    {
+		ObjectiveIcon("map_objective_challenge_runner");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_ChallengeTrigger&");
+		PriorityModifier(800);
+		VisibleRange(60);
+    }
+	
+	LocationDef("ChallengeTriggerFever", "map_challenge_fever")
+    {
+		ObjectiveIcon("map_objective_challenge_runner");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_ChallengeTrigger&");
+		PriorityModifier(800);
+		VisibleRange(60);
+    }
+
+    LocationDef("ChallengeTriggerCombat", "map_challenge_fighter")
+    {
+		ObjectiveIcon("map_objective_challenge_fighter");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_ChallengeTrigger&");
+		PriorityModifier(800);
+		VisibleRange(60);
+    }
+    
+    LocationDef("ChallengeShield", "map_challenge_destination")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_ChallengeShield&");
+		PriorityModifier(800);
+		VisibleRange(60);
+    }
+    
+    LocationDef("ChallengeArea", "")
+    {
+        AreaColor([0.0, 0.0, 1.0, 0.5]);
+        ShowOnRadar();
+        ShowOnMap("&MMap_ChallengeArea&");        
+        IgnoreFogOfWar();
+		VisibleRange(60);
+    }
+    
+    LocationDef("ChallengeDestination", "map_location")
+    {
+        ObjectiveIcon("map_objective_location");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_CurrentObjective&");
+        IgnoreFogOfWar();
+        ShowOnMapEdgeWhenObjective();
+		PriorityModifier(1000);
+		VisibleRange(60);
+    }
+    
+    LocationDef("CoopPlayer", "map_icon_player_white")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_Coopplayer&");
+        ShowOnMapEdge();
+        IgnoreFogOfWar();
+        RotateToObject();
+        PriorityModifier(800);
+    }    
+    
+    LocationDef("Debug" , "map_default")
+    {
+        ShowOnRadar();
+        ShowOnMap("&MMap_Debug&");
+        IgnoreFogOfWar();
+    }
+    
+    LocationDef("Default", "map_default")
+    {
+        IgnoreFogOfWar();
+    }
+    
+    LocationDef("Destination", "map_location")
+    {
+        ObjectiveIcon("map_objective_location");
+        ShowPointOnRadar();
+        ShowOnMapEdgeWhenObjective();
+        ShowOnMap("&MMap_CurrentObjective&");
+        IgnoreFogOfWar();
+        ShowOnMapEdgeWhenObjective();
+		PriorityModifier(800);
+		VisibleRange(30);
+    }
+    
+    LocationDef("DropItem", "map_location")
+    {
+        ObjectiveIcon("map_objective_location");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_DropItem&");
+        ShowOnMapEdgeWhenObjective();
+        IgnoreFogOfWar();
+		PriorityModifier(800);
+		VisibleRange(30);
+    }
+    
+    LocationDef("Encounter"  , "map_encounter")
+    {
+        ShowOnMap("&MMap_Encounter&");
+        ShowOnRadar();
+        IgnoreFogOfWar();
+		PriorityModifier(800);
+    }
+	
+	LocationDef("Custom_Encounter"  , "map_encounter")
+    {
+        ShowOnMap("&MMap_Encounter&");
+        ShowOnRadar();
+        IgnoreFogOfWar();
+		PriorityModifier(800);
+    }
+    
+    LocationDef("EncounterEnemyZombie", "map_enemy_zombie")
+    {
+        ShowPointOnRadar();
+        //ShowOnMap("&MMap_EncounterEnemyZombie&");
+        IgnoreFogOfWar();
+        RotateToObject();
+        PriorityModifier(900);
+    }
+    
+    LocationDef("EncounterShop", "map_encounter_shop")
+    {    
+        EncounterIcon("map_encounter_shop");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_Encounter_Shop&");
+        IgnoreFogOfWar();
+		PriorityModifier(900);
+    }
+    
+    LocationDef("EncounterEnemyHuman", "map_enemy_human")
+    {
+        ShowPointOnRadar();
+        //ShowOnMap("&MMap_EncounterEnemyHuman&");
+        IgnoreFogOfWar();
+        RotateToObject();
+        PriorityModifier(900);
+		VisibleRange(30);
+    }
+    
+    LocationDef("EncounterNpc", "map_encounter_human")
+    {
+        ShowPointOnRadar();
+        //ShowOnMap("&MMap_EncounterNpc&");
+        IgnoreFogOfWar();
+        RotateToObject();
+        PriorityModifier(900);
+    }
+	
+	LocationDef("Custom_Survivor", "map_encounter_human")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_LegendEncounterHuman&");
+        IgnoreFogOfWar();
+        RotateToObject();
+        PriorityModifier(10);
+    }
+       
+    LocationDef("Enemy", "map_human")
+    {
+        ThreatIcon("map_human"); //we use white because it will be colored from SetAlertLevel
+        ObjectiveIcon("map_objective_human");
+        ShowPointOnRadar();
+        //ShowOnMap("&MMap_Enemy&");
+        ShowOnMapEdgeWhenObjective();
+        IgnoreFogOfWar();
+        RotateToObject();
+        DoNotClampToRadius();
+        PriorityModifier(900);
+		VisibleRange(30);
+		UseRadarRadiusAsRange();
+    }
+    
+    LocationDef("EnemyZombie", "map_zombie")
+    {
+        ThreatIcon("map_zombie"); //we use white because it will be colored from SetAlertLevel
+        ObjectiveIcon("map_objective_zombie");
+        ShowPointOnRadar();
+        ShowOnMap("");
+        ShowOnMapEdgeWhenObjective();
+        IgnoreFogOfWar();
+        DoNotClampToRadius();
+        PriorityModifier(900);
+        RotateToObject();
+		VisibleRange(30);
+		UseRadarRadiusAsRange();
+    }
+
+    
+    LocationDef("EnemyZombieCarChallenge", "map_enemy_zombie")
+    {
+        ThreatIcon("map_enemy_zombie"); 
+        ObjectiveIcon("map_enemy_zombie");
+        ShowPointOnRadar();
+        ShowOnMap("");
+        ShowOnMapEdgeWhenObjective();
+        IgnoreFogOfWar();
+        PriorityModifier(900);
+        RotateToObject();
+		VisibleRange(70);
+    }
+
+
+    LocationDef("EnemyZombieArena", "map_enemy_zombie")
+    {
+        ThreatIcon("map_enemy_zombie"); //we use white because it will be colored from SetAlertLevel
+        ObjectiveIcon("map_enemy_zombie");
+        ShowPointOnRadar();
+        ShowOnMap("");
+        ShowOnMapEdgeWhenObjective();
+        IgnoreFogOfWar();
+        PriorityModifier(900);
+        RotateToObject();
+		VisibleRange(70);
+    }
+   
+
+    LocationDef("NoisePoint", "noise_indicator_icon")
+    {
+        ShowPointOnRadar();
+        ThreatIcon("noise_indicator_icon");
+        ObjectiveIcon("noise_indicator_icon");        
+        IgnoreFogOfWar();
+    }
+    
+    LocationDef("FastTravel", "map_fast_travel")
+    {
+        ThreatIcon("map_fast_travel_objective"); /// is this ever used ??
+        ObjectiveIcon("map_fast_travel_objective");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_FastTravel&");
+        ShowOnMapEdgeWhenObjective();
+        CanBeHiddenByInvisibilityZone();
+		PriorityModifier(800);
+		VisibleRange(30);
+    }
+    
+    LocationDef("GameEvent", "map_encounter")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_GameEvent&");
+        IgnoreFogOfWar();
+        PriorityModifier(800);
+    }
+	
+	LocationDef("EncounterAssist", "map_encounter_assist")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_Assist&");
+        IgnoreFogOfWar();
+		PriorityModifier(950);
+    }
+    
+	LocationDef("Assist", "map_assist")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_Assist&");
+        IgnoreFogOfWar();
+		PriorityModifier(950);
+		VisibleRange(30);
+    }
+	
+    LocationDef("GetInCar"   , "map_location")
+    {
+        ThreatIcon("map_location");
+        ObjectiveIcon("map_objective_location");
+        ShowOnMap("&MMap_GetInCar&");
+        IgnoreFogOfWar();
+		VisibleRange(30);
+    }
+    
+    LocationDef("LocalPlayer", "map_icon_player_white")
+    {
+        ShowOnMap("&MMap_Player&");
+        IgnoreFogOfWar();
+        RotateToObject();
+        ShowOnMapEdge();
+		PriorityModifier(10000);
+    }
+    
+    LocationDef("MapPortal", "map_portal")
+    {
+        ObjectiveIcon("map_objective_portal");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_LocalPortal&");
+        ShowOnMapEdgeWhenObjective();
+        CanBeHiddenByInvisibilityZone();
+		PriorityModifier(900);
+		VisibleRange(30);
+    }
+    
+    LocationDef("MapPortalCleansing", "map_challenge_cleansing")
+    {
+        ThreatIcon("map_challenge_cleansing"); /// is this ever used ??
+        ObjectiveIcon("map_challenge_cleansing"); /// is this ever used ??
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_AreaCleansingTransition&");
+        ShowOnMapEdgeWhenObjective();
+		PriorityModifier(900);
+		VisibleRange(30);
+        //IgnoreFogOfWar();
+    }
+    
+    LocationDef("MapPortalTracked"   , "map_objective_portal")
+    {
+        ThreatIcon("map_objective_portal"); /// is this ever used ??
+        ObjectiveIcon("map_objective_portal"); /// is this ever used ??
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_AreaTransition&");
+        ShowOnMapEdgeWhenObjective();
+        IgnoreFogOfWar();
+		PriorityModifier(900);
+    }
+    
+    LocationDef("Prime", "map_prime")
+    {
+        ShowPointOnRadar();
+		EncounterIcon("map_prime");
+        IgnoreFogOfWar();
+        //RotateToObject();
+		PriorityModifier(950);
+    }
+    
+    LocationDef("ProtectPerson", "map_human")
+    {
+        ThreatIcon("map_enemy_human");
+        ObjectiveIcon("map_objective_human");
+        EncounterIcon("map_encounter_human");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_ProtectPerson&");
+        ShowOnMapEdgeWhenObjective();
+        IgnoreFogOfWar();
+        RotateToObject();
+		PriorityModifier(950);
+    }
+    
+    LocationDef("PursuitBreakerActivated", "map_breaker_activated")
+    {
+        ShowPointOnRadar();
+        //ShowOnMap("&MMap_PursuitBreakerActivated&");
+        IgnoreFogOfWar();
+		PriorityModifier(800);
+		VisibleRange(30);
+    }
+    
+    LocationDef("PursuitBreakerDeactivated", "map_breaker_deactivated")
+    {
+        ShowPointOnRadar();
+        //ShowOnMap("&MMap_PursuitBreakerDeactivated&");
+        IgnoreFogOfWar();
+		PriorityModifier(800);
+		VisibleRange(30);
+    }
+    
+    LocationDef("PursuitBreakerEnabled", "map_breaker_enabled")
+    {
+        ShowPointOnRadar();
+        //ShowOnMap("&MMap_PursuitBreakerEnabled&");
+        IgnoreFogOfWar();
+		PriorityModifier(800);
+		VisibleRange(30);
+    }
+    
+    LocationDef("PursuitBreakerNotEnabled", "map_breaker_disabled")
+    {
+        ShowPointOnRadar();
+        //ShowOnMap("&MMap_PursuitBreakerNotEnabled&");
+        IgnoreFogOfWar();
+		PriorityModifier(800);
+		VisibleRange(30);
+    }
+    
+    LocationDef("PursuitBreakerReady", "map_breaker_ready")
+    {
+        ShowPointOnRadar();
+        //ShowOnMap("&MMap_PursuitBreakerReady&");
+        IgnoreFogOfWar();
+		PriorityModifier(800);
+		VisibleRange(30);
+    }
+    
+    LocationDef("QuestGiver", "map_questgiver")
+    {
+        ThreatIcon("map_enemy_human");
+        ObjectiveIcon("map_questgiver_objective");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_Questgiver&");
+        ShowOnMapEdgeWhenObjective();
+        //IgnoreFogOfWar();
+        CanBeHiddenByInvisibilityZone();
+        //RotateToObject();
+        PriorityModifier(950);
+		VisibleRange(40);
+    }
+    
+    LocationDef("ChallengeGiver", "map_challenge_fighter")
+    {
+        //ThreatIcon("map_enemy_human");
+        //ObjectiveIcon("map_questgiver_objective");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_ChallengeGiver&");
+        //ShowOnMapEdgeWhenObjective();
+        CanBeHiddenByInvisibilityZone();
+        PriorityModifier(800);
+		VisibleRange(40);
+    }    
+    
+    LocationDef("Reward", "map_reward")
+    {
+        ThreatIcon("map_location");
+        ObjectiveIcon("map_objective_location");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_Reward&");
+        IgnoreFogOfWar();
+        CanBeHiddenByInvisibilityZone();
+        PriorityModifier(800);
+		VisibleRange(30);
+    }
+    
+    LocationDef("SafeDestination_Active", "map_safe_zone")
+    {
+		IgnoreFogOfWar();
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_LegendSafeZone&");        
+        PriorityModifier(900);
+		VisibleRange(100);
+    }
+    
+    LocationDef("SafeDestination_Inactive", "map_safe_zone_inactive")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_LegendSafeZoneInactive&");        
+        PriorityModifier(900);
+        IgnoreFogOfWar();
+		VisibleRange(100);
+    }
+    
+    LocationDef("Shop", "map_store")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_Store&");        
+        CanBeHiddenByInvisibilityZone();
+		PriorityModifier(900);
+		VisibleRange(30);
+        IgnoreFogOfWar();
+    }
+    
+    LocationDef("Quartermaster", "map_quatermaster")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_LegendQuatermaster&");        
+        CanBeHiddenByInvisibilityZone();
+		PriorityModifier(900);
+		VisibleRange(30);
+    }
+    
+    LocationDef("QuartermasterSpike", "map_quatermaster")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_LegendQuatermaster&");        
+        CanBeHiddenByInvisibilityZone();
+		PriorityModifier(900);
+		VisibleRange(30);
+    }
+    
+    LocationDef("PrimeGlandsBarrel", "map_prime_glands_barrel")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_PrimeGlandsBarrel&");        
+        CanBeHiddenByInvisibilityZone();
+		PriorityModifier(900);
+		VisibleRange(30);
+    }
+    
+    LocationDef("Scout", "map_scout")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_Scout&");        
+        CanBeHiddenByInvisibilityZone();
+        PriorityModifier(800);
+		VisibleRange(30);
+        //RotateToObject();
+    }
+    
+    LocationDef("Spike", "map_spike")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_Spike&");
+        //RotateToObject();
+        PriorityModifier(800);
+		VisibleRange(30);
+    }
+    
+    LocationDef("SpikeReward", "map_spike_reward")
+    //LocationDef("SpikeReward", "map_wardrobe")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_SpikeReward&");
+        //RotateToObject();
+        PriorityModifier(800);
+		VisibleRange(30);
+    }
+    
+    LocationDef("SpikeRewardShield", "map_spike_reward_shield")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_SpikeRewardShield&");
+        //RotateToObject();
+        PriorityModifier(800);
+		VisibleRange(30);
+    }
+    
+    LocationDef("SpikeRewardGrapplingHook", "map_spike_reward_grappling_hook")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_SpikeRewardGrapplingHook&");
+        //RotateToObject();
+        PriorityModifier(800);
+		VisibleRange(30);
+    }
+    
+    LocationDef("ShopSpawner", "map_store")
+    {
+        CanBeHiddenByInvisibilityZone();        
+    }
+    
+    LocationDef("Staircase", "map_staircase")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_Staircase&");        
+        CanBeHiddenByInvisibilityZone();
+        PriorityModifier(800);
+		VisibleRange(30);
+    }
+    
+    LocationDef("ZipLine", "map_zipline")
+    {
+		//the location has also been disabled from code
+        //ShowOnMap("&MMap_ZipLine&");
+        //ShowPointOnRadar();
+    }
+    
+    LocationDef("RestingPlace", "map_resting_place")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_RestingPlace&");
+        CanBeHiddenByInvisibilityZone();
+        PriorityModifier(800);
+		VisibleRange(30);
+    }    
+    
+    LocationDef("TakeItem", "map_location")
+    {
+        ThreatIcon("map_location");
+        ObjectiveIcon("map_objective_location");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_TakeItem&");
+        ShowOnMapEdgeWhenObjective();
+        IgnoreFogOfWar();
+        PriorityModifier(800);
+		VisibleRange(30);
+    }
+    
+    LocationDef("TakeHeavyObject", "map_marker")
+    {
+        ThreatIcon("map_marker");
+        ObjectiveIcon("map_objective_marker");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_TakeItem&");
+        ShowOnMapEdgeWhenObjective();
+        IgnoreFogOfWar();
+        PriorityModifier(800);
+		VisibleRange(30);
+    }
+    
+    LocationDef("TakeBringObject", "map_marker")
+    {
+        ThreatIcon("map_marker");
+        ObjectiveIcon("map_objective_marker");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_TakeItem&");
+        ShowOnMapEdgeWhenObjective();
+        IgnoreFogOfWar();
+        PriorityModifier(800);
+		VisibleRange(30);
+    }
+
+    LocationDef("Talk", "map_location")
+    {
+        ThreatIcon("map_enemy_human");
+        ObjectiveIcon("map_objective_location");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_Talk&");
+        ShowOnMapEdgeWhenObjective();
+        IgnoreFogOfWar();
+        PriorityModifier(800);
+		VisibleRange(30);
+    }
+    
+    LocationDef("Undefined"  , "map_location")
+    {
+        IgnoreFogOfWar();
+    }
+    
+    LocationDef("Vehicle", "map_vehicle")
+    {
+		NeutralIcon("map_vehicle");
+		ObjectiveIcon("map_objective_location");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_Car&");        
+		VisibleRange(60);
+		IgnoreFogOfWar();
+		PriorityModifier(800);
+        //RotateToObject();
+    }
+    
+    LocationDef("Waypoint", "map_waypoint")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_Waypoint&");
+        IgnoreFogOfWar();
+        ShowOnMapEdge();
+        PriorityModifier(10000);
+    }
+     
+    LocationDef("WaypointCoop", "map_waypoint_white")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_Waypoint&");
+        IgnoreFogOfWar();
+        ShowOnMapEdge();
+        PriorityModifier(9999);
+    }       
+    
+    LocationDef("Workbench", "map_location")
+    {
+        ThreatIcon("map_location");
+        ObjectiveIcon("map_objective_location");
+        CanBeHiddenByInvisibilityZone();
+        ShowOnMap("&MMap_Workbench&");
+        PriorityModifier(800);
+		VisibleRange(30);
+    }
+    
+    LocationDef("PursuitArea", "")
+    {
+        AreaColor([1.0, 1.0, 1.0, 0.4]);
+        ObjectiveAreaColor([1.0, 0.7, 0.0 , 0.4]);
+        EncounterAreaColor([0.0, 0.66, 1.0 , 0.4]);
+        ThreatAreaColor([0.95, 0.19, 0.33, 0.4]);
+        
+        ShowOnRadar();
+        
+        IgnoreFogOfWar();
+    }
+    
+    LocationDef("PatrolArea", "")
+    {
+        AreaColor([1.0, 1.0, 1.0, 1.0]);
+        ObjectiveAreaColor([1.0, 1.0, 1.0, 1.0]);
+        EncounterAreaColor([1.0, 1.0, 1.0, 1.0]);
+        ThreatAreaColor([1.0, 1.0, 1.0, 1.5]);
+        
+        ShowOnRadar();
+        
+        IgnoreFogOfWar();
+    }
+    
+    LocationDef("Zone", "map_location")
+    {
+        ThreatIcon("map_location");
+        ObjectiveIcon("map_objective_location");
+        AreaColor([1.0, 1.0, 1.0, 0.4]);
+        ObjectiveAreaColor([1.0, 0.7, 0.0 , 0.4]);
+        EncounterAreaColor([0.0, 0.66, 1.0 , 0.4]);
+        ThreatAreaColor([0.95, 0.19, 0.33, 0.4]);
+        ShowOnRadar();
+        ShowOnMap("&MMap_CurrentObjective&");
+        ShowOnMapEdgeWhenObjective();        
+        IgnoreFogOfWar();
+    }
+
+    LocationDef("ClearArea", "")
+    {
+        AreaColor([1.0, 1.0, 1.0, 0.4]);
+        ObjectiveAreaColor([1.0, 0.7, 0.0 , 0.4]);
+        EncounterAreaColor([0.0, 0.66, 1.0 , 0.4]);
+        ThreatAreaColor([0.95, 0.19, 0.33, 0.4]);
+        ThreatIcon("map_location");
+        ObjectiveIcon("map_objective_location");
+        ShowOnRadar();
+        ShowOnMap("&MMap_ClearArea&");        
+        ShowOnMapEdgeWhenObjective();
+        IgnoreFogOfWar();
+    }
+    
+    LocationDef("ClearAreaFeatured", "")
+    {
+        // This type of area is considered important, hence, has the same colour regardless whether tracked or not.
+        AreaColor([1.0, 0.7, 0.0 , 0.4]);
+        ObjectiveAreaColor([1.0, 0.7, 0.0 , 0.4]);
+        EncounterAreaColor([0.0, 0.66, 1.0 , 0.4]);
+        ThreatAreaColor([0.95, 0.19, 0.33, 0.4]);
+        ThreatIcon("map_location");
+        ObjectiveIcon("map_objective_location");
+        ShowOnRadar();
+        ShowOnMap("&MMap_ClearArea&");        
+        ShowOnMapEdgeWhenObjective();
+        IgnoreFogOfWar();
+    }
+    
+    LocationDef("Bloodbath", "")
+    {
+        AreaColor([1.0, 1.0, 1.0, 0.4]);
+        ObjectiveAreaColor([1.0, 0.7, 0.0 , 0.4]);
+        EncounterAreaColor([0.0, 0.66, 1.0 , 0.4]);
+        ThreatAreaColor([0.95, 0.19, 0.33, 0.4]);
+        ShowOnRadar();
+        ShowOnMap("&MMap_Bloodbath&");
+        IgnoreFogOfWar();
+    }    
+    
+    LocationDef("Outpost", "map_outpost")
+    {
+        ThreatIcon("map_enemy_outpost");
+        ObjectiveIcon("map_objective_outpost");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_OutpostOwnedByRais&");
+        PriorityModifier(900);
+    }
+
+    LocationDef("ZombiePlayer", "map_enemy_night_hunter")
+    {
+        ShowPointOnRadar();
+        IgnoreFogOfWar();
+        PriorityModifier(800);
+    }
+
+    LocationDef("ZombieHive", "map_zombie_hive")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_LegendZombieHive&");
+        IgnoreFogOfWar();
+        PriorityModifier(1000);
+    }
+    
+    LocationDef("ZombieHiveEncounter", "map_zombie_hive_encounter")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_LegendZombieHive&");
+        IgnoreFogOfWar();
+        PriorityModifier(1000);
+    }
+
+    LocationDef("BtZLightDamageArea", "")
+    {
+            ThreatAreaColor([0.95, 0.19, 0.33, 0.4]);
+    }
+    
+    LocationDef("Custom_Place", "map_location")
+    {
+        ObjectiveIcon("map_objective_location");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_Custom_Place&");
+        IgnoreFogOfWar();
+		VisibleRange(30);
+    }
+    
+    LocationDef("Custom_Item", "map_location")
+    {
+        ObjectiveIcon("map_objective_location");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_Custom_Item&");
+        IgnoreFogOfWar();
+		VisibleRange(30);
+    }
+    
+    LocationDef("WaterSource", "map_fountain")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_WaterSource&");
+        VisibleRange(30);
+    }
+
+    LocationDef("Custom_Airdrop", "map_encounter_airdrop")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_Custom_Airdrop&");
+        IgnoreFogOfWar();
+		PriorityModifier(700);
+    }
+	
+	LocationDef("Custom_Airdrop_White", "map_airdrop")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_Custom_Airdrop_White&");
+		PriorityModifier(950);
+		VisibleRange(60);
+    }
+    
+    LocationDef("Custom_Zipline", "map_zipline")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_Custom_Zipline&");
+        IgnoreFogOfWar();
+		VisibleRange(30);
+    }
+    
+    LocationDef("Custom_Outpost", "map_outpost")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_Custom_Outpost&");
+        IgnoreFogOfWar();
+        PriorityModifier(900);
+		VisibleRange(100);
+    }
+    
+    LocationDef("Custom_Outpost_Orange", "map_objective_outpost")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_Custom_Outpost&");
+        IgnoreFogOfWar();
+        PriorityModifier(1000);
+		VisibleRange(100);
+    }
+    
+    LocationDef("Custom_Outpost_Red", "map_enemy_outpost")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_Custom_Outpost&");
+        IgnoreFogOfWar();
+        PriorityModifier(900);
+		VisibleRange(100);
+    }
+    
+    LocationDef("MapMarker_TableQuest", "map_table_quest")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_TableQuest&");        
+        PriorityModifier(800);
+		VisibleRange(40);
+    }
+    LocationDef("SensorTutorial", "map_location")
+    {
+        ThreatIcon("map_location");
+        ObjectiveIcon("map_objective_location");
+        AreaColor([1.0, 1.0, 1.0, 0.4]);
+        ObjectiveAreaColor([1.0, 0.7, 0.0 , 0.4]);
+        EncounterAreaColor([0.0, 0.66, 1.0 , 0.4]);
+        ThreatAreaColor([0.95, 0.19, 0.33, 0.4]);
+        ShowOnRadar();
+        IgnoreFogOfWar();
+    }
+    
+    LocationDef("Wardrobe", "map_wardrobe")
+    {
+        ShowOnMap("&MMap_LegendWardrobe&");
+        CanBeHiddenByInvisibilityZone();
+        PriorityModifier(800);
+		VisibleRange(30);
+    }
+    
+    LocationDef("Stash", "map_stash")
+    {
+        //ShowOnMap("&MMap_LegendStash&");
+        ShowOnRadar();
+        CanBeHiddenByInvisibilityZone();
+		PriorityModifier(800);
+		VisibleRange(30);
+    }
+    
+    LocationDef("WardrobeRadar", "map_wardrobe")
+    {
+        ShowOnRadar();
+        CanBeHiddenByInvisibilityZone();
+		PriorityModifier(800);
+		VisibleRange(30);
+    }
+    
+    LocationDef("Custom_QuestHelper", "map_waypoint_white")
+    {
+        ObjectiveIcon("map_objective_location");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_Custom_Place&");
+        IgnoreFogOfWar();
+		PriorityModifier(800);
+		VisibleRange(40);
+    }
+
+    LocationDef("WeaponChest", "radar_player")
+    {
+        ShowPointOnRadar();
+        VisibleRange(30);
+    }
+
+	LocationDef("FuelTrigger", "map_fuel")
+    {
+        ThreatIcon("map_fuel");
+        ObjectiveIcon("map_fuel");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_TakeItem&");
+        ShowOnMapEdgeWhenObjective();
+        IgnoreFogOfWar();
+        PriorityModifier(800);
+		VisibleRange(30);
+    }
+
+	LocationDef("PrimeRewardArena", "map_prime_reward")
+    {
+        ThreatIcon("map_prime_reward");
+        ObjectiveIcon("map_prime_reward");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_Reward&");
+        IgnoreFogOfWar();
+        CanBeHiddenByInvisibilityZone();
+        PriorityModifier(800);
+		VisibleRange(70);
+    }
+	
+    LocationDef("ImpedimentZombieArena", "map_zombie")
+    {
+        ThreatIcon("map_zombie"); //we use white because it will be colored from SetAlertLevel
+        ObjectiveIcon("map_zombie");
+        ShowPointOnRadar();
+        ShowOnMap("");
+        ShowOnMapEdgeWhenObjective();
+        IgnoreFogOfWar();
+        PriorityModifier(900);
+        RotateToObject();
+		VisibleRange(30);
+    }
+    
+    LocationDef("ChallengeAgilityNoFOW", "map_challenge_runner")
+    {
+		ObjectiveIcon("map_objective_challenge_runner");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_ChallengeTrigger&");
+		PriorityModifier(800);
+		VisibleRange(60);
+        IgnoreFogOfWar();
+    }
+	
+	LocationDef("ChallengeFeverNoFOW", "map_challenge_fever")
+    {
+		ObjectiveIcon("map_objective_challenge_runner");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_ChallengeTrigger&");
+		PriorityModifier(800);
+		VisibleRange(60);
+        IgnoreFogOfWar();
+    }
+
+    LocationDef("ChallengeCombatNoFOW", "map_challenge_fighter")
+    {
+		ObjectiveIcon("map_objective_challenge_fighter");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_ChallengeTrigger&");
+		PriorityModifier(800);
+		VisibleRange(60);
+        IgnoreFogOfWar();
+    }
+    
+    LocationDef("MapPortalCleansingNoFOW", "map_challenge_cleansing")
+    {
+        ThreatIcon("map_challenge_cleansing"); /// is this ever used ??
+        ObjectiveIcon("map_challenge_cleansing"); /// is this ever used ??
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_AreaCleansingTransition&");
+        ShowOnMapEdgeWhenObjective();
+		PriorityModifier(900);
+		VisibleRange(30);
+        IgnoreFogOfWar();
+        //IgnoreFogOfWar();
+    }
+    
+    LocationDef("WastelandCleansing", "map_challenge_infestation")
+    {
+        ShowPointOnRadar();
+		ShowAreaOnRadar();
+        ShowOnMap("&MMap_WastelandCleansing&");
+        ShowOnMapEdgeWhenObjective();
+		AreaColor([0.7, 0.7, 0.7 , 0.4]);
+		PriorityModifier(900);
+		VisibleRange(30);
+        IgnoreFogOfWar();
+    }
+    
+    LocationDef("WastelandNest", "map_challenge_nest")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_WastelandNest&");
+        ShowOnMapEdgeWhenObjective();
+		PriorityModifier(900);
+		VisibleRange(30);
+        IgnoreFogOfWar();
+    }
+
+    LocationDef("ChallengeDriving", "map_challenge_driving")
+    {
+		ObjectiveIcon("map_objective_challenge_driving");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_ChallengeTrigger&");
+		PriorityModifier(800);
+		VisibleRange(60);
+        IgnoreFogOfWar();
+    }
+    
+    LocationDef("ChallengeDrivingNoFOW", "map_challenge_driving")
+    {
+		ObjectiveIcon("map_objective_challenge_driving");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_ChallengeTrigger&");
+		PriorityModifier(800);
+		VisibleRange(60);
+        IgnoreFogOfWar();
+    }
+	
+	LocationDef("DriveToArea", "")
+    {
+        AreaColor([1.0, 1.0, 1.0, 0.4]);
+        ObjectiveAreaColor([1.0, 0.7, 0.0 , 0.4]);
+        ObjectiveIcon("map_objective_location");
+        ShowOnRadar();
+        ShowOnMap("&MMap_DriveToArea&");        
+        ShowOnMapEdgeWhenObjective();
+        IgnoreFogOfWar();
+    }
+	
+	LocationDef("BuggySpawnerTrigger", "map_car_spawner")
+    {
+		ObjectiveIcon("map_objective_location");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_BuggySpawnerTrigger&");
+		ShowOnMapEdgeWhenObjective();
+		PriorityModifier(860);
+		VisibleRange(30);
+        IgnoreFogOfWar();
+        CanBeHiddenByInvisibilityZone();
+    }
+
+	LocationDef("WastelandLootPlace", "map_loot_alt")
+    {
+        //ShowPointOnRadar();
+        ShowOnMap("&MMap_Custom_Looting_Place&");
+		PriorityModifier(900);
+		VisibleRange(60);
+		IgnoreHeight();
+    }
+	
+	LocationDef("WastelandLootPlace_IgnoreFogOfWar", "map_loot_alt")
+    {
+        //ShowPointOnRadar();
+        ShowOnMap("&MMap_Custom_Looting_Place&");
+		PriorityModifier(900);
+		IgnoreFogOfWar();
+		IgnoreHeight();
+		VisibleRange(60);
+    }
+
+	LocationDef("MilitaryPlace", "map_loot_alt")
+    {
+        //ShowPointOnRadar();
+        ShowOnMap("&MMap_Custom_Looting_Place&");
+		PriorityModifier(800);
+		VisibleRange(60);
+    }
+	
+	LocationDef("MilitaryPlace_IgnoreFogOfWar", "map_loot_alt")
+    {
+        //ShowPointOnRadar();
+        ShowOnMap("&MMap_Custom_Looting_Place&");
+		PriorityModifier(800);
+		IgnoreFogOfWar();
+		VisibleRange(60);
+    }
+
+	LocationDef("WastelandLootPlaceArea", "")
+    {
+        AreaColor([0.7, 0.7, 0.7 , 0.4]);
+        ObjectiveAreaColor([1.0, 0.7, 0.0 , 0.4]);
+        EncounterAreaColor([0.0, 0.66, 1.0 , 0.4]);
+        ThreatAreaColor([0.95, 0.19, 0.33, 0.4]);
+        ThreatIcon("map_location");
+        ObjectiveIcon("map_objective_location");
+        ShowOnRadar();
+        ShowOnMap("&MMap_ClearArea&");        
+        ShowOnMapEdgeWhenObjective();
+        IgnoreFogOfWar();
+    }
+	
+	LocationDef("WastelandHiveArea", "")
+    {
+        AreaColor([1.0, 0.7, 0.0, 0.4]);
+        ObjectiveAreaColor([1.0, 0.7, 0.0, 0.4]);
+        EncounterAreaColor([1.0, 0.7, 0.0, 0.4]);
+        ThreatAreaColor([1.0, 0.7, 0.0, 0.4]);
+		NeutralAreaColor([1.0, 0.7, 0.0, 0.4]);
+		FriendlyAreaColor([1.0, 0.7, 0.0, 0.4]);
+		CoopAreaColor([1.0, 0.7, 0.0, 0.4]);
+        ThreatIcon("map_location");
+        ObjectiveIcon("map_objective_location");
+        ShowOnRadar();
+        ShowOnMap("&MMap_ClearArea&");        
+        ShowOnMapEdgeWhenObjective();
+        IgnoreFogOfWar();
+		IgnoreHeight();
+		PriorityModifier(1000);
+    }
+
+    LocationDef("SafeDestination_Inactive_NoElectricity", "map_safe_zone_unpowered")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_LegendSafeZoneInactiveNoElectricity&");
+        PriorityModifier(900);
+        IgnoreFogOfWar();
+		VisibleRange(100);
+    }
+
+	LocationDef("WastelandRadioactivePlace", "map_radioactive")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_LegendRadioactive&");
+		PriorityModifier(950);
+		VisibleRange(60);
+    }
+    
+    LocationDef("BountyStartTrigger", "map_bounty")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_BountyBoard&");
+        CanBeHiddenByInvisibilityZone();
+        PriorityModifier(950);
+        VisibleRange(40);
+    }
+    
+    LocationDef("BountyGoToPosition", "map_bounty_goto")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_BountyGoToPosition&");
+        IgnoreFogOfWar();
+        ShowOnMapEdge();
+        PriorityModifier(800);
+        VisibleRange(10000);
+    }
+
+    LocationDef("CommunityGoToPosition", "map_community")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_CommunityGoToPosition&");
+        IgnoreFogOfWar();
+        ShowOnMapEdge();
+        PriorityModifier(800);
+        VisibleRange(10000);
+    }
+    
+    LocationDef("ScriptVolumeArea", "")
+    {
+        NeutralAreaColor([1.0, 1.0, 1.0, 1.0]);
+        ThreatAreaColor([0.85, 0.0, 0.0, 1.0]);
+        ObjectiveAreaColor([1.0, 0.45, 0.0, 1.0]);
+        EncounterAreaColor([0.0, 0.58, 0.74, 1.0]);
+        FriendlyAreaColor([0.25, 0.68, 0.15, 1.0]);
+        CoopAreaColor([0.25, 0.68, 0.15, 1.0]);
+
+        ShowOnRadar();
+        VisibleRange(60);
+    }
+	
+	LocationDef("POI_ToDo", "map_poi")
+    {
+        ShowPointOnRadar();
+		IgnoreHeight();
+        ShowOnMap("&MMap_poi_todo&");
+		IgnoreFogOfWar();
+		PriorityModifier(850);
+		VisibleRange(90);
+    }
+
+	LocationDef("POI_Done", "map_poi_visited")
+    {
+        ShowPointOnRadar();
+		IgnoreHeight();
+        ShowOnMap("&MMap_LegendRadioactive&");
+		PriorityModifier(700);
+		VisibleRange(60);
+    }
+	
+	LocationDef("HuntingTower", "map_hunting_tower")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_HuntingTower&");
+		IgnoreHeight();
+		PriorityModifier(700);
+		VisibleRange(100);
+    }
+	
+	LocationDef("HuntingTower_IgnoreFogOfWar", "map_hunting_tower")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_HuntingTower&");
+		IgnoreFogOfWar();
+		IgnoreHeight();
+		PriorityModifier(700);
+		VisibleRange(100);
+    }
+
+	LocationDef("CultPlace", "map_cult")
+    {
+        //ShowPointOnRadar(); - REMOVED AS SIKOREK ASKED
+        //ShowOnMap("&MMap_Cult&"); - REMOVED AS SIKOREK ASKED
+		IgnoreHeight();
+		PriorityModifier(700);
+		VisibleRange(60);
+    }
+	
+	LocationDef("CultPlace_IgnoreFogOfWar", "map_cult")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_Cult&");
+		IgnoreFogOfWar();
+		IgnoreHeight();
+		PriorityModifier(700);
+		VisibleRange(60);
+    }
+
+	LocationDef("ChallengeRace", "map_challenge_race")
+    {
+		ObjectiveIcon("map_objective_challenge_race");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_ChallengeRace&");
+		PriorityModifier(800);
+		VisibleRange(60);
+        IgnoreFogOfWar();
+    }
+    
+    LocationDef("ChallengeRaceNoFOW", "map_challenge_race")
+    {
+		ObjectiveIcon("map_objective_challenge_race");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_ChallengeRace&");
+		PriorityModifier(800);
+		VisibleRange(60);
+        IgnoreFogOfWar();
+    }
+	
+	LocationDef("ChallengeHorizon", "map_challenge_horizon")
+    {
+		ObjectiveIcon("map_objective_challenge_race");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_ChallengeHorizon&");
+		PriorityModifier(800);
+		VisibleRange(60);
+        IgnoreFogOfWar();
+    }
+    
+    LocationDef("ChallengeHorizonNoFOW", "map_challenge_horizon")
+    {
+		ObjectiveIcon("map_objective_challenge_race");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_ChallengeHorizon&");
+		PriorityModifier(800);
+		VisibleRange(60);
+        IgnoreFogOfWar();
+    }
+	
+	LocationDef("ChallengeSlammer", "map_challenge_slammer")
+    {
+		ObjectiveIcon("map_objective_challenge_slammer");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_ChallengeSlammer&");
+		PriorityModifier(800);
+		VisibleRange(60);
+        IgnoreFogOfWar();
+    }
+    
+    LocationDef("ChallengeSlammerNoFOW", "map_challenge_slammer")
+    {
+		ObjectiveIcon("map_objective_challenge_slammer");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_ChallengeSlammer&");
+		PriorityModifier(800);
+		VisibleRange(60);
+        IgnoreFogOfWar();
+    }
+	
+	LocationDef("ChallengeCarnage", "map_challenge_carnage")
+    {
+		ObjectiveIcon("map_objective_challenge_carnage");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_ChallengeCarnage&");
+		PriorityModifier(800);
+		VisibleRange(60);
+        IgnoreFogOfWar();
+    }
+    
+    LocationDef("ChallengeCarnageNoFOW", "map_challenge_carnage")
+    {
+		ObjectiveIcon("map_objective_challenge_carnage");
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_ChallengeCarnage&");
+		PriorityModifier(800);
+		VisibleRange(60);
+        IgnoreFogOfWar();
+    }
+
+	LocationDef("ChallengePoster", "map_questgiver")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&WL_Driver_Map_Hint&");
+		PriorityModifier(800);
+		VisibleRange(60);
+    }
+	
+	LocationDef("ZombieObjective", "map_objective_location")
+    {
+        ShowPointOnRadar();
+		PriorityModifier(1000);
+		VisibleRange(60);
+		IgnoreFogOfWar();
+    }
+	
+	LocationDef("Wasteland_GasStation", "map_gas_station")
+    {
+		ShowPointOnRadar();
+        ShowOnMap("&MMap_GasStation&");
+		IgnoreHeight();
+		PriorityModifier(750);
+		VisibleRange(60);
+    }
+	
+	LocationDef("Wasteland_MilitaryOutpost", "map_military_outpost_alt")
+    {
+		//ShowPointOnRadar();
+        ShowOnMap("&MMap_Military_Outpost&");
+		IgnoreHeight();
+		PriorityModifier(750);
+		VisibleRange(60);
+		IgnoreFogOfWar();
+    }
+	
+	LocationDef("Wasteland_Miniboss", "map_enemy_miniboss")
+    {
+		ShowPointOnRadar();
+        ShowOnMap("&MMap_Wasteland_MiniBoss&");
+		IgnoreHeight();
+		IgnoreFogOfWar();
+		PriorityModifier(950);
+		VisibleRange(60);
+    }
+    
+    LocationDef("POI_ToDo_FOW", "map_poi")
+    {
+        ShowPointOnRadar();
+        ShowOnMap("&MMap_poi_todo&");
+        PriorityModifier(850);
+        VisibleRange(90);
+    }
+	
+	LocationDef("MilitarySpecialPlace", "map_loot_alt")
+    {
+        //ShowPointOnRadar();
+        ShowOnMap("&Map_MilitarySpecialPlace&");
+        PriorityModifier(800);
+        VisibleRange(90);
+    }
+	
+	LocationDef("Mine", "map_mine_armed")
+    {
+        ShowPointOnRadar();
+        DoNotClampToRadius();
+        PriorityModifier(750);
+		IgnoreHeight();
+		UseRadarRadiusAsRange();
+    }
+}

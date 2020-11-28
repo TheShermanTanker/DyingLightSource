@@ -1,0 +1,123 @@
+sub main() 
+{   
+    Event("MultiplayerSessionStart", "DurangoEvent")
+    {
+        Filter("Evn_SessionEvent")
+        {
+            MultiplayerSessionStart();
+        }
+    }
+    
+    Event("MultiplayerSessionEnd", "DurangoEvent")
+    {   
+        Filter("Evn_SessionEvent")
+        {    
+            MultiplayerSessionEnd();
+        }
+    }
+    
+    Event("PlayerSessionStart", "DurangoEvent")
+    {
+        Filter("Evn_SessionEvent")
+        {
+            SessionStart();
+        }
+    }
+    
+    Event("PlayerSessionEnd", "DurangoEvent")
+    {
+        Filter("Evn_SessionEvent")
+        {
+            SessionEnd();
+        }        
+    }
+    
+    Event("PlayerSessionPause", "DurangoEvent")
+    {
+        Filter("Evn_SessionEvent")
+        {
+            SessionPause();
+        }
+    }
+    
+    Event("PlayerSessionResume", "DurangoEvent")
+    {
+        Filter("Evn_SessionEvent")
+        {
+            SessionResume();
+        }
+    }
+    
+    Event("LoadMap", "DurangoEvent")
+    {
+        Filter("Evn_LevelEvent")
+        {
+            LevelEvent("LOADING");
+        }
+    }
+    
+    Event("UnloadMap", "DurangoEvent")
+    {
+        Filter("Evn_LevelEvent")
+        {
+            LevelEvent("UNLOADING");
+        }
+    }
+    
+    Event("GameProgress", "DurangoEvent")
+    {
+        Filter("Evn_Quest")
+        {
+			AllowAnyProgressPercentage();
+        }
+    }
+        
+    Event("EnemyDefeated", "DurangoEvent")
+    {
+        Filter("Evn_Kill")
+        {
+			Victim("Zombie;Viral;Biter;Goon;GasTank;Toad;Bomber;Demolisher;Screamer;Prime;Volatile");
+        }
+    }
+    
+    Event("PlayerJoined", "DurangoEvent")
+    {
+        Filter("Evn_Multiplayer")
+        {
+			Flags("PlayerJoined");
+        }
+    }
+    Event("PlayerLeft", "DurangoEvent")
+    {
+        Filter("Evn_Multiplayer")
+        {
+			Flags("PlayerLeft");
+        }
+    }
+    Event("DistanceTravelled", "DurangoEvent")
+    {
+        Filter("Evn_Distance")
+        {
+			Unit(1000.0);
+        }
+    }
+    Event("HeightClimbed", "DurangoEvent")
+    {
+        Filter("Evn_Distance")
+        {
+			Climbing();
+			Unit(10.0);
+			Scale(2.0);
+        }
+    }
+    
+    Event("QuestEnd", "DurangoEvent")
+    {
+        Filter("Evn_Quest")
+        {
+            Revealed();									// Quest (or his any parent) is visble in menu QuestLog (has objective).
+			OnlyWhenMostGluedParentQuestCompleted();
+        }
+    }
+    
+}

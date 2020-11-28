@@ -1,0 +1,2292 @@
+import "values.mtt"
+import "common.ppfx"
+import "game_effects.ppfx"
+import "dpt_first.ppfx"
+import "dpt_last.ppfx"
+import "opq_first.ppfx"
+import "opq_last.ppfx"
+import "opq_nrm_first.ppfx"
+import "opq_nrm_last.ppfx"
+import "opq_clr_first.ppfx"
+import "opq_clr_last.ppfx"
+import "lit_first.ppfx"
+import "lit_last.ppfx"
+import "glow_first.ppfx"
+import "glow_add.ppfx"
+import "glow_last.ppfx"
+import "blur_first.ppfx"
+import "blur_last.ppfx"
+import "screen_drops.ppfx"
+import "postprocess.ppfx"
+import "postprocess_old.ppfx"
+import "postprocess_first.ppfx"
+import "std_first.ppfx"
+import "std_last.ppfx"
+import "last.ppfx"
+import "trn_first.ppfx"
+import "trn_last.ppfx"
+
+// USERMAPS ////////////////////////////////////////////////////////////////////////////////////////
+sub usermaps(int e_path = -1)
+{
+	//i_um_* -> values.mtt
+	SetTextureVar(i_um_nrm_waves, "s_nrm_waves_def");
+	SetTextureVar(i_um_env, "s_env");
+	SetTextureVar(i_um_fx_weapon_trail, "s_fx_weapon_trail");
+	SetTextureVar(i_um_player_reflection, "s_player_reflection");
+	SetTextureVar(i_um_fx_weapon_trail, "s_fx_weapon_trail");
+	SetTextureVar(i_um_moon, "s_moon");
+	SetTextureVar(i_um_clouds, "s_clouds");
+	SetTextureVar(i_um_clouds_dynamic, "s_clouds_dynamic");
+	SetTextureVar(i_um_stars, "s_stars");
+	SetTextureVar(i_um_screen_drops_splat, "s_screen_drops_splat");
+	SetTextureVar(i_um_overlay_add_effect_0, "s_overlay_add_effect_0");
+	SetTextureVar(i_um_overlay_map, "s_overlay_map");
+	SetTextureVar(i_um_overlay_weather_0, "s_overlay_weather_0");
+	SetTextureVar(i_um_overlay_weather_1, "s_overlay_weather_1");
+	SetTextureVar(i_um_overlay_weather_2, "s_overlay_weather_2");
+	SetTextureVar(i_um_overlay_weather_3, "s_overlay_weather_3");
+	SetTextureVar(i_um_overlay_sensor, "s_overlay_sensor");
+	SetTextureVar(i_um_overlay_movie, "s_overlay_movie");
+	SetTextureVar(i_um_overlay_effect_0, "s_overlay_effect_0");
+	SetTextureVar(i_um_overlay_effect_1, "s_overlay_effect_1");
+	SetTextureVar(i_um_overlay_effect_2, "s_overlay_effect_2");
+	SetTextureVar(i_um_overlay_effect_3, "s_overlay_effect_3");
+	SetTextureVar(i_um_overlay_effect_4, "s_overlay_effect_4");
+	SetTextureVar(i_um_overlay_effect_5, "s_overlay_effect_5");
+	SetTextureVar(i_um_overlay_effect_6, "s_overlay_effect_6");
+	SetTextureVar(i_um_overlay_effect_7, "s_overlay_effect_7");
+	SetTextureVar(i_um_overlay_game, "s_overlay_game");
+	SetTextureVar(i_um_fade_pp_clr, "s_fade_pp_clr");
+	SetTextureVar(i_um_fade_pp_msk, "s_fade_pp_msk");
+	if(e_path == SM31)
+	{
+		SetBuffer(i_um_hdr_buffer_copy, "1_RGBA16F_A");
+	}
+	else
+	{
+		SetBuffer(i_um_hdr_buffer_copy, "1_RGBA16F_B");
+	}
+
+	SetBuffer(3, "16_RGBA16F_B"); //after nrm render 16_SHD
+	SetBuffer(12, "2_RGBA16F_A");
+	SetBuffer(13, "CLR");
+	SetBuffer(14, "NRM");
+	SetBuffer(15, "PRV");
+    SetBuffer(32, "LUM_16x16_PRV");
+
+}
+
+/// SKY ///////////////////////////////////////////////////////////////////////////////////////////
+sub sky(int e_path = -1, bool b_sky_on = FALSE)
+{
+	if(b_sky_on)
+	{
+		If("i_sky_on", "", "", "", "")
+		{
+			If("f_pp_clouds_opacity", "", "", "", "")
+			{
+				Mesh("sky.msh", "sky_clouds.mat", "std");
+			}
+			If("f_pp_clouds_opacity", "", "", "", "not")
+			{
+				Mesh("sky.msh", "sky.mat", "std");
+			}
+			Mesh("sky_bottom.msh", "sky_bottom.mat", "std");
+		}
+	}
+}
+
+//// OPQ render /////////////////////////////////////////////////////////////////////////////////////////
+sub opq_render(int e_path = -1, bool b_clear_depth_on = FALSE, bool b_clear_color_on = FALSE, bool b_sky_on = FALSE, bool b_legacy_on = FALSE, bool b_indoor_on = FALSE)
+{
+	//// DEPTH /////////////////////////////////////////////////////////////////////////////
+	if(b_clear_depth_on)
+	{
+		SetClearColor(1.0, 1.0, 1.0, 1.0);
+		SetRenderTargetsView("_ZBUFFER", "color depth stencil noresolve");
+	}
+	else { SetRenderTargetsView("_ZBUFFER", "depth stencil noresolve"); }
+
+			use dpt_first(e_path = e_path);
+			Scene("dpt");
+			use dpt_last(e_path = e_path);
+
+	//// OPQ FULL /////////////////////////////////////////////////////////////////////////////////////
+	if(b_clear_color_on)
+	{
+		If("f_ed_pink_background_on", "", "", "", "")
+		{
+			SetClearColor(1.0, 0.0, 1.0, 0.0);
+		}
+		If("f_ed_pink_background_on", "", "", "", "not")
+		{
+			SetClearColor(0.0, 0.0, 0.0, 0.0);
+		}
+		SetRenderTargetsView("_OPAQUE", "color noresolve");
+	}
+	else { SetRenderTargetsView("_OPAQUE", "noresolve"); }
+
+			use opq_first(e_path = e_path);
+			Scene("opq_first");
+			Scene("opq0");
+			Scene("opq");
+			Scene("opq2");
+			Scene("opq_last");
+			use opq_last(e_path = e_path);
+	
+	if(b_sky_on)
+	{
+		If("f_pp_dust_amount", "", "", "", "")
+		{
+			If("f_dust_soot_on", "", "", "", "")
+			{
+				Mesh("particles_2048.msh", "soot_particles.mat", "std");
+			}
+			If("f_dust_soot_on", "", "", "", "not")
+			{
+				Mesh("particles_2048.msh", "dust_particles.mat", "std");
+			}
+		}
+	}
+			
+	if(b_indoor_on)
+	{
+		Mesh("quad_screen.msh", "indoor_gbuffer_fill.mat", "std");
+	}
+		If("f_underwater", "", "", "", "")
+	{
+		Mesh("particles_2048.msh", "underwater_bubbles.mat", "opq");
+	}
+
+	ResolveDepthStencil("");
+    PS4_DecompressDepth("ZBUFFER");
+
+    if((e_path == SM30) || (e_path == SM40))
+    {
+        SetRenderTargetsView("_ZBUFFER_COPY", "");
+          if(b_legacy_on)
+          {
+            SetBuffer(8, "ZBUFFER");
+          }
+          else
+          {
+          SetBuffer(8, "ZBUFFER_W");
+          }
+
+              Mesh("quad_screen.msh", "write_dpt.mat", "std");
+
+        SetRenderTargetsView("_OPAQUE", "noresolve");
+    }
+
+    if(b_legacy_on)
+    {
+       SetBuffer(10, "ZBUFFER_W");
+    }
+    else
+    {
+       SetBuffer(10, "ZBUFFER");
+    }
+
+	if(e_path == SM50)
+	{
+		SetRenderTargetsView("_OPAQUE", "noresolve read_only_ds");
+	}
+	else
+	{
+		if (e_path == SM53)
+		{
+			SetRenderTargetsView("_HDR_IMAGE", "noresolve");
+		}
+	}
+    Scene("opq_clr_nrm_0");
+    Scene("opq_clr_nrm");
+    Scene("opq_clr_nrm_2");
+
+	use sky(e_path = e_path, b_sky_on = b_sky_on);
+
+	//// OPQ / NRM /////////////////////////////////////////////////////////////////////////////
+    string rtv_flags = (e_path == SM50) ? "noresolve read_only_ds" : "noresolve";
+    SetRenderTargetsView("_OPAQUE_NRM", rtv_flags);
+
+			use opq_nrm_first(e_path = e_path);
+			Scene("opq_nrm_0");
+			Scene("opq_nrm");
+			Scene("opq_nrm_2");
+			use opq_nrm_last(e_path = e_path);
+
+	  resolve(0, "");
+
+	//// OPQ / CLR /////////////////////////////////////////////////////////////////////////////
+    SetRenderTargetsView("_OPAQUE_CLR", rtv_flags);
+
+			use opq_clr_first(e_path = e_path);
+			Scene("opq_clr_0");
+			Scene("opq_clr");
+			Scene("opq_clr_2");
+			use opq_clr_last(e_path = e_path);
+			If("f_dirt_corners", "", "", "", "")
+			{
+				Mesh("light_sphere.msh", "dirt_corners.mat", "std");
+			}
+			Scene("opq_wtr");
+			If("f_ed_pp_dev_ambient_only_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "white_rgb_pp.mat", "std");
+			}
+
+	If("f_pp_rain", "", "", "", "not")
+	{
+	resolve(0, "");
+	}
+	if(e_path == SM31)
+	{
+		SetXenonGPRs(32, 96);
+	}
+
+	If("f_weather_wet", "", "", "", "")
+	{
+			if(e_path != SM31)
+			{
+				SetRenderTarget("1_RGBA8_A", "");
+					SetBuffer(8, "NRM");
+						Mesh("quad_screen.msh", "copy.mat", "std");
+			}
+
+			string tex_nrm = (e_path == SM31) ? "NRM" : "1_RGBA8_A";
+
+			SetRenderTargetsView("_OPAQUE", rtv_flags);
+				SetBuffer(7, tex_nrm);
+					Mesh("quad_screen.msh", "rain_gbuffer.mat", "std");
+
+			Resolve(0, "");
+			Resolve(1, "");
+	}
+	//// DEPTH RESOLVE /////////////////////////////////////////////////////////////////////////////
+	SetRenderTargetsView("_2_DPT", "noresolve");
+			Mesh("quad_screen.msh", "copy_dpt.mat", "std");
+	Resolve(0, "");
+
+	SetRenderTargetsView("_4_DPT", "noresolve");
+		SetBuffer(4, "2_DPT");
+			Mesh("quad_screen.msh", "dpt_4.mat", "std");
+	Resolve(0, "");
+}
+
+
+sub fx_gen(int e_path = -1)
+		{
+	string rtv_params = (e_path == SM32) ? "" : "noresolve color";
+
+	//// VERY FAST BLENDING ///////////////////////////////////////////////////////////////////////////////////////
+	If("i_pp_vfb_on", "", "", "", "")
+{
+			SetClearColor(0.0, 0.0, 0.0, 1.0);
+			SetRenderTargetsView("_2_VFB", rtv_params);
+
+			if(e_path == SM32) { Mesh("quad_screen.msh", "clear_ufb_ps3.mat", "std"); }
+
+			SetBuffer(3, "16_RGBA16F_A");
+			SetBuffer(8, "2_DPT");
+	}		
+			Scene("vfb");
+
+	If("i_pp_vfb_on", "", "", "", "")
+	{
+		Resolve(0, "");
+	}
+}
+sub full_ppfx(
+	int e_path = -1,
+	bool b_opq_nrm_diff_on = FALSE,
+	bool b_heat_on = FALSE,
+	bool b_sky_on = FALSE,
+	bool b_rain_on = FALSE,
+	bool b_editor_on = FALSE,
+	bool b_editor_lighting_on = FALSE,
+	bool b_editor_stencil_on = FALSE,
+	bool b_top_on = FALSE,
+	bool b_shoots_on = FALSE,
+	bool b_opq_clear_depth_on = FALSE,
+	bool b_opq_clear_color_on = FALSE,
+	bool b_legacy_on = FALSE,
+	bool b_glow_on = FALSE,
+	bool b_blur_on = FALSE,
+	bool b_blur_motion_on = FALSE,
+	bool b_aa_on = FALSE
+)
+{
+	bool b_sm3x_on = (e_path == SM31) || (e_path == SM32) || (e_path == SM40);
+	bool b_sm5x_on = (e_path == SM50) || (e_path == SM51) || (e_path == SM52) || (e_path == SM53);
+	string hdr_image_rtv_params = (b_sm5x_on) ? "read_only_ds" : "noresolve";
+
+	// Uncomment me to enable SMAA screen jittering
+
+	// Configure hi-stencil for light optimizations (PASS only if stencil value == 127, CULL otherwise)
+	HiStencilConfigure(127, TRUE);
+
+	SetBuffer(i_um_avg, "LUM_16x16_PRV");
+
+	if(!b_editor_lighting_on && !b_top_on)
+	{
+		use game_effects(e_path = e_path);
+
+		if(b_shoots_on)
+		{
+			If("f_player_shoot_opacity", "", "", "", "")
+			{
+				If("f_player_shoot_clear", "", "", "", "")
+				{
+					SetRenderTarget("SHOOTS", "");
+							Mesh("quad_screen.msh", "black_pp.mat", "std");
+				}
+
+				if(e_path != SM31)
+				{
+					SetRenderTarget("SHOOTS_TEMP", "");
+						SetBuffer(8, "SHOOTS");
+							Mesh("quad_screen.msh", "copy.mat", "std");
+						SetBuffer(4, "SHOOTS_TEMP");
+				}
+				else
+				{
+					SetBuffer(4, "SHOOTS");
+				}
+
+				SetRenderTarget("SHOOTS", "");
+					If("f_player_shoot", "", "", "", "")
+					{
+						Mesh("quad_screen.msh", "shoots.mat", "std");
+					}
+					If("f_player_shoot", "", "", "", "not")
+					{
+						Mesh("quad_screen.msh", "shoots_fade.mat", "std");
+					}
+			}
+		}
+	}
+
+	use usermaps(e_path = e_path);
+
+	if(!b_editor_lighting_on && !b_editor_on && b_aa_on)
+	{
+		If("f_smaa_jitter_on", "", "", "", "")
+		{
+			SMAAScreenJitter(true);
+		}
+	}
+	use opq_render(e_path = e_path, b_clear_depth_on = b_opq_clear_depth_on, b_legacy_on = b_legacy_on, b_clear_color_on = b_opq_clear_color_on, b_indoor_on = !b_sky_on, b_sky_on = b_sky_on);
+
+	if(e_path == SM31)
+	{
+		use fx_gen(e_path = e_path);
+	}
+
+	if(b_top_on && b_editor_on)
+	{
+		SetRenderTarget("CLR", "");
+			Mesh("quad_screen.msh", "clear_spc.mat", "std");
+	}
+
+	//// SSAO + SHADOWS BLUR ////////////////////////////////////////////////////////////////////////
+	If("f_pp_ssao", "", "", "", "")
+	{
+		if(b_sm5x_on)
+		{
+			If("i_nvidia_features_on", "", "", "", "")
+			{
+				NVHBAO("HBAO_1", "ZBUFFER", "f_nvidia_hbao_scene_scale", "f_nvidia_hbao_radius", "f_nvidia_hbao_bias", "f_nvidia_hbao_power_exponent", "f_nvidia_hbao_blur_sharpness", "i_nvidia_hbao_blur_radius", "f_nvidia_hbao_detail_ao", "f_nvidia_hbao_coarse_ao");
+			}
+			If("i_nvidia_features_on", "", "", "", "not")
+			{
+				SetRenderTarget("HBAO_X", "");
+					SetBuffer(8, "2_DPT");
+						Mesh("quad_screen.msh", "hbao_pc.mat", "std");
+				SetRenderTarget("HBAO_MASK", "");
+					SetBuffer(8, "HBAO_X");
+						Mesh("quad_screen.msh", "hbao_mask_dilation.mat", "std");
+
+				///HACK to unbind all used RT
+				SetRenderTarget("2_RGBA16F_B", "");
+
+				SetRWBuffer(0, "HBAO_0");
+					SetBuffer(8, "HBAO_X");
+						DispatchUsingBuffer("hbao_blur_X.mat", "std", "HBAO_0", 1, 1, 64, 1);
+
+				SetRWBuffer(0, "HBAO_1");
+				SetRWBuffer(1, "HBAO_N");
+					SetBuffer(8, "HBAO_0");
+					SetBuffer(7, "HBAO_PRV");
+					SetBuffeR(6, "HBAO_MASK");
+						DispatchUsingBuffer("hbao_blur_Y.mat", "std", "HBAO_1", 1, 1, 1, 64);
+				SetRWBuffer(-1, "");
+
+				SetRenderTarget("HBAO_PRV", "");
+					SetBuffer(8, "HBAO_1");
+						Mesh("quad_screen.msh", "copy.mat", "std");
+			}
+		}
+		else
+		{
+			string ssao_temp_tex = (e_path == SM31) ? "4_RGBA16F_C" : "4_RGBA16F_A";
+
+			SetRenderTargetsView("_4_SSAO", "noresolve");
+					SetBuffer(4, "4_DPT");
+						If("f_pp_ssdao", "", "", "", "")
+						{
+							Mesh("quad_screen.msh", "ssdao.mat", "std");
+						}
+						If("f_pp_ssdao", "", "", "", "not")
+						{
+							Mesh("quad_screen.msh", "ssao.mat", "std");
+						}
+			Resolve(0, "");
+
+			SetRenderTargetsView("_4_SSAO_TEMP", "noresolve");
+				SetBuffer(4, "4_DPT");
+				SetBuffer(5, "4_RGBA16F_C");
+					Mesh("quad_screen.msh", "ssao_blur.mat", "std");
+			Resolve(0, "");
+
+			SetRenderTargetsView("_4_SSAO", "noresolve");
+				SetBuffer(8, ssao_temp_tex);
+				SetBuffer(9, "4_DPT");
+					Mesh("quad_screen.msh", "ssao_max.mat", "std");
+			Resolve(0, "");
+		}
+	}
+
+	if(b_editor_lighting_on)
+	{
+		If("f_ed_pp_lighting", "", "", "", "")
+		{
+			SetRenderTargetsView("_OPAQUE_CLR", "");
+				Mesh("quad_screen.msh", "editor_fill_white.mat", "std");
+		}
+	}
+
+	HiStencilFill();
+	SetClearColor(0.0, 0.0, 0.0, 0.0);
+	if(b_sm5x_on)
+    {
+		SetRenderTargetsView("_HDR_IMAGE_MRT", "color stencil read_only_ds");
+    }
+	else
+	{
+		SetRenderTargetsView("_HDR_IMAGE", "color stencil noresolve");
+	}
+	SetBuffer(19, "4_DPT");
+	SetBuffer(20, "CLR");
+	SetBuffer(21, "NRM");
+    SetBuffer(27, "16_RGBA16F_A");
+
+	if(b_sky_on)
+	{
+        If("i_pp_outdoor_on", "", "", "", "")
+		{
+			use sky(e_path = e_path, b_sky_on = TRUE);
+        }
+	}
+
+		Scene("env"); //opaque envprobes
+
+		If("f_ambient_def", "", "", "", "")
+		{
+			HiStencilFill();
+			Mesh("quad_screen.msh", "ambient_global_stencil.mat", "std"); //Render quad, test if stencil is <128 and fill stencil with 127 - in effect everywhere where there is no cumulative mask, hi-s is set to PASS
+			HiStencilUse();
+			Mesh("quad_screen.msh", "ambient_global.mat", "std"); //Render quad with global envprobe, stencil test set to equ 127.
+		}
+
+	HiStencilFill();
+	Clear("stencil");// Clear stencil to 0, hi-s becomes all CULL.
+		If("i_pp_outdoor_on", "", "", "", "")
+		{
+			Mesh("sky.msh", "sky_stencil.mat", "std"); //Render sky (stencil only), fill stencil to 255, hi-s is still all to CULL.
+			Mesh("sky_bottom.msh", "sky_stencil.mat", "std");
+		}
+
+		Scene("lit_env");
+		Scene("lit_dim");
+
+		If("f_ed_pp_dev_ambient_only_on", "", "", "", "")
+		{
+			Mesh("quad_screen.msh", "ambient_exposure.mat", "std");
+		}
+
+		use lit_first(e_path = e_path); //can't use hi-stencil acceleration
+		Scene("lit");
+
+			if(b_sky_on)
+			{
+				If("f_pp_ssao", "i_pp_lighting_sun_on", "", "", "")
+				{
+					If("i_pp_outdoor_on", "", "", "", "")
+					{
+						HiStencilFill();
+						Mesh("sky.msh", "sky_stencil.mat", "std"); //Render sky (stencil only), fill stencil to 255, hi-s is still all to CULL.
+						Mesh("sky_bottom.msh", "sky_stencil.mat", "std");
+						Mesh("quad_screen.msh", "ambient_global_stencil.mat", "std"); //Render quad, test if stencil is <128 and fill stencil with 127 - in effect everywhere where there is no sky, hi-s is set to PASS.
+						HiStencilUse();
+					}
+				}
+			}
+
+		use lit_last(e_path = e_path);
+
+		If("f_ed_pp_dev_ambient_only_on", "", "", "", "not")
+		{
+			if(b_sky_on)
+			{
+				If("i_pp_lighting_sun_on", "", "", "", "")
+				{
+					Mesh("quad_screen.msh", "lighting_sun.mat", "std");//TODO: Render sun quad, stencil test set to equ 127.
+				}
+			}
+			else
+			{
+				if(b_top_on)
+				{
+					Mesh("quad_screen.msh", "lighting_sun_top.mat", "std");
+				}
+			}
+		}
+
+if(!b_sky_on) //HACK: enable ssao & inscattering @indoor
+{
+	HiStencilFill();
+	Mesh("quad_screen.msh", "ambient_global_stencil.mat", "std"); //Render quad, test if stencil is <128 and fill stencil with 127 - in effect everywhere where there is no sky, hi-s is set to PASS.
+	HiStencilUse();
+}
+		If("f_pp_ssao", "", "", "", "")
+		{
+			if(e_path == SM50 || e_path == SM51 || e_path == SM52)
+			{
+				SetBuffer(23, "HBAO_1");
+			}
+			else
+			{
+				SetBuffer(23, "4_RGBA16F_C");
+			}
+			Mesh("quad_screen.msh", "ssao_mul.mat", "std");//TODO: Render sun quad, stencil test set to equ 127.
+		}
+		If("f_pp_ssao", "", "", "", "not")
+		{
+			SetTextureVar(23, "s_ssao_def");
+				Mesh("quad_screen.msh", "ssao_off.mat", "std");//TODO: Render sun quad, stencil test set to equ 127.
+		}
+
+	if(b_sm5x_on)
+	{
+		If("f_pp_ssss_on", "", "", "", "")
+		{
+			HiStencilFill();
+			SetRenderTargetsView("_SSSS", "read_only_ds stencil");
+		}
+			Scene("ssss");
+		If("f_pp_ssss_on", "", "", "", "")
+		{
+			HiStencilUse();
+			SetClearColor(0.0, 0.0, 0.0, 0.0);
+			SetRenderTarget("1_RGBA16F_D", "color");
+			SetRenderTargetsView("_SKIN_H", "read_only_ds color");
+					SetBuffer(8, "1_RGBA16F_B");
+						Mesh("quad_screen.msh", "ssss_s0_h.mat", "std");
+
+			SetRenderTargetsView("_SKIN", "read_only_ds");
+				SetBuffer(8, "1_RGBA16F_C");
+					Mesh("quad_screen.msh", "ssss_s0_v.mat", "std");
+
+			SetRenderTargetsView("_SKIN_H", "read_only_ds");
+					SetBuffer(8, "1_RGBA16F_D");
+						Mesh("quad_screen.msh", "ssss_s1_h.mat", "std");
+
+			SetRenderTargetsView("_SKIN", "read_only_ds");
+				SetBuffer(8, "1_RGBA16F_C");
+					Mesh("quad_screen.msh", "ssss_s1_v.mat", "std");
+
+			SetRenderTargetsView("_SKIN_H", "read_only_ds");
+					SetBuffer(8, "1_RGBA16F_D");
+						Mesh("quad_screen.msh", "ssss_s2_h.mat", "std");
+
+			SetRenderTargetsView("_SKIN", "read_only_ds");
+				SetBuffer(8, "1_RGBA16F_C");
+					Mesh("quad_screen.msh", "ssss_s2_v.mat", "std");
+		}
+
+		SetRenderTargetsView("_HDR_IMAGE", hdr_image_rtv_params);
+			SetBuffer(8, "1_RGBA16F_B");
+				Mesh("quad_screen.msh", "lighting_combine.mat", "std");
+	}
+	HiStencilDisable();
+
+            If("f_ed_buffer_out_off", "", "", "", "")
+            {
+				If("f_ed_pp_lighting_emissive_on", "", "", "", "")
+				{
+					SetClearColor(0.0, 0.0, 0.0, 0.0);
+					SetRenderTarget("backbuffer", "color");
+				}
+			}
+
+			Scene("ems");
+			Scene("haze");
+
+        if(b_editor_lighting_on)
+        {
+            If("f_ed_buffer_out_off", "", "", "", "")
+            {
+				If("f_ed_pp_lighting_emissive_on", "", "", "", "not")
+				{
+					SetClearColor(0.0, 0.0, 0.0, 0.0);
+					SetRenderTarget("backbuffer", "color");
+				}
+            }
+
+            If("f_ed_pp_lighting_diffuse_on", "", "", "", "")
+            {
+                Mesh("quad_screen.msh", "lighting_diffuse.mat", "std");
+            }
+            If("f_ed_pp_lighting_diffuse_full_on", "", "", "", "")
+            {
+                Mesh("quad_screen.msh", "lighting_diffuse_full.mat", "std");
+            }
+            If("f_ed_pp_lighting_diffuse_shadows_on", "", "", "", "")
+            {
+                Mesh("quad_screen.msh", "lighting_diffuse_shadows.mat", "std");
+            }
+            If("f_ed_pp_lighting_specular_on", "", "", "", "")
+            {
+                Mesh("quad_screen.msh", "lighting_specular.mat", "std");
+            }
+            If("f_ed_pp_lighting_specular_full_on", "", "", "", "")
+            {
+                Mesh("quad_screen.msh", "lighting_specular_full.mat", "std");
+            }
+            If("f_ed_pp_lighting_specular_shadows_on", "", "", "", "")
+            {
+                Mesh("quad_screen.msh", "lighting_specular_shadows.mat", "std");
+            }
+            If("f_ed_pp_lighting_ssao_on", "", "", "", "")
+            {
+                Mesh("quad_screen.msh", "lighting_ssao.mat", "std");
+            }
+            If("f_ed_pp_lighting_sss_on", "", "", "", "")
+            {
+                Mesh("quad_screen.msh", "lighting_sss.mat", "std");
+            }
+            If("f_ed_pp_lighting_sss_shadows_on", "", "", "", "")
+            {
+                Mesh("quad_screen.msh", "lighting_sss_shadows.mat", "std");
+            }
+            If("f_ed_pp_lighting_shadows_on", "", "", "", "")
+            {
+                Mesh("quad_screen.msh", "lighting_shadows.mat", "std");
+            }
+            If("f_ed_pp_lighting_nrm_luminance_on", "", "", "", "")
+            {
+                Mesh("quad_screen.msh", "lighting_nrm_luminance.mat", "std");
+            }
+            If("f_ed_pp_albedo_diffuse_on", "", "", "", "")
+            {
+                Mesh("quad_screen.msh", "albedo_diffuse.mat", "std");
+            }
+            If("f_ed_pp_albedo_diffuse_ranges_on", "", "", "", "")
+            {
+                Mesh("quad_screen.msh", "albedo_diffuse_ranges.mat", "std");
+            }
+            If("f_ed_pp_albedo_specular_on", "", "", "", "")
+            {
+                Mesh("quad_screen.msh", "albedo_specular.mat", "std");
+            }
+            If("f_ed_pp_albedo_specular_ranges_on", "", "", "", "")
+            {
+                Mesh("quad_screen.msh", "albedo_specular_ranges.mat", "std");
+            }
+			If("f_ed_pp_dev_ambient_only_on", "", "", "", "")
+			{
+				SetBuffer(4, "1_RGBA16F_A");
+				Mesh("quad_screen.msh", "env_normalize.mat", "std");
+			}
+        }
+	resolve(0, "/32");
+
+	string shadows16_rtv_temp = (e_path == SM31) ? "_16_SHADOWS" : "_16_BLUR_TEMP";
+	string shadows16_tex_temp = (e_path == SM31) ? "16_RGBA16F_A" : "16_RGBA16F_C";
+	string shadows16_blur_h_mat = (e_path == SM31) ? "blur_gauss_17_h_32.mat" : "blur_gauss_17_h.mat";
+	string shadows16_blur_v_mat = (e_path == SM31) ? "blur_gauss_17_v_32.mat" : "blur_gauss_17_v.mat";
+	string copy_smooth_mat = (e_path == SM31) ? "copy_smooth_32.mat" : "copy_smooth.mat";
+
+	SetRenderTargetsView("_4_SHADOWS_TEMP", "noresolve");
+		SetBuffer(8, "1_RGBA16F_A");
+			Mesh("quad_screen.msh", "copy.mat", "std");
+	Resolve(0, "");	
+	
+	string shd_tex_temp = (e_path == SM31) ? "4_RGBA16F_A" : "4_RGBA16F_B";
+
+	SetRenderTargetsView("_4_SHADOWS", "noresolve");
+		SetBuffer(8, shd_tex_temp);
+			Mesh("quad_screen.msh", "ambient_downsample.mat", "std");
+	Resolve(0, "/32");
+	
+	SetRenderTargetsView("_8_SHADOWS", "noresolve");
+		SetBuffer(8, "4_RGBA16F_A");
+			Mesh("quad_screen.msh", copy_smooth_mat, "std");
+	Resolve(0, "/32");
+
+	SetRenderTargetsView("_16_SHADOWS", "noresolve");
+		SetBuffer(8, "8_RGBA16F_A");
+			Mesh("quad_screen.msh", copy_smooth_mat, "std");
+	Resolve(0, "/32");
+
+	SetRenderTargetsView(shadows16_rtv_temp, "noresolve");
+		SetBuffer(8, "16_RGBA16F_A");
+			Mesh("quad_screen.msh", shadows16_blur_h_mat, "std");
+	Resolve(0, "/32");
+
+	SetRenderTargetsView("_16_SHADOWS", "noresolve");
+		SetBuffer(8, shadows16_tex_temp);
+			Mesh("quad_screen.msh", shadows16_blur_v_mat, "std");
+	Resolve(0, "/32");
+		
+    SetRenderTargetsView("_HDR_IMAGE", hdr_image_rtv_params);
+
+	if(b_sky_on)
+	{
+		If("i_pp_outdoor_on", "", "", "", "")
+		{
+            If("f_ed_buffer_out_off", "", "", "", "not")
+            {
+				If("f_pp_hdr_intensity_stars", "", "", "", "")
+				{
+						Mesh("stars.msh", "stars.mat", "std");
+				}
+
+				If("i_pp_lighting_sun_on", "", "", "", "")
+				{
+					If("f_pp_moon_opacity", "", "", "", "")
+					{
+						Mesh("sun.msh", "moon.mat", "std");
+					}
+				}
+				If("f_pp_clouds_dynamic_on", "", "", "", "")
+				{
+					If("f_pp_clouds_dynamic_depth_blending", "", "", "", "")
+					{
+						Mesh("clouds_cone.msh", "clouds_cone_blend.mat", "std");
+					}
+					If("f_pp_clouds_dynamic_depth_blending", "", "", "", "not")
+					{
+						Mesh("clouds_cone.msh", "clouds_cone.mat", "std");
+					}
+				}
+			}
+		}
+	}
+
+
+
+		SetBuffer(11, "1_RGBA16F_A"); //scene buffer is now available
+
+	if(b_heat_on)
+	{
+		If("f_pp_heat", "", "", "", "")
+		{
+			SetBuffer(4, "PRV");
+				Mesh("heat_pp.msh", "heat_pp.mat", "std");
+		}
+	}
+
+		SetBuffer(11, "1_RGBA16F_A"); //scene buffer is now available
+	//// NRM RENDER ///////////////////////////////////////////////////////////////////////////////////////
+	if(e_path == SM50 || e_path == SM51 || e_path == SM52)
+	{
+		If("f_pp_nrm", "", "", "", "")
+		{
+			SetBuffer(i_um_nrm_waves, "1_RGBA16F_C");
+
+			SetClearColor(0.0, 0.0, 0.0, 0.0);
+			SetRenderTargetsView("_1_WATER_NORMALS", "color");
+		}
+			Scene("nrm");
+	}
+
+	string rfl_temp_tex = (e_path == SM31) ? "4_RGBA16F_A" : "4_RGBA16F_B";
+
+	SetRenderTargetsView("_4_WTR_CLR_TEMP", "noresolve");
+		SetBuffer(8, "4_RGBA16F_A");
+			Mesh("quad_screen.msh", "blur_gauss_17_h_srgb.mat", "std");
+	Resolve(0, "");
+
+	SetRenderTargetsView("_4_WTR_CLR", "noresolve");
+		SetBuffer(8, rfl_temp_tex);
+			Mesh("quad_screen.msh", "blur_gauss_17_v_srgb.mat", "std");
+	Resolve(0, "");
+
+	SetClearColor(0.0, 0.0, 0.0, 0.0);
+	SetRenderTargetsView("_4_WTR_RFL", "noresolve color");
+
+		if(e_path == SM32)
+		{
+			Mesh("quad_screen.msh", "clear_fnd_ps3.mat", "std");
+		}
+
+		SetBuffer(16, "4_DPT");
+		SetBuffer(8, "4_RGBA16F_A");
+			Scene("rfl2");
+
+	Resolve(0, "/32");
+
+	if(e_path != SM31)
+	{
+		SetRenderTarget("4_RGBA16F_A", "");
+			SetBuffer(8, "4_RGBA16F_B");
+				Mesh("quad_screen.msh", "copy.mat", "std");
+	}
+
+	SetRenderTargetsView("_4_WTR_RFL", "noresolve");
+		SetBuffer(8, "4_RGBA16F_A");
+		SetBuffer(9, "4_RGBA16F_D");
+			Mesh("quad_screen.msh", "rfl_temp_resolve.mat", "std");
+	Resolve(0, "/32");
+
+	SetRenderTargetsView("_4_RFL_PRV", "noresolve");
+		SetBuffer(8, "4_RGBA16F_B");
+			Mesh("quad_screen.msh", "copy.mat", "std");
+	Resolve(0, "");
+
+
+	SetBuffer(17, "4_RGBA16F_B");
+	//// SCENE DOWNSAMPLE ///////////////////////////////////////////////////////////////////////////////////////
+		If("f_pp_water_downsample", "", "", "", "")
+		{
+			if(e_path == SM31)
+			{
+				Resolve(0, "/32");
+			}
+			else
+			{
+				SetRenderTarget("1_RGBA16F_B", "");
+					SetBuffer(8, "1_RGBA16F_A");
+						Mesh("quad_screen.msh", "copy.mat", "std");
+					SetBuffer(9, "1_RGBA16F_B");
+			}
+		}
+	/*
+	if(!b_sm3x_on)
+	{
+		If("f_pp_env_strength", "", "", "", "")
+		{
+			SetClearColor(0.0, 0.0, 0.0, 0.0);
+			SetRenderTarget("2_RGBA16F_B", "color");
+			SetRenderTarget("2_RGBA16F_C", "color");
+			SetRenderTarget("2_RGBA32U_A", "color");
+			SetRenderTarget("1_RGBA16F_B", "");
+			
+			
+			SetRWBuffer(0, "2_RGBA32U_A");
+				SetBuffer(8, "CLR");				
+					DispatchUsingBuffer("SSR_mask.mat", "std", "2_RGBA32U_A", 1, 1, 32, 32);
+			SetRWBuffer(-1, "");
+			
+			SetRWBuffer(0, "2_RGBA16F_B");
+				SetBuffer(8, "2_RGBA32U_A");
+				SetBuffer(9, "1_RGBA16F_A");
+					DispatchUsingBuffer("SSR_precise.mat", "std", "2_RGBA16F_B", 1, 1, 8, 8);
+			SetRWBuffer(-1, "");		
+
+			
+			SetRWBuffer(0, "2_RGBA16F_C");		
+				SetBuffer(6, "2_RGBA32U_A");
+				SetBuffer(7, "CLR");		
+				SetBuffer(8, "2_RGBA16F_B");
+				SetBuffer(9, "2_DPT");				
+					DispatchUsingBuffer("ssr_blur_cs_x.mat", "std", "2_RGBA16F_B", 1, 1, 256, 1);	
+			SetRWBuffer(-1, "");
+			
+			
+			SetRWBuffer(0, "2_RGBA16F_B");
+				SetBuffer(6, "2_RGBA32U_A");
+				SetBuffer(7, "CLR");		
+				SetBuffer(8, "2_RGBA16F_C");			
+					DispatchUsingBuffer("ssr_blur_cs_y.mat", "std", "2_RGBA16F_B", 1, 1, 1, 256);
+			SetRWBuffer(-1, "");
+			
+			
+			
+			SetRenderTargetsView("_HDR_IMAGE", hdr_image_rtv_params);
+				SetBuffer(8, "2_RGBA16F_B");
+					Mesh("quad_screen.msh", "ssr_blend.mat", "std");
+		}
+	}*/
+	
+	SetRenderTargetsView("_HDR_IMAGE", hdr_image_rtv_params);
+	
+	SetBuffer(16, "2_DPT");
+	
+	if(!b_top_on)
+	{
+		Scene("ice");
+		if(b_aa_on && b_sm5x_on)
+		{
+			If("f_smaa_jitter_on", "", "", "", "")
+			{
+				SMAAScreenJitter(false);
+			}
+		}
+
+			Scene("wtr_deep");
+			Scene("wtr");
+			Scene("rfl");
+
+		if(b_aa_on && b_sm5x_on)
+		{
+			If("f_smaa_jitter_on", "", "", "", "")
+			{
+				SMAAScreenJitter(true);
+			}
+		}
+	}
+			SetBuffer(3, "16_RGBA16F_A");
+
+
+
+	if(e_path != SM31)
+	{
+		use fx_gen(e_path = e_path);
+	}
+
+	// PARTICLE BLEND ///////////////////////////////////////////////////////////////////
+	If("i_pp_vfb_on", "", "", "", "")
+	{
+		string vfb_tex = (e_path == SM31) ? "VFB" : "2_RGBA16F_A";
+		SetRenderTargetsView("_HDR_IMAGE", hdr_image_rtv_params);
+			SetBuffer(4, vfb_tex); //TEMP
+				Mesh("quad_screen.msh", "copy_fb.mat", "std");
+	}
+
+		If("f_pp_rain_drops", "", "", "", "")
+		{
+			Mesh("particles_16.msh", "rain_smudge.mat", "std");
+		}
+
+		//// TRANSPARENT SCENE ///////////////////////////////////////////////////////////////////////////////////////
+		//Render geometry with depth blending, refraction, itp
+		use trn_first(e_path = e_path);
+
+		Scene("trn_first_0");
+		Scene("trn_first");
+		Scene("trn_first_2");
+
+		if(e_path == SM50 || e_path == SM51 || e_path == SM52)
+		{
+			SetRenderTargetsView("_HDR_IMAGE", "");
+		}
+		Scene("trn_dpt");
+
+		if(e_path == SM50 || e_path == SM51 || e_path == SM52)
+		{
+			SetRenderTargetsView("_HDR_IMAGE", "read_only_ds");
+		}
+
+		Scene("trn_back");
+		Scene("trn0");
+		Scene("trn");
+		Scene("trn2");
+
+		Scene("trn_last_0");
+		Scene("trn_last");
+		Scene("trn_last_2");
+
+		use trn_last(e_path = e_path);
+
+		// RFR ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		string hdr_image_tex = (e_path == SM31) ? "1_RGBA16F_A" : "1_RGBA16F_B";
+
+		If("f_pp_rfr", "f_pp_rfr_last", "f_pp_rfr2", "", "")
+		{
+			if(e_path != SM31)
+			{
+				SetRenderTarget("1_RGBA16F_B", "");
+					SetBuffer(8, "1_RGBA16F_A");
+						Mesh("quad_screen.msh", "copy.mat", "std");
+			}
+			else
+			{
+				resolve(0, "/32");
+			}
+			SetRenderTargetsView("_HDR_IMAGE", hdr_image_rtv_params);
+				SetBuffer(8, hdr_image_tex);
+		}
+
+		if(b_aa_on && b_sm5x_on)
+		{
+			If("f_smaa_jitter_on", "", "", "", "")
+			{
+				SMAAScreenJitter(false);
+			}
+		}
+
+				Scene("rfr"); //Refraction
+				Scene("rfr2");
+				Scene("rfr_last");
+
+		if(b_aa_on && b_sm5x_on)
+		{
+			If("f_smaa_jitter_on", "", "", "", "")
+			{
+				SMAAScreenJitter(true);
+			}
+		}
+
+		If("f_underwater", "", "", "", "")
+		{
+			Mesh("particles_1024.msh", "underwater_particles.mat", "std");
+			Mesh("particles_2048.msh", "underwater_lightshafts.mat", "std");
+			Mesh("water_surface_tension.msh", "water_surface_tension.mat", "std");
+		}
+
+		//// RAIN - DROPS ///////////////////////////////////////////////////////////////////////////////////////
+		If("f_pp_rain_drops", "", "", "", "")
+		{
+			Mesh("particles_2048.msh", "rain_drops.mat", "std");
+		}
+
+		//// PREVIOUS BLEND ///////////////////////////////////////////////////////////////////////////////////////
+		SetBuffer(4, "PRV");
+		If("f_pp_prv_lrp", "", "", "", "")
+		{
+			Mesh("quad_screen.msh", "prv_lrp.mat", "std");
+		}
+		If("f_pp_prv_add", "", "", "", "")
+		{
+			Mesh("quad_screen.msh", "prv_add.mat", "std");
+		}
+
+		Resolve(0, "/32");
+
+		// REDUCE ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		If("f_pp_prv_copy", "", "", "", "")
+		{
+			SetRenderTargetsView("_2_PRV", "noresolve");
+				SetBuffer(8, "1_RGBA16F_A");
+					Mesh("quad_screen.msh", "copy_blinn.mat", "std");
+			resolve(0, "");
+
+			SetRenderTargetsView("_4_HDR_IMAGE", "noresolve");
+				SetBuffer(8, "PRV");
+					Mesh("quad_screen.msh", "copy_blinn.mat", "std");
+		}
+
+		If("f_pp_prv_copy", "", "", "", "not")
+		{
+			SetRenderTargetsView("_4_HDR_IMAGE", "noresolve");
+				SetBuffer(8, "1_RGBA16F_A");
+					Mesh("quad_screen.msh", "copy_4.mat", "std");
+		}
+		resolve(0, "");
+
+		string rt_0 = (e_path != SM31) ? "_LUM_16x16_A" : "_LUM_16x16";
+		string rt_1 = (e_path != SM31) ? "_LUM_16x16_B" : "_LUM_16x16";
+		string lum_tex = (e_path != SM31) ? "LUM_16x16_B" : "LUM_16x16_A";
+
+		SetRenderTargetsView("_LUM_32x16", "noresolve");
+			SetBuffer(8, "4_RGBA16F_A");
+				Mesh("quad_screen.msh", "copy_lum.mat", "std");
+		Resolve(0, "");
+
+		SetRenderTargetsView(rt_0, "noresolve");
+			SetBuffer(8, "LUM_32x16");
+				Mesh("quad_screen.msh", "copy_4_lum.mat", "std");
+		Resolve(0, "");
+
+		SetRenderTargetsView(rt_1, "noresolve");
+			SetBuffer(8, "LUM_16x16_A", "");
+				Mesh("quad_screen.msh", "copy_4x4_lum.mat", "std");
+		Resolve(0, "");
+
+		SetRenderTargetsView(rt_0, "noresolve");
+			SetBuffer(8, lum_tex);
+			SetBuffer(9, "LUM_16x16_PRV");
+				Mesh("quad_screen.msh", "avg.mat", "std");
+		Resolve(0, "");
+
+		SetRenderTargetsView("_LUM_16x16_PRV", "noresolve");
+			SetBuffer(8, "LUM_16x16_A");
+				Mesh("quad_screen.msh", "copy_1px.mat", "std");
+		Resolve(0, "");
+
+		if(b_glow_on)
+		{
+			//string "_4_GLOW" = "_4_GLOW"; //(e_path == SM31) ? "_4C" : "_4C__GLOW";
+			//string "4_RGBA16F_C" = "4_RGBA16F_C";
+			//string "_4_GLOW_TEMP" = "_4_GLOW_TEMP";//(e_path == SM31) ? "_4C_COPY" : "_4B__GLOW";
+			string tex_temp = (e_path == SM31) ? "4_RGBA16F_C" : "4_RGBA16F_B";
+
+			SetRenderTargetsView("_4_GLOW", "noresolve");
+				SetBuffer(4, "4_DPT");				
+				SetBuffer(5, "LUM_16x16_A");
+				SetBuffer(6, "4_RGBA16F_A");
+					Mesh("quad_screen.msh", "glow_extract.mat", "std");
+
+				SetBuffer(4, "4_DPT");
+				SetBuffer(5, "4_RGBA16F_A");
+					use glow_first(e_path = e_path);
+					scene("glow_0");
+					use glow_add(e_path = e_path);
+			resolve(0, "/32");
+
+			SetRenderTargetsView("_4_GLOW_TEMP", "noresolve");
+				SetBuffer(8, "4_RGBA16F_C");
+					Mesh("quad_screen.msh", "glow_star_ray_h.mat", "std");
+			resolve(0, "/32");
+
+			SetRenderTargetsView("_4_GLOW", "noresolve");
+				SetBuffer(8, tex_temp);
+					Mesh("quad_screen.msh", "glow_star_ray_v.mat", "std");
+			resolve(0, "/32");
+
+			if(e_path != SM32 && e_path != SM31)
+			{
+				SetRenderTargetsView("_4_GLOW_TEMP", "noresolve");
+					SetBuffer(8, "4_RGBA16F_C");
+						Mesh("quad_screen.msh", "glow_star_ray_v.mat", "std");
+				resolve(0, "/32");
+
+				SetRenderTargetsView("_4_GLOW", "noresolve");
+					SetBuffer(8, tex_temp);
+						Mesh("quad_screen.msh", "glow_star_ray_v.mat", "std");
+				resolve(0, "/32");
+			}
+
+			string tex_temp_2 = (e_path == SM31) ? "4_RGBA16F_C" : "4_RGBA8_A";
+
+			if(b_sky_on)
+			{
+				If("f_pp_sun_glow_on", "", "", "", "")
+				{
+					if(e_path == SM32)
+					{
+						SetRenderTargetsView("_4_GLOW_TEMP", "");
+						Mesh("quad_screen.msh", "clear_fnd_ps3.mat", "std");
+					}
+					else
+					{
+						SetClearColor(0.0, 0.0, 0.0, 0.0);
+						SetRenderTargetsView("_4_GLOW_TEMP", "color noresolve");
+					}
+						SetBuffer(4, "4_DPT");
+						SetBuffer(16, "4_RGBA16F_A");
+							Mesh("sun_rays.msh", "sun_rays.mat", "std");
+					resolve(0, "/32");
+
+					SetRenderTargetsView("_4_SUN_RAYS_BLUR", "noresolve");
+						SetBuffer(4, tex_temp);
+							Mesh("quad_screen.msh", "sun_rays_blur.mat", "std");
+					resolve(0, "/32");
+
+					SetRenderTargetsView("_4_GLOW", "noresolve");
+						SetBuffer(4, tex_temp_2);
+							Mesh("quad_screen.msh", "sun_rays_blur_blend.mat", "std");
+				}
+			}
+
+				SetBuffer(4, "4_DPT");
+					scene("glow_1");
+					use glow_last(e_path = e_path);
+			resolve(0, "/32");
+
+			If("f_pp_screen_drops_on", "", "", "", "")
+			{
+
+				if(e_path != SM31)
+				{
+					SetRenderTargetsView("_4_GLOW_TEMP", "");
+						SetBuffer(8, "4_RGBA16F_C");
+							Mesh("quad_screen.msh", "copy.mat", "std");
+
+					SetRenderTargetsView("_32x32_P1024_COPY", "noresolve");
+						SetBuffer(8, "32x32_RGBA32F_P1024_POS");
+						SetBuffer(9, "32x32_RGBA32F_P1024_CLR");
+							Mesh("quad_screen.msh", "copy_mrt2.mat", "std");
+				}
+
+				string tex_temp = (e_path == SM31) ? "4_RGBA16F_C" : "4_RGBA16F_B";
+
+				SetClearColor(1.0, 1.0, 1.0, 0.0);
+				SetRenderTargetsView("_4_SCREEN_DROPS", "color noresolve");
+					SetBuffer(16, "32x32_RGBA32F_P1024_POS");
+					SetBuffer(17, "32x32_RGBA32F_P1024_CLR");
+						Mesh("particles_1024.msh", "screen_drops_blur.mat", "std");
+				resolve(0, "");
+
+				SetRenderTargetsView("_32x32_P1024_UPDATE", "noresolve");
+					if(e_path == SM31)
+					{
+						SetBuffer(16, "32x32_RGBA32F_P1024_POS");
+						SetBuffer(17, "32x32_RGBA32F_P1024_CLR");
+					}
+					else
+					{
+						SetBuffer(16, "32x32_RGBA32F_B");
+						SetBuffer(17, "32x32_RGBA32F_C");
+					}
+					SetBuffer(18, tex_temp);
+					use screen_drops_usermaps(e_path = e_path);
+					SetBuffer(20, "4_RGBA8_A");
+						Mesh("quad_screen.msh", "screen_drops_update.mat", "std");
+				resolve(0, "");
+				resolve(1, "");
+				resolve(2, "");
+			}
+
+			SetRenderTargetsView("_4_GLOW", "noresolve");
+				SetBuffer(8, tex_temp);
+				if(b_sky_on)
+				{
+					If("f_pp_sun_flare_on", "", "", "", "")
+					{
+						SetBuffer(16, "4_RGBA16F_A");
+							Mesh("sun_star.msh", "sun_star.mat", "glow_1");
+							Mesh("sun_flares.msh", "sun_flares.mat", "glow_1");
+					}
+				}
+
+				If("f_pp_screen_drops_on", "", "", "", "")
+				{
+					SetBuffer(16, "32x32_RGBA32F_P1024_POS");
+					SetBuffer(17, "32x32_RGBA32F_A");
+						Mesh("particles_1024.msh", "screen_drops_glow.mat", "std");
+				}
+
+				if(b_shoots_on)
+				{
+					If("f_player_shoot_opacity", "", "", "", "")
+					{
+						SetBuffer(4, "SHOOTS");
+							Mesh("quad_screen.msh", "shoots_show.mat", "std");
+					}
+				}
+
+				If( "f_pp_overlay_add_effect_0", "", "", "", "")
+				{
+					Mesh("quad_screen.msh", "overlay_effect_0.mat", "std");
+				}
+
+			SetRenderTargetsView("_16_GLOW_LENS_FLARES_A", "noresolve");
+				SetBuffer(4, "4_RGBA16F_A");
+				SetBuffer(5, "LUM_16x16_A");
+					Mesh("quad_screen.msh", "glow_lens_flares_source.mat", "std");
+			resolve(0, "/32");
+
+			SetRenderTargetsView("_4_GLOW", "noresolve");
+				SetBuffer(4, "16_RGBA16F_A");
+					Mesh("quad_screen.msh", "glow_halo_flare.mat", "std");
+			resolve(0, "/32");
+
+			SetRenderTargetsView("_16_GLOW_LENS_FLARES_B", "noresolve");
+				SetBuffer(8, "16_RGBA16F_A");
+					Mesh("quad_screen.msh", "blur_gauss_17_h.mat", "std");
+			resolve(0, "/32");
+
+			SetRenderTargetsView("_16_GLOW_LENS_FLARES_A", "noresolve");
+				SetBuffer(8, "16_RGBA16F_B");
+					Mesh("quad_screen.msh", "blur_gauss_17_v.mat", "std");
+			resolve(0, "/32");
+
+			SetRenderTargetsView("_4_GLOW", "noresolve");
+				SetBuffer(4, "16_RGBA16F_A");
+					Mesh("quad_screen.msh", "glow_lens_flares_0.mat", "std");
+					Mesh("quad_screen.msh", "glow_lens_flares_1.mat", "std");
+					Mesh("quad_screen.msh", "glow_lens_flares_2.mat", "std");
+					Mesh("quad_screen.msh", "glow_lens_flares_3.mat", "std");
+					Mesh("quad_screen.msh", "glow_lens_flares_4.mat", "std");
+					Mesh("quad_screen.msh", "glow_lens_flares_5.mat", "std");
+					Mesh("quad_screen.msh", "glow_lens_flares_6.mat", "std");
+					Mesh("quad_screen.msh", "glow_lens_flares_7.mat", "std");
+			resolve(0, "/32");
+		}
+
+		if(b_blur_on)
+		{
+			If("f_pp_blur_on", "", "", "", "")
+			{
+				use blur_first(e_path = e_path);
+				string tex_0 = (e_path == SM31) ? "4_RGBA16F_B" : "4_RGBA16F_A";
+
+				//bokeh
+				if(e_path == SM50 || e_path == SM51 || e_path == SM52)
+				{
+					If("f_pp_blur_far", "f_pp_blur_near", "", "", "")
+					{
+						If("f_bokeh_max_size", "", "", "", "")
+						{
+							SetRWBuffer(0, "B_BOKEH", true);
+								SetBuffer(8, "1_RGBA16F_A");
+									//DispatchUsingBuffer("bokeh_extract_cs.mat", "std", "1_RGBA16F_A", 1, 1, 8, 8);
+							SetRWBuffer(-1, "");
+
+							SetRWBuffer(0, "B_INDIRECT_ARGS", false);
+								Dispatch("buf_args_cs.mat", "std", 1, 1, 1);
+								CopyBufferAtomicCounter("B_BOKEH", "B_INDIRECT_ARGS", 4);
+							SetRWBuffer(-1, "");
+						}
+					}
+				}
+
+				SetRenderTargetsView("_4_BLUR", "noresolve");
+					SetBuffer(8, "4_RGBA16F_A");
+						if(e_path == SM31)
+						{
+							Mesh("quad_screen.msh", "copy_smooth_32.mat", "std");
+						}
+						else
+						{
+							Mesh("quad_screen.msh", "copy_smooth.mat", "std");
+						}
+				Resolve(0, "/32");
+
+				SetRenderTargetsView("_4_BLUR_TEMP", "noresolve");
+					SetBuffer(8, "4_RGBA16F_B");
+						if(e_path == SM31)
+						{
+							Mesh("quad_screen.msh", "copy_smooth_32.mat", "std");
+						}
+						else
+						{
+							Mesh("quad_screen.msh", "copy_smooth.mat", "std");
+						}
+				Resolve(0, "/32");
+
+
+				SetRenderTargetsView("_4_BLUR", "noresolve");
+						SetBuffer(4, "4_DPT");
+						SetBuffer(5, tex_0);
+
+						If("f_pp_blur_mask_radial_opacity", "", "", "", "not")
+						{
+							If("f_pp_blur_far", "", "", "", "not")
+							{
+								If("f_pp_blur_near", "", "", "", "not")
+								{
+									Mesh("quad_screen.msh", "blur_____.mat", "std");
+								}
+								If("f_pp_blur_near", "", "", "", "")
+								{
+									Mesh("quad_screen.msh", "blur_n___.mat", "std");
+								}
+							}
+							If("f_pp_blur_far", "", "", "", "")
+							{
+								If("f_pp_blur_near", "", "", "", "not")
+								{
+									Mesh("quad_screen.msh", "blur__f__.mat", "std");
+								}
+								If("f_pp_blur_near", "", "", "", "")
+								{
+									Mesh("quad_screen.msh", "blur_nf__.mat", "std");
+								}
+							}
+						}
+						If("f_pp_blur_mask_radial_opacity", "", "", "", "")
+						{
+							If("f_pp_blur_far", "", "", "", "not")
+							{
+								If("f_pp_blur_near", "", "", "", "not")
+								{
+									Mesh("quad_screen.msh", "blur___m_.mat", "std");
+								}
+								If("f_pp_blur_near", "", "", "", "")
+								{
+									Mesh("quad_screen.msh", "blur_n_m_.mat", "std");
+								}
+							}
+							If("f_pp_blur_far", "", "", "", "")
+							{
+								If("f_pp_blur_near", "", "", "", "not")
+								{
+									Mesh("quad_screen.msh", "blur__fm_.mat", "std");
+								}
+								If("f_pp_blur_near", "", "", "", "")
+								{
+									Mesh("quad_screen.msh", "blur_nfm_.mat", "std");
+								}
+							}
+						}
+				If("f_pp_screen_drops_on", "", "", "", "")
+				{
+					SetBuffer(16, "4_RGBA8_A");
+						Mesh("quad_screen.msh", "screen_drops_mul.mat", "std");
+				}
+
+				SetRenderTargetsView("_4_BLUR", "noresolve");
+						SetBuffer(8, tex_0);
+
+				If("f_pp_aberration_on", "", "", "", "")
+				{
+					if(e_path != SM31)
+					{
+						SetRenderTargetsView("_4_BLUR_TEMP", "");
+							SetBuffer(8, "4_RGBA16F_B");
+								Mesh("quad_screen.msh", "copy.mat", "std");
+					}
+
+					resolve(0, "/32");
+					SetRenderTargetsView("_4_BLUR", "noresolve");
+						SetBuffer(8, tex_0);
+							Mesh("quad_screen.msh", "screen_aberration.mat", "std");
+				}
+				If("f_pp_shake_on", "", "", "", "")
+				{
+					if(e_path != SM31)
+					{
+						SetRenderTargetsView("_4_BLUR_TEMP", "");
+							SetBuffer(8, "4_RGBA16F_B");
+								Mesh("quad_screen.msh", "copy.mat", "std");
+					}
+
+					resolve(0, "/32");
+					SetRenderTargetsView("_4_BLUR", "noresolve");
+						SetBuffer(8, tex_0);
+							Mesh("quad_screen.msh", "screen_shake.mat", "std");
+				}
+
+				If("f_pp_blur_radial_on", "", "", "", "")
+				{
+					if(e_path != SM31)
+					{
+						SetRenderTargetsView("_4_BLUR_TEMP", "");
+							SetBuffer(8, "4_RGBA16F_B");
+								Mesh("quad_screen.msh", "copy.mat", "std");
+					}
+
+					resolve(0, "/32");
+					SetRenderTargetsView("_4_BLUR", "noresolve");
+						SetBuffer(8, tex_0);
+							Mesh("quad_screen.msh", "blur_radial.mat", "std");
+				}
+
+				if(b_sm3x_on)
+				{
+					string tex_blur_camera_mask = (e_path == SM31) ? "4_RGBA16F_B" : "4_RGBA16F_A";
+					If("f_pp_blur_camera_motion_factor", "", "", "", "")
+					{
+						SetRenderTargetsView("_4_BLUR_CAMERA_MOTION_MASK", "noresolve");
+							SetBuffer(4, "4_RGBA16F_B");
+							SetBuffer(5, "4_DPT");
+								Mesh("quad_screen.msh", "blur_camera_motion_mask.mat", "std");
+						resolve(0, "/32");
+
+						SetRenderTargetsView("_4_BLUR", "noresolve");
+							SetBuffer(4, tex_blur_camera_mask);
+							SetBuffer(5, "4_DPT");
+								Mesh("quad_screen.msh", "blur_camera_motion.mat", "std");
+					}
+				}
+				use blur_last(e_path = e_path);
+
+				resolve(0, "/32");
+			}
+		}
+
+		if(!b_editor_on)
+		{
+			If("f_pp_curves", "", "", "", "")
+			{
+				SetRenderTargetsView("_CURVES", "noresolve");
+
+					If("i_pp_curves_edit", "", "", "", "not")
+					{
+							Mesh("quad_screen.msh", "curves.mat", "std");
+					}
+					If("i_pp_curves_edit", "", "", "", "")
+					{
+							Mesh("quad_screen.msh", "curves_edit.mat", "std");
+					}
+				Resolve(0, "");
+			}
+
+			If("f_pp_overlays", "", "", "", "")
+			{
+				SetRenderTargetsView("_OVERLAY", "noresolve");
+					If("f_pp_overlays_mix", "", "", "", "")
+					{
+						Mesh("quad_screen.msh", "overlays_mix.mat", "std");
+					}
+				Resolve(0, "");
+			}
+
+			SetBuffer(31, "1_RGBA8_A"); //s_clr
+			SetBuffer(30, "4_RGBA16F_C"); //s_glow
+			SetBuffer(29, "4_RGBA16F_B"); //blur
+			SetBuffer(27, "OVERLAY"); //overlays
+			SetBuffer(26, "CURVES");
+			SetBuffer(21, "NRM");
+
+			use postprocess_first(e_path = e_path);
+		}
+		// BLUR FAR ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		if(b_blur_on)
+		{
+			If("f_pp_blur_far", "", "", "", "")
+			{
+				if(e_path == SM50)
+				{
+					If("i_nvidia_dof_on", "", "", "", "not")
+					{
+						SetRenderTargetsView("_2_BLUR_FAR", "noresolve");
+							SetBuffer(4, "2_DPT");
+							SetBuffer(5, "4_RGBA16F_B");
+								Mesh("quad_screen.msh", "blur_far.mat", "std");
+							SetBuffer(29, "2_RGBA16F_A"); //blur
+						Resolve(0, "/32");
+					}
+				}
+				else
+				{
+					SetRenderTargetsView("_2_BLUR_FAR", "noresolve");
+						SetBuffer(4, "2_DPT");
+						SetBuffer(5, "4_RGBA16F_B");
+							Mesh("quad_screen.msh", "blur_far.mat", "std");
+						SetBuffer(29, "2_RGBA16F_A"); //blur
+					Resolve(0, "/32");
+				}
+
+				if(e_path == SM50 || e_path == SM51 || e_path == SM52)
+				{
+					If("f_bokeh_max_size", "", "", "", "")
+					{
+						SetBuffer(2, "B_BOKEH");
+							DrawInstancedIndirect("bokeh_sprite.mat", "std", "B_INDIRECT_ARGS");
+					}
+				}
+			}
+			if(e_path == SM50 || e_path == SM51 || e_path == SM52)
+			{
+				If("f_pp_blur_far", "", "", "", "not")
+				{
+					If("f_pp_blur_near", "f_bokeh_max_size", "", "", "and")
+					{
+						SetRenderTargetsView("_2_BLUR_FAR", "noresolve");
+							SetBuffer(8, "4_RGBA16F_B");
+								Mesh("quad_screen.msh", "copy.mat", "std");
+
+						SetBuffer(2, "B_BOKEH");
+							DrawInstancedIndirect("bokeh_sprite.mat", "std", "B_INDIRECT_ARGS");
+						SetBuffer(29, "2_RGBA16F_A"); //blur
+					}
+				}
+			}
+		}
+
+		if(e_path == SM50)
+		{
+			If("i_nvidia_dof_on", "f_pp_blur_far", "", "", "and")
+			{
+				SetRenderTarget("1_RGBA16F_B", "");
+					SetBuffer(10, "ZBUFFER");
+						Mesh("quad_screen.msh", "blur_far_nvidia.mat", "std");
+
+						NVdofBokeh("1_RGBA16F_A", "ZBUFFER", "1_RGBA16F_A", "1_RGBA16F_B", "1_RGBA16F_B",
+							"f_nvdof_bokeh_start_blur_radius", "f_nvdof_bokeh_fade_in_radius", "f_nvdof_bokeh_exp_falloff", "f_nvdof_bokeh_size", "f_nvdof_bokeh_area_factor", "f_nvdof_bokeh_intensity", "f_nvdof_luminance_min", "f_nvdof_luminance_max",
+							"f_nvdof_bokeh_out_color_saturation",	"f_nvdof_bokeh_out_max_luminance", "f_nvdof_reduce_energy_factor", "f_nvdof_preblur_reduce_energy_factor", "s_nvdof_bokeh_shape");
+			}
+		}
+
+
+		if(b_blur_motion_on)
+		{
+			If("f_pp_blur_motion_object", "", "", "", "")
+			{
+				SetRenderTarget("1_RGBA16F_B", "");
+							SetBuffer(8, "1_RGBA16F_A");
+								Mesh("quad_screen.msh", "copy.mat", "std");
+
+				SetRenderTarget("1_RGBA16F_C", "");
+					SetBuffer(8, "MB_A");
+						Mesh("quad_screen.msh", "copy.mat", "std");
+
+				SetRenderTarget("MB_A", "");
+					SetBuffer(10, "ZBUFFER");
+						Mesh("quad_screen.msh", "blur_camera_blend.mat", "std");
+
+				SetRenderTarget("MB_2A", "");
+					SetBuffer(8, "MB_A");
+						Mesh("quad_screen.msh", "om_tile_max_0.mat", "std");
+
+				SetRenderTarget("MB_4A", "");
+					SetBuffer(8, "MB_2A");
+						Mesh("quad_screen.msh", "om_tile_max.mat", "std");
+
+				SetRenderTarget("MB_8A", "");
+					SetBuffer(8, "MB_4A");
+						Mesh("quad_screen.msh", "om_tile_max.mat", "std");
+
+				SetRenderTarget("MB_16A", "");
+					SetBuffer(8, "MB_8A");
+						Mesh("quad_screen.msh", "om_tile_max.mat", "std");
+
+				SetRenderTarget("MB_16B", "");
+					SetBuffer(8, "MB_16A");
+						Mesh("quad_screen.msh", "om_neighbor_max.mat", "std");
+
+					///object motion blur
+				SetRenderTargetsView("_HDR_IMAGE", "");
+					SetBuffer(5, "MB_16A");
+					SetBuffer(6, "MB_16B");
+					SetBuffer(8, "MB_A");
+					SetBuffer(9, "1_RGBA16F_B");
+					SetBuffer(10, "ZBUFFER");
+						Mesh("quad_screen.msh", "blur_object_motion.mat", "std");
+			}
+		}
+
+
+		if(!b_sm3x_on || b_editor_on)
+		{
+			SetRenderTargetsView("_RGBA8_A_SRGB", "noresolve");
+				SetBuffer(8, "1_RGBA16F_A");
+					if(b_blur_on)
+					{
+						If("f_pp_blur_on", "", "", "", "")
+						{
+							Mesh("quad_screen.msh", "tonemapping_b.mat", "std");
+						}
+						If("f_pp_blur_on", "", "", "", "not")
+						{
+							Mesh("quad_screen.msh", "tonemapping.mat", "std");
+						}
+					}
+					else
+					{
+						if(b_editor_on)
+						{
+							Mesh("quad_screen.msh", "tonemapping_editor.mat", "std");
+						}
+						else
+						{
+							Mesh("quad_screen.msh", "tonemapping.mat", "std");
+						}
+					}
+
+					If("f_pp_filmgrain_4", "f_pp_filmgrain_8", "f_pp_filmgrain_16", "", "")
+					{
+						If("f_pp_filmgrain_16", "", "", "", "")
+						{
+							SetRenderTargetsView("_16_FILMGRAIN", "noresolve");
+								Mesh("quad_screen.msh", "filmgrain_16.mat", "std");
+									Resolve(0, "");
+								SetBuffer(8, "16_RGBA8_A");
+						}
+						If("f_pp_filmgrain_8", "", "", "", "")
+						{
+							SetRenderTargetsView("_8_FILMGRAIN", "noresolve");
+								Mesh("quad_screen.msh", "filmgrain_8.mat", "std");
+								If("f_pp_filmgrain_16", "", "", "", "")
+								{
+									Mesh("quad_screen.msh", "filmgrain_add.mat", "std");
+								}
+									Resolve(0, "");
+								SetBuffer(8, "8_RGBA8_A");
+						}
+						If("f_pp_filmgrain_4", "", "", "", "")
+						{
+							SetRenderTargetsView("_4_FILMGRAIN", "noresolve");
+								Mesh("quad_screen.msh", "filmgrain_4.mat", "std");
+								If("f_pp_filmgrain_16", "f_pp_filmgrain_8", "", "", "")
+								{
+									Mesh("quad_screen.msh", "filmgrain_add.mat", "std");
+								}
+									Resolve(0, "");
+								// SetBuffer(8, "4_RGBA8_A");
+						}
+						SetRenderTargetsView("_RGBA8_A_SRGB", "noresolve"); //for resolve
+								// Mesh("quad_screen.msh", "filmgrain_mix.mat", "std");
+					}
+
+			Resolve(0, "");
+		}
+
+
+
+		if(b_aa_on)
+		{
+			If("f_fxaa_on", "", "", "", "")
+			{
+				SetRenderTargetsView("_RGBA8_B_SRGB", "");
+					 SetBuffer(8, "1_RGBA8_A");
+						 Mesh("quad_screen.msh", "copy_srgb.mat", "std");
+
+				SetRenderTargetsView("_RGBA8_A_SRGB", "");
+					SetBuffer(8, "1_RGBA8_B");
+						Mesh("quad_screen.msh", "fxaa_he.mat", "std");
+			}
+
+			if(!b_editor_lighting_on && !b_editor_on)
+			{
+				If("f_smaa_tx2_on", "", "", "", "")
+				{
+
+					SetClearColor(0.0, 0.0, 0.0, 0.0);
+					SetRenderTargetsView("_MLAA", "stencil color");
+						SetBuffer(8, "1_RGBA8_A");
+							Mesh("quad_screen.msh", "smaa_edge_detection.mat", "std");
+
+					SetClearColor(0.0, 0.0, 0.0, 0.0);
+					SetRenderTargetsView("_MLAA_WEIGHTS", "color");
+						SetBuffer(8, "1_RGBA8_B");
+							Mesh("quad_screen.msh", "smaa_blend_weight.mat", "std");
+
+					SetRenderTargetsView("_RGBA8_B_SRGB", "");
+						SetBuffer(7, "MB_A");
+						SetBuffer(8, "1_RGBA8_A"); //CLR
+						SetBuffer(9, "CLR"); //WEIGHTS
+							Mesh("quad_screen.msh", "smaa_blend.mat", "std");
+
+					//copy previous
+					SetRenderTargetsView("_RGBA8_A_SRGB", "");
+						SetBuffer(7, "1_RGBA16F_C");
+						SetBuffer(8, "1_RGBA8_B");
+						SetBuffer(9, "1_RGBA8_C");
+							Mesh("quad_screen.msh", "smaa_resolve.mat", "std");
+
+					SetRenderTargetsView("_RGBA8_C_SRGB", "");
+						SetBuffer(8, "1_RGBA8_B");
+							Mesh("quad_screen.msh", "copy_srgb.mat", "std");
+						SetBuffer(8, "1_RGBA8_A");
+							Mesh("quad_screen.msh", "copy_vel.mat", "std");
+
+				}
+			}
+		}
+
+		// POSTPROCESS /////////////////////////////////////////////////////////////////////////////////////////////
+	if(!b_editor_lighting_on && !b_editor_on)
+	{
+		if(e_path == SM31)
+		{
+			SetRenderTargetsView("_RGBA8_A_SRGB_Z", "noresolve");
+		}
+		else
+		{
+			if(e_path == SM32)
+			{
+
+				SetRenderTargetsView("_RGBA8_A_SRGB_Z", "");
+				If("f_menu_digital_noise", "i_menu_copy_buffer", "", "", "")
+				{
+						SetRenderTargetsView("_CLR__STD_RENDER", "");
+				}
+
+			}
+			else
+			{
+				string final_rtv_params = b_sm5x_on ? "read_only_ds" : "";
+
+				If("i_pp_direct_on", "", "", "", "")
+				{
+					If("f_pp_screen_scaling_on", "", "", "", "")
+					{
+						SetRenderTargetsView("_CLR__STD_RENDER", final_rtv_params);
+					}
+					If("f_pp_screen_scaling_on", "", "", "", "not")
+					{
+						If("i_menu_copy_buffer", "", "", "", "not")
+						{
+							SetRenderTarget("backbuffer", "");
+						}
+						If("i_menu_copy_buffer", "", "", "", "")
+						{
+							SetRenderTargetsView("_CLR__STD_RENDER", final_rtv_params);
+
+						}
+					}
+				}
+				If("i_pp_direct_on", "", "", "", "not")
+				{
+					SetRenderTargetsView("_CLR__STD_RENDER", final_rtv_params);
+				}
+			}
+		}
+
+			SetBuffer(8, "PRV"); //screen /2
+				if(b_sm3x_on)
+				{
+					SetBuffer(31, "1_RGBA16F_A");
+					use postprocess_old(e_path = e_path);
+				}
+				else
+				{
+					use postprocess(e_path = e_path);
+
+					If("f_pp_filmgrain_4", "f_pp_filmgrain_8", "f_pp_filmgrain_16", "", "")
+					{
+						If("f_pp_filmgrain_16", "", "", "", "")
+						{
+								SetBuffer(8, "16_RGBA8_A");
+						}
+						If("f_pp_filmgrain_8", "", "", "", "")
+						{
+								SetBuffer(8, "8_RGBA8_A");
+						}
+						If("f_pp_filmgrain_4", "", "", "", "")
+						{
+								SetBuffer(8, "4_RGBA8_A");
+						}
+						Mesh("quad_screen.msh", "filmgrain_mix.mat", "std");
+					}
+				}
+
+	}
+	else
+	{
+		string final_rtv_params = b_sm5x_on ? "read_only_ds" : "";
+		If("f_ed_buffer_out_off", "", "", "", "")
+        {
+            SetRenderTarget("backbuffer", "");
+        }
+        If("f_ed_buffer_out_off", "", "", "", "not")
+        {
+			SetRenderTargetsView("_RGBA8_A_SRGB_Z", final_rtv_params);
+        }
+	}
+		SetBuffer(10, "ZBUFFER");
+		SetBuffer(14, "NRM");
+			use std_first(e_path = e_path);
+			if(b_sm5x_on)
+			{
+				if(!b_editor_lighting_on && !b_editor_on)
+				{
+					If("i_pp_direct_on", "", "", "", "")
+					{
+						If("f_pp_screen_scaling_on", "", "", "", "")
+						{
+							SetRenderTargetsView("_CLR__STD_RENDER", "");
+						}
+						If("f_pp_screen_scaling_on", "", "", "", "not")
+						{
+							If("i_menu_copy_buffer", "", "", "", "not")
+							{
+								SetRenderTarget("backbuffer", "");
+							}
+							If("i_menu_copy_buffer", "", "", "", "")
+							{
+								SetRenderTargetsView("_CLR__STD_RENDER", "");
+							}
+						}
+					}
+					If("i_pp_direct_on", "", "", "", "not")
+					{
+						SetRenderTargetsView("_CLR__STD_RENDER", "");
+					}
+				}
+				else
+				{
+					If("f_ed_buffer_out_off", "", "", "", "")
+					{
+						SetRenderTarget("backbuffer", "");
+					}
+					If("f_ed_buffer_out_off", "", "", "", "not")
+					{
+						SetRenderTargetsView("_RGBA8_A_SRGB_Z", "");
+					}
+				}
+			}
+
+			Scene("lpp");
+			if(b_aa_on)
+			{
+				If("f_smaa_jitter_on", "", "", "", "")
+				{
+					SMAAScreenJitter(false);
+				}
+			}
+			Scene("std_dpt_clear");
+			Scene("std_dpt");
+			if(b_sm5x_on)
+			{
+				if(!b_editor_lighting_on && !b_editor_on)
+				{
+					If("i_pp_direct_on", "", "", "", "")
+					{
+						If("f_pp_screen_scaling_on", "", "", "", "")
+						{
+							SetRenderTargetsView("_CLR__STD_RENDER", "read_only_ds");
+						}
+						If("f_pp_screen_scaling_on", "", "", "", "not")
+						{
+							If("i_menu_copy_buffer", "", "", "", "not")
+							{
+								SetRenderTarget("backbuffer", "");
+							}
+							If("i_menu_copy_buffer", "", "", "", "")
+							{
+								SetRenderTargetsView("_CLR__STD_RENDER", "read_only_ds");
+							}
+						}
+					}
+					If("i_pp_direct_on", "", "", "", "not")
+					{
+						SetRenderTargetsView("_CLR__STD_RENDER", "read_only_ds");
+					}
+				}
+				else
+				{
+					If("f_ed_buffer_out_off", "", "", "", "")
+					{
+						SetRenderTarget("backbuffer", "");
+					}
+					If("f_ed_buffer_out_off", "", "", "", "not")
+					{
+						SetRenderTargetsView("_RGBA8_A_SRGB_Z", "");
+					}
+				}
+			}
+
+			Scene("std"); //Helpers, UI
+			Scene("std2");
+			use std_last(e_path = e_path);
+	Resolve(0, "");
+
+	if(b_editor_on || b_editor_stencil_on)
+	{
+		string stencil_rtv = (b_editor_stencil_on && !b_editor_on) ? "_CLR__STD_RENDER" : "_RGBA8_A_SRGB_Z";
+		string clr_tex = (b_editor_stencil_on && !b_editor_on) ? "CLR" : "1_RGBA8_A";
+
+		If("f_ed_pp_grid_cs", "", "", "", "")
+		{
+			Mesh("quad_screen.msh", "grid_cs.mat", "std");
+		}
+		If("f_ed_pp_grid_ws", "", "", "", "")
+		{
+			Mesh("quad_screen.msh", "grid_ws.mat", "std");
+		}
+		If("f_ed_pp_grid_distance", "", "", "", "")
+		{
+			Mesh("quad_screen.msh", "grid_distance.mat", "std");
+		}
+		If("f_ed_pp_grid_distance_ws", "", "", "", "")
+		{
+			Mesh("quad_screen.msh", "grid_distance_ws.mat", "std");
+		}
+
+		SetRenderTargetsView("_OPAQUE_NRM", "stencil");
+			Scene("stencil_marker");
+
+		SetRenderTarget("NRM", "");
+			SetBuffer(8, clr_tex);
+				Mesh("quad_screen.msh", "copy.mat", "std");
+
+
+		SetRenderTargetsView(stencil_rtv, "");
+					SetBuffer(8, "NRM");
+
+			If("f_ed_sm_0_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_0.mat", "std");
+			}
+
+			If("f_ed_sm_1_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_1.mat", "std");
+			}
+
+			If("f_ed_sm_2_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_2.mat", "std");
+			}
+
+			If("f_ed_sm_3_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_3.mat", "std");
+			}
+
+			If("f_ed_sm_4_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_4.mat", "std");
+			}
+
+			If("f_ed_sm_5_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_5.mat", "std");
+			}
+
+			If("f_ed_sm_6_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_6.mat", "std");
+			}
+
+			If("f_ed_sm_7_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_7.mat", "std");
+			}
+
+
+			If("f_ed_sm_8_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_8.mat", "std");
+			}
+
+			If("f_ed_sm_9_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_9.mat", "std");
+			}
+
+			If("f_ed_sm_10_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_10.mat", "std");
+			}
+
+			If("f_ed_sm_11_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_11.mat", "std");
+			}
+
+			If("f_ed_sm_12_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_12.mat", "std");
+			}
+
+			If("f_ed_sm_13_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_13.mat", "std");
+			}
+
+			If("f_ed_sm_14_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_14.mat", "std");
+			}
+
+			If("f_ed_sm_15_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_15.mat", "std");
+			}
+
+			SetRenderTarget("backbuffer", "");
+			If("f_ed_buffer_out_off", "", "", "", "not")
+			{
+					SetBuffer(8, "1_RGBA8_A");
+						Mesh("quad_screen.msh", "copy_gamma_win.mat", "std");
+			}
+	}
+
+	If("f_gamma_screen_on", "", "", "", "")
+	{
+		Mesh("quad_screen.msh", "monitor_tester.mat", "std");
+
+	}
+
+	if(!b_editor_on)
+	{
+		if(b_sm3x_on && (e_path != SM40) )
+		{
+			string clr_tex = (e_path == SM31) ? "1_RGBA8_A" : "CLR";
+
+			SetRenderTargetsView("_RGBA8_A_SRGB_Z", "noresolve");
+			SetBuffer(8, clr_tex);
+			SetBuffer(15, clr_tex);//menu
+
+			if(e_path != SM31)
+			{
+				If("f_menu_digital_noise", "", "", "", "not")
+				{
+					If("i_menu_copy_buffer", "", "", "", "")
+					{
+						Mesh("quad_screen.msh", "copy_srgb.mat", "std");
+					}
+				}
+			}
+
+			If("f_menu_digital_noise", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "menu_digital_noise.mat", "std");
+			}
+		}
+		else
+		{
+			If("i_pp_direct_on", "", "", "", "not")
+			{
+				If("f_pp_screen_scaling_on", "", "", "", "")
+				{
+					SetRenderTargetsView("_HDR_IMAGE", "");
+
+				}
+				If("f_pp_screen_scaling_on", "", "", "", "not")
+				{
+					SetRenderTarget("backbuffer", "");
+				}
+
+
+				// Uncomment me to test NVidia HBAO
+
+
+				string clr_tex = (e_path == SM51) ? "1_RGBA8_B" : "CLR";
+					SetBuffer(8, clr_tex);
+					SetBuffer(15, clr_tex); //menu
+
+				if(e_path == SM50)
+				{
+					If("i_pp_OculusEnable", "", "", "", "")
+					{
+						If("i_pp_OculusRightEye", "", "", "", "")
+						{
+							SetRenderTargetsView("_RIFT_R", "");
+						}
+						If("i_pp_OculusRightEye", "", "", "", "not")
+						{
+							SetRenderTargetsView("_RIFT_L", "");
+						}
+					}
+				}
+
+				If("f_menu_digital_noise", "", "", "", "not")
+				{
+					if(e_path == SM50 || e_path == SM40 || e_path == SM53)
+					{
+						Mesh("quad_screen.msh", "copy_gamma_win.mat", "std");
+					}
+					else
+					{
+						Mesh("quad_screen.msh", "copy_srgb.mat", "std");
+					}
+				}
+				If("f_menu_digital_noise", "", "", "", "")
+				{
+					Mesh("quad_screen.msh", "menu_digital_noise.mat", "std");
+				}
+			}
+
+		}
+
+		If("i_menu_copy_buffer", "", "", "", "")
+		{
+			Resolve(0, "");
+
+			string clr_tex_0 = (e_path == SM31) ? "1_RGBA8_A" : "CLR";
+			string clr_tex = (e_path == SM51) ? "1_RGBA8_B" : clr_tex_0;
+
+			If("i_menu_blur_buffer", "", "", "", "")
+			{
+
+
+				string blur_tex_temp_0 = (e_path == SM31) ? "4_RGBA8_B" : "4_RGBA8_A";
+				string blur_tex_temp = (e_path == SM51) ? "4_RGBA8_C" : blur_tex_temp_0;
+
+				SetRenderTargetsView("_4_MENU_BLUR", "noresolve");
+					SetBuffer(8, clr_tex);
+						Mesh("quad_screen.msh", "copy_smooth_srgb.mat", "std");
+				Resolve(0, "");
+
+				SetRenderTargetsView("_4_MENU_BLUR_TEMP", "noresolve");
+					SetBuffer(8, "4_RGBA8_B");
+						Mesh("quad_screen.msh", "blur_gauss_17_h_srgb.mat", "std");
+				Resolve(0, "");
+
+				SetRenderTargetsView("_4_MENU_BLUR", "noresolve");
+					SetBuffer(8, blur_tex_temp);
+						Mesh("quad_screen.msh", "blur_gauss_17_v_srgb.mat", "std");
+				Resolve(0, "");
+
+			}
+
+			SetBuffer(8, clr_tex);
+
+			if(b_sm3x_on)
+			{
+				if(e_path == SM40)
+				{
+					If("i_pp_direct_on", "", "", "", "")
+					{
+						If("f_pp_screen_scaling_on", "", "", "", "")
+						{
+							SetRenderTargetsView("_CLR__STD_RENDER", "");
+						}
+						If("f_pp_screen_scaling_on", "", "", "", "not")
+						{
+							SetRenderTarget("backbuffer", "");
+						}
+					}
+					If("i_pp_direct_on", "", "", "", "not")
+					{
+						SetRenderTarget("backbuffer", "");
+					}
+
+
+				}
+				else
+				{
+					SetRenderTargetsView("_RGBA8_A_SRGB_Z", "noresolve");
+				}
+			}
+			else
+			{
+				If("i_pp_direct_on", "", "", "", "not")
+				{
+					If("f_pp_screen_scaling_on", "", "", "", "")
+					{
+						SetRenderTargetsView("_HDR_IMAGE", "");
+					}
+					If("f_pp_screen_scaling_on", "", "", "", "not")
+					{
+						SetRenderTarget("backbuffer", "");
+					}
+
+					if(e_path == SM50)
+					{
+						If("i_pp_OculusEnable", "", "", "", "")
+						{
+							If("i_pp_OculusRightEye", "", "", "", "")
+							{
+								SetRenderTargetsView("_RIFT_R", "");
+							}
+							If("i_pp_OculusRightEye", "", "", "", "not")
+							{
+								SetRenderTargetsView("_RIFT_L", "");
+							}
+						}
+					}
+				}
+			}
+
+			If("i_pp_direct_on", "", "", "", "")
+			{
+				if(e_path == SM50 || e_path == SM40 || e_path == SM53)
+				{
+					Mesh("quad_screen.msh", "copy_gamma_win.mat", "std");
+				}
+				else
+				{
+					Mesh("quad_screen.msh", "copy_srgb.mat", "std");
+				}
+			}
+		}
+		SetBuffer(16, "4_RGBA8_B");		
+		
+		use last(e_path = e_path);
+		If("f_pp_fade_pp", "", "", "", "")
+		{
+			If("f_pp_fade_pp_clr", "", "", "", "")
+			{
+				If("f_pp_fade_pp_msk", "", "", "", "")
+				{
+					Mesh("quad_screen.msh", "fade_pp_cm.mat", "std");
+				}
+				If("f_pp_fade_pp_msk", "", "", "", "not")
+				{
+					Mesh("quad_screen.msh", "fade_pp_c_.mat", "std");
+				}
+			}
+			If("f_pp_fade_pp_clr", "", "", "", "not")
+			{
+				If("f_pp_fade_pp_msk", "", "", "", "")
+				{
+					Mesh("quad_screen.msh", "fade_pp__m.mat", "std");
+				}
+				If("f_pp_fade_pp_msk", "", "", "", "not")
+				{
+					Mesh("quad_screen.msh", "fade_pp___.mat", "std");
+				}
+			}
+		}
+	}
+}

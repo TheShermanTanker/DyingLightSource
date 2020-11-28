@@ -1,0 +1,43 @@
+export int ScanAllGames                 = 0;
+export int ScanFriendsGames             = 1;
+
+// Search distance - must match EDistanceFilter enum.
+export int DistanceClose        = 0;
+export int DistanceNear         = 1;
+export int DistanceFar          = 2;
+export int DistanceWorldWide    = 3;
+
+// Connectivity test - must match FConnectivityTest enum.
+export int NoTest                   = 0;
+export int LatencyTest              = 1;
+export int ConnectionTest           = 2;
+
+// FConnectivityTest flags combinations.
+export int LatencyAndConnectionTest = 3;
+
+// Task(score_min, score_max, search_type)
+
+sub main()
+{
+    Params()
+    {
+        ScanInterval(60);
+        RefreshInterval(20);
+        MaxResults(25);
+    }
+
+    Task("f_matchmaking_min_expected_score_initial_search", "f_matchmaking_max_expected_score_initial_search", ScanAllGames, DistanceNear, LatencyAndConnectionTest);
+    Task("f_matchmaking_min_expected_score_second_search",  "f_matchmaking_max_expected_score_second_search",  ScanAllGames, DistanceNear, LatencyAndConnectionTest);
+    Task("f_matchmaking_min_expected_score_third_search",   "f_matchmaking_max_expected_score_third_search",   ScanAllGames, DistanceNear, LatencyAndConnectionTest);
+    Task("f_matchmaking_min_expected_score_fourth_search",  "f_matchmaking_max_expected_score_fourth_search",  ScanAllGames, DistanceNear, LatencyAndConnectionTest);
+    
+    Task("f_matchmaking_min_expected_score_initial_search", "f_matchmaking_max_expected_score_initial_search", ScanAllGames, DistanceFar, LatencyAndConnectionTest);
+    Task("f_matchmaking_min_expected_score_second_search",  "f_matchmaking_max_expected_score_second_search",  ScanAllGames, DistanceFar, LatencyAndConnectionTest);
+    Task("f_matchmaking_min_expected_score_third_search",   "f_matchmaking_max_expected_score_third_search",   ScanAllGames, DistanceFar, LatencyAndConnectionTest);
+    Task("f_matchmaking_min_expected_score_fourth_search",  "f_matchmaking_max_expected_score_fourth_search",  ScanAllGames, DistanceFar, LatencyAndConnectionTest);
+    
+    Task("f_matchmaking_min_expected_score_initial_search", "f_matchmaking_max_expected_score_initial_search", ScanAllGames, DistanceWorldWide, LatencyAndConnectionTest);
+    Task("f_matchmaking_min_expected_score_second_search",  "f_matchmaking_max_expected_score_second_search",  ScanAllGames, DistanceWorldWide, LatencyAndConnectionTest);
+    Task("f_matchmaking_min_expected_score_third_search",   "f_matchmaking_max_expected_score_third_search",   ScanAllGames, DistanceWorldWide, LatencyAndConnectionTest);
+    Task("f_matchmaking_min_expected_score_fourth_search",  "f_matchmaking_max_expected_score_fourth_search",  ScanAllGames, DistanceWorldWide, LatencyAndConnectionTest);    
+}

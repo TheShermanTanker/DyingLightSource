@@ -1,0 +1,315 @@
+// ----   Nowe testy Noisa Kamery
+SeqTrack( "FPP_Stick_StandNoise",				"M_FPP_Stick_StandNoise.anm2", 		        0, 170, 30, 1, 0.3)
+SeqTrack( "FPP_Stick_MoveNoise",		"M_FPP_Stick_MoveNoise.anm2",				0, 60, 30, 1, 0.5)
+SeqTrack( "Berserker_FPP_Stick_MoveNoise",		"M_FPP_Stick_Noise_Berserker.anm2",			0, 28, 30, 1, 0.5)
+SeqTrack( "FPP_Stick_SprintNoise", 			"M_FPP_Stick_NM_Sprint02.anm2", 				0, 31, 30, 1, 0.5) 
+//----- animacje Male_FPP Unarmed
+
+//----- animacje Stick - Bron Jednoreczna
+
+// ===== prototype
+
+// CAMERA_ROLL -6 (jesli nie z animacji)
+// ATTACK_DURATION 0.6
+// m_EyeCameraTime 0 - 0.2
+
+//===================================== Fight Trigger============================================
+SeqTrack("FPP_Stick_Vigilent", 			"M_FPP_Stick_Vigilant_lvl0.anm2",  0, 260, 30, 1, 0.5 )
+SeqTrack("FPP_Stick_Stand", 			"M_FPP_Stick_Stand_DW.anm2", 				0, 10, 30, 1, 0.5)
+SeqTrack("FPP_Stick_Get", 				"M_FPP_Stick_Get.anm2"					, 0, 40, 30, 1, 0.3)
+
+//SeqTrack("FPP_Stick_Trick1", 			"M_FPP_Stick_WeaponTrick_01.anm2", 				0, 14, 30, 1, 0.1)
+//SeqTrack("FPP_Stick_Trick2", 			"M_FPP_Stick_WeaponTrick_01.anm2", 				0, 14, 30, 1, 0.1)
+
+SeqTrack("FPP_Stick_Melee_Attack_ExhaustedPunch", "M_FPP_Stick_LowStamina.anm2"	, 0, 47, 30, 1, 0.15)
+{
+	Event(0, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_Stamina_Low_XX.wav", 1, 0, 0, 1.0)
+	}
+	Event(10, MELEE_SWING_RIGHT, 1) 
+	Event(14, START_GIVE_DAMAGE, 1)
+	Event(14, PUNCH_HIT, 1)
+	Event(20, END_GIVE_DAMAGE, 1)
+	Event(30, CAN_START_KICK, -1)
+}
+
+SeqTrack("FPP_Stick_Melee_Attack_ExhaustedPunch_Rest", "M_FPP_Stick_LowStamina.anm2"	, 47, 92, 30, 1, 0.0)
+{
+	Event(3, END_ANIMATION, 1)
+}
+SeqTrack("FPP_Stick_Exhausted_Idle", "M_FPP_Stick_LowStamina.anm2"	, 92, 142, 30, 1, 0.4)
+
+
+SeqTracksBlend("FPP_Stick_Melee_Attack_ExhaustedPunch_Rest", 			"FPP_Stick_Exhausted_Idle", 1.5)
+
+SeqTrack("FPP_Stick_Melee_Attack_RL_Begin", 		"M_FPP_Stick_Swings.anm2"	, 0, 11, 110, 1, 0.1)
+SeqTrack("FPP_Stick_Melee_Attack_RL_Empty", 		"M_FPP_Stick_Swings_Long.anm2"	, 66, 84, 30, 1, 0.1)
+{
+	Event(0, 0, 1)
+	{
+			PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_XX.wav", 1, 0, 1, 0.5)
+	}
+	Event(0, MELEE_SWING_RIGHT, 1) 
+	Event(2.8, START_GIVE_DAMAGE, 1)
+	Event(2.8, PUNCH_HIT, 1)
+	Event(10, END_GIVE_DAMAGE, 1)	
+}
+SeqTrack("FPP_Stick_Melee_Attack_RL_Empty_Rest", 		"M_FPP_Stick_Swings.anm2"	, 175, 217, 20, 1, 0.1)
+{
+	Event(20, END_ANIMATION, 1)
+}
+
+SeqTrack("FPP_Stick_Melee_Attack_LR_Empty", 		"M_FPP_Stick_Swings_Long.anm2"	, 43, 58, 30, 1, 0.1)
+{
+	Event(0, 0, 1)
+	{
+			PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_XX.wav", 1, 0, 1, 0.5)
+	}
+	Event(3, PUNCH_HIT, 1)
+	Event(0, MELEE_SWING_RIGHT, 1) 
+	Event(2.5, START_GIVE_DAMAGE, 1)	
+	Event(10, END_GIVE_DAMAGE, 1)	
+}
+
+SeqTrack("FPP_Stick_Melee_Attack_LR_Empty_Rest", 		"M_FPP_Stick_Swings.anm2"	, 220, 262, 20, 1, 0.1)
+{
+	Event(20, END_ANIMATION, 1)
+}
+
+SeqTrack("FPP_Stick_Melee_Attack_LR_Hit_Middle", 		"M_FPP_Stick_HitShort.anm2", 		0, 16, 30, 1, 0.05)
+{	
+	Event(2, END_GIVE_DAMAGE, 1)	
+	Event(13, END_ANIMATION, 1)
+}
+SeqTrack("FPP_Stick_Melee_Attack_LR_Hit_Middle_Rest", 		"M_FPP_Stick_Swings.anm2"	, 175, 217, 20, 1, 0.3)
+{
+	Event(20, END_ANIMATION, 1)
+}
+SeqTrack("FPP_Stick_Melee_Attack_RL_Hit_Middle", 		"M_FPP_Stick_HitShort.anm2", 		36, 52, 30, 1, 0.03)
+{	
+	Event(2, END_GIVE_DAMAGE, 1)	
+	Event(13, END_ANIMATION, 1)
+}
+SeqTrack("FPP_Stick_Melee_Attack_RL_Hit_Middle_Rest", 		"M_FPP_Stick_Swings.anm2"	, 220, 262, 20, 1, 0.3)
+
+
+SeqTrack("FPP_Stick_Melee_Attack_CH_RL_Begin", 			"M_FPP_Stick_StrongHit_RL_LR_DW.anm2"	, 0, 19, 30, 1, 0.4)
+SeqTrack("FPP_Stick_Melee_Attack_CH_RL_Loop", 			"M_FPP_Stick_StrongHit_RL_LR_DW.anm2"	, 19, 54, 30, 1, 0.3)
+SeqTrack("FPP_Stick_Melee_Attack_CH_RL_Empty",			"M_FPP_Stick_StrongHit_RL_LR_DW.anm2"	, 55, 110, 33, 1, 0.1)
+{
+	Event(3, 0, 1)
+	{
+			PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_Charge_XX.wav", -1, 0, 0, 1.0)
+	}
+	Event(22.5, PUNCH_HIT, 1)
+	Event(16, MELEE_SWING_RIGHT,1) 
+	Event(22, START_GIVE_DAMAGE, 1)
+	Event(29, END_GIVE_DAMAGE, 1)	
+}
+SeqTrackAlias("FPP_Stick_Melee_Attack_CH_RL_Empty_Rest", 			"FPP_Stick_Melee_Attack_RL_Empty_Rest")
+
+
+SeqTrack("FPP_Stick_Melee_Attack_CH_LR_Begin", 			"M_FPP_Stick_StrongHit_RL_LR_DW.anm2"	, 112, 131, 30, 1, 0.4)
+SeqTrack("FPP_Stick_Melee_Attack_CH_LR_Loop", 			"M_FPP_Stick_StrongHit_RL_LR_DW.anm2"	, 133, 169, 20, 1, 0.3)
+SeqTrack("FPP_Stick_Melee_Attack_CH_LR_Empty",			"M_FPP_Stick_StrongHit_RL_LR_DW.anm2", 		166, 231, 40, 1, 0.1)
+{
+	Event(3, 0, 1)
+	{
+			PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_Charge_XX.wav", -1, 0, 0, 1.0)
+	}
+	Event(30, PUNCH_HIT, 1)
+	Event(21, MELEE_SWING_RIGHT,1) 
+	Event(30.8, START_GIVE_DAMAGE, 1)	
+	Event(37, END_GIVE_DAMAGE, 1)
+}
+
+SeqTrackAlias("FPP_Stick_Melee_Attack_CH_LR_Empty_Rest", 			"FPP_Stick_Melee_Attack_LR_Empty_Rest")
+/////////////// Vertical 0
+SeqTrack("FPP_Stick_Melee_Attack_UD_Begin", 			"M_FPP_Stick_Attack_UD_01.anm2"	, 0, 8, 60, 1, 0.1)
+SeqTrack("FPP_Stick_Melee_Attack_UD_Empty", 			"M_FPP_Stick_Attack_UD_01.anm2"	, 8, 27, 30, 1, 0.05)
+{
+	Event(0, 0, 1)
+	{
+			PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_XX.wav", 1, 0, 1, 0.5)
+	}
+	Event(3, PUNCH_HIT, 1)
+	Event(0, MELEE_SWING_RIGHT,1) 
+	Event(2, START_GIVE_DAMAGE, 1)
+	Event(7, END_GIVE_DAMAGE, 1)
+}
+SeqTrack("FPP_Stick_Melee_Attack_UD_Empty_Rest", 			"M_FPP_Stick_Attack_UD_01.anm2"	, 30, 58, 30, 1, 0.05)
+{
+	Event(10, END_ANIMATION, 1)
+}
+
+SeqTrack("FPP_Stick_Melee_Attack_UD_Hit_Middle", 		"M_FPP_Stick_Attack_UD_Hit_01.anm2", 		11, 22, 30, 1, 0.05)
+{	
+	Event(1, END_GIVE_DAMAGE, 1)	
+}
+SeqTrackAlias("FPP_Stick_Melee_Attack_UD_Hit_Middle_Rest", 		"FPP_Stick_Melee_Attack_UD_Empty_Rest")
+////////////////// Vertical 1
+/*SeqTrack("FPP_Stick_Melee_Attack_UD_Begin1", 			"M_FPP_Stick_Attack_UD_02.anm2"	, 0, 8, 60, 1, 0.1)
+SeqTrack("FPP_Stick_Melee_Attack_UD_Empty1", 			"M_FPP_Stick_Attack_UD_02.anm2"	, 8, 27, 30, 1, 0.05)
+{
+	Event(0, 0, 1)
+	{
+			PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_XX.wav", 1, 0, 1, 0.5)
+	}
+	Event(3, PUNCH_HIT, 1)
+	Event(0, MELEE_SWING_RIGHT,1) 
+	Event(2, START_GIVE_DAMAGE, 1)
+	Event(7, END_GIVE_DAMAGE, 1)
+}
+SeqTrack("FPP_Stick_Melee_Attack_UD_Empty1_Rest", 			"M_FPP_Stick_Attack_UD_02.anm2"	, 30, 58, 30, 1, 0.1)
+{
+	Event(10, END_ANIMATION, 1)
+}
+
+SeqTrack("FPP_Stick_Melee_Attack_UD_Hit_Middle1", 		"M_FPP_Stick_Attack_UD_Hit_02.anm2", 		11, 22, 30, 1, 0.1)
+{	
+	Event(1, END_GIVE_DAMAGE, 1)	
+}
+SeqTrackAlias("FPP_Stick_Melee_Attack_UD_Hit_Middle1_Rest", 		"FPP_Stick_Melee_Attack_UD_Empty_Rest")*/
+////////////////// Vertical 2
+SeqTrack("FPP_Stick_Melee_Attack_UD_Begin1", 			"M_FPP_Stick_Attack_UD_03.anm2"	, 0, 8, 60, 1, 0.1)
+SeqTrack("FPP_Stick_Melee_Attack_UD_Empty1", 			"M_FPP_Stick_Attack_UD_03.anm2"	, 8, 27, 30, 1, 0.05)
+{
+	Event(0, 0, 1)
+	{
+			PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_XX.wav", 1, 0, 1, 0.5)
+	}
+	Event(3, PUNCH_HIT, 1)
+	Event(0, MELEE_SWING_RIGHT,1) 
+	Event(2, START_GIVE_DAMAGE, 1)
+	Event(7, END_GIVE_DAMAGE, 1)
+}
+SeqTrack("FPP_Stick_Melee_Attack_UD_Empty1_Rest", 			"M_FPP_Stick_Attack_UD_03.anm2"	, 30, 58, 30, 1, 0.05)
+{
+	Event(10, END_ANIMATION, 1)
+}
+
+SeqTrack("FPP_Stick_Melee_Attack_UD_Hit_Middle1", 		"M_FPP_Stick_Attack_UD_Hit_03.anm2", 		11, 22, 30, 1, 0.05)
+{	
+	Event(1, END_GIVE_DAMAGE, 1)	
+}
+SeqTrackAlias("FPP_Stick_Melee_Attack_UD_Hit_Middle1_Rest", 		"FPP_Stick_Melee_Attack_UD_Empty_Rest")
+
+SeqTrack("FPP_Stick_Melee_Attack_JA_Begin", 			"M_FPP_Assassin_JumpAttack_Begin.anm2"	, 0, 11, 30, 1, 0.0)
+{
+	Event(1, EVENT_JUMP_ATTACK, 1)
+}
+SeqTrack("FPP_Stick_Melee_Attack_JA_Empty", 			"M_FPP_Assassin_JumpAttack_Begin.anm2"	, 0, 16, 30, 1, 0.0)
+{	
+	Event(0, MELEE_SWING_RIGHT,1) 
+	Event(0, START_GIVE_DAMAGE, 1)
+}
+
+SeqTrack("FPP_Stick_Melee_Attack_UR_Empty", 		"M_FPP_Stick_CrowdRelease_AttackR.anm2"	, 0, 21, 30, 1, 0.05)
+{
+	Event(0, 0, 1)
+	{
+			PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_XX.wav", 1, 0, 1, 0.5)
+	}
+	Event(0, MELEE_SWING_RIGHT, 1) 
+	Event(4.5, START_GIVE_DAMAGE, 1)
+	Event(4.5, PUNCH_HIT, 1)
+	Event(8, END_GIVE_DAMAGE, 1)	
+}
+SeqTrack("FPP_Stick_Melee_Attack_UR_Empty_Rest", 		"M_FPP_Stick_CrowdRelease_AttackR.anm2"	, 21, 65, 30, 1, 0.1)
+{
+	Event(20, END_ANIMATION, 1)
+}
+
+SeqTrack("FPP_Stick_Melee_Attack_UL_Empty", 		"M_FPP_Stick_CrowdRelease_AttackL.anm2"	, 0, 21, 30, 1, 0.05)
+{
+	Event(0, 0, 1)
+	{
+			PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_XX.wav", 1, 0, 1, 0.5)
+	}
+	Event(0, MELEE_SWING_RIGHT, 1) 
+	Event(4.5, START_GIVE_DAMAGE, 1)
+	Event(4.5, PUNCH_HIT, 1)
+	Event(8, END_GIVE_DAMAGE, 1)
+}
+
+SeqTrack("FPP_Stick_Melee_Attack_UL_Empty_Rest", 		"M_FPP_Stick_CrowdRelease_AttackL.anm2"	, 21, 65, 30, 1, 0.1)
+{
+	Event(20, END_ANIMATION, 1)
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// ROPE THROW
+
+SeqTrack( "FPP_Stick_Melee_RopeThrow_Aim",		"M_FPP_UniversalThrow_DW.anm2",			0, 130, 30, 1, 0.2)
+SeqTrack( "FPP_Stick_Melee_RopeThrow",			"M_FPP_UniversalThrow_DW.anm2",			132, 157, 30, 1, 0.0)
+{
+	Event(5, PUNCH_HIT, 1)
+	Event(5, ROPE_LOCOMOTION_ATTACH, 1)
+	Event(0, MELEE_SWING_RIGHT,1) 
+	Event(0, START_GIVE_DAMAGE, 1)	
+	Event(0, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_LoudSound, "weapon_rope_throw.wav", 1, 3, "head", 1, [0,0,0], 1)
+    }
+}
+
+SeqTrack( "FPP_Stick_Melee_RopeThrowBack",		"M_FPP_WeaponThrow.anm2",			61, 81, 30, 1, 0.3)
+{
+	Event(0, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_LoudSound, "weapon_rope_throw_back.wav", 1, 3, "head", 1, [0,0,0], 1)
+    }
+	Event(9, PUNCH_HIT, 1)
+}
+SeqTrack( "FPP_Stick_Melee_RopeThrowBack_Rest",	"M_FPP_WeaponThrow.anm2",			81, 125, 60, 1, 0.0)
+SeqTrack( "FPP_Stick_Melee_RopeClimb",		"M_FPP_WeaponThrow.anm2",			61, 115, 30, 1, 0.0)
+{
+	Event(0, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_LoudSound, "weapon_rope_throw_back.wav", 1, 3, "head", 1, [0,0,0], 1)
+    }
+	Event(9, PUNCH_HIT, 1)
+}
+
+SeqTrack( "FPP_Stick_Melee_Throw_Aim",		"M_FPP_UniversalThrow_DW.anm2",			0, 130, 30, 1, 0.2)
+SeqTrack( "FPP_Stick_Melee_Throw",		"M_FPP_UniversalThrow_DW.anm2",				132, 157, 30, 1, 0.0)
+{
+	Event(5, PUNCH_HIT, 1)
+	Event(0, MELEE_SWING_RIGHT, 1) 
+	Event(0, START_GIVE_DAMAGE, -1)	
+}
+SeqTracksBlend("FPP_Stick_Melee_Attack_CH_LR_Begin",	"FPP_Stick_Stand",			1.5)
+SeqTracksBlend("FPP_Stick_Melee_Attack_CH_RL_Begin",	"FPP_Stick_Stand",			1.5)
+
+SeqTracksBlend("FPP_Stick_Exhausted_Idle", "FPP_Stick_Stand", 1.0)
+SeqTracksBlend("FPP_Stick_Vigilent", "FPP_Stick_Melee_Attack_CH_RL_Begin", 1.0)
+SeqTracksBlend("FPP_Stick_Vigilent", "FPP_Stick_Melee_Attack_CH_LR_Begin", 1.0)
+
+
+SeqTracksBlend("FPP_Unarmed_Kick", 			"FPP_Stick_Exhausted_Idle", 0.5)
+SeqTracksBlend("FPP_Unarmed_KickMedium", 	"FPP_Stick_Exhausted_Idle", 0.5)
+SeqTracksBlend("FPP_Unarmed_KickLow", 		"FPP_Stick_Exhausted_Idle", 0.5)
+
+SeqTracksBlend("FPP_Unarmed_Kick", 			"FPP_Stick_Melee_Attack_ExhaustedPunch", 0.5)
+SeqTracksBlend("FPP_Unarmed_KickMedium", 	"FPP_Stick_Melee_Attack_ExhaustedPunch", 0.5)
+SeqTracksBlend("FPP_Unarmed_KickLow", 		"FPP_Stick_Melee_Attack_ExhaustedPunch", 0.5)
+
+SeqTracksBlend("FPP_Unarmed_Kick", 			"FPP_Stick_Melee_Attack_ExhaustedPunch_Rest", 0.5)
+SeqTracksBlend("FPP_Unarmed_KickMedium", 	"FPP_Stick_Melee_Attack_ExhaustedPunch_Rest", 0.5)
+SeqTracksBlend("FPP_Unarmed_KickLow", 		"FPP_Stick_Melee_Attack_ExhaustedPunch_Rest", 0.5)
+
+SeqTracksBlend("FPP_Stick_Exhausted_Idle", 	"FPP_Unarmed_Kick",			0.5)
+SeqTracksBlend("FPP_Stick_Exhausted_Idle", 	"FPP_Unarmed_KickMedium", 	0.5)
+SeqTracksBlend("FPP_Stick_Exhausted_Idle", 	"FPP_Unarmed_KickLow", 		0.5)
+
+SeqTracksBlend("FPP_Stick_Melee_Attack_ExhaustedPunch",		"FPP_Unarmed_Kick",			0.5)
+SeqTracksBlend("FPP_Stick_Melee_Attack_ExhaustedPunch", 	"FPP_Unarmed_KickMedium", 	0.5)
+SeqTracksBlend("FPP_Stick_Melee_Attack_ExhaustedPunch", 	"FPP_Unarmed_KickLow", 		0.5)
+
+SeqTracksBlend("FPP_Stick_Melee_Attack_ExhaustedPunch_Rest",	"FPP_Unarmed_Kick",			0.5)
+SeqTracksBlend("FPP_Stick_Melee_Attack_ExhaustedPunch_Rest", 	"FPP_Unarmed_KickMedium", 	0.5)
+SeqTracksBlend("FPP_Stick_Melee_Attack_ExhaustedPunch_Rest", 	"FPP_Unarmed_KickLow", 		0.5)
+
+SeqTracksBlend("FPP_Stick_Melee_Attack_CH_LR_Loop", 	"FPP_Stick_Melee_Attack_CH_LR_Empty", 		0.05)
+SeqTracksBlend("FPP_Stick_Melee_Attack_CH_RL_Loop", 	"FPP_Stick_Melee_Attack_CH_RL_Empty", 		0.05)

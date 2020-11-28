@@ -1,0 +1,922 @@
+////////////////////////////////////////////////////////////
+//Grab sets
+////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////
+//New Version (18.03.2013) - Zombie Grab
+////////////////////////////////////////////////////////////
+
+$GRAB_LEG_PUNCH_SOUND (s, "player_grab_leg_punch_XX.wav")
+$GRAB_LEG_PUNCH_SPEECH_PLAYER_SOUND (s, "speech_player_grab_leg_punch_XX.ogg")
+$GRAB_LEG_FINISH_SPEECH_PLAYER_SOUND (s, "speech_player_grab_leg_finish_XX.ogg")
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+// Grab (Default)
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+
+SeqTrack("FPP_Unarmed_BeginLeft_GrabLeft",		"M_FPP_Unarmed_Player_ZombieGrab.anm2",		 510, 532, 30, 1, 0.1) //L
+{	
+	Event(0, GRAB_INPUT_START, -1)
+	Event(11, GRAB_INPUT_STOP, -1)
+}
+
+
+SeqTrack("FPP_Unarmed_BeginFrontLeft_GrabLeft",		"M_FPP_Unarmed_Player_ZombieGrab.anm2",		 365, 387, 30, 1, 0.1) //L
+{
+	// 16 we can go to fast finish win
+	Event(0, GRAB_INPUT_START, -1)
+	Event(11, GRAB_INPUT_STOP, -1)
+}
+
+
+SeqTrack("FPP_Unarmed_Begin_Grab",		"M_FPP_Unarmed_Player_ZombieGrab.anm2",		 5, 27, 30, 1, 0.1) //R
+{
+	// 16 we can go to fast finish win
+	Event(0, GRAB_INPUT_START, -1)
+	Event(11, GRAB_INPUT_STOP, -1)
+}
+
+
+SeqTrack("FPP_Unarmed_BeginRight_Grab",		"M_FPP_Unarmed_Player_ZombieGrab.anm2",		 302, 324, 30, 1, 0.1) //R
+{
+	// 16 we can go to fast finish win
+	Event(0, GRAB_INPUT_START, -1)
+	Event(11, GRAB_INPUT_STOP, -1)
+}
+SeqTrackAlias("FPP_Unarmed_BeginFrontRight_Grab",		"FPP_Unarmed_BeginRight_Grab" )
+
+SeqTrack("FPP_Unarmed_FastFinishWins_Front_Grab", 	"M_FPP_Unarmed_Player_ZombieGrab.anm2",		 218, 261, 30, 1, 0.0)
+{
+	Event(0, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_knee_prepare.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+	Event(2, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_Charge_XX.wav", -1, 0, 1, 1.0)
+	}
+	Event(16, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_knee_XX.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+	Event(26, CAN_WALK, 1)
+	Event(30, GIVE_GRAB_DAMAGE, 1)
+    Event(33, GRAB_RELEASE, 1)
+}
+SeqTrackAlias("FPP_Unarmed_FastFinishWins_Front_GrabLeft",		"FPP_Unarmed_FastFinishWins_Front_Grab" )
+
+SeqTrack("FPP_Unarmed_FastFinishWins_Break_Grab", 	"M_FPP_Unarmed_BreakGrab.anm2",		 16, 45, 30, 1, 0.1)
+{
+	Event(0, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_fast_kick_XX.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+	Event(0, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_XX.wav", 1, 0, 0, 1.0)
+	}
+	Event(19, CAN_WALK, 1)
+	Event(8, GIVE_GRAB_DAMAGE, 1)
+    Event(19, GRAB_RELEASE, 1)
+	Event(21, END_ANIMATION, -1)
+}
+
+SeqTrackAlias("FPP_Unarmed_FastFinishWins_Break_GrabLeft", "FPP_Unarmed_FastFinishWins_Break_Grab")
+
+SeqTrack("FPP_Unarmed_Loop_Grab", 		"M_FPP_Unarmed_Player_ZombieGrab.anm2",		 27, 77, 30, 1, 0.0) //R
+{
+	Event(36, 0, 1)
+	{
+		PlayFx("grab_player_bleeding_sequence.fx", [0, -1, 0], "r_clavicle", 1, [0.1, 0, 0], 0)
+	}
+}
+
+SeqTrack("FPP_Unarmed_Loop_GrabLeft", 		"M_FPP_Unarmed_Player_ZombieGrab.anm2",		 387, 437, 30, 1, 0.0) //L
+{
+	Event(36, 0, 1)
+	{
+		PlayFx("grab_player_bleeding_sequence.fx", [0, -1, 0], "r_clavicle", 1, [0.1, 0, 0], 1)
+	}
+}
+
+SeqTrack("FPP_Unarmed_Punch1_Grab", 		"M_FPP_Unarmed_Player_ZombieGrab.anm2",		 77, 140, 30, 1, 0.1) //R
+{
+	Event(0, GRAB_INPUT_START, -1)
+	Event(43, GRAB_INPUT_STOP, -1)
+	Event(48, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "walker_female_grab_bite_break_failed_00.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+    Event(50, END_ANIMATION, -1)
+}
+
+SeqTrack("FPP_Unarmed_Punch1_GrabLeft", 		"M_FPP_Unarmed_Player_ZombieGrab.anm2",		 437, 500, 30, 1, 0.1) //L
+{
+	Event(0, GRAB_INPUT_START, -1)
+	Event(43, GRAB_INPUT_STOP, -1)
+	Event(48, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "walker_female_grab_bite_break_failed_00.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+    Event(50, END_ANIMATION, -1)
+}
+
+SeqTrack("FPP_Unarmed_FinishWins_Grab", 	"M_FPP_Unarmed_Player_ZombieGrab.anm2",		 145, 197, 30, 1, 0.1)
+{	
+	Event(0, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_neck.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+	Event(4, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_XX.wav", 1, 0, 0, 0.6)
+	}
+	Event(43, GIVE_GRAB_DAMAGE, 1) //33
+	Event(20, CAN_WALK, 1)
+	Event(45, GRAB_RELEASE, 1) //35
+}
+SeqTrackAlias("FPP_Unarmed_FinishWins_GrabLeft", "FPP_Unarmed_FinishWins_Grab")
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+// GrabWeak (Default)
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+
+SeqTrackAlias("FPP_Unarmed_BeginLeft_GrabWeakLeft", 			"FPP_Unarmed_BeginLeft_GrabLeft")
+SeqTrackAlias("FPP_Unarmed_BeginFrontLeft_GrabWeakLeft", 		"FPP_Unarmed_BeginFrontLeft_GrabLeft")
+SeqTrackAlias("FPP_Unarmed_Begin_GrabWeak", 					"FPP_Unarmed_Begin_Grab")
+SeqTrackAlias("FPP_Unarmed_BeginRight_GrabWeak", 				"FPP_Unarmed_BeginRight_Grab")
+SeqTrackAlias("FPP_Unarmed_BeginFrontRight_GrabWeak",			"FPP_Unarmed_BeginRight_Grab" )
+
+SeqTrackAlias("FPP_Unarmed_FastFinishWins_Front_GrabWeak", 		"FPP_Unarmed_FastFinishWins_Front_Grab")
+SeqTrackAlias("FPP_Unarmed_FastFinishWins_Front_GrabWeakLeft",	"FPP_Unarmed_FastFinishWins_Front_Grab" )
+SeqTrackAlias("FPP_Unarmed_FastFinishWins_Break_GrabWeak", 		"FPP_Unarmed_FastFinishWins_Break_Grab")
+SeqTrackAlias("FPP_Unarmed_FastFinishWins_Break_GrabWeakLeft", 	"FPP_Unarmed_FastFinishWins_Break_Grab")
+
+SeqTrackAlias("FPP_Unarmed_Loop_GrabWeak", 						"FPP_Unarmed_Loop_Grab")
+SeqTrackAlias("FPP_Unarmed_Loop_GrabWeakLeft", 					"FPP_Unarmed_Loop_GrabLeft")
+SeqTrackAlias("FPP_Unarmed_Punch1_GrabWeak",					"FPP_Unarmed_Punch1_Grab")
+SeqTrackAlias("FPP_Unarmed_Punch1_GrabWeakLeft", 				"FPP_Unarmed_Punch1_GrabLeft")
+
+SeqTrack("FPP_Unarmed_FinishWins_GrabWeak", 	"M_FPP_Unarmed_Player_ZombieGrab_AltFinish.anm2",		 0, 50, 30, 1, 0.1) //95
+{	
+	Event(0, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_weak_prepare.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+	Event(8, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_Charge_XX.wav", -1, 0, 1, 0.5)
+	}
+	Event(13, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_punch_XX.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+	Event(23, GIVE_GRAB_DAMAGE, 1) //33
+	Event(30, CAN_WALK, 1)
+	Event(35, GRAB_RELEASE, 1) //35
+	Event(40, END_ANIMATION, -1)
+}
+SeqTrackAlias("FPP_Unarmed_FinishWins_GrabWeakLeft",			"FPP_Unarmed_FinishWins_GrabWeak")
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+// Grab_1 (Kick)
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+
+SeqTrack("FPP_Unarmed_BeginLeft_GrabLeft_1",		"M_FPP_Unarmed_Player_GrabKick.anm2",		 255, 277, 30, 1, 0.1)
+{	
+	Event(0, GRAB_INPUT_START, -1)
+	Event(11, GRAB_INPUT_STOP, -1)
+}
+SeqTrackAlias("FPP_Unarmed_BeginFrontLeft_GrabLeft_1", 		"FPP_Unarmed_BeginLeft_GrabLeft_1")
+SeqTrack("FPP_Unarmed_Begin_Grab_1",		"M_FPP_Unarmed_Player_GrabKick.anm2",		 5, 27, 30, 1, 0.1) 
+{
+	Event(0, GRAB_INPUT_START, -1)
+	Event(11, GRAB_INPUT_STOP, -1)
+}
+SeqTrackAlias("FPP_Unarmed_Begin_GrabLeft_1", 					"FPP_Unarmed_Begin_Grab_1")
+SeqTrack("FPP_Unarmed_BeginRight_Grab_1",		"M_FPP_Unarmed_Player_GrabKick.anm2",		 220, 242, 30, 1, 0.1) 
+{
+	Event(0, GRAB_INPUT_START, -1)
+	Event(11, GRAB_INPUT_STOP, -1)
+}
+SeqTrackAlias("FPP_Unarmed_BeginFrontRight_Grab_1",			"FPP_Unarmed_BeginRight_Grab_1" )
+
+SeqTrackAlias("FPP_Unarmed_FastFinishWins_Front_Grab_1", 		"FPP_Unarmed_FastFinishWins_Front_Grab")
+SeqTrackAlias("FPP_Unarmed_FastFinishWins_Break_Grab_1", 		"FPP_Unarmed_FastFinishWins_Break_Grab")
+SeqTrack("FPP_Unarmed_Loop_Grab_1", 		"M_FPP_Unarmed_Player_GrabKick.anm2",		 27, 77, 30, 1, 0.5) 
+{
+	Event(36, 0, 1)
+	{
+		PlayFx("grab_player_bleeding_sequence.fx", [0, -1, 0], "r_clavicle", 1, [0.1, 0, 0], 0)
+	}    
+}
+
+SeqTrack("FPP_Unarmed_Punch1_Grab_1", 		"M_FPP_Unarmed_Player_GrabKick.anm2",		 77, 143, 30, 1, 0.1)
+{
+	Event(0, GRAB_INPUT_START, -1)
+	Event(0, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Reaction_Grab_Break_XX.wav", 1, 0, 0, 1.0)
+	}
+	Event(46, GRAB_INPUT_STOP, -1)
+	Event(51, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "walker_female_grab_bite_break_failed_00.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+    Event(53, END_ANIMATION, -1)
+}
+
+SeqTrack("FPP_Unarmed_FinishWins_Grab_1", 	"M_FPP_Unarmed_Player_GrabKick.anm2",		 150, 211, 20, 1, 0.1)
+{	
+	Event(0, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_weak_prepare.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+	Event(3, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_Charge_XX.wav", -1, 0, 1, 0.5)
+	}
+	Event(10, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "hit_leg_XX.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+	Event(13, GIVE_GRAB_DAMAGE, 1)
+	//Event(13, ROZPIERDOL_GLOWY, 1)
+	Event(28, CAN_WALK, 1)
+	Event(30, GRAB_RELEASE, 1)
+	Event(31, END_ANIMATION, -1)
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+// GrabWeak_1 (Kick)
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+SeqTrackAlias("FPP_Unarmed_BeginLeft_GrabWeakLeft_1","FPP_Unarmed_BeginLeft_GrabLeft_1"	)
+SeqTrackAlias("FPP_Unarmed_BeginFrontLeft_GrabWeakLeft_1", "FPP_Unarmed_BeginFrontLeft_GrabLeft_1")
+SeqTrackAlias("FPP_Unarmed_Begin_GrabWeak_1",	"FPP_Unarmed_Begin_Grab_1")	
+SeqTrackAlias("FPP_Unarmed_Begin_GrabWeakLeft_1", "FPP_Unarmed_Begin_GrabLeft_1"	)
+SeqTrackAlias("FPP_Unarmed_BeginRight_GrabWeak_1",	"FPP_Unarmed_BeginRight_Grab_1")
+SeqTrackAlias("FPP_Unarmed_BeginFrontRight_GrabWeak_1",	"FPP_Unarmed_BeginFrontRight_Grab_1"	)
+SeqTrackAlias("FPP_Unarmed_FastFinishWins_Front_GrabWeak_1", "FPP_Unarmed_FastFinishWins_Front_Grab_1")	
+SeqTrackAlias("FPP_Unarmed_FastFinishWins_Break_GrabWeak_1", 	"FPP_Unarmed_FastFinishWins_Break_Grab_1")
+SeqTrackAlias("FPP_Unarmed_Loop_GrabWeak_1", "FPP_Unarmed_Loop_Grab_1"	)
+
+SeqTrackAlias("FPP_Unarmed_Punch1_GrabWeak_1", "FPP_Unarmed_Punch1_Grab_1")
+
+SeqTrack("FPP_Unarmed_FinishWins_GrabWeak_1", 	   "M_FPP_Unarmed_Player_GrabKick_Weak.anm2",		 0, 62, 24, 1, 0.1)
+{	
+	Event(0, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_weak_prepare.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+	Event(3, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_Charge_XX.wav", -1, 0, 1, 0.5)
+	}
+	Event(10, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "hit_leg_xx.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+	Event(13, GIVE_GRAB_DAMAGE, 1) // temp
+	Event(28, CAN_WALK, 1)
+	Event(30, GRAB_RELEASE, 1)
+	Event(31, END_ANIMATION, -1)
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+// Grab_2 (Elbow)
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+SeqTrackAlias("FPP_Unarmed_Begin_Grab_2",		"FPP_Unarmed_Begin_Grab")
+SeqTrackAlias("FPP_Unarmed_FastFinishWins_Break_Grab_2",		"FPP_Unarmed_FastFinishWins_Break_Grab")
+SeqTrackAlias("FPP_Unarmed_Loop_Grab_2", "FPP_Unarmed_Loop_Grab"	)
+
+SeqTrack("FPP_Unarmed_FastFinishWins_Front_Grab_2", 	"M_FPP_Unarmed_Player_Grab_FastRelease_Necksnap.anm2",		 16, 76, 30, 1, 0.0)
+{
+	Event(4, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_Charge_XX.wav", -1, 0, 1, 0.6)
+	}
+	Event(40, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_neck.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+	Event(50, CAN_WALK, 1)
+	Event(55, GIVE_GRAB_DAMAGE, 1)
+    Event(56, GRAB_RELEASE, 1)
+}
+
+SeqTrackAlias("FPP_Unarmed_Punch1_Grab_2", 		"FPP_Unarmed_Punch1_Grab_1") 
+
+
+SeqTrack("FPP_Unarmed_FinishWins_Grab_2", 	"M_FPP_Unarmed_Player_GrabElbow.anm2",		 0, 62, 30, 1, 0.1)
+{	
+	Event(0, 0, 1)
+	{
+	    PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_elbow_begin.wav", 1.0, 3, "head", 1, [0, 0, 0], 0)
+    }
+	Event(15, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_Charge_XX.wav", -1, 0, 1, 1.0)
+	}
+	Event(27, 0, 1)
+	{
+	    PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_elbow_hit.wav", 1.0, 3, "head", 1, [0, 0, 0], 0)
+    }
+	Event(40, GIVE_GRAB_DAMAGE, 1) //33
+	Event(50, CAN_WALK, 1)
+	Event(55, GRAB_RELEASE, 1) //35
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+// GrabWeak_2 (Push)
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+SeqTrackAlias("FPP_Unarmed_BeginLeft_GrabWeakLeft_2","FPP_Unarmed_BeginLeft_GrabLeft"	)
+SeqTrackAlias("FPP_Unarmed_BeginFrontLeft_GrabWeakLeft_2", "FPP_Unarmed_BeginFrontLeft_GrabLeft")
+SeqTrackAlias("FPP_Unarmed_Begin_GrabWeak_2",	"FPP_Unarmed_Begin_Grab")	
+SeqTrackAlias("FPP_Unarmed_Begin_GrabWeakLeft_2", "FPP_Unarmed_Begin_GrabLeft_1"	)
+SeqTrackAlias("FPP_Unarmed_BeginRight_GrabWeak_2",	"FPP_Unarmed_BeginRight_Grab")
+SeqTrackAlias("FPP_Unarmed_BeginFrontRight_GrabWeak_2",	"FPP_Unarmed_BeginFrontRight_Grab"	)
+SeqTrackAlias("FPP_Unarmed_FastFinishWins_Front_GrabWeak_2", "FPP_Unarmed_FastFinishWins_Front_Grab")
+
+SeqTrack("FPP_Unarmed_FastFinishWins_Break_GrabWeak_2", 	"M_FPP_Unarmed_Player_Grab_FastRelease_Weak_Palm.anm2",		 16, 68, 30, 1, 0.1)
+{	
+	Event(0, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_fast_punch_begin.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+	Event(4, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_Charge_XX.wav", -1, 0, 1, 1.0)
+	}
+	Event(17, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_fast_punch_hit.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+	Event(20, GIVE_GRAB_DAMAGE, 1) // temp
+	Event(28, CAN_WALK, 1)
+	Event(34, GRAB_RELEASE, 1)
+	Event(36, END_ANIMATION, -1)
+}
+SeqTrackAlias("FPP_Unarmed_Loop_GrabWeak_2", "FPP_Unarmed_Loop_Grab"	)
+
+SeqTrackAlias("FPP_Unarmed_Punch1_GrabWeak_2", "FPP_Unarmed_Punch1_Grab_2")
+
+SeqTrack("FPP_Unarmed_FinishWins_GrabWeak_2", 	   "M_FPP_Unarmed_Player_Grab_Weak_Push.anm2",		 0, 90, 60, 1, 0.1)
+{	
+	Event(0, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_weak_prepare.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+	Event(3, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_Charge_XX.wav", -1, 0, 1, 0.5)
+	}
+	Event(10, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_push_XX.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+	Event(35, GIVE_GRAB_DAMAGE, 1) // temp
+	Event(45, CAN_WALK, 1)
+	Event(50, GRAB_RELEASE, 1)
+	Event(80, END_ANIMATION, -1)
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+// CLENCH
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+
+SeqTrackAlias("FPP_Unarmed_Begin_Clench", "FPP_Unarmed_Begin_Grab")
+SeqTrackAlias("FPP_Unarmed_Loop_Clench", "FPP_Unarmed_Loop_Grab")
+SeqTrackAlias("FPP_Unarmed_Punch1_Clench", "FPP_Unarmed_Punch1_Grab")
+SeqTrackAlias("FPP_Unarmed_FinishWins_Clench", "FPP_Unarmed_FinishWins_Grab")
+SeqTrackAlias("FPP_Unarmed_FinishLose_Clench", "FPP_Unarmed_FinishWins_Grab")
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+// Jump Attack
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+SeqTrack("FPP_Unarmed_Begin_JumpAttack", 			"M_FPP_Assassin_JumpAttack.anm2"		, 6, 15, 30, 1, 0.1)
+{
+    Event(0, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_XX.wav", 1, 0, 0, 1.0)
+	}
+	Event(0, 0, 0)
+    {
+    	PlaySound23D(GameVolumeSource_SpecialSound, "jump_attack_sharp_hit.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+}
+SeqTrack("FPP_Unarmed_FinishWins_JumpAttack", 		"M_FPP_Assassin_JumpAttack.anm2"		, 15, 54, 30, 1, 0.0)
+{
+	
+	Event(0, GIVE_GRAB_DAMAGE, 1)
+	Event(23, 0, 1)
+    {
+    	PlaySound23D(GameVolumeSource_SpecialSound, "jump_attack_sharp_pull_out.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+	Event(42, GRAB_RELEASE, 1)
+	Event(50, CAN_WALK, 1)
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+// Jump Attack Blunt
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+SeqTrack("FPP_Unarmed_Begin_JumpAttackBlunt", 			"M_FPP_Stick_JumpAttack.anm2"		, 7, 14, 30, 1, 0.1)
+{
+    Event(0, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_XX.wav", 1, 0, 0, 1.0)
+	}
+	Event(0, 0, 1)
+    {
+    	PlaySound23D(GameVolumeSource_SpecialSound, "jump_attack_blunt.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+}
+SeqTrack("FPP_Unarmed_FinishWins_JumpAttackBlunt", 		"M_FPP_Stick_JumpAttack.anm2"		, 14, 74, 30, 1, 0.0)
+{
+	Event(4, GIVE_GRAB_DAMAGE, 1)	
+	Event(34, GRAB_RELEASE, 1)
+	Event(34, CAN_WALK, 1)
+}
+///////////////////////////////////////
+//////////////////// Scalping (elbow)
+//////////////////////////////////////
+SeqTrack("FPP_Unarmed_Begin_Scalping", 	"M_FPP_Unarmed_Player_GrabElbow.anm2",		 0, 6, 30, 1, 0.1)
+SeqTrack("FPP_Unarmed_FinishWins_Scalping", 	"M_FPP_Unarmed_Player_GrabElbow.anm2",		 6, 62, 30, 1, 0.0)
+{	
+	Event(0, 0, 1)
+	{
+	    PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_elbow_begin.wav", 1.0, 3, "head", 1, [0, 0, 0], 0)
+    }
+	Event(15, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_Charge_XX.wav", -1, 0, 1, 1.0)
+	}
+	Event(27, 0, 1)
+	{
+	    PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_elbow_hit.wav", 1.0, 3, "head", 1, [0, 0, 0], 0)
+    }
+	Event(31, GIVE_GRAB_DAMAGE, 1) //33
+	Event(44, CAN_WALK, 1)
+	Event(49, GRAB_RELEASE, 1) //35
+}
+
+///////////////////////////////////////
+//////////////////// Scalping 2 (knee in the head)
+//////////////////////////////////////
+SeqTrack("FPP_Unarmed_Begin_Scalping_1",		"M_FPP_Unarmed_Player_ZombieGrab.anm2",		 214, 220, 30, 1, 0.1)
+SeqTrack("FPP_Unarmed_FinishWins_Scalping_1", 	"M_FPP_Unarmed_Player_ZombieGrab.anm2",		 220, 261, 30, 1, 0.0)
+{
+	Event(0, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_knee_prepare.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+	Event(0, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_Charge_XX.wav", -1, 0, 1, 1.0)
+	}
+	Event(14, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_knee_XX.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+	Event(24, CAN_WALK, 1)
+	Event(20, GRAB_DESTROY_HEAD, 1)
+    Event(31, GRAB_RELEASE, 1)
+}
+///////////////////////////////////////
+//////////////////// Scalping 2 (necksnap under shoulder)
+//////////////////////////////////////
+SeqTrack("FPP_Unarmed_Begin_Scalping_2", 	"M_FPP_Unarmed_Player_Grab_FastRelease_Necksnap.anm2",		 0, 16, 45, 1, 0.1)
+SeqTrack("FPP_Unarmed_FinishWins_Scalping_2", 	"M_FPP_Unarmed_Player_Grab_FastRelease_Necksnap.anm2",		 16, 76, 35, 1, 0.0)
+{
+	Event(0, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_neck_under_begin.wav", 1.0, 3, "head", 1, [0, 0, 0], 0)
+    }
+	Event(30, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_XX.wav", 1, 0, 1, 1.0)
+	}
+	Event(39, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_neck_under_hit.wav", 1.0, 3, "head", 1, [0, 0, 0], 0)
+    }
+	Event(50, CAN_WALK, 1)
+	Event(55, GIVE_GRAB_DAMAGE, 1)
+    Event(56, GRAB_RELEASE, 1)
+}
+///////////////////////////////////////
+//////////////////// Scalping 3 (necksnap in front)
+//////////////////////////////////////
+SeqTrack("FPP_Unarmed_Begin_Scalping_3", 		"M_FPP_Unarmed_Player_ZombieGrab.anm2",		 145, 150, 30, 1, 0.1)
+SeqTrack("FPP_Unarmed_FinishWins_Scalping_3", 	"M_FPP_Unarmed_Player_ZombieGrab.anm2",		 150, 197, 30, 1, 0.1)
+{	
+	Event(0, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_neck.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+	Event(4, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_XX.wav", 1, 0, 0, 0.6)
+	}
+	Event(37, GIVE_GRAB_DAMAGE, 1) //33
+	Event(15, CAN_WALK, 1)
+	Event(40, GRAB_RELEASE, 1) //35
+}
+///////////////////////////////////////
+//////////////////// Scalping 4 (kick in the head)
+//////////////////////////////////////
+/*SeqTrack("FPP_Unarmed_Begin_Scalping_5",	 	"M_FPP_Unarmed_Player_GrabKick.anm2",		 156, 160, 20, 1, 0.1)
+{
+	Event(0, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_weak_prepare.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+	Event(3, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_Charge_XX.wav", -1, 0, 1, 0.5)
+	}
+}
+SeqTrack("FPP_Unarmed_FinishWins_Scalping_5", 	"M_FPP_Unarmed_Player_GrabKick.anm2",		 160, 211, 20, 1, 0.1)
+{
+	Event(0, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "hit_leg_xx.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+	Event(3, GRAB_DESTROY_HEAD, 1)
+	Event(18, CAN_WALK, 1)
+	Event(20, GRAB_RELEASE, 1)
+	Event(23, END_ANIMATION, -1)
+}*/
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+// FinisherBack
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+SeqTrack("FPP_Unarmed_Begin_FinisherBack",			"M_FPP_Unarmed_FinisherBack_Slow.anm2"			, 0, 5, 30, 1, 0.1)
+SeqTrack("FPP_Unarmed_FinishWins_FinisherBack",			"M_FPP_Unarmed_FinisherBack_Slow.anm2"		, 5, 127, 30, 1, 0.0)
+{
+	Event(1, 0, 1)
+	{
+		PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_back_begin.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(61, 0, 1)
+	{
+		PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_back_hit.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(76, 0, 1)
+	{
+		PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_back_end.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(92, GIVE_GRAB_DAMAGE, 1)	
+	Event(100, GRAB_RELEASE, 1)
+	Event(110, CAN_WALK, 1)
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+// FinisherBackFast
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+SeqTrack("FPP_Unarmed_Begin_FinisherBackFast",			"M_FPP_Unarmed_FinisherBack_Fast.anm2"			, 2, 5, 30, 1, 0.1)
+SeqTrack("FPP_Unarmed_FinishWins_FinisherBackFast",			"M_FPP_Unarmed_FinisherBack_Fast.anm2"		, 5, 45, 30, 1, 0.0)
+{
+	Event(0, 0, 1)
+	{
+		PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_back_fast_begin.wav", 0.8, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(15, 0, 1)
+	{
+		PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_back_fast_hit.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(21, 0, 1)
+	{
+		PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_back_fast_end.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}	
+	Event(20, GIVE_GRAB_DAMAGE, 1)	
+	Event(36, GRAB_RELEASE, 1)
+	Event(36, CAN_WALK, 1)
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+// NageWaza Back
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+
+SeqTrack("FPP_Unarmed_Begin_NageWazaBack",			"M_FPP_Unarmed_NageWaza_Right.anm2",		 0, 10, 30, 1, 0.2) //R
+SeqTrack("FPP_Unarmed_FinishWins_NageWazaBack",		"M_FPP_Unarmed_NageWaza_Right.anm2",		 10, 62, 30, 1, 0.0)
+{
+	Event(0, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_XX.wav", 1, 0, 1, 0.5)
+	}
+	Event(0, 0, 1)
+	{
+		PlaySound23D(GameVolumeSource_SpecialSound, "player_nage_vaza_front.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(30, CAN_WALK, 1)
+    Event(0, GRAB_RELEASE, 1)	
+	Event(32, END_ANIMATION, 1)
+}
+
+SeqTrack("FPP_Unarmed_FinishWins_NageWazaBack_Enhanced",		"M_FPP_Unarmed_NageWaza_Right.anm2",		 10, 62, 30, 1, 0.0)
+{
+	Event(0, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_XX.wav", 1, 0, 1, 0.5)
+	}
+	Event(0, 0, 1)
+	{
+		PlaySound23D(GameVolumeSource_SpecialSound, "player_nage_vaza_front.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(30, CAN_WALK, 1)
+    Event(0, GRAB_RELEASE, 1)	
+    Event(20, 0, 1)	
+	{
+        SetRagdollBehaviorOnTarget("NageWazaRelease",  [0, 0, 1], 0.1)
+    }
+	
+	Event(32, END_ANIMATION, 1)
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+// NageWaza Right
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+
+SeqTrack("FPP_Unarmed_Begin_NageWazaRight",			"M_FPP_Unarmed_NageWaza_Right_90.anm2",		 0, 10, 30, 1, 0.2) //R
+SeqTrack("FPP_Unarmed_FinishWins_NageWazaRight",		"M_FPP_Unarmed_NageWaza_Right_90.anm2",		 10, 62, 30, 1, 0.0)
+{
+	Event(0, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_XX.wav", 1, 0, 1, 0.5)
+	}
+	Event(0, 0, 1)
+	{
+		PlaySound23D(GameVolumeSource_SpecialSound, "player_nage_vaza_front.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(30, CAN_WALK, 1)
+    Event(0, GRAB_RELEASE, 1)	
+	Event(32, END_ANIMATION, 1)
+}
+
+SeqTrack("FPP_Unarmed_FinishWins_NageWazaRight_Enhanced",		"M_FPP_Unarmed_NageWaza_Right_90.anm2",		 10, 62, 30, 1, 0.0)
+{
+	Event(0, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_XX.wav", 1, 0, 1, 0.5)
+	}
+	Event(0, 0, 1)
+	{
+		PlaySound23D(GameVolumeSource_SpecialSound, "player_nage_vaza_front.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(30, CAN_WALK, 1)
+    Event(0, GRAB_RELEASE, 1)	
+    Event(25, 0, 1)	
+	{
+        SetRagdollBehaviorOnTarget("NageWazaRelease",  [0, 0, 1], 0.1)
+    }
+	Event(32, END_ANIMATION, 1)
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+// NageWaza Left
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+
+SeqTrack("FPP_Unarmed_Begin_NageWazaLeft",			"M_FPP_Unarmed_NageWaza_Left_90.anm2",		 0, 10, 30, 1, 0.2) //R
+SeqTrack("FPP_Unarmed_FinishWins_NageWazaLeft",		"M_FPP_Unarmed_NageWaza_Left_90.anm2",		 10, 45, 30, 1, 0.0)
+{
+	Event(0, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_XX.wav", 1, 0, 1, 0.5)
+	}
+	Event(0, 0, 1)
+	{
+		PlaySound23D(GameVolumeSource_SpecialSound, "player_nage_vaza_side.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(24, CAN_WALK, 1)
+    Event(0, GRAB_RELEASE, 1)
+	Event(32, END_ANIMATION, 1)
+}
+
+SeqTrack("FPP_Unarmed_FinishWins_NageWazaLeft_Enhanced",		"M_FPP_Unarmed_NageWaza_Left_90.anm2",		 10, 45, 30, 1, 0.0)
+{
+	Event(0, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_XX.wav", 1, 0, 1, 0.5)
+	}
+	Event(0, 0, 1)
+	{
+		PlaySound23D(GameVolumeSource_SpecialSound, "player_nage_vaza_side.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(24, CAN_WALK, 1)
+    Event(0, GRAB_RELEASE, 1)
+    Event(20, 0, 1)
+	{
+        SetRagdollBehaviorOnTarget("NageWazaRelease",  [0, 0, 1], 0.2)
+    }
+	Event(32, END_ANIMATION, 1)
+}
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+// NageWaza Front
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+
+SeqTrack("FPP_Unarmed_Begin_NageWazaFront",			"M_FPP_Unarmed_NageWaza_Right_Forward.anm2",		 0, 10, 30, 1, 0.2) //R
+SeqTrack("FPP_Unarmed_FinishWins_NageWazaFront",		"M_FPP_Unarmed_NageWaza_Right_Forward.anm2",		 10, 49, 30, 1, 0.0)
+{		
+    Event(0, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_XX.wav", 1, 0, 1, 0.6)
+	}
+	Event(0, 0, 1)
+	{
+		PlaySound23D(GameVolumeSource_SpecialSound, "player_nage_vaza_front.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(16, GRAB_RELEASE, 1)	
+	{
+		SetRagdollBehaviorOnTarget("NageWazaReleaseFront",  [0, 0, 1], 1.0)
+	}
+	Event(30, CAN_WALK, 1)
+	Event(35, END_ANIMATION, 1)
+}
+
+SeqTrack("FPP_Unarmed_FinishWins_NageWazaFront_Enhanced",		"M_FPP_Unarmed_NageWaza_Right_Forward.anm2",		 10, 49, 30, 1, 0.0)
+{		
+    Event(0, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_XX.wav", 1, 0, 1, 0.6)
+	}
+	Event(0, 0, 1)
+	{
+		PlaySound23D(GameVolumeSource_SpecialSound, "player_nage_vaza_front.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(16, GRAB_RELEASE, 1)	
+	{
+		SetRagdollBehaviorOnTarget("NageWazaReleaseFrontEnhanced",  [0, 0, 1], 1.5)
+	}
+	Event(30, CAN_WALK, 1)
+	Event(35, END_ANIMATION, 1)
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+// Leg Grabs
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+
+SeqTrack("FPP_Unarmed_Begin_LegGrab", 	  "FPP_lurker_grab_Begin.anm2", 0, 58, 30, 1, 0.2)
+{
+	Event(0, 0, 1)
+	{
+		PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_leg_begin.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+    
+    Event(27, GRAB_INPUT_START, -1)
+}
+SeqTrack("FPP_Unarmed_Loop_LegGrab", 	  "FPP_lurker_grab_Loop.anm2", 0, 62, 30, 1, 0.2)
+{
+	Event(0, 0, 1)
+	{
+		PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_leg_loop.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+}
+SeqTrack("FPP_Unarmed_Punch1_LegGrab", 	  "FPP_lurker_grab_trigger.anm2", 0, 83, 30, 1, 0.2)
+{
+	Event(0, 0, 1)
+	{
+		PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_leg_punch_prepare.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(0, 0, 1)
+	{
+		PlaySound23D(GameVolumeSource_SpeechPlayer, GRAB_LEG_PUNCH_SPEECH_PLAYER_SOUND, 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(26, 0, 1)
+	{
+		PlaySound23D(GameVolumeSource_SpecialSound, GRAB_LEG_PUNCH_SOUND, 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(77, 0, 1)
+	{
+		PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_leg_begin_fast.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+}
+SeqTrack("FPP_Unarmed_FinishWins_LegGrab", 		"FPP_lurker_grab_finisher.anm2", 0, 96, 30, 1, 0.2)
+{
+    Event(0, GRAB_INPUT_STOP, -1)
+	Event(0, 0, 1)
+	{
+		PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_leg_punch_prepare.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(0, 0, 1)
+	{
+		PlaySound23D(GameVolumeSource_SpeechPlayer, GRAB_LEG_FINISH_SPEECH_PLAYER_SOUND, 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(56, 0, 1)
+	{
+		PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_leg_finish.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(56, GIVE_GRAB_DAMAGE, 1)
+	Event(70, GRAB_RELEASE, 1)
+	Event(90, CAN_WALK, 1)
+}
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+// Volatile Grab
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+
+SeqTrack("FPP_Unarmed_Begin_VolatileGrab", 	  				  "M_FPP_Volatile_grab_Attack_Sequence_02.anm2"    , 24, 30, 20, 1, 0.15)
+{
+}
+SeqTrack("FPP_Unarmed_Loop_VolatileGrab", 	  				  "M_FPP_Volatile_grab_Attack_Sequence_02.anm2"    , 30, 180, 30, 1, 0.0)
+{
+	Event(0, GRAB_INPUT_START, -1)
+	Event(0, 0, 1)
+	{
+		PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_volatile_begin.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(60, GRAB_INPUT_STOP, -1)
+	Event(61, 0, 1)
+	{
+		PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_volatile_end.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}	
+	Event(144, GIVE_GRAB_DAMAGE, 1)		
+}
+//SeqTrack("FPP_Unarmed_FinishLose_VolatileGrab",				  "M_FPP_Volatile_grab_Attack_Sequence.anm2"    , 248, 249, 60, 1, 0.0)
+
+SeqTrack("FPP_Unarmed_FastFinishWins_Front_VolatileGrab", 	  "M_FPP_Volatile_grab_Throw_Sequence_02.anm2"     , 30, 62, 30, 1, 0.05)
+{
+	Event(1, 0, 1)
+	{
+		PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_volatile_finish_fast.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(25, GRAB_RELEASE, 1)
+	Event(21, CAN_WALK, 1)
+}
+/* 
+SeqTrack("FPP_Unarmed_FinishWins_VolatileGrab", 	  		  "M_FPP_Volatile_grab_Attack_Sequence_02.anm2"     , 184, 274, 30, 1, 0.05)
+{
+    Event(0, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_volatile_finish_kick.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+    Event(46, GRAB_RELEASE, 1)
+    Event(70, CAN_WALK, 1)
+    Event(70, END_ANIMATION, -1)
+}
+stare - teraz jest wersja z szybszym wstawaniem */
+SeqTrack("FPP_Unarmed_FinishWins_VolatileGrab", 	  		  "M_FPP_Unarmed_FinishWins_VolatileGrabShort.anm2"     , 0, 71, 30, 1, 0.05)
+{
+    Event(0, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_volatile_finish_kick.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+    Event(46, GRAB_RELEASE, 1)
+    Event(50, CAN_WALK, 1)
+    Event(50, END_ANIMATION, -1)
+}
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+// Screamer Kill
+//////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
+
+SeqTrack("FPP_Unarmed_Begin_GrabScreamer",	 	  		  "M_FPP_Unarmed_ScreamerKill.anm2"     , 0, 30, 30, 1, 0.1)
+{
+    Event(13, 0, 1)
+	{
+		PlaySound23D(GameVolumeSource_SpecialSound, "player_grab_finish_screamer.wav", 1.2, 3, "head", 1, [0, 0, 0], 0)
+	}
+}
+SeqTrack("FPP_Unarmed_FinishWins_GrabScreamer",	  		  "M_FPP_Unarmed_ScreamerKill.anm2"     , 30, 162, 30, 1, 0.0)
+{
+	Event(70, GIVE_GRAB_DAMAGE, 1)	
+	Event(88, GRAB_RELEASE, 1)
+	Event(115, CAN_WALK, 1)
+}

@@ -1,0 +1,218 @@
+import "StatsStuff.scr" 
+
+sub main() 
+{   
+	Stat("Award")
+    {
+        Name("PusruitLevelInc");
+        ChallengeId(1000);
+        Hidden(true);
+        
+		Event("Evn_Pursuit")
+        {		
+			PursuitEvent("PursuitLevelAdd");
+			MinPursuitLevel(2);
+        }
+    }
+
+	Stat("Award")
+    {
+        Name("PusruitLevelDec");
+        ChallengeId(1001);
+        Hidden(true);
+        
+		Event("Evn_Pursuit")
+        {
+			PursuitEvent("PursuitLevelDec");
+        }
+    }
+		
+	Stat("Award")
+    {
+        Name("PusruitLevelEnd");
+        ChallengeId(1002);
+        Hidden(true);
+        
+		Event("Evn_Pursuit")
+        {
+			PursuitEvent("PursuitEnd");
+        }
+    }
+	
+	Stat("Award")
+    {
+        Name("PusruitLevelStart");
+        ChallengeId(1003);
+        Hidden(true);
+        
+		Event("Evn_Pursuit")
+        {
+			PursuitEvent("PursuitStart");
+        }
+    }
+	
+	Stat("Award")
+    {
+        Name("PursuitDeath");
+        ChallengeId(1004);
+        Hidden(true);
+        
+		Event("Evn_Death")
+        {			
+        }
+    }
+	
+	Stat("Award")
+    {
+        Name("PBreakerActivated");
+        ChallengeId(1005);
+        Hidden(true);
+        
+		Event("Evn_PBreakerActivated")
+        {			
+        }
+    }
+	
+	Stat("Award")
+    {
+        Name("NightSurviveTime");
+        ChallengeId(1006);
+        Hidden(true);
+        
+		Event("Evn_GameDeltaTimePassed")
+        {
+			AtNight();			
+			OutsideSafeZone();
+			AfterTime(60000);
+        }
+    }	
+			
+	
+	Stat("Experience")
+	{
+		Name("PBreakerActivation");
+		BaseExperience(100);		
+		DisplayMsg("&Hud_BreakerActivated&");
+		Disabled();
+		
+		Event("Evn_PBreakerActivated")
+		{
+			Enables();
+		}
+
+		
+		Event("Evn_PBreakerActivated")
+		{
+			OnDeactivation();
+		}
+		
+		Event("Evn_PBreakerActivated")
+		{
+			OnDeactivation();
+			Disables();
+		}
+	}
+	
+	
+	Stat("Experience")
+	{
+		Name("NightConstant");
+		BaseExperience(3);
+		OnlyAtNight();
+		OutsideSafeZone();
+		
+		Event("Evn_GameDeltaTimePassed")
+		{
+			AtNight();
+			OutOfPursuit();
+			AfterTime(10000);
+		}
+	}
+	
+	
+	Stat("Experience")
+	{
+		Name("NightConstantPursuit");
+		BaseExperience(0.3);
+		OnlyAtNight();
+		OutsideSafeZone();
+		
+		Event("Evn_GameDeltaTimePassed")
+		{
+			AtNight();
+			InPursuit();
+			AfterTime(1000);
+		}
+	}
+	
+	
+	Stat("Experience")
+	{
+		Name("NightProgressMul");		
+		OnlyAtNight();		
+		
+		Event("Evn_Challenge")
+        {
+            IncreaseMul();
+			MulValue(0.25);
+            ChallengeName("NightSurviveTime");
+        }
+	}
+	
+	
+	Stat("Experience")
+	{
+		Name("NightKill");
+		BaseExperience(30);
+		OnlyAtNight();
+		OutsideSafeZone();
+		DisplayMsg("&Hud_NightKill&");
+		
+		Event("Evn_Kill")
+		{
+			AtNight();
+			LocalPlayerDamager();
+			Victim("Infected"); //	Victim("Infected;Suicider;Berserker;Butcher;Corrupter");
+		}
+	}
+	
+	Stat("Experience")
+	{
+		Name("PursuitStart");
+		BaseExperience(50);
+		MessageType("FightingGroupsSuccess");
+		DisplayMsg("&Hud_PursuitStart&");
+		
+		Event("Evn_Challenge")
+        {
+            ChallengeName("PusruitLevelStart");
+        }
+	}
+	
+	Stat("Experience")
+	{
+		Name("PursuitInc");
+		BaseExperience(20);
+		MessageType("FightingGroupsSuccess");
+		DisplayMsg("&Hud_PursuitIncrease&");
+		
+		Event("Evn_Challenge")
+        {
+            ChallengeName("PusruitLevelInc");
+        }
+	}
+	
+	
+	Stat("Experience")
+	{
+		Name("PursuitEvaded");
+		BaseExperience(70);
+		MessageType("FightingGroupsSuccess");
+		DisplayMsg("&Hud_PursuitEvaded&");
+		
+		Event("Evn_Challenge")
+        {
+            ChallengeName("PusruitLevelEnd");
+        }
+	}
+}

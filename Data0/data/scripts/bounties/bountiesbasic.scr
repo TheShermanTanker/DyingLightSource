@@ -1,0 +1,2120 @@
+sub main()
+{    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10068);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+            PlayerSkill("JumpOverZombie");
+        }
+
+        PrimaryObjective()
+        {
+            XpRewardCurve("Runner", "bounty_xp_reward_basic_agility");
+            Count(40)
+            {
+                Name("&Bounty_Obj_Vault&");
+                Event("Evn_PlayerAction")
+                {
+                     IgnoreAllExcept("JumpOverEnemy");                
+                }
+            }
+        }
+        SecondaryObjective()
+        {
+            Count(1)
+            {
+                Objective()
+                {
+                    XpRewardCurve("Runner", "bounty_xp_reward_basic_agility_bonus");
+                    Count(1)
+                    {
+                        RefName("Vault");              
+                        Event("Evn_PlayerAction")
+                        {
+                             IgnoreAllExcept("JumpOverEnemy");                
+                        }
+                        EventReset("Evn_PlayerAction")
+                        {                    
+                            IgnoreAllExcept("Land");                
+                        } 
+                    }
+                    Count(12)
+                    {
+                        PrerequisiteCount("Vault", "Reached");
+                        HudIgnorePrerequisite();
+                        Name("&Bounty_Obj_StayInAirVault&");               
+                        Event("Evn_Distance")
+                        {
+                            Unit(1);
+                            DistanceType("Y_Negative");
+                        }            
+                        EventReset("Evn_PlayerAction")
+                        {                    
+                            IgnoreAllExcept("Land");                
+                        }  
+                    }
+                }           
+            }
+        }
+    } 
+
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10067);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+            PlayerSkill("LegBreaker");
+        }
+
+        PrimaryObjective()
+        {
+            XpRewardCurve("Runner", "bounty_xp_reward_basic_agility");
+            Count(20)
+            {
+                Name("&Bounty_Obj_SlideKick&");
+                Event("Evn_GiveDamage")
+                {
+                    DamageType("SLIDE");
+                    DamageFlags("FORCE_DESTROY_BONE");
+                } 
+            }
+        }
+        SecondaryObjective()
+        {
+            XpRewardCurve("Runner", "bounty_xp_reward_basic_agility_bonus");
+            FailureCount(110)
+            {
+                Name("&Bounty_Obj_LimitedSlideDistance&");
+                Event("Evn_Distance")
+                {  
+                    Conditions()
+                    {
+                        DefensiveControllerState(">=", "SlideBegin");
+                        DefensiveControllerState("<=", "SlideEnd");
+                    }
+                   
+                    Unit(1);
+                    DistanceType("XZ");
+                }
+            }
+        }
+    }
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10066);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+        }
+
+        ResetOnActiveBountyChanged();
+        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Runner", "bounty_xp_reward_basic_agility");
+            Count(150)
+            {
+                Name("&Bounty_Obj_Climb&");
+                Event("Evn_Distance")
+                {
+                    Conditions()
+                    {
+                        OR()
+                        {
+                            ControllerGroup("EdgeGrab");
+                            ControllerGroup("Ladder");
+                        }
+                    }
+                    Unit(1);
+                    DistanceType("Y_Positive");
+                }
+            }
+        }
+        SecondaryObjective()
+        {
+            XpRewardCurve("Runner", "bounty_xp_reward_basic_agility_bonus");
+            FailureCount(75)
+            {
+                Name("&Bounty_Obj_DoNotFall&");
+                Event("Evn_Distance")
+                {  
+                    InAir();
+                    Unit(1);
+                    DistanceType("Y_Negative");
+                }
+            }
+        }
+    }
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10065);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+        }
+
+        PrimaryObjective()
+        {
+            XpRewardCurve("Runner", "bounty_xp_reward_basic_agility");
+            Count(200)
+            {
+                Name("&Bounty_Obj_Fall&");
+                Event("Evn_Distance")
+                {  
+                    InAir();
+                    Unit(1);
+                    DistanceType("Y_Negative");
+
+                    Conditions()
+                    {
+                        NOT()
+                        {
+                            InWater();
+                        }
+                    }
+                }
+            }
+            //Wait till on ground before going to completed so we can accomplish secondary 
+            Count(1)
+            {
+                Event("Evn_GameDeltaTimePassed")
+                {
+                    Conditions()
+                    {
+                        OR()
+                        {
+                            NOT()
+                            {
+                                InAir();
+                            }
+                            InWater();
+                        }
+                    }
+                }
+                EventReset("Evn_GameDeltaTimePassed")
+                {
+                    Conditions()
+                    {                       
+                        InAir();
+                        NOT()
+                        {
+                            InWater();
+                        }
+                    }
+                }
+            }
+        }
+        SecondaryObjective()
+        {
+            XpRewardCurve("Runner", "bounty_xp_reward_basic_agility_bonus");
+            Count(1)
+            {
+                Objective()
+                {
+                    Count(50)
+                    {
+                        Name("&Bounty_Obj_BigFall&");
+                        Event("Evn_Distance")
+                        { 
+                            Unit(1);
+                            InAir();
+                            DistanceType("Y_Negative");
+
+                            Conditions()
+                            {
+                                NOT()
+                                {
+                                    InWater();
+                                }
+                            }
+                        }
+                       
+                        EventReset("Evn_GameDeltaTimePassed")
+                        {
+                            Conditions()
+                            {
+                                OR()
+                                {
+                                    NOT()
+                                    {
+                                        InAir();
+                                    }
+                                    InWater();
+                                }
+                            }
+                        }  
+                    }
+                }
+            }
+        }
+    }
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10064);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+        }
+
+        ResetOnActiveBountyChanged();
+        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Runner", "bounty_xp_reward_basic_agility");
+            Count(1000)
+            {
+                Name("&Bounty_Obj_Run&");
+                Event("Evn_Distance")
+                {
+                   Unit(1);
+                   OnFoot();
+                }
+            }
+        }
+        SecondaryObjective()
+        {
+            XpRewardCurve("Fighter", "bounty_xp_reward_basic_fighter_bonus");
+            Count (40)
+            {
+                Name("&Bounty_Obj_Kill&");
+                Event("Evn_Kill")
+                {       
+                    Conditions()
+                    {
+                        NOT()
+                        {
+                            InVehicle();
+                        }
+                    }
+                }
+            }
+        }
+    }
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10063);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+
+        AvailableConditions()
+        {
+            PrerequisiteString("&BountyPrerequisiteCondition_GetHook&");
+            
+            PlayerTeam("Default");
+            InventoryItemType("Hook", "Main");
+        }
+
+        PrimaryObjective()
+        {
+            XpRewardCurve("Runner", "bounty_xp_reward_basic_agility");
+            Count(400)
+            {
+                Name("&Bounty_Obj_Hook&");
+                Event("Evn_Distance")
+                {
+                   Unit(1);
+                   GrapplingHook();
+                }
+            }
+        }
+        SecondaryObjective()
+        {
+            XpRewardCurve("Runner", "bounty_xp_reward_basic_agility_bonus");
+            FailureCount(20)
+            {
+                Name("&Bounty_Obj_Hook_Times&");
+                Event("Evn_ControllerGroupChanged")
+                {
+                    Conditions()
+                    {
+                        PreviousControllerGroup("RopeLocomotion");
+                    }
+                }
+            }
+        }
+    }
+     Stat("SuperServerAchievement")
+    {
+        XlastId(10062);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+            PlayerSkill("SafeLanding2");
+        }
+
+        PrimaryObjective()
+        {
+            XpRewardCurve("Runner", "bounty_xp_reward_basic_agility");
+            Count(30)
+            {
+                Name("&Bounty_Obj_Roll&");
+                Event("Evn_ControllerGroupChanged")
+                {
+                    Conditions()
+                    {
+                        ControllerGroup("Landing");
+                        LandType("CrouchDamperRoll");
+                    }
+                }
+            }
+        }
+        SecondaryObjective()
+        {
+            XpRewardCurve("Runner", "bounty_xp_reward_basic_agility_bonus");
+            FailureCount (1)
+            {
+                Name("&Bounty_Obj_NoFallDamage&");
+                Event("Evn_GiveDamage")
+                {
+                    VictimLocalPlayer();
+                    DamageType("COLLISION_FROM_GAME_SCRIPT");
+                } 
+            }
+        }
+    }
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10061);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+        }
+
+        PrimaryObjective()
+        {
+            XpRewardCurve("Fighter", "bounty_xp_reward_basic_fighter");
+            Count(10)
+            {
+                Name("&Bounty_Obj_Hit_Airborne&");
+                Event("Evn_GiveDamage")
+                {
+                    Alive();
+                    VictimAIIsAirborne();
+                    UniqueTargetsForTime(5.0);
+                }
+            }
+        }
+    }
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(11016);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+        
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+            DLCPresent("DLC17");
+        }
+
+        PrerequisiteConditions()
+        {
+            Map("wasteland");
+        }
+            
+        PrimaryObjective()
+        {
+            XpRewardCurve("Driver", "bounty_xp_reward_basic_driver");
+                     
+            Count (1)
+            {
+                Name("&Bounty_Obj_Hay_Windmill&");
+                Event("Evn_GameDeltaTimePassed")
+                {     
+                    Logic("MarkPosition")
+                    {
+                        Position([-770.65, 50.00, -212.44]);
+                    }
+                    Conditions()
+                    {
+                        ObjectInVolume("ModelObject", "hay_cube_a.msh;hay_cube_b.msh;dlc_wl_hay_bale.msh")
+                        {
+                            VolumeSphere()
+                            {
+                                Radius(1.5);
+                                Center(-770.87, 51.63, -212.44);
+                                //DebugRender();
+                            }
+                        }
+                    }
+                    AfterTime(1000); 
+                } 
+            }            
+        }
+    }
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(11078);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+
+        StartAt("2015-09-01T00:00:00");
+
+        AvailableConditions()
+        {
+            PlayerTeam("Default");  
+            DLCPresent("DLC17");
+        }
+
+        PrerequisiteConditions()
+        {
+            Map("wasteland");
+        }
+        
+        PrerequisiteConditions()
+        {              
+            IsDriving();
+        }
+
+        ResetOnActiveBountyChanged();
+        ResetOnLevelLoad();
+        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Driver", "bounty_xp_reward_basic_driver");
+            Count(1)
+            {
+                Name("&Bounty_Obj_Goto&");
+                //PrerequisiteCount("Goto 3", "Reached");
+                RefName("Goto 3");
+                Event("Evn_ScriptLogic")
+                {
+                    Logic("GoToPosition")
+                    {
+                        Position([-1085.21, 61.00, -402.82]);
+                    }
+                    State("Accomplished");
+                }
+            }
+            Count(1)
+            {
+                Name("&Bounty_Obj_Goto&");
+                HideInDescription();
+                PrerequisiteCount("Goto 3", "Reached");
+                RefName("Goto 4");
+                Event("Evn_ScriptLogic")
+                {
+                    Logic("GoToPosition")
+                    {
+                        Position([-1031.39, 60.26, -387.56]);
+                    }
+                    State("Accomplished");
+                }
+            }
+            Count(1)
+            {
+                Name("&Bounty_Obj_Goto&");
+                HideInDescription();
+                PrerequisiteCount("Goto 4", "Reached");
+                RefName("Goto 5");
+                Event("Evn_ScriptLogic")
+                {
+                    Logic("GoToPosition")
+                    {
+                        Position([-950.06, 61.02, -419.31]);
+                    }
+                    State("Accomplished");
+                }
+            }
+            Count(1)
+            {
+                Name("&Bounty_Obj_Goto&");
+                HideInDescription();
+                PrerequisiteCount("Goto 5", "Reached");
+                RefName("Goto 6");
+                Event("Evn_ScriptLogic")
+                {
+                    Logic("GoToPosition")
+                    {
+                        Position([-870.91, 59.42, -428.77]);
+                    }
+                    State("Accomplished");
+                }
+            }
+            Count(1)
+            {
+                Name("&Bounty_Obj_Goto&");
+                HideInDescription();
+                PrerequisiteCount("Goto 6", "Reached");
+                RefName("Goto 7");
+                Event("Evn_ScriptLogic")
+                {
+                    Logic("GoToPosition")
+                    {
+                        Position([-794.92, 56.74, -438.88]);
+                    }
+                    State("Accomplished");
+                }
+            }
+            Count(1)
+            {
+                Name("&Bounty_Obj_Goto&");
+                HideInDescription();
+                PrerequisiteCount("Goto 7", "Reached");
+                RefName("Goto 8");
+                Event("Evn_ScriptLogic")
+                {
+                    Logic("GoToPosition")
+                    {
+                        Position([-668.35, 55.5, -385.42]);
+                    }
+                    State("Accomplished");
+                }
+            }
+            Count(1)
+            {
+                Name("&Bounty_Obj_Goto&");
+                HideInDescription();
+                PrerequisiteCount("Goto 8", "Reached");
+                RefName("Goto 9");
+                Event("Evn_ScriptLogic")
+                {
+                    Logic("GoToPosition")
+                    {
+                        Position([-566.79, 53.0, -368.80]);
+                    }
+                    State("Accomplished");
+                }
+            }
+            Count(1)
+            {
+                Name("&Bounty_Obj_Goto&");
+                HideInDescription();
+                PrerequisiteCount("Goto 9", "Reached");
+                RefName("Goto 10");
+                Event("Evn_ScriptLogic")
+                {
+                    Logic("GoToPosition")
+                    {
+                        Position([-513.98, 57.0, -395.52]);
+                    }
+                    State("Accomplished");
+                }
+            }
+            FailureCount(3)
+            { 
+                Name("&Bounty_Obj_Dont_Hit_Zombies&"); 
+                PrerequisiteCount("Goto 3", "Reached");
+                Objective()
+                {
+                    Count (1)
+                    {
+                        RefName("Hit");
+                        Event("Evn_GiveDamage")
+                        {
+                            UniqueTargetsForTime(3.0);
+                            Alive();
+                            Conditions()
+                            {
+                                IsDriving();
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    } 
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(11077);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+            DLCPresent("DLC17");
+        }
+
+        PrerequisiteConditions()
+        {
+            Map("wasteland");
+        }
+
+        PrimaryObjective()
+        {
+            XpRewardCurve("Driver", "bounty_xp_reward_basic_driver");
+            Count(100)
+            {
+                Name("&Bounty_Obj_Drive_With_Volatile&");
+                Event("Evn_Distance")
+                {
+                    Unit(1);
+                    Conditions()
+                    {
+                        IsDriving();
+                        AIAttachedToVehicle("Volatile");
+                    }
+                }
+                EventReset("Evn_Distance")
+                {
+                    Conditions()
+                    {
+                        NOT()
+                        {
+                            AIAttachedToVehicle("Volatile");
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10060);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+        
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+        }        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Fighter", "bounty_xp_reward_basic_fighter");
+        
+            Count (10)
+            {
+                Name("&Bounty_Obj_BTZ_Kill_Brood&");
+                Event("Evn_Kill")
+                {
+                    Conditions()
+                    {
+                        BTZActive();
+                    }
+                    Victim("HiveBrood");
+                }
+            } 
+        }
+    } 
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10059);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Runner", "bounty_xp_reward_basic_agility");
+        
+            Count (25)
+            {
+                Name("&Bounty_Obj_Kill_Fall&");
+                Event("Evn_Kill")
+                {
+                    HasFallen();
+                }
+            } 
+        }
+    }
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10058);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Fighter", "bounty_xp_reward_basic_fighter");
+        
+            Count (25)
+            {
+                Name("&Bounty_Obj_Kill_Fire&");
+                Event("Evn_Kill")
+                {
+                    DamageType("Fire");
+                }
+                Event("Evn_Kill")
+                {
+                    DamagerNotPlayer();
+                    DamageType("Fire");
+                }
+            } 
+        }
+    }
+    
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10057);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+        
+        AvailableConditions()
+        {
+            PrerequisiteString("&BountyPrerequisiteCondition_10057&");
+
+            PlayerTeam("Default");
+            OR()
+            {
+               PlayerSkill("SilentKill");
+               PlayerSkill("Finisher");
+            }            
+        }        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Fighter", "bounty_xp_reward_basic_fighter");
+        
+            Count (30)
+            {
+                Name("&Bounty_Obj_Kill_Takedowns&");
+                Event("Evn_PlayerAction")
+                {
+                    IgnoreAllExcept("GrabFrontKill");
+                }
+                Event("Evn_PlayerAction")
+                {
+                    IgnoreAllExcept("GrabBackKill");
+                }
+            } 
+        }
+    }
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10056);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+        
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+        }
+        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Runner", "bounty_xp_reward_basic_agility");
+        
+            Count (1)
+            {
+                Name("&Bounty_Obj_Drown_Volatile&");
+                Event("Evn_Kill")
+                {
+                    Victim("Volatile");
+                    DamageType("DROWNING");
+                }
+                Event("Evn_Kill")
+                {
+                    Victim("Volatile");
+                    DamagerNotPlayer();
+                    DamageType("DROWNING");
+                }
+                
+            }   
+        }
+    }
+    
+    
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10055);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+        
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+        }
+        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Fighter", "bounty_xp_reward_basic_fighter");
+        
+            Count (20)
+            {
+                Name("&Bounty_Obj_Cut_Legs&");
+                Event("Evn_GiveDamage")
+                {
+                    Alive();
+                    BodyPartDestroyed();
+                    PlayerDamagerAiVictim();
+                    BodyParts("left_leg;right_leg;right_foot;left_foot");
+                    DamageType("cut");
+                }                
+            } 
+            Count (20)
+            {
+                Name("&Bounty_Obj_Cut_Arms&");
+                Event("Evn_GiveDamage")
+                {
+                    Alive();
+                    BodyPartDestroyed();
+                    PlayerDamagerAiVictim();
+                    BodyParts("left_hand;right_hand;");
+                    DamageType("cut");
+                }                
+            }
+        }
+    }
+    
+     Stat("SuperServerAchievement")
+    {
+        XlastId(10054);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+
+        StartAt("2015-09-01T00:00:00");
+
+        AvailableConditions()
+        {
+            PlayerTeam("Default");    
+            DLCPresent("DLC17");
+        }
+
+        PrerequisiteConditions()
+        {
+            Map("wasteland");       
+        }
+
+        PrimaryObjective()
+        {
+            XpRewardCurve("Driver", "bounty_xp_reward_basic_driver");
+            Count(15)
+            {
+                Name("&Bounty_Obj_Buggy_Large_Jumps&");
+                RefName("InAir");
+                Objective()
+                { 
+                    Count(9)
+                    { 
+                        RefName("JumpTime");
+                        Event("Evn_GameDeltaTimePassed")
+                        {
+                            Conditions()
+                            {
+                                InAir();
+                                IsDriving();
+                            }
+                            AfterTime(100); 
+                        }
+                        // if we jump was not big enough reset timer
+                        ObjectiveReset()
+                        {                            
+                            Count(1)
+                            {
+                                // if JumpTime is reached then we do not want to reset
+                                PrerequisiteCount("JumpTime", "InProgress"); 
+                                
+                                // detect that we are on the ground
+                                Event("Evn_GameDeltaTimePassed")
+                                {
+                                    Conditions()
+                                    {
+                                        NOT()
+                                        {
+                                            InAir();
+                                        }   
+                                    }
+                                    AfterTime(100); 
+                                }
+                            }
+                        }
+                    }
+                    // trigger when we are on the ground and JumpTime was reached
+                    Count(1)
+                    {
+                        PrerequisiteCount("JumpTime", "Reached");                                                              
+                        Event("Evn_GameDeltaTimePassed")
+                        {
+                            Conditions()
+                            {
+                                NOT()
+                                {
+                                    InAir();   
+                                }                                
+                            }
+                             AfterTime(100);
+                        }
+                    }
+                }    
+            }
+        }
+    }
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10053);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+      
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+            DLCPresent("DLC17");
+        }
+
+        PrerequisiteConditions()
+        {
+            Map("wasteland");
+        }
+        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Driver", "bounty_xp_reward_basic_driver");
+            Count (10)
+            {
+                Name("&Bounty_Obj_Drive_Scarecrows&");
+                Event("Evn_DestroyableKilled")
+                {
+                    Conditions()
+                    {
+                        IsDriving();
+                    }
+                    DestroyableMesh("wasteland_scarecrow.msh");
+                }
+            }
+        }
+    }
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10052);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+      
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+        }
+        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Status", "bounty_xp_reward_basic");
+        
+            Count (3)
+            {
+                Name("&Bounty_Obj_Pick_Hard_Locks&");
+                Event("Evn_PlayerAction")
+                {
+                    Conditions()
+                    {
+                        OR()
+                        {
+                            LockpickDifficulty("&Lockpicking_Hard&");
+                            LockpickDifficulty("&Lockpicking_Imposible&");
+                        }
+                    }
+                    IgnoreAllExcept("LockPicked");
+                }
+
+            }
+        }
+        SecondaryObjective()
+        {
+             XpRewardCurve("Status", "bounty_xp_reward_basic_bonus");
+            FailureCount (1)
+            {
+                Name("&Bounty_Obj_No_Lockpick_Break&");
+                Event("Evn_PlayerAction")
+                {
+                    IgnoreAllExcept("LockPickFailed");
+                }
+            }
+        }
+    }
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10051);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+        
+        AvailableConditions()
+        {
+            PlayerTeam("Default"); 
+        }
+
+        PrerequisiteConditions()
+        {
+            Map("slums");
+        }
+        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Runner", "bounty_xp_reward_basic_agility");            
+           
+            Count(1)
+            {
+                Name("&Bounty_Obj_Visit_Lookout&");
+                Event("Evn_ScriptLogic")
+                {
+                    Logic("GoToPosition")
+                    {
+                        Position([-63.11,116.0,102.0]);
+                        Distance(2.0);
+                    }
+                    State("Accomplished");
+                }
+            }
+            Count(1)
+            {
+                Name("&Bounty_Obj_Visit_Sword&");
+                Event("Evn_ScriptLogic")
+                {
+                    Logic("GoToPosition")
+                    {
+                        Position([-93.56, 96.54, -39.59]);
+                        Distance(2.0);
+                    }
+                    State("Accomplished");
+                }
+            } 
+            Count(1)
+            {
+                Name("&Bounty_Obj_Visit_Cave&");
+                Event("Evn_ScriptLogic")
+                {
+                    Logic("GoToPosition")
+                    {
+                        Position([26.73, 96.13, 543.95]);
+                        Distance(2.0);
+                    }
+                    State("Accomplished");
+                }
+            }             
+        }
+    }  
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10050);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+        
+        ResetOnActiveBountyChanged();
+        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Fighter", "bounty_xp_reward_basic_fighter");
+        
+            Count (20)
+            {
+                Name("&Bounty_Obj_Kill_Expl_Night&");
+                Event("Evn_Kill")
+                {
+                    Conditions()
+                    {
+                        OR()
+                        {
+                            TimeOfDay("night_start");
+                            TimeOfDay("night_attack");
+                            TimeOfDay("night");
+                            TimeOfDay("night_final");
+                        }
+                    }
+                    DamageType("blast;blast_special");
+                }    
+                
+                EventReset("Evn_GameDeltaTimePassed")
+                {     
+                    Conditions()
+                    {
+                        InSafeZone();
+                    }                    
+                } 
+            }
+        }
+    }
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10043);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+        
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+        }        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Status", "bounty_xp_reward_basic");
+            
+            Count(500)
+            {
+                Name("&Bounty_Obj_Money_At_Night&");
+                FormatString("&Bounty_CashFmt&");
+                Event("Evn_Cash")
+                { 
+                    Conditions()
+                    {
+                        OR()
+                        {
+                            TimeOfDay("night_start");
+                            TimeOfDay("night_attack");
+                            TimeOfDay("night");
+                            TimeOfDay("night_final");
+                        }
+                    }
+                    Reason("PickedUp");
+                }
+            }
+        }
+    }
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10042);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+        
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+            PlayerSkill("JumpOverZombie");
+            PlayerSkill("DeathFromAbove");
+        }   
+        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Runner", "bounty_xp_reward_basic_agility");
+        
+            Count (1)
+            {
+                RefName("Vault");
+                // track when we perform a vault of an enemy
+                Event("Evn_PlayerAction")
+                {
+                     IgnoreAllExcept("JumpOverEnemy");                
+                }
+                
+                ObjectiveReset()
+                {
+                    Count(7)
+                    {
+                        PrerequisiteCount("Vault", "Reached");
+                        Event("Evn_PostGameFrame")
+                        {
+                            Conditions()
+                            {
+                                NOT()
+                                {
+                                    ControllerGroup("Grab");
+                                }
+                                NOT()
+                                {                                    
+                                    InAir();
+                                }
+                            }               
+                        }
+                    }
+                }
+            } 
+            Count (1)
+            {   
+                Name("&Bounty_Obj_Vault_Spitter&");  
+                HudIgnorePrerequisite();
+                PrerequisiteCount("Vault", "Reached");
+                // did we kill someone with the jump attack kill
+                Event("Evn_PlayerAction")
+                {
+                    Conditions()
+                    {
+                        IsGrabbing("Toad");
+                    }
+                    IgnoreAllExcept("JumpAttackKill");
+                }
+            }              
+        }
+    }
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10041);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+        
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+            PlayerSkill("DropKick");
+        }
+        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Runner", "bounty_xp_reward_basic_agility");
+        
+            Count (20)
+            {
+                Name("&Bounty_Obj_Kill_Infected_Dropkick&");         
+
+                Event("Evn_GiveDamage")
+                {
+                    Alive();
+                    Victim("Infected");
+                    DamageFlags("WRESTLE_KICK");
+                }
+            }  
+        }
+    }
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10040);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+        
+        AvailableConditions()
+        {
+            PrerequisiteString("&BountyPrerequisiteCondition_10040&");
+
+            PlayerTeam("Default");
+            OR()
+            {
+               PlayerSkill("SilentKill");
+               PlayerSkill("Finisher");
+            }
+            
+        }
+        
+        ResetOnActiveBountyChanged();
+        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Fighter", "bounty_xp_reward_basic_fighter");
+        
+            Count(5)
+            {
+                Name("&Bounty_Obj_Kill_Night_Silent_Takedowns&");
+                Event("Evn_PlayerAction")
+                {
+                    Conditions()
+                    {
+                        OR()
+                        {
+                            TimeOfDay("night_start");
+                            TimeOfDay("night_attack");
+                            TimeOfDay("night");
+                            TimeOfDay("night_final");
+                        }
+                    }
+                    IgnoreAllExcept("GrabFrontKill");
+                }
+                Event("Evn_PlayerAction")
+                {
+                    Conditions()
+                    {
+                        OR()
+                        {
+                            TimeOfDay("night_start");
+                            TimeOfDay("night_attack");
+                            TimeOfDay("night");
+                            TimeOfDay("night_final");
+                        }
+                    }
+                    IgnoreAllExcept("GrabBackKill");
+                }
+                EventReset("Evn_SoundMade")
+                {
+                    PlayerNoiseMaker();
+                }
+                
+            } 
+            FailureCount(1)
+            {
+                HideInDescription();
+                Name("&Bounty_Obj_Be_Silent&");
+                Event("Evn_SoundMade")
+                {
+                    PlayerNoiseMaker();
+                }
+            }
+        }
+        SecondaryObjective()
+        {
+            XpRewardCurve("Fighter", "bounty_xp_reward_basic_fighter_bonus");
+
+            FailureCount(1)
+            {
+                Name("&Bounty_Obj_No_Camo&");
+                Event("Evn_PlayerAction")
+                {
+                    IgnoreAllExcept("Camouflage");
+                }
+            }
+        }
+    }
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10039);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+        
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+            PlayerSkill("WeaponThrow");
+        }
+        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Fighter", "bounty_xp_reward_basic_fighter");
+        
+            Count (35)
+            {
+                Name("&Bounty_Obj_Kill_Thrown_Melee&");
+                Event("Evn_Kill")
+                {
+                    DamageFlags("THROW");
+                    WeaponGroup("melee");
+                }
+            }
+        }
+    }
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10038);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+        
+        AvailableConditions()
+        {
+            PlayerTeam("Default");       
+        }
+        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Fighter", "bounty_xp_reward_basic_fighter");
+        
+            Count (25)
+            {
+                Name("&Bounty_Obj_Kill_Thrown_Weapons&");
+                Event("Evn_Kill")
+                {
+                    DamageFlags("THROW");
+                }
+            }
+        }
+    }
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10037);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+        
+        AvailableConditions()
+        {
+            PlayerTeam("Default");           
+        }
+        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Fighter", "bounty_xp_reward_basic_fighter");
+        
+            Count (20)
+            {
+                Name("&Bounty_Obj_Kill_Burning&");
+                Event("Evn_Kill")
+                {
+                    IsBurning();
+                }
+            }
+        }
+    }
+
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10036);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+        
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+        }
+        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Fighter", "bounty_xp_reward_basic_fighter");
+        
+            Count (20)
+            {
+                Name("&Bounty_Obj_Kill_Night&");
+                Event("Evn_Kill")
+                {
+                    Conditions()
+                    {
+                        OR()
+                        {
+                            TimeOfDay("night_start");
+                            TimeOfDay("night_attack");
+                            TimeOfDay("night");
+                            TimeOfDay("night_final");
+                        }
+                    }
+                }
+            }
+        }
+        SecondaryObjective()
+        {
+            XpRewardCurve("Fighter", "bounty_xp_reward_basic_fighter_bonus");
+
+            FailureCount (1)
+            {
+                Name("&Bounty_Obj_No_Pursuit&");
+                Event("Evn_Pursuit")
+                {
+                    PursuitEvent("PursuitStart");
+                }
+            }
+            FailureCount (1)
+            {
+                Name("&Bounty_Obj_No_Damage&");
+                Event("Evn_GiveDamage")
+                {
+                    VictimLocalPlayer();
+                }
+            }
+            FailureCount (1)
+            {
+                Name("&Bounty_Obj_No_Camo&");
+                Event("Evn_PlayerAction")
+                {
+                    IgnoreAllExcept("Camouflage");
+                }
+            }
+        }
+    }
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10035);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+        
+        AvailableConditions()
+        {
+            PlayerTeam("Default");           
+        }
+        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Fighter", "bounty_xp_reward_basic_fighter");
+        
+            Count (20)
+            {
+                Name("&Bounty_Obj_EnvironmentalKill&"); 
+                Event("Evn_PlayerAction")
+                {
+                    IgnoreAllExcept("EnviramentalKill");
+                }
+                Event("Evn_Kill")
+                {
+                    DamageType("Drowning");
+                }
+                Event("Evn_Kill")
+                {
+                    DamagerNotPlayer();
+                    DamageType("Drowning");
+                    DamageType("Fire");
+                    DamageType("Poison");
+                }
+            }
+        }
+    }
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10034);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+              
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+            PlayerSkill("DeathFromAbove");                    
+        }
+        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Fighter", "bounty_xp_reward_basic_fighter");
+        
+            Count (25)
+            {
+                Name("&Bounty_Obj_JumpAttack_Kills&"); 
+                Event("Evn_PlayerAction")
+                {
+                    IgnoreAllExcept("JumpAttackKill");
+                }
+            }
+        }
+    }
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10033);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+      
+        AvailableConditions()
+        {
+            PrerequisiteString("&BountyPrerequisiteCondition_10033&");
+
+            PlayerTeam("Default");
+            OR()
+            {
+                InventoryItemType("Pistol", "Main");
+                InventoryItemType("Revolver", "Main");
+                InventoryItemType("SubMachineGun", "Main");
+                InventoryItemType("Rifle", "Main");
+                InventoryItemType("SniperRifle", "Main");
+                InventoryItemType("HeavyMachineGun", "Main");
+                InventoryItemType("Shotgun", "Main");
+                InventoryItemType("SniperRifle", "Main");
+            }
+        }
+        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Fighter", "bounty_xp_reward_basic_fighter");
+        
+            Count (10)
+            {
+                Name("&Bounty_Obj_Consecutive_Head_Shots&"); 
+                Event("Evn_GiveDamage")
+                {
+                    Alive();
+                    DamageType("BULLET");
+                    PlayerDamagerAiVictim();
+                    BodyParts("head");
+                }
+                EventReset("Evn_GiveDamage")
+                {
+                    DamageType("BULLET");
+                    PlayerDamagerAiVictim();
+                    BodyParts("left_leg;right_leg;left_hand;right_hand;torso;right_foot;left_foot");
+                }
+            }
+        }
+    } 
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10032);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+      
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+        }
+        PrimaryObjective()
+        {
+            XpRewardCurve("Status", "bounty_xp_reward_basic");
+        
+            Count (15)
+            {
+                Name("&Bounty_Obj_Collect_Algae&");
+                Objective()
+                {
+                    Count (1)
+                    {
+                        RefName("Success");
+                        Event("Evn_ItemTakenDropped")
+                        {
+                            action("take");
+                            ItemsSet("Craft_UnderwaterAlgae");
+                        }                      
+                    }
+                    Count(4)
+                    {
+                        PrerequisiteCount("Success", "Reached");
+                        Event("Evn_GameDeltaTimePassed")
+                        {
+                            AfterTime(100); 
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10031);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+     
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+            PlayerSkill("Stomp");
+        }
+        PrimaryObjective()
+        {
+            XpRewardCurve("Runner", "bounty_xp_reward_basic_agility");
+        
+            Count (25)
+            {
+                Name("&Bounty_Obj_Stomp&");
+                Event("Evn_PlayerAction")
+                {
+                    IgnoreAllExcept("Stomp");
+                }
+            }
+        }
+    }
+    
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10030);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+        
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+            PlayerSkill("NageWaza");            
+        }
+        PrimaryObjective()
+        {
+            XpRewardCurve("Runner", "bounty_xp_reward_basic_agility");
+        
+            Count (25)
+            {
+                Name("&Bounty_Obj_NagaWaza&");
+                Event("Evn_PlayerAction")
+                {
+                    IgnoreAllExcept("NageWazaPerformed");
+                }
+            }
+        }
+    }
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10029);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+       
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+        }
+        PrimaryObjective()
+        {
+            XpRewardCurve("Status", "bounty_xp_reward_basic");
+        
+            Count (1000)
+            {
+                Name("&Bounty_Obj_Collect_Money&");
+                FormatString("&Bounty_CashFmt&");
+                Event("Evn_Cash")
+                {
+                    Reason("PickedUp");                
+                }
+            }
+        }        
+    }
+ 
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10028);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+       
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+        }
+        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Fighter", "bounty_xp_reward_basic_fighter");
+        
+            Count (50)
+            {
+                Name("&Bounty_Obj_Kill_Zombies&");
+                Event("Evn_Kill")
+                {
+                    Victim("Zombie");
+                }
+            }
+        }
+    }
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10027);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+       
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+        }
+        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Fighter", "bounty_xp_reward_basic_fighter");
+        
+            Count (2)
+            {
+                Name("&Bounty_Obj_Kill_Thug&");
+                Event("Evn_Kill")
+                {
+                    Victim("Goon");
+                }  
+            }
+        }
+    }
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10026);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+       
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+        }
+        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Status", "bounty_xp_reward_basic");
+        
+            Count (3)
+            {
+                Name("&Bounty_Obj_Kill_Bolter_DNA&");
+                // group it in a objective with a timer so that we only count one per search
+                Objective()
+                {
+                    Count (1)
+                    {
+                        RefName("Success");
+                        Event("Evn_ItemTakenDropped")
+                        {
+                            ItemsSet("Craft_PrimeTissue");                
+                        }   
+                        Event("Evn_ItemTakenDropped")
+                        {                   
+                            ItemsSet("ZZZZ3_Craft_PrimeGland");
+                        }
+                        Event("Evn_ItemTakenDropped")
+                        {                   
+                            ItemsSet("ZZZZ3_Bundle_Primeguts_Bundle");
+                        }                        
+                    }
+                    Count(4)
+                    {
+                        PrerequisiteCount("Success", "Reached");
+                        Event("Evn_GameDeltaTimePassed")
+                        {
+                            AfterTime(100); 
+                        }
+                    }
+                }                
+            }
+        }
+    }
+
+    ///////////
+    //btz
+    /////////////////
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10025);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+        
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+        }
+        
+        ResetOnActiveBountyChanged();
+        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Status", "bounty_xp_reward_basic");
+        
+            Count (1)
+            {
+                Name("&Bounty_Obj_BTZ_Win&");
+                Event("Evn_BeTheZombie")
+                {
+                    MissionState("END_SCREEN");
+                    MissionEndResult("SUCCESS");
+                }
+            } 
+        }
+        SecondaryObjective()
+        {
+            XpRewardCurve("Status", "bounty_xp_reward_basic_bonus");
+           
+            Count (1)
+            {
+                RefName("BtzStart");               
+                Event("Evn_BeTheZombie")
+                {
+                    MissionState("DESTROY_HIVES");
+                }
+            } 
+            FailureCount (1)
+            {
+                PrerequisiteCount("BtzStart", "Reached");
+                Name("&Bounty_Obj_BTZ_Hunter_Alive&");
+                Event("Evn_Kill")
+                {
+                    Victim("ZombiePlayer");
+                }
+                EventReset("Evn_BeTheZombie")
+                {
+                    MissionState("PRE_GAME_LOAD");
+                }
+                EventReset("Evn_BeTheZombie")
+                {
+                    MissionState("DESTROY_HIVES");
+                }
+            } 
+        }
+    }   
+   
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10024);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+        
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+        }
+        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Status", "bounty_xp_reward_basic");
+        
+            Count (5)
+            {
+                Name("&Bounty_Obj_BTZ_Tackle_Evade&");
+                Event("Evn_PlayerAction")
+                {
+                    IgnoreAllExcept("BtzZombie_ChargeEvade");
+                }
+            } 
+        }
+    }
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(10021);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+       
+        ProgressType("number");
+        
+        ResetOnActiveBountyChanged();
+       
+        PrimaryObjective()
+        {
+            XpRewardCurve("Runner", "bounty_xp_reward_basic_agility");
+        
+            Count (2400)
+            {
+                Name("&Bounty_Obj_Survive_Pursuit&"); 
+                IsTime();
+                Event("Evn_GameDeltaTimePassed")
+                {
+                    Conditions()
+                    {
+                        PursuitLevel(">=", 1);
+                    }
+                    AfterTime(100);                   
+                }
+                EventReset("Evn_GameDeltaTimePassed")
+                {
+                    Conditions()
+                    {
+                        PursuitLevel("<", 1);
+                    }
+                    AfterTime(1000);                   
+                }                
+            }
+        }
+    } 
+    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(11045);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+       
+        AvailableConditions()
+        {
+            PrerequisiteString("&BountyPrerequisiteCondition_11045&");
+
+            PlayerTeam("Default");
+            OR()
+            {
+                InventoryItemType("Bow", "Main");
+                InventoryItemType("Crossbow", "Main");
+            }
+        }
+        
+        PrimaryObjective()
+        {
+            XpRewardCurve("Fighter", "bounty_xp_reward_basic_fighter");
+
+            Count (50)
+            {
+                Name("&Bounty_Obj_Arrow_Leg&");
+                Event("Evn_GiveDamage")
+                {
+                    BodyParts("right_leg;right_foot;left_leg;left_foot");
+                    Victim("Zombie;Biter;Viral");
+                    DamageType("arrow");
+                    Alive();
+                    UniqueTargetsForTime(300.0);
+                }
+            }
+        }
+    } 
+    Stat("SuperServerAchievement")
+    {
+        XlastId(11062);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+
+        StartAt("2015-09-12T00:00:00");
+
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+        }
+        PrimaryObjective()
+        {
+            XpRewardCurve("Status", "bounty_xp_reward_basic");
+
+            Count(5)
+            {
+                Name("&Bounty_Obj_Shield_Bash&");
+                Event("Evn_PlayerAction")
+                {
+                    IgnoreAllExcept("ShieldAttack");
+                }
+                EventReset("Evn_GiveDamage")
+                {
+                    VictimLocalPlayer();
+                    DamageType("CUT;BULLET;BLAST;PUNCH1;PUNCH2;PUNCH3;PUNCH_BLOCKED;PUNCH_KO;BLUNT;CUT;RAM;POISON;IMPACT;CAR_HIT;KICK;FLARE;TOXIC;COLD;SLIDE;BITE");
+                }
+                EventReset("Evn_PlayerAction")
+                {
+                    IgnoreAllExcept("ShieldAttackFailed");
+                }
+            }
+        }
+    }    
+    Stat("SuperServerAchievement")
+    {
+        XlastId(11063);
+        ProgressType("number");
+        Category("Bounty");
+        BountyType("Basic");
+
+        StartAt("2015-09-11T00:00:00");
+
+        AvailableConditions()
+        {
+            PlayerTeam("Default");
+        }
+        PrimaryObjective()
+        {
+            XpRewardCurve("Runner", "bounty_xp_reward_basic_agility");
+
+            Count(10)
+            {
+                Name("&Bounty_Obj_Instant_Grab_Breaks&");
+                Event("Evn_PlayerAction")
+                {
+                    IgnoreAllExcept("GrabFastBreak");
+                }
+                EventReset("Evn_GiveDamage")
+                {
+                    VictimLocalPlayer();
+                    DamageType("CUT;BULLET;BLAST;PUNCH1;PUNCH2;PUNCH3;PUNCH_BLOCKED;PUNCH_KO;BLUNT;CUT;RAM;POISON;IMPACT;CAR_HIT;KICK;FLARE;TOXIC;COLD;SLIDE;BITE");
+                }
+            }
+        }
+    }
+}

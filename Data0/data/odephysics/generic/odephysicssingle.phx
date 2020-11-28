@@ -1,0 +1,94 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Fizyka Single - ustawienia domyslne
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+!include("../Include/ODEPhysicsSingle.def")
+
+//-------------------------------------------------------------------------------------------------
+PhysicsParams()
+{
+    SetVelsGate(0, 0)
+    SetWaterFloat(0.08)
+    SetAutoDisableVels(0.10, 0.3, 1)        // CM2M
+    SetAbsorbers(0.05, 0.05)
+    SetMaxVels(100, 20)                     // CM2M
+    SetMaxWatchingTime(0.5)
+    SynchroInterpolation(1)
+    AllowDepthCompression(1)
+    
+    TerrainCacheParams(1, 0, 10)
+    StaticMeshCacheParams(1, 0, 10)
+    TreesCacheParams(1, 0, 10)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("Terrain")
+{
+    ZeroFlags()
+    Mu(5)                  
+    
+    //SetModeFlag("dContactSoftERP")
+    //SetModeFlag("dContactSoftCFM")
+    //SoftERP(0.15) 
+    //SoftCFM(0.00001)
+
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("SimpleObjects")
+{
+    ZeroFlags()
+    Mu(5)                  
+    
+    //SetModeFlag("dContactSoftERP")
+    //SetModeFlag("dContactSoftCFM")
+    //SoftERP(0.25) 
+    //SoftCFM(0.00001)
+
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("NonODEObjects")
+{
+    ZeroFlags()
+    Mu(5)                  
+    
+    //SetModeFlag("dContactSoftERP")
+    //SetModeFlag("dContactSoftCFM")
+    //SoftERP(1.00)
+    //SoftCFM(0.0)
+    
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("ODEObjects")
+{
+    ZeroFlags()
+    Mu(5)                  
+    
+    //SetModeFlag("dContactSoftERP")
+    //SetModeFlag("dContactSoftCFM")
+    //SoftERP(0.25) 
+    //SoftCFM(0.00001)
+    
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("Water")
+{
+    ZeroFlags()
+    Mu(0.1)                  
+    
+    //SetModeFlag("dContactSoftERP")
+    //SetModeFlag("dContactSoftCFM")
+    //SoftERP(0.25) 
+    //SoftCFM(0.0000001)
+
+    Ignore(0)
+}
+
+

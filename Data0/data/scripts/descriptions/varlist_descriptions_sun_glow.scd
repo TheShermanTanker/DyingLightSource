@@ -1,0 +1,8 @@
+Description("f_sun_glow_radius", "f:EDIT;e:EDIT|SPINNER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.0;s:10.0;c:Sun glow;d:Radius;" )
+Description("f_sun_glow_range", "f:EDIT;e:EDIT|SPINNER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.0;s:10.0;c:Sun glow;d:Rays range;" )
+Description("f_sun_glow_near", "f:EDIT;e:EDIT|SPINNER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.0;s:10.0;c:Sun glow;d:Rays near;" )
+Description("f_sun_glow_rotation_speed", "f:EDIT;e:EDIT|SPINNER|SHOW_DESCRIPTION|DONT_SERIALIZE;s:0.1;c:Sun glow;d:Rays rotation speed;" )
+Description("f_sun_glow_rotation_offset", "f:EDIT;e:EDIT|SPINNER|SHOW_DESCRIPTION|DONT_SERIALIZE;s:1.0;c:Sun glow;d:Rays rotation offset;" )
+Description("v_sun_glow_color", "f:EDIT;e:EDIT|SPINNER|EXPANDABLE|BROWSE_COLOR|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0 0 0;x:1 1 1;s:0.05 0.05 0.05;c:Sun glow;d:Color;" )
+Description("f_sun_flare_on", "f:EDIT;e:EDIT|SPINNER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.0;s:1.0;x:1.0;c:Sun flare;d:Sun flare toggle;" )
+Description("f_sun_flare_intensity", "f:EDIT;e:EDIT|SPINNER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.0;s:1.0;c:Sun flare;d:Sun flare intensity;" )

@@ -1,0 +1,98 @@
+!include("MeshPartCloth.def")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+MeshPartCloth()
+{
+//----------------------------------------------
+// bones
+//----------------------------------------------
+    BonesGridSize(2, 8)
+
+    $XDIST(f, -0.95)
+    $YDIST(f, -0.95)
+    
+    Bone(0, 0, "bone_l_longribbon_b_00", 1, XDIST, YDIST)
+    Bone(0, 1, "bone_l_longribbon_b_01", 0, XDIST, YDIST)
+    Bone(0, 2, "bone_l_longribbon_b_02", 0, XDIST, YDIST)
+    Bone(0, 3, "bone_l_longribbon_b_03", 0, XDIST, YDIST)
+    Bone(0, 4, "bone_l_longribbon_b_04", 0, XDIST, YDIST)
+    Bone(0, 5, "bone_l_longribbon_b_05", 0, XDIST, YDIST)
+    Bone(0, 6, "bone_l_longribbon_b_06", 0, XDIST, YDIST)
+    Bone(0, 7, "",                   0, XDIST, YDIST)
+
+    Bone(1, 0, "bone_l_longribbon_a_00", 1, XDIST, YDIST)
+    Bone(1, 1, "bone_l_longribbon_a_01", 0, XDIST, YDIST)
+    Bone(1, 2, "bone_l_longribbon_a_02", 0, XDIST, YDIST)
+    Bone(1, 3, "bone_l_longribbon_a_03", 0, XDIST, YDIST)
+    Bone(1, 4, "bone_l_longribbon_a_04", 0, XDIST, YDIST)
+    Bone(1, 5, "bone_l_longribbon_a_05", 0, XDIST, YDIST)
+    Bone(1, 6, "bone_l_longribbon_a_06", 0, XDIST, YDIST)
+    Bone(1, 7, "",                   0, XDIST, YDIST)
+
+    
+//----------------------------------------------
+// collisions 
+//----------------------------------------------
+
+    CollisionSlide(0.3)
+    CollisionSpeedMod(1)
+    CollisionBounce(0)
+    
+    CollisionShapesMoveInfluence(1)
+    
+    CollisionSegmentDivision(200)
+    CollisionNormalAngleThreshold(100)
+    
+    NodeCollisionSphereRadius(0.1)
+    ExternalCollisionAffectMul(0)
+    
+    CollisionSphereShift("spine3", [-0.4, 0, 0.2], 0.5)
+    CollisionSphereShift("head", [0, -0.1, 0], 0.185)
+
+    CollisionSphereShift("l_breast", [0, 0, 0], 0.08)
+    CollisionSphereShift("r_breast", [0, 0, 0], 0.08)
+    
+    CollisionMaxDistance(0, 1, "bine_root_mask", [-0.05, 0.1, -0.2], 0.16, 0)
+    CollisionMaxDistance(0, 2, "bine_root_mask", [-0.05, 0.1, -0.2], 0.15, 0)
+
+    CollisionMaxDistance(1, 1, "bine_root_mask", [-0.05, 0.1, -0.2], 0.16, 0)
+    CollisionMaxDistance(1, 2, "bine_root_mask", [-0.05, 0.1, -0.2], 0.15, 0)
+
+    CollisionSphereShift("l_hand", [0.0, 0.05, -0.1], 0.16)
+    
+//----------------------------------------------
+// spring params 
+//----------------------------------------------
+
+    Viscous(1)
+    AirFriction(1)
+
+    StructuralStiffness(10000, 10000)
+    ShearStiffness(5000, 1000)
+    FlexionStiffness(8000, 8000)
+
+    HorizontSpringRatio(0.25)
+    
+    CheckLengthsStepsPerSec(0)
+
+//----------------------------------------------
+// physical params 
+//----------------------------------------------
+    
+    Mass(1)
+    GravityMul(1)
+    WindInfluence(1)
+    // WindGust(0.3, 0.2)
+
+//----------------------------------------------
+// other params
+//----------------------------------------------
+
+    SynchroWithPhysics(0)
+    EnableAPBOut(1)
+    
+    ObjectMoveMul(1)
+    AnimationMoveMul(0.5)
+}
+
+

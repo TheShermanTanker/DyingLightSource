@@ -1,0 +1,26 @@
+!include("ai_data.def")
+!include("ai_timing.def")
+
+!include("ai_goals.def")
+
+ShortHeadRotation()
+StrongAttractor()
+SnapDist(2)
+ReleaseDist(3)
+User("Woman")
+
+DisabledTurnDuringActivity(ALL_INTERACT)
+
+Slot("", 1, 1, 1, 0, 0, 0, 0, 0, 1, 1.5)
+{
+    AiTypeDataSet("human")
+    {
+        Data("idle:standing:none:stand:none:none:none", -2, "w_npc_scared_02_idle", -1, 1)
+        Data("idle:standing:none:special:none:none:none", -2, "w_npc_scared_02_special_01", -1, 1)
+        Data("idle:standing:none:idle:none:none:none", -2, "w_npc_scared_02_idle", -1, 1)
+        Data("idle:standing:none:stand:none:none:finish", -2, "w_npc_scared_02_finish", -1, 1)
+    }
+    DeactivateOn(GoalAttack)
+    DeactivateOn(GoalChangeAlarmLevel)
+}
+

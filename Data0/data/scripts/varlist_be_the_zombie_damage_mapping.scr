@@ -1,0 +1,1277 @@
+////////////////////////////////
+///////////Player///////////////
+////////////////////////////////
+
+// Versus damage scale. These multipliers adjust the amount of damage applied to the zombie player
+// based on how many human players he is facing. These multipliers are applied as the very last step
+// in the damage amount calculations (i.e. on top of any other scaling). 
+VarFloat("f_btz_zombie_player_damage_scale_1_human", 1.0)
+VarFloat("f_btz_zombie_player_damage_scale_2_human", 1.0)
+VarFloat("f_btz_zombie_player_damage_scale_3_human", 1.0)
+VarFloat("f_btz_zombie_player_damage_scale_4_human", 1.0)
+
+// allows zombie player to take less damage when stuck in pvp grab sequence
+VarFloat("f_btz_zombie_player_pvp_grab_damage_scale", 0.5)
+
+// Take less damage while on vehicles as hunter
+VarFloat("f_btz_zombie_player_grab_vehicle_damage_scale", 0.5)
+
+//player tackle/////
+VarFloat("f_btz_tackle_on_player_min_hits", 4.99) // 5 hits
+VarFloat("f_btz_tackle_on_player_max_hits", 4.99) // 5 hits
+VarFloat("f_btz_tackle_on_player_damage_for_min", 40.0)
+VarFloat("f_btz_tackle_on_player_damage_for_max", 3.0)
+
+//player kick/////
+VarFloat("f_btz_kick_on_player_min_hits", 9.99) // 10 hits
+VarFloat("f_btz_kick_on_player_max_hits", 9.99) // 10 hits
+VarFloat("f_btz_kick_on_player_damage_for_min", 5.0)
+VarFloat("f_btz_kick_on_player_damage_for_max", 5.0)
+
+//player blunt/////
+VarFloat("f_btz_blunt_on_player_min_hits", -1.0)
+VarFloat("f_btz_blunt_on_player_max_hits", -1.0)
+VarFloat("f_btz_blunt_on_player_damage_for_min", 500.0)
+VarFloat("f_btz_blunt_on_player_damage_for_max", 1.0)
+
+//player fist/////
+VarFloat("f_btz_fist_on_player_min_hits", 4.99) // 5 hits
+VarFloat("f_btz_fist_on_player_max_hits", 4.99) // 5 hits
+VarFloat("f_btz_fist_on_player_damage_for_min", 20.0)
+VarFloat("f_btz_fist_on_player_damage_for_max", 5.0)
+
+VarFloat("f_btz_charge_fist_on_player_min_hits", 1.99) // 2 hits
+VarFloat("f_btz_charge_fist_on_player_max_hits", 2.99) // 3 hits
+VarFloat("f_btz_charge_fist_on_player_damage_for_min", 40.0)
+VarFloat("f_btz_charge_fist_on_player_damage_for_max", 20.0)
+
+//player blast/////
+VarFloat("f_btz_blast_on_player_min_hits", 5.1) 
+VarFloat("f_btz_blast_on_player_max_hits", 6.1) 
+VarFloat("f_btz_blast_on_player_damage_for_min", 200.0)
+VarFloat("f_btz_blast_on_player_damage_for_max", 50.0)
+
+//player blast_lethal/////
+VarFloat("f_btz_blast_lethal_on_player_min_hits", 1.5) 
+VarFloat("f_btz_blast_lethal_on_player_max_hits", 1.5) 
+VarFloat("f_btz_blast_lethal_on_player_damage_for_min", 500.0)
+VarFloat("f_btz_blast_lethal_on_player_damage_for_max", 50.0)
+
+//player mine/////
+VarFloat("f_btz_mine_on_player_min_hits", 2.9) // 3 hits
+VarFloat("f_btz_mine_on_player_max_hits", 4.1) // 5 hits
+VarFloat("f_btz_mine_on_player_damage_for_min", 300.0)
+VarFloat("f_btz_mine_on_player_damage_for_max", 50.0)
+
+//player stick/////
+VarFloat("f_btz_stick_on_player_min_hits", 2.49) // 3 hits
+VarFloat("f_btz_stick_on_player_max_hits", 2.99) // 3 hits
+VarFloat("f_btz_stick_on_player_damage_for_min", 400.0)
+VarFloat("f_btz_stick_on_player_damage_for_max", 20.0)
+
+VarFloat("f_btz_charge_stick_on_player_min_hits", 1.1) // 2 hits
+VarFloat("f_btz_charge_stick_on_player_max_hits", 1.99) // 2 hits
+VarFloat("f_btz_charge_stick_on_player_damage_for_min", 600.0)
+VarFloat("f_btz_charge_stick_on_player_damage_for_max", 50.0)
+
+VarFloat("f_btz_throw_stick_on_player_min_hits", 1.1) // 2 hits
+VarFloat("f_btz_throw_stick_on_player_max_hits",  2.99) // 3 hits
+VarFloat("f_btz_throw_stick_on_player_damage_for_min", 400.0)
+VarFloat("f_btz_throw_stick_on_player_damage_for_max", 20.0)
+
+VarFloat("f_btz_hook_stick_on_player_min_hits", 5.0) // 5 hits
+VarFloat("f_btz_hook_stick_on_player_max_hits",  5.0) // 5 hits
+VarFloat("f_btz_hook_stick_on_player_damage_for_min", 400.0)
+VarFloat("f_btz_hook_stick_on_player_damage_for_max", 20.0)
+
+//player knife/////
+VarFloat("f_btz_knife_on_player_min_hits", 5.1) //6 hits
+VarFloat("f_btz_knife_on_player_max_hits", 5.9) //6 hits 
+VarFloat("f_btz_knife_on_player_damage_for_min", 90.0)
+VarFloat("f_btz_knife_on_player_damage_for_max", 20.0)
+
+VarFloat("f_btz_charge_knife_on_player_min_hits", 1.3) //2 hits
+VarFloat("f_btz_charge_knife_on_player_max_hits", 1.9) //2 hits
+VarFloat("f_btz_charge_knife_on_player_damage_for_min", 150.0)
+VarFloat("f_btz_charge_knife_on_player_damage_for_max", 40.0)
+
+VarFloat("f_btz_throw_knife_on_player_min_hits", 1.1) //2 hits
+VarFloat("f_btz_throw_knife_on_player_max_hits", 2.9) //3 hits
+VarFloat("f_btz_throw_knife_on_player_damage_for_min", 90.0)
+VarFloat("f_btz_throw_knife_on_player_damage_for_max", 20.0)
+
+
+//player stick2close/////
+VarFloat("f_btz_stick2close_on_player_min_hits", 2.49) //3 hits
+VarFloat("f_btz_stick2close_on_player_max_hits", 2.99) //3 hits
+VarFloat("f_btz_stick2close_on_player_damage_for_min", 600.0)
+VarFloat("f_btz_stick2close_on_player_damage_for_max", 40.0)
+
+VarFloat("f_btz_charge_stick2close_on_player_min_hits", 1.1) //2 hits
+VarFloat("f_btz_charge_stick2close_on_player_max_hits", 1.99) //2 hits
+VarFloat("f_btz_charge_stick2close_on_player_damage_for_min", 600.0)
+VarFloat("f_btz_charge_stick2close_on_player_damage_for_max", 100.0)
+
+VarFloat("f_btz_throw_stick2close_on_player_min_hits", 1.1) //2 hits
+VarFloat("f_btz_throw_stick2close_on_player_max_hits", 2.99) //3 hits
+VarFloat("f_btz_throw_stick2close_on_player_damage_for_min", 600.0)
+VarFloat("f_btz_throw_stick2close_on_player_damage_for_max", 40.0)
+
+
+//player stick2heavy/////
+VarFloat("f_btz_stick2heavy_on_player_min_hits", 1.25) //2 hit
+VarFloat("f_btz_stick2heavy_on_player_max_hits", 1.9) //2 hits
+VarFloat("f_btz_stick2heavy_on_player_damage_for_min", 150.0)
+VarFloat("f_btz_stick2heavy_on_player_damage_for_max", 40.0)
+
+VarFloat("f_btz_charge_stick2heavy_on_player_min_hits", 1.1) //2 hit
+VarFloat("f_btz_charge_stick2heavy_on_player_max_hits", 1.5) //2 hits
+VarFloat("f_btz_charge_stick2heavy_on_player_damage_for_min", 300.0)
+VarFloat("f_btz_charge_stick2heavy_on_player_damage_for_max", 70.0)  
+
+VarFloat("f_btz_throw_stick2heavy_on_player_min_hits", 0.99) //1 hit
+VarFloat("f_btz_throw_stick2heavy_on_player_max_hits", 1.5) //2 hits
+VarFloat("f_btz_throw_stick2heavy_on_player_damage_for_min", 250.0)
+VarFloat("f_btz_throw_stick2heavy_on_player_damage_for_max", 40.0)
+
+//player thrower////
+VarFloat("f_btz_throw_thrower_on_player_min_hits", 3.8) //4 hit
+VarFloat("f_btz_throw_thrower_on_player_max_hits", 4.9) //5 hits
+VarFloat("f_btz_throw_thrower_on_player_damage_for_min", 500.0)
+VarFloat("f_btz_throw_thrower_on_player_damage_for_max", 40.0)
+
+// player impact /// 
+VarFloat("f_btz_impact_dps_on_player_min_hits", 10.0) 
+VarFloat("f_btz_impact_dps_on_player_max_hits", 10.0) 
+VarFloat("f_btz_impact_dps_on_player_damage_for_min", 500.0)
+VarFloat("f_btz_impact_dps_on_player_damage_for_max", 1.0)
+
+// player impact_buggy /// 
+VarFloat("f_btz_impact_buggy_on_player_min_hits", 15.0) 
+VarFloat("f_btz_impact_buggy_on_player_max_hits", 15.0) 
+VarFloat("f_btz_impact_buggy_on_player_damage_for_min", 500.0)
+VarFloat("f_btz_impact_buggy_on_player_damage_for_max", 1.0)
+
+// player electric /// 
+VarFloat("f_btz_electric_dps_on_player_min_hits", 10.0) 
+VarFloat("f_btz_electric_dps_on_player_max_hits", 10.0) 
+VarFloat("f_btz_electric_dps_on_player_damage_for_min", 500.0)
+VarFloat("f_btz_electric_dps_on_player_damage_for_max", 1.0)
+
+// player electric_buggy /// 
+VarFloat("f_btz_electric_buggy_on_player_min_hits", -1.0) 
+VarFloat("f_btz_electric_buggy_on_player_max_hits", -1.0) 
+VarFloat("f_btz_electric_buggy_on_player_damage_for_min", 500.0)
+VarFloat("f_btz_electric_buggy_on_player_damage_for_max", 1.0)
+
+// player bleeding /// 
+VarFloat("f_btz_bleeding_dps_on_player_min_hits", 10.0) 
+VarFloat("f_btz_bleeding_dps_on_player_max_hits", 10.0) 
+VarFloat("f_btz_bleeding_dps_on_player_damage_for_min", 500.0)
+VarFloat("f_btz_bleeding_dps_on_player_damage_for_max", 1.0)
+
+// player fire /// 
+VarFloat("f_btz_fire_dps_on_player_min_hits", 10.0) 
+VarFloat("f_btz_fire_dps_on_player_max_hits", 10.0) 
+VarFloat("f_btz_fire_dps_on_player_damage_for_min", 30.0)
+VarFloat("f_btz_fire_dps_on_player_damage_for_max", 0.1)
+
+// player fire_buggy /// 
+VarFloat("f_btz_fire_buggy_on_player_min_hits", 10.0) 
+VarFloat("f_btz_fire_buggy_on_player_max_hits", 10.0) 
+VarFloat("f_btz_fire_buggy_on_player_damage_for_min", 500.0)
+VarFloat("f_btz_fire_buggy_on_player_damage_for_max", 1.0)
+
+// player poison /// 
+VarFloat("f_btz_poison_dps_on_player_min_hits", 10.0) 
+VarFloat("f_btz_poison_dps_on_player_max_hits", 10.0) 
+VarFloat("f_btz_poison_dps_on_player_damage_for_min", 500.0)
+VarFloat("f_btz_poison_dps_on_player_damage_for_max", 1.0)
+
+// player toxic /// 
+VarFloat("f_btz_toxic_dps_on_player_min_hits", 10.0) 
+VarFloat("f_btz_toxic_dps_on_player_max_hits", 10.0) 
+VarFloat("f_btz_toxic_dps_on_player_damage_for_min", 500.0)
+VarFloat("f_btz_toxic_dps_on_player_damage_for_max", 1.0)
+
+// player cold /// 
+VarFloat("f_btz_cold_dps_on_player_min_hits", 10.0) 
+VarFloat("f_btz_cold_dps_on_player_max_hits", 10.0) 
+VarFloat("f_btz_cold_dps_on_player_damage_for_min", 500.0)
+VarFloat("f_btz_cold_dps_on_player_damage_for_max", 1.0)
+
+
+//////////////////// Guns Damage Mapping Begin //////////////////////////////////////
+// NOTE HUNTER HAS BulletDamageReduction of 0.2, which meens he will take 20% less damage than what is mapped here
+VarFloat("f_btz_pistol_on_player_min_hits", 16.9) 
+VarFloat("f_btz_pistol_on_player_max_hits", 18.9) 
+VarFloat("f_btz_pistol_on_player_damage_for_min", 100.0)
+VarFloat("f_btz_pistol_on_player_damage_for_max", 10.0)
+
+VarFloat("f_btz_pistol_headshot_on_player_min_hits", 12.9) 
+VarFloat("f_btz_pistol_headshot_on_player_max_hits", 14.9) 
+VarFloat("f_btz_pistol_headshot_on_player_damage_for_min", 100)
+VarFloat("f_btz_pistol_headshot_on_player_damage_for_max", 20)
+
+VarFloat("f_btz_revolver_on_player_min_hits", 13.9) 
+VarFloat("f_btz_revolver_on_player_max_hits", 16.9) 
+VarFloat("f_btz_revolver_on_player_damage_for_min", 100.0)
+VarFloat("f_btz_revolver_on_player_damage_for_max", 10.0)
+
+VarFloat("f_btz_revolver_headshot_on_player_min_hits", 9.9) 
+VarFloat("f_btz_revolver_headshot_on_player_max_hits", 12.9) 
+VarFloat("f_btz_revolver_headshot_on_player_damage_for_min", 100.0)
+VarFloat("f_btz_revolver_headshot_on_player_damage_for_max", 10.0)
+
+VarFloat("f_btz_Rifle_on_player_min_hits", 18.9) 
+VarFloat("f_btz_Rifle_on_player_max_hits", 21.9) 
+VarFloat("f_btz_Rifle_on_player_damage_for_min", 150.0)
+VarFloat("f_btz_Rifle_on_player_damage_for_max", 15.0)
+
+VarFloat("f_btz_Rifle_headshot_on_player_min_hits", 12.9) 
+VarFloat("f_btz_Rifle_headshot_on_player_max_hits", 16.9) 
+VarFloat("f_btz_Rifle_headshot_on_player_damage_for_min", 150.0)
+VarFloat("f_btz_Rifle_headshot_on_player_damage_for_max", 15.0)
+
+VarFloat("f_btz_Shotgun_on_player_min_hits", 60.9) 
+VarFloat("f_btz_Shotgun_on_player_max_hits", 60.9) 
+VarFloat("f_btz_Shotgun_on_player_damage_for_min", 400.0)
+VarFloat("f_btz_Shotgun_on_player_damage_for_max", 200.0)
+
+VarFloat("f_btz_Shotgun_headshot_on_player_min_hits", 30.9) 
+VarFloat("f_btz_Shotgun_headshot_on_player_max_hits", 30.9) 
+VarFloat("f_btz_Shotgun_headshot_on_player_damage_for_min", 400.0)
+VarFloat("f_btz_Shotgun_headshot_on_player_damage_for_max", 200.0)
+
+VarFloat("f_btz_Sniper_on_player_min_hits", 1.9) 
+VarFloat("f_btz_Sniper_on_player_max_hits", 1.9) 
+VarFloat("f_btz_Sniper_on_player_damage_for_min", 1.0)
+VarFloat("f_btz_Sniper_on_player_damage_for_max", 0.1)
+
+VarFloat("f_btz_Sniper_headshot_on_player_min_hits", 0.9) 
+VarFloat("f_btz_Sniper_headshot_on_player_max_hits", 0.9) 
+VarFloat("f_btz_Sniper_headshot_on_player_damage_for_min", 150.0)
+VarFloat("f_btz_Sniper_headshot_on_player_damage_for_max", 15.0)
+
+VarFloat("f_btz_LightMachine_on_player_min_hits", 18.9)
+VarFloat("f_btz_LightMachine_on_player_max_hits", 21.9) 
+VarFloat("f_btz_LightMachine_on_player_damage_for_min", 90.0)
+VarFloat("f_btz_LightMachine_on_player_damage_for_max", 20.0)
+
+VarFloat("f_btz_LightMachine_headshot_on_player_min_hits", 12.9) 
+VarFloat("f_btz_LightMachine_headshot_on_player_max_hits", 16.9)  
+VarFloat("f_btz_LightMachine_headshot_on_player_damage_for_min", 150.0)
+VarFloat("f_btz_LightMachine_headshot_on_player_damage_for_max", 15.0)
+
+VarFloat("f_btz_Rocket_on_player_min_hits", 1.9) 
+VarFloat("f_btz_Rocket_on_player_max_hits", 2.9) 
+VarFloat("f_btz_Rocket_on_player_damage_for_min", 250.0)
+VarFloat("f_btz_Rocket_on_player_damage_for_max", 20.0)
+
+VarFloat("f_btz_Rocket_headshot_on_player_min_hits", 1.9) 
+VarFloat("f_btz_Rocket_headshot_on_player_max_hits", 1.9) 
+VarFloat("f_btz_Rocket_headshot_on_player_damage_for_min", 1)
+VarFloat("f_btz_Rocket_headshot_on_player_damage_for_max", 0.1)
+
+VarFloat("f_btz_Arrow_on_player_min_hits", 2.9) 
+VarFloat("f_btz_Arrow_on_player_max_hits", 2.9) 
+VarFloat("f_btz_Arrow_on_player_damage_for_min", 250.0)
+VarFloat("f_btz_Arrow_on_player_damage_for_max", 20.0)
+
+VarFloat("f_btz_Arrow_headshot_on_player_min_hits", 1.1) 
+VarFloat("f_btz_Arrow_headshot_on_player_max_hits", 1.1) 
+VarFloat("f_btz_Arrow_headshot_on_player_damage_for_min", 250)
+VarFloat("f_btz_Arrow_headshot_on_player_damage_for_max", 20)
+
+VarFloat("f_btz_SubMachine_on_player_min_hits", 26.0) 
+VarFloat("f_btz_SubMachine_on_player_max_hits", 30.0) 
+VarFloat("f_btz_SubMachine_on_player_damage_for_min", 150.0)
+VarFloat("f_btz_SubMachine_on_player_damage_for_max", 15.0)
+
+VarFloat("f_btz_SubMachine_headshot_on_player_min_hits", 12.9) 
+VarFloat("f_btz_SubMachine_headshot_on_player_max_hits", 16.9) 
+VarFloat("f_btz_SubMachine_headshot_on_player_damage_for_min", 150.0)
+VarFloat("f_btz_SubMachine_headshot_on_player_damage_for_max", 15.0)
+
+VarFloat("f_btz_bolt_on_player_min_hits", 2.9) 
+VarFloat("f_btz_bolt_on_player_max_hits", 2.9) 
+VarFloat("f_btz_bolt_on_player_damage_for_min", 250.0)
+VarFloat("f_btz_bolt_on_player_damage_for_max", 20.0)
+
+VarFloat("f_btz_bolt_headshot_on_player_min_hits", 1.1) 
+VarFloat("f_btz_bolt_headshot_on_player_max_hits", 1.1) 
+VarFloat("f_btz_bolt_headshot_on_player_damage_for_min", 250)
+VarFloat("f_btz_bolt_headshot_on_player_damage_for_max", 20)
+
+//// On Zombie ////
+
+VarFloat("f_btz_pistol_on_zombie_min_hits", 100.9) 
+VarFloat("f_btz_pistol_on_zombie_max_hits", 100.9) 
+VarFloat("f_btz_pistol_on_zombie_damage_for_min", 100.0)
+VarFloat("f_btz_pistol_on_zombie_damage_for_max", 10.0)
+
+VarFloat("f_btz_pistol_headshot_on_zombie_min_hits", 1.0) 
+VarFloat("f_btz_pistol_headshot_on_zombie_max_hits", 1.0) 
+VarFloat("f_btz_pistol_headshot_on_zombie_damage_for_min", 100)
+VarFloat("f_btz_pistol_headshot_on_zombie_damage_for_max", 20)
+
+VarFloat("f_btz_revolver_on_zombie_min_hits", 20.9) 
+VarFloat("f_btz_revolver_on_zombie_max_hits", 20.9) 
+VarFloat("f_btz_revolver_on_zombie_damage_for_min", 100.0)
+VarFloat("f_btz_revolver_on_zombie_damage_for_max", 10.0)
+
+VarFloat("f_btz_revolver_headshot_on_zombie_min_hits", 0.9) 
+VarFloat("f_btz_revolver_headshot_on_zombie_max_hits", 0.9) 
+VarFloat("f_btz_revolver_headshot_on_zombie_damage_for_min", 100.0)
+VarFloat("f_btz_revolver_headshot_on_zombie_damage_for_max", 10.0)
+
+VarFloat("f_btz_Rifle_on_zombie_min_hits", 100.9) 
+VarFloat("f_btz_Rifle_on_zombie_max_hits", 100.9) 
+VarFloat("f_btz_Rifle_on_zombie_damage_for_min", 150.0)
+VarFloat("f_btz_Rifle_on_zombie_damage_for_max", 15.0)
+
+VarFloat("f_btz_Rifle_headshot_on_zombie_min_hits", 1.0) 
+VarFloat("f_btz_Rifle_headshot_on_zombie_max_hits", 1.0) 
+VarFloat("f_btz_Rifle_headshot_on_zombie_damage_for_min", 150.0)
+VarFloat("f_btz_Rifle_headshot_on_zombie_damage_for_max", 15.0)
+
+VarFloat("f_btz_Shotgun_on_zombie_min_hits", 14.9) 
+VarFloat("f_btz_Shotgun_on_zombie_max_hits", 14.9) 
+VarFloat("f_btz_Shotgun_on_zombie_damage_for_min", 300.0)
+VarFloat("f_btz_Shotgun_on_zombie_damage_for_max", 10.0)
+
+VarFloat("f_btz_Shotgun_headshot_on_zombie_min_hits", 5.9) 
+VarFloat("f_btz_Shotgun_headshot_on_zombie_max_hits", 5.9) 
+VarFloat("f_btz_Shotgun_headshot_on_zombie_damage_for_min", 300.0)
+VarFloat("f_btz_Shotgun_headshot_on_zombie_damage_for_max", 10.0)
+
+VarFloat("f_btz_Sniper_on_zombie_min_hits", 1.9) 
+VarFloat("f_btz_Sniper_on_zombie_max_hits", 1.9) 
+VarFloat("f_btz_Sniper_on_zombie_damage_for_min", 1.0)
+VarFloat("f_btz_Sniper_on_zombie_damage_for_max", 0.1)
+
+VarFloat("f_btz_Sniper_headshot_on_zombie_min_hits", 0.9) 
+VarFloat("f_btz_Sniper_headshot_on_zombie_max_hits", 0.9) 
+VarFloat("f_btz_Sniper_headshot_on_zombie_damage_for_min", 150.0)
+VarFloat("f_btz_Sniper_headshot_on_zombie_damage_for_max", 15.0)
+
+VarFloat("f_btz_LightMachine_on_zombie_min_hits", 80.9)
+VarFloat("f_btz_LightMachine_on_zombie_max_hits", 80.9) 
+VarFloat("f_btz_LightMachine_on_zombie_damage_for_min", 90.0)
+VarFloat("f_btz_LightMachine_on_zombie_damage_for_max", 20.0)
+
+VarFloat("f_btz_LightMachine_headshot_on_zombie_min_hits", 1.0) 
+VarFloat("f_btz_LightMachine_headshot_on_zombie_max_hits", 1.0)  
+VarFloat("f_btz_LightMachine_headshot_on_zombie_damage_for_min", 150.0)
+VarFloat("f_btz_LightMachine_headshot_on_zombie_damage_for_max", 15.0)
+
+VarFloat("f_btz_Rocket_on_zombie_min_hits", 1.9) 
+VarFloat("f_btz_Rocket_on_zombie_max_hits", 2.9) 
+VarFloat("f_btz_Rocket_on_zombie_damage_for_min", 250.0)
+VarFloat("f_btz_Rocket_on_zombie_damage_for_max", 20.0)
+
+VarFloat("f_btz_Rocket_headshot_on_zombie_min_hits", 0.9) 
+VarFloat("f_btz_Rocket_headshot_on_zombie_max_hits", 0.9) 
+VarFloat("f_btz_Rocket_headshot_on_zombie_damage_for_min", 1)
+VarFloat("f_btz_Rocket_headshot_on_zombie_damage_for_max", 0.1)
+
+VarFloat("f_btz_Arrow_on_zombie_min_hits", 4.9) 
+VarFloat("f_btz_Arrow_on_zombie_max_hits", 4.9) 
+VarFloat("f_btz_Arrow_on_zombie_damage_for_min", 250.0)
+VarFloat("f_btz_Arrow_on_zombie_damage_for_max", 20.0)
+
+VarFloat("f_btz_Arrow_headshot_on_zombie_min_hits", 0.1) 
+VarFloat("f_btz_Arrow_headshot_on_zombie_max_hits", 0.1) 
+VarFloat("f_btz_Arrow_headshot_on_zombie_damage_for_min", 250)
+VarFloat("f_btz_Arrow_headshot_on_zombie_damage_for_max", 20)
+
+VarFloat("f_btz_SubMachine_on_zombie_min_hits", 100.9) 
+VarFloat("f_btz_SubMachine_on_zombie_max_hits", 100.9) 
+VarFloat("f_btz_SubMachine_on_zombie_damage_for_min", 150.0)
+VarFloat("f_btz_SubMachine_on_zombie_damage_for_max", 15.0)
+
+VarFloat("f_btz_SubMachine_headshot_on_zombie_min_hits", 1.0) 
+VarFloat("f_btz_SubMachine_headshot_on_zombie_max_hits", 1.0) 
+VarFloat("f_btz_SubMachine_headshot_on_zombie_damage_for_min", 150.0)
+VarFloat("f_btz_SubMachine_headshot_on_zombie_damage_for_max", 15.0)
+
+VarFloat("f_btz_bolt_on_zombie_min_hits", 4.9) 
+VarFloat("f_btz_bolt_on_zombie_max_hits", 4.9) 
+VarFloat("f_btz_bolt_on_zombie_damage_for_min", 250.0)
+VarFloat("f_btz_bolt_on_zombie_damage_for_max", 20.0)
+
+VarFloat("f_btz_bolt_headshot_on_zombie_min_hits", 0.1) 
+VarFloat("f_btz_bolt_headshot_on_zombie_max_hits", 0.1) 
+VarFloat("f_btz_bolt_headshot_on_zombie_damage_for_min", 250)
+VarFloat("f_btz_bolt_headshot_on_zombie_damage_for_max", 20)
+
+
+
+//// On Thug ////
+
+VarFloat("f_btz_pistol_on_thug_min_hits", 50.9) 
+VarFloat("f_btz_pistol_on_thug_max_hits", 50.9) 
+VarFloat("f_btz_pistol_on_thug_damage_for_min", 100.0)
+VarFloat("f_btz_pistol_on_thug_damage_for_max", 10.0)
+
+VarFloat("f_btz_pistol_headshot_on_thug_min_hits", 4.9) 
+VarFloat("f_btz_pistol_headshot_on_thug_max_hits", 4.9) 
+VarFloat("f_btz_pistol_headshot_on_thug_damage_for_min", 100)
+VarFloat("f_btz_pistol_headshot_on_thug_damage_for_max", 20)
+
+VarFloat("f_btz_revolver_on_thug_min_hits", 30.9) 
+VarFloat("f_btz_revolver_on_thug_max_hits", 30.9) 
+VarFloat("f_btz_revolver_on_thug_damage_for_min", 100.0)
+VarFloat("f_btz_revolver_on_thug_damage_for_max", 10.0)
+
+VarFloat("f_btz_revolver_headshot_on_thug_min_hits", 0.9) 
+VarFloat("f_btz_revolver_headshot_on_thug_max_hits", 0.9) 
+VarFloat("f_btz_revolver_headshot_on_thug_damage_for_min", 100.0)
+VarFloat("f_btz_revolver_headshot_on_thug_damage_for_max", 10.0)
+
+VarFloat("f_btz_Rifle_on_thug_min_hits", 100.9) 
+VarFloat("f_btz_Rifle_on_thug_max_hits", 100.9) 
+VarFloat("f_btz_Rifle_on_thug_damage_for_min", 150.0)
+VarFloat("f_btz_Rifle_on_thug_damage_for_max", 15.0)
+
+VarFloat("f_btz_Rifle_headshot_on_thug_min_hits", 7.9) 
+VarFloat("f_btz_Rifle_headshot_on_thug_max_hits", 7.9) 
+VarFloat("f_btz_Rifle_headshot_on_thug_damage_for_min", 150.0)
+VarFloat("f_btz_Rifle_headshot_on_thug_damage_for_max", 15.0)
+
+VarFloat("f_btz_Shotgun_on_thug_min_hits", 100.0) 
+VarFloat("f_btz_Shotgun_on_thug_max_hits", 100.0) 
+VarFloat("f_btz_Shotgun_on_thug_damage_for_min", 300.0)
+VarFloat("f_btz_Shotgun_on_thug_damage_for_max", 10.0)
+
+VarFloat("f_btz_Shotgun_headshot_on_thug_min_hits", 12.9) 
+VarFloat("f_btz_Shotgun_headshot_on_thug_max_hits", 12.9) 
+VarFloat("f_btz_Shotgun_headshot_on_thug_damage_for_min", 300.0)
+VarFloat("f_btz_Shotgun_headshot_on_thug_damage_for_max", 10.0)
+
+VarFloat("f_btz_Sniper_on_thug_min_hits", 1.9) 
+VarFloat("f_btz_Sniper_on_thug_max_hits", 1.9) 
+VarFloat("f_btz_Sniper_on_thug_damage_for_min", 1.0)
+VarFloat("f_btz_Sniper_on_thug_damage_for_max", 0.1)
+
+VarFloat("f_btz_Sniper_headshot_on_thug_min_hits", 0.9) 
+VarFloat("f_btz_Sniper_headshot_on_thug_max_hits", 0.9) 
+VarFloat("f_btz_Sniper_headshot_on_thug_damage_for_min", 150.0)
+VarFloat("f_btz_Sniper_headshot_on_thug_damage_for_max", 15.0)
+
+VarFloat("f_btz_LightMachine_on_thug_min_hits", 100.9)
+VarFloat("f_btz_LightMachine_on_thug_max_hits", 100.9) 
+VarFloat("f_btz_LightMachine_on_thug_damage_for_min", 90.0)
+VarFloat("f_btz_LightMachine_on_thug_damage_for_max", 20.0)
+
+VarFloat("f_btz_LightMachine_headshot_on_thug_min_hits", 6.9) 
+VarFloat("f_btz_LightMachine_headshot_on_thug_max_hits", 6.9)  
+VarFloat("f_btz_LightMachine_headshot_on_thug_damage_for_min", 150.0)
+VarFloat("f_btz_LightMachine_headshot_on_thug_damage_for_max", 15.0)
+
+VarFloat("f_btz_Rocket_on_thug_min_hits", 1.9) 
+VarFloat("f_btz_Rocket_on_thug_max_hits", 2.9) 
+VarFloat("f_btz_Rocket_on_thug_damage_for_min", 250.0)
+VarFloat("f_btz_Rocket_on_thug_damage_for_max", 20.0)
+
+VarFloat("f_btz_Rocket_headshot_on_thug_min_hits", 1.9) 
+VarFloat("f_btz_Rocket_headshot_on_thug_max_hits", 1.9) 
+VarFloat("f_btz_Rocket_headshot_on_thug_damage_for_min", 1)
+VarFloat("f_btz_Rocket_headshot_on_thug_damage_for_max", 0.1)
+
+VarFloat("f_btz_Arrow_on_thug_min_hits", 6.9) 
+VarFloat("f_btz_Arrow_on_thug_max_hits", 6.9) 
+VarFloat("f_btz_Arrow_on_thug_damage_for_min", 250.0)
+VarFloat("f_btz_Arrow_on_thug_damage_for_max", 20.0)
+
+VarFloat("f_btz_Arrow_headshot_on_thug_min_hits", 1.9) 
+VarFloat("f_btz_Arrow_headshot_on_thug_max_hits", 1.9) 
+VarFloat("f_btz_Arrow_headshot_on_thug_damage_for_min", 250)
+VarFloat("f_btz_Arrow_headshot_on_thug_damage_for_max", 20)
+
+VarFloat("f_btz_SubMachine_on_thug_min_hits", 100.9) 
+VarFloat("f_btz_SubMachine_on_thug_max_hits", 100.9) 
+VarFloat("f_btz_SubMachine_on_thug_damage_for_min", 150.0)
+VarFloat("f_btz_SubMachine_on_thug_damage_for_max", 15.0)
+
+VarFloat("f_btz_SubMachine_headshot_on_thug_min_hits", 6.9) 
+VarFloat("f_btz_SubMachine_headshot_on_thug_max_hits", 6.9) 
+VarFloat("f_btz_SubMachine_headshot_on_thug_damage_for_min", 150.0)
+VarFloat("f_btz_SubMachine_headshot_on_thug_damage_for_max", 15.0)
+
+VarFloat("f_btz_bolt_on_thug_min_hits", 6.9) 
+VarFloat("f_btz_bolt_on_thug_max_hits", 6.9) 
+VarFloat("f_btz_bolt_on_thug_damage_for_min", 250.0)
+VarFloat("f_btz_bolt_on_thug_damage_for_max", 20.0)
+
+VarFloat("f_btz_bolt_headshot_on_thug_min_hits", 1.9) 
+VarFloat("f_btz_bolt_headshot_on_thug_max_hits", 1.9) 
+VarFloat("f_btz_bolt_headshot_on_thug_damage_for_min", 250)
+VarFloat("f_btz_bolt_headshot_on_thug_damage_for_max", 20)
+
+
+
+//// On Brood ////
+
+VarFloat("f_btz_pistol_on_brood_min_hits", 2.3) 
+VarFloat("f_btz_pistol_on_brood_max_hits", 2.3) 
+VarFloat("f_btz_pistol_on_brood_damage_for_min", 100.0)
+VarFloat("f_btz_pistol_on_brood_damage_for_max", 10.0)
+
+VarFloat("f_btz_pistol_headshot_on_brood_min_hits", 1.5) 
+VarFloat("f_btz_pistol_headshot_on_brood_max_hits", 1.5) 
+VarFloat("f_btz_pistol_headshot_on_brood_damage_for_min", 100)
+VarFloat("f_btz_pistol_headshot_on_brood_damage_for_max", 20)
+
+VarFloat("f_btz_revolver_on_brood_min_hits", 1.5) 
+VarFloat("f_btz_revolver_on_brood_max_hits", 1.5) 
+VarFloat("f_btz_revolver_on_brood_damage_for_min", 100.0)
+VarFloat("f_btz_revolver_on_brood_damage_for_max", 10.0)
+
+VarFloat("f_btz_revolver_headshot_on_brood_min_hits", 1.3) 
+VarFloat("f_btz_revolver_headshot_on_brood_max_hits", 1.3) 
+VarFloat("f_btz_revolver_headshot_on_brood_damage_for_min", 100.0)
+VarFloat("f_btz_revolver_headshot_on_brood_damage_for_max", 10.0)
+
+VarFloat("f_btz_Rifle_on_brood_min_hits", 2.3) 
+VarFloat("f_btz_Rifle_on_brood_max_hits", 2.3) 
+VarFloat("f_btz_Rifle_on_brood_damage_for_min", 150.0)
+VarFloat("f_btz_Rifle_on_brood_damage_for_max", 15.0)
+
+VarFloat("f_btz_Rifle_headshot_on_brood_min_hits", 1.5) 
+VarFloat("f_btz_Rifle_headshot_on_brood_max_hits", 1.5) 
+VarFloat("f_btz_Rifle_headshot_on_brood_damage_for_min", 150.0)
+VarFloat("f_btz_Rifle_headshot_on_brood_damage_for_max", 15.0)
+
+VarFloat("f_btz_Shotgun_on_brood_min_hits", 5.5) 
+VarFloat("f_btz_Shotgun_on_brood_max_hits", 5.5) 
+VarFloat("f_btz_Shotgun_on_brood_damage_for_min", 300.0)
+VarFloat("f_btz_Shotgun_on_brood_damage_for_max", 10.0)
+
+VarFloat("f_btz_Shotgun_headshot_on_brood_min_hits", 3.9) 
+VarFloat("f_btz_Shotgun_headshot_on_brood_max_hits", 3.9) 
+VarFloat("f_btz_Shotgun_headshot_on_brood_damage_for_min", 300.0)
+VarFloat("f_btz_Shotgun_headshot_on_brood_damage_for_max", 10.0)
+
+VarFloat("f_btz_Sniper_on_brood_min_hits", 4.9) 
+VarFloat("f_btz_Sniper_on_brood_max_hits", 4.9) 
+VarFloat("f_btz_Sniper_on_brood_damage_for_min", 1.0)
+VarFloat("f_btz_Sniper_on_brood_damage_for_max", 0.1)
+
+VarFloat("f_btz_Sniper_headshot_on_brood_min_hits", 2.9) 
+VarFloat("f_btz_Sniper_headshot_on_brood_max_hits", 2.9) 
+VarFloat("f_btz_Sniper_headshot_on_brood_damage_for_min", 150.0)
+VarFloat("f_btz_Sniper_headshot_on_brood_damage_for_max", 15.0)
+
+VarFloat("f_btz_LightMachine_on_brood_min_hits", 2.3)
+VarFloat("f_btz_LightMachine_on_brood_max_hits", 2.3) 
+VarFloat("f_btz_LightMachine_on_brood_damage_for_min", 90.0)
+VarFloat("f_btz_LightMachine_on_brood_damage_for_max", 20.0)
+
+VarFloat("f_btz_LightMachine_headshot_on_brood_min_hits", 1.9) 
+VarFloat("f_btz_LightMachine_headshot_on_brood_max_hits", 1.9)  
+VarFloat("f_btz_LightMachine_headshot_on_brood_damage_for_min", 150.0)
+VarFloat("f_btz_LightMachine_headshot_on_brood_damage_for_max", 15.0)
+
+VarFloat("f_btz_Rocket_on_brood_min_hits", 4.9) 
+VarFloat("f_btz_Rocket_on_brood_max_hits", 4.9) 
+VarFloat("f_btz_Rocket_on_brood_damage_for_min", 250.0)
+VarFloat("f_btz_Rocket_on_brood_damage_for_max", 20.0)
+
+VarFloat("f_btz_Rocket_headshot_on_brood_min_hits", 2.9) 
+VarFloat("f_btz_Rocket_headshot_on_brood_max_hits", 2.9) 
+VarFloat("f_btz_Rocket_headshot_on_brood_damage_for_min", 1)
+VarFloat("f_btz_Rocket_headshot_on_brood_damage_for_max", 0.1)
+
+VarFloat("f_btz_Arrow_on_brood_min_hits", 0.18) 
+VarFloat("f_btz_Arrow_on_brood_max_hits", 0.18) 
+VarFloat("f_btz_Arrow_on_brood_damage_for_min", 250.0)
+VarFloat("f_btz_Arrow_on_brood_damage_for_max", 20.0)
+
+VarFloat("f_btz_Arrow_headshot_on_brood_min_hits", 0.018) 
+VarFloat("f_btz_Arrow_headshot_on_brood_max_hits", 0.018) 
+VarFloat("f_btz_Arrow_headshot_on_brood_damage_for_min", 250)
+VarFloat("f_btz_Arrow_headshot_on_brood_damage_for_max", 20)
+
+VarFloat("f_btz_SubMachine_on_brood_min_hits", 2.5) 
+VarFloat("f_btz_SubMachine_on_brood_max_hits", 2.5) 
+VarFloat("f_btz_SubMachine_on_brood_damage_for_min", 150.0)
+VarFloat("f_btz_SubMachine_on_brood_damage_for_max", 15.0)
+
+VarFloat("f_btz_SubMachine_headshot_on_brood_min_hits", 1.6) 
+VarFloat("f_btz_SubMachine_headshot_on_brood_max_hits", 1.6) 
+VarFloat("f_btz_SubMachine_headshot_on_brood_damage_for_min", 150.0)
+VarFloat("f_btz_SubMachine_headshot_on_brood_damage_for_max", 15.0)
+
+VarFloat("f_btz_bolt_on_brood_min_hits", 0.18) 
+VarFloat("f_btz_bolt_on_brood_max_hits", 0.18) 
+VarFloat("f_btz_bolt_on_brood_damage_for_min", 250.0)
+VarFloat("f_btz_bolt_on_brood_damage_for_max", 20.0)
+
+VarFloat("f_btz_bolt_headshot_on_brood_min_hits", 0.018) 
+VarFloat("f_btz_bolt_headshot_on_brood_max_hits", 0.018) 
+VarFloat("f_btz_bolt_headshot_on_brood_damage_for_min", 250)
+VarFloat("f_btz_bolt_headshot_on_brood_damage_for_max", 20)
+
+
+//////////////////// Guns Damage Mapping End //////////////////////////////////////
+
+
+////////////////////////////////
+///////////Brood////////////////
+////////////////////////////////
+
+//brood tackle/////
+VarFloat("f_btz_tackle_on_brood_min_hits", 13.0) 
+VarFloat("f_btz_tackle_on_brood_max_hits", 13.0) 
+VarFloat("f_btz_tackle_on_brood_damage_for_min", 40.0)
+VarFloat("f_btz_tackle_on_brood_damage_for_max", 3.0)
+
+//brood blast/////
+VarFloat("f_btz_blast_on_brood_min_hits", 30.0) 
+VarFloat("f_btz_blast_on_brood_max_hits", 1000.0)  // int btz blast mod weapons will add there mods into the base damage and apply a 1 damage of the effect damage, we want this to be negligible its just applied for effects 
+VarFloat("f_btz_blast_on_brood_damage_for_min", 400.0)
+VarFloat("f_btz_blast_on_brood_damage_for_max", 2.0) 
+
+//brood blast_lethal/////
+VarFloat("f_btz_blast_lethal_on_brood_min_hits", 1.3) 
+VarFloat("f_btz_blast_lethal_on_brood_max_hits", 1.3)  
+VarFloat("f_btz_blast_lethal_on_brood_damage_for_min", 100.0)
+VarFloat("f_btz_blast_lethal_on_brood_damage_for_max", 2.0) 
+
+//brood mine/////
+VarFloat("f_btz_mine_on_brood_min_hits", 5.5) 
+VarFloat("f_btz_mine_on_brood_max_hits", 5.5)  
+VarFloat("f_btz_mine_on_brood_damage_for_min", 100.0)
+VarFloat("f_btz_mine_on_brood_damage_for_max", 2.0) 
+
+//brood kick/////
+VarFloat("f_btz_kick_on_brood_min_hits", 20.0)
+VarFloat("f_btz_kick_on_brood_max_hits", 20.0)
+VarFloat("f_btz_kick_on_brood_damage_for_min", 5.0)
+VarFloat("f_btz_kick_on_brood_damage_for_max", 5.0)
+
+//brood ram (dropkick)/////
+VarFloat("f_btz_ram_on_brood_min_hits", 7.0)
+VarFloat("f_btz_ram_on_brood_max_hits", 7.0)
+VarFloat("f_btz_ram_on_brood_damage_for_min", 5.0)
+VarFloat("f_btz_ram_on_brood_damage_for_max", 5.0)
+
+//brood blunt/////
+VarFloat("f_btz_blunt_on_brood_min_hits", -1.0)
+VarFloat("f_btz_blunt_on_brood_max_hits", -1.0)
+VarFloat("f_btz_blunt_on_brood_damage_for_min", 500.0)
+VarFloat("f_btz_blunt_on_brood_damage_for_max", 1.0)
+
+//brood fist/////
+VarFloat("f_btz_fist_on_brood_min_hits", 20.0) 
+VarFloat("f_btz_fist_on_brood_max_hits", 20.0) 
+VarFloat("f_btz_fist_on_brood_damage_for_min", 20.0)
+VarFloat("f_btz_fist_on_brood_damage_for_max", 5.0)
+
+VarFloat("f_btz_charge_fist_on_brood_min_hits", 10.0) 
+VarFloat("f_btz_charge_fist_on_brood_max_hits", 10.0)
+VarFloat("f_btz_charge_fist_on_brood_damage_for_min", 40.0)
+VarFloat("f_btz_charge_fist_on_brood_damage_for_max", 20.0)
+
+
+//brood stick/////
+VarFloat("f_btz_stick_on_brood_min_hits", 18.0) 
+VarFloat("f_btz_stick_on_brood_max_hits", 18.0) 
+VarFloat("f_btz_stick_on_brood_damage_for_min", 600.0)
+VarFloat("f_btz_stick_on_brood_damage_for_max", 30.0)
+
+VarFloat("f_btz_charge_stick_on_brood_min_hits", 7.0) 
+VarFloat("f_btz_charge_stick_on_brood_max_hits", 7.0)
+VarFloat("f_btz_charge_stick_on_brood_damage_for_min", 1000.0)
+VarFloat("f_btz_charge_stick_on_brood_damage_for_max", 50.0)
+
+VarFloat("f_btz_hook_stick_on_brood_min_hits", 36.0) 
+VarFloat("f_btz_hook_stick_on_brood_max_hits", 36.0) 
+VarFloat("f_btz_hook_stick_on_brood_damage_for_min", 600.0)
+VarFloat("f_btz_hook_stick_on_brood_damage_for_max", 30.0)
+
+VarFloat("f_btz_throw_stick_on_brood_min_hits", 5.0) 
+VarFloat("f_btz_throw_stick_on_brood_max_hits",  5.0) 
+VarFloat("f_btz_throw_stick_on_brood_damage_for_min", 600.0)
+VarFloat("f_btz_throw_stick_on_brood_damage_for_max", 30.0)
+
+
+//brood knife/////
+VarFloat("f_btz_knife_on_brood_min_hits", 26.0) 
+VarFloat("f_btz_knife_on_brood_max_hits", 26.0) 
+VarFloat("f_btz_knife_on_brood_damage_for_min", 90.0)
+VarFloat("f_btz_knife_on_brood_damage_for_max", 20.0)
+
+VarFloat("f_btz_charge_knife_on_brood_min_hits", 9.0) 
+VarFloat("f_btz_charge_knife_on_brood_max_hits", 9.0) 
+VarFloat("f_btz_charge_knife_on_brood_damage_for_min", 150.0)
+VarFloat("f_btz_charge_knife_on_brood_damage_for_max", 40.0)
+
+VarFloat("f_btz_throw_knife_on_brood_min_hits", 11.0) 
+VarFloat("f_btz_throw_knife_on_brood_max_hits", 11.0) 
+VarFloat("f_btz_throw_knife_on_brood_damage_for_min", 90.0)
+VarFloat("f_btz_throw_knife_on_brood_damage_for_max", 20.0)
+
+
+//brood stick2close/////
+VarFloat("f_btz_stick2close_on_brood_min_hits", 13.0) 
+VarFloat("f_btz_stick2close_on_brood_max_hits", 13.0) 
+VarFloat("f_btz_stick2close_on_brood_damage_for_min", 600.0)
+VarFloat("f_btz_stick2close_on_brood_damage_for_max", 40.0)
+
+VarFloat("f_btz_charge_stick2close_on_brood_min_hits", 6.0) 
+VarFloat("f_btz_charge_stick2close_on_brood_max_hits", 6.0) 
+VarFloat("f_btz_charge_stick2close_on_brood_damage_for_min", 600.0)
+VarFloat("f_btz_charge_stick2close_on_brood_damage_for_max", 100.0)
+
+VarFloat("f_btz_throw_stick2close_on_brood_min_hits", 5.0) 
+VarFloat("f_btz_throw_stick2close_on_brood_max_hits", 5.0) 
+VarFloat("f_btz_throw_stick2close_on_brood_damage_for_min", 1000.0)
+VarFloat("f_btz_throw_stick2close_on_brood_damage_for_max", 100.0)
+
+
+//brood stick2heavy/////
+VarFloat("f_btz_stick2heavy_on_brood_min_hits", 10.0) 
+VarFloat("f_btz_stick2heavy_on_brood_max_hits", 10.0) 
+VarFloat("f_btz_stick2heavy_on_brood_damage_for_min", 500.0)
+VarFloat("f_btz_stick2heavy_on_brood_damage_for_max", 40.0)
+
+VarFloat("f_btz_charge_stick2heavy_on_brood_min_hits", 5.0) 
+VarFloat("f_btz_charge_stick2heavy_on_brood_max_hits", 5.0) 
+VarFloat("f_btz_charge_stick2heavy_on_brood_damage_for_min", 600.0)
+VarFloat("f_btz_charge_stick2heavy_on_brood_damage_for_max", 70.0)  
+
+VarFloat("f_btz_throw_stick2heavy_on_brood_min_hits", 4.0)
+VarFloat("f_btz_throw_stick2heavy_on_brood_max_hits", 4.0) 
+VarFloat("f_btz_throw_stick2heavy_on_brood_damage_for_min", 150.0)
+VarFloat("f_btz_throw_stick2heavy_on_brood_damage_for_max", 40.0)
+
+//brood thrower////
+VarFloat("f_btz_throw_thrower_on_brood_min_hits", 200.0) 
+VarFloat("f_btz_throw_thrower_on_brood_max_hits", 200.0) // explosive throwing start does low is throw damage but then also explodes. to make it not ridiculously over powered make the throw damage do very little
+VarFloat("f_btz_throw_thrower_on_brood_damage_for_min", 120.0)
+VarFloat("f_btz_throw_thrower_on_brood_damage_for_max", 80.0)
+
+//brood grenade//// // there is some special type of grenade that has a strainge damage type so it just uses the item name as the look up
+VarFloat("f_btz_grenade_on_brood_min_hits", 12.0) 
+VarFloat("f_btz_grenade_on_brood_max_hits", 12.0) 
+VarFloat("f_btz_grenade_on_brood_damage_for_min", 120.0)
+VarFloat("f_btz_grenade_on_brood_damage_for_max", 80.0)
+
+
+// Brood impact_buggy /// 
+VarFloat("f_btz_impact_buggy_on_brood_min_hits", 45.0) 
+VarFloat("f_btz_impact_buggy_on_brood_max_hits", 80.0) 
+VarFloat("f_btz_impact_buggy_on_brood_damage_for_min", 30.0)
+VarFloat("f_btz_impact_buggy_on_brood_damage_for_max", 5.0)
+
+// Brood impact /// 
+VarFloat("f_btz_impact_dps_on_brood_min_hits", 45.0) 
+VarFloat("f_btz_impact_dps_on_brood_max_hits", 80.0) 
+VarFloat("f_btz_impact_dps_on_brood_damage_for_min", 30.0)
+VarFloat("f_btz_impact_dps_on_brood_damage_for_max", 5.0)
+
+// Brood electric /// 
+VarFloat("f_btz_electric_dps_on_brood_min_hits", 45.0) 
+VarFloat("f_btz_electric_dps_on_brood_max_hits", 80.0) 
+VarFloat("f_btz_electric_dps_on_brood_damage_for_min", 30.0)
+VarFloat("f_btz_electric_dps_on_brood_damage_for_max", 5.0)
+
+// Brood electric_buggy /// 
+VarFloat("f_btz_electric_buggy_on_brood_min_hits", 45.0) 
+VarFloat("f_btz_electric_buggy_on_brood_max_hits", 80.0) 
+VarFloat("f_btz_electric_buggy_on_brood_damage_for_min", 30.0)
+VarFloat("f_btz_electric_buggy_on_brood_damage_for_max", 5.0)
+
+// Brood bleeding /// 
+VarFloat("f_btz_bleeding_dps_on_brood_min_hits", 45.0) 
+VarFloat("f_btz_bleeding_dps_on_brood_max_hits", 80.0) 
+VarFloat("f_btz_bleeding_dps_on_brood_damage_for_min", 30.0)
+VarFloat("f_btz_bleeding_dps_on_brood_damage_for_max", 5.0)
+
+// Brood fire /// 
+VarFloat("f_btz_fire_dps_on_brood_min_hits", 35.0) 
+VarFloat("f_btz_fire_dps_on_brood_max_hits", 80.0) 
+VarFloat("f_btz_fire_dps_on_brood_damage_for_min", 40.0)
+VarFloat("f_btz_fire_dps_on_brood_damage_for_max", 5.0)
+
+// Brood fire_buggy /// 
+VarFloat("f_btz_fire_buggy_on_brood_min_hits", 35.0) 
+VarFloat("f_btz_fire_buggy_on_brood_max_hits", 80.0) 
+VarFloat("f_btz_fire_buggy_on_brood_damage_for_min", 40.0)
+VarFloat("f_btz_fire_buggy_on_brood_damage_for_max", 5.0)
+
+// Brood poison /// 
+VarFloat("f_btz_poison_dps_on_brood_min_hits", 45.0) 
+VarFloat("f_btz_poison_dps_on_brood_max_hits", 80.0) 
+VarFloat("f_btz_poison_dps_on_brood_damage_for_min", 30.0)
+VarFloat("f_btz_poison_dps_on_brood_damage_for_max", 5.0)
+
+// Brood toxic /// 
+VarFloat("f_btz_toxic_dps_on_brood_min_hits", 45.0) 
+VarFloat("f_btz_toxic_dps_on_brood_max_hits", 80.0) 
+VarFloat("f_btz_toxic_dps_on_brood_damage_for_min", 30.0)
+VarFloat("f_btz_toxic_dps_on_brood_damage_for_max", 5.0)
+
+// Brood cold /// 
+VarFloat("f_btz_cold_dps_on_brood_min_hits", 45.0) 
+VarFloat("f_btz_cold_dps_on_brood_max_hits", 80.0) 
+VarFloat("f_btz_cold_dps_on_brood_damage_for_min", 30.0)
+VarFloat("f_btz_cold_dps_on_brood_damage_for_max", 5.0)
+
+//brood mod dps//// 
+// keep these values at 1 so that it maps to the max hit dps. this allows for things like molotovs todo a little more damage with keeping modded weapon damage on par with non modded weapons
+VarFloat("f_btz_electric_mod_dps_on_brood", 1.0) 
+VarFloat("f_btz_bleeding_mod_dps_on_brood", 1.0) 
+VarFloat("f_btz_fire_mod_dps_on_brood", 1.0) 
+VarFloat("f_btz_poison_mod_dps_on_brood", 1.0) 
+VarFloat("f_btz_toxic_mod_dps_on_brood", 1.0) 
+VarFloat("f_btz_cold_mod_dps_on_brood", 1.0) 
+VarFloat("f_btz_impact_mod_dps_on_brood", 1.0) 
+VarFloat("f_btz_unknown_mod_dps_on_brood", 1.0) 
+
+
+//brood buggy////
+VarFloat("f_btz_buggy_on_brood_min_hits", 1.9) 
+VarFloat("f_btz_buggy_on_brood_max_hits", 3.9) 
+VarFloat("f_btz_buggy_on_brood_damage_for_min", 40.0)
+VarFloat("f_btz_buggy_on_brood_damage_for_max", 5.0)
+
+////////////////////////////////
+////////////Thug////////////////
+////////////////////////////////
+
+//thug blast/////
+VarFloat("f_btz_blast_on_thug_min_hits", 8.0) 
+VarFloat("f_btz_blast_on_thug_max_hits", 1000.0) 
+VarFloat("f_btz_blast_on_thug_damage_for_min", 400.0)
+VarFloat("f_btz_blast_on_thug_damage_for_max", 2.0) // int btz blast mod weapons will add there mods into the base damage and apply a 1 damage of the effect damage, we want this to be negligible its just applied for effects  
+
+//thug blast_lethal/////
+VarFloat("f_btz_blast_lethal_on_thug_min_hits", 0.9) 
+VarFloat("f_btz_blast_lethal_on_thug_max_hits", 3.0) 
+VarFloat("f_btz_blast_lethal_on_thug_damage_for_min", 180.0)
+VarFloat("f_btz_blast_lethal_on_thug_damage_for_max", 2.0) 
+
+//thug mine/////
+VarFloat("f_btz_mine_on_thug_min_hits", 1.3) 
+VarFloat("f_btz_mine_on_thug_max_hits", 1.3) 
+VarFloat("f_btz_mine_on_thug_damage_for_min", 180.0)
+VarFloat("f_btz_mine_on_thug_damage_for_max", 2.0) 
+
+//thug tackle/////
+VarFloat("f_btz_tackle_on_thug_min_hits", 7.0) 
+VarFloat("f_btz_tackle_on_thug_max_hits", 10.0) 
+VarFloat("f_btz_tackle_on_thug_damage_for_min", 40.0)
+VarFloat("f_btz_tackle_on_thug_damage_for_max", 3.0)
+
+//thug kick/////
+VarFloat("f_btz_kick_on_thug_min_hits", 20.0)
+VarFloat("f_btz_kick_on_thug_max_hits", 20.0)
+VarFloat("f_btz_kick_on_thug_damage_for_min", 5.0)
+VarFloat("f_btz_kick_on_thug_damage_for_max", 5.0)
+
+//thug ram (dropkick)/////
+VarFloat("f_btz_ram_on_thug_min_hits", 6.0)
+VarFloat("f_btz_ram_on_thug_max_hits", 6.0)
+VarFloat("f_btz_ram_on_thug_damage_for_min", 5.0)
+VarFloat("f_btz_ram_on_thug_damage_for_max", 5.0)
+
+//thug blunt/////
+VarFloat("f_btz_blunt_on_thug_min_hits", -1.0)
+VarFloat("f_btz_blunt_on_thug_max_hits", -1.0)
+VarFloat("f_btz_blunt_on_thug_damage_for_min", 500.0)
+VarFloat("f_btz_blunt_on_thug_damage_for_max", 1.0)
+
+//thug fist/////
+VarFloat("f_btz_fist_on_thug_min_hits", 20.0) 
+VarFloat("f_btz_fist_on_thug_max_hits", 20.0) 
+VarFloat("f_btz_fist_on_thug_damage_for_min", 20.0)
+VarFloat("f_btz_fist_on_thug_damage_for_max", 5.0)
+
+VarFloat("f_btz_charge_fist_on_thug_min_hits", 10.0) 
+VarFloat("f_btz_charge_fist_on_thug_max_hits", 10.0)
+VarFloat("f_btz_charge_fist_on_thug_damage_for_min", 40.0)
+VarFloat("f_btz_charge_fist_on_thug_damage_for_max", 20.0)
+
+//thug stick/////
+VarFloat("f_btz_stick_on_thug_min_hits", 10.0) 
+VarFloat("f_btz_stick_on_thug_max_hits", 18.0) 
+VarFloat("f_btz_stick_on_thug_damage_for_min", 600.0)
+VarFloat("f_btz_stick_on_thug_damage_for_max", 30.0)
+
+VarFloat("f_btz_charge_stick_on_thug_min_hits", 5.0) 
+VarFloat("f_btz_charge_stick_on_thug_max_hits", 10.0)
+VarFloat("f_btz_charge_stick_on_thug_damage_for_min", 1000.0)
+VarFloat("f_btz_charge_stick_on_thug_damage_for_max", 50.0)
+
+VarFloat("f_btz_throw_stick_on_thug_min_hits", 1.5) 
+VarFloat("f_btz_throw_stick_on_thug_max_hits",  3.0) 
+VarFloat("f_btz_throw_stick_on_thug_damage_for_min", 600.0)
+VarFloat("f_btz_throw_stick_on_thug_damage_for_max", 30.0)
+
+VarFloat("f_btz_hook_stick_on_thug_min_hits", 13.0) 
+VarFloat("f_btz_hook_stick_on_thug_max_hits",  13.0) 
+VarFloat("f_btz_hook_stick_on_thug_damage_for_min", 600.0)
+VarFloat("f_btz_hook_stick_on_thug_damage_for_max", 30.0)
+
+//thug knife/////
+VarFloat("f_btz_knife_on_thug_min_hits", 23.0) 
+VarFloat("f_btz_knife_on_thug_max_hits", 26.0) 
+VarFloat("f_btz_knife_on_thug_damage_for_min", 90.0)
+VarFloat("f_btz_knife_on_thug_damage_for_max", 20.0)
+
+VarFloat("f_btz_charge_knife_on_thug_min_hits", 9.0) 
+VarFloat("f_btz_charge_knife_on_thug_max_hits", 11.0) 
+VarFloat("f_btz_charge_knife_on_thug_damage_for_min", 150.0)
+VarFloat("f_btz_charge_knife_on_thug_damage_for_max", 40.0)
+
+VarFloat("f_btz_throw_knife_on_thug_min_hits", 3.0) 
+VarFloat("f_btz_throw_knife_on_thug_max_hits", 5.0) 
+VarFloat("f_btz_throw_knife_on_thug_damage_for_min", 90.0)
+VarFloat("f_btz_throw_knife_on_thug_damage_for_max", 20.0)
+
+
+//thug stick2close/////
+VarFloat("f_btz_stick2close_on_thug_min_hits", 10.0) 
+VarFloat("f_btz_stick2close_on_thug_max_hits", 13.0) 
+VarFloat("f_btz_stick2close_on_thug_damage_for_min", 600.0)
+VarFloat("f_btz_stick2close_on_thug_damage_for_max", 40.0)
+
+VarFloat("f_btz_charge_stick2close_on_thug_min_hits", 4.0) 
+VarFloat("f_btz_charge_stick2close_on_thug_max_hits", 7.0) 
+VarFloat("f_btz_charge_stick2close_on_thug_damage_for_min", 600.0)
+VarFloat("f_btz_charge_stick2close_on_thug_damage_for_max", 100.0)
+
+VarFloat("f_btz_throw_stick2close_on_thug_min_hits", 1.5) 
+VarFloat("f_btz_throw_stick2close_on_thug_max_hits", 3.0) 
+VarFloat("f_btz_throw_stick2close_on_thug_damage_for_min", 1000.0)
+VarFloat("f_btz_throw_stick2close_on_thug_damage_for_max", 100.0)
+
+
+//thug stick2heavy/////
+VarFloat("f_btz_stick2heavy_on_thug_min_hits", 4.0) 
+VarFloat("f_btz_stick2heavy_on_thug_max_hits", 5.5) 
+VarFloat("f_btz_stick2heavy_on_thug_damage_for_min", 500.0)
+VarFloat("f_btz_stick2heavy_on_thug_damage_for_max", 40.0)
+
+VarFloat("f_btz_charge_stick2heavy_on_thug_min_hits", 4.0) 
+VarFloat("f_btz_charge_stick2heavy_on_thug_max_hits", 5.5) 
+VarFloat("f_btz_charge_stick2heavy_on_thug_damage_for_min", 600.0)
+VarFloat("f_btz_charge_stick2heavy_on_thug_damage_for_max", 70.0)  
+
+VarFloat("f_btz_throw_stick2heavy_on_thug_min_hits", 1.3)
+VarFloat("f_btz_throw_stick2heavy_on_thug_max_hits", 2.0) 
+VarFloat("f_btz_throw_stick2heavy_on_thug_damage_for_min", 150.0)
+VarFloat("f_btz_throw_stick2heavy_on_thug_damage_for_max", 40.0)
+
+//thug thrower////
+VarFloat("f_btz_throw_thrower_on_thug_min_hits", 12.0) 
+VarFloat("f_btz_throw_thrower_on_thug_max_hits", 200.0) 
+VarFloat("f_btz_throw_thrower_on_thug_damage_for_min", 400.0)
+VarFloat("f_btz_throw_thrower_on_thug_damage_for_max", 80.0)
+
+//thug grenade//// // there is some special type of grenade that has a strainge damage type so it just uses the item name as the look up
+VarFloat("f_btz_grenade_on_thug_min_hits", 6.0) 
+VarFloat("f_btz_grenade_on_thug_max_hits", 6.0) 
+VarFloat("f_btz_grenade_on_thug_damage_for_min", 120.0)
+VarFloat("f_btz_grenade_on_thug_damage_for_max", 80.0)
+
+// thug impact /// 
+VarFloat("f_btz_impact_dps_on_thug_min_hits", 50.0) 
+VarFloat("f_btz_impact_dps_on_thug_max_hits", 50.0) 
+VarFloat("f_btz_impact_dps_on_thug_damage_for_min", 500.0)
+VarFloat("f_btz_impact_dps_on_thug_damage_for_max", 1.0)
+
+// thug impact_buggy /// 
+VarFloat("f_btz_impact_buggy_on_thug_min_hits", 50.0) 
+VarFloat("f_btz_impact_buggy_on_thug_max_hits", 50.0) 
+VarFloat("f_btz_impact_buggy_on_thug_damage_for_min", 500.0)
+VarFloat("f_btz_impact_buggy_on_thug_damage_for_max", 1.0)
+
+// thug electric /// 
+VarFloat("f_btz_electric_dps_on_thug_min_hits", 50.0) 
+VarFloat("f_btz_electric_dps_on_thug_max_hits", 50.0) 
+VarFloat("f_btz_electric_dps_on_thug_damage_for_min", 500.0)
+VarFloat("f_btz_electric_dps_on_thug_damage_for_max", 1.0)
+
+// thug electric_buggy /// 
+VarFloat("f_btz_electric_buggy_on_thug_min_hits", 50.0) 
+VarFloat("f_btz_electric_buggy_on_thug_max_hits", 50.0) 
+VarFloat("f_btz_electric_buggy_on_thug_damage_for_min", 500.0)
+VarFloat("f_btz_electric_buggy_on_thug_damage_for_max", 1.0)
+
+// thug bleeding /// 
+VarFloat("f_btz_bleeding_dps_on_thug_min_hits", 50.0) 
+VarFloat("f_btz_bleeding_dps_on_thug_max_hits", 50.0) 
+VarFloat("f_btz_bleeding_dps_on_thug_damage_for_min", 500.0)
+VarFloat("f_btz_bleeding_dps_on_thug_damage_for_max", 1.0)
+
+// thug fire /// 
+VarFloat("f_btz_fire_dps_on_thug_min_hits", 50.0) 
+VarFloat("f_btz_fire_dps_on_thug_max_hits", 50.0) 
+VarFloat("f_btz_fire_dps_on_thug_damage_for_min", 30.0)
+VarFloat("f_btz_fire_dps_on_thug_damage_for_max", 0.1)
+
+// thug fire_buggy /// 
+VarFloat("f_btz_fire_buggy_on_thug_min_hits", 50.0) 
+VarFloat("f_btz_fire_buggy_on_thug_max_hits", 50.0) 
+VarFloat("f_btz_fire_buggy_on_thug_damage_for_min", 30.0)
+VarFloat("f_btz_fire_buggy_on_thug_damage_for_max", 0.1)
+
+// thug poison /// 
+VarFloat("f_btz_poison_dps_on_thug_min_hits", 50.0) 
+VarFloat("f_btz_poison_dps_on_thug_max_hits", 50.0) 
+VarFloat("f_btz_poison_dps_on_thug_damage_for_min", 500.0)
+VarFloat("f_btz_poison_dps_on_thug_damage_for_max", 1.0)
+
+// thug toxic /// 
+VarFloat("f_btz_toxic_dps_on_thug_min_hits", 50.0) 
+VarFloat("f_btz_toxic_dps_on_thug_max_hits", 50.0) 
+VarFloat("f_btz_toxic_dps_on_thug_damage_for_min", 500.0)
+VarFloat("f_btz_toxic_dps_on_thug_damage_for_max", 1.0)
+
+// thug cold /// 
+VarFloat("f_btz_cold_dps_on_thug_min_hits", 50.0) 
+VarFloat("f_btz_cold_dps_on_thug_max_hits", 50.0) 
+VarFloat("f_btz_cold_dps_on_thug_damage_for_min", 500.0)
+VarFloat("f_btz_cold_dps_on_thug_damage_for_max", 1.0)
+
+
+//thug mod dps////
+VarFloat("f_btz_electric_mod_dps_on_thug", 45.0) 
+VarFloat("f_btz_bleeding_mod_dps_on_thug", 45.0) 
+VarFloat("f_btz_fire_mod_dps_on_thug", 45.0) 
+VarFloat("f_btz_poison_mod_dps_on_thug", 45.0) 
+VarFloat("f_btz_toxic_mod_dps_on_thug", 45.0) 
+VarFloat("f_btz_cold_mod_dps_on_thug", 45.0) 
+VarFloat("f_btz_impact_mod_dps_on_thug", 45.0) 
+VarFloat("f_btz_unknown_mod_dps_on_thug", 45.0) 
+
+
+
+////////////////////////////////
+///////////Zombie///////////////
+////////////////////////////////
+
+// zombie blast/////
+VarFloat("f_btz_blast_on_zombie_min_hits", 5.0) 
+VarFloat("f_btz_blast_on_zombie_max_hits", 40.0) 
+VarFloat("f_btz_blast_on_zombie_damage_for_min", 200.0)
+VarFloat("f_btz_blast_on_zombie_damage_for_max", 2.0)
+
+// zombie blast_lethal/////
+VarFloat("f_btz_blast_lethal_on_zombie_min_hits", 0.9) 
+VarFloat("f_btz_blast_lethal_on_zombie_max_hits", 1.9) 
+VarFloat("f_btz_blast_lethal_on_zombie_damage_for_min", 60.0)
+VarFloat("f_btz_blast_lethal_on_zombie_damage_for_max", 2.0)
+
+// zombie mine/////
+VarFloat("f_btz_mine_on_zombie_min_hits", 0.9) 
+VarFloat("f_btz_mine_on_zombie_max_hits", 0.9) 
+VarFloat("f_btz_mine_on_zombie_damage_for_min", 60.0)
+VarFloat("f_btz_mine_on_zombie_damage_for_max", 2.0)
+
+//zombie tackle/////
+VarFloat("f_btz_tackle_on_zombie_min_hits", 7.0) 
+VarFloat("f_btz_tackle_on_zombie_max_hits", 10.0) 
+VarFloat("f_btz_tackle_on_zombie_damage_for_min", 40.0)
+VarFloat("f_btz_tackle_on_zombie_damage_for_max", 3.0)
+
+//zombie kick/////
+VarFloat("f_btz_kick_on_zombie_min_hits", 10.0)
+VarFloat("f_btz_kick_on_zombie_max_hits", 10.0)
+VarFloat("f_btz_kick_on_zombie_damage_for_min", 5.0)
+VarFloat("f_btz_kick_on_zombie_damage_for_max", 5.0)
+
+//zombie ram (dropkick)/////
+VarFloat("f_btz_ram_on_zombie_min_hits", 5.0)
+VarFloat("f_btz_ram_on_zombie_max_hits", 5.0)
+VarFloat("f_btz_ram_on_zombie_damage_for_min", 5.0)
+VarFloat("f_btz_ram_on_zombie_damage_for_max", 5.0)
+
+//zombie blunt/////
+VarFloat("f_btz_blunt_on_zombie_min_hits", -1.0)
+VarFloat("f_btz_blunt_on_zombie_max_hits", -1.0)
+VarFloat("f_btz_blunt_on_zombie_damage_for_min", 500.0)
+VarFloat("f_btz_blunt_on_zombie_damage_for_max", 1.0)
+
+//zombie fist/////
+VarFloat("f_btz_fist_on_zombie_min_hits", 10.0) 
+VarFloat("f_btz_fist_on_zombie_max_hits", 10.0) 
+VarFloat("f_btz_fist_on_zombie_damage_for_min", 20.0)
+VarFloat("f_btz_fist_on_zombie_damage_for_max", 5.0)
+
+VarFloat("f_btz_charge_fist_on_zombie_min_hits", 10.0) 
+VarFloat("f_btz_charge_fist_on_zombie_max_hits", 10.0)
+VarFloat("f_btz_charge_fist_on_zombie_damage_for_min", 40.0)
+VarFloat("f_btz_charge_fist_on_zombie_damage_for_max", 20.0)
+
+
+//zombie stick/////
+VarFloat("f_btz_stick_on_zombie_min_hits", 1.0) //these values are set to handle the drop attack which is 10000 damage
+VarFloat("f_btz_stick_on_zombie_max_hits", 6.1) 
+VarFloat("f_btz_stick_on_zombie_damage_for_min", 10000.0)
+VarFloat("f_btz_stick_on_zombie_damage_for_max", 9999.0)
+
+VarFloat("f_btz_charge_stick_on_zombie_min_hits", 1.0) 
+VarFloat("f_btz_charge_stick_on_zombie_max_hits", 2.0)
+VarFloat("f_btz_charge_stick_on_zombie_damage_for_min", 2000.0)
+VarFloat("f_btz_charge_stick_on_zombie_damage_for_max", 50.0)
+
+VarFloat("f_btz_throw_stick_on_zombie_min_hits", 1.0) 
+VarFloat("f_btz_throw_stick_on_zombie_max_hits",  1.0) 
+VarFloat("f_btz_throw_stick_on_zombie_damage_for_min", 500.0)
+VarFloat("f_btz_throw_stick_on_zombie_damage_for_max", 30.0)
+
+VarFloat("f_btz_hook_stick_on_zombie_min_hits", 5.0) 
+VarFloat("f_btz_hook_stick_on_zombie_max_hits",  5.0) 
+VarFloat("f_btz_hook_stick_on_zombie_damage_for_min", 500.0)
+VarFloat("f_btz_hook_stick_on_zombie_damage_for_max", 30.0)
+
+//zombie knife/////
+VarFloat("f_btz_knife_on_zombie_min_hits", 8.0)
+VarFloat("f_btz_knife_on_zombie_max_hits", 10.0) 
+VarFloat("f_btz_knife_on_zombie_damage_for_min", 200.0)
+VarFloat("f_btz_knife_on_zombie_damage_for_max", 20.0)
+
+VarFloat("f_btz_charge_knife_on_zombie_min_hits", 2.0) 
+VarFloat("f_btz_charge_knife_on_zombie_max_hits", 3.0) 
+VarFloat("f_btz_charge_knife_on_zombie_damage_for_min", 300.0)
+VarFloat("f_btz_charge_knife_on_zombie_damage_for_max", 40.0)
+
+VarFloat("f_btz_throw_knife_on_zombie_min_hits", 1.0) 
+VarFloat("f_btz_throw_knife_on_zombie_max_hits", 2.0) 
+VarFloat("f_btz_throw_knife_on_zombie_damage_for_min", 90.0)
+VarFloat("f_btz_throw_knife_on_zombie_damage_for_max", 20.0)
+
+
+//zombie stick2close/////
+VarFloat("f_btz_stick2close_on_zombie_min_hits", 1.0) //these values are set to handle the drop attack which is 10000 damage
+VarFloat("f_btz_stick2close_on_zombie_max_hits", 6.1) 
+VarFloat("f_btz_stick2close_on_zombie_damage_for_min", 10000.0)
+VarFloat("f_btz_stick2close_on_zombie_damage_for_max", 9999.0)
+
+VarFloat("f_btz_charge_stick2close_on_zombie_min_hits", 1.0) 
+VarFloat("f_btz_charge_stick2close_on_zombie_max_hits", 2.0) 
+VarFloat("f_btz_charge_stick2close_on_zombie_damage_for_min", 2000.0)
+VarFloat("f_btz_charge_stick2close_on_zombie_damage_for_max", 100.0)
+
+VarFloat("f_btz_throw_stick2close_on_zombie_min_hits", 1.0) 
+VarFloat("f_btz_throw_stick2close_on_zombie_max_hits", 1.0) 
+VarFloat("f_btz_throw_stick2close_on_zombie_damage_for_min", 500.0)
+VarFloat("f_btz_throw_stick2close_on_zombie_damage_for_max", 100.0)
+
+
+//zombie stick2heavy/////
+VarFloat("f_btz_stick2heavy_on_zombie_min_hits", 2.1) 
+VarFloat("f_btz_stick2heavy_on_zombie_max_hits", 2.9) 
+VarFloat("f_btz_stick2heavy_on_zombie_damage_for_min", 500.0)
+VarFloat("f_btz_stick2heavy_on_zombie_damage_for_max", 40.0)
+
+VarFloat("f_btz_charge_stick2heavy_on_zombie_min_hits", 2.1) 
+VarFloat("f_btz_charge_stick2heavy_on_zombie_max_hits", 2.9) 
+VarFloat("f_btz_charge_stick2heavy_on_zombie_damage_for_min", 600.0)
+VarFloat("f_btz_charge_stick2heavy_on_zombie_damage_for_max", 70.0)  
+
+VarFloat("f_btz_throw_stick2heavy_on_zombie_min_hits", 1.0)
+VarFloat("f_btz_throw_stick2heavy_on_zombie_max_hits", 1.0) 
+VarFloat("f_btz_throw_stick2heavy_on_zombie_damage_for_min", 150.0)
+VarFloat("f_btz_throw_stick2heavy_on_zombie_damage_for_max", 40.0)
+
+//zombie thrower////
+VarFloat("f_btz_throw_thrower_on_zombie_min_hits", 4.0) 
+VarFloat("f_btz_throw_thrower_on_zombie_max_hits", 12.0) 
+VarFloat("f_btz_throw_thrower_on_zombie_damage_for_min", 500.0)
+VarFloat("f_btz_throw_thrower_on_zombie_damage_for_max", 80.0)
+
+
+//zombie grenade//// // there is some special type of grenade that has a strainge damage type so it just uses the item name as the look up
+VarFloat("f_btz_grenade_on_zombie_min_hits", 2.0) 
+VarFloat("f_btz_grenade_on_zombie_max_hits", 2.0) 
+VarFloat("f_btz_grenade_on_zombie_damage_for_min", 120.0)
+VarFloat("f_btz_grenade_on_zombie_damage_for_max", 80.0)
+
+
+// zombie impact /// 
+VarFloat("f_btz_impact_dps_on_zombie_min_hits", 100.0) 
+VarFloat("f_btz_impact_dps_on_zombie_max_hits", 100.0) 
+VarFloat("f_btz_impact_dps_on_zombie_damage_for_min", 500.0)
+VarFloat("f_btz_impact_dps_on_zombie_damage_for_max", 1.0)
+
+// zombie impact_buggy /// 
+VarFloat("f_btz_impact_buggy_on_zombie_min_hits", 100.0) 
+VarFloat("f_btz_impact_buggy_on_zombie_max_hits", 100.0) 
+VarFloat("f_btz_impact_buggy_on_zombie_damage_for_min", 500.0)
+VarFloat("f_btz_impact_buggy_on_zombie_damage_for_max", 1.0)
+
+// zombie electric /// 
+VarFloat("f_btz_electric_dps_on_zombie_min_hits", 100.0) 
+VarFloat("f_btz_electric_dps_on_zombie_max_hits", 100.0) 
+VarFloat("f_btz_electric_dps_on_zombie_damage_for_min", 500.0)
+VarFloat("f_btz_electric_dps_on_zombie_damage_for_max", 1.0)
+
+// zombie electric_buggy /// 
+VarFloat("f_btz_electric_buggy_on_zombie_min_hits", 100.0) 
+VarFloat("f_btz_electric_buggy_on_zombie_max_hits", 100.0) 
+VarFloat("f_btz_electric_buggy_on_zombie_damage_for_min", 500.0)
+VarFloat("f_btz_electric_buggy_on_zombie_damage_for_max", 1.0)
+
+// zombie bleeding /// 
+VarFloat("f_btz_bleeding_dps_on_zombie_min_hits", 100.0) 
+VarFloat("f_btz_bleeding_dps_on_zombie_max_hits", 100.0) 
+VarFloat("f_btz_bleeding_dps_on_zombie_damage_for_min", 500.0)
+VarFloat("f_btz_bleeding_dps_on_zombie_damage_for_max", 1.0)
+
+// zombie fire /// 
+VarFloat("f_btz_fire_dps_on_zombie_min_hits", 100.0) 
+VarFloat("f_btz_fire_dps_on_zombie_max_hits", 100.0) 
+VarFloat("f_btz_fire_dps_on_zombie_damage_for_min", 30.0)
+VarFloat("f_btz_fire_dps_on_zombie_damage_for_max", 0.1)
+
+// zombie fire_buggy /// 
+VarFloat("f_btz_fire_buggy_on_zombie_min_hits", 100.0) 
+VarFloat("f_btz_fire_buggy_on_zombie_max_hits", 100.0) 
+VarFloat("f_btz_fire_buggy_on_zombie_damage_for_min", 30.0)
+VarFloat("f_btz_fire_buggy_on_zombie_damage_for_max", 0.1)
+
+// zombie poison /// 
+VarFloat("f_btz_poison_dps_on_zombie_min_hits", 100.0) 
+VarFloat("f_btz_poison_dps_on_zombie_max_hits", 100.0) 
+VarFloat("f_btz_poison_dps_on_zombie_damage_for_min", 500.0)
+VarFloat("f_btz_poison_dps_on_zombie_damage_for_max", 1.0)
+
+// zombie toxic /// 
+VarFloat("f_btz_toxic_dps_on_zombie_min_hits", 100.0) 
+VarFloat("f_btz_toxic_dps_on_zombie_max_hits", 100.0) 
+VarFloat("f_btz_toxic_dps_on_zombie_damage_for_min", 500.0)
+VarFloat("f_btz_toxic_dps_on_zombie_damage_for_max", 1.0)
+
+// zombie cold /// 
+VarFloat("f_btz_cold_dps_on_zombie_min_hits", 100.0) 
+VarFloat("f_btz_cold_dps_on_zombie_max_hits", 100.0) 
+VarFloat("f_btz_cold_dps_on_zombie_damage_for_min", 500.0)
+VarFloat("f_btz_cold_dps_on_zombie_damage_for_max", 1.0)
+
+//zombie mod dps////
+VarFloat("f_btz_electric_mod_dps_on_zombie", 45.0) 
+VarFloat("f_btz_bleeding_mod_dps_on_zombie", 45.0) 
+VarFloat("f_btz_fire_mod_dps_on_zombie", 45.0) 
+VarFloat("f_btz_poison_mod_dps_on_zombie", 45.0) 
+VarFloat("f_btz_toxic_mod_dps_on_zombie", 45.0) 
+VarFloat("f_btz_cold_mod_dps_on_zombie", 45.0) 
+VarFloat("f_btz_impact_mod_dps_on_zombie", 45.0) 
+VarFloat("f_btz_unknown_mod_dps_on_zombie", 45.0) 
+
+///takedown kills///
+VarFloat("f_btz__on_zombie_min_hits", 0.9) 
+VarFloat("f_btz__on_zombie_max_hits", 0.9) 
+VarFloat("f_btz__on_zombie_damage_for_min", 1.0)
+VarFloat("f_btz__on_zombie_damage_for_max", 1.0)
+
+VarFloat("f_btz_silent_kill_on_zombie_min_hits", 0.9) 
+VarFloat("f_btz_silent_kill_on_zombie_max_hits", 0.9) 
+VarFloat("f_btz_silent_kill_on_zombie_damage_for_min", 1.0)
+VarFloat("f_btz_silent_kill_on_zombie_damage_for_max", 1.0)
+

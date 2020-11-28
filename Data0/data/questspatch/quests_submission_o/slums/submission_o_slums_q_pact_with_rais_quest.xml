@@ -1,0 +1,1552 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST NAME : Pack with Rais -->
+    <!-- QUEST INFO : Talk with Rais - Hub need suppressants -->
+    <!-- AFTER QUEST: AirDrop -->
+    <!-- COMMENT    :  -->
+    <!-- FROM       : >> SLUMS INTERIOR -->
+    <!-- TO         : >> SLUMS >> SLUMS INT WAREHOUSE -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="PactWithRais01"
+         parent="PactWithRais00"
+         leading_portal="portal_slums_interior_to_slums"
+         new_chapter="Chapter02"
+         reward_set="StorylineReward_PactWithRais_reward"
+         pxsl_line="14">
+        <!-- Buy Antizin from Rais. -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;PactWithRais_OBJ_GetOut&amp;"
+             pxsl_line="15">
+            <Path
+                 pxsl_line="15">
+                <Phase
+                     type="go to"
+                     name="PACT WITH RAIS - START"
+                     distance="10000"
+                     pxsl_line="16">
+                    <Destination
+                         pxsl_line="16">
+                        <QuestObject
+                             class="SpawnPointWithInteractiveMovie"
+                             name="sp_Hub_LJ_Floor_0"
+                             pxsl_line="16" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="17">
+                        <QuestObject
+                             class="SpawnPointWithInteractiveMovie"
+                             name="sp_Hub_LJ_Floor_0"
+                             pxsl_line="17" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="Player changes"
+                     pxsl_line="18">
+                    <Path
+                         pxsl_line="18">
+                        <!-- PLAYER GOT WATCH -->
+                        <Phase
+                             type="player control"
+                             name="_"
+                             has_watch="true"
+                             pxsl_line="19" />
+                        <Phase
+                             type="player control"
+                             name="_"
+                             block_night_reminder_sounds="false"
+                             pxsl_line="20" />
+                        <!-- VIRAL -->
+                        <Phase
+                             type="player control"
+                             name="_"
+                             spawn_system_progress="3"
+                             pxsl_line="21" />
+                        <!-- PLAYER CAN SLEEP TO NEXT MORNING AND NEXT NIGHT -->
+                        <Phase
+                             type="player control"
+                             name="_"
+                             sleep_to_morning="false"
+                             pxsl_line="22" />
+                    </Path>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="WORLD changes"
+                     pxsl_line="23">
+                    <Path
+                         pxsl_line="23">
+                        <Phase
+                             type="group block unblock"
+                             name="_"
+                             group_name="Air_Events"
+                             block="false"
+                             force="false"
+                             pxsl_line="24" />
+                    </Path>
+                </Phase>
+                <!-- CHANGES AND CEALNING AFTER AIRDROP -->
+                <Phase
+                     type="AND"
+                     name="Unlocking HMF encounters"
+                     pxsl_line="26">
+                    <Path
+                         pxsl_line="26">
+                        <Phase
+                             type="group block unblock"
+                             name="_"
+                             group_name="EncounterPatrol"
+                             block="false"
+                             force="false"
+                             pxsl_line="27" />
+                        <Phase
+                             type="group block unblock"
+                             name="_"
+                             group_name="EncounterPrisoners"
+                             block="false"
+                             force="false"
+                             pxsl_line="28" />
+                    </Path>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="celar on end"
+                     pxsl_line="29">
+                    <Path
+                         pxsl_line="29">
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="30">
+                            <Object
+                                 pxsl_line="31">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="airdrop_C_qeg"
+                                     pxsl_line="31" />
+                            </Object>
+                            <Object
+                                 pxsl_line="32">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="airdrop_B_deadbody_01"
+                                     pxsl_line="32" />
+                            </Object>
+                            <Object
+                                 pxsl_line="33">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="airdrop_B_deadbody_02"
+                                     pxsl_line="33" />
+                            </Object>
+                            <Object
+                                 pxsl_line="34">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="airdrop_B_deadbody_03"
+                                     pxsl_line="34" />
+                            </Object>
+                            <Object
+                                 pxsl_line="35">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="airdrop_C_enemies_in_way_from_qeg"
+                                     pxsl_line="35" />
+                            </Object>
+                            <Object
+                                 pxsl_line="36">
+                                <QuestObject
+                                     class="Encounter::EncounterBlockArea"
+                                     name="airdrop_enc_blocker_01"
+                                     pxsl_line="36" />
+                            </Object>
+                            <Object
+                                 pxsl_line="37">
+                                <QuestObject
+                                     class="Encounter::EncounterBlockArea"
+                                     name="airdrop_enc_blocker_02"
+                                     pxsl_line="37" />
+                            </Object>
+                            <Object
+                                 pxsl_line="38">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="airdrop_electic"
+                                     pxsl_line="38" />
+                            </Object>
+                            <Object
+                                 pxsl_line="39">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="airdrop_C"
+                                     pxsl_line="39" />
+                            </Object>
+                            <!-- EXP CAR -->
+                            <Object
+                                 pxsl_line="40">
+                                <QuestObject
+                                     class="NavMeshDynamicObject"
+                                     name="airdrop_exploding_car::slums_intruders_exploding_car_navmesh_dynamic"
+                                     pxsl_line="40" />
+                            </Object>
+                            <!-- EXP CAR -->
+                            <Object
+                                 pxsl_line="41">
+                                <QuestObject
+                                     class="SoundEmitterSimple"
+                                     name="airdrop_exploding_car::slums_intruders_exploding_car_sfx_fire"
+                                     pxsl_line="41" />
+                            </Object>
+                            <!-- EXP CAR -->
+                            <Object
+                                 pxsl_line="42">
+                                <QuestObject
+                                     class="FXEmitter"
+                                     name="airdrop_exploding_car::slums_intruders_exploding_car_fx_after_explosion"
+                                     pxsl_line="42" />
+                            </Object>
+                            <!-- EXP CAR -->
+                            <Object
+                                 pxsl_line="43">
+                                <QuestObject
+                                     class="FXEmitter"
+                                     name="airdrop_exploding_car::slums_intruders_exploding_car_fx_fire_after"
+                                     pxsl_line="43" />
+                            </Object>
+                            <!-- EXP CAR -->
+                            <Object
+                                 pxsl_line="44">
+                                <QuestObject
+                                     class="FXEmitter"
+                                     name="slums_exploding_car_airdrop_fx_fire"
+                                     pxsl_line="44" />
+                            </Object>
+                            <!-- EXP CAR -->
+                            <Object
+                                 pxsl_line="45">
+                                <QuestObject
+                                     class="FireEmitterDI"
+                                     name="airdrop_exploding_cars_fire_emitter"
+                                     pxsl_line="45" />
+                            </Object>
+                            <Object
+                                 pxsl_line="46">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="airdrop_b_reward_qeg"
+                                     pxsl_line="46" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="47">
+                            <Object
+                                 pxsl_line="48">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Airdrop_A"
+                                     pxsl_line="48" />
+                            </Object>
+                            <Object
+                                 pxsl_line="49">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Airdrop_B"
+                                     pxsl_line="49" />
+                            </Object>
+                            <Object
+                                 pxsl_line="50">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="airdrop_b_reward_ag"
+                                     pxsl_line="50" />
+                            </Object>
+                            <Object
+                                 pxsl_line="51">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Airdrop_C"
+                                     pxsl_line="51" />
+                            </Object>
+                            <Object
+                                 pxsl_line="52">
+                                <QuestObject
+                                     class="MovieActor"
+                                     name="cin_destroing_antazin_MilitaryCargo"
+                                     pxsl_line="52" />
+                            </Object>
+                            <Object
+                                 pxsl_line="53">
+                                <QuestObject
+                                     class="MovieActor"
+                                     name="cin_destroing_antazin_Toolbox05"
+                                     pxsl_line="53" />
+                            </Object>
+                            <Object
+                                 pxsl_line="54">
+                                <QuestObject
+                                     class="MovieActor"
+                                     name="cin_destroing_antazin_Toolbox03"
+                                     pxsl_line="54" />
+                            </Object>
+                            <Object
+                                 pxsl_line="55">
+                                <QuestObject
+                                     class="MovieActor"
+                                     name="cin_destroing_antazin_Toolbox02"
+                                     pxsl_line="55" />
+                            </Object>
+                            <Object
+                                 pxsl_line="56">
+                                <QuestObject
+                                     class="MovieActor"
+                                     name="cin_destroing_antazin_Toolbox01"
+                                     pxsl_line="56" />
+                            </Object>
+                            <Object
+                                 pxsl_line="57">
+                                <QuestObject
+                                     class="MovieActor"
+                                     name="Tools_box_plug"
+                                     pxsl_line="57" />
+                            </Object>
+                            <Object
+                                 pxsl_line="58">
+                                <QuestObject
+                                     class="MovieActor"
+                                     name="cin_destroing_antazin_Toolbox04"
+                                     pxsl_line="58" />
+                            </Object>
+                            <Object
+                                 pxsl_line="59">
+                                <QuestObject
+                                     class="MovieActor"
+                                     name="cin_destroing_antazin_WalkieTalkie"
+                                     pxsl_line="59" />
+                            </Object>
+                            <Object
+                                 pxsl_line="60">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="airdrop_B_deadbody_01"
+                                     pxsl_line="60" />
+                            </Object>
+                            <Object
+                                 pxsl_line="61">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="airdrop_B_deadbody_02"
+                                     pxsl_line="61" />
+                            </Object>
+                            <Object
+                                 pxsl_line="62">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="airdrop_B_deadbody_03"
+                                     pxsl_line="62" />
+                            </Object>
+                            <Object
+                                 pxsl_line="63">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="airdrop_C_deabdoby_01"
+                                     pxsl_line="63" />
+                            </Object>
+                            <Object
+                                 pxsl_line="64">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="airdrop_C_deadbody_02"
+                                     pxsl_line="64" />
+                            </Object>
+                            <Object
+                                 pxsl_line="65">
+                                <QuestObject
+                                     class="MovieActor"
+                                     name="MilitaryCargo"
+                                     pxsl_line="65" />
+                            </Object>
+                            <Object
+                                 pxsl_line="66">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="rais_warehouse_grating_gate_01"
+                                     pxsl_line="66" />
+                            </Object>
+                            <!-- EXP CAR -->
+                            <Object
+                                 pxsl_line="67">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="airdrop_exploding_car_go"
+                                     pxsl_line="67" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="show"
+                             pxsl_line="68">
+                            <Object
+                                 pxsl_line="69">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Shopkeeper_Slums_SafeZone"
+                                     pxsl_line="69" />
+                            </Object>
+                            <Object
+                                 pxsl_line="70">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="playfield_safezone_shopkeeper_decoration_a_go"
+                                     pxsl_line="70" />
+                            </Object>
+                            <Object
+                                 pxsl_line="71">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="rais_warehouse_grating_gate_02"
+                                     pxsl_line="71" />
+                            </Object>
+                            <Object
+                                 pxsl_line="72">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="slums_warehouse_weapons_go"
+                                     pxsl_line="72" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="shopkeeper_slums_safezone"
+                             group="shopkeeper_slums_safezone_nf_dlg"
+                             pxsl_line="74" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="75">
+                            <!-- Field Safe Zone -->
+                            <Object
+                                 pxsl_line="76">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="First_Playfield_Safezone::SafeZone_qeg"
+                                     pxsl_line="76" />
+                            </Object>
+                            <!-- Field Resting Place -->
+                            <Object
+                                 pxsl_line="77">
+                                <QuestObject
+                                     class="RestingPlace"
+                                     name="First_Playfield_Safezone::restingplace_for_player"
+                                     pxsl_line="77" />
+                            </Object>
+                            <Object
+                                 pxsl_line="78">
+                                <QuestObject
+                                     class="Trading::Shop"
+                                     name="Shops_Slums_SafeZone"
+                                     pxsl_line="78" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="RESPAWN - Blackout Filed - ON"
+                             pxsl_line="79">
+                            <Object
+                                 pxsl_line="80">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="First_Playfield_Safezone::SafeZone_sp_First_playfield"
+                                     pxsl_line="80" />
+                            </Object>
+                            <Object
+                                 pxsl_line="81">
+                                <QuestObject
+                                     class="HubZone"
+                                     name="First_Playfield_Safezone::SafeZone_sp_First_playfield_fake_hub_zone"
+                                     pxsl_line="81" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="Guards in front of the entrance to the Rais warehouse"
+                     pxsl_line="82">
+                    <Path
+                         pxsl_line="82">
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="show"
+                             pxsl_line="83">
+                            <Object
+                                 pxsl_line="84">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Slums_RaisWarehouseGuard01"
+                                     pxsl_line="84" />
+                            </Object>
+                            <Object
+                                 pxsl_line="85">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Slums_RaisWarehouseGuard02"
+                                     pxsl_line="85" />
+                            </Object>
+                            <Object
+                                 pxsl_line="86">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Slums_RaisWarehouseGuard03"
+                                     pxsl_line="86" />
+                            </Object>
+                            <Object
+                                 pxsl_line="87">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Slums_RaisWarehouseGuard08"
+                                     pxsl_line="87" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="88">
+                            <Object
+                                 pxsl_line="89">
+                                <QuestObject
+                                     class="BarrierObject"
+                                     name="RaisWarehouse_Barrier_Entrance"
+                                     pxsl_line="89" />
+                            </Object>
+                            <Object
+                                 pxsl_line="90">
+                                <QuestObject
+                                     class="SpawnBlocker"
+                                     name="RaisWarehouse_SpawnBlocker_Entrance"
+                                     pxsl_line="90" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="use life place"
+                             name="_"
+                             teleport="true"
+                             pxsl_line="91">
+                            <LifePlace
+                                 pxsl_line="91">
+                                <QuestObject
+                                     class="NPCLifePlace"
+                                     name="Slums_RaisWarehouseGuard01_LP"
+                                     pxsl_line="91" />
+                            </LifePlace>
+                            <AI
+                                 pxsl_line="92">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Slums_RaisWarehouseGuard01"
+                                     pxsl_line="92" />
+                            </AI>
+                        </Phase>
+                        <Phase
+                             type="use life place"
+                             name="_"
+                             teleport="true"
+                             pxsl_line="93">
+                            <LifePlace
+                                 pxsl_line="93">
+                                <QuestObject
+                                     class="NPCLifePlace"
+                                     name="Slums_RaisWarehouseGuard02_LP"
+                                     pxsl_line="93" />
+                            </LifePlace>
+                            <AI
+                                 pxsl_line="94">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Slums_RaisWarehouseGuard02"
+                                     pxsl_line="94" />
+                            </AI>
+                        </Phase>
+                        <Phase
+                             type="use life place"
+                             name="_"
+                             teleport="true"
+                             pxsl_line="95">
+                            <LifePlace
+                                 pxsl_line="95">
+                                <QuestObject
+                                     class="NPCLifePlace"
+                                     name="Slums_RaisWarehouseGuard03_LP_01"
+                                     pxsl_line="95" />
+                            </LifePlace>
+                            <AI
+                                 pxsl_line="96">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Slums_RaisWarehouseGuard03"
+                                     pxsl_line="96" />
+                            </AI>
+                        </Phase>
+                        <Phase
+                             type="use life place"
+                             name="_"
+                             teleport="true"
+                             pxsl_line="97">
+                            <LifePlace
+                                 pxsl_line="97">
+                                <QuestObject
+                                     class="NPCLifePlace"
+                                     name="Slums_RaisWarehouseGuard08_LP_02"
+                                     pxsl_line="97" />
+                            </LifePlace>
+                            <AI
+                                 pxsl_line="98">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Slums_RaisWarehouseGuard08"
+                                     pxsl_line="98" />
+                            </AI>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="99">
+                            <Object
+                                 pxsl_line="99">
+                                <QuestObject
+                                     class="NPCLifePlace"
+                                     name="Slums_RaisWarehouseGuard08_LP_01"
+                                     pxsl_line="99" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <!-- ACTIONS AFTER FIRST VISIT IN THE TOWER -->
+                <Phase
+                     type="AND"
+                     name="changes after first visit in The Tower"
+                     pxsl_line="102">
+                    <Path
+                         pxsl_line="102">
+                        <Phase
+                             type="use life place"
+                             name="_"
+                             teleport="true"
+                             pxsl_line="103">
+                            <LifePlace
+                                 pxsl_line="103">
+                                <QuestObject
+                                     class="NPCLifePlace"
+                                     name="slums_guard_talk_lp"
+                                     pxsl_line="103" />
+                            </LifePlace>
+                            <AI
+                                 pxsl_line="104">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="slums_thetower_m_ground_03"
+                                     pxsl_line="104" />
+                            </AI>
+                        </Phase>
+                        <Phase
+                             type="use life place"
+                             name="_"
+                             teleport="true"
+                             pxsl_line="105">
+                            <LifePlace
+                                 pxsl_line="105">
+                                <QuestObject
+                                     class="NPCLifePlace"
+                                     name="TheTower_Guard02_LP_Wall"
+                                     pxsl_line="105" />
+                            </LifePlace>
+                            <AI
+                                 pxsl_line="106">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="TheTower_Guard02"
+                                     pxsl_line="106" />
+                            </AI>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="107">
+                            <Object
+                                 pxsl_line="108">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="rais_outpost_enter::trigger_blocked_warehouse_enter"
+                                     pxsl_line="108" />
+                            </Object>
+                            <Object
+                                 pxsl_line="109">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Blackout_burn_car::demo_night_burning_car"
+                                     pxsl_line="109" />
+                            </Object>
+                            <!-- TIR intensity area -->
+                            <Object
+                                 pxsl_line="110">
+                                <QuestObject
+                                     class="IntensityArea"
+                                     name="tir_intensity_area"
+                                     pxsl_line="110" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="111">
+                            <Object
+                                 pxsl_line="112">
+                                <QuestObject
+                                     class="GroupingMapMarker"
+                                     name="Hub_Slums_Brecken"
+                                     pxsl_line="112" />
+                            </Object>
+                            <Object
+                                 pxsl_line="113">
+                                <QuestObject
+                                     class="RestingPlace"
+                                     name="resting_place_the_tower::restingplace_for_player"
+                                     pxsl_line="113" />
+                            </Object>
+                            <!-- Resting place at the Bazaar. -->
+                            <Object
+                                 pxsl_line="114">
+                                <QuestObject
+                                     class="RestingPlace"
+                                     name="resting_place_black_serpent_bazaar::restingplace_for_player"
+                                     pxsl_line="114" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="115">
+                            <Object
+                                 pxsl_line="116">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="warehouse_gate_01"
+                                     pxsl_line="116" />
+                            </Object>
+                        </Phase>
+                        <!-- -->
+                        <!-- ELECTRIC MACHETE -->
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="TheTower_Guard02"
+                             pxsl_line="119" />
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="Shopkeeper_02"
+                             group="Shopkeeper_02_Near01"
+                             pxsl_line="120" />
+                        <!-- SQ Table Quests -->
+                        <!-- ,show _ QuestStartTrigger B_tablequest::tablequest_01 -->
+                        <!-- ,show _ QuestStartTrigger B_tablequest::tablequest_05 -->
+                        <!-- ,show _ QuestStartTrigger B_tablequest::tablequest_09 -->
+                        <Phase
+                             type="AND"
+                             name="Tir dlg Third chatters"
+                             pxsl_line="125">
+                            <Path
+                                 pxsl_line="125">
+                                <Phase
+                                     type="set dialog"
+                                     name="_"
+                                     speaker="npc02_tir"
+                                     group="NPC02_Tir_BCHT01"
+                                     pxsl_line="126" />
+                            </Path>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="127">
+                    <Destination
+                         pxsl_line="127">
+                        <QuestObject
+                             class="SpawnPointWithInteractiveMovie"
+                             name="sp_Hub_LJ_Floor_0"
+                             pxsl_line="127" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <!-- PLAYERS BAG at FIRSTPLAYFIELD -->
+    <Quest
+         name="__PlayersDepotAtFirstPlayfield"
+         parent="PactWithRais01"
+         pxsl_line="130">
+        <!-- Show progress itemst -->
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="AirDrop03"
+             finished="true"
+             show_locations="false"
+             pxsl_line="132" />
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="133">
+            <Object
+                 pxsl_line="133">
+                <QuestObject
+                     class="ModelObject"
+                     name="First_Playfield_Safezone::FristPlayefield_sz_depot::Item01"
+                     pxsl_line="133" />
+            </Object>
+        </Phase>
+        <!-- checkpoints between quests should be used with caution -->
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="SaveTheTower03"
+             finished="true"
+             show_locations="false"
+             pxsl_line="135" />
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="136">
+            <Object
+                 pxsl_line="136">
+                <QuestObject
+                     class="ModelObject"
+                     name="First_Playfield_Safezone::FristPlayefield_sz_depot::Item02"
+                     pxsl_line="136" />
+            </Object>
+        </Phase>
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="Q_Demolition05"
+             finished="true"
+             show_locations="false"
+             pxsl_line="137" />
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="138">
+            <Object
+                 pxsl_line="138">
+                <QuestObject
+                     class="ModelObject"
+                     name="First_Playfield_Safezone::FristPlayefield_sz_depot::Item03"
+                     pxsl_line="138" />
+            </Object>
+        </Phase>
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="Q_AnotherDay"
+             finished="true"
+             show_locations="false"
+             pxsl_line="140" />
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="141">
+            <Object
+                 pxsl_line="141">
+                <QuestObject
+                     class="ModelObject"
+                     name="First_Playfield_Safezone::FristPlayefield_sz_depot::Item04"
+                     pxsl_line="141" />
+            </Object>
+        </Phase>
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="ProjectMayhem07"
+             finished="true"
+             show_locations="false"
+             pxsl_line="143" />
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="144">
+            <Object
+                 pxsl_line="144">
+                <QuestObject
+                     class="ModelObject"
+                     name="First_Playfield_Safezone::FristPlayefield_sz_depot::Item05"
+                     pxsl_line="144" />
+            </Object>
+        </Phase>
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="Museum05"
+             finished="true"
+             show_locations="false"
+             pxsl_line="146" />
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="147">
+            <Object
+                 pxsl_line="147">
+                <QuestObject
+                     class="ModelObject"
+                     name="First_Playfield_Safezone::FristPlayefield_sz_depot::Item06"
+                     pxsl_line="147" />
+            </Object>
+        </Phase>
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="Contact_05"
+             finished="true"
+             show_locations="false"
+             pxsl_line="149" />
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="150">
+            <Object
+                 pxsl_line="150">
+                <QuestObject
+                     class="ModelObject"
+                     name="First_Playfield_Safezone::FristPlayefield_sz_depot::Item07"
+                     pxsl_line="150" />
+            </Object>
+        </Phase>
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="Clinic02"
+             finished="true"
+             show_locations="false"
+             pxsl_line="152" />
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="153">
+            <Object
+                 pxsl_line="153">
+                <QuestObject
+                     class="ModelObject"
+                     name="First_Playfield_Safezone::FristPlayefield_sz_depot::Item08"
+                     pxsl_line="153" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="154">
+            <Destination
+                 pxsl_line="154">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="MapStart"
+                     pxsl_line="154" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="PactWithRais02"
+         parent="PactWithRais01"
+         glued="true"
+         pxsl_line="157">
+        <!-- Introduce yourself to Rais. -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;PactWithRais_OBJ_GetToTheRaisWarehouse&amp;"
+             pxsl_line="158">
+            <Path
+                 pxsl_line="158">
+                <Phase
+                     type="AND"
+                     name="Way to Rais Garrison"
+                     pxsl_line="159">
+                    <Path
+                         pxsl_line="160">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="510"
+                             show_locations="false"
+                             pxsl_line="161">
+                            <Destination
+                                 pxsl_line="161">
+                                <QuestObject
+                                     class="Marker"
+                                     name="warehouse_main_gate_loc"
+                                     pxsl_line="161" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Jade_PactWithRais_00DLG01"
+                             auto_start="true"
+                             pxsl_line="162" />
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="115"
+                             show_locations="false"
+                             pxsl_line="163">
+                            <Destination
+                                 pxsl_line="163">
+                                <QuestObject
+                                     class="Marker"
+                                     name="warehouse_main_gate_loc"
+                                     pxsl_line="163" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Player_PactWithRais_03DLG03"
+                             auto_start="true"
+                             pxsl_line="164" />
+                    </Path>
+                    <Path
+                         pxsl_line="165">
+                        <Phase
+                             type="go to"
+                             name=" runcooprais "
+                             distance="6"
+                             pxsl_line="166">
+                            <Destination
+                                 pxsl_line="166">
+                                <QuestObject
+                                     class="Marker"
+                                     name="rais_warehouse_cin_loc"
+                                     pxsl_line="166" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="167">
+                        <Phase
+                             type="go to"
+                             name="Talk to Guard in front of the entrance to the warehouse"
+                             distance="30"
+                             show_locations="false"
+                             pxsl_line="168">
+                            <Destination
+                                 pxsl_line="168">
+                                <QuestObject
+                                     class="Marker"
+                                     name="RaisWarehouse_Marker_TalkToGuards"
+                                     pxsl_line="168" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="RESPAWN - Warehouse - outside - ON"
+                             pxsl_line="169">
+                            <Object
+                                 pxsl_line="169">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="warehouse_zones__small_qeg"
+                                     pxsl_line="169" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="talk"
+                             name="_"
+                             speaker="Slums_RaisWarehouseGuard01"
+                             group="Player_PactWithRais_07DLG01"
+                             show_locations="false"
+                             auto_start="true"
+                             pxsl_line="170" />
+                        <Phase
+                             type="talk"
+                             name="_"
+                             speaker="Slums_RaisWarehouseGuard02"
+                             group="RaisWarehouseGuard02_PactWithRais_08DLG01"
+                             show_locations="false"
+                             auto_start="true"
+                             pxsl_line="171" />
+                        <Phase
+                             type="use life place"
+                             name="_"
+                             move_style="walk"
+                             wait_for_move_end="false"
+                             pxsl_line="172">
+                            <LifePlace
+                                 pxsl_line="172">
+                                <QuestObject
+                                     class="NPCLifePlace"
+                                     name="Slums_RaisWarehouseGuard03_LP_02"
+                                     pxsl_line="172" />
+                            </LifePlace>
+                            <AI
+                                 pxsl_line="173">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Slums_RaisWarehouseGuard03"
+                                     pxsl_line="173" />
+                            </AI>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="174">
+                            <Object
+                                 pxsl_line="175">
+                                <QuestObject
+                                     class="BarrierObject"
+                                     name="RaisWarehouse_Barrier_Entrance"
+                                     pxsl_line="175" />
+                            </Object>
+                            <Object
+                                 pxsl_line="176">
+                                <QuestObject
+                                     class="SpawnBlocker"
+                                     name="RaisWarehouse_SpawnBlocker_Entrance"
+                                     pxsl_line="176" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <!-- CIN - KING OF SLUMS - Talk with Rais about suppresants -->
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <Phase
+                     type="go to"
+                     name="PACT WITH RAIS - CIN - King of the Slums"
+                     distance="3"
+                     pxsl_line="181">
+                    <Destination
+                         pxsl_line="181">
+                        <QuestObject
+                             class="Marker"
+                             name="rais_warehouse_cin_loc"
+                             pxsl_line="181" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="182">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="rais_warehouse_cin_sp"
+                             pxsl_line="182" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="183">
+                    <Object
+                         pxsl_line="183">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="cin04n_trigger_qeg"
+                             pxsl_line="183" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="use"
+                     name="CIN - King of the Slums"
+                     desired_state="on"
+                     pxsl_line="184">
+                    <Trigger
+                         pxsl_line="184">
+                        <QuestObject
+                             class="InteractiveMovieTrigger"
+                             name="cin04n_trigger"
+                             pxsl_line="184" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="185">
+                    <Object
+                         pxsl_line="185">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="cin04n_trigger_qeg"
+                             pxsl_line="185" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="186">
+                    <Object
+                         pxsl_line="186">
+                        <QuestObject
+                             class="ModelObject"
+                             name="warehouse_gate_02"
+                             pxsl_line="186" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="187">
+                    <Object
+                         pxsl_line="187">
+                        <QuestObject
+                             class="MovieActor"
+                             name="cin04n_Fence_before"
+                             pxsl_line="187" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="RESPAWN - Warehouse - ON"
+                     pxsl_line="188">
+                    <Object
+                         pxsl_line="189">
+                        <QuestObject
+                             class="SafeDestination"
+                             name="rais_SD"
+                             pxsl_line="189" />
+                    </Object>
+                    <Object
+                         pxsl_line="190">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Slums_RaisWarehouseGuard08_LP_01"
+                             pxsl_line="190" />
+                    </Object>
+                    <Object
+                         pxsl_line="191">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="warehouse_zones_qeg"
+                             pxsl_line="191" />
+                    </Object>
+                    <Object
+                         pxsl_line="192">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Respawn_Warehouse"
+                             pxsl_line="192" />
+                    </Object>
+                    <!-- Resting place in Rais Garrison. -->
+                    <Object
+                         pxsl_line="193">
+                        <QuestObject
+                             class="RestingPlace"
+                             name="resting_place_rais_outpost::restingplace_for_player"
+                             pxsl_line="193" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="194">
+                    <Object
+                         pxsl_line="195">
+                        <QuestObject
+                             class="NPCLifeGraph"
+                             name="Slums_RaisWarehouseGuard05_LifeGraph"
+                             pxsl_line="195" />
+                    </Object>
+                    <Object
+                         pxsl_line="196">
+                        <QuestObject
+                             class="NPCLifeGraph"
+                             name="Slums_RaisWarehouseGuard07_LifeGraph"
+                             pxsl_line="196" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="197">
+                    <Object
+                         pxsl_line="198">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Slums_RaisWarehouseGuard04"
+                             pxsl_line="198" />
+                    </Object>
+                    <Object
+                         pxsl_line="199">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Slums_RaisWarehouseGuard05"
+                             pxsl_line="199" />
+                    </Object>
+                    <Object
+                         pxsl_line="200">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Slums_RaisWarehouseGuard06"
+                             pxsl_line="200" />
+                    </Object>
+                    <Object
+                         pxsl_line="201">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Slums_RaisWarehouseGuard07"
+                             pxsl_line="201" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="use life place"
+                     name="_"
+                     teleport="true"
+                     pxsl_line="202">
+                    <LifePlace
+                         pxsl_line="202">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Slums_RaisWarehouseGuard04_LP_01"
+                             pxsl_line="202" />
+                    </LifePlace>
+                    <AI
+                         pxsl_line="203">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Slums_RaisWarehouseGuard04"
+                             pxsl_line="203" />
+                    </AI>
+                </Phase>
+                <Phase
+                     type="use life place"
+                     name="_"
+                     teleport="true"
+                     pxsl_line="204">
+                    <LifePlace
+                         pxsl_line="204">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Slums_RaisWarehouseGuard05_LP_01"
+                             pxsl_line="204" />
+                    </LifePlace>
+                    <AI
+                         pxsl_line="205">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Slums_RaisWarehouseGuard05"
+                             pxsl_line="205" />
+                    </AI>
+                </Phase>
+                <Phase
+                     type="use life place"
+                     name="_"
+                     teleport="true"
+                     pxsl_line="206">
+                    <LifePlace
+                         pxsl_line="206">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Slums_RaisWarehouseGuard06_LP_01"
+                             pxsl_line="206" />
+                    </LifePlace>
+                    <AI
+                         pxsl_line="207">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Slums_RaisWarehouseGuard06"
+                             pxsl_line="207" />
+                    </AI>
+                </Phase>
+                <Phase
+                     type="use life place"
+                     name="_"
+                     teleport="true"
+                     pxsl_line="208">
+                    <LifePlace
+                         pxsl_line="208">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Slums_RaisWarehouseGuard07_LP_01"
+                             pxsl_line="208" />
+                    </LifePlace>
+                    <AI
+                         pxsl_line="209">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Slums_RaisWarehouseGuard07"
+                             pxsl_line="209" />
+                    </AI>
+                </Phase>
+                <Phase
+                     type="use life place"
+                     name="_"
+                     teleport="true"
+                     pxsl_line="210">
+                    <LifePlace
+                         pxsl_line="210">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Slums_RaisWarehouseGuard08_LP_01"
+                             pxsl_line="210" />
+                    </LifePlace>
+                    <AI
+                         pxsl_line="211">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Slums_RaisWarehouseGuard08"
+                             pxsl_line="211" />
+                    </AI>
+                </Phase>
+                <!-- weapon after -->
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="213">
+                    <Object
+                         pxsl_line="213">
+                        <QuestObject
+                             class="ItemSpawner"
+                             name="cin_kos_rais_wn_machete_item"
+                             pxsl_line="213" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="0.5"
+                     pxsl_line="214" />
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="215">
+                    <Object
+                         pxsl_line="215">
+                        <QuestObject
+                             class="MovieActor"
+                             name="cin_kos_rais_wn_machete_a_after"
+                             pxsl_line="215" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="216">
+                    <Object
+                         pxsl_line="216">
+                        <QuestObject
+                             class="ItemSpawner"
+                             name="cin_kos_rais_wn_machete_item"
+                             pxsl_line="216" />
+                    </Object>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="go to"
+             name="_"
+             distance="10000"
+             show_locations="false"
+             pxsl_line="217">
+            <Destination
+                 pxsl_line="217">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="rais_warehouse_sp"
+                     pxsl_line="217" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="player control"
+             name="After Cutscene with Rais"
+             diff_level_progress="2"
+             pxsl_line="218" />
+        <Phase
+             type="wait guard"
+             name="Achievement_ShakeHandsOnIt "
+             time="0"
+             pxsl_line="219" />
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="220">
+            <!-- Enabling portal to warehouse. -->
+            <Object
+                 pxsl_line="221">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="portal_Slums_TO_Slums_Int_Warehouse_Neutral_qeg"
+                     pxsl_line="221" />
+            </Object>
+        </Phase>
+        <Phase
+             type="set dialog"
+             name="_"
+             speaker="voice2d"
+             pxsl_line="222" />
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="223">
+            <!-- SHOW first part of ziplines -->
+            <Object
+                 pxsl_line="224">
+                <QuestObject
+                     class="GroupingObject"
+                     name="Scout_Ziplines1_01"
+                     pxsl_line="224" />
+            </Object>
+            <Object
+                 pxsl_line="225">
+                <QuestObject
+                     class="GroupingObject"
+                     name="Scout_Ziplines1_02"
+                     pxsl_line="225" />
+            </Object>
+        </Phase>
+        <!-- ,reward _ -reward=StorylineReward_PactWithRais_reward -= After "King of the Slums" cinematic. -->
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="227">
+            <Destination
+                 pxsl_line="227">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="rais_warehouse_sp"
+                     pxsl_line="227" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- GOTO - SLUMS INT WAREHOUSE - RAISE WAREHOUSE -->
+    <!-- NEXT QUEST - ANTENNAS -->
+</QuestsDefinitions>

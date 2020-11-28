@@ -1,0 +1,191 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- Magic Garden -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- CLEAR -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- quest __sq_MagicGarden_clear01 -parent=game_root -glued=false -->
+        <!-- ,hide-multi _ -->
+            <!-- ,o CarBuggy sq_MagicGarden_MarketPickup -->
+        <!-- ,disable _ CarBuggy sq_MagicGarden_MarketPickup -->
+        <!-- ,checkpoint _ SpawnPoint sp_MagicGarden_05 -->
+    <!-- quest MagicGarden -parent=PactWithRais00 -difficulty=medium -reward_set=MagicGarden_reward -quest_giver=Maya -->
+        <!-- ,enable _ NPCLifePlace lp_sq_MagicGarden_Carl_WaveHands_core -->
+        <!-- ,show-multi _ -->
+            <!-- ,o HumanAI Carl -->
+            <!-- ,o HumanAI David -->
+            <!-- ,o HumanAI Maya -->
+            <!-- ,o HumanAI Aldo -->
+        <!-- ,hide _ DoorDI magicgarden_door_next_to -->
+        <!-- -= ,hide _ ModelObject sq_MagicGarden_Door_Locked -->
+        <!-- ,goto <<Magic Garden - START>> HumanAI Maya -show=false -distance=10000 -->
+            <!-- ,debugpos SpawnPoint sp_MagicGarden_01 -->
+        <!-- ,show _ CarBuggy sq_MagicGarden_MarketPickup -->
+        <!-- ,BLOCK _ -= -obj=&SQ_MagicGarden_OBJ_FindFamily&    -->
+            <!-- ,goto _ SensorGoTo magic_garden_cemir_talk -distance=0 -show=false -->
+            <!-- ,checkpoint _ SpawnPoint sp_MagicGarden_01 -->
+            <!-- ,AND _  -->
+                <!-- path -->
+                    <!-- ,talk <<Carl speaking>> carl Carl_MagicGarden_01DLG -show=false -auto=true -->
+                <!-- path    -->
+                    <!-- ,wait _ 1 -->
+                    <!-- ,goto <<Find family>> HumanAI David -show=true -distance=3 -->
+                    <!-- ,disable _ NPCLifePlace lp_sq_MagicGarden_David_Sit -->
+                    <!-- ,talk <<David speaking>> david David_MagicGarden_01DLG -show=false -auto=true -->
+                <!-- path -->
+                    <!-- ,disable _ NPCLifePlace lp_sq_MagicGarden_Carl_WaveHands_core -->
+                    <!-- ,enable _ DoorDI magicgarden_door_inside_home2 -->
+                    <!-- ,set _ DoorDI magicgarden_door_inside_home2 -state=opened -->
+            <!-- ,talk _ maya Maya_MagicGarden_01DLG      -->
+            <!-- ,checkpoint _ SpawnPoint sp_MagicGarden_02 -->
+            <!-- ,talk <<Speak with Maya>> maya Maya_MagicGarden_02USE -show=true -->
+                <!-- ,debugpos SpawnPoint sp_MagicGarden_02 -->
+            <!-- ,checkpoint _ SpawnPoint sp_MagicGarden_02 -->
+    <!-- quest sq_MagicGarden02 -parent=MagicGarden -glued=true   -->
+        <!-- ,BLOCK _ -obj=&SQ_MagicGarden_OBJ_KillZombies&    -->
+            <!-- ,gather _ SpawnBlocker magic_garden_supermarket_spawn_blocker -distance=-50 -show=false -->
+            <!-- ,enable _ QuestEnableGroup magic_garden_spawn_aldo_with_zombies -->
+            <!-- ,enable _ AISpawnBoxNumber magic_garden_car_zombies -->
+            <!-- ,enable _ AISpawnBoxNumber magic_garden_car_zombies2 -->
+            <!-- ,enable _ AISpawnBoxNumber magic_garden_car_zombies3 -->
+            <!-- ,enable _ SpawnBlocker magic_garden_supermarket_spawn_blocker -->
+            <!-- ,enable _ NPCLifePlace magic_garden_aldo_in_van_anim_lp -->
+            <!-- ,checkpoint _ SpawnPoint sp_MagicGarden_02 -->
+            <!--  -->
+            <!-- ,goto << Here is Aldo >> SensorGoTo magic_garden_aldo_scream -distance=0 -show=false -->
+                <!-- ,area ZoneBox magic_garden_search_for_aldo -->
+                <!-- ,debugpos SpawnPoint sp_MagicGarden_03 -->
+            <!-- ,checkpoint _ SpawnPoint sp_MagicGarden_03         -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,clear_area _ ClearArea magic_garden_clear_aldo_1  -->
+                    <!-- ,disable _ AISpawnBoxNumber magic_garden_car_zombies   -->
+                    <!-- ,disable _ AISpawnBoxNumber magic_garden_car_zombies2  -->
+                    <!-- ,disable _ AISpawnBoxNumber magic_garden_car_zombies3  -->
+                    <!-- ,disable _ QuestEnableGroup magic_garden_spawn_aldo_with_zombies -->
+                    <!-- ,inc_status_points _ -increment_type=SurvivorsRescued -obj=&HudPoi_Encounter_HelpSafeNPC_Succeeded& -exp=1000 -->
+                <!-- path -->
+                    <!-- ,talk _ aldo Aldo_MagicGarden_02DLG01 -auto=true -show=false -->
+                    <!-- ,talk _ aldo Aldo_MagicGarden_02DLG02 -auto=true -show=false -->
+            <!-- ,checkpoint _ SpawnPoint sp_MagicGarden_03  -->
+        <!-- ,AND _  -->
+            <!-- path -->
+                <!-- ,movie _ Magic_garden_animation_door_01 -->
+            <!-- path -->
+                <!-- ,show _ HumanAI Aldo -->
+                <!-- ,enable _ HumanAI Aldo -->
+        <!-- ,talk _ aldo Aldo_MagicGarden_03DLG01  -->
+        <!-- ,movie _ Magic_garden_animation_door_02 -->
+        <!-- ,wait _ 1  -->
+        <!-- ,talk _ aldo Player_MagicGarden_06DLG01 -auto=true -show=false -->
+        <!-- ,checkpoint _ SpawnPoint sp_MagicGarden_03     -->
+    <!--  -->
+    <!-- quest sq_MagicGarden04 -parent=sq_MagicGarden03 -glued=true -leading_portal=portal_Interior_to_Slums_07 -->
+        <!-- ,BLOCK _ -obj=&SQ_MagicGarden_OBJ_BackAldo& -->
+            <!-- ,BLOCK _  -->
+                <!-- ,goto <<Got the key>> SpawnPoint portal_Slums_to_Interior_07_spawn -distance=20 -->
+                    <!-- ,debugpos SpawnPoint portal_Slums_to_Interior_07_spawn -->
+                <!-- ,checkpoint _ SpawnPoint portal_Slums_to_Interior_07_spawn -->
+            <!-- ,AND _  -->
+                <!-- path   -->
+                    <!-- -= ,set _ DoorDI magicgarden_door_next_to -state=closed -->
+                    <!-- ,disable _ DoorDI magicgarden_door_next_to -->
+                    <!-- ,enable _ QuestEnableGroup magic_garden_VA_melee -->
+                    <!-- ,teleport _ NPCLifePlace magic_garden_aldo_in_car_teleport -->
+                        <!-- ,ai HumanAI aldo   -->
+                    <!-- ,hide _ HumanAI aldo  -->
+                    <!-- ,enable _ AISpawnBoxCompound magic_garden_melee -->
+                    <!-- ,enable _ CarBuggy sq_MagicGarden_MarketPickup -->
+                    <!-- -= ,hide _ ModelObject Magic_garden_animate_door_x -->
+                    <!-- -= ,show _ DoorDI magicgarden_door_next_to -->
+                    <!-- ,disable _ AISpawnBoxNumber magic_garden_car_zombies   -->
+                    <!-- ,disable _ AISpawnBoxNumber magic_garden_car_zombies2  -->
+                    <!-- ,disable _ AISpawnBoxNumber magic_garden_car_zombies3 -->
+                    <!-- ,movie _ MagicGarden_open_door_all -->
+                    <!-- ,set _ DoorDI magicgarden_door_inside_home2 -state=closed -->
+                    <!-- ,wait _ 2 -->
+                    <!-- ,disable _ DoorDI magicgarden_door_inside_home2  -->
+                    <!-- ,teleport _ NPCLifePlace magicgarden_cemal_is_home_lp -->
+                        <!-- ,ai HumanAI carl -->
+                <!-- path -->
+                    <!-- ,goto _ DoorDI magicgarden_door_next_to -distance=20 -->
+                    <!-- ,talk _ aldo Aldo_MagicGarden_04DLG01 -auto=true -show=false  -->
+            <!-- ,checkpoint _ SpawnPoint sp_MagicGarden_03  -->
+        <!-- ,BLOCK _ -obj=&SQ_MagicGarden_OBJ_KillMelee2&  -->
+            <!-- ,kill-multi _ -show=false -->
+                <!-- ,spawner AISpawnBoxCompound magic_garden_melee -->
+        <!-- ,show _ HumanAI aldo   -->
+        <!-- ,movie _ Magic_garden_open_wide_door_animation -->
+        <!-- -= ,set _ DoorDI magicgarden_door_next_to -state=opened -->
+        <!-- ,disable _ DoorDI magicgarden_door_next_to -->
+        <!-- ,checkpoint _ SpawnPoint sp_MagicGarden_03  -->
+        <!-- ,talk <<Before car drive>> aldo Player_MagicGarden_03DLG02 -auto=true -show=false -->
+            <!-- ,debugpos SpawnPoint sp_MagicGarden_05 -->
+        <!-- ,checkpoint _ SpawnPoint sp_MagicGarden_05 -->
+        <!-- ,BLOCK _ -obj=&SQ_MagicGarden_OBJ_DriveAldoHome&     -->
+            <!-- ,MF-dead _ HumanAI Aldo -->
+                <!-- ,AND _ -->
+                    <!-- path -->
+                        <!-- ,carry <<Drive Aldo home>> Marker magicgarden_drive_to_point -show=true -distance=2 -->
+                            <!-- ,escortee HumanAI Aldo -->
+                            <!-- ,vehicle CarBuggy sq_MagicGarden_MarketPickup -->
+                    <!-- path -->
+                        <!-- ,drive <<Take car first>> Marker magicgarden_drive_to_point -show=false -->
+                            <!-- ,vehicle CarBuggy sq_MagicGarden_MarketPickup  -->
+                <!-- ,enable _ NPCLifePlace magicgarden_aldo_front_door -->
+                <!-- ,enable _ NPCLifePlace magicgarden_aldo_is_home_lp -->
+                <!-- ,enable _ NPCLifePlace magicgarden_aldo_is_home2_lp -->
+                <!-- ,movie _ Magic_garden_home_door_anim_open -->
+                <!-- ,OR _ -->
+                    <!-- path -->
+                        <!-- ,move _ NPCLifePlace magicgarden_aldo_front_door -style=walk -->
+                            <!-- ,ai HumanAI Aldo     -->
+                    <!-- path -->
+                        <!-- ,wait _ 5 -->
+                        <!-- ,teleport _ NPCLifePlace magicgarden_aldo_front_door -->
+                            <!-- ,ai HumanAI Aldo  -->
+                <!-- ,talk _ aldo Aldo_MagicGarden_05DLG01 -show=true -->
+                <!-- ,OR _ -->
+                    <!-- path -->
+                        <!-- ,move _ NPCLifePlace magicgarden_aldo_is_home_lp -style=walk -->
+                            <!-- ,ai HumanAI Aldo -->
+                        <!-- ,teleport _ NPCLifePlace magicgarden_aldo_is_home_lp -->
+                            <!-- ,ai HumanAI Aldo  -->
+                    <!-- path -->
+                        <!-- ,wait _ 3 -->
+                        <!-- ,movie _ Magic_garden_home_door_anim_close -->
+        <!-- ,disable _ SpawnBlocker magic_garden_supermarket_spawn_blocker -->
+        <!-- ,checkpoint _ SpawnPoint sp_MagicGarden_01 -->
+    <!-- quest sq_MagicGarden05 -parent=sq_MagicGarden04 -glued=true  -->
+        <!--  -->
+        <!-- ,wait _ 2 -->
+        <!-- ,talk _ maya Maya_Magicgarden_05DLG01 -auto=true -show=false -->
+        <!-- ,wait _ 5 -->
+        <!-- ,teleport _ NPCLifePlace magicgarden_aldo_is_home2_lp -->
+            <!-- ,ai HumanAI aldo  -->
+        <!-- ,teleport _ NPCLifePlace magicgarden_maya_is_home2_lp -->
+            <!-- ,ai HumanAI maya  -->
+        <!-- ,teleport _ NPCLifePlace magicgarden_demir_is_home2_lp -->
+            <!-- ,ai HumanAI david -->
+        <!-- ,teleport _ NPCLifePlace magicgarden_cemal_is_home2_lp -->
+            <!-- ,ai HumanAI carl   -->
+        <!-- ,movie _ Magic_garden_home_door_anim_open_bit -->
+        <!-- ,checkpoint _ SpawnPoint sp_MagicGarden_01 -->
+        <!-- ,talk <<Missed Gardener - END>> maya Maya_MagicGarden_END -->
+            <!-- ,debugpos SpawnPoint sp_MagicGarden_01 -->
+        <!-- -= ,talk _ carl Carl_MagicGarden_END -auto=true -->
+        <!-- ,reward _  -->
+        <!-- ,checkpoint _ SpawnPoint sp_MagicGarden_01 -->
+    <!-- quest __sq_MagicGarden06 -parent=sq_MagicGarden05 -->
+        <!-- ,gather _ HumanAI aldo -distance=-30 -show=false -->
+        <!-- ,movie _ Magic_garden_home_door_anim_close_bit -->
+        <!-- ,wait _ 2 -->
+        <!-- ,hide-multi _  -->
+            <!-- ,o HumanAI aldo -->
+            <!-- ,o HumanAI carl -->
+            <!-- ,o HumanAI david -->
+            <!-- ,o HumanAI maya -->
+        <!-- ,checkpoint _ SpawnPoint sp_MagicGarden_01 -->
+</QuestsDefinitions>

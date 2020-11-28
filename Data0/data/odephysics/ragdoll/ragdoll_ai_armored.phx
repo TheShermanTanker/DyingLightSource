@@ -1,0 +1,140 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Fizyka Ragdoll dla czlowieka
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+!include("ODEPhysicsRagdoll.phx")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+PhysicsParams()
+{
+    QuickStepNumIterations(15)
+    QuickStepSortingMethod(2)
+    
+    AllowContinuousCollisions(0, 0)
+    SetWaterFloat(1.7)
+    
+    CollisionDamageToMeMul(0, 0)
+    
+    SetVelsGate(0.03, 0.4)      // CM2M
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+RagdollParams()
+{
+    Mass(140)
+    StiffenStartTime(-1)
+    ApplyForceMod(1)
+    ApplyForceAddUp(0)
+
+    BehaviorSet("RagdollBehaviors.phx")
+    
+    BlendingOfNonPhysicalBonesTime(1)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+Bones()
+{
+    UseBoneScale("Pelvis",  "capsule",  6, 1.0)
+    UseBoneScale("Spine1",  "sphere",   6, 0.8)
+    UseBoneScale("Spine3",  "capsule",  6, 0.9)
+    UseBone("Head",         "sphere",   4)
+    UseBone("L_Upperarm",   "capsule",  4)
+    UseBone("R_Upperarm",   "capsule",  4)
+    UseBone("L_Forearm",    "capsule",  3)
+    UseBone("R_Forearm",    "capsule",  3)
+    UseBone("L_Thigh",      "capsule",  3)
+    UseBone("R_Thigh",      "capsule",  3)
+    UseBone("L_Calf",       "capsule",  3)
+    UseBone("R_Calf",       "capsule",  3)
+    UseBoneScale("L_Hand",  "sphere",   2, 1.4)
+    UseBoneScale("R_Hand",  "sphere",   2, 1.4)
+	
+	RootSynchro("bip01", "Pelvis")
+
+    CollisionHelper("l toe0", "L_Calf",      1.3)
+    CollisionHelper("r toe0", "R_Calf",      1.3)
+    CollisionHelper("Spine",        "Spine1",      1.5)
+    
+    NoCollidedPair("L_Thigh",    "Spine1")
+    NoCollidedPair("R_Thigh",    "Spine1")
+    NoCollidedPair("L_Thigh",    "R_Thigh")
+    
+    FloatingGeom("L_Upperarm", 1.1)
+    FloatingGeom("R_Upperarm", 1.1)
+    FloatingGeom("L_Forearm", 1.1)
+    FloatingGeom("R_Forearm", 1.1)
+    FloatingGeom("Pelvis", 0)
+    FloatingGeom("Spine1", 0.9)
+    FloatingGeom("Spine3", 1.3)
+    FloatingGeom("L_Thigh", 0.3)
+    FloatingGeom("R_Thigh", 0.3)
+    FloatingGeom("L_Calf", 0.1)
+    FloatingGeom("R_Calf", 0.1)
+    FloatingGeom("Head", 0)
+    
+    BoneSynchro("Pelvis", "Spine")
+    BoneSynchro("Spine1", "Spine2")
+
+    BoneSynchro("L_Upperarm", "l uparmtwist")
+    BoneSynchro("R_Upperarm", "r uparmtwist")
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+Joints()
+{
+    // definicja jointow
+    DefineJoint("Pelvis",     "Spine1",     "ball",  0,  1,  0,    1,  0,  0)
+    DefineJoint("Spine1",     "Spine3",     "ball",  0,  1,  0,    1,  0,  0)
+    DefineJoint("Spine3",     "Head",       "ball",  0,  1,  0,    1,  0,  0)
+    DefineJoint("Pelvis",     "L_Thigh",    "ball",  0,  1,  0,    0,  0,  1)
+    DefineJoint("Pelvis",     "R_Thigh",    "ball",  0,  1,  0,    0,  0,  1)
+    DefineJoint("L_Thigh",    "L_Calf",     "hinge", 0,  1,  0,    0,  0,  0)
+    DefineJoint("R_Thigh",    "R_Calf",     "hinge", 0,  1,  0,    0,  0,  0)
+    DefineJoint("Spine3",     "L_Upperarm", "ball",  0,  0,  1,    1,  0,  0)
+    DefineJoint("Spine3",     "R_Upperarm", "ball",  0,  0,  1,    1,  0,  0)
+    DefineJoint("L_Upperarm", "L_Forearm",  "ball",  0,  1,  0,    1,  0,  0)
+    DefineJoint("R_Upperarm", "R_Forearm",  "ball",  0, -1,  0,    1,  0,  0)
+    DefineJoint("L_Forearm",  "L_Hand",     "hinge", 0,  0,  1,    0,  0,  0)
+    DefineJoint("R_Forearm",  "R_Hand",     "hinge", 0,  0, -1,    0,  0,  0)
+
+    // parametry stopu
+    Set3DOFStops("Pelvis Spine1",        -0.05, 0.00,   -0.05, 0.05,   -0.10, 0.10,  0, 0, 0) 
+    Set3DOFStops("Spine1 Spine3",        -0.10, 0.10,   -0.10, 0.10,   -0.05, 0.05,  0, 0, 0) 
+    Set3DOFStops("Spine3 Head",          -0.20, 0.10,   -0.10, 0.10,   -0.30, 0.30,  0, 0, 0) 
+    Set3DOFStops("Pelvis L_Thigh",       -0.00, 0.30,   -0.00, 0.00,   -0.00, 0.00,  0, 0, 0) 
+    Set3DOFStops("Pelvis R_Thigh",       -0.00, 0.30,   -0.00, 0.00,   -0.00, 0.00,  0, 0, 0) 
+    Set1DOFStops("L_Thigh L_Calf",        0.00, 0.38,  0) 
+    Set1DOFStops("R_Thigh R_Calf",        0.00, 0.38,  0) 
+    Set3DOFStops("Spine3 L_Upperarm",     0.00, 0.15,   -0.00, 0.30,   -0.20, 0.10,  0, 0, 0) 
+    Set3DOFStops("Spine3 R_Upperarm",    -0.15, 0.00,   -0.00, 0.30,   -0.10, 0.20,  0, 0, 0) 
+    Set3DOFStops("L_Upperarm L_Forearm", -0.15, 0.15,   -0.00, 0.20,   -0.15, 0.15,  0, 0, 0) 
+    Set3DOFStops("R_Upperarm R_Forearm", -0.15, 0.15,   -0.00, 0.20,   -0.15, 0.15,  0, 0, 0) 
+    Set1DOFStops("L_Forearm L_Hand",     -0.20, 0.20,  0) 
+    Set1DOFStops("R_Forearm R_Hand",     -0.20, 0.20,  0) 
+
+    // sily tarcia stawow
+    SetFrictionForceAll(1)
+
+    // wspolczynniki dopuszczalnych bledow stopow
+    SetStopERPAll(0.3)
+
+    // wspolczynniki sprezystosci jointow po osiagnieciu stopow
+    SetStopCFMAll(0.03)
+
+    // wspolczynniki sprezystosci jointow
+    SetCFMAll(0)
+
+    // wspolczynniki tlumienia sily oddalajacej od stopu (1 - brak tlumienia, 0.5 - sila zmniejszona dwukrotnie)
+    SetFudgeFactorAll(0.1)
+}
+
+
+
+
+
+
+
+
+
+
+

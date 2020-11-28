@@ -1,0 +1,69 @@
+$_HEAD(i, 0)
+$_UPPERARM_L(i, 1)
+$_UPPERARM_R(i, 2)
+$_FOREARM_L(i, 3)
+$_FOREARM_R(i, 4)
+$_THIGH_L(i, 5)
+$_THIGH_R(i, 6)
+$_SPINE(i, 7)
+$_OBLIQUE_UPPER_BODY(i, 8)
+$_CHEST_VERTICAL(i, 9)
+$_CHEST_HORIZONTAL(i, 10)
+
+$_ARM_LEFT_A(i, 11)
+$_ARM_LEFT_B(i, 12)
+$_ARM_LEFT_C(i, 13)
+$_ARM_LEFT_D(i, 14)
+$_ARM_RIGHT_A(i, 15)
+$_ARM_RIGHT_B(i, 16)
+$_ARM_RIGHT_C(i, 17)
+$_ARM_RIGHT_D(i, 18)
+$_LEG_LEFT_A(i, 19)
+$_LEG_LEFT_B(i, 20)
+$_LEG_LEFT_C(i, 21)
+$_LEG_LEFT_D(i, 22)
+$_LEG_RIGHT_A(i, 23)
+$_LEG_RIGHT_B(i, 24)
+$_LEG_RIGHT_C(i, 25)
+$_LEG_RIGHT_D(i, 26)
+
+$PHYSICS_SINGLE(i, 4)
+$PHYSICS_RAGDOLL(i, 2)
+
+// synchronize with EAIHitSeverity !!!
+$SEVERITY_LIGHT(i, 1)
+$SEVERITY_MEDIUM(i, 2)
+$SEVERITY_HEAVY(i, 3)
+
+// synchronize with EDamageTypeMeat !!!
+$DAMAGE_TYPE_MEAT_CUT(i, 0)
+$DAMAGE_TYPE_MEAT_NO_CUT(i, 1)
+
+// synchronize with EBodyHitRegion !!!
+$BODY_HIT_REGION_HEAD(i, 0)
+$BODY_HIT_REGION_NO_HEAD(i, 1)
+
+//!BodyElement(i, i, i, f, f, s, s, s, i, f, i)//element, durability, die_after_destroy, damage_per_sec, mass, fx1, fx2, fx_mesh_elem, hide_chanel, hide_weight, morph_replicate
+
+//informacje o relicach ktore odpadaja po oderwaniu konczyny (mesh_name, typ_fizyki, skrypt_fizyczny, nazwa_sekwencji_fx, lokalna_pozycja_fx, lokalny_kierunek_fx)
+!AddRelics(s, i, s, s, v3, v3) 
+
+//informacje o relicach ktore odpadaja po oderwaniu konczyny KTOREJ CHILD JUZ ZOSTAL OBCIETY (mesh_name, typ_fizyki, skrypt_fizyczny, nazwa_sekwencji_fx, lokalna_pozycja_fx, lokalny_kierunek_fx)
+!AddRelicsWithDestroyedChild(s, i, s, s, v3, v3)
+
+!AddMesh2Disable(s)// mesh ktory jest wylaczany
+!AddMesh2DisableFromRelic(s) //mesh ktory jest wylaczany z utworzonego relica. Uzyteczne gdy utworzony relic jest ragdollem
+
+!BurningTempo(f)// szybkosc spalania sie
+
+// Kawalki na ktore ma sie rozpasc glowa po zniszczeniu, przyjmuje xxformat
+!DestroyedHeadParts(s, i)
+
+!BodyElement(i, i, i, f, f, s)//element, destroyable, percent_to_destroy, body_bleeding_if_destroyed, mass, fx_mesh_elem
+
+// use generic relics - same meshes
+!ForceGenericRelics()
+
+!MeatParts(i, i, i)
+!AddMeatPart(s, i)
+!UseWithHolesOnly()

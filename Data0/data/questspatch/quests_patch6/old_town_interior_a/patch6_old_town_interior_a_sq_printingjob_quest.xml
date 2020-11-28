@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="old_town_interior_a"
+     pxsl_line="3">
+    <!-- quest sq_printingjob02 -parent=sq_printingjob01 -glued=true -leading_portal=portal_sq_printingjob_old_town_to_old_town_interior_a -->
+        <!-- ,BLOCK <<Finding printer>> -obj=&sq_printingjob01_OBJ_GoTo& -->
+            <!-- ,goto <<Printing Job - Printing House>> SpawnPoint sp_sq_printingjob_old_town_interior_a_to_old_town -distance=100 -show=true -->
+                <!-- ,debugpos SpawnPoint sp_sq_printingjob_old_town_interior_a_to_old_town -->
+            <!-- ,checkpoint _ SpawnPoint sp_sq_printingjob_old_town_interior_a_to_old_town -->
+            <!--  -->
+        <!-- ,BLOCK <<Finding printer>> -obj=&sq_printingjob01_OBJ_PrintLeaflets& -->
+            <!-- ,hide _ QuestInventoryItemDI sq_printingjob_Printings -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,use _ InvisibleSwitchDI sq_printingjob_Printer_Switch01 -state=on -->
+                <!-- path -->
+                    <!-- ,goto <<Zombie spawn>> SensorGoTo sq_printingjob_Vessel_Sensor -show=false -->
+                    <!-- ,enable _ QuestEnableGroup sq_printingjob_ZombieSpawn_QEG02 -->
+                    <!--  -->
+                <!-- path -->
+                    <!-- ,goto <<Thug sound>> SensorGoTo sq_printingjob_Thug_Sensor -show=false -->
+                    <!-- ,enable _ QuestEnableGroup sq_printingjob_ThugSound_QEG -->
+                    <!--  -->
+            <!-- ,talk _ voice2d Player_printingjob01_01DLG01 -auto=true -show=true -->
+            <!--  -->
+        <!-- ,BLOCK <<Finding door to basement>> -obj=&sq_printingjob01_OBJ_StartGenerator&     -->
+            <!-- ,use _ InvisibleSwitchDI sq_printingjob_Door_Switch01 -state=on -->
+            <!-- ,radio-dialog _ voice2d Player_printingjob01_02DLG01 -->
+            <!--  -->
+        <!-- ,BLOCK <<Finding key to basement>> -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- -= ,goto <<Thug Go In>> SensorGoTo sq_printingjob_Thug_Sensor -show=false      -->
+                    <!-- ,wait _ 7.0 -->
+                    <!-- ,disable _ QuestEnableGroup sq_printingjob_ThugSound_QEG -->
+                    <!-- ,spawn_ai _ Thug DynamicSpawner sq_printingjob_Thug -->
+                    <!--  -->
+                <!-- path -->
+                    <!-- ,take _ QuestInventoryItemDI sq_printingjob_BasementKey -show=false -->
+                        <!-- ,area ZoneBox sq_printingjob_KeySearch -->
+                    <!--  -->
+            <!-- ,enable _ QuestEnableGroup sq_printingjob_Door_B_QEG -state=enabled -->
+            <!-- ,enable _ QuestEnableGroup sq_printingjob_ZombieSpawn_QEG03 -->
+            <!--  -->
+        <!-- ,BLOCK <<Starting generator>> -->
+            <!-- ,use _ PhysicalSwitchDI sq_printingjob_Generator_Switch -state=on -->
+            <!-- ,enable _ QuestEnableGroup sq_printingjob_LightQEG -->
+            <!-- ,wait _ 2.0 -->
+            <!-- ,enable _ QuestEnableGroup sq_printingjob_InfectedScreamQEG -->
+            <!-- ,wait _ 3.5 -->
+            <!-- ,spawn_ai _ Infected DynamicSpawner sq_printingjob_Infected -->
+            <!-- ,enable _ QuestEnableGroup sq_printingjob_Infected_QEG -->
+            <!--  -->
+        <!-- ,BLOCK <<Printing >> -obj=&sq_printingjob01_OBJ_PrintLeaflets&     -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,goto <<Zombie near printer rising>> SensorGoTo sq_printingjob_Printer_Sensor -show=false -->
+                    <!-- ,wait _ 2.0 -->
+                    <!-- ,enable _ QuestEnableGroup sq_printingjob_PrinterStingerQEG -->
+                <!-- path -->
+                    <!-- ,use _ InvisibleSwitchDI sq_printingjob_Printer_Switch02 -state=on -->
+            <!-- ,wait _ 3.0 -->
+            <!-- ,show _ QuestInventoryItemDI sq_printingjob_Printings -->
+            <!--  -->
+        <!-- ,BLOCK <<Returning to Quest Giver>> -->
+            <!-- ,take _ QuestInventoryItemDI sq_printingjob_Printings -->
+            <!-- ,disable _ QuestEnableGroup sq_printingjob_ZombieSpawn_QEG03 -->
+            <!-- ,disable _ QuestEnableGroup sq_printingjob_Infected_QEG -->
+            <!-- ,disable _ QuestEnableGroup sq_printingjob_PrinterStingerQEG -->
+            <!-- ,disable _ QuestEnableGroup sq_printingjob_InfectedWavesQEG -->
+            <!-- ,checkpoint _ SpawnPoint sp_sq_printingjob_old_town_interior_a_to_old_town -->
+            <!--  -->
+    <!-- quest __sq_printingjob_basement -parent=sq_printingjob01 -->
+        <!-- ,goto <<Suicider spawn>> SensorGoTo sq_printingjob_Suicider_Sensor -show=false -->
+        <!-- ,kill _ AISpawnBoxNumber sq_printingjob_Suicider -show=false -->
+        <!-- ,enable _ QuestEnableGroup sq_printingjob_InfectedWavesQEG -->
+        <!-- ,cnd_quest_started _ sq_printingjob02 -finished=true -->
+        <!-- ,disable _ QuestEnableGroup sq_printingjob_InfectedWavesQEG -->
+</QuestsDefinitions>

@@ -1,0 +1,65 @@
+sub main()
+{
+	asset_types()
+	{
+	    type("unknown",	    "Unknown",                          0, "data/interface/mshdefaultimg.dds");
+	    type("directory",	"Directories",                      0, "data/interface/dirdefaultimg.dds");
+		type("mesh",		"Meshes (.MSH)",                    1, "data/interface/mshdefaultimg.dds");
+		type("selection",	"Hierarchical Groups (.EDS)",       1, "data/interface/edsdefaultimg.dds");
+		type("sound",		"Sounds (.OGG, .WAV)",              1, "data/interface/sounddefaultimg.dds");
+		type("texture",		"Textures (.DDS, .PNG, .TGA...)",   1, "data/interface/mshdefaultimg.dds");
+		type("fx",		    "Special Effects (.FX)",            1, "data/interface/fxdefaultimg.dds");
+		type("df2",	        "Default Settings Scripts (.DF2)",  1, "data/interface/mshdefaultimg.dds");
+		type("stamp",	    "Quest Stamp (.STAMP)",             1, "data/interface/mshdefaultimg.dds");
+		type("lofter",		"Lofters shape mesh (.LOFTER)",     1, "data/interface/lofterdefaultimg.dds");
+		type("terrain",		"Terrain",     						1, "data/interface/lofterdefaultimg.dds");
+		type("material",    "Materials (.MAT)",                 1, "data/interface/materialdefaultimg.dds");
+		type("lod", 		"Level of Details (_LOD)",          1, "data/interface/mshdefaultimg.dds");
+		type("dependence",  "Dependence",                       0, "data/interface/mshdefaultimg.dds");
+	}
+
+	extensions()
+	{
+		ext(".msh",     "mesh",		    "template.msh.df2",     "", "");
+		ext(".eds",     "selection",	"template.eds.df2",     "", "");
+		ext(".wav",     "sound",		"template.wav.df2",     "", "");
+		ext(".ogg",     "sound",		"template.ogg.df2",     "", "");
+		//ext(".dds",     "texture",		"template.dds.df2",     "-.msh.dds -.eds.dds -_prvw", "");
+		//ext(".png",     "texture",		"template.png.df2",     "-.msh.dds -.eds.dds -_prvw", "");
+		ext(".dds",     "texture",		"",     "-.msh.dds -.eds.dds -_prvw", "");
+		ext(".png",     "texture",		"",     "-.msh.dds -.eds.dds -_prvw", "");
+		ext(".fx",      "fx",		    "template.fx.df2",      "", "");
+		ext(".df2",     "df2",          "",                     "", "");
+		ext(".stamp",   "stamp",        "template.stamp.df2",   "", "");
+        ext(".lofter",  "lofter",       "template.lofter.df2",  "", "");
+		ext(".mat",     "material",     "",                     "", "");
+		ext(".dmt",     "material",     "",                     "", "");
+		ext("",         "lofter",       "",                     "", "lofter");
+		ext("",         "terrain", 		"",                     "", "buildterrain");
+		ext("",         "terrain",    	"",                     "", "/patches/");
+		ext("",         "lod",          "",                     "", "_lod_ _lod.");
+		ext("",         "dependence",   "",                     "", "_clr_ _clr. _nrm_ _nrm. _msk_ _msk. _shn_ _shn.");
+	}
+    
+	class_meshes()
+	{
+		mesh("Decal",						"decal_plane_a.msh");
+		mesh("CCameraPositionHelper",		"data/interface/camera.msh");
+		mesh("CCameraTargetHelper",			"data/interface/cameraTarget.msh");
+		mesh("CCameraControlPointHelper",	"data/interface/cameraTarget.msh");
+		mesh("CPivotHelper",				"data/interface/cross.msh");
+		mesh("PhysicsLine",					"data/interface/PhysicsLine.msh");
+		mesh("CRoadControlPointHelper",		"data/interface/wayball.msh");
+		mesh("CShapeControlPointHelper",	"data/interface/wayball.msh");
+		mesh("CShapeVertexHelper",			"data/interface/waypoint.msh");
+		mesh("COccluderHelper",				"data/interface/zfilloccluder.msh");
+		mesh("CHookHelper",                 "data/interface/helperhook_a.msh");
+		mesh("CMovieKeyHelper",			    "data/interface/cameraTarget.msh");
+		mesh("CMovieFXHelper",			    "data/interface/pointer.msh");
+		mesh("CIconHelper",				    "data/interface/objects/icons_helper.msh");
+		mesh("CLightProbeHelper",			"lightprobe.msh");
+		mesh("CLightProbeArrayHelper",		"extent_box.msh");
+		mesh("CTinyObjectHelper",		    "sensorbox.msh");
+		mesh("CCameraDofHelper",            "dof_helper.msh");
+	}
+}

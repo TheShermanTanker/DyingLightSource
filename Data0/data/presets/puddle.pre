@@ -1,0 +1,138 @@
+sub main()
+{
+    PresetDef("MeshPreset")
+    {
+        Description("");
+        AddField("MeshName", "slums_puddle_big_a.msh");
+
+        Preset("Default")
+        {
+            SetField("MeshName", "slums_puddle_big_a.msh");
+        }
+        Preset("Overlay")
+        {
+            SetField("MeshName", "slums_puddle_big_b.msh");
+        }
+    }
+    PresetDef("SkinPreset")
+    {
+        Description("");
+        AddField("SkinName", "Default");
+
+        Preset("Default")
+        {
+            SetField("SkinName", "Default");
+        }
+        Preset("Toxic")
+        {
+            SetField("SkinName", "Toxic");
+        }
+        Preset("Oil")
+        {
+            SetField("SkinName", "Oil");
+        }
+        Preset("DefaultAsphalt")
+        {
+            SetField("SkinName", "Default_asphalt");
+        }
+    }
+    PresetDef("TypePreset")
+    {
+        Description("");
+        AddField("m_DamageType",   "UNKNOWN", true, true);
+        AddField("m_FadeInTime",   "0.3",     true, true);
+        //Fxes per size (see SizePreset)
+        AddField("m_FxNames[0]",    "",        true, true);
+        AddField("m_FxNames[1]",    "",        true, true);
+        AddField("m_FxNames[2]",    "",        true, true);
+        AddField("m_FxIsSequence",  "1",       true, true);
+        AddField("m_FxStartDelay",  "0.0",     true, true);
+        //Sounds per size (see SizePreset) 
+        AddField("m_SoundNames[0]", "",        true, true);
+        AddField("m_SoundNames[1]", "",        true, true);
+        AddField("m_SoundNames[2]", "",        true, true);
+        AddField("m_SoundVol",      "0.6",     true, true);
+        AddField("m_InitialSoundName",     "",     true, true);
+        AddField("m_InitialSoundVolume",   "1.0",  true, true);
+        AddField("m_InitialSoundMinRange", "10.0", true, true);
+        AddField("m_LifeTime", "");
+		AddField("m_VehicleDamagePerSecond", "0.0");
+		AddField("m_GiveSlideDamageWhenDisabled", "0");
+		AddField("m_GiveSlideDamageWhenEnabled", "0");
+
+        Preset("Fire")
+        {
+            SetField("m_DamageType",   "FIRE");
+            SetField("m_FadeInTime",   "0.0");
+            SetField("m_FxNames[0]",    "slums_puddle_burning");
+            SetField("m_FxNames[1]",    "slums_puddle_burning");
+            SetField("m_FxNames[2]",    "slums_puddle_burning");
+            SetField("m_FxIsSequence",  "1");
+            SetField("m_FxStartDelay",  "0.4");
+            SetField("m_SoundNames[0]", "puddle_fire_loop.ogg");
+            SetField("m_SoundNames[1]", "puddle_fire_loop.ogg");
+            SetField("m_SoundNames[2]", "puddle_fire_loop.ogg");
+            SetField("m_SoundVol",      "1.0");
+            SetField("m_InitialSoundName",     "puddle_fire_start.ogg");
+            SetField("m_InitialSoundVolume",   "1.0");
+            SetField("m_InitialSoundMinRange", "10.0");
+            SetField("m_LifeTime", "90");
+			SetField("m_GiveSlideDamageWhenDisabled", "1");
+			SetField("m_GiveSlideDamageWhenEnabled", "0");
+        }
+        Preset("Electricity")
+        {
+            SetField("m_DamageType",   "ELECTRIC");
+            SetField("m_FxNames[0]",   "electricpuddle");
+            SetField("m_FxNames[1]",   "electricpuddle");
+            SetField("m_FxNames[2]",   "electricpuddle");
+            SetField("m_FxIsSequence", "1");
+            SetField("m_SoundNames[0]", "puddle_electricity_loop.ogg");
+            SetField("m_SoundNames[1]", "puddle_electricity_loop.ogg");
+            SetField("m_SoundNames[2]", "puddle_electricity_loop.ogg");
+            SetField("m_SoundVol",      "1.0");
+            SetField("m_InitialSoundName",     "puddle_electricity_start.ogg");
+            SetField("m_InitialSoundVolume",   "1.0");
+            SetField("m_InitialSoundMinRange", "4.0");
+        }
+        Preset("Poison")
+        {
+            SetField("m_DamageType",   "POISON");
+            SetField("m_FxNames[0]",   "poison_puddle");
+            SetField("m_FxNames[1]",   "poison_puddle");
+            SetField("m_FxNames[2]",   "poison_puddle");
+            SetField("m_FxIsSequence", "1");
+            SetField("m_SoundNames[0]", "puddle_poison_loop.ogg");
+            SetField("m_SoundNames[1]", "puddle_poison_loop.ogg");
+            SetField("m_SoundNames[2]", "puddle_poison_loop.ogg");
+            SetField("m_SoundVol",      "1.0");
+			SetField("m_VehicleDamagePerSecond", "400.0");
+        }
+    }
+    PresetDef("SizePreset")
+    {
+        Description("");
+        //Sizes used for both fx and sound.
+        //ESize::Small  = 0
+        //ESize::Normal = 1
+        //ESize::Big    = 2
+        AddField("m_FxSize",     "Normal", true, true);
+        AddField("m_SoundSize",  "Normal", true, true);
+
+        Preset("Small")
+        {
+            SetField("m_FxSize",     "Small");
+            SetField("m_SoundSize",  "Small");
+        }
+        Preset("Normal")
+        {
+            SetField("m_FxSize",     "Normal");
+            SetField("m_SoundSize",  "Normal");
+        }
+        Preset("Big")
+        {
+            SetField("m_FxSize",     "Big");
+            SetField("m_SoundSize",  "Big");
+        }
+    }
+}

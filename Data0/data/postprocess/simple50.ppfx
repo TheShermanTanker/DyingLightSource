@@ -1,0 +1,156 @@
+import "render_loop.ppfx"
+
+sub ppfx()
+{
+	int e_path = SM50;
+
+	use usermaps(e_path = e_path);
+
+	use opq_render(e_path = e_path, b_sky_on = TRUE);
+
+	use gbuffer_modify(e_path = e_path, b_sky_on = TRUE);
+	
+	SetRenderTargetsView("_Z1_RG11B10F_A", "read_only_ds");
+		SetBuffer(16, "1_RGBA8_SPC");
+			Mesh("tri_screen.msh", "copy.mat", "std"); //simple and texture density view
+			
+			If("f_ed_pp_gbuffer_normal_on", "", "", "", "")
+			{
+				Mesh("tri_screen.msh", "gbuffer_normal.mat", "std");
+			}
+			If("f_ed_pp_gbuffer_normal_ws_on", "", "", "", "")
+			{
+				Mesh("tri_screen.msh", "gbuffer_normal_ws.mat", "std");
+			}
+            If("f_ed_pp_gbuffer_matid_on", "", "", "", "")
+            {
+                Mesh("tri_screen.msh", "gbuffer_matid.mat", "std");
+            }
+            If("f_ed_pp_gbuffer_roughness_on", "", "", "", "")
+            {
+                Mesh("tri_screen.msh", "gbuffer_roughness.mat", "std");
+            }
+            If("f_ed_pp_gbuffer_diffuse_on", "", "", "", "")
+            {
+				Mesh("tri_screen.msh", "gbuffer_diffuse.mat", "std");
+			}
+            If("f_ed_pp_gbuffer_diffuse_ranges_on", "", "", "", "")
+            {
+				Mesh("tri_screen.msh", "gbuffer_diffuse_ranges.mat", "std");
+			}
+            If("f_ed_pp_gbuffer_specular_on", "", "", "", "")
+            {
+				Mesh("tri_screen.msh", "gbuffer_specular.mat", "std");
+			}
+            If("f_ed_pp_gbuffer_specular_ranges_on", "", "", "", "")
+            {
+				Mesh("tri_screen.msh", "gbuffer_specular_ranges.mat", "std");
+			}
+			
+			If("f_ed_pp_gbuffer_zbuffer", "", "", "", "")
+			{
+				Mesh("tri_screen.msh", "gbuffer_zbuffer.mat", "std");
+			}
+			If("f_ed_pp_gbuffer_mv_on", "", "", "", "")
+			{
+				SetBuffer(16, "1_RG16F_MV");
+					Mesh("tri_screen.msh", "gbuffer_mv.mat", "std");
+			}			
+			Scene("std");//Helpers, UI
+			Scene("std2");
+	
+	SetRenderTargetsView("_Z1_GBUFFER_NRM", "stencil");
+			Scene("stencil_marker");
+
+	SetRenderTargetsView("_1_RG11B10F_B", "");
+		SetBuffer(16, "1_RG11B10F_A");
+			Mesh("tri_screen.msh", "copy.mat", "std");
+
+	SetRenderTargetsView("_Z1_RG11B10F_A", "");
+		SetBuffer(8, "1_RG11B10F_B");
+
+			If("f_ed_sm_0_on", "", "", "", "")
+			{
+				Mesh("tri_screen.msh", "stencil_marker_0.mat", "std");
+			}
+
+			If("f_ed_sm_1_on", "", "", "", "")
+			{
+				Mesh("tri_screen.msh", "stencil_marker_1.mat", "std");
+			}
+
+			If("f_ed_sm_2_on", "", "", "", "")
+			{
+				Mesh("tri_screen.msh", "stencil_marker_2.mat", "std");
+			}
+
+			If("f_ed_sm_3_on", "", "", "", "")
+			{
+				Mesh("tri_screen.msh", "stencil_marker_3.mat", "std");
+			}
+
+			If("f_ed_sm_4_on", "", "", "", "")
+			{
+				Mesh("tri_screen.msh", "stencil_marker_4.mat", "std");
+			}
+
+			If("f_ed_sm_5_on", "", "", "", "")
+			{
+				Mesh("tri_screen.msh", "stencil_marker_5.mat", "std");
+			}
+
+			If("f_ed_sm_6_on", "", "", "", "")
+			{
+				Mesh("tri_screen.msh", "stencil_marker_6.mat", "std");
+			}
+
+			If("f_ed_sm_7_on", "", "", "", "")
+			{
+				Mesh("tri_screen.msh", "stencil_marker_7.mat", "std");
+			}
+
+
+			If("f_ed_sm_8_on", "", "", "", "")
+			{
+				Mesh("tri_screen.msh", "stencil_marker_8.mat", "std");
+			}
+
+			If("f_ed_sm_9_on", "", "", "", "")
+			{
+				Mesh("tri_screen.msh", "stencil_marker_9.mat", "std");
+			}
+
+			If("f_ed_sm_10_on", "", "", "", "")
+			{
+				Mesh("tri_screen.msh", "stencil_marker_10.mat", "std");
+			}
+
+			If("f_ed_sm_11_on", "", "", "", "")
+			{
+				Mesh("tri_screen.msh", "stencil_marker_11.mat", "std");
+			}
+
+			If("f_ed_sm_12_on", "", "", "", "")
+			{
+				Mesh("tri_screen.msh", "stencil_marker_12.mat", "std");
+			}
+
+			If("f_ed_sm_13_on", "", "", "", "")
+			{
+				Mesh("tri_screen.msh", "stencil_marker_13.mat", "std");
+			}
+
+			If("f_ed_sm_14_on", "", "", "", "")
+			{
+				Mesh("tri_screen.msh", "stencil_marker_14.mat", "std");
+			}
+
+			If("f_ed_sm_15_on", "", "", "", "")
+			{
+				Mesh("tri_screen.msh", "stencil_marker_15.mat", "std");
+			}
+	
+	SetRenderTarget("backbuffer", "");
+		SetBuffer(16, "1_RG11B10F_A");
+			Mesh("tri_screen.msh", "copy.mat", "std");
+}

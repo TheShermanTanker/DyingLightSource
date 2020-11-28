@@ -1,0 +1,275 @@
+
+// ----   Nowe testy Noisa Kamery
+SeqTrack( "FPP_Stick2Close_StandNoise",				"M_FPP_Stick_StandNoise.anm2", 		        0, 170, 30, 1, 0.3)
+SeqTrack( "FPP_Stick2Close_MoveNoise",				"M_FPP_Stick_MoveNoise.anm2",				0, 60, 30, 1, 0.5)
+SeqTrack( "FPP_Stick2Close_SprintNoise", 			"M_FPP_Baseball_Sprint.anm2", 				0, 17, 30, 1, 0.5) 
+//===================================== M_FPP_Stick2_Melee_ALL_Katana ============================================
+SeqTrack( "FPP_Stick2Close_Stand",             	"M_FPP_Baseball_Stand.anm2",			           0, 10, 30, 1, 0.5) //pozycja
+SeqTrack("FPP_Stick2Close_Vigilent", 			"M_FPP_Baseball_DW_Idle.anm2",       	       0, 420, 30, 1, 0.5) //pozycja
+SeqTrack("FPP_Stick2Close_VigilentLeft", 		"M_FPP_Baseball_DW_Idle_Mirror.anm2",     	   0, 420, 30, 1, 0.5) //pozycja
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Horizontal
+SeqTrack("FPP_Stick2Close_Melee_Attack_RL_Begin", 		"M_FPP_Baseball_DWAttacks.anm2"	, 0, 9, 100, 1, 0.1)
+SeqTrack("FPP_Stick2Close_Melee_Attack_RL_Empty", 		"M_FPP_Baseball_DWAttacks.anm2"	, 11, 33, 30, 1, 0.1)
+{
+	Event(0, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_XX.wav", 1, 0, 1, 0.7)
+	}
+	Event(0, MELEE_SWING_RIGHT, 1) 
+	Event(8, START_GIVE_DAMAGE, -1)
+	Event(8, PUNCH_HIT, -1)	
+	Event(11.5, END_GIVE_DAMAGE, -1)
+}
+SeqTrack("FPP_Stick2Close_Melee_Attack_RL_Empty_Rest", 		"M_FPP_Baseball_DWAttacks.anm2"	, 33, 95, 20, 1, 0.1)
+{
+	Event(8, CAN_START_CUSTOM_IDLE,1)
+	Event(25, END_ANIMATION, 1)
+}
+
+SeqTrack("FPP_Stick2Close_Melee_Attack_RL_Hit_Middle", 		"M_FPP_Baseball_DWAttacks.anm2"	, 201, 214, 30, 1, 0.05)
+{
+	Event(3, END_GIVE_DAMAGE, -1)
+}
+SeqTrack("FPP_Stick2Close_Melee_Attack_RL_Hit_Middle_Rest", 		"M_FPP_Baseball_DWAttacks.anm2"	, 125, 182, 20, 1, 0.1)
+{
+	Event(0, CAN_START_CUSTOM_IDLE,1)
+	Event(15, END_ANIMATION, 1)	
+}
+
+SeqTrack("FPP_Stick2Close_Melee_Attack_LR_Empty", 		"M_FPP_Baseball_DWAttacks.anm2"	, 98, 120, 30, 1, 0.1)
+{
+	Event(0, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_XX.wav", 1, 0, 1, 0.7)
+	}
+	Event(0, MELEE_SWING_RIGHT, 1) 
+	Event(7, START_GIVE_DAMAGE, -1)	
+	Event(8, PUNCH_HIT, -1)	
+	Event(13, END_GIVE_DAMAGE, -1)
+}
+SeqTrack("FPP_Stick2Close_Melee_Attack_LR_Empty_Rest", 		"M_FPP_Baseball_DWAttacks.anm2"	, 120, 182, 20, 1, 0.1)
+{
+	Event(11, CAN_START_CUSTOM_IDLE,1) 
+	Event(25, END_ANIMATION, 1)
+}
+
+SeqTrack("FPP_Stick2Close_Melee_Attack_LR_Hit_Middle", 		"M_FPP_Baseball_DWAttacks.anm2"	, 249, 263, 30, 1, 0.05)
+{
+	Event(3, END_GIVE_DAMAGE, -1)
+}
+SeqTrack("FPP_Stick2Close_Melee_Attack_LR_Hit_Middle_Rest", 		"M_FPP_Baseball_DWAttacks.anm2"	, 263, 280, 20, 1, 0.1)
+{
+	Event(0, CAN_START_CUSTOM_IDLE,1) 
+	Event(15, END_ANIMATION, 1)
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// CHARGE
+SeqTrack("FPP_Stick2Close_Melee_Attack_CH_LR_Begin", 			"M_FPP_Baseball_ChargeAttack.anm2"	, 247, 285, 30, 1, 0.4)
+SeqTrack("FPP_Stick2Close_Melee_Attack_CH_LR_Loop", 			"M_FPP_Baseball_ChargeAttack.anm2"	, 285, 435, 30, 1, 0.3)
+SeqTrack("FPP_Stick2Close_Melee_Attack_CH_LR_Empty",			"M_FPP_Baseball_ChargeAttack.anm2"   , 437, 496, 33, 1, 0.2)
+{
+	Event(3, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_Charge_XX.wav", -1, 0, 1, 1.0)
+	}
+	Event(29, PUNCH_HIT, -1)
+	Event(20, MELEE_SWING_RIGHT, 1) 
+	Event(29, START_GIVE_DAMAGE, -1)	
+	Event(33, END_GIVE_DAMAGE, -1)
+}
+
+SeqTrackAlias("FPP_Stick2Close_Melee_Attack_CH_LR_Empty_Rest", 			"FPP_Stick2Close_Melee_Attack_LR_Empty_Rest")
+
+SeqTrack("FPP_Stick2Close_Melee_Attack_CH_RL_Begin", 			"M_FPP_Baseball_ChargeAttack.anm2"	, 0, 34, 30, 1, 0.4)
+SeqTrack("FPP_Stick2Close_Melee_Attack_CH_RL_Loop", 			"M_FPP_Baseball_ChargeAttack.anm2"	, 34, 184, 30, 1, 0.4)
+SeqTrack("FPP_Stick2Close_Melee_Attack_CH_RL_Empty",			"M_FPP_Baseball_ChargeAttack.anm2"	, 186, 245, 38, 1, 0.2)
+{
+	Event(3, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_Charge_XX.wav", -1, 0, 1, 1.0)
+	}
+	Event(29, PUNCH_HIT, -1)
+	Event(20, MELEE_SWING_RIGHT, 1) 
+	Event(29, START_GIVE_DAMAGE, -1)	
+	Event(34, END_GIVE_DAMAGE, -1)
+}
+SeqTrackAlias("FPP_Stick2Close_Melee_Attack_CH_RL_Empty_Rest", 			"FPP_Stick2Close_Melee_Attack_RL_Empty_Rest")
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Vertical
+
+// Version 0
+SeqTrack("FPP_Stick2Close_Melee_Attack_UD_Begin", 			"M_FPP_Baseball_UD_01.anm2"	, 0, 9, 60, 1, 0.1)
+SeqTrack("FPP_Stick2Close_Melee_Attack_UD_Empty", 			"M_FPP_Baseball_UD_01.anm2"	, 9, 34, 30, 1, 0.05)
+{
+	Event(0, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_XX.wav", 1, 0, 1, 0.7)
+	}
+	Event(4, PUNCH_HIT, -1)
+	Event(0, MELEE_SWING_RIGHT, 1) 
+	Event(3.5, START_GIVE_DAMAGE, -1)
+	Event(8, END_GIVE_DAMAGE, -1)
+}
+SeqTrack("FPP_Stick2Close_Melee_Attack_UD_Empty_Rest", 			"M_FPP_Baseball_UD_01.anm2"	, 34, 56, 20, 1, 0.1)
+{
+	Event(0, CAN_START_CUSTOM_IDLE,1) 	
+}
+
+SeqTrack("FPP_Stick2Close_Melee_Attack_UD_Hit_Middle", 		"M_FPP_Baseball_UD_Hit_01.anm2", 		14, 30, 30, 1, 0.1)
+{	
+	Event(4, END_GIVE_DAMAGE, 1)	
+}
+SeqTrackAlias("FPP_Stick2Close_Melee_Attack_UD_Hit_Middle_Rest", 		"FPP_Stick2Close_Melee_Attack_UD_Empty_Rest")
+
+// Version 1
+/*SeqTrack("FPP_Stick2Close_Melee_Attack_UD_Begin1", 			"M_FPP_Baseball_UD_02c.anm2"	, 0, 9, 60, 1, 0.1)
+SeqTrack("FPP_Stick2Close_Melee_Attack_UD_Empty1", 			"M_FPP_Baseball_UD_02c.anm2"	, 9, 34, 30, 1, 0.05)
+{
+	Event(0, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_XX.wav", 1, 0, 1, 0.7)
+	}
+	Event(4, PUNCH_HIT, -1)
+	Event(0, MELEE_SWING_RIGHT, 1) 
+	Event(3.5, START_GIVE_DAMAGE, -1)
+	Event(8, END_GIVE_DAMAGE, -1)
+}
+SeqTrack("FPP_Stick2Close_Melee_Attack_UD_Empty1_Rest", 			"M_FPP_Baseball_UD_01.anm2"	, 34, 56, 20, 1, 0.1)
+{
+	Event(0, CAN_START_CUSTOM_IDLE,1) 	
+}
+
+SeqTrack("FPP_Stick2Close_Melee_Attack_UD_Hit_Middle1", 		"M_FPP_Baseball_UD_Hit_02c.anm2", 		14, 30, 30, 1, 0.05)
+{	
+	Event(4, END_GIVE_DAMAGE, 1)	
+}
+SeqTrackAlias("FPP_Stick2Close_Melee_Attack_UD_Hit_Middle1_Rest", 		"FPP_Stick2Close_Melee_Attack_UD_Empty_Rest")*/
+
+
+// Version 2
+SeqTrack("FPP_Stick2Close_Melee_Attack_UD_Begin1", 			"M_FPP_Baseball_UD_02b.anm2"	, 0, 9, 60, 1, 0.1)
+SeqTrack("FPP_Stick2Close_Melee_Attack_UD_Empty1", 			"M_FPP_Baseball_UD_02b.anm2"	, 9, 34, 30, 1, 0.05)
+{
+	Event(0, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_XX.wav", 1, 0, 1, 0.7)
+	}
+	Event(4, PUNCH_HIT, -1)
+	Event(0, MELEE_SWING_RIGHT, 1) 
+	Event(3.5, START_GIVE_DAMAGE, -1)
+	Event(8, END_GIVE_DAMAGE, -1)
+}
+SeqTrack("FPP_Stick2Close_Melee_Attack_UD_Empty1_Rest", 			"M_FPP_Baseball_UD_01.anm2"	, 34, 56, 20, 1, 0.1)
+{
+	Event(0, CAN_START_CUSTOM_IDLE,1) 	
+}
+
+SeqTrack("FPP_Stick2Close_Melee_Attack_UD_Hit_Middle1", 		"M_FPP_Baseball_UD_Hit_02b.anm2", 		14, 30, 30, 1, 0.1)
+{	
+	Event(4, END_GIVE_DAMAGE, 1)	
+}
+SeqTrackAlias("FPP_Stick2Close_Melee_Attack_UD_Hit_Middle1_Rest", 		"FPP_Stick2Close_Melee_Attack_UD_Empty_Rest")
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+SeqTrack("FPP_Stick2Close_Melee_Attack_ExhaustedPunch", 		"M_FPP_Baseball_LowStamina.anm2"	, 0, 47, 30, 1, 0.25)
+{
+	Event(0, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_Stamina_Low_XX.wav", 1, 0, 0, 1.0)
+	}
+	Event(20, MELEE_SWING_RIGHT, 1) 
+	Event(18, START_GIVE_DAMAGE, -1)
+	Event(18, PUNCH_HIT, -1)
+	Event(26, END_GIVE_DAMAGE, -1)	
+}
+SeqTrack("FPP_Stick2Close_Melee_Attack_ExhaustedPunch_Rest", 		"M_FPP_Baseball_LowStamina.anm2"	, 47, 100, 30, 1, 0.0)
+{
+	Event(3, END_ANIMATION, 1)
+}
+SeqTrack("FPP_Stick2Close_Exhausted_Idle", "M_FPP_Baseball_LowStamina.anm2"	, 100, 150, 30, 1, 0.5)
+
+SeqTrack("FPP_Stick2Close_Melee_Attack_JA_Begin", 			"M_FPP_Assassin_JumpAttack_Begin.anm2"	, 0, 11, 30, 1, 0.0)
+{
+	Event(1, EVENT_JUMP_ATTACK, 1)
+}
+SeqTrack("FPP_Stick2Close_Melee_Attack_JA_Empty", 			"M_FPP_Assassin_JumpAttack_Begin.anm2"	, 0, 16, 30, 1, 0.0)
+{	
+	Event(0, MELEE_SWING_RIGHT,1) 
+	Event(0, START_GIVE_DAMAGE, 1)
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////
+// ROPE THROW
+SeqTrackAlias("FPP_Stick2Close_Melee_RopeThrow_Aim", 		"FPP_Stick_Melee_RopeThrow_Aim")
+SeqTrackAlias("FPP_Stick2Close_Melee_RopeThrow", 			"FPP_Stick_Melee_RopeThrow")
+SeqTrackAlias("FPP_Stick2Close_Melee_RopeThrowBack", 		"FPP_Stick_Melee_RopeThrowBack")
+SeqTrackAlias("FPP_Stick2Close_Melee_RopeThrowBack_Rest", 	"FPP_Stick_Melee_RopeThrowBack_Rest")
+SeqTrackAlias("FPP_Stick2Close_Melee_RopeClimb", 			"FPP_Stick_Melee_RopeClimb")
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Other
+SeqTrack( "FPP_Stick2Close_Melee_Throw_Aim",		"M_FPP_UniversalThrow_DW.anm2",			0, 130, 30, 1, 0.2)
+SeqTrack( "FPP_Stick2Close_Melee_Throw",			"M_FPP_UniversalThrow_DW.anm2",				132, 157, 30, 1, 0.0)
+{
+	Event(5, PUNCH_HIT, 1)
+	Event(0, MELEE_SWING_RIGHT,1) 
+	Event(0, START_GIVE_DAMAGE, -1)	
+}
+
+SeqTrack( "FPP_Stick2Close_Confused",    			"M_FPP_Stick_Confused_Katana.anm2",				0, 19, 30, 1, 0.0 )
+
+//================================================================================================
+// BLENDING
+
+SeqTracksBlend("FPP_Stick2Close_Melee_Attack_CH_LR_Begin",	"FPP_Stick2Close_Stand",			1.5)
+SeqTracksBlend("FPP_Stick2Close_Melee_Attack_CH_RL_Begin",	"FPP_Stick2Close_Stand",			1.5)
+
+SeqTracksBlend("FPP_Stick2Close_Melee_Attack_LR_Empty_Rest", "FPP_Stick2Close_Vigilent", 0.3)
+SeqTracksBlend("FPP_Stick2Close_Melee_Attack_RL_Hit_Middle_Rest", "FPP_Stick2Close_Vigilent", 0.3)
+
+SeqTracksBlend("FPP_Stick2Close_Melee_Attack_RL_Empty_Rest", "FPP_Stick2Close_VigilentLeft", 0.3)
+SeqTracksBlend("FPP_Stick2Close_Melee_Attack_LR_Hit_Middle_Rest", "FPP_Stick2Close_VigilentLeft", 0.3)
+
+SeqTracksBlend("FPP_Stick2Close_Melee_Attack_CH_LR_Empty", "FPP_Stick2Close_Melee_Attack_CH_LR_Empty_Rest", 1.0)
+SeqTracksBlend("FPP_Stick2Close_Melee_Attack_CH_RL_Empty", "FPP_Stick2Close_Melee_Attack_CH_RL_Empty_Rest", 1.0)
+
+SeqTracksBlend("FPP_Stick2Close_Vigilent", "FPP_Stick2Close_Melee_Attack_CH_RL_Begin", 1.0)
+SeqTracksBlend("FPP_Stick2Close_VigilentLeft", "FPP_Stick2Close_Melee_Attack_CH_LR_Begin", 1.2)
+
+SeqTracksBlend("FPP_Stick2Close_Melee_Attack_ExhaustedPunch_Rest", 			"FPP_Stick2Close_Exhausted_Idle", 2.0)
+
+SeqTracksBlend("FPP_Unarmed_Kick", 			"FPP_Stick2Close_Exhausted_Idle", 0.5)
+SeqTracksBlend("FPP_Unarmed_KickMedium", 	"FPP_Stick2Close_Exhausted_Idle", 0.5)
+SeqTracksBlend("FPP_Unarmed_KickLow", 		"FPP_Stick2Close_Exhausted_Idle", 0.5)
+
+SeqTracksBlend("FPP_Unarmed_Kick", 			"FPP_Stick2Close_Melee_Attack_ExhaustedPunch", 0.5)
+SeqTracksBlend("FPP_Unarmed_KickMedium", 	"FPP_Stick2Close_Melee_Attack_ExhaustedPunch", 0.5)
+SeqTracksBlend("FPP_Unarmed_KickLow", 		"FPP_Stick2Close_Melee_Attack_ExhaustedPunch", 0.5)
+
+SeqTracksBlend("FPP_Unarmed_Kick", 			"FPP_Stick2Close_Melee_Attack_ExhaustedPunch_Rest", 0.5)
+SeqTracksBlend("FPP_Unarmed_KickMedium", 	"FPP_Stick2Close_Melee_Attack_ExhaustedPunch_Rest", 0.5)
+SeqTracksBlend("FPP_Unarmed_KickLow", 		"FPP_Stick2Close_Melee_Attack_ExhaustedPunch_Rest", 0.5)
+
+SeqTracksBlend("FPP_Stick2Close_Exhausted_Idle", 	"FPP_Unarmed_Kick",			0.5)
+SeqTracksBlend("FPP_Stick2Close_Exhausted_Idle", 	"FPP_Unarmed_KickMedium", 	0.5)
+SeqTracksBlend("FPP_Stick2Close_Exhausted_Idle", 	"FPP_Unarmed_KickLow", 		0.5)
+
+SeqTracksBlend("FPP_Stick2Close_Melee_Attack_ExhaustedPunch",		"FPP_Unarmed_Kick",			0.5)
+SeqTracksBlend("FPP_Stick2Close_Melee_Attack_ExhaustedPunch", 	"FPP_Unarmed_KickMedium", 	0.5)
+SeqTracksBlend("FPP_Stick2Close_Melee_Attack_ExhaustedPunch", 	"FPP_Unarmed_KickLow", 		0.5)
+
+SeqTracksBlend("FPP_Stick2Close_Melee_Attack_ExhaustedPunch_Rest",	"FPP_Unarmed_Kick",			0.5)
+SeqTracksBlend("FPP_Stick2Close_Melee_Attack_ExhaustedPunch_Rest", 	"FPP_Unarmed_KickMedium", 	0.5)
+SeqTracksBlend("FPP_Stick2Close_Melee_Attack_ExhaustedPunch_Rest", 	"FPP_Unarmed_KickLow", 		0.5)
+
+SeqTracksBlend("FPP_Stick2Close_Vigilent",  "FPP_Stick2Close_Jump_Begin", 0.4)
+SeqTracksBlend("FPP_Stick2Close_Jump_Begin", "FPP_Stick2Close_Vigilent", 0.4)
+SeqTracksBlend("FPP_Stick2Close_Jump_Loop", "FPP_Stick2Close_Vigilent", 0.4)
+
+SeqTracksBlend("FPP_Stick2Close_Melee_Attack_CH_LR_Loop", 	"FPP_Stick2Close_Melee_Attack_CH_LR_Empty", 		0.1)
+SeqTracksBlend("FPP_Stick2Close_Melee_Attack_CH_RL_Loop", 	"FPP_Stick2Close_Melee_Attack_CH_RL_Empty", 		0.1)

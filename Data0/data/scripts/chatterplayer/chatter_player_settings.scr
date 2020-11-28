@@ -1,0 +1,138 @@
+ /*
+Challenge(s)            - challenge declaration: s - unique name of challenge
+Duration(f)             - max time to pass challenge 
+RewardXP(i)             - xp award
+
+MapActivator(s, s)      - map_name, spawnpoint_name - after loading the map to the spawnpoint, it automatically appears brief challenge menu without the possibility of rejecting
+Difficulty(i)           - difficulty level:
+                            - Challenge_Diff_Easy,
+                            - Challenge_Diff_Medium,
+                            - Challenge_Diff_Hard,
+     
+Type(i)                 - typ of the challenge'a (defines in witch tab in menu challenge will be displayed)
+                            - Challenge_Type_Agility, 
+                            - Challenge_Type_Combat
+                            
+ForcedItem(s, s)        - s - name of item that player will try to use on start the challenge s - name of mod to item
+ForcedSwitchName(s)     - name of switch that player will try to use on start the challenge
+
+OnlyOnce(b)             - if true, challenge can be activated only once per game
+OnlyOnceCompleted(b)    - if true, challenge can be completed only once per game
+
+AreaRange(b)            - range of challenge area (default 0 - no area). if player leave area, or there will be no enemies inside area, the challenge will be finished
+     
+TextureName(s)          - name of location texture
+PlayChallengeMusic(b)   - should play special music during the challenge
+UseJointGoal(b)         - if true, players must jointly achieve the goal
+DeathFailsChallengeSingle(b)    - should fail single challenge after player death
+DeathFailsChallengeCoop(b)      - should fail coop challenge after player death
+IsStoryRelated(b)       - is challenge related to the story
+UsesQuestName(b)        - should use quest name instead of challenge name to display it on HUD 
+IsCompetition(b)        - is challenge marked as competition (shows different texts on HUD).
+
+Requirements()          - requrements to activate the challenge
+{
+     Level(i)           - if the player does not have the specified level, challenge will be invisible
+     Skill(s)           - if the player does not have the specified skill, challenge will be visible on the map, but can't be activated
+     AggressionLevel(i) - if there is no specified aggression level, challenge will be visible on the map, but can't be activated
+     DayPhase(s)        - if the day phase will be defferent, challenge will be visible on the map, but can't be activated: s - "day", "night";
+     Chapter(i)         - if chapter is lower, challenge will be invisible
+}
+
+EVENTY:
+PositiveEvent(s)        - event necessary to complete challenge'a. can be only one. must be completed to pass challenge.
+{
+     Count(i)               - how many times you need to make an event to complete him
+     Point(s)               - name of ChallengePoint to pass in ReachPoint event
+     VictimType(s)          - type of enemy to kill in Kill event (np. ZOMBIE).
+     VictimPresetName(s)    - preset name of enemy to kill in Kill event (np. Goon_Slums).
+     BySpikes(b)            - true - enemy must be killed by spikes in Kill event
+     ByVehicle(b)           - true - enemy must be killed by vehicle in Kill event
+     WeaponType(s)          - type of weapon required to kill enemy in Kill event
+     ByFlashLight(b)        - true - enemy must be killed by flashlight in Kill event
+     ByPursuitBreaker(s)    - true - enemy must be killed by pursuit breaker in Kill event
+     ByGasTank(b)           - true - enemy must be killed by gas tank in Kill event
+     Skill(s)               - name of skill to make in UseSkill event
+     Type(s)                - required damage type in TakeDamge event
+     Surface(s)             - required surface type in Collision event
+     BodyPart(s)            - parts to give damage in GiveDamage event
+     DamageType(s)          - required damage type in GiveDamage event
+     CutOff(b)              - true - the limb must be cutted off in GiveDamage event 
+     CutOffAll(b)           - true - player must cutoff all limbs of enemy in GiveDamage event
+     BreakBone(b)           - true - player must break hitted bone in GiveDamage event
+     BodyCut(s)             - type of body cuts in GiveDamage event
+     GrabFastWin(b)         - true - player must give damage from grab in GiveDamage event
+     GroundPound(b)         - true - player must give damage from grond pound in GiveDamage event
+     WeaponType(s)          - type of weapon required in GiveDamage event
+     CanBeDead(b)           - true - enemy can be dead in GiveDamage event
+     Area(s)                - name of SensorChallengeArea to leave in LeaveArea event
+     Type(i)                - required move type in Move event
+     Distance(f)            - required distance to pass in Move event
+     QuestName(s)           - name of quest to pass in FinishQuest event
+     Trigger(s)             - name of trigger to use in UseTrigger event
+     InOrder(bool)          - false - all trigger are visible on start event, true - 
+     HandleVisibility(bool) - true - the event will hide triggers on start level and will show on start challenge
+     HandleQEnable(bool)    - true - the event will enable triggers on start challenge using QEnable
+     ShowLocations(bool)    - true - location for the trigger will be created
+     HudDescription(s)      - description of the challenge displayed on the hud (used in all events)
+
+}
+NegativeEvent(s)        - event, the fulfillment of which interrupts the challenge. can be more than one. completion of one will cause failure of challenge.
+{
+                        - same as in PositiveEvent
+}
+Event types:
+     - ReachPoint           - available params: Point(s)
+     - Kill                 - available params: Count(i), VictimType(s), BySpikes(b), ByVehicle(b), WeaponType(s), ByFlashLight(b), ByPursuitBreaker(s)
+     - Die                  - available params: Count(i)
+     - FinishQuest          - available params: QuestName(s)
+     - UseSkill             - available params: Count(i), Skill(s)
+     - LosePursuit          - available params: Count(i)
+     - TakeDamage           - available params: Count(i), Type(s)
+     - Collision            - available params: Count(i), Surface(s)
+     - GiveDamage           - available params: Count(i), GroundPound(b), DamageType(s), BodyPart(s), CutOff(b), CutOffAll(b), BreakBone(b), BodyCut(s), GrabFastWin(b), WeaponType(s), CanBeDead(b)
+     - HitShield            - available params: Points(i)
+     - LeaveArea            - available params: Area(s)
+     - LeaveVehicle         - available params: NONE
+     - Move                 - available params: Type(i), Distance(f) 
+     - SpottedByAI          - available params: Count(i)
+     - VehicleCollision     - available params: Count(i), Type(s)
+     - BodyCut              - available params: Count(i)
+     - CompleteQuestPhase   - available params: NONE
+     - Loot                 - available params: Count(i)
+     - UseTrigger           - available params: Trigger(s), InOrder(bool), ShowLocations(bool), HandleVisibility(bool)
+     
+AUTOCHALLENGE - Challenges started automatically. Inherits from Challenge (events, requirements, methods, etc. works as in normal Challenge)
+AutoChallenge(s)            - challenge declaration: s - unique name of auto challenge
+Methods used only in AutoChallenges:
+    MinCount(i)                 - min count of loot, enemies etc. to start challenge
+    MinRange(f)                 - min range to search loot, enemies etc. to start challenge
+    AvailableMaps("m1;m2;m3")   - limit challenge only to maps listed
+    ExcludedMaps("m1;m2;m3")    - don't start challenge on maps listed
+    AllowNextAfterDistance(f)   - notification about challenge will be blocked until the player will pass the distance from last notification pos
+
+*/
+
+sub main() 
+{	
+    // Story competitions
+	Add("StoryCompetitionsSlums.scr");
+	Add("StoryCompetitionsOldTown.scr");
+	
+	// Auto competitions
+    Add("AutoCompetitions.scr");
+	Add("AutoCompetitionsSafezones.scr");
+    
+	// Challenges
+    Add("ChallengesSlums.scr");
+    Add("ChallengesOldTown.scr");
+    Add("ChallengesOldTown_poster.scr");
+    Add("ChallengesDeadZones.scr");
+
+	// Rewards - must be added after all scripts with challenges
+    Rewards("ChallengesRewards.scr");
+    
+	// Others
+    //Add("ChallengesDebug.scr");
+    //IgnoreRequirements();
+}

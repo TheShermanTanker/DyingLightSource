@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="old_town_interior"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- MOVIE SET -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- quest __SQ_MovieSet_Start_01 -parent=Q_Start01 -->
+        <!-- ,hide _ ModelObject MovieSet_Barricade_Door_02 -->
+        <!-- ,goto <<QS MOVIE SET - START>> Marker m_MovieSet_start -distance=10 -show=false -->
+            <!-- ,debugpos SpawnPoint sp_portal_MovieSet_01 -->
+        <!-- ,dialog _ Igor SQ_MovieSet_Igor_00_NF -->
+        <!-- ,dialog _ Angelica SQ_MSet_Angelica_00_NF -->
+        <!-- ,talk _ Uwo_Boul SQ_MovieSet_Uwo_00_NF -show=false -->
+        <!--  -->
+    <!-- -= -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- -= MOVIE SET - Uwo quests - movie -->
+    <!-- -= -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!--  -->
+    <!-- quest SQ_MovieSet_Uwo_Movie_01 -parent=__SQ_MovieSet_Start_01 -glued=false -->
+        <!-- ,talk <<SQ Movie Set - Uwo - Movie - START>> Uwo_Boul SQ_MovieSet_Uwo_Movie_01_NF -follow=SQ_MovieSet_Uwo_Movie_01_InProgress -show=false -->
+            <!-- ,debugpos SpawnPoint sp_SQ_MovieSet_Uwo_Movie_01_01 -->
+        <!-- ,dialog _ Igor -->
+        <!-- ,checkpoint _ SpawnPoint sp_SQ_MovieSet_Uwo_Movie_01_01 -->
+        <!-- -= QUEST PHASES -->
+        <!-- -= obj=&SQ_MovieSet_Uwo_Movie_01_OBJ_01& -->
+        <!--  -->
+    <!-- quest SQ_MovieSet_Uwo_Movie_03 -parent=SQ_MovieSet_Uwo_Movie_02 -glued=true -leading_portal=portal_Old_Town_to_MovieSet -= zmienic na 03 -->
+        <!-- ,BLOCK _  -obj=&SQ_MovieSet_Uwo_Movie_01_OBJ_END&  -->
+            <!-- -= ,goto _ Marker m_MovieSet_start -distacje=5 -->
+            <!-- ,talk <<SQ Movie Set - Uwo - Movie - END>> Uwo_Boul SQ_MovieSet_Uwo_Movie_01_Accomplished -->
+                <!-- ,debugpos SpawnPoint sp_SQ_MovieSet_Uwo_Movie_01_01 -->
+            <!-- ,reward _  -->
+        <!-- ,checkpoint _ SpawnPoint sp_SQ_MovieSet_Uwo_Movie_01_01 -->
+    <!-- -= -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- -= MOVIE SET - Angelica quests - safe -->
+    <!-- -= -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!--  -->
+    <!-- quest SQ_MSet_Angelica_Safe_01 -parent=SQ_MovieSet_Uwo_Movie_03 -glued=false -->
+        <!-- ,talk <<SQ Movie Set - Angelica - Sejf - START>> Angelica SQ_MSet_Angelica_Safe_01_NF -follow=SQ_MSet_Angelica_Safe_01_InProgress -show=false -->
+            <!-- ,debugpos SpawnPoint sp_SQ_MSet_Angelica_Safe_01_01 -->
+        <!-- ,checkpoint _ SpawnPoint sp_SQ_MSet_Angelica_Safe_01_01 -->
+    <!-- quest SQ_MSet_Angelica_Safe_03 -parent=SQ_MSet_Angelica_Safe_02 -glued=true -leading_portal=portal_Old_Town_to_MovieSet -->
+        <!-- ,BLOCK _  -obj=&SQ_MSet_Angelica_Safe_01_OBJ_END&   -->
+            <!-- ,hide _ ModelObject MovieSet_Barricade_Door_01 -->
+            <!-- ,hide _ ModelObject MovieSet_Barricade_Wall_01 -->
+            <!-- ,show _ ModelObject MovieSet_Barricade_Door_02 -->
+            <!-- ,teleport _ Marker m_Confrontation_Angelica_01 -->
+                <!-- ,ai HumanAI Angelica -->
+            <!-- ,teleport _ Marker m_Confrontation_Uwo_01 -->
+                <!-- ,ai HumanAI Uwo -->
+            <!-- ,set-lp _ NPCLifePlace lp_Confrontation_Uwo_01 -state=off -->
+            <!-- ,set-lp _ NPCLifePlace lp_Confrontation_Angelica_01 -state=off -->
+            <!-- ,set-lp _ NPCLifePlace lp_Confrontation_Uwo_01 -state=on -->
+            <!-- ,set-lp _ NPCLifePlace lp_Confrontation_Angelica_01 -state=on -->
+            <!-- ,talk <<SQ Movie Set - Angelica - Sejf - END>> Angelica SQ_Confrontation_Angelica_01 -->
+                <!-- ,debugpos SpawnPoint sp_SQ_MSet_Angelica_Safe_01_03 -->
+            <!-- ,talk _ Uwo_Boul SQ_Confrontation_Uwo_02 -show=false -auto=true -->
+            <!-- ,talk _ Angelica SQ_Confrontation_Angelica_03 -show=false -auto=true -->
+            <!-- ,talk _ Uwo_Boul SQ_Confrontation_Uwo_04 -show=false -auto=true -->
+            <!-- ,talk _ Angelica SQ_Confrontation_Angelica_06 -show=false -auto=true -->
+            <!-- ,talk _ Uwo_Boul SQ_Confrontation_Uwo_07 -show=false -auto=true -->
+            <!-- ,talk _ Angelica SQ_Confrontation_Angelica_10 -show=false -auto=true -->
+            <!-- ,talk _ Angelica SQ_MSet_Angelica_Safe_01_Accomplished -->
+            <!-- ,reward _ -->
+        <!-- ,checkpoint _ SpawnPoint sp_SQ_MSet_Angelica_Safe_01_01 -->
+    <!-- -= -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- -= MOVIE SET - Satellite -->
+    <!-- -= -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- quest SQ_MSet_Satellite_01 -parent=SQ_MSet_Angelica_Safe_03 -glued=false -->
+        <!-- ,talk <<SQ Movie Set - Satellite - START>> Uwo_Boul SQ_MSet_Uwo_Satellite_01_NF -follow=SQ_MSet_Uwo_Satellite_01_InProgress -show=false -->
+            <!-- ,debugpos SpawnPoint sp_SQ_MSet_Angelica_Safe_01_03 -->
+        <!-- ,checkpoint _ SpawnPoint sp_SQ_MSet_Angelica_Safe_01_03 -->
+    <!-- quest SQ_MSet_Satellite_03 -parent=SQ_MSet_Satellite_02  -glued=true -leading_portal=portal_Old_Town_to_MovieSet -->
+        <!-- ,AND _ -obj=&SQ_MSet_Uwo_Satellite_01_OBJ_02& -->
+            <!-- path -->
+                <!-- ,goto <<QS Movie Set - Satellite - Zombie Attack>> SpawnPoint sp_portal_MovieSet_01 -distance=5 -->
+                    <!-- ,debugpos SpawnPoint sp_portal_MovieSet_01 -->
+            <!-- path -->
+                <!-- ,hide _ ModelObject MovieSet_Barricade_Door_01 -->
+                <!-- ,hide _ ModelObject MovieSet_Barricade_Wall_01 -->
+                <!-- ,show _ ModelObject MovieSet_Barricade_Door_02 -->
+                <!-- ,teleport _ Marker m_MSet_Satellite_01_Angelica_pos_01 -->
+                    <!-- ,ai HumanAI Angelica -->
+                <!-- ,teleport _ Marker m_MSet_Satellite_01_Uwo_pos_01 -->
+                    <!-- ,ai HumanAI Uwo -->
+                <!-- ,teleport _ Marker m_MSet_Satellite_01_Igor_pos_01 -->
+                    <!-- ,ai HumanAI Igor -->
+                <!-- ,set-lp _ NPCLifePlace lp_MSet_Satellite_01_Angelica_pos_01 -state=off -->
+                <!-- ,set-lp _ NPCLifePlace lp_MSet_Satellite_01_Igor_pos_01 -state=off -->
+                <!-- ,set-lp _ NPCLifePlace lp_MSet_Satellite_01_Uwo_pos_01 -state=off -->
+                <!-- ,set-lp _ NPCLifePlace lp_MSet_Satellite_01_Angelica_pos_01 -state=on -->
+                <!-- ,set-lp _ NPCLifePlace lp_MSet_Satellite_01_Igor_pos_01 -state=on -->
+                <!-- ,set-lp _ NPCLifePlace lp_MSet_Satellite_01_Uwo_pos_01 -state=on -->
+                <!-- ,enable _ QuestEnableGroup qeg_MSet_Uwo_Satellite_01_Zombie_Attractors_01 -state=enabled -->
+        <!-- ,AND _  -obj=&SQ_MSet_Uwo_Satellite_01_OBJ_03& -->
+            <!-- path -->
+                <!-- ,talk _ Igor SQ_MSet_Satellite_01_Igor_01 -show=false -auto=true -->
+            <!-- path -->
+                <!-- ,kill _ AISpawnBoxNumber SQ_MSet_Satellite_01_Zombie_01 -->
+                <!-- ,set-lp _ NPCLifePlace lp_MSet_Satellite_01_Uwo_pos_01 -state=off -->
+                <!-- ,talk _ Uwo_Boul SQ_MSet_Satellite_01_Uwo_Thanks_01 -show=false -auto=true -->
+            <!-- path -->
+                <!-- ,kill _ AISpawnBoxNumber SQ_MSet_Satellite_01_Zombie_02 -->
+                <!-- ,set-lp _ NPCLifePlace lp_MSet_Satellite_01_Angelica_pos_01 -state=off -->
+                <!-- ,talk _ Angelica SQ_MSet_Satellite_01_Angelica_Thanks_01 -show=false -auto=true -->
+            <!-- path -->
+                <!-- ,kill-multi _ -->
+                    <!-- ,spawner AISpawnBoxNumber SQ_MSet_Satellite_01_Zombie_03 -->
+                    <!-- ,spawner AISpawnBoxNumber SQ_MSet_Satellite_01_Zombie_04 -->
+                    <!-- ,spawner AISpawnBoxNumber SQ_MSet_Satellite_01_Zombie_05 -->
+        <!-- ,BLOCK _ -obj=&SQ_MSet_Uwo_Satellite_01_OBJ_END& -->
+            <!-- ,talk <<SQ Movie Set - Satellite - END>> Uwo_Boul SQ_MSet_Uwo_Satellite_01_Accomplished -->
+                <!-- ,debugpos SpawnPoint sp_SQ_MSet_Angelica_Safe_01_03 -->
+            <!-- ,enable _ QuestEnableGroup qeg_MSet_Satellite_01_Zombie_01 -state=disabled                 -->
+            <!-- ,reward _ -->
+        <!-- ,checkpoint _ SpawnPoint sp_SQ_MSet_Angelica_Safe_01_03 -->
+</QuestsDefinitions>

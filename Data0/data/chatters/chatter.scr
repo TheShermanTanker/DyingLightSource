@@ -1,0 +1,2743 @@
+//Roznica miedzy Cond a FrequentCnd to roznica miedzy wielokrotnoscia odpalenia chatteru - w Cond odpali go losowy AI, we FrequentCnd - wszyscy pasujacy.
+//FrequentCnd( 7.5000,  18.0000, true, 2000.) // fourth param is range
+//{
+//	Cond("SHOOTING_ENEMY_TAUNT");
+//  //enemy see player - dziala wtedy, gdy AI atakuje gracza, odpala sie w kolko
+//  Chatter("Chatter_Fight_01_Indian01");
+//}
+
+//     priority  	min_time,	can_play_during_dialog, range
+// Cnd( 10.0000,  	22.0000, 	true, 					2000.) // fourth param is range
+//
+
+// Cond("ENEMY_TYPE", 0); // 0 == Human, 1 == Zombie/Infected
+
+import "ChattersFirearm.scr"
+import "NPCChatter.scr"
+
+sub main()
+{	
+	Occlusion(0.0, 0.6);
+	RollOff(1.0);
+	
+    ChatterAlias("Chatter_MeleeFighterZombieSurprise_01_Survivor01", "ChatterMeleeFighterZombieSurprise_Survivor01_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSurprise_02_Survivor01", "ChatterMeleeFighterZombieSurprise_Survivor01_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSurprise_03_Survivor01", "ChatterMeleeFighterZombieSurprise_Survivor01_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSurprise_01_Survivor02", "ChatterMeleeFighterZombieSurprise_Survivor02_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSurprise_02_Survivor02", "ChatterMeleeFighterZombieSurprise_Survivor02_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSurprise_03_Survivor02", "ChatterMeleeFighterZombieSurprise_Survivor02_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSurprise_01_Survivor03", "ChatterMeleeFighterZombieSurprise_Survivor03_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSurprise_02_Survivor03", "ChatterMeleeFighterZombieSurprise_Survivor03_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSurprise_03_Survivor03", "ChatterMeleeFighterZombieSurprise_Survivor03_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSurprise_01_Survivor04", "ChatterMeleeFighterZombieSurprise_Survivor04_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSurprise_02_Survivor04", "ChatterMeleeFighterZombieSurprise_Survivor04_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSurprise_03_Survivor04", "ChatterMeleeFighterZombieSurprise_Survivor04_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSurprise_01_Survivor05", "ChatterMeleeFighterZombieSurprise_Survivor05_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSurprise_02_Survivor05", "ChatterMeleeFighterZombieSurprise_Survivor05_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSurprise_03_Survivor05", "ChatterMeleeFighterZombieSurprise_Survivor05_CHT03.ogg");
+    
+    ChatterAlias("Chatter_MeleeFighterZombieSurprise_01_SurvivorB01", "ChatterMeleeFighterZombieSurprise_SurvivorB01_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSurprise_02_SurvivorB01", "ChatterMeleeFighterZombieSurprise_SurvivorB01_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSurprise_03_SurvivorB01", "ChatterMeleeFighterZombieSurprise_SurvivorB01_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSurprise_01_SurvivorB02", "ChatterMeleeFighterZombieSurprise_SurvivorB02_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSurprise_02_SurvivorB02", "ChatterMeleeFighterZombieSurprise_SurvivorB02_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSurprise_03_SurvivorB02", "ChatterMeleeFighterZombieSurprise_SurvivorB02_CHT03.ogg");
+    
+    ChatterAlias("Chatter_MeleeFighterZombieSpotted_01_Survivor01", "ChatterMeleeFighterZombieSpotted_Survivor01_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSpotted_02_Survivor01", "ChatterMeleeFighterZombieSpotted_Survivor01_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSpotted_03_Survivor01", "ChatterMeleeFighterZombieSpotted_Survivor01_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSpotted_01_Survivor02", "ChatterMeleeFighterZombieSpotted_Survivor02_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSpotted_02_Survivor02", "ChatterMeleeFighterZombieSpotted_Survivor02_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSpotted_03_Survivor02", "ChatterMeleeFighterZombieSpotted_Survivor02_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSpotted_01_Survivor03", "ChatterMeleeFighterZombieSpotted_Survivor03_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSpotted_02_Survivor03", "ChatterMeleeFighterZombieSpotted_Survivor03_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSpotted_03_Survivor03", "ChatterMeleeFighterZombieSpotted_Survivor03_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSpotted_01_Survivor04", "ChatterMeleeFighterZombieSpotted_Survivor04_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSpotted_02_Survivor04", "ChatterMeleeFighterZombieSpotted_Survivor04_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSpotted_03_Survivor04", "ChatterMeleeFighterZombieSpotted_Survivor04_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSpotted_01_Survivor05", "ChatterMeleeFighterZombieSpotted_Survivor05_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSpotted_02_Survivor05", "ChatterMeleeFighterZombieSpotted_Survivor05_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSpotted_03_Survivor05", "ChatterMeleeFighterZombieSpotted_Survivor05_CHT03.ogg");
+    
+    
+    ChatterAlias("Chatter_MeleeFighterZombieSpotted_01_SurvivorB01", "ChatterMeleeFighterZombieSpotted_SurvivorB01_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSpotted_02_SurvivorB01", "ChatterMeleeFighterZombieSpotted_SurvivorB01_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSpotted_03_SurvivorB01", "ChatterMeleeFighterZombieSpotted_SurvivorB01_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSpotted_01_SurvivorB02", "ChatterMeleeFighterZombieSpotted_SurvivorB02_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSpotted_02_SurvivorB02", "ChatterMeleeFighterZombieSpotted_SurvivorB02_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieSpotted_03_SurvivorB02", "ChatterMeleeFighterZombieSpotted_SurvivorB02_CHT03.ogg");
+    
+    ChatterAlias("Chatter_MeleeFighterZombieUnreachable_01_Survivor01", "ChatterMeleeFighterZombieUnreachable_Survivor01_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieUnreachable_02_Survivor01", "ChatterMeleeFighterZombieUnreachable_Survivor01_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieUnreachable_03_Survivor01", "ChatterMeleeFighterZombieUnreachable_Survivor01_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieUnreachable_01_Survivor02", "ChatterMeleeFighterZombieUnreachable_Survivor02_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieUnreachable_02_Survivor02", "ChatterMeleeFighterZombieUnreachable_Survivor02_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieUnreachable_03_Survivor02", "ChatterMeleeFighterZombieUnreachable_Survivor02_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieUnreachable_01_Survivor03", "ChatterMeleeFighterZombieUnreachable_Survivor03_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieUnreachable_02_Survivor03", "ChatterMeleeFighterZombieUnreachable_Survivor03_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieUnreachable_03_Survivor03", "ChatterMeleeFighterZombieUnreachable_Survivor03_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieUnreachable_01_Survivor04", "ChatterMeleeFighterZombieUnreachable_Survivor04_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieUnreachable_02_Survivor04", "ChatterMeleeFighterZombieUnreachable_Survivor04_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieUnreachable_03_Survivor04", "ChatterMeleeFighterZombieUnreachable_Survivor04_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieUnreachable_01_Survivor05", "ChatterMeleeFighterZombieUnreachable_Survivor05_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieUnreachable_02_Survivor05", "ChatterMeleeFighterZombieUnreachable_Survivor05_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieUnreachable_03_Survivor05", "ChatterMeleeFighterZombieUnreachable_Survivor05_CHT03.ogg");
+    
+    ChatterAlias("Chatter_MeleeFighterZombieUnreachable_01_SurvivorB01", "ChatterMeleeFighterZombieUnreachable_SurvivorB01_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieUnreachable_02_SurvivorB01", "ChatterMeleeFighterZombieUnreachable_SurvivorB01_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieUnreachable_03_SurvivorB01", "ChatterMeleeFighterZombieUnreachable_SurvivorB01_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieUnreachable_01_SurvivorB02", "ChatterMeleeFighterZombieUnreachable_SurvivorB02_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieUnreachable_02_SurvivorB02", "ChatterMeleeFighterZombieUnreachable_SurvivorB02_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieUnreachable_03_SurvivorB02", "ChatterMeleeFighterZombieUnreachable_SurvivorB02_CHT03.ogg");
+    
+    ChatterAlias("Chatter_MeleeFighterPerformingAttack_01_Survivor01", "ChatterMeleeFighterPerformingAttack_Survivor01_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterPerformingAttack_02_Survivor01", "ChatterMeleeFighterPerformingAttack_Survivor01_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterPerformingAttack_03_Survivor01", "ChatterMeleeFighterPerformingAttack_Survivor01_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterPerformingAttack_01_Survivor02", "ChatterMeleeFighterPerformingAttack_Survivor02_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterPerformingAttack_02_Survivor02", "ChatterMeleeFighterPerformingAttack_Survivor02_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterPerformingAttack_03_Survivor02", "ChatterMeleeFighterPerformingAttack_Survivor02_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterPerformingAttack_01_Survivor03", "ChatterMeleeFighterPerformingAttack_Survivor03_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterPerformingAttack_02_Survivor03", "ChatterMeleeFighterPerformingAttack_Survivor03_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterPerformingAttack_03_Survivor03", "ChatterMeleeFighterPerformingAttack_Survivor03_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterPerformingAttack_01_Survivor04", "ChatterMeleeFighterPerformingAttack_Survivor04_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterPerformingAttack_02_Survivor04", "ChatterMeleeFighterPerformingAttack_Survivor04_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterPerformingAttack_03_Survivor04", "ChatterMeleeFighterPerformingAttack_Survivor04_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterPerformingAttack_01_Survivor05", "ChatterMeleeFighterPerformingAttack_Survivor05_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterPerformingAttack_02_Survivor05", "ChatterMeleeFighterPerformingAttack_Survivor05_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterPerformingAttack_03_Survivor05", "ChatterMeleeFighterPerformingAttack_Survivor05_CHT03.ogg");
+    
+    ChatterAlias("Chatter_MeleeFighterPerformingAttack_01_SurvivorB01", "ChatterMeleeFighterPerformingAttack_SurvivorB01_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterPerformingAttack_02_SurvivorB01", "ChatterMeleeFighterPerformingAttack_SurvivorB01_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterPerformingAttack_03_SurvivorB01", "ChatterMeleeFighterPerformingAttack_SurvivorB01_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterPerformingAttack_01_SurvivorB02", "ChatterMeleeFighterPerformingAttack_SurvivorB02_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterPerformingAttack_02_SurvivorB02", "ChatterMeleeFighterPerformingAttack_SurvivorB02_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterPerformingAttack_03_SurvivorB02", "ChatterMeleeFighterPerformingAttack_SurvivorB02_CHT03.ogg");
+    
+    ChatterAlias("Chatter_MeleeFighterZombieHit_01_Survivor01", "ChatterMeleeFighterZombieHit_Survivor01_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieHit_02_Survivor01", "ChatterMeleeFighterZombieHit_Survivor01_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieHit_03_Survivor01", "ChatterMeleeFighterZombieHit_Survivor01_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieHit_01_Survivor02", "ChatterMeleeFighterZombieHit_Survivor02_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieHit_02_Survivor02", "ChatterMeleeFighterZombieHit_Survivor02_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieHit_03_Survivor02", "ChatterMeleeFighterZombieHit_Survivor02_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieHit_01_Survivor03", "ChatterMeleeFighterZombieHit_Survivor03_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieHit_02_Survivor03", "ChatterMeleeFighterZombieHit_Survivor03_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieHit_03_Survivor03", "ChatterMeleeFighterZombieHit_Survivor03_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieHit_01_Survivor04", "ChatterMeleeFighterZombieHit_Survivor04_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieHit_02_Survivor04", "ChatterMeleeFighterZombieHit_Survivor04_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieHit_03_Survivor04", "ChatterMeleeFighterZombieHit_Survivor04_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieHit_01_Survivor05", "ChatterMeleeFighterZombieHit_Survivor05_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieHit_02_Survivor05", "ChatterMeleeFighterZombieHit_Survivor05_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieHit_03_Survivor05", "ChatterMeleeFighterZombieHit_Survivor05_CHT03.ogg");
+    
+    ChatterAlias("Chatter_MeleeFighterZombieHit_01_SurvivorB01", "ChatterMeleeFighterZombieHit_SurvivorB01_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieHit_02_SurvivorB01", "ChatterMeleeFighterZombieHit_SurvivorB01_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieHit_03_SurvivorB01", "ChatterMeleeFighterZombieHit_SurvivorB01_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieHit_01_SurvivorB02", "ChatterMeleeFighterZombieHit_SurvivorB02_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieHit_02_SurvivorB02", "ChatterMeleeFighterZombieHit_SurvivorB02_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterZombieHit_03_SurvivorB02", "ChatterMeleeFighterZombieHit_SurvivorB02_CHT03.ogg");
+    
+    ChatterAlias("Chatter_MeleeFighterDamageFromZombie_01_Survivor01", "ChatterMeleeFighterDamageFromZombie_Survivor01_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterDamageFromZombie_02_Survivor01", "ChatterMeleeFighterDamageFromZombie_Survivor01_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterDamageFromZombie_03_Survivor01", "ChatterMeleeFighterDamageFromZombie_Survivor01_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterDamageFromZombie_01_Survivor02", "ChatterMeleeFighterDamageFromZombie_Survivor02_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterDamageFromZombie_02_Survivor02", "ChatterMeleeFighterDamageFromZombie_Survivor02_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterDamageFromZombie_03_Survivor02", "ChatterMeleeFighterDamageFromZombie_Survivor02_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterDamageFromZombie_01_Survivor03", "ChatterMeleeFighterDamageFromZombie_Survivor03_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterDamageFromZombie_02_Survivor03", "ChatterMeleeFighterDamageFromZombie_Survivor03_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterDamageFromZombie_03_Survivor03", "ChatterMeleeFighterDamageFromZombie_Survivor03_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterDamageFromZombie_01_Survivor04", "ChatterMeleeFighterDamageFromZombie_Survivor04_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterDamageFromZombie_02_Survivor04", "ChatterMeleeFighterDamageFromZombie_Survivor04_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterDamageFromZombie_03_Survivor04", "ChatterMeleeFighterDamageFromZombie_Survivor04_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterDamageFromZombie_01_Survivor05", "ChatterMeleeFighterDamageFromZombie_Survivor05_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterDamageFromZombie_02_Survivor05", "ChatterMeleeFighterDamageFromZombie_Survivor05_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterDamageFromZombie_03_Survivor05", "ChatterMeleeFighterDamageFromZombie_Survivor05_CHT03.ogg");
+    
+    ChatterAlias("Chatter_MeleeFighterDamageFromZombie_01_SurvivorB01", "ChatterMeleeFighterDamageFromZombie_SurvivorB01_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterDamageFromZombie_02_SurvivorB01", "ChatterMeleeFighterDamageFromZombie_SurvivorB01_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterDamageFromZombie_03_SurvivorB01", "ChatterMeleeFighterDamageFromZombie_SurvivorB01_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterDamageFromZombie_01_SurvivorB02", "ChatterMeleeFighterDamageFromZombie_SurvivorB02_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterDamageFromZombie_02_SurvivorB02", "ChatterMeleeFighterDamageFromZombie_SurvivorB02_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterDamageFromZombie_03_SurvivorB02", "ChatterMeleeFighterDamageFromZombie_SurvivorB02_CHT03.ogg");
+    
+    ChatterAlias("Chatter_MeleeFighterDuringTheFight_01_Survivor01", "ChatterMeleeFighterDuringTheFight_Survivor01_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterDuringTheFight_02_Survivor01", "ChatterMeleeFighterDuringTheFight_Survivor01_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterDuringTheFight_03_Survivor01", "ChatterMeleeFighterDuringTheFight_Survivor01_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterDuringTheFight_01_Survivor02", "ChatterMeleeFighterDuringTheFight_Survivor02_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterDuringTheFight_02_Survivor02", "ChatterMeleeFighterDuringTheFight_Survivor02_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterDuringTheFight_03_Survivor02", "ChatterMeleeFighterDuringTheFight_Survivor02_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterDuringTheFight_01_Survivor03", "ChatterMeleeFighterDuringTheFight_Survivor03_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterDuringTheFight_02_Survivor03", "ChatterMeleeFighterDuringTheFight_Survivor03_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterDuringTheFight_03_Survivor03", "ChatterMeleeFighterDuringTheFight_Survivor03_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterDuringTheFight_01_Survivor04", "ChatterMeleeFighterDuringTheFight_Survivor04_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterDuringTheFight_02_Survivor04", "ChatterMeleeFighterDuringTheFight_Survivor04_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterDuringTheFight_03_Survivor04", "ChatterMeleeFighterDuringTheFight_Survivor04_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterDuringTheFight_01_Survivor05", "ChatterMeleeFighterDuringTheFight_Survivor05_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterDuringTheFight_02_Survivor05", "ChatterMeleeFighterDuringTheFight_Survivor05_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterDuringTheFight_03_Survivor05", "ChatterMeleeFighterDuringTheFight_Survivor05_CHT03.ogg");
+    
+    ChatterAlias("Chatter_MeleeFighterDuringTheFight_01_SurvivorB01", "ChatterMeleeFighterDuringTheFight_SurvivorB01_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterDuringTheFight_02_SurvivorB01", "ChatterMeleeFighterDuringTheFight_SurvivorB01_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterDuringTheFight_03_SurvivorB01", "ChatterMeleeFighterDuringTheFight_SurvivorB01_CHT03.ogg");
+    ChatterAlias("Chatter_MeleeFighterDuringTheFight_01_SurvivorB02", "ChatterMeleeFighterDuringTheFight_SurvivorB02_CHT01.ogg");
+    ChatterAlias("Chatter_MeleeFighterDuringTheFight_02_SurvivorB02", "ChatterMeleeFighterDuringTheFight_SurvivorB02_CHT02.ogg");
+    ChatterAlias("Chatter_MeleeFighterDuringTheFight_03_SurvivorB02", "ChatterMeleeFighterDuringTheFight_SurvivorB02_CHT03.ogg");
+    
+    ChatterAlias("Chatter_HasAttackTarget_01_Survivor01",   		"EncSurvivorAttack_Survivor01_CHT01.ogg");
+    ChatterAlias("Chatter_HasAttackTarget_02_Survivor01",   		"EncSurvivorAttack_Survivor01_CHT02.ogg");
+    ChatterAlias("Chatter_HasAttackTarget_03_Survivor01",   		"EncSurvivorAttack_Survivor01_CHT03.ogg");
+    ChatterAlias("Chatter_HasAttackTarget_01_Survivor02",   		"EncSurvivorAttack_Survivor02_CHT01.ogg");
+    ChatterAlias("Chatter_HasAttackTarget_02_Survivor02",   		"EncSurvivorAttack_Survivor02_CHT02.ogg");
+    ChatterAlias("Chatter_HasAttackTarget_03_Survivor02",   		"EncSurvivorAttack_Survivor02_CHT03.ogg");
+    ChatterAlias("Chatter_HasAttackTarget_01_Survivor03",   		"EncSurvivorAttack_Survivor03_CHT01.ogg");
+    ChatterAlias("Chatter_HasAttackTarget_02_Survivor03",   		"EncSurvivorAttack_Survivor03_CHT02.ogg");
+    ChatterAlias("Chatter_HasAttackTarget_03_Survivor03",   		"EncSurvivorAttack_Survivor03_CHT03.ogg");
+    ChatterAlias("Chatter_HasAttackTarget_01_Survivor04",   		"EncSurvivorAttack_Survivor04_CHT01.ogg");
+    ChatterAlias("Chatter_HasAttackTarget_02_Survivor04",   		"EncSurvivorAttack_Survivor04_CHT02.ogg");
+    ChatterAlias("Chatter_HasAttackTarget_03_Survivor04",   		"EncSurvivorAttack_Survivor04_CHT03.ogg");
+    ChatterAlias("Chatter_HasAttackTarget_01_Survivor05",   		"EncSurvivorAttack_Survivor05_CHT01.ogg");
+    ChatterAlias("Chatter_HasAttackTarget_02_Survivor05",   		"EncSurvivorAttack_Survivor05_CHT02.ogg");
+    ChatterAlias("Chatter_HasAttackTarget_03_Survivor05",   		"EncSurvivorAttack_Survivor05_CHT03.ogg");
+    
+    ChatterAlias("Chatter_HasAttackTarget_01_SurvivorB01",   		"EncSurvivorAttack_SurvivorB01_CHT01.ogg");
+    ChatterAlias("Chatter_HasAttackTarget_02_SurvivorB01",   		"EncSurvivorAttack_SurvivorB01_CHT02.ogg");
+    ChatterAlias("Chatter_HasAttackTarget_03_SurvivorB01",   		"EncSurvivorAttack_SurvivorB01_CHT03.ogg");
+    ChatterAlias("Chatter_HasAttackTarget_01_SurvivorB02",   		"EncSurvivorAttack_SurvivorB02_CHT01.ogg");
+    ChatterAlias("Chatter_HasAttackTarget_02_SurvivorB02",   		"EncSurvivorAttack_SurvivorB02_CHT02.ogg");
+    ChatterAlias("Chatter_HasAttackTarget_03_SurvivorB02",   		"EncSurvivorAttack_SurvivorB02_CHT03.ogg");
+	
+	// TODO: nagrac!!!
+	ChatterAlias("Chatter_RunningAway_01_Bandit01",   		"ChatterMeleeFighterO_01_Bandit01.ogg");
+    ChatterAlias("Chatter_RunningAway_02_Bandit01",   		"ChatterMeleeFighterO_02_Bandit01.ogg");
+    ChatterAlias("Chatter_RunningAway_03_Bandit01",   		"ChatterMeleeFighterO_03_Bandit01.ogg");
+    ChatterAlias("Chatter_RunningAway_04_Bandit01",   		"ChatterMeleeFighterO_04_Bandit01.ogg");
+    ChatterAlias("Chatter_RunningAway_05_Bandit01",   		"ChatterMeleeFighterO_05_Bandit01.ogg");
+	ChatterAlias("Chatter_RunningAway_01_Bandit02",   		"ChatterMeleeFighterO_01_Bandit02.ogg");
+    ChatterAlias("Chatter_RunningAway_02_Bandit02",   		"ChatterMeleeFighterO_02_Bandit02.ogg");
+    ChatterAlias("Chatter_RunningAway_03_Bandit02",   		"ChatterMeleeFighterO_03_Bandit02.ogg");
+    ChatterAlias("Chatter_RunningAway_04_Bandit02",   		"ChatterMeleeFighterO_04_Bandit02.ogg");
+    ChatterAlias("Chatter_RunningAway_05_Bandit02",   		"ChatterMeleeFighterO_05_Bandit02.ogg");
+	ChatterAlias("Chatter_RunningAway_01_Bandit03",   		"ChatterMeleeFighterO_01_Bandit03.ogg");
+    ChatterAlias("Chatter_RunningAway_02_Bandit03",   		"ChatterMeleeFighterO_02_Bandit03.ogg");
+    ChatterAlias("Chatter_RunningAway_03_Bandit03",   		"ChatterMeleeFighterO_03_Bandit03.ogg");
+    ChatterAlias("Chatter_RunningAway_04_Bandit03",   		"ChatterMeleeFighterO_04_Bandit03.ogg");
+    ChatterAlias("Chatter_RunningAway_05_Bandit03",   		"ChatterMeleeFighterO_05_Bandit03.ogg");
+	ChatterAlias("Chatter_RunningAway_01_Bandit04",   		"ChatterMeleeFighterO_01_Bandit04.ogg");
+    ChatterAlias("Chatter_RunningAway_02_Bandit04",   		"ChatterMeleeFighterO_02_Bandit04.ogg");
+    ChatterAlias("Chatter_RunningAway_03_Bandit04",   		"ChatterMeleeFighterO_03_Bandit04.ogg");
+    ChatterAlias("Chatter_RunningAway_04_Bandit04",   		"ChatterMeleeFighterO_04_Bandit04.ogg");
+    ChatterAlias("Chatter_RunningAway_05_Bandit04",   		"ChatterMeleeFighterO_05_Bandit04.ogg");
+	ChatterAlias("Chatter_RunningAway_01_Bandit05",   		"ChatterMeleeFighterO_01_Bandit05.ogg");
+    ChatterAlias("Chatter_RunningAway_02_Bandit05",   		"ChatterMeleeFighterO_02_Bandit05.ogg");
+    ChatterAlias("Chatter_RunningAway_03_Bandit05",   		"ChatterMeleeFighterO_03_Bandit05.ogg");
+    ChatterAlias("Chatter_RunningAway_04_Bandit05",   		"ChatterMeleeFighterO_04_Bandit05.ogg");
+    ChatterAlias("Chatter_RunningAway_05_Bandit05",   		"ChatterMeleeFighterO_05_Bandit05.ogg");
+	ChatterAlias("Chatter_RunningAway_01_MaskedBandit01",   		"ChatterMeleeFighterO_01_Bandit01.ogg");
+    ChatterAlias("Chatter_RunningAway_02_MaskedBandit01",   		"ChatterMeleeFighterO_02_Bandit01.ogg");
+    ChatterAlias("Chatter_RunningAway_03_MaskedBandit01",   		"ChatterMeleeFighterO_03_Bandit01.ogg");
+    ChatterAlias("Chatter_RunningAway_04_MaskedBandit01",   		"ChatterMeleeFighterO_04_Bandit01.ogg");
+    ChatterAlias("Chatter_RunningAway_05_MaskedBandit01",   		"ChatterMeleeFighterO_05_Bandit01.ogg");
+	ChatterAlias("Chatter_RunningAway_01_MaskedBandit02",   		"ChatterMeleeFighterO_01_Bandit02.ogg");
+    ChatterAlias("Chatter_RunningAway_02_MaskedBandit02",   		"ChatterMeleeFighterO_02_Bandit02.ogg");
+    ChatterAlias("Chatter_RunningAway_03_MaskedBandit02",   		"ChatterMeleeFighterO_03_Bandit02.ogg");
+    ChatterAlias("Chatter_RunningAway_04_MaskedBandit02",   		"ChatterMeleeFighterO_04_Bandit02.ogg");
+    ChatterAlias("Chatter_RunningAway_05_MaskedBandit02",   		"ChatterMeleeFighterO_05_Bandit02.ogg");
+	ChatterAlias("Chatter_RunningAway_01_MaskedBandit03",   		"ChatterMeleeFighterO_01_Bandit03.ogg");
+    ChatterAlias("Chatter_RunningAway_02_MaskedBandit03",   		"ChatterMeleeFighterO_02_Bandit03.ogg");
+    ChatterAlias("Chatter_RunningAway_03_MaskedBandit03",   		"ChatterMeleeFighterO_03_Bandit03.ogg");
+    ChatterAlias("Chatter_RunningAway_04_MaskedBandit03",   		"ChatterMeleeFighterO_04_Bandit03.ogg");
+    ChatterAlias("Chatter_RunningAway_05_MaskedBandit03",   		"ChatterMeleeFighterO_05_Bandit03.ogg");
+	ChatterAlias("Chatter_RunningAway_01_MaskedBandit04",   		"ChatterMeleeFighterO_01_Bandit04.ogg");
+    ChatterAlias("Chatter_RunningAway_02_MaskedBandit04",   		"ChatterMeleeFighterO_02_Bandit04.ogg");
+    ChatterAlias("Chatter_RunningAway_03_MaskedBandit04",   		"ChatterMeleeFighterO_03_Bandit04.ogg");
+    ChatterAlias("Chatter_RunningAway_04_MaskedBandit04",   		"ChatterMeleeFighterO_04_Bandit04.ogg");
+    ChatterAlias("Chatter_RunningAway_05_MaskedBandit04",   		"ChatterMeleeFighterO_05_Bandit04.ogg");
+	ChatterAlias("Chatter_RunningAway_01_MaskedBandit05",   		"ChatterMeleeFighterO_01_Bandit05.ogg");
+    ChatterAlias("Chatter_RunningAway_02_MaskedBandit05",   		"ChatterMeleeFighterO_02_Bandit05.ogg");
+    ChatterAlias("Chatter_RunningAway_03_MaskedBandit05",   		"ChatterMeleeFighterO_03_Bandit05.ogg");
+    ChatterAlias("Chatter_RunningAway_04_MaskedBandit05",   		"ChatterMeleeFighterO_04_Bandit05.ogg");
+    ChatterAlias("Chatter_RunningAway_05_MaskedBandit05",   		"ChatterMeleeFighterO_05_Bandit05.ogg");
+	ChatterAlias("Chatter_RunningAway_01_BanditBoss01",   		"ChatterMeleeFighterO_01_BanditBoss01.ogg");
+    ChatterAlias("Chatter_RunningAway_02_BanditBoss01",   		"ChatterMeleeFighterO_02_BanditBoss01.ogg");
+    ChatterAlias("Chatter_RunningAway_03_BanditBoss01",   		"ChatterMeleeFighterO_03_BanditBoss01.ogg");
+    ChatterAlias("Chatter_RunningAway_04_BanditBoss01",   		"ChatterMeleeFighterO_04_BanditBoss01.ogg");
+    ChatterAlias("Chatter_RunningAway_05_BanditBoss01",   		"ChatterMeleeFighterO_05_BanditBoss01.ogg");
+ 
+	ChatterAlias("Chatter_HasAttackTarget_01_Male01",          "melee_fighter00_chatter_01.ogg");
+    ChatterAlias("Chatter_HasAttackTarget_02_Male01",          "melee_fighter00_chatter_02.ogg");  
+	ChatterAlias("Chatter_PlayerAway_01_Male01",               "melee_fighter00_chatter_03.ogg");
+    ChatterAlias("Chatter_IsPerformingMeleeAttack_01_Male01",  "melee_fighter00_chatter_04.ogg"); 	
+    ChatterAlias("Chatter_KeepDistanceFromPlayer_01_Male01",   "melee_fighter01_chatter_01.ogg");
+	ChatterAlias("Chatter_KeepDistanceFromPlayer_02_Male01",   "melee_fighter01_chatter_02.ogg");
+	ChatterAlias("Chatter_KeepDistanceFromPlayer_03_Male01",   "melee_fighter01_chatter_03.ogg");
+
+	ChatterAlias("Chatter_FightinWithZombie_01_HeadHunter01",   	"EncSurvivorAttack_Survivor01_CHT01.ogg");
+	ChatterAlias("Chatter_FightinWithZombie_02_HeadHunter01",   	"EncSurvivorAttack_Survivor01_CHT02.ogg");
+	ChatterAlias("Chatter_FightinWithZombie_03_HeadHunter01",   	"EncSurvivorAttack_Survivor01_CHT03.ogg");
+	ChatterAlias("Chatter_PlayerSpotted_01_HeadHunter01",       	"EncSurvivorAttack_Survivor01_CHT04.ogg");
+	ChatterAlias("Chatter_PlayerSpotted_02_HeadHunter01",   	    "EncSurvivorAttack_Survivor01_CHT05.ogg");
+	ChatterAlias("Chatter_FightWithPlayer_01_HeadHunter01",       	"EncSurvivorAttack_Survivor01_CHT06.ogg");
+	ChatterAlias("Chatter_FightWithPlayer_02_HeadHunter01",   	    "EncSurvivorAttack_Survivor01_CHT07.ogg");
+
+	ChatterAlias("Chatter_FightinWithZombie_01_HeadHunter02",   	"EncSurvivorAttack_Survivor02_CHT01.ogg");
+	ChatterAlias("Chatter_FightinWithZombie_02_HeadHunter02",   	"EncSurvivorAttack_Survivor02_CHT02.ogg");
+	ChatterAlias("Chatter_FightinWithZombie_03_HeadHunter02",   	"EncSurvivorAttack_Survivor02_CHT03.ogg");
+	ChatterAlias("Chatter_PlayerSpotted_01_HeadHunter02",       	"EncSurvivorAttack_Survivor02_CHT04.ogg");
+	ChatterAlias("Chatter_PlayerSpotted_02_HeadHunter02",   	    "EncSurvivorAttack_Survivor02_CHT05.ogg");
+	ChatterAlias("Chatter_FightWithPlayer_01_HeadHunter02",       	"EncSurvivorAttack_Survivor02_CHT06.ogg");
+	ChatterAlias("Chatter_FightWithPlayer_02_HeadHunter02",   	    "EncSurvivorAttack_Survivor02_CHT07.ogg");
+
+	ChatterAlias("Chatter_FightinWithZombie_01_HeadHunter03",   	"EncSurvivorAttack_Survivor03_CHT01.ogg");
+	ChatterAlias("Chatter_FightinWithZombie_02_HeadHunter03",   	"EncSurvivorAttack_Survivor03_CHT02.ogg");
+	ChatterAlias("Chatter_FightinWithZombie_03_HeadHunter03",   	"EncSurvivorAttack_Survivor03_CHT03.ogg");
+	ChatterAlias("Chatter_PlayerSpotted_01_HeadHunter03",       	"EncSurvivorAttack_Survivor03_CHT04.ogg");
+	ChatterAlias("Chatter_PlayerSpotted_02_HeadHunter03",   	    "EncSurvivorAttack_Survivor03_CHT05.ogg");
+	ChatterAlias("Chatter_FightWithPlayer_01_HeadHunter03",       	"EncSurvivorAttack_Survivor03_CHT06.ogg");
+	ChatterAlias("Chatter_FightWithPlayer_02_HeadHunter03",   	    "EncSurvivorAttack_Survivor03_CHT07.ogg");
+	
+	ChatterAlias("Chatter_FightinWithZombie_01_HeadHunter04",   	"EncSurvivorAttack_Survivor04_CHT01.ogg");
+	ChatterAlias("Chatter_FightinWithZombie_02_HeadHunter04",   	"EncSurvivorAttack_Survivor04_CHT02.ogg");
+	ChatterAlias("Chatter_FightinWithZombie_03_HeadHunter04",   	"EncSurvivorAttack_Survivor04_CHT03.ogg");
+	ChatterAlias("Chatter_PlayerSpotted_01_HeadHunter04",       	"EncSurvivorAttack_Survivor04_CHT04.ogg");
+	ChatterAlias("Chatter_PlayerSpotted_02_HeadHunter04",   	    "EncSurvivorAttack_Survivor04_CHT05.ogg");
+	ChatterAlias("Chatter_FightWithPlayer_01_HeadHunter04",       	"EncSurvivorAttack_Survivor04_CHT06.ogg");
+	ChatterAlias("Chatter_FightWithPlayer_02_HeadHunter04",   	    "EncSurvivorAttack_Survivor04_CHT07.ogg");
+	
+	ChatterAlias("Chatter_FightinWithZombie_01_HeadHunter05",   	"EncSurvivorAttack_Survivor05_CHT01.ogg");
+	ChatterAlias("Chatter_FightinWithZombie_02_HeadHunter05",   	"EncSurvivorAttack_Survivor05_CHT02.ogg");
+	ChatterAlias("Chatter_FightinWithZombie_03_HeadHunter05",   	"EncSurvivorAttack_Survivor05_CHT03.ogg");
+	ChatterAlias("Chatter_PlayerSpotted_01_HeadHunter05",       	"EncSurvivorAttack_Survivor05_CHT04.ogg");
+	ChatterAlias("Chatter_PlayerSpotted_02_HeadHunter05",   	    "EncSurvivorAttack_Survivor05_CHT05.ogg");
+	ChatterAlias("Chatter_FightWithPlayer_01_HeadHunter05",       	"EncSurvivorAttack_Survivor05_CHT06.ogg");
+	ChatterAlias("Chatter_FightWithPlayer_02_HeadHunter05",   	    "EncSurvivorAttack_Survivor05_CHT07.ogg");
+
+    // blocking path  
+	ChatterAlias("Chatter_IsBlockingPath_02_Male01",              "npc_player_blocking_path_01.ogg");
+	ChatterAlias("Chatter_IsBlockingPath_04_Male01",              "npc_player_blocking_path_03.ogg");
+	ChatterAlias("Chatter_IsBlockingPath_05_Male01",              "npc_player_blocking_path_04.ogg");
+    
+	// for missing bandit boss chatters use bandit04 as it is most similiar
+	ChatterAlias("ChatterMeleeFighterC_01_BanditBoss01" ,"ChatterMeleeFighterC_01_Bandit04.ogg");
+	ChatterAlias("ChatterMeleeFighterC_02_BanditBoss01" ,"ChatterMeleeFighterC_02_Bandit04.ogg");
+	ChatterAlias("ChatterMeleeFighterC_03_BanditBoss01" ,"ChatterMeleeFighterC_03_Bandit04.ogg");
+	ChatterAlias("ChatterMeleeFighterC_04_BanditBoss01" ,"ChatterMeleeFighterC_04_Bandit04.ogg");
+	ChatterAlias("ChatterMeleeFighterC_05_BanditBoss01" ,"ChatterMeleeFighterC_05_Bandit04.ogg");
+	
+	ChatterAlias("ChatterMeleeFighterE_01_BanditBoss01", "ChatterMeleeFighterE_01_Bandit04.ogg");
+	ChatterAlias("ChatterMeleeFighterE_02_BanditBoss01", "ChatterMeleeFighterE_02_Bandit04.ogg");
+	ChatterAlias("ChatterMeleeFighterE_05_BanditBoss01", "ChatterMeleeFighterE_05_Bandit04.ogg");
+	ChatterAlias("ChatterMeleeFighterI_04_BanditBoss01", "ChatterMeleeFighterI_04_Bandit04.ogg");
+	ChatterAlias("ChatterMeleeFighterI_05_BanditBoss01", "ChatterMeleeFighterI_05_Bandit04.ogg");
+
+	ChatterAlias("ChatterMeleeFighterF_02_BanditBoss01", "ChatterMeleeFighterF_02_Bandit04.ogg");
+	ChatterAlias("ChatterMeleeFighterF_03_BanditBoss01", "ChatterMeleeFighterF_03_Bandit04.ogg");
+	ChatterAlias("ChatterMeleeFighterD_03_BanditBoss01", "ChatterMeleeFighterD_03_Bandit04.ogg");
+	
+	ChatterAlias("ChatterMeleeFighterE_03_BanditBoss01", "ChatterMeleeFighterE_03_Bandit04.ogg");
+	ChatterAlias("ChatterMeleeFighterE_04_BanditBoss01", "ChatterMeleeFighterE_04_Bandit04.ogg");
+
+	ChatterAlias("ChatterMeleeFighterF_01_BanditBoss01", "ChatterMeleeFighterF_01_Bandit04.ogg");
+	ChatterAlias("ChatterMeleeFighterD_01_BanditBoss01", "ChatterMeleeFighterD_01_Bandit04.ogg");
+	ChatterAlias("ChatterMeleeFighterD_02_BanditBoss01", "ChatterMeleeFighterD_02_Bandit04.ogg");
+	ChatterAlias("ChatterMeleeFighterD_04_BanditBoss01", "ChatterMeleeFighterD_04_Bandit04.ogg");
+	
+	ChatterAlias("ChatterMeleeFighterG_01_BanditBoss01", "ChatterMeleeFighterG_01_Bandit04.ogg");
+	ChatterAlias("ChatterMeleeFighterG_02_BanditBoss01", "ChatterMeleeFighterG_02_Bandit04.ogg");
+	ChatterAlias("ChatterMeleeFighterG_03_BanditBoss01", "ChatterMeleeFighterG_03_Bandit04.ogg");
+	ChatterAlias("ChatterMeleeFighterG_04_BanditBoss01", "ChatterMeleeFighterG_04_Bandit04.ogg");
+	ChatterAlias("ChatterMeleeFighterG_05_BanditBoss01", "ChatterMeleeFighterG_05_Bandit04.ogg");
+	
+	ChatterAlias("ChatterMeleeFighterI_01_BanditBoss01", "ChatterMeleeFighterI_01_Bandit04.ogg");
+	ChatterAlias("ChatterMeleeFighterI_02_BanditBoss01", "ChatterMeleeFighterI_02_Bandit04.ogg");
+	ChatterAlias("ChatterMeleeFighterI_03_BanditBoss01", "ChatterMeleeFighterI_03_Bandit04.ogg");
+	
+	ChatterAlias("ChatterMeleeFighter_FightInitiation01_Bandit01", "ChatterMeleeFighter_FightInitiation01_BanditBoss01.ogg");
+	ChatterAlias("ChatterMeleeFighter_FightInitiation02_Bandit01", "ChatterMeleeFighter_FightInitiation02_BanditBoss01.ogg");
+	ChatterAlias("ChatterMeleeFighter_FightInitiation03_Bandit01", "ChatterMeleeFighter_FightInitiation03_BanditBoss01.ogg");
+	
+	ChatterAlias("ChatterMeleeFighter_FightInitiation01_Bandit02", "ChatterMeleeFighter_FightInitiation01_BanditBoss01.ogg");
+	ChatterAlias("ChatterMeleeFighter_FightInitiation02_Bandit02", "ChatterMeleeFighter_FightInitiation02_BanditBoss01.ogg");
+	ChatterAlias("ChatterMeleeFighter_FightInitiation03_Bandit02", "ChatterMeleeFighter_FightInitiation03_BanditBoss01.ogg");
+	
+	ChatterAlias("ChatterMeleeFighter_FightInitiation01_Bandit03", "ChatterMeleeFighter_FightInitiation01_BanditBoss01.ogg");
+	ChatterAlias("ChatterMeleeFighter_FightInitiation02_Bandit03", "ChatterMeleeFighter_FightInitiation02_BanditBoss01.ogg");
+	ChatterAlias("ChatterMeleeFighter_FightInitiation03_Bandit03", "ChatterMeleeFighter_FightInitiation03_BanditBoss01.ogg");
+	
+	ChatterAlias("ChatterMeleeFighter_FightInitiation01_Bandit04", "ChatterMeleeFighter_FightInitiation01_BanditBoss01.ogg");
+	ChatterAlias("ChatterMeleeFighter_FightInitiation02_Bandit04", "ChatterMeleeFighter_FightInitiation02_BanditBoss01.ogg");
+	ChatterAlias("ChatterMeleeFighter_FightInitiation03_Bandit04", "ChatterMeleeFighter_FightInitiation03_BanditBoss01.ogg");
+	
+	ChatterAlias("ChatterMeleeFighter_FightInitiation01_Bandit05", "ChatterMeleeFighter_FightInitiation01_BanditBoss01.ogg");
+	ChatterAlias("ChatterMeleeFighter_FightInitiation02_Bandit05", "ChatterMeleeFighter_FightInitiation02_BanditBoss01.ogg");
+	ChatterAlias("ChatterMeleeFighter_FightInitiation03_Bandit05", "ChatterMeleeFighter_FightInitiation03_BanditBoss01.ogg");
+
+	ChatterAlias("Chatter_IDontWantAnyTrouble_01_Bandit01", "ChatterMeleeFighterN_01_Bandit01.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_02_Bandit01", "ChatterMeleeFighterN_02_Bandit01.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_03_Bandit01", "ChatterMeleeFighterN_03_Bandit01.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_01_Bandit02", "ChatterMeleeFighterN_01_Bandit02.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_02_Bandit02", "ChatterMeleeFighterN_02_Bandit02.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_03_Bandit02", "ChatterMeleeFighterN_03_Bandit02.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_01_Bandit03", "ChatterMeleeFighterN_01_Bandit03.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_02_Bandit03", "ChatterMeleeFighterN_02_Bandit03.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_03_Bandit03", "ChatterMeleeFighterN_03_Bandit03.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_01_Bandit04", "ChatterMeleeFighterN_01_Bandit04.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_02_Bandit04", "ChatterMeleeFighterN_02_Bandit04.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_03_Bandit04", "ChatterMeleeFighterN_03_Bandit04.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_01_Bandit05", "ChatterMeleeFighterN_01_Bandit05.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_02_Bandit05", "ChatterMeleeFighterN_02_Bandit05.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_03_Bandit05", "ChatterMeleeFighterN_03_Bandit05.ogg");
+
+	ChatterAlias("Chatter_IDontWantAnyTrouble_01_MaskedBandit01", "ChatterMeleeFighterN_01_MaskedBandit01.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_02_MaskedBandit01", "ChatterMeleeFighterN_02_MaskedBandit01.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_03_MaskedBandit01", "ChatterMeleeFighterN_03_MaskedBandit01.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_01_MaskedBandit02", "ChatterMeleeFighterN_01_MaskedBandit02.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_02_MaskedBandit02", "ChatterMeleeFighterN_02_MaskedBandit02.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_03_MaskedBandit02", "ChatterMeleeFighterN_03_MaskedBandit02.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_01_MaskedBandit03", "ChatterMeleeFighterN_01_MaskedBandit03.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_02_MaskedBandit03", "ChatterMeleeFighterN_02_MaskedBandit03.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_03_MaskedBandit03", "ChatterMeleeFighterN_03_MaskedBandit03.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_01_MaskedBandit04", "ChatterMeleeFighterN_01_MaskedBandit04.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_02_MaskedBandit04", "ChatterMeleeFighterN_02_MaskedBandit04.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_03_MaskedBandit04", "ChatterMeleeFighterN_03_MaskedBandit04.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_01_MaskedBandit05", "ChatterMeleeFighterN_01_MaskedBandit05.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_02_MaskedBandit05", "ChatterMeleeFighterN_02_MaskedBandit05.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_03_MaskedBandit05", "ChatterMeleeFighterN_03_MaskedBandit05.ogg");
+	
+	ChatterAlias("Chatter_IDontWantAnyTrouble_01_BanditBoss01", "ChatterMeleeFighterN_01_Bandit04.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_02_BanditBoss01", "ChatterMeleeFighterN_02_Bandit04.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_03_BanditBoss01", "ChatterMeleeFighterN_03_Bandit04.ogg");
+
+	ChatterAlias("Chatter_IDontWantAnyTrouble_01_Male01", "ChatterMeleeFighterN_01_Bandit01.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_02_Male01", "ChatterMeleeFighterN_02_Bandit01.ogg");
+	ChatterAlias("Chatter_IDontWantAnyTrouble_03_Male01", "ChatterMeleeFighterN_03_Bandit01.ogg");
+	
+    CharacterAlias("Bandit06", "Bandit01");
+    CharacterAlias("Bandit07", "Bandit02");
+    CharacterAlias("Bandit08", "Bandit05");
+    CharacterAlias("Bandit09", "Bandit04");
+    CharacterAlias("Bandit10", "Bandit05");
+    CharacterAlias("Bandit11", "Bandit01");
+    CharacterAlias("Bandit12", "Bandit02");
+    CharacterAlias("Bandit13", "Bandit05");
+    CharacterAlias("Bandit14", "Bandit04");
+    CharacterAlias("Bandit15", "Bandit05");
+    CharacterAlias("Bandit16", "Bandit01");
+    CharacterAlias("Bandit17", "Bandit04");
+    CharacterAlias("Bandit18", "Bandit05");
+    CharacterAlias("Bandit19", "Bandit02");
+    CharacterAlias("Bandit20", "Bandit05");
+
+    CharacterAlias("MaskedBandit06", "MaskedBandit01");
+    CharacterAlias("MaskedBandit07", "MaskedBandit02");
+    CharacterAlias("MaskedBandit08", "MaskedBandit05");
+    CharacterAlias("MaskedBandit09", "MaskedBandit04");
+    CharacterAlias("MaskedBandit10", "MaskedBandit05");
+    CharacterAlias("MaskedBandit11", "MaskedBandit01");
+    CharacterAlias("MaskedBandit12", "MaskedBandit02");
+    CharacterAlias("MaskedBandit13", "MaskedBandit05");
+    CharacterAlias("MaskedBandit14", "MaskedBandit04");
+    CharacterAlias("MaskedBandit15", "MaskedBandit05");
+    CharacterAlias("MaskedBandit16", "MaskedBandit01");
+    CharacterAlias("MaskedBandit17", "MaskedBandit04");
+    CharacterAlias("MaskedBandit18", "MaskedBandit05");
+    CharacterAlias("MaskedBandit19", "MaskedBandit02");
+    CharacterAlias("MaskedBandit20", "MaskedBandit05");
+    
+	// for masked bandits take text from bandit (to reduce texts number in lockit)
+    CharacterAliasForText("MaskedBandit01", "Bandit01");
+    CharacterAliasForText("MaskedBandit02", "Bandit02");
+    CharacterAliasForText("MaskedBandit03", "Bandit03");
+    CharacterAliasForText("MaskedBandit04", "Bandit04");
+    CharacterAliasForText("MaskedBandit05", "Bandit05");
+    CharacterAliasForText("MaskedBandit06", "Bandit06");
+    CharacterAliasForText("MaskedBandit07", "Bandit07");
+    CharacterAliasForText("MaskedBandit08", "Bandit08");
+    CharacterAliasForText("MaskedBandit09", "Bandit09");
+    CharacterAliasForText("MaskedBandit10", "Bandit10");
+    CharacterAliasForText("MaskedBandit11", "Bandit11");
+    CharacterAliasForText("MaskedBandit12", "Bandit12");
+    CharacterAliasForText("MaskedBandit13", "Bandit13");
+    CharacterAliasForText("MaskedBandit14", "Bandit14");
+    CharacterAliasForText("MaskedBandit15", "Bandit15");
+    CharacterAliasForText("MaskedBandit16", "Bandit16");
+    CharacterAliasForText("MaskedBandit17", "Bandit17");
+    CharacterAliasForText("MaskedBandit18", "Bandit18");
+    CharacterAliasForText("MaskedBandit19", "Bandit19");
+    CharacterAliasForText("MaskedBandit20", "Bandit20");
+	
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    // FIGHT against human
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+	Cnd(14.0000,  	10.0000, 	true, 					7.0)
+	{
+		// boss spots human (or player)
+		Cond("AI_IS_HMF_GROUP_LEADER");
+		Cond("AI_HAS_NEW_ENEMY");
+		Cond("AI_IN_GROUP");
+		Cond("NOT_KNOCKED_DOWN");
+		Cond("ENEMY_TYPE", 0);
+		Cond("ENEMY_NO_SUPERIOR_WEAPON_NOTICED");
+
+		Chatter("ChatterMeleeFighter_FightInitiation01_BanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_FightInitiation02_BanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_FightInitiation03_BanditBoss01.ogg");
+		
+		Chatter("ChatterMeleeFighter_FightInitiation01_MaskedBanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_FightInitiation02_MaskedBanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_FightInitiation03_MaskedBanditBoss01.ogg");
+		
+		Chatter("ChatterMeleeFighter_FightInitiation01_Bandit01");
+		Chatter("ChatterMeleeFighter_FightInitiation02_Bandit01");
+		Chatter("ChatterMeleeFighter_FightInitiation03_Bandit01");
+		
+		Chatter("ChatterMeleeFighter_FightInitiation01_Bandit02");
+		Chatter("ChatterMeleeFighter_FightInitiation02_Bandit02");
+		Chatter("ChatterMeleeFighter_FightInitiation03_Bandit02");
+		
+		Chatter("ChatterMeleeFighter_FightInitiation01_Bandit03");
+		Chatter("ChatterMeleeFighter_FightInitiation02_Bandit03");
+		Chatter("ChatterMeleeFighter_FightInitiation03_Bandit03");
+		
+		Chatter("ChatterMeleeFighter_FightInitiation01_Bandit04");
+		Chatter("ChatterMeleeFighter_FightInitiation02_Bandit04");
+		Chatter("ChatterMeleeFighter_FightInitiation03_Bandit04");
+		
+		Chatter("ChatterMeleeFighter_FightInitiation01_Bandit05");
+		Chatter("ChatterMeleeFighter_FightInitiation02_Bandit05");
+		Chatter("ChatterMeleeFighter_FightInitiation03_Bandit05");
+	}
+	Cnd(13.5000,  	10.0000, 	true, 					7.0)
+	{
+        // spotting a new human enemy very close to AI (surprise)
+		Cond("NEW_ENEMIES_SPOTTED"); // that should be condition for first enemy spotted, not for everyone
+		Cond("NOT_KNOCKED_DOWN");
+        Cond("DIST_TO_TARGET_LOWER_THAN", 8);
+		Cond("ENEMY_TYPE", 0);
+		Cond("HAS_NO_FIREARM");
+
+        Chatter("ChatterMeleeFighterB_01_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterB_02_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterB_03_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterB_04_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterB_05_Bandit01.ogg");
+
+        Chatter("ChatterMeleeFighterB_01_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterB_02_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterB_03_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterB_04_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterB_05_Bandit02.ogg");
+
+        Chatter("ChatterMeleeFighterB_01_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterB_02_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterB_03_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterB_04_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterB_05_Bandit03.ogg");
+
+        Chatter("ChatterMeleeFighterB_01_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterB_02_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterB_03_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterB_04_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterB_05_Bandit04.ogg");
+
+        Chatter("ChatterMeleeFighterB_01_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterB_02_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterB_03_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterB_04_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterB_05_Bandit05.ogg");
+        
+        Chatter("ChatterMeleeFighterB_01_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterB_02_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterB_03_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterB_04_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterB_05_MaskedBandit01.ogg");
+
+        Chatter("ChatterMeleeFighterB_01_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterB_02_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterB_03_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterB_04_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterB_05_MaskedBandit02.ogg");
+
+        Chatter("ChatterMeleeFighterB_01_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterB_02_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterB_03_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterB_04_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterB_05_MaskedBandit03.ogg");
+
+        Chatter("ChatterMeleeFighterB_01_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterB_02_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterB_03_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterB_04_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterB_05_MaskedBandit04.ogg");
+
+        Chatter("ChatterMeleeFighterB_01_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterB_02_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterB_03_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterB_04_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterB_05_MaskedBandit05.ogg");
+	}
+	Cnd(13.1000,  	10.0000, 	true, 					10.0)
+	{
+        // spotting a new human enemy by an ai group
+		Cond("NEW_ENEMIES_SPOTTED");
+		Cond("NOT_KNOCKED_DOWN");
+		Cond("AI_IN_GROUP");
+        Cond("DIST_TO_TARGET_HIGHER_THAN", 8);
+		Cond("ENEMY_TYPE", 0);
+		Cond("ENEMY_NO_SUPERIOR_WEAPON_NOTICED");
+		Cond("HAS_NO_FIREARM");
+		
+        Chatter("ChatterMeleeFighterH_01_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterH_02_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterH_03_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterH_04_Bandit01.ogg");
+
+        Chatter("ChatterMeleeFighterH_01_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterH_02_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterH_03_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterH_04_Bandit02.ogg");
+
+        Chatter("ChatterMeleeFighterH_01_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterH_02_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterH_03_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterH_04_Bandit03.ogg");
+
+        Chatter("ChatterMeleeFighterH_01_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterH_02_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterH_03_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterH_04_Bandit04.ogg");
+
+        Chatter("ChatterMeleeFighterH_01_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterH_02_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterH_03_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterH_04_Bandit05.ogg");
+        
+        Chatter("ChatterMeleeFighterH_01_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterH_02_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterH_03_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterH_04_MaskedBandit01.ogg");
+
+        Chatter("ChatterMeleeFighterH_01_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterH_02_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterH_03_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterH_04_MaskedBandit02.ogg");
+
+        Chatter("ChatterMeleeFighterH_01_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterH_02_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterH_03_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterH_04_MaskedBandit03.ogg");
+
+        Chatter("ChatterMeleeFighterH_01_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterH_02_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterH_03_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterH_04_MaskedBandit04.ogg");
+
+        Chatter("ChatterMeleeFighterH_01_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterH_02_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterH_03_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterH_04_MaskedBandit05.ogg");
+	}
+	Cnd(13.0000,  	10.0000, 	true, 					7.0)
+	{
+        // spotting a new human enemy by a single melee fighter
+		Cond("NEW_ENEMIES_SPOTTED");
+		Cond("AI_NOT_IN_GROUP");
+		Cond("NOT_KNOCKED_DOWN");
+        Cond("DIST_TO_TARGET_HIGHER_THAN", 8);
+		Cond("ENEMY_TYPE", 0);
+		Cond("ENEMY_NO_SUPERIOR_WEAPON_NOTICED");
+		Cond("HAS_NO_FIREARM");
+		
+        Chatter("ChatterMeleeFighterC_01_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterC_02_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterC_03_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterC_04_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterC_05_Bandit01.ogg");
+
+        Chatter("ChatterMeleeFighterC_01_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterC_02_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterC_03_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterC_04_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterC_05_Bandit02.ogg");
+
+        Chatter("ChatterMeleeFighterC_01_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterC_02_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterC_03_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterC_04_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterC_05_Bandit03.ogg");
+
+        Chatter("ChatterMeleeFighterC_01_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterC_02_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterC_03_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterC_04_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterC_05_Bandit04.ogg");
+
+        Chatter("ChatterMeleeFighterC_01_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterC_02_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterC_03_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterC_04_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterC_05_Bandit05.ogg");
+        
+        Chatter("ChatterMeleeFighterC_01_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterC_02_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterC_03_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterC_04_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterC_05_MaskedBandit01.ogg");
+
+        Chatter("ChatterMeleeFighterC_01_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterC_02_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterC_03_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterC_04_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterC_05_MaskedBandit02.ogg");
+
+        Chatter("ChatterMeleeFighterC_01_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterC_02_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterC_03_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterC_04_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterC_05_MaskedBandit03.ogg");
+
+        Chatter("ChatterMeleeFighterC_01_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterC_02_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterC_03_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterC_04_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterC_05_MaskedBandit04.ogg");
+
+        Chatter("ChatterMeleeFighterC_01_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterC_02_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterC_03_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterC_04_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterC_05_MaskedBandit05.ogg");
+		
+		Chatter("ChatterMeleeFighterC_01_BanditBoss01");
+		Chatter("ChatterMeleeFighterC_02_BanditBoss01");
+		Chatter("ChatterMeleeFighterC_03_BanditBoss01");
+		Chatter("ChatterMeleeFighterC_04_BanditBoss01");
+		Chatter("ChatterMeleeFighterC_05_BanditBoss01");
+	}
+	Cnd(13.0000,  	60.0000, 	true, 					7.0)
+	{
+		// headhunter spots human (or player) TODO f.e. once condition !!!
+		Cond("NOT_KNOCKED_DOWN");
+        Cond("DIST_TO_TARGET_LOWER_THAN", 20);
+		Cond("ENEMY_TYPE", 0);
+		Cond("ENEMY_NO_SUPERIOR_WEAPON_NOTICED");
+		Cond("HAS_NO_FIREARM");
+
+		Chatter("Chatter_PlayerSpotted_01_HeadHunter01");
+		Chatter("Chatter_PlayerSpotted_02_HeadHunter01");
+		Chatter("Chatter_PlayerSpotted_01_HeadHunter02");
+		Chatter("Chatter_PlayerSpotted_02_HeadHunter02");
+		Chatter("Chatter_PlayerSpotted_01_HeadHunter03");
+		Chatter("Chatter_PlayerSpotted_02_HeadHunter03");
+		Chatter("Chatter_PlayerSpotted_01_HeadHunter04");
+		Chatter("Chatter_PlayerSpotted_02_HeadHunter04");
+		Chatter("Chatter_PlayerSpotted_01_HeadHunter05");
+		Chatter("Chatter_PlayerSpotted_02_HeadHunter05");
+	}
+	Cnd(12.5000,  	15.0000, 	true, 					10.0)
+	{
+		// AI armed with melee weapon notices firearms in enemy's hands
+		Cond("NOT_KNOCKED_DOWN");
+		Cond("ENEMY_TYPE", 0);
+        Cond("DIST_TO_TARGET_LOWER_THAN", 15);
+		Cond("ENEMY_SUPERIOR_WEAPON_NOTICED", 3);
+		Cond("HAS_NO_FIREARM");
+
+		Chatter("Chatter_IDontWantAnyTrouble_01_Bandit01");
+		Chatter("Chatter_IDontWantAnyTrouble_02_Bandit01");
+		Chatter("Chatter_IDontWantAnyTrouble_03_Bandit01");
+		Chatter("Chatter_IDontWantAnyTrouble_01_Bandit02");
+		Chatter("Chatter_IDontWantAnyTrouble_02_Bandit02");
+		Chatter("Chatter_IDontWantAnyTrouble_03_Bandit02");
+		Chatter("Chatter_IDontWantAnyTrouble_01_Bandit03");
+		Chatter("Chatter_IDontWantAnyTrouble_02_Bandit03");
+		Chatter("Chatter_IDontWantAnyTrouble_03_Bandit03");
+		Chatter("Chatter_IDontWantAnyTrouble_01_Bandit04");
+		Chatter("Chatter_IDontWantAnyTrouble_02_Bandit04");
+		Chatter("Chatter_IDontWantAnyTrouble_03_Bandit04");
+		Chatter("Chatter_IDontWantAnyTrouble_01_Bandit05");
+		Chatter("Chatter_IDontWantAnyTrouble_02_Bandit05");
+		Chatter("Chatter_IDontWantAnyTrouble_03_Bandit05");
+		
+		Chatter("Chatter_IDontWantAnyTrouble_01_MaskedBandit01");
+		Chatter("Chatter_IDontWantAnyTrouble_02_MaskedBandit01");
+		Chatter("Chatter_IDontWantAnyTrouble_03_MaskedBandit01");
+		Chatter("Chatter_IDontWantAnyTrouble_01_MaskedBandit02");
+		Chatter("Chatter_IDontWantAnyTrouble_02_MaskedBandit02");
+		Chatter("Chatter_IDontWantAnyTrouble_03_MaskedBandit02");
+		Chatter("Chatter_IDontWantAnyTrouble_01_MaskedBandit03");
+		Chatter("Chatter_IDontWantAnyTrouble_02_MaskedBandit03");
+		Chatter("Chatter_IDontWantAnyTrouble_03_MaskedBandit03");
+		Chatter("Chatter_IDontWantAnyTrouble_01_MaskedBandit04");
+		Chatter("Chatter_IDontWantAnyTrouble_02_MaskedBandit04");
+		Chatter("Chatter_IDontWantAnyTrouble_03_MaskedBandit04");
+		Chatter("Chatter_IDontWantAnyTrouble_01_MaskedBandit05");
+		Chatter("Chatter_IDontWantAnyTrouble_02_MaskedBandit05");
+		Chatter("Chatter_IDontWantAnyTrouble_03_MaskedBandit05");
+		
+		Chatter("Chatter_IDontWantAnyTrouble_01_BanditBoss01");
+		Chatter("Chatter_IDontWantAnyTrouble_02_BanditBoss01");
+		Chatter("Chatter_IDontWantAnyTrouble_03_BanditBoss01");
+		
+		Chatter("Chatter_IDontWantAnyTrouble_01_Male01");
+		Chatter("Chatter_IDontWantAnyTrouble_02_Male01");
+		Chatter("Chatter_IDontWantAnyTrouble_03_Male01");
+	}
+	
+	Cnd(12.2000,  	10.0000, 	true, 					10.0)
+	{        
+		Cond("RUNNING_AWAY");
+
+		Chatter("Chatter_RunningAway_01_Bandit01");
+		Chatter("Chatter_RunningAway_02_Bandit01");
+		Chatter("Chatter_RunningAway_03_Bandit01");
+		Chatter("Chatter_RunningAway_04_Bandit01");
+		Chatter("Chatter_RunningAway_05_Bandit01");
+		Chatter("Chatter_RunningAway_01_Bandit02");
+		Chatter("Chatter_RunningAway_02_Bandit02");
+		Chatter("Chatter_RunningAway_03_Bandit02");
+		Chatter("Chatter_RunningAway_04_Bandit02");
+		Chatter("Chatter_RunningAway_05_Bandit02");
+		Chatter("Chatter_RunningAway_01_Bandit03");
+		Chatter("Chatter_RunningAway_02_Bandit03");
+		Chatter("Chatter_RunningAway_03_Bandit03");
+		Chatter("Chatter_RunningAway_04_Bandit03");
+		Chatter("Chatter_RunningAway_05_Bandit03");
+		Chatter("Chatter_RunningAway_01_Bandit04");
+		Chatter("Chatter_RunningAway_02_Bandit04");
+		Chatter("Chatter_RunningAway_03_Bandit04");
+		Chatter("Chatter_RunningAway_04_Bandit04");
+		Chatter("Chatter_RunningAway_05_Bandit04");
+		Chatter("Chatter_RunningAway_01_Bandit05");
+		Chatter("Chatter_RunningAway_02_Bandit05");
+		Chatter("Chatter_RunningAway_03_Bandit05");
+		Chatter("Chatter_RunningAway_04_Bandit05");
+		Chatter("Chatter_RunningAway_05_Bandit05");
+		
+        Chatter("Chatter_RunningAway_01_MaskedBandit01");
+		Chatter("Chatter_RunningAway_02_MaskedBandit01");
+		Chatter("Chatter_RunningAway_03_MaskedBandit01");
+		Chatter("Chatter_RunningAway_04_MaskedBandit01");
+		Chatter("Chatter_RunningAway_05_MaskedBandit01");
+		Chatter("Chatter_RunningAway_01_MaskedBandit02");
+		Chatter("Chatter_RunningAway_02_MaskedBandit02");
+		Chatter("Chatter_RunningAway_03_MaskedBandit02");
+		Chatter("Chatter_RunningAway_04_MaskedBandit02");
+		Chatter("Chatter_RunningAway_05_MaskedBandit02");
+		Chatter("Chatter_RunningAway_01_MaskedBandit03");
+		Chatter("Chatter_RunningAway_02_MaskedBandit03");
+		Chatter("Chatter_RunningAway_03_MaskedBandit03");
+		Chatter("Chatter_RunningAway_04_MaskedBandit03");
+		Chatter("Chatter_RunningAway_05_MaskedBandit03");
+		Chatter("Chatter_RunningAway_01_MaskedBandit04");
+		Chatter("Chatter_RunningAway_02_MaskedBandit04");
+		Chatter("Chatter_RunningAway_03_MaskedBandit04");
+		Chatter("Chatter_RunningAway_04_MaskedBandit04");
+		Chatter("Chatter_RunningAway_05_MaskedBandit04");
+		Chatter("Chatter_RunningAway_01_MaskedBandit05");
+		Chatter("Chatter_RunningAway_02_MaskedBandit05");
+		Chatter("Chatter_RunningAway_03_MaskedBandit05");
+		Chatter("Chatter_RunningAway_04_MaskedBandit05");
+		Chatter("Chatter_RunningAway_05_MaskedBandit05");
+		
+		Chatter("Chatter_RunningAway_01_BanditBoss01");
+		Chatter("Chatter_RunningAway_02_BanditBoss01");
+		Chatter("Chatter_RunningAway_03_BanditBoss01");
+		Chatter("Chatter_RunningAway_04_BanditBoss01");
+		Chatter("Chatter_RunningAway_05_BanditBoss01");
+	}
+	
+    Cnd(12.0000,  	10.0000, 	true, 					10.0)
+	{
+        // human enemy is unreacheable (can't get to him)
+		Cond("ENEMY_UNREACHEABLE");
+		Cond("NOT_KNOCKED_DOWN");
+		Cond("ENEMY_TYPE", 0);
+		Cond("ENEMY_NO_SUPERIOR_WEAPON_NOTICED");
+		Cond("HAS_NO_FIREARM");
+
+        Chatter("ChatterMeleeFighterE_01_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterE_02_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterE_05_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterI_04_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterI_05_Bandit01.ogg");
+
+        Chatter("ChatterMeleeFighterE_01_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterE_02_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterE_05_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterI_04_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterI_05_Bandit02.ogg");
+
+        Chatter("ChatterMeleeFighterE_01_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterE_02_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterE_05_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterI_04_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterI_05_Bandit03.ogg");
+
+        Chatter("ChatterMeleeFighterE_01_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterE_02_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterE_05_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterI_04_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterI_05_Bandit04.ogg");
+
+        Chatter("ChatterMeleeFighterE_01_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterE_02_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterE_05_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterI_04_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterI_05_Bandit05.ogg");
+        
+        Chatter("ChatterMeleeFighterE_01_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterE_02_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterE_05_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterI_04_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterI_05_MaskedBandit01.ogg");
+
+        Chatter("ChatterMeleeFighterE_01_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterE_02_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterE_05_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterI_04_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterI_05_MaskedBandit02.ogg");
+
+        Chatter("ChatterMeleeFighterE_01_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterE_02_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterE_05_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterI_04_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterI_05_MaskedBandit03.ogg");
+
+        Chatter("ChatterMeleeFighterE_01_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterE_02_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterE_05_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterI_04_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterI_05_MaskedBandit04.ogg");
+
+        Chatter("ChatterMeleeFighterE_01_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterE_02_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterE_05_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterI_04_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterI_05_MaskedBandit05.ogg");
+		
+        Chatter("ChatterMeleeFighterE_01_BanditBoss01");
+        Chatter("ChatterMeleeFighterE_02_BanditBoss01");
+        Chatter("ChatterMeleeFighterE_05_BanditBoss01");
+        Chatter("ChatterMeleeFighterI_04_BanditBoss01");
+        Chatter("ChatterMeleeFighterI_05_BanditBoss01");
+	}
+    Cnd(12.0000,  	10.0000, 	true, 					7.0)
+	{
+        // performing melee attack at human enemy
+		Cond("IS_PERFORMING_MELEE_ATTACK");
+		Cond("NOT_KNOCKED_DOWN");
+		Cond("ENEMY_TYPE", 0);
+		Cond("ENEMY_NO_SUPERIOR_WEAPON_NOTICED");
+		Cond("HAS_NO_FIREARM");
+       
+		Chatter("Chatter_IsPerformingMeleeAttack_01_Male01");
+	
+		Chatter("ChatterMeleeFighter_Fight01_BanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_Fight02_BanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_Fight03_BanditBoss01.ogg");
+    
+        Chatter("ChatterMeleeFighterF_02_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterF_03_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterD_03_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterD_04_Bandit01.ogg");
+
+        Chatter("ChatterMeleeFighterF_02_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterF_03_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterD_03_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterD_04_Bandit02.ogg");
+
+        Chatter("ChatterMeleeFighterF_02_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterF_03_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterD_03_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterD_04_Bandit03.ogg");
+
+        Chatter("ChatterMeleeFighterF_02_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterF_03_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterD_03_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterD_04_Bandit04.ogg");
+
+        Chatter("ChatterMeleeFighterF_02_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterF_03_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterD_03_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterD_04_Bandit05.ogg");
+        
+        Chatter("ChatterMeleeFighterF_02_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterF_03_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterD_03_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterD_04_MaskedBandit01.ogg");
+
+        Chatter("ChatterMeleeFighterF_02_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterF_03_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterD_03_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterD_04_MaskedBandit02.ogg");
+
+        Chatter("ChatterMeleeFighterF_02_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterF_03_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterD_03_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterD_04_MaskedBandit03.ogg");
+
+        Chatter("ChatterMeleeFighterF_02_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterF_03_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterD_03_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterD_04_MaskedBandit04.ogg");
+
+        Chatter("ChatterMeleeFighterF_02_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterF_03_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterD_03_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterD_04_MaskedBandit05.ogg");
+		
+        Chatter("ChatterMeleeFighterF_02_BanditBoss01");
+        Chatter("ChatterMeleeFighterF_03_BanditBoss01");
+        Chatter("ChatterMeleeFighterD_03_BanditBoss01");
+        Chatter("ChatterMeleeFighterD_04_BanditBoss01");
+
+
+		Chatter("Chatter_FightWithPlayer_01_HeadHunter01");
+		Chatter("Chatter_FightWithPlayer_02_HeadHunter01");
+		Chatter("Chatter_FightWithPlayer_01_HeadHunter02");
+		Chatter("Chatter_FightWithPlayer_02_HeadHunter02");
+		Chatter("Chatter_FightWithPlayer_01_HeadHunter03");
+		Chatter("Chatter_FightWithPlayer_02_HeadHunter03");
+		Chatter("Chatter_FightWithPlayer_01_HeadHunter04");
+		Chatter("Chatter_FightWithPlayer_02_HeadHunter04");
+		Chatter("Chatter_FightWithPlayer_01_HeadHunter05");
+		Chatter("Chatter_FightWithPlayer_02_HeadHunter05");
+	}
+    Cnd(12.0000,  	20.0000, 	true, 					7.0)
+	{
+        // headhunter performing melee attack at human enemy
+		Cond("NOT_KNOCKED_DOWN");
+        Cond("DIST_TO_TARGET_LOWER_THAN", 8);
+		Cond("ENEMY_TYPE", 0);
+		Cond("ENEMY_NO_SUPERIOR_WEAPON_NOTICED");
+		Cond("HAS_NO_FIREARM");
+		
+		Chatter("Chatter_FightWithPlayer_01_HeadHunter01");
+		Chatter("Chatter_FightWithPlayer_02_HeadHunter01");
+		Chatter("Chatter_FightWithPlayer_01_HeadHunter02");
+		Chatter("Chatter_FightWithPlayer_02_HeadHunter02");
+		Chatter("Chatter_FightWithPlayer_01_HeadHunter03");
+		Chatter("Chatter_FightWithPlayer_02_HeadHunter03");
+		Chatter("Chatter_FightWithPlayer_01_HeadHunter04");
+		Chatter("Chatter_FightWithPlayer_02_HeadHunter04");
+		Chatter("Chatter_FightWithPlayer_01_HeadHunter05");
+		Chatter("Chatter_FightWithPlayer_02_HeadHunter05");
+	}
+    Cnd(12.0000,  	10.0000, 	true, 					10.0)
+	{
+        // human target runs away from AI
+		Cond("TARGET_RUNNING_AWAY", 8); // second parameter means meters
+		Cond("NOT_KNOCKED_DOWN");
+		Cond("ENEMY_TYPE", 0);
+		Cond("ENEMY_NO_SUPERIOR_WEAPON_NOTICED");
+		Cond("HAS_NO_FIREARM");
+        
+		Chatter("Chatter_PlayerAway_01_Male01");
+	
+        Chatter("ChatterMeleeFighterE_01_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterE_02_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterE_03_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterE_04_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterE_05_Bandit01.ogg");
+
+        Chatter("ChatterMeleeFighterE_01_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterE_02_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterE_03_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterE_04_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterE_05_Bandit02.ogg");
+
+        Chatter("ChatterMeleeFighterE_01_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterE_02_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterE_03_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterE_04_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterE_05_Bandit03.ogg");
+
+        Chatter("ChatterMeleeFighterE_01_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterE_02_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterE_03_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterE_04_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterE_05_Bandit04.ogg");
+
+        Chatter("ChatterMeleeFighterE_01_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterE_02_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterE_03_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterE_04_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterE_05_Bandit05.ogg");
+        
+        Chatter("ChatterMeleeFighterE_01_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterE_02_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterE_03_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterE_04_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterE_05_MaskedBandit01.ogg");
+
+        Chatter("ChatterMeleeFighterE_01_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterE_02_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterE_03_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterE_04_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterE_05_MaskedBandit02.ogg");
+
+        Chatter("ChatterMeleeFighterE_01_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterE_02_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterE_03_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterE_04_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterE_05_MaskedBandit03.ogg");
+
+        Chatter("ChatterMeleeFighterE_01_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterE_02_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterE_03_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterE_04_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterE_05_MaskedBandit04.ogg");
+
+        Chatter("ChatterMeleeFighterE_01_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterE_02_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterE_03_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterE_04_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterE_05_MaskedBandit05.ogg");
+		
+        Chatter("ChatterMeleeFighterE_01_BanditBoss01");
+        Chatter("ChatterMeleeFighterE_02_BanditBoss01");
+        Chatter("ChatterMeleeFighterE_03_BanditBoss01");
+        Chatter("ChatterMeleeFighterE_04_BanditBoss01");
+        Chatter("ChatterMeleeFighterE_05_BanditBoss01");
+	} 
+    Cnd(11.0000,  	6.0000, 	true, 					7.0)
+	{
+        // chatters after successful attack was performed (human enemy was hit)
+		Cond("IDLE_DURING_ATTACK");
+		Cond("AFTER_SUCCESSFUL_ATTACK_AT_ENEMY", 4); // validity after attack in seconds
+        Cond("NOT_KNOCKED_DOWN");
+		Cond("ENEMY_TYPE", 0);
+		Cond("ENEMY_NO_SUPERIOR_WEAPON_NOTICED");
+
+        Chatter("ChatterMeleeFighterF_01_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterF_02_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterF_03_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterD_01_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterD_02_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterD_03_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterD_04_Bandit01.ogg");
+        
+        Chatter("ChatterMeleeFighterF_01_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterF_02_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterF_03_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterD_01_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterD_02_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterD_03_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterD_04_Bandit02.ogg");
+        
+        Chatter("ChatterMeleeFighterF_01_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterF_02_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterF_03_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterD_01_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterD_02_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterD_03_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterD_04_Bandit03.ogg");
+        
+        Chatter("ChatterMeleeFighterF_01_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterF_02_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterF_03_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterD_01_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterD_02_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterD_03_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterD_04_Bandit04.ogg");
+        
+        Chatter("ChatterMeleeFighterF_01_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterF_02_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterF_03_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterD_01_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterD_02_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterD_03_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterD_04_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterD_05_Bandit05.ogg");
+        
+        Chatter("ChatterMeleeFighterF_01_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterF_02_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterF_03_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterD_01_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterD_02_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterD_03_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterD_04_MaskedBandit01.ogg");
+        
+        Chatter("ChatterMeleeFighterF_01_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterF_02_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterF_03_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterD_01_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterD_02_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterD_03_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterD_04_MaskedBandit02.ogg");
+        
+        Chatter("ChatterMeleeFighterF_01_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterF_02_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterF_03_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterD_01_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterD_02_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterD_03_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterD_04_MaskedBandit03.ogg");
+        
+        Chatter("ChatterMeleeFighterF_01_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterF_02_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterF_03_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterD_01_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterD_02_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterD_03_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterD_04_MaskedBandit04.ogg");
+        
+        Chatter("ChatterMeleeFighterF_01_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterF_02_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterF_03_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterD_01_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterD_02_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterD_03_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterD_04_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterD_05_MaskedBandit05.ogg");
+		
+        Chatter("ChatterMeleeFighterF_01_BanditBoss01");
+        Chatter("ChatterMeleeFighterF_02_BanditBoss01");
+        Chatter("ChatterMeleeFighterF_03_BanditBoss01");
+        Chatter("ChatterMeleeFighterD_01_BanditBoss01");
+        Chatter("ChatterMeleeFighterD_02_BanditBoss01");
+        Chatter("ChatterMeleeFighterD_03_BanditBoss01");
+        Chatter("ChatterMeleeFighterD_04_BanditBoss01");
+		
+		Chatter("ChatterMeleeFighter_Fight01_MaskedBanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_Fight02_MaskedBanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_Fight03_MaskedBanditBoss01.ogg");
+	} 
+    Cnd(11.0000,  	6.0000, 	true, 					7.0)
+	{
+        // chatters after getting damage from human target
+		Cond("GOT_DAMAGE_FROM_TARGET", 3);
+		Cond("NOT_KNOCKED_DOWN");
+		Cond("ENEMY_TYPE", 0);
+		Cond("ENEMY_NO_SUPERIOR_WEAPON_NOTICED");
+       
+        Chatter("ChatterMeleeFighterG_01_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterG_02_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterG_03_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterG_04_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterG_05_Bandit01.ogg");
+
+        Chatter("ChatterMeleeFighterG_01_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterG_02_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterG_03_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterG_04_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterG_05_Bandit02.ogg");
+
+        Chatter("ChatterMeleeFighterG_01_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterG_02_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterG_03_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterG_04_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterG_05_Bandit03.ogg");
+
+        Chatter("ChatterMeleeFighterG_01_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterG_02_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterG_03_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterG_04_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterG_05_Bandit04.ogg");
+
+        Chatter("ChatterMeleeFighterG_01_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterG_02_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterG_03_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterG_04_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterG_05_Bandit05.ogg");
+        
+        Chatter("ChatterMeleeFighterG_01_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterG_02_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterG_03_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterG_04_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterG_05_MaskedBandit01.ogg");
+
+        Chatter("ChatterMeleeFighterG_01_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterG_02_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterG_03_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterG_04_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterG_05_MaskedBandit02.ogg");
+
+        Chatter("ChatterMeleeFighterG_01_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterG_02_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterG_03_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterG_04_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterG_05_MaskedBandit03.ogg");
+
+        Chatter("ChatterMeleeFighterG_01_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterG_02_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterG_03_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterG_04_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterG_05_MaskedBandit04.ogg");
+
+        Chatter("ChatterMeleeFighterG_01_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterG_02_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterG_03_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterG_04_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterG_05_MaskedBandit05.ogg");
+		
+        Chatter("ChatterMeleeFighterG_01_BanditBoss01");
+        Chatter("ChatterMeleeFighterG_02_BanditBoss01");
+        Chatter("ChatterMeleeFighterG_03_BanditBoss01");
+        Chatter("ChatterMeleeFighterG_04_BanditBoss01");
+        Chatter("ChatterMeleeFighterG_05_BanditBoss01");
+	} 
+    Cnd( 0.5000, 5.0000, true, 30.0 )
+	{
+        // chatters played when human enemy is far away and HMF stop chasing him
+		Cond("IS_AI_WARNING");
+		Cond("ENEMY_TYPE", 0);
+		Cond("ENEMY_NO_SUPERIOR_WEAPON_NOTICED");
+		Cond("HAS_NO_FIREARM");
+		
+        Chatter("ChatterMeleeFighterI_01_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterI_02_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterI_03_Bandit01.ogg");
+
+        Chatter("ChatterMeleeFighterI_01_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterI_02_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterI_03_Bandit02.ogg");
+
+        Chatter("ChatterMeleeFighterI_01_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterI_02_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterI_03_Bandit03.ogg");
+
+        Chatter("ChatterMeleeFighterI_01_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterI_02_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterI_03_Bandit04.ogg");
+
+        Chatter("ChatterMeleeFighterI_01_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterI_02_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterI_03_Bandit05.ogg");
+        
+        Chatter("ChatterMeleeFighterI_01_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterI_02_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterI_03_MaskedBandit01.ogg");
+
+        Chatter("ChatterMeleeFighterI_01_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterI_02_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterI_03_MaskedBandit02.ogg");
+
+        Chatter("ChatterMeleeFighterI_01_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterI_02_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterI_03_MaskedBandit03.ogg");
+
+        Chatter("ChatterMeleeFighterI_01_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterI_02_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterI_03_MaskedBandit04.ogg");
+
+        Chatter("ChatterMeleeFighterI_01_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterI_02_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterI_03_MaskedBandit05.ogg");
+		
+        Chatter("ChatterMeleeFighterI_01_BanditBoss01");
+        Chatter("ChatterMeleeFighterI_02_BanditBoss01");
+        Chatter("ChatterMeleeFighterI_03_BanditBoss01");
+	}
+
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    // FIGHT against zombie
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+	Cnd(13.1000,  	10.0000, 	true, 					7.0)
+	{
+		// survivor during assist waiting for player's help
+		Cond("NOT_KNOCKED_DOWN");
+		Cond("ENEMY_TYPE", 1);
+		Cond("IN_ASSIST_PHASE", 1); // EAIStateDuringAssist::WaitForHelp
+		ShowSubtitlesIfAssist();
+		
+		Chatter("EncEscortA_02CHT01_Nick.ogg");
+		Chatter("EncEscortA_02CHT02_Nick.ogg");
+		Chatter("EncEscortA_02CHT03_Nick.ogg");
+		Chatter("EncEscortA_02CHT04_Nick.ogg");
+		
+		Chatter("EncEscortB_02CHT01_Omar.ogg");
+		Chatter("EncEscortB_02CHT02_Omar.ogg");
+		Chatter("EncEscortB_02CHT03_Omar.ogg");
+		
+		Chatter("EncEscortC_03CHT01_Ahmet.ogg");
+		Chatter("EncEscortC_03CHT02_Ahmet.ogg");
+		Chatter("EncEscortC_03CHT03_Ahmet.ogg");
+		
+		Chatter("EncEscortD_02CHT01_Babar.ogg");
+		Chatter("EncEscortD_02CHT02_Babar.ogg");
+		Chatter("EncEscortD_02CHT03_Babar.ogg");
+		
+		Chatter("EncEscortE_03CHT01_Faruk.ogg");
+		Chatter("EncEscortE_03CHT02_Faruk.ogg");
+		Chatter("EncEscortE_03CHT03_Faruk.ogg");
+		
+		Chatter("EncEscortGen_11DLG01_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_11DLG02_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_11DLG01_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_11DLG02_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_11DLG01_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_11DLG02_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_11DLG01_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_11DLG02_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_11DLG01_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_11DLG02_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_11DLG01_SurvivorEscortB02.ogg");
+		Chatter("EncEscortGen_11DLG02_SurvivorEscortB02.ogg");
+	}
+	
+    Cnd(13.3000,  	60.0000, 	true, 					7.0)
+	{
+		// survivor during assist notices a goon (EZombieType::THUG) on his way
+		Cond("NOT_KNOCKED_DOWN");
+		Cond("ZOMBIE_TYPE_VISIBLE_IN_ASSIST", 1);
+		Cond("IN_ASSIST");
+		ShowSubtitlesIfAssist();
+		
+		Chatter("EncEscortA_14CHT01_Nick.ogg");
+		Chatter("EncEscortA_14CHT02_Nick.ogg");
+		Chatter("EncEscortA_14CHT03_Nick.ogg");
+		Chatter("EncEscortA_14CHT04_Nick.ogg");
+		Chatter("EncEscortA_14CHT05_Nick.ogg");
+		Chatter("EncEscortA_14CHT06_Nick.ogg");
+		
+		Chatter("EncEscortB_14CHT01_Omar.ogg");
+		Chatter("EncEscortB_14CHT02_Omar.ogg");
+		Chatter("EncEscortB_14CHT03_Omar.ogg");
+		
+		Chatter("EncEscortC_15CHT01_Ahmet.ogg");
+		Chatter("EncEscortC_15CHT02_Ahmet.ogg");
+		Chatter("EncEscortC_15CHT03_Ahmet.ogg");
+		
+		Chatter("EncEscortD_14CHT01_Babar.ogg");
+		Chatter("EncEscortD_14CHT02_Babar.ogg");
+		Chatter("EncEscortD_14CHT03_Babar.ogg");
+		
+		Chatter("EncEscortE_15CHT01_Faruk.ogg");
+		Chatter("EncEscortE_15CHT02_Faruk.ogg");
+		Chatter("EncEscortE_15CHT03_Faruk.ogg");
+		
+		Chatter("EncEscortGen_22DLG01_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_22DLG02_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_22DLG01_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_22DLG02_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_22DLG01_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_22DLG02_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_22DLG01_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_22DLG02_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_22DLG01_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_22DLG02_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_22DLG01_SurvivorEscortB02.ogg");
+		Chatter("EncEscortGen_22DLG02_SurvivorEscortB02.ogg");
+    }
+	
+    Cnd(13.3000,  	60.0000, 	true, 					7.0)
+	{
+		// survivor during assist notices a spitter (EZombieType::SPITTER) on his way
+		Cond("NOT_KNOCKED_DOWN");
+		Cond("ZOMBIE_TYPE_VISIBLE_IN_ASSIST", 12);
+		ShowSubtitlesIfAssist();
+		
+		Chatter("EncEscortA_16CHT01_Nick.ogg");
+		Chatter("EncEscortA_16CHT02_Nick.ogg");
+		Chatter("EncEscortA_16CHT03_Nick.ogg");
+		Chatter("EncEscortA_16CHT04_Nick.ogg");
+		
+		Chatter("EncEscortB_16CHT01_Omar.ogg");
+		Chatter("EncEscortB_16CHT02_Omar.ogg");
+		Chatter("EncEscortB_16CHT03_Omar.ogg");
+		
+		Chatter("EncEscortC_17CHT01_Ahmet.ogg");
+		Chatter("EncEscortC_17CHT02_Ahmet.ogg");
+		Chatter("EncEscortC_17CHT03_Ahmet.ogg");
+		
+		Chatter("EncEscortD_16CHT01_Babar.ogg");
+		Chatter("EncEscortD_16CHT02_Babar.ogg");
+		Chatter("EncEscortD_16CHT03_Babar.ogg");
+		
+		Chatter("EncEscortE_17CHT01_Faruk.ogg");
+		Chatter("EncEscortE_17CHT02_Faruk.ogg");
+		Chatter("EncEscortE_17CHT03_Faruk.ogg");
+		
+		Chatter("EncEscortGen_24DLG01_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_24DLG02_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_24DLG01_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_24DLG02_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_24DLG01_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_24DLG02_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_24DLG01_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_24DLG02_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_24DLG01_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_24DLG02_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_24DLG01_SurvivorEscortB02.ogg");
+		Chatter("EncEscortGen_24DLG02_SurvivorEscortB02.ogg");
+    }
+	
+    Cnd(13.2000,  	30.0000, 	true, 					7.0)
+	{
+		// survivor during assist starts to fight with enemies (improved importance, reduced time between plays)
+		Cond("NOT_KNOCKED_DOWN");
+		Cond("ENEMY_TYPE", 1);
+		Cond("IN_ASSIST_PHASE", 2); // EAIStateDuringAssist::InFight
+		ShowSubtitlesIfAssist();
+		
+		Chatter("EncEscortA_03CHT01_Nick.ogg");
+		Chatter("EncEscortA_03CHT02_Nick.ogg");
+		Chatter("EncEscortA_03CHT03_Nick.ogg");
+		Chatter("EncEscortA_03CHT04_Nick.ogg");
+		
+		Chatter("EncEscortB_03CHT01_Omar.ogg");
+		Chatter("EncEscortB_03CHT02_Omar.ogg");
+		Chatter("EncEscortB_03CHT03_Omar.ogg");
+		
+		Chatter("EncEscortC_04CHT01_Ahmet.ogg");
+		Chatter("EncEscortC_04CHT02_Ahmet.ogg");
+		Chatter("EncEscortC_04CHT03_Ahmet.ogg");
+		
+		Chatter("EncEscortD_03CHT01_Babar.ogg");
+		Chatter("EncEscortD_03CHT02_Babar.ogg");
+		Chatter("EncEscortD_03CHT03_Babar.ogg");
+		
+		Chatter("EncEscortE_04CHT01_Faruk.ogg");
+		Chatter("EncEscortE_04CHT02_Faruk.ogg");
+		Chatter("EncEscortE_04CHT03_Faruk.ogg");
+		
+		Chatter("EncEscortGen_12DLG01_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_12DLG02_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_12DLG01_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_12DLG02_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_12DLG01_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_12DLG02_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_12DLG01_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_12DLG02_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_12DLG01_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_12DLG02_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_12DLG02_SurvivorEscortB02.ogg");
+		Chatter("EncEscortGen_12DLG03_SurvivorEscortB02.ogg");
+    }
+            
+    Cnd(13.1000,  	10.0000, 	true, 					7.0)
+	{
+		// survivor during assist: before attack
+		Cond("NOT_KNOCKED_DOWN");
+		Cond("ENEMY_TYPE", 1);
+		Cond("IN_ASSIST_PHASE", 2); // EAIStateDuringAssist::InFight
+		ShowSubtitlesIfAssist();
+		
+		Chatter("EncEscortA_04CHT01_Nick.ogg");
+		Chatter("EncEscortA_04CHT02_Nick.ogg");
+		Chatter("EncEscortA_04CHT03_Nick.ogg");
+		Chatter("EncEscortA_04CHT04_Nick.ogg");
+		Chatter("EncEscortA_04CHT05_Nick.ogg");
+		Chatter("EncEscortA_04CHT06_Nick.ogg");
+		Chatter("EncEscortA_04CHT07_Nick.ogg");
+		
+		Chatter("EncEscortB_04CHT01_Omar.ogg");
+		Chatter("EncEscortB_04CHT02_Omar.ogg");
+		Chatter("EncEscortB_04CHT03_Omar.ogg");
+		
+		Chatter("EncEscortC_05CHT01_Ahmet.ogg");
+		Chatter("EncEscortC_05CHT02_Ahmet.ogg");
+		Chatter("EncEscortC_05CHT03_Ahmet.ogg");
+		
+		Chatter("EncEscortD_04CHT01_Babar.ogg");
+		Chatter("EncEscortD_04CHT02_Babar.ogg");
+		Chatter("EncEscortD_04CHT03_Babar.ogg");
+		
+		Chatter("EncEscortE_05CHT01_Faruk.ogg");
+		Chatter("EncEscortE_05CHT02_Faruk.ogg");
+		Chatter("EncEscortE_05CHT03_Faruk.ogg");
+		
+		Chatter("EncEscortGen_22DLG01_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_22DLG02_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_22DLG01_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_22DLG02_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_22DLG01_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_22DLG02_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_22DLG01_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_22DLG02_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_22DLG01_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_22DLG02_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_22DLG01_SurvivorEscortB02.ogg");
+		Chatter("EncEscortGen_22DLG02_SurvivorEscortB02.ogg");
+    }
+            
+    Cnd(13.3000,  	10.0000, 	true, 					15.0)
+	{
+		// survivor during assist: far from player calling for help
+		Cond("NOT_KNOCKED_DOWN");
+		Cond("IN_ASSIST_PHASE", 4); // EAIStateDuringAssist::WaitForFarAwayPlayer
+		Cond("PLAYER_FAR_FROM_ASSISTED", 15); // distance in meters
+		ShowSubtitlesIfAssist();
+		
+		Chatter("EncEscortA_13CHT01_Nick.ogg");
+		Chatter("EncEscortA_13CHT02_Nick.ogg");
+		Chatter("EncEscortA_13CHT03_Nick.ogg");
+		Chatter("EncEscortA_13CHT04_Nick.ogg");
+		Chatter("EncEscortA_13CHT05_Nick.ogg");
+		Chatter("EncEscortA_13CHT06_Nick.ogg");
+		
+		Chatter("EncEscortB_13CHT01_Omar.ogg");
+		Chatter("EncEscortB_13CHT02_Omar.ogg");
+		Chatter("EncEscortB_13CHT03_Omar.ogg");
+		
+		Chatter("EncEscortC_14CHT01_Ahmet.ogg");
+		Chatter("EncEscortC_14CHT02_Ahmet.ogg");
+		Chatter("EncEscortC_14CHT03_Ahmet.ogg");
+		
+		Chatter("EncEscortD_13CHT01_Babar.ogg");
+		Chatter("EncEscortD_13CHT02_Babar.ogg");
+		Chatter("EncEscortD_13CHT03_Babar.ogg");
+		
+		Chatter("EncEscortE_14CHT01_Faruk.ogg");
+		Chatter("EncEscortE_14CHT02_Faruk.ogg");
+		Chatter("EncEscortE_14CHT03_Faruk.ogg");
+		
+		Chatter("EncEscortGen_21DLG01_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_21DLG02_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_21DLG01_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_21DLG02_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_21DLG01_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_21DLG02_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_21DLG01_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_21DLG02_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_21DLG01_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_21DLG02_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_21DLG01_SurvivorEscortB02.ogg");
+		Chatter("EncEscortGen_21DLG02_SurvivorEscortB02.ogg");
+    }
+            
+	Cnd(13.1000,  	10.0000, 	true, 					7.0)
+	{
+		// survivor during assist changed state from fighting to clear_path (it turned out that he can move now)
+		Cond("NOT_KNOCKED_DOWN");
+		Cond("IN_ASSIST_CLEARED_PATH"); // EAIStateDuringAssist::InFight ->  EAIStateDuringAssist::PathClear
+		ShowSubtitlesIfAssist();
+		
+		Chatter("EncEscortA_09CHT01_Nick.ogg");
+		Chatter("EncEscortA_09CHT02_Nick.ogg");
+		Chatter("EncEscortA_09CHT03_Nick.ogg");
+		Chatter("EncEscortA_09CHT04_Nick.ogg");
+		Chatter("EncEscortA_09CHT05_Nick.ogg");
+		
+		Chatter("EncEscortB_09CHT01_Omar.ogg");
+		Chatter("EncEscortB_09CHT02_Omar.ogg");
+		Chatter("EncEscortB_09CHT03_Omar.ogg");
+		
+		Chatter("EncEscortC_10CHT01_Ahmet.ogg");
+		Chatter("EncEscortC_10CHT02_Ahmet.ogg");
+		Chatter("EncEscortC_10CHT03_Ahmet.ogg");
+		
+		Chatter("EncEscortD_09CHT01_Babar.ogg");
+		Chatter("EncEscortD_09CHT02_Babar.ogg");
+		Chatter("EncEscortD_09CHT03_Babar.ogg");
+		
+		Chatter("EncEscortE_10CHT01_Faruk.ogg");
+		Chatter("EncEscortE_10CHT02_Faruk.ogg");
+		Chatter("EncEscortE_10CHT03_Faruk.ogg");
+		
+		Chatter("EncEscortGen_17DLG01_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_17DLG02_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_17DLG01_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_17DLG02_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_17DLG01_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_17DLG02_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_17DLG01_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_17DLG02_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_17DLG01_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_17DLG02_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_17DLG01_SurvivorEscortB02.ogg");
+		Chatter("EncEscortGen_17DLG02_SurvivorEscortB02.ogg");
+	}
+	
+	Cnd(13.1000,  	10.0000, 	true, 					7.0)
+	{
+		// survivor during assist running forward and waiting for a while for player fighting with zombie ("hurry up" situation)
+		Cond("NOT_KNOCKED_DOWN");
+		Cond("IN_ASSIST_PHASE", 3); // EAIStateDuringAssist::WaitForFightingPlayer
+		ShowSubtitlesIfAssist();
+		
+		Chatter("EncEscortA_10CHT01_Nick.ogg");
+		Chatter("EncEscortA_10CHT02_Nick.ogg");
+		Chatter("EncEscortA_10CHT03_Nick.ogg");
+		Chatter("EncEscortA_10CHT04_Nick.ogg");
+		
+		Chatter("EncEscortB_10CHT01_Omar.ogg");
+		Chatter("EncEscortB_10CHT02_Omar.ogg");
+		Chatter("EncEscortB_10CHT03_Omar.ogg");
+		
+		Chatter("EncEscortC_11CHT01_Ahmet.ogg");
+		Chatter("EncEscortC_11CHT02_Ahmet.ogg");
+		Chatter("EncEscortC_11CHT03_Ahmet.ogg");
+		
+		Chatter("EncEscortD_10CHT01_Babar.ogg");
+		Chatter("EncEscortD_10CHT02_Babar.ogg");
+		Chatter("EncEscortD_10CHT03_Babar.ogg");
+		
+		Chatter("EncEscortE_11CHT01_Faruk.ogg");
+		Chatter("EncEscortE_11CHT02_Faruk.ogg");
+		Chatter("EncEscortE_11CHT03_Faruk.ogg");
+		
+		Chatter("EncEscortGen_18DLG01_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_18DLG02_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_18DLG01_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_18DLG02_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_18DLG01_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_18DLG02_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_18DLG01_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_18DLG02_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_18DLG01_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_18DLG02_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_18DLG01_SurvivorEscortB02.ogg");
+		Chatter("EncEscortGen_18DLG02_SurvivorEscortB02.ogg");
+	}
+	Cnd(13.1000,  	10.0000, 	true, 					7.0)
+	{
+		// survivor during assist kills zombie (EZombieType::DEFAULT)
+		Cond("NOT_KNOCKED_DOWN");
+		Cond("IN_ASSIST");
+		Cond("ZOMBIE_KILLED_BY_HUMAN", 0);
+		ShowSubtitlesIfAssist();
+		
+		Chatter("EncEscortA_08CHT01_Nick.ogg");
+		Chatter("EncEscortA_08CHT02_Nick.ogg");
+		Chatter("EncEscortA_08CHT03_Nick.ogg");
+		Chatter("EncEscortA_08CHT04_Nick.ogg");
+		
+		Chatter("EncEscortB_08CHT01_Omar.ogg");
+		Chatter("EncEscortB_08CHT02_Omar.ogg");
+		Chatter("EncEscortB_08CHT03_Omar.ogg");
+		
+		Chatter("EncEscortC_09CHT01_Ahmet.ogg");
+		Chatter("EncEscortC_09CHT02_Ahmet.ogg");
+		Chatter("EncEscortC_09CHT03_Ahmet.ogg");
+		
+		Chatter("EncEscortD_08CHT01_Babar.ogg");
+		Chatter("EncEscortD_08CHT02_Babar.ogg");
+		Chatter("EncEscortD_08CHT03_Babar.ogg");
+		
+		Chatter("EncEscortE_09CHT01_Faruk.ogg");
+		Chatter("EncEscortE_09CHT02_Faruk.ogg");
+		Chatter("EncEscortE_09CHT03_Faruk.ogg");
+		
+		Chatter("EncEscortGen_16DLG01_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_16DLG02_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_16DLG01_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_16DLG02_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_16DLG01_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_16DLG02_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_16DLG01_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_16DLG02_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_16DLG01_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_16DLG02_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_16DLG01_SurvivorEscortB02.ogg");
+		Chatter("EncEscortGen_16DLG02_SurvivorEscortB02.ogg");
+	}
+
+	Cnd(13.4000,  	10.0000, 	true, 					7.0)
+	{
+		// survivor during assist kills goon (EZombieType::THUG)
+		Cond("NOT_KNOCKED_DOWN");
+		Cond("IN_ASSIST");
+		Cond("ZOMBIE_KILLED_BY_HUMAN", 1);
+		ShowSubtitlesIfAssist();
+		
+		Chatter("EncEscortA_15CHT01_Nick.ogg");
+		Chatter("EncEscortA_15CHT02_Nick.ogg");
+		Chatter("EncEscortA_15CHT03_Nick.ogg");
+		Chatter("EncEscortA_15CHT04_Nick.ogg");
+		
+		Chatter("EncEscortB_15CHT01_Omar.ogg");
+		Chatter("EncEscortB_15CHT02_Omar.ogg");
+		Chatter("EncEscortB_15CHT03_Omar.ogg");
+		
+		Chatter("EncEscortC_16CHT01_Ahmet.ogg");
+		Chatter("EncEscortC_16CHT02_Ahmet.ogg");
+		Chatter("EncEscortC_16CHT03_Ahmet.ogg");
+		
+		Chatter("EncEscortD_15CHT01_Babar.ogg");
+		Chatter("EncEscortD_15CHT02_Babar.ogg");
+		Chatter("EncEscortD_15CHT03_Babar.ogg");
+		
+		Chatter("EncEscortE_16CHT01_Faruk.ogg");
+		Chatter("EncEscortE_16CHT02_Faruk.ogg");
+		Chatter("EncEscortE_16CHT03_Faruk.ogg");
+		
+		Chatter("EncEscortGen_23DLG01_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_23DLG02_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_23DLG01_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_23DLG02_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_23DLG01_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_23DLG02_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_23DLG01_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_23DLG02_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_23DLG01_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_23DLG02_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_23DLG01_SurvivorEscortB02.ogg");
+		Chatter("EncEscortGen_23DLG02_SurvivorEscortB02.ogg");
+	}
+	
+	Cnd(13.4000,  	10.0000, 	true, 					7.0)
+	{
+		// survivor during assist kills spitter ((EZombieType::SPITTER)
+		Cond("NOT_KNOCKED_DOWN");
+		Cond("IN_ASSIST");
+		Cond("ZOMBIE_KILLED_BY_HUMAN", 12);
+		ShowSubtitlesIfAssist();
+		
+		Chatter("EncEscortA_17CHT01_Nick.ogg");
+		Chatter("EncEscortA_17CHT02_Nick.ogg");
+		Chatter("EncEscortA_17CHT03_Nick.ogg");
+		Chatter("EncEscortA_17CHT04_Nick.ogg");
+		Chatter("EncEscortA_17CHT05_Nick.ogg");
+		
+		Chatter("EncEscortB_17CHT01_Omar.ogg");
+		Chatter("EncEscortB_17CHT02_Omar.ogg");
+		Chatter("EncEscortB_17CHT03_Omar.ogg");
+		
+		Chatter("EncEscortC_18CHT01_Ahmet.ogg");
+		Chatter("EncEscortC_18CHT02_Ahmet.ogg");
+		Chatter("EncEscortC_18CHT03_Ahmet.ogg");
+		
+		Chatter("EncEscortD_17CHT01_Babar.ogg");
+		Chatter("EncEscortD_17CHT02_Babar.ogg");
+		Chatter("EncEscortD_17CHT03_Babar.ogg");
+		
+		Chatter("EncEscortE_18CHT01_Faruk.ogg");
+		Chatter("EncEscortE_18CHT02_Faruk.ogg");
+		Chatter("EncEscortE_18CHT03_Faruk.ogg");
+		
+		Chatter("EncEscortGen_25DLG01_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_25DLG02_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_25DLG01_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_25DLG02_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_25DLG01_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_25DLG02_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_25DLG01_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_25DLG02_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_25DLG01_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_25DLG02_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_25DLG01_SurvivorEscortB02.ogg");
+		Chatter("EncEscortGen_25DLG02_SurvivorEscortB02.ogg");
+		
+	}
+	
+	Cnd(14.0000,  	10.0000, 	true, 					7.0)
+	{
+		// boss spots zombie
+		Cond("AI_IS_HMF_GROUP_LEADER");
+		Cond("AI_HAS_NEW_ENEMY");
+		Cond("AI_IN_GROUP");
+		Cond("NOT_KNOCKED_DOWN");
+		Cond("ENEMY_TYPE", 1);
+		Cond("ENEMY_NO_SUPERIOR_WEAPON_NOTICED");
+
+		Chatter("ChatterMeleeFighter_ZombieSpotted01_BanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_ZombieSpotted02_BanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_ZombieSpotted03_BanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_ZombieSpotted04_BanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_ZombieSpotted05_BanditBoss01.ogg");
+
+		Chatter("ChatterMeleeFighter_ZombieSpotted01_MaskedBanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_ZombieSpotted02_MaskedBanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_ZombieSpotted03_MaskedBanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_ZombieSpotted04_MaskedBanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_ZombieSpotted05_MaskedBanditBoss01.ogg");
+
+		Chatter("ChatterMeleeFighter_FightInitiation01_BanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_FightInitiation01_Bandit01");
+		Chatter("ChatterMeleeFighter_FightInitiation01_Bandit02");
+		Chatter("ChatterMeleeFighter_FightInitiation01_Bandit03");
+		Chatter("ChatterMeleeFighter_FightInitiation01_Bandit04");
+		Chatter("ChatterMeleeFighter_FightInitiation01_Bandit05");
+	}
+
+	Cnd(13.0000,  	10.0000, 	true, 					7.0)
+	{
+        // spotting a new zombie / infected enemy very close to AI (surprise)
+		Cond("NEW_ENEMIES_SPOTTED"); // that should be condition for first enemy spotted, not for everyone
+		Cond("NOT_KNOCKED_DOWN");
+        Cond("DIST_TO_TARGET_LOWER_THAN", 8);
+		Cond("ENEMY_TYPE", 1);
+		Cond("ENEMY_NO_SUPERIOR_WEAPON_NOTICED");
+
+        Chatter("ChatterMeleeFighterB_01_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterB_02_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterB_03_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterB_04_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterB_05_Bandit01.ogg");
+
+        Chatter("ChatterMeleeFighterB_01_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterB_02_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterB_03_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterB_04_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterB_05_Bandit02.ogg");
+
+        Chatter("ChatterMeleeFighterB_01_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterB_02_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterB_03_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterB_04_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterB_05_Bandit03.ogg");
+
+        Chatter("ChatterMeleeFighterB_01_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterB_02_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterB_03_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterB_04_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterB_05_Bandit04.ogg");
+
+        Chatter("ChatterMeleeFighterB_01_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterB_02_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterB_03_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterB_04_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterB_05_Bandit05.ogg");
+        
+        Chatter("ChatterMeleeFighterB_01_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterB_02_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterB_03_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterB_04_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterB_05_MaskedBandit01.ogg");
+
+        Chatter("ChatterMeleeFighterB_01_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterB_02_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterB_03_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterB_04_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterB_05_MaskedBandit02.ogg");
+
+        Chatter("ChatterMeleeFighterB_01_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterB_02_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterB_03_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterB_04_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterB_05_MaskedBandit03.ogg");
+
+        Chatter("ChatterMeleeFighterB_01_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterB_02_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterB_03_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterB_04_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterB_05_MaskedBandit04.ogg");
+
+        Chatter("ChatterMeleeFighterB_01_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterB_02_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterB_03_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterB_04_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterB_05_MaskedBandit05.ogg");
+        
+        Chatter("Chatter_MeleeFighterZombieSurprise_01_Survivor01");
+        Chatter("Chatter_MeleeFighterZombieSurprise_02_Survivor01");
+        Chatter("Chatter_MeleeFighterZombieSurprise_03_Survivor01");
+        
+        Chatter("Chatter_MeleeFighterZombieSurprise_01_Survivor02");
+        Chatter("Chatter_MeleeFighterZombieSurprise_02_Survivor02");
+        Chatter("Chatter_MeleeFighterZombieSurprise_03_Survivor02");
+        
+        Chatter("Chatter_MeleeFighterZombieSurprise_01_Survivor03");
+        Chatter("Chatter_MeleeFighterZombieSurprise_02_Survivor03");
+        Chatter("Chatter_MeleeFighterZombieSurprise_03_Survivor03");
+        
+        Chatter("Chatter_MeleeFighterZombieSurprise_01_Survivor04");
+        Chatter("Chatter_MeleeFighterZombieSurprise_02_Survivor04");
+        Chatter("Chatter_MeleeFighterZombieSurprise_03_Survivor04");
+        
+        Chatter("Chatter_MeleeFighterZombieSurprise_01_SurvivorB01");
+        Chatter("Chatter_MeleeFighterZombieSurprise_02_SurvivorB01");
+        Chatter("Chatter_MeleeFighterZombieSurprise_03_SurvivorB01");
+        
+        Chatter("Chatter_MeleeFighterZombieSurprise_01_SurvivorB02");
+        Chatter("Chatter_MeleeFighterZombieSurprise_02_SurvivorB02");
+        Chatter("Chatter_MeleeFighterZombieSurprise_03_SurvivorB02");
+
+	}
+	Cnd(13.0000,  	10.0000, 	true, 					7.0)
+	{
+        // spotting a new zombie enemy by a single melee fighter
+		Cond("NEW_ENEMIES_SPOTTED");
+		Cond("AI_NOT_IN_GROUP");
+		Cond("NOT_KNOCKED_DOWN");
+        Cond("DIST_TO_TARGET_HIGHER_THAN", 8);
+		Cond("ENEMY_TYPE", 1);
+		Cond("ENEMY_NO_SUPERIOR_WEAPON_NOTICED");
+		
+        Chatter("ChatterMeleeFighterC_02_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterC_02_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterC_02_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterC_02_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterC_02_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterC_02_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterC_02_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterC_02_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterC_02_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterC_02_MaskedBandit05.ogg");
+		Chatter("ChatterMeleeFighterC_02_BanditBoss01");
+        
+        Chatter("Chatter_MeleeFighterZombieSpotted_01_Survivor01");
+        Chatter("Chatter_MeleeFighterZombieSpotted_02_Survivor01");
+        Chatter("Chatter_MeleeFighterZombieSpotted_03_Survivor01");
+        
+        Chatter("Chatter_MeleeFighterZombieSpotted_01_Survivor02");
+        Chatter("Chatter_MeleeFighterZombieSpotted_02_Survivor02");
+        Chatter("Chatter_MeleeFighterZombieSpotted_03_Survivor02");
+        
+        Chatter("Chatter_MeleeFighterZombieSpotted_01_Survivor03");
+        Chatter("Chatter_MeleeFighterZombieSpotted_02_Survivor03");
+        Chatter("Chatter_MeleeFighterZombieSpotted_03_Survivor03");
+        
+        Chatter("Chatter_MeleeFighterZombieSpotted_01_Survivor04");
+        Chatter("Chatter_MeleeFighterZombieSpotted_02_Survivor04");
+        Chatter("Chatter_MeleeFighterZombieSpotted_03_Survivor04");
+        
+        Chatter("Chatter_MeleeFighterZombieSpotted_01_SurvivorB01");
+        Chatter("Chatter_MeleeFighterZombieSpotted_02_SurvivorB01");
+        Chatter("Chatter_MeleeFighterZombieSpotted_03_SurvivorB01");
+        
+        Chatter("Chatter_MeleeFighterZombieSpotted_01_SurvivorB02");
+        Chatter("Chatter_MeleeFighterZombieSpotted_02_SurvivorB02");
+        Chatter("Chatter_MeleeFighterZombieSpotted_03_SurvivorB02");
+        
+        Chatter("ChatterMeleeFighterK_01_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterK_02_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterK_03_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterK_04_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterK_05_Bandit01.ogg");
+
+        Chatter("ChatterMeleeFighterK_01_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterK_02_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterK_03_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterK_04_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterK_05_Bandit02.ogg");
+
+        Chatter("ChatterMeleeFighterK_01_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterK_02_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterK_03_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterK_04_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterK_05_Bandit03.ogg");
+		
+        Chatter("ChatterMeleeFighterK_01_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterK_02_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterK_03_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterK_04_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterK_05_Bandit04.ogg");
+
+        Chatter("ChatterMeleeFighterK_01_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterK_02_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterK_03_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterK_04_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterK_05_Bandit05.ogg");
+		
+        Chatter("ChatterMeleeFighterK_01_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterK_02_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterK_03_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterK_04_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterK_05_MaskedBandit01.ogg");
+
+        Chatter("ChatterMeleeFighterK_01_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterK_02_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterK_03_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterK_04_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterK_05_MaskedBandit02.ogg");
+
+        Chatter("ChatterMeleeFighterK_01_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterK_02_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterK_03_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterK_04_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterK_05_MaskedBandit03.ogg");
+		
+        Chatter("ChatterMeleeFighterK_01_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterK_02_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterK_03_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterK_04_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterK_05_MaskedBandit04.ogg");
+
+        Chatter("ChatterMeleeFighterK_01_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterK_02_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterK_03_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterK_04_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterK_05_MaskedBandit05.ogg");
+	}
+	Cnd(13.0000,  	10.0000, 	true, 					7.0)
+	{
+        // spotting a new zombie enemy by an ai group
+		Cond("NEW_ENEMIES_SPOTTED");
+		Cond("NOT_KNOCKED_DOWN");
+		Cond("AI_IN_GROUP");
+        Cond("DIST_TO_TARGET_HIGHER_THAN", 8);
+		Cond("ENEMY_TYPE", 1);
+		Cond("ENEMY_NO_SUPERIOR_WEAPON_NOTICED");
+		
+        Chatter("ChatterMeleeFighterH_01_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterH_03_Bandit01.ogg");
+
+        Chatter("ChatterMeleeFighterH_01_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterH_03_Bandit02.ogg");
+
+        Chatter("ChatterMeleeFighterH_01_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterH_03_Bandit03.ogg");
+
+        Chatter("ChatterMeleeFighterH_01_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterH_03_Bandit04.ogg");
+
+        Chatter("ChatterMeleeFighterH_01_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterH_03_Bandit05.ogg");
+        
+        Chatter("ChatterMeleeFighterH_01_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterH_03_MaskedBandit01.ogg");
+
+        Chatter("ChatterMeleeFighterH_01_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterH_03_MaskedBandit02.ogg");
+
+        Chatter("ChatterMeleeFighterH_01_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterH_03_MaskedBandit03.ogg");
+
+        Chatter("ChatterMeleeFighterH_01_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterH_03_MaskedBandit04.ogg");
+
+        Chatter("ChatterMeleeFighterH_01_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterH_03_MaskedBandit05.ogg");
+	}
+    Cnd(12.0000,  	10.0000, 	true, 					7.0)
+	{
+        // zombie enemy is unreacheable (can't get to him)
+		Cond("ENEMY_UNREACHEABLE");
+		Cond("NOT_KNOCKED_DOWN");
+		Cond("ENEMY_TYPE", 1);
+		Cond("ENEMY_NO_SUPERIOR_WEAPON_NOTICED");
+
+        Chatter("ChatterMeleeFighterE_01_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterE_01_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterE_01_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterE_01_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterE_01_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterE_01_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterE_01_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterE_01_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterE_01_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterE_01_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterE_01_BanditBoss01");
+        
+        Chatter("Chatter_MeleeFighterZombieUnreachable_01_Survivor01");
+        Chatter("Chatter_MeleeFighterZombieUnreachable_02_Survivor01");
+        Chatter("Chatter_MeleeFighterZombieUnreachable_03_Survivor01");
+        
+        Chatter("Chatter_MeleeFighterZombieUnreachable_01_Survivor02");
+        Chatter("Chatter_MeleeFighterZombieUnreachable_02_Survivor02");
+        Chatter("Chatter_MeleeFighterZombieUnreachable_03_Survivor02");
+        
+        Chatter("Chatter_MeleeFighterZombieUnreachable_01_Survivor03");
+        Chatter("Chatter_MeleeFighterZombieUnreachable_02_Survivor03");
+        Chatter("Chatter_MeleeFighterZombieUnreachable_03_Survivor03");
+        
+        Chatter("Chatter_MeleeFighterZombieUnreachable_01_Survivor04");
+        Chatter("Chatter_MeleeFighterZombieUnreachable_02_Survivor04");
+        Chatter("Chatter_MeleeFighterZombieUnreachable_03_Survivor04");
+        
+        Chatter("Chatter_MeleeFighterZombieUnreachable_01_SurvivorB01");
+        Chatter("Chatter_MeleeFighterZombieUnreachable_02_SurvivorB01");
+        Chatter("Chatter_MeleeFighterZombieUnreachable_03_SurvivorB01");
+        
+        Chatter("Chatter_MeleeFighterZombieUnreachable_01_SurvivorB02");
+        Chatter("Chatter_MeleeFighterZombieUnreachable_02_SurvivorB02");
+        Chatter("Chatter_MeleeFighterZombieUnreachable_03_SurvivorB02");
+	}
+    Cnd(12.1000,  	6.0000, 	true, 					7.0)
+	{
+        // chatters during grab with zombie
+		Cond("IS_GRABBED");
+		Cond("NOT_KNOCKED_DOWN");
+		ShowSubtitlesIfAssist();
+
+		Chatter("EncEscortA_07CHT01_Nick.ogg");
+		Chatter("EncEscortA_07CHT02_Nick.ogg");
+		Chatter("EncEscortA_07CHT03_Nick.ogg");
+		Chatter("EncEscortA_07CHT04_Nick.ogg");
+		Chatter("EncEscortA_07CHT05_Nick.ogg");
+		
+		Chatter("EncEscortB_07CHT01_Omar.ogg");
+		Chatter("EncEscortB_07CHT02_Omar.ogg");
+		Chatter("EncEscortB_07CHT03_Omar.ogg");
+		
+		Chatter("EncEscortC_08CHT01_Ahmet.ogg");
+		Chatter("EncEscortC_08CHT02_Ahmet.ogg");
+		Chatter("EncEscortC_08CHT03_Ahmet.ogg");
+		
+		Chatter("EncEscortD_07CHT01_Babar.ogg");
+		Chatter("EncEscortD_07CHT02_Babar.ogg");
+		Chatter("EncEscortD_07CHT03_Babar.ogg");
+		
+		Chatter("EncEscortE_08CHT01_Faruk.ogg");
+		Chatter("EncEscortE_08CHT02_Faruk.ogg");
+		Chatter("EncEscortE_08CHT03_Faruk.ogg");
+		
+		Chatter("EncEscortGen_23DLG01_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_23DLG02_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_23DLG01_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_23DLG02_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_23DLG01_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_23DLG02_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_23DLG01_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_23DLG02_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_23DLG01_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_23DLG02_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_23DLG01_SurvivorEscortB02.ogg");
+		Chatter("EncEscortGen_23DLG02_SurvivorEscortB02.ogg");
+		
+		Chatter("ChatterMeleeFighter_ZombieGrab01_BanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_ZombieGrab02_BanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_ZombieGrab03_BanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_ZombieGrab04_BanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_ZombieGrab05_BanditBoss01.ogg");
+        
+		Chatter("ChatterMeleeFighter_ZombieGrab01_MaskedBanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_ZombieGrab02_MaskedBanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_ZombieGrab03_MaskedBanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_ZombieGrab04_MaskedBanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_ZombieGrab05_MaskedBanditBoss01.ogg");
+		
+		Chatter("ChatterMeleeFighterL_01_Bandit01.ogg");
+		Chatter("ChatterMeleeFighterL_02_Bandit01.ogg");
+		Chatter("ChatterMeleeFighterL_03_Bandit01.ogg");
+		Chatter("ChatterMeleeFighterL_04_Bandit01.ogg");
+
+		Chatter("ChatterMeleeFighterL_01_Bandit02.ogg");
+		Chatter("ChatterMeleeFighterL_02_Bandit02.ogg");
+		Chatter("ChatterMeleeFighterL_03_Bandit02.ogg");
+		Chatter("ChatterMeleeFighterL_04_Bandit02.ogg");
+		
+		Chatter("ChatterMeleeFighterL_01_Bandit03.ogg");
+		Chatter("ChatterMeleeFighterL_02_Bandit03.ogg");
+		Chatter("ChatterMeleeFighterL_03_Bandit03.ogg");
+		Chatter("ChatterMeleeFighterL_04_Bandit03.ogg");
+		
+		Chatter("ChatterMeleeFighterL_01_Bandit04.ogg");
+		Chatter("ChatterMeleeFighterL_02_Bandit04.ogg");
+		Chatter("ChatterMeleeFighterL_03_Bandit04.ogg");
+		Chatter("ChatterMeleeFighterL_04_Bandit04.ogg");
+		
+		Chatter("ChatterMeleeFighterL_01_Bandit05.ogg");
+		Chatter("ChatterMeleeFighterL_02_Bandit05.ogg");
+		Chatter("ChatterMeleeFighterL_03_Bandit05.ogg");
+		Chatter("ChatterMeleeFighterL_04_Bandit05.ogg");
+		
+		Chatter("ChatterMeleeFighterL_01_MaskedBandit01.ogg");
+		Chatter("ChatterMeleeFighterL_02_MaskedBandit01.ogg");
+		Chatter("ChatterMeleeFighterL_03_MaskedBandit01.ogg");
+		Chatter("ChatterMeleeFighterL_04_MaskedBandit01.ogg");
+
+		Chatter("ChatterMeleeFighterL_01_MaskedBandit02.ogg");
+		Chatter("ChatterMeleeFighterL_02_MaskedBandit02.ogg");
+		Chatter("ChatterMeleeFighterL_03_MaskedBandit02.ogg");
+		Chatter("ChatterMeleeFighterL_04_MaskedBandit02.ogg");
+		
+		Chatter("ChatterMeleeFighterL_01_MaskedBandit03.ogg");
+		Chatter("ChatterMeleeFighterL_02_MaskedBandit03.ogg");
+		Chatter("ChatterMeleeFighterL_03_MaskedBandit03.ogg");
+		Chatter("ChatterMeleeFighterL_04_MaskedBandit03.ogg");
+		
+		Chatter("ChatterMeleeFighterL_01_MaskedBandit04.ogg");
+		Chatter("ChatterMeleeFighterL_02_MaskedBandit04.ogg");
+		Chatter("ChatterMeleeFighterL_03_MaskedBandit04.ogg");
+		Chatter("ChatterMeleeFighterL_04_MaskedBandit04.ogg");
+		
+		Chatter("ChatterMeleeFighterL_01_MaskedBandit05.ogg");
+		Chatter("ChatterMeleeFighterL_02_MaskedBandit05.ogg");
+		Chatter("ChatterMeleeFighterL_03_MaskedBandit05.ogg");
+		Chatter("ChatterMeleeFighterL_04_MaskedBandit05.ogg");
+	} 
+    Cnd(12.0000,  	10.0000, 	true, 					7.0)
+	{
+        // performing melee attack at zombie enemy
+		Cond("IS_PERFORMING_MELEE_ATTACK");
+		Cond("NOT_KNOCKED_DOWN");
+		Cond("ENEMY_TYPE", 1);
+		Cond("ENEMY_NO_SUPERIOR_WEAPON_NOTICED");
+		ShowSubtitlesIfAssist();
+    
+		Chatter("EncEscortA_04CHT01_Nick.ogg");
+		Chatter("EncEscortA_04CHT02_Nick.ogg");
+		Chatter("EncEscortA_04CHT03_Nick.ogg");
+		Chatter("EncEscortA_04CHT04_Nick.ogg");
+		Chatter("EncEscortA_04CHT05_Nick.ogg");
+		Chatter("EncEscortA_04CHT06_Nick.ogg");
+		Chatter("EncEscortA_04CHT07_Nick.ogg");
+	
+		Chatter("EncEscortB_04CHT01_Omar.ogg");
+		Chatter("EncEscortB_04CHT02_Omar.ogg");
+		Chatter("EncEscortB_04CHT03_Omar.ogg");
+	
+		Chatter("EncEscortC_05CHT01_Ahmet.ogg");
+		Chatter("EncEscortC_05CHT02_Ahmet.ogg");
+		Chatter("EncEscortC_05CHT03_Ahmet.ogg");
+		
+		Chatter("EncEscortD_04CHT01_Babar.ogg");
+		Chatter("EncEscortD_04CHT02_Babar.ogg");
+		Chatter("EncEscortD_04CHT03_Babar.ogg");
+		
+		Chatter("EncEscortE_05CHT01_Faruk.ogg");
+		Chatter("EncEscortE_05CHT02_Faruk.ogg");
+		Chatter("EncEscortE_05CHT03_Faruk.ogg");
+		
+		Chatter("EncEscortGen_22DLG01_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_22DLG02_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_22DLG01_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_22DLG02_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_22DLG01_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_22DLG02_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_22DLG01_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_22DLG02_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_22DLG01_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_22DLG02_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_22DLG01_SurvivorEscortB02.ogg");
+		Chatter("EncEscortGen_22DLG02_SurvivorEscortB02.ogg");
+	
+		Chatter("ChatterMeleeFighter_Fight02_BanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_Fight03_BanditBoss01.ogg");
+    
+        Chatter("ChatterMeleeFighterF_02_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterF_03_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterD_03_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterD_04_Bandit01.ogg");
+
+        Chatter("ChatterMeleeFighterF_02_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterF_03_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterD_03_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterD_04_Bandit02.ogg");
+
+        Chatter("ChatterMeleeFighterF_02_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterF_03_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterD_03_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterD_04_Bandit03.ogg");
+
+        Chatter("ChatterMeleeFighterF_02_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterF_03_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterD_03_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterD_04_Bandit04.ogg");
+
+        Chatter("ChatterMeleeFighterF_02_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterF_03_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterD_03_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterD_04_Bandit05.ogg");
+        
+        Chatter("ChatterMeleeFighterF_02_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterF_03_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterD_03_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterD_04_MaskedBandit01.ogg");
+
+        Chatter("ChatterMeleeFighterF_02_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterF_03_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterD_03_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterD_04_MaskedBandit02.ogg");
+
+        Chatter("ChatterMeleeFighterF_02_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterF_03_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterD_03_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterD_04_MaskedBandit03.ogg");
+
+        Chatter("ChatterMeleeFighterF_02_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterF_03_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterD_03_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterD_04_MaskedBandit04.ogg");
+
+        Chatter("ChatterMeleeFighterF_02_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterF_03_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterD_03_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterD_04_MaskedBandit05.ogg");
+		
+        Chatter("ChatterMeleeFighterF_02_BanditBoss01");
+        Chatter("ChatterMeleeFighterF_03_BanditBoss01");
+        Chatter("ChatterMeleeFighterD_03_BanditBoss01");
+        Chatter("ChatterMeleeFighterD_04_BanditBoss01");
+
+		Chatter("Chatter_FightinWithZombie_01_HeadHunter01");
+		Chatter("Chatter_FightinWithZombie_02_HeadHunter01");
+		Chatter("Chatter_FightinWithZombie_03_HeadHunter01");
+		Chatter("Chatter_FightinWithZombie_01_HeadHunter02");
+		Chatter("Chatter_FightinWithZombie_02_HeadHunter02");
+		Chatter("Chatter_FightinWithZombie_03_HeadHunter02");
+		Chatter("Chatter_FightinWithZombie_01_HeadHunter03");
+		Chatter("Chatter_FightinWithZombie_02_HeadHunter03");
+		Chatter("Chatter_FightinWithZombie_03_HeadHunter03");
+		Chatter("Chatter_FightinWithZombie_01_HeadHunter04");
+		Chatter("Chatter_FightinWithZombie_02_HeadHunter04");
+		Chatter("Chatter_FightinWithZombie_03_HeadHunter04");
+		Chatter("Chatter_FightinWithZombie_01_HeadHunter05");
+		Chatter("Chatter_FightinWithZombie_02_HeadHunter05");
+		Chatter("Chatter_FightinWithZombie_03_HeadHunter05");
+        
+        Chatter("Chatter_MeleeFighterPerformingAttack_01_Survivor01");
+        Chatter("Chatter_MeleeFighterPerformingAttack_02_Survivor01");
+        Chatter("Chatter_MeleeFighterPerformingAttack_03_Survivor01");
+        
+        Chatter("Chatter_MeleeFighterPerformingAttack_01_Survivor02");
+        Chatter("Chatter_MeleeFighterPerformingAttack_02_Survivor02");
+        Chatter("Chatter_MeleeFighterPerformingAttack_03_Survivor02");
+        
+        Chatter("Chatter_MeleeFighterPerformingAttack_01_Survivor03");
+        Chatter("Chatter_MeleeFighterPerformingAttack_02_Survivor03");
+        Chatter("Chatter_MeleeFighterPerformingAttack_03_Survivor03");
+        
+        Chatter("Chatter_MeleeFighterPerformingAttack_01_Survivor04");
+        Chatter("Chatter_MeleeFighterPerformingAttack_02_Survivor04");
+        Chatter("Chatter_MeleeFighterPerformingAttack_03_Survivor04");
+        
+        Chatter("Chatter_MeleeFighterPerformingAttack_01_SurvivorB01");
+        Chatter("Chatter_MeleeFighterPerformingAttack_02_SurvivorB01");
+        Chatter("Chatter_MeleeFighterPerformingAttack_03_SurvivorB01");
+        
+        Chatter("Chatter_MeleeFighterPerformingAttack_01_SurvivorB02");
+        Chatter("Chatter_MeleeFighterPerformingAttack_02_SurvivorB02");
+        Chatter("Chatter_MeleeFighterPerformingAttack_03_SurvivorB02");
+	}
+    Cnd(12.0000,  	10.0000, 	true, 					7.0)
+	{
+        // zombie target runs away from AI
+		Cond("TARGET_RUNNING_AWAY", 8); // second parameter means meters
+		Cond("NOT_KNOCKED_DOWN");
+		Cond("ENEMY_TYPE", 1);
+		Cond("ENEMY_NO_SUPERIOR_WEAPON_NOTICED");
+        
+        Chatter("ChatterMeleeFighterE_01_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterE_01_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterE_01_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterE_01_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterE_01_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterE_01_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterE_01_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterE_01_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterE_01_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterE_01_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterE_01_BanditBoss01");
+	}
+    Cnd(11.0000,  	6.0000, 	true, 					7.0)
+	{
+        // chatters after successful attack was performed (zombie enemy was hit)
+		Cond("IDLE_DURING_ATTACK");
+		Cond("AFTER_SUCCESSFUL_ATTACK_AT_ENEMY", 4); // validity after attack in seconds
+        Cond("NOT_KNOCKED_DOWN");
+		Cond("ENEMY_TYPE", 1);
+		Cond("ENEMY_NO_SUPERIOR_WEAPON_NOTICED");
+		ShowSubtitlesIfAssist();
+
+		Chatter("EncEscortA_05CHT01_Nick.ogg");
+		Chatter("EncEscortA_05CHT02_Nick.ogg");
+		Chatter("EncEscortA_05CHT03_Nick.ogg");
+		Chatter("EncEscortA_05CHT04_Nick.ogg");
+		
+		Chatter("EncEscortB_05CHT01_Omar.ogg");
+		Chatter("EncEscortB_05CHT02_Omar.ogg");
+		Chatter("EncEscortB_05CHT03_Omar.ogg");
+
+		Chatter("EncEscortC_06CHT01_Ahmet.ogg");
+		Chatter("EncEscortC_06CHT02_Ahmet.ogg");
+		Chatter("EncEscortC_06CHT03_Ahmet.ogg");
+		
+		Chatter("EncEscortD_05CHT01_Babar.ogg");
+		Chatter("EncEscortD_05CHT02_Babar.ogg");
+		Chatter("EncEscortD_05CHT03_Babar.ogg");
+		
+		Chatter("EncEscortE_06CHT01_Faruk.ogg");
+		Chatter("EncEscortE_06CHT02_Faruk.ogg");
+		Chatter("EncEscortE_06CHT03_Faruk.ogg");
+		
+		Chatter("EncEscortGen_13DLG01_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_13DLG02_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_13DLG01_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_13DLG02_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_13DLG01_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_13DLG02_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_13DLG01_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_13DLG02_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_13DLG01_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_13DLG02_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_13DLG01_SurvivorEscortB02.ogg");
+		Chatter("EncEscortGen_13DLG02_SurvivorEscortB02.ogg");
+		
+        Chatter("ChatterMeleeFighterF_03_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterD_02_Bandit01.ogg");
+        
+        Chatter("ChatterMeleeFighterF_03_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterD_02_Bandit02.ogg");
+        
+        Chatter("ChatterMeleeFighterF_03_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterD_02_Bandit03.ogg");
+        
+        Chatter("ChatterMeleeFighterF_03_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterD_02_Bandit04.ogg");
+        
+        Chatter("ChatterMeleeFighterF_03_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterD_02_Bandit05.ogg");
+        
+		Chatter("ChatterMeleeFighterM_01_Bandit01.ogg");
+		Chatter("ChatterMeleeFighterM_02_Bandit01.ogg");
+		Chatter("ChatterMeleeFighterM_03_Bandit01.ogg");
+		Chatter("ChatterMeleeFighterM_04_Bandit01.ogg");
+		Chatter("ChatterMeleeFighterM_05_Bandit01.ogg");
+
+		Chatter("ChatterMeleeFighterM_01_Bandit02.ogg");
+		Chatter("ChatterMeleeFighterM_02_Bandit02.ogg");
+		Chatter("ChatterMeleeFighterM_03_Bandit02.ogg");
+		Chatter("ChatterMeleeFighterM_04_Bandit02.ogg");
+		Chatter("ChatterMeleeFighterM_05_Bandit02.ogg");
+		
+		Chatter("ChatterMeleeFighterM_01_Bandit03.ogg");
+		Chatter("ChatterMeleeFighterM_02_Bandit03.ogg");
+		Chatter("ChatterMeleeFighterM_03_Bandit03.ogg");
+		Chatter("ChatterMeleeFighterM_04_Bandit03.ogg");
+		Chatter("ChatterMeleeFighterM_05_Bandit03.ogg");
+		
+		Chatter("ChatterMeleeFighterM_01_Bandit04.ogg");
+		Chatter("ChatterMeleeFighterM_02_Bandit04.ogg");
+		Chatter("ChatterMeleeFighterM_03_Bandit04.ogg");
+		Chatter("ChatterMeleeFighterM_04_Bandit04.ogg");
+		Chatter("ChatterMeleeFighterM_05_Bandit04.ogg");
+		
+		Chatter("ChatterMeleeFighterM_01_Bandit05.ogg");
+		Chatter("ChatterMeleeFighterM_02_Bandit05.ogg");
+		Chatter("ChatterMeleeFighterM_03_Bandit05.ogg");
+		Chatter("ChatterMeleeFighterM_04_Bandit05.ogg");
+		Chatter("ChatterMeleeFighterM_05_Bandit05.ogg");
+
+		Chatter("ChatterMeleeFighterM_01_MaskedBandit01.ogg");
+		Chatter("ChatterMeleeFighterM_02_MaskedBandit01.ogg");
+		Chatter("ChatterMeleeFighterM_03_MaskedBandit01.ogg");
+		Chatter("ChatterMeleeFighterM_04_MaskedBandit01.ogg");
+		Chatter("ChatterMeleeFighterM_05_MaskedBandit01.ogg");
+
+		Chatter("ChatterMeleeFighterM_01_MaskedBandit02.ogg");
+		Chatter("ChatterMeleeFighterM_02_MaskedBandit02.ogg");
+		Chatter("ChatterMeleeFighterM_03_MaskedBandit02.ogg");
+		Chatter("ChatterMeleeFighterM_04_MaskedBandit02.ogg");
+		Chatter("ChatterMeleeFighterM_05_MaskedBandit02.ogg");
+		
+		Chatter("ChatterMeleeFighterM_01_MaskedBandit03.ogg");
+		Chatter("ChatterMeleeFighterM_02_MaskedBandit03.ogg");
+		Chatter("ChatterMeleeFighterM_03_MaskedBandit03.ogg");
+		Chatter("ChatterMeleeFighterM_04_MaskedBandit03.ogg");
+		Chatter("ChatterMeleeFighterM_05_MaskedBandit03.ogg");
+		
+		Chatter("ChatterMeleeFighterM_01_MaskedBandit04.ogg");
+		Chatter("ChatterMeleeFighterM_02_MaskedBandit04.ogg");
+		Chatter("ChatterMeleeFighterM_03_MaskedBandit04.ogg");
+		Chatter("ChatterMeleeFighterM_04_MaskedBandit04.ogg");
+		Chatter("ChatterMeleeFighterM_05_MaskedBandit04.ogg");
+		
+		Chatter("ChatterMeleeFighterM_01_MaskedBandit05.ogg");
+		Chatter("ChatterMeleeFighterM_02_MaskedBandit05.ogg");
+		Chatter("ChatterMeleeFighterM_03_MaskedBandit05.ogg");
+		Chatter("ChatterMeleeFighterM_04_MaskedBandit05.ogg");
+		Chatter("ChatterMeleeFighterM_05_MaskedBandit05.ogg");
+		
+        Chatter("ChatterMeleeFighterF_03_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterD_02_MaskedBandit01.ogg");
+        
+        Chatter("ChatterMeleeFighterF_03_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterD_02_MaskedBandit02.ogg");
+        
+        Chatter("ChatterMeleeFighterF_03_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterD_02_MaskedBandit03.ogg");
+        
+        Chatter("ChatterMeleeFighterF_03_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterD_02_MaskedBandit04.ogg");
+        
+        Chatter("ChatterMeleeFighterF_03_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterD_02_MaskedBandit05.ogg");
+		
+        Chatter("ChatterMeleeFighterF_03_BanditBoss01");
+        Chatter("ChatterMeleeFighterD_02_BanditBoss01");
+
+		Chatter("ChatterMeleeFighter_ZombieFight01_BanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_ZombieFight02_BanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_ZombieFight03_BanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_ZombieFight04_BanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_ZombieFight05_BanditBoss01.ogg");
+		
+		Chatter("ChatterMeleeFighter_ZombieFight01_MaskedBanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_ZombieFight02_MaskedBanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_ZombieFight03_MaskedBanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_ZombieFight04_MaskedBanditBoss01.ogg");
+		Chatter("ChatterMeleeFighter_ZombieFight05_MaskedBanditBoss01.ogg");
+        
+        Chatter("Chatter_MeleeFighterZombieHit_01_Survivor01");
+        Chatter("Chatter_MeleeFighterZombieHit_02_Survivor01");
+        Chatter("Chatter_MeleeFighterZombieHit_03_Survivor01");
+        
+        Chatter("Chatter_MeleeFighterZombieHit_01_Survivor02");
+        Chatter("Chatter_MeleeFighterZombieHit_02_Survivor02");
+        Chatter("Chatter_MeleeFighterZombieHit_03_Survivor02");
+        
+        Chatter("Chatter_MeleeFighterZombieHit_01_Survivor03");
+        Chatter("Chatter_MeleeFighterZombieHit_02_Survivor03");
+        Chatter("Chatter_MeleeFighterZombieHit_03_Survivor03");
+        
+        Chatter("Chatter_MeleeFighterZombieHit_01_Survivor04");
+        Chatter("Chatter_MeleeFighterZombieHit_02_Survivor04");
+        Chatter("Chatter_MeleeFighterZombieHit_03_Survivor04");
+        
+        Chatter("Chatter_MeleeFighterZombieHit_01_SurvivorB01");
+        Chatter("Chatter_MeleeFighterZombieHit_02_SurvivorB01");
+        Chatter("Chatter_MeleeFighterZombieHit_03_SurvivorB01");
+        
+        Chatter("Chatter_MeleeFighterZombieHit_01_SurvivorB02");
+        Chatter("Chatter_MeleeFighterZombieHit_02_SurvivorB02");
+        Chatter("Chatter_MeleeFighterZombieHit_03_SurvivorB02");
+
+	} 
+    Cnd(11.0000,  	6.0000, 	true, 					7.0)
+	{
+        // chatters after getting damage from zombie target
+		Cond("GOT_DAMAGE_FROM_TARGET", 3);
+		Cond("NOT_KNOCKED_DOWN");
+		Cond("ENEMY_TYPE", 1);
+		Cond("ENEMY_NO_SUPERIOR_WEAPON_NOTICED");
+		ShowSubtitlesIfAssist();
+		
+		Chatter("EncEscortA_06CHT01_Nick.ogg");
+		Chatter("EncEscortA_06CHT02_Nick.ogg");
+		Chatter("EncEscortA_06CHT03_Nick.ogg");
+       
+		Chatter("EncEscortB_06CHT01_Omar.ogg");
+		Chatter("EncEscortB_06CHT02_Omar.ogg");
+		Chatter("EncEscortB_06CHT03_Omar.ogg");
+	   
+		Chatter("EncEscortC_07CHT01_Ahmet.ogg");
+		Chatter("EncEscortC_07CHT02_Ahmet.ogg");
+		Chatter("EncEscortC_07CHT03_Ahmet.ogg");
+		
+		Chatter("EncEscortD_06CHT01_Babar.ogg");
+		Chatter("EncEscortD_06CHT02_Babar.ogg");
+		Chatter("EncEscortD_06CHT03_Babar.ogg");
+	   
+	   	Chatter("EncEscortE_07CHT01_Faruk.ogg");
+		Chatter("EncEscortE_07CHT02_Faruk.ogg");
+		Chatter("EncEscortE_07CHT03_Faruk.ogg");
+	   
+		Chatter("EncEscortGen_14DLG01_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_14DLG02_SurvivorEscort01.ogg");
+		Chatter("EncEscortGen_14DLG01_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_14DLG02_SurvivorEscort02.ogg");
+		Chatter("EncEscortGen_14DLG01_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_14DLG02_SurvivorEscort03.ogg");
+		Chatter("EncEscortGen_14DLG01_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_14DLG02_SurvivorEscort04.ogg");
+		Chatter("EncEscortGen_14DLG01_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_14DLG02_SurvivorEscortB01.ogg");
+		Chatter("EncEscortGen_14DLG01_SurvivorEscortB02.ogg");
+		Chatter("EncEscortGen_14DLG02_SurvivorEscortB02.ogg");
+	   
+        Chatter("ChatterMeleeFighterG_01_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterG_05_Bandit01.ogg");
+
+        Chatter("ChatterMeleeFighterG_01_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterG_05_Bandit02.ogg");
+
+        Chatter("ChatterMeleeFighterG_01_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterG_05_Bandit03.ogg");
+
+        Chatter("ChatterMeleeFighterG_01_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterG_05_Bandit04.ogg");
+
+        Chatter("ChatterMeleeFighterG_01_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterG_05_Bandit05.ogg");
+        
+        Chatter("ChatterMeleeFighterG_01_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterG_05_MaskedBandit01.ogg");
+
+        Chatter("ChatterMeleeFighterG_01_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterG_05_MaskedBandit02.ogg");
+
+        Chatter("ChatterMeleeFighterG_01_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterG_05_MaskedBandit03.ogg");
+
+        Chatter("ChatterMeleeFighterG_01_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterG_05_MaskedBandit04.ogg");
+
+        Chatter("ChatterMeleeFighterG_01_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterG_05_MaskedBandit05.ogg");
+		
+        Chatter("ChatterMeleeFighterG_01_BanditBoss01");
+        Chatter("ChatterMeleeFighterG_05_BanditBoss01");
+        
+        Chatter("Chatter_MeleeFighterDamageFromZombie_01_Survivor01");
+        Chatter("Chatter_MeleeFighterDamageFromZombie_02_Survivor01");
+        Chatter("Chatter_MeleeFighterDamageFromZombie_03_Survivor01");
+        
+        Chatter("Chatter_MeleeFighterDamageFromZombie_01_Survivor02");
+        Chatter("Chatter_MeleeFighterDamageFromZombie_02_Survivor02");
+        Chatter("Chatter_MeleeFighterDamageFromZombie_03_Survivor02");
+        
+        Chatter("Chatter_MeleeFighterDamageFromZombie_01_Survivor03");
+        Chatter("Chatter_MeleeFighterDamageFromZombie_02_Survivor03");
+        Chatter("Chatter_MeleeFighterDamageFromZombie_03_Survivor03");
+        
+        Chatter("Chatter_MeleeFighterDamageFromZombie_01_Survivor04");
+        Chatter("Chatter_MeleeFighterDamageFromZombie_02_Survivor04");
+        Chatter("Chatter_MeleeFighterDamageFromZombie_03_Survivor04");
+        
+        Chatter("Chatter_MeleeFighterDamageFromZombie_01_SurvivorB01");
+        Chatter("Chatter_MeleeFighterDamageFromZombie_02_SurvivorB01");
+        Chatter("Chatter_MeleeFighterDamageFromZombie_03_SurvivorB01");
+        
+        Chatter("Chatter_MeleeFighterDamageFromZombie_01_SurvivorB02");
+        Chatter("Chatter_MeleeFighterDamageFromZombie_02_SurvivorB02");
+        Chatter("Chatter_MeleeFighterDamageFromZombie_03_SurvivorB02");
+        
+	} 
+    Cnd( 0.5000, 5.0000, true, 30.0 )
+	{
+        // chatters played when zombie is far away and HMF stop chasing him
+		Cond("IS_AI_WARNING");
+		Cond("ENEMY_TYPE", 1);
+		Cond("ENEMY_NO_SUPERIOR_WEAPON_NOTICED");
+		
+        Chatter("ChatterMeleeFighterI_02_Bandit01.ogg");
+        Chatter("ChatterMeleeFighterI_02_Bandit02.ogg");
+        Chatter("ChatterMeleeFighterI_02_Bandit03.ogg");
+        Chatter("ChatterMeleeFighterI_02_Bandit04.ogg");
+        Chatter("ChatterMeleeFighterI_02_Bandit05.ogg");
+        Chatter("ChatterMeleeFighterI_02_MaskedBandit01.ogg");
+        Chatter("ChatterMeleeFighterI_02_MaskedBandit02.ogg");
+        Chatter("ChatterMeleeFighterI_02_MaskedBandit03.ogg");
+        Chatter("ChatterMeleeFighterI_02_MaskedBandit04.ogg");
+        Chatter("ChatterMeleeFighterI_02_MaskedBandit05.ogg");
+        Chatter("ChatterMeleeFighterI_02_BanditBoss01");
+	}
+	
+	use NPCs();
+	use Shooters();
+    /////////////////////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////////////////////    
+    /////////////////////////////////////////////////////////////////////////////////////////////////////    
+    
+    Cnd(13.0000,  	20.0000, 	true, 					10.0)
+	{
+		Cond("KEEP_DISTANCE_FROM_PLAYER");
+		Chatter("Chatter_KeepDistanceFromPlayer_01_Male01");
+		Chatter("Chatter_KeepDistanceFromPlayer_02_Male01");
+		Chatter("Chatter_KeepDistanceFromPlayer_03_Male01");
+	}
+	
+	Cnd(11.0000,  	20.0000, 	true, 					10.0)
+	{
+		Cond("HAS_ATTACK_TARGET");
+        Cond("ENEMY_TYPE", 1);
+       
+        Chatter("Chatter_MeleeFighterDuringTheFight_01_Survivor01");
+        Chatter("Chatter_MeleeFighterDuringTheFight_02_Survivor01");
+        Chatter("Chatter_MeleeFighterDuringTheFight_03_Survivor01");
+        
+        Chatter("Chatter_MeleeFighterDuringTheFight_01_Survivor02");
+        Chatter("Chatter_MeleeFighterDuringTheFight_02_Survivor02");
+        Chatter("Chatter_MeleeFighterDuringTheFight_03_Survivor02");
+        
+        Chatter("Chatter_MeleeFighterDuringTheFight_01_Survivor03");
+        Chatter("Chatter_MeleeFighterDuringTheFight_02_Survivor03");
+        Chatter("Chatter_MeleeFighterDuringTheFight_03_Survivor03");
+        
+        Chatter("Chatter_MeleeFighterDuringTheFight_01_Survivor04");
+        Chatter("Chatter_MeleeFighterDuringTheFight_02_Survivor04");
+        Chatter("Chatter_MeleeFighterDuringTheFight_03_Survivor04");
+        
+        Chatter("Chatter_MeleeFighterDuringTheFight_01_SurvivorB01");
+        Chatter("Chatter_MeleeFighterDuringTheFight_02_SurvivorB01");
+        Chatter("Chatter_MeleeFighterDuringTheFight_03_SurvivorB01");
+        
+        Chatter("Chatter_MeleeFighterDuringTheFight_01_SurvivorB02");
+        Chatter("Chatter_MeleeFighterDuringTheFight_02_SurvivorB02");
+        Chatter("Chatter_MeleeFighterDuringTheFight_03_SurvivorB02");
+	}
+    
+    NpcCnd( 10.0000,  	15.0000, 	false, 					0.7)
+	{
+		Cond("PLAYER_IS_BLOCKING_PATH", -1);	
+		//ShowSubtitles();
+        
+        Chatter("Chatter_IsBlockingPath_02_Male01");
+        Chatter("Chatter_IsBlockingPath_04_Male01");
+        Chatter("Chatter_IsBlockingPath_05_Male01");
+	}
+}

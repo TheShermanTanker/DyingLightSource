@@ -1,0 +1,1702 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums_cs"
+     pxsl_line="2">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST NAME : Run -->
+    <!-- QUEST INFO : Run from Rais base -->
+    <!-- AFTER QUEST: Arena -->
+    <!-- COMMENT    :  -->
+    <!-- FROM       : >> SLUMS CS -->
+    <!-- TO         : >> SLUMS -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="Q_Run01"
+         parent="Q_Arena01"
+         glued="true"
+         pxsl_line="13">
+        <Phase
+             type="BLOCK_SPIKE_CHATTERS"
+             name="_"
+             pxsl_line="14">
+            <Path
+                 pxsl_line="14">
+                <Phase
+                     type="AND"
+                     name="_"
+                     objective="&amp;Run_OBJ_Escape&amp;"
+                     pxsl_line="15">
+                    <Path
+                         pxsl_line="15">
+                        <Phase
+                             type="go to"
+                             name="RUNAWAY - START"
+                             distance="10000"
+                             pxsl_line="16">
+                            <Destination
+                                 pxsl_line="16">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="runaway_start"
+                                     pxsl_line="16" />
+                            </Destination>
+                            <DebugPlayerPosition
+                                 pxsl_line="17">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="runaway_start"
+                                     pxsl_line="17" />
+                            </DebugPlayerPosition>
+                        </Phase>
+                        <Phase
+                             type="player control"
+                             name="_"
+                             restore_health="true"
+                             pxsl_line="18" />
+                        <Phase
+                             type="disable enable time freeze"
+                             name="_"
+                             should_freeze_time="false"
+                             pxsl_line="19" />
+                        <Phase
+                             type="set weather"
+                             name="_"
+                             wanted_weather="0.20"
+                             duration="-1"
+                             interpolation="1"
+                             pxsl_line="20" />
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="21">
+                            <!-- HIDE RAIS SOLDIERS IN CROWD -->
+                            <Object
+                                 pxsl_line="22">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="slums_cs_arena_rais_soldiers_in_crowd_go"
+                                     pxsl_line="22" />
+                            </Object>
+                        </Phase>
+                        <!-- CHECKPOINT 1 -->
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="24">
+                            <Object
+                                 pxsl_line="24">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="runaway_start"
+                                     pxsl_line="24" />
+                            </Object>
+                        </Phase>
+                        <!-- ,enable-challengesensor _  storyslums_16 -= COOP challenge Start -->
+                        <Phase
+                             type="activate challenge"
+                             name="_"
+                             challenge="storyslums_16"
+                             pxsl_line="26" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="27">
+                            <Object
+                                 pxsl_line="28">
+                                <QuestObject
+                                     class="NightArea"
+                                     name="slums_cs_night_area"
+                                     pxsl_line="28" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="checkpoint"
+                             name="_"
+                             pxsl_line="29">
+                            <Destination
+                                 pxsl_line="29">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="runaway_start"
+                                     pxsl_line="29" />
+                            </Destination>
+                        </Phase>
+                        <!-- RUN TO SCAFFOLDING PLACE -->
+                        <Phase
+                             type="AND"
+                             name="_"
+                             pxsl_line="31">
+                            <Path
+                                 pxsl_line="32">
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     pxsl_line="33">
+                                    <Object
+                                         pxsl_line="34">
+                                        <QuestObject
+                                             class="SensorAmbientMusicArea"
+                                             name="runaway_music_area"
+                                             pxsl_line="34" />
+                                    </Object>
+                                    <!-- Enable way out to slums. -->
+                                    <Object
+                                         pxsl_line="35">
+                                        <QuestObject
+                                             class="MapPortal"
+                                             name="Portal_Slums_CS_Parking_TO_Slums"
+                                             pxsl_line="35" />
+                                    </Object>
+                                </Phase>
+                                <Phase
+                                     type="wait guard"
+                                     name="_"
+                                     time="0.5"
+                                     pxsl_line="36" />
+                                <!-- shooters on start -->
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     pxsl_line="38">
+                                    <Object
+                                         pxsl_line="38">
+                                        <QuestObject
+                                             class="AISpawnBoxCompound"
+                                             name="runaway_Shooter_start_balcony01"
+                                             pxsl_line="38" />
+                                    </Object>
+                                </Phase>
+                                <Phase
+                                     type="wait guard"
+                                     name="_"
+                                     time="0.5"
+                                     pxsl_line="39" />
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     pxsl_line="40">
+                                    <Object
+                                         pxsl_line="41">
+                                        <QuestObject
+                                             class="AISpawnBoxCompound"
+                                             name="runaway_Shooter_start_balcony02"
+                                             pxsl_line="41" />
+                                    </Object>
+                                    <Object
+                                         pxsl_line="42">
+                                        <QuestObject
+                                             class="AISpawnBoxCompound"
+                                             name="Shooter_yard_edge_right"
+                                             pxsl_line="42" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="43">
+                                <!-- SHOOTERS FAR -->
+                                <Phase
+                                     type="OR"
+                                     name="_"
+                                     pxsl_line="44">
+                                    <Path
+                                         pxsl_line="45">
+                                        <Phase
+                                             type="go to"
+                                             name="_"
+                                             distance="0"
+                                             show_locations="false"
+                                             pxsl_line="46">
+                                            <Destination
+                                                 pxsl_line="46">
+                                                <QuestObject
+                                                     class="SensorGoTo"
+                                                     name="runaway_enemies_spawn_trigger_scaffolding"
+                                                     pxsl_line="46" />
+                                            </Destination>
+                                        </Phase>
+                                        <Phase
+                                             type="enable"
+                                             name="_"
+                                             pxsl_line="47">
+                                            <Object
+                                                 pxsl_line="48">
+                                                <QuestObject
+                                                     class="AISpawnBoxCompound"
+                                                     name="runaway_Shooter_scaffolding"
+                                                     pxsl_line="48" />
+                                            </Object>
+                                            <Object
+                                                 pxsl_line="49">
+                                                <QuestObject
+                                                     class="AutoCannon"
+                                                     name="runaway_autocannon_bazooka_01"
+                                                     pxsl_line="49" />
+                                            </Object>
+                                            <Object
+                                                 pxsl_line="50">
+                                                <QuestObject
+                                                     class="AutoCannon"
+                                                     name="runaway_autocannon_flare_01"
+                                                     pxsl_line="50" />
+                                            </Object>
+                                        </Phase>
+                                    </Path>
+                                    <Path
+                                         pxsl_line="51">
+                                        <Phase
+                                             type="go to"
+                                             name="_"
+                                             distance="0"
+                                             show_locations="false"
+                                             pxsl_line="52">
+                                            <Destination
+                                                 pxsl_line="52">
+                                                <QuestObject
+                                                     class="SensorGoTo"
+                                                     name="runaway_sensor_goto_exploding_bridge"
+                                                     pxsl_line="52" />
+                                            </Destination>
+                                        </Phase>
+                                    </Path>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="53">
+                                <!-- LOCATION -->
+                                <Phase
+                                     type="OR"
+                                     name="_"
+                                     pxsl_line="54">
+                                    <Path
+                                         pxsl_line="55">
+                                        <Phase
+                                             type="go to"
+                                             name="_"
+                                             distance="0"
+                                             pxsl_line="56">
+                                            <Destination
+                                                 pxsl_line="56">
+                                                <QuestObject
+                                                     class="SensorGoTo"
+                                                     name="runaway_enemies_spawn_trigger_scaffolding"
+                                                     pxsl_line="56" />
+                                            </Destination>
+                                        </Phase>
+                                    </Path>
+                                    <Path
+                                         pxsl_line="57">
+                                        <Phase
+                                             type="go to"
+                                             name="_"
+                                             distance="0"
+                                             show_locations="false"
+                                             pxsl_line="58">
+                                            <Destination
+                                                 pxsl_line="58">
+                                                <QuestObject
+                                                     class="SensorGoTo"
+                                                     name="runaway_enemies_spawn_trigger_top_01"
+                                                     pxsl_line="58" />
+                                            </Destination>
+                                        </Phase>
+                                    </Path>
+                                </Phase>
+                                <!-- LOACTION -->
+                                <Phase
+                                     type="OR"
+                                     name="_"
+                                     pxsl_line="59">
+                                    <Path
+                                         pxsl_line="60">
+                                        <Phase
+                                             type="go to"
+                                             name="_"
+                                             distance="0"
+                                             pxsl_line="61">
+                                            <Destination
+                                                 pxsl_line="61">
+                                                <QuestObject
+                                                     class="SensorGoTo"
+                                                     name="runaway_enemies_spawn_trigger_top_01"
+                                                     pxsl_line="61" />
+                                            </Destination>
+                                        </Phase>
+                                    </Path>
+                                    <Path
+                                         pxsl_line="62">
+                                        <Phase
+                                             type="go to"
+                                             name="_"
+                                             distance="0"
+                                             show_locations="false"
+                                             pxsl_line="63">
+                                            <Destination
+                                                 pxsl_line="63">
+                                                <QuestObject
+                                                     class="SensorGoTo"
+                                                     name="runaway_enemies_spawn_trigger_top_01_b"
+                                                     pxsl_line="63" />
+                                            </Destination>
+                                        </Phase>
+                                    </Path>
+                                </Phase>
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     pxsl_line="64">
+                                    <Object
+                                         pxsl_line="65">
+                                        <QuestObject
+                                             class="AISpawnBoxCompound"
+                                             name="runaway_Shooter_top_01"
+                                             pxsl_line="65" />
+                                    </Object>
+                                    <Object
+                                         pxsl_line="66">
+                                        <QuestObject
+                                             class="AISpawnBoxCompound"
+                                             name="runaway_Shooter_top_01b"
+                                             pxsl_line="66" />
+                                    </Object>
+                                    <Object
+                                         pxsl_line="67">
+                                        <QuestObject
+                                             class="AutoCannon"
+                                             name="runaway_autocannon_flare_02"
+                                             pxsl_line="67" />
+                                    </Object>
+                                </Phase>
+                                <Phase
+                                     type="set dialog"
+                                     name="_"
+                                     speaker="voice2d"
+                                     group="Player_Runaway_01DLG01"
+                                     auto_start="true"
+                                     pxsl_line="68" />
+                            </Path>
+                            <Path
+                                 pxsl_line="69">
+                                <Phase
+                                     type="wait guard"
+                                     name="_"
+                                     time="6"
+                                     pxsl_line="70" />
+                                <Phase
+                                     type="set dialog"
+                                     name="_"
+                                     speaker="voice2d"
+                                     group="Player_Runaway_01DLG05"
+                                     auto_start="true"
+                                     pxsl_line="71" />
+                            </Path>
+                            <Path
+                                 pxsl_line="72">
+                                <Phase
+                                     type="OR"
+                                     name="_"
+                                     pxsl_line="73">
+                                    <Path
+                                         pxsl_line="74">
+                                        <Phase
+                                             type="go to"
+                                             name="_"
+                                             distance="0"
+                                             show_locations="false"
+                                             pxsl_line="75">
+                                            <Destination
+                                                 pxsl_line="75">
+                                                <QuestObject
+                                                     class="SensorGoTo"
+                                                     name="runaway_enemies_spawn_trigger_top_01_b"
+                                                     pxsl_line="75" />
+                                            </Destination>
+                                        </Phase>
+                                    </Path>
+                                    <Path
+                                         pxsl_line="76">
+                                        <Phase
+                                             type="go to"
+                                             name="_"
+                                             distance="0"
+                                             show_locations="false"
+                                             pxsl_line="77">
+                                            <Destination
+                                                 pxsl_line="77">
+                                                <QuestObject
+                                                     class="SensorGoTo"
+                                                     name="runaway_enemies_spawn_trigger_rocket"
+                                                     pxsl_line="77" />
+                                            </Destination>
+                                        </Phase>
+                                    </Path>
+                                </Phase>
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     pxsl_line="78">
+                                    <Object
+                                         pxsl_line="78">
+                                        <QuestObject
+                                             class="AutoCannon"
+                                             name="runaway_autocannon_bazooka_02"
+                                             pxsl_line="78" />
+                                    </Object>
+                                </Phase>
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     state="disabled"
+                                     pxsl_line="79">
+                                    <Object
+                                         pxsl_line="79">
+                                        <QuestObject
+                                             class="AutoCannon"
+                                             name="runaway_autocannon_bazooka_01"
+                                             pxsl_line="79" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="80">
+                                <Phase
+                                     type="OR"
+                                     name="_"
+                                     pxsl_line="81">
+                                    <Path
+                                         pxsl_line="82">
+                                        <Phase
+                                             type="go to"
+                                             name="_"
+                                             distance="0"
+                                             show_locations="false"
+                                             pxsl_line="83">
+                                            <Destination
+                                                 pxsl_line="83">
+                                                <QuestObject
+                                                     class="SensorGoTo"
+                                                     name="runaway_scaffolding_crate_destroy_trigger"
+                                                     pxsl_line="83" />
+                                            </Destination>
+                                        </Phase>
+                                    </Path>
+                                    <Path
+                                         pxsl_line="84">
+                                        <Phase
+                                             type="go to"
+                                             name="_"
+                                             distance="0"
+                                             show_locations="false"
+                                             pxsl_line="85">
+                                            <Destination
+                                                 pxsl_line="85">
+                                                <QuestObject
+                                                     class="SensorGoTo"
+                                                     name="runaway_enemies_spawn_trigger_top_01_b"
+                                                     pxsl_line="85" />
+                                            </Destination>
+                                        </Phase>
+                                    </Path>
+                                </Phase>
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     pxsl_line="86">
+                                    <Object
+                                         pxsl_line="86">
+                                        <QuestObject
+                                             class="AutoCannon"
+                                             name="runaway_autocannon_bazooka_03"
+                                             pxsl_line="86" />
+                                    </Object>
+                                </Phase>
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     state="disabled"
+                                     pxsl_line="87">
+                                    <Object
+                                         pxsl_line="87">
+                                        <QuestObject
+                                             class="AutoCannon"
+                                             name="runaway_autocannon_bazooka_02"
+                                             pxsl_line="87" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                        <!-- CHECKPOINT 2 -->
+                        <Phase
+                             type="go to"
+                             name="RUNAWAY - Going up"
+                             distance="10000"
+                             pxsl_line="89">
+                            <Destination
+                                 pxsl_line="89">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="runaway_respawn_01"
+                                     pxsl_line="89" />
+                            </Destination>
+                            <DebugPlayerPosition
+                                 pxsl_line="90">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="runaway_respawn_01"
+                                     pxsl_line="90" />
+                            </DebugPlayerPosition>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="91">
+                            <Object
+                                 pxsl_line="91">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="runaway_respawn_01"
+                                     pxsl_line="91" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="92">
+                            <Object
+                                 pxsl_line="92">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="runaway_start"
+                                     pxsl_line="92" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="93">
+                            <Object
+                                 pxsl_line="94">
+                                <QuestObject
+                                     class="AutoCannon"
+                                     name="runaway_autocannon_bazooka_03"
+                                     pxsl_line="94" />
+                            </Object>
+                            <Object
+                                 pxsl_line="95">
+                                <QuestObject
+                                     class="AutoCannon"
+                                     name="runaway_autocannon_flare_01"
+                                     pxsl_line="95" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="checkpoint"
+                             name="_"
+                             pxsl_line="96">
+                            <Destination
+                                 pxsl_line="96">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="runaway_respawn_01"
+                                     pxsl_line="96" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="AND"
+                             name="WAYPOINT 2"
+                             pxsl_line="98">
+                            <Path
+                                 pxsl_line="98">
+                                <Phase
+                                     type="OR"
+                                     name="_"
+                                     pxsl_line="99">
+                                    <!-- LOCATION -->
+                                    <Path
+                                         pxsl_line="100">
+                                        <Phase
+                                             type="go to"
+                                             name="BRIDGE WAY"
+                                             distance="0"
+                                             pxsl_line="101">
+                                            <Destination
+                                                 pxsl_line="101">
+                                                <QuestObject
+                                                     class="SensorGoTo"
+                                                     name="runaway_sensor_goto_exploding_bridge"
+                                                     pxsl_line="101" />
+                                            </Destination>
+                                        </Phase>
+                                        <Phase
+                                             type="enable"
+                                             name="_"
+                                             pxsl_line="102">
+                                            <Object
+                                                 pxsl_line="102">
+                                                <QuestObject
+                                                     class="AISpawnBoxCompound"
+                                                     name="runaway_Shooter_top_02"
+                                                     pxsl_line="102" />
+                                            </Object>
+                                        </Phase>
+                                    </Path>
+                                    <Path
+                                         pxsl_line="103">
+                                        <!-- UNBLOCKER -->
+                                        <Phase
+                                             type="go to"
+                                             name="_"
+                                             distance="0"
+                                             show_locations="false"
+                                             pxsl_line="104">
+                                            <Destination
+                                                 pxsl_line="104">
+                                                <QuestObject
+                                                     class="SensorGoTo"
+                                                     name="runaway_sensor_goto_invoke_normandy"
+                                                     pxsl_line="104" />
+                                            </Destination>
+                                        </Phase>
+                                    </Path>
+                                </Phase>
+                                <Phase
+                                     type="OR"
+                                     name="_"
+                                     pxsl_line="105">
+                                    <!-- LOCATION -->
+                                    <Path
+                                         pxsl_line="106">
+                                        <Phase
+                                             type="go to"
+                                             name="_"
+                                             distance="0"
+                                             pxsl_line="107">
+                                            <Destination
+                                                 pxsl_line="107">
+                                                <QuestObject
+                                                     class="SensorGoTo"
+                                                     name="runaway_checkpoint_01_trigger"
+                                                     pxsl_line="107" />
+                                            </Destination>
+                                        </Phase>
+                                        <Phase
+                                             type="enable"
+                                             name="_"
+                                             pxsl_line="108">
+                                            <Object
+                                                 pxsl_line="108">
+                                                <QuestObject
+                                                     class="AISpawnBoxCompound"
+                                                     name="runaway_Shooter_top_03"
+                                                     pxsl_line="108" />
+                                            </Object>
+                                        </Phase>
+                                        <Phase
+                                             type="set dialog"
+                                             name="_"
+                                             speaker="voice2d"
+                                             group="Player_Runaway_01DLG03"
+                                             auto_start="true"
+                                             pxsl_line="109" />
+                                    </Path>
+                                    <Path
+                                         pxsl_line="110">
+                                        <!-- UNBLOCKER                    -->
+                                        <Phase
+                                             type="go to"
+                                             name="_"
+                                             distance="0"
+                                             show_locations="false"
+                                             pxsl_line="111">
+                                            <Destination
+                                                 pxsl_line="111">
+                                                <QuestObject
+                                                     class="SensorGoTo"
+                                                     name="runaway_sensor_goto_invoke_normandy"
+                                                     pxsl_line="111" />
+                                            </Destination>
+                                        </Phase>
+                                    </Path>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                        <!-- CHECKPOINT 3 -->
+                        <Phase
+                             type="go to"
+                             name="RUNAWAY - First building"
+                             distance="10000"
+                             pxsl_line="114">
+                            <Destination
+                                 pxsl_line="114">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="runaway_respawn_02"
+                                     pxsl_line="114" />
+                            </Destination>
+                            <DebugPlayerPosition
+                                 pxsl_line="115">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="runaway_respawn_02"
+                                     pxsl_line="115" />
+                            </DebugPlayerPosition>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="116">
+                            <Object
+                                 pxsl_line="116">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="runaway_respawn_02"
+                                     pxsl_line="116" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="117">
+                            <Object
+                                 pxsl_line="117">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="runaway_respawn_01"
+                                     pxsl_line="117" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="checkpoint"
+                             name="_"
+                             pxsl_line="118">
+                            <Destination
+                                 pxsl_line="118">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="runaway_respawn_02"
+                                     pxsl_line="118" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="OR"
+                             name="WAYPOINT 2-5"
+                             pxsl_line="120">
+                            <!-- LOCATION -->
+                            <Path
+                                 pxsl_line="121">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="0"
+                                     pxsl_line="122">
+                                    <Destination
+                                         pxsl_line="122">
+                                        <QuestObject
+                                             class="SensorGoTo"
+                                             name="runaway_checkpoint_01_trigger_b"
+                                             pxsl_line="122" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="123">
+                                <!-- UNBLOCKER -->
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="0"
+                                     show_locations="false"
+                                     pxsl_line="124">
+                                    <Destination
+                                         pxsl_line="124">
+                                        <QuestObject
+                                             class="SensorGoTo"
+                                             name="runaway_sensor_goto_invoke_normandy"
+                                             pxsl_line="124" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="125">
+                            <Object
+                                 pxsl_line="125">
+                                <QuestObject
+                                     class="AutoCannon"
+                                     name="runaway_autocannon_flare_03"
+                                     pxsl_line="125" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="126">
+                            <Object
+                                 pxsl_line="126">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="runaway_respawn_02_5"
+                                     pxsl_line="126" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="127">
+                            <Object
+                                 pxsl_line="127">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="runaway_respawn_02"
+                                     pxsl_line="127" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="AND"
+                             name="WAYPOINT 3"
+                             pxsl_line="129">
+                            <!-- LOCATION -->
+                            <Path
+                                 pxsl_line="130">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="0"
+                                     pxsl_line="131">
+                                    <Destination
+                                         pxsl_line="131">
+                                        <QuestObject
+                                             class="SensorGoTo"
+                                             name="runaway_sensor_goto_invoke_normandy"
+                                             pxsl_line="131" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                            <!-- ENEMIES ON CONTAINERS ON RIGHT -->
+                            <Path
+                                 pxsl_line="132">
+                                <Phase
+                                     type="OR"
+                                     name="_"
+                                     pxsl_line="133">
+                                    <Path
+                                         pxsl_line="134">
+                                        <Phase
+                                             type="go to"
+                                             name="_"
+                                             distance="0"
+                                             show_locations="false"
+                                             pxsl_line="135">
+                                            <Destination
+                                                 pxsl_line="135">
+                                                <QuestObject
+                                                     class="SensorGoTo"
+                                                     name="runaway_goto_landing_in_normandy"
+                                                     pxsl_line="135" />
+                                            </Destination>
+                                        </Phase>
+                                        <Phase
+                                             type="enable"
+                                             name="_"
+                                             pxsl_line="136">
+                                            <Object
+                                                 pxsl_line="136">
+                                                <QuestObject
+                                                     class="AISpawnBoxCompound"
+                                                     name="Shooter_top_04"
+                                                     pxsl_line="136" />
+                                            </Object>
+                                        </Phase>
+                                    </Path>
+                                    <Path
+                                         pxsl_line="137">
+                                        <!-- UNBLOCKER   -->
+                                        <Phase
+                                             type="go to"
+                                             name="_"
+                                             distance="0"
+                                             show_locations="false"
+                                             pxsl_line="138">
+                                            <Destination
+                                                 pxsl_line="138">
+                                                <QuestObject
+                                                     class="SensorGoTo"
+                                                     name="runaway_sensor_goto_invoke_normandy"
+                                                     pxsl_line="138" />
+                                            </Destination>
+                                        </Phase>
+                                    </Path>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                        <Phase
+                             type="AND"
+                             name="_"
+                             pxsl_line="140">
+                            <!-- LOCATION -->
+                            <Path
+                                 pxsl_line="141">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="0"
+                                     pxsl_line="142">
+                                    <Destination
+                                         pxsl_line="142">
+                                        <QuestObject
+                                             class="SensorGoTo"
+                                             name="runaway_goto_elevator"
+                                             pxsl_line="142" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="143">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="0"
+                                     show_locations="false"
+                                     pxsl_line="144">
+                                    <Destination
+                                         pxsl_line="144">
+                                        <QuestObject
+                                             class="SensorGoTo"
+                                             name="runaway_sensor_goto_yard_explosion_01"
+                                             pxsl_line="144" />
+                                    </Destination>
+                                </Phase>
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     pxsl_line="145">
+                                    <Object
+                                         pxsl_line="145">
+                                        <QuestObject
+                                             class="AISpawnBoxCompound"
+                                             name="runaway_Shooter_top_04"
+                                             pxsl_line="145" />
+                                    </Object>
+                                </Phase>
+                                <Phase
+                                     type="set dialog"
+                                     name="_"
+                                     speaker="voice2d"
+                                     group="Player_Runaway_01DLG04"
+                                     auto_start="true"
+                                     pxsl_line="146" />
+                                <!-- yard explosions -->
+                                <Phase
+                                     type="AND"
+                                     name="_"
+                                     pxsl_line="150">
+                                    <Path
+                                         pxsl_line="151">
+                                        <Phase
+                                             type="enable"
+                                             name="_"
+                                             pxsl_line="152">
+                                            <Object
+                                                 pxsl_line="153">
+                                                <QuestObject
+                                                     class="EarthQuakeArea"
+                                                     name="runaway_yard_explosion_area_01"
+                                                     pxsl_line="153" />
+                                            </Object>
+                                            <Object
+                                                 pxsl_line="154">
+                                                <QuestObject
+                                                     class="FXEmitter"
+                                                     name="runaway_FX_yard_explosion_01"
+                                                     pxsl_line="154" />
+                                            </Object>
+                                            <Object
+                                                 pxsl_line="155">
+                                                <QuestObject
+                                                     class="SoundEmitterSimple"
+                                                     name="runaway_construction_yard_explision_SFX_01"
+                                                     pxsl_line="155" />
+                                            </Object>
+                                        </Phase>
+                                        <Phase
+                                             type="wait guard"
+                                             name="_"
+                                             time="1"
+                                             pxsl_line="156" />
+                                        <Phase
+                                             type="enable"
+                                             name="_"
+                                             state="disabled"
+                                             pxsl_line="157">
+                                            <Object
+                                                 pxsl_line="157">
+                                                <QuestObject
+                                                     class="EarthQuakeArea"
+                                                     name="runaway_yard_explosion_area_01"
+                                                     pxsl_line="157" />
+                                            </Object>
+                                        </Phase>
+                                    </Path>
+                                    <Path
+                                         pxsl_line="159">
+                                        <Phase
+                                             type="go to"
+                                             name="_"
+                                             distance="0"
+                                             show_locations="false"
+                                             pxsl_line="160">
+                                            <Destination
+                                                 pxsl_line="160">
+                                                <QuestObject
+                                                     class="SensorGoTo"
+                                                     name="runaway_sensor_goto_yard_explosion_02"
+                                                     pxsl_line="160" />
+                                            </Destination>
+                                        </Phase>
+                                        <Phase
+                                             type="enable"
+                                             name="_"
+                                             pxsl_line="161">
+                                            <Object
+                                                 pxsl_line="162">
+                                                <QuestObject
+                                                     class="EarthQuakeArea"
+                                                     name="runaway_yard_explosion_area_02"
+                                                     pxsl_line="162" />
+                                            </Object>
+                                            <Object
+                                                 pxsl_line="163">
+                                                <QuestObject
+                                                     class="FXEmitter"
+                                                     name="runaway_FX_yard_explosion_02"
+                                                     pxsl_line="163" />
+                                            </Object>
+                                            <Object
+                                                 pxsl_line="164">
+                                                <QuestObject
+                                                     class="SoundEmitterSimple"
+                                                     name="runaway_construction_yard_explision_SFX_02"
+                                                     pxsl_line="164" />
+                                            </Object>
+                                        </Phase>
+                                        <Phase
+                                             type="wait guard"
+                                             name="_"
+                                             time="1"
+                                             pxsl_line="165" />
+                                        <Phase
+                                             type="enable"
+                                             name="_"
+                                             state="disabled"
+                                             pxsl_line="166">
+                                            <Object
+                                                 pxsl_line="166">
+                                                <QuestObject
+                                                     class="EarthQuakeArea"
+                                                     name="runaway_yard_explosion_area_02"
+                                                     pxsl_line="166" />
+                                            </Object>
+                                        </Phase>
+                                    </Path>
+                                    <Path
+                                         pxsl_line="167">
+                                        <Phase
+                                             type="go to"
+                                             name="_"
+                                             distance="0"
+                                             show_locations="false"
+                                             pxsl_line="168">
+                                            <Destination
+                                                 pxsl_line="168">
+                                                <QuestObject
+                                                     class="SensorGoTo"
+                                                     name="runaway_sensor_goto_yard_explosion_04"
+                                                     pxsl_line="168" />
+                                            </Destination>
+                                        </Phase>
+                                        <Phase
+                                             type="enable"
+                                             name="_"
+                                             pxsl_line="169">
+                                            <Object
+                                                 pxsl_line="170">
+                                                <QuestObject
+                                                     class="EarthQuakeArea"
+                                                     name="runaway_yard_explosion_area_04"
+                                                     pxsl_line="170" />
+                                            </Object>
+                                            <Object
+                                                 pxsl_line="171">
+                                                <QuestObject
+                                                     class="FXEmitter"
+                                                     name="runaway_FX_yard_explosion_04"
+                                                     pxsl_line="171" />
+                                            </Object>
+                                            <Object
+                                                 pxsl_line="172">
+                                                <QuestObject
+                                                     class="SoundEmitterSimple"
+                                                     name="runaway_construction_yard_explision_SFX_04"
+                                                     pxsl_line="172" />
+                                            </Object>
+                                        </Phase>
+                                        <Phase
+                                             type="wait guard"
+                                             name="_"
+                                             time="1"
+                                             pxsl_line="173" />
+                                        <Phase
+                                             type="enable"
+                                             name="_"
+                                             state="disabled"
+                                             pxsl_line="174">
+                                            <Object
+                                                 pxsl_line="174">
+                                                <QuestObject
+                                                     class="EarthQuakeArea"
+                                                     name="runaway_yard_explosion_area_04"
+                                                     pxsl_line="174" />
+                                            </Object>
+                                        </Phase>
+                                    </Path>
+                                    <Path
+                                         pxsl_line="176">
+                                        <Phase
+                                             type="go to"
+                                             name="_"
+                                             distance="0"
+                                             show_locations="false"
+                                             pxsl_line="177">
+                                            <Destination
+                                                 pxsl_line="177">
+                                                <QuestObject
+                                                     class="SensorGoTo"
+                                                     name="runaway_sensor_goto_yard_explosion_05"
+                                                     pxsl_line="177" />
+                                            </Destination>
+                                        </Phase>
+                                        <Phase
+                                             type="enable"
+                                             name="_"
+                                             pxsl_line="178">
+                                            <Object
+                                                 pxsl_line="179">
+                                                <QuestObject
+                                                     class="EarthQuakeArea"
+                                                     name="runaway_yard_explosion_area_05"
+                                                     pxsl_line="179" />
+                                            </Object>
+                                            <Object
+                                                 pxsl_line="180">
+                                                <QuestObject
+                                                     class="FXEmitter"
+                                                     name="runaway_FX_yard_explosion_05"
+                                                     pxsl_line="180" />
+                                            </Object>
+                                            <Object
+                                                 pxsl_line="181">
+                                                <QuestObject
+                                                     class="SoundEmitterSimple"
+                                                     name="runaway_construction_yard_explision_SFX_05"
+                                                     pxsl_line="181" />
+                                            </Object>
+                                        </Phase>
+                                        <Phase
+                                             type="wait guard"
+                                             name="_"
+                                             time="1"
+                                             pxsl_line="182" />
+                                        <Phase
+                                             type="enable"
+                                             name="_"
+                                             state="disabled"
+                                             pxsl_line="183">
+                                            <Object
+                                                 pxsl_line="183">
+                                                <QuestObject
+                                                     class="EarthQuakeArea"
+                                                     name="runaway_yard_explosion_area_05"
+                                                     pxsl_line="183" />
+                                            </Object>
+                                        </Phase>
+                                    </Path>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                        <!-- CHECKPOINT 4 -->
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             pxsl_line="186">
+                            <Destination
+                                 pxsl_line="186">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="runaway_goto_elevator_b"
+                                     pxsl_line="186" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="go to"
+                             name="RUNAWAY - Final"
+                             distance="100000"
+                             pxsl_line="187">
+                            <Destination
+                                 pxsl_line="187">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="runaway_respawn_03"
+                                     pxsl_line="187" />
+                            </Destination>
+                            <DebugPlayerPosition
+                                 pxsl_line="188">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="runaway_respawn_03"
+                                     pxsl_line="188" />
+                            </DebugPlayerPosition>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="189">
+                            <Object
+                                 pxsl_line="189">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="runaway_respawn_03"
+                                     pxsl_line="189" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="190">
+                            <Object
+                                 pxsl_line="190">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="runaway_respawn_02_5"
+                                     pxsl_line="190" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="191">
+                            <Object
+                                 pxsl_line="192">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="runaway_enemy_01"
+                                     pxsl_line="192" />
+                            </Object>
+                            <Object
+                                 pxsl_line="193">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="runaway_enemy_02"
+                                     pxsl_line="193" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="checkpoint"
+                             name="_"
+                             pxsl_line="194">
+                            <Destination
+                                 pxsl_line="194">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="runaway_respawn_03"
+                                     pxsl_line="194" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             pxsl_line="195">
+                            <Destination
+                                 pxsl_line="195">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="runaway_goto_elevator_d"
+                                     pxsl_line="195" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             pxsl_line="196">
+                            <Destination
+                                 pxsl_line="196">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="runaway_goto_elevator_c"
+                                     pxsl_line="196" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="197">
+                            <Object
+                                 pxsl_line="198">
+                                <QuestObject
+                                     class="AISpawnBoxCompound"
+                                     name="runaway_Shooter_start_balcony01"
+                                     pxsl_line="198" />
+                            </Object>
+                            <Object
+                                 pxsl_line="199">
+                                <QuestObject
+                                     class="AISpawnBoxCompound"
+                                     name="runaway_Shooter_start_balcony02"
+                                     pxsl_line="199" />
+                            </Object>
+                            <Object
+                                 pxsl_line="200">
+                                <QuestObject
+                                     class="AISpawnBoxCompound"
+                                     name="runaway_Shooter_scaffolding"
+                                     pxsl_line="200" />
+                            </Object>
+                            <Object
+                                 pxsl_line="201">
+                                <QuestObject
+                                     class="SoundEmitterSimple"
+                                     name="runaway_scaffloding_planks_destroy_SFX"
+                                     pxsl_line="201" />
+                            </Object>
+                            <!-- ,o FXEmitter runaway_scaffloding_crate_destroy_FX_02 -->
+                            <!-- ,o FXEmitter runaway_scaffloding_crate_destroy_FX_01 -->
+                            <!-- ,o FXEmitter runaway_scaffloding_crate_destroy_FX_03 -->
+                            <Object
+                                 pxsl_line="205">
+                                <QuestObject
+                                     class="AISpawnBoxCompound"
+                                     name="runaway_Shooter_top_01"
+                                     pxsl_line="205" />
+                            </Object>
+                            <Object
+                                 pxsl_line="206">
+                                <QuestObject
+                                     class="AISpawnBoxCompound"
+                                     name="runaway_Shooter_top_01b"
+                                     pxsl_line="206" />
+                            </Object>
+                            <Object
+                                 pxsl_line="207">
+                                <QuestObject
+                                     class="AISpawnBoxCompound"
+                                     name="runaway_Shooter_top_02"
+                                     pxsl_line="207" />
+                            </Object>
+                            <Object
+                                 pxsl_line="208">
+                                <QuestObject
+                                     class="AISpawnBoxCompound"
+                                     name="runaway_Shooter_top_03"
+                                     pxsl_line="208" />
+                            </Object>
+                            <Object
+                                 pxsl_line="209">
+                                <QuestObject
+                                     class="AISpawnBoxCompound"
+                                     name="runaway_Shooter_top_04"
+                                     pxsl_line="209" />
+                            </Object>
+                            <Object
+                                 pxsl_line="210">
+                                <QuestObject
+                                     class="FXEmitter"
+                                     name="runaway_FX_yard_explosion_01"
+                                     pxsl_line="210" />
+                            </Object>
+                            <Object
+                                 pxsl_line="211">
+                                <QuestObject
+                                     class="SoundEmitterSimple"
+                                     name="runaway_construction_yard_explision_SFX_01"
+                                     pxsl_line="211" />
+                            </Object>
+                            <Object
+                                 pxsl_line="212">
+                                <QuestObject
+                                     class="FXEmitter"
+                                     name="runaway_FX_yard_explosion_02"
+                                     pxsl_line="212" />
+                            </Object>
+                            <Object
+                                 pxsl_line="213">
+                                <QuestObject
+                                     class="FXEmitter"
+                                     name="runaway_FX_yard_explosion_03"
+                                     pxsl_line="213" />
+                            </Object>
+                            <Object
+                                 pxsl_line="214">
+                                <QuestObject
+                                     class="SoundEmitterSimple"
+                                     name="runaway_construction_yard_explision_SFX_03"
+                                     pxsl_line="214" />
+                            </Object>
+                            <Object
+                                 pxsl_line="215">
+                                <QuestObject
+                                     class="FXEmitter"
+                                     name="runaway_FX_yard_explosion_04"
+                                     pxsl_line="215" />
+                            </Object>
+                            <Object
+                                 pxsl_line="216">
+                                <QuestObject
+                                     class="SoundEmitterSimple"
+                                     name="runaway_construction_yard_explision_SFX_04"
+                                     pxsl_line="216" />
+                            </Object>
+                            <Object
+                                 pxsl_line="217">
+                                <QuestObject
+                                     class="FXEmitter"
+                                     name="runaway_FX_yard_explosion_05"
+                                     pxsl_line="217" />
+                            </Object>
+                            <Object
+                                 pxsl_line="218">
+                                <QuestObject
+                                     class="SoundEmitterSimple"
+                                     name="runaway_construction_yard_explision_SFX_05"
+                                     pxsl_line="218" />
+                            </Object>
+                            <Object
+                                 pxsl_line="219">
+                                <QuestObject
+                                     class="AISpawnBoxCompound"
+                                     name="runaway_Shooter_top_05"
+                                     pxsl_line="219" />
+                            </Object>
+                            <Object
+                                 pxsl_line="220">
+                                <QuestObject
+                                     class="AISpawnBoxCompound"
+                                     name="Shooter_yard_edge_right"
+                                     pxsl_line="220" />
+                            </Object>
+                            <Object
+                                 pxsl_line="221">
+                                <QuestObject
+                                     class="AutoCannon"
+                                     name="runaway_autocannon_flare_02"
+                                     pxsl_line="221" />
+                            </Object>
+                            <Object
+                                 pxsl_line="222">
+                                <QuestObject
+                                     class="AutoCannon"
+                                     name="runaway_autocannon_flare_03"
+                                     pxsl_line="222" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="go to"
+                             name="WAYPOINT 4"
+                             distance="0"
+                             show_locations="true"
+                             complete_challenge="storyslums_16"
+                             pxsl_line="223">
+                            <Destination
+                                 pxsl_line="223">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="runaway_Sensor_finish"
+                                     pxsl_line="223" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="session param"
+                             name="_"
+                             param="BtZDisable"
+                             value="true"
+                             pxsl_line="224" />
+                        <!-- ,disable-challengesensor _  storyslums_16 -= COOP challenge DISABLE -->
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="226">
+                            <Object
+                                 pxsl_line="227">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="runaway_enemy_01"
+                                     pxsl_line="227" />
+                            </Object>
+                            <Object
+                                 pxsl_line="228">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="runaway_enemy_02"
+                                     pxsl_line="228" />
+                            </Object>
+                            <Object
+                                 pxsl_line="229">
+                                <QuestObject
+                                     class="SensorAmbientMusicArea"
+                                     name="runaway_music_area"
+                                     pxsl_line="229" />
+                            </Object>
+                            <Object
+                                 pxsl_line="230">
+                                <QuestObject
+                                     class="PlayableAreaController"
+                                     name="Construction_SITE_playablearea_controler"
+                                     pxsl_line="230" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__runaway_cin_scaffolding_crate"
+         parent="Q_Arena01"
+         pxsl_line="231">
+        <Phase
+             type="go to"
+             name="_"
+             distance="0"
+             show_locations="false"
+             pxsl_line="232">
+            <Destination
+                 pxsl_line="232">
+                <QuestObject
+                     class="SensorGoTo"
+                     name="runaway_scaffolding_crate_destroy_trigger"
+                     pxsl_line="232" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="233">
+            <Object
+                 pxsl_line="234">
+                <QuestObject
+                     class="SoundEmitterSimple"
+                     name="runaway_scaffloding_planks_destroy_SFX"
+                     pxsl_line="234" />
+            </Object>
+            <Object
+                 pxsl_line="235">
+                <QuestObject
+                     class="FXEmitter"
+                     name="runaway_scaffloding_crate_destroy_FX_02"
+                     pxsl_line="235" />
+            </Object>
+            <Object
+                 pxsl_line="236">
+                <QuestObject
+                     class="FXEmitter"
+                     name="runaway_scaffloding_crate_destroy_FX_01"
+                     pxsl_line="236" />
+            </Object>
+            <Object
+                 pxsl_line="237">
+                <QuestObject
+                     class="FXEmitter"
+                     name="runaway_scaffloding_crate_destroy_FX_03"
+                     pxsl_line="237" />
+            </Object>
+        </Phase>
+        <Phase
+             type="movie"
+             name="_"
+             movie="runaway_scaffloding_Crate_destroy"
+             pxsl_line="238" />
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="239">
+            <Object
+                 pxsl_line="239">
+                <QuestObject
+                     class="SoundEmitterSimple"
+                     name="runaway_scaffloding_planks_destroy_metal_SFX"
+                     pxsl_line="239" />
+            </Object>
+        </Phase>
+        <Phase
+             type="wait guard"
+             name="_"
+             time="2"
+             pxsl_line="240" />
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="241">
+            <Object
+                 pxsl_line="242">
+                <QuestObject
+                     class="SoundEmitterSimple"
+                     name="runaway_scaffloding_planks_destroy_SFX"
+                     pxsl_line="242" />
+            </Object>
+            <Object
+                 pxsl_line="243">
+                <QuestObject
+                     class="FXEmitter"
+                     name="runaway_scaffloding_crate_destroy_FX_02"
+                     pxsl_line="243" />
+            </Object>
+            <Object
+                 pxsl_line="244">
+                <QuestObject
+                     class="FXEmitter"
+                     name="runaway_scaffloding_crate_destroy_FX_01"
+                     pxsl_line="244" />
+            </Object>
+            <Object
+                 pxsl_line="245">
+                <QuestObject
+                     class="FXEmitter"
+                     name="runaway_scaffloding_crate_destroy_FX_03"
+                     pxsl_line="245" />
+            </Object>
+            <Object
+                 pxsl_line="246">
+                <QuestObject
+                     class="SoundEmitterSimple"
+                     name="runaway_scaffloding_planks_destroy_metal_SFX"
+                     pxsl_line="246" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="247">
+            <Destination
+                 pxsl_line="247">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="runaway_respawn_01"
+                     pxsl_line="247" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- GOTO - SLUMS -->
+    <!-- NEXT QUEST - ANOTHER DAY IN PARADISE -->
+</QuestsDefinitions>

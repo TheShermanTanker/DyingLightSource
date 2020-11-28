@@ -1,0 +1,115 @@
+import "dynamic_objects_reason.def"
+
+sub DeclareMeshSkins(string mesh = "", string class = "", string mesh_replacement = "", int reason = DYNOBJ_REASON_ALL_NO_AI)
+{
+	Mesh(mesh)
+	{
+		Object(class, mesh_replacement, reason);
+	}
+}
+
+sub Declare(string mesh = "", string skin = "", string class = "", string mesh_replacement = "", string skin_replacement = "", int reason = DYNOBJ_REASON_ALL)
+{
+	Mesh(mesh)
+	{
+		Skin(skin)
+		{
+			Object(class, mesh_replacement, skin_replacement, reason);
+		}
+	}
+}
+
+sub DeclareMeshSkinsWithPreset(string mesh = "", string class = "", string preset = "", string mesh_replacement = "", int reason = DYNOBJ_REASON_ALL_NO_AI)
+{
+	Mesh(mesh)
+	{
+		ObjectWithPreset(class, preset, mesh_replacement, reason);
+	}
+}
+
+sub DeclareWithPreset(string mesh = "", string skin = "", string class = "", string preset = "", string mesh_replacement = "", string skin_replacement = "", int reason = DYNOBJ_REASON_ALL)
+{
+	Mesh(mesh)
+	{
+		Skin(skin)
+		{
+			ObjectWithPreset(class, preset, mesh_replacement, skin_replacement, reason);
+		}
+	}
+}
+
+sub DeclarePhysics(string mesh = "", string skin = "", int reason = DYNOBJ_REASON_ALL_NO_AI)
+{
+	use Declare(mesh = mesh, skin = skin, class = "PhysicsObject", reason = reason);
+}
+
+sub DeclareDestroyable(string mesh = "", string skin = "", int reason = DYNOBJ_REASON_ALL_NO_AI)
+{
+	use Declare(mesh = mesh, skin = skin, class = "DestroyableObject", reason = reason);
+}
+
+sub DeclareDestroyablePhysics(string mesh = "", string skin = "", int reason = DYNOBJ_REASON_ALL_NO_AI)
+{
+	use Declare(mesh = mesh, skin = skin, class = "DestroyablePhysicsObject", reason = reason);
+}
+
+sub DeclareChunk(string mesh = "", string skin = "", int reason = DYNOBJ_REASON_ALL_NO_AI)
+{
+	use Declare(mesh = mesh, skin = skin, class = "ChunkObject", reason = reason);
+}
+
+sub DeclareBreakingWindow(string mesh = "", string skin = "", int reason = DYNOBJ_REASON_ALL_NO_AI)
+{
+	use Declare(mesh = mesh, skin = skin, class = "BreakingWindow", reason = reason);
+}
+
+sub DeclareMeshContainer(string mesh = "", string skin = "", string mesh_replacement = "")
+{
+	use Declare(mesh = mesh, skin = skin, class = "Container", mesh_replacement = mesh_replacement, reason = DYNOBJ_REASON_ALL_NO_AI);
+}
+
+sub DeclareMeshComplexContainer(string mesh = "", string skin = "", string mesh_replacement = "")
+{
+	use Declare(mesh = mesh, skin = skin, class = "ComplexContainer", mesh_replacement = mesh_replacement, reason = DYNOBJ_REASON_ALL_NO_AI);
+}
+
+sub DeclareMeshComplexContainerExclude(string mesh = "", string skin = "", string mesh_replacement = "")
+{
+	use Declare(mesh = mesh, skin = skin, class = "ComplexContainer", mesh_replacement = mesh_replacement, reason = NEVER_DYNAMIC);
+}
+
+sub DeclareMeshItemSpawner(string mesh = "", string skin = "")
+{
+	use Declare(mesh = mesh, skin = skin, class = "ItemSpawner", reason = DYNOBJ_REASON_ALL_NO_AI);
+}
+
+sub DeclareMeshItemSpawnerRandom(string mesh = "", string skin = "")
+{
+	use Declare(mesh = mesh, skin = skin, class = "ItemSpawnerRandom", reason = DYNOBJ_REASON_ALL_NO_AI);
+}
+
+sub DeclareMeshLadder(string mesh = "")
+{
+	Mesh(mesh)
+	{
+		ObjectWithPreset("LadderDI", "Type;Ladder", "", "", DYNOBJ_REASON_ALL_NO_AI);
+	}
+}
+
+sub DeclareMeshClimbingPole(string mesh = "")
+{
+	Mesh(mesh)
+	{
+		ObjectWithPreset("LadderDI","Type;Pipe", "", "", DYNOBJ_REASON_ALL_NO_AI);
+	}
+}
+
+sub DeclareMeshLadderExclude(string mesh = "", string skin = "")
+{
+	use Declare(mesh = mesh, skin = skin, class = "LadderDI", reason = NEVER_DYNAMIC);
+}
+
+sub DeclareMeshSpikes(string mesh = "", string skin = "")
+{
+	use Declare(mesh = mesh, skin = skin, class = "Spikes", reason = DYNOBJ_REASON_ALL);
+}

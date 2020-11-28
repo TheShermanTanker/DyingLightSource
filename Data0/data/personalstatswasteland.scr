@@ -1,0 +1,362 @@
+sub main() 
+{
+	// Distance travelled in driver's seat
+	Stat("Personal")
+    {
+		Version(1);
+        Name("MP_DistanceTraveledDriver");
+		AgregationType("sum");
+		PropertyId("0x20000093");
+        
+		Event("Evn_Distance")
+        {
+			Driving();
+			Unit(1.0);
+        }
+    }
+
+	// Distance travelled in passenger's seat
+	Stat("Personal")
+    {
+		Version(1);
+        Name("MP_DistanceTraveledPassenger");
+		AgregationType("sum");
+		PropertyId("0x20000094");
+        
+		Event("Evn_Distance")
+        {
+			Passenger();
+			Unit(1.0);
+        }
+    }
+
+	// Maximum speed in buggy
+	Stat("Personal")
+    {
+		Version(1);
+        Name("MP_BuggyMaxSpeed");
+		AgregationType("max");
+		PropertyId("0x10000095");
+        
+		Event("Evn_Velocity")
+        {
+			Driving();
+        }
+    }
+
+	// Buggy jumps
+	Stat("Personal")
+    {
+		Version(1);
+        Name("MP_BuggyJumps");
+		AgregationType("sum");
+		PropertyId("0x10000096");
+        
+		Event("Evn_PlayerAction")
+        {
+			IgnoreAllExcept("BuggyJump");
+        }
+    }
+
+	// Bilal's Challenges completed
+	Stat("Personal")
+    {
+		Version(1);
+        Name("MP_BilalChallenges");
+		AgregationType("sum");
+		PropertyId("0x10000097");
+        
+		Event("Evn_GameplayChallenge")
+        {
+			ChallengeId("wl_challenge_car_00;wl_challenge_car_00_after;wl_challenge_car_01;wl_challenge_car_02;wl_challenge_car_03;wl_challenge_car_04;wl_challenge_car_05;wl_challenge_car_06;wl_challenge_car_07;wl_challenge_car_08;wl_challenge_car_09;wl_challenge_car_10;wl_challenge_car_11;wl_challenge_car_14;wl_challenge_car_17;wl_challenge_car_18;wl_challenge_car_19;wl_challenge_car_21;wl_challenge_car_22;wl_challenge_car_23;wl_challenge_car_horizon_04;wl_challenge_car_horizon_05;wl_challenge_car_horizon_06;wl_challenge_car_kill_01;wl_challenge_car_kill_02;wl_challenge_car_kill_03;wl_challenge_car_kill_04;wl_challenge_car_kill_04_01;wl_challenge_car_kill_04_02;wl_challenge_car_kill_05;wl_challenge_car_kill_06;wl_challenge_car_kill_07;wl_challenge_car_kill_08;wl_challenge_car_kill_09;wl_challenge_car_kill_10;wl_challenge_car_kill_11;wl_challenge_car_kill_12;wl_challenge_car_kill_13;wl_challenge_car_kill_14;wl_challenge_car_kill_15;wl_challenge_car_carnage_01;wl_challenge_car_carnage_02;wl_challenge_car_16;wl_challenge_car_20;wl_challenge_car_slammer_00;wl_challenge_car_12;wl_challenge_car_13;wasteland_demo_drive_01");
+        }
+    }
+
+	// Driver Challenges completed
+	Stat("Personal")
+    {
+		Version(1);
+        Name("MP_DriverChallenges");
+		AgregationType("sum");
+		PropertyId("0x10000098");
+        
+		Event("Evn_GameplayChallenge")
+        {
+			ChallengeId("auto_wl_car_destroyable;auto_wl_lose_pursuit;auto_wl_marker;auto_wl_airdrop;auto_wl_car_speed;auto_wl_car_kill_no_leave;auto_wl_kill_by_flame;auto_wl_car_kill_no_leave_fixed;auto_wl_car_kill;storywasteland_01;storywasteland_02;storywasteland_03;storywasteland_06;storywasteland_12;storywasteland_13;storywasteland_14;storywasteland_15;storywasteland_21;storywasteland_22");
+        }
+    }
+
+	// Buggy Parts crafted
+	Stat("Personal")
+    {
+		Version(1);
+        Name("MP_BuggyPartsCrafted");
+		AgregationType("sum");
+		PropertyId("0x10000099");
+        
+		Event("Evn_CreateWeapon")
+        {
+			ItemTypes("Item_CarUpgrade");
+        }
+    }
+
+	// Items used for repairs
+	Stat("Personal")
+    {
+		Version(1);
+        Name("MP_BuggyItemsForRepair");
+		AgregationType("sum");
+		PropertyId("0x1000009A");
+        
+		Event("Evn_BuggyPartRepaired")
+		{
+			CountUsedItems();
+		}
+    }
+
+	// Fuel units used
+	Stat("Personal")
+    {
+		Version(1);
+        Name("MP_BuggyFuelUnits");
+		AgregationType("sum");
+		PropertyId("0x1000009B");
+        
+		Event("Evn_PlayerAction")
+        {
+			IgnoreAllExcept("BuggyFuelRefill");
+        }
+    }
+
+	// Infected killed by mines
+	Stat("Personal")
+    {
+		Version(1);
+        Name("MP_InfectedKilledByMines");
+		AgregationType("sum");
+		PropertyId("0x1000009C");
+        
+		Event("Evn_Kill")
+        {
+			Victim("Zombie");
+			WeaponId("ZZZZ3_Mine");
+        }
+    }
+
+	// Infected killed by electric cage
+	Stat("Personal")
+    {
+		Version(1);
+        Name("MP_InfectedKilledByElectricCage");
+		AgregationType("sum");
+		PropertyId("0x1000009D");
+        
+		Event("Evn_Kill")
+        {
+			Victim("Zombie");
+			WeaponId("ZZZZ3_TempElectricCage;ZZZZ3_TempElectricCageShock");
+        }
+    }
+
+	// Infected killed by flamethrower
+	Stat("Personal")
+    {
+		Version(1);
+        Name("MP_InfectedKilledByFlamethrower");
+		AgregationType("sum");
+		PropertyId("0x1000009E");
+        
+		Event("Evn_Kill")
+        {
+			Victim("Zombie");
+			WeaponId("ZZZZ3_TempFireCage");
+        }
+    }
+
+	// Biters hit by a car
+	Stat("Personal")
+    {
+		Version(1);
+        Name("MP_BuggyBitersHits");
+		AgregationType("sum");
+		PropertyId("0x1000009F");
+        
+		Event("Evn_GiveDamage")
+        {
+			DamageType("car_hit");
+			UniqueTargetsForTime(10.0);
+			Victim("Biter");
+			Alive();
+        }
+    }
+
+	// Virals hit by a car
+	Stat("Personal")
+    {
+		Version(1);
+        Name("MP_BuggyViralsHits");
+		AgregationType("sum");
+		PropertyId("0x100000A0");
+        
+		Event("Evn_GiveDamage")
+        {
+			DamageType("car_hit");
+			UniqueTargetsForTime(10.0);
+			Victim("Viral");
+			Alive();
+        }
+    }
+
+	// Bolters hit by a car
+	Stat("Personal")
+    {
+		Version(1);
+        Name("MP_BuggyPrimesHits");
+		AgregationType("sum");
+		PropertyId("0x100000A1");
+        
+		Event("Evn_GiveDamage")
+        {
+			DamageType("car_hit");
+			UniqueTargetsForTime(10.0);
+			Victim("Prime");
+			Alive();
+        }
+    }
+
+	// Volatiles hit by a car
+	Stat("Personal")
+    {
+		Version(1);
+        Name("MP_BuggyVolatilesHits");
+		AgregationType("sum");
+		PropertyId("0x100000A2");
+        
+		Event("Evn_GiveDamage")
+        {
+			DamageType("car_hit");
+			UniqueTargetsForTime(10.0);
+			Victim("Volatile");
+			Alive();
+        }
+    }
+
+	// Demolishers hit by a car
+	Stat("Personal")
+    {
+		Version(1);
+        Name("MP_BuggyDemolishersHits");
+		AgregationType("sum");
+		PropertyId("0x100000A3");
+        
+		Event("Evn_GiveDamage")
+        {
+			DamageType("car_hit");
+			UniqueTargetsForTime(10.0);
+			Victim("Demolisher");
+			Alive();
+        }
+    }
+
+	// Goons hit by a car
+	Stat("Personal")
+    {
+		Version(1);
+        Name("MP_BuggyGoonsHits");
+		AgregationType("sum");
+		PropertyId("0x100000A4");
+        
+		Event("Evn_GiveDamage")
+        {
+			DamageType("car_hit");
+			UniqueTargetsForTime(10.0);
+			Victim("Goon");
+			Alive();
+        }
+    }
+
+	// Humans hit by a car
+	Stat("Personal")
+    {
+		Version(1);
+        Name("MP_BuggyHumansHits");
+		AgregationType("sum");
+		PropertyId("0x100000A5");
+        
+		Event("Evn_GiveDamage")
+        {
+			DamageType("car_hit");
+			UniqueTargetsForTime(10.0);
+			Victim("Human");
+			Alive();
+        }
+    }
+
+	// Gas Tanks hit by a car
+	Stat("Personal")
+    {
+		Version(1);
+        Name("MP_BuggyGasTanksHits");
+		AgregationType("sum");
+		PropertyId("0x100000A6");
+        
+		Event("Evn_GiveDamage")
+        {
+			DamageType("car_hit");
+			UniqueTargetsForTime(10.0);
+			Victim("GasTank");
+			Alive();
+        }
+    }
+
+	// Bombers hit by a car
+	Stat("Personal")
+    {
+		Version(1);
+        Name("MP_BuggyBombersHits");
+		AgregationType("sum");
+		PropertyId("0x100000A7");
+        
+		Event("Evn_GiveDamage")
+        {
+			DamageType("car_hit");
+			UniqueTargetsForTime(10.0);
+			Victim("Bomber");
+			Alive();
+        }
+    }
+
+	// Screamers hit by a car
+	Stat("Personal")
+    {
+		Version(1);
+        Name("MP_BuggyScreamersHits");
+		AgregationType("sum");
+		PropertyId("0x100000A8");
+        
+		Event("Evn_GiveDamage")
+        {
+			DamageType("car_hit");
+			UniqueTargetsForTime(10.0);
+			Victim("Screamer");
+			Alive();
+        }
+    }
+
+	// Toads hit by a car
+	Stat("Personal")
+    {
+		Version(1);
+        Name("MP_BuggyToadsHits");
+		AgregationType("sum");
+		PropertyId("0x100000A9");
+        
+		Event("Evn_GiveDamage")
+        {
+			DamageType("car_hit");
+			UniqueTargetsForTime(10.0);
+			Victim("Toad");
+			Alive();
+        }
+    }
+}

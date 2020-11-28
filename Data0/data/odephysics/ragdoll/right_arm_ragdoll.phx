@@ -1,0 +1,76 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Fizyka Ragdoll dla czlowieka
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+!include("ODEPhysicsRagdoll.phx")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+PhysicsParams()
+{
+    QuickStepNumIterations(15)
+    QuickStepSortingMethod(2)
+    
+    AllowContinuousCollisions(0, 0)
+    SetWaterFloat(1.7)
+    
+    SetVelsGate(0.03, 0.4)      // CM2M
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+RagdollParams()
+{
+    Mass(10)
+    StiffenStartTime(-1)
+    ApplyForceMod(1)
+    ApplyForceAddUp(0)
+
+    BlendingOfNonPhysicalBonesTime(1)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+Bones()
+{
+    UseBone("R_Upperarm",   "capsule",  4)
+    UseBone("R_Forearm",    "capsule",  3)
+    UseBoneScale("R_Hand",  "sphere",   2, 1.4)
+	
+    BoneSynchro("R_Upperarm", "r uparmtwist")
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+Joints()
+{
+    // definicja jointow
+    DefineJoint("R_Upperarm", "R_Forearm",  "ball",  0, -1,  0,    1,  0,  0)
+    DefineJoint("R_Forearm",  "R_Hand",     "hinge", 0,  0, -1,    0,  0,  0)
+
+    // parametry stopu
+    Set3DOFStops("R_Upperarm R_Forearm", -0.15, 0.15,   -0.00, 0.20,   -0.15, 0.15,  0, 0, 0) 
+    Set1DOFStops("R_Forearm R_Hand",     -0.20, 0.20,  0) 
+
+    // sily tarcia stawow
+    SetFrictionForceAll(1)
+
+    // wspolczynniki dopuszczalnych bledow stopow
+    SetStopERPAll(0.3)
+
+    // wspolczynniki sprezystosci jointow po osiagnieciu stopow
+    SetStopCFMAll(0.03)
+
+    // wspolczynniki sprezystosci jointow
+    SetCFMAll(0)
+
+    // wspolczynniki tlumienia sily oddalajacej od stopu (1 - brak tlumienia, 0.5 - sila zmniejszona dwukrotnie)
+    SetFudgeFactorAll(0.1)
+}
+
+
+
+
+
+
+
+
+
+
+

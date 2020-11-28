@@ -1,0 +1,421 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST NAME : Warehouse -->
+    <!-- QUEST INFO : Looking for military device in Rais Warehouse -->
+    <!-- AFTER QUEST: Intruders -->
+    <!-- COMMENT    :  -->
+    <!-- FROM       : >> SLUMS  -->
+    <!-- TO         : >> SLUMS INT WAREHOUSE -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="Q_Warehouse01"
+         parent="Q_Intruders01"
+         glued="true"
+         pxsl_line="15">
+        <!-- Rescue Zere. -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Warehouse_OBJ_GetToTheWarehouse&amp;"
+             pxsl_line="16">
+            <Path
+                 pxsl_line="16">
+                <Phase
+                     type="go to"
+                     name="WAREHOUSE - START"
+                     distance="100000"
+                     pxsl_line="17">
+                    <Destination
+                         pxsl_line="17">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="sp_Warehouse01_Start"
+                             pxsl_line="17" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="18">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="sp_Warehouse01_Start"
+                             pxsl_line="18" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="OR"
+                     name="_"
+                     pxsl_line="19">
+                    <Path
+                         pxsl_line="20">
+                        <Phase
+                             type="go to"
+                             name="WAREHOUSE - Find alternate way inside"
+                             distance="50"
+                             pxsl_line="21">
+                            <Destination
+                                 pxsl_line="21">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="rais_warehouse_cin_sp"
+                                     pxsl_line="21" />
+                            </Destination>
+                            <DebugPlayerPosition
+                                 pxsl_line="22">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="warehouse_main_enterence_sp"
+                                     pxsl_line="22" />
+                            </DebugPlayerPosition>
+                        </Phase>
+                    </Path>
+                    <!-- Brecken  -->
+                    <Path
+                         pxsl_line="23">
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="30"
+                             pxsl_line="24" />
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Brecken_Warehouse_02DLG01"
+                             auto_start="true"
+                             pxsl_line="25" />
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="90"
+                             pxsl_line="26" />
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Brecken_Warehouse_03DLG01"
+                             auto_start="true"
+                             pxsl_line="27" />
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="90"
+                             pxsl_line="28" />
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Brecken_Warehouse_03DLG02"
+                             auto_start="true"
+                             pxsl_line="29" />
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="90"
+                             pxsl_line="30" />
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Brecken_Warehouse_03DLG03"
+                             auto_start="true"
+                             pxsl_line="31" />
+                        <Phase
+                             type="semaphore"
+                             name="_"
+                             pxsl_line="32" />
+                    </Path>
+                </Phase>
+                <Phase
+                     type="OR"
+                     name="_"
+                     pxsl_line="33">
+                    <Path
+                         pxsl_line="34">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="9"
+                             pxsl_line="35">
+                            <Destination
+                                 pxsl_line="35">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="rais_warehouse_cin_sp"
+                                     pxsl_line="35" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Player_Warehouse_06DLG01"
+                             auto_start="true"
+                             pxsl_line="36" />
+                    </Path>
+                    <Path
+                         pxsl_line="37">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="10"
+                             show_locations="false"
+                             pxsl_line="38">
+                            <Destination
+                                 pxsl_line="38">
+                                <QuestObject
+                                     class="Marker"
+                                     name="warehouse_back_enterence_loc"
+                                     pxsl_line="38" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="39">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="40">
+                            <Destination
+                                 pxsl_line="40">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="warehouse_back_enterence_goto"
+                                     pxsl_line="40" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <!-- TURN OFF UV FXses AND SOUND              -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="41">
+                    <Object
+                         pxsl_line="41">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="intruders_uv_turn_off_fx_qeg"
+                             pxsl_line="41" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="42">
+                    <Destination
+                         pxsl_line="42">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="warehouse_main_enterence_sp"
+                             pxsl_line="42" />
+                    </Destination>
+                </Phase>
+                <!-- COOP CHALLENGE ENABLE   -->
+                <Phase
+                     type="enable challengesensor"
+                     name="_"
+                     state="true"
+                     pxsl_line="43">
+                    <Object
+                         pxsl_line="43">
+                        <QuestObject
+                             class="SensorCoopChallengeTrigger"
+                             name="storyslums_13"
+                             pxsl_line="43" />
+                    </Object>
+                </Phase>
+            </Path>
+        </Phase>
+        <!-- Check the back of the Garrison for another entrance -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Warehouse_OBJ_FindWay&amp;"
+             pxsl_line="44">
+            <Path
+                 pxsl_line="44">
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="0"
+                     show_locations="false"
+                     pxsl_line="45">
+                    <Destination
+                         pxsl_line="45">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="warehouse_back_enterence_goto"
+                             pxsl_line="45" />
+                    </Destination>
+                    <SpecificLocation
+                         pxsl_line="46">
+                        <QuestObject
+                             class="ZoneBox"
+                             name="Slums_Zone_RaisWarehouse"
+                             pxsl_line="46" />
+                    </SpecificLocation>
+                </Phase>
+                <Phase
+                     type="set dialog"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_Warehouse_07DLG01"
+                     auto_start="true"
+                     pxsl_line="47" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="48">
+                    <Object
+                         pxsl_line="48">
+                        <QuestObject
+                             class="SensorAmbientMusicArea"
+                             name="SAMA_Warehouse_Roof"
+                             pxsl_line="48" />
+                    </Object>
+                </Phase>
+            </Path>
+        </Phase>
+        <!-- Climb to the roof     -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Warehouse_OBJ_ClimbRoof&amp;"
+             pxsl_line="49">
+            <Path
+                 pxsl_line="49">
+                <!-- challenges coop WIN -->
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="0"
+                     show_locations="false"
+                     complete_challenge="storyslums_13"
+                     pxsl_line="50">
+                    <Destination
+                         pxsl_line="50">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="warehouse_roof_enterence_c"
+                             pxsl_line="50" />
+                    </Destination>
+                    <SpecificLocation
+                         pxsl_line="51">
+                        <QuestObject
+                             class="ZoneBox"
+                             name="Slums_Zone_RaisWarehouse_roof"
+                             pxsl_line="51" />
+                    </SpecificLocation>
+                </Phase>
+            </Path>
+        </Phase>
+        <!-- Find the entrance into the building -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Warehouse_OBJ_FindEntrance&amp;"
+             pxsl_line="52">
+            <Path
+                 pxsl_line="52">
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="0"
+                     show_locations="false"
+                     pxsl_line="53">
+                    <Destination
+                         pxsl_line="53">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="warehouse_roof_enterence_b"
+                             pxsl_line="53" />
+                    </Destination>
+                    <SpecificLocation
+                         pxsl_line="54">
+                        <QuestObject
+                             class="ZoneBox"
+                             name="Slums_Zone_RaisWarehouse_roof"
+                             pxsl_line="54" />
+                    </SpecificLocation>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="55">
+                    <Object
+                         pxsl_line="55">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="portal_Slums_TO_Slums_Int_Warehouse_qeg"
+                             pxsl_line="55" />
+                    </Object>
+                </Phase>
+                <!-- COOP CHALLENGE DISABLE -->
+                <Phase
+                     type="enable challengesensor"
+                     name="_"
+                     state="false"
+                     pxsl_line="56">
+                    <Object
+                         pxsl_line="56">
+                        <QuestObject
+                             class="SensorCoopChallengeTrigger"
+                             name="storyslums_13"
+                             pxsl_line="56" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="57">
+                    <Destination
+                         pxsl_line="57">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="warehouse_back_enterence_sp"
+                             pxsl_line="57" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <!-- quest Q_Warehouse03 -parent=Q_Warehouse02 -glued=true -leading_portal=portal_Slums_CS_Warehouse_TO_Slums -->
+        <!-- ,BLOCK _ -obj=&Q_Warehouse_OBJ_BackToTheTower& -->
+            <!-- ,increase_event_prob _ -->
+            <!-- ,goto <<WAREHOUSE - Roof>> Marker warehouse_main_gate_loc -distance=10000 -->
+                <!-- ,debugpos SpawnPoint sp_portal_Slums_Int_Warehouse_TO_Slums -->
+            <!-- ,disable-multi _ -->
+                <!-- ,o QuestEnableGroup portal_Slums_TO_Slums_Int_Warehouse_qeg -->
+                <!-- ,o QuestEnableGroup warehouse_blockers_qeg -->
+            <!-- ,wait _ 0.5 -->
+            <!-- ,enable-multi _  -->
+                <!-- ,o QuestEnableGroup warehouse_roof_infecteds_qeg -->
+                <!-- ,o QuestEnableGroup warehouse_bitters_crowds_qeg -->
+            <!-- ,enable _ QuestEnableGroup warehouse_roof_bandits_01_qeg -->
+            <!-- ,checkpoint _ SpawnPoint sp_portal_Slums_Int_Warehouse_TO_Slums -->
+            <!-- ,radio-dialog _ voice2d Player_Warehouse_05DLG -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,goto <<WAREHOUSE - Back to The Tower>> SpawnPoint sp_Hub_LJ_Floor_0 -distance=10 -->
+                        <!-- ,debugpos SpawnPoint sp_Hub_LJ_Floor_0 -->
+                <!-- path -->
+                    <!-- ,OR _  -->
+                        <!-- path -->
+                            <!-- ,goto _ Marker warehouse_dlg_loc -distance=50 -show=false -->
+                        <!-- path -->
+                            <!-- ,goto _ SpawnPoint sp_Hub_LJ_Floor_0 -distance=490 -show=false -->
+                    <!-- ,radio-dialog _ voice2d Player_Warehouse_06DLG -->
+            <!-- ,disable-multi _ -->
+                <!-- ,o QuestEnableGroup warehouse_roof_bandits_01_qeg -->
+                <!-- ,o QuestEnableGroup warehouse_roof_infecteds_qeg -->
+                <!-- ,o QuestEnableGroup warehouse_bitters_crowds_qeg -= thing about it later -->
+            <!-- ,decrease_event_prob _     -->
+            <!-- ,checkpoint _ SpawnPoint sp_Hub_LJ_Floor_0 -->
+    <!-- GOTO - SLUMS INTERIOR -->
+    <!-- NEXT QUEST - DEMOLITION -->
+</QuestsDefinitions>

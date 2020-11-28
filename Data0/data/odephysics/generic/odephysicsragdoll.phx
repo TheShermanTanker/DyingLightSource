@@ -1,0 +1,82 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Fizyka Ragdoll - ustawienia domyslne
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+!include("../Include/ODEPhysicsRagdoll.def")
+
+//-------------------------------------------------------------------------------------------------
+PhysicsParams()
+{
+    SetPhysicsSurfaceID(SRF_FLESH)
+    SetMaxVels(50, 50)              // CM2M
+
+    // [dev] SetAutoDisableVels(0, 0, 1)
+    SetAutoDisableVels(0.13, 3, 0.5)        // CM2M
+
+    SetAbsorbers(0.1, 0.2) 
+    SetWaterFloat(0.4)
+    SetMaxWatchingTime(0.3)
+    SetVelsGate(0, 0)
+    MaxLifeTime(16)
+    AllowDepthCompression(1)
+    
+    TerrainCacheParams(1, 1, 10)
+    StaticMeshCacheParams(1, 1, 10)
+    TreesCacheParams(1, 1, 10)
+} 
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("Terrain")
+{
+    ZeroFlags()
+    Mu(1.6)
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("SimpleObjects")
+{
+    ZeroFlags()
+    Mu(1.6)                  
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("NonODEObjects")
+{
+    ZeroFlags()
+    Mu(1.6)                  
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("ODEObjects")
+{
+    ZeroFlags()
+    Mu(1.0)                  
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("ODEObjectsSamePhysics")
+{
+    ZeroFlags()
+    Mu(0.01)                  
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("ODEObjectsSameOwnerOtherPhysics")
+{
+    ZeroFlags()
+    Ignore(1)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("Water")
+{
+    ZeroFlags()
+    Mu(1)
+    Ignore(0)
+}
+

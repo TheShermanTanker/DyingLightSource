@@ -1,0 +1,67 @@
+// for creating groups
+export float Range						 	 = 5.0; // meters; must be equal for all groups
+export float GroupAngle						 = 45.0;
+export int MaxInt						 	 = 32767;
+
+// keywords:
+// creates round group with maximum range
+// RoundGroup(float max_range_in_meters);
+
+// creates round group with maximum range
+// add info: "vector" group_world_dir_in_degrees is in fact an angle used to rotate a world vector [0, 0, 1]
+// DirectionalGroup(float max_range_in_meters, float group_world_dir_in_degrees, float group_width_angle_in_degrees);
+
+// creates filter for particular logical sound
+// FilterDef(int logical_sound_type, float flags, int max_number_of_sounds);
+
+// shows sounds visualizations
+// RenderDebug(bool);
+
+// turns on/off system
+// FilterSystemEnabled(bool);
+
+sub main()
+{
+	RoundGroup(Range)
+	{
+		FilterDef(ELogicalSoundType_Step, FSoundDefFlags_NONE, 2);
+		FilterDef(ELogicalSoundType_Movement, FSoundDefFlags_TRACKED | FSoundDefFlags_LOOPED, 2);
+		FilterDef(ELogicalSoundType_Shot, FSoundDefFlags_TRACKED, 1);
+		FilterDef(ELogicalSoundType_NoLimit, FSoundDefFlags_NONE, MaxInt);
+	}
+	
+	DirectionalGroup(Range, -135.0, GroupAngle)
+	{
+		FilterDef(ELogicalSoundType_Step, FSoundDefFlags_NONE, 2);
+		FilterDef(ELogicalSoundType_Movement, FSoundDefFlags_TRACKED | FSoundDefFlags_LOOPED, 2);
+		FilterDef(ELogicalSoundType_Shot, FSoundDefFlags_TRACKED, 1);
+		FilterDef(ELogicalSoundType_NoLimit, FSoundDefFlags_NONE, MaxInt);
+	}
+
+	DirectionalGroup(Range, -45.0, GroupAngle)
+	{
+		FilterDef(ELogicalSoundType_Step, FSoundDefFlags_NONE, 2);
+		FilterDef(ELogicalSoundType_Movement, FSoundDefFlags_TRACKED | FSoundDefFlags_LOOPED, 2);
+		FilterDef(ELogicalSoundType_Shot, FSoundDefFlags_TRACKED, 1);
+		FilterDef(ELogicalSoundType_NoLimit, FSoundDefFlags_NONE, MaxInt);
+	}
+
+	DirectionalGroup(Range, 45.0, GroupAngle)
+	{
+		FilterDef(ELogicalSoundType_Step, FSoundDefFlags_NONE, 2);
+		FilterDef(ELogicalSoundType_Movement, FSoundDefFlags_TRACKED | FSoundDefFlags_LOOPED, 2);
+		FilterDef(ELogicalSoundType_Shot, FSoundDefFlags_TRACKED, 1);
+		FilterDef(ELogicalSoundType_NoLimit, FSoundDefFlags_NONE, MaxInt);
+	}
+
+	DirectionalGroup(Range, 135.0, GroupAngle)
+	{
+		FilterDef(ELogicalSoundType_Step, FSoundDefFlags_NONE, 2);
+		FilterDef(ELogicalSoundType_Movement, FSoundDefFlags_TRACKED | FSoundDefFlags_LOOPED, 2);
+		FilterDef(ELogicalSoundType_Shot, FSoundDefFlags_TRACKED, 1);
+		FilterDef(ELogicalSoundType_NoLimit, FSoundDefFlags_NONE, MaxInt);
+	}
+	
+	RenderDebug(false);
+	FilterSystemEnabled(true);
+}

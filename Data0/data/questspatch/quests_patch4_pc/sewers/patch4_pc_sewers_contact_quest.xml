@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="sewers"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST NAME : Contact -->
+    <!-- QUEST INFO : -->
+    <!-- AFTER QUEST:  -->
+    <!-- COMMENT    :  -->
+    <!-- FROM       : >> OLD TOWN -->
+    <!-- TO         : >> OLD TOWN -> SEWERS -> SLUMS ANTENNA ->OLD TOWN -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- quest Contact_02 -parent=Contact -glued=true -leading_portal=Firebees_Portal_OldTown_TO_Sewers -->
+        <!-- ,goto <<Entering Sewers - START>> SensorGoTo WayToSomewhere_SewerEnter -distance=0  -obj=&WayToStadium_OBJ_Enter& -->
+            <!-- ,debugpos   SpawnPoint SP_Sewers_Stadium_OldTown_Exit1 -->
+        <!-- ,checkpoint _       SpawnPoint SP_Sewers_Stadium_OldTown_Exit1 -->
+        <!-- ,enable _       SpawnPoint WayToSomewhere_Respawn_1   -->
+        <!-- ,BLOCK _        -obj=&WayToStadium_OBJ_Find_1& -->
+            <!-- ,goto << Horde_Test >>     SensorGoTo WayToSomewhere_Marker_1      -distance=0         -->
+                <!-- ,debugpos   SpawnPoint Horde_Test -->
+            <!-- ,enable _       NightArea WayToSomewhere_NightArea -->
+            <!-- ,enable _       SpawnPoint Horde_Test -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,dialog _ voice2d Firebees_FindigWay -auto=true  -->
+                <!-- path -->
+                    <!-- ,OR _         -->
+                        <!-- path -->
+                            <!-- ,goto _     SensorGoTo WayToSomewhere_Marker_1A      -distance=0      -->
+                        <!-- path -->
+                            <!-- ,goto _     SensorGoTo WayToSomewhere_Marker_1B      -distance=0     -show=false -->
+            <!-- ,goto << Entering Electric Room >>     SensorGoTo WayToSomewhere_Marker_ElectricRoom   -distance=0  -obj=&WayToStadium_OBJ_Find_2&       -->
+                <!-- ,debugpos    SpawnPoint SP_Sewers_Stadium_Pipe -->
+            <!-- ,enable _           SpawnPoint WayToSomewhere_ElectriRoom -->
+            <!-- ,disable-multi _ -->
+                <!-- ,o      SpawnPoint WayToSomewhere_Respawn_1 -->
+                <!-- ,o      SpawnPoint Horde_Test -->
+        <!-- ,BLOCK _    -obj=&WayToStadium_OBJ_Electricity& -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,dialog _ voice2d Firebees_ElectricRoom_Enter -auto=true -->
+            <!-- ,OR _ -->
+                <!-- ,area      ZoneBox Electric_Zone_Marker -->
+                <!-- path -->
+                    <!-- ,use _      PhysicalSwitchDI Electric_Box       -state=on   -show=false -->
+                    <!-- ,use _      PhysicalSwitchDI Electric_Lever     -state=on   -show=false -->
+                    <!-- ,disable _  QuestEnableGroup Electric_Lever_Items -->
+                    <!-- ,enable _  BlackoutArea Sewer_WayToSomewhere_BlackOut -->
+                    <!-- ,enable _   QuestEnableGroup Electric_Room_Volletailes -->
+                <!-- path -->
+                    <!-- ,AND _ -->
+                        <!-- path -->
+                            <!-- ,use _  PhysicalSwitchDI Electric_Lever_Fake_1  -state=on   -show=false -->
+                            <!-- ,dialog _ voice2d Firebees_Opening_FakeBox_1 -auto=true  -->
+                        <!-- path -->
+                            <!-- ,use _  PhysicalSwitchDI Electric_Lever_Fake_2  -state=on   -show=false -->
+                            <!-- ,dialog _ voice2d Firebees_Opening_FakeBox_2 -auto=true  -->
+                    <!-- ,semaphore _     -->
+        <!-- ,BLOCK _    -obj=&WayToStadium_OBJ_Find_3& -->
+            <!-- ,goto _     SensorGoTo WayToSome_Marker_ElectricRoom_Exit    -distance=0  -->
+            <!-- ,enable _   QuestEnableGroup Air_Room_Zombies -->
+            <!-- ,checkpoint _      SpawnPoint Check_Floded_Room -->
+            <!-- ,goto << Entering Floded Room >>      SensorGoTo WayToSome_Marker_FloodRoom    -distance=0  -->
+                <!-- ,debugpos    SpawnPoint Check_Floded_Room -->
+            <!-- ,enable _   SpawnPoint WayToSomewhere_FlodedRoom -->
+            <!-- ,disable _  SpawnPoint WayToSomewhere_ElectriRoom -->
+            <!-- ,BLOCK _     -->
+                <!-- ,goto _     SensorGoTo WayToSome_Marker_FloodRoom_Exit    -distance=0  -->
+                <!-- ,enable _   SpawnPoint WayToSomewhere_FlodedRoom_Exit -->
+                <!-- ,disable _   SpawnPoint WayToSomewhere_FlodedRoom -->
+                <!-- ,enable _   QuestEnableGroup Air_Room_2_Zombies -->
+            <!-- ,goto << Entering Bridge >>     SensorGoTo WayToSome_Marker_Bridge    -distance=0  -->
+                <!-- ,debugpos    SpawnPoint Check_Bridge_Fall -->
+            <!-- ,checkpoint _       SpawnPoint Check_Bridge_Fall -->
+            <!-- ,goto _             SensorGoTo WayToSome_Marker_Slide           -distance=0      -->
+            <!-- ,checkpoint _   SpawnPoint  Check_Slide -->
+            <!-- ,disable _      SpawnPoint WayToSomewhere_FlodedRoom_Exit -->
+            <!-- ,enable _       SpawnPoint WayToSomewhere_Slide_Respawn -->
+            <!-- ,goto << Entering Slide >>             SensorGoTo WayToSome_Marker_Slide_2           -distance=0 -->
+                <!-- ,debugpos   SpawnPoint Check_Slide -->
+        <!-- ,AND _ -->
+            <!-- path -->
+                <!-- ,dialog _ voice2d Firebees_Sliding -auto=true  -->
+            <!-- path -->
+                <!-- ,OR _ -->
+                    <!-- path -->
+                        <!-- ,goto _            SensorGoTo WayToSome_Marker_TankRoom           -distance=0 -->
+                        <!-- ,BLOCK _    -obj=&WayToStadium_OBJ_Water& -->
+                            <!-- ,use _  PhysicalSwitchDI Sluice_Valve_3     -state=off -->
+                            <!-- ,AND _ -->
+                                <!-- path -->
+                                    <!-- ,dialog _ voice2d Firebees_Closing_Sluices -auto=true  -->
+                                <!-- path -->
+                                    <!-- ,movie _    Movie_Sluice_Window_Close_3 -->
+                                <!-- path -->
+                                    <!-- ,use _  PhysicalSwitchDI Sluice_Valve_2     -state=off -->
+                                    <!-- ,movie _    Movie_Sluice_Window_Close_2 -->
+                                <!-- path -->
+                                    <!-- ,use _  PhysicalSwitchDI Sluice_Valve_1     -state=off -->
+                                    <!-- ,movie _    Movie_Sluice_Window_Close_1         -->
+                            <!-- ,movie _        Movie_Water_Level_Up -->
+                            <!-- ,checkpoint _   SpawnPoint Check_TankRoom                 -->
+                    <!-- path -->
+                        <!-- ,goto _     SensorGoTo WayToSomewhere_SewerExit      -distance=0       -show=false -->
+        <!-- ,BLOCK _        -obj=&WayToStadium_OBJ_Find_4& -->
+            <!-- ,checkpoint _   SpawnPoint  Check_SewerExit -->
+            <!-- ,enable _       SpawnPoint WayToSomewhere_Sewer_Exit -->
+            <!-- ,disable _      SpawnPoint WayToSomewhere_Slide_Respawn -->
+            <!-- ,goto << End >> MapPortal Contact_MP_Sewers_TO_SlumsAntenna      -distance=5     -show=false -->
+                <!-- ,debugpos   SpawnPoint Check_SewerExit -->
+            <!-- ,checkpoint _   SpawnPoint  Check_SewerExit -->
+    <!--  -->
+    <!--  -->
+    <!-- quest __Firebees_Sewers_Bridge -parent=Contact           -->
+        <!-- ,goto << Bridge Destroy >>    SensorGoTo WayToSome_Marker_Bridge    -distance=0 -show=false -->
+            <!-- ,debugpos    SpawnPoint Check_Bridge_Fall -->
+        <!-- ,enable-multi _        -->
+            <!-- ,o      FakeAITarget Bridge_Zombie_Attractor   -->
+            <!-- ,o      DamageSwitchDI Bridge_Damage_Box_1 -->
+            <!-- ,o      DamageSwitchDI Bridge_Damage_Box_2           -->
+        <!-- ,OR _ -->
+            <!-- path -->
+                <!-- ,goto _     SensorGoTo WayToSome_Marker_Bridge_Fall     -distance=0     -show=false -->
+            <!-- path -->
+                <!-- ,OR _ -->
+                    <!-- path -->
+                        <!-- ,use _      DamageSwitchDI Bridge_Damage_Box_1        -state=on     -show=false -->
+                    <!-- path -->
+                        <!-- ,use _      DamageSwitchDI Bridge_Damage_Box_2        -state=on     -show=false -->
+        <!-- ,disable _  FakeAITarget Bridge_Zombie_Attractor                   -->
+        <!-- ,movie _    Movie_Bridge_Falls -->
+        <!-- ,checkpoint _       SpawnPoint Check_Bridge_Fall -->
+        <!--  -->
+    <!-- quest __Firebees_Sewers_FallingZombies -parent=Contact -->
+        <!-- ,goto _          SensorGoTo WayToSome_Marker_TankRoom           -distance=0     -show=false     -->
+        <!-- ,wait _         5 -->
+        <!-- ,enable-multi _ -->
+            <!-- ,o      FakeAITarget Fake_Zombie_BigRoom_Attractor -->
+            <!-- ,o      AISpawnBoxNumber Falling_Zombies -->
+        <!-- ,wait _         15 -->
+        <!-- ,disable _      FakeAITarget Fake_Zombie_BigRoom_Attractor -->
+        <!-- ,checkpoint _       SpawnPoint Check_TankRoom -->
+        <!--  -->
+    <!-- quest __Firebees_Sewers_Pipe_Grating -parent=Contact -->
+        <!-- ,goto _          SensorGoTo  Sewer_Pipe_Grating_Fall         -distance=0     -show=false   -->
+        <!-- ,movie _        Movie_Pipe_Grating_Fall -->
+        <!-- ,checkpoint _       SpawnPoint WayToSomewhere_FlodedRoom -->
+        <!--  -->
+    <!-- quest __Firebees_Sewers_Pipe_Grating_2 -parent=Contact -->
+        <!-- ,goto _          SensorGoTo  Sewer_Pipe_Grating_Fall_2         -distance=0     -show=false   -->
+        <!-- ,movie _        Movie_Pipe_Grating_Fall_2 -->
+        <!-- ,checkpoint _       SpawnPoint WayToSomewhere_FlodedRoom -->
+        <!--  -->
+    <!-- quest __Firebees_Sewers_Pipe_Grating_3 -parent=Contact -->
+        <!-- ,goto _          SensorGoTo  Sewer_Pipe_Grating_Fall_3         -distance=0     -show=false   -->
+        <!-- ,movie _        Movie_Pipe_Grating_Fall_3 -->
+        <!-- ,checkpoint _       SpawnPoint WayToSomewhere_ElectriRoom -->
+        <!--  -->
+    <!-- quest __Firebees_Sewers_Pipe_Grating_4 -parent=Contact -->
+        <!-- ,goto _          SensorGoTo  Sewer_Pipe_Grating_Fall_4         -distance=0     -show=false   -->
+        <!-- ,movie _        Movie_Pipe_Grating_Fall_4 -->
+        <!-- ,checkpoint _       SpawnPoint WayToSomewhere_ElectriRoom -->
+</QuestsDefinitions>

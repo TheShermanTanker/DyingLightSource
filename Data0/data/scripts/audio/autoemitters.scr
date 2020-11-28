@@ -1,0 +1,1009 @@
+////////////////////////////////////////////////////////////////////////////////
+// Auto Emitter System Script
+////////////////////////////////////////////////////////////////////////////////
+
+// Audio emitter system settings
+!AutoEmitterSystem()
+
+// Auto emitter metadata definition
+!AutoEmitterDef()
+
+////////////////////////////////////////////////////////////////////////////////
+// System variables
+////////////////////////////////////////////////////////////////////////////////
+
+// 0 - disable, 1 - enable
+!Enabled(i)
+
+// Range at which system performs search for meshes. In game units (DL i.e. meters)
+!Range(f)
+
+// System update interval in miliseconds. (1000 = 1 second), 0 each frame
+!UpdateInterval(i)
+
+// Maximum emitters number
+!MaxEmitterCount(i)
+
+// Volume range that is used during volume update of EnvSense enabled emitters.
+!EnvVolRange(f,f)
+
+// Pitch range that is used during pitch update of EnvSense enabled emitters.
+!EnvPitchRange(f,f)
+
+////////////////////////////////////////////////////////////////////////////////
+// Emitter definition variables
+////////////////////////////////////////////////////////////////////////////////
+
+// Mesh to spawn emitter for. 
+// Mandatory.
+!Mesh(s)
+
+// If specified sound will be spawned only for mesh with given skin name.
+// If not specified in the definition script all objects with matching mesh name will spawn sounds regardless of skin they are using.
+!Skin(s)
+
+// Sound to spawn. Can be in XX format. 
+// Mandatory.
+!Sound(s)
+
+// Position to offset emitter in mesh local space.
+// Default is (0,0,0) - no offset, emitter will spawn in mesh world position.
+!PositionOffset(f,f,f)
+
+// Emitter priority. Higer value = higher priority.
+// 0 is default value.
+!Priority(i)
+
+// Maximum emitters that can play simultaneously using this definition. 
+// Passing zero will discard this definition, thus no emitters will be created or processed. 
+// Internally it is clamped to maximum emitters allowd by the system (i.e. MaxEmitterCount).
+// MaxEmitterCount is the default value.
+!MaxInstances(i)
+
+// How likely emitter will be created for this definition. This must be in (0.0,1.0> range.
+// Passing zero will discard this definition, thus no emitters will be created or processed.
+// 1.0 is the default value - for all objects that match this definition system will try to issue an emiter.
+!Probability(f)
+
+// When put into definition, emitters will be sensitive to environment changes (that are taken into account at runtime - wind power for example)
+!EnvSense()
+
+////////////////////////////////////////////////////////////////////////////////
+
+AutoEmitterSystem()
+{
+    Enabled(1)
+    Range(25.0)		
+    UpdateInterval(0)
+    MaxEmitterCount(20)
+	EnvVolRange(0.0,1.2)
+	EnvPitchRange(0.9,1.15)
+}
+
+////////////FLORA_IN_THE_WIND////////////
+
+AutoEmitterDef()
+{
+    Mesh("bush_a.msh")
+    Sound("bush_big_wind_loop_XX.ogg")
+    PositionOffset(0.0, 1.0, 0.0)
+    Priority(5)
+    MaxInstances(2)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("bush_b.msh")
+    Sound("pot_flower_small_wind_loop_XX.ogg")
+    PositionOffset(0.0, 0.5, 0.0)
+    Priority(5)
+    MaxInstances(2)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("bush_c.msh")
+    Sound("bush_small_wind_loop_XX.ogg")
+    PositionOffset(0.0, 1.0, 0.0)
+    Priority(5)
+    MaxInstances(2)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("bush_d.msh")
+    Sound("bush_small_wind_loop_XX.ogg")
+    PositionOffset(0.0, 1.0, 0.0)
+    Priority(5)
+    MaxInstances(2)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("bush_e.msh")
+    Sound("bush_small_wind_loop_XX.ogg")
+    PositionOffset(0.0, 1.0, 0.0)
+    Priority(5)
+    MaxInstances(2)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("bush_f.msh")
+    Sound("bush_small_wind_loop_XX.ogg")
+    PositionOffset(0.0, 1.0, 0.0)
+    Priority(5)
+    MaxInstances(2)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("bush_g.msh")
+    Sound("bush_small_wind_loop_XX.ogg")
+    PositionOffset(0.0, 1.0, 0.0)
+    Priority(5)
+    MaxInstances(2)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("bush_leafy_a.msh")
+    Sound("pot_ficus_wind_loop_XX.ogg")
+    PositionOffset(0.0, 1.0, 0.0)
+    Priority(5)
+    MaxInstances(2)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("chaparral_a.msh")
+    Sound("bush_big_wind_loop_XX.ogg")
+    PositionOffset(0.0, 1.0, 0.0)
+    Priority(5)
+    MaxInstances(2)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("cocopalm_a.msh")
+    Sound("palm_wind_loop_XX.ogg")
+    PositionOffset(-1.9, 10.0, 0.9)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("cocopalm_b.msh")
+    Sound("palm_wind_loop_XX.ogg")
+    PositionOffset(-2.5, 8.0, 0.4)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("cocopalm_c.msh")
+    Sound("palm_wind_loop_XX.ogg")
+    PositionOffset(-1.1, 5.5, 0.5)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("desert_bush_c.msh")
+    Sound("bush_big_wind_loop_XX.ogg")
+    PositionOffset(0.0, 1.0, 0.0)
+    Priority(5)
+    MaxInstances(2)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("desert_bush_d.msh")
+    Sound("bush_big_wind_loop_XX.ogg")
+    PositionOffset(0.0, 1.0, 0.0)
+    Priority(5)
+    MaxInstances(2)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("flowerpot_b_flowers_a.msh")
+	//Skin("default")
+    Sound("pot_flower_small_wind_loop_XX.ogg")
+    PositionOffset(0.0, 0.5, 0.0)
+    Priority(5)
+	MaxInstances(2)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("flowerpot_a_flowers_b.msh")
+	//Skin("default")
+    Sound("pot_flower_small_wind_loop_XX.ogg")
+    PositionOffset(0.0, 0.5, 0.0)
+    Priority(5)
+	MaxInstances(2)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("flowerpot_b_flowers_b.msh")
+	//Skin("default")
+    Sound("pot_flower_small_wind_loop_XX.ogg")
+    PositionOffset(0.0, 0.5, 0.0)
+    Priority(5)
+	MaxInstances(2)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("pot_ficus_a.msh")
+	Skin("default")
+    Sound("pot_ficus_wind_loop_XX.ogg")
+    PositionOffset(0.0, 1.0, 0.0)
+    Priority(5)
+	MaxInstances(2)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("pot_ficus_single_a.msh")
+	//Skin("default")
+    Sound("pot_ficus_wind_loop_XX.ogg")
+    PositionOffset(0.0, 1.0, 0.0)
+    Priority(5)
+	MaxInstances(2)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("pot_palm_single_a.msh")
+	//Skin("default")
+    Sound("pot_palm_wind_loop_XX.ogg")
+    PositionOffset(0.0, 1.0, 0.0)
+    Priority(5)
+	MaxInstances(2)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("tree_maple_a.msh")
+    Sound("tree_leafy_wind_loop_XX.ogg")
+    PositionOffset(0.0, 6.0, 0.0)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("tree_maple_b.msh")
+    Sound("tree_leafy_wind_loop_XX.ogg")
+    PositionOffset(-0.4, 4.1, 0.5)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("tree_maple_c.msh")
+    Sound("tree_leafy_wind_loop_XX.ogg")
+    PositionOffset(0.0, 6.0, 0.0)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("tree_maple_d.msh")
+    Sound("tree_leafy_wind_loop_XX.ogg")
+    PositionOffset(-0.4, 4.1, 0.5)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("tree_maple_e.msh")
+    Sound("tree_leafy_wind_loop_XX.ogg")
+    PositionOffset(0.0, 6.0, 0.0)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("tree_high_ulmus.msh")
+    Sound("tree_leafy_wind_loop_XX.ogg")
+    PositionOffset(-0.4, 4.1, 0.5)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("tree_a.msh")
+    Sound("tree_leafy_wind_loop_XX.ogg")
+    PositionOffset(0.0, 6.0, 0.0)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("tree_b.msh")
+    Sound("tree_leafy_wind_loop_XX.ogg")
+    PositionOffset(0.0, 6.0, 0.0)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("pot_flower_in_a.msh")
+	Skin("default")
+    Sound("pot_flower_small_wind_loop_XX.ogg")
+    PositionOffset(0.0, 0.5, 0.0)
+    Priority(5)
+	MaxInstances(2)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("pot_flower_b.msh")
+	Skin("default")
+    Sound("pot_flower_small_wind_loop_XX.ogg")
+    PositionOffset(0.0, 0.5, 0.0)
+    Priority(5)
+	MaxInstances(2)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("pot_palm_a.msh")
+    Sound("pot_palm_wind_loop_XX.ogg")
+    PositionOffset(0.0, 1.0, 0.0)
+    Priority(5)
+	MaxInstances(2)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("fern_b.msh")
+    Sound("bush_small_wind_loop_XX.ogg")
+    PositionOffset(0.0, 1.0, 0.0)
+    Priority(5)
+    MaxInstances(2)
+	EnvSense()
+}
+
+//////////////////////////////////////////
+
+AutoEmitterDef()
+{
+    Mesh("garbage_can_a_open.msh")
+    Sound("flies_around_corpse_loop.ogg")
+    PositionOffset(0.0, 1.5, 0.0)
+    Priority(5)
+	MaxInstances(1)
+}
+
+AutoEmitterDef()
+{
+    Mesh("flag_pole_ad.msh")
+    Sound("flag_wind_loop_XX.ogg")
+    PositionOffset(0.0, 2.0, 0.0)
+    Priority(5)
+	MaxInstances(3)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("anim_flag_a.msh")
+	Skin("default")
+    Sound("plastic_tape_wind_loop_XX.ogg")
+    PositionOffset(0.6, 0.0, 0.0)
+    Priority(5)
+	EnvSense()
+	MaxInstances(2)
+}
+
+AutoEmitterDef()
+{
+    Mesh("weather_vane_a.msh")
+    Sound("weather_vane_wind_near_loop.ogg")
+    PositionOffset(0.0, 1.0, 0.0)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("ot_cable_lamp.msh")
+    Sound("lamp_cable_wind_loop_XX.ogg")
+    PositionOffset(0.0, -1.0, 0.0)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("air_conditioning_b.msh")
+	Skin("default")
+    Sound("air_conditioner_loop_XX.wav")
+    PositionOffset(0.0, 0.3, 0.3)
+    Priority(5)
+}
+
+AutoEmitterDef()
+{
+    Mesh("air_conditioning_b.msh")
+	Skin("standalone")
+    Sound("air_conditioner_loop_XX.wav")
+    PositionOffset(0.0, 0.3, 0.3)
+    Priority(5)
+}
+
+AutoEmitterDef()
+{
+    Mesh("air_conditioning_c.msh")
+	Skin("default")
+    Sound("air_conditioner_loop_XX.wav")
+    PositionOffset(0.0, 0.3, 0.3)
+	Probability(0.5)
+    Priority(5)
+}
+
+AutoEmitterDef()
+{
+    Mesh("air_conditioning_c.msh")
+	Skin("standalone")
+    Sound("air_conditioner_loop_XX.wav")
+    PositionOffset(0.0, 0.3, 0.3)
+	Probability(0.5)
+    Priority(5)
+}
+
+AutoEmitterDef()
+{
+    Mesh("air_conditioning_roof_a.msh")
+	Skin("default")
+    Sound("air_conditioner_roof_loop_XX.wav")
+    PositionOffset(0.0, 0.3, 0.3)
+	Probability(1.0)
+    Priority(5)
+}
+
+AutoEmitterDef()
+{
+    Mesh("antenna_a.msh")
+    Sound("antenna_tv_wind_loop_XX.ogg")
+    PositionOffset(0.0, 1.0, 0.0)
+	Probability(1.0)
+    Priority(5)
+	MaxInstances(1)
+	EnvSense()
+	
+}
+
+AutoEmitterDef()
+{
+    Mesh("antenna_b.msh")
+    Sound("antenna_tv_wind_loop_XX.ogg")
+    PositionOffset(0.0, 1.5, 0.0)
+	Probability(1.0)
+    Priority(5)
+	EnvSense()
+	
+}
+
+AutoEmitterDef()
+{
+    Mesh("antenna_c.msh")
+    Sound("antenna_tv_wind_loop_XX.ogg")
+    PositionOffset(0.0, 1.5, 0.0)
+	Probability(1.0)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("antenna_d.msh")
+    Sound("antenna_tv_wind_loop_XX.ogg")
+    PositionOffset(0.0, 1.5, 0.0)
+	Probability(1.0)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("fence_wire_panel_l.msh")
+	Skin("default")
+    Sound("fence_metal_wire_wind_loop_XX.ogg")
+    PositionOffset(2.8, 1.3, 0.0)
+    Priority(5)
+	MaxInstances(3)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("fence_wire_gate_a.msh")
+	Skin("default")
+    Sound("fence_metal_wire_wind_loop_XX.ogg")
+    PositionOffset(0.0, 0.0, 0.0)
+    Priority(5)
+	MaxInstances(3)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("manhole_a.msh")
+    Sound("manhole_sewers_loop_XX.ogg")
+    PositionOffset(0.0, 0.1, 0.0)
+    Priority(5)
+	Probability(0.5)
+}
+
+AutoEmitterDef()
+{
+    Mesh("ot_baldachain_fabric_c.msh")
+    Sound("awning_wind_loop_XX.ogg")
+    PositionOffset(0.0, -1.0, 0.0)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("ot_sheet_a.msh")
+    Sound("awning_wind_loop_XX.ogg")
+    PositionOffset(0.0, 1.0, 0.0)
+    Priority(5)
+	MaxInstances(2)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("ot_sheet_b.msh")
+    Sound("awning_wind_loop_XX.ogg")
+    PositionOffset(0.0, 1.0, 0.0)
+    Priority(5)
+	MaxInstances(2)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("ot_national_flag_a.msh")
+    Sound("flag_wind_loop_XX.ogg")
+    PositionOffset(0.0, 1.8, 0.0)
+    Priority(5)
+	MaxInstances(4)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("ot_jump_flagpole.msh")
+    Sound("flag_wind_loop_XX.ogg")
+    PositionOffset(0.0, 3.0, 0.0)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("plastic_tape.msh")
+	Skin("default")
+    Sound("plastic_tape_wind_loop_XX.ogg")
+    PositionOffset(0.0, 1.3, 0.0)
+    Priority(5)
+	EnvSense()
+	MaxInstances(2)
+}
+
+AutoEmitterDef()
+{
+    Mesh("pave_one_0303_manhole_a.msh")
+    Sound("manhole_sewers_loop_XX.ogg")
+    PositionOffset(-1.0, 0.2, -0.5)
+    Priority(5)
+	Probability(0.5)
+}
+
+AutoEmitterDef()
+{
+    Mesh("pizza_roof_a.msh")
+    Sound("awning_wind_loop_XX.ogg")
+    PositionOffset(0.0, 3.0, 3.0)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("sewer_segment_c_container.msh")
+    Sound("water_inside_pipe_loop_XX.ogg")
+    PositionOffset(0.0, 1.5, 0.0)
+    Priority(5)
+}
+
+AutoEmitterDef()
+{
+    Mesh("slums_laundry_a.msh")
+	Skin("default") // Use only default skin, i.e. omit no_wind skin
+    Sound("clothes_wind_loop_XX.ogg")
+    PositionOffset(0.0, 0.0, 0.0)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("slums_laundry_b.msh")
+	Skin("default") // Use only default skin, i.e. omit no_wind skin
+    Sound("clothes_wind_loop_XX.ogg")
+    PositionOffset(-1.5, 1.4, 0.0)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("slums_block_a_balcony_roof.msh")
+    Sound("metal_roof_wind_loop_XX.ogg")
+    PositionOffset(0.0, 1.2, 1.5)
+    Priority(5)
+	Probability(1.0)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("slums_block_b_balcony_roof.msh")
+    Sound("metal_roof_wind_loop_XX.ogg")
+    PositionOffset(0.0, 3.5, 1.5)
+    Priority(5)
+	Probability(1.0)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("slums_house_a_roof_b.msh")
+    Sound("foil_roof_wind_loop_XX.ogg")
+    PositionOffset(0.0, 0.5, 1.5)
+    Priority(5)
+	Probability(1.0)
+	EnvSense()
+}
+
+
+AutoEmitterDef()
+{
+    Mesh("slums_house_c_roof_ramp_a.msh")
+    Sound("metal_roof_wind_loop_XX.ogg")
+    PositionOffset(0.0, 1.2, 1.5)
+    Priority(5)
+	Probability(1.0)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("slums_house_c_roof_ramp_b.msh")
+    Sound("metal_roof_wind_loop_XX.ogg")
+    PositionOffset(0.0, 1.2, 1.5)
+    Priority(5)
+	Probability(1.0)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("slums_house_a_roof_a.msh")
+    Sound("metal_roof_wind_loop_XX.ogg")
+    PositionOffset(0.0, 1.2, 1.5)
+    Priority(5)
+	Probability(1.0)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("slums_block_roof_b.msh")
+    Sound("wood_roof_wind_loop_XX.ogg")
+    PositionOffset(0.0, 0.5, 1.5)
+    Priority(5)
+	Probability(1.0)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("sunblind_a.msh")
+    Sound("metal_roof_wind_loop_XX.ogg")
+    PositionOffset(0.0, 0.2, 1.0)
+    Priority(5)
+	Probability(1.0)
+	EnvSense()
+}
+
+
+AutoEmitterDef()
+{
+    Mesh("sunblind_b.msh")
+    Sound("awning_wind_loop_XX.ogg")
+    PositionOffset(0.0, 0.0, 1.3)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("sunblind_h.msh")
+    Sound("awning_wind_loop_XX.ogg")
+    PositionOffset(0.0, 0.0, 1.3)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("trash_container_a_new.msh")
+    Sound("flies_around_corpse_loop.ogg")
+    PositionOffset(0.0, 2.0, 1.0)
+    Priority(5)
+}
+
+AutoEmitterDef()
+{
+    Mesh("umbrella_fabric_big_a.msh")
+    Sound("umbrella_wind_loop_XX.ogg")
+    PositionOffset(0.0, 2.0, 0.0)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("umbrella_fabric_big_b.msh")
+    Sound("umbrella_wind_loop_XX.ogg")
+    PositionOffset(0.0, 2.6, 0.0)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("umbrella_fabric_big_c.msh")
+    Sound("umbrella_wind_loop_XX.ogg")
+    PositionOffset(2.5, 1.1, 0.0)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("vent_turbine_a.msh")
+	//Skin("default")
+    Sound("vent_turbine_loop_XX.ogg")
+    PositionOffset(0.0, 0.9, 0.0)
+    Priority(5)
+	MaxInstances(3)
+}
+
+AutoEmitterDef()
+{
+    Mesh("wasteland_barn_gate_b.msh")
+	Skin("default")
+    Sound("barn_gate_wind_loop_XX.ogg")
+    PositionOffset(1.5, 1.5, 0.2)
+    Priority(5)
+}
+
+///////////////////
+// wasteland cult
+///////////////////
+
+AutoEmitterDef()
+{
+    Mesh("dlc_wl_cult_trim_a.msh")
+    Sound("ribbons_cult_loop_XX.ogg")
+    PositionOffset(0.0, -0.5, 0.8)
+    Priority(5)
+	EnvSense()
+	MaxInstances(2)
+}
+
+AutoEmitterDef()
+{
+    Mesh("dlc_wl_cult_trim_b.msh")
+    Sound("ribbons_cult_loop_XX.ogg")
+    PositionOffset(0.0, -0.5, 0.7)
+    Priority(5)
+	EnvSense()
+	MaxInstances(2)
+}
+
+AutoEmitterDef()
+{
+    Mesh("dlc_wl_cult_trim_c.msh")
+    Sound("ribbons_cult_loop_XX.ogg")
+    PositionOffset(0.0, -0.6, 0.8)
+    Priority(5)
+	EnvSense()
+	MaxInstances(2)
+}
+
+AutoEmitterDef()
+{
+    Mesh("dlc_wl_cult_trim_d.msh")
+    Sound("ribbons_cult_loop_XX.ogg")
+    PositionOffset(0.0, -0.3, 0.1)
+    Priority(5)
+	EnvSense()
+	MaxInstances(2)
+}
+
+AutoEmitterDef()
+{
+    Mesh("dlc_wl_cult_trim_e.msh")
+    Sound("ribbons_cult_loop_XX.ogg")
+    PositionOffset(0.0, -0.5, 0.2)
+    Priority(5)
+	EnvSense()
+	MaxInstances(2)
+}
+
+AutoEmitterDef()
+{
+    Mesh("dlc_dead_body_cult_a.msh")
+    Sound("ribbons_cult_loop_XX.ogg")
+    PositionOffset(0.0, 0.75, 0.0)
+    Priority(5)
+	EnvSense()
+	MaxInstances(2)
+}
+
+AutoEmitterDef()
+{
+    Mesh("dlc_anim_flag_a.msh")
+    Sound("ribbons_cult_loop_XX.ogg")
+    PositionOffset(0.2, -0.3, 0.2)
+    Priority(5)
+	EnvSense()
+	MaxInstances(2)
+}
+
+AutoEmitterDef()
+{
+    Mesh("wind_bells_a.msh")
+    Sound("wind_chimes_XX.ogg")
+    PositionOffset(0.0, -0.4, 0.0)
+    Priority(5)
+	EnvSense()
+	MaxInstances(2)
+}
+
+AutoEmitterDef()
+{
+    Mesh("flag_rais_b.msh")
+    Sound("flag_wind_loop_XX.ogg")
+    PositionOffset(0.0, 0.0, 1.3)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("flag_rais.msh")
+    Sound("flag_wind_loop_XX.ogg")
+    PositionOffset(0.0, 0.0, 1.3)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("tree_e.msh")
+    Sound("Tree_big_creak_XX.ogg")
+    PositionOffset(0.0, 6.0, 0.0)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("dlc_tree_e.msh")
+    Sound("Tree_big_creak_XX.wav")
+    PositionOffset(0.0, 6.0, 0.0)
+    Priority(5)
+	EnvSense()
+}
+
+AutoEmitterDef()
+{
+    Mesh("wall_carpet_a.msh")
+    Sound("carpet_loop_01.wav")
+    PositionOffset(0.0, 0.0, 0.1)
+    Priority(5)
+	MaxInstances(2)
+	EnvSense()
+}
+
+
+/*
+AutoEmitterDef()
+{
+    Mesh("window_plastic_a.msh")
+	Skin("default")
+    Sound("window_plastic_wind_loop_XX.ogg")
+    PositionOffset(-0.25, 0.0, 0.0)
+	EnvSense()
+    Priority(5)
+}
+
+AutoEmitterDef()
+{
+    Mesh("window_plastic_b.msh")
+	Skin("default")
+    Sound("window_plastic_wind_loop_XX.ogg")
+    PositionOffset(-0.25, 0.0, 0.0)
+	EnvSense()
+    Priority(5)
+}
+
+AutoEmitterDef()
+{
+    Mesh("window_plastic_c.msh")
+	Skin("default")
+    Sound("window_plastic_wind_loop_XX.ogg")
+    PositionOffset(-0.25, 0.0, 0.0)
+    Priority(5)
+	EnvSense()
+}
+
+*/
+
+///////NO_WIND///////
+
+/*
+AutoEmitterDef()
+{
+    Mesh("phone_shelter.msh")
+    Sound("phone_shelter_dead_loop_00.ogg")
+    PositionOffset(0.0, 1.2, 0.6)
+    Priority(5)
+	Probability(1.0)
+	MaxInstances(1)
+}
+*/

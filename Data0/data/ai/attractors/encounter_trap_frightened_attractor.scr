@@ -1,0 +1,35 @@
+!include("ai_data.def")
+!include("ai_timing.def")
+
+!include("ai_goals.def")
+
+Invisible()
+EnemyRadius(7)
+PeriodBtwSpecialAnims(5)
+SnapDist(2)
+ReleaseDist(3)
+InteractionLevel(4)
+User("Man")
+
+Usage("ENCOUNTER")
+Usage("VIRTUAL_ATTRACTOR")
+
+DisableInteractAnim(TO_INTERACT)
+DisableInteractAnim(FROM_INTERACT)
+DisableInteractAnim(INTERACT)
+DisableInteractAnim(ALL_DIALOG)
+
+Slot("", 1, 1, 1, 0, 0, 0, 0, 0, 1, 1.5)
+{
+    DynamicMesh("can_b.msh", "propsholder1", "canb", "", 1)
+    DynamicMesh("can_b.msh", "propsholder2", "canb", "", 1)
+    AiTypeDataSet("human")
+    {
+        Data("idle:standing:none:stand:none:none:none", -2, "encounter_trap_frightened_idle", -1, 1)
+        Data("idle:standing:none:idle:none:none:none", -2, "encounter_trap_frightened_idle", -1, 1)
+        Data("idle:standing:none:special_enemy:none:none:none", -2, "encounter_trap_frightened_special_enemy_01", -1, 1)
+        Data("idle:standing:none:special_enemy:none:none:none", -2, "encounter_trap_frightened_special_enemy_02", -1, 1)
+        Data("idle:standing:none:stand:none:prepare:none", -2, "encounter_trap_frightened_prepare", -1, 1)
+    }
+}
+

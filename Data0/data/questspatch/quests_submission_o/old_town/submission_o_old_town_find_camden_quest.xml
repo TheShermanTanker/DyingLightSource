@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="old_town"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST NAME : Q_FindCamden01 -->
+    <!-- QUEST INFO : Serpents Hideout -->
+    <!-- COMMENT    :  -->
+    <!-- FROM       : OLD TOWN -->
+    <!-- TO         : OLD TOWN INTERIOR A -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- quest Q_FindCamden01 -parent=Clinic02 -reward_set=FindCamden_reward -quest_giver=Murat -difficulty=medium -->
+        <!-- -= ,goto <<FIND CAMDEN - START>> Marker m_FindCamden_Start -distance=5 -show=false -->
+        <!-- ,BLOCK _ -->
+            <!-- ,gather _ HumanAI Murat -distance=-200 -show=false -->
+            <!-- ,show _ HumanAI Murat -->
+            <!-- ,talk <<Strange Guests - START>> Murat Murat_FindCamden_USA -show=false -->
+                <!-- ,debugpos SpawnPoint sp_FindCamden -->
+                <!--  -->
+            <!-- ,checkpoint _ SpawnPoint sp_FindCamden -->
+        <!--  -->
+        <!-- ,BLOCK _ -obj=&FindCamden_OBJ_FindHotelEntrance& -= <<TEMP - Find Hotel Entrance>> -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,goto _ Marker m_FindCamden_Hotel -distance=5 -->
+                <!-- path -->
+                    <!-- ,enable _ MapPortal portal_OldTown_TO_Hotel_FindCamdenFront -->
+                    <!--  -->
+            <!-- ,checkpoint _ SpawnPoint sp_FindCamden -->
+    <!-- quest Q_FindCamden03 -parent=Q_FindCamden02 -= -glued=true -->
+        <!-- ,wait _ 0.1 -->
+        <!-- -= ,BLOCK _ -obj=<<Talk with Murat>> -->
+            <!-- -= ,talk <<<Strange Guests - END>> Murat Player_FindCamden_01END -->
+                <!-- -= ,debugpos SpawnPoint sp_portal_Hotel_FindCamdenFront_TO_OldTown -->
+            <!-- -= ,checkpoint _ SpawnPoint sp_portal_Hotel_FindCamdenFront_TO_OldTown -->
+            <!-- -= ,reward _ Murat -->
+            <!-- -= ,checkpoint _ SpawnPoint sp_Radiostation -->
+</QuestsDefinitions>

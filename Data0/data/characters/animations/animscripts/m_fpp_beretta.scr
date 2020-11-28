@@ -1,0 +1,115 @@
+//----- animacje z beretta
+
+// --- Noise kamery 
+SeqTrack( "FPP_Beretta_StandNoise",			    "M_FPP_Beretta_StandIdle.anm2",		    0, 200, 30, 1, 0.3)
+SeqTrack( "FPP_Beretta_MoveNoise",				"M_FPP_Beretta_Walk.anm2",				0, 24, 30, 1, 0.5)
+SeqTrack( "FPP_Beretta_AimMoveNoise",			"M_FPP_Beretta_AimWalk.anm2",		0, 26, 30, 1, 0.5)
+SeqTrack( "FPP_Beretta_SprintNoise",			"M_FPP_Beretta_Sprint.anm2",				0, 18, 30, 1, 0.5)
+
+// beretta - podstawowe
+SeqTrack("FPP_Beretta_ReloadBegin", 					"M_FPP_Beretta_Reload_SpecialAmmo.anm2"			, 0, 18, 30, 1, 0.3)
+{
+	Event(5, EVENT_RELOAD_FORBID_BREAK, -1)
+	Event(0, 0, -1)
+    {
+        PlaySound2DExternal(GameVolumeSource_SoundPlayer, "beretta_reload_part_00.wav", 1, 1, 1)
+    }	
+}
+SeqTrack("FPP_Beretta_ReloadManage", 					"M_FPP_Beretta_Reload_SpecialAmmo.anm2"			, 19, 80, 30, 1, 0.0)
+
+SeqTrack("FPP_Beretta_ReloadLoop", 					"M_FPP_Beretta_Reload_SpecialAmmo.anm2"			, 81, 107, 30, 1, 0.0)
+{	
+	Event(6, 0, -1)
+    {
+        PlaySound2DExternal(GameVolumeSource_SoundPlayer, "beretta_reload_part_01.wav", 1, 1, 1)
+    }
+	Event(18, 0, -1)
+    {
+        PlaySound2DExternal(GameVolumeSource_SoundPlayer, "beretta_reload_part_02.wav", 1, 1, 1)
+    }
+	Event(19,   EVENT_RELOAD_ADD_BULLET, -1)	
+}
+
+SeqTrack("FPP_Beretta_ReloadFinish", 					"M_FPP_Beretta_Reload_SpecialAmmo.anm2"			, 107, 127, 30, 1, 0.0)
+{	
+	Event(7, EVENT_RELOAD_ALLOW_BREAK, -1)
+}
+
+SeqTrack("FPP_Beretta_ReloadBeginEmpty", 					"M_FPP_Beretta_ReloadEmpty.anm2"			, 0, 14, 30, 1, 0.3)
+{
+	Event(5, EVENT_RELOAD_FORBID_BREAK, -1)
+	Event(0, 0, -1)
+    {
+        PlaySound2DExternal(GameVolumeSource_SoundPlayer, "beretta_reload_part_00.wav", 1, 1, 1)
+    }	
+}
+
+SeqTrack("FPP_Beretta_ReloadManageEmpty", 					"M_FPP_Beretta_ReloadEmpty.anm2"			, 14, 15, 1, 1, 0.0)
+SeqTrack("FPP_Beretta_ReloadLoopEmpty", 					"M_FPP_Beretta_ReloadEmpty.anm2"			, 14, 44, 30, 1, 0.0)
+{	
+	Event(6, 0, -1)
+    {
+        PlaySound2DExternal(GameVolumeSource_SoundPlayer, "beretta_reload_part_01.wav", 1, 1, 1)
+    }
+	Event(18, 0, -1)
+    {
+        PlaySound2DExternal(GameVolumeSource_SoundPlayer, "beretta_reload_part_02.wav", 1, 1, 1)
+    }
+	Event(19,   EVENT_RELOAD_ADD_BULLET, -1)	
+}
+
+SeqTrack("FPP_Beretta_ReloadFinishEmpty", 					"M_FPP_Beretta_ReloadEmpty.anm2"			, 44, 64, 30, 1, 0.3)
+{	
+	Event(7, EVENT_RELOAD_ALLOW_BREAK, -1)
+}
+
+//Normal
+SeqTrack("FPP_Beretta_Stand", 					"M_FPP_Beretta_StandPos.anm2"			, 0, 10, 30, 1, 0.3)
+SeqTrack("FPP_Beretta_Wall", 					"M_FPP_Beretta_StandPos.anm2"			, 0, 10, 30, 1, 0.3) // no anim for wall now added so we have no assetions
+SeqTrack("FPP_Beretta_Cover_StandPos",			"M_FPP_Beretta_StandPos.anm2"			, 0, 10, 30, 1, 0.3) // no anim for wall now added so we have no assetions
+SeqTrack("FPP_Beretta_StandEmpty", 				"M_FPP_Beretta_StandPosEmpty.anm2"		, 0, 10, 30, 1, 0.3)
+
+SeqTrack( "FPP_Beretta_ShotRecoil0",                "M_FPP_Beretta_Shoot.anm2",						 0, 35, 30, 1, 0.3)
+SeqTrack( "FPP_Beretta_ShotRecoil1",                "M_FPP_Beretta_AimShoot_Recoil_L.anm2",           0, 35, 30, 1, 0.3)
+SeqTrack( "FPP_Beretta_ShotRecoil2",                "M_FPP_Beretta_AimShoot_Recoil_R.anm2",           0, 35, 30, 1, 0.3)
+
+SeqTrack("FPP_Beretta_Shot", 					"M_FPP_Beretta_Shoot.anm2"				, 0, 35, 30, 1, 0.3)
+SeqTrack("FPP_Beretta_ShotLast", 				"M_FPP_Beretta_ShootEmpty.anm2"			, 0, 35, 30, 1, 0.3)
+SeqTrack("FPP_Beretta_ShotEmpty", 				"M_FPP_Beretta_Shoot_NoBullet.anm2"		, 0, 35, 30, 1, 0.3)
+
+
+// Aim
+SeqTrack("FPP_Beretta_Aim_Stand", 					"M_FPP_Beretta_AimShoot_Pose.anm2"				, 0, 10, 30, 1, 0.3)
+SeqTrack("FPP_Beretta_Aim_StandEmpty",				"M_FPP_Beretta_AimShootEmpty_Pose.anm2"			, 0, 10, 30, 1, 0.3)
+
+SeqTrack( "FPP_Beretta_Aim_ShotRecoil0",                "M_FPP_Beretta_Shoot.anm2",						 0, 35, 30, 1, 0.3)
+SeqTrack( "FPP_Beretta_Aim_ShotRecoil1",                "M_FPP_Beretta_AimShoot_Recoil_L.anm2",           0, 35, 30, 1, 0.3)
+SeqTrack( "FPP_Beretta_Aim_ShotRecoil2",                "M_FPP_Beretta_AimShoot_Recoil_R.anm2",           0, 35, 30, 1, 0.3)
+
+SeqTrack("FPP_Beretta_Aim_Shot", 					"M_FPP_Beretta_AimShoot.anm2"					, 0, 35, 30, 1, 0.3)
+SeqTrack("FPP_Beretta_Aim_ShotLast", 				"M_FPP_Beretta_AimShootEmpty.anm2"         		, 0, 35, 30, 1, 0.3)
+SeqTrack("FPP_Beretta_Aim_ShotEmpty", 				"M_FPP_Beretta_AimShoot_NoBullet.anm2"           , 0, 35, 30, 1, 0.3)
+
+//===================================== Gunkimbo ============================================
+
+//SeqTrack("FPP_Gunkimbo_attack", 				"FPP_Gunkimbo_test.anm2",              0, 79, 30, 1, 0.3)
+//SeqTrack("FPP_Gunkimbo_pose",	 				"FPP_Gunkimbo_test.anm2",              79, 89, 30, 1, 0.3)
+
+SeqTrack( "FPP_Beretta_TakeDamageHitRight",    					"M_FPP_Beretta_TakeDamage.anm2",				32, 50, 30, 1, 0.3 )
+SeqTrack( "FPP_Beretta_TakeDamageHitRight_Rest",				"M_FPP_Beretta_TakeDamage.anm2",				50, 62, 30, 1, 0.5 )
+
+SeqTrack( "FPP_Beretta_TakeDamageLeft",    				"M_FPP_Beretta_TakeDamage.anm2",				0, 18, 30, 1, 0.3 )
+SeqTrack( "FPP_Beretta_TakeDamageLeft_Rest",			"M_FPP_Beretta_TakeDamage.anm2",				18, 30, 30, 1, 0.5 )
+
+SeqTrack( "FPP_Beretta_TakeDamage1",    				"M_FPP_Beretta_TakeDamage.anm2",				96, 114, 30, 1, 0.3 )
+SeqTrack( "FPP_Beretta_TakeDamage1_Rest",				"M_FPP_Beretta_TakeDamage.anm2",				114, 126, 30, 1, 0.5 )
+
+SeqTrack( "FPP_Beretta_TakeDamageLeft1",    			"M_FPP_Beretta_TakeDamage.anm2",				64, 82, 30, 1, 0.3 )
+SeqTrack( "FPP_Beretta_TakeDamageLeft1_Rest",			"M_FPP_Beretta_TakeDamage.anm2",				82, 94, 30, 1, 0.5 )
+
+SeqTrack( "FPP_Beretta_TakeDamage2",    				"M_FPP_Beretta_TakeDamage.anm2",				160, 178, 30, 1, 0.3 )
+SeqTrack( "FPP_Beretta_TakeDamage2_Rest",				"M_FPP_Beretta_TakeDamage.anm2",				178, 190, 30, 1, 0.5 )
+
+SeqTrack( "FPP_Beretta_TakeDamageLeft2",    			"M_FPP_Beretta_TakeDamage.anm2",				128, 146, 30, 1, 0.3 )
+SeqTrack( "FPP_Beretta_TakeDamageLeft2_Rest",			"M_FPP_Beretta_TakeDamage.anm2",				146, 158, 30, 1, 0.5 )
+

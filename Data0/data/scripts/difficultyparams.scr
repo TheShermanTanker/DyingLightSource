@@ -1,0 +1,282 @@
+sub main()
+{
+    NewGamePlusParams()
+    {
+        Biter(0.9);
+        Viral(0.8);
+        HMF(0.7);
+        HMF_Leader(0.6);
+        HumanFirearm(0.5);
+        Goon(0.4);
+        Volatile(0.3);
+        Spitter(0.2);
+        Demolisher(0.1);        
+    }
+    //EncounterXpMul("HelpGrabbedNPC_Grabbed", 2.0);
+    //PlayerActionsXpMul("Climb", 10.0);
+    
+    ItemParams()
+    {
+        //Item("Melee_PipeANew")
+        //{
+        //    DamageMul(100.0);
+        //    ForceMul(4.0);
+        //    SellPriceMul(10.0);
+        //    BuyPriceMul(0.1);
+        //    XpMul(100.0);
+        //    DurabilityMul(100.0);
+        //}
+    }
+    
+    Difficulty("Normal")
+    {
+        CanUseShopColorSetHard(false);
+        CanAccelerateBluprintPartDrop(true);
+        CanAccelerateVehicleComponentDrop(true);
+        LootTreeName("default");
+        SpecialLootTreeName("default");
+        ShootingAccuracyFactor(1.0);
+        NightSpottingMult(1.0);
+        AirdropPatrolTimeFactor(1.0);
+       
+        MeleeVerticalAttackOffset(0.1);
+        MeleeVerticalAttackDeviation(0.0);
+        MeleeHorizontalAttackOffset(0.0);
+        MeleeHorizontalAttackDeviation(5.0);
+        xp_legend_factor(1.0);
+        DeathPenaltyLegendXPFactor(0.0);
+		
+		ForceAttackTrackingUsingEventsOnlyEnabled(true);
+    }
+    
+    Difficulty("Hard")
+    {
+        CanShowPatrolCones(false);
+        CanUseShopColorSetHard(true);
+        CanAccelerateBluprintPartDrop(false);
+        CanAccelerateVehicleComponentDrop(false);
+        DeathPenaltyStatusXPFactor(2.5);
+        ShootingAccuracyFactor(1.25);
+        NightSpottingMult(1.0);       //Multiplier of time need for Volatile to spot player
+        AddHealthFactor(0.5);         //Multiplier for amount of health received by using medkit.
+        HealthRegenFactor(3.0);       //Multiplier of time needed to regenerate Player's health from critical health.
+        LootTreeName("default_hard");
+        SpecialLootTreeName("default_hard");
+        AirdropPatrolTimeFactor(0.3);
+        
+        MeleeVerticalAttackOffset(0.1);
+        MeleeVerticalAttackDeviation(0.0);
+        MeleeHorizontalAttackOffset(0.1);
+        MeleeHorizontalAttackDeviation(0.0);
+        
+        sense_enable_triggers(false);            //Decides if player can see triggers 
+                
+        camouflage_duration_mul(0.66);            //changes the duration of Camouflage skill
+        
+        // this means how much damage GIVEN to AI will be modified (ie. player hits with 100 dmg * Biter(0.9) = will give 90 dmg to AI)
+        
+        PlayerDmgFactorMin()
+        {
+            Biter(0.80);
+            Viral(1.00);
+            HMF(0.50);
+            HMF_Leader(0.50);
+            HumanFirearm(0.53);
+            HMF_Arena(0.50);
+            HumanFirearm_Arena(0.50);
+            HMF_Leader_Arena(0.53);   
+            Goon(0.50);
+            Volatile(0.30);
+            Spitter(0.50);
+            Demolisher(0.50);
+            Demolisher_Arena(0.7);
+        }
+        PlayerDmgFactorMax()
+        {
+            Biter(0.80);
+            Viral(1.00);
+            HMF(0.50);
+            HMF_Leader(0.50);
+            HumanFirearm(0.53);
+            HMF_Arena(0.50);
+            HumanFirearm_Arena(0.50);
+            HMF_Leader_Arena(0.53);               
+            Goon(0.50);
+            Volatile(0.30);
+            Spitter(0.50);
+            Demolisher(0.50);
+            Demolisher_Arena(0.7);
+        }
+        
+        // The status level range over which PlayerDmgFactorMin and PlayerDmgFactorMin is interpolated.
+        PlayerDmgStatusMin(0);
+        PlayerDmgStatusMax(25);
+        
+        PlayerForceFactor()
+        {
+            Biter(0.50);
+            Viral(0.50);
+            HMF(0.50);
+            HMF_Leader(0.50);
+            HumanFirearm(0.50);
+            HMF_Arena(0.50);
+            HumanFirearm_Arena(0.50);
+            HMF_Leader_Arena(0.50); 
+            Goon(0.01);
+            Volatile(0.01);
+            Spitter(0.50);
+            Demolisher(0.01);  
+            Demolisher_Arena(0.01);            
+        }
+        EnemiesDmgFactor()// this means how much damage TAKEN from AI will be modified (ie. Bitter hits with 10 dmg * Biter(1.5) = will give 15 dmg to PLAYER)
+        {
+            Biter(2.0);
+            Viral(1.5);
+            HMF(2.0);
+            HMF_Leader(2.0);
+            HumanFirearm(2.0);
+            HMF_Arena(2.0);
+            HumanFirearm_Arena(2.0);
+            HMF_Leader_Arena(2.0); 
+            Goon(2.0);
+            Volatile(1.5);
+            Spitter(1.38);
+            Demolisher(2.0);
+            Demolisher_Arena(2.0);
+        }
+        night_duration_mul(2.0); // normal night during 420 sec, in hard mode during 420x2 = 840 sec
+        day_duration_mul(0.89);//normal day during 3840 sec, in hard mode during 3840x0.89 = 3417 sec
+        hud_enable_hints(false);
+        xp_legend_factor(2.5);
+        DeathPenaltyLegendXPFactor(0.25);
+		
+		ForceAttackTrackingUsingEventsOnlyEnabled(false);
+    }
+    
+    Difficulty("Nightmare")
+    {
+        CanShowPatrolCones(false);
+        CanUseShopColorSetHard(false);
+        CanAccelerateBluprintPartDrop(false);
+        CanAccelerateVehicleComponentDrop(false);
+        ShootingAccuracyFactor(1.25);
+        NightSpottingMult(1.0);       //Multiplier of time need for Volatile to spot player
+        AddHealthFactor(0.5);         //Multiplier for amount of health received by using medkit.
+        HealthRegenFactor(3.0);
+        LootTreeName("default_nightmare");
+        SpecialLootTreeName("default_nightmare");
+        AirdropPatrolTimeFactor(0.3);
+       
+        MeleeVerticalAttackOffset(0.1);
+        MeleeVerticalAttackDeviation(0.0);
+        MeleeHorizontalAttackOffset(0.0);
+        MeleeHorizontalAttackDeviation(5.0);
+    
+        sense_enable_triggers(false);            //Decides if player can see triggers
+
+        camouflage_duration_mul(0.66);            //changes the duration of Camouflage skill
+
+        PlayerDmgFactorMin()// this means how much damage GIVEN to AI will be modified (ie. player hits with 100 dmg * Biter(0.9) = will give 90 dmg to AI)
+        {
+            Biter(0.80);
+            Viral(1.00);
+            HMF(0.50);
+            HMF_Leader(0.50);
+            HumanFirearm(0.53);
+            HMF_Arena(0.50);
+            HumanFirearm_Arena(0.50);
+            HMF_Leader_Arena(0.7);
+            Goon(0.50);
+            Volatile(0.30);
+            Spitter(0.50);
+            Demolisher(0.50);
+            Demolisher_Arena(0.7);
+        }
+        
+        PlayerDmgFactorMax()
+        {
+            Biter(0.2);
+            Viral(0.15);
+            HMF(0.1);
+            HMF_Leader(0.1);
+            HumanFirearm(0.2);
+            HMF_Arena(0.2);
+            HumanFirearm_Arena(0.2);
+            HMF_Leader_Arena(0.7);
+            Goon(0.19);
+            Volatile(0.2);
+            Spitter(0.05);
+            Demolisher(0.3);
+            Demolisher_Arena(0.35);
+        }
+        
+        // The status level range over which PlayerDmgFactorMin and PlayerDmgFactorMin is interpolated.
+        PlayerDmgStatusMin(5);
+        PlayerDmgStatusMax(25);
+        
+        PlayerForceFactor()
+        {
+            Biter(0.50);
+            Viral(0.50);
+            HMF(0.50);
+            HMF_Leader(0.50);
+            HumanFirearm(0.50);
+            HMF_Arena(0.50);
+            HumanFirearm_Arena(0.50);
+            HMF_Leader_Arena(0.50);            
+            Goon(0.01);
+            Volatile(0.01);
+            Spitter(0.50);
+            Demolisher(0.01); 
+            Demolisher_Arena(0.01);
+            
+        }
+        EnemiesDmgFactor()// this means how much damage TAKEN from AI will be modified (ie. Bitter hits with 10 dmg * Biter(1.5) = will give 15 dmg to PLAYER)
+        {
+            Biter(2.0);
+            Viral(1.5);
+            HMF(2.0);
+            HMF_Leader(2.0);
+            HumanFirearm(2.0);
+            HMF_Arena(2.0);
+            HumanFirearm_Arena(2.0);
+            HMF_Leader_Arena(2.0);
+            Goon(2.0);
+            Volatile(1.5);
+            Spitter(1.38);
+            Demolisher(2.0);
+            Demolisher_Arena(2.0);
+        }
+
+        night_duration_mul(2.0); // normal night during 420 sec, in hard mode during 420x2 = 840 sec
+        day_duration_mul(0.89);//normal day during 3840 sec, in hard mode during 3840x0.89 = 3417 sec
+        hud_enable_hints(false);
+
+        InfiniteStaminaAllowed(false);
+        
+        xp_legend_factor(10.0);
+        xp_legend_mp_factor_2player(1.1);
+        xp_legend_mp_factor_3player(1.2);
+        xp_legend_mp_factor_4player(1.3);
+        
+        DeathPenaltyStatusXPFactor(2.5);
+        DeathPenaltyLegendXPFactor(1.0);
+        BannedItems()
+        {
+            Item("ZZZZZ_MacheteBKorek2");
+            Item("Throwable_DevCraft1");
+            Item("DevCraftSiCKBomb");
+            Item("DevRightHandofgloVA");
+            Item("DevCraftAirStrike");
+            Item("DevCraftExcalibour");
+            Item("MacheteAKorek");
+            Item("zzz2_Throwable_DevCraft2");
+            Item("ZZZZ3_DevCraft3");
+            Item("ZZZZ3_DevCraft4");
+            Item("ZZZZ3_Firearm_ToyGun_Twins");
+        }
+		
+		ForceAttackTrackingUsingEventsOnlyEnabled(false);
+    }
+}    
+

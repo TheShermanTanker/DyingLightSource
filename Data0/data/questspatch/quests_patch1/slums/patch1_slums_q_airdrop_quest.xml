@@ -1,0 +1,3808 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST NAME : Airdrop -->
+    <!-- QUEST INFO : Looking for Suppressants from Airdrops -->
+    <!-- AFTER QUEST: Blackout -->
+    <!-- COMMENT    :  -->
+    <!-- FROM       : >> SLUMS INT -->
+    <!-- TO         : >> SLUMS  -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="AirDrop01"
+         parent="Blackout_2"
+         reward_set="StorylineReward_Airdrop_reward"
+         pxsl_line="14">
+        <!-- Contact the GRE. -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Airdrop_OBJ_GRE&amp;"
+             pxsl_line="15">
+            <Path
+                 pxsl_line="15">
+                <Phase
+                     type="go to"
+                     name="AIRDROP - START"
+                     distance="100000"
+                     pxsl_line="16">
+                    <Destination
+                         pxsl_line="16">
+                        <QuestObject
+                             class="SpawnPointWithInteractiveMovie"
+                             name="sp_Hub_LJ_Floor_0"
+                             pxsl_line="16" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="17">
+                        <QuestObject
+                             class="SpawnPointWithInteractiveMovie"
+                             name="sp_Hub_LJ_Floor_0"
+                             pxsl_line="17" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <!-- -->
+                <!-- disabling chatter in hub - -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="20">
+                    <Object
+                         pxsl_line="20">
+                        <QuestObject
+                             class="ConversationNode"
+                             name="slums_faraj_akram_chatter_1"
+                             pxsl_line="20" />
+                    </Object>
+                </Phase>
+                <!-- START ACTIONS -->
+                <!--    -->
+                <Phase
+                     type="player control"
+                     name="Airdrop Start"
+                     diff_level_progress="1"
+                     pxsl_line="23" />
+                <Phase
+                     type="set day night time"
+                     name="_"
+                     day_time="19.5"
+                     pxsl_line="24" />
+                <!-- GIVE PB PILOT TO PLAYER -->
+                <Phase
+                     type="player control"
+                     name="_"
+                     no_pursuitbreakers="false"
+                     pxsl_line="25" />
+                <!--     -->
+                <!-- show joking NPCs in Brecken Hub -->
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="28">
+                    <Object
+                         pxsl_line="29">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Faraj"
+                             pxsl_line="29" />
+                    </Object>
+                    <Object
+                         pxsl_line="30">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Akram"
+                             pxsl_line="30" />
+                    </Object>
+                </Phase>
+                <!-- -->
+                <Phase
+                     type="enable"
+                     name="RESPAWN - The Tower - ON"
+                     pxsl_line="32">
+                    <Object
+                         pxsl_line="33">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="respawn_the_tower"
+                             pxsl_line="33" />
+                    </Object>
+                    <Object
+                         pxsl_line="34">
+                        <QuestObject
+                             class="HubZone"
+                             name="respawn_the_tower_fake_hub_zone"
+                             pxsl_line="34" />
+                    </Object>
+                </Phase>
+                <!-- challenges coop, Wit -->
+                <Phase
+                     type="enable challengesensor"
+                     name="_"
+                     state="true"
+                     pxsl_line="35">
+                    <Object
+                         pxsl_line="35">
+                        <QuestObject
+                             class="SensorCoopChallengeTrigger"
+                             name="storyslums_00"
+                             pxsl_line="35" />
+                    </Object>
+                </Phase>
+                <!-- -->
+                <Phase
+                     type="spike control"
+                     name="_"
+                     enable_map="true"
+                     pxsl_line="37" />
+                <Phase
+                     type="use life place"
+                     name="_"
+                     teleport="true"
+                     pxsl_line="38">
+                    <LifePlace
+                         pxsl_line="38">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="ScoutingSpike_Tir_lp"
+                             pxsl_line="38" />
+                    </LifePlace>
+                    <AI
+                         pxsl_line="39">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Spike"
+                             pxsl_line="39" />
+                    </AI>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="changes on start AirDrop"
+                     pxsl_line="40">
+                    <Path
+                         pxsl_line="40">
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="41">
+                            <Object
+                                 pxsl_line="42">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="airdrop_A_qeg"
+                                     pxsl_line="42" />
+                            </Object>
+                            <Object
+                                 pxsl_line="43">
+                                <QuestObject
+                                     class="FXEmitter"
+                                     name="airdrop_A_fx"
+                                     pxsl_line="43" />
+                            </Object>
+                            <Object
+                                 pxsl_line="44">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="airdrop_electic"
+                                     pxsl_line="44" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="show"
+                             pxsl_line="45">
+                            <Object
+                                 pxsl_line="46">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Airdrop_A"
+                                     pxsl_line="46" />
+                            </Object>
+                            <Object
+                                 pxsl_line="47">
+                                <QuestObject
+                                     class="MovieActor"
+                                     name="MilitaryCargo"
+                                     pxsl_line="47" />
+                            </Object>
+                            <!-- PLAYER RESTING PLACE TIR -->
+                            <Object
+                                 pxsl_line="48">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="resting_place_tir::resting_place_AG"
+                                     pxsl_line="48" />
+                            </Object>
+                        </Phase>
+                        <!-- enabling resting place tir -->
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="49">
+                            <Object
+                                 pxsl_line="49">
+                                <QuestObject
+                                     class="RestingPlace"
+                                     name="resting_place_tir::restingplace_for_player"
+                                     pxsl_line="49" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="third group zombie from Zeres Tir"
+                             state="disabled"
+                             pxsl_line="50">
+                            <Object
+                                 pxsl_line="50">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="tir_zombies_03"
+                                     pxsl_line="50" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="enable easy group of zombies from Zeres Tir"
+                             pxsl_line="51">
+                            <Object
+                                 pxsl_line="51">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="tir_zombies_04"
+                                     pxsl_line="51" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <!-- -->
+                <!-- ENCOUNTERS ACTIONS -->
+                <Phase
+                     type="AND"
+                     name="encounters activation"
+                     pxsl_line="54">
+                    <Path
+                         pxsl_line="54">
+                        <Phase
+                             type="group block unblock"
+                             name="_"
+                             group_name="NpcHelp"
+                             block="false"
+                             force="false"
+                             pxsl_line="55" />
+                        <Phase
+                             type="group block unblock"
+                             name="_"
+                             group_name="NpcGrabbedHelp"
+                             block="false"
+                             force="false"
+                             pxsl_line="56" />
+                        <Phase
+                             type="group block unblock"
+                             name="_"
+                             group_name="EncounterShop"
+                             block="false"
+                             force="false"
+                             pxsl_line="57" />
+                        <Phase
+                             type="group block unblock"
+                             name="_"
+                             group_name="EncounterNightShop"
+                             block="false"
+                             force="false"
+                             pxsl_line="58" />
+                        <Phase
+                             type="group block unblock"
+                             name="_"
+                             group_name="EncounterStoryTeller"
+                             block="false"
+                             force="true"
+                             pxsl_line="59" />
+                        <Phase
+                             type="group block unblock"
+                             name="_"
+                             group_name="EncounterGenericAssist"
+                             block="false"
+                             force="true"
+                             pxsl_line="60" />
+                    </Path>
+                </Phase>
+                <!-- -->
+                <!-- BLACKOUT -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="63">
+                    <Object
+                         pxsl_line="64">
+                        <QuestObject
+                             class="CrowdSpawner"
+                             name="demo_night_crowd_03"
+                             pxsl_line="64" />
+                    </Object>
+                    <Object
+                         pxsl_line="65">
+                        <QuestObject
+                             class="CrowdSpawner"
+                             name="demo_night_crowd_04"
+                             pxsl_line="65" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="66">
+                    <Destination
+                         pxsl_line="66">
+                        <QuestObject
+                             class="SpawnPointWithInteractiveMovie"
+                             name="sp_Hub_LJ_Floor_0"
+                             pxsl_line="66" />
+                    </Destination>
+                </Phase>
+                <!--  -->
+                <!-- GRE CONTACT 3 -->
+                <!-- -->
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="70">
+                    <Path
+                         pxsl_line="70">
+                        <Phase
+                             type="gather players guard"
+                             name="AIRDROP - GRE 03"
+                             distance="0"
+                             pxsl_line="71">
+                            <Destination
+                                 pxsl_line="71">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="GRE_03_goto"
+                                     pxsl_line="71" />
+                            </Destination>
+                            <DebugPlayerPosition
+                                 pxsl_line="72">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="GRE_03_sp"
+                                     pxsl_line="72" />
+                            </DebugPlayerPosition>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="73">
+                            <Object
+                                 pxsl_line="74">
+                                <QuestObject
+                                     class="UseItemOnceZone"
+                                     name="GRE_03_Dialog"
+                                     pxsl_line="74" />
+                            </Object>
+                            <Object
+                                 pxsl_line="75">
+                                <QuestObject
+                                     class="SafeArea"
+                                     name="GRE_03_safe_area"
+                                     pxsl_line="75" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="use"
+                             name="_"
+                             desired_state="on"
+                             show_locations="false"
+                             pxsl_line="76">
+                            <Trigger
+                                 pxsl_line="76">
+                                <QuestObject
+                                     class="InvisibleSwitchDI"
+                                     name="GRE_03_Dialog_Trigger"
+                                     pxsl_line="76" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="player control"
+                             name="_"
+                             block_move="true"
+                             pxsl_line="77" />
+                        <Phase
+                             type="hudgroup"
+                             name="_"
+                             group="HideRadarForGREContact"
+                             mode="hide"
+                             pxsl_line="78" />
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="6"
+                             pxsl_line="79" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="80">
+                            <Object
+                                 pxsl_line="81">
+                                <QuestObject
+                                     class="SensorVarlist"
+                                     name="GRE_03_varlist_mod"
+                                     pxsl_line="81" />
+                            </Object>
+                            <Object
+                                 pxsl_line="82">
+                                <QuestObject
+                                     class="SensorAmbientMusicArea"
+                                     name="GRE_03_Music"
+                                     pxsl_line="82" />
+                            </Object>
+                        </Phase>
+                        <!-- AGENCY - 3     -->
+                        <Phase
+                             type="talk"
+                             name="_"
+                             speaker="voice2d"
+                             group="Player_Airdrop_17DLG01"
+                             show_locations="false"
+                             auto_start="true"
+                             pxsl_line="83" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="84">
+                            <Object
+                                 pxsl_line="84">
+                                <QuestObject
+                                     class="UseItemOnceZone"
+                                     name="GRE_03_Dialog"
+                                     pxsl_line="84" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="85">
+                            <Object
+                                 pxsl_line="85">
+                                <QuestObject
+                                     class="UseItemOnceZone"
+                                     name="GRE_03_Dialog_Ending"
+                                     pxsl_line="85" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="OR"
+                             name="_"
+                             pxsl_line="86">
+                            <Path
+                                 pxsl_line="87">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="88">
+                                    <Trigger
+                                         pxsl_line="88">
+                                        <QuestObject
+                                             class="InvisibleSwitchDI"
+                                             name="GRE_03_Dialog_Ending_Trigger"
+                                             pxsl_line="88" />
+                                    </Trigger>
+                                </Phase>
+                                <Phase
+                                     type="wait guard"
+                                     name="_"
+                                     time="1"
+                                     pxsl_line="89" />
+                            </Path>
+                            <Path
+                                 pxsl_line="90">
+                                <Phase
+                                     type="wait guard"
+                                     name="_"
+                                     time="3"
+                                     pxsl_line="91" />
+                            </Path>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="92">
+                            <Object
+                                 pxsl_line="93">
+                                <QuestObject
+                                     class="SafeArea"
+                                     name="GRE_03_safe_area"
+                                     pxsl_line="93" />
+                            </Object>
+                            <Object
+                                 pxsl_line="94">
+                                <QuestObject
+                                     class="UseItemOnceZone"
+                                     name="GRE_03_Dialog_Ending"
+                                     pxsl_line="94" />
+                            </Object>
+                            <Object
+                                 pxsl_line="95">
+                                <QuestObject
+                                     class="SensorVarlist"
+                                     name="GRE_03_varlist_mod"
+                                     pxsl_line="95" />
+                            </Object>
+                            <Object
+                                 pxsl_line="96">
+                                <QuestObject
+                                     class="SensorAmbientMusicArea"
+                                     name="GRE_03_Music"
+                                     pxsl_line="96" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="hudgroup"
+                             name="_"
+                             group="HideRadarForGREContact"
+                             mode="show"
+                             pxsl_line="97" />
+                        <Phase
+                             type="player control"
+                             name="_"
+                             block_move="false"
+                             pxsl_line="98" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="99">
+                            <Object
+                                 pxsl_line="99">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="GRE_03_pre_qeg"
+                                     pxsl_line="99" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="checkpoint"
+                             name="_"
+                             pxsl_line="100">
+                            <Destination
+                                 pxsl_line="100">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="GRE_03_sp"
+                                     pxsl_line="100" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                </Phase>
+            </Path>
+        </Phase>
+        <!-- GET TO THE AIR DROP         -->
+        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-         -->
+        <!-- Look for the airdrop in the Cauldron area. -->
+        <Phase
+             type="AND"
+             name="Get to the Aridrop"
+             objective="&amp;Airdrop_OBJ_LookForAirdrop&amp;"
+             pxsl_line="104">
+            <Path
+                 pxsl_line="104">
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="105">
+                    <SpecificLocation
+                         pxsl_line="106">
+                        <QuestObject
+                             class="ZoneBox"
+                             name="airdrop_A_zone_01"
+                             pxsl_line="106" />
+                    </SpecificLocation>
+                    <Path
+                         pxsl_line="107">
+                        <Phase
+                             type="go to"
+                             name="AIRDROP - Secure the military aid drop zone"
+                             distance="220"
+                             show_locations="false"
+                             pxsl_line="108">
+                            <Destination
+                                 pxsl_line="108">
+                                <QuestObject
+                                     class="Marker"
+                                     name="airdrop_A_control_loc"
+                                     pxsl_line="108" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="en 20 : 00"
+                             pxsl_line="109">
+                            <Object
+                                 pxsl_line="109">
+                                <QuestObject
+                                     class="ForceDayTimeObject"
+                                     name="ForceDayTimeObject_Airdrop_02_20_00"
+                                     pxsl_line="109" />
+                            </Object>
+                        </Phase>
+                        <!-- challenges coop, Wit -->
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="30"
+                             show_locations="false"
+                             pxsl_line="110">
+                            <Destination
+                                 pxsl_line="110">
+                                <QuestObject
+                                     class="Marker"
+                                     name="airdrop_A_control_loc"
+                                     pxsl_line="110" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="111">
+                            <Object
+                                 pxsl_line="111">
+                                <QuestObject
+                                     class="FXEmitter"
+                                     name="airdrop_A_fx"
+                                     pxsl_line="111" />
+                            </Object>
+                        </Phase>
+                        <!-- ,goto _ Marker airdrop_A_control_loc -distance=6 -show=false -= Removed by Sikorek to show precise LOC faster. -->
+                    </Path>
+                    <Path
+                         pxsl_line="113">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="100"
+                             show_locations="false"
+                             pxsl_line="114">
+                            <Destination
+                                 pxsl_line="114">
+                                <QuestObject
+                                     class="Marker"
+                                     name="airdrop_A_control_loc"
+                                     pxsl_line="114" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Jade_Airdrop_02DLG"
+                             auto_start="true"
+                             pxsl_line="115" />
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="40"
+                             show_locations="false"
+                             pxsl_line="116">
+                            <Destination
+                                 pxsl_line="116">
+                                <QuestObject
+                                     class="Marker"
+                                     name="airdrop_A_control_loc"
+                                     pxsl_line="116" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Player_Airdrop_13DLG01"
+                             auto_start="true"
+                             pxsl_line="117" />
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="2"
+                             pxsl_line="118" />
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="20"
+                             show_locations="false"
+                             pxsl_line="119">
+                            <Destination
+                                 pxsl_line="119">
+                                <QuestObject
+                                     class="Marker"
+                                     name="airdrop_A_control_loc"
+                                     pxsl_line="119" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Player_Airdrop_13DLG01_b"
+                             auto_start="true"
+                             pxsl_line="120" />
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="2"
+                             pxsl_line="121" />
+                    </Path>
+                </Phase>
+                <!-- ,goto _ SensorGoTo airdrop_A_gld_goto -distance=0 -= Removed by Sikorek to show precise LOC faster. -->
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="123">
+                    <Destination
+                         pxsl_line="123">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="cin_airdrop_sp"
+                             pxsl_line="123" />
+                    </Destination>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <!-- CIN - AIRDROP PLANE -->
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="127">
+                    <Object
+                         pxsl_line="127">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="cin_airdrop_trigger_qeg"
+                             pxsl_line="127" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="use"
+                     name="AIRDROP - CIN - Plane"
+                     desired_state="on"
+                     pxsl_line="128">
+                    <Trigger
+                         pxsl_line="128">
+                        <QuestObject
+                             class="InteractiveMovieTrigger"
+                             name="cin_airdrop_trigger"
+                             pxsl_line="128" />
+                    </Trigger>
+                    <DebugPlayerPosition
+                         pxsl_line="129">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="cin_airdrop_sp"
+                             pxsl_line="129" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="130">
+                    <Destination
+                         pxsl_line="130">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="cin_airdrop_sp"
+                             pxsl_line="130" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-         -->
+    <!-- Rais men near the first airdrop         -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__AirDrop_AirdropBandits"
+         parent="AirDrop01"
+         pxsl_line="136">
+        <!-- Workaround for the problem of disabling spawners not being fully symmetric with enabling them. -->
+        <!-- The difference is that enable spawns enemies if needed, but disable doesn't remove them, -->
+        <!-- which is crucial here. -->
+        <Phase
+             type="ensure spawner clear"
+             name="_"
+             pxsl_line="140">
+            <Spawner
+                 pxsl_line="141">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="airdrop_B_soldier_A"
+                     pxsl_line="141" />
+            </Spawner>
+            <Spawner
+                 pxsl_line="142">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="airdrop_B_leader"
+                     pxsl_line="142" />
+            </Spawner>
+            <Spawner
+                 pxsl_line="143">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="airdrop_B_soldier_B"
+                     pxsl_line="143" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="145">
+            <Object
+                 pxsl_line="145">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="airdrop_B_qeg"
+                     pxsl_line="145" />
+            </Object>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="146">
+            <Object
+                 pxsl_line="146">
+                <QuestObject
+                     class="MapMarker"
+                     name="First_Playfield_Safezone::First_Playfield_MapMarker_SafeZone_Active"
+                     pxsl_line="146" />
+            </Object>
+        </Phase>
+        <Phase
+             type="OR"
+             name="_"
+             pxsl_line="147">
+            <Path
+                 pxsl_line="148">
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="15"
+                     show_locations="false"
+                     pxsl_line="149">
+                    <Destination
+                         pxsl_line="149">
+                        <QuestObject
+                             class="Marker"
+                             name="airdrop_B_action_04_bandits_chatter"
+                             pxsl_line="149" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="OR"
+                     name="_"
+                     pxsl_line="150">
+                    <Path
+                         pxsl_line="151">
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="AirdropBandit02"
+                             group="AirdropBandit02_Airdrop_01TLK01"
+                             auto_start="true"
+                             pxsl_line="152" />
+                    </Path>
+                    <Path
+                         pxsl_line="153">
+                        <Phase
+                             type="group alarmed guard"
+                             name="_"
+                             level="High"
+                             pxsl_line="154">
+                            <GroupMarker
+                                 pxsl_line="154">
+                                <QuestObject
+                                     class="AIGroupMarker"
+                                     name="airdrop_B_soldiers_aigroup"
+                                     pxsl_line="154" />
+                            </GroupMarker>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="group alarmed guard"
+                     name="_"
+                     level="High"
+                     pxsl_line="156">
+                    <GroupMarker
+                         pxsl_line="156">
+                        <QuestObject
+                             class="AIGroupMarker"
+                             name="airdrop_B_soldiers_aigroup"
+                             pxsl_line="156" />
+                    </GroupMarker>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="1"
+                     pxsl_line="157" />
+                <Phase
+                     type="set dialog"
+                     name="_"
+                     speaker="AirdropBandit01"
+                     group="AirdropBandit01_Airdrop_02TLK01"
+                     auto_start="true"
+                     pxsl_line="158" />
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="16"
+                     pxsl_line="159" />
+                <Phase
+                     type="set dialog"
+                     name="_"
+                     speaker="AirdropBandit01"
+                     group="AirdropBandit01_Airdrop_03TLK01"
+                     auto_start="true"
+                     pxsl_line="160" />
+            </Path>
+            <Path
+                 pxsl_line="161">
+                <Phase
+                     type="started quest guard"
+                     name="_"
+                     quest_name="PactWithRais00"
+                     finished="true"
+                     pxsl_line="162" />
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="163">
+            <Destination
+                 pxsl_line="163">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="cin_airdrop_sp"
+                     pxsl_line="163" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="PactWithRais00"
+             finished="true"
+             pxsl_line="164" />
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="165">
+            <Object
+                 pxsl_line="166">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="airdrop_B_qeg"
+                     pxsl_line="166" />
+            </Object>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="167">
+            <Object
+                 pxsl_line="167">
+                <QuestObject
+                     class="MapMarker"
+                     name="First_Playfield_Safezone::First_Playfield_MapMarker_SafeZone_Active"
+                     pxsl_line="167" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="168">
+            <Destination
+                 pxsl_line="168">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="cin_airdrop_sp"
+                     pxsl_line="168" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="AirDrop02"
+         parent="AirDrop01"
+         glued="true"
+         pxsl_line="171">
+        <Phase
+             type="BLOCK_SPIKE_CHATTERS"
+             name="_"
+             pxsl_line="172">
+            <Path
+                 pxsl_line="172">
+                <Phase
+                     type="set day night time"
+                     name="_"
+                     day_time="20"
+                     pxsl_line="173" />
+                <!-- challenges coop, Wit     -->
+                <Phase
+                     type="enable challengesensor"
+                     name="_"
+                     state="false"
+                     pxsl_line="174">
+                    <Object
+                         pxsl_line="174">
+                        <QuestObject
+                             class="SensorCoopChallengeTrigger"
+                             name="storyslums_00"
+                             pxsl_line="174" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="175">
+                    <Object
+                         pxsl_line="175">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="cin_airdrop_trigger_qeg"
+                             pxsl_line="175" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="set state"
+                     name="_"
+                     desired_state="closed"
+                     pxsl_line="176">
+                    <Trigger
+                         pxsl_line="176">
+                        <QuestObject
+                             class="DoorDI"
+                             name="SafeZone_doors_to_house"
+                             pxsl_line="176" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="after movie changes"
+                     pxsl_line="177">
+                    <Path
+                         pxsl_line="177">
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="178">
+                            <Object
+                                 pxsl_line="179">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="airdrop_A_qeg"
+                                     pxsl_line="179" />
+                            </Object>
+                            <!-- Field Safe Zone -->
+                            <Object
+                                 pxsl_line="180">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="First_Playfield_Safezone::SafeZone_qeg"
+                                     pxsl_line="180" />
+                            </Object>
+                            <!-- Filed Restingplace -->
+                            <Object
+                                 pxsl_line="181">
+                                <QuestObject
+                                     class="RestingPlace"
+                                     name="First_Playfield_Safezone::restingplace_for_player"
+                                     pxsl_line="181" />
+                            </Object>
+                            <Object
+                                 pxsl_line="182">
+                                <QuestObject
+                                     class="DoorDI"
+                                     name="SafeZone_doors_to_house"
+                                     pxsl_line="182" />
+                            </Object>
+                            <Object
+                                 pxsl_line="183">
+                                <QuestObject
+                                     class="DepotContainer"
+                                     name="First_Playfield_Safezone::FristPlayefield_sz_depot::bag"
+                                     pxsl_line="183" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="184">
+                            <Object
+                                 pxsl_line="185">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="airdrop_B_crowd_qeg"
+                                     pxsl_line="185" />
+                            </Object>
+                            <Object
+                                 pxsl_line="186">
+                                <QuestObject
+                                     class="FXEmitter"
+                                     name="airdrop_B_fx"
+                                     pxsl_line="186" />
+                            </Object>
+                            <Object
+                                 pxsl_line="187">
+                                <QuestObject
+                                     class="FXEmitter"
+                                     name="airdrop_C_fx"
+                                     pxsl_line="187" />
+                            </Object>
+                            <Object
+                                 pxsl_line="188">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="airdrop_C_qeg"
+                                     pxsl_line="188" />
+                            </Object>
+                            <Object
+                                 pxsl_line="189">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="airdrop_C_enemies_in_way_to_qeg"
+                                     pxsl_line="189" />
+                            </Object>
+                            <Object
+                                 pxsl_line="190">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="airdrop_B_deadbody_01"
+                                     pxsl_line="190" />
+                            </Object>
+                            <Object
+                                 pxsl_line="191">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="airdrop_B_deadbody_02"
+                                     pxsl_line="191" />
+                            </Object>
+                            <Object
+                                 pxsl_line="192">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="airdrop_B_deadbody_03"
+                                     pxsl_line="192" />
+                            </Object>
+                            <Object
+                                 pxsl_line="193">
+                                <QuestObject
+                                     class="Encounter::EncounterBlockArea"
+                                     name="airdrop_enc_blocker_01"
+                                     pxsl_line="193" />
+                            </Object>
+                            <Object
+                                 pxsl_line="194">
+                                <QuestObject
+                                     class="Encounter::EncounterBlockArea"
+                                     name="airdrop_enc_blocker_02"
+                                     pxsl_line="194" />
+                            </Object>
+                            <Object
+                                 pxsl_line="195">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="airdrop_C"
+                                     pxsl_line="195" />
+                            </Object>
+                            <Object
+                                 pxsl_line="196">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="airdrop_zombie_qeg"
+                                     pxsl_line="196" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="RESPAWN - The Tower - OFF"
+                             state="disabled"
+                             pxsl_line="197">
+                            <Object
+                                 pxsl_line="198">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="respawn_the_tower"
+                                     pxsl_line="198" />
+                            </Object>
+                            <Object
+                                 pxsl_line="199">
+                                <QuestObject
+                                     class="HubZone"
+                                     name="respawn_the_tower_fake_hub_zone"
+                                     pxsl_line="199" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="RESPAWN - Blackout Filed - OFF"
+                             state="disabled"
+                             pxsl_line="200">
+                            <Object
+                                 pxsl_line="201">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="First_Playfield_Safezone::SafeZone_sp_First_playfield"
+                                     pxsl_line="201" />
+                            </Object>
+                            <Object
+                                 pxsl_line="202">
+                                <QuestObject
+                                     class="HubZone"
+                                     name="First_Playfield_Safezone::SafeZone_sp_First_playfield_fake_hub_zone"
+                                     pxsl_line="202" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="RESPAWN - Zeres Tir - OFF"
+                             state="disabled"
+                             pxsl_line="203">
+                            <Object
+                                 pxsl_line="204">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="respawn_zeres_tir"
+                                     pxsl_line="204" />
+                            </Object>
+                            <Object
+                                 pxsl_line="205">
+                                <QuestObject
+                                     class="HubZone"
+                                     name="respawn_zeres_tir_fake_hub_zone"
+                                     pxsl_line="205" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="show"
+                             pxsl_line="206">
+                            <Object
+                                 pxsl_line="207">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Airdrop_B"
+                                     pxsl_line="207" />
+                            </Object>
+                            <Object
+                                 pxsl_line="208">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="airdrop_b_reward_ag"
+                                     pxsl_line="208" />
+                            </Object>
+                            <Object
+                                 pxsl_line="209">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Airdrop_C"
+                                     pxsl_line="209" />
+                            </Object>
+                            <Object
+                                 pxsl_line="210">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="airdrop_C_deabdoby_01"
+                                     pxsl_line="210" />
+                            </Object>
+                            <Object
+                                 pxsl_line="211">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="airdrop_C_deadbody_02"
+                                     pxsl_line="211" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="212">
+                            <Object
+                                 pxsl_line="212">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="airdrop_b_reward_qeg"
+                                     pxsl_line="212" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="dis 19 : 00"
+                             state="disabled"
+                             pxsl_line="213">
+                            <Object
+                                 pxsl_line="213">
+                                <QuestObject
+                                     class="ForceDayTimeObject"
+                                     name="ForceDayTimeObject_Airdrop_02_20_00"
+                                     pxsl_line="213" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="en 20 : 40"
+                             pxsl_line="214">
+                            <Object
+                                 pxsl_line="214">
+                                <QuestObject
+                                     class="ForceDayTimeObject"
+                                     name="ForceDayTimeObject_Airdrop_03_20_30"
+                                     pxsl_line="214" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="go to"
+                     name="AIRDROP - Run to the first airdrop"
+                     distance="10000"
+                     show_locations="false"
+                     pxsl_line="215">
+                    <Destination
+                         pxsl_line="215">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="cin_airdrop_sp"
+                             pxsl_line="215" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="216">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="cin_airdrop_sp"
+                             pxsl_line="216" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <!-- Retrieve Antizin from the first airdrop. -->
+                <Phase
+                     type="AND"
+                     name="Run to the first airdrop"
+                     objective="&amp;Airdrop_OBJ_FirstAirdrops&amp;"
+                     pxsl_line="218">
+                    <Path
+                         pxsl_line="218">
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="219">
+                            <Object
+                                 pxsl_line="219">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="airdrop_C_enemies_in_way_from_qeg"
+                                     pxsl_line="219" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="AND"
+                             name="_"
+                             pxsl_line="220">
+                            <Path
+                                 pxsl_line="221">
+                                <Phase
+                                     type="OR"
+                                     name="alternative actions in run to second air drop"
+                                     pxsl_line="222">
+                                    <Path
+                                         pxsl_line="223">
+                                        <Phase
+                                             type="go to"
+                                             name="_"
+                                             distance="2"
+                                             show_locations="false"
+                                             pxsl_line="224">
+                                            <Destination
+                                                 pxsl_line="224">
+                                                <QuestObject
+                                                     class="Marker"
+                                                     name="airdrop_B_action_02_highway"
+                                                     pxsl_line="224" />
+                                            </Destination>
+                                        </Phase>
+                                        <Phase
+                                             type="wait guard"
+                                             name="_"
+                                             time="1"
+                                             pxsl_line="225" />
+                                        <Phase
+                                             type="set dialog"
+                                             name="enter on highway"
+                                             speaker="voice2d"
+                                             group="Player_Airdrop_12DLG01"
+                                             auto_start="true"
+                                             pxsl_line="226" />
+                                        <Phase
+                                             type="semaphore"
+                                             name="_"
+                                             pxsl_line="227" />
+                                    </Path>
+                                    <Path
+                                         pxsl_line="228">
+                                        <Phase
+                                             type="go to"
+                                             name="_"
+                                             distance="0"
+                                             pxsl_line="229">
+                                            <Destination
+                                                 pxsl_line="229">
+                                                <QuestObject
+                                                     class="SensorGoTo"
+                                                     name="airdrop_B_action_04_bandits_goto"
+                                                     pxsl_line="229" />
+                                            </Destination>
+                                        </Phase>
+                                    </Path>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="230">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="40"
+                                     show_locations="false"
+                                     pxsl_line="231">
+                                    <Destination
+                                         pxsl_line="231">
+                                        <QuestObject
+                                             class="Marker"
+                                             name="airdrop_B_action_04_bandits"
+                                             pxsl_line="231" />
+                                    </Destination>
+                                </Phase>
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     state="disabled"
+                                     pxsl_line="232">
+                                    <Object
+                                         pxsl_line="232">
+                                        <QuestObject
+                                             class="FXEmitter"
+                                             name="airdrop_B_fx"
+                                             pxsl_line="232" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="233">
+                                <!-- PLANE FLIGHT -->
+                                <Phase
+                                     type="movie"
+                                     name="_"
+                                     movie="cin_airdrop_after"
+                                     pxsl_line="234" />
+                            </Path>
+                        </Phase>
+                        <Phase
+                             type="talk"
+                             name="_"
+                             speaker="voice2d"
+                             group="Player_Airdrop_07DLG"
+                             show_locations="false"
+                             auto_start="true"
+                             pxsl_line="235" />
+                        <Phase
+                             type="go to"
+                             name="AIRDROP - Rais soldiers"
+                             distance="100000"
+                             show_locations="false"
+                             pxsl_line="236">
+                            <Destination
+                                 pxsl_line="236">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="airdrop_B_sp"
+                                     pxsl_line="236" />
+                            </Destination>
+                            <DebugPlayerPosition
+                                 pxsl_line="237">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="airdrop_B_sp"
+                                     pxsl_line="237" />
+                            </DebugPlayerPosition>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="238">
+                            <Object
+                                 pxsl_line="238">
+                                <QuestObject
+                                     class="SpawnBlocker"
+                                     name="airdrop_C_spawn_blocker"
+                                     pxsl_line="238" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="checkpoint"
+                             name="_"
+                             pxsl_line="239">
+                            <Destination
+                                 pxsl_line="239">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="airdrop_B_sp"
+                                     pxsl_line="239" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <!-- Rush to the second airdrop. -->
+                <Phase
+                     type="AND"
+                     name="Rush to the second airdrop."
+                     objective="&amp;Airdrop_OBJ_SecondAirdrops&amp;"
+                     pxsl_line="241">
+                    <Path
+                         pxsl_line="241">
+                        <!-- challenges coop, Wit -->
+                        <Phase
+                             type="enable challengesensor"
+                             name="_"
+                             state="true"
+                             pxsl_line="242">
+                            <Object
+                                 pxsl_line="242">
+                                <QuestObject
+                                     class="SensorCoopChallengeTrigger"
+                                     name="storyslums_01"
+                                     pxsl_line="242" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="AND"
+                             name="_"
+                             pxsl_line="243">
+                            <Path
+                                 pxsl_line="244">
+                                <!-- challenges coop, Wit -->
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="6"
+                                     show_locations="false"
+                                     complete_challenge="storyslums_01"
+                                     pxsl_line="245">
+                                    <Destination
+                                         pxsl_line="245">
+                                        <QuestObject
+                                             class="Marker"
+                                             name="airdrop_C_loc"
+                                             pxsl_line="245" />
+                                    </Destination>
+                                </Phase>
+                                <!-- challenges coop, Wit -->
+                                <Phase
+                                     type="enable challengesensor"
+                                     name="_"
+                                     state="false"
+                                     pxsl_line="246">
+                                    <Object
+                                         pxsl_line="246">
+                                        <QuestObject
+                                             class="SensorCoopChallengeTrigger"
+                                             name="storyslums_01"
+                                             pxsl_line="246" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                            <SpecificLocation
+                                 pxsl_line="247">
+                                <QuestObject
+                                     class="ZoneBox"
+                                     name="airdrop_C_zone"
+                                     pxsl_line="247" />
+                            </SpecificLocation>
+                            <Path
+                                 pxsl_line="248">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="120"
+                                     show_locations="false"
+                                     pxsl_line="249">
+                                    <Destination
+                                         pxsl_line="249">
+                                        <QuestObject
+                                             class="Marker"
+                                             name="airdrop_C_loc"
+                                             pxsl_line="249" />
+                                    </Destination>
+                                </Phase>
+                                <!-- Jade hustle -->
+                                <Phase
+                                     type="set dialog"
+                                     name="_"
+                                     speaker="voice2d"
+                                     group="Jade_Airdrop_08DLG"
+                                     auto_start="true"
+                                     pxsl_line="250" />
+                            </Path>
+                            <Path
+                                 pxsl_line="251">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="120"
+                                     show_locations="false"
+                                     pxsl_line="252">
+                                    <Destination
+                                         pxsl_line="252">
+                                        <QuestObject
+                                             class="Marker"
+                                             name="airdrop_C_loc"
+                                             pxsl_line="252" />
+                                    </Destination>
+                                </Phase>
+                                <!-- Jade hustle -->
+                                <Phase
+                                     type="set dialog"
+                                     name="_"
+                                     speaker="voice2d"
+                                     group="Jade_Airdrop_09DLG01"
+                                     auto_start="true"
+                                     pxsl_line="253" />
+                            </Path>
+                            <Path
+                                 pxsl_line="254">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="35"
+                                     show_locations="false"
+                                     pxsl_line="255">
+                                    <Destination
+                                         pxsl_line="255">
+                                        <QuestObject
+                                             class="Marker"
+                                             name="airdrop_C_loc"
+                                             pxsl_line="255" />
+                                    </Destination>
+                                </Phase>
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     state="disabled"
+                                     pxsl_line="256">
+                                    <Object
+                                         pxsl_line="256">
+                                        <QuestObject
+                                             class="FXEmitter"
+                                             name="airdrop_C_fx"
+                                             pxsl_line="256" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="RESPAWN - second roof"
+                             pxsl_line="257">
+                            <Object
+                                 pxsl_line="257">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="respawn_airdrop_03"
+                                     pxsl_line="257" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <!-- Clear the airdrop area. -->
+                <Phase
+                     type="AND"
+                     name="_"
+                     objective="&amp;Airdrop_OBJ_SecondAirdropClearZone&amp;"
+                     pxsl_line="259">
+                    <Path
+                         pxsl_line="259">
+                        <!-- ,enable <<RESPAWN - Airdrop C - on>> SpawnPoint airdrop_C_sp -->
+                        <Phase
+                             type="clear area"
+                             name="_"
+                             show_location="false"
+                             visualize_count="-1"
+                             location_visible_on_map="true"
+                             pxsl_line="261">
+                            <Object
+                                 pxsl_line="261">
+                                <QuestObject
+                                     class="ClearArea"
+                                     name="airdrop_C_clear_area"
+                                     pxsl_line="261" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="set day night time"
+                             name="_"
+                             day_time="20.5"
+                             pxsl_line="262" />
+                        <Phase
+                             type="checkpoint"
+                             name="_"
+                             pxsl_line="263">
+                            <Destination
+                                 pxsl_line="263">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="cin_destroing_antazin_01_pos01"
+                                     pxsl_line="263" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <!-- Salvage the vials of Antizin.     -->
+                <Phase
+                     type="AND"
+                     name="_"
+                     objective="&amp;Airdrop_OBJ_SecondAirdropOpen&amp;"
+                     pxsl_line="264">
+                    <Path
+                         pxsl_line="264">
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                        <!-- CIN VOLATILE INITIATION -->
+                        <!-- -->
+                        <!-- GRE 04 - in CIN with antazin and Volatile -->
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="270">
+                            <Object
+                                 pxsl_line="270">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="cin_destroing_antazin_01_trigger_qeg"
+                                     pxsl_line="270" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="block quest tracking"
+                             name="_"
+                             block="true"
+                             pxsl_line="271" />
+                        <Phase
+                             type="use"
+                             name="AIRDROP - CIN - Volatile's initiation"
+                             desired_state="on"
+                             pxsl_line="272">
+                            <Trigger
+                                 pxsl_line="272">
+                                <QuestObject
+                                     class="InteractiveMovieTrigger"
+                                     name="cin_destroing_antazin_01_trigger"
+                                     pxsl_line="272" />
+                            </Trigger>
+                            <DebugPlayerPosition
+                                 pxsl_line="273">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="cin_destroing_antazin_01_pos01"
+                                     pxsl_line="273" />
+                            </DebugPlayerPosition>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="274">
+                            <Object
+                                 pxsl_line="274">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="cin_destroing_antazin_01_trigger_qeg"
+                                     pxsl_line="274" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="go to"
+                             name="AIRDROP - after Volatile initiation"
+                             distance="10000"
+                             pxsl_line="275">
+                            <Destination
+                                 pxsl_line="275">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="cin_destroing_antazin_01_pos01"
+                                     pxsl_line="275" />
+                            </Destination>
+                            <DebugPlayerPosition
+                                 pxsl_line="276">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="cin_destroing_antazin_01_pos01"
+                                     pxsl_line="276" />
+                            </DebugPlayerPosition>
+                        </Phase>
+                        <Phase
+                             type="set day night time"
+                             name="_"
+                             day_time="21.3"
+                             pxsl_line="277" />
+                        <Phase
+                             type="disable enable time freeze"
+                             name="_"
+                             should_freeze_time="true"
+                             pxsl_line="278" />
+                        <!-- SHOW FIRST PHASE OF THE TOWER ELECTRIC TRAPS -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="show"
+                             pxsl_line="279">
+                            <Object
+                                 pxsl_line="280">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="pursuit_braker_electric_the_tower_a_phase_01_go"
+                                     pxsl_line="280" />
+                            </Object>
+                            <Object
+                                 pxsl_line="281">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="pursuit_braker_electric_the_tower_b_phase_01_go"
+                                     pxsl_line="281" />
+                            </Object>
+                            <Object
+                                 pxsl_line="282">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="slums_interior_barricade_c_dest"
+                                     pxsl_line="282" />
+                            </Object>
+                            <!-- EXP CAR -->
+                            <Object
+                                 pxsl_line="283">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="airdrop_exploding_car_go"
+                                     pxsl_line="283" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="284">
+                            <Object
+                                 pxsl_line="284">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="slums_interior_barricade_c_02"
+                                     pxsl_line="284" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="285">
+                            <Object
+                                 pxsl_line="285">
+                                <QuestObject
+                                     class="HubZoneEntrance"
+                                     name="the_tower_hub_zone_entrance_b"
+                                     pxsl_line="285" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="dis 20 : 40"
+                             state="disabled"
+                             pxsl_line="286">
+                            <Object
+                                 pxsl_line="286">
+                                <QuestObject
+                                     class="ForceDayTimeObject"
+                                     name="ForceDayTimeObject_Airdrop_03_20_30"
+                                     pxsl_line="286" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="287">
+                            <Object
+                                 pxsl_line="288">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="cin_airdrop_01_voletile_01_spawner"
+                                     pxsl_line="288" />
+                            </Object>
+                            <Object
+                                 pxsl_line="289">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="cin_airdrop_01_voletile_02_spawner"
+                                     pxsl_line="289" />
+                            </Object>
+                            <!-- EXP CAR -->
+                            <Object
+                                 pxsl_line="290">
+                                <QuestObject
+                                     class="NavMeshDynamicObject"
+                                     name="airdrop_exploding_car::slums_intruders_exploding_car_navmesh_dynamic"
+                                     pxsl_line="290" />
+                            </Object>
+                            <!-- EXP CAR -->
+                            <Object
+                                 pxsl_line="291">
+                                <QuestObject
+                                     class="FXEmitter"
+                                     name="airdrop_exploding_car::slums_intruders_exploding_car_fx_03_big_fire"
+                                     pxsl_line="291" />
+                            </Object>
+                            <!-- EXP CAR -->
+                            <Object
+                                 pxsl_line="292">
+                                <QuestObject
+                                     class="SoundEmitterSimple"
+                                     name="airdrop_exploding_car::slums_intruders_exploding_car_sfx_fire"
+                                     pxsl_line="292" />
+                            </Object>
+                            <Object
+                                 pxsl_line="293">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="airdrop_burning_car_01::demo_night_burning_car"
+                                     pxsl_line="293" />
+                            </Object>
+                            <Object
+                                 pxsl_line="294">
+                                <QuestObject
+                                     class="SpawnBlocker"
+                                     name="airdrop_chase_spawn_blocker_01"
+                                     pxsl_line="294" />
+                            </Object>
+                            <Object
+                                 pxsl_line="295">
+                                <QuestObject
+                                     class="Encounter::EncounterBlockArea"
+                                     name="airdrop_enc_blocker_03b"
+                                     pxsl_line="295" />
+                            </Object>
+                            <Object
+                                 pxsl_line="296">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="airdrop_chase_crowd_01_qeg"
+                                     pxsl_line="296" />
+                            </Object>
+                            <Object
+                                 pxsl_line="297">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="airdrop_chase_biters_01_qeg"
+                                     pxsl_line="297" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="298">
+                            <Object
+                                 pxsl_line="299">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="airdrop_zombie_qeg"
+                                     pxsl_line="299" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="set skin"
+                             name="_"
+                             skin_name="emi"
+                             pxsl_line="300">
+                            <ModelObject
+                                 pxsl_line="300">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="airdrop_burning_car_01::demo_night_burning_car_ashes"
+                                     pxsl_line="300" />
+                            </ModelObject>
+                        </Phase>
+                        <Phase
+                             type="checkpoint"
+                             name="_"
+                             pxsl_line="302">
+                            <Destination
+                                 pxsl_line="302">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="cin_destroing_antazin_01_pos01"
+                                     pxsl_line="302" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <!-- RUN FROM  -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-     -->
+    <Quest
+         name="AirDrop02_2"
+         parent="AirDrop02"
+         glued="true"
+         pxsl_line="306">
+        <!-- Return to the Tower -->
+        <Phase
+             type="AND"
+             name="Back to the Tower"
+             objective="&amp;AirDrop_OBJ_BackToTheTower&amp;"
+             pxsl_line="307">
+            <Path
+                 pxsl_line="307">
+                <Phase
+                     type="player control"
+                     name="_"
+                     max_aggro_level="1"
+                     pxsl_line="308" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="309">
+                    <Object
+                         pxsl_line="309">
+                        <QuestObject
+                             class="NightAggressionTrigger"
+                             name="airdrop_aggresion_trigger"
+                             pxsl_line="309" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="changes after take suppresant"
+                     pxsl_line="310">
+                    <Path
+                         pxsl_line="310">
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="311">
+                            <Object
+                                 pxsl_line="312">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="airdrop_B_crowd_qeg"
+                                     pxsl_line="312" />
+                            </Object>
+                            <Object
+                                 pxsl_line="313">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="airdrop_C_enemies_in_way_to_qeg"
+                                     pxsl_line="313" />
+                            </Object>
+                        </Phase>
+                        <!-- TURNING ON WEATHER SYSTEM -->
+                        <Phase
+                             type="set weather scenario"
+                             name="_"
+                             scenario_name="0"
+                             reset="true"
+                             pxsl_line="314" />
+                    </Path>
+                </Phase>
+                <Phase
+                     type="OR"
+                     name="_"
+                     pxsl_line="315">
+                    <!-- LOCATION -->
+                    <Path
+                         pxsl_line="316">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="195"
+                             pxsl_line="317">
+                            <Destination
+                                 pxsl_line="317">
+                                <QuestObject
+                                     class="SpawnPointWithInteractiveMovie"
+                                     name="sp_Hub_LJ_Floor_0"
+                                     pxsl_line="317" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="318">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="60"
+                             show_locations="false"
+                             pxsl_line="319">
+                            <Destination
+                                 pxsl_line="319">
+                                <QuestObject
+                                     class="Marker"
+                                     name="airdrop_chase_loc_01"
+                                     pxsl_line="319" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="320">
+                    <Object
+                         pxsl_line="321">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="airdrop_chase_voletail_01"
+                             pxsl_line="321" />
+                    </Object>
+                    <Object
+                         pxsl_line="322">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="airdrop_chase_goon_03"
+                             pxsl_line="322" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="OR"
+                     name="_"
+                     pxsl_line="323">
+                    <!-- LOCATION -->
+                    <Path
+                         pxsl_line="324">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="170"
+                             pxsl_line="325">
+                            <Destination
+                                 pxsl_line="325">
+                                <QuestObject
+                                     class="SpawnPointWithInteractiveMovie"
+                                     name="sp_Hub_LJ_Floor_0"
+                                     pxsl_line="325" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="326">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="15"
+                             show_locations="false"
+                             pxsl_line="327">
+                            <Destination
+                                 pxsl_line="327">
+                                <QuestObject
+                                     class="Marker"
+                                     name="airdrop_chase_loc_03"
+                                     pxsl_line="327" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="328">
+                    <Object
+                         pxsl_line="328">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="airdrop_volatile_van::ve_van_a_init_volatile_number"
+                             pxsl_line="328" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="OR"
+                     name="_"
+                     pxsl_line="329">
+                    <!-- LOCATION -->
+                    <Path
+                         pxsl_line="330">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="160"
+                             pxsl_line="331">
+                            <Destination
+                                 pxsl_line="331">
+                                <QuestObject
+                                     class="SpawnPointWithInteractiveMovie"
+                                     name="sp_Hub_LJ_Floor_0"
+                                     pxsl_line="331" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="332">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="9"
+                             show_locations="false"
+                             pxsl_line="333">
+                            <Destination
+                                 pxsl_line="333">
+                                <QuestObject
+                                     class="Marker"
+                                     name="airdrop_chase_loc_02"
+                                     pxsl_line="333" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="334">
+                    <Object
+                         pxsl_line="334">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="airdrop_chase_voletail_02"
+                             pxsl_line="334" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="150"
+                     pxsl_line="335">
+                    <Destination
+                         pxsl_line="335">
+                        <QuestObject
+                             class="SpawnPointWithInteractiveMovie"
+                             name="sp_Hub_LJ_Floor_0"
+                             pxsl_line="335" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="336">
+                    <Object
+                         pxsl_line="337">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="airdrop_chase_voletail_03"
+                             pxsl_line="337" />
+                    </Object>
+                    <Object
+                         pxsl_line="338">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="airdrop_chase_goon_01"
+                             pxsl_line="338" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="140"
+                     pxsl_line="339">
+                    <Destination
+                         pxsl_line="339">
+                        <QuestObject
+                             class="SpawnPointWithInteractiveMovie"
+                             name="sp_Hub_LJ_Floor_0"
+                             pxsl_line="339" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="340">
+                    <Object
+                         pxsl_line="340">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="airdrop_chase_voletail_05"
+                             pxsl_line="340" />
+                    </Object>
+                </Phase>
+                <!-- GOING OUTSIDE - Agro 2 -= 115 -->
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="128"
+                     pxsl_line="341">
+                    <Destination
+                         pxsl_line="341">
+                        <QuestObject
+                             class="SpawnPointWithInteractiveMovie"
+                             name="sp_Hub_LJ_Floor_0"
+                             pxsl_line="341" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="342">
+                    <Object
+                         pxsl_line="343">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="airdrop_chase_voletail_04"
+                             pxsl_line="343" />
+                    </Object>
+                    <Object
+                         pxsl_line="344">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="airdrop_chase_goon_02"
+                             pxsl_line="344" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="345">
+                    <Object
+                         pxsl_line="346">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="cin_airdrop_01_voletile_01_spawner"
+                             pxsl_line="346" />
+                    </Object>
+                    <Object
+                         pxsl_line="347">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="cin_airdrop_01_voletile_02_spawner"
+                             pxsl_line="347" />
+                    </Object>
+                    <Object
+                         pxsl_line="348">
+                        <QuestObject
+                             class="NightAggressionTrigger"
+                             name="airdrop_aggresion_trigger"
+                             pxsl_line="348" />
+                    </Object>
+                    <Object
+                         pxsl_line="349">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="airdrop_chase_voletail_01"
+                             pxsl_line="349" />
+                    </Object>
+                    <Object
+                         pxsl_line="350">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="airdrop_chase_goon_03"
+                             pxsl_line="350" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="351">
+                    <!-- EXPLOING CAR -->
+                    <Path
+                         pxsl_line="352">
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="353">
+                            <Object
+                                 pxsl_line="354">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="airdrop_exploding_car::slums_intruders_exploding_car_explodings_qeg"
+                                     pxsl_line="354" />
+                            </Object>
+                            <Object
+                                 pxsl_line="355">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="cin_destroing_antazin_01_pos01"
+                                     pxsl_line="355" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="356">
+                            <Object
+                                 pxsl_line="356">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="airdrop_exploding_car::intruders_exploding_car_02_hide::slums_intruders_exploding_car_explodings_on_start_ag"
+                                     pxsl_line="356" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="set skin"
+                             name="_"
+                             skin_name="Burned"
+                             pxsl_line="357">
+                            <ModelObject
+                                 pxsl_line="357">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="airdrop_exploding_car::intruders_exploding_car_02_hide::slums_intruders_exploding_car_cin_car_before"
+                                     pxsl_line="357" />
+                            </ModelObject>
+                        </Phase>
+                        <Phase
+                             type="set skin"
+                             name="_"
+                             skin_name="Burned"
+                             pxsl_line="358">
+                            <ModelObject
+                                 pxsl_line="358">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="airdrop_exploding_car::intruders_exploding_car_02_hide::slums_intruders_exploding_car_cin_car_before_bonnet"
+                                     pxsl_line="358" />
+                            </ModelObject>
+                        </Phase>
+                        <Phase
+                             type="set skin"
+                             name="_"
+                             skin_name="Burned"
+                             pxsl_line="359">
+                            <ModelObject
+                                 pxsl_line="359">
+                                <QuestObject
+                                     class="MovieActor"
+                                     name="airdrop_exploding_car::intruders_exploding_car_02_hide::slums_intruders_exploding_car_cin_car_before_boot"
+                                     pxsl_line="359" />
+                            </ModelObject>
+                        </Phase>
+                        <Phase
+                             type="set skin"
+                             name="_"
+                             skin_name="Burned"
+                             pxsl_line="360">
+                            <ModelObject
+                                 pxsl_line="360">
+                                <QuestObject
+                                     class="MovieActor"
+                                     name="airdrop_exploding_car::intruders_exploding_car_02_hide::slums_intruders_exploding_car_cin_car_before_door_right"
+                                     pxsl_line="360" />
+                            </ModelObject>
+                        </Phase>
+                        <Phase
+                             type="set skin"
+                             name="_"
+                             skin_name="Burned"
+                             pxsl_line="361">
+                            <ModelObject
+                                 pxsl_line="361">
+                                <QuestObject
+                                     class="MovieActor"
+                                     name="airdrop_exploding_car::intruders_exploding_car_02_hide::slums_intruders_exploding_car_cin_car_before_door_left"
+                                     pxsl_line="361" />
+                            </ModelObject>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="362">
+                            <Object
+                                 pxsl_line="363">
+                                <QuestObject
+                                     class="FXEmitter"
+                                     name="airdrop_exploding_car::slums_intruders_exploding_car_fx_after_explosion"
+                                     pxsl_line="363" />
+                            </Object>
+                            <Object
+                                 pxsl_line="364">
+                                <QuestObject
+                                     class="FXEmitter"
+                                     name="airdrop_exploding_car::slums_intruders_exploding_car_fx_fire_after"
+                                     pxsl_line="364" />
+                            </Object>
+                            <Object
+                                 pxsl_line="365">
+                                <QuestObject
+                                     class="FireEmitterDI"
+                                     name="airdrop_exploding_cars_fire_emitter"
+                                     pxsl_line="365" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="0.5"
+                             pxsl_line="366" />
+                        <Phase
+                             type="set state"
+                             name="_"
+                             desired_state="on"
+                             pxsl_line="367">
+                            <Trigger
+                                 pxsl_line="367">
+                                <QuestObject
+                                     class="BombSwitchDI"
+                                     name="airdrop_exploding_car::slums_intruders_exploding_car_bomb_switch"
+                                     pxsl_line="367" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="movie"
+                             name="_"
+                             movie="airdrop_exploding_car::intruders_exploding_car_02_hide::slums_intruders_exploding_car_cin"
+                             pxsl_line="368" />
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="0.5"
+                             pxsl_line="369" />
+                        <Phase
+                             type="set state"
+                             name="_"
+                             desired_state="off"
+                             pxsl_line="370">
+                            <Trigger
+                                 pxsl_line="370">
+                                <QuestObject
+                                     class="BombSwitchDI"
+                                     name="airdrop_exploding_car::slums_intruders_exploding_car_bomb_switch"
+                                     pxsl_line="370" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="371">
+                            <Object
+                                 pxsl_line="372">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="airdrop_exploding_car::slums_intruders_exploding_car_explodings_qeg"
+                                     pxsl_line="372" />
+                            </Object>
+                            <Object
+                                 pxsl_line="373">
+                                <QuestObject
+                                     class="FXEmitter"
+                                     name="airdrop_exploding_car::slums_intruders_exploding_car_fx_03_big_fire"
+                                     pxsl_line="373" />
+                            </Object>
+                        </Phase>
+                        <!--   -->
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="375">
+                            <Object
+                                 pxsl_line="375">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="slums_exploding_car_airdrop_explode_qeg"
+                                     pxsl_line="375" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="376">
+                            <Object
+                                 pxsl_line="376">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="slums_exploding_car_airdrop_cin_car_before_interior"
+                                     pxsl_line="376" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="set skin"
+                             name="_"
+                             skin_name="Burned"
+                             pxsl_line="377">
+                            <ModelObject
+                                 pxsl_line="377">
+                                <QuestObject
+                                     class="MovieActor"
+                                     name="slums_exploding_car_airdrop_cin_car_before"
+                                     pxsl_line="377" />
+                            </ModelObject>
+                        </Phase>
+                        <Phase
+                             type="set skin"
+                             name="_"
+                             skin_name="Burned"
+                             pxsl_line="378">
+                            <ModelObject
+                                 pxsl_line="378">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="slums_exploding_car_airdrop_cin_car_before_bonnet"
+                                     pxsl_line="378" />
+                            </ModelObject>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="379">
+                            <Object
+                                 pxsl_line="379">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="slums_exploding_car_airdrop_cin_car_before_door_left"
+                                     pxsl_line="379" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="set skin"
+                             name="_"
+                             skin_name="Burned"
+                             pxsl_line="380">
+                            <ModelObject
+                                 pxsl_line="380">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="slums_exploding_car_airdrop_cin_car_before_boot"
+                                     pxsl_line="380" />
+                            </ModelObject>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="381">
+                            <Object
+                                 pxsl_line="381">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="slums_exploding_car_airdrop_cin_car_before_door_right"
+                                     pxsl_line="381" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="set state"
+                             name="_"
+                             desired_state="on"
+                             pxsl_line="382">
+                            <Trigger
+                                 pxsl_line="382">
+                                <QuestObject
+                                     class="BombSwitchDI"
+                                     name="slums_exploding_car_airdrop_bomb_switch"
+                                     pxsl_line="382" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="movie"
+                             name="_"
+                             movie="slums_exploding_car_airdrop_cin"
+                             pxsl_line="383" />
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="1"
+                             pxsl_line="384" />
+                        <Phase
+                             type="set state"
+                             name="_"
+                             desired_state="off"
+                             pxsl_line="385">
+                            <Trigger
+                                 pxsl_line="385">
+                                <QuestObject
+                                     class="BombSwitchDI"
+                                     name="slums_exploding_car_airdrop_bomb_switch"
+                                     pxsl_line="385" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="386">
+                            <Object
+                                 pxsl_line="386">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="slums_exploding_car_airdrop_explode_qeg"
+                                     pxsl_line="386" />
+                            </Object>
+                        </Phase>
+                        <!-- -->
+                        <Phase
+                             type="player control"
+                             name="_"
+                             max_aggro_level="2"
+                             pxsl_line="388" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="389">
+                            <Object
+                                 pxsl_line="389">
+                                <QuestObject
+                                     class="NightAggressionTrigger"
+                                     name="airdrop_aggresion_trigger"
+                                     pxsl_line="389" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="390">
+                            <Object
+                                 pxsl_line="391">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="airdrop_chase_voletail_04"
+                                     pxsl_line="391" />
+                            </Object>
+                            <Object
+                                 pxsl_line="392">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="airdrop_chase_goon_02"
+                                     pxsl_line="392" />
+                            </Object>
+                            <!-- cars explosion -->
+                            <Object
+                                 pxsl_line="393">
+                                <QuestObject
+                                     class="FXEmitter"
+                                     name="slums_exploding_car_airdrop_fx_fire"
+                                     pxsl_line="393" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <!-- LOCATION -->
+                    <Path
+                         pxsl_line="394">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="80"
+                             pxsl_line="395">
+                            <Destination
+                                 pxsl_line="395">
+                                <QuestObject
+                                     class="SpawnPointWithInteractiveMovie"
+                                     name="sp_Hub_LJ_Floor_0"
+                                     pxsl_line="395" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="396">
+                            <Object
+                                 pxsl_line="396">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="airdrop_chase_voletail_06"
+                                     pxsl_line="396" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="62"
+                     pxsl_line="397">
+                    <Destination
+                         pxsl_line="397">
+                        <QuestObject
+                             class="SpawnPointWithInteractiveMovie"
+                             name="sp_Hub_LJ_Floor_0"
+                             pxsl_line="397" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="398">
+                    <Object
+                         pxsl_line="399">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="airdrop_chase_voletail_07"
+                             pxsl_line="399" />
+                    </Object>
+                    <Object
+                         pxsl_line="400">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="airdrop_chase_voletail_08"
+                             pxsl_line="400" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="401">
+                    <Object
+                         pxsl_line="402">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="airdrop_chase_voletail_02"
+                             pxsl_line="402" />
+                    </Object>
+                    <Object
+                         pxsl_line="403">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="airdrop_chase_voletail_03"
+                             pxsl_line="403" />
+                    </Object>
+                    <Object
+                         pxsl_line="404">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="airdrop_chase_voletail_04"
+                             pxsl_line="404" />
+                    </Object>
+                    <Object
+                         pxsl_line="405">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="airdrop_chase_voletail_05"
+                             pxsl_line="405" />
+                    </Object>
+                    <Object
+                         pxsl_line="406">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="airdrop_volatile_van::ve_van_a_init_volatile_number"
+                             pxsl_line="406" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="go to"
+                     name="AIRDROP - Get back to the Tower"
+                     distance="35"
+                     pxsl_line="407">
+                    <Destination
+                         pxsl_line="407">
+                        <QuestObject
+                             class="SpawnPointWithInteractiveMovie"
+                             name="sp_Hub_LJ_Floor_0"
+                             pxsl_line="407" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="408">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="respawn_the_tower"
+                             pxsl_line="408" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="RESPAWN - The Tower - ON"
+                     pxsl_line="409">
+                    <Object
+                         pxsl_line="410">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="respawn_the_tower"
+                             pxsl_line="410" />
+                    </Object>
+                    <Object
+                         pxsl_line="411">
+                        <QuestObject
+                             class="HubZone"
+                             name="respawn_the_tower_fake_hub_zone"
+                             pxsl_line="411" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="RESPAWN - Zeres Tir - ON"
+                     pxsl_line="412">
+                    <Object
+                         pxsl_line="413">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="respawn_zeres_tir"
+                             pxsl_line="413" />
+                    </Object>
+                    <Object
+                         pxsl_line="414">
+                        <QuestObject
+                             class="HubZone"
+                             name="respawn_zeres_tir_fake_hub_zone"
+                             pxsl_line="414" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="415">
+                    <!-- Location -->
+                    <Path
+                         pxsl_line="416">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="5"
+                             pxsl_line="417">
+                            <Destination
+                                 pxsl_line="417">
+                                <QuestObject
+                                     class="SpawnPointWithInteractiveMovie"
+                                     name="sp_Hub_LJ_Floor_0"
+                                     pxsl_line="417" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="418">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="6"
+                             show_locations="false"
+                             pxsl_line="419">
+                            <Destination
+                                 pxsl_line="419">
+                                <QuestObject
+                                     class="Marker"
+                                     name="the_tower_safe_enter_night_hint"
+                                     pxsl_line="419" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="hint"
+                             name="_"
+                             hint_name="TutorialHints_TimeFreeze_NightGameplay_1"
+                             show="true"
+                             enable="true"
+                             pxsl_line="420" />
+                    </Path>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="421">
+                    <Object
+                         pxsl_line="422">
+                        <QuestObject
+                             class="NightAggressionTrigger"
+                             name="airdrop_aggresion_trigger"
+                             pxsl_line="422" />
+                    </Object>
+                    <!-- ,o SpawnPoint airdrop_C_sp -= RESPAWN Airdrop C off -->
+                    <!-- RESPAWN Second roof off -->
+                    <Object
+                         pxsl_line="424">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="respawn_airdrop_03"
+                             pxsl_line="424" />
+                    </Object>
+                    <Object
+                         pxsl_line="425">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="airdrop_chase_voletail_06"
+                             pxsl_line="425" />
+                    </Object>
+                    <Object
+                         pxsl_line="426">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="airdrop_chase_voletail_07"
+                             pxsl_line="426" />
+                    </Object>
+                    <Object
+                         pxsl_line="427">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="airdrop_chase_voletail_08"
+                             pxsl_line="427" />
+                    </Object>
+                    <Object
+                         pxsl_line="428">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="airdrop_chase_goon_01"
+                             pxsl_line="428" />
+                    </Object>
+                    <Object
+                         pxsl_line="429">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="airdrop_chase_goon_02"
+                             pxsl_line="429" />
+                    </Object>
+                    <Object
+                         pxsl_line="430">
+                        <QuestObject
+                             class="SpawnBlocker"
+                             name="airdrop_C_spawn_blocker"
+                             pxsl_line="430" />
+                    </Object>
+                    <Object
+                         pxsl_line="431">
+                        <QuestObject
+                             class="SpawnBlocker"
+                             name="airdrop_chase_spawn_blocker_01"
+                             pxsl_line="431" />
+                    </Object>
+                    <Object
+                         pxsl_line="432">
+                        <QuestObject
+                             class="Encounter::EncounterBlockArea"
+                             name="airdrop_enc_blocker_03b"
+                             pxsl_line="432" />
+                    </Object>
+                    <Object
+                         pxsl_line="433">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="airdrop_chase_crowd_01_qeg"
+                             pxsl_line="433" />
+                    </Object>
+                    <Object
+                         pxsl_line="434">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="airdrop_chase_biters_01_qeg"
+                             pxsl_line="434" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="disable enable time freeze"
+                     name="_"
+                     should_freeze_time="false"
+                     pxsl_line="435" />
+                <Phase
+                     type="block quest tracking"
+                     name="_"
+                     block="false"
+                     pxsl_line="436" />
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="437">
+                    <Destination
+                         pxsl_line="437">
+                        <QuestObject
+                             class="SpawnPointWithInteractiveMovie"
+                             name="sp_Hub_LJ_Floor_0"
+                             pxsl_line="437" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <!-- GOTO - SLUMS INTERIOR - THE TOWER - meeting with Rakim on the roof -->
+    <!-- NEXT QUEST - PACT WITH RAIS -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- SIDE QUEST ACTIONS -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- Dead Body on roof -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__airdrop_body_on_roof"
+         parent="Blackout_2"
+         pxsl_line="454">
+        <Phase
+             type="use"
+             name="_"
+             desired_state="on"
+             show_locations="false"
+             pxsl_line="455">
+            <Trigger
+                 pxsl_line="455">
+                <QuestObject
+                     class="PhysicalSwitchDI"
+                     name="selAirdrop_A::airdrop_jerry_body_01"
+                     pxsl_line="455" />
+            </Trigger>
+        </Phase>
+        <Phase
+             type="set dialog"
+             name="_"
+             speaker="voice2d"
+             group="Player_Airdrop_00DLG01"
+             auto_start="true"
+             pxsl_line="456" />
+    </Quest>
+    <!-- GIRL (Clara) in wardrobe -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-     -->
+    <Quest
+         name="__airdrop_girl_in_wardrobe"
+         parent="Blackout_2"
+         pxsl_line="460">
+        <Phase
+             type="OR"
+             name="_"
+             pxsl_line="461">
+            <Path
+                 pxsl_line="462">
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="463">
+                    <Object
+                         pxsl_line="463">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="airdrop_girl_qeg"
+                             pxsl_line="463" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="464">
+                    <Path
+                         pxsl_line="465">
+                        <Phase
+                             type="OR"
+                             name="_"
+                             pxsl_line="466">
+                            <Path
+                                 pxsl_line="467">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="7"
+                                     show_locations="false"
+                                     pxsl_line="468">
+                                    <Destination
+                                         pxsl_line="468">
+                                        <QuestObject
+                                             class="Marker"
+                                             name="airdrop_girl_loc"
+                                             pxsl_line="468" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="469">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="3.5"
+                                     show_locations="false"
+                                     pxsl_line="470">
+                                    <Destination
+                                         pxsl_line="470">
+                                        <QuestObject
+                                             class="SpawnPoint"
+                                             name="airdrop_girl_house_sp"
+                                             pxsl_line="470" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="471">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="40"
+                             show_locations="false"
+                             pxsl_line="472">
+                            <Destination
+                                 pxsl_line="472">
+                                <QuestObject
+                                     class="Marker"
+                                     name="airdrop_girl_loc"
+                                     pxsl_line="472" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="473">
+                            <Object
+                                 pxsl_line="473">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="airdrop_girl_door_zombie"
+                                     pxsl_line="473" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="474">
+                    <Object
+                         pxsl_line="475">
+                        <QuestObject
+                             class="ChatterOnceZone"
+                             name="airdrop_girl_dlg_01"
+                             pxsl_line="475" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="476">
+                    <Object
+                         pxsl_line="476">
+                        <QuestObject
+                             class="ActorDI"
+                             name="airdrop_clara"
+                             pxsl_line="476" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="4"
+                     show_locations="true"
+                     pxsl_line="477">
+                    <Destination
+                         pxsl_line="477">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="airdrop_girl_house_sp"
+                             pxsl_line="477" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="478">
+                    <Object
+                         pxsl_line="478">
+                        <QuestObject
+                             class="VirtualAttractor"
+                             name="airdrop_girl_infected_va"
+                             pxsl_line="478" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="479">
+                    <Object
+                         pxsl_line="480">
+                        <QuestObject
+                             class="ChatterOnceZone"
+                             name="airdrop_girl_dlg_02"
+                             pxsl_line="480" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="on"
+                     show_locations="true"
+                     pxsl_line="481">
+                    <Trigger
+                         pxsl_line="481">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="airdrop_girl_wardrobe"
+                             pxsl_line="481" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="482">
+                    <Object
+                         pxsl_line="482">
+                        <QuestObject
+                             class="SoundEmitterSimple"
+                             name="airdrop_girl_crying"
+                             pxsl_line="482" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="483">
+                    <Object
+                         pxsl_line="483">
+                        <QuestObject
+                             class="SafeArea"
+                             name="airdrop_girl_safe_area"
+                             pxsl_line="483" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="484">
+                    <Path
+                         pxsl_line="485">
+                        <Phase
+                             type="movie"
+                             name="_"
+                             movie="airdrop_girl_in_wardrobe"
+                             pxsl_line="486" />
+                    </Path>
+                    <Path
+                         pxsl_line="487">
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="2"
+                             pxsl_line="488" />
+                        <Phase
+                             type="talk"
+                             name="_"
+                             speaker="Clara"
+                             group="Player_Airdrop_05DLG"
+                             show_locations="true"
+                             auto_start="true"
+                             pxsl_line="489" />
+                    </Path>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="490">
+                    <Object
+                         pxsl_line="490">
+                        <QuestObject
+                             class="ChatterOnceZone"
+                             name="airdrop_girl_dlg_03"
+                             pxsl_line="490" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="2"
+                     pxsl_line="491" />
+                <Phase
+                     type="set dialog"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_Airdrop_06DLG01"
+                     auto_start="true"
+                     pxsl_line="492" />
+                <Phase
+                     type="set reward"
+                     name="_"
+                     reward="StorylineReward_Airdrop_LittleGirl_reward"
+                     pxsl_line="493" />
+            </Path>
+            <Path
+                 pxsl_line="494">
+                <Phase
+                     type="started quest guard"
+                     name="_"
+                     quest_name="AirDrop02"
+                     finished="true"
+                     pxsl_line="495" />
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="496">
+            <Destination
+                 pxsl_line="496">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="airdrop_girl_house_sp"
+                     pxsl_line="496" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="AirDrop02"
+             finished="true"
+             pxsl_line="497" />
+        <Phase
+             type="AND"
+             name="clear after"
+             pxsl_line="498">
+            <Path
+                 pxsl_line="498">
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="499">
+                    <Object
+                         pxsl_line="500">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="airdrop_girl_qeg"
+                             pxsl_line="500" />
+                    </Object>
+                    <Object
+                         pxsl_line="501">
+                        <QuestObject
+                             class="ChatterOnceZone"
+                             name="airdrop_girl_dlg_01"
+                             pxsl_line="501" />
+                    </Object>
+                    <Object
+                         pxsl_line="502">
+                        <QuestObject
+                             class="ChatterOnceZone"
+                             name="airdrop_girl_dlg_02"
+                             pxsl_line="502" />
+                    </Object>
+                    <Object
+                         pxsl_line="503">
+                        <QuestObject
+                             class="ChatterOnceZone"
+                             name="airdrop_girl_dlg_03"
+                             pxsl_line="503" />
+                    </Object>
+                    <Object
+                         pxsl_line="504">
+                        <QuestObject
+                             class="SafeArea"
+                             name="airdrop_girl_safe_area"
+                             pxsl_line="504" />
+                    </Object>
+                    <Object
+                         pxsl_line="505">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="airdrop_girl_door_zombie"
+                             pxsl_line="505" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="506">
+                    <Object
+                         pxsl_line="507">
+                        <QuestObject
+                             class="ActorDI"
+                             name="airdrop_clara"
+                             pxsl_line="507" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="set dialog"
+                     name="_"
+                     speaker="voice2d"
+                     pxsl_line="508" />
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="509">
+            <Destination
+                 pxsl_line="509">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="cin_destroing_antazin_01_pos01"
+                     pxsl_line="509" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- TV Cartoon in Clara house -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-                         -->
+    <Quest
+         name="__airdrop_tv_cartoon"
+         parent="AirDrop01"
+         pxsl_line="513">
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="514">
+            <Object
+                 pxsl_line="515">
+                <QuestObject
+                     class="SoundEmitterSimple"
+                     name="airdrop_girl_tv_sound_cartoon"
+                     pxsl_line="515" />
+            </Object>
+            <Object
+                 pxsl_line="516">
+                <QuestObject
+                     class="LightObject"
+                     name="airdrop_girl_tv_light"
+                     pxsl_line="516" />
+            </Object>
+        </Phase>
+        <Phase
+             type="set skin"
+             name="_"
+             skin_name="movie_a"
+             pxsl_line="517">
+            <ModelObject
+                 pxsl_line="517">
+                <QuestObject
+                     class="ModelObject"
+                     name="airdrop_girl_tv"
+                     pxsl_line="517" />
+            </ModelObject>
+        </Phase>
+        <Phase
+             type="use"
+             name="_"
+             desired_state="off"
+             show_locations="false"
+             pxsl_line="518">
+            <Trigger
+                 pxsl_line="518">
+                <QuestObject
+                     class="InvisibleSwitchDI"
+                     name="airdrop_girl_tv_switch"
+                     pxsl_line="518" />
+            </Trigger>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="519">
+            <Object
+                 pxsl_line="520">
+                <QuestObject
+                     class="SoundEmitterSimple"
+                     name="airdrop_girl_tv_sound_cartoon"
+                     pxsl_line="520" />
+            </Object>
+            <Object
+                 pxsl_line="521">
+                <QuestObject
+                     class="LightObject"
+                     name="airdrop_girl_tv_light"
+                     pxsl_line="521" />
+            </Object>
+        </Phase>
+        <Phase
+             type="set skin"
+             name="_"
+             skin_name="Default"
+             pxsl_line="522">
+            <ModelObject
+                 pxsl_line="522">
+                <QuestObject
+                     class="ModelObject"
+                     name="airdrop_girl_tv"
+                     pxsl_line="522" />
+            </ModelObject>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="523">
+            <Destination
+                 pxsl_line="523">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="airdrop_girl_house_sp"
+                     pxsl_line="523" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- Workshop action -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-         -->
+    <Quest
+         name="__airdrop_workshop"
+         parent="AirDrop01"
+         pxsl_line="527">
+        <Phase
+             type="appear"
+             name="_"
+             mode="hide"
+             pxsl_line="528">
+            <Object
+                 pxsl_line="529">
+                <QuestObject
+                     class="ModelObject"
+                     name="airdrop_workshop_gate_close"
+                     pxsl_line="529" />
+            </Object>
+        </Phase>
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="530">
+            <Object
+                 pxsl_line="531">
+                <QuestObject
+                     class="PhysicalSwitchDI"
+                     name="airdrop_workshop_gate_open"
+                     pxsl_line="531" />
+            </Object>
+            <Object
+                 pxsl_line="532">
+                <QuestObject
+                     class="ModelObject"
+                     name="airdrop_workshop_gate_tire_01"
+                     pxsl_line="532" />
+            </Object>
+            <Object
+                 pxsl_line="533">
+                <QuestObject
+                     class="ModelObject"
+                     name="airdrop_workshop_gate_tire_02"
+                     pxsl_line="533" />
+            </Object>
+            <Object
+                 pxsl_line="534">
+                <QuestObject
+                     class="AIDeadBodySpawnBoxAuto"
+                     name="airdrop_warehouse_deadbody_01"
+                     pxsl_line="534" />
+            </Object>
+        </Phase>
+        <Phase
+             type="set state"
+             name="_"
+             desired_state="closed"
+             pxsl_line="535">
+            <Trigger
+                 pxsl_line="535">
+                <QuestObject
+                     class="DoorDI"
+                     name="airdrop_warehouse_door"
+                     pxsl_line="535" />
+            </Trigger>
+        </Phase>
+        <Phase
+             type="go to"
+             name="_"
+             distance="50"
+             show_locations="false"
+             pxsl_line="536">
+            <Destination
+                 pxsl_line="536">
+                <QuestObject
+                     class="Marker"
+                     name="airdrop_workshop_loc"
+                     pxsl_line="536" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="537">
+            <Object
+                 pxsl_line="538">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="airdrop_workshop_eater"
+                     pxsl_line="538" />
+            </Object>
+            <Object
+                 pxsl_line="539">
+                <QuestObject
+                     class="AIDeadBodySpawnBoxAuto"
+                     name="airdrop_warehouse_deadbody_01"
+                     pxsl_line="539" />
+            </Object>
+        </Phase>
+        <Phase
+             type="go to"
+             name="_"
+             distance="15"
+             show_locations="false"
+             pxsl_line="540">
+            <Destination
+                 pxsl_line="540">
+                <QuestObject
+                     class="Marker"
+                     name="airdrop_workshop_loc"
+                     pxsl_line="540" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="541">
+            <Object
+                 pxsl_line="541">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="airdrop_workshop_infected_01"
+                     pxsl_line="541" />
+            </Object>
+        </Phase>
+        <Phase
+             type="gather players guard"
+             name="_"
+             distance="-50"
+             show_locations="false"
+             pxsl_line="542">
+            <Destination
+                 pxsl_line="542">
+                <QuestObject
+                     class="Marker"
+                     name="airdrop_workshop_loc"
+                     pxsl_line="542" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="543">
+            <Object
+                 pxsl_line="544">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="airdrop_workshop_eater"
+                     pxsl_line="544" />
+            </Object>
+            <Object
+                 pxsl_line="545">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="airdrop_workshop_infected_01"
+                     pxsl_line="545" />
+            </Object>
+            <Object
+                 pxsl_line="546">
+                <QuestObject
+                     class="AIDeadBodySpawnBoxAuto"
+                     name="airdrop_warehouse_deadbody_01"
+                     pxsl_line="546" />
+            </Object>
+        </Phase>
+        <Phase
+             type="appear"
+             name="_"
+             mode="hide"
+             pxsl_line="547">
+            <Object
+                 pxsl_line="547">
+                <QuestObject
+                     class="AIDeadBodySpawnBoxAuto"
+                     name="airdrop_warehouse_deadbody_01"
+                     pxsl_line="547" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="548">
+            <Destination
+                 pxsl_line="548">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="airdrop_warehouse_sp"
+                     pxsl_line="548" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- GOTO - SLUMS INTERIOR - THE TOWER - meeting with Rakim on the roof -->
+    <!-- NEXT QUEST - PACT WITH RAIS -->
+</QuestsDefinitions>

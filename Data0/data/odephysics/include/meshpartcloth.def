@@ -1,0 +1,142 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// MeshPartCloth definition keywords - used by CMeshPartCloth.cpp
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+!include("ODEPhysics.def")
+
+//-------------------------------------------------------------------------------------------------
+!MeshPartCloth()                            // header of        
+!BonesGridSize(iX, iY)                      // size of 2D grid - iX * iY particles will be created
+!Bone(i,i,s,i,f,f)                          // normal node definition:
+                                            // i,i - x and y coordinates in grid (must be in range of [0 .. Xsize] and [0 .. Ysize])
+                                            // s - mesh element name (optional) - mesh element binded with current node
+                                            // i - type of node (Normal = 0, Fixed = 1, Clip = 2, Hook = 3) - use only normal and fixed
+                                            // f - distance to nearest-right node (x + 1) - could be -1 if this distance should be calculated on start
+                                            // f - distance to nearest-down node (y + 1) - could be -1 if this distance should be calculated on start
+!Hook(i,i,s,v3,f,f)                         // hook node definition:
+                                            // i,i - x and y coordinates in grid (must be in range of [0 .. Xsize] and [0 .. Ysize])
+                                            // s - mesh element name (required) - mesh element to whose this node is hooked
+                                            // v3 - local shift of hook position from base of mesh element pivot (in mesh element coordinates)
+                                            // f - distance to nearest right node (x + 1) - could be -1 if this distance should be calculated on start
+                                            // f - distance to nearest down node (y + 1) - could be -1 if this distance should be calculated on start
+!Clip(i,i,i,i,f,f)                          // clip node definition:
+                                            // i,i - x and y coordinates in grid (must be in range of [0 .. Xsize] and [0 .. Ysize])
+                                            // i,i - x and y coordinates of node we are just clipping to (must be in range of [0 .. Xsize] and [0 .. Ysize])
+                                            // f - distance to nearest right node (x + 1) - could be -1 if this distance should be calculated on start
+                                            // f - distance to nearest down node (y + 1) - could be -1 if this distance should be calculated on start
+!Viscous(f)                                 // viscous coefficient - is used to clamping nodes velocity 
+!AirFriction(f)                             // air friction coefficient - used to apply force dependent on nodes normal
+!CheckLengthsStepsPerSec(i)                 // number of iterations used to check springs lenghts - it may be 0
+!StructuralStiffness(f,f)                   // structural spring coefficients (2 independent values for stretching and compression of spring)
+!ShearStiffness(f,f)                        // shear spring coefficients (2 independent values for stretching and compression of spring)
+!FlexionStiffness(f,f)                      // flexion spring coefficients (2 independent values for stretching and compression of spring)
+!Mass(f)                                    // mass [kg] of entire MPC (mass of particular node will be calculated)
+!WindInfluence(f)                           // influence of wind [0 .. 1(defalt) .. inf]
+!WindGust(f, f)                             // sets wind gust params (fForce_mul, fSpeed_mul) - default fForce_mul = 0 (disabled)
+!ForceGeneratorsInfluence(f)                // influence of force generators (e.g. heicopters, missiles gusts) [0(default) .. 1 .. inf]
+!CheckBendingStiffness(f)                   // additional stiffness checking - f is a stiffness multiplier (0 - flexible, 1 - rigid cloth)
+!CollisionCapsule(s,f,f)                    // creates capsule geom for self-collisions:
+                                            // s - name of mesh element the capsule is attached to 
+                                            // f - length of capsule (without a endcaps) (-1 if can be given from mesh element bounding box)
+                                            // f - radius of capsule (-1 if can be given from mesh element bounding box)
+!CollisionCapsuleBetween(s,i,s,i,f)         // creates capsule geom for self-collisions built between two mesh elements:
+                                            // s - name of mesh element the capsule begin is attached to 
+                                            // i - type of attachment (0 - attach to mesh element base, 1 - attach to mesh element center of bounding box)
+                                            // s - name of mesh element the capsule end is attached to 
+                                            // i - type of attachment (0 - attach to mesh element base, 1 - attach to mesh element center of bounding box)
+                                            // f - radius of capsule (-1 if can be given from mesh element bounding box)
+!CollisionBottomOfBones(f)                  // creates collision horizontal plane that is placed below lower limit of all mesh elements bounding boxes
+                                            // f - shift on Y axis [m]
+!AddBonesToCheckBottomOfBones(s)            // adds bones (by given mesh element names separated by '|') which will be checked when bottom of bones is calculated                                            
+!CollisionBottomOfObject(f)                 // creates collision horizontal plane that is placed below lower limit of mesh bounding box
+                                            // f - shift on Y axis [m]
+!CollisionSphere(s,f)                       // creates sphere geom for self-collisions placed in center of given mesh element bounding box:
+                                            // s - mesh element name (required) which collision geom will be synchronized with
+                                            // f - radius of sphere (-1 if can be given from mesh element bounding box)
+!CollisionSphereShift(s,v3,f)               // creates sphere geom for self-collisions which can be moved from original mesh element base:
+                                            // s - mesh element name (required) which collision geom will be synchronized with
+                                            // v3 - local shift of attachment point from center of mesh element bounding box
+                                            // f - radius of sphere (-1 if can be given from mesh element bounding box)
+!CollisionInteriorOfSphere(s,v3,f)          // creates interior of sphere geom for self-collisions (which can be moved from original mesh element base):
+                                            // s - mesh element name (required) which collision geom will be synchronized with
+                                            // v3 - local shift of attachment point from center of mesh element bounding box
+                                            // f - radius of sphere (-1 if can be given from mesh element bounding box)
+!CollisionMinDistance(i,i,s,v3,f,f)         // creates min distance collision scheme for given (i, i) node
+                                            // s - mesh element name (required) which collision geom will be synchronized with
+                                            // v3 - local shift from mesh element bounding box (in mesh element coordinates)
+                                            // f - desired distance (node will not be permitted to be nearer from mesh element than that distance)
+                                            // f - spring coeff (0 - disabled) when distance is reached
+!CollisionMaxDistance(i,i,s,v3,f,f)         // creates max distance collision scheme for given (i, i) node
+                                            // s - mesh element name (required) which collision geom will be synchronized with
+                                            // v3 - local shift from mesh element bounding box (in mesh element coordinates)
+                                            // f - desired distance (node will be kept in this distance (sphere) from given mesh element)
+                                            // f - spring coeff (0 - disabled) when distance is reached
+!CollisionSlide(f)                          // slide coefficient of all collisions
+!CollisionBounce(f)                         // bounce coefficient of all collisions
+!CollisionSpeedMod(f)                       // speed modification factor if collisions have just occured
+!CollisionNormalAngleThreshold(f)           // [DEG] when angle among a node's normal and collision normal is greater than 
+                                            // this threshold, collision will have no effect (default = 100 DEG)
+                                            // use values in range [0, 180] - 180 means every collision will be applied
+!CollisionShapesMoveInfluence(f)            // multiplier of collision shapes mul (when geom is moving through frame we gather it in t time
+                                            // when t is mul from 0 (pos in last frame) to 1 (pos in current frame)
+!CollisionSegmentDivision(f)                // max distance between points we will calculate internal collisions
+                                            // if distance between two nodes is greater, then that distance will be divided into small segments of length m_CollisionSegmentDivision
+!SynchroWithPhysics(i)                      // enables/disables synchronizing with ode physics of owner. 
+                                            // If such syncing is used, auto-disabling of physics causes auto disabling of MPC
+!GravityMul(f)                              // gravity coeficient used to calculate gravity force
+!HorizontSpringRatio(f)                     // coefficient of horizontal springs will be multiplied by this value
+                                            // It can be useful on skirts, when you have to use different springs forces for horizontal and vertical ones.
+!ParentMoveMul(f)                           // when mpc owner is attached to some parent, then part of its move may be
+                                            // applied to all free floated (normal) nodes. This may avoid of too jerky moves that can cause 
+                                            // unexpected behaviour of MPC
+!ObjectMoveMul(f)                           // when entire object that has attached MPC is moving then part of this move may be
+                                            // applied to all free floated (normal) nodes. This may avoid of too jerky moves that can cause 
+                                            // unexpected behaviour of MPC
+!AnimationMoveMul(f)                        // when animation moves nodes then part of this move may be applied to all free floated (normal) nodes. 
+                                            // This may avoid of too jerky moves that can cause unexpected behaviour of MPC
+!CalcNormalX(i,i,i,i,i,i)                   // defines how normal of given node will be determined
+                                            // normal is calculated from 4 neghbours (upper, bottom, left, right):
+                                            // i,i - x and y coordinate of node for which we want to define normal special calculations
+                                            // i,i - x and y coordinate of left node used to calculate normal 
+                                            // i,i - x and y coordinate of right node used to calculate normal 
+!CalcNormalY(i,i,i,i,i,i)                   // defines how normal of given node will be determined
+                                            // normal is calculated from 4 neghbours (upper, bottom, left, right):
+                                            // i,i - x and y coordinate of node for which we want to define normal special calculations
+                                            // i,i - x and y coordinate of upper node used to calculate normal 
+                                            // i,i - x and y coordinate of bottom node used to calculate normal 
+!UseFlatNormalCalculations(i)               // using normal obtaining mode taken only right and up neighbours (defining triangle with normal)
+                                            // instead of default mode which takes left-rigth, up-down neighbours to cross and calculate normal
+                                            // default is 0 (default mode)
+!EnableLengthMulForAll(i)                   // coefficient of all springs length - use it to scale physical model
+!EnableLengthMulForBone(i,i,i)              // coefficient of particular spring's length
+!EnableCheckingIfHidden(i)                  // enables/disables testing of MPC mesh elements visibility 
+                                            // to determine whether MPC should be frozen or not
+!CheckIfHidden(s)                           // for given mesh element(s) checks will be performed (flag MEF_HIDDEN is tested) - if this element
+                                            // is hidden all MPC simulation will be disabled or frozen
+!Mode3D(i)                                  // enables 3D mode - particles grid in such mode is placed in 3D space, all distances and springs
+                                            // lengths comply values in 3D space
+!EnableLoddedSynchro(i)                     // enables/disables skipping of some synchro frame, depends on current lod
+!StartStabilisation(i)                      // set number of steps performed on mpc start to stabilize position of nodes (0 if disabled, default = 0)
+                                            // it is necessary in some cases to stabilize MPC before first use
+!UnimportanceThresholds(f,f)                // unimportance thresholds to freeze and disable
+                                            // f - value of unimportance when mpc go to freeze
+                                            // f - value of unimportance when mpc disables itself
+!AutoDisableVel(f,f)                        // defines auto disable vel [m/s] and duration [s] - when vel of all nodes are below this threshold
+                                            // for given time then mpc auto disables itself. 
+                                            // If auto disable duration == -1 this turned auto disable feature off
+                                           
+!EnableAPBIn(i)                             // enables/disables Adaptive Physics Blending In - see documentation for details
+!EnableAPBOut(i)                            // enables/disables Adaptive Physics Blending Out - see documentation for details
+!NodeCollisionSphereRadius(f)               // radius of sphere enclosed each particle which is used in collision routines
+!ExternalCollisionAffectMul(f)              // coefficient of strenght used to applied collision contact to MPC as force
+!ExternalDamageAffectMul(f)                 // coefficient of strenght used to applied damage (used by game logic) to MPC as force
+!StandaloneMode(i)                          // enables/disables standalone mode (position of object and extents will be adjusted according to mpc changes)
+!DisableOnMovie(s)                          // disable this mpc on given movie (movie name)
+
+!CollisionSoundsParams()                    // start of section with definition of collision sounds
+!Interval(f)                                // minimal interval between two played sounds
+!HitLinVel(f,f)                             // spread of linear vel used to determine volume of collision sounds
+                                            // f - lower threshold of speed - if collision is slower then there are no sound
+                                            // f - speed of maximal volume
+!HitSound(s)                                // name of sound (can realize _XX format)
+ 

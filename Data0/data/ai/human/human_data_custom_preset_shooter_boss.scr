@@ -1,0 +1,132 @@
+!include("ai_data.def")
+!include("ai_timing.def")
+!include("export_human_boss_params.scr")
+
+
+// shooting npc (boss) for interior with limited visibility
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////// CURVES //////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+Curve(CURVE_HEALTH, "boss_shooter_health")
+
+
+////////////////////////////////////////////// DATA ///////////////////////////////////////////////
+//##############
+//#### IDLE ####
+//##############
+//## idle:pose:idle_type:item_type:scare_level:is_idle_prepare:is_idle_finish
+//##############d
+
+Data("idle:standing::killer_comment_killed_enemy:::", -2, "m_npc_ak47_killer_comment_killed_1", -1, 1)
+Data("idle:standing::comment_killed_enemy:::", -2, "m_npc_ak47_comment_killed_1", -1, 1)
+Data("idle:standing::comment_killed_enemy:::", -2, "m_npc_ak47_comment_killed_2", -1, 1)
+
+//##################
+//#### ALARMING ####
+//##################
+//## alarming:is_standing:alarm_level:angle:direction:was_moving
+//##################
+
+Data("alarming:standing:calm:alarmed:0::false",  -2, "m_npc_ak47_alarming_turn_front", -1, 1)
+Data("alarming:standing:calm:alarmed:90:right:false",  -2, "m_npc_ak47_alarming_turn_90R", -1, 1)
+Data("alarming:standing:calm:alarmed:90:left:false",  -2, "m_npc_ak47_alarming_turn_90L", -1, 1)
+Data("alarming:standing:calm:alarmed:180:right:false",  -2, "m_npc_ak47_alarming_turn_180R", -1, 1)
+Data("alarming:standing:calm:alarmed:180:left:false",  -2, "m_npc_ak47_alarming_turn_180L", -1, 1)
+Data("alarming:standing::calm:::false",  0, "", -1, 1)
+
+Data("alarming:standing:calm:upset:0::false",  -2, "m_npc_ak47_alarming_turn_front", -1, 1)
+Data("alarming:standing:calm:upset:90:right:false",  -2, "m_npc_ak47_alarming_turn_90R", -1, 1)
+Data("alarming:standing:calm:upset:90:left:false",  -2, "m_npc_ak47_alarming_turn_90L", -1, 1)
+Data("alarming:standing:calm:upset:180:right:false",  -2, "m_npc_ak47_alarming_turn_180R", -1, 1)
+Data("alarming:standing:calm:upset:180:left:false",  -2, "m_npc_ak47_alarming_turn_180L", -1, 1)
+
+Data("hit_reaction:standing:pain:rifle:all:::left:", -2, "m_npc_hit_reaction_rifle_left_01", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all:::left:", -2, "m_npc_hit_reaction_rifle_left_02", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all:::left:", -2, "m_npc_hit_reaction_rifle_left_03", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all:::right:", -2, "m_npc_hit_reaction_rifle_right_01", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all:::right:", -2, "m_npc_hit_reaction_rifle_right_02", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::::", -2, "m_npc_hit_reaction_rifle_backward_01", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::::", -2, "m_npc_hit_reaction_rifle_backward_02", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::::", -2, "m_npc_hit_reaction_rifle_backward_03", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all:::down:", -2, "m_npc_hit_reaction_rifle_down_01", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all:::down:", -2, "m_npc_hit_reaction_rifle_down_02", -1, 1)
+
+Data("alarming:standing:alarmed:upset:::false",  0, "", -1, 1)
+
+//################
+//#### ATTACK ####
+//################
+//## idle:pose:idle_type:item_type:scare_level:is_idle_prepare:is_idle_finish
+//##############d
+
+Data("attack:standing::taunt:::", -2, "m_npc_ak47_alarming_taunt", -1, 1)
+
+///////////////////////////////////////////// PARAMS //////////////////////////////////////////////
+
+ParamBool("use_advanced_target_keeping_logic", 1)
+
+ParamFloat("additional_shooting_visibility_time", 2.5)
+
+ParamFloat("min_time_btw_hit_reactions", 3.0)
+ParamFloat("min_time_btw_firearm_melee_attacks", 3.0)
+
+ParamFloat("time_btw_cover_eval_base", 0.5)
+ParamFloat("time_btw_cover_eval_in_cover", 0.5)
+
+ParamFloat("sight_range_calm", 10.0) //converted
+ParamFloat("sight_range", 15.0) //converted
+ParamFloat("sight_additional_range", 20.0) //converted
+
+ParamFloat("full_angle_sight_range", 1.0)	// 360deg sight angle
+
+ParamFloat("stay_in_cover_time_min", 2.)           // shortest time ai stays in cover before next shoot
+ParamFloat("stay_in_cover_time_max", 4.)           // longest time ai stays in cover before next shoot
+
+ParamFloat("stay_in_cover_total_time_max", 3.0)
+
+ParamFloat("max_time_target_invisible", 10.0)
+
+ParamFloat("sight_angle_at_min_dist_calm", 110)
+ParamFloat("sight_angle_at_max_dist_calm", 90)
+ParamFloat("sight_angle_min_dist_calm", 5.0)
+ParamFloat("sight_angle_max_dist_calm", 15.0)
+ParamFloat("sight_angle_at_min_dist", 130)
+ParamFloat("sight_angle_at_max_dist", 90)
+ParamFloat("sight_angle_min_dist", 10)
+ParamFloat("sight_angle_max_dist", 20)
+
+ParamFloat("enemy_keep_time_upset", 7)
+ParamFloat("enemy_keep_time_alarmed", 20)
+
+ParamFloat("alarm_after_enemy_visible_min_dist_time", 1.5)
+ParamFloat("alarm_after_enemy_visible_max_dist_time", 4.0)
+ParamFloat("alarm_when_enemy_close_min_distance", 5.0)
+ParamFloat("alarm_when_enemy_close_max_distance", 20.0)
+
+ParamFloat("base_hit_pause_time_rifle", 1.5)
+
+
+//ParamFloat("damage_mul_vs_other_ai", 3.0)
+
+
+//ParamFloat("hit_legs_stamina_mul", 1.0)								//Stamina damage dealt to legs is multiplied by this factor.
+ParamFloat("fall_on_shot_prob", 0.0)
+
+
+ParamFloat("health_mul", 8.0)										//Body health is set from CURVE_HEALTH and multiplied by this parameter
+ParamFloat("head_health_mul", 1.0)									//Head health is a multiplier of body health - when head dies, AI dies.
+
+ParamFloat("pro_player_head_health_influence", 1.0)
+
+//ParamFloat("damage_mul", 0.5)
+ParamBool("can_fall", 0)
+
+ParamFloat("arms_enable_time", 0.5)
+ParamFloat("arms_dev_time", 0.0)
+
+ParamBool("high_alarm_level_on_sound_heard_weapon_use", 1)
+ParamFloat("min_time_to_keep_alarm_level_from_sound_heard_weapon_use", 20.0)
+
+ParamBool("can_destroy_head_before_death", 1)

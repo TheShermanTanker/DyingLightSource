@@ -1,0 +1,314 @@
+!include("AudioScript.def")
+!include("AudioProperties.scr")
+
+OnStart()
+{
+    //////////////////////////////////////////////////////////////////////////
+    // OCCLUSION PARAMETERS
+    // Warrning, snapshot of new sound occlusion system (WIP).
+    //////////////////////////////////////////////////////////////////////////
+    EnableOcclusion(2)
+    SetVariable("occlusion_impact_partial", "0.4")
+    SetVariable("occlusion_impact_full", "0.9")
+    SetVariable("occlusion_air_max_impact", "0.3")
+    SetVariable("occlusion_floor_over", "0.2") // current occlusion attack time in seconds
+    SetVariable("occlusion_floor_under", "1.0") // current occlusion release time in seconds
+
+    SetVariable("back_LPF_cutoff_frq", "7000.0f") // LPF cutoff frequency applied gradually to sounds behind player
+
+    SetOcclusionLPFMin(2000.0)
+    SetOcclusionLPFMax(8000.0)
+    SetOcclusionVolumeMin(0.01)
+
+    //////////////////////////////////////////////////////////////////////////
+    //SetHDR(windowSize [amplitude], lowestMaxAmplitude [amplitude], releaseTime [seconds], useRMS[0,1], RMSTreshold[-100,0]dB, HDRHeadroom[-100,0]dB)
+    // WARNING! windowSize <= lowestMaxAmplitude
+    //////////////////////////////////////////////////////////////////////////
+    SetHDR(1.0, 1.0, 0.7, 1, -16, 0)
+
+    //////////////////////////////////////////////////////////////////////////
+    //SetCompressor(enabled [0,1] boolean, threshold [-60,0]dB, attack [10,200]miliseconds, release [20,1000]miliseconds, gaionMakeUp [0,30]dB)
+    //////////////////////////////////////////////////////////////////////////
+    SetCompressor(0, -6.0, 50.0, 50.0, 0.0)
+
+    //////////////////////////////////////////////////////////////////////////
+    //SetMasterVolume(volume [-60,0]dB)
+    //////////////////////////////////////////////////////////////////////////
+    SetMasterVolume(-5.0)
+
+    //////////////////////////////////////////////////////////////////////////
+    // LISTENER CONE PARAMETERS
+    //////////////////////////////////////////////////////////////////////////
+    EnableListenerCone(1)
+    SetListenerCone(60.0, 1.0, 160.0, 0.7)
+
+    //////////////////////////////////////////////////////////////////////////
+    // REVERB PARAMETERS
+    //////////////////////////////////////////////////////////////////////////
+    EnableAutoReverb(0)
+    //SetAutoReverb(0, 1)
+    //SetAutoReverb(2, 1)
+    //SetAutoReverb(3, 1)
+    //SetAutoReverb(4, 1)
+    //SetAutoReverb(11, 1)
+
+    SetVariable("use_reverb_level", "1")
+    SetVariable("enable_auto_reverb", "0")
+    SetVariable("reverb_min_level", "0.3")
+    SetVariable("override_volume", "0")
+    //SetVariable("reverb_min_distance", "200.0")
+    //SetVariable("reverb_max_distance", "1000.0")
+}
+
+//////////////////////////////////////////////////////////////////
+// DEAD WORLD PRE PRODUCTION /////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+AudioProc("map_default")
+{
+    LoadAudioBanks("menu")
+    LoadAudioBanks("music_1")
+    LoadAudioBanks("music_2")
+    LoadAudioBanks("music_3")
+    LoadAudioBanks("all_in_maps_1")
+    LoadAudioBanks("all_in_maps_2")
+    LoadAudioBanks("all_in_maps_3")
+    LoadAudioBanks("all_in_maps_persistant")
+    LoadLocalisedAudioBank("all_quests_local")
+    LoadLocalisedAudioBank("common_local_1")
+    LoadLocalisedAudioBank("common_local_2")
+}
+
+AudioProc("main_menu")
+{
+    LoadAudioBanks("menu")
+    LoadAudioBanks("music_1")
+    LoadAudioBanks("music_3")
+}
+
+AudioProc("slums_interior")
+{
+    LoadAudioBanks("menu")
+    LoadAudioBanks("music_1")
+    LoadAudioBanks("music_3")
+    LoadAudioBanks("all_in_maps_1")
+    LoadAudioBanks("all_in_maps_3")
+    LoadAudioBanks("all_in_maps_persistant")
+    LoadLocalisedAudioBank("slums_interior_quests_local")
+    LoadLocalisedAudioBank("common_local_1")
+}
+
+AudioProc("forever_foundation")
+{
+    CallProc("map_default")
+}
+
+AudioProc("old_town")
+{
+    CallProc("map_default")
+}
+
+AudioProc("old_town_interior_a")
+{
+    CallProc("map_default")
+}
+
+AudioProc("sewers_saviors")
+{
+    CallProc("map_default")
+}
+
+AudioProc("slums")
+{
+    CallProc("map_default")
+}
+
+AudioProc("slums_antenna")
+{
+    CallProc("map_default")
+}
+
+AudioProc("slums_cl_flats")
+{
+    CallProc("map_default")
+}
+
+AudioProc("slums_cl_market")
+{
+    CallProc("map_default")
+}
+
+AudioProc("slums_cl_hangar")
+{
+    CallProc("map_default")
+}
+
+AudioProc("slums_cl_parking")
+{
+    CallProc("map_default")
+}
+
+AudioProc("slums_cl_sidetrack")
+{
+    CallProc("map_default")
+}
+
+AudioProc("slums_cl_tunnel")
+{
+    CallProc("map_default")
+}
+
+AudioProc("slums_cs")
+{
+    CallProc("map_default")
+}
+
+AudioProc("slums_int_projmayhem")
+{
+    CallProc("map_default")
+}
+
+AudioProc("slums_int_school")
+{
+    CallProc("map_default")
+}
+
+AudioProc("slums_int_warehouse")
+{
+    CallProc("map_default")
+}
+
+AudioProc("slums_interior_a")
+{
+    CallProc("map_default")
+}
+
+AudioProc("old_town_int_hotel")
+{
+    CallProc("map_default")
+}
+
+AudioProc("slums_demolition")
+{
+    CallProc("map_default")
+}
+
+AudioProc("sewers_prof")
+{
+    CallProc("map_default")
+}
+
+AudioProc("old_town_outposts")
+{
+    CallProc("map_default")
+}
+
+AudioProc("old_town_outposts_radio")
+{
+    CallProc("map_default")
+}
+
+AudioProc("old_town_outposts_museum")
+{
+    CallProc("map_default")
+}
+
+AudioProc("ot_cl_apartments")
+{
+    CallProc("map_default")
+}
+
+AudioProc("ot_cl_parking")
+{
+    CallProc("map_default")
+}
+
+AudioProc("ot_cl_hotel")
+{
+    CallProc("map_default")
+}
+
+AudioProc("ot_cl_restaurant")
+{
+    CallProc("map_default")
+}
+
+AudioProc("old_town_townhall")
+{
+    CallProc("map_default")
+}
+
+AudioProc("testmap_audio")
+{
+    CallProc("map_default")
+}
+
+AudioProc("testmap_qa")
+{
+    CallProc("map_default")
+}
+
+AudioProc("testmap_head")
+{
+    CallProc("map_default")
+}
+
+AudioProc("testmap_wojtek")
+{
+    CallProc("map_default")
+}
+
+AudioProc("testmap_craft")
+{
+    CallProc("map_default")
+}
+
+AudioProc("testmapmarek")
+{
+    CallProc("map_default")
+}
+    
+AudioProc("testmap_marcin")
+{
+    CallProc("map_default")
+}
+
+AudioProc("testmap_matt")
+{
+    CallProc("map_default")
+}
+
+AudioProc("testmap_roger")
+{
+    CallProc("map_default")
+}
+
+AudioProc("testmap_tomek")
+{
+    CallProc("map_default")
+}
+
+AudioProc("testmap_kowal")
+{
+    CallProc("map_default")
+}
+
+AudioProc("last_cinematic_wasteland")
+{
+    CallProc("map_default")
+}
+
+//////////////////////////////////////////////////////////////////
+// Miscellaneous banks ///////////////////////////////////////////
+//////////////////////////////////////////////////////////////////
+
+AudioProc("music_only")
+{
+    LoadAudioBanks("music_1")
+    LoadAudioBanks("music_2")
+    LoadAudioBanks("music_3")
+}
+
+AudioProc("chromed")
+{
+    CallProc("map_default")
+}

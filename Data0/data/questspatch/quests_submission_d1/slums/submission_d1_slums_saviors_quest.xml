@@ -1,0 +1,531 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST NAME : Saviors -->
+    <!-- QUEST INFO : Player is looking for Jade. Player is trying to escape from the quarantine zone through the sewers. -->
+    <!-- AFTER QUEST:  -->
+    <!-- COMMENT    :  -->
+    <!-- FROM       : >> SLUMS -->
+    <!-- TO         : >> SLUMS -> SEWERS -> OLD TOWN -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="Saviors"
+         parent="Q_AnotherDay_02"
+         new_chapter="Chapter05"
+         reward_set="StorylineReward_Saviors_reward"
+         pxsl_line="14">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Saviors01_OBJ_GotoSmugglersHideout&amp;"
+             pxsl_line="15">
+            <Path
+                 pxsl_line="15">
+                <!-- ,challenge-unlock _ Slums_chapter_06 -->
+                <Phase
+                     type="go to"
+                     name="Saviors - START"
+                     distance="100000"
+                     pxsl_line="17">
+                    <Destination
+                         pxsl_line="17">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="another_day_start_sp"
+                             pxsl_line="17" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="18">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="another_day_start_sp"
+                             pxsl_line="18" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="19">
+                    <Object
+                         pxsl_line="19">
+                        <QuestObject
+                             class="ModelObject"
+                             name="Saviors_Door_CenkHideout"
+                             pxsl_line="19" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="20">
+                    <Object
+                         pxsl_line="21">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Cenk"
+                             pxsl_line="21" />
+                    </Object>
+                    <Object
+                         pxsl_line="22">
+                        <QuestObject
+                             class="GroupingObject"
+                             name="Saviors_GO_SafeZone_Cenk"
+                             pxsl_line="22" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="use life place"
+                     name="_"
+                     teleport="true"
+                     pxsl_line="23">
+                    <LifePlace
+                         pxsl_line="23">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Saviors_LP_Cenk_001"
+                             pxsl_line="23" />
+                    </LifePlace>
+                    <AI
+                         pxsl_line="24">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Cenk"
+                             pxsl_line="24" />
+                    </AI>
+                </Phase>
+                <Phase
+                     type="set lifeplace"
+                     name="_"
+                     interact_dist="0.1"
+                     pxsl_line="25">
+                    <LifePlace
+                         pxsl_line="25">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Saviors_LP_Cenk_001"
+                             pxsl_line="25" />
+                    </LifePlace>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="26">
+                    <Object
+                         pxsl_line="27">
+                        <QuestObject
+                             class="HubZone"
+                             name="Saviors_HubZone_Cenk"
+                             pxsl_line="27" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="28">
+                    <!-- LOCATION -->
+                    <Path
+                         pxsl_line="29">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="10"
+                             pxsl_line="30">
+                            <Destination
+                                 pxsl_line="30">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="Saviors_SP_000"
+                                     pxsl_line="30" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                    <!-- RADIO DLG with Brecken -->
+                    <Path
+                         pxsl_line="31">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="-200"
+                             show_locations="false"
+                             pxsl_line="32">
+                            <Destination
+                                 pxsl_line="32">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="cin_another_day_in_paradise_01_pos_01"
+                                     pxsl_line="32" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Brecken_AnotherDayInParadise_01DLG01_radio"
+                             auto_start="true"
+                             pxsl_line="33" />
+                    </Path>
+                </Phase>
+                <Phase
+                     type="use"
+                     name="Saviors - Talk to Cenk"
+                     desired_state="on"
+                     gather_radius="3"
+                     pxsl_line="34">
+                    <Trigger
+                         pxsl_line="34">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="Saviors_PS_Knock_001"
+                             pxsl_line="34" />
+                    </Trigger>
+                    <DebugPlayerPosition
+                         pxsl_line="35">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_SP_000"
+                             pxsl_line="35" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="set lifeplace"
+                     name="_"
+                     interact_dist="10"
+                     pxsl_line="36">
+                    <LifePlace
+                         pxsl_line="36">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Saviors_LP_Cenk_001"
+                             pxsl_line="36" />
+                    </LifePlace>
+                </Phase>
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="Cenk"
+                     group="Cenk_Saviors_02DLG"
+                     show_locations="false"
+                     auto_start="true"
+                     gather_radius="10000"
+                     pxsl_line="37" />
+                <!-- Margaret -->
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="38">
+                    <Path
+                         pxsl_line="38">
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="39">
+                            <Object
+                                 pxsl_line="40">
+                                <QuestObject
+                                     class="NavMeshDynamicObject"
+                                     name="anotherday_navmesh_dyn"
+                                     pxsl_line="40" />
+                            </Object>
+                            <Object
+                                 pxsl_line="41">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="QEG_AnotherDay_Siege"
+                                     pxsl_line="41" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="42">
+                            <Object
+                                 pxsl_line="43">
+                                <QuestObject
+                                     class="NPCLifePlace"
+                                     name="Ahran_Sleep"
+                                     pxsl_line="43" />
+                            </Object>
+                            <Object
+                                 pxsl_line="44">
+                                <QuestObject
+                                     class="NPCLifePlace"
+                                     name="Joshua_Sleep"
+                                     pxsl_line="44" />
+                            </Object>
+                            <Object
+                                 pxsl_line="45">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Morgan_QEG_Crowds"
+                                     pxsl_line="45" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="show"
+                             pxsl_line="46">
+                            <Object
+                                 pxsl_line="46">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="margaret_container_door_01"
+                                     pxsl_line="46" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="47">
+                            <Object
+                                 pxsl_line="48">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="margaret_container_door_02"
+                                     pxsl_line="48" />
+                            </Object>
+                            <Object
+                                 pxsl_line="49">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="slums_thetower_guard_19th_02"
+                                     pxsl_line="49" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="set lifeplace"
+                     name="_"
+                     interact_dist="0"
+                     pxsl_line="50">
+                    <LifePlace
+                         pxsl_line="50">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Saviors_LP_Cenk_001"
+                             pxsl_line="50" />
+                    </LifePlace>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="9"
+                     pxsl_line="51" />
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="Cenk_Fake"
+                     group="Cenk_Saviors_03DLG"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="52" />
+                <Phase
+                     type="use life place"
+                     name="_"
+                     teleport="true"
+                     pxsl_line="53">
+                    <LifePlace
+                         pxsl_line="53">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Saviors_LP_Cenk_02"
+                             pxsl_line="53" />
+                    </LifePlace>
+                    <AI
+                         pxsl_line="54">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Cenk"
+                             pxsl_line="54" />
+                    </AI>
+                </Phase>
+                <Phase
+                     type="set lifeplace"
+                     name="_"
+                     interact_dist="10"
+                     pxsl_line="55">
+                    <LifePlace
+                         pxsl_line="55">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Saviors_LP_Cenk_02"
+                             pxsl_line="55" />
+                    </LifePlace>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="2"
+                     pxsl_line="56" />
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="Cenk"
+                     group="Cenk_Saviors_04DLG"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="57" />
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="Cenk"
+                     group="Cenk_Saviors_05DLG"
+                     pxsl_line="58" />
+                <Phase
+                     type="set lifeplace"
+                     name="_"
+                     interact_dist="0"
+                     pxsl_line="59">
+                    <LifePlace
+                         pxsl_line="59">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Saviors_LP_Cenk_02"
+                             pxsl_line="59" />
+                    </LifePlace>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="60">
+                    <Destination
+                         pxsl_line="60">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_SP_000"
+                             pxsl_line="60" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Saviors01_OBJ_GoToTheTunnel&amp;"
+             pxsl_line="62">
+            <Path
+                 pxsl_line="62">
+                <Phase
+                     type="go to"
+                     name="Saviors - Tunnel entrance"
+                     distance="6"
+                     pxsl_line="63">
+                    <Destination
+                         pxsl_line="63">
+                        <QuestObject
+                             class="Marker"
+                             name="Saviors_Marker_Tunnel_Entrance"
+                             pxsl_line="63" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="64">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_SP_001"
+                             pxsl_line="64" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="65">
+                    <Object
+                         pxsl_line="65">
+                        <QuestObject
+                             class="MapPortal"
+                             name="Saviors_MP_Slums_TO_Sewers"
+                             pxsl_line="65" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="66">
+                    <Object
+                         pxsl_line="66">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Cenk"
+                             pxsl_line="66" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="67">
+                    <Object
+                         pxsl_line="67">
+                        <QuestObject
+                             class="ModelObject"
+                             name="Saviors_Door_CenkHideout"
+                             pxsl_line="67" />
+                    </Object>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="68">
+            <Destination
+                 pxsl_line="68">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Saviors_SP_002"
+                     pxsl_line="68" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__Saviors_Cenk"
+         parent="Saviors04"
+         pxsl_line="70">
+        <Phase
+             type="appear"
+             name="_"
+             mode="hide"
+             pxsl_line="71">
+            <Object
+                 pxsl_line="72">
+                <QuestObject
+                     class="GroupingObject"
+                     name="Saviors_GO_SafeZone_Cenk"
+                     pxsl_line="72" />
+            </Object>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="73">
+            <Object
+                 pxsl_line="74">
+                <QuestObject
+                     class="HubZone"
+                     name="Saviors_HubZone_Cenk"
+                     pxsl_line="74" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="75">
+            <Destination
+                 pxsl_line="75">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Saviors_SP_000"
+                     pxsl_line="75" />
+            </Destination>
+        </Phase>
+    </Quest>
+</QuestsDefinitions>

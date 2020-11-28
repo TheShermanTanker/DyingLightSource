@@ -1,0 +1,194 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="old_town"
+     pxsl_line="3">
+    <!-- Old Town E3 Demo -->
+    <!-- quest E3_Demo_OT_Start -parent=Saviors_04 -= -new_map=true -= __Spike_GraplingHook  -->
+        <!-- ,BLOCK _ -obj=&DemoE3_OBJ_OldTown& -->
+            <!-- ,OR _ -->
+                <!-- path -->
+                    <!-- ,semaphore _  -->
+                <!-- path -->
+                    <!-- ,cnd-quest-started _ E3_Slums_Demo_Part_3 -finished=true -show=false -->
+            <!-- ,AND <<E3 DEMO - OT - START>> -->
+                <!-- ,debugpos SpawnPoint E3_Demo_Start -->
+                <!-- path -->
+                    <!-- ,goto _ SpawnPoint E3_Demo_Start -distance=100 -show=false -->
+                <!-- path -->
+                    <!-- ,hide-multi _ -->
+                        <!-- ,o HumanAI Tasneem -->
+                    <!-- ,set_day_time _ 7.30 -->
+                    <!-- ,enable_time_freeze _ -->
+                    <!-- -= OBJECTS TO ENABLE -= -->
+                    <!-- ,enable-multi _ -->
+                        <!-- ,o SpawnPoint E3_Demo_Start -->
+                        <!-- ,o PlayableAreaController demo_playable_area_e3 -->
+                        <!-- ,o CrowdSpawnerChallenge E3_BloodFountain_Crowd01 -->
+                        <!-- ,o IntensityArea E3_AfterCannal_HotGround01  -->
+                    <!-- ,actiondirector_event_group_control _ AllEncounters -block=false -force=false -->
+                    <!-- -= ,actiondirector_encounter _  e3_start_encounter01::EncounterBody -->
+                    <!-- -= OBJECTS TO DISABLE -= -->
+                    <!-- ,disable-multi _  -->
+                        <!-- ,o PlayableAreaController demo_playable_area_e3     -->
+                        <!-- -= REsPAWN POINTS USED IN MAIN AND SIDE QUESTS -->
+                        <!-- ,o SpawnPoint sp_safezone_church_renovation -->
+                        <!--  -->
+                    <!-- -= CINEMATIC -->
+                    <!-- ,set _ InteractiveMovieTrigger imt_cin_ot_presentation_Door -state=off -->
+                    <!-- ,enable _ InteractiveMovieTrigger imt_cin_ot_presentation_Door -->
+                    <!-- ,use _ InteractiveMovieTrigger imt_cin_ot_presentation_Door -state=on -show=false -->
+                    <!-- -= ,movie _ cin_ot_presentation_01 -->
+                    <!-- ,show _ ModelObject cin_ot_presentation_Door_001 -->
+        <!-- ,checkpoint _ SpawnPoint E3_Demo_Start -->
+    <!-- quest E3_Demo_OT_End -parent=E3_Demo_OT_Start -glued=true -->
+        <!-- -= TWO TOWERS     -->
+        <!-- ,BLOCK _ -obj=&DemoE3_OBJ_TwoTowers& -->
+            <!-- ,AND <<E3 DEMO - OT - NearTwoTowers>> -->
+                <!-- ,debugpos SpawnPoint E3_Demo_SpawnPoint_NearTwoTowers -->
+                <!-- path -->
+                    <!-- ,goto _ SensorGoTo E3_TwoTowers_SGT_TopOfTwoTowers -distance=0 -->
+                <!-- path -->
+                    <!-- ,goto _ Marker E3_TwoTowers_AdditionalActions -distance=50 -show=false -->
+                    <!-- -= special actions if needed -->
+                    <!-- ,enable _ VirtualAttractor E3_TwoTowers_Enemie_Attractor -->
+                    <!-- ,enable _ SpawnPoint E3_Demo_SpawnPoint_NearTwoTowers -->
+                    <!-- ,enable _ AISpawnBoxNumber E3_TwoTowers_Enemies_001 -->
+                    <!-- ,enable _ AISpawnBoxNumber E3_TwoTowers_Enemies_002 -->
+                    <!-- ,enable _ AISpawnBoxNumber E3_TwoTowers_Enemies_003 -->
+                    <!-- ,set _ DoorDI d_Scavengers_HUB_SafeZone_01 -state=closed -->
+                    <!-- ,set _ DoorDI d_Scavengers_HUB_SafeZone_02 -state=closed -->
+                <!-- path -->
+                    <!-- -= dialogs -->
+                    <!-- ,OR _ -->
+                        <!--  -->
+                        <!-- path -->
+                            <!-- -= time shift fake -->
+                            <!-- ,goto _ SensorGoTo E3_Underwater_TimeShift -distance=0 -show=false -->
+                            <!-- ,set_day_time _ 8.20 -->
+                            <!-- ,disable_time_freeze _ -->
+                            <!-- ,semaphore _  -->
+                        <!-- path -->
+                            <!-- ,goto _ Marker E3_Start -distance=-55 -show=false -->
+                            <!-- ,set_day_time _ 8.20 -->
+                            <!-- ,disable_time_freeze _ -->
+                    <!-- ,radio-dialog _ voice2d Survivor_E3Demo_02DLG01 -->
+                    <!-- ,OR _ -->
+                        <!-- path -->
+                            <!-- ,wait _ 40 -->
+                            <!-- ,radio-dialog _ voice2d Survivor_E3Demo_03DLG01 -->
+                            <!-- ,wait _ 40 -->
+                            <!-- ,radio-dialog _ voice2d Survivor_E3Demo_06DLG01 -->
+                            <!-- ,wait _ 40 -->
+                            <!-- ,radio-dialog _ voice2d Survivor_E3Demo_04DLG01 -->
+                            <!-- ,wait _ 40 -->
+                            <!-- ,radio-dialog _ voice2d Survivor_E3Demo_05DLG01 -->
+                            <!-- ,wait _ 40 -->
+                            <!-- ,radio-dialog _ voice2d Survivor_E3Demo_07DLG01 -->
+                        <!-- path -->
+                            <!-- ,goto _ Marker E3_TwoTowers_AdditionalActions -distance=55 -show=false -->
+                            <!-- ,show _ DeadRagdoll E3_Demo_Ragdoll -->
+                            <!-- ,enable _ DeadRagdoll E3_Demo_Ragdoll -->
+                        <!-- path -->
+                            <!-- ,goto _ Marker E3_TwoTowers_AdditionalActions -distance=40 -show=false -->
+                        <!-- path -->
+                            <!-- -= Encounter Patrol -->
+                            <!-- ,goto _ Marker E3_FirstEncouter -distance=60 -show=false -->
+                            <!-- ,actiondirector_encounter _ enc_patrol_barell01::Patrol_Barrel01 -->
+                            <!-- ,semaphore _ -->
+                            <!--  -->
+                    <!-- -= ,weather _ -weather_type=clear -duration=-1 -interpolation=00.00 -->
+                    <!-- ,goto _ Marker E3_TwoTowers_AdditionalActions -distance=25 -show=false -->
+                    <!-- ,radio-dialog _ voice2d Survivor_E3Demo_12DLG01 -->
+                    <!-- ,goto _ Marker E3_TwoTowers_AdditionalActions -distance=15 -show=false -->
+                    <!-- ,radio-dialog _ voice2d Survivor_E3Demo_11DLG01 -->
+            <!-- ,enable _ SpawnPoint E3_Demo_SpawnPoint_TwoTowers -->
+            <!-- ,checkpoint _ SpawnPoint E3_Demo_SpawnPoint_NearTwoTowers -->
+            <!-- -= kill'em all -->
+            <!-- ,OR <<E3 DEMO - OT - Kill all zombies>> -->
+                <!-- ,debugpos SpawnPoint E3_Demo_SpawnPoint_TwoTowers -->
+                <!-- path -->
+                    <!-- ,OR _ -->
+                        <!-- path -->
+                            <!-- ,use _ DoorDI d_Scavengers_HUB_SafeZone_01 -state=opened -->
+                        <!-- path -->
+                            <!-- ,use _ DoorDI d_Scavengers_HUB_SafeZone_02 -state=opened -show=false -->
+                    <!-- ,wait _ 10 -->
+                <!-- path -->
+                    <!-- ,clear_area _ ClearArea E3_Demo_ClearArea_TwoTowers -->
+                    <!-- ,semaphore _  -->
+                <!-- path -->
+                    <!-- ,gather _ Marker E3_TwoTowers -distance=-40 -show=false -->
+                <!-- path -->
+                    <!-- ,goto _ SensorGoTo E3_TwoTowers_SGT_TopOfTwoTowers_Enemies_001 -distance=0 -show=false -->
+                    <!-- ,disable _ QuestEnableGroup qeg_E3_TwoTowers_Enemies_001_attractors -->
+                    <!-- ,semaphore _ -->
+                <!-- path -->
+                    <!-- ,goto _ SensorGoTo E3_TwoTowers_SGT_TopOfTwoTowers_Enemies_002 -distance=0 -show=false -->
+                    <!-- ,disable _ QuestEnableGroup qeg_E3_TwoTowers_Enemies_002_attractors -->
+                    <!-- ,semaphore _ -->
+                <!-- path -->
+                    <!-- ,goto _ SensorGoTo E3_TwoTowers_SGT_TopOfTwoTowers_Enemies_InTheTower -distance=0 -show=false -->
+                    <!-- ,enable _ AISpawnBoxNumber E3_TwoTowers_Enemies_004 -->
+                    <!-- ,semaphore _  -->
+            <!-- ,set_day_time _ -day_time=18.00  -->
+            <!-- ,weather _ -weather_type=storm -duration=-1 -interpolation=00.00 -->
+            <!-- ,checkpoint _ SpawnPoint E3_Demo_Start -->
+            <!--  -->
+            <!-- -= new respawn - fake cutscene  -->
+            <!-- ,enable _ InteractiveMovieTrigger it_CIN_E3_FAKE -->
+            <!-- ,use _  InteractiveMovieTrigger it_CIN_E3_FAKE -state=on -show=false -->
+            <!-- ,disable _ InteractiveMovieTrigger it_CIN_E3_FAKE -->
+            <!-- ,enable _ SpawnPoint E3_Demo_WayToHigiestTower -->
+            <!-- ,set_day_time _ -day_time=18.00  -->
+            <!-- ,weather _ -weather_type=storm -duration=-1 -interpolation=00.00 -->
+            <!-- ,checkpoint _ SpawnPoint E3_Demo_WayToHigiestTower -->
+            <!--  -->
+            <!-- ,OR <<E3 DEMO - OT - Way to highiest tower>>  -->
+                <!-- ,debugpos SpawnPoint E3_Demo_WayToHigiestTower -->
+                <!-- path -->
+                    <!-- -= FAN ZONE -->
+                    <!-- ,goto _ Marker E3_Demo_Arena_01 -distance=50  -->
+                    <!-- ,actiondirector_encounter _ enc_fanzone_armoredarea::2ArmoredArena -->
+                <!-- path -->
+                    <!-- -= SLUMS  -->
+                    <!-- ,goto _ Marker E3_Demo_Arena_02 -distance=50 -->
+                    <!-- ,actiondirector_encounter _ Enc_Sllums01_AmoredArea::2ArmoredArena -->
+                <!-- path -->
+                    <!-- -= SOCCER FIELD -->
+                    <!-- ,goto _ Marker E3_Demo_Arena_03 -distance=40 -->
+                    <!-- ,actiondirector_encounter _ enc_football_armoredarea::ArmoredArena -->
+                <!-- path -->
+                    <!-- -= PARKING -->
+                    <!-- ,goto _ Marker E3_Demo_Arena_04 -distance=40 -->
+                    <!-- ,actiondirector_encounter _ enc_cl_parking_armoredarea::2ArmoredArena -->
+                <!-- path -->
+                    <!-- -= HOTEL -->
+                    <!-- ,goto _ Marker E3_Demo_Arena_05 -distance=40 -->
+                    <!-- ,actiondirector_encounter _ enc_cl_hotel_armoredarea::ArmoredArena -->
+            <!-- ,weather _ -weather_type=clear -duration=1 -interpolation=00.10 -->
+            <!-- ,checkpoint _ SpawnPoint E3_Demo_WayToHigiestTower -->
+            <!--  -->
+        <!-- ,semaphore _ -->
+        <!--  -->
+    <!-- quest Oldtown_Demo_Placeholder_Movie_01 -parent=OldTown01 -->
+        <!-- ,semaphore _ -->
+        <!-- ,movie <<Demo Placeholder Movie 01>> demo_placeholder_movie_01 -->
+            <!-- ,debugpos SpawnPoint MapStart -->
+        <!--  -->
+    <!-- quest Oldtown_Demo_Placeholder_Movie_02 -parent=OldTown01 -->
+        <!-- ,semaphore _ -->
+        <!-- ,movie <<Demo Placeholder Movie 02>>demo_placeholder_movie_02 -->
+            <!-- ,debugpos SpawnPoint MapStart -->
+    <!-- quest Oldtown_Demo_Placeholder_Movie_03 -parent=OldTown01 -->
+        <!-- ,semaphore _ -->
+        <!-- ,movie <<Demo Placeholder Movie 03>> demo_placeholder_movie_03 -->
+            <!-- ,debugpos SpawnPoint MapStart -->
+    <!-- quest Oldtown_Demo_Placeholder_Movie_04 -parent=OldTown01 -->
+        <!-- ,semaphore _ -->
+        <!-- ,movie <<Demo Placeholder Movie 04>> demo_placeholder_movie_04 -->
+            <!-- ,debugpos SpawnPoint MapStart -->
+    <!-- quest Oldtown_Demo_Placeholder_Movie_05 -parent=OldTown01 -->
+        <!-- ,semaphore _ -->
+        <!-- ,movie <<Demo Placeholder Movie 05>> demo_placeholder_movie_05 -->
+            <!-- ,debugpos SpawnPoint MapStart -->
+</QuestsDefinitions>

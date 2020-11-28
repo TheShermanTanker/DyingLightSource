@@ -1,0 +1,95 @@
+// defines set of XFaders for engine
+!EngineSound(s)
+
+// path to the place with sounds
+!Path(s)
+
+//fGain, fXFade, fMax
+!XFaderLoadLow(f, f, f)
+
+//fGain, fMin, fXFade
+!XFaderLoadHigh(f, f, f)
+
+//fBaseRPM, sWave, fGain, fXFadeLeft, fMax
+!XFaderLeft(f, s, f, f, f)
+
+//fBaseRPM, sWave, fGain, fMin, fXFadeLeft, fXFadeRight, fMax
+!XFader0(f, s, f, f, f, f, f)
+
+//fBaseRPM, sWave, fGain, fMin, fXFadeLeft, fXFadeRight, fMax
+!XFader1(f, s, f, f, f, f, f)
+
+//fBaseRPM, sWave, fGain, fMin, fXFadeRight
+!XFaderRight(f, s, f, f, f)
+
+// Crossfader for low rpm
+!XFaderLoRPM()
+
+// Crossfader for high rpm
+!XFaderHiRPM()    
+
+!XFaderTurbo(s, f, f, f, f, f)
+!XFaderHiss(s, f, f, f)
+
+!XFaderWhineLoadLowInside(f, f, f)
+!XFaderWhineLoadHighInside(f, f, f)
+!XFaderWhineLoadLowOutside(f, f, f)
+!XFaderWhineLoadHighOutside(f, f, f)
+
+// audibility range of car engine sound
+!EngineSoundRange(f,f)
+
+// sound of gear shifting when inside car view
+!GearShiftUpInsideSound(s)
+// sound of gear shifting when inside car view
+!GearShiftDownInsideSound(s)
+
+// turbo blow off sounds
+!TurboPopOff(f)
+// min, med, max pressure sound, fDistMin, fDistMax
+!TurboPopOffSound(s, s, s, f, f)
+
+!BackfireRumbleSoundNoFX(s, f, f)
+!BackfireRumbleSoundFX(s, f, f)
+
+// engine rpm will be scaled to match this max rpm
+!MaxRPM(f)
+
+// Modifier of engine sound. It sets characteristic of sound depending on displacement of the engine.
+// Params: min displacement, max displacement, lower xfader gain, higher xfader gain, rpm sound modifier
+// If displacement of an engine is between min and max displacement - mathematically <min, max), param will be applayed // to this engine
+!XFaderEngineModifier(f, f, f, f, f)
+
+!XFaderWhineModifier(f, f, f)
+
+EngineSound("pickup")
+{
+    Path("Data/Sounds/Common/Car/pickup/")
+    EngineSoundRange(8.0, 100.0)
+
+    XFaderLoRPM()
+    {
+        XFaderLoadLow(1.0, 0.67, 0.8)
+        {
+            XFaderLeft(999.0, "v8_pickup_idle_loop.wav", 1.0, 1453.0, 1752.0)
+            XFader0(1999.0, "v8_pickup_offlow_loop.wav", 1.0, 1154.0, 1453.0, 2906.0, 3184.0)
+            XFader1(3999.0, "v8_pickup_offmid_loop.wav", 1.0, 2628.0, 2906.0, 4220.0, 4615.0)
+            XFaderRight(6996.0, "v8_pickup_offhigh_loop.wav", 1.0, 3825.0, 4220.0)
+        }
+        XFaderLoadHigh(1.0, 0.54, 0.67)
+        {
+            XFaderLeft(1999.0, "v8_pickup_onlow_loop.wav", 1.0, 1453.0, 1752.0)
+            XFader0(1999.0, "v8_pickup_onlow_loop.wav", 1.0, 1154.0, 1453.0, 2906.0, 3184.0)
+            XFader1(3999.0, "v8_pickup_onmid_loop.wav", 1.0, 2628.0, 2906.0, 4220.0, 4615.0)
+            XFaderRight(6996.0, "v8_pickup_onhigh_loop.wav", 1.0, 3825.0, 4220.0)
+        }
+    }
+
+    //XFaderEngineModifier(0,    1100,  0.9,  0.9,  1.15)
+    //XFaderEngineModifier(1100, 1300,  0.9,  0.95, 1.1)
+    //XFaderEngineModifier(1300, 1600,  0.9,  1.0,  1.0)
+    //XFaderEngineModifier(1600, 2000,  0.95, 1.0,  0.9)
+    //XFaderEngineModifier(2000, 2400,  1.0,  1.0,  0.8)
+    //XFaderEngineModifier(2400, 10000, 1.0,  1.0,  0.7)
+}
+

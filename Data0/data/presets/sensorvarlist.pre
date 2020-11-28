@@ -1,0 +1,77 @@
+sub main()
+{
+    PresetDef("Shape")
+    {
+        Description("");
+    
+        AddField("EditorMeshName",      "SensorBox.msh");
+        AddField("EditorMeshAlpha",     "1");
+        AddField("m_ShapeType",         "Box");
+        AddField("m_MeshOrigin",        "0 0 0");
+        AddField("m_MeshSpanHalf",      "0.50 0.50 0.50");
+        
+        Preset("Box");
+        Preset("BoxA")
+        {
+            SetField("EditorMeshName",      "SensorBoxA.msh");
+            SetField("m_MeshOrigin",        "0 0.50 0");
+        }
+        Preset("Sphere")
+        {
+            SetField("EditorMeshName",      "SensorSphere.msh");
+            SetField("m_ShapeType",         "Sphere");
+        }
+        Preset("Cylinder")
+        {
+            SetField("EditorMeshName",      "SensorCylinder.msh");
+            SetField("m_ShapeType",         "CylinderY");
+        }
+        Preset("CylinderA")
+        {
+            SetField("EditorMeshName",      "SensorCylinderA.msh");
+            SetField("m_ShapeType",         "CylinderY");
+            SetField("m_MeshOrigin",        "0 0.50 0");
+        }
+    }
+        
+    PresetDef("Check interval")
+    {
+        Description("");
+    
+        AddField("m_CheckInterval",  "0.3");
+        
+        Preset("Default");
+        Preset("Frequent")
+        {
+            SetField("m_CheckInterval",  "0.1");
+        }
+        Preset("Rarely")
+        {
+            SetField("m_CheckInterval",  "1.0");
+        }
+    }
+
+    PresetDef("Blend level")
+    {
+        Description("");
+    
+        AddField("m_BlendLevel",  "100");
+ 
+        Preset("Default");
+
+        Preset("Top")
+        {
+            SetField("m_BlendLevel",  "0");
+        }
+
+        Preset("High")
+        {
+            SetField("m_BlendLevel",  "50");
+        }
+
+        Preset("Low")
+        {
+            SetField("m_BlendLevel",  "200");
+        }
+    }
+}

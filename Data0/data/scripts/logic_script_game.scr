@@ -1,0 +1,18 @@
+import "frame_script_def.scr"
+
+sub game_modify()
+{
+	extern float FPS;
+	extern float f_game_player_flashbang;
+	extern float f_pp_game_player_flashbang_prv;
+	extern float f_pp_game_player_flashbang_time;
+
+	float flashbang_prv_copy = (f_game_player_flashbang != f_pp_game_player_flashbang_prv) ? 1.0 : 0.0;
+	float flashbang_time = f_pp_game_player_flashbang_time;
+	float flashbang_time = max(flashbang_time - 1.0 / FPS, 0.0);
+	float flashbang_time = (f_game_player_flashbang != f_pp_game_player_flashbang_prv) ? 6.0 : flashbang_time;
+
+	Set("f_game_player_flashbang_prv_copy", flashbang_prv_copy);
+	Set("f_pp_game_player_flashbang_time", flashbang_time);
+	Set("f_pp_game_player_flashbang_prv", f_game_player_flashbang);
+}

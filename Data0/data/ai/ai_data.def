@@ -1,0 +1,68 @@
+!include("ai_curves.def")
+!include("ai_interaction_anim.def")
+
+
+!Data(s, f, s, i, i) //Data(data_name, duration, reference_speed_animation_name, animation_group, weight)
+!Timing(i, f) //Timing(event_id, event_time)
+!ParamFloat(s, f) //ParamFloat(param_name, value)
+!ParamBool(s, i) //ParamBool(param_name, value)
+!ParamInt(s, i) //ParamInt(param_name, value)
+!ParamString(s, s) //ParamString(param_name, value)
+!ParamProb(s, i, i) //ParamProb(param_name, positive_values_num, negative_values_num)
+!ParamFloatRange(s, f, f) //ParamFloatRange(param_name, value_min, value_max)
+!Slot(s, i, i, i, f, f, f, f, f, f, f) //Slot(location_helper, is_idle_activity, activity_id, is_looped, location_local_pos_x, location_local_pos_y, location_local_pos_z, location_local_dir_x, location_local_dir_y, location_local_dir_z, radius)
+!MultiSlot(s, i, i, i, f, i, f) //MultiSlot(is_idle_activity, activity_id, is_looped, radius, locations_on_radius, slot radius) - multiple slots located on radius 
+!DeactivateOn(i)
+!DiscardOn(i)
+!StrongAttractor() // indicates that this is a strong attractor - attracts stronger than enemies
+!ChangeableAttractor() //indicates that this is a changeable attractot - at the beggining it behaves as strong, agter discard or deactivate it behaves as normal
+!AiTypeDataSet(s) // data set for ai with given type
+!UseNearestSlot() // indicates that AI should use nearest slot instead of random one 
+!CheckSlotsAvailability() // attractor needs to check periodically if slots are available for use (i.e. are not blocked by some other object)
+!Curve(i, s) // Curve(curve_id, curve_name) curve_name is a string from curve_di.dat file
+!NPCUsingItem()
+!CanMoveOnAnimation()
+!LockPosition()
+!DisableCollision()
+!SnapDist(f)
+!ReleaseDist(f)
+!SafePlace()
+!FXSequence(s, s, i)
+!SoundRange(f)
+!PeriodBtwSpecialAnims(f)
+!ShortHeadRotation()
+!Invisible()
+!DisableFastInteraction()
+!InteractionLevel(i)
+!InteractionDist(f)
+!FarInteractionDist(f)
+!FarInteractionViewAngle(f)
+!DisableToFromInteractAnim() // make sens only when set InteractionLevel(FULL). Disables to_interact and from_interact anims, cuz there is no way to determine if those animations are setted.
+!DisableInteractAnim(i)
+!DisabledTurnDuringActivity(i)
+!DisabledHeadTrackDuringActivity(i)
+!Usage(s)		// Mark the attractor as supporting a system/functionality indicated by the passed flag name (FAttractorUsage from code).
+!User(s) // Man, Woman, Kid
+!Role(s)		// Enum describing role which npc will play when entered this attractor.(EAttractorRole from code).
+!EnemyRadius(f)
+!EnableDialogAnimations() //Enables dialog animations (all dialog aniamations must be addded !!!)
+!BlockRandomChatters()
+
+!AttachPhysicGeom(s, i, f, f, f, f, f, f)//mesh element, volume [Sphere(0), Box(1), YEllipsoid(2)], size_x, size_y, size_z, shift_x, shift_y, shift_z // defined for slot
+
+// MultiMeshAnim System:
+!StaticMesh(s, s, s, s, s, f)         // StaticMesh(mesh_name, body_attach_point_name, mesh_attach_point_name, anim_name, skin_name, homogeneous_scale) - spawn and attached given mesh, also play anim on it - postition is calculated based on anim_name. Mesh will be attached to AI.
+
+!DynamicMesh(s, s, s, s, f)              // DynamicMesh(mesh_name, body_attach_point_name, mesh_attach_point_name, skin_name, scale)
+!DynamicFXToNPC(s, s, f, f, f, f, f, f)  // DynamicFXToNPC(fx_name, attach_point_name, local_pos_x, local_pos_y, local_pos_z, local_dir_x, local_dir_y, local_dir_z)
+!DynamicFXToMesh(s, s, f, f, f, f, f, f)  // DynamicFXToNPC(fx_name, attach_point_name, local_pos_x, local_pos_y, local_pos_z, local_dir_x, local_dir_y, local_dir_z)
+
+!Scale(f, f, f)
+!TimeBeforeRemove(f)
+!NoAttach()
+!AddAdditionalInfo(i)
+
+!DialogCameraMode(s)
+!DialogCameraOffset(f, f, f)
+!HeadPosOnScreen(f, f)
+!DialogNpcSize(f)

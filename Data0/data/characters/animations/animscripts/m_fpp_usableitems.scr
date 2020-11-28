@@ -1,0 +1,69 @@
+//Anim script for usable items
+
+
+//===================================== FPP Healing ============================================
+SeqTrack( "FPP_HealthPack_SelfHealing",		"M_FPP_UniversalWeaponRepair.anm2", 		        0, 58, 30, 1, 0.5)
+{	
+	Event(38, 0, 1)
+	{
+		PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Self_Healing_Injection.wav", 1, 0, 1, 1.0)
+	}
+	Event(30, SPECIAL_EFFECT, 1)
+	Event(35, END_ANIMATION, 1)
+}
+
+SeqTrack( "FPP_Bandage_SelfHealing",		"M_FPP_Unarmed_HealingSelf_Bandage.anm2", 		        0, 92, 30, 1, 0.2)
+{
+	Event(30, SPECIAL_EFFECT, 1)
+	Event(0, 0, 1)
+	{
+			PlaySound23D(GameVolumeSource_SoundPlayer, "player_self_healing_bandage.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(35, END_ANIMATION, 1)
+}
+//SeqTrack( "FPP_HealthPack_CoopHealing",		"M_FPP_Unarmed_HealingCoop_V01.anm2",0, 55, 30, 1, 0.5 )
+//SeqTrack( "FPP_HealthPack_HelpGetUp",		"M_FPP_Stick_Get.anm2",0, 40, 30, 1, 0.3 )
+
+SeqTrack( "FPP_Snack_SelfHealing",  		"M_FPP_Snack.anm2", 0, 32, 30, 1, 0.3 )
+SeqTrack( "FPP_Fruit_SelfHealing",  		"M_FPP_Snack_Fruit.anm2", 0, 32, 30, 1, 0.3 )
+SeqTrack( "FPP_PursuitBreakerSwitch",  		"M_FPP_Unarmed_RemoteTrigger_RightHand.anm2", 10, 50, 30, 1, 0.3 )
+{
+	Event(22, SPECIAL_USE_CALLBACK, -1)
+}
+SeqTrack( "FPP_GRECommunicator",            "M_FPP_Unarmed_RemoteTrigger_RightHand.anm2", 0, 50, 15, 1, 0.3 )
+{
+	Event(5, SPECIAL_USE_CALLBACK, -1)
+}
+
+//===================================== FPP Bottle ============================================
+SeqTrack( "FPP_Bottle_SelfHealing",	"M_FPP_Bottle_Drinking.anm2", 0, 70, 30, 1, 0.1)
+{
+	Event( 31, EVENT_COLA_USE, -1)
+}
+
+//===================================== FPP Bottle ============================================
+SeqTrack( "FPP_PursuitBreakerSwitch_SelfHealing",	"M_FPP_Unarmed_RemoteTrigger_RightHand.anm2", 10, 50, 30, 1, 0.3 )
+{
+	Event( 31, SPECIAL_USE_CALLBACK, -1)
+}
+
+//SeqTrack( "FPP_Spray_SelfHealing", "M_FPP_Spraying.anm2", 0, 85, 30, 1, 0.5)
+
+//===================================== FPP Bomb Planting =====================================
+
+//SeqTrack( "FPP_bomb_planting", "FPP_bomb_arming_placeholder.anm2", 0, 190, 30, 1, 0.3 )
+
+//===================================== FPP Paper Note Reading ================================
+SeqTrack( "FPP_PaperSheet",  		"M_FPP_Unarmed_PaperNote.anm2", 0, 62, 30, 1, 0.1 )
+{
+	Event(1, 0, 1)
+    {
+        PlaySound2DExternal(GameVolumeSource_SoundPlayer, "paper_note_reading.wav", 1, 1, 1) 
+    }
+	Event(50, SPECIAL_USE_CALLBACK, 1)
+	
+	Event(50, 0, 1)
+    {
+        PlaySound2DExternal(GameVolumeSource_SoundPlayer, "paper_note_reading_end.wav", 1, 1, 1) 
+    }
+}

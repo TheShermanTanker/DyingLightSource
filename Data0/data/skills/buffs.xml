@@ -1,0 +1,840 @@
+<!-- combo points are gained each time player kills zombie -->
+<buff id="RunForYourLifeLevel1" duration="15">
+	<property name="InfiniteFitness" set="true"/>
+	<varlist_timeline var="f_game_player_infinite_fitness">
+		<key t="0" val="0"/>
+		<key t="2" val="0.2"/>		
+		<key t_e="-2" val="0.2"/>		
+		<key t_e="0" val="0.0"/>
+	</varlist_timeline>
+</buff>
+
+<!-- this triggers hud response -->
+<buff id="MultikillHud" max_stacks="1" duration="5"/>
+
+<!-- this is added when you kill a zombie, reaching max stack will trigger the reward! -->
+<buff id="MultikillTimer" max_stacks="10" duration="2" apply_behaviour="ResetDuration">
+	<OnMaxStack>
+		<AddExp value="100" />
+		<ApplyBuff id="MultikillHud" />
+		<RemoveBuff id="MultikillTimer" />
+	</OnMaxStack>
+</buff>
+
+<!-- injector buffs -->
+<buff id="Invurnerability" duration="60">
+	<varlist_timeline var="f_game_player_injection_0">
+		<!-- t_e means time from end, t means time from beginning -->
+		<key t="0" val="0"/>
+		<key t="0.5" val="0.7"/>
+		<key t_e="-3.5" val="0.7"/>
+		<key t_e="-3" val="0.3"/>
+		<key t_e="-2.5" val="0.7"/>
+		<key t_e="-2" val="0.3"/>
+		<key t_e="-1.5" val="0.7"/>
+		<key t_e="-1" val="0.3"/>
+		<key t_e="-0.5" val="0.7"/>
+		<key t_e="0" val="0"/>
+	</varlist_timeline>
+	<!--<sound t="0" file="inv.ogg"/>
+	<sound t="22" file="inv_ending.ogg"/>
+	<sound t="25" file="inv_ended.ogg"/>-->
+</buff>
+
+<buff id="ZombieInvisibility" duration="60">
+	<varlist_timeline var="f_game_player_injection_3">
+		<key t="0" val="0"/>
+		<key t="0.5" val="0.7"/>
+		<key t_e="-3.5" val="0.7"/>
+		<key t_e="-3" val="0.3"/>
+		<key t_e="-2.5" val="0.7"/>
+		<key t_e="-2" val="0.3"/>
+		<key t_e="-1.5" val="0.7"/>
+		<key t_e="-1" val="0.3"/>
+		<key t_e="-0.5" val="0.7"/>
+		<key t_e="0" val="0"/>
+	</varlist_timeline>
+</buff>
+
+<buff id="Painkillers" duration="25">
+	<property name="MaxHealth" value_add="120"/>
+	<!--property name="HealthRegeneration" value_add="5"/-->
+	<varlist_timeline var="f_game_player_injection_1">
+		<key t="0" val="0"/>
+		<key t="0.5" val="0.7"/>
+		<key t_e="-3.5" val="0.7"/>
+		<key t_e="-3" val="0.3"/>
+		<key t_e="-2.5" val="0.7"/>
+		<key t_e="-2" val="0.3"/>
+		<key t_e="-1.5" val="0.7"/>
+		<key t_e="-1" val="0.3"/>
+		<key t_e="-0.5" val="0.7"/> 
+		<key t_e="0" val="0"/>
+	</varlist_timeline>
+</buff>
+
+<buff id="Drunk" duration="20">
+	<OnGain>
+		<AddDrunk value="0.33"/>
+	</OnGain>
+	<!--<property name="MeeleDRPercent" value_add="0.2"/>
+	<property name="RangedDRPercent" value_add="0.2"/>
+	<property name="EnviromentalDRPercent" value_add="0.2"/>-->
+	<!-- this is BULLSHIT because Drunk postprocess is made from code not from here -->
+	<!--<varlist_timeline var="f_blur_motion">
+		<key t="0" val="0"/>
+		<key t="0.4" val="0.05"/>	
+		<key t_e="-0.2" val="0.05"/>	
+		<key t_e="0" val="0"/>
+	</varlist_timeline>-->
+	
+	<!--<varlist_timeline var="f_overlay_13_weight">
+		<key t="0" val="0"/>
+		<key t="0.2" val="0"/>	
+		<key t="0.4" val="0.2"/>
+		<key t_e="-0.2" val="0.2"/>	
+		<key t_e="0" val="0"/>
+	</varlist_timeline>-->
+	
+	<!--<varlist_timeline var="f_curves_13_weight">
+		<key t="0" val="0"/>
+		<key t="0.2" val="0.2"/>	
+		<key t_e="-0.2" val="0.2"/>	
+		<key t_e="0" val="0"/>
+	</varlist_timeline>-->
+</buff>
+
+<buff id="Strength" duration="90">
+	<!-- +100% dmg, +100% force-->
+	<property name="MeeleDamageMul" value_add="1"/>
+	<property name="MeeleForceMul" value_add="1"/>
+	<varlist_timeline var="f_game_player_injection_2">
+		<key t="0" val="0"/>
+		<key t="0.5" val="0.7"/>
+		<key t_e="-3.5" val="0.7"/>
+		<key t_e="-3" val="0.3"/>
+		<key t_e="-2.5" val="0.7"/>
+		<key t_e="-2" val="0.3"/>
+		<key t_e="-1.5" val="0.7"/>
+		<key t_e="-1" val="0.3"/>
+		<key t_e="-0.5" val="0.7"/>
+		<key t_e="0" val="0"/>
+	</varlist_timeline>
+</buff>
+
+<buff id="MedKitWeak" duration="0">
+    <OnGain>
+		<ValueMultiply value="MedkitEffectivenessMul"/>
+        <AddHealthPercent value="0.25"/>
+    </OnGain>
+</buff>
+
+<buff id="MedKitNormal" duration="0">
+    <OnGain>
+		<ValueMultiply value="MedkitEffectivenessMul"/>
+        <AddHealthPercent value="0.5"/>
+    </OnGain>
+</buff>
+
+<buff id="MedKitStrong" duration="0">
+    <OnGain>
+		<ValueMultiply value="MedkitEffectivenessMul"/>
+        <AddHealth value="100"/>
+    </OnGain>
+</buff>
+
+<buff id="MedKitPremium" duration="0">
+    <OnGain>
+		<ValueMultiply value="MedkitEffectivenessMul"/>
+        <AddHealth value="150"/>
+    </OnGain>
+</buff>
+
+<buff id="MedKitStrongHard" duration="20">
+    <property name="HealthRegenerationDelay" value_add="-20.0"/>
+	<property name="HealthRegenerationMaxLevel" value_add="-1000.0"/>
+	<property name="HealthRegenerationTimeToMax" value_add="5.34"/>	
+    <hud_icon val="equipment_medkit_a_big"/>
+</buff>
+
+<buff id="FoodSmall" duration="0">
+    <OnGain>
+        <AddHealth value="5"/>
+    </OnGain>
+</buff>
+
+<buff id="FoodNormal" duration="0">
+    <OnGain>
+        <AddHealth value="10"/>
+    </OnGain>
+</buff>
+
+<buff id="FoodLarge" duration="0">
+    <OnGain>
+        <AddHealth value="15"/>
+    </OnGain>
+</buff>
+
+<buff id="DamageStrong" duration="0">
+    <OnGain>
+        <AddHealth value="-80"/>
+    </OnGain>
+</buff>
+
+<buff id="StaminaBoosterNormal" duration="0">
+    <OnGain>
+        <AddStaminaPercent value="1.0"/>
+		<AddStaminaDropResistance value="10"/>
+		<!-- <AddFitnessPercent value="0.5"/>
+		<AddFitnessDropResistance value="10"/> -->
+    </OnGain>
+</buff>
+
+<buff id="InfectionSuppressantMedium" duration="0">
+    <OnGain>
+		<AddInfectionSuppression value="20"/>		<!-- in minutes -->
+    </OnGain>
+</buff>
+
+<buff id="JumpAttackStaminaBoostLevel1" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="StaminaUsageReduction" value_add="0.33"/>
+</buff>
+<buff id="JumpAttackStaminaBoostLevel2" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="StaminaUsageReduction" value_add="0.66"/>
+</buff>
+<buff id="JumpAttackStaminaBoostLevel3" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="StaminaUsageReduction" value_add="1.0"/>
+</buff>
+
+<buff id="JumpAttackCritChanceBoostLevel1" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="BuffCritChanceMul" value_add="0.05"/>
+</buff>
+<buff id="JumpAttackCritChanceBoostLevel2" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="BuffCritChanceMul" value_add="0.1"/>
+</buff>
+<buff id="JumpAttackCritChanceBoostLevel3" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="BuffCritChanceMul" value_add="0.15"/>
+</buff>
+
+<buff id="DodgeDamageBoostLevel1" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="BuffDamageMul" value_add="0.1"/>
+</buff>
+<buff id="DodgeDamageBoostLevel2" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="BuffDamageMul" value_add="0.2"/>
+</buff>
+<buff id="DodgeDamageBoostLevel3" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="BuffDamageMul" value_add="0.3"/>
+</buff>
+
+<buff id="DodgeCritChanceBoostLevel1" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="BuffCritChanceMul" value_add="0.05"/>
+</buff>
+<buff id="DodgeCritChanceBoostLevel2" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="BuffCritChanceMul" value_add="0.1"/>
+</buff>
+<buff id="DodgeCritChanceBoostLevel3" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="BuffCritChanceMul" value_add="0.15"/>
+</buff>
+
+<buff id="SlideStaminaBoostLevel1" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="StaminaUsageReduction" value_add="0.1"/>
+</buff>
+<buff id="SlideStaminaBoostLevel2" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="StaminaUsageReduction" value_add="0.25"/>
+</buff>
+<buff id="SlideStaminaBoostLevel3" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="StaminaUsageReduction" value_add="0.5"/>
+</buff>
+
+<buff id="SlideDamageBoostLevel1" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="BuffDamageMul" value_add="0.1"/>
+</buff>
+<buff id="SlideDamageBoostLevel2" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="BuffDamageMul" value_add="0.2"/>
+</buff>
+<buff id="SlideDamageBoostLevel3" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="BuffDamageMul" value_add="0.3"/>
+</buff>
+
+<buff id="SlideCritChanceBoostLevel1" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="BuffCritChanceMul" value_add="0.05"/>
+</buff>
+<buff id="SlideCritChanceBoostLevel2" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="BuffCritChanceMul" value_add="0.1"/>
+</buff>
+<buff id="SlideCritChanceBoostLevel3" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="BuffCritChanceMul" value_add="0.15"/>
+</buff>
+
+<buff id="JumpOverZombieStaminaBoostLevel1" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="StaminaUsageReduction" value_add="0.1"/>
+</buff>
+<buff id="JumpOverZombieStaminaBoostLevel2" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="StaminaUsageReduction" value_add="0.25"/>
+</buff>
+<buff id="JumpOverZombieStaminaBoostLevel3" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="StaminaUsageReduction" value_add="0.5"/>
+</buff>
+
+<buff id="JumpOverZombieDamageBoostLevel1" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="BuffDamageMul" value_add="0.1"/>
+</buff>
+<buff id="JumpOverZombieDamageBoostLevel2" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="BuffDamageMul" value_add="0.2"/>
+</buff>
+<buff id="JumpOverZombieDamageBoostLevel3" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="BuffDamageMul" value_add="0.3"/>
+</buff>
+
+<buff id="JumpOverZombieCritChanceBoostLevel1" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="BuffCritChanceMul" value_add="0.05"/>
+</buff>
+<buff id="JumpOverZombieCritChanceBoostLevel2" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="BuffCritChanceMul" value_add="0.1"/>
+</buff>
+<buff id="JumpOverZombieCritChanceBoostLevel3" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="BuffCritChanceMul" value_add="0.15"/>
+</buff>
+
+<buff id="GroundPoundDamageReductionBoostLevel1" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="BuffDamageReduction" value_add="0.1"/>
+</buff>
+<buff id="GroundPoundDamageReductionBoostLevel2" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="BuffDamageReduction" value_add="0.2"/>
+</buff>
+<buff id="GroundPoundDamageReductionBoostLevel3" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="BuffDamageReduction" value_add="0.3"/>
+</buff>
+
+<buff id="WrestlingKickDamageReductionBoostLevel1" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="BuffDamageReduction" value_add="0.1"/>
+</buff>
+<buff id="WrestlingKickDamageReductionBoostLevel2" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="BuffDamageReduction" value_add="0.2"/>
+</buff>
+<buff id="WrestlingKickDamageReductionBoostLevel3" duration="5" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="BuffDamageReduction" value_add="0.3"/>
+</buff>
+
+<buff id="GrapplingHookStaminaBoostLevel1" duration="8" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="StaminaUsageReduction" value_add="0.1"/>
+</buff>
+<buff id="GrapplingHookStaminaBoostLevel2" duration="8" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="StaminaUsageReduction" value_add="0.25"/>
+</buff>
+<buff id="GrapplingHookStaminaBoostLevel3" duration="8" max_stacks="1" apply_behaviour="ResetDuration">
+	<property name="StaminaUsageReduction" value_add="0.5"/>
+</buff>
+
+
+<buff id="InfiniteFitnes" duration="10">	
+	<property name="FitnessTimeToRegenerate" value_add="-20.0"/>
+	<property name="FitnessRegenRate" value_add="100.0"/>
+	<property name="FitnessRegenerationFactor" value_add="100.0"/>	
+	<OnGain>
+		<AddFitness value="4.0"/>		
+	</OnGain>
+</buff>
+
+<buff id="NaturalMovementActionLevel1" duration="5" max_stacks="5" apply_behaviour="ResetDuration">	
+	<OnMaxStack>		
+		<ApplyBuff id="InfiniteFitnes"/>
+	</OnMaxStack>
+</buff>
+
+<buff id="IncreaseMoveSpeedInc" duration="5" max_stacks="10" apply_behaviour="ResetDuration">
+	<property name="MoveBackwardMaxSpeed" value_add="0.125"/>
+	<property name="MoveForwardMaxSpeed" value_add="0.25"/>
+	<property name="MoveStrafeMaxSpeed" value_add="0.25"/>
+	<property name="MoveSprintSpeed" value_add="0.25"/>
+	<hud_icon val="buff_speed"/>
+</buff>
+
+<buff id="IncreaseMoveSpeed" duration="0">	
+	<OnGain>
+		<require>
+			<SkillReq id="Momentum"/>			
+		</require>			
+		<ApplyBuff id="IncreaseMoveSpeedInc"/>
+	</OnGain>
+</buff>
+
+<buff id="DamageResistatenMeleeAndBulletLvl1" duration="45" max_stacks="1" >	
+	<property name="MeleeDamageReduction" value_add="0.95"/>
+	<property name="BulletDamageReduction" value_add="0.95"/>
+	<OnGain>
+		<AddHealthPercent value="1.0"/>
+	</OnGain>
+    <hud_icon val="potion_timer_resistance"/>
+</buff>
+<buff id="DamageResistatenMeleeAndBulletLvl2" duration="90" max_stacks="1" >	
+	<property name="MeleeDamageReduction" value_add="0.95"/>
+	<property name="BulletDamageReduction" value_add="0.95"/>
+	<OnGain>
+		<AddHealthPercent value="1.0"/>
+	</OnGain>
+    <hud_icon val="potion_timer_resistance"/>
+</buff>
+<buff id="DamageResistatenMeleeAndBullet" duration="0" max_stacks="1" >	
+    <OnGain>
+		<ApplyBuff id="DamageResistatenMeleeAndBulletLvl1" />
+    </OnGain>
+    <OnGain>
+        <require>
+			<SkillReq id="BoostsExtender"/>			
+		</require>
+        <RemoveBuff id="DamageResistatenMeleeAndBulletLvl1" />
+        <ApplyBuff id="DamageResistatenMeleeAndBulletLvl2" />
+	</OnGain>
+</buff>
+
+<buff id="DamageResistatenMeleeAndBulletLvl1Hard" duration="20" max_stacks="1" >	
+	<property name="MeleeDamageReduction" value_add="0.95"/>
+	<property name="BulletDamageReduction" value_add="0.95"/>
+	<OnGain>
+		<AddHealthPercent value="1.0"/>
+	</OnGain>
+    <hud_icon val="potion_timer_resistance"/>
+</buff>
+<buff id="DamageResistatenMeleeAndBulletLvl2Hard" duration="30" max_stacks="1" >	
+	<property name="MeleeDamageReduction" value_add="0.95"/>
+	<property name="BulletDamageReduction" value_add="0.95"/>
+	<OnGain>
+		<AddHealthPercent value="1.0"/>
+	</OnGain>
+    <hud_icon val="potion_timer_resistance"/>
+</buff>
+<buff id="DamageResistatenMeleeAndBulletHard" duration="0" max_stacks="1" >	
+    <OnGain>
+		<ApplyBuff id="DamageResistatenMeleeAndBulletLvl1Hard" />
+    </OnGain>
+    <OnGain>
+        <require>
+			<SkillReq id="BoostsExtender"/>			
+		</require>
+        <RemoveBuff id="DamageResistatenMeleeAndBulletLvl1Hard" />
+        <ApplyBuff id="DamageResistatenMeleeAndBulletLvl2Hard" />
+	</OnGain>
+</buff>
+
+<buff id="DamageResistatenMeleeAndBulletBtzLvl1" duration="45" max_stacks="1" >	
+	<property name="MeleeDamageReduction" value_add="0.5"/>
+	<property name="BulletDamageReduction" value_add="0.5"/>
+	<OnGain>
+		<AddHealthPercent value="1.0"/>
+	</OnGain>
+    <hud_icon val="potion_timer_resistance"/>
+</buff>
+<buff id="DamageResistatenMeleeAndBulletBtzLvl2" duration="90" max_stacks="1" >	
+	<property name="MeleeDamageReduction" value_add="0.5"/>
+	<property name="BulletDamageReduction" value_add="0.5"/>
+	<OnGain>
+		<AddHealthPercent value="1.0"/>
+	</OnGain>
+    <hud_icon val="potion_timer_resistance"/>
+</buff>
+<buff id="DamageResistatenMeleeAndBulletBtz" duration="0" max_stacks="1" >	
+    <OnGain>
+		<ApplyBuff id="DamageResistatenMeleeAndBulletBtzLvl1" />
+    </OnGain>
+    <OnGain>
+        <require>
+			<SkillReq id="BoostsExtender"/>			
+		</require>
+        <RemoveBuff id="DamageResistatenMeleeAndBulletBtzLvl1" />
+        <ApplyBuff id="DamageResistatenMeleeAndBulletBtzLvl2" />
+	</OnGain>
+</buff>
+
+<buff id="DoubleDamageLvl1" duration="50">	
+	<property name="BaseDamageMul" value_add="1.0"/>	
+    <hud_icon val="potion_timer_damage"/>
+</buff>
+<buff id="DoubleDamageLvl2" duration="75">	
+	<property name="BaseDamageMul" value_add="1.0"/>	
+    <hud_icon val="potion_timer_damage"/>
+</buff>
+<buff id="DoubleDamage" duration="0">	
+    <OnGain>
+		<ApplyBuff id="DoubleDamageLvl1" />
+    </OnGain>
+    <OnGain>
+        <require>
+			<SkillReq id="BoostsExtender"/>			
+		</require>
+        <RemoveBuff id="DoubleDamageLvl1" />
+        <ApplyBuff id="DoubleDamageLvl2" />
+	</OnGain>
+</buff>
+
+<buff id="DoubleDamageLvl1Hard" duration="20">	
+	<property name="BaseDamageMul" value_add="1.0"/>	
+    <hud_icon val="potion_timer_damage"/>
+</buff>
+<buff id="DoubleDamageLvl2Hard" duration="30">	
+	<property name="BaseDamageMul" value_add="1.0"/>	
+    <hud_icon val="potion_timer_damage"/>
+</buff>
+<buff id="DoubleDamageHard" duration="0">	
+    <OnGain>
+		<ApplyBuff id="DoubleDamageLvl1Hard" />
+    </OnGain>
+    <OnGain>
+        <require>
+			<SkillReq id="BoostsExtender"/>			
+		</require>
+        <RemoveBuff id="DoubleDamageLvl1Hard" />
+        <ApplyBuff id="DoubleDamageLvl2Hard" />
+	</OnGain>
+</buff>
+
+<buff id="NightVisionAndNightDamageBoostLvl1" duration="45" max_stacks="1" >	
+	<property name="NightDamageMul" value_add="0.25"/>		
+	<varlist_timeline var="f_game_player_night_vision">
+		<key t="0" val="0"/>
+		<key t="1" val="1"/>
+		<key t_e="-2.5" val="1"/>		
+		<key t_e="0" val="0"/>
+	</varlist_timeline>
+    <hud_icon val="potion_timer_nightvision"/>
+</buff>
+<buff id="NightVisionAndNightDamageBoostLvl2" duration="90" max_stacks="1" >	
+	<property name="NightDamageMul" value_add="0.25"/>		
+	<varlist_timeline var="f_game_player_night_vision">
+		<key t="0" val="0"/>
+		<key t="1" val="1"/>
+		<key t_e="-2.5" val="1"/>		
+		<key t_e="0" val="0"/>
+	</varlist_timeline>
+    <hud_icon val="potion_timer_nightvision"/>
+</buff>
+<buff id="NightVisionAndNightDamageBoost" duration="0" max_stacks="1" >	
+    <OnGain>
+		<ApplyBuff id="NightVisionAndNightDamageBoostLvl1" />
+    </OnGain>
+    <OnGain>
+        <require>
+			<SkillReq id="BoostsExtender"/>			
+		</require>
+        <RemoveBuff id="NightVisionAndNightDamageBoostLvl1" />
+        <ApplyBuff id="NightVisionAndNightDamageBoostLvl2" />
+	</OnGain>
+</buff>
+
+<buff id="NightVisionAndNightDamageBoostLvl1Hard" duration="20" max_stacks="1" >	
+	<property name="NightDamageMul" value_add="0.25"/>		
+	<varlist_timeline var="f_game_player_night_vision">
+		<key t="0" val="0"/>
+		<key t="1" val="1"/>
+		<key t_e="-2.5" val="1"/>		
+		<key t_e="0" val="0"/>
+	</varlist_timeline>
+    <hud_icon val="potion_timer_nightvision"/>
+</buff>
+<buff id="NightVisionAndNightDamageBoostLvl2Hard" duration="30" max_stacks="1" >	
+	<property name="NightDamageMul" value_add="0.25"/>		
+	<varlist_timeline var="f_game_player_night_vision">
+		<key t="0" val="0"/>
+		<key t="1" val="1"/>
+		<key t_e="-2.5" val="1"/>		
+		<key t_e="0" val="0"/>
+	</varlist_timeline>
+    <hud_icon val="potion_timer_nightvision"/>
+</buff>
+<buff id="NightVisionAndNightDamageBoostHard" duration="0" max_stacks="1" >	
+    <OnGain>
+		<ApplyBuff id="NightVisionAndNightDamageBoostLvl1Hard" />
+    </OnGain>
+    <OnGain>
+        <require>
+			<SkillReq id="BoostsExtender"/>			
+		</require>
+        <RemoveBuff id="NightVisionAndNightDamageBoostLvl1Hard" />
+        <ApplyBuff id="NightVisionAndNightDamageBoostLvl2Hard" />
+	</OnGain>
+</buff>
+
+<buff id="InfiniteFitnesAndSpeedIncreaseLvl1" duration="45" max_stacks="1" >	
+	<property name="FitnessTimeToRegenerate" value_add="-20.0"/>
+	<property name="FitnessRegenRate" value_add="100.0"/>
+	<property name="FitnessRegenerationFactor" value_add="100.0"/>		
+	<property name="MoveBackwardMaxSpeed" value_add="2.0"/>
+	<property name="MoveForwardMaxSpeed" value_add="2.0"/>
+	<property name="MoveStrafeMaxSpeed" value_add="2.0"/>
+	<property name="MoveSprintSpeed" value_add="2.0"/>	
+	<OnGain>
+		<AddFitness value="4.0"/>		
+	</OnGain>
+    <hud_icon val="potion_timer_speed"/>
+</buff>
+<buff id="InfiniteFitnesAndSpeedIncreaseLvl2" duration="90" max_stacks="1" >	
+	<property name="FitnessTimeToRegenerate" value_add="-20.0"/>
+	<property name="FitnessRegenRate" value_add="100.0"/>
+	<property name="FitnessRegenerationFactor" value_add="100.0"/>		
+	<property name="MoveBackwardMaxSpeed" value_add="2.0"/>
+	<property name="MoveForwardMaxSpeed" value_add="2.0"/>
+	<property name="MoveStrafeMaxSpeed" value_add="2.0"/>
+	<property name="MoveSprintSpeed" value_add="2.0"/>	
+	<OnGain>
+		<AddFitness value="4.0"/>		
+	</OnGain>
+    <hud_icon val="potion_timer_speed"/>
+</buff>
+<buff id="InfiniteFitnesAndSpeedIncrease" duration="0" max_stacks="1" >	
+    <OnGain>
+		<ApplyBuff id="InfiniteFitnesAndSpeedIncreaseLvl1" />
+    </OnGain>
+    <OnGain>
+        <require>
+			<SkillReq id="BoostsExtender"/>			
+		</require>
+        <RemoveBuff id="InfiniteFitnesAndSpeedIncreaseLvl1" />
+        <ApplyBuff id="InfiniteFitnesAndSpeedIncreaseLvl2" />
+	</OnGain>
+</buff>
+
+<buff id="InfiniteFitnesAndSpeedIncreaseLvl1Hard" duration="20" max_stacks="1" >	
+	<property name="FitnessTimeToRegenerate" value_add="-20.0"/>
+	<property name="FitnessRegenRate" value_add="100.0"/>
+	<property name="FitnessRegenerationFactor" value_add="100.0"/>		
+	<property name="MoveBackwardMaxSpeed" value_add="2.0"/>
+	<property name="MoveForwardMaxSpeed" value_add="2.0"/>
+	<property name="MoveStrafeMaxSpeed" value_add="2.0"/>
+	<property name="MoveSprintSpeed" value_add="2.0"/>	
+	<OnGain>
+		<AddFitness value="4.0"/>		
+	</OnGain>
+    <hud_icon val="potion_timer_speed"/>
+</buff>
+<buff id="InfiniteFitnesAndSpeedIncreaseLvl2Hard" duration="30" max_stacks="1" >	
+	<property name="FitnessTimeToRegenerate" value_add="-20.0"/>
+	<property name="FitnessRegenRate" value_add="100.0"/>
+	<property name="FitnessRegenerationFactor" value_add="100.0"/>		
+	<property name="MoveBackwardMaxSpeed" value_add="2.0"/>
+	<property name="MoveForwardMaxSpeed" value_add="2.0"/>
+	<property name="MoveStrafeMaxSpeed" value_add="2.0"/>
+	<property name="MoveSprintSpeed" value_add="2.0"/>	
+	<OnGain>
+		<AddFitness value="4.0"/>		
+	</OnGain>
+    <hud_icon val="potion_timer_speed"/>
+</buff>
+<buff id="InfiniteFitnesAndSpeedIncreaseHard" duration="0" max_stacks="1" >	
+    <OnGain>
+		<ApplyBuff id="InfiniteFitnesAndSpeedIncreaseLvl1Hard" />
+    </OnGain>
+    <OnGain>
+        <require>
+			<SkillReq id="BoostsExtender"/>			
+		</require>
+        <RemoveBuff id="InfiniteFitnesAndSpeedIncreaseLvl1Hard" />
+        <ApplyBuff id="InfiniteFitnesAndSpeedIncreaseLvl2Hard" />
+	</OnGain>
+</buff>
+
+<buff id="InfiniteFitnesAndSpeedIncreaseBtzLvl1" duration="45" max_stacks="1" >	
+	<property name="FitnessTimeToRegenerate" value_add="-20.0"/>
+	<property name="FitnessRegenRate" value_add="100.0"/>
+	<property name="FitnessRegenerationFactor" value_add="100.0"/>		
+	<property name="MoveBackwardMaxSpeed" value_add="1.0"/>
+	<property name="MoveForwardMaxSpeed" value_add="1.0"/>
+	<property name="MoveStrafeMaxSpeed" value_add="1.0"/>
+	<property name="MoveSprintSpeed" value_add="1.0"/>	
+	<OnGain>
+		<AddFitness value="4.0"/>		
+	</OnGain>
+    <hud_icon val="potion_timer_speed"/>
+</buff>
+<buff id="InfiniteFitnesAndSpeedIncreaseBtzLvl2" duration="90" max_stacks="1" >	
+	<property name="FitnessTimeToRegenerate" value_add="-20.0"/>
+	<property name="FitnessRegenRate" value_add="100.0"/>
+	<property name="FitnessRegenerationFactor" value_add="100.0"/>		
+	<property name="MoveBackwardMaxSpeed" value_add="1.0"/>
+	<property name="MoveForwardMaxSpeed" value_add="1.0"/>
+	<property name="MoveStrafeMaxSpeed" value_add="1.0"/>
+	<property name="MoveSprintSpeed" value_add="1.0"/>	
+	<OnGain>
+		<AddFitness value="4.0"/>		
+	</OnGain>
+    <hud_icon val="potion_timer_speed"/>
+</buff>
+<buff id="InfiniteFitnesAndSpeedIncreaseBtz" duration="0" max_stacks="1" >	
+    <OnGain>
+		<ApplyBuff id="InfiniteFitnesAndSpeedIncreaseBtzLvl1" />
+    </OnGain>
+    <OnGain>
+        <require>
+			<SkillReq id="BoostsExtender"/>			
+		</require>
+        <RemoveBuff id="InfiniteFitnesAndSpeedIncreaseBtzLvl1" />
+        <ApplyBuff id="InfiniteFitnesAndSpeedIncreaseBtzLvl2" />
+	</OnGain>
+</buff>
+
+
+<buff id="InfiniteStaminaLvl1" duration="45">	
+	<property name="StaminaTimeToRegenerate" value_add="-20.0"/>
+	<property name="StaminaRegeneration" value_add="100.0"/>
+	<property name="StaminaRegenerationFactor" value_add="100.0"/>
+	<OnGain>
+		<AddStamina value="4.0"/>		
+	</OnGain>
+    <hud_icon val="potion_timer_stamina"/>
+</buff>
+<buff id="InfiniteStaminaLvl2" duration="90">	
+	<property name="StaminaTimeToRegenerate" value_add="-20.0"/>
+	<property name="StaminaRegeneration" value_add="100.0"/>
+	<property name="StaminaRegenerationFactor" value_add="100.0"/>
+	<OnGain>
+		<AddStamina value="4.0"/>		
+	</OnGain>
+    <hud_icon val="potion_timer_stamina"/>
+</buff>
+<buff id="InfiniteStamina" duration="0">	
+	<OnGain>
+		<ApplyBuff id="InfiniteStaminaLvl1" />
+    </OnGain>
+    <OnGain>
+        <require>
+			<SkillReq id="BoostsExtender"/>			
+		</require>
+        <RemoveBuff id="InfiniteStaminaLvl1" />
+        <ApplyBuff id="InfiniteStaminaLvl2" />
+	</OnGain>
+</buff>
+
+<buff id="InfiniteStaminaLvl1Hard" duration="20">	
+	<property name="StaminaTimeToRegenerate" value_add="-20.0"/>
+	<property name="StaminaRegeneration" value_add="100.0"/>
+	<property name="StaminaRegenerationFactor" value_add="100.0"/>
+	<OnGain>
+		<AddStamina value="4.0"/>		
+	</OnGain>
+    <hud_icon val="potion_timer_stamina"/>
+</buff>
+<buff id="InfiniteStaminaLvl2Hard" duration="30">	
+	<property name="StaminaTimeToRegenerate" value_add="-20.0"/>
+	<property name="StaminaRegeneration" value_add="100.0"/>
+	<property name="StaminaRegenerationFactor" value_add="100.0"/>
+	<OnGain>
+		<AddStamina value="4.0"/>		
+	</OnGain>
+    <hud_icon val="potion_timer_stamina"/>
+</buff>
+<buff id="InfiniteStaminaHard" duration="0">	
+	<OnGain>
+		<ApplyBuff id="InfiniteStaminaLvl1Hard" />
+    </OnGain>
+    <OnGain>
+        <require>
+			<SkillReq id="BoostsExtender"/>			
+		</require>
+        <RemoveBuff id="InfiniteStaminaLvl1Hard" />
+        <ApplyBuff id="InfiniteStaminaLvl2Hard" />
+	</OnGain>
+</buff>
+
+<buff id="FightingActionLevel1" duration="5" max_stacks="5" apply_behaviour="ResetDuration">	
+	<OnMaxStack>		
+		<ApplyBuff id="InfiniteStamina"/>		
+	</OnMaxStack>
+</buff>
+
+<buff id="ConsecutiveBlowDamageFactor" duration="999999" max_stacks="10">
+	<property name="ConsecutiveBlowDamageFactor" value_add="0.05"/>
+</buff>
+
+<buff id="ConsecutiveBlow" duration="0">	
+	<OnGain>
+		<require>
+			<SkillReq id="Overpowered2b"/>			
+		</require>	
+		<ApplyBuff id="ConsecutiveBlowDamageFactor"/>
+	</OnGain>	
+</buff>
+
+<buff id="FighterXPFactor" duration="10" max_stacks="5" apply_behaviour="ResetDuration">>
+	<property name="FighterXPFactor" value_add="0.1"/>
+</buff>
+
+<buff id="FighterXPFactorInc" duration="0">	
+	<OnGain>
+		<require>
+			<SkillReq id="KillFrenzy"/>			
+		</require>			
+		<ApplyBuff id="FighterXPFactor"/>
+	</OnGain>
+</buff>
+
+<buff id="RemoveFightingAction" duration="0">			
+	<OnGain>
+		<RemoveBuff id="FightingActionLevel1"/>		
+	</OnGain>
+</buff>
+
+
+<buff id="Mixture_WQ_Invert" duration="30">
+	<OnGain>
+		<AddControlsInvert value="30.0"/>
+	</OnGain>
+</buff>
+
+<buff id="Mixture_WQ_SloMo" duration="30">
+	<OnGain>
+		<AddMovementSlowDown value="30.0"/>
+	</OnGain>
+</buff>
+
+<buff id="Mixture_WQ_Rot" duration="30">
+	<OnGain>
+		<AddCameraRotate value="30.0"/>
+	</OnGain>
+</buff>
+
+<buff id="Cloak" duration="30">
+	<OnGain>
+		<AddCloakIgnoreAggression value="30.0"/>
+	</OnGain>
+</buff>
+
+<buff id="AdrenalineRushLevel1" duration="1">
+	<property name="AutoRamEnabled" value_add="1.0"/>
+	<OnGain>
+		<AddFitness value="0.1"/>
+	</OnGain>
+</buff>
+
+<buff id="AdrenalineRushLevel2" duration="2">
+	<property name="AutoRamEnabled" value_add="1.0"/>
+	<OnGain>
+		<AddFitness value="0.1"/>
+	</OnGain>
+</buff>
+    
+<buff id="FocusLevel1" duration="5">
+	<property name="FuryFreezeRadius" value_add="11"/>
+</buff>
+
+<buff id="HealingWater" duration="0">
+    <OnGain>
+        <AddHealthPercent value="10"/>
+    </OnGain>
+</buff>
+
+<buff id="Ghul" duration="0">	
+    <OnGain>
+		<ApplyBuff id="DoubleDamage" />
+		<ApplyBuff id="InfiniteStamina" />
+		<ApplyBuff id="InfiniteFitnesAndSpeedIncrease" />
+		<ApplyBuff id="DamageResistatenMeleeAndBullet" />
+    </OnGain>
+</buff>
+
+<buff id="GhulHard" duration="0">	
+    <OnGain>
+		<ApplyBuff id="DoubleDamageHard" />
+		<ApplyBuff id="InfiniteStaminaHard" />
+		<ApplyBuff id="InfiniteFitnesAndSpeedIncreaseHard" />
+		<ApplyBuff id="DamageResistatenMeleeAndBulletHard" />
+    </OnGain>
+</buff>

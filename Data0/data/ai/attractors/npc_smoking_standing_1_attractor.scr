@@ -1,0 +1,37 @@
+!include("ai_data.def")
+!include("ai_timing.def")
+!include("ai_goals.def")
+
+ShortHeadRotation()
+StrongAttractor()
+InteractionDist(3)
+FarInteractionDist(3)
+SnapDist(2)
+ReleaseDist(3)
+InteractionLevel(3)
+User("Man")
+
+Usage("ENCOUNTER")
+Usage("VIRTUAL_ATTRACTOR")
+Usage("AI_USAGE_SYSTEM")
+
+DisableInteractAnim(TO_INTERACT)
+DisableInteractAnim(FROM_INTERACT)
+DisableInteractAnim(ALL_DIALOG)
+
+Slot("", 1, 1, 1, 0, 0, 0, 0, 0, 1, 1.5)
+{
+    LockPosition()
+    DynamicMesh("cigarette_c.msh", "R_HandHolder", "cigarette_c", "", 1)
+	{
+		DynamicFXToMesh("cigatettesmoke_sequence.fx", "ofx_lp", 0, 0, -0.01, 1, 0, 0)
+	}
+    AiTypeDataSet("human")
+    {
+        Data("idle:standing:none:stand:none:none:none", -2, "m_npc_smoking_standing_1_Idle", -1, 1)
+        Data("idle:standing:none:special:none:none:none", -2, "m_npc_smoking_standing_1_Special", -1, 1)
+        Data("idle:standing:none:idle:none:none:none", -2, "m_npc_smoking_standing_1_Idle", -1, 1)
+        Data("idle:standing:none:interact:none:none:none", -2, "m_npc_smoking_standing_1_React", -1, 1)
+    }
+}
+

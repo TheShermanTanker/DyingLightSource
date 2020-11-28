@@ -1,0 +1,7 @@
+Description("f_blur_radial_center_x", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.0;x:1.0;s:0.01;c:Postprocess Radial Blur;d:Center X;")
+Description("f_blur_radial_center_y", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.0;x:1.0;s:0.01;c:Postprocess Radial Blur;d:Center Y;")
+Description("f_blur_radial_mask_bias", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:-1.0;x:1.0;s:0.01;c:Postprocess Radial Blur;d:Mask bias;")
+Description("f_blur_radial_mask_scale", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.0;x:10.0;s:0.01;c:Postprocess Radial Blur;d:Mask scale;")
+Description("f_blur_radial_mask_opacity", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.0;x:1.0;s:0.01;c:Postprocess Radial Blur;d:Mask opacity;")
+Description("f_blur_radial_power", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.0;x:1.0;s:0.01;c:Postprocess Radial Blur;d:Power;")
+Description("f_blur_radial_range", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.0;x:1.0;s:0.01;c:Postprocess Radial Blur;d:Range;")

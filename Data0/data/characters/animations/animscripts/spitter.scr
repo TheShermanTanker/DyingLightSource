@@ -1,0 +1,2570 @@
+!include("events.def")
+!include("anim_actions.def")
+!include("human_vis_events.def")
+!include("vessel_vis_events.def")
+!include("human_sound_events.def")
+!include("vessel_sound_events.def")
+!include("game_volume_source.def")
+!include("anim_actions.def")
+!include("ai_timing.def")
+
+ ////////////////
+ /// cutscene ///
+ ////////////////
+SeqTrack("spitter_presentation_Spitter_00", "spitter_presentation_Spitter_00.anm2", 0, 280, 30, 1, 0.5) 
+
+ ////////////////
+
+$ATTACK_TRIPLE_SOUND (s, "zombie_spitter_attack_triple_XX.wav")
+$RECHARGE_SPIT_SOUND (s, "zombie_spitter_recharge_XX.wav")
+$ATTACK_GRENADE_SPIT_SOUND (s, "zombie_spitter_attack_grenade_XX.wav")
+$PUSH_SPIT_SOUND (s, "zombie_spitter_push_XX.wav")
+
+ /////////////
+ /// idles ///
+ /////////////
+
+ SeqTrack("spitter_idle_01", 	        "spitter_idle_01.anm2"		, 0, 195, 31, 0, 0.5)  //no ik
+{
+	Event(7, VIS_EVENT_STEP_RIGHT, -1)
+	Event(24, VIS_EVENT_STEP_LEFT, -1)
+	Event(33, VIS_EVENT_STEP_RIGHT, -1)
+	Event(44, VIS_EVENT_STEP_LEFT, -1)
+}
+
+ SeqTrack("spitter_idle_02", 	        "spitter_idle_02.anm2"		, 0, 135, 30, 0, 0.5)  //no ik
+{
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(1, VIS_EVENT_STEP_RIGHT, -1)
+}
+////////////////
+
+
+ /////////////
+ ///Run new///
+ /////////////
+SeqTrack("spitter_run_loop_01", 	        "spitter_run_loop_01.anm2"		, 0, 65, 34, 1, 0.5)
+{
+    Event(10, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(35, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(60, EVENT_APPLY_RANGED_DAMAGE, -1)
+
+	Event(12, VIS_EVENT_STEP_RIGHT, -1)
+	Event(23, VIS_EVENT_STEP_LEFT, -1)
+	Event(34, VIS_EVENT_STEP_RIGHT, -1)
+	Event(45, VIS_EVENT_STEP_LEFT, -1)
+	Event(55, VIS_EVENT_STEP_RIGHT, -1)
+	Event(65, VIS_EVENT_STEP_LEFT, -1)
+}
+
+
+SeqTrack("spitter_run_start_180R", 	  "spitter_run_start_180R.anm2"    , 0, 50, 30, 1, 0.4)//no ik
+{
+    Event(0, EVENT_DODGE_ENABLED, -1)
+	Event(11, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(39, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(27, VIS_EVENT_STEP_RIGHT, -1)
+	Event(39, VIS_EVENT_STEP_LEFT, -1)
+	Event(48, VIS_EVENT_STEP_RIGHT, -1)
+    Event(49, VIS_EVENT_STOPANIM, -1)
+ }
+SeqTrack("spitter_run_start_180L", 	  "spitter_run_start_180L.anm2"    , 0, 70, 30, 1, 0.4)//no ik
+{
+    Event(0, EVENT_DODGE_ENABLED, -1)
+	Event(12, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(40, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(32, VIS_EVENT_STEP_LEFT, -1)
+	Event(43, VIS_EVENT_STEP_RIGHT, -1)
+	Event(53, VIS_EVENT_STEP_LEFT, -1)
+    Event(44, VIS_EVENT_STOPANIM, -1)
+    
+}
+SeqTrack("spitter_run_start_front_01",   "spitter_run_start_front_01.anm2"    , 0, 50, 30, 1, 0.4) //no ik
+{
+    Event(0, EVENT_DODGE_ENABLED, -1)
+    Event(13, VIS_EVENT_STEP_LEFT, -1)
+	Event(7, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(25, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(29, VIS_EVENT_STEP_RIGHT, -1)
+	Event(40, VIS_EVENT_STEP_LEFT, -1)
+    Event(30, VIS_EVENT_STOPANIM, -1)
+}
+SeqTrack("spitter_run_start_90L",   "spitter_run_start_90L.anm2"     , 0, 55, 30, 1, 0.4)  //no ik
+{
+    Event(0, EVENT_DODGE_ENABLED, -1)
+    Event(8, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(22, VIS_EVENT_STEP_LEFT, -1)
+    Event(33, VIS_EVENT_STEP_RIGHT, -1)
+    Event(34, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(44, VIS_EVENT_STEP_LEFT, -1)
+    Event(45, VIS_EVENT_STOPANIM, -1)
+    Event(55, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("spitter_run_start_90R",    "spitter_run_start_90R.anm2"    , 0, 60, 30, 1, 0.4)//no ik
+{
+    Event(0, EVENT_DODGE_ENABLED, -1)
+    Event(31, VIS_EVENT_STEP_LEFT, -1)
+	Event(6, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(30, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(41, VIS_EVENT_STEP_RIGHT, -1)
+	Event(52, VIS_EVENT_STEP_LEFT, -1)
+    Event(53, VIS_EVENT_STOPANIM, -1)
+}
+
+
+/////////////
+//run stops//
+/////////////
+
+SeqTrack("spitter_run_stop_front_01",	 "spitter_run_stop_front_01.anm2", 8 , 65 , 33 , 1, 0.35 )
+{
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(3, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(3, VIS_EVENT_STEP_RIGHT, -1)
+    Event(5, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(11, VIS_EVENT_STEP_LEFT, -1)
+    Event(11, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(15, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(25, VIS_EVENT_STEP_RIGHT, -1)
+    Event(25, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(25, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(25, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(36, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(36, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(38, VIS_EVENT_STEP_LEFT, -1)
+    Event(38, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(41, VIS_EVENT_STOPANIM, -1)
+}
+
+
+SeqTrack("spitter_run_stop_180L",	 "spitter_run_stop_180L.anm2", 0 , 94 , 30 , 1, 0.25 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(1, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(11, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(11, VIS_EVENT_STEP_RIGHT, -1)
+    Event(13, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(23, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(23, VIS_EVENT_STEP_LEFT, -1)
+    Event(27, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(27, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(28, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(36, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(36, VIS_EVENT_STEP_RIGHT, -1)
+    Event(40, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(41, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(48, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(48, VIS_EVENT_STEP_LEFT, -1)
+    Event(54, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(55, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(61, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(61, VIS_EVENT_STEP_RIGHT, -1)
+    Event(73, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(73, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(73, VIS_EVENT_STEP_LEFT, -1)
+    Event(75, VIS_EVENT_STOPANIM, -1)
+}
+
+
+SeqTrack("spitter_run_stop_180R",	 "spitter_run_stop_180R.anm2", 0 , 90 , 30 , 1, 0.35 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)
+    Event(2, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(11, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(11, VIS_EVENT_STEP_LEFT, -1)
+    Event(13, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(22, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(22, VIS_EVENT_STEP_RIGHT, -1)
+    Event(23, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(23, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(31, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(32, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(32, VIS_EVENT_STEP_LEFT, -1)
+    Event(35, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(38, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(40, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(40, VIS_EVENT_STEP_RIGHT, -1)
+    Event(44, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(49, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(54, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(54, VIS_EVENT_STEP_LEFT, -1)
+    Event(61, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(69, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(70, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(70, VIS_EVENT_STEP_RIGHT, -1)
+    Event(70, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(70, VIS_EVENT_STEP_LEFT, -1)
+    Event(75, VIS_EVENT_STOPANIM, -1)
+}
+
+
+
+SeqTrack("spitter_run_stop_90R",	 "spitter_run_stop_90R.anm2", 0 , 76 , 30 , 1, 0.25 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(1, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(1, VIS_EVENT_STEP_LEFT, -1)
+    Event(2, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(12, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(12, VIS_EVENT_STEP_RIGHT, -1)
+    Event(13, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(22, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(23, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(23, VIS_EVENT_STEP_LEFT, -1)
+    Event(24, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(28, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(30, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(30, VIS_EVENT_STEP_RIGHT, -1)
+    Event(33, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(36, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(36, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(44, VIS_EVENT_STEP_LEFT, -1)
+    Event(44, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(49, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(59, VIS_EVENT_STOPANIM, -1)
+    Event(65, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(65, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+SeqTrack("spitter_run_stop_90L",	 "spitter_run_stop_90L.anm2", 0 , 75 , 30 , 1, 0.35 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(1, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(11, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(11, VIS_EVENT_STEP_RIGHT, -1)
+    Event(12, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(17, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(20, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(20, VIS_EVENT_STEP_LEFT, -1)
+    Event(21, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(22, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(26, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(29, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(29, VIS_EVENT_STEP_RIGHT, -1)
+    Event(35, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(35, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(42, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(42, VIS_EVENT_STEP_LEFT, -1)
+    Event(50, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(54, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(54, VIS_EVENT_STEP_RIGHT, -1)
+    Event(56, VIS_EVENT_STOPANIM, -1)
+}
+	
+	
+///////////////////
+/// strafe new ////
+///////////////////
+SeqTrack("spitter_strafe_left_loop", 		    "spitter_strafe_left_loop.anm2"		, 0, 47, 34, 0, 0.25)  //no ik
+{
+    Event(5, EVENT_SPITTER_SPIT, -1)
+    Event(10, EVENT_SPITTER_SPIT, -1)
+    Event(15, EVENT_SPITTER_SPIT, -1)
+    Event(20, EVENT_SPITTER_SPIT, -1)
+    Event(25, EVENT_SPITTER_SPIT, -1)
+    Event(30, EVENT_SPITTER_SPIT, -1)
+    Event(35, EVENT_SPITTER_SPIT, -1)
+    Event(40, EVENT_SPITTER_SPIT, -1)
+    Event(45, EVENT_SPITTER_SPIT, -1)
+    
+    Event(3, VIS_EVENT_STEP_LEFT, -1)
+    Event(14, VIS_EVENT_STEP_RIGHT, -1)
+    Event(24, VIS_EVENT_STEP_LEFT, -1)
+    Event(37, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+SeqTrack("spitter_strafe_Right_loop", 		    "spitter_strafe_Right_loop.anm2"		, 0, 42, 34, 0, 0.25) // no ik
+{
+    Event(5, EVENT_SPITTER_SPIT, -1)
+    Event(10, EVENT_SPITTER_SPIT, -1)
+    Event(15, EVENT_SPITTER_SPIT, -1)
+    Event(20, EVENT_SPITTER_SPIT, -1)
+    Event(25, EVENT_SPITTER_SPIT, -1)
+    Event(30, EVENT_SPITTER_SPIT, -1)
+    Event(35, EVENT_SPITTER_SPIT, -1)
+    Event(40, EVENT_SPITTER_SPIT, -1)
+    
+    Event(2, VIS_EVENT_STEP_RIGHT, -1)
+    Event(13, VIS_EVENT_STEP_LEFT, -1)
+    Event(22, VIS_EVENT_STEP_RIGHT, -1)
+    Event(35, VIS_EVENT_STEP_LEFT, -1)
+}
+
+SeqTrack("spitter_strafe_back_loop", "spitter_strafe_back_loop.anm2", 0, 54, 30, 1, 0.5)
+{
+    Event(5, EVENT_SPITTER_SPIT, -1)
+    Event(10, EVENT_SPITTER_SPIT, -1)
+    Event(15, EVENT_SPITTER_SPIT, -1)
+    Event(20, EVENT_SPITTER_SPIT, -1)
+    Event(25, EVENT_SPITTER_SPIT, -1)
+    Event(30, EVENT_SPITTER_SPIT, -1)
+    Event(35, EVENT_SPITTER_SPIT, -1)
+    Event(40, EVENT_SPITTER_SPIT, -1)
+    Event(45, EVENT_SPITTER_SPIT, -1)
+    Event(50, EVENT_SPITTER_SPIT, -1)
+
+    Event( 0 , VIS_EVENT_IK_ENABLE, -1 )
+    Event( 0 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event( 2 , VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+    Event( 6 , VIS_EVENT_STEP_RIGHT, -1 )
+    Event( 6 , VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+    Event( 9 , VIS_EVENT_RIGHT_FOOT_LIFT, -1 )
+    Event( 15 , VIS_EVENT_STEP_LEFT, -1 )
+    Event( 15 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event( 18 , VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+    Event( 22 , VIS_EVENT_STEP_RIGHT, -1 )
+    Event( 22 , VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+    Event( 25 , VIS_EVENT_RIGHT_FOOT_LIFT, -1 )
+    Event( 35 , VIS_EVENT_STEP_LEFT, -1 )
+    Event( 35 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event( 39 , VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+    Event( 42 , VIS_EVENT_STEP_RIGHT, -1 )
+    Event( 42 , VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+    Event( 46 , VIS_EVENT_RIGHT_FOOT_LIFT, -1 )
+    Event( 53 , VIS_EVENT_STEP_LEFT, -1 )
+    Event( 53 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event( 54 , VIS_EVENT_STOPANIM, -1 )
+}
+
+//////////////////
+
+///////////////////
+/// attack new ////
+///////////////////
+
+
+SeqTrack("spitter_spit_attack_x3_01", "spitter_spit_attack_x3_01.anm2"	, 0, 97, 45, 1, 0.3)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(6, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(23, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(26, SOUND_EVENT_SPIT, -1)
+    Event(27, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(30, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(38, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(41, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(47, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(49, SOUND_EVENT_SPIT, -1)
+    Event(50, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(51, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(56, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(61, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(68, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(70, SOUND_EVENT_SPIT, -1)
+    Event(71, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(72, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(81, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(87, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(89, VIS_EVENT_STOPANIM, -1)
+    Event(92, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(96, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+
+SeqTrack("spitter_spit_attack_01", "spitter_spit_attack_01.anm2"	, 0, 48, 45, 1, 0.3)  //no ik
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(8, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(22, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(24, SOUND_EVENT_SPIT, -1)
+    Event(26, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(31, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(39, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(44, VIS_EVENT_STOPANIM, -1)
+    Event(45, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(47, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+SeqTrack("spitter_spit_attack_empty", "spitter_spit_attack_empty.anm2"	, 0, 49, 45, 1, 0.3) //no ik
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(22, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(45, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(8, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(31, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(39, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(49, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(24, SOUND_EVENT_SPIT, -1)
+    Event(26, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(45, VIS_EVENT_STOPANIM, -1)
+}
+/////////////
+
+SeqTrack("spitter_initiation_01", 	  "spitter_initiation_01.anm2"    , 0, 350, 30, 1, 0.4)
+{
+    Event(12, VIS_EVENT_STEP_LEFT, -1)
+    Event(26, VIS_EVENT_STEP_RIGHT, -1)
+	Event(36, VIS_EVENT_STEP_LEFT, -1)
+    Event(50, VIS_EVENT_STEP_RIGHT, -1)
+	Event(60, VIS_EVENT_STEP_LEFT, -1)
+    Event(74, VIS_EVENT_STEP_RIGHT, -1)
+	Event(85, VIS_EVENT_STEP_LEFT, -1)
+    Event(99, VIS_EVENT_STEP_RIGHT, -1)
+	Event(110, VIS_EVENT_STEP_LEFT, -1)
+    Event(142, VIS_EVENT_STEP_RIGHT, -1)
+	Event(143, VIS_EVENT_STEP_LEFT, -1)
+    Event(165, VIS_EVENT_STEP_RIGHT, -1)
+	Event(171, VIS_EVENT_STEP_LEFT, -1)
+    Event(184, VIS_EVENT_STEP_RIGHT, -1)
+	Event(196, VIS_EVENT_STEP_LEFT, -1)
+    Event(214, VIS_EVENT_STEP_RIGHT, -1)
+	Event(235, VIS_EVENT_STEP_LEFT, -1)
+    Event(243, VIS_EVENT_STEP_RIGHT, -1)
+	Event(267, VIS_EVENT_STEP_LEFT, -1)
+    Event(274, VIS_EVENT_STEP_RIGHT, -1)
+	Event(284, VIS_EVENT_STEP_LEFT, -1)
+    Event(302, VIS_EVENT_STEP_RIGHT, -1)
+	Event(316, VIS_EVENT_STEP_LEFT, -1)
+    Event(329, VIS_EVENT_STEP_RIGHT, -1)
+	Event(330, VIS_EVENT_STOPANIM, -1)
+}
+SeqTrack("spitter_initiation_van", 	  "spitter_initiation_van.anm2"    , 0, 62, 30, 1, 0.1)
+{
+    Event(53, VIS_EVENT_STOPANIM, -1)
+}
+SeqTrack("spitter_pit_initiation", 	  "spitter_initiation_02.anm2"    , 0, 100, 30, 1, 0.1)
+{
+    Event(86, VIS_EVENT_STOPANIM, -1)
+}
+
+SeqTrack("spitter_run_back_left", 	  "fighter_run_back_left.anm2"    , 0, 50, 30, 1, 0.3)
+{
+    Event(0, EVENT_DODGE_ENABLED, -1)
+    Event(20, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(22, VIS_EVENT_STEP_LEFT, -1)
+    Event(40, VIS_EVENT_STEP_RIGHT, -1)
+    Event(42, VIS_EVENT_STOPANIM, -1)
+    Event(50, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("spitter_run_back_right", 	  "fighter_run_back_right.anm2"    , 6, 59, 30, 1, 0.3)
+{
+    Event(0, EVENT_DODGE_ENABLED, -1)
+    Event(26, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(26, VIS_EVENT_STEP_RIGHT, -1)
+    Event(43, VIS_EVENT_STEP_LEFT, -1)
+    Event(45, VIS_EVENT_STOPANIM, -1)
+    Event(53, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("spitter_run_front_start",   "fighter_run_front_start.anm2"    , 0, 31, 30, 1, 0.3)
+{
+    Event(0, EVENT_DODGE_ENABLED, -1)
+    Event(7, VIS_EVENT_STEP_LEFT, -1)
+    Event(15, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(26, VIS_EVENT_STEP_RIGHT, -1)
+    Event(28, VIS_EVENT_STOPANIM, -1)
+}
+SeqTrack("spitter_run_left_start",   "fighter_run_left_start.anm2"     , 1, 50, 30, 1, 0.3)
+{
+    Event(0, EVENT_DODGE_ENABLED, -1)
+    Event(29, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(20, VIS_EVENT_STEP_RIGHT, -1)
+    Event(34, VIS_EVENT_STEP_LEFT, -1)
+    Event(40, VIS_EVENT_STOPANIM, -1)
+    Event(49, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("spitter_run_right_start",    "fighter_run_right_start.anm2"    , 0, 44, 30, 1, 0.3)
+{
+    Event(0, EVENT_DODGE_ENABLED, -1)
+    Event(18, VIS_EVENT_STEP_LEFT, -1)
+    Event(19, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(35, VIS_EVENT_STEP_RIGHT, -1)
+    Event(38, VIS_EVENT_STOPANIM, -1)
+    Event(44, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("spitter_run_front_stop", 	  "fighter_run_front_stop.anm2"    , 0, 59, 30, 1, 0.3)
+{
+    Event(0, EVENT_DODGE_ENABLED, -1)
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(10, VIS_EVENT_STEP_RIGHT, -1)
+    Event(11, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(21, VIS_EVENT_STEP_LEFT, -1)
+    Event(35, VIS_EVENT_STEP_RIGHT, -1)
+    Event(48, VIS_EVENT_STEP_LEFT, -1)
+}
+
+SeqTrack("spitter_run_loop", 	      "spitter_run_01.anm2"           , 0, 65, 30, 1, 0.3)
+{
+    Event(0, EVENT_DODGE_ENABLED, -1)
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(1, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(13, VIS_EVENT_STEP_RIGHT, -1)
+    Event(13, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(14, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(22, VIS_EVENT_STEP_LEFT, -1)
+    Event(22, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(23, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(35, VIS_EVENT_STEP_RIGHT, -1)
+    Event(35, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(36, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(45, VIS_EVENT_STEP_LEFT, -1)
+    Event(45, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(46, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(57, VIS_EVENT_STEP_RIGHT, -1)
+    Event(57, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(58, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(65, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+
+
+SeqTrack("spitter_triple_spit_v01", "spitter_triple_spit_v01.anm2"	, 0, 140, 30, 1, 0.5)
+{
+    Event(20, SOUND_EVENT_SPIT, -1)
+    Event(25, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(47, SOUND_EVENT_SPIT, -1)
+    Event(52, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(76, SOUND_EVENT_SPIT, -1)
+    Event(81, EVENT_APPLY_RANGED_DAMAGE, -1)
+}
+
+SeqTrack("spitter_single_spit_v01", "spitter_triple_spit_v01.anm2"	, 0, 35, 30, 1, 0.5)
+{
+    Event(20, SOUND_EVENT_SPIT, -1)
+    Event(25, EVENT_APPLY_RANGED_DAMAGE, -1)
+}
+
+SeqTrack("spitter_granade_spit_v01", "spitter_granade_spit_v01.anm2"	, 0, 120, 30, 1, 0.4)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(49, 0, 0)
+    {
+        PlaySound3D(GameVolumeSource_LoudSound, ATTACK_GRENADE_SPIT_SOUND, 1, 3, "head", 1, [0, 0, 0], 1)
+    }
+    Event(85, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(112, VIS_EVENT_STOPANIM, -1)
+}
+
+SeqTrack("spitter_recharge", 	  "spitter_regeneration_v01.anm2"	    , 0, 95, 28, 1, 0.6)
+{
+    Event(1, 0, 0)
+    {
+        PlaySound3D(GameVolumeSource_LoudSound, "zombie_spitter_recharge_00.wav", 1, 3, "head", 1, [0, 0, 0], 1)
+    }
+    Event(55, EVENT_RELOADED, -1)
+}
+
+SeqTrack("spitter_perfectmurder", "m_npc_sitting_by_wall_1.anm2"	, 0, 855, 30, 1, 1)
+{
+    Event(0, EVENT_REACT_ON_HIT_DISABLED, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(49, 0, 0)
+    {
+        PlaySound3D(GameVolumeSource_LoudSound, ATTACK_GRENADE_SPIT_SOUND, 1, 3, "head", 1, [0, 0, 0], 1)
+    }
+    Event(85, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(112, VIS_EVENT_STOPANIM, -1)
+}
+
+//////////////////////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////  Deaths    /////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+//bozak
+
+SeqTrack("spitter_explosive_reaction_01", "spitter_explosive_reaction_01.anm2", 0, 99, 30, 1, 0.25)
+{
+    Event(0, EVENT_TRACK_DISABLE, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+
+	Event(1, 0, 0)
+    {
+        PlayAISound(GameVolumeSource_LoudSound, "prime_collar_before_exploding.wav", 1, 3, -1, -1)
+    }
+	Event(1, 0, 0)
+    {
+        PlayFx("bomb_led_sequence.fx", [0, 0, -1], "r_thigh", 1, [0.0, 0.0, 0.0], 1)
+    }
+
+
+	    Event(17, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+		Event(12, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(75, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+	Event(30, VIS_EVENT_LEFT_FOOT_LAND, -1)
+
+	Event(95, 0, 0)
+    {
+        PlaySound3D(GameVolumeSource_SoundPlayer, "prime_collar_exploding.wav", 1, 3, "r_thigh", 0, [0, 0, 0], 0)             
+    }
+
+
+    MustSendEvent(95, 0, 0)
+    {
+        PlayFx("leg_bomb_explosion_sequence.fx", [0, 1, 0], "spine", 0, [0, 0.0, 0.0], 0)
+    }
+	MustSendEvent(98, EVENT_EXPLODE, -1)
+    Event(99, VIS_EVENT_STOPANIM, -1)
+}
+
+SeqTrack("spitter_explosive_reaction_02", "spitter_explosive_reaction_02.anm2", 0, 96, 30, 1, 0.25)
+{
+    Event(0, EVENT_TRACK_DISABLE, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+	Event(1, 0, 0)
+    {
+        PlayAISound(GameVolumeSource_LoudSound, "prime_collar_before_exploding.wav", 1, 3, -1, -1)
+    }
+	Event(1, 0, 0)
+    {
+        PlayFx("bomb_led_sequence.fx", [0, 0, -1], "r_thigh", 1, [0.0, 0.0, 0.0], 1)
+    }
+
+	    Event(17, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+		Event(12, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(75, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+	Event(30, VIS_EVENT_LEFT_FOOT_LAND, -1)
+
+	Event(93, 0, 0)
+    {
+        PlaySound3D(GameVolumeSource_SoundPlayer, "prime_collar_exploding.wav", 1, 3, "r_thigh", 0, [0, 0, 0], 0)             
+    }
+
+
+    MustSendEvent(93, 0, 0)
+    {
+        PlayFx("leg_bomb_explosion_sequence.fx", [0, 1, 0], "spine", 0, [0, 0.0, 0.0], 0)
+    }
+	MustSendEvent(95, EVENT_EXPLODE, -1)
+    Event(96, VIS_EVENT_STOPANIM, -1)
+}
+
+
+
+//
+
+
+
+
+SeqTrack("spitter_death_right_01",	"spitter_death_right_01.anm2", 3 , 68 , 31 , 0, 0.15 )
+{
+    Event( 0 , VIS_EVENT_IK_ENABLE, -1 )
+    Event( 0 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+	Event( 4 , VIS_EVENT_IK_DISABLING_START, -1 )
+    Event( 10 , VIS_EVENT_IK_DISABLE, -1 )
+	Event(50, EVENT_FALL, -1)
+    Event( 2 , VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+}
+
+SeqTrack("spitter_electrified_loop_01","spitter_electrified_loop_01.anm2", 0 , 227 , 30 , 1, 0.3 )
+{
+
+   Event(227, VIS_EVENT_STOPANIM, -1)
+
+}
+
+SeqTrack( "spitter_death_burn_01", "Infected_death_burn_01.anm2", 0, 255, 30, 1, 0.22)
+{
+    Event(0, VIS_EVENT_IK_DISABLE, -1)
+    Event(142, EVENT_HANDLE_DEATH_EFFECT, -1)
+    Event(250, EVENT_FALL, -1)
+}
+
+SeqTrack("spitter_burn_loop_01","spitter_burn_loop_01.anm2", 0 , 239 , 30 , 1, 0.3 )
+{
+ Event(239, VIS_EVENT_STOPANIM, -1)
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////// 
+///////////////////////////////////////////HIT_REACTION/////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////
+
+
+SeqTrack("spitter_hitreaction_head_left_light_01","spitter_hitreaction_head_left_light_01.anm2", 5 , 67 , 33 , 1, 0.15 )
+
+
+
+SeqTrack("spitter_hitreaction_head_right_light_01","spitter_hitreaction_head_right_light_01.anm2", 12 , 67 , 33 , 1, 0.15 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(1, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(14, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(30, VIS_EVENT_STEP_RIGHT, -1)
+    Event(30, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(45, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(49, VIS_EVENT_STEP_LEFT, -1)
+    Event(49, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(50, VIS_EVENT_STEP_RIGHT, -1)
+    Event(50, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(52, VIS_EVENT_STOPANIM, -1)
+}
+
+SeqTrack("spitter_hitreaction_head_back_light_01","spitter_hitreaction_head_back_light_01.anm2", 4 , 45 , 30 , 1, 0.15 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)
+    Event(1, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(5, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(14, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(15, VIS_EVENT_STEP_RIGHT, -1)
+    Event(23, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(23, VIS_EVENT_STEP_LEFT, -1)
+    Event(26, VIS_EVENT_STOPANIM, -1)
+}
+
+
+
+SeqTrack("spitter_hitreaction_head_back_heavy_01","spitter_hitreaction_head_back_heavy_01.anm2", 4 , 45 , 30 , 1, 0.15 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)
+    Event(3, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(9, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(15, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(15, VIS_EVENT_STEP_RIGHT, -1)
+    Event(20, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(23, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(23, VIS_EVENT_STEP_LEFT, -1)
+    Event(25, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(25, VIS_EVENT_STEP_RIGHT, -1)
+    Event(26, VIS_EVENT_STOPANIM, -1)
+}
+
+
+SeqTrack("spitter_hitreaction_stomach_front_light_01","spitter_hitreaction_stomach_front_light_01.anm2", 2 , 30 , 30 , 1, 0.15 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)
+    Event(3, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(6, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(12, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(12, VIS_EVENT_STEP_RIGHT, -1)
+    Event(21, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(21, VIS_EVENT_STEP_LEFT, -1)
+    Event(21, VIS_EVENT_STOPANIM, -1)
+}
+
+SeqTrack("spitter_hitreaction_torso_right_heavy_01","spitter_hitreaction_torso_right_heavy_01.anm2", 2 , 46 , 30 , 1, 0.15 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)
+    Event(0, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(0, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(1, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(2, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(12, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(15, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(15, VIS_EVENT_STEP_LEFT, -1)
+    Event(16, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(30, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(30, VIS_EVENT_STEP_RIGHT, -1)
+    Event(34, VIS_EVENT_STOPANIM, -1)
+}
+
+SeqTrack("spitter_hitreaction_torso_left_heavy_01","spitter_hitreaction_torso_left_heavy_01.anm2", 0 , 42 , 30 , 0, 0.15 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)
+    Event(0, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(1, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(2, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(10, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(17, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(17, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(18, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(27, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(27, VIS_EVENT_STEP_LEFT, -1)
+    Event(27, VIS_EVENT_STEP_RIGHT, -1)
+    Event(29, VIS_EVENT_STOPANIM, -1)
+}
+
+SeqTrack("spitter_hitreaction_left_leg_hard_01","spitter_hitreaction_left_leg_hard_01.anm2", 3 , 47 , 30 , 0, 0.15 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)
+    Event(1, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(1, VIS_EVENT_IK_DISABLING_START, -1)
+    Event(2, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(3, VIS_EVENT_IK_DISABLE, -1)
+    Event(4, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(4, VIS_EVENT_STEP_RIGHT, -1)
+    Event(12, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(23, VIS_EVENT_IK_ENABLING_START, -1)
+    Event(30, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(30, VIS_EVENT_STEP_LEFT, -1)
+    Event(30, VIS_EVENT_IK_ENABLE, -1)
+    Event(32, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(32, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(32, VIS_EVENT_STEP_RIGHT, -1)
+    Event(42, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(42, VIS_EVENT_STEP_LEFT, -1)
+    Event(42, VIS_EVENT_STOPANIM, -1)
+}
+
+SeqTrack("spitter_hitreaction_right_leg_hard_01","spitter_hitreaction_right_leg_hard_01.anm2", 7 , 72 , 30 , 0, 0.15 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(2, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(2, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(3, VIS_EVENT_IK_DISABLING_START, -1)
+    Event(10, VIS_EVENT_IK_DISABLE, -1)
+    Event(35, VIS_EVENT_STEP_LEFT, -1)
+    Event(35, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(40, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(43, VIS_EVENT_IK_ENABLING_START, -1)
+    Event(46, VIS_EVENT_STEP_RIGHT, -1)
+    Event(46, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(49, VIS_EVENT_IK_ENABLE, -1)
+    Event(53, VIS_EVENT_STEP_LEFT, -1)
+    Event(53, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(55, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(62, VIS_EVENT_STEP_RIGHT, -1)
+    Event(62, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(63, VIS_EVENT_STOPANIM, -1)
+}
+
+
+
+
+SeqTrack("spitter_hitreaction_abdomen_medium_01","spitter_hitreaction_abdomen_medium_01.anm2", 4 , 36 , 30 , 0, 0.15 )
+{
+    Event(-4, VIS_EVENT_IK_ENABLE, -1)
+    Event(-4, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(-4, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)
+    Event(7, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(10, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(13, VIS_EVENT_STEP_RIGHT, -1)
+    Event(13, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(22, VIS_EVENT_STEP_LEFT, -1)
+    Event(22, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(26, VIS_EVENT_STOPANIM, -1)
+}
+
+
+
+
+
+
+
+
+SeqTrack("spitter_hit_reaction_left_counter_push_01", 		       "mzi_infected_hit_reaction_left_counter_push_01.anm2", 	                    0, 49, 30, 1, 0.11) //62
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(0, EVENT_DODGE_ENABLED, -1)
+    Event(0, EVENT_REACT_ON_HIT_DISABLED, -1)
+    Event(10, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(11, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(18, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(18, VIS_EVENT_STEP_LEFT, -1)
+    Event(21, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(25, SOUND_EVENT_ATTACK, -1)
+    Event(26, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(28, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(28, EVENT_APPLY_DAMAGE_FORWARD, -1)
+	Event(28, EVENT_APPLY_DAMAGE_LIGHT_PUSH, -1)
+    Event(29, EVENT_REACT_ON_HIT_ENABLED, -1)
+    Event(34, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(36, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(38, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(38, VIS_EVENT_STEP_LEFT, -1)
+    Event(39, VIS_EVENT_STOPANIM, -1)
+    Event(47, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(48, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+SeqTrack("spitter_hit_reaction_left_counter_push_02", 		       "mzi_infected_hit_reaction_left_counter_push_02.anm2", 	                    0, 48, 30, 1, 0.11) //63
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(0, EVENT_DODGE_ENABLED, -1)
+    Event(0, EVENT_REACT_ON_HIT_DISABLED, -1)
+    Event(3, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(13, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(22, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(22, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(22, VIS_EVENT_STEP_LEFT, -1)
+    Event(27, SOUND_EVENT_ATTACK, -1)
+    Event(28, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(30, EVENT_APPLY_DAMAGE_FORWARD, -1)
+	Event(30, EVENT_APPLY_DAMAGE_LIGHT_PUSH, -1)
+    Event(31, EVENT_REACT_ON_HIT_ENABLED, -1)
+    Event(37, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(37, VIS_EVENT_STEP_LEFT, -1)
+    Event(41, VIS_EVENT_STOPANIM, -1)
+    Event(44, VIS_EVENT_STEP_RIGHT, -1)
+    Event(45, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+
+SeqTrack("spitter_hit_reaction_left_counter_push_03", 		       "mzi_infected_hit_reaction_left_counter_push_03.anm2", 	                    0, 52, 30, 1, 0.11) //65
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(0, EVENT_DODGE_ENABLED, -1)
+    Event(0, EVENT_REACT_ON_HIT_DISABLED, -1)
+    Event(11, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(16, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(19, VIS_EVENT_STEP_LEFT, -1)
+    Event(20, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(22, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(27, SOUND_EVENT_ATTACK, -1)
+    Event(31, EVENT_APPLY_DAMAGE_FORWARD, -1)
+	Event(31, EVENT_APPLY_DAMAGE_LIGHT_PUSH, -1)
+    Event(32, EVENT_REACT_ON_HIT_ENABLED, -1)
+    Event(39, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(39, VIS_EVENT_STEP_LEFT, -1)
+    Event(43, VIS_EVENT_STOPANIM, -1)
+    Event(49, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(49, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+SeqTrack("spitter_hit_reaction_right_counter_push_01", 		   "mzi_infected_hit_reaction_right_counter_push_01.anm2", 	                    0, 47, 30, 1, 0.11) //53
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(0, EVENT_DODGE_ENABLED, -1)
+    Event(0, EVENT_REACT_ON_HIT_DISABLED, -1)
+    Event(7, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(7, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(12, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(14, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(16, SOUND_EVENT_ATTACK, -1)
+    Event(21, EVENT_APPLY_DAMAGE_FORWARD, -1)
+	Event(21, EVENT_APPLY_DAMAGE_LIGHT_PUSH, -1)
+    Event(22, EVENT_REACT_ON_HIT_ENABLED, -1)
+    Event(25, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(28, VIS_EVENT_STEP_RIGHT, -1)
+    Event(29, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(38, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(39, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(39, VIS_EVENT_STEP_LEFT, -1)
+    Event(39, VIS_EVENT_STOPANIM, -1)
+    Event(47, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+
+SeqTrack("spitter_hit_reaction_right_counter_push_02", 		   "mzi_infected_hit_reaction_right_counter_push_02.anm2", 	                    0, 58, 30, 1, 0.27)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, EVENT_DODGE_ENABLED, -1)
+    Event(0, EVENT_REACT_ON_HIT_DISABLED, -1)
+    Event(4, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(7, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(10, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(14, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(14, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(20, SOUND_EVENT_ATTACK, -1)
+    Event(24, EVENT_APPLY_DAMAGE_FORWARD, -1)
+	Event(24, EVENT_APPLY_DAMAGE_LIGHT_PUSH, -1)
+    Event(25, EVENT_REACT_ON_HIT_ENABLED, -1)
+    Event(26, VIS_EVENT_STEP_LEFT, -1)
+    Event(27, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(37, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(37, VIS_EVENT_STEP_RIGHT, -1)
+    Event(37, VIS_EVENT_STOPANIM, -1)
+    Event(38, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(46, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+SeqTrack("spitter_hit_reaction_up_counter_push_01", 		       "mzi_infected_hit_reaction_up_counter_push_01.anm2", 	                        0, 50, 30, 1, 0.11) //58
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(0, EVENT_DODGE_ENABLED, -1)
+    Event(0, EVENT_REACT_ON_HIT_DISABLED, -1)
+    Event(8, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(13, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(18, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(21, SOUND_EVENT_ATTACK, -1)
+    Event(23, VIS_EVENT_STEP_LEFT, -1)
+    Event(25, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(27, EVENT_APPLY_DAMAGE_FORWARD, -1)
+	Event(27, EVENT_APPLY_DAMAGE_LIGHT_PUSH, -1)
+    Event(28, EVENT_REACT_ON_HIT_ENABLED, -1)
+    Event(37, VIS_EVENT_STEP_RIGHT, -1)
+    Event(38, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(38, VIS_EVENT_STOPANIM, -1)
+    Event(39, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(47, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+SeqTrack("spitter_hit_reaction_up_counter_push_02", 		       "mzi_infected_hit_reaction_up_counter_push_02.anm2", 	                        0, 58, 30, 1, 0.11) //67
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(0, EVENT_DODGE_ENABLED, -1)
+    Event(0, EVENT_REACT_ON_HIT_DISABLED, -1)
+    Event(11, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(20, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(20, VIS_EVENT_STEP_RIGHT, -1)
+    Event(25, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(29, SOUND_EVENT_ATTACK, -1)
+    Event(30, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(30, VIS_EVENT_STEP_LEFT, -1)
+    Event(34, EVENT_APPLY_DAMAGE_FORWARD, -1)
+	Event(34, EVENT_APPLY_DAMAGE_LIGHT_PUSH, -1)
+    Event(35, EVENT_REACT_ON_HIT_ENABLED, -1)
+    Event(38, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(44, VIS_EVENT_STEP_RIGHT, -1)
+    Event(46, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(48, VIS_EVENT_STOPANIM, -1)
+    Event(53, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(54, VIS_EVENT_STEP_LEFT, -1)
+}
+
+SeqTrack("spitter_hit_reaction_down_counter_push_01", 		       "mzi_infected_hit_reaction_down_counter_push_01.anm2", 	                    0, 50, 30, 1, 0.11) //52
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(0, EVENT_DODGE_ENABLED, -1)
+    Event(0, EVENT_REACT_ON_HIT_DISABLED, -1)
+    Event(8, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(9, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(17, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(21, SOUND_EVENT_ATTACK, -1)
+    Event(25, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(25, VIS_EVENT_STEP_LEFT, -1)
+    Event(26, EVENT_APPLY_DAMAGE_FORWARD, -1)
+	Event(26, EVENT_APPLY_DAMAGE_LIGHT_PUSH, -1)
+    Event(27, EVENT_REACT_ON_HIT_ENABLED, -1)
+    Event(39, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(40, VIS_EVENT_STEP_RIGHT, -1)
+    Event(40, VIS_EVENT_STOPANIM, -1)
+    Event(42, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(50, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+SeqTrack("spitter_hit_reaction_down_counter_push_02", 		       "mzi_infected_hit_reaction_down_counter_push_02.anm2", 	                    0, 56, 30, 1, 0.11) //63
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, EVENT_DODGE_ENABLED, -1)
+    Event(0, EVENT_REACT_ON_HIT_DISABLED, -1)
+    Event(7, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(7, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(14, VIS_EVENT_STEP_RIGHT, -1)
+    Event(16, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(20, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(27, SOUND_EVENT_ATTACK, -1)
+    Event(28, VIS_EVENT_STEP_LEFT, -1)
+    Event(30, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(31, EVENT_APPLY_DAMAGE_FORWARD, -1)
+	Event(31, EVENT_APPLY_DAMAGE_LIGHT_PUSH, -1)
+    Event(32, EVENT_REACT_ON_HIT_ENABLED, -1)
+    Event(45, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(45, VIS_EVENT_STEP_RIGHT, -1)
+    Event(46, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(46, VIS_EVENT_STOPANIM, -1)
+    Event(55, VIS_EVENT_STEP_LEFT, -1)
+    Event(56, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+SeqTrack("spitter_hit_reaction_back_counter_push", 	"infected_counter_reaction_back_02.anm2",		 14, 100, 60, 1, 0.25) //No IK
+{	
+	Event(24, VIS_EVENT_STEP_LEFT, -1)
+	Event(36, VIS_EVENT_STEP_RIGHT, -1)
+	Event(68, VIS_EVENT_STEP_LEFT, -1)
+
+    Event(55, SOUND_EVENT_ATTACK, -1)
+    Event(59, EVENT_APPLY_DAMAGE_FORWARD, -1)
+    Event(59, EVENT_APPLY_DAMAGE_LIGHT_PUSH, -1)
+
+	Event(72, VIS_EVENT_STOPANIM, -1)
+}
+
+SeqTrack("spitter_hitreaction_torso_right_heavy_02","spitter_hitreaction_torso_right_heavy_02.anm2", 3 , 92 , 30 , 1, 0.15 )
+{
+
+}
+
+
+SeqTrack("spitter_hitreaction_torso_left_heavy_02","spitter_hitreaction_torso_left_heavy_02.anm2", 3 , 92 , 30 , 1, 0.15 )
+{
+
+}
+
+
+SeqTrack("spitter_attack_standing_push_01","spitter_attack_standing_push_01.anm2", 0 , 75 , 30 , 1, 0.3 )
+{
+    Event( 0 , VIS_EVENT_IK_ENABLE, -1 )
+    Event( 0 , VIS_EVENT_STEP_LEFT, -1 )
+    Event( 0 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event( 0 , VIS_EVENT_STEP_RIGHT, -1 )
+    Event( 0 , VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+    Event( 8 , VIS_EVENT_RIGHT_FOOT_LIFT, -1 )
+    Event( 11 , VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+    Event( 28 , VIS_EVENT_STEP_LEFT, -1 )
+    Event( 28 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event( 36 , VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+    Event( 46 , VIS_EVENT_STEP_RIGHT, -1 )
+    Event( 46 , VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+    Event( 47 , VIS_EVENT_STEP_LEFT, -1 )
+    Event( 47 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event( 52 , VIS_EVENT_RIGHT_FOOT_LIFT, -1 )
+    Event( 64 , VIS_EVENT_STEP_RIGHT, -1 )
+    Event( 64 , VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+    Event( 65 , VIS_EVENT_STOPANIM, -1 )
+	
+	
+	Event(14, VIS_EVENT_ROTATION_MOD_START, -1)
+	Event(54, VIS_EVENT_ROTATION_MOD_END, -1)
+	
+	Event(24, EVENT_APPLY_DAMAGE_FORWARD, -1)
+	Event(28, EVENT_APPLY_DAMAGE_LIGHT_PUSH, -1)
+	Event(14, EVENT_TRACK_DISABLE, -1)
+	Event(54, EVENT_TRACK_ENABLE, -1)
+}
+
+
+
+SeqTrack("spitter_push", 			"spitter_pushoff.anm2"		, 0, 86, 30, 1, 0.3)
+{
+    Event(0, SOUND_EVENT_ATTACK, -1)
+	Event(11, EVENT_TRACK_DISABLE, -1)
+    Event(11, VIS_EVENT_ROTATION_MOD_START, -1)
+	Event(21, EVENT_APPLY_DAMAGE_FORWARD, -1)
+	Event(21, EVENT_APPLY_DAMAGE_LIGHT_PUSH, -1)
+    Event(50, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(51, EVENT_TRACK_ENABLE, -1)
+}
+
+SeqTrack( "spitter_walk_loop",	"MZI_Upset_Walk_Loop_V04.anm2", 0, 51, 30, 1, 0.2)
+{
+    Event(0, EVENT_DODGE_ENABLED, -1)
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)
+    Event(13, VIS_EVENT_STEP_LEFT, -1)
+    Event(26, VIS_EVENT_STEP_RIGHT, -1)
+    Event(38, VIS_EVENT_STEP_LEFT, -1)
+    Event(51, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+SeqTrack("spitter_strafe_left", 		    "spitter_strafe_left_loop.anm2"		, 0, 78, 30, 1, 0.25)
+{
+	Event(8, VIS_EVENT_STEP_LEFT, -1)
+	Event(12, SOUND_EVENT_SPIT, -1)
+	Event(16, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(18, VIS_EVENT_STEP_RIGHT, -1)
+	Event(27, VIS_EVENT_STEP_LEFT, -1)
+	Event(37, VIS_EVENT_STEP_RIGHT, -1)
+	Event(46, VIS_EVENT_STEP_LEFT, -1)
+	Event(49, SOUND_EVENT_SPIT, -1)
+	Event(53, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(57, VIS_EVENT_STEP_RIGHT, -1)
+	Event(66, VIS_EVENT_STEP_LEFT, -1)
+	Event(75, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("spitter_strafe_left_start", "spitter_strafe_left_start.anm2", 0, 74, 30, 1, 0.5)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(9, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(11, VIS_EVENT_STEP_RIGHT, -1)
+    Event(25, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(26, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(26, VIS_EVENT_STEP_LEFT, -1)
+    Event(28, VIS_EVENT_STOPANIM, -1)
+    Event(40, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(42, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(42, VIS_EVENT_STEP_RIGHT, -1)
+    Event(50, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(54, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(54, VIS_EVENT_STEP_LEFT, -1)
+    Event(62, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(66, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(66, VIS_EVENT_STEP_RIGHT, -1)
+    Event(70, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+}
+
+SeqTrack("spitter_strafe_right", 		    "spitter_strafe_right_loop.anm2"		, 0, 59, 30, 1, 0.25)
+{
+	Event(7, VIS_EVENT_STEP_LEFT, -1)
+	Event(8, SOUND_EVENT_SPIT, -1)
+	Event(12, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(18, VIS_EVENT_STEP_RIGHT, -1)
+	Event(28, VIS_EVENT_STEP_LEFT, -1)
+	Event(37, VIS_EVENT_STEP_RIGHT, -1)
+	Event(39, SOUND_EVENT_SPIT, -1)
+	Event(43, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(46, VIS_EVENT_STEP_LEFT, -1)
+	Event(56, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("spitter_strafe_right_start", "spitter_strafe_right_start.anm2", 0, 46, 30, 1, 0.5)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(6, VIS_EVENT_STEP_LEFT, -1)
+    Event(7, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(14, VIS_EVENT_STEP_RIGHT, -1)
+    Event(24, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(24, VIS_EVENT_STOPANIM, -1)
+    Event(28, VIS_EVENT_STEP_LEFT, -1)
+    Event(28, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(34, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(40, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(40, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+SeqTrack("spitter_strafe_back_start", "spitter_strafe_back_start.anm2", 0, 45, 30, 1, 0.5)
+{
+    Event(4, VIS_EVENT_STEP_LEFT, -1)
+    Event(11, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(16, VIS_EVENT_STEP_RIGHT, -1)
+    Event(28, VIS_EVENT_STOPANIM, -1)
+    Event(35, VIS_EVENT_STEP_LEFT, -1)
+    Event(42, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+
+
+////////////////
+//STRAFE STOPS//
+////////////////
+
+SeqTrack("spitter_strafe_backward_stop", 	        "spitter_strafe_back_start.anm2"		, 45, 0, 30, 1, 0.35)
+{
+	Event(44, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+}
+
+SeqTrack("spitter_strafe_right_stop", "spitter_strafe_right_stop.anm2", 0, 98, 30, 1, 0.5)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(2, VIS_EVENT_STEP_RIGHT, -1)
+    Event(2, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(6, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(12, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(12, VIS_EVENT_STEP_LEFT, -1)
+    Event(16, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(24, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(24, VIS_EVENT_STEP_RIGHT, -1)
+    Event(27, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(34, VIS_EVENT_STEP_LEFT, -1)
+    Event(34, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(34, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(43, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(47, VIS_EVENT_STEP_RIGHT, -1)
+    Event(47, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(49, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(49, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(74, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(78, VIS_EVENT_STOPANIM, -1)
+}
+
+
+SeqTrack("spitter_strafe_left_stop", "spitter_strafe_left_stop.anm2", 0, 96, 30, 1, 0.5)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(4, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(4, VIS_EVENT_STEP_LEFT, -1)
+    Event(11, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(16, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(16, VIS_EVENT_STEP_RIGHT, -1)
+    Event(22, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(28, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(28, VIS_EVENT_STEP_LEFT, -1)
+    Event(33, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(40, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(48, VIS_EVENT_STEP_RIGHT, -1)
+    Event(48, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(50, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(50, EVENT_FINAL_ROTATION, -1)
+    Event(54, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(54, VIS_EVENT_STEP_LEFT, -1)
+    Event(58, VIS_EVENT_STOPANIM, -1)
+}
+SeqTrack("spitter_strafe_back_stop", "spitter_strafe_back_stop.anm2", 0, 62, 30, 1, 0.5)
+{
+    Event(6, VIS_EVENT_STEP_LEFT, -1)
+    Event(13, VIS_EVENT_STEP_RIGHT, -1)
+    Event(24, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(32, VIS_EVENT_STEP_LEFT, -1)
+    Event(32, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(38, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(38, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(38, EVENT_FINAL_ROTATION, -1)
+    Event(42, VIS_EVENT_STEP_RIGHT, -1)
+    Event(50, VIS_EVENT_STOPANIM, -1)
+}
+/////////
+//TURNS//
+/////////
+
+SeqTrack("Spitter_turn_90R","Spitter_turn_90R.anm2", 23 , 81 , 33 , 1, 0.3 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(1, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(1, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(11, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(12, VIS_EVENT_STEP_LEFT, -1)
+    Event(12, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(24, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(24, VIS_EVENT_STEP_RIGHT, -1)
+    Event(24, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(36, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(43, VIS_EVENT_STOPANIM, -1)
+    Event(45, VIS_EVENT_STEP_LEFT, -1)
+    Event(45, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+
+SeqTrack("spitter_turn_90L","spitter_turn_90L.anm2", 17 , 81 , 33 , 1, 0.3 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(1, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(15, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(20, VIS_EVENT_STEP_LEFT, -1)
+    Event(20, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(29, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(30, VIS_EVENT_STEP_RIGHT, -1)
+    Event(30, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(40, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(40, VIS_EVENT_STEP_LEFT, -1)
+    Event(40, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(42, VIS_EVENT_STOPANIM, -1)
+}
+
+SeqTrack("spitter_turn_180R","spitter_turn_180R.anm2", 27 , 109 , 33 , 1, 0.3 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(1, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(5, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(6, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(15, VIS_EVENT_STEP_LEFT, -1)
+    Event(15, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(25, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(29, VIS_EVENT_STEP_RIGHT, -1)
+    Event(29, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(41, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(42, VIS_EVENT_STEP_LEFT, -1)
+    Event(42, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(42, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(43, VIS_EVENT_STOPANIM, -1)
+    Event(51, VIS_EVENT_STEP_RIGHT, -1)
+    Event(51, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+
+SeqTrack("spitter_turn_180L","spitter_turn_180L.anm2", 37 , 109 , 33 , 1, 0.3 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(4, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(6, VIS_EVENT_STEP_RIGHT, -1)
+    Event(6, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(18, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(21, VIS_EVENT_STEP_LEFT, -1)
+    Event(21, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(31, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(39, VIS_EVENT_STEP_RIGHT, -1)
+    Event(39, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(44, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(45, VIS_EVENT_STEP_LEFT, -1)
+    Event(45, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(49, VIS_EVENT_STOPANIM, -1)
+}
+
+SeqTrack("spitter_turn_45L","spitter_turn_45L.anm2", 3 , 52 , 33 , 1, 0.3 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(1, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(1, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(7, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(12, VIS_EVENT_STEP_LEFT, -1)
+    Event(12, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(26, VIS_EVENT_STEP_RIGHT, -1)
+    Event(26, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(27, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(28, VIS_EVENT_STOPANIM, -1)
+}
+
+SeqTrack("spitter_turn_45R","spitter_turn_45R.anm2", 14 , 41 , 33 , 1, 0.3 )
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(2, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(9, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(14, VIS_EVENT_STEP_RIGHT, -1)
+    Event(14, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(20, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(21, VIS_EVENT_STOPANIM, -1)
+    Event(23, VIS_EVENT_STEP_LEFT, -1)
+    Event(23, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+
+
+// JUMPS
+SeqTrack("spitter_jump_up_1_2m_01","spitter_jump_up_1_2m_01.anm2", 0 , 80 , 30 , 1, 0.3 )
+{
+    Event( 0 , VIS_EVENT_IK_ENABLE, -1 )
+    Event( 0 , VIS_EVENT_STEP_LEFT, -1 )
+    Event( 0 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event( 0 , VIS_EVENT_STEP_RIGHT, -1 )
+    Event( 0 , VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+    Event( 10 , VIS_EVENT_RIGHT_FOOT_LIFT, -1 )
+    Event( 14 , VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+    Event( 19 , VIS_EVENT_STEP_RIGHT, -1 )
+    Event( 19 , VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+    Event( 20 , VIS_EVENT_STEP_LEFT, -1 )
+    Event( 20 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event( 23 , VIS_EVENT_IK_DISABLE, -1 )
+    Event( 23 , VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+    Event( 23 , VIS_EVENT_RIGHT_FOOT_LIFT, -1 )
+    Event( 43 , VIS_EVENT_IK_ENABLE, -1 )
+    Event( 43 , VIS_EVENT_STEP_LEFT, -1 )
+    Event( 43 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event( 43 , VIS_EVENT_STEP_RIGHT, -1 )
+    Event( 43 , VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+    Event( 49 , VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+    Event( 50 , VIS_EVENT_RIGHT_FOOT_LIFT, -1 )
+    Event( 55 , VIS_EVENT_STEP_RIGHT, -1 )
+    Event( 55 , VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+    Event( 58 , VIS_EVENT_STEP_LEFT, -1 )
+    Event( 58 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event( 63 , VIS_EVENT_STOPANIM, -1 )
+}
+
+SeqTrack("spitter_run_jump_up_1_2m_01","spitter_run_jump_up_1_2m_01.anm2", 0 , 65 , 30 , 1, 0.3 )
+{
+    Event( 0 , VIS_EVENT_IK_ENABLE, -1 )
+    Event( 0 , VIS_EVENT_STEP_RIGHT, -1 )
+    Event( 0 , VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+    Event( 3 , VIS_EVENT_RIGHT_FOOT_LIFT, -1 )
+    Event( 12 , VIS_EVENT_STEP_LEFT, -1 )
+    Event( 12 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event( 15 , VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+    Event( 21 , VIS_EVENT_STEP_RIGHT, -1 )
+    Event( 21 , VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+    Event( 23 , VIS_EVENT_MAX_ANIM_CUT_TIME, -1 )
+    Event( 25 , VIS_EVENT_IK_DISABLE, -1 )
+    Event( 25 , VIS_EVENT_RIGHT_FOOT_LIFT, -1 )
+    Event( 50 , VIS_EVENT_IK_ENABLE, -1 )
+    Event( 50 , VIS_EVENT_STEP_LEFT, -1 )
+    Event( 50 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event( 50 , VIS_EVENT_STEP_RIGHT, -1 )
+    Event( 50 , VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+    Event( 60 , VIS_EVENT_STOPANIM, -1 )
+}
+
+SeqTrack("spitter_jump_down_1_2m_01","spitter_jump_down_1_2m_01.anm2", 0 , 57 , 30 , 1, 0.3 )
+{
+    Event( 0 , VIS_EVENT_IK_ENABLE, -1 )
+    Event( 0 , VIS_EVENT_STEP_LEFT, -1 )
+    Event( 0 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event( 0 , VIS_EVENT_STEP_RIGHT, -1 )
+    Event( 0 , VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+    Event( 1 , VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+    Event( 9 , VIS_EVENT_RIGHT_FOOT_LIFT, -1 )
+    Event( 11 , VIS_EVENT_STEP_LEFT, -1 )
+    Event( 11 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event( 18 , VIS_EVENT_LEFT_FOOT_LIFT, -1 )
+    Event( 20 , VIS_EVENT_IK_DISABLE, -1 )
+    Event( 37 , VIS_EVENT_IK_ENABLE, -1 )
+    Event( 37 , VIS_EVENT_STEP_RIGHT, -1 )
+    Event( 37 , VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+    Event( 38 , VIS_EVENT_RIGHT_FOOT_LIFT, -1 )
+    Event( 40 , VIS_EVENT_STEP_LEFT, -1 )
+    Event( 40 , VIS_EVENT_LEFT_FOOT_LAND, -1 )
+    Event( 56 , VIS_EVENT_STOPANIM, -1 )
+    Event( 57 , VIS_EVENT_STEP_RIGHT, -1 )
+    Event( 57 , VIS_EVENT_RIGHT_FOOT_LAND, -1 )
+}
+
+//Reload//
+SeqTrack("spitter_spit_reload",	 "spitter_spit_reload.anm2", 6 , 130 , 30 , 1, 0.35 )
+{
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(30, 0, 0)
+    {
+        PlaySound3D(GameVolumeSource_LoudSound, "zombie_spitter_recharge_00.wav", 1, 3, "head", 1, [0, 0, 0], 1)
+    }
+    Event(91, EVENT_RELOADED, -1)
+    Event(104, VIS_EVENT_STOPANIM, -1)
+}
+
+////////////
+//Stand up//
+////////////
+
+SeqTrack( "spitter_stand_up_back_01",	            "spitter_stand_up_back_01.anm2",	 0, 105, 30, 1, 0.6)
+{
+    Event(0, EVENT_TRACK_DISABLE, -1)
+    Event(0, VIS_EVENT_IK_DISABLE, -1)
+    Event(0, EVENT_FALL_ON_HIT_ENABLE, -1)
+    Event(48, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(48, VIS_EVENT_STEP_RIGHT, -1)
+    Event(63, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(64, EVENT_TRACK_ENABLE, -1)
+    Event(66, VIS_EVENT_IK_ENABLING_START, -1)
+    Event(71, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(71, VIS_EVENT_STEP_LEFT, -1)
+    Event(74, VIS_EVENT_IK_ENABLE, -1)
+    Event(77, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(81, EVENT_STOOD_UP, -1)
+    Event(82, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(82, VIS_EVENT_STEP_RIGHT, -1)
+    Event(92, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(92, VIS_EVENT_STEP_LEFT, -1)
+    Event(94, VIS_EVENT_STOPANIM, -1)
+    Event(107, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+
+SeqTrack( "spitter_stand_up_front_01",	            "spitter_stand_up_front_01.anm2",	 0, 86, 30, 1, 0.6)
+{
+    Event(0, EVENT_TRACK_DISABLE, -1)
+    Event(0, VIS_EVENT_IK_DISABLE, -1)
+    Event(0, EVENT_FALL_ON_HIT_ENABLE, -1)
+    Event(44, EVENT_TRACK_ENABLE, -1)
+    Event(48, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(48, VIS_EVENT_STEP_LEFT, -1)
+    Event(49, EVENT_STOOD_UP, -1)
+    Event(49, EVENT_FALL_ON_HIT_DISABLE, -1)
+    Event(53, VIS_EVENT_IK_ENABLING_START, -1)
+    Event(59, VIS_EVENT_IK_ENABLE, -1)
+    Event(59, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(65, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(65, VIS_EVENT_STEP_RIGHT, -1)
+    Event(74, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(74, VIS_EVENT_STEP_LEFT, -1)
+    Event(75, VIS_EVENT_STOPANIM, -1)
+}
+
+SeqTrack( "spitter_stand_up_left_01",	            "spitter_stand_up_left_01.anm2",	 0, 88, 30, 1, 0.6)
+{
+    Event(0, EVENT_TRACK_DISABLE, -1)
+    Event(0, VIS_EVENT_IK_DISABLE, -1)
+    Event(0, EVENT_FALL_ON_HIT_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(57, EVENT_TRACK_ENABLE, -1)
+    Event(58, VIS_EVENT_IK_ENABLING_START, -1)
+    Event(65, EVENT_STOOD_UP, -1)
+    Event(68, VIS_EVENT_IK_ENABLE, -1)
+    Event(76, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(76, VIS_EVENT_STEP_LEFT, -1)
+    Event(80, VIS_EVENT_STOPANIM, -1)
+    Event(84, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(84, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+SeqTrack( "spitter_stand_up_right_01",	            "spitter_stand_up_right_01.anm2",	 0, 118, 30, 1, 0.6)
+{
+    Event(0, EVENT_TRACK_DISABLE, -1)
+    Event(0, VIS_EVENT_IK_DISABLE, -1)
+    Event(0, EVENT_FALL_ON_HIT_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(65, VIS_EVENT_IK_ENABLING_START, -1)
+    Event(66, EVENT_TRACK_ENABLE, -1)
+    Event(74, EVENT_STOOD_UP, -1)
+    Event(74, EVENT_FALL_ON_HIT_DISABLE, -1)
+    Event(79, VIS_EVENT_IK_ENABLE, -1)
+    Event(83, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(83, VIS_EVENT_STEP_LEFT, -1)
+    Event(92, VIS_EVENT_STOPANIM, -1)
+    Event(96, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(96, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+/////////////
+////TAUNT////
+/////////////
+
+// spitter turns in this animation, so legs shouldn't be pinned to the ground
+SeqTrack( "spitter_taunt_01",	            "spitter_taunt_01.anm2",	 0, 99, 30, 1, 0.4)
+{
+    Event(0, SOUND_EVENT_TAUNT, -1)
+    Event(0, VIS_EVENT_IK_DISABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)
+    Event(5, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(18, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(65, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(65, VIS_EVENT_STEP_RIGHT, -1)
+    Event(82, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(83, VIS_EVENT_STOPANIM, -1)
+}
+
+// spitter turns in this animation, so legs shouldn't be pinned to the ground
+SeqTrack( "spitter_taunt_02",	            "spitter_taunt_02.anm2",	 0, 85, 30, 1, 0.4)
+{
+    Event(0, SOUND_EVENT_TAUNT, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)
+    Event(0, VIS_EVENT_IK_DISABLE, -1)
+    Event(2, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(8, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(67, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(67, VIS_EVENT_STEP_RIGHT, -1)
+    Event(69, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(69, VIS_EVENT_STEP_LEFT, -1)
+    Event(70, VIS_EVENT_STOPANIM, -1)
+}
+
+// spitter turns in this animation, so legs shouldn't be pinned to the ground for long time
+SeqTrack( "spitter_taunt_03",	            "spitter_taunt_03.anm2",	 0, 94, 30, 1, 0.4)
+{
+    Event(0, SOUND_EVENT_TAUNT, -1)
+    Event(0, VIS_EVENT_IK_DISABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)
+    Event(3, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(13, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(13, VIS_EVENT_STEP_LEFT, -1)
+    Event(70, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(85, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(85, VIS_EVENT_STEP_LEFT, -1)
+    Event(86, VIS_EVENT_STOPANIM, -1)
+}
+
+SeqTrack( "spitter_mzi_upset_jump_1m", 	"mzi_upset_jump_1m.anm2",	 0, 55, 30, 1, 0.2)//55
+{
+    Event(0, VIS_EVENT_LEFT_FEET_FORWARD, -1)
+    Event(0, EVENT_FALL_FROM_EDGE_DISABLED, -1)
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(7, VIS_EVENT_STEP_LEFT, -1)
+    Event(7, EVENT_FALL_ON_HIT_ENABLE, -1)
+    Event(7, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(7, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(7, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(2, VIS_EVENT_IK_DISABLING_START, -1)
+    Event(10, EVENT_FINAL_POSITION, -1)
+    Event(10, EVENT_FINAL_ROTATION, -1)
+    Event(6, VIS_EVENT_IK_DISABLE, -1)
+    Event(23, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(26, VIS_EVENT_IK_ENABLING_START, -1)
+    Event(27, EVENT_TURN_ON_PHYSICS, -1)
+    Event(27, EVENT_FINAL_POSITION_2, -1)
+    Event(27, EVENT_FINAL_ROTATION_2, -1)
+    Event(27, VIS_EVENT_STEP_RIGHT, -1)
+    Event(28, EVENT_FALL_FROM_EDGE_ENABLED, -1)
+    Event(31, EVENT_FALL_ON_HIT_DISABLE, -1)
+    Event(31, VIS_EVENT_STEP_LEFT, -1)
+    Event(32, VIS_EVENT_IK_ENABLE, -1)
+    Event(32, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(32, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(32, VIS_EVENT_STOPANIM, -1)
+    Event(32, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(32, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(41, VIS_EVENT_STEP_RIGHT, -1)
+    Event(42, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(42, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(50, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(50, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+}
+
+SeqTrack( "spitter_mzi_upset_jump_3_5m", "mzi_upset_jump_3_5m.anm2", 0, 78, 30, 1, 0.2)
+{
+    Event(0, VIS_EVENT_RIGHT_FEET_FORWARD, -1)
+    Event(0, EVENT_FALL_FROM_EDGE_DISABLED, -1)
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(7, VIS_EVENT_STEP_RIGHT, -1)
+    Event(8, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(8, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(15, VIS_EVENT_STEP_LEFT, -1)
+    Event(15, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(15, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(18, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(22, VIS_EVENT_STEP_RIGHT, -1)
+    Event(23, EVENT_FALL_ON_HIT_ENABLE, -1)
+    Event(23, EVENT_FINAL_POSITION, -1)
+    Event(23, EVENT_FINAL_ROTATION, -1)
+    Event(23, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(23, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(24, VIS_EVENT_IK_DISABLE, -1)
+    Event(35, VIS_EVENT_IK_ENABLING_START, -1)
+    Event(36, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(39, VIS_EVENT_STEP_RIGHT, -1)
+    Event(39, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(39, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(39, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(39, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(40, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(40, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(40, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(40, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(40, EVENT_FINAL_POSITION_2, -1)
+    Event(40, EVENT_FINAL_ROTATION_2, -1)
+    Event(40, EVENT_FALL_ON_HIT_DISABLE, -1)
+    Event(40, VIS_EVENT_IK_ENABLE, -1)
+    Event(41, EVENT_TURN_ON_PHYSICS, -1)
+    Event(42, EVENT_FALL_FROM_EDGE_ENABLED, -1)
+    Event(42, VIS_EVENT_CAN_BREAK_ANIM, -1)
+    Event(46, VIS_EVENT_STEP_LEFT, -1)
+    Event(46, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(46, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(46, VIS_EVENT_STOPANIM, -1)
+    Event(54, VIS_EVENT_STEP_RIGHT, -1)
+    Event(55, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(55, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(62, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(62, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(71, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(71, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(78, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+SeqTrack( "spitter_mzi_upset_jump_3_5m_lleg", "mzi_upset_jump_3_5m_mirrored.anm2", 0, 78, 30, 1, 0.2)
+{
+    Event(0, VIS_EVENT_LEFT_FEET_FORWARD, -1)
+    Event(0, EVENT_FALL_FROM_EDGE_DISABLED, -1)
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(7, VIS_EVENT_STEP_LEFT, -1)
+    Event(8, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(8, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(15, VIS_EVENT_STEP_RIGHT, -1)
+    Event(15, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(15, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(18, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(22, VIS_EVENT_STEP_LEFT, -1)
+    Event(23, EVENT_FALL_ON_HIT_ENABLE, -1)
+    Event(23, EVENT_FINAL_POSITION, -1)
+    Event(23, EVENT_FINAL_ROTATION, -1)
+    Event(23, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(23, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(24, VIS_EVENT_IK_DISABLE, -1)
+    Event(35, VIS_EVENT_IK_ENABLING_START, -1)
+    Event(36, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(39, VIS_EVENT_STEP_LEFT, -1)
+    Event(39, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(39, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(39, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(39, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(40, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(40, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(40, EVENT_FINAL_POSITION_2, -1)
+    Event(40, EVENT_FALL_ON_HIT_DISABLE, -1)
+    Event(40, EVENT_FINAL_ROTATION_2, -1)
+    Event(40, VIS_EVENT_IK_ENABLE, -1)
+    Event(41, EVENT_TURN_ON_PHYSICS, -1)
+    Event(42, VIS_EVENT_CAN_BREAK_ANIM, -1)
+    Event(42, EVENT_FALL_FROM_EDGE_ENABLED, -1)
+    Event(46, VIS_EVENT_STEP_RIGHT, -1)
+    Event(46, VIS_EVENT_STOPANIM, -1)
+    Event(46, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(46, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(54, VIS_EVENT_STEP_LEFT, -1)
+    Event(55, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(55, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(62, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(62, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(71, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(71, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(78, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+
+SeqTrack( "spitter_mzi_upset_jump_5m", "mzi_upset_jump_3m.anm2", 0, 50, 20, 1, 0.2)
+{
+    Event(0, VIS_EVENT_LEFT_FEET_FORWARD, -1)
+    Event(0, EVENT_FALL_FROM_EDGE_DISABLED, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(5, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(6, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(6, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(9, VIS_EVENT_IK_DISABLE, -1)
+    Event(11, EVENT_FALL_ON_HIT_ENABLE, -1)
+    Event(11, EVENT_FINAL_POSITION, -1)
+    Event(11, EVENT_FINAL_ROTATION, -1)
+    Event(16, VIS_EVENT_STEP_RIGHT, -1)
+    Event(23, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(23, EVENT_FINAL_POSITION_2, -1)
+    Event(23, VIS_EVENT_CAN_BREAK_ANIM, -1)
+    Event(23, VIS_EVENT_IK_ENABLING_START, -1)
+    Event(24, EVENT_FALL_ON_HIT_DISABLE, -1)
+    Event(24, EVENT_TURN_ON_PHYSICS, -1)
+    Event(25, EVENT_FINAL_ROTATION_2, -1)
+    Event(26, VIS_EVENT_STEP_LEFT, -1)
+    Event(26, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(26, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(26, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(26, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(27, VIS_EVENT_IK_ENABLE, -1)
+    Event(27, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(27, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(30, VIS_EVENT_STOPANIM, -1)
+    Event(35, VIS_EVENT_STEP_RIGHT, -1)
+    Event(35, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(35, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(43, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(43, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+}
+
+SeqTrack( "spitter_mzi_upset_jump_through_window_lleg", 	"mzi_upset_jump_over_low_02.anm2",	 0, 50, 26, 1, 0.2)//50
+{
+    Event(0, VIS_EVENT_LEFT_FEET_FORWARD, -1)
+    Event(0, EVENT_FALL_FROM_EDGE_DISABLED, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(1, VIS_EVENT_STEP_RIGHT, -1)
+    Event(2, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(2, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(8, VIS_EVENT_STEP_LEFT, -1)
+    Event(8, EVENT_FALL_ON_HIT_ENABLE, -1)
+    Event(8, VIS_EVENT_IK_DISABLE, -1)
+    Event(8, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(9, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(9, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(12, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(18, EVENT_FINAL_ROTATION_2, -1)
+    Event(18, EVENT_FINAL_POSITION_2, -1)
+    Event(23, VIS_EVENT_IK_ENABLING_START, -1)
+    Event(24, VIS_EVENT_CAN_BREAK_ANIM, -1)
+    Event(25, EVENT_TURN_ON_PHYSICS, -1)
+    Event(25, VIS_EVENT_STEP_RIGHT, -1)
+    Event(26, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(26, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(26, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(26, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(27, VIS_EVENT_IK_ENABLE, -1)
+    Event(30, EVENT_FALL_ON_HIT_DISABLE, -1)
+    Event(30, EVENT_FALL_FROM_EDGE_ENABLED, -1)
+    Event(30, VIS_EVENT_STEP_LEFT, -1)
+    Event(30, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(31, VIS_EVENT_STOPANIM, -1)
+    Event(33, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(40, VIS_EVENT_STEP_RIGHT, -1)
+    Event(40, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(40, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(49, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+SeqTrack( "spitter_mzi_upset_jump_through_window", 	"mzi_upset_jump_over_low_02_mirror.anm2",	 0, 50, 26, 1, 0.2)//50
+{
+    Event(0, EVENT_FALL_FROM_EDGE_DISABLED, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(1, VIS_EVENT_STEP_LEFT, -1)
+    Event(2, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(2, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(8, VIS_EVENT_STEP_RIGHT, -1)
+    Event(8, EVENT_FALL_ON_HIT_ENABLE, -1)
+    Event(8, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(8, VIS_EVENT_IK_DISABLE, -1)
+    Event(8, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(9, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(10, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(18, EVENT_FINAL_ROTATION_2, -1)
+    Event(18, EVENT_FINAL_POSITION_2, -1)
+    Event(21, EVENT_TURN_ON_PHYSICS, -1)
+    Event(24, VIS_EVENT_CAN_BREAK_ANIM, -1)
+    Event(25, VIS_EVENT_STEP_LEFT, -1)
+    Event(27, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(27, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(27, VIS_EVENT_IK_ENABLING_START, -1)
+    Event(30, EVENT_FALL_ON_HIT_DISABLE, -1)
+    Event(30, EVENT_FALL_FROM_EDGE_ENABLED, -1)
+    Event(30, VIS_EVENT_STEP_RIGHT, -1)
+    Event(31, VIS_EVENT_STOPANIM, -1)
+    Event(31, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(31, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(31, VIS_EVENT_IK_ENABLE, -1)
+    Event(40, VIS_EVENT_STEP_LEFT, -1)
+    Event(40, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(40, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(50, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+
+SeqTrack( "spitter_mzi_upset_jump_through_car", "MZI_TPP_JumpOver_01_mirrored.anm2", 0, 58, 30, 1, 0.2)
+{
+    Event(0, EVENT_FALL_FROM_EDGE_DISABLED, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(7, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(7, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(7, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(8, VIS_EVENT_STEP_LEFT, -1)
+    Event(9, EVENT_FALL_ON_HIT_ENABLE, -1)
+    Event(10, EVENT_FINAL_POSITION, -1)
+    Event(11, VIS_EVENT_IK_DISABLE, -1)
+    Event(13, EVENT_FINAL_ROTATION, -1)
+    Event(31, EVENT_TURN_ON_PHYSICS, -1)
+    Event(32, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(33, EVENT_FALL_ON_HIT_DISABLE, -1)
+    Event(33, VIS_EVENT_IK_ENABLING_START, -1)
+    Event(34, EVENT_FALL_FROM_EDGE_ENABLED, -1)
+    Event(34, VIS_EVENT_CAN_BREAK_ANIM, -1)
+    Event(34, VIS_EVENT_STEP_RIGHT, -1)
+    Event(34, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(34, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(34, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(34, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(37, VIS_EVENT_IK_ENABLE, -1)
+    Event(37, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(38, EVENT_FINAL_ROTATION_2, -1)
+    Event(38, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(41, VIS_EVENT_STOPANIM, -1)
+    Event(43, VIS_EVENT_STEP_LEFT, -1)
+    Event(43, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(43, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(50, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+
+SeqTrack( "spitter_mzi_upset_jump_through_car_lleg", "MZI_TPP_JumpOver_01.anm2", 0, 58, 30, 1, 0.2)
+{
+    Event(0, VIS_EVENT_LEFT_FEET_FORWARD, -1)
+    Event(0, EVENT_FALL_FROM_EDGE_DISABLED, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(7, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(7, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(7, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(8, VIS_EVENT_STEP_RIGHT, -1)
+    Event(9, EVENT_FALL_ON_HIT_ENABLE, -1)
+    Event(10, EVENT_FINAL_POSITION, -1)
+    Event(10, VIS_EVENT_IK_DISABLE, -1)
+    Event(13, EVENT_FINAL_ROTATION, -1)
+    Event(31, EVENT_TURN_ON_PHYSICS, -1)
+    Event(32, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(33, EVENT_FALL_ON_HIT_DISABLE, -1)
+    Event(33, VIS_EVENT_IK_ENABLING_START, -1)
+    Event(34, EVENT_FALL_FROM_EDGE_ENABLED, -1)
+    Event(34, VIS_EVENT_CAN_BREAK_ANIM, -1)
+    Event(34, VIS_EVENT_STEP_LEFT, -1)
+    Event(34, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(34, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(34, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(34, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(35, VIS_EVENT_IK_ENABLE, -1)
+    Event(35, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(38, EVENT_FINAL_ROTATION_2, -1)
+    Event(38, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(41, VIS_EVENT_STOPANIM, -1)
+    Event(43, VIS_EVENT_STEP_RIGHT, -1)
+    Event(44, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(44, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(50, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+SeqTrack( "spitter_mzi_upset_sprintjumpup", "mzi_upset_sprintjumpup.anm2", 0, 110, 30, 1, 0.2)
+{
+    Event(0, VIS_EVENT_RIGHT_FEET_FORWARD, -1)
+    Event(0, EVENT_FALL_FROM_EDGE_DISABLED, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(9, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(9, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(16, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(18, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(19, VIS_EVENT_IK_DISABLING_START, -1)
+    Event(23, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(24, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(25, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(25, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(27, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(28, VIS_EVENT_IK_DISABLE, -1)
+    Event(28, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(28, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(28, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(28, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(29, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(30, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(30, EVENT_FALL_ON_HIT_ENABLE, -1)
+    Event(35, EVENT_FINAL_ROTATION, -1)
+    Event(35, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(42, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(43, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(51, EVENT_FINAL_POSITION_2, -1)
+    Event(66, VIS_EVENT_STEP_RIGHT, -1)
+    Event(80, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(82, VIS_EVENT_STEP_LEFT, -1)
+    Event(82, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(82, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(82, VIS_EVENT_IK_ENABLING_START, -1)
+    Event(82, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(82, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(90, EVENT_FALL_ON_HIT_DISABLE, -1)
+    Event(90, VIS_EVENT_CAN_BREAK_ANIM, -1)
+    Event(90, EVENT_FALL_FROM_EDGE_ENABLED, -1)
+    Event(90, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(90, EVENT_FINAL_ROTATION_2, -1)
+    Event(91, VIS_EVENT_STOPANIM, -1)
+    Event(91, VIS_EVENT_IK_ENABLE, -1)
+    Event(94, VIS_EVENT_STEP_RIGHT, -1)
+    Event(95, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(96, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(101, VIS_EVENT_STEP_LEFT, -1)
+    Event(102, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(103, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(110, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+
+SeqTrack( "spitter_mzi_upset_sprintjumpup_lleg", "mzi_upset_sprintjumpup_mirror.anm2", 0, 110, 30, 1, 0.2)
+{
+    Event(0, VIS_EVENT_LEFT_FEET_FORWARD, -1)
+    Event(0, EVENT_FALL_FROM_EDGE_DISABLED, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(2, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(9, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(9, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(16, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(17, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(20, VIS_EVENT_IK_DISABLING_START, -1)
+    Event(23, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(23, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(26, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(26, VIS_EVENT_IK_DISABLE, -1)
+    Event(26, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(26, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(26, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(26, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(27, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(28, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(29, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(30, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(30, EVENT_FALL_ON_HIT_ENABLE, -1)
+    Event(36, EVENT_FINAL_ROTATION, -1)
+    Event(36, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(40, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(46, EVENT_FINAL_POSITION_2, -1)
+    Event(66, VIS_EVENT_STEP_LEFT, -1)
+    Event(81, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(82, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(82, VIS_EVENT_STEP_RIGHT, -1)
+    Event(82, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(83, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(83, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(83, VIS_EVENT_IK_ENABLING_START, -1)
+    Event(85, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(90, EVENT_FINAL_ROTATION_2, -1)
+    Event(90, EVENT_FALL_FROM_EDGE_ENABLED, -1)
+    Event(90, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(90, VIS_EVENT_CAN_BREAK_ANIM, -1)
+    Event(90, EVENT_FALL_ON_HIT_DISABLE, -1)
+    Event(91, VIS_EVENT_STOPANIM, -1)
+    Event(95, VIS_EVENT_STEP_LEFT, -1)
+    Event(95, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(96, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(97, VIS_EVENT_IK_ENABLE, -1)
+    Event(101, VIS_EVENT_STEP_RIGHT, -1)
+    Event(101, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(102, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(110, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+SeqTrack( "spitter_mzi_upset_sprintjumpdown", "mzi_upset_sprintjumpdown.anm2", 0, 82, 28, 1, 0.2)
+{
+    Event(0, VIS_EVENT_LEFT_FEET_FORWARD, -1)
+    Event(0, EVENT_FALL_FROM_EDGE_DISABLED, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(10, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(10, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(18, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(18, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(25, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(26, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(26, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(27, VIS_EVENT_IK_DISABLING_START, -1)
+    Event(29, EVENT_FALL_ON_HIT_ENABLE, -1)
+    Event(29, EVENT_FINAL_ROTATION, -1)
+    Event(33, EVENT_FINAL_POSITION, -1)
+    Event(33, VIS_EVENT_IK_DISABLE, -1)
+    Event(36, EVENT_TURN_ON_PHYSICS, -1)
+    Event(37, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(39, VIS_EVENT_IK_ENABLING_START, -1)
+    Event(43, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(43, EVENT_FALL_ON_HIT_DISABLE, -1)
+    Event(43, VIS_EVENT_STEP_RIGHT, -1)
+    Event(43, VIS_EVENT_IK_ENABLE, -1)
+    Event(43, EVENT_FINAL_ROTATION_2, -1)
+    Event(44, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(46, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(47, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(49, VIS_EVENT_STEP_LEFT, -1)
+    Event(51, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(52, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(53, EVENT_FALL_FROM_EDGE_ENABLED, -1)
+    Event(54, VIS_EVENT_STOPANIM, -1)
+    Event(54, VIS_EVENT_CAN_BREAK_ANIM, -1)
+    Event(61, VIS_EVENT_STEP_RIGHT, -1)
+    Event(62, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(63, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(71, VIS_EVENT_STEP_LEFT, -1)
+    Event(73, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(74, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(82, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+
+SeqTrack( "spitter_mzi_upset_jump_on", 	"MZI_Upset_Jumps01.anm2",	 0, 37, 35, 1, 0.25)//73
+{
+    Event(0, VIS_EVENT_RIGHT_FEET_FORWARD, -1)
+    Event(0, EVENT_FALL_FROM_EDGE_DISABLED, -1)
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(7, VIS_EVENT_STEP_LEFT, -1)
+    Event(8, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(9, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(16, VIS_EVENT_STEP_RIGHT, -1)
+    Event(16, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(17, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(17, VIS_EVENT_IK_DISABLING_START, -1)
+    Event(18, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(20, VIS_EVENT_IK_DISABLE, -1)
+    Event(20, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(20, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(20, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(20, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(25, EVENT_FINAL_ROTATION_2, -1)
+    Event(26, EVENT_FINAL_POSITION_2, -1)
+    Event(27, VIS_EVENT_CAN_BREAK_ANIM, -1)
+    Event(27, EVENT_TURN_ON_PHYSICS, -1)
+    Event(27, VIS_EVENT_STEP_LEFT, -1)
+    Event(28, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(28, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(28, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(28, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(28, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(28, VIS_EVENT_IK_ENABLING_START, -1)
+    Event(30, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(30, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(31, VIS_EVENT_IK_ENABLE, -1)
+    Event(31, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(31, EVENT_FALL_FROM_EDGE_ENABLED, -1)
+    Event(32, VIS_EVENT_STOPANIM, -1)
+    Event(37, VIS_EVENT_STEP_RIGHT, -1)
+    Event(37, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+
+SeqTrack( "spitter_mzi_upset_jump_off", "MZI_Upset_Jumps01.anm2",	 30, 73, 30, 1, 0.2)//73
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_RIGHT_FEET_FORWARD, -1)
+    Event(0, EVENT_FALL_FROM_EDGE_DISABLED, -1)
+    Event(0, VIS_EVENT_STEP_LEFT, -1)
+    Event(2, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(5, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(5, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(5, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(7, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(8, VIS_EVENT_IK_DISABLING_START, -1)
+    Event(8, VIS_EVENT_STEP_RIGHT, -1)
+    Event(11, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(11, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(11, EVENT_FINAL_ROTATION, -1)
+    Event(11, EVENT_FINAL_POSITION, -1)
+    Event(11, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(12, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(12, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(13, VIS_EVENT_IK_DISABLE, -1)
+    Event(23, EVENT_TURN_ON_PHYSICS, -1)
+    Event(24, EVENT_FALL_FROM_EDGE_ENABLED, -1)
+    Event(24, EVENT_FINAL_ROTATION_2, -1)
+    Event(24, EVENT_FINAL_POSITION_2, -1)
+    Event(24, VIS_EVENT_MOVEMENT_MOD_END, -1)
+    Event(24, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(25, VIS_EVENT_IK_ENABLING_START, -1)
+    Event(25, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(25, VIS_EVENT_STEP_LEFT, -1)
+    Event(26, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(26, VIS_EVENT_STEP_RIGHT, -1)
+    Event(27, VIS_EVENT_IK_ENABLE, -1)
+    Event(28, EVENT_SET_IS_NOT_MOVING, -1)
+    Event(29, VIS_EVENT_STOPANIM, -1)
+    Event(43, VIS_EVENT_STEP_LEFT, -1)
+}
+
+SeqTrack( "spitter_mzi_upset_sprintbarrierjumpup", "mzi_upset_sprintbarrierjumpup.anm2", 0, 89, 30, 1, 0.2)
+{
+    Event(0, VIS_EVENT_RIGHT_FEET_FORWARD, -1)
+    Event(0, EVENT_FALL_FROM_EDGE_DISABLED, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(9, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(9, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(15, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(16, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(22, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(23, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(23, VIS_EVENT_IK_DISABLING_START, -1)
+    Event(27, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(27, EVENT_FALL_ON_HIT_ENABLE, -1)
+    Event(28, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(29, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(30, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(32, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(36, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(36, VIS_EVENT_IK_DISABLE, -1)
+    Event(38, EVENT_FINAL_ROTATION, -1)
+    Event(38, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(44, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(45, EVENT_FINAL_POSITION_2, -1)
+    Event(51, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(52, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(62, VIS_EVENT_IK_ENABLING_START, -1)
+    Event(66, EVENT_TURN_ON_PHYSICS, -1)
+    Event(66, EVENT_FINAL_ROTATION_2, -1)
+    Event(66, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(70, EVENT_FALL_ON_HIT_DISABLE, -1)
+    Event(70, VIS_EVENT_STEP_RIGHT, -1)
+    Event(70, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(70, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(70, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(70, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(71, EVENT_FALL_FROM_EDGE_ENABLED, -1)
+    Event(71, VIS_EVENT_CAN_BREAK_ANIM, -1)
+    Event(71, VIS_EVENT_IK_ENABLE, -1)
+    Event(75, VIS_EVENT_STOPANIM, -1)
+    Event(79, VIS_EVENT_STEP_LEFT, -1)
+    Event(80, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(81, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(88, VIS_EVENT_STEP_RIGHT, -1)
+    Event(89, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+SeqTrack( "spitter_mzi_upset_jump_over_low_02", 	"mzi_upset_jump_over_low_02_mirror.anm2",	 0, 50, 30, 1, 0.2)//50
+{
+    Event(0, EVENT_FALL_FROM_EDGE_DISABLED, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(1, VIS_EVENT_STEP_LEFT, -1)
+    Event(2, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(2, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(8, VIS_EVENT_STEP_RIGHT, -1)
+    Event(8, EVENT_FALL_ON_HIT_ENABLE, -1)
+    Event(8, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(8, VIS_EVENT_IK_DISABLE, -1)
+    Event(8, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(9, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(10, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(18, EVENT_FINAL_ROTATION_2, -1)
+    Event(18, EVENT_FINAL_POSITION_2, -1)
+    Event(21, EVENT_TURN_ON_PHYSICS, -1)
+    Event(24, VIS_EVENT_CAN_BREAK_ANIM, -1)
+    Event(25, VIS_EVENT_STEP_LEFT, -1)
+    Event(27, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(27, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(27, VIS_EVENT_IK_ENABLING_START, -1)
+    Event(30, EVENT_FALL_ON_HIT_DISABLE, -1)
+    Event(30, EVENT_FALL_FROM_EDGE_ENABLED, -1)
+    Event(30, VIS_EVENT_STEP_RIGHT, -1)
+    Event(31, VIS_EVENT_STOPANIM, -1)
+    Event(31, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(31, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(31, VIS_EVENT_IK_ENABLE, -1)
+    Event(40, VIS_EVENT_STEP_LEFT, -1)
+    Event(40, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(40, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(50, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+
+SeqTrack( "spitter_mzi_upset_jump_over_low_02_lleg", 	"mzi_upset_jump_over_low_02.anm2",	 0, 50, 30, 1, 0.2)//50
+{
+    Event(0, VIS_EVENT_LEFT_FEET_FORWARD, -1)
+    Event(0, EVENT_FALL_FROM_EDGE_DISABLED, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(1, VIS_EVENT_STEP_RIGHT, -1)
+    Event(2, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(2, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(8, VIS_EVENT_STEP_LEFT, -1)
+    Event(8, EVENT_FALL_ON_HIT_ENABLE, -1)
+    Event(8, VIS_EVENT_IK_DISABLE, -1)
+    Event(8, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(9, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(9, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(12, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(18, EVENT_FINAL_ROTATION_2, -1)
+    Event(18, EVENT_FINAL_POSITION_2, -1)
+    Event(24, VIS_EVENT_CAN_BREAK_ANIM, -1)
+    Event(25, EVENT_TURN_ON_PHYSICS, -1)
+    Event(25, VIS_EVENT_STEP_RIGHT, -1)
+    Event(26, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(26, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(26, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(26, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(28, VIS_EVENT_IK_ENABLING_START, -1)
+    Event(30, EVENT_FALL_ON_HIT_DISABLE, -1)
+    Event(30, EVENT_FALL_FROM_EDGE_ENABLED, -1)
+    Event(30, VIS_EVENT_STEP_LEFT, -1)
+    Event(30, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(31, VIS_EVENT_IK_ENABLE, -1)
+    Event(31, VIS_EVENT_STOPANIM, -1)
+    Event(33, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(40, VIS_EVENT_STEP_RIGHT, -1)
+    Event(40, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(40, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(49, VIS_EVENT_LEFT_FOOT_LAND, -1)
+}
+
+SeqTrack( "spitter_mzi_upset_sprintbarrierjumpdown", "mzi_upset_sprintbarrierjumpdown.anm2", 0, 83, 30, 1, 0.2)
+{
+    Event(0, EVENT_FALL_FROM_EDGE_DISABLED, -1)
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(0, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(9, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(9, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(15, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(15, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(18, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(19, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(19, EVENT_FALL_ON_HIT_ENABLE, -1)
+    Event(24, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(24, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(24, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(24, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(24, EVENT_FINAL_POSITION, -1)
+    Event(24, EVENT_FINAL_ROTATION, -1)
+    Event(24, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(25, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(26, VIS_EVENT_IK_DISABLE, -1)
+    Event(26, VIS_EVENT_ROTATION_MOD_START, -1)
+    Event(29, EVENT_FINAL_POSITION_2, -1)
+    Event(44, EVENT_FINAL_ROTATION_2, -1)
+    Event(44, EVENT_TURN_ON_PHYSICS, -1)
+    Event(44, VIS_EVENT_ROTATION_MOD_END, -1)
+    Event(45, VIS_EVENT_IK_ENABLING_START, -1)
+    Event(49, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(49, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(49, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(49, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(50, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(50, VIS_EVENT_IK_ENABLE, -1)
+    Event(50, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(50, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(50, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(51, VIS_EVENT_CAN_BREAK_ANIM, -1)
+    Event(55, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(55, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(59, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(59, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(60, EVENT_FALL_ON_HIT_DISABLE, -1)
+    Event(61, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(62, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(63, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(64, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(64, VIS_EVENT_STEP_LEFT, -1)
+    Event(70, VIS_EVENT_STOPANIM, -1)
+    Event(74, VIS_EVENT_STEP_RIGHT, -1)
+    Event(75, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(76, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(83, VIS_EVENT_STEP_LEFT, -1)
+    Event(83, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+}
+
+/// Deadly finish    /////////////////////////////////////////////////////
+
+SeqTrack( "spitter_mz_begin_deadly_finish",			"spitter_mz_deadly_finish.anm2"		, 11, 20, 30, 1, 0.1)
+{
+    Event(0, VIS_EVENT_IK_DISABLE, -1)
+}
+SeqTrack( "spitter_mz_deadly_finish",			    "spitter_mz_deadly_finish.anm2"		, 20, 46, 30, 1, 0.0)
+{
+    Event(0, VIS_EVENT_IK_DISABLE, -1)
+    Event(25, EVENT_FORCE_FALL, -1)
+    Event(25, EVENT_LAY_DOWN, -1)
+}
+
+SeqTrack( "spiter_mz_begin_deadly_finish",			"spitter_mz_deadly_finish.anm2"		, 11, 20, 30, 1, 0.1)
+{
+    Event(0, VIS_EVENT_IK_DISABLE, -1)
+}
+
+
+SeqTrack( "spiter_mz_begin_deadly_finish_blunt",			"spitter_mz_deadly_finish.anm2"		, 7, 11, 30, 1, 0.1)
+SeqTrack( "spiter_mz_deadly_finish_blunt",					"spitter_mz_deadly_finish.anm2"		, 11, 74, 30, 1, 0.1)
+{
+	Event(0, VIS_EVENT_IK_DISABLE, -1)
+	Event(7, 0, 0)
+	{
+		PlayFx("death_from_above_sequence.fx", [0, 0, -1], "head", 1, [0, 0.1, 0], 0)
+	}
+	Event(36, EVENT_FORCE_FALL, -1)
+    Event(36, VIS_EVENT_ORIGINAL_BODY_SCALE, -1)
+}
+
+/////////////////////////////////////////////////////////////////////
+
+
+
+SeqTrack("spitter_strafe_front_start", "spitter_strafe_front_start.anm2", 0, 48, 30, 1, 0.5)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(0, VIS_EVENT_STEP_RIGHT, -1)
+    Event(2, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(4, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(11, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(11, VIS_EVENT_STEP_LEFT, -1)
+    Event(13, VIS_EVENT_STOPANIM, -1)
+    Event(18, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(24, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(24, VIS_EVENT_STEP_RIGHT, -1)
+    Event(25, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(34, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(34, VIS_EVENT_STEP_LEFT, -1)
+    Event(36, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(44, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(44, VIS_EVENT_STEP_RIGHT, -1)
+    Event(46, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+}
+SeqTrack("spitter_strafe_front_stop", "spitter_strafe_front_stop.anm2", 0, 84, 30, 1, 0.5)
+{
+    Event(0, VIS_EVENT_IK_ENABLE, -1)
+    Event(6, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(6, VIS_EVENT_STEP_RIGHT, -1)
+    Event(9, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(17, VIS_EVENT_STEP_LEFT, -1)
+    Event(17, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(20, VIS_EVENT_LEFT_FOOT_LIFT, -1)
+    Event(29, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(29, VIS_EVENT_STEP_RIGHT, -1)
+    Event(29, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(39, VIS_EVENT_RIGHT_FOOT_LIFT, -1)
+    Event(41, VIS_EVENT_STEP_LEFT, -1)
+    Event(41, VIS_EVENT_LEFT_FOOT_LAND, -1)
+    Event(53, VIS_EVENT_STOPANIM, -1)
+    Event(59, VIS_EVENT_RIGHT_FOOT_LAND, -1)
+    Event(59, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+// nagewaza
+SeqTrack("spitter_nagewaza_begin_back", 	"infected_nagewaza_back.anm2",		 0, 10, 30, 1, 0.2)
+{
+	Event(0, VIS_EVENT_IK_DISABLE, -1)
+	Event(9.99, VIS_EVENT_STOPANIM, -1)
+}
+SeqTrack("spitter_nagewaza_finish_back","infected_nagewaza_back.anm2", 10 , 127 , 30 , 1, 0.0 )
+{
+    Event(0, VIS_EVENT_IK_DISABLE, -1)
+    Event(1, VIS_EVENT_BLOCK_GENERIC_MIMIC, -1)
+    Event(12, VIS_EVENT_ORIGINAL_BODY_SCALE, -1)
+    Event(12, EVENT_CHECK_COLLISION_TO_FALL_ENABLE, -1)
+    Event(55, EVENT_CHECK_COLLISION_TO_FALL_DISABLE, -1)
+    Event(106, VIS_EVENT_STOPANIM, -1)
+}
+SeqTrack("spitter_nagewaza_begin_left", 	"infected_nagewaza_left.anm2",		 0, 10, 30, 1, 0.2)
+{
+	Event(0, VIS_EVENT_IK_DISABLE, -1)
+	Event(9.99, VIS_EVENT_STOPANIM, -1)
+}
+SeqTrack("spitter_nagewaza_finish_left","infected_nagewaza_left.anm2", 10 , 107 , 30 , 1, 0.0 )
+{
+    Event(0, VIS_EVENT_IK_DISABLE, -1)
+    Event(1, VIS_EVENT_BLOCK_GENERIC_MIMIC, -1)
+    Event(11, VIS_EVENT_ORIGINAL_BODY_SCALE, -1)
+    Event(20, EVENT_CHECK_COLLISION_TO_FALL_ENABLE, -1)
+    Event(20, EVENT_CAN_BREAK_GRAB_ON_DAMAGE, -1)
+    Event(58, EVENT_CHECK_COLLISION_TO_FALL_DISABLE, -1)
+    Event(78, VIS_EVENT_STOPANIM, -1)
+}
+SeqTrack("spitter_nagewaza_begin_right", 	"infected_nagewaza_right.anm2",		 0, 10, 30, 1, 0.2)
+{
+	Event(0, VIS_EVENT_IK_DISABLE, -1)
+	Event(9.99, VIS_EVENT_STOPANIM, -1)
+}
+SeqTrack("spitter_nagewaza_finish_right","infected_nagewaza_right.anm2", 10 , 110 , 30 , 1, 0.0 )
+{
+    Event(0, VIS_EVENT_IK_DISABLE, -1)
+    Event(1, VIS_EVENT_BLOCK_GENERIC_MIMIC, -1)
+    Event(11, VIS_EVENT_ORIGINAL_BODY_SCALE, -1)
+    Event(25, EVENT_CHECK_COLLISION_TO_FALL_ENABLE, -1)
+    Event(25, EVENT_CAN_BREAK_GRAB_ON_DAMAGE, -1)
+    Event(60, EVENT_CHECK_COLLISION_TO_FALL_DISABLE, -1)
+    Event(81, VIS_EVENT_STOPANIM, -1)
+}

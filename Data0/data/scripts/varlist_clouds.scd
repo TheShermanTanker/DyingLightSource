@@ -1,0 +1,15 @@
+!include( "varlist_clouds.scr" )
+
+VarFloat("f_pp_clouds_opacity", 1.0)
+VarFloat("f_pp_clouds_intensity", 10.0)
+VarFloat("f_pp_clouds_occlusion", 1.0)
+VarFloat("f_pp_clouds_scale", 0.0001)
+VarFloat("f_pp_clouds_speed", 0.1)
+VarFloat("f_pp_clouds_dynamic_on", 1.0)
+VarFloat("f_pp_clouds_dynamic_height", 1.0)
+VarFloat("f_pp_clouds_dynamic_height_scale", 1.0)
+VarFloat("f_pp_clouds_dynamic_depth_blending", 1.0)
+VarFloat("f_pp_clouds_dynamic_cover", 0.0)
+VarFloat("f_pp_clouds_shadows", 1.0)
+
+VarVec3("v_pp_clouds_clr", [1.0, 1.0, 1.0])

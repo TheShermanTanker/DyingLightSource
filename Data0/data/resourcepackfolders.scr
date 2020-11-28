@@ -1,0 +1,23 @@
+import "enginedefs.mth"
+import "ResourcePackCfg.scr"
+
+sub main()
+{
+	default(MF_DEFAULT, MF_INSTANCING, MF_INSTANCING | MF_DISTANCE_FADE, MF_SKINNING, MF_SKINNING | MF_SKINNING_ONE_BONE);
+
+	path("data\shaders\postprocess", MF_DEFAULT);
+	path("data\lights", MF_DEFAULT, MF_INSTANCING);
+	path("data\menu", MF_DEFAULT);
+	path("data\fx\meshes", MF_DEFAULT, MF_INSTANCING);
+	path("data\fx", MF_DEFAULT);
+	path("data\characters", MF_DEFAULT, MF_SKINNING, MF_SKINNING | MF_SKINNING_ONE_BONE, MF_SKINNING | MF_MORPH_TARGETS, MF_INSTANCING);
+	path("data\maps", MF_DEFAULT, MF_INSTANCING);
+	path("data\maps\tech_art", MF_DEFAULT, MF_SKINNING, MF_SKINNING | MF_SKINNING_ONE_BONE, MF_SKINNING | MF_MORPH_TARGETS, MF_INSTANCING);
+
+	exclude("*.msh.dds");
+	exclude("*.eds.dds");
+
+	resources(_MESH_, _TEXTURE_, _MATERIAL_);
+	
+	mipcalc_mips(5.0, 7.0, 9.0, 11.0);
+}

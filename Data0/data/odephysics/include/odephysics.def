@@ -1,0 +1,73 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Definicja polecen fizyki ODE
+// Ze skryptu korzysta CODEPhysics.cpp i klasy pochodne (fizyki CODEPhysicsSingle, CODEPhysicsRagdoll, itd.)
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+!include("..\\..\\surface.def")
+
+//-------------------------------------------------------------------------------------------------
+!PhysicsParams()                            // wspolne parametry fizyki
+!SynchroInterpolation(f)                    // wspolczynnik interpolacji podczas synchronizacji mesha (1 - bez interpolacji)                
+!SetMaxVels(f,f)                            // maksymalna predkosc liniowa [m/s] i katowa [rad/s] ciala (-1 disabled)
+!SetAutoDisableVels(f,f,f)                  // predkosci wylaczenia fizyki: liniowa, katowa i czas trwania
+!SetVelsGate(f,f)                           // bramka szumow dla predkosci liniowej i katowej - po wspolrzednych (np. jesli |vSpeed.fX| < f to zerujemy vSpeed.fX)
+!SetAbsorbers(f,f)                          // wspolczynniki tlumienia predkosci liniowej i katowej przy kazdym kroku symulacji
+!EnableMassPoint(i)                         // wlacza/wylacza interpretacje bryly ODE jako punktu materialnego (bez predkosci obrotowej)
+!SetWaterFloat(f)                           // plywalnosc
+!SetMaxWatchingTime(f)                      // czas przebywania fizyki w stanie WATCHING - czuwania na impuls/kolizje przed calkowitym wylaczeniam
+!SetPhysicsSurfaceID(i)                     // typ powierzchni (SurfaceID) dla calej fizyki
+!SetExtraGravity(f,f,f)                     // ustawienie dodatkowej grawitacji fizyki (poza standardowa zdefiniowana dla swiata)
+!Awakener(i)                                // czy fizyka ma budzic inne fizyki w swoim sasiedztwie
+!MaxLifeTime(f)                             // maksymalny czas zycia fizyki [s]
+!SynchroMode(s)                             // set mesh synchro mode: (None, CenterBody, Cloth, Rope, PhysicsDependant)
+!AllowDepthCompression(i)                   // czy podczas kolizji z obiektami z fizyki stosowana jest kompresja depth
+!WindInfluence(f)                           // wplyw wiatru na fizyke (default: 1)
+!CollisionDamageToMeMul(f,f)                // mnoznik damagu od kolizji zadawanych ownerowi (poziome, pionowe)
+!CollisionDamageToMeSpeedThreshold(f,f)     // prog predkosci przy damagu od kolizji zadawanych ownerowi (poziome, pionowe)
+!CollisionDamageToOtherMul(f,f)             // mnoznik damagu od kolizji zadawanych innym obiektom (poziome, pionowe)
+!CollisionDamageToOtherSpeedThreshold(f,f)  // prog predkosci przy damagu od kolizji zadawanych innym obiektom (poziome, pionowe)
+!NotCollisionDamageToMeMul(f)               // mnoznik damagu zadawanego ownerowi (innego niz od kolizji, np. od strzalow) - default 1
+!QuickStepNumIterations(i)                  // liczba iteracji metody QuickStep przy obsludze wyspy zawirajacej tylko te fizyke
+!QuickStepSortingMethod(i)                  // method of sorting used by quickstep solver:
+                                            // 0 - no sorting,
+                                            // 1 - randomize joints (default),
+                                            // 2 - sort joints (accurate but costs a lot of time),
+!AllowContinuousCollisions(i,i)             // enables ContinuousCollisions for that physics ("world" settings can bypass that)
+											// i - enables CC for collisions with static obstacles
+											// i - enables CC for collisions with dynamic obstacles
+!SynchroMeshExtrapolation(i)                // wlacza ekstrapolacje pozycji i rotacji mesha na ramce renderingu - default 1
+!TerrainCacheParams(i,i,f)                  // parametry cache'a terenu (patrz ODEWorld.def)
+!StaticMeshCacheParams(i,i,f)               // parametry cache'a meshy statycznych (patrz ODEWorld.def)
+!TreesCacheParams(i,i,f)                    // parametry cache'a drzew (patrz ODEWorld.def)
+!EnablePlatformAutoMounting(i)              // if platform automounting system is enabled (1) or disabled(0)
+!MaxPlatformInfluenceDuration(f)            // duration of platform speed influence on this physics [s]   
+!PlodParams(f,f,f)                          // physics LOD parameters:
+                                            // f - LOD 0 / LOD 1 transition distance (near/far)
+                                            // f - LOD 1 / LOD 2 transition distance (far/outside)
+                                            // f - not in frustum on LOD influence
+!EnableAPBIn(i)                             // wlaczenie/wylaczenie Adaptive Physics Blending In - wlaczanie fizyki dostosowujace sie do pozycji mesh elementow
+!EnableAPBOut(i)                            // wlaczenie/wylaczenie Adaptive Physics Blending Out - wylaczanie fizyki z dostosowaniem sie do pozycji mesh elementow
+!EnableFindObjectsCache(i)                  // enables/disables cache used by collision routines when objects are pulled out from grid by FindObjectsInExtents
+!CollisionSfx(i,i)                          // enables/disables collision sfx (sounds and fxs played on physics contact)
+                                            // i - enable sounds, i - enable fxs
+!PreciseCC(i)								// enables/disables continuous collisions "precise mode" (CC at all should be enabled by Physics_EnableContinuousCollisions)
+											// "precise mode" means cc will be calculated even if object has small velocity - obviously it is slower
+											// default: disabled
+											
+//-------------------------------------------------------------------------------------------------
+!ContactParams(s)                           // definiuje parametry kontaktu
+!ZeroFlags()
+!SetModeFlag(s)
+!ClearModeFlag(s)
+!Mu(f)
+!Mu2(f)
+!Bounce(f)
+!BounceVel(f)
+!SoftERP(f)
+!SoftCFM(f)
+!Motion1(f)
+!Motion2(f)
+!Slip1(f)
+!Slip2(f)
+!Ignore(i)
+

@@ -1,0 +1,778 @@
+import "CarStuff.scr" 
+//  Tworzenie polaczen
+// 		  AddConnection(z_kad, przez_co, dokad, waga);
+//
+// UWAGA: nie nalezy deklarowac stanu o nazwie START, gdyz jest to nazwa zarezerwowana
+// 		  i nie bedzie on dodany, nie nalezy nazywac dwuch stanow tak samo ktore moga zostac wrzucone do tych samych grafow
+//        ogolnie Manager, ktory je laduje sra asercjami wiec mozna po nich wywnioskowac co jest nie ta
+// Spis wszystkich pol jakie moga byc ustawione w Stanie 
+// AddState("Nazwa_stanu") {
+//		  AnimName(string)            
+//        MorphTime(float)            
+//        VehicleAnimName(string)            
+//        VehicleBoneToAnim(string)            
+//        IsStartPosFromPlayer(bool)            
+//        IsLookContrVehContr(bool)            
+//        CanShoot(bool)            
+//        IsState(bool)            
+//        LookAnglesMax(float, float)            
+//        LookAnglesMin(float, float)            
+//        StartOffset(vec3)             // WARNING!!! value in cm conversion to m applied in code
+//        StartElementName(string)
+//        DestOffset(vec3)              // WARNING!!! value in cm conversion to m applied in code
+//        DestElementName(string)
+//        LookSpringTime(float)            
+//        BodyRotStart(float)           
+//        BodyRotEnd(float)           
+//        IsEndState(bool)           
+//        Condition(VehicleCondition::TYPE)
+//        Type(VehiclePlaceState::TYPE)
+//        PassangerRole(EPassengerRole::TYPE) }
+
+sub Buggy()
+{
+	AddState("WALK")
+    {  
+		Type(VehiclePlaceState_Outside);
+		IsState(false);
+		IsStartPosFromPlayer(true);
+		LookSpringTime(1.0);
+    }
+    
+    AddState("START_ENGINE")
+    {
+		IsState(false);		
+		Type(VehiclePlaceState_Seat);			
+		AnimName("Vehicle_StartEngine");
+		PassangerRole(PassengerRole_VEHICLE_DRIVER);	
+		LookAnglesMin(-115.0, -20.0);
+		LookAnglesMax( 100.0,  80.0);
+		StartElementName("ddriver");
+		StartOffset([0.0,0.0,0.0]);
+		DestElementName("ddriver");
+		DestOffset([0.0,0.0,0.0]);
+		IsLookContrVehContr(true);	
+		MorphTime(0.1);
+		IsDriver(true);
+    }
+	
+	AddState("OUTSIDE_DRIVER_END")
+    {        
+		Type(VehiclePlaceState_Outside);
+		IsState(true);		
+		StartElementName("ddriver");
+		StartOffset([132.64,-85.99,-43.79]);
+		DestElementName("ddriver");
+		DestOffset([132.64,-85.99,-43.79]);
+		BodyRotStart(80.9);
+		BodyRotEnd(80.90);
+		IsEndState(true);
+    }
+	
+	AddState("DRIVER")
+    {
+		IsState(true);		
+		Type(VehiclePlaceState_Seat);			
+		AnimName("Vehicle_DrivingBuggy");
+		PassangerRole(PassengerRole_VEHICLE_DRIVER);	
+		LookAnglesMin(-115.0, -20.0);
+		LookAnglesMax( 100.0,  80.0);
+		StartElementName("ddriver");
+		StartOffset([0.0,0.0,0.0]);
+		DestElementName("ddriver");
+		DestOffset([0.0,0.0,0.0]);
+		IsLookContrVehContr(true);	
+		MorphTime(0.1);
+		IsDriver(true);
+		CanPunch(PassengerRole_VEHICLE_GRAB_FRONT);
+		CanPunch(PassengerRole_VEHICLE_GRAB_FRONT_RIGHT);
+		CanPunch(PassengerRole_VEHICLE_GRAB_FRONT_LEFT);
+    }
+
+	
+	AddState("DRIVER_PUNCH_FRONT_RIGHT")
+    {
+		IsState(false);		
+		Type(VehiclePlaceState_PunchFrontR);			
+		AnimName("Buggy_Driver_HitFront_Right");
+		PassangerRole(PassengerRole_VEHICLE_DRIVER);	
+		LookAnglesMin(-115.0, -20.0);
+		LookAnglesMax( 100.0,  80.0);
+		StartElementName("ddriver");
+		StartOffset([0.0,0.0,0.0]);
+		DestElementName("ddriver");
+		DestOffset([0.0,0.0,0.0]);
+		IsLookContrVehContr(true);	
+		MorphTime(0.0);
+		IsDriver(true);
+    }
+	
+	AddState("DRIVER_PUNCH_FRONT_LEFT")
+    {
+		IsState(false);		
+		Type(VehiclePlaceState_PunchFrontL);			
+		AnimName("Buggy_Driver_HitFront_Left");
+		PassangerRole(PassengerRole_VEHICLE_DRIVER);	
+		LookAnglesMin(-115.0, -20.0);
+		LookAnglesMax( 100.0,  80.0);
+		StartElementName("ddriver");
+		StartOffset([0.0,0.0,0.0]);
+		DestElementName("ddriver");
+		DestOffset([0.0,0.0,0.0]);
+		IsLookContrVehContr(true);	
+		MorphTime(0.0);
+		IsDriver(true);
+    }
+
+	AddState("DRIVER_PUNCH_RIGHT")
+    {
+		IsState(false);		
+		Type(VehiclePlaceState_PunchFrontRight);			
+		AnimName("Buggy_Driver_HitRight");
+		PassangerRole(PassengerRole_VEHICLE_DRIVER);	
+		LookAnglesMin(-115.0, -20.0);
+		LookAnglesMax( 100.0,  80.0);
+		StartElementName("ddriver");
+		StartOffset([0.0,0.0,0.0]);
+		DestElementName("ddriver");
+		DestOffset([0.0,0.0,0.0]);
+		IsLookContrVehContr(true);	
+		MorphTime(0.0);
+		IsDriver(true);
+    }
+	
+	AddState("DRIVER_PUNCH_LEFT")
+    {
+		IsState(false);		
+		Type(VehiclePlaceState_PunchFrontLeft);			
+		AnimName("Buggy_Driver_HitLeft");
+		PassangerRole(PassengerRole_VEHICLE_DRIVER);	
+		LookAnglesMin(-115.0, -20.0);
+		LookAnglesMax( 100.0,  80.0);
+		StartElementName("ddriver");
+		StartOffset([0.0,0.0,0.0]);
+		DestElementName("ddriver");
+		DestOffset([0.0,0.0,0.0]);
+		IsLookContrVehContr(true);	
+		MorphTime(0.0);
+		IsDriver(true);
+    }
+
+	AddState("DRIVER_TO_OUTSIDE")
+    {
+		Type(VehiclePlaceState_Seat);		
+		PassangerRole(PassengerRole_VEHICLE_NONE);		
+		VehicleBoneToAnim("");
+		Condition(VehicleCondition_InputGetOut);	
+    }  
+	Graph()
+    {
+		AddConnection("START", "WALK", "DRIVER", 1.0);	
+		
+        AddConnection("DRIVER", "START_ENGINE", "DRIVER", 1.0);
+		AddConnection("DRIVER", "DRIVER_TO_OUTSIDE", "OUTSIDE_DRIVER_END", 1.0); 
+		AddConnection("DRIVER", "DRIVER_PUNCH_FRONT_RIGHT", "DRIVER", 1.0);
+		AddConnection("DRIVER", "DRIVER_PUNCH_FRONT_LEFT", "DRIVER", 1.0);
+		AddConnection("DRIVER", "DRIVER_PUNCH_LEFT", "DRIVER", 1.0);
+		AddConnection("DRIVER", "DRIVER_PUNCH_RIGHT", "DRIVER", 1.0);
+    }
+}
+
+
+
+
+sub BuggyBack()
+{
+	AddState("START_BACK")
+    {
+		Type(VehiclePlaceState_Outside);
+		IsState(true);		
+		StartElementName("DPassenger");
+		StartOffset([-133.86, -85.99, -43.78]);
+		DestElementName("DPassenger");
+		DestOffset([-133.86, -85.99, -43.78]);
+		BodyRotStart(-80.0);
+		BodyRotEnd(-80.0);	
+    }
+	
+	AddState("END_BACK")
+    {
+		Type(VehiclePlaceState_Outside);
+		IsState(true);		
+		StartElementName("DPassenger");
+		StartOffset([-133.86, -85.99, -43.78]);
+		DestElementName("DPassenger");
+		DestOffset([-133.86, -85.99, -43.78]);
+		BodyRotStart(-85.0);
+		BodyRotEnd(-85.0);	
+		IsEndState(true);
+    }
+	
+	
+    AddState("LEAN")
+    { 
+		IsState(true);	
+		CanShoot(true);
+		Type(VehiclePlaceState_Leaning);			
+		AnimName("Vehicle_PassengerBuggy", "Lean");
+		PassangerRole(PassengerRole_VEHICLE_PASSENGER);	
+		LookAnglesMin(-180.0, -60.0);
+		LookAnglesMax( 180.0,  80.0);
+		StartElementName("DPassenger");
+		StartOffset([0.0,0.0,0.0]);
+		DestElementName("DPassenger");
+		DestOffset([0.0,0.0,0.0]);	
+		MorphTime(0.1);
+    }
+    
+    AddState("LEAN120L", "LEAN")
+    { 
+		AnimName("Vehicle_PassengerBuggy", "Lean120L");
+        //AnimName("Vehicle_PassengerBuggy", "Lean");
+        BodyRotStart(120.0);
+		BodyRotEnd(120.0);	
+		CanPunch(PassengerRole_VEHICLE_GRAB_BACK );
+		CanPunch(PassengerRole_VEHICLE_GRAB_BACK_RIGHT);
+    }
+    
+    AddState("LEAN120R", "LEAN")
+    { 
+		AnimName("Vehicle_PassengerBuggy", "Lean120R");
+        //AnimName("Vehicle_PassengerBuggy", "Lean");
+        BodyRotStart(-120.0);
+		BodyRotEnd(-120.0);	
+		CanPunch(PassengerRole_VEHICLE_GRAB_BACK );
+		CanPunch(PassengerRole_VEHICLE_GRAB_BACK_LEFT);
+    }
+
+	AddState("PUNCH_RIGHT")
+    {
+		IsState(false);		
+		CanShoot(false);
+		Type(VehiclePlaceState_PunchBackR);			
+		AnimName("Buggy_Passenger_HitLeft");
+		PassangerRole(PassengerRole_VEHICLE_PASSENGER);	
+		LookAnglesMin(-180.0, -60.0);
+		LookAnglesMax( 180.0,  80.0);
+		StartElementName("DPassenger");
+		StartOffset([0.0,0.0,0.0]);
+		DestElementName("DPassenger");
+		DestOffset([0.0,0.0,0.0]);	
+		MorphTime(0.1);
+    }
+	
+	AddState("PUNCH_LEFT")
+    {
+		IsState(false);		
+		CanShoot(false);
+		Type(VehiclePlaceState_PunchBackL);			
+		AnimName("Buggy_Passenger_HitRight");
+		PassangerRole(PassengerRole_VEHICLE_PASSENGER);	
+		LookAnglesMin(-180.0, -60.0);
+		LookAnglesMax( 180.0,  80.0);
+		StartElementName("DPassenger");
+		StartOffset([0.0,0.0,0.0]);
+		DestElementName("DPassenger");
+		DestOffset([0.0,0.0,0.0]);	
+		MorphTime(0.1);
+    }
+	
+	AddState("PUNCH_BACK_LEFT")
+    {
+		IsState(false);		
+		CanShoot(false);
+		Type(VehiclePlaceState_PunchBackLeft);			
+		AnimName("Buggy_Passenger_HitBack_Right");
+		PassangerRole(PassengerRole_VEHICLE_PASSENGER);	
+		LookAnglesMin(-180.0, -60.0);
+		LookAnglesMax( 180.0,  80.0);
+		StartElementName("DPassenger");
+		StartOffset([0.0,0.0,0.0]);
+		DestElementName("DPassenger");
+		DestOffset([0.0,0.0,0.0]);	
+		MorphTime(0.1);
+    }
+	
+	AddState("PUNCH_BACK_RIGHT")
+    {
+		IsState(false);		
+		CanShoot(false);
+		Type(VehiclePlaceState_PunchBackRight);			
+		AnimName("Buggy_Passenger_HitBack_Left");
+		PassangerRole(PassengerRole_VEHICLE_PASSENGER);	
+		LookAnglesMin(-180.0, -60.0);
+		LookAnglesMax( 180.0,  80.0);
+		StartElementName("DPassenger");
+		StartOffset([0.0,0.0,0.0]);
+		DestElementName("DPassenger");
+		DestOffset([0.0,0.0,0.0]);	
+		MorphTime(0.1);
+    }
+    
+    AddState("lean_to_inside_base")
+    { 
+		IsState(false);	
+		CanShoot(false);
+		Type(VehiclePlaceState_Seat);			
+		AnimName("Vehicle_PassengerBuggy", "LeanToInside");
+		PassangerRole(PassengerRole_VEHICLE_PASSENGER);	
+		LookAnglesMin(-160.0, -10.0);
+		LookAnglesMax( 160.0,  80.0);
+		StartElementName("DPassenger");
+		StartOffset([0.0,0.0,0.0]);
+		DestElementName("DPassenger");
+		DestOffset([0.0,0.0,0.0]);	
+		MorphTime(0.1);
+    }
+    
+    AddState("LEAN_TO_INSIDE", "lean_to_inside_base")
+    { 
+		AnimName("Vehicle_PassengerBuggy", "LeanToInside");
+        Condition(VehicleCondition_InputHide);
+    }
+    
+    AddState("LEAN_TO_INSIDE_FAST", "lean_to_inside_base")
+    { 
+		AnimName("Vehicle_PassengerBuggy", "LeanToInsideFast");
+		MorphTime(0.0);
+        Condition(VehicleCondition_Collision);
+    }
+    
+    AddState("LEAN120L_TO_INSIDE", "lean_to_inside_base")
+    { 
+		AnimName("Vehicle_PassengerBuggy", "Lean120LToInside");
+        BodyRotStart(120.0);
+		BodyRotEnd(0.0);	
+        Condition(VehicleCondition_InputHide);
+    }
+    
+    AddState("LEAN120L_TO_INSIDE_FAST", "lean_to_inside_base")
+    { 
+		AnimName("Vehicle_PassengerBuggy", "Lean120LToInsideFast");
+        BodyRotStart(120.0);
+		BodyRotEnd(0.0);	
+		MorphTime(0.0);
+        Condition(VehicleCondition_Collision);
+    }
+    
+    AddState("LEAN120R_TO_INSIDE", "lean_to_inside_base")
+    { 
+		AnimName("Vehicle_PassengerBuggy", "Lean120RToInside");
+        BodyRotStart(-120.0);
+		BodyRotEnd(0.0);	
+        Condition(VehicleCondition_InputHide);
+    }
+    
+    AddState("LEAN120R_TO_INSIDE_FAST", "lean_to_inside_base")
+    { 
+		AnimName("Vehicle_PassengerBuggy", "Lean120RToInsideFast");
+        BodyRotStart(-120.0);
+		BodyRotEnd(0.0);	
+        Condition(VehicleCondition_Collision);
+    }
+    
+    AddState("INSIDE")
+    { 
+		IsState(true);	
+		CanShoot(false);
+		Type(VehiclePlaceState_Seat);			
+		AnimName("Vehicle_PassengerBuggy", "Inside");
+		PassangerRole(PassengerRole_VEHICLE_PASSENGER);	
+		LookAnglesMin(-160.0, -10.0);
+		LookAnglesMax( 160.0,  80.0);
+		StartElementName("DPassenger");
+		StartOffset([0.0,0.0,0.0]);
+		DestElementName("DPassenger");
+		DestOffset([0.0,0.0,0.0]);	
+		MorphTime(0.1);
+    }
+    
+    AddState("inside_to_lean_base")
+    { 
+		IsState(false);	
+		CanShoot(false);
+		Type(VehiclePlaceState_Seat);			
+		PassangerRole(PassengerRole_VEHICLE_PASSENGER);	
+		LookAnglesMin(-160.0, -20.0);
+		LookAnglesMax( 160.0,  80.0);
+		StartElementName("DPassenger");
+		StartOffset([0.0,0.0,0.0]);
+		DestElementName("DPassenger");
+		DestOffset([0.0,0.0,0.0]);	
+		MorphTime(0.1);
+        Condition(VehicleCondition_InputLeanOut);
+    }
+    
+    AddState("INSIDE_TO_LEAN", "inside_to_lean_base")
+    { 
+		AnimName("Vehicle_PassengerBuggy", "InsideToLean");
+        Condition(VehicleCondition_LookForward);
+    }
+    
+    AddState("INSIDE_TO_LEAN120L", "inside_to_lean_base")
+    { 
+		AnimName("Vehicle_PassengerBuggy", "InsideToLean120L");
+        //AnimName("Vehicle_PassengerBuggy", "InsideToLean");
+        BodyRotStart(0.0);
+		BodyRotEnd(120.0);	
+        Condition(VehicleCondition_LookLeft120);
+    }
+    
+    AddState("INSIDE_TO_LEAN120R", "inside_to_lean_base")
+    { 
+		AnimName("Vehicle_PassengerBuggy", "InsideToLean120R");
+        //AnimName("Vehicle_PassengerBuggy", "InsideToLean");
+        BodyRotStart(0.0);
+		BodyRotEnd(-120.0);	
+        Condition(VehicleCondition_LookRight120);
+    }
+    
+    
+    AddState("lean_to_lean") //base state definition
+    { 
+		IsState(false);	
+		CanShoot(true);
+		Type(VehiclePlaceState_Leaning);
+		PassangerRole(PassengerRole_VEHICLE_PASSENGER);	
+		LookAnglesMin(-180.0, -60.0);
+		LookAnglesMax( 180.0,  80.0);
+		StartElementName("DPassenger");
+		StartOffset([0.0,0.0,0.0]);
+		DestElementName("DPassenger");
+		DestOffset([0.0,0.0,0.0]);	
+		MorphTime(0.1);
+    }
+	
+    AddState("LEAN120L_TO_LEAN120R", "lean_to_lean")
+    {
+        AnimName("Vehicle_PassengerBuggy", "Lean120LToLean120R");
+        //AnimName("Vehicle_PassengerBuggy", "Lean");
+        BodyRotStart(120.0);
+		BodyRotEnd(-120.0);	
+        Condition(VehicleCondition_LookRight120);
+    }
+    
+    AddState("LEAN120R_TO_LEAN120L", "lean_to_lean")
+    {
+        AnimName("Vehicle_PassengerBuggy", "Lean120RToLean120L");
+        //AnimName("Vehicle_PassengerBuggy", "Lean");
+        BodyRotStart(-120.0);
+		BodyRotEnd(120.0);	
+        Condition(VehicleCondition_LookLeft120);
+    }
+    
+    AddState("LEAN120L_TO_LEAN", "lean_to_lean")
+    {
+        AnimName("Vehicle_PassengerBuggy", "Lean120LToLean");
+        //AnimName("Vehicle_PassengerBuggy", "Lean");
+        BodyRotStart(120.0);
+		BodyRotEnd(0.0);	
+        Condition(VehicleCondition_LookForward);
+    }
+    
+    AddState("LEAN_TO_LEAN120L", "lean_to_lean")
+    {
+        AnimName("Vehicle_PassengerBuggy", "LeanToLean120L");
+        //AnimName("Vehicle_PassengerBuggy", "Lean");
+        BodyRotStart(0.0);
+		BodyRotEnd(120.0);	
+        Condition(VehicleCondition_LookLeft120);
+    }
+    
+    AddState("LEAN120R_TO_LEAN", "lean_to_lean")
+    {
+        AnimName("Vehicle_PassengerBuggy", "Lean120RToLean");
+        //AnimName("Vehicle_PassengerBuggy", "Lean");
+        BodyRotStart(-120.0);
+		BodyRotEnd(0.0);	
+        Condition(VehicleCondition_LookForward);
+    }
+    
+    AddState("LEAN_TO_LEAN120R", "lean_to_lean")
+    {
+        AnimName("Vehicle_PassengerBuggy", "LeanToLean120R");
+        //AnimName("Vehicle_PassengerBuggy", "Lean");
+        BodyRotStart(0.0);
+		BodyRotEnd(-120.0);	
+        Condition(VehicleCondition_LookRight120);
+    }
+    
+    AddState("LEAVE_BACK")
+    {
+		Type(VehiclePlaceState_Seat);			
+		PassangerRole(PassengerRole_VEHICLE_NONE);
+		Condition(VehicleCondition_InputGetOut);	
+        DiscontinuousMovment(true);
+    }
+    
+    AddState("ENTER_BACK")
+    {
+		Type(VehiclePlaceState_Seat);			
+		PassangerRole(PassengerRole_VEHICLE_NONE);
+		Condition(VehicleCondition_InputGetOut);	
+    }
+	
+	Graph()
+    {
+        //enter 
+		AddConnection("START",      "ENTER_BACK", "INSIDE", 1.0);
+		
+        //leave
+		AddConnection("LEAN",       "LEAVE_BACK", "END_BACK", 1.0);
+        AddConnection("LEAN120L",   "LEAVE_BACK", "END_BACK", 1.0);
+        AddConnection("LEAN120R",   "LEAVE_BACK", "END_BACK", 1.0);        
+        AddConnection("INSIDE",     "LEAVE_BACK", "END_BACK", 1.0); 
+        
+        //lean <-> inside
+        AddBidirectionalConnection("LEAN",      "LEAN_TO_INSIDE",       "INSIDE_TO_LEAN",       "INSIDE");
+        AddBidirectionalConnection("LEAN120L",  "LEAN120L_TO_INSIDE",   "INSIDE_TO_LEAN120L",   "INSIDE");
+        AddBidirectionalConnection("LEAN120R",  "LEAN120R_TO_INSIDE",   "INSIDE_TO_LEAN120R",   "INSIDE");
+        
+        //collision
+        AddConnection("LEAN",                  "LEAN_TO_INSIDE_FAST",       "INSIDE", 0.01);
+        AddConnection("LEAN_TO_INSIDE",        "LEAN_TO_INSIDE_FAST",       "INSIDE", 0.01);
+        AddConnection("INSIDE_TO_LEAN",        "LEAN_TO_INSIDE_FAST",       "INSIDE", 0.01);
+        AddConnection("LEAN120L_TO_LEAN",      "LEAN_TO_INSIDE_FAST",       "INSIDE", 0.01);
+        AddConnection("LEAN120R_TO_LEAN",      "LEAN_TO_INSIDE_FAST",       "INSIDE", 0.01);
+        
+        AddConnection("LEAN120L",              "LEAN120L_TO_INSIDE_FAST",   "INSIDE", 0.01);
+        AddConnection("LEAN120L_TO_INSIDE",    "LEAN120L_TO_INSIDE_FAST",   "INSIDE", 0.01);
+        AddConnection("INSIDE_TO_LEAN120L",    "LEAN120L_TO_INSIDE_FAST",   "INSIDE", 0.01);
+        AddConnection("LEAN_TO_LEAN120L",      "LEAN120L_TO_INSIDE_FAST",   "INSIDE", 0.01);
+        AddConnection("LEAN120R_TO_LEAN120L",  "LEAN120L_TO_INSIDE_FAST",   "INSIDE", 0.01);
+        
+        AddConnection("LEAN120R",              "LEAN120R_TO_INSIDE_FAST",   "INSIDE", 0.01);
+        AddConnection("LEAN120R_TO_INSIDE",    "LEAN120R_TO_INSIDE_FAST",   "INSIDE", 0.01);
+        AddConnection("INSIDE_TO_LEAN120R",    "LEAN120R_TO_INSIDE_FAST",   "INSIDE", 0.01);
+        AddConnection("LEAN_TO_LEAN120R",      "LEAN120R_TO_INSIDE_FAST",   "INSIDE", 0.01);
+        AddConnection("LEAN120L_TO_LEAN120R",  "LEAN120R_TO_INSIDE_FAST",   "INSIDE", 0.01);
+        
+        //lean <-> lean (rotation)
+        AddBidirectionalConnection("LEAN",      "LEAN_TO_LEAN120L",     "LEAN120L_TO_LEAN",     "LEAN120L");
+        AddBidirectionalConnection("LEAN120L",  "LEAN120L_TO_LEAN120R", "LEAN120R_TO_LEAN120L", "LEAN120R");
+        AddBidirectionalConnection("LEAN120R",  "LEAN120R_TO_LEAN",     "LEAN_TO_LEAN120R",     "LEAN");
+		
+		AddConnection("LEAN120L", "PUNCH_RIGHT", "LEAN120L", 1.0);
+		AddConnection("LEAN120L", "PUNCH_BACK_RIGHT", "LEAN120L", 1.0);
+		
+		AddConnection("LEAN120R", "PUNCH_LEFT", "LEAN120R", 1.0);
+		AddConnection("LEAN120R", "PUNCH_BACK_LEFT", "LEAN120R", 1.0);
+    }
+}
+
+sub BuggyHunter()
+{	
+	AddState("OUTSIDE_TO_HUNTER_BACKLEFT")
+    {        
+        Type(VehiclePlaceState_Outside);
+        AnimName("VehicleAttack_Attaching_BackLeft");
+        StartElementName("DHunter");        
+        IsState(false);
+        LookSpringTime(1.0);
+    }  
+    AddState("HUNTER_BACKLEFT")
+    {
+        IsState(true);		
+        Type(VehiclePlaceState_Seat);			
+        AnimName("VehicleAttack_Idle");
+        PassangerRole(PassengerRole_VEHICLE_HUNTER);	
+        LookAnglesMin(0.0, 0.0);
+        LookAnglesMax(0.0, 0.0);
+        StartElementName("DHunter");
+        StartOffset([1.0,0.0,-1.0]);
+        DestElementName("DHunter");
+        DestOffset([0.0,0.0,0.0]);	
+        IsLookContrVehContr(true);        
+        MorphTime(0.1);
+        IsDriver(false);
+    } 
+    
+    AddState("OUTSIDE_TO_HUNTER_BACKRIGHT")
+    {        
+        Type(VehiclePlaceState_Outside);
+        AnimName("VehicleAttack_Attaching_BackRight");	
+        StartElementName("DHunter");        
+        IsState(false);
+        LookSpringTime(1.0);
+    } 
+     AddState("HUNTER_BACKRIGHT")
+    {
+        IsState(true);		
+        Type(VehiclePlaceState_Seat);			
+        AnimName("VehicleAttack_Idle");
+        PassangerRole(PassengerRole_VEHICLE_HUNTER);	
+        LookAnglesMin(0.0, 0.0);
+        LookAnglesMax(0.0, 0.0);
+        StartElementName("DHunter");
+        StartOffset([-1.0,0.0,-1.0]);
+        DestElementName("DHunter");
+        DestOffset([0.0,0.0,0.0]);	
+        IsLookContrVehContr(true);        
+        MorphTime(0.1);
+        IsDriver(false);
+    }
+    
+     AddState("OUTSIDE_TO_HUNTER_LEFT")
+    {        
+        Type(VehiclePlaceState_Outside);
+        AnimName("VehicleAttack_Attaching_Left");
+        StartElementName("DHunter");        
+        IsState(false);
+        LookSpringTime(1.0);
+    } 
+     AddState("HUNTER_LEFT")
+    {
+        IsState(true);		
+        Type(VehiclePlaceState_Seat);			
+        AnimName("VehicleAttack_Idle");
+        PassangerRole(PassengerRole_VEHICLE_HUNTER);	
+        LookAnglesMin(0.0, 0.0);
+        LookAnglesMax(0.0, 0.0);
+        StartElementName("DHunter");
+        StartOffset([1.0,0.0,0.0]);
+        DestElementName("DHunter");
+        DestOffset([0.0,0.0,0.0]);	
+        IsLookContrVehContr(true);        
+        MorphTime(0.1);
+        IsDriver(false);
+    }
+    
+    AddState("OUTSIDE_TO_HUNTER_RIGHT")
+    {        
+        Type(VehiclePlaceState_Outside);
+        AnimName("VehicleAttack_Attaching_Right");	
+        StartElementName("DHunter");           
+        IsState(false);
+        LookSpringTime(1.0);
+    } 
+    AddState("HUNTER_RIGHT")
+    {
+        IsState(true);		
+        Type(VehiclePlaceState_Seat);			
+        AnimName("VehicleAttack_Idle");
+        PassangerRole(PassengerRole_VEHICLE_HUNTER);	
+        LookAnglesMin(0.0, 0.0);
+        LookAnglesMax(0.0, 0.0);
+        StartElementName("DHunter");
+        StartOffset([-1.0,0.0,0.0]);
+        DestElementName("DHunter");
+        DestOffset([0.0,0.0,0.0]);	
+        IsLookContrVehContr(true);        
+        MorphTime(0.1);
+        IsDriver(false);
+    }
+    
+    AddState("OUTSIDE_TO_HUNTER_FRONT")
+    {        
+        Type(VehiclePlaceState_Outside);
+        AnimName("VehicleAttack_Attaching_Front");	
+        StartElementName("DHunter");        
+        IsState(false);
+        LookSpringTime(0.0);
+    } 
+     AddState("HUNTER_FRONT")
+    {
+        IsState(true);		
+        Type(VehiclePlaceState_Seat);			
+        AnimName("VehicleAttack_Idle");
+        PassangerRole(PassengerRole_VEHICLE_HUNTER);	
+        LookAnglesMin(0.0, 0.0);
+        LookAnglesMax(0.0, 0.0);
+        StartElementName("DHunter");
+        StartOffset([0.0,0.0,1.0]);
+        DestElementName("DHunter");
+        DestOffset([0.0,0.0,0.0]);	
+        IsLookContrVehContr(true);        
+        MorphTime(0.1);
+        IsDriver(false);
+    }
+    
+     AddState("HUNTER_TO_OUTSIDE")
+    {
+        Type(VehiclePlaceState_Seat);	
+        PassangerRole(PassengerRole_VEHICLE_HUNTER);		
+        AnimName("VehicleAttack_Exit_Vehicle");
+        VehicleBoneToAnim("");
+    }
+    
+    AddState("HUNTER_OUTSIDE_DRIVER_END")
+    {        
+        Type(VehiclePlaceState_Outside);
+        IsState(true);	       
+        StartElementName("DHunter");
+        StartOffset([0.0,0.0,0.0]);
+        DestElementName("DHunter");
+        DestOffset([0.0,0.0,0.0]);
+        IsEndState(true);
+    }
+    
+	Graph()
+    {
+        //Main entry connections
+        AddConnection("START", "OUTSIDE_TO_HUNTER_BACKLEFT", "HUNTER_BACKLEFT", 1.0);	
+        AddConnection("START", "OUTSIDE_TO_HUNTER_BACKRIGHT", "HUNTER_BACKRIGHT", 1.0);	
+        AddConnection("START", "OUTSIDE_TO_HUNTER_LEFT", "HUNTER_LEFT", 1.0);	
+        AddConnection("START", "OUTSIDE_TO_HUNTER_RIGHT", "HUNTER_RIGHT", 1.0);	
+        AddConnection("START", "OUTSIDE_TO_HUNTER_FRONT", "HUNTER_FRONT", 1.0); 
+        
+        // alternate connections for when the replicated version picks a different entry state.
+        // this tells it how to the replicated state
+        AddConnection("START", "OUTSIDE_TO_HUNTER_BACKLEFT", "HUNTER_BACKRIGHT", 10.0);
+        AddConnection("START", "OUTSIDE_TO_HUNTER_BACKLEFT", "HUNTER_LEFT", 10.0);
+        AddConnection("START", "OUTSIDE_TO_HUNTER_BACKLEFT", "HUNTER_RIGHT", 10.0);
+        AddConnection("START", "OUTSIDE_TO_HUNTER_BACKLEFT", "HUNTER_FRONT", 10.0); 
+        
+        AddConnection("START", "OUTSIDE_TO_HUNTER_BACKRIGHT", "HUNTER_BACKLEFT", 10.0);
+        AddConnection("START", "OUTSIDE_TO_HUNTER_BACKRIGHT", "HUNTER_LEFT", 10.0);
+        AddConnection("START", "OUTSIDE_TO_HUNTER_BACKRIGHT", "HUNTER_RIGHT", 10.0);
+        AddConnection("START", "OUTSIDE_TO_HUNTER_BACKRIGHT", "HUNTER_FRONT", 10.0); 
+        
+        AddConnection("START", "OUTSIDE_TO_HUNTER_LEFT", "HUNTER_BACKLEFT", 10.0);
+        AddConnection("START", "OUTSIDE_TO_HUNTER_LEFT", "HUNTER_BACKRIGHT", 10.0);
+        AddConnection("START", "OUTSIDE_TO_HUNTER_LEFT", "HUNTER_RIGHT", 10.0);
+        AddConnection("START", "OUTSIDE_TO_HUNTER_LEFT", "HUNTER_FRONT", 10.0); 
+       
+        AddConnection("START", "OUTSIDE_TO_HUNTER_RIGHT", "HUNTER_BACKLEFT", 10.0);
+        AddConnection("START", "OUTSIDE_TO_HUNTER_RIGHT", "HUNTER_BACKRIGHT", 10.0);
+        AddConnection("START", "OUTSIDE_TO_HUNTER_RIGHT", "HUNTER_LEFT", 10.0);
+        AddConnection("START", "OUTSIDE_TO_HUNTER_RIGHT", "HUNTER_FRONT", 10.0);        
+          
+        AddConnection("START", "OUTSIDE_TO_HUNTER_FRONT", "HUNTER_BACKLEFT", 10.0);
+        AddConnection("START", "OUTSIDE_TO_HUNTER_FRONT", "HUNTER_BACKRIGHT", 10.0);
+        AddConnection("START", "OUTSIDE_TO_HUNTER_FRONT", "HUNTER_LEFT", 10.0);
+        AddConnection("START", "OUTSIDE_TO_HUNTER_FRONT", "HUNTER_RIGHT", 10.0);
+        
+        //Exit connections
+        AddConnection("HUNTER_BACKLEFT", "HUNTER_TO_OUTSIDE", "HUNTER_OUTSIDE_DRIVER_END", 1.0);
+        AddConnection("HUNTER_BACKRIGHT", "HUNTER_TO_OUTSIDE", "HUNTER_OUTSIDE_DRIVER_END", 1.0); 
+        AddConnection("HUNTER_LEFT", "HUNTER_TO_OUTSIDE", "HUNTER_OUTSIDE_DRIVER_END", 1.0);
+        AddConnection("HUNTER_RIGHT", "HUNTER_TO_OUTSIDE", "HUNTER_OUTSIDE_DRIVER_END", 1.0); 
+        AddConnection("HUNTER_FRONT", "HUNTER_TO_OUTSIDE", "HUNTER_OUTSIDE_DRIVER_END", 1.0); 
+    }
+}
+
+
+sub main()
+{
+	Car("Default")
+    {
+        use Buggy();        
+        use BuggyBack();
+        use BuggyHunter();
+    }	
+   
+	CarAlias("test_buggy.msh", "Buggy");       
+	CarAlias("ve_buggy_a.msh", "Buggy");       
+	CarAlias("ve_buggy.msh", "Buggy");         
+    CarAlias("dlc_wl_ve_buggy.msh", "Buggy");
+
+	Car("Buggy")
+    {
+        use Buggy();        
+        use BuggyBack();
+        use BuggyHunter();
+    }
+}
+	
+	
+	

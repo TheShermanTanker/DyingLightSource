@@ -1,0 +1,24 @@
+!include("ai_data.def")
+!include("ai_timing.def")
+
+!include("ai_goals.def")
+
+UseNearestSlot()
+CheckSlotsAvailability()
+User("Man")
+
+Usage("ENCOUNTER")
+
+Slot("", 1, 1, 1, 0, 0, 0, 0, 0, 1, 0.1)
+{
+    AiTypeDataSet("zombie")
+    {
+        Data("turn:standing:none:none:none:none", 0, "", -1, 1)
+        Data("idle:standing:none:stand:none:none:none", -2, "mz_upset_stand_attack_fake_v02", -1, 1)
+        Data("idle:standing:none:stand:none:none:none", -2, "mz_upset_stand_attack_fake_v05", -1, 1)
+    }
+    DeactivateOn(GoalAttack)
+    DeactivateOn(GoalChangeAlarmLevel)
+    DiscardOn(GoalReactOnHit)
+}
+

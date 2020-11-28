@@ -1,0 +1,201 @@
+// filter parameters:
+// - class of filter - for now use only "FuncFilter"
+// - name of filter
+// - category of filter - added for future reference :), will be used in UI
+// - position in menu - optional parameter, the higher value, the closer filter is to top of the menu. Default value is -1. Value -2 means, that filter will not be visible at all. 
+//
+// NOTE: Order of functions has meaning (it is order of execution). Try to position functions that hide more objects and are faster in execution closer to head of functions queue.
+// Once object is hidden no other functions that hide objects are called for it, until it is revealed by a function that has no "hide();" keyword.
+// In general "Func object class" functions should precede "Func field value" and "Func object name" functions.
+// Position of "Func render option systems" functions is irrelevant as they are called only once per filter activation. 
+
+sub main()
+{
+	filter("FuncFilter", "Horizon", "", 60)
+    {
+        function("Func ControlObject flags")
+        {
+            hide();
+            required_flags("HORIZON");
+        }
+    }
+	
+	filter("FuncFilter", "All Objects", "")
+    {
+        function("Func object class")
+        {
+            hide();
+            class("CGSObject", true);
+        }        
+    }
+	
+	filter("FuncFilter", "All DummyObjs", "")
+    {
+        function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "dummy*box*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+		
+		function("Func field value")
+		{
+            field_value("CModelObject::MeshName", "dummy*cylinder*.msh");
+            hide();
+            treat_value_as_mask();
+        } 
+    }
+	
+	filter("FuncFilter", "All ModelObjects", "")
+    {
+        function("Func object class")
+        {
+            hide();
+            class("ModelObject", true);
+        }        
+    }
+	
+    // "Helpers" filter is necessary for "Helpers" functionality to work. Do not remove  / rename it. 
+    filter("FuncFilter", "Helpers", "", 101)
+    {
+        // function("Func field value")
+        // {
+            // field_value("CModelObject::MeshName", "*occl*.msh");
+            // hide();
+            // treat_value_as_mask();
+        // } 
+        function("Func render option switch")
+        {
+            disable();
+            render_option_description("Render references between waypoints and fightpoints (fightnodes)");
+        }
+    
+        function("Func render option switch")
+        {
+            disable();
+            render_option_description("Render dynamic light extents");
+        }
+    
+        function("Func render option switch")
+        {
+            disable();
+            render_option_description("Render group and SelectionObject extents");
+        }
+    
+        function("Func render option switch")
+        {
+            disable();
+            render_option_description("Render group extents as object extents");
+        }
+    
+        function("Func render option switch")
+        {
+            disable();
+            render_option_description("Render sound emitter ranges");
+        }
+    
+        function("Func render option switch")
+        {
+            disable();
+            render_option_description("Render road debug lines");
+        }
+    
+        function("Func render option switch")
+        {
+            disable();
+            render_option_description("Shadowmap calculator debug lines");
+        }
+    
+        function("Func render option switch")
+        {
+            disable();
+            render_option_description("Control: Render hooks");
+        }
+    
+        function("Func render option switch")
+        {
+            disable();
+            render_option_description("Control: Render gizmo and boxes during orbiting");
+        }
+    
+        function("Func render option switch")
+        {
+            disable();
+            render_option_description("Films: render camera tracks");
+        }
+    
+        function("Func render option switch")
+        {
+            disable();
+            render_option_description("Forester:  calc lighting debug lines");
+        }
+    
+        function("Func render option switch")
+        {
+            disable();
+            render_option_description("Forester: calc shadows flags debug lines");
+        }
+    
+        function("Func render option switch")
+        {
+            disable();
+            render_option_description("Forester:  PVS enabled");
+        }
+    
+        function("Func render option switch")
+        {
+            disable();
+            render_option_description("LightmapsEd: light ranges");
+        }
+    }
+	
+	filter("FuncFilter", "FXs", "",99)
+    {
+        function("Func render option systems")
+        {
+            fx_render();
+        }
+        function("Func object class")
+        {
+            hide();
+            class("FXEmitter", false);
+        }
+    }
+	
+	filter("FuncFilter", "Envprobe generation", "", -2)
+    {
+        function("Func render option systems")
+        {
+            disable();
+            tiny_objects_render();
+        }
+        function("Func render option systems")
+        {
+            disable();
+            fx_render();
+        }
+        function("Func EditorData flags")
+        {
+            hide();
+            required_flags("EDDATA_ENVPROBE_GEN_EXCLUDED");
+        }
+    }
+
+	filter("FuncFilter", "Validation", "", -2)
+    {
+        function("Func render option systems")
+        {
+            randomized_rendering();
+        }
+    }
+	
+    filter("FuncFilter", "Old platform objects", "")
+    {
+        function("Func EditorData flags selection hierarchy")
+        {
+            hide();
+            required_flags("EDDATA_REMOVED_AT_OLD_PLATFORMS");
+        }
+    }
+
+}

@@ -1,0 +1,94 @@
+// navmesh tools used by NavMesh generator plugin - per particular game definition
+
+// read this file for reference
+!include("chromed_navmesh_tools.def")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+Tool("path - 120m visible")
+{
+    Action("Pathfinding")
+    HardToPassArea("HardToPass")
+    ConsiderDynamicObjects(1)
+    MaxVisibleDistance(120)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+Tool("path - player")
+{
+    Action("Pathfinding")
+    HardToPassArea("Water")
+    ConsiderDynamicObjects(1)
+    MaxConnectionHeightUp(4)
+    MaxConnectionHeightDown(4.5)
+    DisallowAllConnections()
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+Tool("path - vehicle")
+{
+    Action("Pathfinding")
+    ExcludedArea("RegularGround")
+    HardToPassArea("Water")
+    ConsiderDynamicObjects(1)
+    MaxConnectionHeightUp(0.1)
+    MaxConnectionHeightDown(2)
+    DisallowAllConnections()
+    AllowConnection("Generic")
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+Tool("path - human")
+{
+    Action("Pathfinding")
+    ConsiderDynamicObjects(1)
+    MaxVisibleDistance(40)
+    MaxConnectionHeightUp(4.5)
+    MaxConnectionHeightDown(4.5)
+    ConnectionCostMul(1)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+Tool("path - vessel")
+{
+    Action("Pathfinding")
+    ConsiderDynamicObjects(1)
+    MaxVisibleDistance(15)
+    MaxConnectionHeightUp(4.5)
+    MaxConnectionHeightDown(4.5)
+    ConnectionCostMul(3)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+Tool("path - move away")
+{
+    Action("Pathfinding")
+    ConsiderDynamicObjects(1)
+	MoveAwayFromPoint(1)
+    MaxConnectionHeightUp(4.5)
+    MaxConnectionHeightDown(4.5)
+    ConnectionCostMul(1)
+	MaxVisibleDistance(80)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+Tool("path - infected")
+{
+    Action("Pathfinding")
+    ConsiderDynamicObjects(1)
+    MaxVisibleDistance(80)
+    MaxConnectionHeightUp(1.1)
+    MaxConnectionHeightDown(4.5)
+    ConnectionCostMul(1)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+Tool("path - volatile")
+{
+    Action("Pathfinding")
+    ConsiderDynamicObjects(1)
+    MaxVisibleDistance(80)
+    MaxConnectionHeightUp(4.5)
+    MaxConnectionHeightDown(4.5)
+    ConnectionCostMul(1)
+}
+

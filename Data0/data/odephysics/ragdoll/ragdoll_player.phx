@@ -1,0 +1,215 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Fizyka Ragdoll dla czlowieka
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+!include("ODEPhysicsRagdoll.phx")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+PhysicsParams()
+{
+    QuickStepNumIterations(15)
+    QuickStepSortingMethod(2)
+    
+    CollisionDamageToMeMul(0, 0)
+    AllowContinuousCollisions(1, 0)
+    SetWaterFloat(32.0)
+
+    SetAbsorbers(0.8, 0.5)
+    SetMaxVels(50, 100)
+    
+    MaxLifeTime(16)
+
+    SetVelsGate(0, 0)
+    
+    PreciseCC(1)
+    
+    SetExtraGravity(0, -1, 0)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+RagdollParams()
+{
+    Mass(90)
+    
+    ApplyForceMod(1)
+    ApplyForceAddUp(0)
+
+    BehaviorSet("RagdollBehaviors.phx")
+    
+    BlendingOfNonPhysicalBonesTime(0.5)
+    NPBoneSynchroExclusionPropagate("head")
+    NPBoneSynchroHidePropagate("r_tendril00")
+    NPBoneSynchroHidePropagate("l_tendrill00")
+    NPBoneSynchroExclusionPropagate("bone_spine_belly")
+    NPBoneSynchroExclusionPropagate("bone_spine1_belly")
+    NPBoneSynchroExclusionPropagate("bone_spine2_belly")
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+Bones()
+{
+    // define physical bones and collision helpers (collision geom with no rigid body)
+    UseBoneScale("pelvis",  "sphere",   3, 0.8)
+    UseBoneScale("spine1",  "sphere",   3, 0.8)
+    UseBoneScale("spine3",  "sphere",   3, 0.8)
+    UseBone("head",         "sphere",   2)
+    UseBone("l_upperarm",   "capsule",  3)
+    UseBone("r_upperarm",   "capsule",  3)
+    UseBone("l_forearm",    "capsule",  2)
+    UseBone("r_forearm",    "capsule",  2)
+    UseBoneScale("l_hand",  "sphere",   1, 1.4)
+    UseBoneScale("r_hand",  "sphere",   1, 1.4)
+    UseBoneScale("l_thigh", "capsule",  3, 0.8)
+    UseBoneScale("r_thigh", "capsule",  3, 0.8)
+    UseBoneScale("l_calf",  "capsule",  2, 0.6)
+    UseBoneScale("r_calf",  "capsule",  2, 0.6)
+   
+    CollisionHelper("l_foot",   "l_calf",   1.4)
+    CollisionHelper("r_foot",   "r_calf",   1.4)
+    CollisionHelper("spine",    "spine1",   1)
+	
+    // synchro non physical bones
+    RootSynchro("bip01", "pelvis")
+
+    BoneSynchro("pelvis", "spine")
+    BoneSynchro("spine1", "spine2")
+    BoneSynchro("spine3", "neck1")
+
+    // exclude some collisions
+    NoCollidedPair("l_thigh",  "spine1")
+    NoCollidedPair("r_thigh",  "spine1")
+    NoCollidedPair("l_thigh",  "r_thigh")
+
+    // define floating on the water parameter for some geoms
+    FloatingGeom("head", 0.2)
+    FloatingGeom("l_upperarm", 1.3)
+    FloatingGeom("r_upperarm", 1.3)
+    FloatingGeom("l_forearm", 1.2)
+    FloatingGeom("r_forearm", 1.2)
+    
+    FloatingGeom("pelvis", 0)
+    FloatingGeom("spine", 0.8)
+    FloatingGeom("spine1", 0.8)
+    FloatingGeom("spine3", 1.2)
+    
+    FloatingGeom("l_thigh", 0.9)
+    FloatingGeom("r_thigh", 0.9)
+    FloatingGeom("l_calf", 0.7)
+    FloatingGeom("r_calf", 0.7)
+    FloatingGeom("l_foot", 0)
+    FloatingGeom("r_foot", 0)
+    
+    GeomFrictionMul("l_forearm", 0.02)
+    GeomFrictionMul("r_forearm", 0.02)
+    GeomFrictionMul("l_hand", 0.02)
+    GeomFrictionMul("r_hand", 0.02)
+    GeomFrictionMul("l_calf", 0.08)
+    GeomFrictionMul("r_calf", 0.08)
+    GeomFrictionMul("l_foot", 0.06)
+    GeomFrictionMul("r_foot", 0.06)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+Joints()
+{
+    // definicja jointow
+    DefineJoint("pelvis",     "spine1",       "ball",  0,  1,  0,    0,  0,  1)
+    DefineJoint("spine1",     "spine3",       "ball",  0,  1,  0,    0,  0,  1)
+    DefineJoint("spine3",     "head",         "ball",  0,  1,  0,    1,  0,  0)
+    DefineJoint("pelvis",     "l_thigh",      "ball",  0,  1,  0,    0,  0,  1)
+    DefineJoint("pelvis",     "r_thigh",      "ball",  0,  1,  0,    0,  0,  1)
+    DefineJoint("l_thigh",    "l_calf",       "hinge", 0,  1,  0,    0,  0,  0)
+    DefineJoint("r_thigh",    "r_calf",       "hinge", 0,  1,  0,    0,  0,  0)
+    DefineJoint("spine3",     "l_upperarm",   "ball",  0,  0,  1,    0,  1,  0)
+    DefineJoint("spine3",     "r_upperarm",   "ball",  0,  0, -1,    0,  1,  0)
+    DefineJoint("l_upperarm", "l_forearm",    "ball",  0,  1,  0,    1,  0,  0)
+    DefineJoint("r_upperarm", "r_forearm",    "ball",  0,  1,  0,    1,  0,  0)
+    DefineJoint("l_forearm",  "l_hand",       "hinge", 0,  1,  0,    0,  0,  0)
+    DefineJoint("r_forearm",  "r_hand",       "hinge", 0,  1,  0,    0,  0,  0)
+
+    // parametry stopu
+    Set3DOFStops("pelvis spine1",        -0.10, 0.05,   -0.05, 0.05,   -0.05, 0.05,  0, 0, 0)
+    Set3DOFStops("spine1 spine3",        -0.10, 0.10,   -0.10, 0.10,   -0.10, 0.10,  0, 0, 0)
+    Set3DOFStops("spine3 head",          -0.10, 0.10,   -0.10, 0.10,   -0.20, 0.20,  0, 0, 0)
+    Set3DOFStops("pelvis l_thigh",       -0.05, 0.30,   -0.05, 0.05,   -0.02, 0.04,  0, 0, 0)
+    Set3DOFStops("pelvis r_thigh",       -0.05, 0.30,   -0.05, 0.05,   -0.02, 0.04,  0, 0, 0)
+    Set1DOFStops("l_thigh l_calf",       -0.05, 0.48,  0)
+    Set1DOFStops("r_thigh r_calf",       -0.05, 0.48,  0)
+
+    Set3DOFStops("spine3 l_upperarm",    -0.10, 0.30,   -0.30, 0.10,   -0.10, 0.20,  0, 0, 0)
+    Set3DOFStops("spine3 r_upperarm",    -0.10, 0.30,   -0.30, 0.10,   -0.10, 0.20,  0, 0, 0)
+
+    Set3DOFStops("l_upperarm l_forearm", -0.10, 0.30,   -0.05, 0.40,   -0.00, 0.30,  0, 0, 0)
+    Set3DOFStops("r_upperarm r_forearm", -0.10, 0.30,   -0.40, 0.05,   -0.30, 0.00,  0, 0, 0)
+    Set1DOFStops("l_forearm l_hand",     -0.20, 0.20,  0)
+    Set1DOFStops("r_forearm r_hand",     -0.20, 0.20,  0)
+
+	// tendons
+    Tendon("pelvis l_thigh", 0, "l_thigh l_calf", 0, 0.05, 0.30, 0, -0.05, 0.40)
+    Tendon("pelvis r_thigh", 0, "r_thigh r_calf", 0, 0.05, 0.30, 0, -0.05, 0.40)
+
+    //?? Tendon("spine3 l_upperarm", 0, "l_upperarm l_forearm", 1, 0.00, 0.30, 0, -0.05, 0.20)
+    //?? Tendon("spine3 r_upperarm", 0, "r_upperarm r_forearm", 1, 0.00, 0.30, 1, 0.05, -0.20)
+	
+    // sily tarcia stawow
+    SetFrictionRandomFactors(0.3, 1.4)
+    SetFrictionForceAll(4)
+    SetFrictionForce("l_thigh l_calf", 1)
+    SetFrictionForce("r_thigh r_calf", 1)
+    SetFrictionForce("l_upperarm l_forearm", 1)
+    SetFrictionForce("r_upperarm r_forearm", 1)
+    SetFrictionForce("l_forearm l_hand", 1)
+    SetFrictionForce("r_forearm r_hand", 1)
+    SetFrictionForce("spine3 head", 1)
+    
+    SetFrictionForceAll(1)
+    
+    // wspolczynniki dopuszczalnych bledow stopow
+    SetStopERPAll(0.8)
+
+    // wspolczynniki sprezystosci jointow po osiagnieciu stopow
+    SetStopCFMAll(0.12)
+    
+    // wspolczynniki sprezystosci jointow
+    SetCFMAll(0)
+
+    // wspolczynniki tlumienia sily oddalajacej od stopu (1 - brak tlumienia, 0.5 - sila zmniejszona dwukrotnie)
+    SetFudgeFactorAll(0)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+RagdollUnconditionedReflexes()
+{
+    // draw in legs
+    Rur(RUR_TORQUE_REFLEX, "l_thigh", "spine1", -1, RUR_DIR_LOCAL_A, [0, 1, 0], RUR_SPEED_STEERING_LINVEL, 0.4, 3, 10, [0, 0, 0])
+    Rur(RUR_TORQUE_REFLEX, "r_thigh", "spine1", -1, RUR_DIR_LOCAL_A, [0, 1, 0], RUR_SPEED_STEERING_LINVEL, 0.3, 3, 10, [0, 0, 0])
+    Rur(RUR_TORQUE_REFLEX, "l_calf", "l_thigh", -1, RUR_DIR_LOCAL_A, [0, -1, 0], RUR_SPEED_STEERING_LINVEL, 0.3, 3, 10, [0, 0, 0])
+    Rur(RUR_TORQUE_REFLEX, "r_calf", "r_thigh", -1, RUR_DIR_LOCAL_A, [0, -1, 0], RUR_SPEED_STEERING_LINVEL, 0.4, 3, 10, [0, 0, 0])
+
+    // balancing hands when up speed
+    Rur(RUR_FORCE_REFLEX, "l_hand", "spine1", -1, RUR_DIR_A_TO_B, [0, 0, 0], RUR_SPEED_STEERING_VERTVEL, -30, 3, 10, [0, 0, 0])
+    Rur(RUR_FORCE_REFLEX, "r_hand", "spine1", -1, RUR_DIR_A_TO_B, [0, 0, 0], RUR_SPEED_STEERING_VERTVEL, -30, 3, 10, [0, 0, 0])
+
+    // fall secured by hands
+    Rur(RUR_FORCE_REFLEX, "l_hand", "spine1", -1, RUR_DIR_WORLD, [0, -1, 0], RUR_SPEED_STEERING_VERTVEL, -20, -1, -10, [0, 0, 0])
+    Rur(RUR_FORCE_REFLEX, "r_hand", "spine1", -1, RUR_DIR_WORLD, [0, -1, 0], RUR_SPEED_STEERING_VERTVEL, -20, -1, -10, [0, 0, 0])
+    
+    // head secured by hands, head hounched
+    Rur(RUR_FORCE_REFLEX, "l_hand", "head", -1, RUR_DIR_A_TO_B, [0, 0, 0], RUR_SPEED_STEERING_LINVEL, 16, 1, 5, [0, 0, 0])
+    Rur(RUR_FORCE_REFLEX, "r_hand", "head", -1, RUR_DIR_A_TO_B, [0, 0, 0], RUR_SPEED_STEERING_LINVEL, 16, 1, 5, [0, 0, 0])
+    Rur(RUR_TORQUE_REFLEX, "head", "", 0, RUR_DIR_LOCAL_A, [0, 1, 0], RUR_SPEED_STEERING_LINVEL, 2, 1, 5, [0, 0, 0])
+    
+    // random body twist
+    Rur(RUR_TORQUE_REFLEX, "spine1", "", 0, RUR_DIR_RANDOM, [1, 1, 1], RUR_SPEED_STEERING_LINVEL, 1, 2, 10, [0, 0, 0])
+}
+
+
+
+
+
+
+
+
+
+
+

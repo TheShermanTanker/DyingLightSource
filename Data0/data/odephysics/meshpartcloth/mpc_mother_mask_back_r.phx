@@ -1,0 +1,84 @@
+!include("MeshPartCloth.def")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+MeshPartCloth()
+{
+//----------------------------------------------
+// bones
+//----------------------------------------------
+    BonesGridSize(1, 6)
+
+    $XDIST(f, -1.05)
+    $YDIST(f, -0.85)
+    
+    Mode3D(0)
+    
+    Bone(0, 0,  "bone_mask_mother_back_k_02", 1, XDIST, YDIST)
+    Bone(0, 1,  "bone_mask_mother_back_k_03", 0, XDIST, YDIST)
+    Bone(0, 2,  "bone_mask_mother_back_k_04", 0, XDIST, YDIST)
+    Bone(0, 3,  "bone_mask_mother_back_k_05", 0, XDIST, YDIST)
+    Bone(0, 4,  "bone_mask_mother_back_k_06", 0, XDIST, YDIST)
+    Bone(0, 5,  "",                           0, XDIST, YDIST)
+    
+//----------------------------------------------
+// collisions 
+//----------------------------------------------
+
+    CollisionSlide(1)
+    CollisionSpeedMod(1)
+    CollisionBounce(0)
+    
+    CollisionShapesMoveInfluence(1)
+    
+    CollisionSegmentDivision(200)
+    CollisionNormalAngleThreshold(180)
+    
+    NodeCollisionSphereRadius(0.1)
+    ExternalCollisionAffectMul(0)
+    
+    CollisionSphereShift("spine3", [-0.08, 0.06,  -0.08], 0.2)
+    CollisionSphereShift("spine3", [-0.08, -0.06, -0.08], 0.2)
+    CollisionSphereShift("spine3", [-0.1, 0,    -0.08], 0.2)
+    
+    CollisionSphereShift("bone_root_mask", [-0.2, 0, -0.38], 0.415)
+    CollisionSphereShift("bone_root_mask", [0.0, 0.0, 0.0], 0.11)
+    CollisionSphereShift("bone_root_mask", [-0.08, 0.0, 0.0], 0.11)
+    
+//----------------------------------------------
+// spring params 
+//----------------------------------------------
+
+    Viscous(2)
+    AirFriction(1)
+
+    StructuralStiffness(10000, 10000)
+    ShearStiffness(5000, 1000)
+    FlexionStiffness(8000, 8000)
+
+    HorizontSpringRatio(0.05)
+    
+    CheckLengthsStepsPerSec(0)
+
+//----------------------------------------------
+// physical params 
+//----------------------------------------------
+    
+    Mass(1)
+    GravityMul(1)
+    WindInfluence(0.5)
+    // WindGust(0.3, 0.2)
+
+//----------------------------------------------
+// other params
+//----------------------------------------------
+
+    DisableOnMovie("cin_mother_01")
+
+    SynchroWithPhysics(0)
+    EnableAPBOut(1)
+    
+    ObjectMoveMul(1)
+    AnimationMoveMul(0.6)
+}
+
+

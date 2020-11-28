@@ -1,0 +1,25 @@
+sub std_last(int e_path = -1)
+{
+    If("f_game_zombie_vision", "", "", "", "")
+    {
+        Mesh("zombie_vision_ring.msh", "zombie_vision_ring.mat", "std");
+    }
+	If("f_pp_game_player_blood_hit", "", "", "", "")
+	{
+        Mesh("tri_screen.msh", "blood_hit.mat", "std");
+	}
+	If("f_pp_game_player_blood", "", "", "", "")
+	{
+		Mesh("blood_pp.msh", "blood_pp.mat", "std");
+	}
+	If("f_game_saturation", "", "", "", "")
+	{
+		SetRenderTargetsView("_1_RGBA8_SRGB_B", "");
+			SetBuffer(16, "1_RGBA8_SRGB_A");
+				Mesh("tri_screen.msh", "copy_srgb.mat", "std");
+		SetRenderTargetsView("_Z1_RGBA8_SRGB_A", "read_only_ds");
+			SetBuffer(16, "1_RGBA8_SRGB_B");
+				Mesh("tri_screen.msh", "game_saturation.mat", "std");
+	}
+
+}

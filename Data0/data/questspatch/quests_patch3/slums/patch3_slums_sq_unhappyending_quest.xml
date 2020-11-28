@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums"
+     pxsl_line="3">
+    <!-- quest SQ_UnhappyEnding01 -parent=sq_MagicGarden05 -glued=false -->
+        <!-- ,hide _ HumanAI Aldo_02 -->
+        <!-- ,show _ HumanAI Aldo_02 -->
+        <!-- ,teleport _ NPCLifePlace SQ_UnhappyEnding01_LP_Aldo00 -->
+            <!-- ,ai HumanAI Aldo_02 -->
+        <!-- ,goto <<Unhappy Ending - Start>> SpawnPoint SQ_UnhappyEnding01_SP_Start -distance=10 -show=false -->
+            <!-- ,debugpos SpawnPoint SQ_UnhappyEnding01_SP_Start -->
+        <!-- ,checkpoint _ SpawnPoint SQ_UnhappyEnding01_SP_Start -->
+        <!-- ,talk _ aldo_02 aldo_02_UnhappyEnding01_01DLG01 -auto=false -show=true -->
+        <!-- ,move _ NPCLifePlace SQ_UnhappyEnding01_LP_Aldo01 -style=walk -->
+            <!-- ,ai HumanAI Aldo_02 -->
+        <!-- ,enable _ QuestEnableGroup SQ_UnhappyEnding01_QEG_aldo01 -state=enabled -->
+        <!-- ,goto _ Marker SQ_UnhappyEnding01_Marker_01 -distance=3 -show=false -->
+        <!-- ,talk _ aldo_02 aldo_02_UnhappyEnding01_02DLG01 -auto=true -show=true -->
+        <!-- ,enable _ QuestEnableGroup SQ_UnhappyEnding01_QEG_beer01 -state=enabled -->
+        <!-- ,OR _ -->
+            <!-- path -->
+                <!-- ,take _ QuestInventoryItemDI SQ_UnhappyEnding01_QII_beer01 -show=true -->
+            <!-- path -->
+                <!-- ,wait _ 5 -->
+        <!-- ,enable _ QuestEnableGroup SQ_UnhappyEnding01_QEG_beer01 -state=disabled -->
+        <!-- ,talk _ aldo_02 aldo_02_UnhappyEnding01_01USE -auto=false -show=true -->
+        <!-- ,BLOCK _ -obj=&SQ_UnhappyEnding01_OBJ_GoToCave& -->
+            <!-- ,show _ HumanAI Maria -->
+            <!-- ,goto _ Marker SQ_UnhappyEnding01_Marker_Cave01 -distance=3 -show=true -->
+            <!-- ,talk <<Unhappy Ending - Talk to Maria>> maria maria_UnhappyEnding01_04DLG01 -auto=true -show=true -->
+                <!-- ,debugpos SpawnPoint SQ_UnhappyEnding01_SP_03 -->
+            <!-- ,checkpoint _ SpawnPoint SQ_UnhappyEnding01_SP_03 -->
+        <!-- ,BLOCK _ -obj=&SQ_UnhappyEnding01_OBJ_FindGasMask& -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,take _ QuestInventoryItemDI SQ_UnhappyEnding01_QII_GasMask01 -show=false -->
+                        <!-- ,area ZoneBox SQ_UnhappyEnding01_ZB_GasStation01 -->
+                    <!-- ,teleport _ NPCLifePlace SQ_UnhappyEnding01_LP_Maria02 -->
+                        <!-- ,ai HumanAI Maria -->
+                <!-- path -->
+                    <!-- ,goto <<Unhappy Ending - Fin Gas Mask>> Marker SQ_UnhappyEnding01_Marker_GasStation01 -distance=6 -show=false -->
+                        <!-- ,debugpos SpawnPoint SQ_UnhappyEnding01_SP_02 -->
+                    <!-- ,checkpoint _ SpawnPoint SQ_UnhappyEnding01_SP_02 -->
+                    <!-- ,actiondirector_event_start _ Armored_Starter -->
+        <!-- ,BLOCK _ -obj=&SQ_UnhappyEnding01_OBJ_GoBackToCave& -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,goto _ Marker SQ_UnhappyEnding01_Marker_Cave02 -distance=3 -show=true -->
+                <!-- path -->
+                    <!-- ,goto <<Unhappy Ending - Enter Cave>> Marker SQ_UnhappyEnding01_Marker_Cave01 -distance=3 -show=false -->
+                        <!-- ,debugpos SpawnPoint SQ_UnhappyEnding01_SP_03 -->
+                    <!-- ,checkpoint _ SpawnPoint SQ_UnhappyEnding01_SP_03 -->
+                    <!-- ,movie _ Movie_SQ_UnhappyEnding_Boat01 -->
+    <!--  -->
+    <!-- quest SQ_UnhappyEnding_items -parent=Q_Start01 -glued=false -->
+        <!-- ,hide-multi _ -->
+            <!-- ,o HumanAI Maria -->
+            <!-- ,o HumanAI Aldo_02 -->
+            <!-- ,o DoorDI SQ_UnhappyEnding_Door01 -->
+                <!--  -->
+                <!--  -->
+    <!-- quest SQ_UnhappyEnding03 -parent=SQ_UnhappyEnding02 -glued=true -leading_portal=portal_slums_interior_a_SQ_UnhappyEnding -->
+        <!-- ,BLOCK _ -obj=&SQ_UnhappyEnding03_OBJ_ExitCave& -->
+            <!-- ,goto <<Unhappy Ending - Return to Aldo>> SpawnPoint portal_slums_interior_a_SQ_UnhappyEnding -distance=10 -show=true -->
+                <!-- ,debugpos SpawnPoint portal_slums_interior_a_SQ_UnhappyEnding -->
+            <!-- ,checkpoint _ SpawnPoint portal_slums_interior_a_SQ_UnhappyEnding -->
+            <!-- ,teleport _ NPCLifePlace SQ_UnhappyEnding03_LP_Aldo01 -->
+                <!-- ,ai HumanAI Aldo_02 -->
+            <!-- ,teleport _ NPCLifePlace SQ_UnhappyEnding03_LP_David01 -->
+                <!-- ,ai HumanAI David -->
+            <!-- ,teleport _ NPCLifePlace SQ_UnhappyEnding03_LP_Maya01 -->
+                <!-- ,ai HumanAI Maya -->
+            <!-- ,teleport _ NPCLifePlace SQ_UnhappyEnding03_LP_Maria01 -->
+                <!-- ,ai HumanAI Maria -->
+            <!-- ,teleport _ NPCLifePlace SQ_UnhappyEnding03_LP_Micky01 -->
+                <!-- ,ai HumanAI Micky -->
+            <!-- ,teleport _ NPCLifePlace SQ_UnhappyEnding03_LP_Carl01 -->
+                <!-- ,ai HumanAI Carl -->
+            <!-- ,teleport _ NPCLifePlace SQ_UnhappyEnding03_LP_David01 -->
+                <!-- ,ai HumanAI David -->
+            <!-- ,hide _ DoorDI sq_MagicGarden_Door_Openable -->
+            <!-- ,show _ DoorDI SQ_UnhappyEnding_Door01 -->
+        <!-- ,BLOCK _ -obj=&SQ_UnhappyEnding03_OBJ_ReturnToAldo& -->
+            <!-- ,goto <<Unhappy Ending - Give Aldo Vaccine>> Marker SQ_UnhappyEnding03_Marker_01 -distance=3 -show=true -->
+                <!-- ,debugpos SpawnPoint SQ_UnhappyEnding03_SP_02 -->
+            <!-- ,checkpoint _ SpawnPoint SQ_UnhappyEnding03_SP_02 -->
+            <!-- ,talk _ maya maya_UnhappyEnding03_01DLG01 -auto=true -show=true -->
+            <!-- ,enable _ QuestEnableGroup SQ_UnhappyEnding03_QEG_door01 -state=enabled -->
+        <!-- ,BLOCK _ -obj=&SQ_UnhappyEnding03_OBJ_GiveAldoVaccine& -->
+            <!-- ,use _ InvisibleSwitchDI SQ_UnhappyEnding03_IS_Aldo01 -state=on -->
+            <!-- ,talk _ aldo_02 aldo_02_UnhappyEnding03_02DLG01 -auto=false -show=true -->
+        <!-- ,BLOCK _ -obj=&SQ_UnhappyEnding03_OBJ_LeaveAldo& -->
+            <!-- ,goto _ SensorGoTo SQ_UnhappyEnding03_GoTo_01 -distance=0 -show=true -->
+            <!-- -= ,talk _ maya maya_UnhappyEnding03_03DLG01 -auto=true -show=true -=brak dialogow - do poprawy -->
+            <!--  -->
+            <!--  -->
+    <!-- -= -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- -= QUEST NAME : ArmoredArena -->
+    <!-- -= COMMENT    : TEST -->
+    <!-- -= -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- quest ArmoredArena -parent=SQ_UnhappyEnding03 -glued=false -->
+        <!-- ,goto <<Slums Armored Arena - START>> SpawnPoint ArmoredArena_sp_01 -distance=100 -show=false -->
+            <!-- ,debugpos SpawnPoint ArmoredArena_sp_01 -->
+        <!-- ,checkpoint _ SpawnPoint ArmoredArena_sp_01 -->
+        <!-- ,BLOCK _ -obj=<<Go to Armored>> -->
+            <!-- ,goto _ Marker ArmoredArena_marker_01 -distance=3 -show=false -->
+            <!-- ,actiondirector_event_start _ Armored_Starter -->
+</QuestsDefinitions>

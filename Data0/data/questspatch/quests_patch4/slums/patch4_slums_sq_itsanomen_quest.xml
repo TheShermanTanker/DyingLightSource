@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums"
+     pxsl_line="3">
+    <!-- IT'S AN OMEN -->
+    <!-- quest ItsAnOmen -parent=Q_Explosives05 -difficulty=medium -quest_giver=Ahd -reward_set=ItsAnOmen_reward -->
+        <!-- ,show _ QuestStartTrigger sq_itsanomen_StartObject -->
+        <!-- ,show _ HumanAI Abed -->
+        <!-- ,checkpoint _ SpawnPoint ItsAnOmen_SP_001 -->
+        <!--  -->
+        <!-- ,take <<It's An Omen - START>> QuestStartTrigger sq_itsanomen_StartObject -show=false -->
+            <!-- ,debugpos SpawnPoint ItsAnOmen_SP_001 -->
+            <!--  -->
+        <!-- -= enabling chatter once zone Abed     -->
+        <!-- ,enable _ ChatterOnceZone ItsAnOmen_ONC_zone_Abed_talk -->
+        <!-- ,checkpoint _ SpawnPoint ItsAnOmen_SP_001 -->
+        <!--  -->
+    <!-- quest ItsAnOmen02 -parent=ItsAnOmen -glued=true -->
+        <!-- ,BLOCK _ -obj=&ItsAnOmen_OBJ_FindWitch& -->
+            <!-- ,OR <<It's An Omen - Fisherman's Village>> -->
+                <!-- ,debugpos SpawnPoint ItsAnOmen_SP_001 -->
+                <!--  -->
+                <!-- path -->
+                    <!-- -= Conversation with Ahd (Fisherman's village) -->
+                    <!-- ,set-lp << forbiden converation life places turend off >>   NPCLifePlace Ahd_LP_Raking  -state=off -->
+                    <!-- ,goto _ HumanAI Ahd -distance=4 -show=false -->
+                    <!-- ,talk _ Ahd Ahd_Omen_01DLG01 -auto=true -show=false -questgiver_indicator=true -->
+                    <!-- ,set-lp << forbiden converation life places turend off >>   NPCLifePlace Ahd_LP_Raking  -state=on -->
+                    <!-- ,semaphore _ -->
+                <!-- path -->
+                    <!-- -= Marker Bazzar -->
+                    <!-- ,goto _ HumanAI Abed -distance=6 -show=false -->
+                        <!-- ,area ZoneBox Slums_Zone_TheBazaar_A -->
+            <!-- ,checkpoint _ SpawnPoint ItsAnOmen_SP_Bazzar_001 -->
+            <!--  -->
+            <!-- ,talk <<It's An Omen - Bazzar>> Abed Abed_Omen_USE -questgiver_indicator=true -->
+                <!-- ,debugpos SpawnPoint ItsAnOmen_SP_Bazzar_001 -->
+            <!-- ,disable _ ChatterOnceZone ItsAnOmen_ONC_zone_Abed_talk -->
+            <!-- ,checkpoint _ SpawnPoint ItsAnOmen_SP_Bazzar_001 -->
+            <!--  -->
+        <!-- ,BLOCK _ -obj=&ItAnOmen_OBJ_TalkDahlia& -->
+            <!-- ,cnd-quest-started _ -quest_name=Witchqueen01 -finished=true -show=false -->
+        <!-- ,checkpoint _ SpawnPoint ItsAnOmen_SP_Bazzar_001 -->
+    <!--  -->
+        <!-- ,BLOCK _ -obj=&ItsAnOmen_OBJ_GetTalisman& -->
+            <!-- ,talk <<It's An Omen - Get the Talisman>> Abed Abed_Omen_02DLG01 -->
+                <!-- ,debugpos SpawnPoint ItsAnOmen_SP_Bazzar_001  -->
+            <!-- ,take _ QuestInventoryItemDI ItsAnOmen_QII_Amulet -->
+            <!-- ,hide _ ModelObject ItsAnOmen_Chain -->
+        <!-- ,checkpoint _ SpawnPoint ItsAnOmen_SP_Bazzar_001 -->
+            <!--  -->
+    <!-- quest ItsAnOmen03 -parent=ItsAnOmen02 -glued=true    -->
+        <!-- ,BLOCK _ -obj=&ItsAnOmen_OBJ_BackToElderAhd& -->
+            <!-- ,set-lp <<forbiden converation life places turend off>>   NPCLifePlace Ahd_LP_Raking  -state=off -->
+            <!-- ,talk <<It's An Omen - END>> Ahd Ahd_Omen_END -->
+                <!-- ,debugpos SpawnPoint ItsAnOmen_SP_001 -->
+            <!-- ,set-lp <<forbiden converation life places turend on>>   NPCLifePlace Ahd_LP_Raking  -state=on     -->
+            <!-- ,reward _ Ahd -->
+            <!--  -->
+            <!-- -= Enabling Life Graph -->
+            <!-- ,enable _ NPCLifeGraph ItsAnOmen_LifeGraph_Abed_01 -->
+        <!-- ,checkpoint _ SpawnPoint ItsAnOmen_SP_001 -->
+</QuestsDefinitions>

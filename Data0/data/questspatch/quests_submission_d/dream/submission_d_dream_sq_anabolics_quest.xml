@@ -1,0 +1,434 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="dream"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST NAME : Harder, Better, Faster, Stronger  -->
+    <!-- QUEST INFO :  -->
+    <!-- AFTER QUEST: The Tower (starts with Pact with Rais) -->
+    <!-- COMMENT    :  -->
+    <!-- FROM       : >> SLUMS -->
+    <!-- TO         : >> DREAM -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- quest sq_anabolics03 -parent=sq_anabolics02 -glued=true -leading_portal=portal_slums_to_slums_interior_a_anabolics01 -->
+        <!-- ,BLOCK _ -obj=&Dream_MeetAsam& -->
+            <!-- ,hide _ AppearGroup asam_killed -= Hiding KILLED ASSAM -->
+            <!-- ,goto <<DREAM - Start>> SpawnPoint sq_anabolics_SP_01 -distance=10000 -->
+                <!-- ,debugpos SpawnPoint Dream_SP_Clinic_001 -->
+            <!-- ,checkpoint _ SpawnPoint Dream_SP_Clinic_001 -->
+            <!-- ,disable _ MapPortal portal_slums_interior_a_to_slums_anabolics01 -->
+            <!-- ,enable_time_freeze _ -->
+            <!-- ,player-watch _ false -->
+            <!-- ,player-can_use_weapons _ false -->
+            <!-- ,hide-hudgroup _ HideDream -->
+            <!-- ,player-has_flashlight _ false -->
+            <!-- ,player-no_xp _ true -->
+            <!-- ,player-can_sprint _ true -->
+            <!-- ,player-no_hints _ true  -->
+            <!-- ,wait _ 3.5 -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,use-lp _ NPCLifePlace lp_asam_start_02 -style=walk -->
+                        <!-- ,ai HumanAI Asam -->
+                <!-- path -->
+                    <!-- ,wait _ 1.5 -->
+                    <!-- ,talk _ asam Asam_Dream02_USE -auto=true -show=false -->
+        <!-- ,checkpoint _ SpawnPoint Dream_SP_Clinic_001 -->
+        <!--  -->
+        <!-- ,BLOCK _ -obj=&Dream_OBJ_TakeDrug& -->
+            <!-- ,take <<Bake Syringe>> QuestInventoryItemDI anabolics_syringe -->
+                <!-- ,debugpos SpawnPoint Dream_SP_Clinic_001 -->
+            <!-- ,wait _ 1  -->
+            <!-- ,enable _ QuestEnableGroup cin_dream_shot_and_waking_up_trigger_qeg  -= 2nd movie, 2 fix -->
+            <!-- ,wait _ 7 -->
+            <!-- ,enable << Varlist >> QuestEnableGroup dream_dream  -->
+            <!-- ,wait _ 2  -->
+            <!-- ,hide _ HumanAI asam   -= Hiding Assam HumanAI -->
+            <!-- ,show _ AppearGroup asam_killed -= APEARING KILLED ASSAM -->
+            <!-- ,enable _ MapPortal portal_slums_interior_a_to_slums_anabolics01 -->
+            <!-- ,wait _ 7 -->
+            <!-- ,disable _ QuestEnableGroup cin_dream_shot_and_waking_up_trigger_qeg -->
+            <!--  -->
+            <!-- -= wake up dialog -->
+            <!-- ,talk _ voice2d Player_Dream02_01DLG01 -auto=true -show=false -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,wait _ 1 -->
+                    <!-- ,set _ DoorDI sq_anabolics_firstdoor -state=opened -->
+                    <!-- ,disable _ DoorDI sq_anabolics_firstdoor -->
+                <!-- path -->
+                    <!-- ,wait _ 1 -->
+                    <!-- ,enable _ SoundEmitterSimple dream_door_open -->
+        <!-- ,checkpoint _ SpawnPoint Dream_SP_001 -->
+        <!--  -->
+        <!-- ,BLOCK _ -obj=&SQ_Dream_FindAsam& -->
+            <!-- ,goto _ SensorGoTo dream_sensorasam_dreamwall -distance=0 -show=false        -->
+            <!-- ,OR _ -= Pierwsza sciana  -->
+                <!-- path -->
+                    <!-- ,movie _ dream_wall -->
+                    <!-- ,semaphore _ -->
+                <!-- path -->
+                    <!-- ,enable _ QuestEnableGroup enable_sound_wall -state=enabled -->
+                    <!-- ,semaphore _ -->
+                <!-- path -->
+                    <!-- ,wait _ 1 -->
+                    <!-- ,movie _ Movie_anmobi_pass_01 -->
+                    <!-- ,semaphore _ -->
+                <!-- path -->
+                    <!-- -= wall broke dialog -->
+                    <!-- ,wait _ 1 -->
+                    <!-- ,talk _ voice2d Player_Dream02_02DLG01 -auto=true -show=false -->
+                    <!--  -->
+            <!-- ,enable _ SpawnPoint Dream_SP_002 -->
+            <!-- ,disable _ SpawnPoint Dream_SP_001 -->
+            <!-- ,checkpoint _ SpawnPoint Dream_SP_002 -->
+            <!--  -->
+            <!-- -= firs dialog witch Asam - after leaving the clinic -->
+            <!-- ,goto _ SensorGoTo Dream_GoTo_001 -distance=0 -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,wait _ 2 -->
+                    <!-- ,movie _ stone_movie_start -->
+                <!-- path -->
+                    <!-- ,radio-dialog _ voice2d Asam_Dream02_03DLG01 -->
+            <!--  -->
+            <!-- -= dialog witch Asam - near school entrance - 04DLG -->
+            <!-- ,goto _ SensorGoTo Dream_GoTo_002 -distance=0 -->
+            <!-- ,radio-dialog _ voice2d Asam_Dream02_04DLG01 -->
+            <!-- ,checkpoint _ SpawnPoint Dream_SP_003 -->
+            <!--  -->
+            <!-- -= dialog witch Asam - near the flying floor - 05DLG -->
+            <!-- ,goto _ SensorGoTo Dream_GoTo_003 -distance=0 -->
+            <!-- ,radio-dialog _ voice2d Asam_Dream02_05DLG01 -->
+            <!-- ,checkpoint _ SpawnPoint Dream_SP_004 -->
+            <!--  -->
+            <!-- -= dialog witch Asam after leaving the school about his past - 10DLG -->
+            <!-- ,goto _ SensorGoTo Dream_GoTo_004 -distance=0 -->
+            <!-- ,radio-dialog _ voice2d Asam_Dream02_10DLG01 -->
+            <!--  -->
+            <!-- ,goto _ SensorGoTo Dream_GoTo_005 -distance=0 -->
+            <!-- ,checkpoint _ SpawnPoint Dream_SP_005 -->
+            <!--  -->
+            <!-- ,goto _ SensorGoTo Dream_GoTo_006 -distance=0 -->
+            <!-- ,disable _ FXEmitter dream_fx03 -->
+            <!-- ,checkpoint _ SpawnPoint Dream_SP_006 -->
+            <!--  -->
+            <!-- -= enabling enemy goon -->
+            <!-- ,goto _ SensorGoTo Dream_GoTo_007 -distance=0 -->
+            <!-- ,enable _ QuestEnableGroup kill_zombie_end -->
+            <!-- ,wait _ 1 -->
+            <!-- ,checkpoint _ SpawnPoint Dream_SP_007 -->
+            <!--  -->
+            <!-- ,goto _ SensorGoTo Dream_GoTo_008 -distance=0 -->
+            <!-- ,movie _ antena_catwalks_broke -->
+            <!-- ,wait _ 2 -->
+            <!-- ,checkpoint _ SpawnPoint Dream_SP_008 -->
+            <!--  -->
+            <!-- -= dialog witch Asam - Asam is encouraging the player -->
+            <!-- ,goto _ SensorGoTo Dream_GoTo_009 -distance=0 -->
+            <!-- ,checkpoint _ SpawnPoint Dream_SP_009 -->
+        <!--  -->
+            <!--  -->
+            <!-- -= ,goto _ SensorGoTo Dream_GoTo_010 -distance=0 -->
+            <!--  -->
+            <!-- -= dialog witch Asam - Asam is encouraging the player - 13DLG -->
+            <!-- ,goto _ SensorGoTo Dream_GoTo_011 -distance=0 -->
+            <!-- ,radio-dialog _ voice2d Asam_Dream02_13DLG01 -->
+            <!-- ,checkpoint _ SpawnPoint Dream_SP_011 -->
+            <!--  -->
+            <!-- -= ,goto _ SensorGoTo Dream_GoTo_013 -distance=0 -->
+            <!--  -->
+            <!-- ,goto _ SensorGoTo Dream_GoTo_012 -distance=0 -->
+            <!-- ,enable _ SpawnPoint Dream_SP_010 -->
+            <!-- ,disable _ SpawnPoint Dream_SP_010 -->
+            <!-- -= ,disable _ SafeZone second_hub   -->
+            <!-- ,enable _ QuestEnableGroup attack_pulse_sound -->
+            <!-- ,checkpoint _ SpawnPoint Dream_SP_010 -->
+            <!--  -->
+            <!-- ,goto _ SpawnPoint slow_end -distance=10 -->
+            <!-- ,enable _ SpawnPoint slow_end -->
+            <!-- ,disable _ SpawnPoint Dream_SP_010 -->
+            <!-- ,checkpoint _ SpawnPoint slow_end -->
+            <!--  -->
+            <!-- -= dialog witch Asam - Asam is encouraging the player -->
+            <!-- ,goto <<Reach The End of the Corridor>> SensorGoTo Dream_Tunnel_GoTo_000 -distance=0 -->
+                <!-- ,debugpos SpawnPoint slow_end -->
+            <!-- ,radio-dialog _ voice2d Asam_Dream02_09DLG02 -->
+            <!-- ,goto _ SensorGoTo Dream_Tunnel_GoTo_001 -distance=0 -->
+            <!-- ,radio-dialog _ voice2d Asam_Dream02_14DLG01 -->
+            <!--  -->
+            <!-- ,goto _ SensorGoTo Dream_Tunnel_GoTo_002 -distance=0 -->
+            <!-- ,disable _ SpawnPoint slow_end -->
+            <!-- ,disable _  LampDI lift_lamp_work -->
+            <!-- ,enable _ SoundEmitterSimple lift_lamp_end_off   -->
+            <!-- -= ,disable _ SensorAmbientSoundArea ambience_dream_corridor_02 -->
+            <!-- ,hide _ ActorDI asam_eating_actor_tohide -->
+            <!-- ,disable _ ActorDI asam_eating_actor_tohide -->
+            <!-- ,disable _ SoundEmitterSimple  asam_eating_actor_tohide -->
+            <!-- ,checkpoint _ SpawnPoint Dream_SP_Tunnel_002 -->
+            <!--  -->
+            <!-- ,wait _ 0.1 -->
+            <!-- ,use <<Kill Asam>> PhysicalSwitchDI lift_ending_door -state=on -= lift opening -->
+                <!-- ,debugpos SpawnPoint Dream_SP_Tunnel_002 -->
+            <!-- ,enable _ AISpawnBoxNumber Asam_to_kill_lift -->
+            <!-- ,enable _ LampDI lift_lamp_work  -->
+            <!-- ,enable _ SensorAmbientMusicArea asam_stinger_lift -->
+            <!-- ,kill _ AISpawnBoxNumber Asam_to_kill_lift -= killing assam -->
+            <!-- ,disable _ SensorAmbientMusicArea asam_stinger_lift -->
+            <!-- ,checkpoint _ SpawnPoint Dream_SP_Tunnel_002 -->
+            <!--  -->
+            <!-- ,enable _ QuestEnableGroup cin_waking_up_qeg -->
+            <!-- ,wait _ 4.45 -->
+            <!-- ,disable << Varlist >> QuestEnableGroup dream_dream  -->
+            <!-- ,wait _ 2 -->
+            <!-- ,disable _ QuestEnableGroup cin_waking_up_qeg -->
+            <!--  -->
+            <!-- ,talk _ voice2d Player_Dream02_16DLG01 -auto=true -show=false -->
+            <!--  -->
+            <!-- ,reward _ -->
+            <!-- ,enable _ MapPortal portal_slums_interior_a_to_slums_anabolics01 -->
+            <!-- ,player-watch _ true -->
+            <!-- ,player-can_use_weapons _ true -->
+            <!-- ,show-hudgroup _ HideDream -->
+            <!-- ,player-has_flashlight _ true -->
+            <!--  -->
+        <!-- ,checkpoint _ SpawnPoint Dream_SP_Clinic_001 -->
+            <!--  -->
+    <!-- -= -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- -= SIDE QUESTS WITH MOVIES -= -=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- -= -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!--  -->
+    <!-- -= schody -->
+    <!-- quest __Dream_CIN_Stairs -parent=sq_anabolics02 -->
+        <!-- ,goto _ SensorGoTo Dream_GoTo_007 -distance=0 -show=false -->
+        <!-- ,AND _ -->
+            <!-- path -->
+                <!-- ,movie _ stone_movie -->
+            <!-- path -->
+                <!-- ,movie _ stairs_to_antena_run_away -->
+        <!-- ,checkpoint _ SpawnPoint Dream_SP_Clinic_001 -->
+        <!--  -->
+    <!-- -= samolot -->
+    <!-- quest __Dream_CIN_Plane -parent=sq_anabolics02 -->
+        <!-- ,goto <<DREAM - Plane>> SensorGoTo anabolics_plane_fly_sensor -distance=0 -show=false -->
+            <!-- ,debugpos SpawnPoint Dream_SP_Clinic_001 -->
+        <!-- ,AND _ -->
+            <!-- path -->
+                <!-- ,movie _ anabolics_plane_fly -->
+            <!-- path   -->
+                <!-- ,enable _ SoundEmitterSimple cin_plane_fly_sound -->
+                <!-- ,enable _ SoundEmitterSimple cin_plane_fly_sound_int  -->
+                <!-- ,wait _ 30 -->
+                <!-- ,disable _ SoundEmitterSimple cin_plane_fly_sound -->
+                <!-- ,disable _ SoundEmitterSimple cin_plane_fly_sound_int -->
+            <!-- path -->
+                <!-- ,enable _ QuestEnableGroup anabolics_plane_fly_earth_quake_switch  -->
+                <!-- ,wait _ 15 -->
+                <!-- ,disable _ QuestEnableGroup anabolics_plane_fly_earth_quake_switch  -->
+        <!-- ,checkpoint _ SpawnPoint Dream_SP_Clinic_001 -->
+    <!--  -->
+    <!-- -= ANIMOWANE SKRZYNKI -->
+    <!-- quest __Dream_CIN_Crates -parent=sq_anabolics02 -->
+        <!-- ,goto _ SensorGoTo dream_goto_04 -distance=0 -show=false -->
+        <!-- ,movie _ car_movie -->
+        <!-- ,checkpoint _ SpawnPoint Dream_SP_Clinic_001 -->
+    <!--  -->
+    <!-- -= pierwszy animowany dach -->
+    <!-- quest __Dream_CIN_Roof -parent=sq_anabolics02 -->
+        <!-- ,goto _ SensorGoTo sensor_dream_floor_01 -distance=0 -show=false -->
+        <!-- ,AND _ -->
+            <!-- path -->
+                <!-- ,movie _ dream_floor_01 -->
+            <!-- path -->
+                <!-- ,enable _ QuestEnableGroup enable_dream_floor_01 -state=enabled -->
+        <!-- ,checkpoint _ SpawnPoint Dream_SP_Clinic_001 -->
+        <!--  -->
+    <!-- -= animacje dachow gdzies w oddali do wywalania chyba          -->
+    <!-- quest __Dream_CIN_Roof_02 -parent=sq_anabolics02  -->
+        <!-- ,goto _ SensorGoTo sensor_raven01 -distance=0 -show=false -->
+        <!-- ,AND _ -->
+            <!-- path -->
+                <!-- ,movie _ dream_floor_03 -->
+            <!-- path -->
+                <!-- ,enable _ QuestEnableGroup enable_dream_floor_03 -state=enabled -->
+            <!-- path -->
+                <!-- ,movie _ dream_floor_06 -->
+            <!-- path -->
+                <!-- ,enable _ QuestEnableGroup enable_dream_floor_06 -state=enabled -->
+        <!-- ,checkpoint _ SpawnPoint Dream_SP_Clinic_001 -->
+    <!--  -->
+    <!-- -= Animowana podloga przed samolotem     -->
+    <!-- quest __Dream_CIN_Floor -parent=sq_anabolics02 -->
+        <!-- ,goto _ SensorGoTo dream_goto_01_end -distance=0 -show=false -->
+        <!-- ,AND _ -->
+            <!-- path -->
+                <!-- ,movie _ dream_floor_04 -->
+            <!-- path -->
+                <!-- ,enable _ QuestEnableGroup enable_dream_floor_04 -state=enabled -->
+        <!-- ,checkpoint _ SpawnPoint Dream_SP_Clinic_001 -->
+    <!--  -->
+    <!-- -= podBoga od samolotu  -->
+    <!-- quest __Dream_CIN_Floor_02 -parent=sq_anabolics02 -->
+        <!-- ,goto _ SensorGoTo sensor_dream_floor_02 -distance=0 -show=false -->
+        <!-- ,AND _ -->
+            <!-- path -->
+                <!-- ,movie _ dream_floor_05 -->
+            <!-- path -->
+                <!-- ,enable _ QuestEnableGroup enable_dream_floor_05 -state=enabled -->
+        <!-- ,checkpoint _ SpawnPoint Dream_SP_Clinic_001 -->
+        <!--  -->
+    <!-- -= samochod z alarmem przelatujacy -->
+    <!-- quest __Dream_CIN_Car -parent=sq_anabolics02 -->
+        <!-- ,goto _ SensorGoTo sensor_dream_destrocar -distance=0 -show=false -->
+        <!-- ,movie _ Movie_destrocar -->
+        <!-- ,checkpoint _ SpawnPoint Dream_SP_Clinic_001 -->
+        <!--  -->
+    <!-- -= -= samochod co niby powinien armoreda trafic  -->
+    <!-- quest __Dream_CIN_Car_02 -parent=sq_anabolics02 -->
+        <!-- ,goto _ SensorGoTo sensor_dream_killcar -distance=0 -show=false -->
+        <!-- ,movie _ Movie_car_kill -->
+        <!-- ,checkpoint _ SpawnPoint Dream_SP_Clinic_001 -->
+        <!--  -->
+    <!-- -= Wysuwajacy sie catwalk -->
+    <!-- quest __Dream_CIN_Catwalk -parent=sq_anabolics02 -->
+        <!-- ,goto _ SensorGoTo anabolics_catwalk_movie -distance=0 -show=false -->
+        <!-- ,AND _ -->
+            <!-- path -->
+                <!-- ,movie _ catwalk_slide_movie  -->
+            <!-- path -->
+                <!-- ,enable _ SoundEmitterSimple movie_metal -->
+            <!-- path -->
+                <!-- ,enable _ PlayerEffectArea windblow -->
+        <!-- ,checkpoint _ SpawnPoint Dream_SP_Clinic_001 -->
+    <!--  -->
+    <!-- -= papierowy samolocik 2fix -->
+    <!-- quest __Dream_CIN_PaperPlane -parent=sq_anabolics02 -->
+        <!-- ,goto _ SensorGoTo goto_paper_aircraft -distance=0 -show=false -->
+        <!-- ,movie _ paper_aircraf_01 -->
+        <!-- ,checkpoint _ SpawnPoint Dream_SP_Clinic_001 -->
+    <!--  -->
+    <!-- -= skalka po samolocie     -->
+    <!-- quest __Dream_CIN_Rock -parent=sq_anabolics02 -->
+        <!-- ,goto _ SensorGoTo dream_after_plane_platform -distance=0 -show=false -->
+        <!-- ,movie _ dream_after_plane_platform -->
+        <!-- ,checkpoint _ SpawnPoint Dream_SP_Clinic_001 -->
+    <!--  -->
+    <!-- -= ruszajace sie stoly 2fix     -->
+    <!-- quest __Dream_CIN_MovingTables -parent=sq_anabolics02 -->
+        <!-- ,goto _ SensorGoTo goto_table_01 -distance=0 -show=false -->
+        <!-- ,movie _ table_01 -->
+        <!-- ,checkpoint _ SpawnPoint Dream_SP_Clinic_001 -->
+    <!--  -->
+    <!-- -= sciana na ziplinie -->
+    <!-- quest __Dream_CIN_Zipline -parent=sq_anabolics02 -->
+        <!-- ,goto _ SensorGoTo door_ziplane -distance=0 -show=false -->
+        <!-- ,movie _ door_ziplane -->
+        <!-- ,checkpoint _ SpawnPoint Dream_SP_Clinic_001 -->
+        <!--  -->
+    <!-- -= dziwne dzwieki ktore gasna jak sie zblizymy -->
+    <!-- quest __Dream_Sounds_001 -parent=sq_anabolics02 -->
+        <!-- ,goto _ SensorGoTo sensor_child01 -distance=0 -show=false -->
+        <!-- ,disable _ QuestEnableGroup enable_child01 -->
+        <!-- ,checkpoint _ SpawnPoint Dream_SP_Clinic_001 -->
+        <!--  -->
+    <!-- -= dziwne dzwieki ktore gasna jak sie zblizymy -->
+    <!-- quest __Dream_Sounds_002 -parent=sq_anabolics02 -->
+        <!-- ,goto _ SensorGoTo sensor_child02 -distance=0 -show=false -->
+        <!-- ,disable _ QuestEnableGroup enable_child02 -->
+        <!-- ,checkpoint _ SpawnPoint Dream_SP_Clinic_001 -->
+    <!--  -->
+    <!-- -= dziwne dzwieki ktore gasna jak sie zblizymy -->
+    <!-- quest __Dream_Sounds_003 -parent=sq_anabolics02 -->
+        <!-- ,goto _ SensorGoTo sensor_child03 -distance=0 -show=false -->
+        <!-- ,disable _ QuestEnableGroup enable_child03 -->
+        <!-- ,checkpoint _ SpawnPoint Dream_SP_Clinic_001 -->
+        <!--  -->
+    <!-- -= dziwne dzwieki ktore gasna jak sie zblizymy -->
+    <!-- quest __Dream_Sounds_004 -parent=sq_anabolics02 -->
+        <!-- ,goto _ SensorGoTo sensor_raven01 -distance=0 -show=false -->
+        <!-- ,disable _ QuestEnableGroup enable_raven01 -->
+        <!-- ,checkpoint _ SpawnPoint Dream_SP_Clinic_001 -->
+    <!--  -->
+    <!-- quest __Dream_FX_Zipline -parent=sq_anabolics02 -= FX na Linie -->
+        <!-- ,goto <<DREAM - FX>> SensorGoTo goto_fx -distance=0 -show=false -->
+            <!-- ,debugpos SpawnPoint spawn_fx -->
+        <!-- ,OR _ -->
+            <!-- path -->
+                <!-- ,enable _ FXEmitter dream_fx_line -->
+                <!-- ,wait _ 4 -->
+                <!-- ,disable _ FXEmitter dream_fx_line -->
+                <!-- ,wait _ 0.5 -->
+                <!-- ,enable _ FXEmitter dream_fx_line -->
+                <!-- ,wait _ 4 -->
+                <!-- ,disable _ FXEmitter dream_fx_line -->
+                <!-- ,wait _ 0.5 -->
+                <!-- ,enable _ FXEmitter dream_fx_line -->
+                <!-- ,wait _ 4 -->
+                <!-- ,disable _ FXEmitter dream_fx_line -->
+                <!-- ,wait _ 0.5 -->
+                <!-- ,enable _ FXEmitter dream_fx_line -->
+                <!-- ,wait _ 4 -->
+                <!-- ,disable _ FXEmitter dream_fx_line -->
+                <!-- ,wait _ 0.5 -->
+                <!-- ,enable _ FXEmitter dream_fx_line -->
+                <!-- ,wait _ 4 -->
+                <!-- ,disable _ FXEmitter dream_fx_line -->
+                <!-- ,wait _ 0.5 -->
+                <!-- ,enable _ FXEmitter dream_fx_line -->
+                <!-- ,wait _ 4 -->
+                <!-- ,disable _ FXEmitter dream_fx_line -->
+                <!-- ,wait _ 0.5 -->
+                <!-- ,enable _ FXEmitter dream_fx_line -->
+                <!-- ,wait _ 4 -->
+                <!-- ,disable _ FXEmitter dream_fx_line -->
+                <!-- ,wait _ 0.5 -->
+                <!-- ,enable _ FXEmitter dream_fx_line -->
+                <!--  -->
+            <!-- path -->
+                <!-- ,goto << FX test >> SensorGoTo goto_fx_or -->
+                <!-- ,disable _ QuestEnableGroup enable_dream_fx -->
+        <!-- ,checkpoint _ SpawnPoint Dream_SP_Clinic_001 -->
+        <!--  -->
+    <!-- quest sq_anabolics_movie_tunnel -parent=sq_anabolics02 -->
+        <!-- ,movie << concept >> Movie_pre_lift -->
+        <!-- ,wait _ 2 -->
+        <!-- ,goto _ SensorGoTo lift_lamp_work -show=false -->
+        <!-- ,enable _ SoundEmitterSimple lift_door_close -->
+        <!-- ,wait _ 1.5 -->
+        <!-- ,enable _ LampDI lift_lamp_work -->
+        <!-- ,enable _ SoundEmitterSimple  lift_lamp_work         -->
+        <!-- ,goto _ SensorGoTo Movie_02 -show=false -->
+        <!-- ,enable _ SoundEmitterSimple Movie_02 -->
+        <!-- ,enable _ EarthQuakeArea  Movie_02 -->
+        <!-- ,movie _ Movie_02 -->
+        <!-- ,enable _ SensorAmbientSoundArea ambience_dream_corridor_01  -->
+        <!-- ,disable _ EarthQuakeArea  Movie_02 -->
+        <!-- ,goto _ SensorGoTo Movie_03 -show=false -->
+        <!-- ,enable _ EarthQuakeArea  Movie_03 -->
+        <!-- ,enable _ SoundEmitterSimple Movie_03  -->
+        <!-- ,movie _ Movie_03 -->
+        <!-- ,disable _ SensorAmbientSoundArea ambience_dream_corridor_01  -->
+        <!-- ,enable _ SensorAmbientSoundArea ambience_dream_corridor_02  -->
+        <!-- ,disable _ EarthQuakeArea  Movie_03 -->
+        <!-- ,goto _ SensorGoTo Movie_04 -show=false -->
+        <!-- ,enable _ EarthQuakeArea  Movie_04 -->
+        <!-- ,enable _ SoundEmitterSimple Movie_04 -->
+        <!-- ,movie _ Movie_04 -->
+        <!--  -->
+        <!-- ,disable _ EarthQuakeArea  Movie_04 -->
+        <!-- ,disable _ SensorAmbientSoundArea ambience_dream_corridor_02 -->
+        <!-- ,enable _ SensorAmbientSoundArea ambience_dream_corridor_03 -->
+        <!-- ,goto _ SensorGoTo pre_lift_wall1 -show=false -->
+        <!-- ,enable _ SoundEmitterSimple pre_lift_wall1 -->
+        <!-- ,enable _ EarthQuakeArea  pre_lift_wall1 -->
+        <!-- ,movie _ pre_lift_wall1 -->
+        <!-- ,disable _ EarthQuakeArea  pre_lift_wall1 -->
+        <!-- ,goto _ SensorGoTo pre_lift_wall2 -show=false -->
+        <!-- ,enable _ SoundEmitterSimple pre_lift_wall2  -->
+        <!-- ,enable _ EarthQuakeArea  pre_lift_wall2 -->
+        <!-- ,movie _ pre_lift_wall2 -->
+        <!-- ,disable _ EarthQuakeArea  pre_lift_wall2 -->
+        <!-- ,hide _ ModelObject lift_door_to_hide -->
+        <!-- ,hide _ ModelObject lift_door_to_hide2 -->
+        <!-- ,checkpoint _ SpawnPoint Dream_SP_Clinic_001 -->
+</QuestsDefinitions>

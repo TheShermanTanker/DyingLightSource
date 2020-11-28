@@ -1,0 +1,196 @@
+//--------------------------------- Zombie natural movement ------------------------------//
+!include("events.def")
+!include("anim_actions.def")
+!include("game_volume_source.def")
+
+!include("M_FPP_Zombie_NM_Jump.scr")
+!include("M_FPP_Zombie_NM_Ballance.scr")
+
+SeqTrack("Zombie_FPP_Unarmed_Land",                "M_FPP_zombie_ropeloco_to_ground.anm2" , 0, 30, 35, 1, 0.25)
+{
+    Event(0, EVENT_LAND_HEAVY, 1)
+    { 
+        PlayPlayerSound7(GameVolumeSource_Speech, "attack_XX.wav", 1.0, 0, 0, 1.0, 2.0)
+		PlayForceFeedback("Zombie_Player_Land_Heavy", 1, 1, 1)
+    }
+}
+SeqTrack("Zombie_FPP_Unarmed_Land_Medium",        "M_FPP_zombie_JumpLand.anm2" , 0, 10, 30, 1, 0.3)
+{
+    Event(0, 0, 1)
+    {
+        PlayPlayerSound7(GameVolumeSource_Speech, "attack_XX.wav", 1.0, 0, 0, 1.0, 2.0)
+		PlayForceFeedback("Zombie_Player_Land_Medium", 1, 1, 1)
+    }
+    //Event(9, END_ANIMATION, 1)
+}
+
+SeqTracksBlend("Zombie_FPP_Unarmed_Land_Medium", "Zombie_FPP_Unarmed_Stand", 0.8)
+
+SeqTrackAlias("Zombie_FPP_Unarmed_DamperLand",         "Zombie_FPP_Unarmed_Land_Medium")
+SeqTrackAlias("Zombie_FPP_Unarmed_CrouchDamper",     "Zombie_FPP_Unarmed_Land_Medium")
+SeqTrackAlias("Zombie_FPP_Unarmed_LandingOnAI",     "Zombie_FPP_Unarmed_Land_Medium")
+
+SeqTrack("Zombie_FPP_Unarmed_DamageFall", "M_FPP_Zombie_BlockedClimbing.anm2",     0, 10, 30, 1, 0.3)
+SeqTrack("Zombie_FPP_Unarmed_BlockedClimbing", "M_FPP_Zombie_BlockedClimbing.anm2",         0, 10, 30, 1, 0.5)
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//---- RoofJumps////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+////////---- Defaults///////////////////////////////////////////////////////////////////////////////////////////////
+    SeqTrack("Zombie_FPP_Unarmed_RoofJump_FromBottomNoHang_Begin",         "M_FPP_Zombie_RoofJump_FromBottom.anm2", 12, 19, 30, 1 , 0.15)
+    SeqTrack("Zombie_FPP_Unarmed_RoofJump_FromBottomNoHang",             "M_FPP_Zombie_RoofJump_FromBottom.anm2", 19, 45, 30, 1, 0.0)
+    {
+        Event(21, CLIMBING_LENGTH, -1)    
+        Event(0, PLAY_NM_FX, -1)
+        Event(0, PLAY_EDGE_GRAB_SOUND, -1)
+    }
+    SeqTrackAlias("Zombie_FPP_Unarmed_RoofJump_FromBottomNoHang1_Begin",         "Zombie_FPP_Unarmed_RoofJump_FromBottomNoHang_Begin")
+    SeqTrackAlias("Zombie_FPP_Unarmed_RoofJump_FromBottomNoHang1",             "Zombie_FPP_Unarmed_RoofJump_FromBottomNoHang")
+    SeqTrackAlias("Zombie_FPP_Unarmed_RoofJump_FromBottomNoHang2_Begin",         "Zombie_FPP_Unarmed_RoofJump_FromBottomNoHang_Begin")
+    SeqTrackAlias("Zombie_FPP_Unarmed_RoofJump_FromBottomNoHang2",             "Zombie_FPP_Unarmed_RoofJump_FromBottomNoHang") 
+    
+    SeqTrack("Zombie_FPP_Unarmed_RoofJump_FromBottom_Begin",     "M_FPP_Zombie_RoofJump_FromBottom.anm2", 12, 19, 30, 1  , 0.15)    
+
+    SeqTrack("Zombie_FPP_Unarmed_RoofJump_FromBottom",             "M_FPP_Zombie_RoofJump_FromBottom.anm2", 19, 45, 30, 1, 0.0)
+    {
+        Event(21, CLIMBING_LENGTH, -1)
+        Event(0, EVENT_EDGE_GRAB_FROM_BOTTOM, -1)
+        Event(0, PLAY_NM_FX, -1)
+        Event(0, PLAY_EDGE_GRAB_SOUND, -1)
+    }
+    SeqTrackAlias("Zombie_FPP_Unarmed_RoofJump_FromBottom1_Begin",         "Zombie_FPP_Unarmed_RoofJump_FromBottom_Begin")
+    SeqTrackAlias("Zombie_FPP_Unarmed_RoofJump_FromBottom1",             "Zombie_FPP_Unarmed_RoofJump_FromBottom")
+    SeqTrackAlias("Zombie_FPP_Unarmed_RoofJump_FromBottom2_Begin",         "Zombie_FPP_Unarmed_RoofJump_FromBottom_Begin")
+    SeqTrackAlias("Zombie_FPP_Unarmed_RoofJump_FromBottom2",             "Zombie_FPP_Unarmed_RoofJump_FromBottom")
+    
+    //SeqTrack("Zombie_FPP_Unarmed_HangFromEdge_Jump_Begin",        "M_FPP_Zombie_RoofJump_FromBottom_jump.anm2", 0, 5, 30, 1, 0.15)
+    SeqTrack("Zombie_FPP_Unarmed_HangFromEdge_Jump",        "M_FPP_Zombie_RoofJump_FromBottom_jump.anm2", 0, 26, 35, 1, 0.5)
+    {
+	    //Event(8, CLIMBING_LENGTH, -1)
+        Event(18, END_ANIMATION, 1)
+    }
+    
+    SeqTrack("Zombie_FPP_Unarmed_RoofJump_EdgeGrab_Begin",     "M_FPP_Zombie_Roofjump_EdgeGrab.anm2",         0, 10, 30, 1, 0.15)
+    SeqTrack("Zombie_FPP_Unarmed_RoofJump_EdgeGrab",         "M_FPP_Zombie_Roofjump_EdgeGrab.anm2",         10, 57, 30, 1, 0.0)
+    {
+        Event(30, CLIMBING_LENGTH, -1)
+        Event(0, EVENT_EDGE_GRAB_FROM_BOTTOM, -1)
+        Event(0, PLAY_NM_FX, -1)
+        Event(0, PLAY_EDGE_GRAB_SOUND, -1)
+    }
+	/*
+    SeqTrackAlias("Zombie_FPP_Unarmed_RoofJump_EdgeGrab1_Begin",         "Zombie_FPP_Unarmed_RoofJump_EdgeGrab_Begin")
+    SeqTrackAlias("Zombie_FPP_Unarmed_RoofJump_EdgeGrab1",             "Zombie_FPP_Unarmed_RoofJump_EdgeGrab")
+
+    SeqTrackAlias("Zombie_FPP_Unarmed_RoofJump_EdgeGrab2_Begin",         "Zombie_FPP_Unarmed_RoofJump_EdgeGrab1_Begin")
+    SeqTrackAlias("Zombie_FPP_Unarmed_RoofJump_EdgeGrab2",             "Zombie_FPP_Unarmed_RoofJump_EdgeGrab1")
+    */
+    SeqTrack( "Zombie_FPP_Unarmed_RoofJump_JumpIn180_begin",    "M_FPP_Zombie_Jumpin_1801.anm2",            0, 10, 30, 1, 0.2)    
+    SeqTrack( "Zombie_FPP_Unarmed_RoofJump_JumpIn180",            "M_FPP_Zombie_Jumpin_1801.anm2",            10, 32, 30, 1, 0.0)
+    {
+        Event(15, CLIMBING_LENGTH, -1)
+        Event(0, EVENT_EDGE_GRAB_FROM_BOTTOM, -1)
+        Event(0, PLAY_NM_FX, -1)
+        Event(0, PLAY_EDGE_GRAB_SOUND, -1)
+    }
+    SeqTrackAlias( "Zombie_FPP_Unarmed_RoofJump_JumpIn1801_begin",    "Zombie_FPP_Unarmed_RoofJump_JumpIn180_begin")
+    SeqTrackAlias( "Zombie_FPP_Unarmed_RoofJump_JumpIn1801",            "Zombie_FPP_Unarmed_RoofJump_JumpIn180")
+
+    SeqTrackAlias( "Zombie_FPP_Unarmed_RoofJump_JumpIn1802_begin",    "Zombie_FPP_Unarmed_RoofJump_JumpIn180_begin")
+    SeqTrackAlias( "Zombie_FPP_Unarmed_RoofJump_JumpIn1802",            "Zombie_FPP_Unarmed_RoofJump_JumpIn180")
+
+    
+    SeqTrack( "Zombie_FPP_Unarmed_RoofJump_SlopeLR_begin",        "M_FPP_Zombie_SlopeLR.anm2",            0, 5, 30, 1, 0.2)    
+    SeqTrack( "Zombie_FPP_Unarmed_RoofJump_SlopeLR",            "M_FPP_Zombie_SlopeLR.anm2",            5, 25, 30, 1, 0.2)
+    {
+        Event(3.5, CLIMBING_LENGTH, -1)
+        Event(0, EVENT_EDGE_GRAB_FROM_BOTTOM, -1)
+        Event(0, PLAY_NM_FX, -1)
+        Event(0, PLAY_EDGE_GRAB_SOUND, -1)
+    }
+    
+    SeqTrack( "Zombie_FPP_Unarmed_RoofJump_SlopeRL_begin",        "M_FPP_Zombie_SlopeRL.anm2",            0, 5, 30, 1, 0.2)    
+    SeqTrack( "Zombie_FPP_Unarmed_RoofJump_SlopeRL",            "M_FPP_Zombie_SlopeRL.anm2",            5, 25, 30, 1, 0.2)
+    {
+        Event(3.5, CLIMBING_LENGTH, -1)
+        Event(0, EVENT_EDGE_GRAB_FROM_BOTTOM, -1)
+        Event(0, PLAY_NM_FX, -1)
+        Event(0, PLAY_EDGE_GRAB_SOUND, -1)
+    }
+    
+    
+    SeqTrack( "Zombie_FPP_Unarmed_RoofJump_HighSlopeLR_begin",        "M_FPP_Zombie_45High_LR.anm2",            0, 12, 30, 1, 0.3)    
+    SeqTrack( "Zombie_FPP_Unarmed_RoofJump_HighSlopeLR",            "M_FPP_Zombie_45High_LR.anm2",            12, 55, 30, 1, 0.0)
+    {
+        Event(28, CLIMBING_LENGTH, -1)
+        Event(0, EVENT_EDGE_GRAB_FROM_BOTTOM, -1)
+        Event(0, PLAY_NM_FX, -1)
+        Event(0, PLAY_EDGE_GRAB_SOUND, -1)
+    }
+    
+    SeqTrack( "Zombie_FPP_Unarmed_RoofJump_HighSlopeRL_begin",        "M_FPP_Zombie_45High_RL.anm2",            0, 12, 30, 1, 0.3)    
+    SeqTrack( "Zombie_FPP_Unarmed_RoofJump_HighSlopeRL",            "M_FPP_Zombie_45High_RL.anm2",            12, 50, 30, 1, 0.0)
+    {
+        Event(28, CLIMBING_LENGTH, -1)
+        Event(0, EVENT_EDGE_GRAB_FROM_BOTTOM, -1)
+        Event(0, PLAY_NM_FX, -1)
+        Event(0, PLAY_EDGE_GRAB_SOUND, -1)
+    }
+    SeqTrackAlias("Zombie_FPP_Unarmed_RoofJump_FromTop_Begin",     "Zombie_FPP_Unarmed_RoofJump_SlopeRL_begin")
+	SeqTrackAlias("Zombie_FPP_Unarmed_RoofJump_FromTop",            "Zombie_FPP_Unarmed_RoofJump_SlopeRL")
+
+	SeqTrackAlias("Zombie_FPP_Unarmed_RoofJump_FromTop1_Begin",     "Zombie_FPP_Unarmed_RoofJump_SlopeLR_begin")
+	SeqTrackAlias("Zombie_FPP_Unarmed_RoofJump_FromTop1",            "Zombie_FPP_Unarmed_RoofJump_SlopeLR")
+    
+    /*SeqTrack("Zombie_FPP_Unarmed_RoofJump_FromTop_Begin",                "M_FPP_Unarmed_NM_JumpOver120_Max_Zombie.anm2",        8, 15, 30, 1, 0.1)
+    SeqTrack("Zombie_FPP_Unarmed_RoofJump_FromTop",                "M_FPP_Unarmed_NM_JumpOver120_Max_Zombie.anm2",        15, 36, 30, 1, 0.1)
+    {
+        Event(10, CLIMBING_LENGTH, -1)
+        Event(0, EVENT_EDGE_GRAB_FROM_TOP, -1)        
+        Event(0, PLAY_NM_FX, -1)
+        Event(0, PLAY_EDGE_GRAB_SOUND, -1)
+    }*/
+
+    /*SeqTrack("Zombie_FPP_Unarmed_RoofJump_FromTop_Begin",     "M_FPP_Unarmed_NM_RoofJump_FromTop_slow_Zombie.anm2",         0, 4, 30, 1, 0.3)
+    {
+    //Event(1, VIS_EVENT_STOPANIM, -1)
+    }
+    SeqTrack("Zombie_FPP_Unarmed_RoofJump_FromTop",            "M_FPP_Unarmed_NM_RoofJump_FromTop_slow_Zombie.anm2",     4, 45, 30, 1, 0.0)
+    {
+    Event(9, CLIMBING_LENGTH, -1)
+    Event(0, EVENT_EDGE_GRAB_FROM_TOP, -1)
+    Event(16, VIS_EVENT_STOPANIM, -1)
+    Event(0, PLAY_NM_FX, -1)
+    Event(0, PLAY_EDGE_GRAB_SOUND, -1)
+    }*/    
+    
+
+    SeqTracksBlend("Zombie_FPP_Unarmed_HangFromEdge_Jump",     "Zombie_FPP_Unarmed_Jump_Loop", 0.5)
+    SeqTracksBlend("Zombie_FPP_Unarmed_HangFromEdge_Jump",     "Zombie_FPP_Unarmed_logicjump", 0.5)
+	SeqTracksBlend("Zombie_FPP_Unarmed_HangFromEdge_Jump",     "Zombie_FPP_Unarmed_logicjump_1", 0.5)
+	SeqTracksBlend("Zombie_FPP_Unarmed_HangFromEdge_Jump",     "Zombie_FPP_Unarmed_logicjump_2", 0.5)
+// Not Used
+/*
+SeqTrack("Zombie_FPP_Unarmed_JumpOverMedium_Far",         "M_FPP_Medium_Wall_JumpOver_v01_Zombie.anm2"   , 0, 21, 30, 1, 0.3)
+{
+    Event(10, CLIMBING_LENGTH, -1)
+}
+SeqTrack("Zombie_FPP_Unarmed_JumpOverMedium_Near",          "M_FPP_Medium_Wall_CloseJump_v01_Zombie.anm2"   , 0, 39, 30, 1, 0.3)
+{
+    Event(17, CLIMBING_LENGTH, -1)
+}
+SeqTrack("Zombie_FPP_Unarmed_JumpOnMedium_Near",          "M_FPP_WalkOn120_01_Zombie.anm2"   , 0, 27, 30, 1, 0.3)
+{
+    Event(7, CLIMBING_LENGTH, -1)
+}
+SeqTrack("Zombie_FPP_Unarmed_JumpOnMedium_Far",           "M_FPP_RunOn120_01_Zombie.anm2"   , 0, 27, 30, 1, 0.3)
+{
+    Event(15, CLIMBING_LENGTH, -1)
+}
+*/
+
+
+
+SeqTrack("Zombie_FPP_Right_Obstacle",                          "M_FPP_Zombie_Right_Obstacle.anm2",            0, 15, 30, 1, 0.25) 
+SeqTrack("Zombie_FPP_Left_Obstacle",                          "M_FPP_Zombie_Left_Obstacle.anm2",                 0, 15, 30, 1, 0.25) 

@@ -1,0 +1,80 @@
+!include("MeshPartCloth.def")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+MeshPartCloth()
+{
+//----------------------------------------------
+// bones
+//----------------------------------------------
+    BonesGridSize(2, 4)
+
+    $XDIST(f, -1)
+    $YDIST(f, -1)
+
+    Mode3D(1)
+    
+    Bone(0, 0, "bonea_torso_a_hand_b_00", 1, XDIST, YDIST)
+    Bone(0, 1, "bonea_torso_a_hand_b_01", 0, XDIST, YDIST)
+    Bone(0, 2, "bonea_torso_a_hand_b_02", 0, XDIST, YDIST)
+    Bone(0, 3, "",                        0, XDIST, YDIST)
+
+    Bone(1, 0, "boneb_torso_a_hand_b_00", 1, XDIST, YDIST)
+    Bone(1, 1, "boneb_torso_a_hand_b_01", 0, XDIST, YDIST)
+    Bone(1, 2, "boneb_torso_a_hand_b_02", 0, XDIST, YDIST)
+    Bone(1, 3, "boneb_torso_a_hand_b_03", 0, XDIST, YDIST)
+
+    
+//----------------------------------------------
+// collisions 
+//----------------------------------------------
+
+    CollisionSlide(1)
+    CollisionBounce(0)
+    CollisionSpeedMod(1)
+    
+    CollisionShapesMoveInfluence(1)
+    
+    CollisionSegmentDivision(0.1)
+    CollisionNormalAngleThreshold(190)
+    
+    NodeCollisionSphereRadius(0.1)
+    ExternalCollisionAffectMul(0)
+    
+    CollisionCapsule("r_forearm", -1.2, -1.3)
+    CollisionSphere("r_handholder", -1.6)
+   
+//----------------------------------------------
+// spring params 
+//----------------------------------------------
+
+    Viscous(2)
+    AirFriction(1)
+
+    StructuralStiffness(8000, 4000)
+    ShearStiffness(5000, 2000)
+    FlexionStiffness(500, 100)    
+    
+    HorizontSpringRatio(0.02)
+    
+    CheckLengthsStepsPerSec(0)
+
+//----------------------------------------------
+// physical params 
+//----------------------------------------------
+    
+    Mass(1)
+    GravityMul(0.8)
+    WindInfluence(1)
+
+//----------------------------------------------
+// other params
+//----------------------------------------------
+
+    SynchroWithPhysics(0)
+    EnableAPBOut(1)
+    
+    ObjectMoveMul(1)
+    AnimationMoveMul(0.6)
+}
+
+

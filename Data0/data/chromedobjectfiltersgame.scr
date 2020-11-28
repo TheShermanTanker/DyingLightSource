@@ -1,0 +1,1358 @@
+// Game specific filters
+
+// filter parameters:
+// - class of filter - for now use only "FuncFilter"
+// - name of filter
+// - category of filter - added for future reference :), will be used in UI
+// - position in menu - optional parameter, the higher value, the closer filter is to top of the menu. Default value is -1. Value -2 means, that filter will not be visible at all.
+
+sub main()
+{
+// ////////////////////////////////////////////////////////
+//
+// LD Filters
+//
+// ////////////////////////////////////////////////////////
+
+    filter("FuncFilter", "LD Mode", "", 100)
+    {
+        function("Func object class")
+        {
+            hide();
+            class("SensorVarlist", true);
+            class("CShapeVertexHelper", true);
+            class("CShapeControlPointHelper", true);
+            class("TerrainOptimizer", true);
+            class("AreaMarker", true);
+            class("CPivotHelper", true);
+            class("CTinyObjectHelper", true);
+            class("LightObject", true);
+            class("SensorAmbientSoundArea", true);
+			class("SensorAmbientSound", true);
+            class("AcousticRoom", true);
+            class("SensorAmbientMusicArea", true);
+			class("AmbientZone", true);
+        }
+        function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "*occl*.msh");
+            hide();
+            treat_value_as_mask();
+        } 
+        function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "amb_*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+        function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "*lightshaft*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+		function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "*light_shaft*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+		function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "*lightshaft*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+		function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "*shaft_circle*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+		function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "*shaft_cone*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+		function("Func field value")
+		{
+            field_value("CModelObject::MeshName", "*sunshaft*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+        function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "*lamp_flare_*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+    }
+	
+	filter("FuncFilter", "NightAreas Helpers", "",99)
+    {
+        function("Func object class")
+        {
+            hide();
+			class("SafeArea", true);
+			class("SafeZone", true);
+			class("SafePlace", true);
+            class("PursuitBreaker", true);
+            class("BlackoutArea", true);
+			class("AIEscapeArea", true);
+			class("NightAggressionTrigger", true);
+			class("NoiseArea", true);
+			class("AreaMarker",true);
+        }
+    }
+	
+	filter("FuncFilter", "AI System Areas", "",99)
+    {
+        function("Func object class")
+        {
+            hide();
+            class("IntensityArea", true);
+            class("ZombieTypeArea", true); 
+			class("SpawnBlocker", true);
+			class("PigeonsArea", true);
+			class("CrowdSpawner", true);
+			class("AISpawnSystem::SpawnAttributesArea", true);
+        }
+    }
+	
+	filter("FuncFilter", "Zones & Challenge & Direction", "",99)
+    {
+        function("Func object class")
+        {
+            hide();
+            class("ZoneBox", true);
+            class("ZoneVCylinder", true);
+            class("MapLayerObject", true);
+			class("ChallengePoint", true);
+			class("SensorChallengeArea", true);
+			class("ChatterOnceZone", true);
+			class("FireEmitterDI", true);
+			class("NorthDirectionZone", true);
+			class("CrowdSpawnerChallenge", true);
+			class("SensorCoopChallengeTrigger", true);
+			
+        }
+		
+		function("Func object name")
+		{
+			mask("*_Zone_*");
+			hide();
+		}
+    }
+	
+	filter("FuncFilter", "Other Events", "",99)
+    {
+        function("Func object class")
+        {
+            hide();
+            class("GameEventPlace", true);
+			class("BoxObjectEnabler", true);
+			class("PlayerFallAmortizer", true);
+			class("PlayerEffectArea", true);
+			class("ExplosionBox", true);
+			class("BombSwitchDI", true);
+			class("EarthQuakeArea", true);
+			class("HunterWarningArea", true);
+			class("PlayableAreaPoint", true);
+			class("MapZone", true);
+			
+			
+			
+        }
+    }
+	
+	filter("FuncFilter", "AppearGroup & QEG", "",99)
+    {
+        function("Func object class")
+        {
+            hide();
+            class("AppearGroup", true);
+			class("QuestEnableGroup", true);
+        }
+    }
+
+    filter("FuncFilter", "Ecounters", "",99)
+    {
+        function("Func object class")
+        {
+            hide();
+			class("MapZone", true);
+            class("Encounter::SpawnPoint", true);
+            class("Encounter::SafePoint", true);
+			class("Encounter::ContainerPoint", true);
+            class("Encounter::ItemPoint", true);
+            class("Encounter::ScenarioHelpSafeNPC", true);
+            class("Encounter::ScenarioHelpSafeGrabbedNPC", true);
+			class("Encounter::EncounterBlockArea", true);
+			class("Encounter::ScenarioPrime", true);
+			class("Encounter::ScenarioFightingGroups", true);
+			class("AIUsageObjectSystem::AIUsageObject", true);
+            class("Encounter::AIEscapeAreaPoint", true);
+        }
+    }
+
+    filter("FuncFilter", "Sensors", "",99)
+    {
+        function("Func object class")
+        {
+			hide();
+			class("SensorGoTo", true);
+			class("SensorMovie", true);
+			class("SensorTutorialHint", true);
+			class("SensorAreaHelper", true);
+        }
+    }
+	
+	filter("FuncFilter", "BTZ Helpers", "",99)
+    {
+        function("Func object class")
+        {
+			hide();
+			class("HunterRestrictedArea", true);
+			class("HiveBroodSpawnPoint", true);
+			class("Hive", true);
+        }
+		
+		function("Func object name")
+		{
+			mask("Hive_SpawnBox*");
+			hide();
+		}
+    }
+	
+	filter("FuncFilter", "AI Boxes", "",99)
+    {
+        function("Func object class")
+        {
+            hide();
+            class("AISpawnBoxNumber", true);
+			class("AISpawnBoxDensity", true);
+            class("SpawnBoxActivator", true);
+            class("Activator", true);
+            class("AIArea", true);
+            class("AISpawnArea", true);
+            class("AIDeadBodySpawnBox", true);
+            class("AIDeadBodySpawnBoxAuto", true);
+            class("CoopAIPathDeactivationSensor", true);
+            class("AISpawnBoxArena", true);
+            class("DynamicSpawner", true);
+            class("AISpawnBoxCompound", true);
+            class("AISpawnBoxDensity", true);
+            class("SpawnBoxSequencer", true);
+			class("ClearArea", true);
+        }
+    }
+
+	filter("FuncFilter", "All Logic Boxes", "",99)
+    {
+        function("Func object class")
+        {
+            hide();
+			class("SensorGoTo", true);
+			class("SensorMovie", true);
+			class("SensorAreaHelper", true);
+			
+			class("Encounter::EncounterBlockArea", true);
+			class("AIUsageObjectSystem::AIUsageObject", true);
+            class("Encounter::AIEscapeAreaPoint", true);
+			
+			class("GameEventPlace", true);
+			class("BoxObjectEnabler", true);
+			class("PlayerFallAmortizer", true);
+			class("PlayerEffectArea", true);
+			class("ExplosionBox", true);
+			class("EarthQuakeArea", true);
+			
+			class("ZoneBox", true);
+            class("ZoneVCylinder", true);
+            class("MapLayerObject", true);
+			class("ChatterOnceZone", true);
+			class("FireEmitterDI", true);
+			class("NorthDirectionZone", true);
+			class("SensorChallengeArea", true);
+			class("ChallengePoint", true);
+			
+			class("IntensityArea", true);
+            class("ZombieTypeArea", true); 
+			class("SpawnBlocker", true);
+			
+			class("SafeArea", true);
+			class("SafeZone", true);
+			class("SafePlace", true);
+            class("PursuitBreaker", true);
+            class("BlackoutArea", true);
+			class("AIEscapeArea", true);
+			class("NightAggressionTrigger", true);
+			class("NoiseArea", true);
+			class("AreaMarker",true);
+			
+            class("AISpawnBoxNumber", true);
+			class("PigeonsArea", true);
+			class("AISpawnBoxDensity", true);
+            class("CrowdSpawner", true);
+            class("SpawnBoxActivator", true);
+            class("Activator", true);
+            class("AIArea", true);
+            class("AISpawnArea", true);
+            class("AIDeadBodySpawnBox", true);
+            class("AIDeadBodySpawnBoxAuto", true);
+            class("CoopAIPathDeactivationSensor", true);
+            class("AISpawnBoxArena", true);
+            class("DynamicSpawner", true);
+            class("AISpawnBoxCompound", true);
+            class("AISpawnBoxDensity", true);
+            class("SpawnBoxSequencer", true);
+			class("ClearArea", true);
+			
+			class("Barrier", true);
+			class("BarrierObject", true);
+			
+			class("QuestHub", true);
+			class("HubZone", true);
+			
+			class("TerrainOptimizer", true);
+			class("SensorVarlist", true);
+			class("SensorTutorialHint", true);
+			
+			class("NavMeshExcluder", true);
+            class("NavMeshHardToPass", true);
+            class("NavMeshScrapPreserver", true);
+            class("NavMeshHelper", true);
+			
+			class("HunterWarningArea", true);
+        }
+    }
+	
+    filter("FuncFilter", "AI Point Nodes", "",99)
+    {
+        function("Func object class")
+        {
+            hide();
+			class("AINode", true);
+			class("AISniperPoint", true);
+			class("AISpawnPoint", true);
+			class("FakeAITarget", true);
+			class("HumanAI", true);
+            class("ActorDI", true);
+			class("VirtualAttractor", true);
+			class("AIGroupMarker", true);
+			class("DeadBody", true);
+			class("MoveMovingMarker", true);
+        }
+    }
+	
+	filter("FuncFilter", "CoverPoints", "",99)
+    {
+        function("Func object class")
+        {
+            hide();
+            class("AICoverPoint", true);
+        }
+    }
+
+    filter("FuncFilter", "Barriers", "",99)
+    {
+        function("Func object class")
+        {
+            hide();
+            class("Barrier", true);
+			class("BarrierObject", true);
+        }
+    }
+
+    filter("FuncFilter", "NavMesh Helpers", "",99)
+    {
+        function("Func object class")
+        {
+            hide();
+            class("NavMeshExcluder", true);
+            class("NavMeshHardToPass", true);
+            class("NavMeshScrapPreserver", true);
+            class("NavMeshEnforcer", true);
+            class("NavMeshHelper", true);
+            class("NavMeshConnectHelper", true);
+        }
+		function("Func field value")
+        {
+            field_value("NavMeshDynamicObject::MeshName", "*helper_box_*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+		
+    }
+     
+    filter("FuncFilter", "Movie helpers", "",99)
+    {
+        function("Func object class")
+        {
+            hide();
+            class("MovieActor", true);
+			class("MovieActorStream", true);
+			class("InteractiveMovieScenario", true);
+			class("InteractiveMovieTrigger", true);
+        }
+    }
+
+    filter("FuncFilter", "Quest Hubs", "",99)
+    {
+        function("Func object class")
+        {
+            hide();
+            class("QuestHub", true);
+			class("HubZone", true);
+			class("GroupingMapMarker", true);
+			
+        }
+    }
+
+    filter("FuncFilter", "Reporting Tool Objects", "",99)
+    {
+        function("Func object class")
+        {
+            hide();
+            class("TestReportObject", false);
+        }
+    }
+
+
+// ////////////////////////////////////////////////////////
+//
+// LA Filters
+//
+// ////////////////////////////////////////////////////////
+
+    filter("FuncFilter", "LA Mode", "", 90)
+    {
+		// function("Func field value")
+        // {
+            // field_value("CModelObject::MeshName", "*occl*.msh");
+            // disable();
+            // treat_value_as_mask();
+        // } 
+		function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "helper_box.msh");
+            hide();
+            treat_value_as_mask();
+        }
+		function("Func field value")
+        {
+            field_value("NavMeshDynamicObject::MeshName", "*helper_box_*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+        function("Func object class")
+        {
+            hide();
+			class("SensorTutorialHint", true);
+			class("ExplosionBox", true);
+			class("EarthQuakeArea", true);
+			class("NoiseMarker", true);
+			class("AIEscapeArea", true);
+			class("BombSwitchDI", true);
+			class("PlayerFallAmortizer", true);
+			class("NoiseArea", true);
+			class("PoisonEmitterDI", true);
+			class("SpawnBlocker", true);
+			class("AIGroupMarker", true);
+            class("PursuitBreaker", true);
+            class("FireEmitterDI", true);
+            //class("FXEmitter", false);
+            class("SensorMovie", true);
+			class("SensorAreaHelper", true);
+            // class("MovieActor", true);
+			class("InteractiveMovieScenario", true);
+			class("InteractiveMovieTrigger", true);
+            class("ChatterOnceZone", true);
+            class("VirtualAttractor", true);
+            class("AISpawnBoxNumber", true);
+            class("CrowdSpawner", true);
+            class("SpawnBoxActivator", true);
+            class("Activator", true);
+            class("AIArea", true);
+            class("BlackoutArea", true);
+            class("ChallengePoint", true);
+            class("AreaMarker",true);
+			class("SensorChallengeArea", true);
+            class("BoxObjectEnabler", true);
+			class("FakeAITarget", true);
+            class("Barrier", true);
+			class("BarrierObject", true);
+            class("AICoverPoint", true);
+            class("AINode", true);
+            class("AISniperPoint", true);
+            class("AISpawnArea", true);
+            class("AISpawnPoint", true);
+            class("DeadBody", true);
+            class("AIDeadBodySpawnBox", true);
+			class("AISpawnBoxDensity", true);
+            class("AIDeadBodySpawnBoxAuto", true);
+            class("MoveMovingMarker", true);
+            class("CoopAIPathDeactivationSensor", true);
+            class("AISpawnBoxArena", true);
+            class("CrowdSpawner", true);
+            class("DynamicSpawner", true);
+            class("SpawnBoxActivator", true);
+            class("AISpawnBoxCompound", true);
+            class("AISpawnBoxDensity", true);
+            class("AISpawnBoxNumber", true);
+            class("SpawnBoxSequencer", true);
+            class("AICoverPoint", true);
+            class("GameEventPlace", true);
+			class("SafeZone", true);
+			class("SafeArea", true);
+			class("HubZone", true);
+			class("MapLayerObject", true);
+			class("MapMarker", true);
+			class("PigeonsArea", true);
+			class("Encounter::SpawnPoint", true);
+            class("Encounter::SafePoint", true);
+			class("Encounter::ContainerPoint", true);
+            class("Encounter::ItemPoint", true);
+            class("Encounter::ScenarioHelpSafeNPC", true);
+			class("Encounter::EncounterBlockArea", true);
+			class("Encounter::ScenarioPrime", true);
+			class("Encounter::ObjectPoint", true);
+			class("AIUsageObjectSystem::AIUsageObject", true);
+            class("Encounter::AIEscapeAreaPoint", true);
+			class("StaircaseObject", true);
+			class("VoiceSpeaker", true);
+            class("SensorGoTo", true);
+            class("IntensityArea", true);
+            class("ClearArea", true);
+            class("SensorAmbientSoundArea", true);
+			class("SensorAmbientSound", true);
+            class("AcousticRoom", true);
+            class("SensorAmbientMusicArea", true);
+            class("HumanAI", true);
+            class("ActorDI", true);
+            class("ZoneBox", true);
+            class("QuestEnableGroup", true);
+            //class("Marker", true);
+            class("QuestHub", true);
+            class("SpawnPoint", true);
+            class("ZombieTypeArea", true);
+            class("SafePlace", true);
+            class("SafeZone", true);
+            class("AppearGroup", true);
+            class("NPCLifePlace", true);
+            class("NPCLifeGraph", true);
+            class("NavMeshExcluder", true);
+            class("NavMeshHardToPass", true);
+            class("NavMeshScrapPreserver", true);
+            class("NavMeshEnforcer", true);
+            class("NavMeshHelper", true);
+            class("SoundEmitter", true);
+            class("NavMeshConnectHelper", true);
+			class("AmbientZone", true);
+			class("AISpawnSystem::SpawnAttributesArea", true);
+			class("HunterRestrictedArea", true);
+			class("HiveBroodSpawnPoint", true);
+			class("Hive", true);
+        }
+    }
+	
+	filter("FuncFilter", "Lights & Envprobs", "",89)
+    {
+        function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "*lightshaft*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+		function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "*light_shaft*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+		function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "*lightshaft*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+		function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "*shaft_circle*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+		function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "*shaft_cone*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+		function("Func field value")
+		{
+            field_value("CModelObject::MeshName", "*sunshaft*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+        function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "*caustic*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+        function("Func object class")
+        {
+            hide();
+            class("LightObject", true);
+        }
+    }
+	
+    filter("FuncFilter", "Terrain & Road & Tiny Helpers", "",89)
+    {
+        function("Func object class")
+        {
+            hide();
+            class("TerrainOptimizer", true);
+            class("CShapeControlPointHelper", true);
+            class("CShapeVertexHelper", true);
+			class("CTinyObjectHelper", true);
+
+        }
+    }
+    
+    filter("FuncFilter", "Water", "",89)
+    {
+        function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "water_box_a.msh");
+            hide();
+            treat_value_as_mask();
+        }
+    }    
+
+    filter("FuncFilter", "LODs", "",89)
+    {
+        function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "*_lod.msh");
+            hide();
+            treat_value_as_mask();
+        }
+    }
+    
+    filter("FuncFilter", "Varlist", "",89)
+    {
+        function("Func object class")
+        {
+            hide();
+            class("SensorVarlist", true);
+        }
+    }
+
+    // filter("FuncFilter", "Hide GFX Helpers", "",89)
+    // {
+        // function("Func object class")
+        // {
+            // hide();
+            // class("CPivotHelper", true);
+        // }
+    // }
+
+    
+    filter("FuncFilter", "Shafts & Ambboxes & Decals", "",89)
+    {
+        function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "amb_*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+        function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "*lightshaft*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+		function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "*light_shaft*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+		function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "*lightshaft*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+		function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "*shaft_circle*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+		function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "*shaft_cone*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+		function("Func field value")
+		{
+            field_value("CModelObject::MeshName", "*sunshaft*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+		
+    }
+    filter("FuncFilter", "Occluders", "",89)
+    {
+        function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "*occl*.msh");
+            hide();
+            treat_value_as_mask();
+        }        
+
+    }   
+    
+    filter("FuncFilter", "Terrain", "",89)
+    {
+        function("Func render option systems")
+        {
+            terrain_render();
+        }
+    }
+       
+    // "Grass" filter is necessary for Rendering options to work. Do not remove  / rename it.
+    filter("FuncFilter", "Grass", "",89)
+    {
+        function("Func render option systems")
+        {
+            grass_render();
+        }
+    }
+
+    // "Trees" filter is necessary for Rendering options to work. Do not remove  / rename it.
+    filter("FuncFilter", "Trees", "",89)
+    {
+        function("Func render option systems")
+        {
+            trees_render();
+        }
+    }
+    
+    filter("FuncFilter", "Roads", "",89)
+    {
+        function("Func render option systems")
+        {
+            roads_render();
+        }
+    }
+    
+    filter("FuncFilter", "Lofters", "",89)
+    {
+        function("Func render option systems")
+        {
+            lofters_render();
+        }
+    }
+
+    filter("FuncFilter", "TinyObjects", "",89)
+    {
+        function("Func render option systems")
+        {
+            tiny_objects_render();
+        }
+    }
+
+    filter("FuncFilter", "Dynamic Lights", "",89)
+    {
+        function("Func render option systems")
+        {
+            dynamic_lights();
+        }
+    }
+
+    filter("FuncFilter", "Foliage", "",89)
+    {
+        function("Func render option systems")
+        {
+            trees_render();
+            grass_render();
+            tiny_objects_render();
+        }
+        function("Func field value")
+        {
+            field_value("MeshName", "*tree_*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+        function("Func field value")
+        {
+            field_value("MeshName", "*palm_*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+        function("Func field value")
+        {
+            field_value("MeshName", "*bush_*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+                function("Func field value")
+        {
+            field_value("MeshName", "*chaparral_*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+    }
+
+	filter("FuncFilter", "Decal Helpers","",89)
+	{
+		function("Func object class")
+		{
+			hide();
+			class("CDecalHelper",true);
+		}
+		function("Func field value")
+		{
+            field_value("CModelObject::MeshName", "*decal*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+		function("Func field value")
+		{
+            field_value("CModelObject::MeshName", "*blood_basic*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+		
+	}
+	
+
+
+
+
+// ////////////////////////////////////////////////////////
+//
+// SD Filters
+//
+// ////////////////////////////////////////////////////////
+ 
+     // filter("FuncFilter", "SD Mode", "", 80)
+    // {
+        // function("Func object class")
+        // {
+            // hide();
+            // class("SensorVarlist", true);
+            // class("CShapeVertexHelper", true);
+            // class("CShapeControlPointHelper", true);
+            // class("TerrainOptimizer", true);
+            // class("AreaMarker", true);
+            // class("CPivotHelper", true);
+            // class("Barrier", true);
+			// class("AIGroupMarker", true);
+            // class("FireEmitterDI", true);
+			// class("FakeAITarget", true);
+            // class("FXEmitter", false);
+            // class("SensorMovie", true);
+			// class("InteractiveMovieScenario", true);
+            // //class("MovieActor", true);
+            // class("ChatterOnceZone", true);
+            // class("VirtualAttractor", true);
+            // class("AISpawnBoxNumber", true);
+            // class("CrowdSpawner", true);
+            // class("SpawnBoxActivator", true);
+            // class("Activator", true);
+            // class("AIArea", true);
+            // class("AICoverPoint", true);
+            // class("BlackoutArea", true);
+            // class("AINode", true);
+            // class("AISniperPoint", true);
+            // class("AISpawnArea", true);
+            // class("AISpawnPoint", true);
+            // class("DeadBody", true);
+            // class("AIDeadBodySpawnBox", true);
+            // class("AIDeadBodySpawnBoxAuto", true);
+            // class("MoveMovingMarker", true);
+            // class("CoopAIPathDeactivationSensor", true);
+            // class("AISpawnBoxArena", true);
+            // class("CrowdSpawner", true);
+            // class("DynamicSpawner", true);
+            // class("SpawnBoxActivator", true);
+            // class("AISpawnBoxCompound", true);
+            // class("AISpawnBoxDensity", true);
+            // class("AISpawnBoxNumber", true);
+            // class("SpawnBoxSequencer", true);
+            // class("AICoverPoint", true);
+            // class("GameEventPlace", true);
+            // class("Encounter::SpawnPoint", true);
+            // class("Encounter::SafePoint", true);
+            // class("Encounter::ScenarioHelpSafeNPC", true);
+            // class("Encounter::ScenarioHelpSafeGrabbedNPC", true);
+            // class("SensorGoTo", true);
+            // class("IntensityArea", true);
+            // class("ClearArea", true);
+            // class("HumanAI", true);
+            // class("ActorDI", true);
+            // class("ZoneBox", true);
+            // class("QuestEnableGroup", true);
+            // //class("Marker", true);
+            // class("QuestHub", true);
+            // class("SpawnPoint", true);
+            // class("ZombieTypeArea", true);
+            // class("SafePlace", true);
+			// class("SafeZone", true);
+			// class("SafeArea", true);
+            // class("AppearGroup", true);
+            // class("NPCLifePlace", true);
+            // class("NPCLifeGraph", true);
+            // class("NavMeshExcluder", true);
+            // class("NavMeshHardToPass", true);
+            // class("NavMeshScrapPreserver", true);
+            // class("NavMeshEnforcer", true);
+            // class("NavMeshHelper", true);
+            // class("NavMeshConnectHelper", true);
+			// class("ChallengePoint", true);
+        // }
+    // }   
+
+// ////////////////////////////////////////////////////////
+//
+// Audio Mode
+//
+// ////////////////////////////////////////////////////////
+
+    filter("FuncFilter", "Audio Mode", "", 70)
+    {
+        function("Func object class")
+        {
+			class("AICoverPoint", true);
+			class("AINode", true);
+			class("AISniperPoint", true);
+			class("AISpawnPoint", true);
+			class("CTinyObjectHelper", true);
+			class("DynamicSpawner", true);
+			class("FakeAITarget", true);
+			class("SensorChallengeArea", true);
+			class("VirtualAttractor", true);
+            class("AIArea", true);
+            class("AIEscapeArea", true);
+            class("AIGroupMarker", true);
+            class("AISpawnBoxCompound", true);
+            class("AISpawnBoxNumber", true);
+            class("AISpawnBoxWaves", true);
+            class("AllLethalObject", true);
+            class("AnimOnceZone", true);
+            class("AreaMarkerBox", true);
+            class("Barrier", true);
+            class("BarrierObject", true);
+            class("BlackoutArea", true);
+            class("BoxObjectEnabler", true);
+            class("ChallengePoint", true);
+            class("ChatterOnceZone", true);
+            class("ClearArea", true);
+            class("CrowdSpawner", true);
+            class("EarthQuakeArea", true);
+            class("Encounter::AIEscapeAreaPoint", true);
+            class("Encounter::EncounterBlockArea", true);
+            class("FakeAITarget", true);
+            class("IntensityArea", true);
+            class("LightObject", true);
+            class("MapLayerObject", true);
+            class("NavMeshExcluder", true);
+            class("NavMeshHelper", true);
+            class("NightAggressionTrigger", true);
+            class("NoiseArea", true);
+            class("PlayerFallAmortizer", true);
+            class("SafeArea", true);
+            class("SafeZone", true);
+            class("SensorGoto", true);
+            class("SensorVarlist", true);
+            class("SpawnBlocker", true);
+            class("SpawnBoxActivator", true);
+            class("TerrainOptimizer", true);
+            class("ZombieTypeArea", true);
+            class("ZoneBox", true);
+            class("ZoneVCylinder", true);
+			class("AISpawnSystem::SpawnAttributesArea", true);
+			class("HunterRestrictedArea", true);
+			class("HiveBroodSpawnPoint", true);
+			class("Hive", true);
+            hide();
+        }
+		function("Func field value")
+        {
+            field_value("NavMeshDynamicObject::MeshName", "*helper_box_*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+
+        function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "amb_*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+
+        function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "*lightshaft*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+		function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "*light_shaft*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+		function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "*lightshaft*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+		function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "*shaft_circle*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+		function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "*shaft_cone*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+		function("Func field value")
+		{
+            field_value("CModelObject::MeshName", "*sunshaft*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+    }
+
+	filter("FuncFilter", "Sounds", "",69)
+    {
+        function("Func render option switch")
+        {
+            disable();
+            render_option_description("Render sound emitter ranges");
+        }
+        function("Func object class")
+        {
+            hide();
+            class("AcousticRoom", true);
+			class("AmbientZone", true);
+            class("SoundEmitter", true);
+            class("SensorMusic", true);
+            class("SensorAmbientSound", true);
+            class("SensorAmbientMusicArea", true);
+        }
+		
+		function("Func object name")
+		{
+			mask("SASA_*");
+			hide();
+		}
+    }
+
+    filter("FuncFilter", "Sound occluders", "",69)
+    {
+        function("Func ControlObject flags")
+        {
+            hide();
+            required_flags("SOUND_OCCLUDER");
+        }
+    }
+	
+    filter("FuncFilter", "Show only sound occluders", "",69)
+    {
+        function("Func ControlObject flags")
+        {
+            hide();
+            negated_condition();
+            required_flags("SOUND_OCCLUDER");
+        }
+    }
+
+// ////////////////////////////////////////////////////////
+//
+// Animators Filters
+//
+// ////////////////////////////////////////////////////////
+
+    filter("FuncFilter", "Animators Mode", "", 30)
+    {
+		// function("Func field value")
+        // {
+            // field_value("CModelObject::MeshName", "*occl*.msh");
+            // disable();
+            // treat_value_as_mask();
+        // } 
+		function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "helper_box.msh");
+            hide();
+            treat_value_as_mask();
+        }
+		function("Func field value")
+        {
+            field_value("NavMeshDynamicObject::MeshName", "*helper_box_*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+        function("Func object class")
+        {
+            hide();
+			class("SensorTutorialHint", true);
+			class("ExplosionBox", true);
+			class("EarthQuakeArea", true);
+			class("NoiseMarker", true);
+			class("AIEscapeArea", true);
+			class("BombSwitchDI", true);
+			class("PlayerFallAmortizer", true);
+			class("NoiseArea", true);
+			class("PoisonEmitterDI", true);
+			class("SpawnBlocker", true);
+			class("AIGroupMarker", true);
+            class("PursuitBreaker", true);
+            class("FireEmitterDI", true);
+            //class("FXEmitter", false);
+            class("SensorMovie", true);
+			class("SensorAreaHelper", true);
+            // class("MovieActor", true);
+			class("InteractiveMovieScenario", true);
+			class("InteractiveMovieTrigger", true);
+            class("ChatterOnceZone", true);
+            class("VirtualAttractor", true);
+            class("AISpawnBoxNumber", true);
+            class("CrowdSpawner", true);
+            class("SpawnBoxActivator", true);
+            class("Activator", true);
+            class("AIArea", true);
+            class("BlackoutArea", true);
+            class("ChallengePoint", true);
+            class("AreaMarker",true);
+			class("SensorChallengeArea", true);
+            class("BoxObjectEnabler", true);
+			class("FakeAITarget", true);
+            class("Barrier", true);
+			class("BarrierObject", true);
+            class("AICoverPoint", true);
+            class("AINode", true);
+            class("AISniperPoint", true);
+            class("AISpawnArea", true);
+            class("AISpawnPoint", true);
+            class("DeadBody", true);
+            class("AIDeadBodySpawnBox", true);
+			class("AISpawnBoxDensity", true);
+            class("AIDeadBodySpawnBoxAuto", true);
+            class("MoveMovingMarker", true);
+            class("CoopAIPathDeactivationSensor", true);
+            class("AISpawnBoxArena", true);
+            class("CrowdSpawner", true);
+            class("DynamicSpawner", true);
+            class("SpawnBoxActivator", true);
+            class("AISpawnBoxCompound", true);
+            class("AISpawnBoxDensity", true);
+            class("AISpawnBoxNumber", true);
+            class("SpawnBoxSequencer", true);
+            class("AICoverPoint", true);
+            class("GameEventPlace", true);
+			class("SafeZone", true);
+			class("SafeArea", true);
+			class("HubZone", true);
+			class("MapLayerObject", true);
+			class("MapMarker", true);
+			class("PigeonsArea", true);
+			class("Encounter::SpawnPoint", true);
+            class("Encounter::SafePoint", true);
+			class("Encounter::ContainerPoint", true);
+            class("Encounter::ItemPoint", true);
+            class("Encounter::ScenarioHelpSafeNPC", true);
+			class("Encounter::EncounterBlockArea", true);
+			class("Encounter::ScenarioPrime", true);
+			class("Encounter::ObjectPoint", true);
+			class("AIUsageObjectSystem::AIUsageObject", true);
+            class("Encounter::AIEscapeAreaPoint", true);
+			class("StaircaseObject", true);
+			class("VoiceSpeaker", true);
+            class("SensorGoTo", true);
+            class("IntensityArea", true);
+            class("ClearArea", true);
+            class("SensorAmbientSoundArea", true);
+			class("SensorAmbientSound", true);
+            class("AcousticRoom", true);
+            class("SensorAmbientMusicArea", true);
+            //class("HumanAI", true);
+            //class("ActorDI", true);
+            class("ZoneBox", true);
+            class("QuestEnableGroup", true);
+            //class("Marker", true);
+            class("QuestHub", true);
+            class("SpawnPoint", true);
+            class("ZombieTypeArea", true);
+            class("SafePlace", true);
+            class("SafeZone", true);
+            class("AppearGroup", true);
+            //class("NPCLifePlace", true);
+            //class("NPCLifeGraph", true);
+            class("NavMeshExcluder", true);
+            class("NavMeshHardToPass", true);
+            class("NavMeshScrapPreserver", true);
+            class("NavMeshEnforcer", true);
+            class("NavMeshHelper", true);
+            class("SoundEmitter", true);
+            class("NavMeshConnectHelper", true);
+			class("AmbientZone", true);
+			class("AISpawnSystem::SpawnAttributesArea", true);
+			class("HunterRestrictedArea", true);
+			class("HiveBroodSpawnPoint", true);
+			class("Hive", true);
+			class("LightObject", true);
+        }
+    }
+	
+// ////////////////////////////////////////////////////////
+//
+// Rest
+//
+// ////////////////////////////////////////////////////////
+	
+    // "Helpers" filter is necessary for "Helpers" functionality to work. Do not remove  / rename it. 
+    filter("FuncFilter", "Helpers", "", 101)
+    {
+		function("Func render option switch")
+        {
+            disable();
+            render_option_description("Render waypoints lists");
+        }
+    
+        function("Func render option switch")
+        {
+            disable();
+            render_option_description("Render references between fightnodes and hideouts");
+        }
+		
+		function("Func render option switch")
+        {
+            disable();
+            render_option_description("Render spawnbox ranges");
+        }
+		
+        function("Func object class")
+        {
+            hide();
+            class("AcousticRoom", true);
+            class("ActionChain", true);
+            class("AIUsageObjectSystem::AIUsageObject", true);  
+            class("AIVisBarrier", true);
+            class("AutoCannon", true);
+            class("Barrier", true);
+            class("BarrierObject", true);
+            class("BombSwitchDI", true);
+            class("CEditorHelper", true);
+            class("ChallengePoint", true);
+            class("CoopConcentrationTrigger", true);
+            class("CrowdSpawner", true);
+            class("DamageSwitchDI", true);
+            class("DynamicSpawner", true);
+            class("EditorRenderableObject", true);
+            class("Encounter::AIEscapeAreaPoint", true);            
+            class("Encounter::ContainerPoint", true);
+            class("Encounter::EncounterBlockArea", true);
+            class("Encounter::ItemPoint", true);
+            class("Encounter::ObjectPoint", true);
+            class("Encounter::SafePoint", true);
+            class("Encounter::ScenarioFightingGroups", true);
+            class("Encounter::ScenarioHelpSafeGrabbedNPC", true);
+            class("Encounter::ScenarioHelpSafeNPC", true);
+            class("Encounter::ScenarioPrime", true);
+            class("Encounter::SpawnPoint", true);
+            class("ExplosionBox", true);
+            class("FakeAITarget", true);
+            class("HelperEditorObject", true);
+            class("HideoutDummy", true);
+            class("InvisibleSwitchDI", true);
+            class("LethalObject", true);
+            class("NavMeshConnectHelper", true);
+            class("NavMeshEnforcer", true);
+            class("NavMeshExcluder", true);
+            class("NavMeshHardToPass", true);
+            class("NavMeshHelper", true);
+            class("NavMeshScrapPreserver", true);
+            class("NPCLifeGraph", true);
+            class("NPCLifePlace", true);
+            class("ObjectsAnihilator", true);
+            class("Sensor", true);
+            class("SensorChallengeArea", true);
+            class("ShadowBarrier", true);
+            class("ShadowFieldBox", true);
+            class("ShadowFieldSphere", true);
+            class("SpawnPoint", true);
+            class("TerrainOptimizer", true);
+            class("Trigger", true);
+            class("TriggerCyclic", true);
+            class("VirtualSwitchDI", true);
+            class("ZombieAI", true);
+            class("ZombieAIHorde", true);
+            class("ZombieTrap", true);
+        }
+		function("Func field value")
+        {
+            field_value("NavMeshDynamicObject::MeshName", "*helper_box_*.msh");
+            hide();
+            treat_value_as_mask();
+        }
+
+        function("Func object class")
+        {
+            class("CDecalHelper", true);
+            class("SimpleAISpawnPoint", true);
+            class("SLParkingPlace", true);
+            class("TestReportObject", true);
+        }
+        
+        function("Func render option systems")
+        {
+            attributes_visualization();
+            //object_descriptions();
+            lofters_render();
+        }           
+    }
+
+    filter("FuncFilter", "Top screenshots", "", -2)
+    {
+        function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "marker.msh");
+            hide();
+        }
+    
+        function("Func field value")
+        {
+            field_value("CModelObject::MeshName", "target_marker.msh");
+            hide();
+        }
+    
+        function("Func object class")
+        {
+            hide();
+            class("NPCLifePlace", false);
+            class("AcousticRoom", false);
+        }
+    }
+
+    filter("FuncFilter", "Envprobe generation", "", -2)
+    {    
+        function("Func object class")
+        {
+            hide();
+            class("TestReportObject", false);
+        }        
+    }
+}

@@ -1,0 +1,105 @@
+!include("MeshPartCloth.def")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+MeshPartCloth()
+{
+//----------------------------------------------
+// bones
+//----------------------------------------------
+    BonesGridSize(5, 4)
+
+    $XDIST(f, -1)
+    $YDIST(f, -1)
+    $HOOK_DIST(f, 0.05)
+    
+    Mode3D(1)
+    
+    Hook(0, 0, "pelvis", [0.15, 0.15, 0.13],    XDIST, YDIST)
+    Bone(0, 1, "bone_ezgi_blouse_back_a_01", 0, XDIST, YDIST)
+    Bone(0, 2, "bone_ezgi_blouse_back_a_02", 0, XDIST, YDIST)
+    Bone(0, 3, "",                           0, XDIST, YDIST)
+
+    Hook(1, 0, "pelvis", [0.15, 0.1, 0.17],     XDIST, YDIST)
+    Bone(1, 1, "bone_ezgi_blouse_back_b_01", 0, XDIST, YDIST)
+    Bone(1, 2, "bone_ezgi_blouse_back_b_02", 0, XDIST, YDIST)
+    Bone(1, 3, "",                           0, XDIST, YDIST)
+
+    Hook(2, 0, "pelvis", [0.15, 0, 0.2],        XDIST, YDIST)
+    Bone(2, 1, "bone_ezgi_blouse_back_c_01", 0, XDIST, YDIST)
+    Bone(2, 2, "bone_ezgi_blouse_back_c_02", 0, XDIST, YDIST)
+    Bone(2, 3, "",                           0, XDIST, YDIST)
+
+    Hook(3, 0, "pelvis", [0.15, -0.1, 0.17],    XDIST, YDIST)
+    Bone(3, 1, "bone_ezgi_blouse_back_d_01", 0, XDIST, YDIST)
+    Bone(3, 2, "bone_ezgi_blouse_back_d_02", 0, XDIST, YDIST)
+    Bone(3, 3, "",                           0, XDIST, YDIST)
+
+    Hook(4, 0, "pelvis", [0.15, -0.15, 0.13],   XDIST, YDIST)
+    Bone(4, 1, "bone_ezgi_blouse_back_e_01", 0, XDIST, YDIST)
+    Bone(4, 2, "bone_ezgi_blouse_back_e_02", 0, XDIST, YDIST)
+    Bone(4, 3, "",                           0, XDIST, YDIST)
+
+    UseFlatNormalCalculations(0)
+    
+//----------------------------------------------
+// collisions 
+//----------------------------------------------
+
+    CollisionSlide(1)
+    CollisionSpeedMod(1)
+    CollisionBounce(0)
+    
+    CollisionShapesMoveInfluence(1)
+    
+    CollisionSegmentDivision(-1)
+    CollisionNormalAngleThreshold(180)
+    
+    NodeCollisionSphereRadius(0.1)
+    ExternalCollisionAffectMul(0)
+    
+    CollisionCapsule("l_thigh", -1, 0.185)
+    CollisionCapsule("r_thigh", -1, 0.185)
+
+    CollisionSphere("pelvis", 0.19)
+
+    CollisionMaxDistance(1, 3, "pelvis", [-0.3, 0, 0.3], 0.25, 100)
+    CollisionMaxDistance(2, 3, "pelvis", [-0.3, 0, 0.3], 0.2,  100)
+    CollisionMaxDistance(3, 3, "pelvis", [-0.3, 0, 0.3], 0.25, 100)
+    
+//----------------------------------------------
+// spring params 
+//----------------------------------------------
+
+    Viscous(2)
+    AirFriction(1)
+
+    StructuralStiffness(10000, 10000)
+    ShearStiffness(4000, 4000)
+    FlexionStiffness(4000, 4000)
+
+    HorizontSpringRatio(0.05)
+    
+    CheckLengthsStepsPerSec(0)
+
+//----------------------------------------------
+// physical params 
+//----------------------------------------------
+    
+    Mass(1)
+    GravityMul(1)
+    WindInfluence(1)
+
+//----------------------------------------------
+// other params
+//----------------------------------------------
+
+    SynchroWithPhysics(0)
+    EnableAPBOut(1)
+    
+    StartStabilisation(0)
+    
+    ObjectMoveMul(1)
+    AnimationMoveMul(0.8)
+}
+
+

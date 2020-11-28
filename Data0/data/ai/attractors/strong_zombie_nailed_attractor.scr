@@ -1,0 +1,40 @@
+!include("ai_data.def")
+!include("ai_timing.def")
+
+!include("ai_goals.def")
+
+UseNearestSlot()
+CheckSlotsAvailability()
+ChangeableAttractor()
+StrongAttractor()
+User("Man")
+
+Usage("VIRTUAL_ATTRACTOR")
+
+Slot("", 1, 1, 1, 0, 0, 0, 0, 0, 1, 0.1)
+{
+    LockPosition()
+    DisableCollision()
+    AiTypeDataSet("zombie")
+    {
+        Data("turn:standing:none:none:none:none", 0, "", -1, 1)
+        Data("idle:standing:none:stand:none:none:none", -2, "m_zombie_fakeattack_low_01", -1, 1)
+        ParamFloat("HEALTH_MUL", 0.01)
+        ParamFloat("SIGHT_RANGE", 0)
+        ParamFloat("SIGHT_RANGE_CALM", 0)
+        ParamFloat("SIGHT_ANGLE_AT_MAX_DIST_CALM", 0)
+        ParamFloat("SIGHT_ANGLE_AT_MIN_DIST_CALM", 0)
+        ParamFloat("SIGHT_ANGLE_MAX_DIST_CALM", 0)
+        ParamFloat("SIGHT_ANGLE_MIN_DIST_CALM", 0)
+        ParamFloat("SIGHT_ANGLE_AT_MAX_DIST", 0)
+        ParamFloat("SIGHT_ANGLE_AT_MIN_DIST", 0)
+        ParamFloat("SIGHT_ANGLE_MAX_DIST", 0)
+        ParamFloat("SIGHT_ANGLE_MIN_DIST", 0)
+        ParamFloat("HEARING_SENSITIVITY_CALM", 0)
+        ParamFloat("HEARING_SENSITIVITY", 0)
+        ParamBool("ONE_SHOT", 1)
+        ParamFloat("SIGHT_RANGE_MUL_AT_NIGHT", 0)
+    }
+    DiscardOn(GoalDie)
+}
+

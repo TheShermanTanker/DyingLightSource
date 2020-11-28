@@ -1,0 +1,1152 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="old_town"
+     pxsl_line="3">
+    <Quest
+         name="Fountain01"
+         parent="University01"
+         difficulty="medium"
+         quest_giver="Mort"
+         reward_set="Fountain_reward"
+         show_quest_log_reminder="true"
+         pxsl_line="5">
+        <Phase
+             type="go to"
+             name="_"
+             distance="50"
+             show_locations="false"
+             pxsl_line="6">
+            <Destination
+                 pxsl_line="6">
+                <QuestObject
+                     class="Marker"
+                     name="m_Fountain_Start"
+                     pxsl_line="6" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="7">
+            <Object
+                 pxsl_line="7">
+                <QuestObject
+                     class="HumanAI"
+                     name="Mort"
+                     pxsl_line="7" />
+            </Object>
+        </Phase>
+        <Phase
+             type="talk"
+             name="Fountain - START - Talk to Mort"
+             speaker="Mort"
+             group="Mort_Fountain_01DLG01"
+             show_locations="false"
+             questgiver_indicator="true"
+             pxsl_line="8">
+            <DebugPlayerPosition
+                 pxsl_line="9">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="sp_Fountain_Start"
+                     pxsl_line="9" />
+            </DebugPlayerPosition>
+        </Phase>
+        <!-- unlock doorrs -->
+        <Phase
+             type="set door behaviour"
+             name="_"
+             behaviour="Closed"
+             pxsl_line="11">
+            <Door
+                 pxsl_line="12">
+                <QuestObject
+                     class="DoorDI"
+                     name="tunnel_a_door01"
+                     pxsl_line="12" />
+            </Door>
+            <Door
+                 pxsl_line="13">
+                <QuestObject
+                     class="DoorDI"
+                     name="tunnel_a_door02"
+                     pxsl_line="13" />
+            </Door>
+            <Door
+                 pxsl_line="14">
+                <QuestObject
+                     class="DoorDI"
+                     name="tunnel_b_door01"
+                     pxsl_line="14" />
+            </Door>
+            <Door
+                 pxsl_line="15">
+                <QuestObject
+                     class="DoorDI"
+                     name="tunnel_b_door02"
+                     pxsl_line="15" />
+            </Door>
+            <!-- ,door DoorDI tunnel_b_door03 -->
+            <Door
+                 pxsl_line="17">
+                <QuestObject
+                     class="DoorDI"
+                     name="tunnel_c_door01"
+                     pxsl_line="17" />
+            </Door>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="18">
+            <Object
+                 pxsl_line="19">
+                <QuestObject
+                     class="HubZone"
+                     name="tunnel_a_zone"
+                     pxsl_line="19" />
+            </Object>
+            <Object
+                 pxsl_line="20">
+                <QuestObject
+                     class="HubZone"
+                     name="tunnel_b_zone"
+                     pxsl_line="20" />
+            </Object>
+            <Object
+                 pxsl_line="21">
+                <QuestObject
+                     class="HubZone"
+                     name="tunnel_c_zone"
+                     pxsl_line="21" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="22">
+            <Destination
+                 pxsl_line="22">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="sp_Fountain_Start"
+                     pxsl_line="22" />
+            </Destination>
+        </Phase>
+        <!-- -obj=&Fountain_OBJ_RestoreWaterPressure& -->
+        <Phase
+             type="AND"
+             name="_"
+             pxsl_line="23">
+            <Path
+                 pxsl_line="23">
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="24">
+                    <Path
+                         pxsl_line="25">
+                        <Phase
+                             type="OR"
+                             name="_"
+                             objective="&amp;Fountain_OBJ_TurnOnValveA&amp;"
+                             pxsl_line="26">
+                            <Path
+                                 pxsl_line="27">
+                                <Phase
+                                     type="use"
+                                     name="Fountain - Tunnel A - Start"
+                                     desired_state="on"
+                                     pxsl_line="28">
+                                    <Trigger
+                                         pxsl_line="28">
+                                        <QuestObject
+                                             class="PhysicalSwitchDI"
+                                             name="tunnel_a_valvearea::valve"
+                                             pxsl_line="28" />
+                                    </Trigger>
+                                    <DebugPlayerPosition
+                                         pxsl_line="29">
+                                        <QuestObject
+                                             class="SpawnPoint"
+                                             name="sp_Fountain_Tunnel_A_Start"
+                                             pxsl_line="29" />
+                                    </DebugPlayerPosition>
+                                </Phase>
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     state="disabled"
+                                     pxsl_line="30">
+                                    <Object
+                                         pxsl_line="30">
+                                        <QuestObject
+                                             class="HubZone"
+                                             name="tunnel_a_zone"
+                                             pxsl_line="30" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="31">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="32">
+                                    <Trigger
+                                         pxsl_line="32">
+                                        <QuestObject
+                                             class="PhysicalSwitchDI"
+                                             name="tunnel_a_electric_door"
+                                             pxsl_line="32" />
+                                    </Trigger>
+                                </Phase>
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="33">
+                                    <Trigger
+                                         pxsl_line="33">
+                                        <QuestObject
+                                             class="PhysicalSwitchDI"
+                                             name="tunnel_a_electric_panel"
+                                             pxsl_line="33" />
+                                    </Trigger>
+                                </Phase>
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     state="disabled"
+                                     pxsl_line="34">
+                                    <Object
+                                         pxsl_line="35">
+                                        <QuestObject
+                                             class="FXEmitter"
+                                             name="tunnel_a_emitter_01"
+                                             pxsl_line="35" />
+                                    </Object>
+                                    <Object
+                                         pxsl_line="36">
+                                        <QuestObject
+                                             class="FXEmitter"
+                                             name="tunnel_a_emitter_02"
+                                             pxsl_line="36" />
+                                    </Object>
+                                    <Object
+                                         pxsl_line="37">
+                                        <QuestObject
+                                             class="FXEmitter"
+                                             name="tunnel_a_emitter_03"
+                                             pxsl_line="37" />
+                                    </Object>
+                                    <Object
+                                         pxsl_line="38">
+                                        <QuestObject
+                                             class="FXEmitter"
+                                             name="tunnel_a_emitter_04"
+                                             pxsl_line="38" />
+                                    </Object>
+                                    <Object
+                                         pxsl_line="39">
+                                        <QuestObject
+                                             class="FXEmitter"
+                                             name="tunnel_a_emitter_05"
+                                             pxsl_line="39" />
+                                    </Object>
+                                    <Object
+                                         pxsl_line="40">
+                                        <QuestObject
+                                             class="FXEmitter"
+                                             name="tunnel_a_emitter_06"
+                                             pxsl_line="40" />
+                                    </Object>
+                                    <Object
+                                         pxsl_line="41">
+                                        <QuestObject
+                                             class="ElectricityEmitterDI"
+                                             name="tunnel_a_electric_emmiter"
+                                             pxsl_line="41" />
+                                    </Object>
+                                    <Object
+                                         pxsl_line="42">
+                                        <QuestObject
+                                             class="SoundEmitterDual"
+                                             name="SED_Electricity"
+                                             pxsl_line="42" />
+                                    </Object>
+                                </Phase>
+                                <Phase
+                                     type="semaphore"
+                                     name="_"
+                                     pxsl_line="43" />
+                            </Path>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="44">
+                        <Phase
+                             type="OR"
+                             name="_"
+                             objective="&amp;Fountain_OBJ_TurnOnValveB&amp;"
+                             pxsl_line="45">
+                            <Path
+                                 pxsl_line="46">
+                                <Phase
+                                     type="use"
+                                     name="Fountain - Tunnel B - Start"
+                                     desired_state="on"
+                                     pxsl_line="47">
+                                    <Trigger
+                                         pxsl_line="47">
+                                        <QuestObject
+                                             class="PhysicalSwitchDI"
+                                             name="tunnel_b_valvearea::valve"
+                                             pxsl_line="47" />
+                                    </Trigger>
+                                    <DebugPlayerPosition
+                                         pxsl_line="48">
+                                        <QuestObject
+                                             class="SpawnPoint"
+                                             name="sp_Fountain_Tunnel_B_Start"
+                                             pxsl_line="48" />
+                                    </DebugPlayerPosition>
+                                </Phase>
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     state="disabled"
+                                     pxsl_line="49">
+                                    <Object
+                                         pxsl_line="49">
+                                        <QuestObject
+                                             class="HubZone"
+                                             name="tunnel_b_zone"
+                                             pxsl_line="49" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="50">
+                                <Phase
+                                     type="semaphore"
+                                     name="_"
+                                     pxsl_line="51" />
+                            </Path>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="52">
+                        <Phase
+                             type="OR"
+                             name="_"
+                             objective="&amp;Fountain_OBJ_TurnOnValveC&amp;"
+                             pxsl_line="53">
+                            <Path
+                                 pxsl_line="54">
+                                <Phase
+                                     type="use"
+                                     name="Fountain - Tunnel C - Start"
+                                     desired_state="on"
+                                     pxsl_line="55">
+                                    <Trigger
+                                         pxsl_line="55">
+                                        <QuestObject
+                                             class="PhysicalSwitchDI"
+                                             name="tunnel_c_valvearea::valve"
+                                             pxsl_line="55" />
+                                    </Trigger>
+                                    <DebugPlayerPosition
+                                         pxsl_line="56">
+                                        <QuestObject
+                                             class="SpawnPoint"
+                                             name="sp_Fountain_Tunnel_C_Start"
+                                             pxsl_line="56" />
+                                    </DebugPlayerPosition>
+                                </Phase>
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     state="disabled"
+                                     pxsl_line="57">
+                                    <Object
+                                         pxsl_line="57">
+                                        <QuestObject
+                                             class="HubZone"
+                                             name="tunnel_c_zone"
+                                             pxsl_line="57" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="58">
+                                <Phase
+                                     type="semaphore"
+                                     name="_"
+                                     pxsl_line="59" />
+                            </Path>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="60">
+                    <Destination
+                         pxsl_line="60">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="sp_Fountain_Start"
+                             pxsl_line="60" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_Fountain_02DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="61" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="63">
+                    <Object
+                         pxsl_line="63">
+                        <QuestObject
+                             class="HubZone"
+                             name="tunnel_c_zone"
+                             pxsl_line="63" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="set door behaviour"
+                     name="_"
+                     behaviour="Closed"
+                     pxsl_line="64">
+                    <Door
+                         pxsl_line="65">
+                        <QuestObject
+                             class="DoorDI"
+                             name="tunnel_d_door01"
+                             pxsl_line="65" />
+                    </Door>
+                    <Door
+                         pxsl_line="66">
+                        <QuestObject
+                             class="DoorDI"
+                             name="tunnel_d_door02"
+                             pxsl_line="66" />
+                    </Door>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="67">
+                    <Destination
+                         pxsl_line="67">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="sp_Fountain_Start"
+                             pxsl_line="67" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Fountain_OBJ_TurnOnMainValve&amp;"
+             pxsl_line="68">
+            <Path
+                 pxsl_line="68">
+                <Phase
+                     type="OR"
+                     name="_"
+                     pxsl_line="69">
+                    <Path
+                         pxsl_line="70">
+                        <Phase
+                             type="use"
+                             name="Fountain - Main Valve - D - Start"
+                             desired_state="on"
+                             pxsl_line="71">
+                            <Trigger
+                                 pxsl_line="71">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="tunnel_d_valvearea::valve"
+                                     pxsl_line="71" />
+                            </Trigger>
+                            <DebugPlayerPosition
+                                 pxsl_line="72">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="sp_fountain_tunnel_D_Start"
+                                     pxsl_line="72" />
+                            </DebugPlayerPosition>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="73">
+                            <Object
+                                 pxsl_line="73">
+                                <QuestObject
+                                     class="HubZone"
+                                     name="tunnel_d_zone"
+                                     pxsl_line="73" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="74">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="75">
+                            <Destination
+                                 pxsl_line="75">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="sgt_tunnel_d_entrance"
+                                     pxsl_line="75" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Player_Fountain_03DLG01"
+                             auto_start="true"
+                             pxsl_line="76" />
+                        <Phase
+                             type="semaphore"
+                             name="_"
+                             pxsl_line="77" />
+                    </Path>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="8"
+                     pxsl_line="78" />
+                <Phase
+                     type="set dialog"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_Fountain_04DLG01"
+                     auto_start="true"
+                     pxsl_line="79" />
+                <Phase
+                     type="set dialog"
+                     name="_"
+                     speaker="Mort"
+                     group="Fountain_Mort_NEA_After"
+                     pxsl_line="80" />
+                <!-- cos tam foutain -->
+                <Phase
+                     type="water system control"
+                     name="_"
+                     command="restore_water"
+                     pxsl_line="82" />
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="83">
+                    <Destination
+                         pxsl_line="83">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="sp_fountain_tunnel_D_Start"
+                             pxsl_line="83" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Fountain_OBJ_CheckFountain&amp;"
+             pxsl_line="84">
+            <Path
+                 pxsl_line="84">
+                <Phase
+                     type="take item"
+                     name="Fountain - Healing water"
+                     pxsl_line="85">
+                    <Item
+                         pxsl_line="85">
+                        <QuestObject
+                             class="QuestInventoryItemDI"
+                             name="fountain_cup"
+                             pxsl_line="85" />
+                    </Item>
+                    <DebugPlayerPosition
+                         pxsl_line="86">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="sp_fountain_tunnel_D_Start"
+                             pxsl_line="86" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="used"
+                     pxsl_line="87">
+                    <Trigger
+                         pxsl_line="87">
+                        <QuestObject
+                             class="Fountain"
+                             name="fountain_fountain_selfie"
+                             pxsl_line="87" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="water system control"
+                     name="_"
+                     command="enable_objects"
+                     pxsl_line="88" />
+                <Phase
+                     type="set reward"
+                     name="_"
+                     pxsl_line="89" />
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="90">
+            <Destination
+                 pxsl_line="90">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="sp_fountain_tunnel_D_Start"
+                     pxsl_line="90" />
+            </Destination>
+        </Phase>
+        <!-- enable fountains -->
+    </Quest>
+    <!-- Enemies activations -->
+    <Quest
+         name="__Fountain_Tunnel_A_Zombies01"
+         parent="University01"
+         pxsl_line="94">
+        <Phase
+             type="go to"
+             name="_"
+             distance="0"
+             show_locations="false"
+             pxsl_line="95">
+            <Destination
+                 pxsl_line="95">
+                <QuestObject
+                     class="SensorGoTo"
+                     name="sgt_tunel_a_01"
+                     pxsl_line="95" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="96">
+            <Object
+                 pxsl_line="96">
+                <QuestObject
+                     class="AISpawnBoxCompound"
+                     name="tunnel_a_spawner01"
+                     pxsl_line="96" />
+            </Object>
+        </Phase>
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="97">
+            <Spawner
+                 pxsl_line="98">
+                <QuestObject
+                     class="AISpawnBoxCompound"
+                     name="tunnel_a_spawner01"
+                     pxsl_line="98" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="99">
+            <Destination
+                 pxsl_line="99">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="sp_Fountain_Tunnel_A_Start"
+                     pxsl_line="99" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__Fountain_Tunnel_A_Zombies02"
+         parent="University01"
+         pxsl_line="101">
+        <Phase
+             type="go to"
+             name="_"
+             distance="0"
+             show_locations="false"
+             pxsl_line="102">
+            <Destination
+                 pxsl_line="102">
+                <QuestObject
+                     class="SensorGoTo"
+                     name="sgt_tunel_a_02"
+                     pxsl_line="102" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="103">
+            <Object
+                 pxsl_line="103">
+                <QuestObject
+                     class="AISpawnBoxCompound"
+                     name="tunnel_a_spawner02"
+                     pxsl_line="103" />
+            </Object>
+        </Phase>
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="104">
+            <Spawner
+                 pxsl_line="105">
+                <QuestObject
+                     class="AISpawnBoxCompound"
+                     name="tunnel_a_spawner02"
+                     pxsl_line="105" />
+            </Spawner>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__Fountain_Tunnel_B_Zombies01"
+         parent="University01"
+         pxsl_line="107">
+        <Phase
+             type="go to"
+             name="_"
+             distance="0"
+             show_locations="false"
+             pxsl_line="108">
+            <Destination
+                 pxsl_line="108">
+                <QuestObject
+                     class="SensorGoTo"
+                     name="sgt_fountain_tunnel_b_enemies_near_valve"
+                     pxsl_line="108" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="wait guard"
+             name="_"
+             time="6"
+             pxsl_line="109" />
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="110">
+            <Spawner
+                 pxsl_line="111">
+                <QuestObject
+                     class="AIDeadBodySpawnBoxAuto"
+                     name="fountain_tunnel_b_zombies_01"
+                     pxsl_line="111" />
+            </Spawner>
+            <Spawner
+                 pxsl_line="112">
+                <QuestObject
+                     class="AIDeadBodySpawnBoxAuto"
+                     name="fountain_tunnel_b_zombies_02"
+                     pxsl_line="112" />
+            </Spawner>
+            <Spawner
+                 pxsl_line="113">
+                <QuestObject
+                     class="AIDeadBodySpawnBoxAuto"
+                     name="fountain_tunnel_b_zombies_03"
+                     pxsl_line="113" />
+            </Spawner>
+            <Spawner
+                 pxsl_line="114">
+                <QuestObject
+                     class="AIDeadBodySpawnBoxAuto"
+                     name="fountain_tunnel_b_zombies_04"
+                     pxsl_line="114" />
+            </Spawner>
+            <Spawner
+                 pxsl_line="115">
+                <QuestObject
+                     class="AIDeadBodySpawnBoxAuto"
+                     name="fountain_tunnel_b_zombies_05"
+                     pxsl_line="115" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="116">
+            <Destination
+                 pxsl_line="116">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="sp_Fountain_Tunnel_B_Start"
+                     pxsl_line="116" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__Fountain_Tunnel_B_Zombies02"
+         parent="University01"
+         pxsl_line="118">
+        <Phase
+             type="go to"
+             name="_"
+             distance="5"
+             show_locations="false"
+             pxsl_line="119">
+            <Destination
+                 pxsl_line="119">
+                <QuestObject
+                     class="Marker"
+                     name="m_Fountain_Valve_B"
+                     pxsl_line="119" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="120">
+            <Object
+                 pxsl_line="121">
+                <QuestObject
+                     class="SoundEmitterRandom"
+                     name="fountain_tunnel_b_zombies_behind_door"
+                     pxsl_line="121" />
+            </Object>
+        </Phase>
+        <Phase
+             type="go to"
+             name="_"
+             distance="0"
+             show_locations="false"
+             pxsl_line="122">
+            <Destination
+                 pxsl_line="122">
+                <QuestObject
+                     class="SensorGoTo"
+                     name="sgt_fountain_tunnel_b_enemies_near_valve"
+                     pxsl_line="122" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="go to"
+             name="_"
+             distance="0"
+             show_locations="false"
+             pxsl_line="123">
+            <Destination
+                 pxsl_line="123">
+                <QuestObject
+                     class="SensorGoTo"
+                     name="sgt_fountain_tunnel_b_enemies_near_exit"
+                     pxsl_line="123" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             pxsl_line="124">
+            <Path
+                 pxsl_line="125">
+                <Phase
+                     type="kill"
+                     name="_"
+                     show_locations="false"
+                     pxsl_line="126">
+                    <Spawner
+                         pxsl_line="127">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="fountain_tunnel_b_enemie_near_exit_01"
+                             pxsl_line="127" />
+                    </Spawner>
+                    <Spawner
+                         pxsl_line="128">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="fountain_tunnel_b_enemie_near_exit_02"
+                             pxsl_line="128" />
+                    </Spawner>
+                    <Spawner
+                         pxsl_line="129">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="fountain_tunnel_b_enemie_near_exit_03"
+                             pxsl_line="129" />
+                    </Spawner>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="130">
+                <Phase
+                     type="set door behaviour"
+                     name="_"
+                     behaviour="OpenedCCW"
+                     pxsl_line="131">
+                    <Door
+                         pxsl_line="131">
+                        <QuestObject
+                             class="DoorDI"
+                             name="tunnel_b_door04"
+                             pxsl_line="131" />
+                    </Door>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="132">
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="133">
+                    <Object
+                         pxsl_line="134">
+                        <QuestObject
+                             class="SoundEmitterRandom"
+                             name="fountain_tunnel_b_zombies_behind_door"
+                             pxsl_line="134" />
+                    </Object>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="135">
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="136">
+                    <Object
+                         pxsl_line="137">
+                        <QuestObject
+                             class="SoundEmitterSimple"
+                             name="fountain_tunnel_b_zombies_door_crushing"
+                             pxsl_line="137" />
+                    </Object>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="138">
+            <Destination
+                 pxsl_line="138">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="sp_Fountain_Tunnel_B_Start"
+                     pxsl_line="138" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__Fountain_Tunnel_C_Zombies01"
+         parent="University01"
+         pxsl_line="140">
+        <Phase
+             type="go to"
+             name="_"
+             distance="0"
+             show_locations="false"
+             pxsl_line="141">
+            <Destination
+                 pxsl_line="141">
+                <QuestObject
+                     class="SensorGoTo"
+                     name="sgt_tunel_c_01"
+                     pxsl_line="141" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="142">
+            <Object
+                 pxsl_line="142">
+                <QuestObject
+                     class="AISpawnBoxCompound"
+                     name="tunnel_c_enemies_01"
+                     pxsl_line="142" />
+            </Object>
+        </Phase>
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="143">
+            <Spawner
+                 pxsl_line="144">
+                <QuestObject
+                     class="AISpawnBoxCompound"
+                     name="tunnel_c_enemies_01"
+                     pxsl_line="144" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="145">
+            <Destination
+                 pxsl_line="145">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="sp_Fountain_Tunnel_A_Start"
+                     pxsl_line="145" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__Fountain_Tunnel_D_Enemies01"
+         parent="University01"
+         pxsl_line="147">
+        <Phase
+             type="go to"
+             name="_"
+             distance="0"
+             show_locations="false"
+             pxsl_line="148">
+            <Destination
+                 pxsl_line="148">
+                <QuestObject
+                     class="SensorGoTo"
+                     name="sgt_tunel_d_01"
+                     pxsl_line="148" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="149">
+            <Object
+                 pxsl_line="150">
+                <QuestObject
+                     class="AISpawnBoxCompound"
+                     name="tunnel_d_enemies_01"
+                     pxsl_line="150" />
+            </Object>
+            <Object
+                 pxsl_line="151">
+                <QuestObject
+                     class="AISpawnBoxCompound"
+                     name="tunnel_d_enemies_02"
+                     pxsl_line="151" />
+            </Object>
+        </Phase>
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="152">
+            <Spawner
+                 pxsl_line="153">
+                <QuestObject
+                     class="AISpawnBoxCompound"
+                     name="tunnel_d_enemies_01"
+                     pxsl_line="153" />
+            </Spawner>
+            <Spawner
+                 pxsl_line="154">
+                <QuestObject
+                     class="AISpawnBoxCompound"
+                     name="tunnel_d_enemies_02"
+                     pxsl_line="154" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="155">
+            <Destination
+                 pxsl_line="155">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="sp_fountain_tunnel_D_Start"
+                     pxsl_line="155" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__Fountain_Tunnel_D_Enemies02"
+         parent="University01"
+         pxsl_line="157">
+        <Phase
+             type="go to"
+             name="_"
+             distance="0"
+             show_locations="false"
+             pxsl_line="158">
+            <Destination
+                 pxsl_line="158">
+                <QuestObject
+                     class="SensorGoTo"
+                     name="sgt_tunel_d_02"
+                     pxsl_line="158" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="159">
+            <Object
+                 pxsl_line="159">
+                <QuestObject
+                     class="AISpawnBoxCompound"
+                     name="tunnel_d_enemies_03"
+                     pxsl_line="159" />
+            </Object>
+        </Phase>
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="160">
+            <Spawner
+                 pxsl_line="160">
+                <QuestObject
+                     class="AISpawnBoxCompound"
+                     name="tunnel_d_enemies_03"
+                     pxsl_line="160" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="161">
+            <Destination
+                 pxsl_line="161">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="sp_fountain_tunnel_D_Start"
+                     pxsl_line="161" />
+            </Destination>
+        </Phase>
+    </Quest>
+</QuestsDefinitions>

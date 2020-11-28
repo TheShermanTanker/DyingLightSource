@@ -1,0 +1,52 @@
+// platform configurations
+
+export string cfg_common = "common";
+export string cfg_PC = "PC";
+
+// resource types
+
+export int _MESH_ = 16;
+export int _SKIN_ = 18;
+export int _TEXTURE_ = 32;
+export int _MATERIAL_ = 48;
+export int _ANIMATION_  = 64;
+export int _ANIMATION_ID_  = 65;
+export int _ANIMATION_SCR_  = 66;
+export int _FX_ = 80;
+export int _LIGHTMAP_ = 96;
+export int _FLASH_ = 97;
+export int _SOUND_ = 101;
+export int _SOUND_MUSIC_ = 102;
+export int _SOUND_SPEECH_ = 103;
+export int _SOUND_STREAM_ = 104;
+export int _SOUND_LOCAL_ = 105;
+export int _DENSITY_MAP_ = 112;
+export int _HEIGHT_MAP_ = 128;
+export int _MIMIC_ = 144;
+export int _PATHMAP_ = 160;
+export int _PHONEMES_ = 176;
+export int _STATIC_GEOMETRY_ = 192;
+export int _TEXT_ = 208;
+export int _BINARY_ = 224;
+export int _TINY_OBJECTS_ = 248;        // 0xF8
+
+sub DCLMATERIAL(string name = "", string flags = "0000")
+{
+    string name = name + "&" + flags;
+    res( _MATERIAL_, name, name + ".mat", "", true );
+}
+
+sub DCLMESH_NOINST(string name = "", string skins = "Default", string pos_compression = "1")
+{
+    res( _MESH_, name, name + ".msh", "skins=" + skins + ";instances_limit=1;pos_compression=" + pos_compression, true );
+}
+
+sub DCLTEXTURE(string name = "")
+{
+    res( _TEXTURE_, name, name + ".dds", "", true );
+}
+
+sub DCLFX(string name = "")
+{
+    res( _FX_, name, name + ".fx", "", true );
+}

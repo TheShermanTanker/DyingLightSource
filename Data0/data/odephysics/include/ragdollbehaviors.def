@@ -1,0 +1,67 @@
+$CURVE_CONST(s, "Const")                            // applied value is constant in time of current activity
+$CURVE_LINEAR_INCREASE(s, "LinearIncrease")         // applied value will be increased with time from 0 to given value
+$CURVE_LINEAR_DECREASE(s, "LinearDecrease")         // applied value will be decreased with time from given value to 0
+
+$COORD_START(s, "Start")                            // behavior start direction/orientation (given by user while starting behavior) is used to calculate final dir
+$COORD_LOCAL(s, "Local")                            // local bone orientation will be used to calculate final dir
+$COORD_WORLD(s, "World")                            // dir is given in world coordinates
+$COORD_VS_ANOTHER_BONE(s, "VsAnotherBone")          // final dir will be calculated as a segment from second to first bone
+$COORD_ANOTHER_BONE_LOCAL(s, "AnotherBoneLocal")    // local orientation of second bone will be used to calculate final dir
+
+!Behavior(s)                        // begin of behavior definition block
+                                    // s - name of behavior - should be one of ERagdollBehavior::TYPE defined in ExportedEnums.h
+!Alias(s, s)						// copy another behavior definition
+									// s - name of behavior to be replaced
+									// s - name of behavior to replace with
+!Stiffness(f, f, f, s)              // defines stiffness of joints 
+                                    // f - start time (in local behavior time coordinates)
+                                    // f - end time (in local behavior time coordinates)
+                                    // f - value of stiffness - from 0 (joints are flexible) to 1 (joints are stiffen)
+                                    // s - shape of curve - use one of CURVE_ macro defined above
+
+!LinVel(f, f, f, s, s, s, v3, s)    // changes linear speed of given bone
+                                    // f - start time (in local behavior time coordinates)
+                                    // f - end time (in local behavior time coordinates)
+                                    // f - value of linear velocity [m/s] 
+                                    // s - shape of curve - use one of CURVE_ macro defined above
+                                    // s - bone, whose speed will be modified
+                                    // s - optional bone used only when 2-bones coordinate system is chosen
+                                    // v3 - direction of speed - applied speed will be calculated correspondly to chosen coordinate system
+                                    // s - coordination system - use one of COORD_ macro defined above
+
+!AngVel(f, f, f, s, s, s, v3, s)    // changes angular speed of given bone
+                                    // f - start time (in local behavior time coordinates)
+                                    // f - end time (in local behavior time coordinates)
+                                    // f - value of angular velocity [rad/s] 
+                                    // s - shape of curve - use one of CURVE_ macro defined above
+                                    // s - bone, whose speed will be modified
+                                    // s - optional bone used only when 2-bones coordinate system is chosen
+                                    // v3 - direction of speed - applied speed will be calculated correspondly to chosen coordinate system
+                                    // s - coordination system - use one of COORD_ macro defined above
+
+
+!RandLinImpulse(f, f, f, f, f, s, s, s, v3, s)  // applying linear impulse (linear speed) to given bone
+                                                // f - start time (in local behavior time coordinates)
+                                                // f - end time (in local behavior time coordinates)
+                                                // f - min value of rand range [m/s] 
+                                                // f - max value of rand range [m/s] 
+                                                // f - impulse interval [s] (e.g. 0.5 means impulse will be applied twice a second)
+                                                // s - shape of curve - use one of CURVE_ macro defined above
+                                                // s - bone, whose speed will be modified
+                                                // s - optional bone used only when 2-bones coordinate system is chosen
+                                                // v3 - direction of speed - applied speed will be calculated correspondly to chosen coordinate system
+                                                // s - coordination system - use one of COORD_ macro defined above
+
+!RandAngImpulse(f, f, f, f, f, s, s, s, v3, s)  // applying angular impulse (angular speed) to given bone
+                                                // f - start time (in local behavior time coordinates)
+                                                // f - end time (in local behavior time coordinates)
+                                                // f - min value of rand range - min speed [rad/s] 
+                                                // f - max value of rand range - max speed [rad/s] 
+                                                // f - impulse interval [s] (e.g. 0.5 means impulse will be applied twice a second)
+                                                // s - shape of curve - use one of CURVE_ macro defined above
+                                                // s - bone, whose speed will be modified
+                                                // s - optional bone used only when 2-bones coordinate system is chosen
+                                                // v3 - direction of speed - applied speed will be calculated correspondly to chosen coordinate system
+                                                // s - coordination system - use one of COORD_ macro defined above
+
+                                                

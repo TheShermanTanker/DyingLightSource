@@ -1,0 +1,35 @@
+!include("ai_data.def")
+!include("ai_timing.def")
+!include("ai_goals.def")
+
+ShortHeadRotation()
+StrongAttractor()
+InteractionDist(7)
+SnapDist(1)
+ReleaseDist(4)
+InteractionLevel(2)
+User("Man")
+
+
+DisabledTurnDuringActivity(ALL_INTERACT)
+EnableDialogAnimations()
+
+Slot("", 1, 1, 1, 0, 0, 0, 0, 0, 1, 1.5)
+{
+    LockPosition()
+    DynamicMesh("wn_wrench_c.msh", "r_handholder", "", "Default", 1)
+    AiTypeDataSet("human")
+    {
+        Data("idle:standing:none:stand:none:none:none", -2, "lp_airplane_polat_nointeract", -1, 1)
+        Data("idle:standing:none:idle:none:none:none", -2, "lp_airplane_polat_nointeract", -1, 1)
+        Data("idle:standing:none:interact:none:none:none", -2, "lp_airplane_polat_interact", -1, 1)
+        Data("idle:standing:none:to_dialog:none:none:none", -2, "lp_airplane_polat_to_dialog", -1, 1)
+		Data("idle:standing:none:dialog:none:none:none", -2, "lp_airplane_polat_forced_4p_no_you_idiot", -1, 1)
+		Data("idle:standing:none:from_dialog:none:none:none", -2, "lp_airplane_polat_from_dialog", -1, 1)
+    }
+}
+
+DialogCameraMode("CustomCamera")
+DialogCameraOffset(0.00000, 0.00000, 0.97000)
+HeadPosOnScreen(-0.10000, -0.25000)
+DialogNpcSize(0.75000)

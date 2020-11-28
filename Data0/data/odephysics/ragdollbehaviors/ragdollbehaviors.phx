@@ -1,0 +1,1761 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// This file should be used from ragdoll definition script only (uses ragdoll definition keywords)
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Ragdoll Behavior names should be unique, case insensitive!
+// bone names are case sensitive! - commonly they are case lowered
+
+!include("RagdollBehaviors.def")
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//COMMON
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+//@@
+Behavior("Test_1")
+{
+	LinVel(0, 0.5, 7, CURVE_LINEAR_DECREASE, "l_hand", "", [0, 0, 1], COORD_START)
+	LinVel(0, 0.5, 7, CURVE_LINEAR_DECREASE, "r_hand", "", [0, 0, 1], COORD_START)
+	
+	LinVel(0, 0.1, 6, CURVE_CONST, "head", "", [0, 0, 1], COORD_START)
+	LinVel(0, 0.1, 8, CURVE_CONST, "spine3", "", [0, 0, 1], COORD_START)
+
+	LinVel(0, 0.1, 2, CURVE_CONST, "l_thigh", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.2, 2, CURVE_CONST, "l_calf", "", [0, 0, -1], COORD_START)
+}
+
+Behavior("Test_2")
+{
+	LinVel(0, 0.1, 6, CURVE_CONST, "spine3", "", [0, -0.7, 1], COORD_START)
+	LinVel(0, 0.3, 1, CURVE_CONST, "pelvis", "", [0, -1, 0.3], COORD_START)
+}
+
+Behavior("Test_3")
+{
+	LinVel(0, 0.1, 7.15, CURVE_CONST, "spine1", "", [0, 0.2, -1], COORD_START)	
+	LinVel(0, 0.1, 9.1, CURVE_CONST, "spine3", "", [0, 0.2, -1], COORD_START)
+	LinVel(0, 0.1, 3.9, CURVE_CONST, "spine1", "", [0, 1, -1], COORD_START)
+	
+	LinVel(0, 0.3, 8.45, CURVE_CONST, "l_hand", "", [0.0, 0, 0], COORD_START)
+    LinVel(0, 0.3, 6.5, CURVE_CONST, "r_hand", "", [0.0, 0, 0], COORD_START)
+			
+	LinVel(0.0, 0.1, 1.3, CURVE_CONST, "l_calf", "", [0.5, -1, 0], COORD_START)
+	LinVel(0.0, 0.1, 1.3, CURVE_CONST, "r_calf", "", [0.5, -1, 0], COORD_START)
+}
+
+Behavior("Test_4")
+{
+	LinVel(0, 0.3, 0.5, CURVE_CONST, "l_hand", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.3, 0.5, CURVE_CONST, "l_hand", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.3, 0.5, CURVE_CONST, "r_hand", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.3, 0.5, CURVE_CONST, "r_hand", "", [0, 0, -1], COORD_START)
+	
+	LinVel(0, 0.9, 0.9, CURVE_LINEAR_DECREASE, "head", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.1, 9, CURVE_CONST, "spine3", "", [0, 0.2, 1], COORD_START)
+	LinVel(0, 0.1, 9.75, CURVE_CONST, "spine1", "", [0, 0.2, 1], COORD_START)
+	LinVel(0, 0.1, 9, CURVE_CONST, "pelvis", "", [0, 0.2, 1], COORD_START)
+	LinVel(0.1, 0.2, 6.5, CURVE_LINEAR_INCREASE, "spine1", "", [0, 0.2, 1], COORD_START)
+    LinVel(0.4, 1.2, 4.5, CURVE_LINEAR_INCREASE, "spine1", "", [0, -0.8, 0], COORD_START)
+}
+
+Behavior("Test_5")
+{
+	LinVel(0, 0.2, 1, CURVE_CONST, "l_hand", "", [0, 0.2, -1], COORD_START)
+    LinVel(0, 0.2, 1, CURVE_CONST, "r_hand", "", [0, 0.2, -1], COORD_START)
+    LinVel(0, 0.6, 2, CURVE_CONST, "head", "", [0, 0.3, 1], COORD_START)
+}
+    
+Behavior("Test_6")
+{
+	LinVel(0, 0.0001, 80, CURVE_CONST, "pelvis", "", [0, 1, 0.2], COORD_START)
+}
+
+
+
+Behavior("GrabRelease")
+{
+    LinVel(0, 0.01, 8, CURVE_CONST, "head", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.2, 2, CURVE_CONST, "head", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.01, 10, CURVE_CONST, "spine3", "", [0, 0, 1], COORD_START)
+	LinVel(0, 0.01, 9, CURVE_CONST, "spine1", "", [0, 0, 1], COORD_START)
+	LinVel(0, 0.01, 2, CURVE_CONST, "pelvis", "", [0, 0, -1], COORD_START)
+
+	LinVel(0, 0.01, 2, CURVE_CONST, "spine1", "", [0, 1, 0], COORD_START)
+}
+
+Behavior("NageWazaRelease")
+{
+	LinVel(0, 0.03, 7.15, CURVE_CONST, "spine1", "", [0.5, 0.2, -1], COORD_START)	
+	LinVel(0, 0.03, 9.1, CURVE_CONST, "spine3", "", [0.5, 0.2, -1], COORD_START)
+	LinVel(0, 0.03, 3.9, CURVE_CONST, "spine1", "", [0.5, 1, 0], COORD_START)
+	
+	LinVel(0, 0.3, 8.45, CURVE_CONST, "l_hand", "", [0.5, 0, -1], COORD_START)
+    LinVel(0, 0.3, 6.5, CURVE_CONST, "r_hand", "", [0.5, 0, -1], COORD_START)
+			
+	LinVel(0.0, 0.1, 1.3, CURVE_CONST, "l_calf", "", [0.5, -1, 0], COORD_START)
+	LinVel(0.0, 0.1, 1.3, CURVE_CONST, "r_calf", "", [0.5, -1, 0], COORD_START)
+}
+Alias("NageWazaReleaseEnhanced", "NageWazaRelease")
+
+Behavior("NageWazaReleaseFront")
+{
+	LinVel(0, 0.1, 7.15, CURVE_CONST, "spine1", "", [0, 0.2, -1], COORD_START)	
+	LinVel(0, 0.1, 9.1, CURVE_CONST, "spine3", "", [0, 0.2, -1], COORD_START)
+	LinVel(0, 0.1, 3.9, CURVE_CONST, "spine1", "", [0, 1, -1], COORD_START)
+	
+	LinVel(0, 0.3, 8.45, CURVE_CONST, "l_hand", "", [0.0, 0, 0], COORD_START)
+    LinVel(0, 0.3, 6.5, CURVE_CONST, "r_hand", "", [0.0, 0, 0], COORD_START)
+			
+	LinVel(0.0, 0.1, 1.3, CURVE_CONST, "l_calf", "", [0.5, -1, 0], COORD_START)
+	LinVel(0.0, 0.1, 1.3, CURVE_CONST, "r_calf", "", [0.5, -1, 0], COORD_START)
+}
+Alias("NageWazaReleaseFrontEnhanced", "NageWazaReleaseFront")
+
+Behavior("GrabReleaseSpinLeft")
+{
+    LinVel(0, 0.01, 8, CURVE_CONST, "head", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.01, 11, CURVE_CONST, "head", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.01, 9, CURVE_CONST, "spine3", "", [0, 0, 1], COORD_START)
+	LinVel(0, 0.01, 8, CURVE_CONST, "spine1", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "spine3", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.1, 1.5, CURVE_CONST, "spine1", "", [0, 1, 0], COORD_START)
+    LinVel(0, 0.01, 8, CURVE_CONST, "spine1", "", [0, -1, 0], COORD_START)
+	LinVel(0, 0.01, 2, CURVE_CONST, "pelvis", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.3, 1, CURVE_CONST, "pelvis", "", [0, -1, 0], COORD_START)
+
+	LinVel(0, 0.01, 2, CURVE_CONST, "spine1", "", [0, 1, 0], COORD_START)
+    
+    AngVel(0, 0.25, -70, CURVE_LINEAR_DECREASE, "head",  "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.25, -50, CURVE_LINEAR_DECREASE, "spine1",  "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.25, -50, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("GrabReleaseSpinRight")
+{
+    LinVel(0, 0.01, 8, CURVE_CONST, "head", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.01, 11, CURVE_CONST, "head", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.01, 9, CURVE_CONST, "spine3", "", [0, 0, 1], COORD_START)
+	LinVel(0, 0.01, 8, CURVE_CONST, "spine1", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "spine3", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.1, 1.5, CURVE_CONST, "spine1", "", [0, 1, 0], COORD_START)
+    LinVel(0, 0.01, 8, CURVE_CONST, "spine1", "", [0, -1, 0], COORD_START)
+	LinVel(0, 0.01, 2, CURVE_CONST, "pelvis", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.3, 1, CURVE_CONST, "pelvis", "", [0, -1, 0], COORD_START)
+
+	LinVel(0, 0.01, 2, CURVE_CONST, "spine1", "", [0, 1, 0], COORD_START)
+    
+    AngVel(0, 0.25, 70, CURVE_LINEAR_DECREASE, "head",  "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.25, 50, CURVE_LINEAR_DECREASE, "spine1",  "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.25, 50, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("Fall")
+{
+	LinVel(0, 0.5, 7, CURVE_LINEAR_DECREASE, "l_hand", "", [0, 0, 1], COORD_START)
+	LinVel(0, 0.5, 7, CURVE_LINEAR_DECREASE, "r_hand", "", [0, 0, 1], COORD_START)
+	
+	LinVel(0, 0.1, 6, CURVE_CONST, "head", "", [0, 0, 1], COORD_START)
+	LinVel(0, 0.1, 8, CURVE_CONST, "spine3", "", [0, 0, 1], COORD_START)
+
+	LinVel(0, 0.1, 2, CURVE_CONST, "l_thigh", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.2, 2, CURVE_CONST, "l_calf", "", [0, 0, -1], COORD_START)
+}
+
+Behavior("Blast")
+{
+    LinVel(0, 0.6, 1, CURVE_CONST, "l_hand", "", [0, 0.1, -1], COORD_START)
+    LinVel(0, 0.6, 1, CURVE_CONST, "r_hand", "", [0, 0.1, -1], COORD_START)
+	
+	LinVel(0, 0.1, 18, CURVE_CONST, "spine1", "", [0, 0.2, 1], COORD_START)
+    LinVel(0.1, 0.6, 10, CURVE_LINEAR_DECREASE, "spine1", "", [0, 0.2, 1], COORD_START)
+	LinVel(0, 0.6, 4, CURVE_CONST, "pelvis", "", [0, 0.2, 1], COORD_START)
+}
+
+Behavior("CarGrabRelease")
+{
+	LinVel(0, 0.1, 18, CURVE_LINEAR_DECREASE, "l_hand", "", [0, 0.2, 1], COORD_START)
+    LinVel(0, 0.1, 18, CURVE_LINEAR_DECREASE, "r_hand", "", [0, 0.2, 1], COORD_START)
+    LinVel(0.1, 0.6, 1, CURVE_CONST, "l_hand", "", [0, 0.0, -1], COORD_START)
+    LinVel(0.1, 0.6, 1, CURVE_CONST, "r_hand", "", [0, 0.0, -1], COORD_START)
+	
+	LinVel(0, 0.1, 15, CURVE_CONST, "spine1", "", [0, 0.0, 1], COORD_START)
+    LinVel(0.1, 0.6, 10, CURVE_LINEAR_DECREASE, "spine1", "", [0, 0.0, 1], COORD_START)
+	LinVel(0, 0.6, 4, CURVE_CONST, "pelvis", "", [0, 0.0, 1], COORD_START)
+}
+
+Behavior("CarGrabBreakRelease")
+{
+    LinVel(0,  0.15, 14, CURVE_CONST, "spine1", "", [0, 0.0, 1], COORD_START)
+    LinVel(0.0, 0.1, 5, CURVE_CONST, "l_calf", "", [0,0, 1], COORD_START)
+	LinVel(0.0, 0.1, 5, CURVE_CONST, "r_calf", "", [0, 0, 1], COORD_START)
+}
+
+Alias("StickBlunt_CarGrabRelease", "CarGrabRelease")
+Alias("StickSharp_CarGrabRelease", "CarGrabRelease")
+Alias("Knife_CarGrabRelease", "CarGrabRelease")
+Alias("Stick2Close_CarGrabRelease", "CarGrabRelease")
+Alias("Stick2HeavySharp_CarGrabRelease", "CarGrabRelease")
+Alias("Stick2HeavyBlunt_CarGrabRelease", "CarGrabRelease")
+
+Behavior("HeadJump")
+{	
+	LinVel(0, 0.1, 6, CURVE_CONST, "spine3", "", [0, -0.7, 1], COORD_START)
+	LinVel(0, 0.3, 1, CURVE_CONST, "pelvis", "", [0, -1, 0.3], COORD_START)
+}
+
+Behavior("Impact")
+{
+	LinVel(0, 0.3, 0.25, CURVE_CONST, "l_hand", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.3, 0.25, CURVE_CONST, "l_hand", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.3, 0.25, CURVE_CONST, "r_hand", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.3, 0.25, CURVE_CONST, "r_hand", "", [0, 0, -1], COORD_START)
+	
+	 LinVel(0, 0.9, 0.45, CURVE_LINEAR_DECREASE, "head", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.1, 4.5, CURVE_CONST, "spine3", "", [0, 0.2, 1], COORD_START)
+	LinVel(0, 0.1, 4.85, CURVE_CONST, "spine1", "", [0, 0.2, 1], COORD_START)
+	LinVel(0, 0.1, 4.5, CURVE_CONST, "pelvis", "", [0, 0.2, 1], COORD_START)
+	LinVel(0.1, 0.2, 3.25, CURVE_LINEAR_INCREASE, "spine1", "", [0, 0.2, 1], COORD_START)
+    LinVel(0.4, 1.2, 2.25, CURVE_LINEAR_INCREASE, "spine1", "", [0, -0.8, 0], COORD_START)
+}
+
+Behavior("Electricity")
+{	
+    LinVel(0, 0.1, 2.75, CURVE_CONST, "spine1", "", [0, -0.1, -0.1], COORD_START)
+    RandLinImpulse(0, 2.5, -5, 5, 0.02, CURVE_CONST, "spine1", "", [1, 0, 1], COORD_WORLD)
+    RandLinImpulse(2.5, 5, -2.5, 2.5, 0.02, CURVE_CONST, "spine1", "", [1, 0, 1], COORD_WORLD)
+    //LinVel(2.48, 2.52, 4, CURVE_CONST, "spine1", "", [0, -1, 0], COORD_WORLD)
+    RandAngImpulse(0, 2.5, -20, 20, 0.02, CURVE_CONST, "l_thigh", "", [1, 0, 1], COORD_WORLD)
+    RandAngImpulse(2.5, 5, -10, 10, 0.02, CURVE_CONST, "l_thigh", "", [1, 0, 1], COORD_WORLD)
+    RandAngImpulse(0, 2.5, -20, 20, 0.02, CURVE_CONST, "r_thigh", "", [1, 0, 1], COORD_WORLD)
+    RandAngImpulse(2.5, 5, -10, 10, 0.02, CURVE_CONST, "r_thigh", "", [1, 0, 1], COORD_WORLD)
+    RandAngImpulse(0, 2.5, -30, 30, 0.01, CURVE_CONST, "l_calf", "", [1, 1, 1], COORD_WORLD)
+    RandAngImpulse(2.5, 5, -10, 10, 0.01, CURVE_CONST, "l_calf", "", [1, 1, 1], COORD_WORLD)
+    RandAngImpulse(0, 2.5, -30, 30, 0.01, CURVE_CONST, "r_calf", "", [1, 1, 1], COORD_WORLD)
+    RandAngImpulse(2.5, 5, -10, 10, 0.01, CURVE_CONST, "r_calf", "", [1, 1, 1], COORD_WORLD)
+    RandAngImpulse(0, 2.5, -30, 30, 0.02, CURVE_CONST, "l_upperarm", "", [1, 0, 1], COORD_WORLD)
+    RandAngImpulse(2.5, 5, -10, 10, 0.02, CURVE_CONST, "l_upperarm", "", [1, 0, 1], COORD_WORLD)
+    RandAngImpulse(0, 2.5, -30, 30, 0.02, CURVE_CONST, "r_upperarm", "", [1, 0, 1], COORD_WORLD)
+    RandAngImpulse(2.5, 5, -10, 10, 0.02, CURVE_CONST, "r_upperarm", "", [1, 0, 1], COORD_WORLD)
+    RandAngImpulse(0, 2.5, -30, 30, 0.01, CURVE_CONST, "l_forearm", "", [1, 1, 1], COORD_WORLD)
+    RandAngImpulse(2.5, 5, -10, 10, 0.01, CURVE_CONST, "l_forearm", "", [1, 1, 1], COORD_WORLD)
+    RandAngImpulse(0, 2.5, -30, 30, 0.01, CURVE_CONST, "r_forearm", "", [1, 1, 1], COORD_WORLD)
+    RandAngImpulse(2.5, 5, -10, 10, 0.01, CURVE_CONST, "r_forearm", "", [1, 1, 1], COORD_WORLD)
+}
+
+Behavior("PreToxicBurnExplosion")
+{	
+    RandLinImpulse(0, 0.4, -2, 2, 0.02, CURVE_CONST, "head", "", [1, 0, 1], COORD_WORLD)
+	RandLinImpulse(0.4, 0.8, -3, 3, 0.02, CURVE_CONST, "head", "", [1, 0, 1], COORD_WORLD)
+	RandLinImpulse(0.8, 1.2, -4, 4, 0.02, CURVE_CONST, "head", "", [1, 0, 1], COORD_WORLD)
+	RandLinImpulse(1.2, 3.0, -6, 6, 0.02, CURVE_CONST, "head", "", [1, 0, 1], COORD_WORLD)
+	RandLinImpulse(3.0, 4.0, -10, 10, 0.02, CURVE_CONST, "head", "", [1, 0, 1], COORD_WORLD)
+	
+    RandLinImpulse(0, 0.4, -2, 2, 0.02, CURVE_CONST, "spine1", "", [1, 0, 1], COORD_WORLD)
+	RandLinImpulse(0.4, 0.8, -3, 3, 0.02, CURVE_CONST, "spine1", "", [1, 0, 1], COORD_WORLD)
+	RandLinImpulse(0.8, 1.2, -4, 4, 0.02, CURVE_CONST, "spine1", "", [1, 0, 1], COORD_WORLD)
+	RandLinImpulse(1.2, 3.0, -6, 6, 0.02, CURVE_CONST, "spine1", "", [1, 0, 1], COORD_WORLD)
+	RandLinImpulse(3.0, 4.0, -10, 10, 0.02, CURVE_CONST, "spine1", "", [1, 0, 1], COORD_WORLD)
+	
+	RandAngImpulse(0, 1.0, -7, 7, 0.02, CURVE_CONST, "l_thigh", "", [1, 0, 1], COORD_WORLD)	
+	RandAngImpulse(0, 2.0, -12, 12, 0.02, CURVE_CONST, "l_thigh", "", [1, 0, 1], COORD_WORLD)	
+	RandAngImpulse(0, 3.0, -20, 20, 0.02, CURVE_CONST, "l_thigh", "", [1, 0, 1], COORD_WORLD)	
+	RandAngImpulse(0, 4.0, -30, 30, 0.02, CURVE_CONST, "l_thigh", "", [1, 0, 1], COORD_WORLD)	
+	RandLinImpulse(2.0, 3.0, -2, 2, 0.02, CURVE_CONST, "l_thigh", "", [1, 0, 1], COORD_WORLD)
+	RandLinImpulse(3.0, 4.0, -3, 3, 0.02, CURVE_CONST, "l_thigh", "", [1, 0, 1], COORD_WORLD)
+	
+	RandAngImpulse(0, 1.0, -7, 7, 0.02, CURVE_CONST, "r_thigh", "", [1, 0, 1], COORD_WORLD)
+	RandAngImpulse(0, 2.0, -12, 12, 0.02, CURVE_CONST, "r_thigh", "", [1, 0, 1], COORD_WORLD)
+	RandAngImpulse(0, 3.0, -20, 20, 0.02, CURVE_CONST, "r_thigh", "", [1, 0, 1], COORD_WORLD)
+	RandAngImpulse(0, 4.0, -30, 30, 0.02, CURVE_CONST, "r_thigh", "", [1, 0, 1], COORD_WORLD)
+	RandLinImpulse(2.0, 3.0, -2, 2, 0.02, CURVE_CONST, "r_thigh", "", [1, 0, 1], COORD_WORLD)
+	RandLinImpulse(3.0, 4.0, -3, 3, 0.02, CURVE_CONST, "r_thigh", "", [1, 0, 1], COORD_WORLD)
+	
+	RandAngImpulse(0, 1.0, -7, 7, 0.02, CURVE_CONST, "l_calf", "", [1, 0, 1], COORD_WORLD)
+	RandAngImpulse(0, 2.0, -12, 12, 0.02, CURVE_CONST, "l_calf", "", [1, 0, 1], COORD_WORLD)
+	RandAngImpulse(0, 3.0, -20, 20, 0.02, CURVE_CONST, "l_calf", "", [1, 0, 1], COORD_WORLD)
+	RandAngImpulse(0, 4.0, -30, 30, 0.02, CURVE_CONST, "l_calf", "", [1, 0, 1], COORD_WORLD)
+	RandLinImpulse(2.0, 3.0, -2, 2, 0.02, CURVE_CONST, "l_calf", "", [1, 0, 1], COORD_WORLD)
+	RandLinImpulse(3.0, 4.0, -3, 3, 0.02, CURVE_CONST, "l_calf", "", [1, 0, 1], COORD_WORLD)
+	
+	RandAngImpulse(0, 1.0, -7, 7, 0.02, CURVE_CONST, "r_calf", "", [1, 0, 1], COORD_WORLD)
+	RandAngImpulse(0, 2.0, -12, 12, 0.02, CURVE_CONST, "r_calf", "", [1, 0, 1], COORD_WORLD)
+	RandAngImpulse(0, 3.0, -20, 20, 0.02, CURVE_CONST, "r_calf", "", [1, 0, 1], COORD_WORLD)
+	RandAngImpulse(0, 4.0, -30, 30, 0.02, CURVE_CONST, "r_calf", "", [1, 0, 1], COORD_WORLD)
+	RandLinImpulse(2.0, 3.0, -2, 2, 0.02, CURVE_CONST, "r_calf", "", [1, 0, 1], COORD_WORLD)
+	RandLinImpulse(3.0, 4.0, -3, 3, 0.02, CURVE_CONST, "r_calf", "", [1, 0, 1], COORD_WORLD)
+	
+	RandAngImpulse(0, 1.0, -7, 7, 0.02, CURVE_CONST, "l_upperarm", "", [1, 0, 1], COORD_WORLD)
+	RandAngImpulse(0, 2.0, -12, 12, 0.02, CURVE_CONST, "l_upperarm", "", [1, 0, 1], COORD_WORLD)
+	RandAngImpulse(0, 3.0, -20, 20, 0.02, CURVE_CONST, "l_upperarm", "", [1, 0, 1], COORD_WORLD)
+	RandAngImpulse(0, 4.0, -30, 30, 0.02, CURVE_CONST, "l_upperarm", "", [1, 0, 1], COORD_WORLD)
+	RandLinImpulse(2.0, 3.0, -2, 2, 0.02, CURVE_CONST, "l_upperarm", "", [1, 0, 1], COORD_WORLD)
+	RandLinImpulse(3.0, 4.0, -3, 3, 0.02, CURVE_CONST, "l_upperarm", "", [1, 0, 1], COORD_WORLD)
+	
+	RandAngImpulse(0, 1.0, -7, 7, 0.02, CURVE_CONST, "r_upperarm", "", [1, 0, 1], COORD_WORLD)
+	RandAngImpulse(0, 2.0, -12, 12, 0.02, CURVE_CONST, "r_upperarm", "", [1, 0, 1], COORD_WORLD)
+	RandAngImpulse(0, 3.0, -20, 20, 0.02, CURVE_CONST, "r_upperarm", "", [1, 0, 1], COORD_WORLD)
+	RandAngImpulse(0, 4.0, -30, 30, 0.02, CURVE_CONST, "r_upperarm", "", [1, 0, 1], COORD_WORLD)
+	RandLinImpulse(2.0, 3.0, -2, 2, 0.02, CURVE_CONST, "r_upperarm", "", [1, 0, 1], COORD_WORLD)
+	RandLinImpulse(3.0, 4.0, -3, 3, 0.02, CURVE_CONST, "r_upperarm", "", [1, 0, 1], COORD_WORLD)
+	
+	RandAngImpulse(0, 1.0, -7, 7, 0.02, CURVE_CONST, "l_forearm", "", [1, 0, 1], COORD_WORLD)
+	RandAngImpulse(0, 2.0, -12, 12, 0.02, CURVE_CONST, "l_forearm", "", [1, 0, 1], COORD_WORLD)
+	RandAngImpulse(0, 3.0, -20, 20, 0.02, CURVE_CONST, "l_forearm", "", [1, 0, 1], COORD_WORLD)
+	RandAngImpulse(0, 4.0, -30, 30, 0.02, CURVE_CONST, "l_forearm", "", [1, 0, 1], COORD_WORLD)
+	RandLinImpulse(2.0, 3.0, -2, 2, 0.02, CURVE_CONST, "l_forearm", "", [1, 0, 1], COORD_WORLD)
+	RandLinImpulse(3.0, 4.0, -3, 3, 0.02, CURVE_CONST, "l_forearm", "", [1, 0, 1], COORD_WORLD)
+	
+	RandAngImpulse(0, 1.0, -7, 7, 0.02, CURVE_CONST, "r_forearm", "", [1, 0, 1], COORD_WORLD)
+	RandAngImpulse(0, 2.0, -12, 12, 0.02, CURVE_CONST, "r_forearm", "", [1, 0, 1], COORD_WORLD)
+	RandAngImpulse(0, 3.0, -20, 20, 0.02, CURVE_CONST, "r_forearm", "", [1, 0, 1], COORD_WORLD)
+	RandAngImpulse(0, 4.0, -30, 30, 0.02, CURVE_CONST, "r_forearm", "", [1, 0, 1], COORD_WORLD)
+	RandLinImpulse(2.0, 3.0, -2, 2, 0.02, CURVE_CONST, "r_forearm", "", [1, 0, 1], COORD_WORLD)
+	RandLinImpulse(3.0, 4.0, -3, 3, 0.02, CURVE_CONST, "r_forearm", "", [1, 0, 1], COORD_WORLD)
+}
+
+Behavior("Tackle")
+{
+    LinVel(0, 0.6, 1, CURVE_CONST, "l_hand", "", [0, 0.1, -1], COORD_START)
+    LinVel(0, 0.6, 1, CURVE_CONST, "r_hand", "", [0, 0.1, -1], COORD_START)
+	
+	LinVel(0, 0.1, 6, CURVE_CONST, "spine1", "", [0, 0.2, 1], COORD_START)
+    LinVel(0.1, 0.4, 4, CURVE_LINEAR_DECREASE, "spine1", "", [0, 0.2, 1], COORD_START)
+	LinVel(0, 0.6, 2, CURVE_CONST, "pelvis", "", [0, 0.2, 1], COORD_START)
+}
+
+Behavior("CarHit")
+{
+	LinVel(0, 0.3, 0.25, CURVE_CONST, "l_hand", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.3, 0.25, CURVE_CONST, "l_hand", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.3, 0.25, CURVE_CONST, "r_hand", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.3, 0.25, CURVE_CONST, "r_hand", "", [0, 0, -1], COORD_START)
+	
+    LinVel(0, 0.9, 0.45, CURVE_LINEAR_DECREASE, "head", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.1, 4.5, CURVE_CONST, "spine3", "", [0, 0.2, 1], COORD_START)
+	LinVel(0, 0.1, 4.85, CURVE_CONST, "spine1", "", [0, 0.2, 1], COORD_START)
+	LinVel(0, 0.1, 4.5, CURVE_CONST, "pelvis", "", [0, 0.2, 1], COORD_START)
+	LinVel(0.1, 0.2, 3.25, CURVE_LINEAR_INCREASE, "spine1", "", [0, 0.2, 1], COORD_START)
+    LinVel(0.4, 1.2, 2.25, CURVE_LINEAR_INCREASE, "spine1", "", [0, -0.8, 0], COORD_START)
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//DEFAULT WEAPON
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+Behavior("TorsoVertical1")
+{
+	LinVel(0, 0.6, 1, CURVE_CONST, "l_hand", "", [0, 0.1, -1], COORD_START)
+    LinVel(0, 0.6, 1, CURVE_CONST, "r_hand", "", [0, 0.1, -1], COORD_START)
+	
+	LinVel(0, 0.2, 5, CURVE_LINEAR_DECREASE, "spine1", "", [0, 0.4, 1], COORD_START)
+    LinVel(0, 0.4, 4, CURVE_LINEAR_DECREASE, "spine1", "", [0, 0.4, 1], COORD_START)
+	LinVel(0, 0.6, 2, CURVE_CONST, "pelvis", "", [0, 0.2, 1], COORD_START)
+}
+
+Behavior("TorsoVertical2")
+{
+	LinVel(0, 0.6, 1, CURVE_CONST, "l_hand", "", [0, 0.1, -1], COORD_START)
+    LinVel(0, 0.6, 1, CURVE_CONST, "r_hand", "", [0, 0.1, -1], COORD_START)
+	
+	LinVel(0, 0.2, 5, CURVE_LINEAR_DECREASE, "spine1", "", [0, 0.4, 1], COORD_START)
+    LinVel(0, 0.4, 4, CURVE_LINEAR_DECREASE, "spine1", "", [0, 0.4, 1], COORD_START)
+    AngVel(0, 0.1, -60, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("TorsoVertical3")
+{
+	LinVel(0, 0.6, 1, CURVE_CONST, "l_hand", "", [0, 0.2, -1], COORD_START)
+    LinVel(0, 0.6, 1, CURVE_CONST, "r_hand", "", [0, 0.2, -1], COORD_START)
+	
+	LinVel(0, 0.2, 5, CURVE_LINEAR_DECREASE, "spine1", "", [0, 0.4, 1], COORD_START)
+    LinVel(0, 0.4, 4, CURVE_LINEAR_DECREASE, "spine1", "", [0, 0.4, 1], COORD_START)
+    AngVel(0, 0.1, -8, CURVE_LINEAR_DECREASE, "spine3", "", [0, 0, 1], COORD_LOCAL)
+    AngVel(0, 0.1, -8, CURVE_CONST, "pelvis", "", [0, 0, 1], COORD_LOCAL)
+}
+
+Behavior("LegsVertical1")
+{
+	LinVel(0, 0.6, 0.5, CURVE_CONST, "l_hand", "", [0, 0.5, -1], COORD_START)
+    LinVel(0, 0.6, 0.5, CURVE_CONST, "r_hand", "", [0, 0.5, -1], COORD_START)
+	LinVel(0, 0.1, 5, CURVE_CONST, "l_calf", "", [0, 0.3, 1], COORD_START)
+	LinVel(0, 0.1, 5, CURVE_CONST, "r_calf", "", [0, 0.3, 1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "pelvis", "", [0, 0.2, 1], COORD_START)
+    LinVel(0, 0.1, 3, CURVE_CONST, "spine3", "", [0, -1.0, 0.4], COORD_START)
+    AngVel(0, 0.1, -30, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+	
+}
+
+Behavior("LegsVertical2")
+{
+	LinVel(0, 0.6, 1, CURVE_CONST, "l_hand", "", [0, 0.2, -1], COORD_START)
+    LinVel(0, 0.6, 1, CURVE_CONST, "r_hand", "", [0, 0.2, -1], COORD_START)
+	LinVel(0, 0.1, 3, CURVE_CONST, "l_calf", "", [0, 0.3, 1], COORD_START)
+	LinVel(0, 0.1, 1.5, CURVE_CONST, "r_calf", "", [0, 0.3, 1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "pelvis", "", [0, 0.2, 1], COORD_START)
+    AngVel(0, 0.1, 30, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("LegsVertical3")
+{
+	LinVel(0, 0.6, 1, CURVE_CONST, "l_hand", "", [0, 0.2, -1], COORD_START)
+    LinVel(0, 0.6, 1, CURVE_CONST, "r_hand", "", [0, 0.2, -1], COORD_START)
+	LinVel(0, 0.1, 2, CURVE_CONST, "l_calf", "", [-0.5, 0.3, 1], COORD_START)
+	LinVel(0, 0.1, 2.5, CURVE_CONST, "r_calf", "", [-0.5, 0.3, 1], COORD_START)
+    AngVel(0, 0.1, 20, CURVE_CONST, "pelvis", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("HeadVertical1")
+{
+	LinVel(0, 0.2, 1, CURVE_CONST, "l_hand", "", [0, 0.2, -1], COORD_START)
+    LinVel(0, 0.2, 1, CURVE_CONST, "r_hand", "", [0, 0.2, -1], COORD_START)
+    LinVel(0, 0.6, 2, CURVE_CONST, "head", "", [0, 0.3, 1], COORD_START)
+}
+
+Behavior("HeadVertical2")
+{
+	LinVel(0, 0.1, 1, CURVE_CONST, "l_hand", "", [0, 0.2, -1], COORD_START)
+    LinVel(0, 0.1, 1, CURVE_CONST, "r_hand", "", [0, 0.2, -1], COORD_START)
+    LinVel(0, 0.1, 5, CURVE_CONST, "head", "", [0, 0.5, 0.5], COORD_START)
+    AngVel(0, 0.2, 10, CURVE_CONST, "spine3", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("HeadVertical3")
+{
+	LinVel(0, 0.1, 1, CURVE_CONST, "l_hand", "", [0, 0.2, -1], COORD_START)
+    LinVel(0, 0.1, 1, CURVE_CONST, "r_hand", "", [0, 0.2, -1], COORD_START)
+    LinVel(0, 0.1, 4, CURVE_CONST, "head", "", [0, 0.5, 0.5], COORD_START)
+    AngVel(0, 0.1, -10, CURVE_CONST, "spine1", "", [1, 0, 0], COORD_LOCAL)
+    LinVel(0, 0.1, 1, CURVE_LINEAR_DECREASE, "l_calf", "", [0, 1, 0], COORD_START)
+    LinVel(0, 0.1, 1, CURVE_LINEAR_DECREASE, "r_calf", "", [0, 1, 0], COORD_START)
+}
+
+Behavior("TorsoVertical1_Down")
+{
+	LinVel(0, 0.15, 12.5, CURVE_CONST, "head", "", [-0.3, -1, 1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "spine3", "", [0, 0, 1], COORD_START)	
+    AngVel(0, 0.1, -60, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    LinVel(0, 0.1, 6, CURVE_LINEAR_DECREASE, "r_calf", "", [1, 0, 1], COORD_START)
+}
+
+Behavior("TorsoVertical2_Down")
+{
+	LinVel(0, 0.1, 4.5, CURVE_CONST, "head", "", [0, -1, -1], COORD_START)
+    LinVel(0, 0.1, 4.4, CURVE_CONST, "spine3", "", [0, -1, 1], COORD_START)
+	LinVel(0, 0.01, 8.5, CURVE_CONST, "spine1", "", [0, -1, 1], COORD_START)
+	LinVel(0, 0.01, 7, CURVE_CONST, "pelvis", "", [0, -1, 1], COORD_START)
+	LinVel(0.01, 0.02, 6, CURVE_LINEAR_INCREASE, "spine1", "", [0, -1, 1], COORD_START)
+	AngVel(0, 0.1, 70, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("TorsoVertical3_Down")
+{
+	LinVel(0, 0.1, 5.5, CURVE_CONST, "head", "", [0, -1, 0], COORD_START)
+    LinVel(0, 0.1, 5.4, CURVE_CONST, "spine3", "", [0, 0, 1], COORD_START)
+    AngVel(0, 0.1, 70, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+	LinVel(0.0, 0.15, 6, CURVE_LINEAR_INCREASE, "r_calf", "", [0, -0.5, 1], COORD_START)
+	LinVel(0.0, 0.15, 8, CURVE_LINEAR_INCREASE, "l_calf", "", [0, -0.5, 1], COORD_START)
+	
+	LinVel(0, 0.1, 15.5, CURVE_CONST, "r_calf", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.1, 15.4, CURVE_CONST, "r_calf", "", [0, 0, -1], COORD_START)
+}
+
+Behavior("TorsoVertical1_Up")
+{
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "head", "", [0, 1, 1], COORD_START)
+    LinVel(0, 0.1, 12, CURVE_LINEAR_DECREASE, "spine1", "", [0, 0, 1], COORD_START)
+    AngVel(0, 0.1, 35, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("TorsoVertical2_Up")
+{
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "head", "", [0, 1, 1], COORD_START)
+    LinVel(0, 0.1, 8, CURVE_LINEAR_DECREASE, "spine1", "", [0, 0, 1], COORD_START)
+    AngVel(0, 0.1, 20, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("TorsoVertical3_Up")
+{
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "head", "", [0, 1, 1], COORD_START)
+    LinVel(0, 0.1, 8, CURVE_LINEAR_DECREASE, "spine3", "", [0, 0, 1], COORD_START)
+    AngVel(0, 0.1, 50, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("LegsHorizontal1_Left")
+{
+	LinVel(0, 0.1, 2, CURVE_CONST, "head", "", [-1, 0, -1], COORD_START)
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "spine3", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "spine3", "", [0, -1, 0], COORD_START)
+    LinVel(0, 0.1, 4.5, CURVE_LINEAR_DECREASE, "l_calf", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 4, CURVE_LINEAR_DECREASE, "r_calf", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.01, 5, CURVE_LINEAR_DECREASE, "r_calf", "", [-1, 0, 1], COORD_START)
+    AngVel(0, 0.2, -50, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("LegsHorizontal2_Left")
+{
+	LinVel(0, 0.1, 1.5, CURVE_CONST, "head", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "spine3", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "pelvis", "", [0, -1, 0], COORD_START)
+    LinVel(0, 0.1, 2.5, CURVE_LINEAR_DECREASE, "l_calf", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 3, CURVE_LINEAR_DECREASE, "r_calf", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.01, 5, CURVE_LINEAR_DECREASE, "r_calf", "", [-1, 0, 1], COORD_START)
+    AngVel(0, 0.2, -20, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("LegsHorizontal3_Left")
+{
+	LinVel(0, 0.1, 1.0, CURVE_CONST, "head", "", [-1, 0, -1], COORD_START)
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "spine3", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "spine3", "", [0, -1, 0], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "pelvis", "", [0, -1, 0], COORD_START)
+    LinVel(0, 0.1, 4.5, CURVE_LINEAR_DECREASE, "l_calf", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 4, CURVE_LINEAR_DECREASE, "r_calf", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.01, 5, CURVE_LINEAR_DECREASE, "r_calf", "", [-1, 0, 1], COORD_START)
+    AngVel(0, 0.2, -50, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, -50, CURVE_LINEAR_DECREASE, "r_calf", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, -50, CURVE_LINEAR_DECREASE, "l_calf", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, -50, CURVE_LINEAR_DECREASE, "r_thigh", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, -50, CURVE_LINEAR_DECREASE, "l_thigh", "", [1, 0, 0], COORD_LOCAL)
+	
+    AngVel(0, 0.1, 100, CURVE_LINEAR_DECREASE, "r_upperarm", "", [-0.3, -1, 0.3], COORD_LOCAL)
+    AngVel(0, 0.1, 100, CURVE_LINEAR_DECREASE, "l_upperarm", "", [0, -1, 0], COORD_LOCAL)
+}
+
+Behavior("LegsHorizontal1_Right")
+{
+	LinVel(0, 0.1, 1.0, CURVE_CONST, "head", "", [1, 0, -1], COORD_START)
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "spine3", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "spine3", "", [0, -1, 0], COORD_START)
+    LinVel(0, 0.1, 4.5, CURVE_LINEAR_DECREASE, "l_calf", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 4, CURVE_LINEAR_DECREASE, "r_calf", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.01, 5, CURVE_LINEAR_DECREASE, "r_calf", "", [1, 0, 1], COORD_START)
+    AngVel(0, 0.2, -50, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("LegsHorizontal2_Right")
+{
+	LinVel(0, 0.1, 1.5, CURVE_CONST, "head", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "spine3", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "pelvis", "", [0, -1, 0], COORD_START)
+    LinVel(0, 0.1, 2.5, CURVE_LINEAR_DECREASE, "l_calf", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 3, CURVE_LINEAR_DECREASE, "r_calf", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.01, 5, CURVE_LINEAR_DECREASE, "r_calf", "", [1, 0, 1], COORD_START)
+    AngVel(0, 0.2, 20, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("LegsHorizontal3_Right")
+{
+	LinVel(0, 0.1, 1.0, CURVE_CONST, "head", "", [1, 0, -1], COORD_START)
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "spine3", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "spine3", "", [0, -1, 0], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "pelvis", "", [0, -1, 0], COORD_START)
+    LinVel(0, 0.1, 4.5, CURVE_LINEAR_DECREASE, "l_calf", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 4, CURVE_LINEAR_DECREASE, "r_calf", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.01, 5, CURVE_LINEAR_DECREASE, "r_calf", "", [1, 0, 1], COORD_START)
+    AngVel(0, 0.2, 50, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, 50, CURVE_LINEAR_DECREASE, "r_calf", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, 50, CURVE_LINEAR_DECREASE, "l_calf", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, -50, CURVE_LINEAR_DECREASE, "r_thigh", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, -50, CURVE_LINEAR_DECREASE, "l_thigh", "", [1, 0, 0], COORD_LOCAL)
+	
+    AngVel(0, 0.1, 70, CURVE_LINEAR_DECREASE, "r_upperarm", "", [-0.3, -1, 0], COORD_LOCAL)
+    AngVel(0, 0.1, 100, CURVE_LINEAR_DECREASE, "l_upperarm", "", [0, -1, -0.3], COORD_LOCAL)
+}
+
+Behavior("TorsoHorizontal1_Right")
+{
+	LinVel(0, 0.1, 1, CURVE_CONST, "head", "", [-1, 0, 0], COORD_START)
+    LinVel(0, 0.01, 13, CURVE_LINEAR_DECREASE, "spine1", "", [-0.5, -1, 1], COORD_START)
+    LinVel(0, 0.1, 4, CURVE_LINEAR_DECREASE, "spine1", "", [-0.5, 0, 1], COORD_START)
+	LinVel(0, 0.1, 1, CURVE_CONST, "pelvis", "", [0, -1, 0], COORD_WORLD)
+    AngVel(0, 0.1, -70, CURVE_LINEAR_DECREASE, "spine1", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.01, -90, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.05, -50, CURVE_LINEAR_DECREASE, "pelvis", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.01, -50, CURVE_LINEAR_DECREASE, "head", "", [0, 0, 1], COORD_WORLD)
+}
+
+Behavior("TorsoHorizontal2_Right")
+{
+	LinVel(0, 0.1, 1, CURVE_CONST, "head", "", [-1, 0, 0], COORD_START)
+    LinVel(0, 0.01, 10, CURVE_LINEAR_DECREASE, "spine3", "", [-0.5, -0.2, 1], COORD_START)
+    LinVel(0, 0.1, 3.5, CURVE_LINEAR_DECREASE, "spine3", "", [-0.5, -0.4, 1], COORD_START)
+    LinVel(0, 0.1, 0.7, CURVE_CONST, "l_calf", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.1, 0.5, CURVE_CONST, "r_calf", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "pelvis", "", [0, -0.3, 1], COORD_START)
+    AngVel(0, 0.2, 20, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.01, 90, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.1, 25, CURVE_LINEAR_DECREASE, "pelvis", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("TorsoHorizontal3_Right")
+{
+	LinVel(0, 0.1, 1, CURVE_CONST, "head", "", [-1, 0, 0], COORD_START)
+	LinVel(0, 0.01, 10, CURVE_CONST, "spine3", "", [-0.3, -0.2, 1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "spine3", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 1, CURVE_CONST, "l_calf", "", [1, 0.3, -1], COORD_START)
+    LinVel(0, 0.1, 1, CURVE_CONST, "r_calf", "", [-1, 0, -1], COORD_START)
+    LinVel(0, 0.1, 3, CURVE_CONST, "pelvis", "", [-0.5, -1, 0], COORD_START)
+    AngVel(0, 0.01, 25, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, 10, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 1], COORD_LOCAL)
+}
+
+Behavior("TorsoHorizontal1_Left")
+{
+	LinVel(0, 0.1, 1, CURVE_CONST, "head", "", [-1, 0, 0], COORD_START)
+    LinVel(0, 0.01, 13, CURVE_LINEAR_DECREASE, "spine1", "", [0.5, -1, 1], COORD_START)
+    LinVel(0, 0.1, 4, CURVE_LINEAR_DECREASE, "spine1", "", [0.5, 0, 1], COORD_START)
+	LinVel(0, 0.1, 2, CURVE_CONST, "pelvis", "", [0, 1, 0], COORD_WORLD)
+	LinVel(0, 0.2, 5, CURVE_LINEAR_DECREASE, "l_forearm", "", [0, 0.5, -1], COORD_LOCAL)
+    AngVel(0, 0.1, 70, CURVE_LINEAR_DECREASE, "spine1", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.01, 90, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.05, 50, CURVE_LINEAR_DECREASE, "pelvis", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.01, 50, CURVE_LINEAR_DECREASE, "head", "", [0, 0, 1], COORD_WORLD)
+}
+
+Behavior("TorsoHorizontal2_Left")
+{
+	LinVel(0, 0.1, 1, CURVE_CONST, "head", "", [1, 0, 0], COORD_START)
+    LinVel(0, 0.01, 10, CURVE_LINEAR_DECREASE, "spine3", "", [0.5, -0.2, 1], COORD_START)
+    LinVel(0, 0.1, 3.5, CURVE_LINEAR_DECREASE, "spine3", "", [0.5, -0.4, 1], COORD_START)
+    LinVel(0, 0.1, 0.5, CURVE_CONST, "l_calf", "", [-1, 0, 1], COORD_START)
+    LinVel(0, 0.1, 0.3, CURVE_CONST, "r_calf", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "pelvis", "", [0, -0.3, -1], COORD_START)
+    AngVel(0, 0.2, -20, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.01, -90, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.1, -25, CURVE_LINEAR_DECREASE, "pelvis", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("TorsoHorizontal3_Left")
+{
+	LinVel(0, 0.1, 1, CURVE_CONST, "head", "", [1, 0, 0], COORD_START)
+	LinVel(0, 0.01, 10, CURVE_CONST, "spine3", "", [0.3, -0.2, 1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "spine3", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 1, CURVE_CONST, "l_calf", "", [-1, 0.3, -1], COORD_START)
+    LinVel(0, 0.1, 1, CURVE_CONST, "r_calf", "", [1, 0, -1], COORD_START)
+    LinVel(0, 0.1, 3, CURVE_CONST, "pelvis", "", [0.5, -1, 0], COORD_START)
+    AngVel(0, 0.01, -25, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, -10, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 1], COORD_LOCAL)
+}
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// StickSharp     (onehanded, sharp)
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+Behavior("StickSharp_TorsoHorizontal1_Left")
+{
+	LinVel(0, 0.1, 1, CURVE_CONST, "head", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.01, 10, CURVE_LINEAR_DECREASE, "spine3", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.1, 10.5, CURVE_LINEAR_DECREASE, "spine3", "", [-1, 0, 1], COORD_START)
+	LinVel(0, 1.1, 1, CURVE_CONST, "pelvis", "", [-1, 1, -1], COORD_WORLD)
+	AngVel(0, 0.1, -100, CURVE_CONST, "l_hand", "", [1, 0, 1], COORD_START)
+    AngVel(0, 0.1, -100, CURVE_LINEAR_DECREASE, "spine1", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.09, -80, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.05, -120, CURVE_CONST, "pelvis", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.01, -80, CURVE_LINEAR_DECREASE, "head", "", [0, 0, -1], COORD_LOCAL)
+}
+
+Behavior("StickSharp_TorsoHorizontal2_Left")
+{
+	LinVel(0, 0.1, 1, CURVE_CONST, "head", "", [-1, 1, 0], COORD_START)
+    LinVel(0, 0.1, 13.5, CURVE_LINEAR_DECREASE, "spine3", "", [-1, 0, 0], COORD_START)
+    LinVel(0, 0.1, 0.3, CURVE_LINEAR_DECREASE, "r_calf", "", [1, 0, -1], COORD_LOCAL)
+	LinVel(0, 0.1, 1.5, CURVE_LINEAR_DECREASE, "pelvis", "", [-1, -0, -0], COORD_START)
+    AngVel(0, 0.4, -80, CURVE_CONST, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, -80, CURVE_LINEAR_DECREASE, "spine3", "", [0.5, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.1, -85, CURVE_CONST, "pelvis", "", [0.3, 0, 0], COORD_LOCAL)
+}
+
+Behavior("StickSharp_TorsoHorizontal3_Left")
+{
+	LinVel(0, 0.1, 1, CURVE_CONST, "head", "", [-1, 0, 0], COORD_START)
+	LinVel(0, 0.01, 10, CURVE_CONST, "spine3", "", [-0.8, -0.2, 0], COORD_START)
+    LinVel(0, 0.1, 6, CURVE_CONST, "spine3", "", [-1, 0, 0], COORD_START)
+    LinVel(0, 0.1, 1, CURVE_CONST, "l_calf", "", [-1, 0.3, -1], COORD_START)
+    LinVel(0, 0.1, 1, CURVE_CONST, "r_calf", "", [1, 0, -1], COORD_START)
+    LinVel(0, 0.1, 3, CURVE_CONST, "pelvis", "", [0.5, -1, 0], COORD_START)
+	AngVel(0, 0.1, -100, CURVE_CONST, "l_hand", "", [1, 0, 1], COORD_LOCAL)
+	AngVel(0, 0.5, -100, CURVE_CONST, "r_hand", "", [0, -1, 0], COORD_LOCAL)
+    AngVel(0, 0.4, -105, CURVE_LINEAR_DECREASE, "pelvis", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, -80, CURVE_LINEAR_DECREASE, "spine1", "", [1, 0, 0], COORD_START)
+}
+Behavior("StickSharp_TorsoHorizontal1_Right")
+{
+	LinVel(0, 0.1, 1, CURVE_CONST, "head", "", [-1, 0, 0], COORD_START)
+    LinVel(0, 0.01, 13, CURVE_LINEAR_DECREASE, "spine1", "", [1, 0, 1], COORD_START)
+    LinVel(0, 0.1, 4, CURVE_LINEAR_DECREASE, "spine1", "", [1, 0, 1], COORD_START)
+	LinVel(0, 0.1, 1, CURVE_CONST, "pelvis", "", [0, 0, 1], COORD_WORLD)
+    AngVel(0, 0.1, -70, CURVE_LINEAR_DECREASE, "spine1", "", [0, 1, 0], COORD_LOCAL)
+    AngVel(0, 0.2, -90, CURVE_LINEAR_DECREASE, "spine3", "", [-1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.1, -70, CURVE_LINEAR_DECREASE, "pelvis", "", [-1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.01, -80, CURVE_LINEAR_DECREASE, "head", "", [-1, 0, 1], COORD_WORLD)
+}
+Behavior("StickSharp_TorsoHorizontal2_Right")
+{
+	LinVel(0, 0.1, 1, CURVE_CONST, "head", "", [-1, 0, 0], COORD_START)
+    LinVel(0, 0.01, 10, CURVE_LINEAR_DECREASE, "spine3", "", [0.5, 0, 1], COORD_START)
+    LinVel(0, 0.1, 3.5, CURVE_LINEAR_DECREASE, "spine3", "", [0.5, 0, 1], COORD_START)
+    LinVel(0, 0.1, 0.7, CURVE_CONST, "l_calf", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.1, 0.5, CURVE_CONST, "r_calf", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.15, 5.5, CURVE_LINEAR_DECREASE, "pelvis", "", [1, 0, 0], COORD_START)
+    AngVel(0, 0.2, 120, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.1, 90, CURVE_CONST, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.1, 125, CURVE_LINEAR_DECREASE, "pelvis", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("StickSharp_TorsoHorizontal3_Right")
+{
+	LinVel(0, 0.1, 1, CURVE_CONST, "head", "", [-1, 0, 0], COORD_START)
+	LinVel(0, 0.01, 10, CURVE_CONST, "spine3", "", [0.3, 0, 1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "spine3", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 1, CURVE_CONST, "l_calf", "", [1, 0.3, -1], COORD_START)
+    LinVel(0, 0.1, 1, CURVE_CONST, "r_calf", "", [1, 0, -1], COORD_START)
+    LinVel(0, 0.1, 5, CURVE_CONST, "pelvis", "", [0.5, 0, 1], COORD_START)
+    AngVel(0, 0.1, 95, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, 100, CURVE_LINEAR_DECREASE, "pelvis", "", [1, 0, 0], COORD_LOCAL)
+}
+
+
+
+
+Behavior("StickSharp_LegsHorizontal1_Left")
+{
+	LinVel(0, 0.1, 1.5, CURVE_CONST, "head", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "spine3", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "pelvis", "", [0, -1, 0], COORD_START)
+    LinVel(0, 0.1, 2.5, CURVE_LINEAR_DECREASE, "l_calf", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 8, CURVE_LINEAR_DECREASE, "r_calf", "", [0, -1, 0], COORD_START)
+    AngVel(0, 0.01, 55, CURVE_LINEAR_DECREASE, "r_calf", "", [-1, 0, 0], COORD_START)
+    AngVel(0, 0.2, 30, CURVE_LINEAR_DECREASE, "pelvis", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("StickSharp_LegsHorizontal2_Left")
+{
+	//LinVel(0, 0.1, 1.0, CURVE_CONST, "head", "", [1, 0, -1], COORD_START)
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "spine3", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "spine3", "", [0, -1, 0], COORD_START)
+    LinVel(0, 0.1, 4.5, CURVE_LINEAR_DECREASE, "l_foot", "", [-1, 0, 0], COORD_START)
+    LinVel(0, 0.1, 4.5, CURVE_LINEAR_DECREASE, "r_foot", "", [-1, 0, 0.4], COORD_START)
+	LinVel(0, 0.1, 4, CURVE_LINEAR_DECREASE, "l_calf", "", [1, 0.3, 0.2], COORD_START)
+    LinVel(0, 0.1, 4, CURVE_LINEAR_DECREASE, "r_calf", "", [1, 0, 0], COORD_START)
+    LinVel(0, 0.01, 5, CURVE_LINEAR_DECREASE, "r_calf", "", [1, 0, 1], COORD_START)
+	AngVel(0, 0.2, -80, CURVE_LINEAR_DECREASE, "r_calf", "", [-1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, -50, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("StickSharp_LegsHorizontal3_Left")
+{
+	LinVel(0, 0.1, 1.0, CURVE_CONST, "head", "", [-1, 0, -1], COORD_START)
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "spine3", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "spine3", "", [0, 1, 1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "pelvis", "", [1, -1, 1], COORD_START)
+    LinVel(0, 0.1, 3.5, CURVE_LINEAR_DECREASE, "l_calf", "", [1, 0, 0], COORD_START)
+  //  LinVel(0, 0.1, 4, CURVE_LINEAR_DECREASE, "r_calf", "", [1, 0, 0], COORD_START)
+ //   LinVel(0, 0.01, 5, CURVE_LINEAR_DECREASE, "r_calf", "", [-1, 0, 1], COORD_START)
+    AngVel(0, 0.2, -100, CURVE_LINEAR_DECREASE, "pelvis", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, -50, CURVE_LINEAR_DECREASE, "r_calf", "", [-1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, -50, CURVE_LINEAR_DECREASE, "l_calf", "", [-1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, -50, CURVE_LINEAR_DECREASE, "r_thigh", "", [-1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, -50, CURVE_LINEAR_DECREASE, "l_thigh", "", [-1, 0, 0], COORD_LOCAL)
+	
+    AngVel(0, 0.1, 80, CURVE_LINEAR_DECREASE, "r_upperarm", "", [-0.3, -1, 0.3], COORD_LOCAL)
+    AngVel(0, 0.1, 80, CURVE_LINEAR_DECREASE, "l_upperarm", "", [0, -1, 0], COORD_LOCAL)
+}
+
+Behavior("StickSharp_LegsHorizontal1_Right")
+{
+		LinVel(0, 0.1, 1.5, CURVE_CONST, "head", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "spine3", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "pelvis", "", [0, -1, 0], COORD_START)
+    LinVel(0, 0.1, 5.5, CURVE_LINEAR_DECREASE, "l_calf", "", [-0.4, 0.5, -0.3], COORD_START)
+    LinVel(0, 0.1, 4, CURVE_LINEAR_DECREASE, "r_calf", "", [-1, 0.5, -0.3], COORD_START)
+    LinVel(0, 0.01, 5, CURVE_LINEAR_DECREASE, "r_calf", "", [-1, 0, -0.3], COORD_START)
+    AngVel(0, 0.2, -60, CURVE_LINEAR_DECREASE, "spine3", "", [-1, 0, 1], COORD_LOCAL)
+
+}
+
+Behavior("StickSharp_LegsHorizontal2_Right")
+{
+	LinVel(0, 0.1, 2, CURVE_CONST, "head", "", [-1, 0, -1], COORD_START)
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "spine3", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "spine3", "", [0, -1, 0], COORD_START)
+    LinVel(0, 0.1, 4.5, CURVE_LINEAR_DECREASE, "l_calf", "", [-0.4, 0, -0.2], COORD_START)
+	//AngVel(0, 0.2, -50, CURVE_LINEAR_DECREASE, "r_thigh", "", [-1, 0, 0], COORD_LOCAL)
+    LinVel(0, 0.3, 4.5, CURVE_LINEAR_DECREASE, "r_calf", "", [-0.3, 0, -0.2], COORD_LOCAL)
+	LinVel(0.2, 0.1, 1.5, CURVE_LINEAR_DECREASE, "r_calf", "", [-0.3, 0, 0.2], COORD_LOCAL)
+    AngVel(0, 0.1, -60, CURVE_LINEAR_DECREASE, "pelvis", "", [-1, 0, 0], COORD_LOCAL)
+
+}
+
+Behavior("StickSharp_LegsHorizontal3_Right")
+{
+	LinVel(0, 0.1, 1.0, CURVE_CONST, "head", "", [-1, 0, 1], COORD_START)
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "spine3", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "spine3", "", [0, -0.2, -0.3], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "pelvis", "", [0, -0.2, -0.3], COORD_START)
+	LinVel(0, 0.1, 2, CURVE_LINEAR_DECREASE, "l_upperarm", "", [0, 1, 0.6], COORD_LOCAL)
+    LinVel(0, 0.1, 4.5, CURVE_LINEAR_DECREASE, "l_calf", "", [-1, 0.4, 0.4], COORD_START)
+    LinVel(0, 0.1, 4, CURVE_LINEAR_DECREASE, "r_calf", "", [-1, 0.4, -0.4], COORD_START)
+    LinVel(0, 0.01, 5, CURVE_LINEAR_DECREASE, "r_calf", "", [-1, -1, 0], COORD_START)
+    AngVel(0, 0.2, -50, CURVE_LINEAR_DECREASE, "pelvis", "", [-1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, 50, CURVE_LINEAR_DECREASE, "r_calf", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, 50, CURVE_LINEAR_DECREASE, "l_calf", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, -50, CURVE_LINEAR_DECREASE, "r_thigh", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, -50, CURVE_LINEAR_DECREASE, "l_thigh", "", [1, 0, 0], COORD_LOCAL)
+	
+    AngVel(0, 0.1, 70, CURVE_LINEAR_DECREASE, "r_upperarm", "", [0.4, -1, 0], COORD_LOCAL)
+    AngVel(0, 0.1, 100, CURVE_LINEAR_DECREASE, "l_upperarm", "", [0, -1, 0.3], COORD_LOCAL)
+}
+Behavior("StickSharp_TorsoHorizontalCharge_Left")
+{
+	LinVel(0, 0.1, 1, CURVE_CONST, "head", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.02, 10, CURVE_LINEAR_DECREASE, "spine3", "", [-1, 0, 1], COORD_START)
+    LinVel(0, 0.1, 10.5, CURVE_LINEAR_DECREASE, "spine3", "", [-1, 0, 1], COORD_START)
+	LinVel(0, 1.1, 2.5, CURVE_CONST, "pelvis", "", [-1, 0, 0.3], COORD_START)
+	AngVel(0, 0.1, -100, CURVE_CONST, "l_hand", "", [1, 0, 1], COORD_START)
+    AngVel(0, 0.1, -100, CURVE_LINEAR_DECREASE, "spine1", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.09, -80, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.05, -120, CURVE_CONST, "pelvis", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.01, -80, CURVE_LINEAR_DECREASE, "head", "", [0, 0, -1], COORD_LOCAL)
+}
+Behavior("StickSharp_TorsoHorizontalCharge_Right")
+{
+	LinVel(0, 0.1, 0.6, CURVE_LINEAR_INCREASE, "head", "", [-1, 0, 0], COORD_START)
+//    LinVel(0, 0.01, 10, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 1], COORD_START)
+    LinVel(0, 0.01, 10.5, CURVE_LINEAR_DECREASE, "spine3", "", [0.6, -0.3, 1], COORD_START)
+	LinVel(0, 0.8, 2.5, CURVE_CONST, "pelvis", "", [0.2, 0, 1], COORD_START)
+	AngVel(0, 0.1, 30, CURVE_CONST, "l_upperarm", "", [1, 0, 1], COORD_START)
+    AngVel(0, 0.15, 30, CURVE_LINEAR_DECREASE, "spine1", "", [1, 0, 0], COORD_LOCAL)
+  //  AngVel(0, 0.12, 140, CURVE_CONST, "pelvis", "", [1, 0, 0], COORD_LOCAL)
+   AngVel(0, 0.1, 120, CURVE_CONST, "pelvis", "", [1, 0, 0], COORD_LOCAL)
+ //   AngVel(0, 0.02, 80, CURVE_LINEAR_DECREASE, "head", "", [1, 0, 0], COORD_LOCAL)
+}
+Alias("StickSharp_LegsVertical1", "LegsVertical1")
+Alias("StickSharp_LegsVertical2", "LegsVertical2")
+Alias("StickSharp_LegsVertical3", "LegsVertical3")
+Alias("StickSharp_LegsHorizontalCharge_Right", "StickSharp_TorsoHorizontalCharge_Right")
+Alias("StickSharp_LegsHorizontalCharge_Left", "StickSharp_TorsoHorizontalCharge_Left")
+
+
+
+
+Alias("StickSharp_TorsoVertical1", "TorsoVertical1")
+Alias("StickSharp_TorsoVertical2", "TorsoVertical2")
+Alias("StickSharp_TorsoVertical3", "TorsoVertical3")
+
+Alias("StickSharp_HeadVertical1", "HeadVertical1")
+Alias("StickSharp_HeadVertical2", "HeadVertical2")
+Alias("StickSharp_HeadVertical3", "HeadVertical3")
+
+Alias("StickSharp_TorsoVertical1_Down", "TorsoVertical1_Down")
+Alias("StickSharp_TorsoVertical2_Down", "TorsoVertical2_Down")
+Alias("StickSharp_TorsoVertical3_Down", "TorsoVertical3_Down")
+
+Alias("StickSharp_TorsoVertical1_Up", "TorsoVertical1_Up")
+Alias("StickSharp_TorsoVertical2_Up", "TorsoVertical2_Up")
+Alias("StickSharp_TorsoVertical3_Up", "TorsoVertical3_Up")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//Hook
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+Behavior("Hook_TorsoVertical1")
+{
+    LinVel(0, 0.6, 0.5, CURVE_CONST, "l_hand", "", [0, 0.1, -1], COORD_START)
+    LinVel(0, 0.6, 0.5, CURVE_CONST, "r_hand", "", [0, 0.1, -1], COORD_START)
+	
+	LinVel(0, 0.1, 4.5, CURVE_CONST, "spine1", "", [0, 0.2, 1], COORD_START)
+    LinVel(0.1, 0.6, 2.5, CURVE_LINEAR_DECREASE, "spine1", "", [0, 0.2, 1], COORD_START)
+	LinVel(0, 0.6, 1, CURVE_CONST, "pelvis", "", [0, 0.2, 1], COORD_START)
+}
+
+Alias("Hook_TorsoVertical2", "Hook_TorsoVertical1")
+Alias("Hook_TorsoVertical3", "Hook_TorsoVertical1")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//Knife
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+Alias("Knife_TorsoVertical1", "TorsoVertical1")
+Alias("Knife_TorsoVertical2", "TorsoVertical2")
+Alias("Knife_TorsoVertical3", "TorsoVertical3")
+Alias("Knife_LegsVertical1", "LegsVertical1")
+Alias("Knife_LegsVertical2", "LegsVertical2")
+Alias("Knife_LegsVertical3", "LegsVertical3")
+Alias("Knife_HeadVertical1", "HeadVertical1")
+Alias("Knife_HeadVertical2", "HeadVertical2")
+Alias("Knife_HeadVertical3", "HeadVertical3")
+Alias("Knife_TorsoVertical1_Down", "TorsoVertical1_Down")
+Alias("Knife_TorsoVertical2_Down", "TorsoVertical2_Down")
+Alias("Knife_TorsoVertical3_Down", "TorsoVertical3_Down")
+Alias("Knife_TorsoVertical1_Up", "TorsoVertical1_Up")
+Alias("Knife_TorsoVertical2_Up", "TorsoVertical2_Up")
+Alias("Knife_TorsoVertical3_Up", "TorsoVertical3_Up")
+Alias("Knife_LegsHorizontal1_Left", "LegsHorizontal1_Left")
+Alias("Knife_LegsHorizontal2_Left", "LegsHorizontal2_Left")
+Alias("Knife_LegsHorizontal3_Left", "LegsHorizontal3_Left")
+Alias("Knife_LegsHorizontal1_Right", "LegsHorizontal1_Right")
+Alias("Knife_LegsHorizontal2_Right", "LegsHorizontal2_Right")
+Alias("Knife_LegsHorizontal3_Right", "LegsHorizontal3_Right")
+Alias("Knife_TorsoHorizontal1_Right", "TorsoHorizontal1_Right")
+Alias("Knife_TorsoHorizontal2_Right", "TorsoHorizontal2_Right")
+Alias("Knife_TorsoHorizontal3_Right", "TorsoHorizontal3_Right")
+Alias("Knife_TorsoHorizontal1_Left", "TorsoHorizontal1_Left")
+Alias("Knife_TorsoHorizontal2_Left", "TorsoHorizontal2_Left")
+Alias("Knife_TorsoHorizontal3_Left", "TorsoHorizontal3_Left")
+Alias("knife_TorsoHorizontalCharge_Right", "StickSharp_TorsoHorizontalCharge_Right")
+Alias("knife_TorsoHorizontalCharge_Left", "StickSharp_TorsoHorizontalCharge_Left")
+Alias("knife_LegsHorizontalCharge_Right", "knife_TorsoHorizontalCharge_Right")
+Alias("knife_LegsHorizontalCharge_Left", "knife_TorsoHorizontalCharge_Left")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//StickBlunt            (onehanded, blunt)
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+Alias("StickBlunt_TorsoVertical1", "TorsoVertical1")
+Alias("StickBlunt_TorsoVertical2", "TorsoVertical2")
+Alias("StickBlunt_TorsoVertical3", "TorsoVertical3")
+Alias("StickBlunt_LegsVertical1", "LegsVertical1")
+Alias("StickBlunt_LegsVertical2", "LegsVertical2")
+Alias("StickBlunt_LegsVertical3", "LegsVertical3")
+Alias("StickBlunt_HeadVertical1", "HeadVertical1")
+Alias("StickBlunt_HeadVertical2", "HeadVertical2")
+Alias("StickBlunt_HeadVertical3", "HeadVertical3")
+Alias("StickBlunt_TorsoVertical1_Down", "TorsoVertical1_Down")
+Alias("StickBlunt_TorsoVertical2_Down", "TorsoVertical2_Down")
+Alias("StickBlunt_TorsoVertical3_Down", "TorsoVertical3_Down")
+Alias("StickBlunt_TorsoVertical1_Up", "TorsoVertical1_Up")
+Alias("StickBlunt_TorsoVertical2_Up", "TorsoVertical2_Up")
+Alias("StickBlunt_TorsoVertical3_Up", "TorsoVertical3_Up")
+Alias("StickBlunt_LegsHorizontal1_Left", "LegsHorizontal1_Left")
+Alias("StickBlunt_LegsHorizontal2_Left", "LegsHorizontal2_Left")
+Alias("StickBlunt_LegsHorizontal3_Left", "LegsHorizontal3_Left")
+Alias("StickBlunt_LegsHorizontal1_Right", "LegsHorizontal1_Right")
+Alias("StickBlunt_LegsHorizontal2_Right", "LegsHorizontal2_Right")
+Alias("StickBlunt_LegsHorizontal3_Right", "LegsHorizontal3_Right")
+Alias("StickBlunt_TorsoHorizontal1_Right", "TorsoHorizontal1_Right")
+Alias("StickBlunt_TorsoHorizontal2_Right", "TorsoHorizontal2_Right")
+Alias("StickBlunt_TorsoHorizontal3_Right", "TorsoHorizontal3_Right")
+Alias("StickBlunt_TorsoHorizontal1_Left", "TorsoHorizontal1_Left")
+Alias("StickBlunt_TorsoHorizontal2_Left", "TorsoHorizontal2_Left")
+Alias("StickBlunt_TorsoHorizontal3_Left", "TorsoHorizontal3_Left")
+Alias("StickBlunt_LegsHorizontalCharge_Right", "StickBlunt_TorsoHorizontalCharge_Right")
+Alias("StickBlunt_LegsHorizontalCharge_Left", "StickBlunt_TorsoHorizontalCharge_Left")
+
+Behavior("StickBlunt_TorsoHorizontalCharge_Left")
+{
+	LinVel(0, 0.1, 1, CURVE_CONST, "head", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.02, 10, CURVE_LINEAR_DECREASE, "spine3", "", [-1, 0, 1], COORD_START)
+    LinVel(0, 0.1, 10.5, CURVE_LINEAR_DECREASE, "spine3", "", [-1, 0, 1], COORD_START)
+	LinVel(0, 1.1, 2.5, CURVE_CONST, "pelvis", "", [-1, 0, 0.3], COORD_START)
+	AngVel(0, 0.1, -100, CURVE_CONST, "l_hand", "", [1, 0, 1], COORD_START)
+    AngVel(0, 0.1, -100, CURVE_LINEAR_DECREASE, "spine1", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.09, -80, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.05, -120, CURVE_CONST, "pelvis", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.01, -80, CURVE_LINEAR_DECREASE, "head", "", [0, 0, -1], COORD_LOCAL)
+}
+Behavior("StickBlunt_TorsoHorizontalCharge_Right")
+{
+	LinVel(0, 0.1, 1, CURVE_CONST, "head", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.01, 10, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 1], COORD_START)
+    LinVel(0, 0.1, 10.5, CURVE_LINEAR_DECREASE, "spine3", "", [0.4, 0, 1], COORD_START)
+	LinVel(0, 0.8, 2.7, CURVE_CONST, "pelvis", "", [0.2, 0, 1], COORD_START)
+	AngVel(0, 0.1, 100, CURVE_CONST, "l_hand", "", [1, 0, 1], COORD_START)
+    AngVel(0, 0.1, 60, CURVE_LINEAR_DECREASE, "spine1", "", [0, -1, 0], COORD_LOCAL)
+ //   AngVel(0, 0.09, 80, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.03, 120, CURVE_CONST, "pelvis", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.01, 80, CURVE_LINEAR_DECREASE, "head", "", [0, 0, 1], COORD_LOCAL)
+}
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//Stick2Close                (Baseball)
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+Behavior("Stick2Close_TorsoVertical1")
+{
+	LinVel(0, 0.6, 1, CURVE_CONST, "l_hand", "", [0, 0.1, -1], COORD_START)
+    LinVel(0, 0.6, 1, CURVE_CONST, "r_hand", "", [0, 0.1, -1], COORD_START)
+	
+	LinVel(0, 0.2, 5, CURVE_LINEAR_DECREASE, "spine1", "", [0, 0.4, 1], COORD_START)
+    LinVel(0, 0.4, 4, CURVE_LINEAR_DECREASE, "spine1", "", [0, 0.4, 1], COORD_START)
+	LinVel(0, 0.6, 2, CURVE_CONST, "pelvis", "", [0, 0.2, 1], COORD_START)
+}
+
+Behavior("Stick2Close_TorsoVertical2")
+{
+	LinVel(0, 0.6, 1, CURVE_CONST, "l_hand", "", [0, 0.1, -1], COORD_START)
+    LinVel(0, 0.6, 1, CURVE_CONST, "r_hand", "", [0, 0.1, -1], COORD_START)
+	
+	LinVel(0, 0.2, 5, CURVE_LINEAR_DECREASE, "spine1", "", [0, 0.4, 1], COORD_START)
+    LinVel(0, 0.4, 4, CURVE_LINEAR_DECREASE, "spine1", "", [0, 0.4, 1], COORD_START)
+    AngVel(0, 0.1, -60, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("Stick2Close_TorsoVertical3")
+{
+	LinVel(0, 0.6, 1, CURVE_CONST, "l_hand", "", [0, 0.2, -1], COORD_START)
+    LinVel(0, 0.6, 1, CURVE_CONST, "r_hand", "", [0, 0.2, -1], COORD_START)
+	
+	LinVel(0, 0.2, 5, CURVE_LINEAR_DECREASE, "spine1", "", [0, 0.4, 1], COORD_START)
+    LinVel(0, 0.4, 4, CURVE_LINEAR_DECREASE, "spine1", "", [0, 0.4, 1], COORD_START)
+    AngVel(0, 0.1, -8, CURVE_LINEAR_DECREASE, "spine3", "", [0, 0, 1], COORD_LOCAL)
+    AngVel(0, 0.1, -8, CURVE_CONST, "pelvis", "", [0, 0, 1], COORD_LOCAL)
+}
+
+
+Behavior("Stick2Close_LegsVertical1")
+{
+	LinVel(0, 0.6, 0.5, CURVE_CONST, "l_hand", "", [0, 0.5, -1], COORD_START)
+    LinVel(0, 0.6, 0.5, CURVE_CONST, "r_hand", "", [0, 0.5, -1], COORD_START)
+	LinVel(0, 0.1, 5, CURVE_CONST, "l_calf", "", [0, 0.3, 1], COORD_START)
+	LinVel(0, 0.1, 5, CURVE_CONST, "r_calf", "", [0, 0.3, 1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "pelvis", "", [0, 0.2, 1], COORD_START)
+    LinVel(0, 0.1, 3, CURVE_CONST, "spine3", "", [0, -1.0, 0.4], COORD_START)
+    AngVel(0, 0.1, -30, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+	
+}
+
+Behavior("Stick2Close_LegsVertical2")
+{
+	LinVel(0, 0.6, 1, CURVE_CONST, "l_hand", "", [0, 0.2, -1], COORD_START)
+    LinVel(0, 0.6, 1, CURVE_CONST, "r_hand", "", [0, 0.2, -1], COORD_START)
+	LinVel(0, 0.1, 3, CURVE_CONST, "l_calf", "", [0, 0.3, 1], COORD_START)
+	LinVel(0, 0.1, 1.5, CURVE_CONST, "r_calf", "", [0, 0.3, 1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "pelvis", "", [0, 0.2, 1], COORD_START)
+    AngVel(0, 0.1, 30, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("Stick2Close_LegsVertical3")
+{
+	LinVel(0, 0.6, 1, CURVE_CONST, "l_hand", "", [0, 0.2, -1], COORD_START)
+    LinVel(0, 0.6, 1, CURVE_CONST, "r_hand", "", [0, 0.2, -1], COORD_START)
+	LinVel(0, 0.1, 2, CURVE_CONST, "l_calf", "", [-0.5, 0.3, 1], COORD_START)
+	LinVel(0, 0.1, 2.5, CURVE_CONST, "r_calf", "", [-0.5, 0.3, 1], COORD_START)
+    AngVel(0, 0.1, 20, CURVE_CONST, "pelvis", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("Stick2Close_HeadVertical1")
+{
+	LinVel(0, 0.2, 1, CURVE_CONST, "l_hand", "", [0, 0.2, -1], COORD_START)
+    LinVel(0, 0.2, 1, CURVE_CONST, "r_hand", "", [0, 0.2, -1], COORD_START)
+    LinVel(0, 0.6, 2, CURVE_CONST, "head", "", [0, 0.3, 1], COORD_START)
+}
+
+Behavior("Stick2Close_HeadVertical2")
+{
+	LinVel(0, 0.1, 1, CURVE_CONST, "l_hand", "", [0, 0.2, -1], COORD_START)
+    LinVel(0, 0.1, 1, CURVE_CONST, "r_hand", "", [0, 0.2, -1], COORD_START)
+    LinVel(0, 0.1, 5, CURVE_CONST, "head", "", [0, 0.5, 0.5], COORD_START)
+    AngVel(0, 0.2, 10, CURVE_CONST, "spine3", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("Stick2Close_HeadVertical3")
+{
+	LinVel(0, 0.1, 1, CURVE_CONST, "l_hand", "", [0, 0.2, -1], COORD_START)
+    LinVel(0, 0.1, 1, CURVE_CONST, "r_hand", "", [0, 0.2, -1], COORD_START)
+    LinVel(0, 0.1, 4, CURVE_CONST, "head", "", [0, 0.5, 0.5], COORD_START)
+    AngVel(0, 0.1, -10, CURVE_CONST, "spine1", "", [1, 0, 0], COORD_LOCAL)
+    LinVel(0, 0.1, 1, CURVE_LINEAR_DECREASE, "l_calf", "", [0, 1, 0], COORD_START)
+    LinVel(0, 0.1, 1, CURVE_LINEAR_DECREASE, "r_calf", "", [0, 1, 0], COORD_START)
+}
+
+Behavior("Stick2Close_TorsoVertical1_Down")
+{
+	LinVel(0, 0.15, 12.5, CURVE_CONST, "head", "", [-0.3, -1, 1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "spine3", "", [0, 0, 1], COORD_START)	
+    AngVel(0, 0.1, -60, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    LinVel(0, 0.1, 6, CURVE_LINEAR_DECREASE, "r_calf", "", [1, 0, 1], COORD_START)
+}
+
+Behavior("Stick2Close_TorsoVertical2_Down")
+{
+	LinVel(0, 0.1, 4.5, CURVE_CONST, "head", "", [0, -1, -1], COORD_START)
+    LinVel(0, 0.1, 4.4, CURVE_CONST, "spine3", "", [0, -1, 1], COORD_START)
+	LinVel(0, 0.01, 8.5, CURVE_CONST, "spine1", "", [0, -1, 1], COORD_START)
+	LinVel(0, 0.01, 7, CURVE_CONST, "pelvis", "", [0, -1, 1], COORD_START)
+	LinVel(0.01, 0.02, 6, CURVE_LINEAR_INCREASE, "spine1", "", [0, -1, 1], COORD_START)
+	AngVel(0, 0.1, 70, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("Stick2Close_TorsoVertical3_Down")
+{
+	LinVel(0, 0.1, 5.5, CURVE_CONST, "head", "", [0, -1, 0], COORD_START)
+    LinVel(0, 0.1, 5.4, CURVE_CONST, "spine3", "", [0, 0, 1], COORD_START)
+    AngVel(0, 0.1, 70, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+	LinVel(0.0, 0.15, 6, CURVE_LINEAR_INCREASE, "r_calf", "", [0, -0.5, 1], COORD_START)
+	LinVel(0.0, 0.15, 8, CURVE_LINEAR_INCREASE, "l_calf", "", [0, -0.5, 1], COORD_START)
+	
+	LinVel(0, 0.1, 15.5, CURVE_CONST, "r_calf", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.1, 15.4, CURVE_CONST, "r_calf", "", [0, 0, -1], COORD_START)
+}
+
+Behavior("Stick2Close_TorsoVertical1_Up")
+{
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "head", "", [0, 1, 1], COORD_START)
+    LinVel(0, 0.1, 12, CURVE_LINEAR_DECREASE, "spine1", "", [0, 0, 1], COORD_START)
+    AngVel(0, 0.1, 35, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("Stick2Close_TorsoVertical2_Up")
+{
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "head", "", [0, 1, 1], COORD_START)
+    LinVel(0, 0.1, 8, CURVE_LINEAR_DECREASE, "spine1", "", [0, 0, 1], COORD_START)
+    AngVel(0, 0.1, 20, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("Stick2Close_TorsoVertical3_Up")
+{
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "head", "", [0, 1, 1], COORD_START)
+    LinVel(0, 0.1, 8, CURVE_LINEAR_DECREASE, "spine3", "", [0, 0, 1], COORD_START)
+    AngVel(0, 0.1, 50, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("Stick2Close_LegsHorizontal1_Left")
+{
+	LinVel(0, 0.1, 2, CURVE_CONST, "head", "", [-1, 0, -1], COORD_START)
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "spine3", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "spine3", "", [0, -1, 0], COORD_START)
+    LinVel(0, 0.1, 4.5, CURVE_LINEAR_DECREASE, "l_calf", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 4, CURVE_LINEAR_DECREASE, "r_calf", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.01, 5, CURVE_LINEAR_DECREASE, "r_calf", "", [-1, 0, 1], COORD_START)
+    AngVel(0, 0.2, -50, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("Stick2Close_LegsHorizontal2_Left")
+{
+	LinVel(0, 0.1, 1.5, CURVE_CONST, "head", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "spine3", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "pelvis", "", [0, -1, 0], COORD_START)
+    LinVel(0, 0.1, 2.5, CURVE_LINEAR_DECREASE, "l_calf", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 3, CURVE_LINEAR_DECREASE, "r_calf", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.01, 5, CURVE_LINEAR_DECREASE, "r_calf", "", [-1, 0, 1], COORD_START)
+    AngVel(0, 0.2, -20, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("Stick2Close_LegsHorizontal3_Left")
+{
+	LinVel(0, 0.1, 1.0, CURVE_CONST, "head", "", [-1, 0, -1], COORD_START)
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "spine3", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "spine3", "", [0, -1, 0], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "pelvis", "", [0, -1, 0], COORD_START)
+    LinVel(0, 0.1, 4.5, CURVE_LINEAR_DECREASE, "l_calf", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 4, CURVE_LINEAR_DECREASE, "r_calf", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.01, 5, CURVE_LINEAR_DECREASE, "r_calf", "", [-1, 0, 1], COORD_START)
+    AngVel(0, 0.2, -50, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, -50, CURVE_LINEAR_DECREASE, "r_calf", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, -50, CURVE_LINEAR_DECREASE, "l_calf", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, -50, CURVE_LINEAR_DECREASE, "r_thigh", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, -50, CURVE_LINEAR_DECREASE, "l_thigh", "", [1, 0, 0], COORD_LOCAL)
+	
+    AngVel(0, 0.1, 100, CURVE_LINEAR_DECREASE, "r_upperarm", "", [-0.3, -1, 0.3], COORD_LOCAL)
+    AngVel(0, 0.1, 100, CURVE_LINEAR_DECREASE, "l_upperarm", "", [0, -1, 0], COORD_LOCAL)
+}
+
+Behavior("Stick2Close_LegsHorizontal1_Right")
+{
+	LinVel(0, 0.1, 1.0, CURVE_CONST, "head", "", [1, 0, -1], COORD_START)
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "spine3", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "spine3", "", [0, -1, 0], COORD_START)
+    LinVel(0, 0.1, 4.5, CURVE_LINEAR_DECREASE, "l_calf", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 4, CURVE_LINEAR_DECREASE, "r_calf", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.01, 5, CURVE_LINEAR_DECREASE, "r_calf", "", [1, 0, 1], COORD_START)
+    AngVel(0, 0.2, -50, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("Stick2Close_LegsHorizontal2_Right")
+{
+	LinVel(0, 0.1, 1.5, CURVE_CONST, "head", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "spine3", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "pelvis", "", [0, -1, 0], COORD_START)
+    LinVel(0, 0.1, 2.5, CURVE_LINEAR_DECREASE, "l_calf", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 3, CURVE_LINEAR_DECREASE, "r_calf", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.01, 5, CURVE_LINEAR_DECREASE, "r_calf", "", [1, 0, 1], COORD_START)
+    AngVel(0, 0.2, 20, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("Stick2Close_LegsHorizontal3_Right")
+{
+	LinVel(0, 0.1, 1.0, CURVE_CONST, "head", "", [1, 0, -1], COORD_START)
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "spine3", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "spine3", "", [0, -1, 0], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "pelvis", "", [0, -1, 0], COORD_START)
+    LinVel(0, 0.1, 4.5, CURVE_LINEAR_DECREASE, "l_calf", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 4, CURVE_LINEAR_DECREASE, "r_calf", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.01, 5, CURVE_LINEAR_DECREASE, "r_calf", "", [1, 0, 1], COORD_START)
+    AngVel(0, 0.2, 50, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, 50, CURVE_LINEAR_DECREASE, "r_calf", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, 50, CURVE_LINEAR_DECREASE, "l_calf", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, -50, CURVE_LINEAR_DECREASE, "r_thigh", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, -50, CURVE_LINEAR_DECREASE, "l_thigh", "", [1, 0, 0], COORD_LOCAL)
+	
+    AngVel(0, 0.1, 70, CURVE_LINEAR_DECREASE, "r_upperarm", "", [-0.3, -1, 0], COORD_LOCAL)
+    AngVel(0, 0.1, 100, CURVE_LINEAR_DECREASE, "l_upperarm", "", [0, -1, -0.3], COORD_LOCAL)
+}
+
+Behavior("Stick2Close_TorsoHorizontal1_Right")
+{
+	LinVel(0, 0.1, 1, CURVE_CONST, "head", "", [-1, 0, 0], COORD_START)
+    LinVel(0, 0.01, 13, CURVE_LINEAR_DECREASE, "spine1", "", [-0.5, -1, 1], COORD_START)
+    LinVel(0, 0.1, 4, CURVE_LINEAR_DECREASE, "spine1", "", [-0.5, 0, 1], COORD_START)
+	LinVel(0, 0.1, 1, CURVE_CONST, "pelvis", "", [0, -1, 0], COORD_WORLD)
+    AngVel(0, 0.1, -70, CURVE_LINEAR_DECREASE, "spine1", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.01, -90, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.05, -50, CURVE_LINEAR_DECREASE, "pelvis", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.01, -50, CURVE_LINEAR_DECREASE, "head", "", [0, 0, 1], COORD_WORLD)
+}
+
+Behavior("Stick2Close_TorsoHorizontal2_Right")
+{
+	LinVel(0, 0.1, 1, CURVE_CONST, "head", "", [-1, 0, 0], COORD_START)
+    LinVel(0, 0.01, 10, CURVE_LINEAR_DECREASE, "spine3", "", [-0.5, -0.2, 1], COORD_START)
+    LinVel(0, 0.1, 3.5, CURVE_LINEAR_DECREASE, "spine3", "", [-0.5, -0.4, 1], COORD_START)
+    LinVel(0, 0.1, 0.7, CURVE_CONST, "l_calf", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.1, 0.5, CURVE_CONST, "r_calf", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "pelvis", "", [0, -0.3, 1], COORD_START)
+    AngVel(0, 0.2, 20, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.01, 90, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.1, 25, CURVE_LINEAR_DECREASE, "pelvis", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("Stick2Close_TorsoHorizontal3_Right")
+{
+	LinVel(0, 0.1, 1, CURVE_CONST, "head", "", [-1, 0, 0], COORD_START)
+	LinVel(0, 0.01, 10, CURVE_CONST, "spine3", "", [-0.3, -0.2, 1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "spine3", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 1, CURVE_CONST, "l_calf", "", [1, 0.3, -1], COORD_START)
+    LinVel(0, 0.1, 1, CURVE_CONST, "r_calf", "", [-1, 0, -1], COORD_START)
+    LinVel(0, 0.1, 3, CURVE_CONST, "pelvis", "", [-0.5, -1, 0], COORD_START)
+    AngVel(0, 0.01, 25, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, 10, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 1], COORD_LOCAL)
+}
+
+Behavior("Stick2Close_TorsoHorizontal1_Left")
+{
+	LinVel(0, 0.1, 1, CURVE_CONST, "head", "", [-1, 0, 0], COORD_START)
+    LinVel(0, 0.01, 13, CURVE_LINEAR_DECREASE, "spine1", "", [0.5, -1, 1], COORD_START)
+    LinVel(0, 0.1, 4, CURVE_LINEAR_DECREASE, "spine1", "", [0.5, 0, 1], COORD_START)
+	LinVel(0, 0.1, 2, CURVE_CONST, "pelvis", "", [0, 1, 0], COORD_WORLD)
+	LinVel(0, 0.2, 5, CURVE_LINEAR_DECREASE, "l_forearm", "", [0, 0.5, -1], COORD_LOCAL)
+    AngVel(0, 0.1, 70, CURVE_LINEAR_DECREASE, "spine1", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.01, 90, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.05, 50, CURVE_LINEAR_DECREASE, "pelvis", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.01, 50, CURVE_LINEAR_DECREASE, "head", "", [0, 0, 1], COORD_WORLD)
+}
+
+Behavior("Stick2Close_TorsoHorizontal2_Left")
+{
+	LinVel(0, 0.1, 1, CURVE_CONST, "head", "", [1, 0, 0], COORD_START)
+    LinVel(0, 0.01, 10, CURVE_LINEAR_DECREASE, "spine3", "", [0.5, -0.2, 1], COORD_START)
+    LinVel(0, 0.1, 3.5, CURVE_LINEAR_DECREASE, "spine3", "", [0.5, -0.4, 1], COORD_START)
+    LinVel(0, 0.1, 0.5, CURVE_CONST, "l_calf", "", [-1, 0, 1], COORD_START)
+    LinVel(0, 0.1, 0.3, CURVE_CONST, "r_calf", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "pelvis", "", [0, -0.3, -1], COORD_START)
+    AngVel(0, 0.2, -20, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.01, -90, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.1, -25, CURVE_LINEAR_DECREASE, "pelvis", "", [1, 0, 0], COORD_LOCAL)
+}
+
+Behavior("Stick2Close_TorsoHorizontal3_Left")
+{
+	LinVel(0, 0.1, 1, CURVE_CONST, "head", "", [1, 0, 0], COORD_START)
+	LinVel(0, 0.01, 10, CURVE_CONST, "spine3", "", [0.3, -0.2, 1], COORD_START)
+    LinVel(0, 0.1, 2, CURVE_CONST, "spine3", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 1, CURVE_CONST, "l_calf", "", [-1, 0.3, -1], COORD_START)
+    LinVel(0, 0.1, 1, CURVE_CONST, "r_calf", "", [1, 0, -1], COORD_START)
+    LinVel(0, 0.1, 3, CURVE_CONST, "pelvis", "", [0.5, -1, 0], COORD_START)
+    AngVel(0, 0.01, -25, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.2, -10, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 1], COORD_LOCAL)
+}
+Behavior("Stick2Close_BluntCharge_Left")
+{
+	LinVel(0, 0.2, 1.0, CURVE_LINEAR_DECREASE, "l_hand", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.3, 1.0, CURVE_LINEAR_DECREASE, "l_hand", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.3, 1.0, CURVE_LINEAR_DECREASE, "r_hand", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.3, 1.0, CURVE_LINEAR_DECREASE, "r_hand", "", [0, 0, -1], COORD_START)
+	
+	LinVel(0, 0.9, 1.7, CURVE_CONST, "head", "", [0, 0.5, 0.5], COORD_START)
+	LinVel(0, 0.5, 3.5, CURVE_CONST, "spine3", "", [-0.9, 0.1, 0.3], COORD_START)
+	LinVel(0, 0.5, 3.8, CURVE_CONST, "spine1", "", [-0.9, 0.1, 0.3], COORD_START)
+    LinVel(0, 0.1, 8.8, CURVE_CONST, "spine1", "", [-0.9, 0.1, 0.3], COORD_START)
+	LinVel(0, 0.3, 3.5, CURVE_CONST, "pelvis", "", [-0.9, 0.1, 0.8], COORD_START)
+//	LinVel(0, 0.3, 2.25, CURVE_CONST, "spine1", "", [0, 0.1, 1], COORD_START)
+    //LinVel(0.3, 1.2, 1.75, CURVE_LINEAR_INCREASE, "spine1", "", [0, -0.8, 0], COORD_START)
+}
+Behavior("Stick2Close_BluntCharge_Right")
+{
+	LinVel(0, 0.2, 1.0, CURVE_LINEAR_DECREASE, "l_hand", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.3, 1.0, CURVE_LINEAR_DECREASE, "l_hand", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.3, 1.0, CURVE_LINEAR_DECREASE, "r_hand", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.3, 1.0, CURVE_LINEAR_DECREASE, "r_hand", "", [0, 0, -1], COORD_START)
+	
+	LinVel(0, 0.9, 1.7, CURVE_CONST, "head", "", [0, 0.5, 0.5], COORD_START)
+	LinVel(0, 0.5, 3.5, CURVE_CONST, "spine3", "", [0.9, 0.1, 0.3], COORD_START)
+	LinVel(0, 0.5, 3.8, CURVE_CONST, "spine1", "", [0.9, 0.1, 0.3], COORD_START)
+    LinVel(0, 0.1, 8.8, CURVE_CONST, "spine1", "", [0.9, 0.1, 0.3], COORD_START)
+	LinVel(0, 0.3, 3.5, CURVE_CONST, "pelvis", "", [0.9, 0.1, 0.8], COORD_START)
+}
+Alias("Stick2Close_Blast", "Blast")
+
+Alias("Stick2Close_TorsoHorizontalCharge_Left", "Stick2Close_BluntCharge_Left")
+Alias("Stick2Close_TorsoHorizontalCharge_Right", "Stick2Close_BluntCharge_Right")
+
+Alias("Stick2Close_LegsHorizontalCharge_Left", "Stick2Close_BluntCharge_Left")
+Alias("Stick2Close_LegsHorizontalCharge_Right", "Stick2Close_BluntCharge_Right")
+
+Alias("Stick2Close_LegsVerticalCharge", "Stick2Close_BluntCharge_Left")
+Alias("Stick2Close_TorsoVerticalCharge", "Stick2Close_BluntCharge_Left")
+
+Alias("Stick2Close_HeadVerticalCharge", "Stick2Close_BluntCharge_Left")
+Alias("Stick2Close_TorsoVerticalCharge_Down", "Stick2Close_BluntCharge_Left")
+Alias("Stick2Close_TorsoVerticalCharge_Up", "Stick2Close_BluntCharge_Right")
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//Stick2HeavySharp           (twohanded sharp)
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+Alias("Stick2HeavySharp_TorsoVertical1", "TorsoVertical1")
+Alias("Stick2HeavySharp_TorsoVertical2", "TorsoVertical2")
+Alias("Stick2HeavySharp_TorsoVertical3", "TorsoVertical3")
+Alias("Stick2HeavySharp_LegsVertical1", "LegsVertical1")
+Alias("Stick2HeavySharp_LegsVertical2", "LegsVertical2")
+Alias("Stick2HeavySharp_LegsVertical3", "LegsVertical3")
+Alias("Stick2HeavySharp_HeadVertical1", "HeadVertical1")
+Alias("Stick2HeavySharp_HeadVertical2", "HeadVertical2")
+Alias("Stick2HeavySharp_HeadVertical3", "HeadVertical3")
+Alias("Stick2HeavySharp_TorsoVertical1_Down", "TorsoVertical1_Down")
+Alias("Stick2HeavySharp_TorsoVertical2_Down", "TorsoVertical2_Down")
+Alias("Stick2HeavySharp_TorsoVertical3_Down", "TorsoVertical3_Down")
+Alias("Stick2HeavySharp_TorsoVertical1_Up", "TorsoVertical1_Up")
+Alias("Stick2HeavySharp_TorsoVertical2_Up", "TorsoVertical2_Up")
+Alias("Stick2HeavySharp_TorsoVertical3_Up", "TorsoVertical3_Up")
+Alias("Stick2HeavySharp_LegsHorizontal1_Left", "LegsHorizontal1_Left")
+Alias("Stick2HeavySharp_LegsHorizontal2_Left", "LegsHorizontal2_Left")
+Alias("Stick2HeavySharp_LegsHorizontal3_Left", "LegsHorizontal3_Left")
+Alias("Stick2HeavySharp_LegsHorizontal1_Right", "LegsHorizontal1_Right")
+Alias("Stick2HeavySharp_LegsHorizontal2_Right", "LegsHorizontal2_Right")
+Alias("Stick2HeavySharp_LegsHorizontal3_Right", "LegsHorizontal3_Right")
+Alias("Stick2HeavySharp_TorsoHorizontal1_Right", "TorsoHorizontal1_Right")
+Alias("Stick2HeavySharp_TorsoHorizontal2_Right", "TorsoHorizontal2_Right")
+Alias("Stick2HeavySharp_TorsoHorizontal3_Right", "TorsoHorizontal3_Right")
+Alias("Stick2HeavySharp_TorsoHorizontal1_Left", "TorsoHorizontal1_Left")
+Alias("Stick2HeavySharp_TorsoHorizontal2_Left", "TorsoHorizontal2_Left")
+Alias("Stick2HeavySharp_TorsoHorizontal3_Left", "TorsoHorizontal3_Left")
+Alias("Stick2HeavySharp_TorsoVerticalCharge_Up", "Stick2HeavyBlunt_Charge")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//Stick2HeavyBlunt          (twohanded, blunt)
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+Behavior("Stick2HeavyBlunt_TorsoVertical1_Down")
+{
+	LinVel(0, 0.3, 0.5, CURVE_CONST, "l_hand", "", [1, 0, 0], COORD_START)
+    LinVel(0, 0.3, 0.5, CURVE_CONST, "r_hand", "", [1, 0, 0], COORD_START)
+	LinVel(0, 0.2, 3, CURVE_LINEAR_DECREASE, "r_calf", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.2, 3, CURVE_LINEAR_DECREASE, "l_calf", "", [0, 0, 1], COORD_START)
+	LinVel(0, 0.1, 2, CURVE_CONST, "spine3", "", [-1, 0, 0.1], COORD_LOCAL)
+	// LinVel(0, 0.1, 5.75, CURVE_CONST, "spine1", "", [1, 0, 1], COORD_START)
+    LinVel(0.1, 0.3, 2.75, CURVE_CONST, "spine1", "", [-0.7, 0, 0.3], COORD_LOCAL)
+    LinVel(0.1, 0.4, 4.75, CURVE_CONST, "spine1", "", [0, 0, 1], COORD_START)
+	LinVel(0, 0.1, 4, CURVE_CONST, "pelvis", "", [-1, 0, 0.1], COORD_LOCAL)
+	LinVel(0.1, 0.2, 3.5, CURVE_LINEAR_INCREASE, "head", "", [-1, 0, 0.2], COORD_LOCAL)
+}
+
+Behavior("Stick2HeavyBlunt_TorsoVertical2_Down")
+{
+	LinVel(0, 0.3, 0.5, CURVE_CONST, "l_hand", "", [1, 0, 0], COORD_START)
+    LinVel(0, 0.3, 0.5, CURVE_CONST, "r_hand", "", [1, 0, 0], COORD_START)
+	LinVel(0, 0.2, 3, CURVE_LINEAR_DECREASE, "r_calf", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.2, 3, CURVE_LINEAR_DECREASE, "l_calf", "", [0, 0, 1], COORD_START)
+	LinVel(0, 0.1, 2, CURVE_CONST, "spine3", "", [-1, 0, 0.1], COORD_LOCAL)
+	// LinVel(0, 0.1, 5.75, CURVE_CONST, "spine1", "", [1, 0, 1], COORD_START)
+    LinVel(0.1, 0.3, 2.0, CURVE_CONST, "spine1", "", [-0.7, 0, 0.3], COORD_LOCAL)
+    LinVel(0.1, 0.3, 2.75, CURVE_CONST, "spine1", "", [0, 0, 1], COORD_START)
+	LinVel(0, 0.1, 4, CURVE_CONST, "pelvis", "", [-1, 0, 0.1], COORD_LOCAL)
+	LinVel(0.1, 0.2, 3.5, CURVE_LINEAR_INCREASE, "head", "", [-1, 0, 0.2], COORD_LOCAL)
+}
+
+Behavior("Stick2HeavyBlunt_TorsoVertical3_Down")
+{
+	LinVel(0, 0.3, 0.5, CURVE_CONST, "l_hand", "", [1, 0, 0], COORD_START)
+    LinVel(0, 0.3, 0.5, CURVE_CONST, "r_hand", "", [1, 0, 0], COORD_START)
+	LinVel(0, 0.2, 3, CURVE_LINEAR_DECREASE, "r_calf", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.2, 3, CURVE_LINEAR_DECREASE, "l_calf", "", [0, 0, -1], COORD_START)
+	LinVel(0, 0.1, 2, CURVE_CONST, "spine3", "", [-1, 0, 0.1], COORD_LOCAL)
+	LinVel(0, 0.1, 6.75, CURVE_CONST, "spine1", "", [1, 0, 1], COORD_START)
+    LinVel(0.1, 0.3, 1.75, CURVE_CONST, "spine1", "", [-0.7, 0, 0.3], COORD_LOCAL)
+    LinVel(0.1, 0.5, 2.75, CURVE_CONST, "spine1", "", [0, 0, 1], COORD_START)
+	LinVel(0, 0.1, 8, CURVE_CONST, "pelvis", "", [-1, 0, 0.1], COORD_LOCAL)
+	LinVel(0.1, 0.2, 5.5, CURVE_LINEAR_INCREASE, "head", "", [-1, 0, 0.2], COORD_LOCAL)
+}
+
+Behavior("Stick2HeavyBlunt_Charge")
+{
+	LinVel(0, 0.3, 1.0, CURVE_CONST, "l_hand", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.3, 1.0, CURVE_CONST, "l_hand", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.3, 1.0, CURVE_CONST, "r_hand", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.3, 1.0, CURVE_CONST, "r_hand", "", [0, 0, -1], COORD_START)
+	
+	LinVel(0, 0.9, 3.3, CURVE_CONST, "head", "", [0, 0.5, 0.5], COORD_START)
+	LinVel(0, 0.1, 7, CURVE_CONST, "spine3", "", [0, 0.1, 1], COORD_START)
+	LinVel(0, 0.1, 7.75, CURVE_CONST, "spine1", "", [0, 0.1, 1], COORD_START)
+	LinVel(0, 0.1, 7, CURVE_CONST, "pelvis", "", [0, 0.1, 1], COORD_START)
+	LinVel(0.1, 0.2, 4.5, CURVE_LINEAR_INCREASE, "spine1", "", [0, 0.1, 1], COORD_START)
+    LinVel(0.4, 1.2, 3.5, CURVE_LINEAR_INCREASE, "spine1", "", [0, -0.8, 0], COORD_START)
+}
+Alias("Stick2HeavyBlunt_TorsoHorizontal1_Left", "LegsHorizontal1_Left")
+Alias("Stick2HeavyBlunt_TorsoHorizontal2_Left", "LegsHorizontal2_Left")
+Alias("Stick2HeavyBlunt_TorsoHorizontal3_Left", "LegsHorizontal3_Left")
+Alias("Stick2HeavyBlunt_TorsoHorizontal1_Right", "LegsHorizontal1_Right")
+Alias("Stick2HeavyBlunt_TorsoHorizontal2_Right", "LegsHorizontal2_Right")
+Alias("Stick2HeavyBlunt_TorsoHorizontal3_Right", "LegsHorizontal3_Right")
+Alias("Stick2HeavyBlunt_LegsHorizontal1_Left", "LegsHorizontal1_Left")
+Alias("Stick2HeavyBlunt_LegsHorizontal2_Left", "LegsHorizontal2_Left")
+Alias("Stick2HeavyBlunt_LegsHorizontal3_Left", "LegsHorizontal3_Left")
+Alias("Stick2HeavyBlunt_LegsHorizontal1_Right", "LegsHorizontal1_Right")
+Alias("Stick2HeavyBlunt_LegsHorizontal2_Right", "LegsHorizontal2_Right")
+Alias("Stick2HeavyBlunt_LegsHorizontal3_Right", "LegsHorizontal3_Right")
+Alias("Stick2HeavyBlunt_LegsVertical1", "Stick2HeavyBlunt_TorsoVertical1_Down")
+Alias("Stick2HeavyBlunt_LegsVertical2", "Stick2HeavyBlunt_TorsoVertical2_Down")
+Alias("Stick2HeavyBlunt_LegsVertical3", "Stick2HeavyBlunt_TorsoVertical3_Down")
+Alias("Stick2HeavyBlunt_TorsoVertical1", "Stick2HeavyBlunt_TorsoVertical1_Down")
+Alias("Stick2HeavyBlunt_TorsoVertical2", "Stick2HeavyBlunt_TorsoVertical2_Down")
+Alias("Stick2HeavyBlunt_TorsoVertical3", "Stick2HeavyBlunt_TorsoVertical3_Down")
+Alias("Stick2HeavyBlunt_HeadVertical1", "Stick2HeavyBlunt_TorsoVertical1_Down")
+Alias("Stick2HeavyBlunt_HeadVertical2", "Stick2HeavyBlunt_TorsoVertical2_Down")
+Alias("Stick2HeavyBlunt_HeadVertical3", "Stick2HeavyBlunt_TorsoVertical3_Down")
+Alias("Stick2HeavyBlunt_TorsoVertical1_Up", "TorsoVertical1_Up")
+Alias("Stick2HeavyBlunt_TorsoVertical2_Up", "TorsoVertical2_Up")
+Alias("Stick2HeavyBlunt_TorsoVertical3_Up", "TorsoVertical3_Up")
+
+Alias("Stick2HeavyBlunt_TorsoHorizontalCharge_Left", "Stick2HeavyBlunt_Charge")
+Alias("Stick2HeavyBlunt_TorsoHorizontalCharge_Right", "Stick2HeavyBlunt_Charge")
+Alias("Stick2HeavyBlunt_LegsHorizontalCharge_Left", "Stick2HeavyBlunt_Charge")
+Alias("Stick2HeavyBlunt_LegsHorizontalCharge_Right", "Stick2HeavyBlunt_Charge")
+Alias("Stick2HeavyBlunt_LegsVerticalCharge", "Stick2HeavyBlunt_Charge")
+Alias("Stick2HeavyBlunt_TorsoVerticalCharge", "Stick2HeavyBlunt_Charge")
+Alias("Stick2HeavyBlunt_HeadVerticalCharge", "Stick2HeavyBlunt_Charge")
+Alias("Stick2HeavyBlunt_TorsoVerticalCharge_Down", "Stick2HeavyBlunt_Charge")
+Alias("Stick2HeavyBlunt_TorsoVerticalCharge_Up", "Stick2HeavyBlunt_Charge")
+
+Alias("Stick2HeavyBlunt_Blast", "Impact") // Thug hammer hit
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//SHOTGUN
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+Behavior("Shotgun_TorsoVertical1")
+{
+	LinVel(0, 0.2, 2.5, CURVE_LINEAR_DECREASE, "l_hand", "", [0, -0.1, -1], COORD_START)
+    LinVel(0, 1.0, 2.5, CURVE_LINEAR_DECREASE, "r_hand", "", [0, -0.1, -1], COORD_START)
+	LinVel(0, 2.0, 4.5, CURVE_LINEAR_DECREASE, "l_leg", "", [ 0, -1, 0], COORD_START)
+	LinVel(0, 2.0, 4.5, CURVE_LINEAR_DECREASE, "r_leg", "", [ 0, -1, 0], COORD_START)
+    LinVel(0.3, 0.4, 7, CURVE_CONST, "l_calf", "", [ 0, -1, 0.7], COORD_START)
+	LinVel(0.3, 0.4, 7, CURVE_CONST, "r_calf", "", [ 0, -1, 0.7], COORD_START)
+    LinVel(0, 0.01, 8, CURVE_CONST, "head", "", [0, -1, 0], COORD_START)
+	LinVel(0, 0.2, 14, CURVE_CONST, "spine3", "", [0, 0.5, 1], COORD_START)
+    LinVel(0.3, 0.4, 23, CURVE_CONST, "spine3", "", [0, -0.5, 0], COORD_START)
+	LinVel(0, 0.2, 14.75, CURVE_CONST, "spine1", "", [0, 0.5, 1], COORD_START)
+	LinVel(0, 0.2, 4, CURVE_CONST, "pelvis", "", [0, -0.5, 0], COORD_START)
+	//LinVel(0.1, 0.2, 3.5, CURVE_LINEAR_INCREASE, "spine1", "", [0, 0.5, 1], COORD_START)
+}
+
+Behavior("Shotgun_TorsoVertical2")
+{
+	LinVel(0, 0.3, 1, CURVE_CONST, "l_hand", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.3, 1, CURVE_CONST, "l_hand", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.3, 1, CURVE_CONST, "r_hand", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.3, 1, CURVE_CONST, "r_hand", "", [0, 0, -1], COORD_START)
+	
+	LinVel(0, 0.1, 1.2, CURVE_LINEAR_INCREASE, "spine3", "", [0, 0.9, 1], COORD_START)
+	LinVel(0, 0.1, 1.5, CURVE_LINEAR_INCREASE, "spine1", "", [0, 0.9, 1], COORD_START)
+	LinVel(0, 0.1, 2, CURVE_LINEAR_INCREASE, "pelvis", "", [0, 0.9, 1], COORD_START)
+	LinVel(0.0, 0.15, 7, CURVE_LINEAR_INCREASE, "pelvis", "", [0, 0.5, 1], COORD_START)
+	LinVel(0.0, 0.15, 7, CURVE_LINEAR_INCREASE, "r_thigh", "", [0, 0.5, 1], COORD_START)
+	LinVel(0.0, 0.2, 7, CURVE_LINEAR_INCREASE, "l_thigh", "", [0, 0.5, 1], COORD_START)
+}
+
+Behavior("Shotgun_TorsoVertical3")
+{
+    LinVel(0, 0.01, 8, CURVE_CONST, "head", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.01, 11, CURVE_CONST, "head", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.01, 9, CURVE_CONST, "spine3", "", [0, 0, 1], COORD_START)
+	LinVel(0, 0.01, 8, CURVE_CONST, "spine1", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.1, 1.5, CURVE_CONST, "spine3", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.1, 1.5, CURVE_CONST, "spine1", "", [0, 1, 0], COORD_START)
+    LinVel(0, 0.01, 8, CURVE_CONST, "spine1", "", [0, -1, 0], COORD_START)
+	LinVel(0, 0.01, 2, CURVE_CONST, "pelvis", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.3, 1, CURVE_CONST, "pelvis", "", [0, -1, 0], COORD_START)
+
+	LinVel(0, 0.01, 2, CURVE_CONST, "spine1", "", [0, 1, 0], COORD_START)
+    
+    AngVel(0, 0.25, -75, CURVE_LINEAR_DECREASE, "head",  "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.25, -60, CURVE_LINEAR_DECREASE, "spine1",  "", [1, 0, 0], COORD_LOCAL)
+    AngVel(0, 0.25, -60, CURVE_LINEAR_DECREASE, "spine3", "", [1, 0, 0], COORD_LOCAL)
+	
+	LinVel(0, 0.1, 2, CURVE_LINEAR_INCREASE, "pelvis", "", [0, 0.9, 1], COORD_START)
+	LinVel(0.0, 0.15, 6, CURVE_LINEAR_INCREASE, "pelvis", "", [0, 0.5, 1], COORD_START)
+}
+
+
+$FIRST_PHASE_END  (f, 1.4)
+$SECOND_PHASE_BEGIN  (f, 0.9)
+$SECOND_PHASE_END  (f, 1.9)
+$MIDLE_PHASE (f, 1.7)
+
+Behavior("FLY_0")
+{
+	Stiffness(0, 1.5, 0.9, CURVE_LINEAR_DECREASE)
+	/*LinVel(0, FIRST_PHASE_END, 1, CURVE_CONST, "l_hand", "", [0, 1, 0], COORD_START)
+	LinVel(0, FIRST_PHASE_END, 1, CURVE_CONST, "l_hand", "", [0, 0, -1], COORD_START)
+    LinVel(0, FIRST_PHASE_END, 1, CURVE_CONST, "r_hand", "", [0, 1, 0], COORD_START)
+	LinVel(0, FIRST_PHASE_END, 1, CURVE_CONST, "r_hand", "", [0, 0, -1], COORD_START)*/
+	
+	LinVel(0, FIRST_PHASE_END, 1.4, CURVE_LINEAR_DECREASE, "pelvis", "", [0, 0, 1], COORD_START)
+	LinVel(0, FIRST_PHASE_END, 1.25, CURVE_LINEAR_DECREASE, "spine3", "", [0, 0, 1], COORD_START)
+	
+	LinVel(SECOND_PHASE_BEGIN, SECOND_PHASE_END, 2.4, CURVE_CONST, "pelvis", "", [ 0, 0, 0.1], COORD_START)
+	LinVel(SECOND_PHASE_BEGIN, SECOND_PHASE_END, 2.25, CURVE_CONST, "spine3", "", [ 0, 0, 0.1], COORD_START)
+		
+	LinVel(MIDLE_PHASE, SECOND_PHASE_END, 5, CURVE_CONST, "l_hand", "", [0, 0, 1], COORD_START)    
+	LinVel(MIDLE_PHASE, SECOND_PHASE_END, 5, CURVE_CONST, "r_hand", "", [0, 0, 1], COORD_START)
+	
+	LinVel(MIDLE_PHASE, SECOND_PHASE_END, 10.1, CURVE_LINEAR_INCREASE, "spine3", "", [0, -0.1, 1], COORD_START)
+	LinVel(MIDLE_PHASE, SECOND_PHASE_END, 10.8, CURVE_LINEAR_INCREASE, "pelvis", "", [0, -0.1, 1], COORD_START)
+	LinVel(MIDLE_PHASE, SECOND_PHASE_END, 10.1, CURVE_LINEAR_INCREASE, "spine3", "", [-0.2, -0.1, 1], COORD_START)
+	
+	AngVel(0, SECOND_PHASE_END, 99, CURVE_LINEAR_INCREASE, "head",  "", [0, 1, 0], COORD_LOCAL)
+    AngVel(0, SECOND_PHASE_END, 70, CURVE_LINEAR_INCREASE, "spine1",  "", [0, 1, 0], COORD_LOCAL)
+    AngVel(0, SECOND_PHASE_END, 80, CURVE_LINEAR_INCREASE, "spine3", "", [0, 1, 0], COORD_LOCAL)
+	//LinVel(3.0, 2.0, 45.5, CURVE_LINEAR_INCREASE, "spine1", "", [1, 0, 1], COORD_START)	
+}
+Behavior("FLY_1")
+{
+	Stiffness(0, 1.5, 0.9, CURVE_LINEAR_DECREASE)
+	LinVel(0, 0.5, 2.1, CURVE_CONST, "l_hand", "", [1, -1, 0], COORD_START)
+	LinVel(0, 0.5, 2.2, CURVE_CONST, "l_hand", "", [0, 0, 1], COORD_START)
+    LinVel(0, 0.7, 2.4, CURVE_CONST, "r_hand", "", [1, -1, 0], COORD_START)    
+	LinVel(0, 0.7, 1.6, CURVE_CONST, "r_hand", "", [0, 0, 1], COORD_START)
+	
+	LinVel(0, FIRST_PHASE_END, 1.4, CURVE_LINEAR_DECREASE, "pelvis", "", [0, -0.5, 1], COORD_START)
+	LinVel(0, FIRST_PHASE_END, 1.25, CURVE_LINEAR_DECREASE, "spine3", "", [0, -0.5, 1], COORD_START)
+	
+	LinVel(SECOND_PHASE_BEGIN, SECOND_PHASE_END, 2.4, CURVE_CONST, "pelvis", "", [ 0, -1, 0.1], COORD_START)
+	LinVel(SECOND_PHASE_BEGIN, SECOND_PHASE_END, 2.25, CURVE_CONST, "spine3", "", [ 0, -1, 0.1], COORD_START)
+		
+	LinVel(MIDLE_PHASE, SECOND_PHASE_END, 7, CURVE_CONST, "l_hand", "", [0, -1, 1], COORD_START)    
+	LinVel(MIDLE_PHASE, SECOND_PHASE_END, 7, CURVE_CONST, "r_hand", "", [0, -1, 1], COORD_START)
+	
+	LinVel(MIDLE_PHASE, SECOND_PHASE_END, 15.1, CURVE_LINEAR_INCREASE, "spine3", "", [0, -1.6, 0], COORD_START)
+	LinVel(MIDLE_PHASE, SECOND_PHASE_END, 15.8, CURVE_LINEAR_INCREASE, "pelvis", "", [0, -1.6, 0], COORD_START)
+	LinVel(MIDLE_PHASE, SECOND_PHASE_END, 15.1, CURVE_LINEAR_INCREASE, "spine3", "", [-0.2, -1.6, 0], COORD_START)
+	
+	AngVel(0, SECOND_PHASE_END, 190, CURVE_LINEAR_INCREASE, "head",  "", [0, 1, 0], COORD_LOCAL)
+    //AngVel(0, SECOND_PHASE_END, 90, CURVE_LINEAR_INCREASE, "spine1",  "", [0, 1, 0], COORD_LOCAL)
+    //AngVel(0, SECOND_PHASE_END, 80, CURVE_LINEAR_INCREASE, "spine3", "", [0, 1, 0], COORD_LOCAL)
+	//LinVel(3.0, 2.0, 45.5, CURVE_LINEAR_INCREASE, "spine1", "", [1, 0, 1], COORD_START)		
+}
+
+Behavior("FLY_2")
+{
+	Stiffness(0, 1.5, 0.9, CURVE_LINEAR_DECREASE)
+	/*LinVel(0, FIRST_PHASE_END, 1, CURVE_CONST, "l_hand", "", [0, 1, 0], COORD_START)
+	LinVel(0, FIRST_PHASE_END, 1, CURVE_CONST, "l_hand", "", [0, 0, -1], COORD_START)
+    LinVel(0, FIRST_PHASE_END, 1, CURVE_CONST, "r_hand", "", [0, 1, 0], COORD_START)
+	LinVel(0, FIRST_PHASE_END, 1, CURVE_CONST, "r_hand", "", [0, 0, -1], COORD_START)*/
+	
+	LinVel(0, FIRST_PHASE_END, 1.4, CURVE_LINEAR_DECREASE, "pelvis", "", [0, -0.5, 1], COORD_START)
+	LinVel(0, FIRST_PHASE_END, 1.25, CURVE_LINEAR_DECREASE, "spine3", "", [0, -0.5, 1], COORD_START)
+	
+	LinVel(SECOND_PHASE_BEGIN, SECOND_PHASE_END, 2.4, CURVE_CONST, "pelvis", "", [ 0, -1, 0.1], COORD_START)
+	LinVel(SECOND_PHASE_BEGIN, SECOND_PHASE_END, 2.25, CURVE_CONST, "spine3", "", [ 0, -1, 0.1], COORD_START)
+		
+	LinVel(MIDLE_PHASE, SECOND_PHASE_END, 7, CURVE_CONST, "l_hand", "", [0, -1, 1], COORD_START)    
+	LinVel(MIDLE_PHASE, SECOND_PHASE_END, 7, CURVE_CONST, "r_hand", "", [0, -1, 1], COORD_START)
+	
+	LinVel(MIDLE_PHASE, SECOND_PHASE_END, 15.1, CURVE_LINEAR_INCREASE, "spine3", "", [0, -1.6, 0], COORD_START)
+	LinVel(MIDLE_PHASE, SECOND_PHASE_END, 15.8, CURVE_LINEAR_INCREASE, "pelvis", "", [0, -1.6, 0], COORD_START)
+	LinVel(MIDLE_PHASE, SECOND_PHASE_END, 15.1, CURVE_LINEAR_INCREASE, "spine3", "", [-0.2, -1.6, 0], COORD_START)
+	
+	AngVel(0, SECOND_PHASE_END, 109, CURVE_LINEAR_INCREASE, "head",  "", [0, 1, 0], COORD_LOCAL)
+    AngVel(0, SECOND_PHASE_END, 90, CURVE_LINEAR_INCREASE, "spine1",  "", [0, 1, 0], COORD_LOCAL)
+    AngVel(0, SECOND_PHASE_END, 80, CURVE_LINEAR_INCREASE, "spine3", "", [0, 1, 0], COORD_LOCAL)
+	//LinVel(3.0, 2.0, 45.5, CURVE_LINEAR_INCREASE, "spine1", "", [1, 0, 1], COORD_START)	
+}
+
+Behavior("KOREK_0")
+{
+	Stiffness(0, 1.5, 2.9, CURVE_LINEAR_INCREASE)
+	LinVel(0, FIRST_PHASE_END, 2.4, CURVE_LINEAR_DECREASE, "pelvis", "", [0, 1, -0.1], COORD_START)
+	LinVel(0, FIRST_PHASE_END, 2.25, CURVE_LINEAR_DECREASE, "spine3", "", [0, 1, -0.1], COORD_START)
+	LinVel(0, FIRST_PHASE_END, 2.25, CURVE_LINEAR_DECREASE, "head", "", [0, 1, -0.1], COORD_START)
+    
+	LinVel(SECOND_PHASE_BEGIN, SECOND_PHASE_END, 1.4, CURVE_CONST, "l_hand", "", [ 0, 1, 0.2], COORD_START)
+	LinVel(SECOND_PHASE_BEGIN, SECOND_PHASE_END, 1.25, CURVE_CONST, "r_hand", "", [ 0, 1, 0.3], COORD_START)
+	LinVel(SECOND_PHASE_BEGIN, SECOND_PHASE_END, 0.4, CURVE_CONST, "pelvis", "", [0, 1, 0.2], COORD_START)
+	LinVel(SECOND_PHASE_BEGIN, SECOND_PHASE_END, 0.25, CURVE_CONST, "spine3", "", [0, 1, 0.2], COORD_START)
+	LinVel(SECOND_PHASE_BEGIN, SECOND_PHASE_END, 0.25, CURVE_CONST, "head", "", [0, 1, 0.2], COORD_START)
+
+	LinVel(1.1, SECOND_PHASE_END, 13.4, CURVE_LINEAR_DECREASE, "pelvis", "", [0, 0.2, -1], COORD_START)
+	LinVel(1.1, SECOND_PHASE_END, 12.25, CURVE_LINEAR_DECREASE, "spine3", "", [0, 0.2, -1], COORD_START)
+	LinVel(1.1, SECOND_PHASE_END, 12.25, CURVE_LINEAR_DECREASE, "head", "", [0, 0.2, -1], COORD_START)
+}
+
+Behavior("KOREK_1_Blast")
+{
+	Stiffness(0, 1.5, 2.9, CURVE_LINEAR_INCREASE)
+	LinVel(0, FIRST_PHASE_END, 2.4, CURVE_LINEAR_DECREASE, "pelvis", "", [0, 1, 0], COORD_WORLD)
+	LinVel(0, FIRST_PHASE_END, 2.25, CURVE_LINEAR_DECREASE, "spine3", "", [0, 1, 0], COORD_WORLD)
+	LinVel(0, FIRST_PHASE_END, 2.25, CURVE_LINEAR_DECREASE, "head", "", [0, 1, 0], COORD_WORLD)
+    
+	LinVel(SECOND_PHASE_BEGIN, SECOND_PHASE_END, 3.4, CURVE_CONST, "l_leg", "", [ 0, 1, 0], COORD_WORLD)
+	LinVel(SECOND_PHASE_BEGIN, SECOND_PHASE_END, 3.25, CURVE_CONST, "r_leg", "", [ 0, 1, 0], COORD_WORLD)
+	LinVel(SECOND_PHASE_BEGIN, SECOND_PHASE_END, 0.4, CURVE_CONST, "pelvis", "", [0, 1, 0], COORD_WORLD)
+	LinVel(SECOND_PHASE_BEGIN, SECOND_PHASE_END, 0.25, CURVE_CONST, "spine3", "", [0, 1, 0], COORD_WORLD)
+	LinVel(SECOND_PHASE_BEGIN, SECOND_PHASE_END, 0.25, CURVE_CONST, "head", "", [0, 1, 0], COORD_WORLD)
+    LinVel(1.1, 4, 1.4, CURVE_CONST, "pelvis", "", [0, 1, 0], COORD_WORLD)
+	LinVel(1.1, 4, 1.25, CURVE_CONST, "spine3", "", [0, 1, 0], COORD_WORLD)
+	LinVel(1.1, 4, 1.25, CURVE_CONST, "head", "", [0, 1, 0], COORD_WORLD)
+	LinVel(1.1, 4, 1.25, CURVE_CONST, "l", "", [0, 1, 0], COORD_WORLD)
+
+//	LinVel(1.1, SECOND_PHASE_END, 13.4, CURVE_LINEAR_DECREASE, "pelvis", "", [0, 0.2, -1], COORD_WORLD)
+//	LinVel(1.1, SECOND_PHASE_END, 12.25, CURVE_LINEAR_DECREASE, "spine3", "", [0, 0.2, -1], COORD_WORLD)
+//	LinVel(1.1, SECOND_PHASE_END, 12.25, CURVE_LINEAR_DECREASE, "head", "", [0, 0.2, -1], COORD_WORLD)
+	
+    Stiffness(1.7, 3.5, 8.9, CURVE_LINEAR_INCREASE)
+    AngVel(1.1, 4, 59, CURVE_LINEAR_INCREASE, "head",  "", [0, 1, 0], COORD_WORLD)
+    AngVel(1.1, 4, 70, CURVE_LINEAR_INCREASE, "spine1",  "", [0, 1, 0], COORD_WORLD)
+    AngVel(1.1, 4, 75, CURVE_LINEAR_INCREASE, "spine3", "", [0, 1, 0], COORD_WORLD)
+    AngVel(1.1, 4, 75, CURVE_LINEAR_INCREASE, "l_calf", "", [0, 1, 0], COORD_WORLD)
+    }
+
+Behavior("KOREK_2_blast")
+{
+	Stiffness(0, 0.5, 0.9, CURVE_LINEAR_INCREASE)
+    Stiffness(1.0, 5.5, 5.9, CURVE_LINEAR_INCREASE)
+	LinVel(0, FIRST_PHASE_END, 2.4, CURVE_LINEAR_DECREASE, "pelvis", "", [0, 1, 0], COORD_WORLD)
+	LinVel(0, FIRST_PHASE_END, 2.25, CURVE_LINEAR_DECREASE, "spine3", "", [0, 1, 0], COORD_WORLD)
+	LinVel(0, FIRST_PHASE_END, 2.25, CURVE_LINEAR_DECREASE, "head", "", [0, 1, 0], COORD_WORLD)
+    
+	LinVel(SECOND_PHASE_BEGIN, SECOND_PHASE_END, 3.4, CURVE_CONST, "l_leg", "", [ 0, 1, 0], COORD_WORLD)
+	LinVel(SECOND_PHASE_BEGIN, SECOND_PHASE_END, 3.25, CURVE_CONST, "r_leg", "", [ 0, 1, 0], COORD_WORLD)
+	LinVel(SECOND_PHASE_BEGIN, SECOND_PHASE_END, 0.4, CURVE_CONST, "pelvis", "", [0, 1, 0], COORD_WORLD)
+	LinVel(SECOND_PHASE_BEGIN, SECOND_PHASE_END, 0.25, CURVE_CONST, "spine3", "", [0, 1, 0], COORD_WORLD)
+	LinVel(SECOND_PHASE_BEGIN, SECOND_PHASE_END, 0.25, CURVE_CONST, "head", "", [0, 1, 0], COORD_WORLD)
+    LinVel(1.0, 5, 17.4, CURVE_CONST, "r_hand", "", [0, 1, 0], COORD_WORLD)
+//	LinVel(1.36, 5, 17.4, CURVE_CONST, "r_hand", "", [0, 1, 0], COORD_WORLD)
+//    LinVel(1.4, 5, 12.25, CURVE_LINEAR_DECREASE, "spine3", "", [0, 1, 0], COORD_WORLD)
+	LinVel(1.6, SECOND_PHASE_END, 1.25, CURVE_LINEAR_INCREASE, "head", "", [0, -1, 0], COORD_WORLD)
+	LinVel(1.6, SECOND_PHASE_END, 2.25, CURVE_LINEAR_INCREASE, "spine3", "", [0, -1, 0], COORD_WORLD)
+    LinVel(1.6, SECOND_PHASE_END, 3.25, CURVE_LINEAR_INCREASE, "pelvis", "", [0, -1, 0], COORD_WORLD)
+
+    
+//	LinVel(1.1, SECOND_PHASE_END, 13.4, CURVE_LINEAR_DECREASE, "pelvis", "", [0, 0.2, -1], COORD_WORLD)
+//	LinVel(1.1, SECOND_PHASE_END, 12.25, CURVE_LINEAR_DECREASE, "spine3", "", [0, 0.2, -1], COORD_WORLD)
+//	LinVel(1.1, SECOND_PHASE_END, 12.25, CURVE_LINEAR_DECREASE, "head", "", [0, 0.2, -1], COORD_WORLD)
+	
+    }
+
+
+    
+Behavior("InfectionFist_Left")
+{
+	Stiffness(0, 0.5, 0.3, CURVE_LINEAR_INCREASE)
+	LinVel(0, 0.3, 0.45, CURVE_CONST, "l_hand", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.3, 0.45, CURVE_CONST, "l_hand", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.3, 0.45, CURVE_CONST, "r_hand", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.3, 0.55, CURVE_CONST, "r_hand", "", [0, 0, -1], COORD_START)
+	
+	 LinVel(0, 0.9, 0.45, CURVE_LINEAR_DECREASE, "head", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.2, 7.5, CURVE_CONST, "spine3", "", [0, 0.4, 1], COORD_START)
+	LinVel(0, 0.2, 7.85, CURVE_CONST, "spine1", "", [0, 0.4, 1], COORD_START)
+	LinVel(0, 0.2, 7.5, CURVE_CONST, "pelvis", "", [0, 0.4, 1], COORD_START)
+	LinVel(0.1, 0.2, 6.25, CURVE_LINEAR_INCREASE, "spine1", "", [0, 0.2, 1], COORD_START)
+    LinVel(0.4, 1.2, 3.25, CURVE_LINEAR_INCREASE, "spine1", "", [0, -0.8, 0], COORD_START)
+    Stiffness(0, 0.4, 0.9, CURVE_LINEAR_DECREASE)
+    //RandAngImpulse(0, 0.5, -20, 20, 0.02, CURVE_CONST, "spine1", "", [1, 0, 1], COORD_START)
+    //RandAngImpulse(0, 0.5, -20, 20, 0.02, CURVE_CONST, "spine3", "", [1, 0, 1], COORD_START)
+    
+
+}
+
+Behavior("InfectionFist_Right")
+{
+	Stiffness(0, 0.5, 0.3, CURVE_LINEAR_INCREASE)
+	LinVel(0, 0.3, 0.45, CURVE_CONST, "l_hand", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.3, 0.45, CURVE_CONST, "l_hand", "", [0, 0, -1], COORD_START)
+    LinVel(0, 0.3, 0.45, CURVE_CONST, "r_hand", "", [0, 1, 0], COORD_WORLD)
+	LinVel(0, 0.3, 0.55, CURVE_CONST, "r_hand", "", [0, 0, -1], COORD_START)
+	
+	 LinVel(0, 0.9, 0.45, CURVE_LINEAR_DECREASE, "head", "", [0, 1, 0], COORD_START)
+	LinVel(0, 0.2, 9.5, CURVE_CONST, "spine3", "", [0, 0.4, 1], COORD_START)
+	LinVel(0, 0.2, 9.85, CURVE_CONST, "spine1", "", [0, 0.4, 1], COORD_START)
+	LinVel(0, 0.2, 9.5, CURVE_CONST, "pelvis", "", [0, 0.4, 1], COORD_START)
+	LinVel(0.1, 0.2, 6.25, CURVE_LINEAR_INCREASE, "spine1", "", [0, 0.2, 1], COORD_START)
+    LinVel(0.4, 1.2, 3.25, CURVE_LINEAR_INCREASE, "spine1", "", [0, -0.8, 0], COORD_START)
+    Stiffness(0, 0.4, 0.9, CURVE_LINEAR_DECREASE)
+    //RandAngImpulse(0, 0.5, -20, 20, 0.02, CURVE_CONST, "spine1", "", [1, 0, 1], COORD_START)
+    //RandAngImpulse(0, 0.5, -20, 20, 0.02, CURVE_CONST, "spine3", "", [1, 0, 1], COORD_START)
+    
+}
+
+Alias("InfectionFist", "InfectionFist_Left")
+    
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//ALIASES
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+Alias("Shotgun_LegsVertical1", "LegsVertical1")
+Alias("Shotgun_LegsVertical2", "LegsVertical2")
+Alias("Shotgun_LegsVertical3", "LegsVertical3")
+
+Alias("Shotgun_HeadVertical1", "HeadVertical1")
+Alias("Shotgun_HeadVertical2", "HeadVertical2")
+Alias("Shotgun_HeadVertical3", "HeadVertical3")
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Charge Aliases
+////////////////////////////////////////////////////////////////////////////////////////////////////
+Alias("TorsoHorizontalCharge_Left", "BluntCharge_Left")
+Alias("TorsoHorizontalCharge_Right", "BluntCharge_Right")
+
+Alias("LegsHorizontalCharge_Left", "BluntCharge_Left")
+Alias("LegsHorizontalCharge_Right", "BluntCharge_Right")
+
+Alias("LegsVerticalCharge", "BluntCharge_Left")
+Alias("TorsoVerticalCharge", "BluntCharge_Left")
+
+Alias("HeadVerticalCharge", "BluntCharge_Left")
+Alias("TorsoVerticalCharge_Down", "BluntCharge_Left")
+Alias("TorsoVerticalCharge_Up", "BluntCharge_Right")
+
+Alias("Charge", "TorsoHorizontalCharge_Left")
+
+
+

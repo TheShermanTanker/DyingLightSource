@@ -1,0 +1,369 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="old_town"
+     pxsl_line="3">
+    <!-- -->
+    <!-- OUTPOSTS -->
+    <!-- -->
+    <Quest
+         name="OldTown_Outpost_Generator"
+         parent="OldTown_Outpost_Start"
+         pxsl_line="8">
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="9">
+            <Object
+                 pxsl_line="9">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="Outpost_generator"
+                     pxsl_line="9" />
+            </Object>
+        </Phase>
+        <Phase
+             type="OR"
+             name="_"
+             pxsl_line="10">
+            <Path
+                 pxsl_line="11">
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="on"
+                     show_locations="false"
+                     pxsl_line="12">
+                    <Trigger
+                         pxsl_line="12">
+                        <QuestObject
+                             class="DamageSwitchDI"
+                             name="Outpost_generator"
+                             pxsl_line="12" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="set state"
+                     name="_"
+                     desired_state="on"
+                     pxsl_line="13">
+                    <Trigger
+                         pxsl_line="13">
+                        <QuestObject
+                             class="BombSwitchDI"
+                             name="Outpost_generator"
+                             pxsl_line="13" />
+                    </Trigger>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="14">
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="on"
+                     show_locations="false"
+                     pxsl_line="15">
+                    <Trigger
+                         pxsl_line="15">
+                        <QuestObject
+                             class="InvisibleSwitchDI"
+                             name="Outpost_generatorIS"
+                             pxsl_line="15" />
+                    </Trigger>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="16">
+                <Phase
+                     type="started quest guard"
+                     name="_"
+                     quest_name="__OldTown_OP_Office_End"
+                     finished="true"
+                     show_locations="false"
+                     pxsl_line="17" />
+            </Path>
+        </Phase>
+        <Phase
+             type="set skin"
+             name="_"
+             skin_name="Default"
+             pxsl_line="19">
+            <ModelObject
+                 pxsl_line="19">
+                <QuestObject
+                     class="DamageSwitchDI"
+                     name="Outpost_generator"
+                     pxsl_line="19" />
+            </ModelObject>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="20">
+            <Object
+                 pxsl_line="20">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="Outpost_generator"
+                     pxsl_line="20" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="21">
+            <Destination
+                 pxsl_line="21">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="sp_OT_Outpost_Start"
+                     pxsl_line="21" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="OldTown_Outpost_Start"
+         parent="FindTheEmbers"
+         reward_set="Outposts_reward"
+         quest_giver="Savvy"
+         difficulty="hard"
+         pxsl_line="23">
+        <!-- ,use-lp _ NPCLifePlace LP_Contact_Savvy -teleport=true -->
+            <!-- ,ai HumanAI Savvy            -->
+        <Phase
+             type="wait guard"
+             name="_"
+             time="3"
+             pxsl_line="27" />
+        <Phase
+             type="talk"
+             name="OT_Outpost - Start - Talk to Savvy"
+             speaker="Savvy"
+             group="Savvy_Outposts_USE"
+             show_locations="false"
+             questgiver_indicator="true"
+             pxsl_line="28">
+            <DebugPlayerPosition
+                 pxsl_line="29">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="sp_OT_Outpost_Start"
+                     pxsl_line="29" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="appear"
+             name="_"
+             mode="hide"
+             pxsl_line="31">
+            <Object
+                 pxsl_line="32">
+                <QuestObject
+                     class="GroupingObject"
+                     name="Outpost02_GO_Hide"
+                     pxsl_line="32" />
+            </Object>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="33">
+            <Object
+                 pxsl_line="34">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="Outpost_QEG_Outpost02_Start"
+                     pxsl_line="34" />
+            </Object>
+            <Object
+                 pxsl_line="35">
+                <QuestObject
+                     class="MapMarker"
+                     name="OutPost_Radio"
+                     pxsl_line="35" />
+            </Object>
+            <Object
+                 pxsl_line="36">
+                <QuestObject
+                     class="MapMarker"
+                     name="Outpost_Office"
+                     pxsl_line="36" />
+            </Object>
+            <Object
+                 pxsl_line="37">
+                <QuestObject
+                     class="MapPortal"
+                     name="Portal_Radio_OldTown_To_Radio"
+                     pxsl_line="37" />
+            </Object>
+        </Phase>
+    </Quest>
+    <Quest
+         name="OldTown_Outpost_Start2"
+         parent="OldTown_Outpost_Start"
+         glued="true"
+         pxsl_line="40">
+        <Phase
+             type="AND"
+             name="_"
+             pxsl_line="41">
+            <Path
+                 pxsl_line="42">
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="43">
+                    <Path
+                         pxsl_line="43">
+                        <Phase
+                             type="started quest guard"
+                             name="_"
+                             quest_name="OldTown_OP_Radio"
+                             finished="true"
+                             pxsl_line="44" />
+                    </Path>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="45">
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="46">
+                    <Path
+                         pxsl_line="46">
+                        <Phase
+                             type="started quest guard"
+                             name="_"
+                             quest_name="OldTown_OP_Office"
+                             finished="true"
+                             pxsl_line="47" />
+                    </Path>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="wait guard"
+             name="_"
+             time="1.5"
+             pxsl_line="49" />
+        <Phase
+             type="talk"
+             name="_"
+             speaker="voice2d"
+             group="Player_Outposts_END"
+             show_locations="false"
+             auto_start="true"
+             pxsl_line="50" />
+        <Phase
+             type="set reward"
+             name="_"
+             reward="Outposts_reward"
+             pxsl_line="51" />
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="52">
+            <Destination
+                 pxsl_line="52">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="sp_OT_Outpost_Start"
+                     pxsl_line="52" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- quest __OldTown_Outpost_Office_Kill -parent=__roofgarden_a -->
+        <!-- -= Added to secure kill and remove AIs on exteior -->
+        <!-- -= Still TODO spawnbox per AI becoz ,kill phase dont remember how many AIs player killed in SB -->
+        <!-- ,cnd-quest-started _  OldTown_Outpost_Start -finished=true -->
+        <!-- ,OR _ -->
+            <!-- path -->
+                <!-- ,AND _ -->
+                    <!-- path -->
+                        <!-- ,kill <<Office Outpost_SBC_OP02_SEnemy02>> AISpawnBoxCompound Outpost_SBC_OP02_SEnemy02 -show=false -->
+                    <!-- path -->
+                        <!-- ,kill <<Office Outpost_SBC_OP02_SEnemy02>> AISpawnBoxCompound Outpost_SBC_OP02_SEnemy01 -show=false -->
+            <!-- path -->
+                <!-- ,cnd-quest-started _ OldTown_Outposts_OP02 -finished=true -->
+        <!-- ,checkpoint _ SpawnPoint OutPost_Portal_OutPost02_To_OldTown -->
+    <Quest
+         name="__OldTown_OP_Office_End"
+         parent="OldTown_OP_Office"
+         pxsl_line="69">
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="70">
+            <Object
+                 pxsl_line="71">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="Outpost_QEG_Outpost02_Start"
+                     pxsl_line="71" />
+            </Object>
+            <Object
+                 pxsl_line="72">
+                <QuestObject
+                     class="MapMarker"
+                     name="Outpost_Office"
+                     pxsl_line="72" />
+            </Object>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="74">
+            <Object
+                 pxsl_line="75">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="safezone_outpost_office::SafeZone_qeg"
+                     pxsl_line="75" />
+            </Object>
+            <Object
+                 pxsl_line="76">
+                <QuestObject
+                     class="MapMarker"
+                     name="safezone_outpost_office::SafeZone_mm_active"
+                     pxsl_line="76" />
+            </Object>
+            <Object
+                 pxsl_line="77">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="Office_BlueLights"
+                     pxsl_line="77" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="OutPost - Cleared Office"
+             pxsl_line="78">
+            <Destination
+                 pxsl_line="78">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="OutPost_Portal_OutPost02_To_OldTown"
+                     pxsl_line="78" />
+            </Destination>
+            <DebugPlayerPosition
+                 pxsl_line="79">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="OutPost_Portal_OutPost02_To_OldTown"
+                     pxsl_line="79" />
+            </DebugPlayerPosition>
+        </Phase>
+    </Quest>
+    <!-- quest __OldTown_Outposts_OP03_Cleared -parent=OldTown_Outposts_OP03 -->
+        <!-- ,disable _ QuestEnableGroup Outpost_QEG_Outpost03_Start -->
+        <!-- ,hide-multi _ -->
+            <!-- ,o AppearGroup Outpost_AG_Outpost03_Flags -->
+        <!-- ,set-inactive-outpost <<Set friendly Rais Outpost Hotel>> o_Old_Town_Outpost03 -->
+        <!--  -->
+        <!-- ,checkpoint <<OutPost - Cleared Hotel>> SpawnPoint OutPost_Portal_OutPost03_To_OldTown -->
+            <!-- ,debugpos SpawnPoint OutPost_Portal_OutPost03_To_OldTown -->
+</QuestsDefinitions>

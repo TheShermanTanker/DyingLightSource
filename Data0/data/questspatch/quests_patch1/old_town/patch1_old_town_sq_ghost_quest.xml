@@ -1,0 +1,430 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="old_town"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- A Ghost we Used to Know -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <Quest
+         name="sq_ghost01"
+         parent="Museum01"
+         reward_set="Ghost_reward"
+         quest_giver="Tariq"
+         difficulty="medium"
+         show_quest_log_reminder="true"
+         pxsl_line="9">
+        <Phase
+             type="OR"
+             name="SIDE: Chasing Past - START"
+             pxsl_line="10">
+            <DebugPlayerPosition
+                 pxsl_line="11">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Ghost_SP_01"
+                     pxsl_line="11" />
+            </DebugPlayerPosition>
+            <Path
+                 pxsl_line="12">
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="Tariq"
+                     group="Tariq_Ghost_USE"
+                     show_locations="false"
+                     questgiver_indicator="true"
+                     pxsl_line="13" />
+            </Path>
+            <Path
+                 pxsl_line="14">
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="15">
+                    <Object
+                         pxsl_line="16">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Ghost_lp_Zhanna"
+                             pxsl_line="16" />
+                    </Object>
+                    <Object
+                         pxsl_line="17">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Ghost_lp_Zhanna_03"
+                             pxsl_line="17" />
+                    </Object>
+                    <Object
+                         pxsl_line="18">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Ghost_lp_Zhanna_Sleep"
+                             pxsl_line="18" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="talk"
+                     name="SIDE: Ghost - Helper Zhanna"
+                     speaker="Zhanna"
+                     group="Zhanna_ChasingPastHelper01_USE"
+                     show_locations="false"
+                     auto_start="false"
+                     questgiver_indicator="true"
+                     pxsl_line="19">
+                    <DebugPlayerPosition
+                         pxsl_line="20">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Ghost_SP_01"
+                             pxsl_line="20" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="semaphore"
+                     name="_"
+                     pxsl_line="21" />
+            </Path>
+        </Phase>
+        <!-- special LP is needed -->
+        <!-- ,use-lp _ NPCLifePlace Ghost_LP_Tariq_001_after_talk -->
+            <!-- ,ai HumanAI Tariq -->
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="25">
+            <Object
+                 pxsl_line="26">
+                <QuestObject
+                     class="MapPortal"
+                     name="Ghost_Portal_OldTown_TO_OldTownInteriorA"
+                     pxsl_line="26" />
+            </Object>
+            <Object
+                 pxsl_line="27">
+                <QuestObject
+                     class="NPCLifePlace"
+                     name="Ghost_lp_Zhanna_Sleep"
+                     pxsl_line="27" />
+            </Object>
+            <Object
+                 pxsl_line="28">
+                <QuestObject
+                     class="NPCLifePlace"
+                     name="Ghost_lp_Zhanna"
+                     pxsl_line="28" />
+            </Object>
+            <Object
+                 pxsl_line="29">
+                <QuestObject
+                     class="NPCLifePlace"
+                     name="Ghost_lp_Zhanna_03"
+                     pxsl_line="29" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="30">
+            <Destination
+                 pxsl_line="30">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Ghost_SP_01"
+                     pxsl_line="30" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -leading_portal=Ghost_Portal_OldTownInteriorA_TO_OldTown2 -->
+    <Quest
+         name="sq_ghost04"
+         parent="sq_ghost02"
+         glued="true"
+         pxsl_line="32">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Ghost_OBJ_ReturnToTariqAndMira&amp;"
+             pxsl_line="33">
+            <Path
+                 pxsl_line="33">
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="100"
+                     pxsl_line="34">
+                    <Destination
+                         pxsl_line="34">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Ghost_Portal_OldTownInteriorA_TO_OldTown"
+                             pxsl_line="34" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="35">
+                    <Object
+                         pxsl_line="36">
+                        <QuestObject
+                             class="DialogTrigger"
+                             name="Ghost_DT02"
+                             pxsl_line="36" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="37">
+                    <Object
+                         pxsl_line="37">
+                        <QuestObject
+                             class="GroupingObject"
+                             name="curtains_before_GO"
+                             pxsl_line="37" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="38">
+                    <Object
+                         pxsl_line="38">
+                        <QuestObject
+                             class="GroupingObject"
+                             name="curtains_after_GO"
+                             pxsl_line="38" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="39">
+                    <Destination
+                         pxsl_line="39">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Ghost_Portal_OldTownInteriorA_TO_OldTown"
+                             pxsl_line="39" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="use life place"
+                     name="_"
+                     teleport="true"
+                     pxsl_line="40">
+                    <LifePlace
+                         pxsl_line="40">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Museum_LP_Tariq_After"
+                             pxsl_line="40" />
+                    </LifePlace>
+                    <AI
+                         pxsl_line="41">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Tariq"
+                             pxsl_line="41" />
+                    </AI>
+                </Phase>
+                <Phase
+                     type="set lifeplace"
+                     name="_"
+                     interact_dist="0"
+                     pxsl_line="42">
+                    <LifePlace
+                         pxsl_line="42">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Museum_LP_Tariq_After"
+                             pxsl_line="42" />
+                    </LifePlace>
+                </Phase>
+                <Phase
+                     type="talk"
+                     name="SIDE: Chasing Past - END"
+                     speaker="Tariq"
+                     group="Tariq_Ghost_END"
+                     pxsl_line="43">
+                    <DebugPlayerPosition
+                         pxsl_line="44">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Ghost_SP_01"
+                             pxsl_line="44" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="set lifeplace"
+                     name="_"
+                     interact_level="only_head"
+                     pxsl_line="45">
+                    <LifePlace
+                         pxsl_line="45">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Ghost_LP_Mira_001"
+                             pxsl_line="45" />
+                    </LifePlace>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="46">
+                    <Destination
+                         pxsl_line="46">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Ghost_SP_01"
+                             pxsl_line="46" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <Quest
+         name="sq_ghost05"
+         parent="sq_ghost04"
+         glued="true"
+         pxsl_line="49">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Ghost_OBJ_Reward&amp;"
+             pxsl_line="50">
+            <Path
+                 pxsl_line="50">
+                <Phase
+                     type="set reward"
+                     name="_"
+                     speaker="tariq"
+                     pxsl_line="51" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="52">
+                    <Object
+                         pxsl_line="52">
+                        <QuestObject
+                             class="DoorDI"
+                             name="GhostDoors"
+                             pxsl_line="52" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="53">
+                    <SpecificLocation
+                         pxsl_line="54">
+                        <QuestObject
+                             class="ZoneBox"
+                             name="GhostReward"
+                             pxsl_line="54" />
+                    </SpecificLocation>
+                    <Path
+                         pxsl_line="55">
+                        <Phase
+                             type="use"
+                             name="_"
+                             show_locations="false"
+                             pxsl_line="56">
+                            <Trigger
+                                 pxsl_line="56">
+                                <QuestObject
+                                     class="ComplexContainer"
+                                     name="GhostReward01"
+                                     pxsl_line="56" />
+                            </Trigger>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="57">
+                        <Phase
+                             type="use"
+                             name="_"
+                             show_locations="false"
+                             pxsl_line="58">
+                            <Trigger
+                                 pxsl_line="58">
+                                <QuestObject
+                                     class="ComplexContainer"
+                                     name="GhostReward02"
+                                     pxsl_line="58" />
+                            </Trigger>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="59">
+                    <Destination
+                         pxsl_line="59">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Ghost_SP_01"
+                             pxsl_line="59" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <Quest
+         name="sq_ghost06"
+         parent="sq_ghost04"
+         pxsl_line="61">
+        <Phase
+             type="gather players guard"
+             name="_"
+             distance="-10"
+             show_locations="false"
+             pxsl_line="62">
+            <Destination
+                 pxsl_line="62">
+                <QuestObject
+                     class="NPCLifePlace"
+                     name="Ghost_LP_Mira_001_after"
+                     pxsl_line="62" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="use life place"
+             name="_"
+             teleport="true"
+             pxsl_line="63">
+            <LifePlace
+                 pxsl_line="63">
+                <QuestObject
+                     class="NPCLifePlace"
+                     name="Ghost_LP_Mira_001_after"
+                     pxsl_line="63" />
+            </LifePlace>
+            <AI
+                 pxsl_line="64">
+                <QuestObject
+                     class="HumanAI"
+                     name="Mira"
+                     pxsl_line="64" />
+            </AI>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="65">
+            <Destination
+                 pxsl_line="65">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Ghost_SP_01"
+                     pxsl_line="65" />
+            </Destination>
+        </Phase>
+    </Quest>
+</QuestsDefinitions>

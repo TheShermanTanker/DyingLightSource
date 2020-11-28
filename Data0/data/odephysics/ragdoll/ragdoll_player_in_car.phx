@@ -1,0 +1,155 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Fizyka Ragdoll dla czlowieka
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+!include("ODEPhysicsRagdoll.phx")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+PhysicsParams()
+{
+    QuickStepNumIterations(25)
+    QuickStepSortingMethod(0)
+    
+    AllowContinuousCollisions(0, 0)
+    SetWaterFloat(1.7)
+    
+    SetVelsGate(0.03, 0.4)      // CM2M
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+RagdollParams()
+{
+    Mass(90)
+    StiffenStartTime(-1)
+    ApplyForceMod(1)
+    ApplyForceAddUp(0)
+
+    SynchroOwner(0)
+    AllowAnimationOfOtherElements(1)
+    ExtentsUpdateMode("expand_existing")
+    
+    BlendingOfNonPhysicalBonesTime(0)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+Bones()
+{
+    UseBoneScale("Spine1",  "sphere",   6, 0.9)
+    UseBoneScale("Spine3",  "capsule",  6, 0.9)
+    UseBone("Head",         "sphere",   4)
+    UseBone("L_Upperarm",   "capsule",  4)
+    UseBone("R_Upperarm",   "capsule",  4)
+    UseBone("L_Forearm",    "capsule",  3)
+    UseBone("R_Forearm",    "capsule",  3)
+    UseBoneScale("L_Hand",  "sphere",   2, 1.4)
+    UseBoneScale("R_Hand",  "sphere",   2, 1.4)
+	
+    GeomFrictionMul("L_Forearm", 0.2)
+    GeomFrictionMul("R_Forearm", 0.2)
+    GeomFrictionMul("L_Hand", 0.2)
+    GeomFrictionMul("R_Hand", 0.2)
+    
+    BoneSynchro("L_Upperarm", "l uparmtwist")
+    BoneSynchro("R_Upperarm", "r uparmtwist")
+    
+    FixBone("Spine1", 0)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+Joints()
+{
+    // definicja jointow
+    DefineJoint("Spine1",     "Spine3",     "ball",  0,  1,  0,    1,  0,  0)
+    DefineJoint("Spine3",     "Head",       "ball",  0,  1,  0,    1,  0,  0)
+    DefineJoint("Spine3",     "L_Upperarm", "ball",  0,  0,  1,    1,  0,  0)
+    DefineJoint("Spine3",     "R_Upperarm", "ball",  0,  0,  1,    1,  0,  0)
+    DefineJoint("L_Upperarm", "L_Forearm",  "ball",  0,  1,  0,    1,  0,  0)
+    DefineJoint("R_Upperarm", "R_Forearm",  "ball",  0, -1,  0,    1,  0,  0)
+    DefineJoint("L_Forearm",  "L_Hand",     "hinge", 0,  0,  1,    0,  0,  0)
+    DefineJoint("R_Forearm",  "R_Hand",     "hinge", 0,  0, -1,    0,  0,  0)
+
+    // parametry stopu
+    Set3DOFStops("Spine1 Spine3",        -0.05, 0.05,   -0.05, 0.05,   -0.05, 0.05,  0, 0, 0) 
+    Set3DOFStops("Spine3 Head",          -0.20, 0.10,   -0.10, 0.10,   -0.30, 0.30,  0, 0, 0) 
+    Set3DOFStops("Spine3 L_Upperarm",     0.00, 0.30,   -0.00, 0.30,   -0.35, 0.20,  0, 0, 0) 
+    Set3DOFStops("Spine3 R_Upperarm",    -0.30, 0.00,   -0.00, 0.30,   -0.20, 0.35,  0, 0, 0) 
+    Set3DOFStops("L_Upperarm L_Forearm", -0.15, 0.15,   -0.20, 0.00,   -0.15, 0.05,  0, 0, 0) 
+    Set3DOFStops("R_Upperarm R_Forearm", -0.15, 0.15,   -0.20, 0.00,   -0.05, 0.15,  0, 0, 0) 
+    Set1DOFStops("L_Forearm L_Hand",     -0.20, 0.20,  0) 
+    Set1DOFStops("R_Forearm R_Hand",     -0.20, 0.20,  0) 
+
+    // sily tarcia stawow
+    SetFrictionForceAll(6)
+
+    // wspolczynniki dopuszczalnych bledow stopow
+    SetStopERPAll(0.3)
+
+    // wspolczynniki sprezystosci jointow po osiagnieciu stopow
+    SetStopCFMAll(0.03)
+
+    // wspolczynniki sprezystosci jointow
+    SetCFMAll(0)
+
+    // wspolczynniki tlumienia sily oddalajacej od stopu (1 - brak tlumienia, 0.5 - sila zmniejszona dwukrotnie)
+    SetFudgeFactorAll(0.1)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+ContactParams("Terrain")
+{
+    ZeroFlags()
+    Ignore(1)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+ContactParams("SimpleObjects")
+{
+    ZeroFlags()
+    Ignore(1)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+ContactParams("NonODEObjects")
+{
+    ZeroFlags()
+    Ignore(1)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+ContactParams("ODEObjects")
+{
+    // ZeroFlags()
+    //Ignore(0)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+ContactParams("ODEObjectsSamePhysics")
+{
+    ZeroFlags()
+    Ignore(1)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+ContactParams("ODEObjectsSameOwnerOtherPhysics")
+{
+    ZeroFlags()
+    Ignore(1)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+ContactParams("Water")
+{
+    ZeroFlags()
+    Ignore(1)
+}
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,142 @@
+//----- animacje Stick - Bron Jednoreczna
+
+!include("W_TPP_Stick.scr")
+// ----------------------------------------------
+// -------------------- walk --------------------
+// ----------------------------------------------
+
+
+
+
+SeqTrack("TPP_Stick_Stand",			"tpp_stick_stand.anm2", 	0, 192, 70, 1, 0.4)
+///FORWARD
+SeqTrack("TPP_Stick_WalkForward",	"tpp_stick_walkforward.anm2", 	0 , 53 , 60 , 1, 0.3 )
+{
+    Event(20, VIS_EVENT_STEP_RIGHT, -1)
+    Event(45, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("TPP_Stick_RunForward",	"m_tpp_player_stick_02_run_f.anm2", 	0 , 44 , 60 , 1, 0.3 )
+{
+    Event(14, VIS_EVENT_STEP_RIGHT, -1)
+    Event(34, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("TPP_Stick_SprintForward",	"m_tpp_player_stick_02_sprint_f.anm2", 	0 , 34 , 60 , 1, 0.3 )
+{
+    Event(10, VIS_EVENT_STEP_RIGHT, -1)
+    Event(25, VIS_EVENT_STEP_LEFT, -1)
+}
+///BACKWARD
+SeqTrack("TPP_Stick_WalkBackward",	"tpp_stick_walkbackward.anm2", 	0 , 82 , 60 , 1, 0.3 )
+{
+    Event(26, VIS_EVENT_STEP_LEFT, -1)
+    Event(62, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("TPP_Stick_RunBackward",	"tpp_stick_runbackward.anm2", 	0 , 45 , 60 , 1, 0.3 )
+{
+    Event(15, VIS_EVENT_STEP_LEFT, -1)
+    Event(36, VIS_EVENT_STEP_RIGHT, -1)
+}
+/// RIGHT
+SeqTrack("TPP_Stick_WalkRight",		"tpp_stick_walkright.anm2", 	0 , 72 , 60 , 1, 0.3 )
+{
+    Event(20, VIS_EVENT_STEP_LEFT, -1)
+    Event(52, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("TPP_Stick_RunRight",		"tpp_stick_runright.anm2", 	0 , 47 , 60 , 1, 0.3 )
+{
+    Event(13, VIS_EVENT_STEP_LEFT, -1)
+    Event(37, VIS_EVENT_STEP_RIGHT, -1)
+}
+/// LEFT
+SeqTrack("TPP_Stick_WalkLeft",		"tpp_stick_walkLeft.anm2", 	0 , 65 , 60 , 1, 0.3 )
+{
+    Event(14, VIS_EVENT_STEP_RIGHT, -1)
+    Event(46, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("TPP_Stick_RunLeft",		"tpp_stick_runleft.anm2", 	0 , 46 , 60 , 1, 0.3 )
+{
+    Event(17, VIS_EVENT_STEP_LEFT, -1)
+    Event(36, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+//===================================== Fight Trigger============================================
+
+SeqTrack("TPP_Stick_Melee_Attack_RL_Begin", "tpp_stick_melee_attack.anm2", 0, 15, 60, 1, 0.15)
+SeqTrack("TPP_Stick_Melee_Attack_RL_Empty", "tpp_stick_melee_attack.anm2", 15, 38, 60, 1, 0.15)
+{
+	Event(5, MELEE_SWING_RIGHT, 1) 
+    Event(23, REPL_EARLY_ANIM_END, 1)
+}
+SeqTrack("TPP_Stick_Melee_Attack_LR_Begin", "tpp_stick_melee_attack.anm2", 38, 53, 60, 1, 0.15)
+SeqTrack("TPP_Stick_Melee_Attack_LR_Empty", "tpp_stick_melee_attack.anm2", 53, 76, 60, 1, 0.25)
+{
+	Event(5, MELEE_SWING_RIGHT, 1) 
+    Event(15, REPL_EARLY_ANIM_END, 1)
+}
+SeqTrack("TPP_Stick_Melee_Attack_LR_Empty_Rest", "tpp_stick_melee_attack.anm2", 76, 130, 60, 1, 0.15)
+SeqTrack("TPP_Stick_Melee_Attack_RL_Empty_Rest", "tpp_stick_melee_attack.anm2", 143, 185, 60, 1, 0.15)
+
+SeqTrack("TPP_Stick_Melee_Attack_CH_RL_Begin", 			"TPP_player_attack_charge_RL.anm2"	, 0, 60, 180, 1, 0.8)
+SeqTrack("TPP_Stick_Melee_Attack_CH_RL_Loop", 			"TPP_player_attack_charge_RL.anm2"	, 0, 60, 60, 1, 1.0)
+SeqTrack("TPP_Stick_Melee_Attack_CH_RL_Empty", 			"M_TPP_Stick_Melee_Charge_Attack_R.anm2"        , 0, 22, 30, 1, 0.3) 
+{
+	Event(5, MELEE_SWING_RIGHT, 1) 
+    Event(25, REPL_EARLY_ANIM_END, 1)
+}
+SeqTrack("TPP_Stick_Melee_Attack_CH_RL_Empty_Rest", 			"M_TPP_Stick_Melee_Charge_Attack_R.anm2"        , 22, 60, 30, 1, 0.1) 
+
+SeqTrack("TPP_Stick_Melee_Attack_CH_LR_Begin", 					"TPP_player_attack_charge_LR.anm2"	, 0, 60, 180, 1, 0.8)
+SeqTrack("TPP_Stick_Melee_Attack_CH_LR_Loop", 					"TPP_player_attack_charge_LR.anm2"	, 0, 60, 60, 1, 1.0)
+SeqTrack("TPP_Stick_Melee_Attack_CH_LR_Empty", 					"M_TPP_Stick_Melee_Charge_Attack_L.anm2"        , 0, 22, 30, 1, 0.3) 
+{
+	Event(5, MELEE_SWING_RIGHT, 1) 
+    Event(20, REPL_EARLY_ANIM_END, 1)
+}
+SeqTrack("TPP_Stick_Melee_Attack_CH_LR_Empty_Rest", 		"M_TPP_Stick_Melee_Charge_Attack_L.anm2"        , 22, 60, 30, 1, 0.1) 
+
+SeqTracksBlend("TPP_Stick_Melee_Attack_CH_RL_Empty_Rest", "TPP_Stick_Stand", 0.9) 
+SeqTracksBlend("TPP_Stick_Melee_Attack_CH_LR_Empty_Rest", "TPP_Stick_Stand", 0.9) 
+
+SeqTrackAlias("TPP_Stick_Melee_Attack_UR_Empty", 		"TPP_Stick_Melee_Attack_RL_Empty")
+SeqTrackAlias("TPP_Stick_Melee_Attack_UR_Empty_Rest", 	"TPP_Stick_Melee_Attack_RL_Empty_Rest")
+SeqTrackAlias("TPP_Stick_Melee_Attack_UL_Empty", 		"TPP_Stick_Melee_Attack_LR_Empty")
+SeqTrackAlias("TPP_Stick_Melee_Attack_UL_Empty_Rest", 	"TPP_Stick_Melee_Attack_LR_Empty_Rest")
+
+///
+//SeqTrack("TPP_Stick2Close_Melee_Attack_CH_RL_Begin", 			"M_TPP_player_baseball_attack_02_RL.anm2"        , 10, 15, 30, 1, 0.0) 
+//SeqTrack("TPP_Stick2Close_Melee_Attack_CH_RL_Loop", 	  		"M_TPP_player_baseball_attack_charge_right_02.anm2"        , 0, 30, 30, 1, 0.1) 
+
+//SeqTrack("TPP_Stick2Close_Melee_Attack_CH_RL_Empty_Rest", 		"M_TPP_player_baseball_attack_charge_attack_right.anm2"        , 60, 100, 30, 1, 0.0) 
+
+//SeqTrackAlias("TPP_Stick2Close_Melee_Attack_CH_LR_Begin", 	"TPP_Stick2Close_Melee_Attack_LR_Begin")
+//SeqTrack("TPP_Stick2Close_Melee_Attack_CH_LR_Loop", 			"M_TPP_player_baseball_attack_charge_left_02.anm2"        	, 0, 31, 30, 1, 0.1) 
+
+
+SeqTrack("TPP_Stick_Melee_Attack_UD_Begin", 			"M_TPP_player_baseball_attack_UD.anm2"	, 0, 6, 30, 1, 0.2)
+SeqTrack("TPP_Stick_Melee_Attack_UD_Empty", 			"M_TPP_player_baseball_attack_UD.anm2"	, 6, 18, 30, 1, 0.2)
+{
+	Event(5, MELEE_SWING_RIGHT, 1) 
+    Event(12, REPL_EARLY_ANIM_END, 1)
+}
+SeqTrack("TPP_Stick_Melee_Attack_UD_Empty_Rest",		"M_TPP_player_baseball_attack_UD.anm2"	, 18, 52, 30, 1, 0.1)
+
+
+SeqTrackAlias("TPP_Stick_Melee_Attack_RL_Hit_Middle",		 	"TPP_Stick_Melee_Attack_RL_Empty")
+SeqTrackAlias("TPP_Stick_Melee_Attack_RL_Hit_Middle_Rest", 	"TPP_Stick_Melee_Attack_RL_Empty_Rest")
+
+SeqTrackAlias("TPP_Stick_Melee_Attack_LR_Hit_Middle",		 	"TPP_Stick_Melee_Attack_LR_Empty")
+SeqTrackAlias("TPP_Stick_Melee_Attack_LR_Hit_Middle_Rest", 	"TPP_Stick_Melee_Attack_LR_Empty_Rest")
+
+SeqTrack("TPP_Stick_Melee_Throw_Aim", 			"TPP_player_attack_charge_RL.anm2"		, 0, 60, 60, 1, 0.3)
+SeqTrack("TPP_Stick_Melee_Throw", 			"M_TPP_Universal_Throwing.anm2"		, 0, 30, 30, 1, 0.3)
+{
+	Event(7, PUNCH_HIT, -1)	
+}
+
+SeqTrackAlias("TPP_Stick_Melee_Attack_JA_Begin", "FPP_Stick_Melee_Attack_JA_Begin")
+
+SeqTrack("TPP_Stick_Melee_Attack_ExhaustedPunch", 		"M_TPP_player_baseball_attack_ex.anm2"	, 0, 20, 30, 1, 0.25)
+{
+	Event(5, MELEE_SWING_RIGHT, 1)
+}
+SeqTrack("TPP_Stick_Melee_Attack_ExhaustedPunch_Rest", 		"M_TPP_player_baseball_attack_ex.anm2"	, 20, 100, 30, 1, 0.0)

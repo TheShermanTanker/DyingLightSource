@@ -1,0 +1,1282 @@
+!include("ai_curves.def")
+!include("ai_data.def")
+!include("infected_timing_events.def")
+
+// USAGE EXAMPLE //////////////////////////////////////////////////////////////////////////////////
+// Data("token_0:token_1:...:token_n", duration, "anim_sequence_name", anim_group, weight)
+// token_0:token_1:...:token_n - it defines animation type
+// duration                    - animation duration in [s] from anim_sequence_name (default -2 -> take duration from sequence lenght)
+// anim_group                  - animation group which is taken into consideration while playing next animation
+//                               e.g. if animation with group 6 is played, then while playing next animation,
+//                               animation with group 6 will be preffered to play (default -1 -> no group)
+// weight                      - it defines how often animation will be played if two or more animations are defined with same tokens (default 1)
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////// DATA ///////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+//###############
+//#### DYING ####
+//###############
+//## die:pose:damage_type:body_part:direction:death_type:carried_weapon:kill_weapon:run_dir
+//###############
+
+Data("die:standing:::::::", 0.0, "", -1, 1)
+Data("die:laying:::::::", 0.0, "", -1, 1)
+
+Data("die:standing::::burn:::", -2, "zombie_burn_death_01", -1, 1) //done
+
+Data("die:standing::::electrocution:::", -2, "Infected_death_electric_01", -1, 1) //done
+Data("die:standing:::right:electrocution:::", -2, "m_zombie_death_electrocution_01", -1, 1) //done
+Data("die:standing:::left:electrocution:::", -2, "Infected_death_electric_01", -1, 1) //IK disabled
+Data("die:standing::::poison:::", -2, "Infected_death_toxic_01", -1, 1) //IK disabled
+Data("die:standing:fire:::burn:::", -2, "Infected_death_burn_01", -1, 1) //IK disabled
+
+Data("die:standing::::assassinated:::", -2, "mz_upset_stand_death_decapitated_v01", -1, 1) //done
+Data("die:standing::::assassinated:::", -2, "m_zombie_death_decapitation_01", -1, 1) //done
+// Data("die:standing::::assassinated:::", -2, "infected_death_decapitated_01", -1, 1) //Rafal Praktyki - nie dziala jeszcze przez AI
+
+Data("die:standing::::right_arm_cut:::", -2, "mzi_death_cutoff_rightarm01", -1, 1) //done
+Data("die:standing::::right_arm_cut:::", -2, "mzi_death_cutoff_rightarm02", -1, 1) //done
+Data("die:standing::::right_arm_cut:::", -2, "infected_death_rightarm_cutoff01", -1, 1) //done
+Data("die:standing::::left_arm_cut:::", -2, "infected_death_cutoff_leftarm01", -1, 1) //done
+Data("die:standing::::left_arm_cut:::", -2, "infected_death_leftarm_cutoff01", -1, 1) //done
+Data("die:standing::::left_arm_cut:::", -2, "mzi_death_cutoff_leftarm02", -1, 1) //done
+Data("die:standing::::left_arm_cut:::", -2, "mzi_death_cutoff_leftarm03", -1, 1)	//memory saving
+Data("die:standing::::left_arm_cut:::", -2, "mzi_death_cutoff_leftarm04", -1, 1)  //memory saving
+Data("die:standing::::left_arm_cut:::", -2, "infected_death_cutoff_leftarm", -1, 1) //KBpraktyki
+
+Data("die:standing:::right:decapitated:::", -2, "mz_upset_stand_death_decapitated_v01", -1, 1) //done
+Data("die:standing:::right:decapitated:::", -2, "m_zombie_death_decapitation_01", -1, 1) //done
+Data("die:standing:::right:decapitated:::", -2, "infected_death_head_cutoff_01", -1, 1)
+Data("die:standing:::right:decapitated:::", -2, "infected_death_head_cutoff_02", -1, 1)
+Data("die:standing:::right:decapitated:::", -2, "infected_death_head_cutoff_03", -1, 1)
+Data("die:standing:::left:decapitated:::", -2, "mz_upset_stand_death_decapitated_v01", -1, 1) //done
+Data("die:standing:::left:decapitated:::", -2, "infected_death_head_cutoff_01", -1, 1)
+Data("die:standing:::left:decapitated:::", -2, "infected_death_head_cutoff_02", -1, 1)
+Data("die:standing:::left:decapitated:::", -2, "infected_death_head_cutoff_03", -1, 1)
+Data("die:standing:::up:decapitated:::", -2, "m_zombie_death_decapitation_01", -1, 1) //done
+Data("die:standing:::up:decapitated:::", -2, "infected_death_head_cutoff_01", -1, 1)
+Data("die:standing:::up:decapitated:::", -2, "infected_death_head_cutoff_02", -1, 1)
+Data("die:standing:::up:decapitated:::", -2, "infected_death_head_cutoff_03", -1, 1)
+Data("die:standing:::backward_right:normal:::", -2, "infected_death_left_01_mirror", -1, 1) //IK disabled noIK
+Data("die:standing:::backward_right:normal:::", -2, "infected_death_left_02_mirror", -1, 1) //IK disabled
+Data("die:standing:::backward_right:normal:::", -2, "infected_death_left_03_mirror", -1, 1) //IK disabled
+Data("die:standing:::backward_right:normal:::", -2, "infected_death_right_01", -1, 1) //IK disabled
+Data("die:standing:::backward_right:normal:::", -2, "infected_death_right_01_quick", -1, 1) //IK disabled
+Data("die:standing:::backward_right:normal:::", -2, "infected_death_right_02", -1, 1) //IK disabled
+Data("die:standing:::backward_right:normal:::", -2, "infected_death_right_02_quick", -1, 1) //IK disabled
+
+
+Data("die:standing:::backward_right:normal:::", -2, "infected_death_back_01", -1, 1) //IK disabled
+Data("die:standing:::backward_right:normal:::", -2, "infected_death_back_01_quick", -1, 1) //IK disabled
+Data("die:standing:::backward_right:normal:::", -2, "infected_death_back_02", -1, 1) //IK disabled
+Data("die:standing:::backward_right:normal:::", -2, "infected_death_back_02_quick", -1, 1) //IK disabled
+
+Data("die:standing:::backward_left:normal:::", -2, "infected_death_back_01", -1, 1) //IK disabled
+Data("die:standing:::backward_left:normal:::", -2, "infected_death_back_01_quick", -1, 1) //IK disabled
+Data("die:standing:::backward_left:normal:::", -2, "infected_death_back_02", -1, 1) //IK disabled
+Data("die:standing:::backward_left:normal:::", -2, "infected_death_back_02_quick", -1, 1) //IK disabled
+
+
+
+Data("die:standing:::forward_right:normal:::", -2, "infected_death_left_01_mirror", -1, 1) //IK disabled
+Data("die:standing:::forward_right:normal:::", -2, "infected_death_left_02_mirror", -1, 1) //IK disabled
+Data("die:standing:::forward_right:normal:::", -2, "infected_death_left_03_mirror", -1, 1) //IK disabled
+Data("die:standing:::forward_right:normal:::", -2, "infected_death_right_01", -1, 1) //IK disabled
+Data("die:standing:::forward_right:normal:::", -2, "infected_death_right_02", -1, 1) //IK disabled
+Data("die:standing:::forward_right:normal:::", -2, "infected_death_right_01_quick", -1, 1) //IK disabled
+Data("die:standing:::forward_right:normal:::", -2, "infected_death_right_02_quick", -1, 1) //IK disabled
+Data("die:standing:::right:normal:::", -2, "infected_death_left_01_mirror", -1, 1) //IK disabled
+Data("die:standing:::right:normal:::", -2, "infected_death_left_02_mirror", -1, 1) //IK disabled
+Data("die:standing:::right:normal:::", -2, "infected_death_left_03_mirror", -1, 1) //IK disabled
+Data("die:standing:::right:normal:::", -2, "infected_death_right_01", -1, 1) //IK disabled
+Data("die:standing:::right:normal:::", -2, "infected_death_right_02", -1, 1) //IK disabled
+Data("die:standing:::right:normal:::", -2, "infected_death_right_01_quick", -1, 1) //IK disabled
+Data("die:standing:::right:normal:::", -2, "infected_death_right_02_quick", -1, 1) //IK disabled
+Data("die:standing:::left:normal:::", -2, "infected_death_right_01_mirror", -1, 1) //IK disabled
+Data("die:standing:::left:normal:::", -2, "infected_death_right_01_mirror", -1, 1) //IK disabled
+Data("die:standing:::left:normal:::", -2, "infected_death_left_01", -1, 1) //IK disabled
+Data("die:standing:::left:normal:::", -2, "infected_death_left_02", -1, 1) //IK disabled
+Data("die:standing:::left:normal:::", -2, "infected_death_left_02_quick", -1, 1) //IK disabled
+
+
+Data("die:standing:::left:normal:::", -2, "infected_death_left_03", -1, 1) //IK disabled
+//Data("die:standing:::backward_left:normal:::", -2, "infected_death_right_01_mirror", -1, 1)
+//Data("die:standing:::backward_left:normal:::", -2, "infected_death_left_01", -1, 1)
+//Data("die:standing:::backward_left:normal:::", -2, "infected_death_left_02", -1, 1)
+//Data("die:standing:::backward_left:normal:::", -2, "infected_death_left_03", -1, 1)
+
+Data("die:standing:::backward_left:normal:::", -2, "infected_death_back_01", -1, 1) //IK disabled
+Data("die:standing:::forward_left:normal:::", -2, "infected_death_right_01_mirror", -1, 1) //IK disabled
+Data("die:standing:::forward_left:normal:::", -2, "infected_death_left_01", -1, 1) //IK disabled
+Data("die:standing:::forward_left:normal:::", -2, "infected_death_left_02", -1, 1) //IK disabled
+Data("die:standing:::forward_left:normal:::", -2, "infected_death_left_02_quick", -1, 1) //IK disabled
+Data("die:standing:::forward_left:normal:::", -2, "infected_death_left_03", -1, 1) //IK disabled
+Data("die:standing:::forward:normal:::", -2, "infected_death_left_03", -1, 1) //temp animation
+Data("die:standing:::backward:normal:::", -2, "infected_death_back_01", -1, 1) //temp animation
+Data("die:standing:::backward:normal:::", -2, "infected_death_back_01_quick", -1, 1) //IK disabled
+Data("die:standing:::backward:normal:::", -2, "infected_death_back_02", -1, 1) //IK disabled
+Data("die:standing:::backward:normal:::", -2, "infected_death_back_02_quick", -1, 1) //IK disabled
+
+Data("die:standing:::up:normal:::", -2, "infected_death_left_03", -1, 1) //temp animation
+Data("die:standing:::down:normal:::", -2, "infected_death_right_02", -1, 1) //temp animation
+//reakcje na postrzaly to do!!!!!!!!
+
+//Data("idle:standing::explode:::", -2,   "infected_explode_seq_01", -1, 1) 
+//Data("idle:standing::explode:::", -2,   "infected_explode_seq_02", -1, 1)
+
+
+Data("idle:standing::explode:::", -2,   "infected_explosive_reactions_01", -1, 1)
+Data("idle:standing::explode:::", -2,   "infected_explosive_reactions_02", -1, 1)
+Data("idle:standing::explode:::", -2,   "infected_explosive_reactions_03", -1, 1)
+Data("idle:standing::explode:::", -2,   "infected_explosive_reactions_04", -1, 1)
+
+
+
+//#######################
+//#### HIT REACTIONS ####
+//#######################
+//## hit_reaction:pose:hit_reaction:item_type:damage_type:attacker_pos:body_part:direction:severity
+//#######################
+
+// HIT REACTIONS LIGHT ///////////////////////////////////////////////////////////////////////////
+
+Data("hit_reaction:standing:pain::light::head:backward:light", -2, "Infected_blinded_counter_reaction_01", -1, 1) //done
+Data("hit_reaction:standing:pain::light::head:backward:light", -2, "Infected_blinded_counter_reaction_01", -1, 1)
+Data("hit_reaction:standing:pain::light::head:backward:medium", -2, "Infected_blinded_counter_reaction_01", -1, 1)
+Data("hit_reaction:standing:pain::light::head:backward:heavy", -2, "Infected_blinded_counter_reaction_01", -1, 1)
+Data("hit_reaction:standing:pain::light:::backward:", -2	, "Infected_blinded_counter_reaction_01", -1, 1)
+
+Data("hit_reaction:standing:pain::light::head:backward:light", -2, "volatile_light_hit_reaction_04", -1, 1) //IK disabled
+Data("hit_reaction:standing:pain::light::head:backward:medium", -2, "volatile_light_hit_reaction_04", -1, 1) 
+Data("hit_reaction:standing:pain::light::head:backward:heavy", -2, "volatile_light_hit_reaction_04", -1, 1)
+Data("hit_reaction:standing:pain::light:::backward:", -2, "volatile_light_hit_reaction_04", -1, 1)
+
+
+Data("hit_reaction:standing:pain::light::head:backward:light", -2, "volatile_light_hit_reaction_03", -1, 1)  //IK disabled
+Data("hit_reaction:standing:pain::light::head:backward:medium", -2, "volatile_light_hit_reaction_03", -1, 1)
+Data("hit_reaction:standing:pain::light::head:backward:heavy", -2, "volatile_light_hit_reaction_03", -1, 1)
+Data("hit_reaction:standing:pain::light:::backward:", -2, "volatile_light_hit_reaction_03", -1, 1)
+
+Data("hit_reaction:standing:pain::light::head:backward:light", -2, "volatile_light_hit_reaction_02", -1, 1) //IK disabled
+Data("hit_reaction:standing:pain::light::head:backward:medium", -2, "volatile_light_hit_reaction_02", -1, 1)
+Data("hit_reaction:standing:pain::light::head:backward:heavy", -2, "volatile_light_hit_reaction_02", -1, 1)
+Data("hit_reaction:standing:pain::light:::backward:", -2, "volatile_light_hit_reaction_02", -1, 1)
+
+Data("hit_reaction:standing:pain::light::head:backward:light", -2, "volatile_light_hit_reaction_01", -1, 1) //IK disabled
+Data("hit_reaction:standing:pain::light::head:backward:medium", -2, "volatile_light_hit_reaction_01", -1, 1)
+Data("hit_reaction:standing:pain::light::head:backward:heavy", -2, "volatile_light_hit_reaction_01", -1, 1)
+Data("hit_reaction:standing:pain::light:::backward:", -2, "volatile_light_hit_reaction_01", -1, 1)
+
+// DEFAULT HIT REACTIONS ///////////////////////////////////////////////////////////////////////////
+
+Data("hit_reaction:standing:pain::all:rear:::", -2, "Infected_hit_reaction_forward_heavy_02", -1, 1) //replaced mzi_infected_hit_reaction_forward_heavy_02
+
+Data("hit_reaction:standing:pain::all:::forward:", -2, "Infected_hit_reaction_forward_heavy_02", -1, 1) //replaced mzi_infected_hit_reaction_forward_heavy_02
+Data("hit_reaction:standing:pain::all:::forward:", -2, "Infected_heavy_reaction_torso_front_right_01", -1, 1) //done - sliding
+Data("hit_reaction:standing:pain::all:::right:", -2, "Infected_heavy_reaction_torso_front_right_01", -1, 1) //done - sliding
+
+Data("hit_reaction:standing:pain::all:::left:", -2, "Infected_hit_reaction_left_heavy_02", -1, 1) //replaced mzi_infected_hit_reaction_left_heavy_02
+Data("hit_reaction:standing:pain::all:::right:", -2, "Infected_hit_reaction_right_heavy_01", -1, 1) //replaced mzi_infected_hit_reaction_right_heavy_01
+Data("hit_reaction:standing:pain::all:::down:", -2, "Infected_Stand_Hitreaction_Head_Down_Medium_01", -1, 1) //replaced mzi_stand_hitreaction_head_down_medium_01
+Data("hit_reaction:standing:pain::all:::down:", -2, "Infected_Stand_Hitreaction_Head_Down_Medium_02", -1, 1) //replaced mzi_stand_hitreaction_head_down_medium_02
+
+Data("hit_reaction:standing:pain::all::torso:up:", -2, "Infected_hit_reaction_backward_heavy_01", -1, 1) //replaced mzi_infected_hit_reaction_backward_heavy_01
+Data("hit_reaction:standing:pain::all::torso:up:", -2, "Infected_hit_reaction_forward_heavy_01", -1, 1) //replaced mzi_infected_hit_reaction_forward_heavy_01
+Data("hit_reaction:standing:pain::all::torso:up:", -2, "Infected_Stand_Hitreaction_Head_Back_Strong_01", -1, 1) //done //replaced MZI_Stand_Hitreaction_Head_Back_Strong_01
+Data("hit_reaction:standing:pain::all::torso:up:", -2, "Infected_Stand_Hitreaction_Head_Back_Strong_02", -1, 1)	//done //replaced MZI_Stand_Hitreaction_Head_Back_Strong_02
+Data("hit_reaction:standing:pain::all::torso:down:", -2, "Infected_hit_reaction_backward_heavy_01", -1, 1) //replaced mzi_infected_hit_reaction_backward_heavy_01
+Data("hit_reaction:standing:pain::all::torso:down:", -2, "Infected_hit_reaction_forward_heavy_01", -1, 1) //replaced mzi_infected_hit_reaction_forward_heavy_01
+Data("hit_reaction:standing:pain::all::torso:backward:", -2, "Infected_Stand_Hitreaction_Head_Back_Strong_01", -1, 1) //replaced MZI_Stand_Hitreaction_Head_Back_Strong_01
+Data("hit_reaction:standing:pain::all::torso:backward:", -2, "Infected_Stand_Hitreaction_Head_Back_Strong_02", -1, 1) //replaced MZI_Stand_Hitreaction_Head_Back_Strong_02
+Data("hit_reaction:standing:pain::all::legs:up:", -2, "Infected_hit_reaction_backward_heavy_01", -1, 1) //replaced mzi_infected_hit_reaction_backward_heavy_01
+Data("hit_reaction:standing:pain::all::legs:up:", -2, "Infected_hit_reaction_forward_heavy_01", -1, 1) //replaced mzi_infected_hit_reaction_forward_heavy_01
+Data("hit_reaction:standing:pain::all::legs:down:", -2, "Infected_hit_reaction_backward_heavy_01", -1, 1) //replaced mzi_infected_hit_reaction_backward_heavy_01
+Data("hit_reaction:standing:pain::all::legs:down:", -2, "Infected_hit_reaction_forward_heavy_01", -1, 1) //replaced mzi_infected_hit_reaction_forward_heavy_01
+
+Data("hit_reaction:standing:pain::all::head:forward:", -2, "infected_medium_hitreaction_head_back_01", -1, 1) //done
+Data("hit_reaction:standing:pain::all:rear:head:forward:", -2, "infected_medium_hitreaction_head_back180_01", -1, 1) //done
+Data("hit_reaction:standing:pain::all::head:backward:", -2, "infected_medium_hitreaction_head_front_01", -1, 1) //done
+Data("hit_reaction:standing:pain::all::head:right:", -2, "infected_medium_hitreaction_head_right_01", -1, 1) //done
+Data("hit_reaction:standing:pain::all::head:left:", -2, "infected_medium_hitreaction_head_left_01", -1, 1) //done
+Data("hit_reaction:standing:pain::all::torso:backward:", -2, "infected_medium_hitreaction_torso_front_01", -1, 1) // nie bylo
+Data("hit_reaction:standing:pain::all::torso:forward:", -2, "infected_medium_hitreaction_torso_back_01", -1, 1) // nie bylo
+Data("hit_reaction:standing:pain::all:rear:torso:forward:", -2, "infected_medium_hitreaction_torso_back180_01", -1, 1) // nie bylo
+Data("hit_reaction:standing:pain::all::torso:left:", -2, "infected_medium_hitreaction_torso_left_01", -1, 1) // nie bylo
+Data("hit_reaction:standing:pain::all::torso:right:", -2, "infected_medium_hitreaction_torso_right_01", -1, 1) // nie bylo
+Data("hit_reaction:standing:pain::all::legs:left:", -2, "infected_medium_hitreaction_legs_left_01", -1, 1) // nie bylo
+Data("hit_reaction:standing:pain::all::legs:right:", -2, "infected_medium_hitreaction_legs_right_01", -1, 1) // nie bylo
+Data("hit_reaction:standing:pain::all::legs:forward:", -2, "infected_medium_hitreaction_legs_left_01", -1, 1) // nie bylo
+Data("hit_reaction:standing:pain::all::legs:forward:", -2, "infected_medium_hitreaction_legs_right_01", -1, 1) 
+Data("hit_reaction:standing:pain::all::legs:backward:", -2, "infected_medium_hitreaction_legs_left_01", -1, 1) 
+Data("hit_reaction:standing:pain::all::legs:backward:", -2, "infected_medium_hitreaction_legs_right_01", -1, 1) 
+
+
+Data("hit_reaction:standing:pain::all::head:up:", -2, "Infected_Stand_Hitreaction_Head_Back_Strong_01", -1, 1) //replaced MZI_Stand_Hitreaction_Head_Back_Strong_01
+Data("hit_reaction:standing:pain::all::head:up:", -2, "Infected_Stand_Hitreaction_Head_Back_Strong_02", -1, 1) //replaced MZI_Stand_Hitreaction_Head_Back_Strong_02
+Data("hit_reaction:standing:pain::all::head:right:", -2, "Infected_Stand_Hitreaction_Head_Right_Medium_01", -1, 1)  //replaced MZI_Stand_Hitreaction_Head_Right_Medium_01
+Data("hit_reaction:standing:pain::all::head:right:", -2, "Infected_Stand_Hitreaction_Head_Right_Medium_02", -1, 1)  //replaced MZI_Stand_Hitreaction_Head_Right_Medium_02
+Data("hit_reaction:standing:pain::all::head:left:", -2, "Infected_Stand_Hitreaction_Head_Left_Medium_01", -1, 1) //replaced mzi_stand_hitreaction_head_left_medium_01
+Data("hit_reaction:standing:pain::all::head:left:", -2, "Infected_Stand_Hitreaction_Head_Left_Medium_01", -1, 1) //replaced mzi_stand_hitreaction_head_left_medium_01
+Data("hit_reaction:standing:pain::all::head:backward:", -2, "Infected_Stand_Hitreaction_Head_Back_Strong_01", -1, 1) //replaced MZI_Stand_Hitreaction_Head_Back_Strong_01
+Data("hit_reaction:standing:pain::all::head:backward:", -2, "Infected_Stand_Hitreaction_Head_Back_Strong_02", -1, 1) //replaced MZI_Stand_Hitreaction_Head_Back_Strong_02
+Data("hit_reaction:standing:pain::all::head:forward:", -2, "Infected_Stand_Hitreaction_Head_Down_Medium_01", -1, 1)  //replaced mzi_stand_hitreaction_head_down_medium_01
+
+Data("hit_reaction:standing:pain::::::", -2, "Infected_hit_reaction_backward_heavy_01", -1, 1) //replaced mzi_infected_hit_reaction_backward_heavy_01
+
+// HIT REACTIONS HUMANITY ///////////////////////////////////////////////////////////////////////////
+Data("hit_reaction:standing:humanity::all::head:right:", -2, "mzi_stand_hitreaction_head_right_humanity_medium_01", -1, 1) 
+Data("hit_reaction:standing:humanity::all::head:right:", -2, "Infected_human_reaction_head_right_01", -1, 1) 
+Data("hit_reaction:standing:humanity::all::head:right:", -2, "Infected_human_reaction_head_right_02", -1, 1) 
+Data("hit_reaction:standing:humanity::all::head:left:", -2, "Infected_human_reaction_head_left_01", -1, 1) 
+Data("hit_reaction:standing:humanity::all::head:backward:", -2, "Infected_human_reaction_head_right_02", -1, 1)	
+
+Data("hit_reaction:standing:humanity::all::torso:left:", -2, "Infected_human_reaction_torso_left_01", -1, 1) //noIK
+Data("hit_reaction:standing:humanity::all::torso:right:", -2, "Infected_human_reaction_head_right_02", -1, 1) //noIK
+Data("hit_reaction:standing:humanity::all::torso:right:", -2, "Infected_human_reaction_torso_right_01", -1, 1) //noIK
+Data("hit_reaction:standing:humanity::all::torso:backward:", -2, "Infected_human_reaction_torso_left_01", -1, 1) //noIK
+Data("hit_reaction:standing:humanity::all::torso:backward:", -2, "Infected_human_reaction_head_right_02", -1, 1) //noIK
+Data("hit_reaction:standing:humanity::all::torso:backward:", -2, "Infected_human_reaction_torso_right_01", -1, 1) //noIK
+
+Data("hit_reaction:standing:humanity::all::right_arm:left:", -2, "Infected_human_reaction_torso_left_01", -1, 1) //noIK
+Data("hit_reaction:standing:humanity::all::right_arm:right:", -2, "Infected_human_reaction_head_right_02", -1, 1) //noIK
+Data("hit_reaction:standing:humanity::all::left_arm:right:", -2, "Infected_human_reaction_head_right_02", -1, 1) //noIK
+Data("hit_reaction:standing:humanity::all::left_arm:right:", -2, "Infected_human_reaction_torso_right_01", -1, 1) //noIK
+
+// HIT REACTIONS HUMANITY HEAVY ///////////////////////////////////////////////////////////////////////////
+Data("hit_reaction:standing:humanity::all::head:forward:", -2, "Infected_human_heavy_reaction_torso_front_right_01", -1, 1)  //noIK
+Data("hit_reaction:standing:humanity::all::head:right:", -2, "Infected_human_heavy_reaction_torso_front_right_01", -1, 1) //noIK
+Data("hit_reaction:standing:humanity::all::head:right:", -2, "infected_human_heavy_reaction_right_01", -1, 1)  //new
+Data("hit_reaction:standing:humanity::all::head:left:", -2, "Infected_human_heavy_reaction_left_01", -1, 1)//new
+
+Data("hit_reaction:standing:humanity::all::torso:forward:", -2, "Infected_human_heavy_reaction_torso_front_right_01", -1, 1)
+Data("hit_reaction:standing:humanity::all::torso:right:", -2, "Infected_human_heavy_reaction_torso_front_right_01", -1, 1)
+Data("hit_reaction:standing:humanity::all::torso:right:", -2, "infected_human_heavy_reaction_right_01", -1, 1)//new
+Data("hit_reaction:standing:humanity::all::torso:left:", -2, "Infected_human_heavy_reaction_left_01", -1, 1)//new
+
+Data("hit_reaction:standing:humanity::all::legs:right:", -2, "Infected_human_heavy_reaction_left_01", -1, 1)//new
+Data("hit_reaction:standing:humanity::all::legs:left:", -2, "infected_human_heavy_reaction_right_01", -1, 1)//new
+
+Data("hit_reaction:standing:humanity::all::legs:right:", -2, "infected_medium_hitreaction_legs_left_01", -1, 1)//new
+Data("hit_reaction:standing:humanity::all::legs:left:", -2, "infected_medium_hitreaction_legs_right_01", -1, 1)//new
+
+
+// END HIT REACTIONS HUMANITY ///////////////////////////////////////////////////////////////////////
+
+
+
+/*Data("hit_reaction:standing:pain::all:::backward:medium", -2, "infected_counter_reaction_back_01", -1, 1)
+Data("hit_reaction:standing:pain::all:::backward:medium", -2, "infected_counter_reaction_back_04", -1, 1)
+
+*/
+////////////////////////
+// COUNTER REACTIONS  //
+////////////////////////
+
+Data("hit_reaction:standing:in_dodge_reaction::all:front:::", -2, "infected_dodge_counterattack_back_01", -1, 1) //noIK
+Data("hit_reaction:standing:in_dodge_reaction::all:front:::", -2, "infected_dodge_counterattack_back_02", -1, 1) //noIK
+Data("hit_reaction:standing:in_dodge_reaction::all:front:::", -2, "infected_dodge_counterattack_back_03", -1, 1) //noIK
+Data("hit_reaction:standing:in_dodge_reaction::all:front:::", -2, "infected_dodge_counterattack_back_04", -1, 1) //noIK
+Data("hit_reaction:standing:in_dodge_reaction::all:front:::", -2, "infected_dodge_counterattack_back_05", -1, 1) //noIK
+Data("hit_reaction:standing:in_dodge_reaction::all:front:::", -2, "infected_dodge_counterattack_back_06", -1, 1) //noIK
+Data("hit_reaction:standing:in_dodge_reaction::all:front:::", -2, "infected_dodge_counterattack_back_07", -1, 1) //noIK
+
+Data("hit_reaction:standing:in_dodge_reaction::all::::", -2, "infected_dodge_back_reaction_01", -1, 1) //noIK
+Data("hit_reaction:standing:in_dodge_reaction::all::::", -2, "infected_dodge_back_reaction_02", -1, 1) //noIK
+Data("hit_reaction:standing:in_dodge_reaction::all::::", -2, "infected_dodge_back_reaction_03", -1, 1) //noIK
+Data("hit_reaction:standing:in_dodge_reaction::all::::", -2, "infected_dodge_back_reaction_04", -1, 1) //noIK
+Data("hit_reaction:standing:in_dodge_reaction::all::::", -2, "infected_dodge_back_reaction_05", -1, 1) //noIK
+Data("hit_reaction:standing:in_dodge_reaction::all::::", -2, "infected_dodge_back_reaction_06", -1, 1) //noIK
+Data("hit_reaction:standing:in_dodge_reaction::all::::", -2, "infected_dodge_back_reaction_07", -1, 1) //noIK
+Data("hit_reaction:standing:in_dodge_reaction::all::::", -2, "infected_dodge_back_reaction_08", -1, 1) //noIK
+
+Data("hit_reaction:standing:in_dodge_reaction::all:front:::", -2, "infected_dodge_back_reaction_01", -1, 1) //noIK
+Data("hit_reaction:standing:in_dodge_reaction::all:front:::", -2, "infected_dodge_back_reaction_02", -1, 1) //noIK
+Data("hit_reaction:standing:in_dodge_reaction::all:front:::", -2, "infected_dodge_back_reaction_03", -1, 1) //noIK
+Data("hit_reaction:standing:in_dodge_reaction::all:front:::", -2, "infected_dodge_back_reaction_04", -1, 1) //noIK
+Data("hit_reaction:standing:in_dodge_reaction::all:front:::", -2, "infected_dodge_back_reaction_05", -1, 1) //noIK
+Data("hit_reaction:standing:in_dodge_reaction::all:front:::", -2, "infected_dodge_back_reaction_06", -1, 1) //noIK
+Data("hit_reaction:standing:in_dodge_reaction::all:front:::", -2, "infected_dodge_back_reaction_07", -1, 1) //noIK
+Data("hit_reaction:standing:in_dodge_reaction::all:front:::", -2, "infected_dodge_back_reaction_08", -1, 1) //noIK
+
+
+
+
+//////////////////
+//--PLAYER BACK--
+//////////////////
+Data("hit_reaction:standing:counter_attack::all:rear::left:", -2, "infected_counter_reaction_right_90L_01", -1, 1) //noIK
+Data("hit_reaction:standing:counter_attack::all:rear::right:", -2, "infected_counter_reaction_left_90R_01", -1, 1) //noIK
+
+//left
+Data("hit_reaction:standing:counter_attack::all:rear::left:", -2, "infected_counter_reaction_left_90R_01", -1, 1) //noIK
+Data("hit_reaction:standing:counter_attack::all:::left:", -2, "infected_counter_reaction_front_medium_01", -1, 1) //IK disabled
+
+//////////////////
+//--PLAYER FRONT--
+//////////////////
+
+//torso left
+Data("hit_reaction:standing:counter_attack::all:front:torso:left:", -2, "infected_counter_reaction_left_03", -1, 1) //noIK
+Data("hit_reaction:standing:counter_attack::all:front:torso:left:", -2, "infected_counter_reaction_left_04", -1, 1) //noIK
+Data("hit_reaction:standing:counter_attack::all:front:torso:left:", -2, "infected_dodge_counterattack_left_01", -1, 1) //noIK
+Data("hit_reaction:standing:counter_attack::all:front:torso:left:", -2, "infected_dodge_counterattack_left_02", -1, 1) //noIK
+Data("hit_reaction:standing:counter_attack::all:front:torso:left:", -2, "infected_dodge_counterattack_back_04", -1, 1) //noIK
+
+//torso right
+Data("hit_reaction:standing:counter_attack::all:front:torso:right:", -2, "infected_counter_reaction_right_03", -1, 1) //noIK
+Data("hit_reaction:standing:counter_attack::all:front:torso:right:", -2, "infected_counter_reaction_right_03", -1, 1) //noIK
+Data("hit_reaction:standing:counter_attack::all:front:torso:right:", -2, "infected_counter_reaction_right_04", -1, 1) //noIK
+Data("hit_reaction:standing:counter_attack::all:front:torso:right:", -2, "infected_counter_reaction_front_medium_01", -1, 1) //IK disabled
+//Data("hit_reaction:standing:counter_attack::all:front:torso:right:", -2, "Infected_counter_reaction_head_right_360_01", -1, 1)
+Data("hit_reaction:standing:counter_attack::all:front:torso:right:", -2, "infected_dodge_counterattack_right_01", -1, 1) //noIK
+Data("hit_reaction:standing:counter_attack::all:front:torso:right:", -2, "infected_dodge_counterattack_right_02", -1, 1) //noIK
+Data("hit_reaction:standing:counter_attack::all:front:torso:right:", -2, "infected_dodge_counterattack_back_03", -1, 1) //noIK
+Data("hit_reaction:standing:counter_attack::all:front:torso:right:", -2, "infected_dodge_counterattack_back_05", -1, 1) //noIK
+
+//head right
+Data("hit_reaction:standing:counter_attack::all:front:head:right:", -2, "Infected_counter_reaction_head_right_medium_01", -1, 1) //noIK
+Data("hit_reaction:standing:counter_attack::all:front:head:right:", -2, "Infected_counter_reaction_head_right_medium_02", -1, 1) //noIK
+Data("hit_reaction:standing:counter_attack::all:front:head:right:", -2, "Infected_counter_reaction_head_right_medium_03", -1, 1) //noIK
+//Data("hit_reaction:standing:counter_attack::all:front:head:right:", -2, "Infected_counter_reaction_head_right_360_01", -1, 1)
+Data("hit_reaction:standing:counter_attack::all:front:head:right:", -2, "infected_dodge_counterattack_right_01", -1, 1)
+Data("hit_reaction:standing:counter_attack::all:front:head:right:", -2, "infected_dodge_counterattack_right_02", -1, 1)
+Data("hit_reaction:standing:counter_attack::all:front:head:right:", -2, "infected_dodge_counterattack_back_03", -1, 1)
+Data("hit_reaction:standing:counter_attack::all:front:head:right:", -2, "infected_dodge_counterattack_back_05", -1, 1)
+
+//head left
+Data("hit_reaction:standing:counter_attack::all:front:head:left:", -2, "infected_counter_reaction_left_03", -1, 1) //noIK
+Data("hit_reaction:standing:counter_attack::all:front:head:left:", -2, "infected_counter_reaction_left_04", -1, 1) //noIK
+Data("hit_reaction:standing:counter_attack::all:front:head:left:", -2, "Infected_counter_reaction_head_left_medium_01", -1, 1) //noIK
+Data("hit_reaction:standing:counter_attack::all:front:head:left:", -2, "infected_dodge_counterattack_left_01", -1, 1)
+Data("hit_reaction:standing:counter_attack::all:front:head:left:", -2, "infected_dodge_counterattack_left_02", -1, 1)
+Data("hit_reaction:standing:counter_attack::all:front:head:left:", -2, "infected_dodge_counterattack_back_04", -1, 1)
+
+//down
+Data("hit_reaction:standing:counter_attack::all:::down:", -2, "infected_counter_reaction_left_03", -1, 1) //noIK
+ ///
+//////////////////
+//--PLAYER LEFT--/
+//////////////////
+
+//torso left
+Data("hit_reaction:standing:counter_attack::all:left:torso:left:", -2, "infected_counter_reaction_left_03", -1, 1) //noIK
+//torso right
+Data("hit_reaction:standing:counter_attack::all:left:torso:right:", -2, "infected_counter_reaction_right_04", -1, 1) //noIK
+//head right
+Data("hit_reaction:standing:counter_attack::all:left:head:right:", -2, "infected_counter_reaction_right_03", -1, 1) //noIK
+//head left
+Data("hit_reaction:standing:counter_attack::all:left:head:left:", -2, "infected_counter_reaction_left_04", -1, 1) //noIK
+
+///////////////////
+//--PLAYER RIGHT--/
+///////////////////
+
+//torso left
+Data("hit_reaction:standing:counter_attack::all:right:torso:left:", -2, "infected_counter_reaction_right_03", -1, 1) // noIK
+//torso right
+Data("hit_reaction:standing:counter_attack::all:right:torso:right:", -2, "infected_counter_reaction_left_04", -1, 1) //noIK
+//head right 
+Data("hit_reaction:standing:counter_attack::all:right:head:right:", -2, "infected_counter_reaction_left_03", -1, 1) //noIK
+//head left
+Data("hit_reaction:standing:counter_attack::all:right:head:left:", -2, "infected_counter_reaction_right_03", -1, 1) //noIK
+//legs
+Data("hit_reaction:standing:counter_attack::all::legs::", -2, "infected_counter_reaction_left_03", -1, 1) //noIK
+
+
+
+//Counter kick:
+//Data("hit_reaction:standing:counter_attack::all:front:torso:backward:", -2, "infected_medium_hitreaction_torso_right_01", -1, 1)
+//Data("hit_reaction:standing:counter_attack::all:front:torso:backward:", -2, "infected_medium_hitreaction_torso_left_01", -1, 1)
+Data("hit_reaction:standing:counter_attack::all:front:torso:backward:", -2, "infected_medium_hitreaction_torso_front_01", -1, 1) //done
+
+//Data("hit_reaction:standing:counter_attack::all:front:head:backward:", -2, "infected_medium_hitreaction_head_left_01", -1, 1)
+//Data("hit_reaction:standing:counter_attack::all:front:head:backward:", -2, "infected_medium_hitreaction_head_right_01", -1, 1)
+Data("hit_reaction:standing:counter_attack::all:front:head:backward:", -2, "infected_medium_hitreaction_head_front_01", -1, 1) //done
+
+
+//Data("hit_reaction:standing:counter_attack::all:::right:", -2, "infected_counter_reaction_right_03", -1, 1)
+//Data("hit_reaction:standing:counter_attack::all:::left:", -2, "infected_counter_reaction_left_03", -1, 1)
+//Data("hit_reaction:standing:counter_attack::all::head::", -2, "infected_counter_reaction_right_03", -1, 1)
+//Data("hit_reaction:standing:counter_attack::all::head::", -2, "infected_counter_reaction_left_03", -1, 1)
+//Data("hit_reaction:standing:counter_attack::all::torso::", -2, "infected_counter_reaction_left_03", -1, 1)
+//Data("hit_reaction:standing:counter_attack::all::torso::", -2, "infected_counter_reaction_right_03", -1, 1)
+//Data("hit_reaction:standing:counter_attack::all::legs::", -2, "infected_counter_reaction_right_03", -1, 1)
+//Data("hit_reaction:standing:counter_attack::all:::down:", -2, "infected_counter_reaction_right_03", -1, 1)
+//Data("hit_reaction:standing:counter_attack::all:::down:", -2, "infected_counter_reaction_left_03", -1, 1)
+
+Data("hit_reaction:standing:counter_berserk::all:::forward:", -2, "Infected_heavy_reaction_torso_front_right_01", -1, 1) //done
+Data("hit_reaction:standing:counter_berserk::all:::right:", -2, "Infected_heavy_reaction_torso_front_right_01", -1, 1) //done
+
+Data("hit_reaction:standing:counter_berserk::all:::right:", -2, "Infected_counter_reaction_head_right_360_01", -1, 1) //noIK
+Data("hit_reaction:standing:counter_berserk::all:::left:", -2, "Infected_counter_reaction_head_left_360_01", -1, 1) //noIK
+Data("hit_reaction:standing:counter_berserk::all:::down:", -2, "infected_counter_reaction_right_03", -1, 1) //noIK
+Data("hit_reaction:standing:counter_berserk::all:::down:", -2, "infected_counter_reaction_left_03", -1, 1) //noIK
+Data("hit_reaction:standing:counter_berserk::all:::up:", -2, "infected_counter_reaction_left_03", -1, 1) //noIK
+Data("hit_reaction:standing:counter_berserk::all:::forward:", -2, "infected_counter_reaction_left_03", -1, 1) //noIK
+Data("hit_reaction:standing:counter_berserk::all:::down:", -2, "infected_counter_reaction_left_03", -1, 1) //noIK
+Data("hit_reaction:standing:counter_berserk::all:::backward:", -2, "Infected_counter_reaction_kick_01", -1, 1) //noIK
+//Data("hit_reaction:standing:counter_berserk::all:::backward:", -2, "infected_counter_reaction_right_01", -1, 1) brzydki poczatek
+Data("hit_reaction:standing:counter_berserk::all::torso:right:", -2, "Infected_heavy_reaction_torso_front_right_01", -1, 1) //done
+Data("hit_reaction:standing:counter_berserk::all::torso:left:", -2, "Infected_counter_reaction_head_left_360_01", -1, 1) //noIK
+Data("hit_reaction:standing:counter_berserk::all::head:right:", -2, "infected_counter_reaction_right_03", -1, 1) //noIK
+Data("hit_reaction:standing:counter_berserk::all::head:left:", -2, "infected_counter_reaction_left_03", -1, 1) //noIK
+Data("hit_reaction:standing:counter_berserk::all::legs:right:", -2, "infected_counter_reaction_right_03", -1, 1) //noIK
+Data("hit_reaction:standing:counter_berserk::all::legs:left:", -2, "infected_counter_reaction_left_03", -1, 1) //noIK
+
+Data("hit_reaction:standing:counter_360::all:::right:", -2, "Infected_counter_reaction_head_right_360_01", -1, 1) //to verify direction!!
+Data("hit_reaction:standing:counter_360::all:::left:", -2, "Infected_counter_reaction_head_left_360_01", -1, 1) //to verify direction!!
+Data("hit_reaction:standing:counter_360::all:::down:", -2, "infected_counter_reaction_back_04", -1, 1) //noIK
+Data("hit_reaction:standing:counter_360::all:::up:", -2, "infected_counter_reaction_back_04", -1, 1) //noIK
+Data("hit_reaction:standing:counter_360::all:::backward:", -2, "infected_counter_reaction_back_04", -1, 1) //noIK
+Data("hit_reaction:standing:counter_360::all:::forward:", -2, "infected_counter_reaction_back_04", -1, 1) //noIK
+
+Data("hit_reaction:standing:counter_360::all:::down:", -2, "infected_counter_reaction_back_02", -1, 1) //noIK
+Data("hit_reaction:standing:counter_360::all:::up:", -2, "infected_counter_reaction_back_02", -1, 1)
+Data("hit_reaction:standing:counter_360::all:::backward:", -2, "infected_counter_reaction_back_02", -1, 1)
+Data("hit_reaction:standing:counter_360::all:::forward:", -2, "infected_counter_reaction_back_02", -1, 1)
+
+Data("hit_reaction:standing:counter_360::all:::down:", -2, "infected_counter_reaction_back_01", -1, 1) //noIK
+Data("hit_reaction:standing:counter_360::all:::up:", -2, "infected_counter_reaction_back_01", -1, 1)
+Data("hit_reaction:standing:counter_360::all:::backward:", -2, "infected_counter_reaction_back_01", -1, 1)
+Data("hit_reaction:standing:counter_360::all:::forward:", -2, "infected_counter_reaction_back_01", -1, 1)
+
+Data("hit_reaction:standing:counter_push::all:::left:", -2, "mzi_infected_hit_reaction_left_counter_push_01", -1, 1) //done
+Data("hit_reaction:standing:counter_push::all:::left:", -2, "mzi_infected_hit_reaction_left_counter_push_02", -1, 1) //done
+Data("hit_reaction:standing:counter_push::all:::left:", -2, "mzi_infected_hit_reaction_left_counter_push_03", -1, 1) //done
+Data("hit_reaction:standing:counter_push::all:::right:", -2, "mzi_infected_hit_reaction_right_counter_push_01", -1, 1) //done
+Data("hit_reaction:standing:counter_push::all:::right:", -2, "mzi_infected_hit_reaction_right_counter_push_02", -1, 1) //done - glowa
+Data("hit_reaction:standing:counter_push::all:::up:", -2, "mzi_infected_hit_reaction_up_counter_push_01", -1, 1) //done - palce
+Data("hit_reaction:standing:counter_push::all:::up:", -2, "mzi_infected_hit_reaction_up_counter_push_02", -1, 1) //done
+Data("hit_reaction:standing:counter_push::all:::backward:", -2, "mzi_infected_hit_reaction_up_counter_push_01", -1, 1) //done
+Data("hit_reaction:standing:counter_push::all:::backward:", -2, "mzi_infected_hit_reaction_up_counter_push_02", -1, 1) //done
+Data("hit_reaction:standing:counter_push::all:::down:", -2, "mzi_infected_hit_reaction_down_counter_push_01", -1, 1) //done
+Data("hit_reaction:standing:counter_push::all:::down:", -2, "mzi_infected_hit_reaction_down_counter_push_02", -1, 1) //done
+Data("hit_reaction:standing:counter_push::all:::backward:", -2, "mzi_infected_hit_reaction_down_counter_push_01", -1, 1) //done
+Data("hit_reaction:standing:counter_push::all:::backward:", -2, "mzi_infected_hit_reaction_down_counter_push_02", -1, 1) //done
+
+// bullet heavy reactions
+Data("hit_reaction:standing:pain::bullet::torso:backward_right:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:pain::bullet::torso:backward_left:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:pain::bullet::torso:forward_right:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:pain::bullet::torso:forward_left:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+
+Data("hit_reaction:standing:pain::bullet::legs:backward_right:", -2, "Infected_heavy_shotreaction_right_01", -1, 1) //noIK
+Data("hit_reaction:standing:pain::bullet::legs:backward_left:", -2, "infected_counter_reaction_left_03", -1, 1) //noIK
+Data("hit_reaction:standing:pain::bullet::legs:forward_right:", -2, "infected_counter_reaction_right_03", -1, 1) //noIK
+Data("hit_reaction:standing:pain::bullet::legs:forward_left:", -2, "Infected_heavy_shotreaction_right_01", -1, 1) //noIK
+
+Data("hit_reaction:standing:pain::bullet::head:backward_right:", -2, "Infected_heavy_shotreaction_right_01", -1, 1) //noIK
+Data("hit_reaction:standing:pain::bullet::head:backward_left:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:pain::bullet::head:forward_right:", -2, "Infected_heavy_shotreaction_right_01", -1, 1) //noIK
+Data("hit_reaction:standing:pain::bullet::head:forward_left:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:pain::bullet::torso:forward_left:", -2, "Infected_heavy_shotreaction_right_01", -1, 1) //noIK
+Data("hit_reaction:standing:pain::bullet::torso:forward_left:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:pain::bullet::torso:forward:", -2, "Infected_heavy_shotreaction_right_01", -1, 1) //noIK
+Data("hit_reaction:standing:pain::bullet::head:forward:", -2, "Infected_heavy_shotreaction_right_01", -1, 1) //noIK
+
+Data("hit_reaction:standing:pain::bullet::head:backward:", -2, "Infected_heavy_shotreaction_right_01", -1, 1) //noIK
+Data("hit_reaction:standing:pain::bullet::head:backward_left:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:pain::bullet::head:backward_right:", -2, "Infected_heavy_shotreaction_right_01", -1, 1) //noIK
+Data("hit_reaction:standing:pain::bullet::head:backward:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:pain::bullet::head:backward_left:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:pain::bullet::head:backward_right:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+
+
+Data("hit_reaction:standing:pain::bullet::torso:backward_right:", -2, "Infected_heavy_shotreaction_right_01", -1, 1) //noIK
+Data("hit_reaction:standing:pain::bullet::torso:backward:", -2, "Infected_heavy_shotreaction_right_01", -1, 1) //noIK
+Data("hit_reaction:standing:pain::bullet::head:backward_left:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:pain::bullet::torso:backward_right:", -2, "infected_counter_reaction_right_03", -1, 1) //noIK
+Data("hit_reaction:standing:pain::bullet::torso:backward:", -2, "infected_counter_reaction_right_03", -1, 1) //noIK
+Data("hit_reaction:standing:pain::bullet::torso:backward_right:", -2, "Infected_heavy_shotreaction_right_01", -1, 1) //noIK
+Data("hit_reaction:standing:pain::bullet::torso:backward:", -2, "Infected_heavy_shotreaction_right_01", -1, 1) //noIK
+Data("hit_reaction:standing:pain::bullet::head:backward_left:", -2, "Infected_heavy_shotreaction_right_01", -1, 1) //noIK
+Data("hit_reaction:standing:pain::bullet::torso:backward_right:", -2, "Infected_heavy_shotreaction_right_01", -1, 1) //noIK
+Data("hit_reaction:standing:pain::bullet::torso:backward:", -2, "Infected_heavy_shotreaction_right_01", -1, 1) //noIK
+
+Data("hit_reaction:standing:pain::bullet::torso:backward_right:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:pain::bullet::torso:backward:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:pain::bullet::head:backward_left:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:pain::bullet::torso:backward_right:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:pain::bullet::torso:backward:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:pain::bullet::torso:backward_right:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:pain::bullet::torso:backward:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:pain::bullet::head:backward_left:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:pain::bullet::torso:backward_right:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:pain::bullet::torso:backward:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+
+Data("hit_reaction:standing:counter_attack::bullet::torso:backward_right:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:counter_attack::bullet::torso:backward:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:counter_attack::bullet::head:backward_left:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:counter_attack::bullet::torso:backward_right:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:counter_attack::bullet::torso:backward:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:counter_attack::bullet::torso:backward_right:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:counter_attack::bullet::torso:backward:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:counter_attack::bullet::head:backward_left:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:counter_attack::bullet::torso:backward_right:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:counter_attack::bullet::torso:backward:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+
+Data("hit_reaction:standing:counter_attack::bullet:::backward:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:counter_attack::bullet:::backward_right:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:counter_attack::bullet:::forward:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:counter_attack::bullet:::forward_left:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:counter_attack::bullet:::forward_right:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:counter_attack::bullet:::backward_left:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+
+Data("hit_reaction:standing:counter_attack::bullet:::backward:", -2, "Infected_heavy_shotreaction_right_01", -1, 1) //noIK
+Data("hit_reaction:standing:counter_attack::bullet:::backward_right:", -2, "Infected_heavy_shotreaction_right_01", -1, 1) //noIK
+Data("hit_reaction:standing:counter_attack::bullet:::forward:", -2, "Infected_heavy_shotreaction_right_01", -1, 1) //noIK
+Data("hit_reaction:standing:counter_attack::bullet:::forward_left:", -2, "Infected_heavy_shotreaction_right_01", -1, 1) //noIK
+Data("hit_reaction:standing:counter_attack::bullet:::forward_right:", -2, "Infected_heavy_shotreaction_right_01", -1, 1) //noIK
+Data("hit_reaction:standing:counter_attack::bullet:::backward_left:", -2, "Infected_heavy_shotreaction_right_01", -1, 1) //noIK
+
+Data("hit_reaction:standing:counter_attack::bullet:::left:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:counter_attack::bullet:::right:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+
+Data("hit_reaction:standing:counter_attack::bullet:::left:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+Data("hit_reaction:standing:counter_attack::bullet:::right:", -2, "Infected_heavy_shotreaction_right_02", -1, 1) //done
+
+//#############################
+//#### COLLISION REACTIONS ####
+//#############################
+//## collision_reaction:pose:direction:item_type:severity
+//#######################
+
+Data("collision_reaction:standing:down::", -2, "mzi_fall_from_edge", -1, 1) //noIK
+
+//###########################
+//#### RECOVER FROM FALL ####
+//###########################
+//## recover_from_fall:is_standing
+//###########################
+
+//Data("recover_from_fall:standing:", -2, "mzi_standup_rightside01", -1, 1)
+//Data("recover_from_fall:standing:", -2, "mzi_standup_rightside02", -1, 1)
+
+//Data("recover_from_fall:standing:", -2, "mzi_standup_leftside01", -1, 1)
+//Data("recover_from_fall:standing:", -2, "mzi_standup_leftside02", -1, 1)
+
+
+//Data("recover_from_fall:standing:", -2, "mzi_standup_stomach01", -1, 1)
+//Data("recover_from_fall:standing:", -2, "mzi_standup_stomach02", -1, 1)
+//Data("recover_from_fall:standing:", -2, "mzi_standup_stomach03", -1, 1)
+
+//Data("recover_from_fall:standing:", -2, "mzi_standup_back01", -1, 1)
+//Data("recover_from_fall:standing:", -2, "mzi_standup_back02", -1, 1)
+
+Data("recover_from_fall:standing:", -2, "infected_standup_front_01", -1, 1) //done
+Data("recover_from_fall:standing:", -2, "infected_standup_back_01", -1, 1) //done
+Data("recover_from_fall:standing:", -2, "infected_standup_back_02", -1, 1) //done
+Data("recover_from_fall:standing:", -2, "infected_standup_left_01", -1, 1) //done
+//Data("recover_from_fall:standing:", -2, "infected_standup_left_02", -1, 1)
+Data("recover_from_fall:standing:", -2, "infected_standup_right_01", -1, 1) //done
+//Data("recover_from_fall:standing:", -2, "infected_standup_front_back_01", -1, 1)
+
+
+
+//##################
+//#### ALARMING ####
+//##################
+//## alarming:is_standing:alarm_level:angle:direction:was_moving
+//##################
+
+//Data("alarming:standing::alarmed:::false", -2, "mzi_alarmed_taunt_01", -1, 1)
+//Data("alarming:standing::alarmed:::false", -2, "mzi_alarmed_taunt_02", -1, 1)
+//Data("alarming:standing::alarmed:::false", -2, "mzi_alarmed_taunt_03", -1, 1)
+//Data("alarming:standing::alarmed:::false", -2, "mzi_alarmed_taunt_04", -1, 1)
+
+Data("alarming:standing::alarmed:::false", -2, "infected_taunt_01", -1, 1) //done
+Data("alarming:standing::alarmed:::false", -2, "infected_taunt_02", -1, 1) //done
+Data("alarming:standing::alarmed:::false", -2, "infected_taunt_03", -1, 1) //done
+Data("alarming:standing::alarmed:::false", -2, "infected_taunt_04", -1, 1) //done
+Data("alarming:standing::alarmed:::false", -2, "Infected_taunt_06", -1, 1) //done
+
+
+
+//################
+//#### ATTACK ####
+//################
+//## attack:pose:item_type:attack_type:direction:attack_range:should_change_pose
+//################
+
+Data("attack:standing::decoy_long:::", -2, "infected_taunt_02", -1, 1)
+Data("attack:standing::decoy_short:::", -2, "infected_taunt_04", -1, 1)
+Data("attack:standing::decoy_short_back_left:::", -2, "Infected_decoy_reaction_short_left_01", -1, 1) //done
+Data("attack:standing::decoy_short_back_right:::", -2, "Infected_decoy_reaction_short_right_01", -1, 1) //done
+
+Data("attack:standing::fake_low:::", -2, "infected_taunt_06", -1, 1) //done
+
+Data("attack:standing::fake_high:::", -2, "Infected_fake_attack_04", -1, 1) //done
+Data("attack:standing::fake_high:::", -2, "Infected_fake_attack_05", -1, 1) //done
+Data("attack:standing::fake_high:::", -2, "Infected_fake_attack_06_short", -1, 1) //done
+Data("attack:standing::fake_high:::", -2, "Infected_fake_attack_07", -1, 1) //done
+Data("attack:standing::fake_short:::", -2, "Infected_fake_attack_06_short", -1, 1) //done
+
+Data("attack:standing::stinger:::", -2, "mz_upset_attack_stinger_f_v01", -1, 1) //done
+
+Data("attack:standing::taunt:::", -2, "infected_taunt_01", -1, 1) //done
+Data("attack:standing::taunt:::", -2, "infected_taunt_02", -1, 1) //done
+Data("attack:standing::taunt:::", -2, "infected_taunt_03", -1, 1) //done
+Data("attack:standing::taunt:::", -2, "infected_taunt_04", -1, 1) //done
+
+Data("attack:standing::push:::", -2, "mzi_attack_push", -1, 1) //done
+
+Data("attack:standing::pursuit_slow:::", -2, "Infected_attack_slow_8m_from_sprint_01", -1, 1) //noIK
+Data("attack:standing::pursuit_normal:::", -2, "Infected_attack_8m_from_sprint_01", -1, 1) //noIK
+Data("attack:standing::pursuit_fast:::", -2, "Infected_attack_fast_8m_from_sprint_01", -1, 1) //noIK
+
+Data("attack:standing::right_arm_strike:::", -2, "Infected_crouching_attack_Right_01", -1, 1) //done
+Data("attack:standing::right_arm_strike:::", -2, "Infected_crouching_attack_Right_02", -1, 1) //done
+Data("attack:standing::right_arm_strike:::", -2, "Infected_crouching_attack_Right_03", -1, 1) //done
+Data("attack:standing::left_arm_strike:::", -2, "Infected_crouching_attack_Left_01", -1, 1) //done
+Data("attack:standing::left_arm_strike:::", -2, "Infected_crouching_attack_Left_02", -1, 1) //done
+Data("attack:standing::left_arm_strike:::", -2, "Infected_crouching_attack_Left_03", -1, 1) //done
+
+Data("attack:standing::strike_from_stand::2m:", -2, "infected_attack_from_stand_04", -1, 1) //noIK
+
+Data("attack:standing::strike_from_stand::2m:", -2, "Infected_crouching_attack_Right_01", -1, 1) //done
+Data("attack:standing::strike_from_stand::2m:", -2, "Infected_crouching_attack_Right_02", -1, 1) //done
+Data("attack:standing::strike_from_stand::2m:", -2, "Infected_crouching_attack_Right_03", -1, 1) //done
+Data("attack:standing::strike_from_stand::2m:", -2, "Infected_crouching_attack_Left_01", -1, 1) //done
+Data("attack:standing::strike_from_stand::2m:", -2, "Infected_crouching_attack_Left_02", -1, 1) //done
+Data("attack:standing::strike_from_stand::2m:", -2, "Infected_crouching_attack_Left_03", -1, 1) //done
+
+Data("attack:standing::strike_from_stand::3m:", -2, "infected_attack_from_stand_01", -1, 1) //IK disabled noIK
+Data("attack:standing::strike_from_stand::3m:", -2, "infected_attack_from_stand_02", -1, 1) //IK disabled noIK
+Data("attack:standing::strike_from_stand::3m:", -2, "infected_attack_from_stand_03", -1, 1) //IK disabled noIK
+
+
+Data("attack:standing::attack_from_move::2m:", -2, "infected_attack_from_move_Right_01", -1, 1) //done
+Data("attack:standing::attack_from_move::2m:", -2, "infected_attack_from_move_Left_01", -1, 1) //done
+Data("attack:standing::attack_from_move::2m:", -2, "infected_attack_from_move_Right_02", -1, 1) //done
+Data("attack:standing::attack_from_move::2m:", -2, "infected_attack_from_move_Left_02", -1, 1) //done
+Data("attack:standing::attack_from_move::2m:", -2, "infected_attack_4m_from_move_09", -1, 1) //done
+
+Data("attack:standing::attack_from_move::3m:", -2, "infected_attack_from_move_Right_01_short", -1, 1) //IK disabled noIK
+Data("attack:standing::attack_from_move::3m:", -2, "infected_attack_from_move_Right_02", -1, 1) //done
+Data("attack:standing::attack_from_move::3m:", -2, "infected_attack_from_move_Left_02", -1, 1) //done
+Data("attack:standing::attack_from_move::3m:", -2, "infected_attack_from_move_Left_03_short", -1, 1) //IK disabled noIK
+Data("attack:standing::attack_from_move::3m:", -2, "infected_attack_4m_from_move_09", -1, 1) //done
+
+Data("attack:standing::attack_from_move::3m:", -2, "infected_attack_from_move_Right_03", -1, 1) //IK disabled noIK
+Data("attack:standing::attack_from_move::3m:", -2, "infected_attack_from_move_Left_03", -1, 1) //IK disabled noIK
+Data("attack:standing::attack_from_move::3m:", -2, "infected_attack_from_move_Right_04", -1, 1)// - zamienione Infected#attack_2m_from_move_07 -> infected_attack_from_move_Right_04
+
+Data("attack:standing::humanity_attack:::", -2, "infected_attack_from_stand_03_humanity", -1, 1) //IK disabled noIK
+Data("attack:standing::humanity_attack::2m:", -2, "infected_crouching_attack_01_humanity", -1, 1) //done
+Data("attack:standing::humanity_attack::2m:", -2, "Infected_crouching_attack_Left_01_humanity", -1, 1) //done
+Data("attack:standing::humanity_attack::3m:", -2, "infected_attack_from_stand_03_humanity", -1, 1) //IK disabled noIK
+Data("attack:standing::humanity_attack_from_move::2m:", -2, "infected_attack_from_move_Right_04_humanity", -1, 1) //IK disabled noIK
+Data("attack:standing::humanity_attack_from_move::3m:", -2, "infected_attack_from_move_Right_01_humanity", -1, 1) //IK disabled noIK
+Data("attack:standing::humanity_attack_from_move::3m:", -2, "infected_attack_from_move_Right_03_humanity", -1, 1) //IK disabled noIK
+Data("attack:standing::humanity_attack_from_move::3m:", -2, "infected_attack_from_move_Right_02_humanity", -1, 1) //done
+
+// vehicle jump attack
+Data("attack:standing::vehicle_jump_attack_from_move::4m:", -2, "viral_jump_attack_vehicle", -1, 1)
+Data("attack:standing::vehicle_jump_strike_from_stand::4m:", -2, "viral_jump_attack_vehicle_from_stand", -1, 1)
+
+Data("attack:standing::jump_away:backward::", -2, "Infected_dodge_back_01", -1, 1) //IK disabled
+Data("attack:standing::jump_away:backward::", -2, "Infected_dodge_back_02", -1, 1) //IK disabled
+Data("attack:standing::jump_away:backward::", -2, "Infected_dodge_back_01", -1, 1) //IK disabled
+Data("attack:standing::jump_away:backward::", -2, "Infected_dodge_back_02", -1, 1) //IK disabled
+// "breakdance" jump away
+Data("attack:standing::jump_away:backward::", -2, "Infected_dodge_back_09", -1, 1) //
+Data("attack:standing::jump_away:backward::", -2, "Infected_dodge_back_10", -1, 1) //
+
+Data("attack:standing::jump_away:backward::", -2, "infected_dodge_back_reaction_01", -1, 1) //IK disabled
+Data("attack:standing::jump_away:backward::", -2, "infected_dodge_back_reaction_02", -1, 1) //IK disabled
+
+Data("attack:standing::jump_away:left::", -2, "Infected_dodge_left_01", -1, 1) //IK disabled
+Data("attack:standing::jump_away:left::", -2, "Infected_dodge_left_01", -1, 1) //IK disabled
+Data("attack:standing::jump_away:left::", -2, "Infected_dodge_left_01", -1, 1) //IK disabled
+Data("attack:standing::jump_away:left::", -2, "Infected_dodge_left_01", -1, 1) //IK disabled
+
+Data("attack:standing::jump_away:right::", -2, "Infected_dodge_right_01", -1, 1) //IK disabled
+Data("attack:standing::jump_away:right::", -2, "Infected_dodge_right_01", -1, 1) //IK disabled
+Data("attack:standing::jump_away:right::", -2, "Infected_dodge_right_01", -1, 1) //IK disabled
+Data("attack:standing::jump_away:right::", -2, "Infected_dodge_right_01", -1, 1) //IK disabled
+
+Data("attack:standing::stalk:left::", -2, "Infected_crouching_left_01", -1, 1) //done
+Data("attack:standing::stalk:left::", -2, "Infected_crouching_left_03", -1, 1) //done
+Data("attack:standing::stalk:left::", -2, "Infected_crouching_left_03", -1, 1) //done
+
+Data("attack:standing::stalk:right::", -2, "Infected_crouching_right_01", -1, 1) //done
+Data("attack:standing::stalk:right::", -2, "Infected_crouching_right_02", -1, 1) //done
+Data("attack:standing::stalk:right::", -2, "Infected_crouching_right_03", -1, 1) //done
+
+Data("attack:standing::confusion:::", -2, "Infected_fake_attack_04", -1, 1) //done
+Data("attack:standing::confusion:::", -2, "Infected_fake_attack_05", -1, 1) //done
+Data("attack:standing::confusion:::", -2, "Infected_fake_attack_06", -1, 1) //done
+
+//##############
+//#### IDLE ####
+//##############
+//## idle:pose:alarm_level:idle_activity:item_type:is_idle_prepare:is_idle_finish
+//##############
+
+Data("idle:standing::stand:::", -2, "infected_idle_01", -1, 1) //done
+
+/*
+Data("idle:standing::stand:::", -2, "mzi_upset_stand_idle02", -1, 1)
+Data("idle:standing::stand:::", -2, "mzi_upset_stand_idle03", -1, 1)
+Data("idle:standing::stand:::", -2, "mzi_upset_stand_idle04", -1, 1)
+Data("idle:standing::stand:::", -2, "mzi_upset_stand_idle05", -1, 1)*/
+//Data("idle:standing::stand:::", -2, "mzi_upset_stand_idle06", -1, 1) //OH needs fixing
+//Data("idle:standing::stand:::", -2, "mzi_upset_stand_idle07", -1, 1) //OH needs fixing
+//Data("idle:standing::stand:::", -2, "mzi_upset_stand_idle08", -1, 1)
+//Data("idle:standing::look_around:::", -2, "mzi_upset_stand_idle01", -1, 1)
+
+
+Data("idle:standing::wait_for_stinger:::", -2, "mz_a_calm_stand_stinger", -1, 1) //done
+Data("idle:laying::stand:::", -2, "mz_calm_crawl_idle_v01", -1, 1) //IK disabled
+Data("idle:standing::confused:::", -2, "infected_stun_01", -1, 1) 
+Data("idle:standing::confused:::", -2, "infected_stun_02", -1, 1) 
+Data("idle:standing::scared:::", -2, "infected_lookaround_01", -1, 1) //done
+Data("idle:standing::attracted:::", -2, "mzi_decoy_reaction_loop_01", -1, 1) //done
+
+//Data("idle:standing::offensive:::", -2, "Infected_idle_crouching_01", -1, 1)
+Data("idle:standing::offensive:::", -2, "Infected_idle_crouching_02", -1, 1) //done
+Data("idle:standing::offensive:::", -2, "Infected_idle_crouching_03", -1, 1) //done
+Data("idle:standing::offensive:::", -2, "Infected_idle_crouching_04", -1, 1) //done
+Data("idle:standing::special:::", -2, "Infected_idle_crouching_02_angry", -1, 1) //done
+
+Data("idle:standing::look_around:::", -2, "infected_lookaround_01", -1, 1) //done
+Data("idle:standing::look_around:::", -2, "infected_lookaround_02", -1, 1) //done
+
+Data("idle:standing::blinded:::", -2, "volatile_light_reaction_loop_01", -1, 1) //done
+
+
+// night_change_confusion  //
+
+//Data("idle:standing::transform_confusion:::", -2, "m_zombie_night_change_confusion_01", -1, 1)
+Data("idle:standing::transform_confusion:::", -2, "m_zombie_night_change_confusion_02", -1, 1) //done
+Data("idle:standing::look_at_target_to_inspect:::", -2, "infected_noticing_02_short", -1, 1) //done
+
+Data("idle:standing::taunt:::", -2, "infected_taunt_01", -1, 1) //done
+Data("idle:standing::taunt:::", -2, "infected_taunt_02", -1, 1) //done
+Data("idle:standing::taunt:::", -2, "infected_taunt_03", -1, 1) //done
+Data("idle:standing::taunt:::", -2, "infected_taunt_04", -1, 1) //done
+Data("idle:standing::taunt:::", -2, "Infected_taunt_06", -1, 1) //done
+
+//##################
+//#### MOVEMENT ####
+//##################
+//## movement:is_standing:movement_type:movement_direction:alarm_level:item_type:ram_type:stairs_climbing_state
+//##################
+
+Data("movement:standing:walk:forward::::", -2, "Infected_walk_loop_01", -1, 1) //done
+
+Data("movement:standing:walk:left::::", -2, "mzi_upset_walk_left", -1, 1) //done
+Data("movement:standing:walk:right::::", -2, "mzi_upset_walk_right", -1, 1) //done
+Data("movement:standing:walk:backward::::", -2, "mzi_upset_walk_backward", -1, 1) //done
+
+Data("movement:standing:run:forward::::", -2, "infected_sprint_03", -1, 1)
+Data("movement:standing:sprint:forward::::", -2, "infected_sprint_03", -1, 1)
+Data("movement:standing:run:forward::::", -2, "infected_sprint_02", -1, 1)
+Data("movement:standing:run:forward::::", -2, "infected_sprint_01", -1, 1) 
+
+Data("movement:standing:sprint:forward::::", -2, "infected_sprint_02", -1, 1)
+Data("movement:standing:sprint:forward::::", -2, "infected_sprint_01", -1, 1)
+
+Data("movement:standing:pursuit_slow:forward::::", -2, "infected_pursuit_slow_sprint_01", -1, 1) //done - nogi wchodza w mesh
+Data("movement:standing:pursuit_normal:forward::::", -2, "infected_pursuit_normal_sprint_01", -1, 1) //done - poczatek "pchniety" w tyl
+Data("movement:standing:pursuit_fast:forward::::", -2, "infected_pursuit_fast_sprint_01", -1, 1) //done
+Data("movement:standing:pursuit_fast:forward::::", -2, "infected_pursuit_fast_sprint_02", -1, 1)  //done - bardzo wyprostowany podczas biegu
+Data("movement:standing:pursuit_vehicle_slow:forward::::", -2, "infected_pursuit_fast_sprint_02", -1, 1)  //done - bardzo wyprostowany podczas biegu
+Data("movement:standing:pursuit_vehicle_normal:forward::::", -2, "infected_pursuit_fast_sprint_02", -1, 1)  //done - bardzo wyprostowany podczas biegu
+Data("movement:standing:pursuit_vehicle_fast:forward::::", -2, "infected_pursuit_fast_sprint_02", -1, 1)  //done - bardzo wyprostowany podczas biegu
+
+Data("movement:standing:climb:forward::::", -2, "mzi_upset_sprintjumpup", -1, 1)  //done - nadgarstek prawy
+Data("movement:standing:climb:forward::::", -2, "mzi_upset_sprintjumpup_lleg", -1, 1) // not done - cos sie schrzanilo
+Data("movement:standing:climb:forward::::", -2, "infected_jump_up_2m_02", -1, 1) // not done - cos sie schrzanilo
+
+Data("movement:standing:climb:forward::::", -2, "infected_climbing_up_3_3m", -1, 1) //done - prawa noga 
+Data("movement:standing:climb:forward::::", -2, "infected_climbing_up_3_3m_02", -1, 1) //done - prawa noga 
+Data("movement:standing:climb:forward::::", -2, "infected_climbing_up_3_3m_mirror", -1, 1) //done - prawa noga 
+
+Data("movement:standing:climb:forward::::", -2, "infected_climbing_up_6_6m", -1, 1) //done
+Data("movement:standing:climb:forward::::", -2, "infected_climbing_up_9_9m", -1, 1) //done
+
+Data("movement:standing:jump_down:forward::::", -2, "infected_jump_down_3m_01", -1, 1) //done
+Data("movement:standing:jump_down:forward::::", -2, "infected_jump_down_3m_02", -1, 1) //done
+Data("movement:standing:jump_down:forward::::", -2, "infected_jump_down_3m_03", -1, 1)  //done
+Data("movement:standing:jump_down:forward::::", -2, "mzi_upset_jump_down_01", -1, 1)  //done	
+Data("movement:standing:jump_down:forward::::", -2, "infected_climbing_down_6_6m", -1, 1)  //done
+Data("movement:standing:jump_down:forward::::", -2, "infected_climbing_down_9_9m", -1, 1)  //done
+
+Data("movement:standing:jump_down_from_move:forward::::", -2, "infected_jump_down_2m_R", -1, 1) //done
+Data("movement:standing:jump_down_from_move:forward::::", -2, "infected_jump_down_2m_L", -1, 1) //done
+Data("movement:standing:jump_down_from_move:forward::::", -2, "infected_jump_down_2m_R_02", -1, 1) //done
+Data("movement:standing:jump_down_from_move:forward::::", -2, "infected_jump_down_2m_L_02", -1, 1) //done
+Data("movement:standing:jump_down_from_move:forward::::", -2, "infected_jump_down_2m_R", -1, 1) //done
+Data("movement:standing:jump_down_from_move:forward::::", -2, "infected_jump_down_2m_L", -1, 1) //done
+
+Data("movement:standing:jump_down_from_move:forward::::", -2, "infected_climbing_down_6_6m", -1, 1) //done
+Data("movement:standing:jump_down_from_move:forward::::", -2, "infected_climbing_down_9_9m", -1, 1)  //done - lewa noga koncowka strzal
+
+Data("movement:standing:jump_down_from_stand:forward::::", -2, "infected_jump_down_3m_01", -1, 1)  //done
+Data("movement:standing:jump_down_from_stand:forward::::", -2, "infected_jump_down_3m_02", -1, 1)	//done
+Data("movement:standing:jump_down_from_stand:forward::::", -2, "infected_jump_down_3m_03", -1, 1)	//done
+Data("movement:standing:jump_down_from_stand:forward::::", -2, "mzi_upset_jump_down_01", -1, 1)	//done
+Data("movement:standing:jump_down_from_stand:forward::::", -2, "infected_climbing_down_6_6m", -1, 1)	//done
+Data("movement:standing:jump_down_from_stand:forward::::", -2, "infected_climbing_down_9_9m", -1, 1)	//done
+
+Data("movement:standing:jump_on:forward::::", -2, "mzi_upset_jump_on", -1, 1)  //done - barki 
+Data("movement:standing:jump_on:forward::::", -2, "mzi_upset_jump_on_mirror", -1, 1)  //done - wizualizacja 
+Data("movement:standing:jump_off:forward::::", -2, "mzi_upset_jump_off", -1, 1)  //done - wizualizacja 
+Data("movement:standing:jump_off:forward::::", -2, "mzi_upset_jump_off_mirror", -1, 1)  //done - wizualizacja 
+
+Data("movement:standing:jump_over_high:forward::::", -2, "mzi_upset_sprintclimb", -1, 1)	//done
+Data("movement:standing:jump_over_high_low:forward::::", -2, "mzi_upset_sprintbarrierjumpup", -1, 1) //done
+Data("movement:standing:jump_over_low:forward::::", -2, "mzi_upset_jump_over_low_02", -1, 1) //done
+Data("movement:standing:jump_over_low:forward::::", -2, "mzi_upset_jump_over_low_02_lleg", -1, 1) //done
+Data("movement:standing:jump_over_low_high:forward::::", -2, "mzi_upset_sprintbarrierjumpdown", -1, 1) //done
+Data("movement:standing:jump_over_low_high:forward::::", -2, "mzi_upset_sprintbarrierjumpdown_mirror", -1, 1)
+Data("movement:standing:jump_over_high_low:forward::::", -2, "mzi_upset_sprintbarrierjumpup_mirror", -1, 1)
+
+Data("movement:standing:jump_05m:forward::::", -2, "infected_jump_05m_L", -1, 1)	//done
+Data("movement:standing:jump_05m:forward::::", -2, "infected_jump_05m_R", -1, 1)	//done
+
+Data("movement:standing:jump_1m:forward::::", -2, "infected_jump_1m_L", -1, 1)	//done - przyspieszenie po stopanimie
+Data("movement:standing:jump_1m:forward::::", -2, "infected_jump_1m_R", -1, 1)	//done
+
+Data("movement:standing:jump_3m:forward::::", -2, "infected_jump_2m_R", -1, 1) //done - lewa noga 42-43
+Data("movement:standing:jump_3m:forward::::", -2, "infected_jump_2m_R", -1, 1)
+Data("movement:standing:jump_5m:forward::::", -2, "infected_jump_5m_R", -1, 1) //noIK
+Data("movement:standing:jump_5m:forward::::", -2, "infected_jump_5m_L", -1, 1) //noIK
+
+Data("movement:standing:jump_5m_to_climb:forward::::", -2, "infected_jump_down_7m_01", -1, 1)  //don't touch
+
+Data("movement:standing:jump_05m_up:forward::::", -2, "mzi_upset_jump_on", -1, 1) //done
+Data("movement:standing:jump_1m_up:forward::::", -2, "infected_jump_up_1m_R", -1, 1) //not sure 
+Data("movement:standing:jump_1m_up:forward::::", -2, "infected_jump_up_1m_L", -1, 1)  //done
+Data("movement:standing:jump_1m_to_climb_up:forward::::", -2, "jump_1m_to_climb_up", -1, 1)  //done
+
+Data("movement:standing:jump_3m_up:forward::::", -2, "infected_jump_up_2m_01", -1, 1) //done
+Data("movement:standing:jump_3m_up:forward::::", -2, "infected_jump_up_3m_01", -1, 1) 
+Data("movement:standing:jump_3m_up:forward::::", -2, "infected_jump_up_3m_03", -1, 1) 
+Data("movement:standing:jump_3m_up:forward::::", -2, "infected_jump_up_3m_04", -1, 1) 
+Data("movement:standing:jump_3m_up:forward::::", -2, "infected_jump_up_3m_03_mirror", -1, 1) 
+
+Data("movement:standing:jump_5m_up:forward::::", -2, "infected_jump_up_2m_01", -1, 1) //done
+Data("movement:standing:jump_3m_to_climb_up:forward::::", -2, "infected_jump_up_3m_01", -1, 1)  //done
+Data("movement:standing:jump_3m_to_climb_up:forward::::", -2, "infected_jump_up_3m_02", -1, 1)  //done
+Data("movement:standing:jump_3m_to_climb_up:forward::::", -2, "infected_jump_up_3m_03", -1, 1)  //done
+Data("movement:standing:jump_3m_to_climb_up:forward::::", -2, "infected_jump_up_3m_04", -1, 1)  //done
+Data("movement:standing:jump_3m_to_climb_up:forward::::", -2, "infected_jump_up_3m_03_mirror", -1, 1)  //done
+
+Data("movement:standing:jump_05m_down:forward::::", -2, "infected_jump_1m_down", -1, 1) //done
+Data("movement:standing:jump_1m_down:forward::::", -2, "infected_jump_1m_down", -1, 1) //done
+Data("movement:standing:jump_1m_down:forward::::", -2, "infected_jump_1m_down", -1, 1) //done
+
+Data("movement:standing:jump_3m_down:forward::::", -2, "infected_jump_3m_down", -1, 1) //done
+Data("movement:standing:jump_3m_down:forward::::", -2, "infected_jump_down_2m_R", -1, 1) //done
+Data("movement:standing:jump_3m_down:forward::::", -2, "infected_jump_down_2m_L", -1, 1) //done
+Data("movement:standing:jump_3m_down:forward::::", -2, "infected_jump_down_2m_R_02", -1, 1) //done
+Data("movement:standing:jump_3m_down:forward::::", -2, "infected_jump_down_2m_L_02", -1, 1) //done
+Data("movement:standing:jump_3m_down:forward::::", -2, "infected_jump_down_2m_R", -1, 1) //done
+Data("movement:standing:jump_3m_down:forward::::", -2, "infected_jump_down_2m_L", -1, 1) //done
+
+Data("movement:standing:jump_5m_down:forward::::", -2, "infected_jump_5m_R", -1, 1) 
+Data("movement:standing:jump_5m_down:forward::::", -2, "infected_jump_5m_L", -1, 1)
+Data("movement:standing:jump_5m_down:forward::::", -2, "infected_jump_down_7m_01", -1, 1) //don't touch
+
+Data("movement:standing:jump_5m_to_climb_down:forward::::", -2, "infected_jump_down_7m_01", -1, 1) //don't touch
+Data("movement:standing:jump_5m_to_climb_up:forward::::", -2, "infected_jump_up_3m_01", -1, 1) //don't touch
+Data("movement:standing:jump_5m_to_climb_up:forward::::", -2, "infected_jump_up_3m_03", -1, 1) //don't touch
+Data("movement:standing:jump_5m_to_climb_up:forward::::", -2, "infected_jump_up_3m_03_mirror", -1, 1) //don't touch
+Data("movement:standing:jump_5m_to_climb_up:forward::::", -2, "infected_jump_up_3m_04", -1, 1) //don't touch
+
+
+Data("movement:standing:jump_05m_to_climb:forward::::", -2, "mzi_upset_jump_on", -1, 1) //done
+Data("movement:standing:jump_1m_to_climb:forward::::", -2, "infected_jump_2m_climb_01", -1, 1) //done
+Data("movement:standing:jump_3m_to_climb:forward::::", -2, "infected_jump_2m_climb_01", -1, 1) //done
+Data("movement:standing:jump_5m_to_climb:forward::::", -2, "infected_jump_2m_climb_01", -1, 1) //done
+
+Data("movement:standing:jump_fail:forward::::", -2, "mzi_upset_jump_fail", -1, 1) //done
+Data("movement:standing:jump_through_window:forward::::", -2, "mzi_upset_jump_over_low_02", -1, 1) //done
+Data("movement:standing:jump_through_window:forward::::", -2, "mzi_upset_jump_over_low_02_lleg", -1, 1) //done
+Data("movement:standing:jump_through_car:forward::::", -2, "mzi_upset_jump_through_car", -1, 1) //not done - slomo
+Data("movement:standing:jump_through_car:forward::::", -2, "mzi_upset_jump_through_car_lleg", -1, 1) //not done - slomo
+
+Data("movement:standing:collision_right:forward::::", -2, "infected_run_hit_reaction_left_02", -1, 1) //noIk
+Data("movement:standing:collision_right:forward::::", -2, "infected_run_hit_reaction_left_01", -1, 1) //noIK
+Data("movement:standing:collision_left:forward::::", -2, "infected_run_hit_reaction_right_01", -1, 1) //noIK
+
+//##############
+//#### TURN ####
+//##############
+//## turn:pose:alarm_level:item_type:direction:angle
+//##############
+
+Data("turn:standing:::left:45", -2, "infected_turn_90l_short", -1, 1) //done
+Data("turn:standing:::right:45", -2, "infected_turn_90r_short", -1, 1)  //not done - lewa stopa koncowka
+Data("turn:standing:::left:90", -2, "infected_turn_90l_short", -1, 1)
+Data("turn:standing:::right:90", -2, "infected_turn_90r_short", -1, 1)
+Data("turn:standing:::left:180", -2, "infected_turn_180l_short", -1, 1)  //done
+Data("turn:standing:::right:180", -2, "infected_turn_180r_short", -1, 1) //done
+
+//####################
+//#### TRANSITION ####
+//####################
+//## movement:pose:source_movement_type:dest_movement_type:source_flags:dest_flags
+//##################
+
+//###############
+//#### START ####
+//###############
+//## start:is_standing:alarm_level:item_type:movement_type:angle:direction
+//##############
+
+Data("start:standing:::walk:90:left:", -2, "infected_walk_start90l_01", -1, 1)  //done
+Data("start:standing:::walk:90:right:", -2, "infected_walk_start90r_01", -1, 1)  //done
+Data("start:standing:::walk:0::", -2, "infected_walk_start", -1, 1)  //done - strzal na glowie
+Data("start:standing:::walk:180:left:", -2, "infected_walk_start180l_01", -1, 1)  //done - prawa reka sztywna
+Data("start:standing:::walk:180:right:", -2, "infected_walk_start180r_01", -1, 1)  //done
+
+
+
+Data("start:standing::::0::", -2, "Infected_run_start_front_01_short", -1, 1)	//done
+Data("start:standing::::90:left:", -2, "Infected_run_start_90L_short_01", -1, 1)  //done
+Data("start:standing::::90:right:", -2, "Infected_run_start_90R_01", -1, 1)	//done
+Data("start:standing::::180:left:", -2, "Infected_run_start_180L_01", -1, 1)	//done
+Data("start:standing::::180:right:", -2, "Infected_run_start_180R_01", -1, 1)  //done
+
+//##############
+//#### STOP ####
+//##############
+//## stop:is_standing:alarm_level:item_type:movement_type:angle:direction
+//##############
+
+Data("stop:standing:::walk:90:left:false:", -2, "infected_walk_stop90l_01", -1, 1)  //done
+Data("stop:standing:::walk:90:right:false:", -2, "infected_walk_stop90r_01", -1, 1) //done
+Data("stop:standing:::walk:90:left:false:", -2, "infected_walk_stop90l_02", -1, 1)  //done
+Data("stop:standing:::walk:90:right:false:", -2, "infected_walk_stop90r_02", -1, 1) //done
+
+
+Data("stop:standing:::walk:0::false:", -2, "infected_walk_stop_01", -1, 1)	//done
+Data("stop:standing:::walk:0::false:", -2, "infected_walk_stop_02", -1, 1)	//done
+Data("stop:standing:::walk:180:left:false:", -2, "infected_walk_stop180l_01", -1, 1)  //done - lewa reka
+Data("stop:standing:::walk:180:right:false:", -2, "infected_walk_stop180r_01", -1, 1)	//done - koncowka, lewa noga
+
+Data("stop:standing::::90:left:false:", -2, "infected_run_stop_90l_01", -1, 1)	//done
+Data("stop:standing::::90:left:false:", -2, "infected_run_stop_90l_02", -1, 1)	//done
+Data("stop:standing::::90:right:false:", -2, "infected_run_stop_90r_01", -1, 1)	//done
+Data("stop:standing::::90:right:false:", -2, "infected_run_stop_90r_02", -1, 1) //done
+Data("stop:standing::::0::false:", -2, "infected_run_stop_front_01", -1, 1) //done - sztywna gora
+Data("stop:standing::::0::false:", -2, "infected_run_stop_front_02", -1, 1)  //done
+Data("stop:standing::::180:left:false:", -2, "infected_run_stop_180l_01", -1, 1)	//done
+Data("stop:standing::::180:right:false:", -2, "infected_run_stop_180r_01", -1, 1)	//done
+
+//#######################
+//#### MOVEMENT TURN ####
+//#######################
+//## movement_turn:pose:alarm_level:item_type:movement_type:angle:direction:sudden
+//#######################
+
+//Data("movement_turn:standing:::walk:90:left:false", -2, "mzi_upset_walk_turn_90_l", -1, 1)
+//Data("movement_turn:standing:::walk:90:right:false", -2, "mzi_upset_walk_turn_90_r", -1, 1)
+//Data("movement_turn:standing:::walk:180:left:false", -2, "mzi_upset_walk_turn_180_l", -1, 1)
+//Data("movement_turn:standing:::walk:180:right:false", -2, "mzi_upset_walk_turn_180_r", -1, 1)
+
+//###########
+//### RUN ###
+//###########
+
+// RUN 45  V1
+
+Data("movement_turn:standing:::run:45:left:false", -2, "Infected_sprint_turn_45L_01", -1, 1) //done
+Data("movement_turn:standing:::run:45:left:true", -2, "Infected_sprint_turn_45L_01", -1, 1)	//done
+Data("movement_turn:standing:::run:45:right:false", -2, "Infected_sprint_turn_45R_01", -1, 1) //done - prawa noga przy skrecie
+Data("movement_turn:standing:::run:45:right:true", -2, "Infected_sprint_turn_45R_01", -1, 1)
+
+// RUN 45  V2
+Data("movement_turn:standing:::run:45:left:false", -2, "Infected_sprint_turn_45L_02", -1, 1)  //done - za szybkie wyprostowanie po skrecie
+Data("movement_turn:standing:::run:45:left:true", -2, "Infected_sprint_turn_45L_02_sudden", -1, 1) //done - -||-
+
+// RUN 90  V1
+Data("movement_turn:standing:::run:90:left:false", -2, "Infected_sprint_turn_90L_01", -1, 1)  //done
+Data("movement_turn:standing:::run:90:left:true", -2, "Infected_sprint_turn_90L_01", -1, 1)	//done
+Data("movement_turn:standing:::run:90:right:false", -2, "Infected_sprint_turn_90R_01", -1, 1)  //done - ochydny zwrot
+Data("movement_turn:standing:::run:90:right:true", -2, "Infected_sprint_turn_90R_01", -1, 1)	//done -||-
+// RUN 90  V2
+Data("movement_turn:standing:::run:90:left:false", -2, "Infected_sprint_turn_90L_02", -1, 1)	//done
+Data("movement_turn:standing:::run:90:left:true", -2, "Infected_sprint_turn_90L_02", -1, 1)	//done
+Data("movement_turn:standing:::run:90:right:false", -2, "Infected_sprint_turn_90R_02", -1, 1) //done
+Data("movement_turn:standing:::run:90:right:true", -2, "Infected_sprint_turn_90R_02", -1, 1)	//done
+
+// RUN 90  V3
+Data("movement_turn:standing:::run:90:right:false", -2, "Infected_sprint_turn_90R_03", -1, 1)	//done
+Data("movement_turn:standing:::run:90:right:true", -2, "Infected_sprint_turn_90R_03", -1, 1)	//done
+
+
+Data("movement_turn:standing:::run:180:left:false", -2, "mzi_upset_sprint_turn_180_l", -1, 1)	//done - ochydna poza po zwrocie, wyprostowane plecy
+Data("movement_turn:standing:::run:180:left:true", -2, "mzi_upset_sprint_turn_180_l", -1, 1)
+Data("movement_turn:standing:::run:180:right:false", -2, "mzi_upset_sprint_turn_180_r", -1, 1)	//done 	-||-
+Data("movement_turn:standing:::run:180:right:true", -2, "mzi_upset_sprint_turn_180_r", -1, 1)
+
+//##############
+//### SPRINT ###
+//##############
+
+// SPRINT 45  V1
+Data("movement_turn:standing:::sprint:45:left:false", -2, "Infected_sprint_turn_45L_01", -1, 1)
+Data("movement_turn:standing:::sprint:45:left:true", -2, "Infected_sprint_turn_45L_01", -1, 1)
+Data("movement_turn:standing:::sprint:45:right:false", -2, "Infected_sprint_turn_45R_01", -1, 1)
+Data("movement_turn:standing:::sprint:45:right:true", -2, "Infected_sprint_turn_45R_01", -1, 1)
+// SPRINT 45  V2
+Data("movement_turn:standing:::sprint:45:left:false", -2, "Infected_sprint_turn_45L_02", -1, 1)
+Data("movement_turn:standing:::sprint:45:left:true", -2, "Infected_sprint_turn_45L_02_sudden", -1, 1)
+
+
+// SPRINT 90  V1
+Data("movement_turn:standing:::sprint:90:left:false", -2, "Infected_sprint_turn_90L_01", -1, 1)
+Data("movement_turn:standing:::sprint:90:left:true", -2, "Infected_sprint_turn_90L_01", -1, 1)
+Data("movement_turn:standing:::sprint:90:right:false", -2, "Infected_sprint_turn_90R_01", -1, 1)
+Data("movement_turn:standing:::sprint:90:right:true", -2, "Infected_sprint_turn_90R_01", -1, 1)
+// SPRINT 90  V2
+Data("movement_turn:standing:::sprint:90:left:false", -2, "Infected_sprint_turn_90L_02", -1, 1)
+Data("movement_turn:standing:::sprint:90:left:true", -2, "Infected_sprint_turn_90L_02", -1, 1)
+Data("movement_turn:standing:::sprint:90:right:false", -2, "Infected_sprint_turn_90R_02", -1, 1)
+Data("movement_turn:standing:::sprint:90:right:true", -2, "Infected_sprint_turn_90R_02", -1, 1)
+
+// SPRINT 90  V3
+Data("movement_turn:standing:::run:90:right:false", -2, "Infected_sprint_turn_90R_03", -1, 1)
+Data("movement_turn:standing:::run:90:right:true", -2, "Infected_sprint_turn_90R_03", -1, 1)
+
+Data("movement_turn:standing:::sprint:180:left:false", -2, "mzi_upset_sprint_turn_180_l", -1, 1)
+Data("movement_turn:standing:::sprint:180:left:true", -2, "mzi_upset_sprint_turn_180_l", -1, 1)
+Data("movement_turn:standing:::sprint:180:right:false", -2, "mzi_upset_sprint_turn_180_r", -1, 1)
+Data("movement_turn:standing:::sprint:180:right:true", -2, "mzi_upset_sprint_turn_180_r", -1, 1)
+
+//################
+//#### EFFECT ####
+//################
+//## effect:type:direction:pose
+//##############
+
+Data("effect:burn::standing", -2, "infected_reaction_burn_01", -1, 1) //to_polish
+Data("effect:burn::standing", -2, "infected_reaction_burn_02", -1, 1) //to_polish
+Data("effect:electrocution::standing", -2, "infected_reaction_electric_01", -1, 1) //to_polish
+Data("effect:electrocution::standing", -2, "infected_reaction_electric_02", -1, 1) //to_polish
+Data("effect:poison::standing", -2, "infected_reaction_toxic_01", -1, 1) //to_polish
+Data("effect:poison::standing", -2, "infected_reaction_toxic_02", -1, 1) //to_polish
+
+//################
+//##### GRAB #####
+//################
+//## grab:is_standing:is_holding:grabbed_phase:grab_type
+//################
+
+Data("grab:standing:true:finish_win:deadly_finish:", -2, "mz_deadly_finish", -1, 1)
+Data("grab:standing:true:begin_front:deadly_finish:", -2, "mz_begin_deadly_finish", -1, 1)
+Data("grab:laying:true:finish_win:deadly_finish:", -2, "mz_deadly_finish", -1, 1)
+Data("grab:laying:true:begin_front:deadly_finish:", -2, "mz_begin_deadly_finish", -1, 1)
+
+Data("grab:standing:true:begin_front:deadly_finish_blunt:", -2, "mzi_begin_deadly_finish_blunt", -1, 1)
+Data("grab:standing:true:finish_win:deadly_finish_blunt:", -2, "mzi_deadly_finish_blunt", -1, 1)
+Data("grab:laying:true:finish_win:deadly_finish_blunt:", -2, "mzi_deadly_finish_blunt", -1, 1)
+Data("grab:laying:true:begin_front:deadly_finish_blunt:", -2, "mzi_begin_deadly_finish_blunt", -1, 1)
+
+// scalping
+Data("grab:standing:true:begin_front:scalping:", -2, "mz_scalping_begin", -1, 1)
+Data("grab:laying:true:begin_front:scalping:", -2, "mz_scalping_begin", -1, 1)
+Data("grab:standing:false:begin_front:scalping:", -2, "mz_scalping_begin", -1, 1)
+Data("grab:laying:false:begin_front:scalping:", -2, "mz_scalping_begin", -1, 1)
+Data("grab:standing:true:finish_win:scalping:", -2, "mz_scalping", -1, 1)
+Data("grab:laying:true:finish_win:scalping:", -2, "mz_scalping", -1, 1)
+//scalping 1
+Data("grab:standing:true:begin_front:scalping:_1", -2, "mz_begin_scalping_1", -1, 1)
+Data("grab:laying:true:begin_front:scalping:_1", -2, "mz_begin_scalping_1", -1, 1)
+Data("grab:standing:false:begin_front:scalping:_1", -2, "mz_begin_scalping_1", -1, 1)
+Data("grab:laying:false:begin_front:scalping:_1", -2, "mz_begin_scalping_1", -1, 1)
+Data("grab:standing:true:finish_win:scalping:_1", -2, "mz_finishwins_scalping_1", -1, 1)
+Data("grab:laying:true:finish_win:scalping:_1", -2, "mz_finishwins_scalping_1", -1, 1)
+//scalping 2
+Data("grab:standing:true:begin_front:scalping:_2", -2, "mz_begin_scalping_2", -1, 1)
+Data("grab:laying:true:begin_front:scalping:_2", -2, "mz_begin_scalping_2", -1, 1)
+Data("grab:standing:false:begin_front:scalping:_2", -2, "mz_begin_scalping_2", -1, 1)
+Data("grab:laying:false:begin_front:scalping:_2", -2, "mz_begin_scalping_2", -1, 1)
+Data("grab:standing:true:finish_win:scalping:_2", -2, "mz_finishwins_scalping_2", -1, 1)
+Data("grab:laying:true:finish_win:scalping:_2", -2, "mz_finishwins_scalping_2", -1, 1)
+//scalping 3
+Data("grab:standing:true:begin_front:scalping:_3", -2, "mz_begin_scalping_3", -1, 1)
+Data("grab:laying:true:begin_front:scalping:_3", -2, "mz_begin_scalping_3", -1, 1)
+Data("grab:standing:false:begin_front:scalping:_3", -2, "mz_begin_scalping_3", -1, 1)
+Data("grab:laying:false:begin_front:scalping:_3", -2, "mz_begin_scalping_3", -1, 1)
+Data("grab:standing:true:finish_win:scalping:_3", -2, "mz_finishwins_scalping_3", -1, 1)
+Data("grab:laying:true:finish_win:scalping:_3", -2, "mz_finishwins_scalping_3", -1, 1)
+
+Data("grab:standing:true:begin_front:finisherback:", -2, "mzi_finisherback_begin", -1, 1)
+Data("grab:laying:true:begin_front:finisherback:", -2, "mzi_finisherback_begin", -1, 1)
+Data("grab:standing:false:begin_front:finisherback:", -2, "mzi_finisherback_begin", -1, 1)
+Data("grab:laying:false:begin_front:finisherback:", -2, "mzi_finisherback_begin", -1, 1)
+Data("grab:standing:true:finish_win:finisherback:", -2, "mzi_finisherback", -1, 1)
+Data("grab:laying:true:finish_win:finisherback:", -2, "mzi_finisherback", -1, 1)
+Data("grab:standing:true:finish_lose:finisherback:", 0, "", -1, 1)
+Data("grab:laying:true:finish_lose:finisherback:", 0, "", -1, 1)
+
+Data("grab:standing:true:begin_front:finisherbackfast:", -2, "mzi_finisherbackfast_begin", -1, 1)
+Data("grab:laying:true:begin_front:finisherbackfast:", -2, "mzi_finisherbackfast_begin", -1, 1)
+Data("grab:standing:false:begin_front:finisherbackfast:", -2, "mzi_finisherbackfast_begin", -1, 1)
+Data("grab:laying:false:begin_front:finisherbackfast:", -2, "mzi_finisherbackfast_begin", -1, 1)
+Data("grab:standing:true:finish_win:finisherbackfast:", -2, "mzi_finisherbackfast", -1, 1)
+Data("grab:laying:true:finish_win:finisherbackfast:", -2, "mzi_finisherbackfast", -1, 1)
+Data("grab:standing:true:finish_lose:finisherbackfast:", 0, "", -1, 1)
+Data("grab:laying:true:finish_lose:finisherbackfast:", 0, "", -1, 1)
+
+Data("grab:standing:true:begin_front:nagewazaback:", -2, "infected_nagewaza_begin_back", -1, 1)
+Data("grab:laying:true:begin_front:nagewazaback:", -2, "infected_nagewaza_begin_back", -1, 1)
+Data("grab:standing:false:begin_front:nagewazaback:", -2, "infected_nagewaza_begin_back", -1, 1)
+Data("grab:laying:false:begin_front:nagewazaback:", -2, "infected_nagewaza_begin_back", -1, 1)
+Data("grab:standing:true:finish_win:nagewazaback:", -2, "infected_nagewaza_finish_back", -1, 1)
+Data("grab:laying:true:finish_win:nagewazaback:", -2, "infected_nagewaza_finish_back", -1, 1)
+
+Data("grab:standing:true:begin_front:nagewazaright:", -2, "infected_nagewaza_begin_right", -1, 1)
+Data("grab:laying:true:begin_front:nagewazaright:", -2, "infected_nagewaza_begin_right", -1, 1)
+Data("grab:standing:false:begin_front:nagewazaright:", -2, "infected_nagewaza_begin_right", -1, 1)
+Data("grab:laying:false:begin_front:nagewazaright:", -2, "infected_nagewaza_begin_right", -1, 1)
+Data("grab:standing:true:finish_win:nagewazaright:", -2, "infected_nagewaza_finish_right", -1, 1)
+Data("grab:laying:true:finish_win:nagewazaright:", -2, "infected_nagewaza_finish_right", -1, 1)
+
+Data("grab:standing:true:begin_front:nagewazaleft:", -2, "infected_nagewaza_begin_left", -1, 1)
+Data("grab:laying:true:begin_front:nagewazaleft:", -2, "infected_nagewaza_begin_left", -1, 1)
+Data("grab:standing:false:begin_front:nagewazaleft:", -2, "infected_nagewaza_begin_left", -1, 1)
+Data("grab:laying:false:begin_front:nagewazaleft:", -2, "infected_nagewaza_begin_left", -1, 1)
+Data("grab:standing:true:finish_win:nagewazaleft:", -2, "infected_nagewaza_finish_left", -1, 1)
+Data("grab:laying:true:finish_win:nagewazaleft:", -2, "infected_nagewaza_finish_left", -1, 1)
+
+Data("grab:standing:true:begin_front:nagewazafront:", -2, "mzi_begin_nagewazafront", -1, 1)
+Data("grab:laying:true:begin_front:nagewazafront:", -2, "mzi_begin_nagewazafront", -1, 1)
+Data("grab:standing:false:begin_front:nagewazafront:", -2, "mzi_begin_nagewazafront", -1, 1)
+Data("grab:laying:false:begin_front:nagewazafront:", -2, "mzi_begin_nagewazafront", -1, 1)
+Data("grab:standing:true:finish_win:nagewazafront:", -2, "mzi_finish_nagewazafront", -1, 1)
+Data("grab:laying:true:finish_win:nagewazafront:", -2, "mzi_finish_nagewazafront", -1, 1)
+
+/*Data("grab:standing:true:begin", -2, "mz_unarmed_grabnew_begin0", -1, 1)
+Data("grab:standing:true:begin", -2, "mz_unarmed_grabnew_begin1", -1, 1)
+Data("grab:standing:true:begin", -2, "mz_unarmed_grabnew_begin2", -1, 1)
+Data("grab:standing:true:begin", -2, "mz_unarmed_clench_begin", -1, 1)
+
+Data("grab:standing:true:fight", -2, "mz_unarmed_grabnew_loop0", -1, 1)
+Data("grab:standing:true:fight", -2, "mz_unarmed_grabnew_loop1", -1, 1)
+Data("grab:standing:true:fight", -2, "mz_unarmed_grabnew_loop2", -1, 1)
+Data("grab:standing:true:fight", -2, "mz_unarmed_clench_loop", -1, 1)
+
+Data("grab:standing:true:punch1", 0, "", -1, 1)
+Data("grab:standing:true:punch1", -2, "mz_unarmed_grabnew_punch1", -1, 1)
+Data("grab:standing:true:punch1", -2, "mz_unarmed_grabnew_punch1", -1, 1)
+Data("grab:standing:true:punch1", -2, "mz_unarmed_clench_punch1", -1, 1)
+
+Data("grab:standing:true:punch2", 0, "", -1, 1)
+Data("grab:standing:true:punch2", 0, "", -1, 1)
+Data("grab:standing:true:punch2", -2, "mz_unarmed_grabnew_punch2", -1, 1)
+Data("grab:standing:true:punch2", 0, "", -1, 1)
+
+Data("grab:standing:true:punch3", 0, "", -1, 1)
+Data("grab:standing:true:punch3", 0, "", -1, 1)
+Data("grab:standing:true:punch3", -2, "mz_unarmed_grabnew_punch3", -1, 1)
+Data("grab:standing:true:punch3", 0, "", -1, 1)
+
+Data("grab:standing:true:finish_win", -2, "mz_unarmed_grabnew_finishwins0", -1, 1)
+Data("grab:standing:true:finish_win", -2, "mz_unarmed_grabnew_finishwins1", -1, 1)
+Data("grab:standing:true:finish_win", -2, "mz_unarmed_grabnew_finishwins2", -1, 1)
+Data("grab:standing:true:finish_win", -2, "mz_unarmed_clench_finishwins", -1, 1)
+
+Data("grab:standing:true:finish_lose", 0, "", -1, 1)
+Data("grab:standing:true:finish_lose", 0, "", -1, 1)
+Data("grab:standing:true:finish_lose", 0, "", -1, 1)
+Data("grab:standing:true:finish_lose", -2, "mz_unarmed_clench_finishlose", -1, 1)*/
+
+//################
+//#### MIMIC #####
+//################
+//## mimic:type:is_speech_played
+//##############
+
+Data("mimic:normal:", -2, "infected_mimic_angry1", -1, 1)
+Data("mimic:angry:", -2, "infected_mimic_angry1", -1, 1)
+Data("mimic:grab:", -2, "mz_mimic_grab", -1, 1)
+Data("mimic:hit_reaction:", -2, "infected_reaction0", -1, 1)
+Data("mimic:hit_reaction:", -2, "infected_reaction1", -1, 1)
+Data("mimic:hit_reaction:", -2, "infected_reaction2", -1, 1)
+
+//##################
+//##### DODGE ######
+//##################
+//## dodge:pose:item_type:type
+//##################
+
+// "jump" dodges
+Data("dodge:standing::jump_back", -2, "Infected_dodge_back_01", -1, 1) //IK disabled
+Data("dodge:standing::jump_back", -2, "Infected_dodge_back_01", -1, 1) //IK disabled
+Data("dodge:standing::jump_back", -2, "Infected_dodge_back_01", -1, 1) //IK disabled
+Data("dodge:standing::jump_back", -2, "Infected_dodge_back_01", -1, 1) //IK disabled
+
+Data("dodge:standing::jump_back", -2, "Infected_dodge_back_02", -1, 1) //IK disabled
+Data("dodge:standing::jump_back", -2, "Infected_dodge_back_02", -1, 1) //IK disabled
+Data("dodge:standing::jump_back", -2, "Infected_dodge_back_02", -1, 1) //IK disabled
+Data("dodge:standing::jump_back", -2, "Infected_dodge_back_02", -1, 1) //IK disabled
+
+Data("dodge:standing::jump_back", -2, "infected_dodge_stand_back_01", -1, 1) //IK disabled
+Data("dodge:standing::jump_back", -2, "infected_dodge_stand_back_01", -1, 1) //IK disabled
+Data("dodge:standing::jump_back", -2, "infected_dodge_stand_back_01", -1, 1) //IK disabled
+Data("dodge:standing::jump_back", -2, "infected_dodge_stand_back_01", -1, 1) //IK disabled
+
+Data("dodge:standing::jump_back", -2, "Infected_dodge_back_01", -1, 1) //IK disabled
+Data("dodge:standing::jump_back", -2, "Infected_dodge_back_01", -1, 1) //IK disabled
+Data("dodge:standing::jump_back", -2, "Infected_dodge_back_01", -1, 1) //IK disabled
+Data("dodge:standing::jump_back", -2, "Infected_dodge_back_01", -1, 1) //IK disabled
+
+Data("dodge:standing::jump_back", -2, "Infected_dodge_back_02", -1, 1) //IK disabled
+Data("dodge:standing::jump_back", -2, "Infected_dodge_back_02", -1, 1) //IK disabled
+Data("dodge:standing::jump_back", -2, "Infected_dodge_back_02", -1, 1) //IK disabled
+Data("dodge:standing::jump_back", -2, "Infected_dodge_back_02", -1, 1) //IK disabled
+
+Data("dodge:standing::jump_back", -2, "infected_dodge_stand_back_01", -1, 1) //IK disabled
+Data("dodge:standing::jump_back", -2, "infected_dodge_stand_back_01", -1, 1) //IK disabled
+Data("dodge:standing::jump_back", -2, "infected_dodge_stand_back_01", -1, 1) //IK disabled
+Data("dodge:standing::jump_back", -2, "infected_dodge_stand_back_01", -1, 1) //IK disabled
+//"breakdance"
+Data("dodge:standing::jump_back", -2, "infected_dodge_back_09", -1, 1) //IK disabled
+Data("dodge:standing::jump_back", -2, "infected_dodge_back_10", -1, 1) //IK disabled
+
+Data("dodge:standing::jump_left", -2, "Infected_dodge_left_01", -1, 1) //IK disabled
+Data("dodge:standing::jump_left", -2, "Infected_dodge_left_01", -1, 1) //IK disabled
+Data("dodge:standing::jump_left", -2, "Infected_dodge_left_01", -1, 1) //IK disabled
+Data("dodge:standing::jump_left", -2, "infected_dodge_back_left_01", -1, 1) //IK disabled
+Data("dodge:standing::jump_left", -2, "infected_dodge_back_left_02", -1, 1) //IK disabled
+Data("dodge:standing::jump_right", -2, "Infected_dodge_right_01", -1, 1) //IK disabled
+Data("dodge:standing::jump_right", -2, "Infected_dodge_right_01", -1, 1) //IK disabled
+Data("dodge:standing::jump_right", -2, "Infected_dodge_right_01", -1, 1) //IK disabled
+Data("dodge:standing::jump_right", -2, "infected_dodge_back_right_01", -1, 1) //IK disabled
+Data("dodge:standing::jump_right", -2, "infected_dodge_back_right_02", -1, 1) //IK disabled
+
+// "avoid" dodges
+Data("dodge:standing::left", -2, "infected_dodge_stand_right_01", -1, 1) //IK disabled
+Data("dodge:standing::right", -2, "infected_dodge_stand_right_02", -1, 1) //IK disabled
+Data("dodge:standing::right", -2, "infected_dodge_stand_counterattack_01", -1, 1) //IK disabled
+Data("dodge:standing::right", -2, "infected_dodge_stand_counterattack_02", -1, 1) //IK disabled
+Data("dodge:standing::right", -2, "infected_dodge_stand_counterattack_03", -1, 1) //IK disabled
+Data("dodge:standing::left", -2, "infected_dodge_stand_left_01", -1, 1) //IK disabled
+Data("dodge:standing::left", -2, "infected_dodge_stand_left_02", -1, 1) //IK disabled
+Data("dodge:standing::left", -2, "infected_dodge_stand_counterattack_01_mirror", -1, 1) //IK disabled
+Data("dodge:standing::left", -2, "infected_dodge_stand_counterattack_02_mirror", -1, 1) //IK disabled
+Data("dodge:standing::left", -2, "infected_dodge_stand_counterattack_03", -1, 1) //IK disabled
+Data("dodge:standing::high", -2, "infected_dodge_stand_right_01", -1, 1) //IK disabled
+Data("dodge:standing::high", -2, "infected_dodge_stand_right_02", -1, 1) //IK disabled
+Data("dodge:standing::high", -2, "infected_dodge_stand_left_01", -1, 1) //IK disabled
+Data("dodge:standing::high", -2, "infected_dodge_stand_left_02", -1, 1) //IK disabled
+Data("dodge:standing::high", -2, "infected_dodge_stand_counterattack_01", -1, 1) //IK disabled
+Data("dodge:standing::high", -2, "infected_dodge_stand_counterattack_01_mirror", -1, 1) //IK disabled
+Data("dodge:standing::high", -2, "infected_dodge_stand_counterattack_02", -1, 1) //IK disabled
+Data("dodge:standing::high", -2, "infected_dodge_stand_counterattack_02_mirror", -1, 1) //IK disabled
+Data("dodge:standing::high", -2, "infected_dodge_stand_counterattack_03", -1, 1) //IK disabled
+
+Data("dodge:standing::low", -2, "Infected_dodge_back_01", -1, 1) //IK disabled
+Data("dodge:standing::low", -2, "Infected_dodge_back_02", -1, 1) //IK disabled
+Data("dodge:standing::low", -2, "infected_dodge_stand_back_01", -1, 1) //IK disabled
+
+!include("infected_data_params.scr")

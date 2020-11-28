@@ -1,0 +1,12 @@
+Description("s_clouds", "f:EDIT|GATHER;e:EDIT|SHOW_DESCRIPTION|BROWSE_FILE;p:dds;c:Clouds;d:Texture;" )
+Description("f_clouds_opacity", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION;m:0.0;s:0.01;x:1.0;c:Clouds;d:Opacity;" )
+Description("f_clouds_v_min", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION;m:0.0;s:0.01;x:1.0;c:Clouds;d:Texture V min;" )
+Description("f_clouds_v_max", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION;m:0.0;s:0.01;x:1.0;c:Clouds;d:Texture V max;" )
+
+Description("f_clouds_dynamic_on", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION;m:0.0;s:0.01;x:1.0;c:Clouds Dynamic;d:Toggle;" )
+Description("s_clouds_dynamic", "f:EDIT|GATHER;e:EDIT|SHOW_DESCRIPTION|BROWSE_FILE;p:dds;c:Clouds Dynamic;d:Texture;" )
+Description("f_clouds_dynamic_height", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION;m:0;s:100;x:10000;c:Clouds Dynamic;d:Height [m];" )
+Description("f_clouds_dynamic_height_scale", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION;m:0;s:100;x:10000;c:Clouds Dynamic;d:Height scale;" )
+Description("f_clouds_dynamic_depth_blending", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION;m:0;s:100;x:10000;c:Clouds Dynamic;d:Depth blending distance [m];" )
+Description("f_clouds_scale", "f:EDIT;e:EDIT|SPINNER|SHOW_DESCRIPTION;s:0.001;c:Clouds Dynamic;d:Texture scale;" )
+Description("f_clouds_speed", "f:EDIT;e:EDIT|SPINNER|SHOW_DESCRIPTION;s:0.1;c:Clouds Dynamic;d:Speed;" )

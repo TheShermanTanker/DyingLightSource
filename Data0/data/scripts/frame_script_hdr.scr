@@ -1,0 +1,129 @@
+// lighting mode
+export int LMODE_DEFAULT = 0;
+export int LMODE_DIRECT = 1;
+export int LMODE_INDIRECT = 2;
+
+sub SetHDR()
+{
+    //intensities
+    // float intensity_ambient_factor = 3.5;
+    // float intensity_shading_sun_factor = 2.5;
+    // float intensity_specular_sun_factor = 3.5;
+    //min 0, max 2, key 0.18
+
+    // float intensity_ambient_factor = 4.25;
+    // float intensity_shading_sun_factor = 3.25;
+    // float intensity_specular_sun_factor = 4.0;
+    float def_intensity_ambient_factor = 6.0;
+    float def_intensity_shading_sun_factor = 4.0;
+    float def_intensity_specular_sun_factor = 5.0;
+    //min 0.25, max 3, key 0.18, glow 0.5
+    
+    float def_intensity_shading_lights_ambient =  2.0;
+        
+    float def_intensity_shading_lights_factor = 2.5;
+    float def_intensity_specular_lights_factor = 3.0;
+    float def_intensity_fx_add_factor = 12.0;
+    float def_intensity_emissive_factor = 12.0;
+
+    float def_intensity_fog_factor = 4.0;
+    float def_intensity_sky_factor = 8.0;
+
+    ////////////
+
+    extern int i_lighting_mode;
+
+    float intensity_ambient_factor			= (i_lighting_mode == LMODE_DIRECT)   ? 0.0
+                                            : (i_lighting_mode == LMODE_INDIRECT) ? 1.0
+                                            : def_intensity_ambient_factor;
+    float intensity_shading_sun_factor		= (i_lighting_mode == LMODE_DIRECT)   ? def_intensity_shading_sun_factor
+                                            : (i_lighting_mode == LMODE_INDIRECT) ? 0.0001 
+                                            : def_intensity_shading_sun_factor;
+    float intensity_specular_sun_factor		= (i_lighting_mode == LMODE_DIRECT)   ? def_intensity_specular_sun_factor
+                                            : (i_lighting_mode == LMODE_INDIRECT) ? 0.0 
+                                            : def_intensity_specular_sun_factor;
+    
+    float intensity_shading_lights_ambient  = (i_lighting_mode == LMODE_DIRECT)   ? 0.0
+                                            : (i_lighting_mode == LMODE_INDIRECT) ? 1.0 
+                                            : def_intensity_shading_lights_ambient;
+        
+    float intensity_shading_lights_factor	= (i_lighting_mode == LMODE_DIRECT)   ? def_intensity_shading_lights_factor
+                                            : (i_lighting_mode == LMODE_INDIRECT) ? 0.0001
+                                            : def_intensity_shading_lights_factor;
+    float intensity_specular_lights_factor  = (i_lighting_mode == LMODE_DIRECT)   ? def_intensity_specular_lights_factor 
+                                            : (i_lighting_mode == LMODE_INDIRECT) ? 0.0
+                                            : def_intensity_specular_lights_factor;
+    float intensity_fx_add_factor			= (i_lighting_mode == LMODE_DIRECT)   ? 0.0 
+                                            : (i_lighting_mode == LMODE_INDIRECT) ? 0.0 
+                                            : def_intensity_fx_add_factor;
+    float intensity_emissive_factor			= (i_lighting_mode == LMODE_DIRECT)   ? def_intensity_emissive_factor 
+                                            : (i_lighting_mode == LMODE_INDIRECT) ? 0.0 
+                                            : def_intensity_emissive_factor;
+
+    float intensity_fog_factor				= def_intensity_fog_factor;
+    float intensity_sky_factor				= (i_lighting_mode == LMODE_INDIRECT) ? 0.0 : def_intensity_sky_factor;
+
+    ////////////
+
+    float f_hdr_intensity_max = 128.0;
+
+
+    Set("f_pp_hdr_intensity_specular_sun", intensity_specular_sun_factor / intensity_shading_sun_factor);
+    Set("f_pp_hdr_intensity_specular_lights", intensity_specular_lights_factor / intensity_shading_lights_factor);
+
+                
+    float f_hdr_intensity_max = pow(f_hdr_intensity_max, 1.0 / 2.2);
+    float intensity_shading_sun_factor = pow(intensity_shading_sun_factor, 1.0 / 2.2);
+    float intensity_ambient_factor = pow(intensity_ambient_factor, 1.0 / 2.2);
+    float intensity_shading_lights_ambient = pow(intensity_shading_lights_ambient, 1.0 / 2.2);
+    float intensity_sky_factor = pow(intensity_sky_factor, 1.0 / 2.2);
+    float intensity_fog_factor = pow(intensity_fog_factor, 1.0 / 2.2);
+    float intensity_emissive_factor = pow(intensity_emissive_factor, 1.0 / 2.2);
+    float intensity_fx_add_factor = pow(intensity_fx_add_factor, 1.0 / 2.2);
+    float intensity_shading_lights_factor = pow(intensity_shading_lights_factor, 1.0 / 2.2);
+
+    Set("f_pp_hdr_intensity_max", f_hdr_intensity_max);
+    Set("f_pp_hdr_intensity_sun_face", f_hdr_intensity_max);
+
+    //natural
+    Set("f_pp_hdr_intensity_shading_sun", intensity_shading_sun_factor);
+    Set("f_pp_hdr_intensity_sky", intensity_sky_factor);
+    Set("f_pp_hdr_intensity_fog", intensity_fog_factor);
+
+    //artificial
+    Set("f_pp_hdr_intensity_emissive", intensity_emissive_factor);
+    Set("f_pp_hdr_intensity_fx_add", intensity_fx_add_factor);
+    Set("f_pp_hdr_intensity_shading_lights", intensity_shading_lights_factor);
+
+    //do wyjebania
+    Set("f_pp_hdr_intensity_fx_lerp", 2.0);
+
+    Set("f_pp_hdr_intensity_flashlight", 1.0);
+
+    //inne
+    Set("f_pp_hdr_intensity_helpers", 1.0);
+
+    //auto exposure
+    extern float f_auto_exposure_key_value;
+    Set("f_pp_auto_exposure_key_value",f_auto_exposure_key_value);
+
+    extern float f_auto_exposure_min;
+    Set("f_pp_auto_exposure_min", f_auto_exposure_min * f_auto_exposure_key_value);
+
+    extern float f_auto_exposure_max;
+    Set("f_pp_auto_exposure_max", f_auto_exposure_max * f_auto_exposure_key_value);
+
+    extern float f_auto_exposure_white;
+    Set("f_pp_auto_exposure_white_inv_sqr", 1.0/(f_auto_exposure_white * f_auto_exposure_white));
+
+
+    extern float f_auto_exposure_adaptation_rate;
+    Set("f_pp_auto_exposure_adaptation_rate", f_auto_exposure_adaptation_rate);
+
+extern float f_ambient_mip;
+extern float f_game_ambient_factor;
+
+    Set("f_pp_hdr_intensity_ambient", intensity_ambient_factor * f_ambient_mip * f_game_ambient_factor);
+Set("f_ambient_mip", 0.0);
+    Set("f_pp_hdr_intensity_shading_lights_ambient", intensity_shading_lights_ambient );
+}

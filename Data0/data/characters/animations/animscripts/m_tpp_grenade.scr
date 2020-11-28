@@ -1,0 +1,104 @@
+!include("events.def")
+!include("anim_actions.def")
+
+//===================================== Molotov ============================================
+SeqTrack("M_TPP_Molotov_High_Stand", "M_TPP_Molotov_High_Stand.anm2"			, 0, 170, 30, 1, 0.3)
+SeqTrackAlias("TPP_Molotov_Stand", 	"M_TPP_Molotov_High_Stand")//"M_FPP_Molotov.anm2"				, 0, 60, 30, 1, 0.5)
+SeqTrackAlias("TPP_Molotov_ThrowBegin", 	"M_TPP_Molotov_High_Stand")
+SeqTrackAlias("TPP_Molotov_ThrowReady", 	"M_TPP_Molotov_High_Stand")
+
+SeqTrack("TPP_Molotov_ThrowAttack", 	"M_TPP_Molotov_High_Throw.anm2"			, 0, 65, 55, 1, 0.3)
+{	
+    Event(37, EVENT_THROWABLE_THROW, 1)
+	{
+		PlaySound23D(GameVolumeSource_SoundPlayer, "clothes_throw.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(45, END_ANIMATION, 1)
+}
+SeqTrack("TPP_Molotov_FastThrow", 	"M_TPP_Molotov_High_Throw.anm2"			, 0, 65, 50, 1, 0.3)
+{	
+	Event(36, EVENT_GRANADE_THROW, 1)
+	{
+		PlaySound23D(GameVolumeSource_SoundPlayer, "clothes_throw.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(37, EVENT_THROWABLE_THROW, 1)
+}
+SeqTrack("TPP_Molotov_BackThrowAttack", 			"M_TPP_Unarmed_LookBack.anm2",		0, 18, 30, 1, 0.1)
+{
+	Event(4, EVENT_GRANADE_THROW, 1)
+	{
+		PlaySound23D(GameVolumeSource_SoundPlayer, "clothes_throw.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(8, END_ANIMATION, 1)
+}
+
+//===================================== Grenade ============================================
+
+SeqTrackAlias("TPP_Grenade_ThrowBegin", "TPP_Molotov_ThrowBegin")
+SeqTrackAlias("TPP_Grenade_ThrowReady", "TPP_Molotov_ThrowReady")
+SeqTrackAlias("TPP_Grenade_ThrowAttack", "TPP_Molotov_ThrowAttack")
+SeqTrackAlias("TPP_Grenade_FastThrow", "TPP_Molotov_FastThrow")
+SeqTrackAlias("TPP_Grenade_BackThrowAttack", "TPP_Molotov_BackThrowAttack")
+
+/////
+SeqTrackAlias("TPP_Flare_ThrowBegin",       "TPP_Grenade_ThrowBegin")
+SeqTrackAlias("TPP_Flare_ThrowReady",       "TPP_Grenade_ThrowReady")
+SeqTrackAlias("TPP_Flare_ThrowAttack",      "TPP_Grenade_ThrowAttack")
+SeqTrackAlias("TPP_Flare_FastThrow",        "TPP_Grenade_FastThrow")
+SeqTrackAlias("TPP_Flare_BackThrowAttack", "TPP_Molotov_BackThrowAttack")
+
+//==================================== Decoys ==================================================
+SeqTrackAlias("TPP_Decoy_ThrowBegin",       "TPP_Grenade_ThrowBegin")
+SeqTrackAlias("TPP_Decoy_ThrowReady",       "TPP_Grenade_ThrowReady")
+SeqTrackAlias("TPP_Decoy_ThrowAttack",      "TPP_Grenade_ThrowAttack")
+SeqTrackAlias("TPP_Decoy_FastThrow",        "TPP_Grenade_FastThrow")
+SeqTrackAlias("TPP_Decoy_BackThrowAttack",  "TPP_Molotov_BackThrowAttack")
+//==================================== Decoys ==================================================
+SeqTrackAlias("TPP_Water_ThrowBegin",       "TPP_Grenade_ThrowBegin")
+SeqTrackAlias("TPP_Water_ThrowReady",       "TPP_Grenade_ThrowReady")
+SeqTrackAlias("TPP_Water_ThrowAttack",      "TPP_Grenade_ThrowAttack")
+SeqTrackAlias("TPP_Water_FastThrow",        "TPP_Grenade_FastThrow")
+SeqTrackAlias("TPP_Water_BackThrowAttack",  "TPP_Molotov_BackThrowAttack")
+
+SeqTrackAlias("TPP_Thrower_ThrowReady",	"TPP_Grenade_ThrowBegin")
+SeqTrackAlias("TPP_Thrower_ThrowBegin", "TPP_Grenade_ThrowReady")
+
+SeqTrack("TPP_Thrower_ThrowAttack", 	"M_TPP_KnifeThrow.anm2"			, 0, 18, 30, 1, 0.0)
+{	
+    Event(5, EVENT_THROWABLE_THROW, 1)	
+	{
+		PlaySound23D(GameVolumeSource_SoundPlayer, "clothes_throw.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(14, END_ANIMATION, 1)
+}
+SeqTrackAlias( "TPP_Thrower_FastThrow", "TPP_Thrower_ThrowAttack")
+SeqTrackAlias("TPP_Thrower_BackThrowAttack",  "TPP_Molotov_BackThrowAttack")
+
+//==================================== SquirrelSuit ==================================================
+SeqTrack("TPP_SquirrelSuit_Stand", 	"M_TPP_Unarmed_Swimming_Idle.anm2"	, 0, 5, 30, 1, 1.0)
+SeqTrackAlias("TPP_SquirrelSuit_ThrowBegin",  "FPP_Water_Stand")
+
+SeqTrack("TPP_SquirrelSuit_ThrowReady", 	"M_TPP_Unarmed_Swimming_Idle.anm2"	, 0, 5, 30, 1, 1.0)
+SeqTrack("TPP_SquirrelSuit_ThrowAttack", 	"M_TPP_Unarmed_Swimming_Idle.anm2"	, 0, 5, 90, 1, 1.0)
+{
+    Event(19, EVENT_THROWABLE_THROW, 1)
+	{
+		PlaySound23D(GameVolumeSource_SoundPlayer, "clothes_throw.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+}
+
+SeqTrack("TPP_SquirrelSuit_FastThrow", 	"M_TPP_Unarmed_Swimming_Idle.anm2"	, 0, 5, 30, 1, 1.0)
+{	
+	Event(26, EVENT_THROWABLE_THROW, 1)
+	{
+		PlaySound23D(GameVolumeSource_SoundPlayer, "clothes_throw.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+}
+SeqTrackAlias("TPP_SquirrelSuit_BackThrowAttack",  "FPP_Grenade_BackThrowAttack")
+
+//==================================== fireball ==================================================
+SeqTrackAlias("TPP_fireball_ThrowBegin",       "TPP_Grenade_ThrowBegin")
+SeqTrackAlias("TPP_fireball_ThrowReady",       "TPP_Grenade_ThrowReady")
+SeqTrackAlias("TPP_fireball_ThrowAttack",      "TPP_Grenade_ThrowAttack")
+SeqTrackAlias("TPP_fireball_FastThrow",        "TPP_Grenade_FastThrow")
+SeqTrackAlias("TPP_fireball_BackThrowAttack",  "TPP_Molotov_BackThrowAttack")

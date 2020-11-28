@@ -1,0 +1,198 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="old_town"
+     pxsl_line="3">
+    <!-- FireBees SideQuest -->
+    <!-- quest Firebees -parent=TalkToTroy -reward_set=Firebees_reward -quest_giver=Zack -difficulty=medium -->
+        <!-- ,show _ HumanAI Zack -->
+        <!--  -->
+        <!-- ,talk <<FIREBEES - Talk to Zack Start>> Zack Player_Firebees_USE -show=false  -->
+            <!-- ,debugpos SpawnPoint sp_Zack -->
+        <!-- ,wait _ 4 -->
+        <!-- ,talk <<talking with Spike>> voice2d Player_Firebees_01DLG01 -auto=true -show=false -->
+        <!--  -->
+        <!-- ,BLOCK _ -obj=&Firebees_OBJ_TalkToZack& -->
+            <!-- ,talk <<FIREBEES - Second talk with Zack>> Zack Player_Firebees_02DLG01 -show=true -follow=Zack_Firebees_INP -->
+                <!-- ,debugpos SpawnPoint sp_Zack -->
+            <!-- ,enable _ MapPortal Firebees_Portal_OldTown_TO_Sewers -->
+            <!-- ,checkpoint _ SpawnPoint sp_Zack -->
+        <!--  -->
+        <!-- ,BLOCK _ -obj=&Firebees_OBJ_FindTheSewersEntrance& -->
+            <!-- ,goto <<FIREBEES - Portal to Sewers>> MapPortal Firebees_Portal_OldTown_TO_Sewers -distance=5 -show=true -->
+                <!-- ,debugpos SpawnPoint sp_Parking_Sewers -->
+            <!-- ,checkpoint _ SpawnPoint sp_Parking_Sewers     -->
+    <!--  -->
+    <!-- quest Firebees_03 -parent=Firebees_02 -glued=true -leading_portal=Portal_Slums_TO_OldTown -->
+        <!--  -->
+        <!-- ,BLOCK _ -obj=&Firebees_OBJ_GetBackToZack& -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- -= unlock quick portal -->
+                    <!-- ,show _     MapPortal Firebees_QuickPortal_OldTown_TO_Slums -->
+                    <!-- ,disable _  MapPortal Firebees_Portal_OldTown_TO_Sewers -->
+                    <!-- ,enable _   MapPortal Firebees_QuickPortal_OldTown_TO_Slums -->
+                <!-- path     -->
+                    <!-- ,OR _ -->
+                        <!-- path -->
+                            <!-- ,cnd-quest-started _ CheckEmbers -finished=false -show=false -->
+                            <!-- ,use-lp _ NPCLifePlace LP_Zack_AfterHamidsMassacre -teleport=true -->
+                                <!-- ,ai HumanAI Zack -->
+                            <!-- ,semaphore _ -->
+                        <!-- path                 -->
+                            <!-- ,talk <<FIREBEES - Talk To Zack End>> Zack Player_Firebees_END -show=true -->
+                                <!-- ,debugpos SpawnPoint sp_Zack                -->
+                            <!-- ,reward _ Zack -->
+        <!-- ,show-multi _ -->
+            <!-- -= ,o AppearGroup ot_pursuit_breaker_lamp_01::ag -->
+            <!-- -= ,o AppearGroup ot_pursuit_breaker_lamp_02::ag -->
+            <!-- -= ,o AppearGroup ot_pursuit_breaker_lamp_03::ag -->
+            <!-- -= ,o AppearGroup ot_pursuit_breaker_lamp_04::ag -->
+            <!-- -= ,o AppearGroup ot_pursuit_breaker_lamp_05::ag -->
+            <!-- -= ,o AppearGroup ot_pursuit_breaker_lamp_06::ag -->
+            <!-- -= ,o AppearGroup ot_pursuit_breaker_lamp_07::ag -->
+            <!-- -= ,o AppearGroup ot_pursuit_breaker_lamp_08::ag -->
+            <!-- ,o AppearGroup ot_pursuit_breaker_car_01::ag -->
+            <!-- ,o AppearGroup ot_pursuit_breaker_car_02::ag -->
+            <!-- ,o AppearGroup ot_pursuit_breaker_car_03::ag -->
+            <!-- ,o AppearGroup ot_pursuit_breaker_car_04::ag -->
+            <!-- ,o AppearGroup ot_pursuit_breaker_car_05::ag -->
+            <!-- ,o AppearGroup ot_pursuit_breaker_car_06::ag -->
+            <!-- ,o AppearGroup ot_pursuit_breaker_car_07::ag -->
+            <!-- ,o AppearGroup ot_pursuit_breaker_car_08::ag -->
+            <!-- ,o AppearGroup ot_pursuit_breaker_car_07::ag -->
+            <!-- ,o AppearGroup ot_pursuit_breaker_car_08::ag -->
+        <!-- -=  -->
+        <!-- -= ,enable-multi _  -->
+            <!-- -= ,o QuestEnableGroup ot_pursuit_breaker_car_01::QEG -->
+            <!-- -= ,o QuestEnableGroup ot_pursuit_breaker_car_02::QEG -->
+            <!-- -= ,o QuestEnableGroup ot_pursuit_breaker_car_03::QEG -->
+            <!-- -= ,o QuestEnableGroup ot_pursuit_breaker_car_04::QEG -->
+            <!-- -= ,o QuestEnableGroup ot_pursuit_breaker_car_05::QEG -->
+            <!-- -= ,o QuestEnableGroup ot_pursuit_breaker_car_06::QEG -->
+            <!-- -= ,o QuestEnableGroup ot_pursuit_breaker_car_07::QEG -->
+            <!-- -= ,o QuestEnableGroup ot_pursuit_breaker_car_08::QEG -->
+            <!-- -= ,o QuestEnableGroup ot_pursuit_breaker_car_09::QEG -->
+            <!-- -= ,o QuestEnableGroup ot_pursuit_breaker_car_10::QEG -->
+            <!-- -= ,o QuestEnableGroup ot_pursuit_breaker_lamp_01::qeg -->
+            <!-- -= ,o QuestEnableGroup ot_pursuit_breaker_lamp_02::qeg -->
+            <!-- -= ,o QuestEnableGroup ot_pursuit_breaker_lamp_03::qeg -->
+            <!-- -= ,o QuestEnableGroup ot_pursuit_breaker_lamp_04::qeg -->
+            <!-- -= ,o QuestEnableGroup ot_pursuit_breaker_lamp_05::qeg -->
+            <!-- -= ,o QuestEnableGroup ot_pursuit_breaker_lamp_06::qeg -->
+            <!-- -= ,o QuestEnableGroup ot_pursuit_breaker_lamp_07::qeg -->
+            <!-- -= ,o QuestEnableGroup ot_pursuit_breaker_lamp_08::qeg -->
+        <!--  -->
+        <!-- ,set-multi _ -state=on -->
+            <!-- ,trigger PBreakerActivator ot_pursuit_breaker_car_01::pursuitbreaker_switch -->
+            <!-- ,trigger PBreakerActivator ot_pursuit_breaker_car_02::pursuitbreaker_switch -->
+            <!-- ,trigger PBreakerActivator ot_pursuit_breaker_car_03::pursuitbreaker_switch -->
+            <!-- ,trigger PBreakerActivator ot_pursuit_breaker_car_04::pursuitbreaker_switch -->
+            <!-- ,trigger PBreakerActivator ot_pursuit_breaker_car_05::pursuitbreaker_switch -->
+            <!-- ,trigger PBreakerActivator ot_pursuit_breaker_car_06::pursuitbreaker_switch -->
+            <!-- ,trigger PBreakerActivator ot_pursuit_breaker_car_07::pursuitbreaker_switch -->
+            <!-- ,trigger PBreakerActivator ot_pursuit_breaker_car_08::pursuitbreaker_switch -->
+            <!-- ,trigger PBreakerActivator ot_pursuit_breaker_car_09::pursuitbreaker_switch -->
+            <!-- ,trigger PBreakerActivator ot_pursuit_breaker_car_10::pursuitbreaker_switch -->
+            <!-- -= ,trigger PBreakerActivator ot_pursuit_breaker_lamp_01::Lamp_switch -->
+            <!-- -= ,trigger PBreakerActivator ot_pursuit_breaker_lamp_02::Lamp_switch -->
+            <!-- -= ,trigger PBreakerActivator ot_pursuit_breaker_lamp_03::Lamp_switch -->
+            <!-- -= ,trigger PBreakerActivator ot_pursuit_breaker_lamp_04::Lamp_switch -->
+            <!-- -= ,trigger PBreakerActivator ot_pursuit_breaker_lamp_05::Lamp_switch -->
+            <!-- -= ,trigger PBreakerActivator ot_pursuit_breaker_lamp_06::Lamp_switch -->
+            <!-- -= ,trigger PBreakerActivator ot_pursuit_breaker_lamp_07::Lamp_switch -->
+            <!-- -= ,trigger PBreakerActivator ot_pursuit_breaker_lamp_08::Lamp_switch -->
+        <!--  -->
+            <!--  -->
+        <!-- ,enable-multi _ -->
+            <!-- ,o PBreakerActivator ot_pursuit_breaker_car_01::pursuitbreaker_switch -->
+            <!-- ,o PBreakerActivator ot_pursuit_breaker_car_02::pursuitbreaker_switch -->
+            <!-- ,o PBreakerActivator ot_pursuit_breaker_car_03::pursuitbreaker_switch -->
+            <!-- ,o PBreakerActivator ot_pursuit_breaker_car_04::pursuitbreaker_switch -->
+            <!-- ,o PBreakerActivator ot_pursuit_breaker_car_05::pursuitbreaker_switch -->
+            <!-- ,o PBreakerActivator ot_pursuit_breaker_car_06::pursuitbreaker_switch -->
+            <!-- ,o PBreakerActivator ot_pursuit_breaker_car_07::pursuitbreaker_switch -->
+            <!-- ,o PBreakerActivator ot_pursuit_breaker_car_08::pursuitbreaker_switch -->
+            <!-- ,o PBreakerActivator ot_pursuit_breaker_car_09::pursuitbreaker_switch -->
+            <!-- ,o PBreakerActivator ot_pursuit_breaker_car_10::pursuitbreaker_switch -->
+            <!-- ,o PBreakerActivator ot_pursuit_breaker_lamp_01::Lamp_switch -->
+            <!-- ,o PBreakerActivator ot_pursuit_breaker_lamp_02::Lamp_switch -->
+            <!-- ,o PBreakerActivator ot_pursuit_breaker_lamp_03::Lamp_switch -->
+            <!-- ,o PBreakerActivator ot_pursuit_breaker_lamp_04::Lamp_switch -->
+            <!-- ,o PBreakerActivator ot_pursuit_breaker_lamp_05::Lamp_switch -->
+            <!-- ,o PBreakerActivator ot_pursuit_breaker_lamp_06::Lamp_switch -->
+            <!-- ,o PBreakerActivator ot_pursuit_breaker_lamp_07::Lamp_switch -->
+            <!-- ,o PBreakerActivator ot_pursuit_breaker_lamp_08::Lamp_switch -->
+        <!-- ,set-skin-multi _  -skin_name=Default -->
+            <!-- ,model_object PBreakerActivator ot_pursuit_breaker_car_01::pursuitbreaker_switch -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_01::door_right -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_01::door_left -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_01::trunk -->
+        <!--  -->
+        <!-- ,set-skin-multi _  -skin_name=Default -->
+            <!-- ,model_object PBreakerActivator ot_pursuit_breaker_car_02::pursuitbreaker_switch -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_02::door_right -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_02::door_left -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_02::trunk -->
+        <!--  -->
+        <!-- ,set-skin-multi _  -skin_name=Default -->
+            <!-- ,model_object PBreakerActivator ot_pursuit_breaker_car_03::pursuitbreaker_switch -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_03::door_right -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_03::door_left -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_03::trunk -->
+        <!--  -->
+        <!-- ,set-skin-multi _  -skin_name=Default -->
+            <!-- ,model_object PBreakerActivator ot_pursuit_breaker_car_04::pursuitbreaker_switch -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_04::door_right -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_04::door_left -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_04::trunk -->
+        <!--  -->
+        <!-- ,set-skin-multi _  -skin_name=Default -->
+            <!-- ,model_object PBreakerActivator ot_pursuit_breaker_car_05::pursuitbreaker_switch -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_05::door_right -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_05::door_left -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_05::trunk -->
+        <!--  -->
+        <!-- ,set-skin-multi _  -skin_name=Default -->
+            <!-- ,model_object PBreakerActivator ot_pursuit_breaker_car_06::pursuitbreaker_switch -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_06::door_right -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_06::door_left -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_06::trunk -->
+        <!--  -->
+        <!-- ,set-skin-multi _  -skin_name=Default -->
+            <!-- ,model_object PBreakerActivator ot_pursuit_breaker_car_07::pursuitbreaker_switch -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_07::door_right -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_07::door_left -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_07::trunk -->
+        <!--  -->
+        <!-- ,set-skin-multi _  -skin_name=Default -->
+            <!-- ,model_object PBreakerActivator ot_pursuit_breaker_car_08::pursuitbreaker_switch -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_08::door_right -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_08::door_left -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_08::trunk -->
+        <!--  -->
+        <!-- ,set-skin-multi _  -skin_name=Default -->
+            <!-- ,model_object PBreakerActivator ot_pursuit_breaker_car_09::pursuitbreaker_switch -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_09::door_right -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_09::door_left -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_09::trunk -->
+        <!--  -->
+        <!-- ,set-skin-multi _  -skin_name=Default -->
+            <!-- ,model_object PBreakerActivator ot_pursuit_breaker_car_10::pursuitbreaker_switch -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_10::door_right -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_10::door_left -->
+            <!-- ,model_object ModelObject ot_pursuit_breaker_car_10::trunk -->
+        <!-- ,checkpoint <<FIREBEES - End Quest Portal Check>>  SpawnPoint sp_Zack -->
+            <!-- ,debugpos SpawnPoint sp_Parking_Sewers -->
+    <!-- quest __Firebees_03_post -parent=Firebees_03 -->
+        <!-- ,OR _ -->
+            <!-- path -->
+                <!-- ,cnd-quest-started _ Q_BackToScavengers01 -finished=false -show=false -->
+            <!-- path -->
+                <!-- ,gather _ NPCLifePlace lp_Zack_at_ScavengersHub -distance=-25 -show=false -->
+                <!-- -= ,hide _ HumanAI Zack -->
+                <!-- -= ,gather _ NPCLifePlace LP_Zack_AfterHamidsMassacre -distance=-25 -show=false -->
+                <!-- -= ,use-lp _ NPCLifePlace LP_Zack_AfterHamidsMassacre -teleport=true -->
+                    <!-- -= ,ai HumanAI Zack -->
+                <!-- -= ,show _ HumanAI Zack -->
+        <!-- ,checkpoint _ SpawnPoint sp_Zack -->
+</QuestsDefinitions>

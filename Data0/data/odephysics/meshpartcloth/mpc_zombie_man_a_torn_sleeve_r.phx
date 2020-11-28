@@ -1,0 +1,86 @@
+!include("MeshPartCloth.def")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+MeshPartCloth()
+{
+//----------------------------------------------
+// bones
+//----------------------------------------------
+    BonesGridSize(3, 5)
+
+    $XDIST(f, -1)
+    $YDIST(f, -0.9)
+
+    Mode3D(0)
+    
+    Bone(0, 0, "bone_torso_jacket_z_r_sleeve_c_00", 1, XDIST, YDIST)
+    Bone(0, 1, "bone_torso_jacket_z_r_sleeve_c_01", 1, XDIST, YDIST)
+    Bone(0, 2, "bone_torso_jacket_z_r_sleeve_c_02", 1, XDIST, YDIST)
+    Bone(0, 3, "bone_torso_jacket_z_r_sleeve_c_03", 1, XDIST, YDIST)
+    Hook(0, 4, "bone_torso_jacket_z_r_sleeve_c_03", [0.07, 0, 0], XDIST, YDIST)
+
+    Bone(1, 0, "bone_torso_jacket_z_r_sleeve_b_00", 1, XDIST, YDIST)
+    Bone(1, 1, "bone_torso_jacket_z_r_sleeve_b_01", 0, XDIST, YDIST)
+    Bone(1, 2, "bone_torso_jacket_z_r_sleeve_b_02", 0, XDIST, YDIST)
+    Bone(1, 3, "bone_torso_jacket_z_r_sleeve_b_03", 0, XDIST, YDIST)
+    Bone(1, 4, "",                                  0, XDIST, YDIST)
+
+    Bone(2, 0, "bone_torso_jacket_z_r_sleeve_a_00", 1, XDIST, YDIST)
+    Bone(2, 1, "bone_torso_jacket_z_r_sleeve_a_01", 0, XDIST, YDIST)
+    Bone(2, 2, "bone_torso_jacket_z_r_sleeve_a_02", 0, XDIST, YDIST)
+    Bone(2, 3, "bone_torso_jacket_z_r_sleeve_a_03", 0, XDIST, YDIST)
+    Bone(2, 4, "",                                  0, XDIST, YDIST)
+
+//----------------------------------------------
+// collisions 
+//----------------------------------------------
+
+    CollisionSlide(1)
+    CollisionBounce(0)
+    CollisionSpeedMod(1)
+    
+    CollisionShapesMoveInfluence(1)
+    
+    CollisionSegmentDivision(0.2)
+    CollisionNormalAngleThreshold(190)
+    
+    NodeCollisionSphereRadius(0.1)
+    ExternalCollisionAffectMul(0)
+    
+    CollisionCapsule("r_forearm", -1, -1.5)
+    
+//----------------------------------------------
+// spring params 
+//----------------------------------------------
+
+    Viscous(1)
+    AirFriction(1)
+
+    StructuralStiffness(8000, 4000)
+    ShearStiffness(5000, 2000)
+    FlexionStiffness(500, 100)    
+    
+    HorizontSpringRatio(1)
+    
+    CheckLengthsStepsPerSec(0)
+
+//----------------------------------------------
+// physical params 
+//----------------------------------------------
+    
+    Mass(1)
+    GravityMul(0.8)
+    WindInfluence(1)
+
+//----------------------------------------------
+// other params
+//----------------------------------------------
+
+    SynchroWithPhysics(0)
+    EnableAPBOut(1)
+    
+    ObjectMoveMul(1)
+    AnimationMoveMul(0.6)
+}
+
+

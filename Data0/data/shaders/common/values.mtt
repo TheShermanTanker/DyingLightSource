@@ -1,0 +1,501 @@
+import "EngineDefs.mth"
+
+export float zbuffer_max = 0.999999;
+
+//mask
+export int e_msk_off = 0;
+export int e_msk_white = 1;
+export int e_msk_black = 2;
+
+//shaodws
+export int i_shadowmaps_count = 4;
+export int e_shadows_none = 0;
+export int e_shadows_on = 1;
+export int e_shadows_cc = e_shadows_on;
+export int e_shadows_pp = 2;
+export int e_shadows_on_simple = 3; //no filtering
+export int e_shadows_cc_simple = e_shadows_on_simple; //no filtering
+export int e_shadows_pp_simple = 4; //pp blurred
+export int e_shadows_def = e_shadows_none;
+
+export bool OFF = FALSE;
+export bool ON = TRUE;
+
+//Techniques
+export string s_tech_std = "std";
+export string s_tech_opq0 = "opq0";
+export string s_tech_opq = "opq";
+export string s_tech_opq2 = "opq2";
+export string s_tech_opq_clr = "opq_clr";
+export string s_tech_opq_nrm = "opq_nrm";
+export string s_tech_opq_nrm_diff = "opq_nrm_diff";
+export string s_tech_trn0 = "trn0";
+export string s_tech_trn = "trn";
+export string s_tech_trn2 = "trn2";
+export string s_tech_nrm = "nrm";
+export string s_tech_trn_blur = "trn_blur";
+
+export string s_tech_shd = "zfill";
+export string s_tech_dpt = "dpt";
+export string s_tech_lit = "lit";
+export string s_tech_lit_simple = "lit_simple";
+export string s_tech_amb_0 = "amb_0";
+export string s_tech_amb_1 = "amb_1";
+export string s_tech_amb_2 = "amb_2";
+export string s_tech_amb_3 = "amb_3";
+export string s_tech_rfr = "rfr";
+
+export string s_tech_vfb = "vfb";
+export string s_tech_ufb = "ufb";
+
+export string s_tech_glow_0 = "glow_0";
+export string s_tech_glow_1 = "glow_1";
+export string s_tech_csl = "csl";
+
+export string s_tech_def = "";
+
+//texture parametres
+export string s_tex_def = "DefaultTexture.dds";
+export int e_tex_quality_def = DONT_CARE;                           //na varliste
+export int e_tex_filter_def = LINEAR_MIP_LINEAR;            //na varliste
+export int i_tex_aniso_def = 4;                         //na varliste
+export int e_tex_tile_def = WRAP;
+export bool b_tex_srgb_on_def = FALSE;
+
+export float fHeightScale_DEFAULT = 0.0;
+export float fAlphaTestValue_DEFAULT = 0.0;
+
+//position space - keep it synchronized with Defines.hlsl
+export int Model = 0;
+export int World = 1;
+export int Instance = 2;
+export int Camera = 3;
+export int Shore = 4;
+export int Bucket = 5;
+export int FX_World = 6;
+export int FX_Camera = 7;
+
+//shader qualitys
+export int High = 0;
+export int Normal = 1;
+export int Low = 2;
+export int VeryLow = 3;
+
+//reflection
+export int Global = 1;
+export int File = 2;
+export int EnvProbe = 3;
+export int Realtime = 4;
+
+export int Vertex = 1;
+export int Pixel = 2;
+
+//extern string s_env;
+//export string sCubemap_DEFAULT = s_env;
+
+export mtx m_xform_def = scale(1.0);
+
+export bool b_burn_on_def = FALSE;
+
+export int iVertexBlending_Const_Num = 768; // 216=3*72 bones,  768=3*256 bones
+export int iVertexMorphing_Const_Num = 40;
+
+export int i_cst_def = -1;
+export string s_cst_name = "CST_";
+export string s_const_name = "CONST_";
+
+export string s_cst_i_name = "CST_I_";
+export string s_const_int_name = "CONST_INT_";
+export int i_const_int_first = 1;
+
+//const num
+export int i_const_first = 100;
+int i_const_current = i_const_first;
+
+int i_const_current = i_const_current - 1; //substract size of i_const_ambient
+export int i_const_ambient = i_const_current;
+
+int i_const_current = i_const_current - 1; //substract size of i_const_ambient_cam
+export int i_const_ambient_cam = i_const_current;
+
+int i_const_current = i_const_current - 1; //substract size of i_const_ambient_cam
+export int i_const_ambient_cam_a = i_const_current;
+
+int i_const_current = i_const_current - 1; //substract size of i_const_ambient_cam
+export int i_const_ambient_cam_a_dir = i_const_current;
+
+int i_const_current = i_const_current - 1; //substract size of i_const_ambient_cam
+export int i_const_ambient_cam_b = i_const_current;
+
+int i_const_current = i_const_current - 1; //substract size of i_const_ambient_cam
+export int i_const_ambient_cam_b_dir = i_const_current;
+
+int i_const_current = i_const_current - 1; //substract size of i_const_ambient_cam_back
+export int i_const_ambient_cam_back = i_const_current;
+
+int i_const_current = i_const_current - 1; //substract size of i_const_ambient_down
+export int i_const_ambient_down = i_const_current;
+
+int i_const_current = i_const_current - 1; //substract size of i_const_ambient_top
+export int i_const_ambient_top = i_const_current;
+
+int i_const_current = i_const_current - 1; //substract size of i_const_ambient_top_params
+export int i_const_ambient_top_params = i_const_current;
+
+int i_const_current = i_const_current - 1; //substract size of i_const_light_color_specular_power
+export int i_const_light_color_specular_power = i_const_current;
+
+int i_const_current = i_const_current - 1; //substract size of i_const_light_color_light_intensity
+export int i_const_light_color_light_intensity = i_const_current;
+
+int i_const_current = i_const_current - 1; //substract size of i_const_shadows_clouds_pos_scale_bias
+export int i_const_shadows_clouds_pos_scale_bias = i_const_current;
+
+int i_const_current = i_const_current - 1; //substract size of i_const_shadows_clouds_uv_scale_bias
+export int i_const_shadows_clouds_uv_scale_bias = i_const_current;
+
+int i_const_current = i_const_current - 1; //substract size of i_const_shadows_fade_params
+export int i_const_shadows_fade_params = i_const_current;
+
+int i_const_current = i_const_current - 1; //substract size of i_const_ambient_occlusion_scale
+export int i_const_ambient_occlusion_scale = i_const_current;
+
+int i_const_current = i_const_current - 3; //substract size of i_const_fade
+export int i_const_fade = i_const_current;
+
+int i_const_current = i_const_current - 1; //substract size of i_const_sky_shadings
+export int i_const_sky_shadings = i_const_current;
+
+int i_const_current = i_const_current - 1; //substract size of i_const_up_dir_cs
+export int i_const_up_dir_cs = i_const_current;
+
+int i_const_current = i_const_current - 1; //substract size of i_const_pp_buffers_scale
+export int i_const_pp_buffers_scale = i_const_current;
+
+int i_const_current = i_const_current - 1; //substract size of i_const_flat_color_ps
+export int i_const_flat_color_ps = i_const_current;
+
+int i_const_current = i_const_current - 4; //substract size of i_const_shadow_xform_0
+export int i_const_shadow_xform_0 = i_const_current;
+
+int i_const_current = i_const_current - 4; //substract size of i_const_shadow_xform_1
+export int i_const_shadow_xform_1 = i_const_current;
+
+int i_const_current = i_const_current - 4; //substract size of i_const_shadow_xform_2
+export int i_const_shadow_xform_2 = i_const_current;
+
+int i_const_current = i_const_current - 4; //substract size of i_const_shadow_xform_3
+export int i_const_shadow_xform_3 = i_const_current;
+
+int i_const_current = i_const_current - 1; //substract size of i_const_material_id_params
+export int i_const_material_id_params = i_const_current;
+
+int i_const_current = i_const_current - 1; //substract size of i_const_sun_dir_cs
+export int i_const_sun_dir = i_const_current;
+
+//tex
+//export int e_clr_filter_def = ANISOTROPIC_MIP_LINEAR;
+export int e_clr_filter_def = ANISOTROPIC_MIP_POINT;
+//export int e_clr_filter_def = LINEAR_MIP_LINEAR;
+export bool b_clr_srgb_on_def = TRUE;
+export int e_nrm_filter_def = LINEAR_MIP_LINEAR;
+export int e_nrm_srf_filter_def = LINEAR_MIP_LINEAR;
+
+//postporcess
+export int i_user_map_pp_shd_simple = 3;
+export int i_user_map_pp_gloss = 5;
+export int i_user_map_pp_def = 8;
+export int i_user_map_pp_terrain_clr = 12;
+
+export int i_user_map_pp_hdr = 11;
+export int i_user_map_pp_shd = 12;
+
+export int i_um_shadows = 255;
+export int i_um_overlay = 254;
+export int i_um_curves = 253;
+export int i_um_clr = 252;
+export int i_um_nrm = 251;
+export int i_um_prv = 250;
+export int i_um_dpt = 249;
+export int i_um_dpt_2 = 248; //obsolete, free
+export int i_um_dpt_4 = 247;
+export int i_um_dif = 246;
+export int i_um_spc = 245;
+export int i_um_nrm_waves = 244;
+export int i_um_env = 243;
+export int i_um_env_glassy = 242;
+export int i_um_env_metallic = 241;
+export int i_um_env_plastic = 240;
+export int i_um_fx_weapon_trail = 239;
+export int i_um_player_reflection = 238;
+export int i_um_moon = 237;
+export int i_um_sun_gradient = 236;
+export int i_um_stars = 235;
+export int i_um_screen_drops_splat = 234;
+export int i_um_overlay_add_effect_0 = 233;
+export int i_um_avg = 232;
+export int i_um_clouds = 231;
+export int i_um_clouds_dynamic = 230;
+export int i_um_hdr_buffer_copy = 229;
+export int i_um_overlay_map = 228;
+export int i_um_overlay_weather_0 = 227;
+export int i_um_overlay_weather_1 = 226;
+export int i_um_overlay_weather_2 = 225;
+export int i_um_overlay_weather_3 = 224;
+export int i_um_overlay_sensor = 223;
+export int i_um_overlay_movie = 222;
+export int i_um_overlay_effect_0 = 221;
+export int i_um_overlay_effect_1 = 220;
+export int i_um_overlay_effect_2 = 219;
+export int i_um_overlay_effect_3 = 218;
+export int i_um_overlay_effect_4 = 217;
+export int i_um_overlay_effect_5 = 216;
+export int i_um_overlay_effect_6 = 215;
+export int i_um_overlay_effect_7 = 214;
+export int i_um_overlay_game = 213;
+export int i_um_fade_pp_clr = 212;
+export int i_um_fade_pp_msk = 211;
+// RESERVED 210:	see: EngineDefs.mth
+// RESERVED 209:	see: EngineDefs.mth
+// RESERVED 208:	see: EngineDefs.mth
+export int i_um_clouds_msk = 207; //sky clouds mask
+export int i_um_fx_lighting = 206;
+export int i_um_dpt_2_min = 205;
+export int i_um_dpt_2_max = 204;
+export int i_um_dpt_2_avg = 203;
+
+//shader paths
+export string s_hlsl_profile_dx9 = "3_0";
+export string s_hlsl_profile_x360 = "3_1";
+export string s_hlsl_profile_dx10 = "4_0";
+
+export string s_hlsl_profile_def = s_hlsl_profile_dx9;
+
+//defines
+export string __none = "";
+export string s_empty = "";
+
+//lighting
+export string s_req_falloff = "REQ_FALLOFF";
+export string s_req_falloff_ps = s_req_falloff + "_PS";
+export string s_req_falloff_vx = s_req_falloff + "_PS";
+
+export string s_falloff = "v_falloff";
+export string s_falloff_in = s_falloff + "_in";
+export string s_falloff_in_define = uppercase( s_falloff_in );
+
+export string s_falloff_in_1 = s_falloff_in + ".x";
+export string s_falloff_in_2 = s_falloff_in + ".y";
+export string s_falloff_in_3 = s_falloff_in + ".z";
+export string s_falloff_in_4 = s_falloff_in + ".w";
+
+export string s_falloff_out = s_falloff + "_out";
+export string s_falloff_out_define = uppercase( s_falloff_out );
+
+export string s_falloff_out_1 = s_falloff_out + ".x";
+export string s_falloff_out_2 = s_falloff_out + ".y";
+export string s_falloff_out_3 = s_falloff_out + ".z";
+export string s_falloff_out_4 = s_falloff_out + ".w";
+
+
+export string s_fade = "fade";
+export string s_fade_struct = "fade_struct";
+export string s_fade_0_field = "v_0";
+export string s_fade_1_field = "v_1";
+export string s_fade_2_field = "v_2";
+
+export string s_fade_0 = s_fade + "." + s_fade_0_field + ".x";
+export string s_fade_0_inv = s_fade + "." + s_fade_0_field + ".y";
+export string s_fade_1 = s_fade + "." + s_fade_1_field + ".x";
+export string s_fade_1_inv = s_fade + "." + s_fade_1_field + ".y";
+export string s_fade_2 = s_fade + "." + s_fade_2_field + ".x";
+export string s_fade_2_inv = s_fade + "." + s_fade_2_field + ".y";
+
+export float f_spc_power_def = 1.0;
+
+export string s_clr = "IN.v_clr";
+export string s_lit_clr_cst = s_const_name + i_const_light_color_specular_power;
+export string s_lit_clr_int_cst = s_const_name + i_const_light_color_light_intensity;
+export string s_lit_clr = "IN.c_lit.v_clr";
+export string s_lit_clr_int = "IN.c_lit.v_clr_int";
+export string s_shn = "IN.f_shn";
+
+export string s_fad_0 = "IN.f_fad_0";
+
+export string s_amb = "v_amb";
+export string s_amb_clr = "v_amb.xyz";
+export string s_amb_shading = "v_amb.w";
+export string s_amb_shaded = "(" + s_amb_clr + "*" + s_amb_shading + ")";
+
+export string s_amb_top = "v_amb_top";
+export string s_amb_top_clr = s_amb_top + ".xyz";
+export string s_amb_top_shading = s_amb_top + ".w";
+export string s_amb_top_shaded = "(" + s_amb_top_clr + "*" + s_amb_top_shading + ")";
+
+export string s_amb_down = "v_amb_down";
+export string s_amb_down_clr = s_amb_down + ".xyz";
+export string s_amb_down_shading = s_amb_down + ".w";
+export string s_amb_down_shaded = "(" + s_amb_down_clr + "*" + s_amb_down_shading + ")";
+
+export string s_amb_cam = "v_amb_cam";
+export string s_amb_cam_clr = "v_amb_cam.xyz";
+export string s_amb_cam_shading = "v_amb_cam.w";
+export string s_amb_cam_shaded = "(" + s_amb_cam_clr + "*" + s_amb_cam_shading + ")";
+export string s_amb_cam_shading_fade = s_amb_cam_shading + " * " + s_fade_1;
+export string s_amb_cam_shaded_fade = "(" + s_amb_cam_clr + "*" + s_amb_cam_shading_fade + ")";
+
+export string s_amb_cam_a = "v_amb_cam_a";
+export string s_amb_cam_a_clr = "v_amb_cam_a.xyz";
+export string s_amb_cam_a_shading = "v_amb_cam_a.w";
+export string s_amb_cam_a_shaded = "(" + s_amb_cam_a_clr + "*" + s_amb_cam_a_shading + ")";
+export string s_amb_cam_a_shading_fade = s_amb_cam_a_shading + " * " + s_fade_1;
+export string s_amb_cam_a_shaded_fade = "(" + s_amb_cam_a_clr + "*" + s_amb_cam_a_shading_fade + ")";
+
+export string s_amb_cam_b = "v_amb_cam_b";
+export string s_amb_cam_b_clr = "v_amb_cam_b.xyz";
+export string s_amb_cam_b_shading = "v_amb_cam_b.w";
+export string s_amb_cam_b_shaded = "(" + s_amb_cam_b_clr + "*" + s_amb_cam_b_shading + ")";
+export string s_amb_cam_b_shading_fade = s_amb_cam_b_shading + " * " + s_fade_1;
+export string s_amb_cam_b_shaded_fade = "(" + s_amb_cam_b_clr + "*" + s_amb_cam_b_shading_fade + ")";
+
+export string s_amb_tex = "v_amb_tex";
+export string s_amb_tex_clr = "v_amb_tex.xyz";
+export string s_amb_tex_shading = "1.0";
+export string s_amb_tex_shaded = s_amb_tex_clr;
+export string s_amb_tex_shading_fade = s_amb_tex_shading;
+export string s_amb_tex_shaded_fade = s_amb_tex_clr;
+
+export string s_amb_cam_back = "v_amb_cam_back";
+export string s_amb_cam_back_clr = "v_amb_cam_back.xyz";
+export string s_amb_cam_back_shading = "v_amb_cam_back.w";
+export string s_amb_cam_back_shaded = "(" + s_amb_cam_back_clr + " * " + s_amb_cam_back_shading + ")";
+export string s_amb_cam_back_shading_fade = s_amb_cam_back_shading + " * " + s_fade_1;
+export string s_amb_cam_back_shaded_fade = "(" + s_amb_cam_back_clr + " * " + s_amb_cam_back_shading_fade + ")";
+
+
+//v3.3
+export string s_amb_rfl = s_amb_clr;
+export string s_amb_lod = s_amb_clr + " * " + s_amb_top_shading + " * " + s_amb_top_shading;
+export string s_amb_gen = s_amb_lod + " + " + s_amb_tex_clr;
+export string s_amb_all = s_amb_tex_clr;
+export string s_amb_all_fade_off = s_amb_tex_clr;
+
+export string s_amb_def = "(" + s_clr + "* IN.c_lit.v_amb )";
+
+export string s_dif_half_shading = "v_difs.x";
+export string s_dif_half_shaded = "(" + s_dif_half_shading + "*" + s_lit_clr + ")";
+
+export string s_dif_full_shading = "v_difs.y";
+export string s_dif_full_shaded = "(" + s_dif_full_shading + "*" + s_lit_clr + ")";
+
+export string s_dif_def = "(" + s_clr + "*" + s_dif_half_shaded + ")";
+
+export string s_spc_aniso = "v_spcs.x";
+export string s_spc_blinn= "v_spcs.y";
+export string s_spc_phong = "v_spcs.z";
+export string s_spc_multi = "v_spcs.w";
+
+
+export string s_spc_nofade_def = s_spc_multi + " * " + s_lit_clr;
+export string s_spc_def = "(" + s_spc_nofade_def + " * " + s_fade_2 + ")";
+
+export string s_sss = "f_sss";
+export string __sss_def =  s_clr + "*" + s_sss + "*" + s_lit_clr + " * IN.f_sss";
+
+export string __amb_def = __none;
+
+//export string __amb_0_def = s_amb_all;
+//export string __amb_1_def = s_amb_all;
+export string __amb_0_def = s_amb_lod;
+export string __amb_1_def = s_amb_lod;
+export string __amb_2_def = s_amb_lod;
+export string __amb_3_def = s_amb_lod;
+
+export string __amb_rfl_0_def = s_amb_rfl;
+export string __amb_rfl_1_def = s_amb_rfl;
+export string __amb_rfl_2_def = s_amb_rfl;
+export string __amb_rfl_3_def = s_amb_rfl;
+
+export string __lit_0_mat = s_amb_def + "+" + s_dif_def;
+export string __lit_1_mat = s_amb_def + "+" + s_dif_def;
+export string __lit_2_mat = s_amb_def + "+" + s_dif_def;
+export string __lit_3_mat = s_amb_def + "+" + s_dif_def;
+
+
+export string __lit_0_def = s_amb_def + "+" + s_dif_def + "+" + s_spc_def;
+export string __lit_1_def = s_amb_def + "+" + s_dif_def + "+" + s_spc_def;
+export string __lit_2_def = s_amb_def + "+" + s_dif_def + "+" + s_spc_def;
+export string __lit_3_def = s_amb_def + "+" + s_dif_def;
+
+export vec4 v_lit_clr_def = [ 1.0, 1.0, 1.0, 1.0 ];
+
+export bool b_projector_on_def = FALSE;
+
+//tex types
+export int e_tt_image     = -1; //file 2d
+export int e_tt_volume    = -2; //file 3d
+export int e_tt_lmap      = -3; //lightmap
+export int e_tt_cube      = -4; //cubemap file
+export int e_tt_cube_env  = -5; //cubemap from envprobe
+export int e_tt_cube_dyn  = -6; //cubemap dynamic/realtime
+export int e_tt_buffer_pp = -7; //postprocess buffer
+
+export int e_tt_image_f32     = -101; //file 2d (float32)
+export int e_tt_volume_f32    = -102; //file 3d (float32)
+export int e_tt_lmap_f32      = -103; //lightmap (float32)
+export int e_tt_cube_f32      = -104; //cubemap file (float32)
+export int e_tt_cube_env_f32  = -105; //cubemap from envprobe (float32)
+export int e_tt_cube_dyn_f32  = -106; //cubemap dynamic/realtime (float32)
+export int e_tt_buffer_pp_f32 = -107; //postprocess buffer (float32)
+
+export int e_tex_type_def = e_tt_image;
+
+export int e_type_mesh = 0;
+export int e_type_terrain = 1;
+export int e_type_grass = 3;
+export int e_type_terrain_lod = 4;
+export int e_type_fx_ws = 5;
+export int e_type_fx_cs = 6;
+export int e_type_water = 7;
+export int e_type_shore = 8;
+export int e_type_bucket = 9;
+
+export int e_type_def = e_type_mesh;
+
+
+export float FREE = 0.0;
+
+export int i_stencil_background = 0;
+export int i_stencil_sky = 255;
+export int i_stencil_dynamic = 64;
+
+
+export int e_int_8 = 0;
+export int e_int_16 = 1;
+export int e_float_8 = 2;
+export int e_float_16 = 3;
+export int e_float_32 = 4;
+
+
+//// WYWALIC /////////////////////////
+//HAKENS
+export string s_lt_none = "";
+export string s_lt_sun = "sun";
+export string s_lt_dir = "dir";
+export string s_lt_omni = "omni";
+export string s_lt_omniproj = "omniproj";
+export string s_lt_spot = "spot2proj";  //<---
+export string s_lt_envprobe = "envprobe";
+export string s_lt_lightmap = "lightmap";
+export string s_lt_omnidark = "omnidark";
+export string s_lt_spotproj = "spot2proj"; //<---
+export string s_lt_spot2 = "spot2proj"; //<---
+export string s_lt_spot2proj = "spot2proj";
+export string s_lt_spot_shadow = "spot2proj_shadow"; //<---
+export string s_lt_spotproj_shadow = "spot2proj_shadow"; //<---
+export string s_lt_spot2_shadow = "spot2proj_shadow"; //<---
+export string s_lt_spot2proj_shadow = "spot2proj_shadow";
+
+//new light types
+export string s_lt_volume_box = "volume_box";
+export string s_lt_volume_cylinder = "volume_cylinder";

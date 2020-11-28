@@ -1,0 +1,39 @@
+!include("ai_data.def")
+!include("ai_timing.def")
+
+!include("ai_goals.def")
+
+ShortHeadRotation()
+StrongAttractor()
+Invisible()
+PeriodBtwSpecialAnims(3)
+SnapDist(2)
+ReleaseDist(3)
+InteractionLevel(4)
+User("Man")
+
+Usage("ENCOUNTER")
+Usage("VIRTUAL_ATTRACTOR")
+
+DisableInteractAnim(TO_INTERACT)
+DisableInteractAnim(FROM_INTERACT)
+DisableInteractAnim(INTERACT)
+DisableInteractAnim(ALL_DIALOG)
+
+Slot("", 1, 1, 1, 0, 0, 0, 0, 0, 1, 1.5)
+{
+    LockPosition()
+    DynamicMesh("wn_baseballbat_a.msh", "R_HandHolder", "holder", "default", 1)
+    {
+        TimeBeforeRemove(1)
+    }
+    AiTypeDataSet("human")
+    {
+        Data("idle:standing:none:stand:none:none:none", -2, "npc_encounter_trap_defense_idle", -1, 1)
+        Data("idle:standing:none:idle:none:none:none", -2, "npc_encounter_trap_defense_idle", -1, 1)
+        Data("idle:standing:none:special_enemy:none:none:none", -2, "npc_encounter_trap_defense_special_enemy", -1, 1)
+        Data("idle:standing:none:special_enemy:none:none:none", -2, "npc_encounter_trap_defense_special_enemy_01", -1, 1)
+        Data("idle:standing:none:special_enemy:none:none:none", -2, "npc_encounter_trap_defense_special", -1, 1)
+    }
+}
+

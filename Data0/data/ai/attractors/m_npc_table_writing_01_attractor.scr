@@ -1,0 +1,36 @@
+!include("ai_data.def")
+!include("ai_timing.def")
+!include("ai_goals.def")
+
+ShortHeadRotation()
+StrongAttractor()
+InteractionDist(3)
+SnapDist(2)
+ReleaseDist(5)
+InteractionLevel(2)
+User("Man")
+
+DisabledTurnDuringActivity(ALL_INTERACT)
+
+Slot("", 1, 1, 1, 0, 0, 0, 0, 0, 1, 1.5)
+{
+	DynamicMesh("kid_crayon.msh", "R_HandHolder", "", "default", 1)
+    StaticMesh("slums_chair_a.msh", "itemholder11", "slums_chair_a", "m_npc_table_writing_01_Prepare", "default", 1)
+    {
+        Scale(0.86, 0.86, 0.86)
+    }
+
+    AiTypeDataSet("human")
+    {
+        Data("idle:standing:none:stand:none:prepare:none", -2, "m_npc_table_writing_01_Prepare", -1, 1)
+		
+        Data("idle:standing:none:stand:none:none:none", -2, "m_npc_table_writing_01_nointeract_a", -1, 1)
+        Data("idle:standing:none:idle:none:none:none", -2, "m_npc_table_writing_01_nointeract_a", -1, 1)
+	    Data("idle:standing:none:idle:none:none:none", -2, "m_npc_table_writing_01_nointeract_b", -1, 1)
+        Data("idle:standing:none:to_interact:none:none:none", -2, "m_npc_table_writing_01_to_interact", -1, 1)
+        Data("idle:standing:none:idle:none:none:none", -2, "m_npc_table_writing_01_nointeract_d", -1, 1)
+        Data("idle:standing:none:stand:none:none:finish", -2, "m_npc_table_writing_01_finish", -1, 1)
+        Data("idle:standing::stand:none:none:finish", -2, "m_npc_table_writing_01_finish", -1, 1)
+    }
+}
+

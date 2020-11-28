@@ -1,0 +1,762 @@
+!include("map_spawn.def")
+!include("common_spawn_pools.scr")
+!include("enemy_level_caps.scr")
+!include("common_crowd.scr")
+!include("common_area_pools_and_curves.scr")
+
+//Warning: All common settings should be added here!
+
+// ForceTargetType(i) can take 5 values
+// -1 - FForcedTarget::None
+//  0 - FForcedTarget::PlayerDoNotForceVisibility
+//  1 - FForcedTarget::PlayerOnce
+//  2 - FForcedTarget::Player
+//  3 - FForcedTarget::FakeTargetOnceNearContact
+//  4 - FForcedTarget::PlayerOnceNearContact
+
+///////////////////////////////////////////////////////////////////
+//Intensity curves
+///////////////////////////////////////////////////////////////////
+
+IntensityCurve("main_begin")
+{
+    UseCondition("Day;DeadZone_Far;Escorted_NPC_Far")
+    MaxChapterAndProgressCondition(1, 0)
+    DisallowedMaps("old_town_outposts_radio")    
+    DisallowedMaps("slums_cs")    
+    PoolType("base")    
+    IntensityKey(20, 5)
+    Wait(30)
+    IntensityKey(10, 15)
+    Wait(5)
+    IntensityKey(15, 5)
+    WaitForPlayerMove(60, 30)
+    Wait(15)
+}
+
+IntensityCurve("main_easy")
+{
+    UseCondition("Day;DeadZone_Far;Escorted_NPC_Far")
+    MinChapterAndProgressCondition(1, 0)
+    MaxChapterAndProgressCondition(13, 0)
+    DisallowedMaps("old_town_outposts_radio")
+    DisallowedMaps("slums_cs")
+    PoolType("base")
+    IntensityKey(15, 9)
+    WaitForPlayerMove(60, 30)
+    Wait(20)
+    PoolType("special")
+    IntensityKey(15, 30)
+    Wait(20)
+    IntensityKey(5, 9)
+    Wait(120)
+    PoolType("peak")
+    IntensityKey(10, 50)
+    Wait(5)
+    IntensityKey(15, 5)
+}
+
+IntensityCurve("main_medium")
+{
+    UseCondition("Day;DeadZone_Far;Escorted_NPC_Far")
+    DisallowedMaps("old_town_outposts_radio")
+    DisallowedMaps("slums_cs")
+    MinChapterAndProgressCondition(3, 0)
+    MaxChapterAndProgressCondition(13, 0)
+    MinTimeBtwUses(200.)
+    PoolType("base")
+    IntensityKey(15, 9)
+    WaitForPlayerMove(60, 30)
+    Wait(20)
+    PoolType("special")
+    IntensityKey(15, 40)
+    Wait(20)
+    IntensityKey(5, 9)
+    Wait(120)
+    PoolType("peak")
+    IntensityKey(10, 60)
+    Wait(5)
+    IntensityKey(15, 5)
+}
+
+IntensityCurve("main_hard")
+{
+    UseCondition("Day;Escorted_NPC_Far")
+    DisallowedMaps("old_town_outposts_radio")
+    DisallowedMaps("slums_cs")
+    MinChapterAndProgressCondition(5, 0)
+    MaxChapterAndProgressCondition(13, 0)
+    MinTimeBtwUses(200.)
+    PoolType("special")
+    IntensityKey(10, 60)
+    Wait(30)
+    PoolType("peak")
+    IntensityKey(10, 80)
+    Wait(15)
+    IntensityKey(15, 15)
+    PoolType("base")
+    WaitForPlayerMove(30, 40)
+}
+
+IntensityCurve("Special_HeadHunters")
+{
+    UseCondition("Day;Scavegers_Outpost_Far;Escorted_NPC_Far")
+    AllowedMaps("Old_Town")
+	BannedAreaAttribs("POOR_DISTRICT")
+    MinTimeBtwUses(600)
+    PoolType("head_hunters")
+    IntensityKey(10, 40)
+    Wait(15)
+    IntensityKey(10, 0)
+    Wait(10)
+}
+
+IntensityCurve("Special_Subs_District") //Curve used ONLY at SUBURBS_DISTRICT
+{
+    UseCondition("Day;Escorted_NPC_Far")
+    AllowedMaps("Old_Town")
+	RequiredAreaAttribs("SUBURBS_DISTRICT")
+    MinTimeBtwUses(60)
+    PoolType("suburbs_district_type")
+    IntensityKey(10, 60)
+    Wait(15)
+    IntensityKey(10, 0)
+    Wait(10)
+}
+
+IntensityCurve("Special_Poor_District") //Curve used ONLY at POOR_DISTRICT
+{
+    UseCondition("Day;Escorted_NPC_Far")
+    AllowedMaps("Old_Town")
+	RequiredAreaAttribs("POOR_DISTRICT")
+    MinTimeBtwUses(90)
+    PoolType("poor_district_type")
+    IntensityKey(10, 80)
+    Wait(15)
+    IntensityKey(10, 0)
+    Wait(10)
+}
+
+IntensityCurve("silient")
+{
+    UseCondition("Evening")
+    DisallowedMaps("slums_cs")
+    PoolType("empty")
+    IntensityKey(100, 0)
+    Wait(300)
+}
+
+IntensityCurve("escort")
+{
+    UseCondition("Day;Escorted_NPC_Near")
+    PoolType("empty")
+    IntensityKey(100, 0)
+    Wait(300)
+}
+
+
+IntensityCurve("#ERROR")
+{
+    UseCondition("Day;Night")
+    PoolType("empty")
+    IntensityKey(100, 0)
+    Wait(300)
+}
+
+
+///////////////////////////////////////////////////////////////////
+//NIGHT
+///////////////////////////////////////////////////////////////////
+IntensityCurve("night_lvl_0_easy")
+{    
+    UseCondition("Night;NightPrime_Far")
+    UseCondition("PlayerZombie_NotExist")
+    ConditionNightAggrLvl(0)
+    DisallowedMaps("slums_cs;Old_Town")
+    MaxChapterAndProgressCondition(3, 2)
+    PoolType("night")
+    IntensityKey(5, 30)
+    Wait(5)
+    IntensityKey(3, 150)
+    Wait(40)
+}
+
+
+IntensityCurve("night_lvl_1_easy")
+{    
+    UseCondition("Night")
+    UseCondition("PlayerZombie_NotExist")
+    DisallowedMaps("slums_cs;Old_Town")
+    ConditionNightAggrLvl(1)
+    MaxChapterAndProgressCondition(3, 2)
+    PoolType("night")
+    IntensityKey(1, 0)
+    Wait(3)
+    IntensityKey(3, 120)
+    Wait(30)
+    IntensityKey(1, 0)
+}
+
+IntensityCurve("night_lvl_2_easy")
+{    
+    UseCondition("Night")
+    UseCondition("PlayerZombie_NotExist")
+    DisallowedMaps("slums_cs;Old_Town")
+    ConditionNightAggrLvl(2)
+    MaxChapterAndProgressCondition(3, 2)
+    PoolType("night")
+    IntensityKey(1, 0)
+    Wait(3)
+    IntensityKey(3, 150)
+    Wait(30)
+    IntensityKey(1, 0)
+}
+
+IntensityCurve("night_lvl_3_easy")
+{    
+    UseCondition("Night")
+    UseCondition("PlayerZombie_NotExist")
+    DisallowedMaps("slums_cs;Old_Town")
+    ConditionNightAggrLvl(3)
+    MaxChapterAndProgressCondition(3, 2)
+    PoolType("night")
+    IntensityKey(1, 0)
+    Wait(3)
+    IntensityKey(3, 180)
+    Wait(30)
+    IntensityKey(1, 0)
+}
+
+IntensityCurve("night_lvl_4_easy")
+{    
+    UseCondition("Night")
+    UseCondition("PlayerZombie_NotExist")
+    DisallowedMaps("slums_cs;Old_Town")
+    ConditionNightAggrLvl(4)
+    MaxChapterAndProgressCondition(3, 2)
+    PoolType("night")
+    IntensityKey(1, 0)
+    Wait(3)
+    IntensityKey(3, 220)
+    Wait(30)
+    IntensityKey(1, 0)
+}
+
+IntensityCurve("night_lvl_5_easy")
+{    
+    UseCondition("Night")
+    UseCondition("PlayerZombie_NotExist")
+    DisallowedMaps("slums_cs;Old_Town")
+    ConditionNightAggrLvl(5)
+    MaxChapterAndProgressCondition(3, 2)
+    PoolType("night")
+    IntensityKey(1, 0)
+    Wait(3)
+    IntensityKey(3, 260)
+    Wait(30)
+    IntensityKey(1, 0)
+}
+
+IntensityCurve("night_lvl_0")
+{    
+    UseCondition("Night;NightPrime_Far")
+    UseCondition("PlayerZombie_NotExist")
+    ConditionNightAggrLvl(0)
+    DisallowedMaps("slums_cs;Old_Town")
+    MinChapterAndProgressCondition(3, 2)
+    PoolType("night")
+    IntensityKey(5, 30)
+    Wait(5)
+    IntensityKey(10, 200)
+    Wait(40)
+}
+
+IntensityCurve("night_lvl_0_prime_gouards")
+{    
+    UseCondition("Night;NightPrime_Near")
+    UseCondition("PlayerZombie_NotExist")
+    ConditionNightAggrLvl(0)
+    DisallowedMaps("slums_cs")
+    MinChapterAndProgressCondition(3, 2)
+    PoolType("night_prime_gouards")
+    IntensityKey(3, 200)
+    Wait(50)
+    PoolType("night")
+    IntensityKey(20, 100)
+    Wait(50)
+}
+
+
+IntensityCurve("night_lvl_1")
+{    
+    UseCondition("Night")
+    UseCondition("PlayerZombie_NotExist")
+    DisallowedMaps("slums_cs;Old_Town")
+    ConditionNightAggrLvl(1)
+    MinChapterAndProgressCondition(3, 2)
+    PoolType("night")
+    IntensityKey(1, 0)
+    Wait(3)
+    IntensityKey(3, 120)
+    Wait(30)
+    IntensityKey(1, 0)
+}
+
+IntensityCurve("night_lvl_2")
+{    
+    UseCondition("Night")
+    UseCondition("PlayerZombie_NotExist")
+    DisallowedMaps("slums_cs;Old_Town")
+    ConditionNightAggrLvl(2)
+    MinChapterAndProgressCondition(3, 2)
+    PoolType("night")
+    IntensityKey(1, 0)
+    Wait(3)
+    IntensityKey(3, 200)
+    Wait(30)
+    IntensityKey(1, 0)
+}
+
+IntensityCurve("night_lvl_3")
+{    
+    UseCondition("Night")
+    UseCondition("PlayerZombie_NotExist")
+    DisallowedMaps("slums_cs;Old_Town")
+    ConditionNightAggrLvl(3)
+    MinChapterAndProgressCondition(3, 2)
+    PoolType("night")
+    IntensityKey(1, 0)
+    Wait(3)
+    IntensityKey(3, 300)
+    Wait(30)
+    IntensityKey(1, 0)
+}
+
+IntensityCurve("night_lvl_4")
+{    
+    UseCondition("Night")
+    UseCondition("PlayerZombie_NotExist")
+    DisallowedMaps("slums_cs;Old_Town")
+    ConditionNightAggrLvl(4)
+    MinChapterAndProgressCondition(3, 2)
+    PoolType("night")
+    IntensityKey(1, 0)
+    Wait(3)
+    IntensityKey(3, 300)
+    Wait(30)
+    IntensityKey(1, 0)
+}
+
+IntensityCurve("night_lvl_5")
+{    
+    UseCondition("Night")
+    UseCondition("PlayerZombie_NotExist")
+    DisallowedMaps("slums_cs;Old_Town")
+    ConditionNightAggrLvl(5)
+    MinChapterAndProgressCondition(3, 2)
+    PoolType("night")
+    IntensityKey(1, 0)
+    Wait(3)
+    IntensityKey(3, 300)
+    Wait(30)
+    IntensityKey(1, 0)
+}
+
+IntensityCurve("night_lvl_0_ot")
+{    
+    UseCondition("Night;NightPrime_Far")
+    UseCondition("PlayerZombie_NotExist")
+    ConditionNightAggrLvl(0)
+    AllowedMaps("Old_Town")
+    PoolType("night")
+    IntensityKey(5, 30)
+    Wait(5)
+    IntensityKey(10, 200)
+    Wait(40)
+}
+
+IntensityCurve("night_lvl_1_ot")
+{    
+    UseCondition("Night")
+    UseCondition("PlayerZombie_NotExist")
+    AllowedMaps("Old_Town")
+    ConditionNightAggrLvl(1)
+    PoolType("night")
+    IntensityKey(1, 0)
+    Wait(3)
+    IntensityKey(3, 200)
+    Wait(30)
+    IntensityKey(1, 0)
+}
+
+IntensityCurve("night_lvl_2_ot")
+{    
+    UseCondition("Night")
+    UseCondition("PlayerZombie_NotExist")
+    AllowedMaps("Old_Town")
+    ConditionNightAggrLvl(2)
+    PoolType("night")
+    IntensityKey(1, 0)
+    Wait(3)
+    IntensityKey(3, 400)
+    Wait(30)
+    IntensityKey(1, 0)
+}
+
+IntensityCurve("night_lvl_3_ot")
+{    
+    UseCondition("Night")
+    UseCondition("PlayerZombie_NotExist")
+    AllowedMaps("Old_Town")
+    ConditionNightAggrLvl(3)
+    PoolType("night")
+    IntensityKey(1, 0)
+    Wait(3)
+    IntensityKey(3, 400)
+    Wait(30)
+    IntensityKey(1, 0)
+}
+
+IntensityCurve("night_lvl_4_ot")
+{    
+    UseCondition("Night")
+    UseCondition("PlayerZombie_NotExist")
+    AllowedMaps("Old_Town")
+    ConditionNightAggrLvl(4)
+    PoolType("night")
+    IntensityKey(1, 0)
+    Wait(3)
+    IntensityKey(3, 400)
+    Wait(30)
+    IntensityKey(1, 0)
+}
+
+IntensityCurve("night_lvl_5_ot")
+{    
+    UseCondition("Night")
+    UseCondition("PlayerZombie_NotExist")
+    AllowedMaps("Old_Town")
+    ConditionNightAggrLvl(5)
+    PoolType("night")
+    IntensityKey(1, 0)
+    Wait(3)
+    IntensityKey(3, 500)
+    Wait(30)
+    IntensityKey(1, 0)
+}
+
+
+
+///////////////////////////////////////////////////////////////////
+//NOISE
+///////////////////////////////////////////////////////////////////
+
+IntensityCurve("noise_chapter_0")
+{    
+    Event(1)
+    MaxChapterAndProgressCondition(1, 0)
+	UseCondition("Day")
+    UseCondition("InfectedsSpawn")
+    AllowedMaps("Slums;")
+    DirectionalSpawn(1)
+    PoolType("noise_chapter_0")
+    IntensityKey(1, 10)
+    Wait(10)
+    DirectionalSpawn(0)
+    IntensityKey(1, 0)
+    Wait(80)
+}
+
+IntensityCurve("noise_event_normal")
+{    
+    Event(1)
+    MinChapterAndProgressCondition(1, 0)
+	UseCondition("Day")
+    UseCondition("InfectedsSpawn")
+	UseCondition("HardMode_Off")
+    AllowedMaps("Slums;")
+    ConditionNoiseLvl(1)
+    PoolType("noise_lvl_1")
+    DirectionalSpawn(1)
+    IntensityKey(1, 30)
+    Wait(10)
+    DirectionalSpawn(0)
+    IntensityKey(1, 0)
+    Wait(20)
+    DirectionalSpawn(1)
+    IntensityKey(1, 50)
+    Wait(10)
+    DirectionalSpawn(0)
+    IntensityKey(1, 50)
+    Wait(20)
+    DirectionalSpawn(1)
+    IntensityKey(1, 200)
+    Wait(10)
+    DirectionalSpawn(0)
+    IntensityKey(20, 100)
+    Wait(10)
+    IntensityKey(20, 0)
+    Wait(40)
+}
+
+
+///////////////////////////////////////////////////////////////////
+//HOT GROUND
+///////////////////////////////////////////////////////////////////
+IntensityCurve("noise_hot_ground")
+{    
+    Event(1)
+    UseCondition("Day")
+    UseCondition("HotGround_On")
+    AllowedMaps("Old_Town;")
+    ConditionNoiseLvl(1)
+    PoolType("empty")    
+    Wait(1)
+    PlaySound("infected_spawn_far_ext_00.wav")
+    Wait(1)
+    PoolType("hot_ground_roof")
+    IntensityKey(5, 25)
+    PoolType("hot_ground")
+    Wait(10)
+	PoolType("hot_ground_roof")
+    PlaySound("infected_spawn_far_ext_00.wav")
+	IntensityKey(5, 35)
+    Wait(10)
+	PoolType("empty")
+    IntensityKey(20, 0)
+}
+
+IntensityCurve("noise_event_old_town")
+{    
+    Event(1)
+	UseCondition("Day")
+    MinChapterAndProgressCondition(1, 5)
+    UseCondition("InfectedsSpawn;HotGround_Off")
+    AllowedMaps("Old_Town;")
+    ConditionNoiseLvl(1)
+    PoolType("empty")    
+    Wait(1)
+    PlaySound("infected_spawn_far_ext_00.wav")
+    Wait(1)
+    PoolType("hot_ground_roof")
+    IntensityKey(5, 45)
+    PoolType("hot_ground")
+    Wait(10)
+	PoolType("hot_ground_roof")
+    PlaySound("infected_spawn_far_ext_00.wav")
+    Wait(20)
+	PoolType("empty")
+    IntensityKey(20, 0)
+}
+
+IntensityCurve("noise_event_lvl_1_interior")
+{    
+    Event(1)
+	UseCondition("Day")
+    MinChapterAndProgressCondition(1, 5)
+    UseCondition("InfectedsSpawn;HotGround_Off")
+    AllowedMaps("old_town_cleansing;slums_cl_flats;slums_cl_hangar;slums_cl_market;slums_cl_parking;slums_cl_sidetrack;slums_cl_tunnel;slums_cleansing;old_town_interior;old_town_interior_a;slums_int_projmayhem")
+    ConditionNoiseLvl(1)
+    PoolType("noise_lvl_1_interior")
+    DirectionalSpawn(1)
+    IntensityKey(1, 25)
+    Wait(10)
+    DirectionalSpawn(0)
+    IntensityKey(1, 0)
+    Wait(20)
+    DirectionalSpawn(1)
+    IntensityKey(1, 50)
+    Wait(10)
+    DirectionalSpawn(0)
+    IntensityKey(1, 25)
+    Wait(20)
+    DirectionalSpawn(1)
+    IntensityKey(1, 100)
+    Wait(10)
+    DirectionalSpawn(0)
+    IntensityKey(20, 50)
+    Wait(10)
+    IntensityKey(20, 0)
+    Wait(40)
+}
+
+///////////////////////////////////////////////////////////////////
+//DEAD ZONE
+///////////////////////////////////////////////////////////////////
+IntensityCurve("dead_zone")
+{
+    UseCondition("Day;DeadZone_Near;")
+    AllowedMaps("Old_Town")
+    PoolType("dead_zone")
+    IntensityKey(1, 70)
+    Wait(500)
+}
+
+///////////////////////////////////////////////////////////////////
+//SEWERS
+///////////////////////////////////////////////////////////////////
+IntensityCurve("sewers_day")
+{
+    UseCondition("Day")
+    AllowedMaps("old_town_outposts_radio")
+    PoolType("night")
+    IntensityKey(1, 80)
+    IntensityKey(15, 200)
+    Wait(5)
+    IntensityKey(10, 80)
+    Wait(5)
+}
+
+IntensityCurve("sewers_night")
+{
+    UseCondition("Night")
+    AllowedMaps("old_town_outposts_radio")
+    PoolType("base")
+    IntensityKey(1, 10)
+    IntensityKey(15, 20)
+    Wait(5)
+    IntensityKey(10, 10)
+    Wait(5)
+}
+
+///////////////////////////////////////////////////////////////////
+//HARD MODE
+///////////////////////////////////////////////////////////////////
+IntensityCurve("HARD_infected_wave_beg")
+{
+	MinProgressCondition(2)
+	MaxProgressCondition(6)
+    UseCondition("Day;DeadZone_Far;Escorted_NPC_Far")
+	UseCondition("HardMode_On")
+	MinTimeBtwUses(800.)
+    AllowedMaps("Old_Town")
+	AllowedMaps("Slums")
+    PoolType("infecteds_hard_mode")
+	PlaySound("infected_spawn_far_ext_00.wav")
+    IntensityKey(5, 20)
+    Wait(10)
+    IntensityKey(10, 0)
+    Wait(50)
+}
+
+IntensityCurve("HARD_infected_wave_med")
+{
+	MinProgressCondition(6)
+	MaxProgressCondition(8)
+    UseCondition("Day;DeadZone_Far;Escorted_NPC_Far")
+	UseCondition("HardMode_On")
+	MinTimeBtwUses(700.)
+    AllowedMaps("Old_Town")
+	AllowedMaps("Slums")
+    PoolType("infecteds_hard_mode")
+	PlaySound("infected_spawn_far_ext_00.wav")
+    IntensityKey(10, 30)
+    Wait(15)
+    IntensityKey(10, 0)
+    Wait(30)
+}
+
+IntensityCurve("HARD_infected_wave_fin")
+{
+	MinProgressCondition(8)
+    UseCondition("Day;DeadZone_Far;Escorted_NPC_Far")
+	UseCondition("HardMode_On")
+	MinTimeBtwUses(600.)
+    AllowedMaps("Old_Town")
+	AllowedMaps("Slums")
+    PoolType("infecteds_hard_mode")
+	PlaySound("infected_spawn_far_ext_00.wav")
+    IntensityKey(20, 60)
+    Wait(20)
+    IntensityKey(10, 0)
+    Wait(10)
+}
+
+
+
+IntensityCurve("HARD_main_storm_beg")
+{
+	MinProgressCondition(5)
+	MaxProgressCondition(7)
+    UseCondition("Day;DeadZone_Far;Escorted_NPC_Far")
+	UseCondition("HardMode_On")
+	MinTimeBtwUses(900.)
+	AllowedMaps("Old_Town")
+	AllowedMaps("Slums")
+    PoolType("infecteds_hard_mode")
+	PlaySound("infected_spawn_far_ext_00.wav")
+    IntensityKey(5, 10)
+    IntensityKey(20, 20)
+    IntensityKey(5, 0)
+    Wait(30)
+}
+
+IntensityCurve("HARD_main_storm_med")
+{
+	MinProgressCondition(7)
+	MaxProgressCondition(9)
+    UseCondition("Day;DeadZone_Far;Escorted_NPC_Far")
+	UseCondition("HardMode_On")
+	MinTimeBtwUses(900.)
+	AllowedMaps("Old_Town")
+	AllowedMaps("Slums")
+    PoolType("infecteds_hard_mode")
+	PlaySound("infected_spawn_far_ext_00.wav")
+    IntensityKey(5, 20)
+    IntensityKey(40, 30)
+    IntensityKey(5, 0)
+    Wait(30)
+}
+
+
+IntensityCurve("HARD_main_storm_fin")
+{
+	MinProgressCondition(9)
+    UseCondition("Day;DeadZone_Far;Escorted_NPC_Far")
+	UseCondition("HardMode_On")
+	MinTimeBtwUses(900.)
+	AllowedMaps("Old_Town")
+	AllowedMaps("Slums")
+    PoolType("infecteds_hard_mode")
+	PlaySound("infected_spawn_far_ext_00.wav")
+    IntensityKey(5, 25)
+    IntensityKey(60, 50)
+    IntensityKey(5, 0)
+    Wait(30)
+}
+
+
+///////////////////////////////////////////////////////////////////
+//NOISE HARD
+///////////////////////////////////////////////////////////////////
+
+IntensityCurve("noise_event_hard_mode")
+{    
+    Event(1)
+    MinChapterAndProgressCondition(1, 0)
+	UseCondition("Day")
+    UseCondition("HardMode_On")
+    AllowedMaps("Slums")
+    ConditionNoiseLvl(1)
+    PoolType("noise_lvl_1")
+    DirectionalSpawn(1)
+    IntensityKey(1, 75)
+    Wait(10)
+    DirectionalSpawn(0)
+    IntensityKey(1, 25)
+    Wait(20)
+    DirectionalSpawn(1)
+    IntensityKey(1, 100)
+    Wait(10)
+    DirectionalSpawn(0)
+    IntensityKey(1, 150)
+    Wait(20)
+    DirectionalSpawn(1)
+    IntensityKey(1, 200)
+    Wait(10)
+    DirectionalSpawn(0)
+    IntensityKey(20, 150)
+    Wait(10)
+    IntensityKey(20, 0)
+    Wait(40)
+}

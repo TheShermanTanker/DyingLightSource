@@ -1,0 +1,362 @@
+import "GameViewPresets.scr"
+
+// Post process has to be specified (using post_process keyword).
+// Camera mode is optional. Currently only valid value is "top".
+// Default camera mode is perspective.
+// 'render_collision_hulls' is optional. It shows collision hulls of all objects and trees that have 'move collisions' enabled.
+// 'render_dynamic_light_meshes' is optional. It shows meshes of all dynamic lights using material defined in 'lights.ini' file.
+// 'color_hulls_surface_id' is optional. It is used to color different surfaces with different colors.
+// There can be any number of:
+// - varlists
+// - filters
+//
+// In addition there can be different settings for different platforms (keyword 'platform').
+// Valid names of platforms are "low" and "high".
+// Per platform settings override default settings.
+// In case of varlists and filters - either all default filters (varlists) are used or all per platform ones. They cannot be combined.
+//
+// Example preset:
+//
+//preset("editor")
+//{
+//  post_process("editor_top");
+//  camera_mode("top");
+//  render_collision_hulls();
+//  varlist("varlist_file_name_1.scr");
+//  varlist("varlist_file_name_2.scr");
+//  varlist("varlist_file_name_n.scr");
+//  filter("filter_name_1", true);
+//  filter("filter_name_2", false);
+//  filter("filter_name_n", true);
+//
+//  platform("high")
+//  {
+//     post_process("editor");
+//  }
+//}
+//
+
+sub main()
+{
+    preset("Editor")
+    {
+        post_process("editor");
+    }
+
+	preset("Editor No Wind")
+    {
+        post_process("editor");
+		varlist("varlist_editor_nowind.scr");
+    }
+	
+	preset("Ambient/No Ambient")
+	{
+		// preset like editor but without ambient lighting
+		post_process("editor");
+		varlist("varlist_dev_no_ambient.scr");
+	}
+	// preset("Ambient/New Ambient") //TODO - to chyba nie bedze juz potrzebne - nowy ambient powinien byc widoczny w editor i normal
+	// {
+		// preset like editor but with new ambient lighting
+		// post_process("editor");
+		// varlist("varlist_dev_ambient.scr");
+	// }
+	preset("Ambient/Pure Ambient")
+	{
+		// new ambient only
+		post_process("editor");
+		varlist("varlist_dev_ambient_only.scr");
+	}
+	preset("Ambient/Direct lighting only")
+	{
+		// direct lighting only, sun + dynlights, no ambient, no AO
+		post_process("editor");
+		varlist("varlist_dev_direct.scr");
+		filter("Envprobe generation", true);
+	}
+	preset("Ambient/Indirect lighting only")
+	{
+		// indirect lighting only, no sun, no dynlights, yes ambient, no AO
+		post_process("editor");
+		varlist("varlist_dev_indirect.scr");
+		filter("Envprobe generation", true);
+	}
+	preset("Ambient/Direct lighting only normal")
+	{
+		// direct lighting only, sun + dynlights, no ambient, no AO
+		post_process("editor");
+		varlist("varlist_dev_direct.scr");
+		filter("Envprobe generation", true);
+	}
+	preset("Ambient/Indirect lighting only normal")
+	{
+		// indirect lighting only, no sun, no dynlights, yes ambient, no AO
+		post_process("editor");
+		varlist("varlist_dev_indirect.scr");
+		filter("Envprobe generation", true);
+	}
+	preset("Ambient/Direct lighting only indoor")
+	{
+		// direct lighting only, sun + dynlights, no ambient, no AO
+		post_process("indoor");
+		varlist("varlist_dev_direct.scr");
+		filter("Envprobe generation", true);
+	}
+	preset("Ambient/Indirect lighting only indoor")
+	{
+		// indirect lighting only, no sun, no dynlights, yes ambient, no AO
+		post_process("indoor");
+		varlist("varlist_dev_indirect.scr");
+		filter("Envprobe generation", true);
+	}
+
+	preset("Developer/Preview Generation")
+    {
+        post_process("editor");
+        varlist("varlist_lod_extra_far.scr");
+		varlist("varlist_no_fog.scr");
+    }
+
+	
+    preset("Normal")
+    {
+        post_process("normal");
+//TODO 		varlist("varlist_editor_pbr_on.scr");
+    }
+    preset("Developer/DX10")
+    {
+        post_process("dx10");
+    }
+    preset("Developer/Simple")
+    {
+        post_process("simple");
+    }
+	preset("Editor Top")
+	{
+        post_process("editor_top");
+        camera_mode("top");
+        varlist("varlist_dev_top.scr");
+    }
+
+    preset("Developer/Editor Top Screenshots")
+	{
+        post_process("editor_top");
+        camera_mode("top");
+        varlist("varlist_dev_top_screenshots.scr");
+        filter("Top screenshots", true);
+    }
+    preset("Developer/Editor Top Map Generation")
+	{
+        post_process("simple");
+        camera_mode("top");
+        varlist("varlist_dev_map_generation.scr");
+        filter("Top screenshots", true);
+    }
+
+
+    preset("Editor/Collision Hulls")
+    {
+        post_process("editor");
+		render_collision_hulls();
+	}
+	preset("Editor/Trace Hulls")
+    {
+        post_process("editor");
+		render_trace_hulls();
+        color_hulls_surface_id();
+    }
+    preset("Editor/Collision Hulls (color surface id)")
+    {
+        post_process("editor");
+		render_collision_hulls();
+        color_hulls_surface_id();
+    }
+    preset("Editor/Cube map generation")
+    {
+        post_process("editor");
+		varlist("varlist_cubemap_gen.scr");
+    }
+
+    preset("Editor/Dynamic Lights")
+    {
+        post_process("editor");
+		render_dynamic_light_meshes();
+    }
+    preset("Editor/Texture density")
+    {
+        post_process("simple");
+        special_render_mode("texture density");
+    }
+	preset("Editor/Valid")
+	{
+		post_process("editor");
+		filter("Helpers", true);
+		filter("Validation", true);
+	}
+    preset("Indoor")
+    {
+        post_process("indoor");
+    }
+	preset("Normal/Mark Dark Region")
+    {
+		post_process("info");
+        varlist("varlist_editor_low_lum.scr");
+    }
+	preset("Normal/Poor TV Emulation")
+    {
+		post_process("info");
+        varlist("varlist_editor_poot_tv.scr");
+    }
+	preset("Grid/Camera")
+    {
+        post_process("editor");
+        varlist("varlist_editor_grid_cs.scr");
+    }
+	preset("Grid/World")
+    {
+        post_process("editor");
+        varlist("varlist_editor_grid_ws.scr");
+    }
+	preset("Grid/Distance")
+    {
+        post_process("editor");
+        varlist("varlist_editor_grid_distance.scr");
+    }
+	preset("Grid/Distance World")
+    {
+        post_process("editor");
+        varlist("varlist_editor_grid_distance_ws.scr");
+    }
+
+    preset("Lighting/Lighting Ambient")
+    {
+		post_process("editor");
+		varlist("varlist_dev_ambient_only.scr");
+    }
+
+    preset("Lighting/Default")
+    {
+        post_process("editor");
+        varlist("varlist_editor_lighting.scr");
+    }
+
+    preset("Lighting/Diffuse")
+    {
+        post_process("editor");
+        varlist("varlist_editor_diffuse.scr");
+    }
+    preset("Lighting/Diffuse Shadows")
+    {
+        post_process("editor");
+        varlist("varlist_editor_diffuse_shadows.scr");
+    }
+    preset("Lighting/Specular")
+    {
+        post_process("editor");
+        varlist("varlist_editor_specular.scr");
+    }
+	preset("Lighting/Specular Shadows")
+    {
+        post_process("editor");
+        varlist("varlist_editor_specular_shadows.scr");
+    }
+    preset("Lighting/SSAO")
+    {
+        post_process("editor");
+        varlist("varlist_editor_ssao.scr");
+    }
+    preset("Lighting/Emissive")
+    {
+        post_process("editor");
+        varlist("varlist_editor_emissive.scr");
+    }
+    preset("Lighting/Subsurface Scattering")
+    {
+        post_process("editor");
+        varlist("varlist_editor_sss.scr");
+    }
+    preset("Lighting/Subsurface Scattering Shadows")
+    {
+        post_process("editor");
+        varlist("varlist_editor_sss_shadows.scr");
+    }
+    preset("Lighting/Shadows")
+    {
+        post_process("editor");
+        varlist("varlist_editor_shadows.scr");
+    }
+	preset("G-Buffer/Diffuse")
+	{
+        post_process("simple");
+        varlist("varlist_gbuffer_diffuse.scr");
+    }
+	preset("G-Buffer/Diffuse Ranges")
+	{
+        post_process("simple");
+        varlist("varlist_gbuffer_diffuse_ranges.scr");
+    }
+	preset("G-Buffer/Specular")
+	{
+        post_process("simple");
+        varlist("varlist_gbuffer_specular.scr");
+    }
+	preset("G-Buffer/Specular Ranges")
+	{
+        post_process("simple");
+        varlist("varlist_gbuffer_specular_ranges.scr");
+    }
+	preset("G-Buffer/Normal")
+	{
+        post_process("simple");
+        varlist("varlist_gbuffer_normal.scr");
+    }
+	preset("G-Buffer/Normal World Normalized")
+	{
+        post_process("simple");
+        varlist("varlist_gbuffer_normal_ws.scr");
+    }
+	preset("G-Buffer/Z-Buffer")
+	{
+        post_process("simple");
+		varlist("varlist_gbuffer_zbuffer.scr");
+    }
+	preset("G-Buffer/Z-Buffer Top")
+	{
+		camera_mode("top");
+        post_process("simple");
+		varlist("varlist_gbuffer_zbuffer.scr");
+    }
+    preset("G-Buffer/SSS Type")
+    {
+        post_process("simple");
+        varlist("varlist_gbuffer_matid.scr");
+    }
+    preset("G-Buffer/Motion Vectors")
+    {
+        post_process("simple");
+        varlist("varlist_gbuffer_mv.scr");
+    }
+    preset("G-Buffer/Roughness")
+    {
+        post_process("simple");
+        varlist("varlist_gbuffer_roughness.scr");
+    }
+    preset("Logo/0")
+    {
+        post_process("logo_0");
+    }
+    preset("Logo/1")
+    {
+        post_process("logo_1");
+    }
+    preset("Logo/2")
+    {
+        post_process("logo_2");
+    }
+    preset("Logo/3")
+    {
+        post_process("logo_3");
+    }
+
+	use GameViewPresets();
+}

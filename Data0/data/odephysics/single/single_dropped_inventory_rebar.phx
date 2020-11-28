@@ -1,0 +1,66 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Fizyka upadajacego ekwipunku
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+!include("../include/ODEPhysics.def")
+
+//-------------------------------------------------------------------------------------------------
+PhysicsParams()
+{
+    SetPhysicsSurfaceID(SRF_METAL)
+    NotCollisionDamageToMeMul(0.2)
+    SetVelsGate(0, 0)
+    SetWaterFloat(0.06)
+    SetAutoDisableVels(0.08, 0.2, 1)            // CM2M
+    SetAbsorbers(3, 8)
+    SetMaxVels(80, 20)                          // CM2M
+    SetMaxWatchingTime(0.8)
+    SynchroInterpolation(1)
+    AllowDepthCompression(1)
+    MaxLifeTime(30)
+
+    AllowContinuousCollisions(1, 1)
+    PreciseCC(1)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("Terrain")
+{
+    ZeroFlags()
+    Mu(4)
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("SimpleObjects")
+{
+    ZeroFlags()
+    Mu(4)                  
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("NonODEObjects")
+{
+    ZeroFlags()
+    Mu(4)                  
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("ODEObjects")
+{
+    ZeroFlags()
+    Mu(20)
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("Water")
+{
+    ZeroFlags()
+    Mu(4)
+    Ignore(0)
+}
+
+

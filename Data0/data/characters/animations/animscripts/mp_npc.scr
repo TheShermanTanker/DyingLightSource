@@ -1,0 +1,776 @@
+!include("MP_NPC_AK47.scr")
+
+
+/*
+SeqTrack("mp_npc_sprint01", "mp_npc_sprint01.anm2", 0, 43,  30, 1, 0.3) // podpiete
+{
+	Event(0, VIS_EVENT_STEP_RIGHT, -1)
+	Event(5, VIS_EVENT_STEP_LEFT, -1)
+	Event(12, VIS_EVENT_STEP_RIGHT, -1)
+	Event(19, VIS_EVENT_STEP_LEFT, -1)
+	Event(27, VIS_EVENT_STEP_RIGHT, -1)
+	Event(33, VIS_EVENT_STEP_LEFT, -1)
+	Event(41, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack( "mp_npc_sprint_turn45r",		        "mp_npc_sprint_turn45r.anm2",             0, 59,  30, 1, 0.3)
+SeqTrack( "mp_npc_sprint_turn45l",		        "mp_npc_sprint_turn45l.anm2",             0, 59,  30, 1, 0.3)
+SeqTrack( "mp_npc_sprint_turn90r",		        "mp_npc_sprint_turn90r.anm2",             0, 74,  30, 1, 0.3)
+SeqTrack( "mp_npc_sprint_turn90l",		        "mp_npc_sprint_turn90l.anm2",             0, 62,  30, 1, 0.3)
+SeqTrack( "mp_npc_sprint_turn180l",		        "mp_npc_sprint_turn180l.anm2",             0, 79,  30, 1, 0.3)
+SeqTrack( "mp_npc_sprint_turn180r",		        "mp_npc_sprint_turn180r.anm2",             0, 80,  30, 1, 0.3)
+
+SeqTrack("mp_npc_sprint_stop", "mp_npc_sprint_stop.anm2", 0, 51,  30, 1, 0.3) // podpiete
+{
+	Event(3, VIS_EVENT_STEP_LEFT, -1)
+	Event(11, VIS_EVENT_STEP_RIGHT, -1)
+	Event(18, VIS_EVENT_STEP_LEFT, -1)
+    Event(19, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+	Event(24, VIS_EVENT_STEP_RIGHT, -1)
+	Event(24, VIS_EVENT_ROTATION_MOD_START, -1)
+	Event(29, VIS_EVENT_STEP_LEFT, -1)
+	Event(32, VIS_EVENT_STEP_RIGHT, -1)
+	Event(37, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("mp_npc_sprint_start",	"mp_npc_sprint_start.anm2", 8, 49,  30, 1, 0.3) // podpiete
+{
+	Event(3, VIS_EVENT_STEP_LEFT, -1)
+	Event(9, VIS_EVENT_ROTATION_MOD_END, -1)
+	Event(17, VIS_EVENT_STEP_RIGHT, -1)
+	Event(20, VIS_EVENT_STOPANIM, -1)
+	Event(25, VIS_EVENT_STEP_LEFT, -1)
+	Event(31, VIS_EVENT_STEP_RIGHT, -1)
+	Event(38, VIS_EVENT_STEP_LEFT, -1)
+}
+
+SeqTrack("mp_npc_sprint_start_turn180r", "mp_npc_sprint_start_turn180r.anm2", 0, 58,  30, 1, 0.3) // podpiete
+{
+	Event(10, VIS_EVENT_STEP_LEFT, -1)
+	Event(13, VIS_EVENT_STEP_RIGHT, -1)
+	Event(24, VIS_EVENT_ROTATION_MOD_END, -1)
+	Event(25, VIS_EVENT_STEP_LEFT, -1)
+	Event(28, VIS_EVENT_STOPANIM, -1)
+	Event(32, VIS_EVENT_STEP_RIGHT, -1)
+	Event(40, VIS_EVENT_STEP_LEFT, -1)
+	Event(46, VIS_EVENT_STEP_RIGHT, -1)
+	Event(53, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("mp_npc_sprint_start_turn180l", "mp_npc_sprint_start_turn180l.anm2", 0, 49,  30, 1, 0.3) // podpiete
+{
+	Event(11, VIS_EVENT_STEP_RIGHT, -1)
+	Event(22, VIS_EVENT_STEP_LEFT, -1)
+	Event(24, VIS_EVENT_ROTATION_MOD_END, -1)
+	Event(30, VIS_EVENT_STOPANIM, -1)
+	Event(32, VIS_EVENT_STEP_RIGHT, -1)
+	Event(38, VIS_EVENT_STEP_LEFT, -1)
+	Event(45, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("mp_npc_sprint_stop_turn90r", "mp_npc_sprint_stop_turn90r.anm2", 0, 53,  30, 1, 0.3) // podpiete
+{
+	Event(6, VIS_EVENT_STEP_RIGHT, -1)
+	Event(15, VIS_EVENT_STEP_LEFT, -1)
+    Event(15, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(18, VIS_EVENT_ROTATION_MOD_START, -1)	
+	Event(22, VIS_EVENT_STEP_RIGHT, -1)
+	Event(27, VIS_EVENT_STEP_LEFT, -1)
+	Event(29, VIS_EVENT_ROTATION_MOD_END, -1)
+	Event(40, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("mp_npc_sprint_start_turn90r", "mp_npc_sprint_start_turn90r.anm2", 5, 44,  30, 1, 0.3) // podpiete
+{
+	Event(10, VIS_EVENT_STEP_LEFT, -1)
+	Event(13, VIS_EVENT_STEP_RIGHT, -1)
+	Event(19, VIS_EVENT_ROTATION_MOD_END, -1)
+	Event(24, VIS_EVENT_STOPANIM, -1)
+	Event(25, VIS_EVENT_STEP_LEFT, -1)
+	Event(32, VIS_EVENT_STEP_RIGHT, -1)
+	Event(39, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("mp_npc_sprint_start_turn90l", "mp_npc_sprint_start_turn90l.anm2", 0, 44,  30, 1, 0.3) // podpiete
+{
+	Event(10, VIS_EVENT_STEP_RIGHT, -1)
+	Event(13, VIS_EVENT_STEP_LEFT, -1)
+	Event(17, VIS_EVENT_ROTATION_MOD_END, -1)
+	Event(24, VIS_EVENT_STEP_RIGHT, -1)
+	Event(25, VIS_EVENT_STOPANIM, -1)
+	Event(33, VIS_EVENT_STEP_LEFT, -1)
+	Event(39, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("mp_npc_sprint_stop_turn90l", "mp_npc_sprint_stop_turn90l.anm2", 0, 51,  30, 1, 0.3) // podpiete
+{
+	Event(2, VIS_EVENT_STEP_RIGHT, -1)
+	Event(10, VIS_EVENT_STEP_LEFT, -1)
+	Event(13, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+	Event(15, VIS_EVENT_STEP_RIGHT, -1)
+	Event(16, VIS_EVENT_ROTATION_MOD_START, -1)	
+	Event(21, VIS_EVENT_STEP_LEFT, -1)
+	Event(26, VIS_EVENT_STEP_RIGHT, -1)
+	Event(30, VIS_EVENT_ROTATION_MOD_END, -1)	
+	Event(32, VIS_EVENT_STEP_LEFT, -1)
+	Event(43, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+SeqTrack("mp_npc_lowrightcover_leftstop", "mp_npc_lowrightcover_leftstop.anm2", 0, 35,  30, 1, 0.3) // podpiete
+{
+	Event(8, VIS_EVENT_STEP_RIGHT, -1)
+	Event(10, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+	Event(16, VIS_EVENT_STEP_LEFT, -1)
+	Event(16, VIS_EVENT_ROTATION_MOD_START, -1)	
+	Event(23, VIS_EVENT_STEP_RIGHT, -1)
+	Event(34, EVENT_CROUCHED_RIGHT, -1)
+}
+SeqTrack("mp_npc_lowleftcover_frontstart", "mp_npc_lowleftcover_frontstart.anm2", 0, 60,  30, 1, 0.3) // podpiete
+{
+	Event(4, EVENT_STOOD_UP, -1)
+	Event(4, VIS_EVENT_STEP_LEFT, -1)
+	Event(25, VIS_EVENT_STEP_RIGHT, -1)
+	Event(27, VIS_EVENT_ROTATION_MOD_END, -1)
+	Event(33, VIS_EVENT_STOPANIM, -1)
+	Event(34, VIS_EVENT_STEP_LEFT, -1)
+	Event(41, VIS_EVENT_STEP_RIGHT, -1)
+	Event(50, VIS_EVENT_STEP_LEFT, -1)
+	Event(57, VIS_EVENT_STEP_RIGHT, -1)
+	Event(40, VIS_EVENT_STEP_RIGHT, -1)
+	Event(49, VIS_EVENT_STEP_LEFT, -1)
+	Event(45, VIS_EVENT_STOPANIM, -1)
+}
+SeqTrack("mp_npc_lowrightcover_leftstart", "mp_npc_lowrightcover_leftstart.anm2", 5, 59,  30, 1, 0.3)  // podpiete
+{
+	Event(11, EVENT_STOOD_UP, -1)
+	Event(28, VIS_EVENT_STEP_LEFT, -1)
+	Event(36, VIS_EVENT_ROTATION_MOD_END, -1)
+	Event(40, VIS_EVENT_STEP_RIGHT, -1)
+	Event(42, VIS_EVENT_STOPANIM, -1)
+	Event(49, VIS_EVENT_STEP_LEFT, -1)
+	Event(45, VIS_EVENT_STOPANIM, -1)
+}
+SeqTrack("mp_npc_lowleftcover_backstart", "mp_npc_lowleftcover_backstart.anm2", 0, 60,  30, 1, 0.3) // podpiete
+{
+	Event(8, EVENT_STOOD_UP, -1)
+	Event(10, VIS_EVENT_STEP_LEFT, -1)
+	Event(22, VIS_EVENT_ROTATION_MOD_START, -1)
+	Event(27, VIS_EVENT_STEP_RIGHT, -1)
+	Event(36, VIS_EVENT_STEP_LEFT, -1)
+	Event(39, VIS_EVENT_ROTATION_MOD_END, -1)
+	Event(43, VIS_EVENT_STEP_RIGHT, -1)
+	Event(45, VIS_EVENT_STOPANIM, -1)
+	Event(51, VIS_EVENT_STEP_LEFT, -1)
+	Event(58, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("mp_npc_lowleftcover_backstop", "mp_npc_lowleftcover_backstop.anm2", 0, 120,  30, 1, 0.3) // podpiete
+{
+	Event(2, VIS_EVENT_STEP_RIGHT, -1)
+	Event(9, VIS_EVENT_STEP_LEFT, -1)
+	Event(17, VIS_EVENT_STEP_RIGHT, -1)
+	Event(17, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+	Event(23, VIS_EVENT_STEP_LEFT, -1)
+	Event(23, VIS_EVENT_ROTATION_MOD_START, -1)	
+	Event(30, VIS_EVENT_STEP_RIGHT, -1)
+	Event(38, VIS_EVENT_STEP_LEFT, -1)
+	Event(38, VIS_EVENT_ROTATION_MOD_END, -1)	
+	Event(49, VIS_EVENT_STEP_RIGHT, -1)
+	Event(57, VIS_EVENT_STEP_LEFT, -1)
+	Event(87, EVENT_CROUCHED_RIGHT, -1)
+}
+
+
+SeqTrack("mp_npc_frontstrafe_withshooting", "mp_npc_frontstrafe_withshooting.anm2", 0, 75,  30, 1, 0.3)
+{
+	Event(7, VIS_EVENT_STEP_RIGHT, -1)
+	Event(16, VIS_EVENT_STEP_LEFT, -1)
+	Event(25, VIS_EVENT_STEP_RIGHT, -1)
+	Event(32, VIS_EVENT_STEP_LEFT, -1)
+	Event(43, VIS_EVENT_STEP_RIGHT, -1)
+	Event(51, VIS_EVENT_STEP_LEFT, -1)
+	Event(61, VIS_EVENT_STEP_RIGHT, -1)
+	Event(70, VIS_EVENT_STEP_LEFT, -1)
+}
+
+SeqTrack("mp_npc_frontstrafe_withshooting_back", "mp_npc_frontstrafe_withshooting_back.anm2", 11, 132,  30, 1, 0.3)
+{
+	Event(14, VIS_EVENT_STEP_LEFT, -1)
+	Event(23, VIS_EVENT_STEP_RIGHT, -1)
+	Event(30, VIS_EVENT_STEP_LEFT, -1)
+	Event(38, VIS_EVENT_STEP_RIGHT, -1)
+	Event(42, VIS_EVENT_STEP_LEFT, -1)
+	Event(50, VIS_EVENT_STEP_RIGHT, -1)
+	Event(61, VIS_EVENT_STEP_LEFT, -1)
+	Event(71, VIS_EVENT_STEP_RIGHT, -1)
+	Event(77, VIS_EVENT_STEP_LEFT, -1)
+	Event(84, VIS_EVENT_STEP_RIGHT, -1)
+	Event(97, VIS_EVENT_STEP_LEFT, -1)
+	Event(108, VIS_EVENT_STEP_RIGHT, -1)
+	Event(115, VIS_EVENT_STEP_LEFT, -1)
+	Event(121, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack( "mp_npc_sidestrafe_with_shooting_rightleft",	        "mp_npc_sidestrafe_with_shooting_rightleft.anm2",     0, 284,  30, 1, 0.3)
+SeqTrack("mp_npc_sidestrafe_with_shooting_left", "mp_npc_sidestrafe_with_shooting_left.anm2", 3, 72,  30, 1, 0.3)
+{
+	Event(0, VIS_EVENT_STEP_LEFT, -1)
+	Event(11, VIS_EVENT_STEP_RIGHT, -1)
+	Event(16, VIS_EVENT_STEP_LEFT, -1)
+	Event(23, VIS_EVENT_STEP_RIGHT, -1)
+	Event(27, VIS_EVENT_STEP_LEFT, -1)
+	Event(38, VIS_EVENT_STEP_RIGHT, -1)
+	Event(46, VIS_EVENT_STEP_LEFT, -1)
+	Event(52, VIS_EVENT_STEP_RIGHT, -1)
+	Event(57, VIS_EVENT_STEP_LEFT, -1)
+	Event(62, VIS_EVENT_STEP_RIGHT, -1)
+	Event(69, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("mp_npc_sidestrafe_with_shooting_right", "mp_npc_sidestrafe_with_shooting_right.anm2", 0, 50,  30, 1, 0.3)
+{
+	Event(12, VIS_EVENT_STEP_LEFT, -1)
+	Event(20, VIS_EVENT_STEP_RIGHT, -1)
+	Event(27, VIS_EVENT_STEP_LEFT, -1)
+	Event(33, VIS_EVENT_STEP_RIGHT, -1)
+	Event(40, VIS_EVENT_STEP_LEFT, -1)
+	Event(47, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack( "mp_npc_frontstrafe_with_shooting_knee_back",	        "mp_npc_frontstrafe_with_shooting_knee_back.anm2",    0, 179,  30, 1, 0.3)
+SeqTrack( "mp_npc_lowleftcover_shootingover",	        "mp_npc_lowleftcover_shootingover.anm2",    0, 135,  30, 1, 0.3)
+SeqTrack( "mp_npc_frontstrafewithshooting01",	        "mp_npc_frontstrafewithshooting01.anm2",    0, 83,  30, 1, 0.3)
+SeqTrack( "mp_npc_frontstrafewithshooting02",	        "mp_npc_frontstrafewithshooting02.anm2",    0, 182,  30, 1, 0.3)
+SeqTrack( "mp_npc_low_left_cover",	        "mp_npc_low_left_cover.anm2",    0, 10,  30, 1, 0.3)
+SeqTrack( "mp_npc_low_left_shooting_over",      "mp_npc_low_left_shooting_over.anm2",    10, 142,  30, 1, 0.3)
+SeqTrack("mp_npc_lowrightcover_frontstop", "mp_npc_lowrightcover_frontstop.anm2", 0, 42,  30, 1, 0.3) // podpiete
+{
+	Event(5, VIS_EVENT_STEP_RIGHT, -1)
+	Event(8, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+	Event(13, VIS_EVENT_STEP_LEFT, -1)
+	Event(13, VIS_EVENT_ROTATION_MOD_START, -1)	
+	Event(21, VIS_EVENT_STEP_RIGHT, -1)
+	Event(25, VIS_EVENT_STEP_LEFT, -1)
+	Event(27, VIS_EVENT_ROTATION_MOD_END, -1)	
+	Event(34, VIS_EVENT_STEP_RIGHT, -1)
+	Event(36, EVENT_CROUCHED_RIGHT, -1)
+}
+SeqTrack( "mp_npc_lowrightcover_frontstart", "mp_npc_lowrightcover_frontstart.anm2", 0, 59,  30, 1, 0.3)
+{
+	Event(18, EVENT_STOOD_UP, -1)
+	Event(36, VIS_EVENT_ROTATION_MOD_END, -1)
+	Event(38, VIS_EVENT_STEP_LEFT, -1)
+	Event(41, VIS_EVENT_STOPANIM, -1)
+	Event(47, VIS_EVENT_STEP_RIGHT, -1)
+	Event(54, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("mp_npc_lowrightcover_lookingaround2", "mp_npc_lowrightcover_lookingaround2.anm2", 0, 134,  30, 1, 0.6) // podpiete
+{
+	Event(0, EVENT_TURN_OFF_PHYSICS, -1)
+}
+SeqTrack("mp_npc_lowrightcover_reload", "mp_npc_lowrightcover_reload.anm2", 0, 73,  30, 1, 0.3) // podpiete
+{
+	Event(0, EVENT_TURN_OFF_PHYSICS, -1)
+	Event(45, EVENT_RELOADED, -1)
+}
+SeqTrack("mp_npc_lowleftcover_lookingaround", "mp_npc_lowleftcover_lookingaround.anm2", 0, 305,  30, 1, 0.6)
+{
+	Event(0, EVENT_TURN_OFF_PHYSICS, -1)
+}
+SeqTrack("mp_npc_lowleftcover_reload", "mp_npc_lowleftcover_reload.anm2", 0, 70, 30, 1, 0.3)
+{
+	Event(0, EVENT_TURN_OFF_PHYSICS, -1)
+	Event(41, EVENT_RELOADED, -1)
+}
+
+SeqTrack("mp_npc_lowleftcover_rightstop", "mp_npc_lowleftcover_rightstop.anm2", 0, 75,  30, 1, 0.3) // podpiete
+{
+	Event(3, VIS_EVENT_STEP_RIGHT, -1)
+	Event(10, VIS_EVENT_STEP_LEFT, -1)
+	Event(17, VIS_EVENT_STEP_RIGHT, -1)
+	Event(24, VIS_EVENT_STEP_LEFT, -1)
+	Event(25, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+	Event(27, VIS_EVENT_ROTATION_MOD_START, -1)	
+	Event(31, VIS_EVENT_STEP_RIGHT, -1)
+	Event(41, VIS_EVENT_STEP_LEFT, -1)
+	Event(45, VIS_EVENT_ROTATION_MOD_END, -1)	
+	Event(62, EVENT_CROUCHED_LEFT, -1)
+}
+SeqTrack("mp_npc_lowleftcover_rightstart",	"mp_npc_lowleftcover_rightstart.anm2", 4, 60,  30, 1, 0.3) // podpiete
+{
+	Event(8, EVENT_STOOD_UP, -1)
+	Event(23, VIS_EVENT_STEP_RIGHT, -1)
+	Event(29, VIS_EVENT_ROTATION_MOD_END, -1)
+	Event(34, VIS_EVENT_STEP_LEFT, -1)
+	Event(36, VIS_EVENT_STOPANIM, -1)
+	Event(41, VIS_EVENT_STEP_RIGHT, -1)
+	Event(50, VIS_EVENT_STEP_LEFT, -1)
+}
+
+SeqTrack("mp_npc_lowleftcover_frontstop", "mp_npc_lowleftcover_frontstop.anm2", 0, 47,  30, 1, 0.3) // podpiete
+{
+	Event(2, VIS_EVENT_STEP_RIGHT, -1)
+	Event(10, VIS_EVENT_STEP_LEFT, -1)
+	Event(14, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+	Event(17, VIS_EVENT_STEP_RIGHT, -1)
+	Event(18, VIS_EVENT_ROTATION_MOD_START, -1)	
+	Event(25, VIS_EVENT_STEP_LEFT, -1)
+	Event(31, VIS_EVENT_STEP_RIGHT, -1)
+	Event(32, VIS_EVENT_ROTATION_MOD_END, -1)	
+	Event(37, EVENT_CROUCHED_LEFT, -1)
+}
+
+SeqTrack("mp_npc_lowleftcover_leftstart", "mp_npc_lowleftcover_leftstart.anm2", 4, 45,  30, 1, 0.3) // podpiete
+{
+	Event(2, EVENT_STOOD_UP, -1)
+	Event(17, VIS_EVENT_ROTATION_MOD_END, -1)
+	Event(22, VIS_EVENT_STEP_RIGHT, -1)
+	Event(25, VIS_EVENT_STOPANIM, -1)
+	Event(32, VIS_EVENT_STEP_LEFT, -1)
+	Event(39, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("mp_npc_lowleftcover_leftstop", "mp_npc_lowleftcover_leftstop.anm2", 0, 61,  30, 1, 0.3) // podpiete
+{
+	Event(5, VIS_EVENT_STEP_LEFT, -1)
+	Event(12, VIS_EVENT_STEP_RIGHT, -1)
+	Event(15, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+	Event(18, VIS_EVENT_STEP_LEFT, -1)
+	Event(18, VIS_EVENT_ROTATION_MOD_START, -1)	
+	Event(24, VIS_EVENT_STEP_RIGHT, -1)
+	Event(30, VIS_EVENT_STEP_LEFT, -1)
+	Event(36, VIS_EVENT_STEP_RIGHT, -1)
+	Event(43, VIS_EVENT_STEP_LEFT, -1)
+	Event(43, VIS_EVENT_ROTATION_MOD_END, -1)	
+	Event(55, EVENT_CROUCHED_LEFT, -1)
+}
+
+SeqTrack( "mp_npc_lowrightcover_backstart",	"mp_npc_lowrightcover_backstart.anm2", 0, 60,  30, 1, 0.3) // podpiete
+{
+	Event(8, EVENT_STOOD_UP, -1)
+	Event(17, VIS_EVENT_ROTATION_MOD_START, -1)
+	Event(19, VIS_EVENT_STEP_LEFT, -1)
+	Event(30, VIS_EVENT_ROTATION_MOD_END, -1)
+	Event(30, VIS_EVENT_STEP_RIGHT, -1)
+	Event(34, VIS_EVENT_STOPANIM, -1)
+	Event(38, VIS_EVENT_STEP_LEFT, -1)
+	Event(45, VIS_EVENT_STEP_RIGHT, -1)
+	Event(52, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("mp_npc_lowrightcover_backstop", "mp_npc_lowrightcover_backstop.anm2", 0, 84,  30, 1, 0.3) // podpiete
+{
+	Event(2, VIS_EVENT_STEP_LEFT, -1)
+	Event(8, VIS_EVENT_STEP_RIGHT, -1)
+	Event(17, VIS_EVENT_STEP_LEFT, -1)
+	Event(23, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+	Event(27, VIS_EVENT_STEP_RIGHT, -1)
+	Event(29, VIS_EVENT_ROTATION_MOD_START, -1)	
+	Event(33, VIS_EVENT_STEP_LEFT, -1)
+	Event(41, VIS_EVENT_STEP_RIGHT, -1)
+	Event(41, VIS_EVENT_ROTATION_MOD_END, -1)	
+	Event(78, EVENT_CROUCHED_RIGHT, -1)
+}
+
+SeqTrack( "mp_npc_lowrightcover_rightstart", "mp_npc_lowrightcover_rightstart.anm2", 6, 60,  30, 1, 0.3)
+{
+	Event(2, EVENT_STOOD_UP, -1)
+	Event(22, VIS_EVENT_ROTATION_MOD_END, -1)
+	Event(22, VIS_EVENT_STEP_LEFT, -1)
+	Event(29, VIS_EVENT_STEP_RIGHT, -1)
+	Event(25, VIS_EVENT_STOPANIM, -1)
+	Event(38, VIS_EVENT_STEP_LEFT, -1)
+	Event(46, VIS_EVENT_STEP_RIGHT, -1)
+	Event(53, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("mp_npc_lowrightcover_rightstop", "mp_npc_lowrightcover_rightstop.anm2", 0, 68,  30, 1, 0.3) // podpiete
+{
+	Event(8, VIS_EVENT_STEP_RIGHT, -1)
+	Event(14, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+	Event(15, VIS_EVENT_ROTATION_MOD_START, -1)	
+	Event(16, VIS_EVENT_STEP_LEFT, -1)
+	Event(26, VIS_EVENT_STEP_RIGHT, -1)
+	Event(32, VIS_EVENT_STEP_LEFT, -1)
+	Event(43, VIS_EVENT_ROTATION_MOD_END, -1)	
+	Event(61, VIS_EVENT_STEP_RIGHT, -1)
+	Event(23, VIS_EVENT_STEP_RIGHT, -1)
+	Event(34, EVENT_CROUCHED_RIGHT, -1)
+}
+
+SeqTrack("mp_npc_lowleftcover_threeshots01", "mp_npc_lowleftcover_threeshots01.anm2", 5, 60,  30, 1, 0.3)
+{
+	Event(0, EVENT_TURN_OFF_PHYSICS, -1)
+	//Event(0, EVENT_TRACK_DISABLE, -1)
+	Event(16, EVENT_TRACK_ENABLE, -1)
+	Event(24, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(30, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(34, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(34, EVENT_TRACK_DISABLE, -1)
+}
+SeqTrack( "mp_npc_lowleftcover_threeshots02",	          "mp_npc_lowleftcover_threeshots02.anm2",        0, 75,  30, 1, 0.3)
+{
+    Event(0, EVENT_TURN_OFF_PHYSICS, -1)
+    Event(14, EVENT_TRACK_ENABLE, -1)
+    Event(24, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(29, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(33, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(34, EVENT_TRACK_DISABLE, -1)
+    Event(34, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(57, EVENT_FINAL_ROTATION, -1)
+    Event(57, EVENT_FINAL_POSITION, -1)
+}
+
+SeqTrack("mp_npc_low_right_cover_three_shots", "mp_npc_low_right_cover_three_shots.anm2", 9, 115,  30, 1, 0.3)
+{
+    Event(0, EVENT_TURN_OFF_PHYSICS, -1)
+    Event(28, EVENT_TRACK_ENABLE, -1)
+    Event(36, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(44, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(54, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(64, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(74, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(80, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(82, EVENT_TRACK_DISABLE, -1)
+    Event(82, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(101, EVENT_FINAL_ROTATION, -1)
+    Event(101, EVENT_FINAL_POSITION, -1)
+}
+
+SeqTrack("mp_npc_low_left_cover_blind_shoot", "mp_npc_low_left_cover_blind_shoot_long.anm2", 0, 105,  30, 1, 0.3)
+{
+	Event(0, EVENT_TURN_OFF_PHYSICS, -1)
+	//Event(0, EVENT_TRACK_DISABLE, -1)
+	Event(28, EVENT_TRACK_ENABLE, -1)
+	Event(22, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(36, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(43, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(50, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(57, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(63, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(70, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(79, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(87, EVENT_TRACK_DISABLE, -1)
+	Event(88, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(88, EVENT_ACTIVITY_END, -1)
+	//	Event(58, EVENT_ACTIVITY_END, -1)
+}
+
+
+SeqTrack("mp_npc_low_left_cover_blind_shoot_long", "mp_npc_low_left_cover_blind_shoot_long.anm2", 0, 105,  30, 1, 0.3)
+
+SeqTrack( "mp_npc_low_right_cover_blind_shoot_long",	          "mp_npc_low_right_cover_blind_shoot_long.anm2",        0, 165,  30, 1, 0.3)
+{
+	Event(24, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(30, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(33, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(42, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(47, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(53, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(58, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(67, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(79, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(83, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(89, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(92, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(97, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(102, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(106, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(112, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(114, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(120, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(126, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(132, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(140, EVENT_APPLY_RANGED_DAMAGE, -1)
+}
+
+SeqTrack("mp_npc_low_right_cover_slow_look", "mp_npc_low_right_cover_slow_look.anm2", 0, 74,  30, 1, 0.6) // podpiete
+{
+	Event(0, EVENT_TURN_OFF_PHYSICS, -1)
+}
+
+SeqTrack("mp_npc_highrightcover_2seriesfastshot", "mp_npc_highrightcover_2seriesfastshot.anm2", 0, 84,  30, 1, 0.3)
+{
+	Event(0, EVENT_TURN_OFF_PHYSICS, -1)
+	//Event(0, EVENT_TRACK_DISABLE, -1)
+	Event(10, EVENT_STOOD_UP, -1)
+	Event(20, EVENT_TRACK_ENABLE, -1)
+	Event(27, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(36, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(44, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(55, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(55, EVENT_TRACK_DISABLE, -1)
+	Event(80, EVENT_LEANED_RIGHT, -1)
+//	Event(58, EVENT_ACTIVITY_END, -1)
+}
+
+SeqTrack("mp_npc_highleftcover_2_seriesleanshot", "mp_npc_highleftcover_2_seriesleanshot.anm2", 0, 64,  30, 1, 0.3)
+{
+	Event(0, EVENT_TURN_OFF_PHYSICS, -1)
+	//Event(0, EVENT_TRACK_DISABLE, -1)
+	Event(5, EVENT_STOOD_UP, -1)
+	Event(23, EVENT_TRACK_ENABLE, -1)
+	Event(29, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(36, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(44, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(44, EVENT_TRACK_DISABLE, -1)
+	Event(60, EVENT_LEANED_LEFT, -1)
+//	Event(58, EVENT_ACTIVITY_END, -1)
+}
+
+SeqTrack( "mp_npc_highleftcover_4shotsfastshot",	          "mp_npc_highleftcover_4shotsfastshot.anm2",        0, 84,  30, 1, 0.3)
+
+SeqTrack("mp_npc_highrightcoverfastlook", "mp_npc_highrightcoverfastlook.anm2", 0, 55,  30, 1, 0.6) // podpiete
+{
+	Event(0, EVENT_TURN_OFF_PHYSICS, -1)
+}
+
+SeqTrack("mp_npc_highleftcoverslowlook", "mp_npc_highleftcoverslowlook.anm2", 0, 60,  30, 1, 0.6) // podpiete
+{
+	Event(0, EVENT_TURN_OFF_PHYSICS, -1)
+}
+
+// ------------- pro pistol shooting --------------------------
+
+SeqTrack("mp_npc_fight_aim_turn90l", "mp_npc_fight_aim_turn90l.anm2", 8, 43,  30, 1, 0.4) // podpiete
+{
+    Event(28, VIS_EVENT_STOPANIM, -1)
+}
+SeqTrack("mp_npc_fight_aim_turn90r", "mp_npc_fight_aim_turn90r.anm2", 4, 45,  30, 1, 0.4) // podpiete
+{
+    Event(27, VIS_EVENT_STOPANIM, -1)
+}
+
+SeqTrack("mp_npc_fight_aim_turn45l", "mp_npc_fight_aim_turn45l.anm2", 3, 32,  30, 1, 0.4) // podpiete
+{
+    Event(19, VIS_EVENT_STOPANIM, -1)
+}
+SeqTrack("mp_npc_fight_aim_turn45r", "mp_npc_fight_aim_turn45r.anm2", 4, 28,  30, 1, 0.4) // podpiete
+{
+    Event(18, VIS_EVENT_STOPANIM, -1)
+}
+
+SeqTrack("mp_npc_fight_aim_turn180l_faster", "mp_npc_fight_aim_turn180l_faster.anm2", 0, 45,  30, 1, 0.4) // podpiete
+{
+    Event(30, VIS_EVENT_STOPANIM, -1)
+}
+SeqTrack("mp_npc_fight_aim_turn180r_faster", "mp_npc_fight_aim_turn180r_faster.anm2", 0, 45,  30, 1, 0.4) // podpiete
+{
+    Event(29, VIS_EVENT_STOPANIM, -1)
+}
+SeqTrack( "mp_npc_fight_aim_turn180l",	        "mp_npc_fight_aim_turn180l.anm2",    0, 55,  30, 1, 0.3)
+{
+    Event(55, VIS_EVENT_STOPANIM, -1)
+}
+SeqTrack( "mp_npc_fight_aim_turn180r",	        "mp_npc_fight_aim_turn180r.anm2",    0, 55,  30, 1, 0.3)
+{
+    Event(55, VIS_EVENT_STOPANIM, -1)
+}
+
+SeqTrack("mp_npc_nocover_standshooting", "mp_npc_nocover_standshooting.anm2", 46, 96,  30, 1, 0.3)
+{
+	Event(10, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(19, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(27, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(39, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(49, EVENT_APPLY_RANGED_DAMAGE, -1)
+}
+
+SeqTrack("mp_npc_aim", "mp_npc_nocover_standshooting.anm2", 46, 96,  30, 1, 0.3)
+
+SeqTrack("mp_npc_pistol_lowcoverright_to_lowcoverleft_25_2m", "mp_npc_pistol_lowcoverright_to_lowcoverleft_25_2m.anm2", 13, 104,  30, 1, 0.3) // podpiete
+{
+	Event(13, EVENT_STOOD_UP, -1)
+	Event(24, VIS_EVENT_STEP_LEFT, -1)
+	Event(30, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(29, VIS_EVENT_STEP_RIGHT, -1)
+	Event(36, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(39, VIS_EVENT_STEP_LEFT, -1)
+	Event(42, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(54, VIS_EVENT_STEP_RIGHT, -1)
+	Event(48, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(61, VIS_EVENT_STEP_LEFT, -1)
+	Event(70, EVENT_CROUCHED_LEFT, -1)
+}
+SeqTrack("mp_npc_pistol_lowcoverleft_to_lowcoverright_25_2m", "mp_npc_pistol_lowcoverleft_to_lowcoverright_25_2m.anm2", 10, 113,  30, 1, 0.3) // podpiete
+{
+	Event(13, EVENT_STOOD_UP, -1)
+	Event(20, VIS_EVENT_STEP_RIGHT, -1)
+	Event(26, VIS_EVENT_STEP_LEFT, -1)
+	Event(30, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(33, VIS_EVENT_STEP_RIGHT, -1)
+	Event(35, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(40, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(51, VIS_EVENT_STEP_LEFT, -1)
+	Event(59, VIS_EVENT_STEP_RIGHT, -1)
+	Event(57, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(67, VIS_EVENT_STEP_LEFT, -1)
+	Event(70, VIS_EVENT_STEP_RIGHT, -1)
+	Event(80, EVENT_CROUCHED_RIGHT, -1)
+}
+SeqTrack("mp_npc_pistol_lowcoverright_to_lowcoverleft_35m", "mp_npc_pistol_lowcoverright_to_lowcoverleft_35m.anm2", 0, 95,  30, 1, 0.3) // podpiete
+{
+	Event(20, EVENT_STOOD_UP, -1)
+	Event(32, VIS_EVENT_STEP_RIGHT, -1)
+	Event(33, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(36, VIS_EVENT_STEP_LEFT, -1)
+	Event(39, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(43, VIS_EVENT_STEP_RIGHT, -1)
+	Event(47, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(53, VIS_EVENT_STEP_LEFT, -1)
+	Event(54, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(65, VIS_EVENT_STEP_RIGHT, -1)
+	Event(75, EVENT_CROUCHED_RIGHT, -1)
+}
+SeqTrack("mp_npc_pistol_lowcoverleft_to_lowcoverright_35m_2", "mp_npc_pistol_lowcoverleft_to_lowcoverright_35m_2.anm2", 0, 106,  30, 1, 0.3) // podpiete
+{
+	Event(25, EVENT_STOOD_UP, -1)
+	Event(33, VIS_EVENT_STEP_LEFT, -1)
+	Event(38, VIS_EVENT_STEP_RIGHT, -1)
+	Event(39, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(43, VIS_EVENT_STEP_LEFT, -1)
+	Event(43, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(53, VIS_EVENT_STEP_RIGHT, -1)
+	Event(57, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(63, VIS_EVENT_STEP_LEFT, -1)
+	Event(66, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(68, VIS_EVENT_STEP_RIGHT, -1)
+	Event(75, VIS_EVENT_STEP_LEFT, -1)
+	Event(86, EVENT_CROUCHED_LEFT, -1)
+}
+SeqTrack("mp_npc_pistol_lowcoverleft_to_lowcoverright_35m_1", "mp_npc_pistol_lowcoverleft_to_lowcoverright_35m_1.anm2", 0, 89,  30, 1, 0.3) // podpiete
+{
+	Event(16, EVENT_STOOD_UP, -1)
+	Event(33, VIS_EVENT_STEP_LEFT, -1)
+	Event(34, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(41, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(44, VIS_EVENT_STEP_RIGHT, -1)
+	Event(48, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(53, VIS_EVENT_STEP_LEFT, -1)
+	Event(54, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(61, VIS_EVENT_STEP_RIGHT, -1)
+	Event(64, EVENT_CROUCHED_RIGHT, -1)
+}
+SeqTrack("mp_npc_pistol_lowcoverright_to_lowcoverleft_35_1", "mp_npc_pistol_lowcoverright_to_lowcoverleft_35_1.anm2", 0, 89,  30, 1, 0.3) // podpiete
+{
+	Event(16, EVENT_STOOD_UP, -1)
+	Event(25, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(26, VIS_EVENT_STEP_LEFT, -1)
+	Event(33, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(33, VIS_EVENT_STEP_RIGHT, -1)
+	Event(41, VIS_EVENT_STEP_LEFT, -1)
+	Event(41, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(47, VIS_EVENT_STEP_RIGHT, -1)
+	Event(49, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(53, VIS_EVENT_STEP_LEFT, -1)
+	Event(57, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(61, VIS_EVENT_STEP_RIGHT, -1)
+	Event(65, VIS_EVENT_STEP_LEFT, -1)
+	Event(70, EVENT_CROUCHED_LEFT, -1)
+}
+
+SeqTrack( "mp_npc_sprintstop_180turn_left",	             "mp_npc_sprintstop_180turn_left.anm2",        0, 104,  30, 1, 0.3)
+SeqTrack( "mp_npc_sprintstop_180turn_right",	         "mp_npc_sprintstop_180turn_right.anm2",       0, 105,  30, 1, 0.3)
+
+
+SeqTrack( "mp_npc_pistol_highcoverright_looking_around", "mp_npc_pistol_highcoverright_looking_around.anm2", 0, 270,  30, 1, 0.6)
+{
+	Event(0, EVENT_TURN_OFF_PHYSICS, -1)
+}
+SeqTrack("mp_npc_pistol_highcoverleft_looking_around", "mp_npc_pistol_highcoverleft_looking_around.anm2", 0, 330,  30, 1, 0.6)
+{
+	Event(0, EVENT_TURN_OFF_PHYSICS, -1)
+}
+SeqTrack("mp_npc_pistol_lowcoverleft_shoot_overcover", "mp_npc_pistol_lowcoverleft_shoot_overcover.anm2", 7, 81,  30, 1, 0.3)
+{
+    Event(0, EVENT_TURN_OFF_PHYSICS, -1)
+    Event(6, EVENT_STOOD_UP, -1)
+    Event(18, EVENT_TRACK_ENABLE, -1)
+    Event(23, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(30, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(36, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(41, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(41, EVENT_TRACK_DISABLE, -1)
+    Event(41, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(67, EVENT_CROUCHED_LEFT, -1)
+    Event(68, EVENT_FINAL_ROTATION, -1)
+    Event(68, EVENT_FINAL_POSITION, -1)
+}
+
+SeqTrack("mp_npc_pistol_lowcoverright_shoot_overcover", "mp_npc_pistol_lowcoverright_shoot_overcover.anm2", 0, 90,  30, 1, 0.3)
+{
+    Event(0, EVENT_TURN_OFF_PHYSICS, -1)
+    Event(6, EVENT_STOOD_UP, -1)
+    Event(21, EVENT_TRACK_ENABLE, -1)
+    Event(30, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(36, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(42, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(48, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(48, EVENT_TRACK_DISABLE, -1)
+    Event(48, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(79, EVENT_FINAL_ROTATION, -1)
+    Event(79, EVENT_FINAL_POSITION, -1)
+    Event(80, EVENT_CROUCHED_RIGHT, -1)
+}
+
+
+SeqTrack("mp_npc_pistol_highcoverleft_fastlook", 			"mp_npc_pistol_highcoverleft_fastlook.anm2",              0, 59, 30, 1, 0.5)
+SeqTrack("mp_npc_pistol_highcoverright_slowlook", 			"mp_npc_pistol_highcoverright_slowlook.anm2",             0, 74, 30, 1, 0.5)
+
+SeqTrack("mp_npc_pistol_lowcoverright_singleshot", 			"mp_npc_pistol_lowcoverright_singleshot.anm2",            0, 74, 30, 1, 0.5)
+{
+    Event(0, EVENT_TRACK_DISABLE, -1)
+	Event(31, EVENT_TRACK_ENABLE, -1)
+	Event(33, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(41, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(43, EVENT_TRACK_DISABLE, -1)
+}
+
+
+SeqTrack("mp_npc_pistol_lowcoverleft_shootover_2series",	"mp_npc_pistol_lowcoverleft_shootover_2series.anm2",      0, 119, 30, 1, 0.3)
+{
+    Event(25, EVENT_TRACK_ENABLE, -1)
+    Event(32, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(37, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(43, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(50, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(56, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(64, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(72, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(89, EVENT_TRACK_DISABLE, -1)
+    Event(89, VIS_EVENT_MOVEMENT_MOD_START, -1)
+    Event(112, EVENT_FINAL_ROTATION, -1)
+    Event(112, EVENT_FINAL_POSITION, -1)
+}
+SeqTrack("mp_npc_pistol_lowcoverleft_blindshoot_short",	    "mp_npc_pistol_lowcoverleft_blindshoot_short.anm2",       0, 74, 30, 1, 0.5)
+{
+    Event(30, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(35, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(42, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(48, EVENT_APPLY_RANGED_DAMAGE, -1)
+}
+
+SeqTrack("mp_npc_lowleftcover_fastlook",        "mp_npc_lowleftcover_fastlook.anm2",           0, 45, 30, 1, 0.5)
+SeqTrack("mp_npc_lowleftcover_overcover_2series",        "mp_npc_lowleftcover_overcover_2series.anm2",           0, 100, 30, 1, 0.5)
+
+SeqTrack("mp_npc_lowleftcover_fourshots",        "mp_npc_lowleftcover_fourshots.anm2",           0, 105, 30, 1, 0.5)
+
+SeqTrack("mp_npc_lowleftcover_singleshot",        "mp_npc_lowleftcover_singleshot.anm2",           0, 55, 30, 1, 0.3)
+{
+	Event(0, EVENT_TRACK_DISABLE, -1)
+	Event(20, EVENT_TRACK_ENABLE, -1)
+	Event(27, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(33, EVENT_APPLY_RANGED_DAMAGE, -1)
+	Event(34, EVENT_TRACK_DISABLE, -1)
+}
+
+SeqTrack("mp_npc_highleft_2series_morevisible",        "mp_npc_highleft_2series_morevisible.anm2",           0, 100, 30, 1, 0.5)
+SeqTrack("mp_npc_highrightcover_2serieswithaim",        "mp_npc_highrightcover_2serieswithaim.anm2",           0, 115, 30, 1, 0.5)
+
+SeqTrack("mp_npc_melee_attack_berretta_to_shot", "mp_npc_melee_attack_berretta_to_shot.anm2", 0, 58,  30, 1, 0.3)
+{
+    Event(12, EVENT_APPLY_DAMAGE_RIGHT, -1)
+     Event(46, VIS_EVENT_STOPANIM, -1)
+}
+SeqTrack("mp_npc_melee_attack_berretta_no_shot", "mp_npc_melee_attack_berretta_to_shot.anm2", 0, 58,  30, 1, 0.3)
+{
+    Event(7, 0, 0)
+    {
+        PlaySound2D(GameVolumeSource_LoudSound, "fast_move_clothes_left_XX.wav", 1, 1)
+    }
+    Event(14, EVENT_APPLY_DAMAGE_RIGHT, -1)
+    Event(46, VIS_EVENT_STOPANIM, -1)
+}
+
+SeqTrack("m_npc_1pistol_hit_front_left_leg", "m_npc_1pistol_hit_front_left_leg.anm2", 0, 48,  30, 1, 0.3)
+SeqTrack("m_npc_1pistol_hit_front_right_leg", "m_npc_1pistol_hit_front_right_leg.anm2", 0, 39,  30, 1, 0.3)
+SeqTrack("m_npc_1pistol_hit_torso_back", "m_npc_1pistol_hit_torso_back.anm2", 0, 56,  30, 1, 0.3)
+SeqTrack("m_npc_1pistol_hit_torso_front", "m_npc_1pistol_hit_torso_front.anm2", 0, 52,  30, 1, 0.3)
+SeqTrack("m_npc_1pistol_hit_torso_front_left", "m_npc_1pistol_hit_torso_front_left.anm2", 0, 38,  30, 1, 0.3)
+SeqTrack("m_npc_1pistol_hit_torso_front_right", "m_npc_1pistol_hit_torso_front_right.anm2", 0, 34,  30, 1, 0.3)

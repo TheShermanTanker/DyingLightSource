@@ -1,0 +1,360 @@
+!include("ai_timing.def")
+
+!include("M_FPP_Fists.scr")
+!include("M_FPP_Legs.scr")
+!include("M_FPP_Shield.scr")
+!include("M_FPP_Grab.scr")
+!include("M_FPP_Interaction.scr")
+
+SeqTrack( "FPP_Unarmed_FallingToDeath",             "M_FPP_Unarmed_Falling_01.anm2",         0, 300, 30, 1, 0.1)
+//SeqTrack("FPP_Unarmed_Push", 				"M_FPP_Unarmed_Push.anm2"				, 0, 38, 30, 1, 0.3)
+//SeqTrack("FPP_Unarmed_DuckPose", 		           "tpp_stick_crouch.anm2"			, 0, 103, 60, 1, 0.2)
+SeqTrackAlias("FPP_Unarmed_DuckPose", 		           "FPP_Unarmed_Stand")
+
+SeqTrack("FPP_PushDoor", 				"M_FPP_PushDoor_01.anm2"		  		, 6, 25, 30, 1, 0.3)
+{
+	Event(10, EXECUTE_TRIGGER, 1)
+	//Event(15, END_ANIMATION, 1)
+}
+//SeqTrack( "FPP_Unarmed_StaminaRegeneration",				"M_FPP_Unarmed_StaminaRegeneration.anm2",				0, 240, 30, 1, 0.5 )
+
+SeqTrack("FPP_Unarmed_Destroyed_Throw", 				"M_FPP_Destroyed_Weapon_Throw.anm2"		  		, 0, 30, 30, 1, 0.1)
+{
+	Event(2, VIS_EVENT_THROW_ITEM, -1)
+}
+//===================================== Bez broni ============================================
+
+SeqTrack( "FPP_watch",				"M_FPP_Watch.anm2",				0, 138, 30, 1, 0.3 )
+SeqTrack( "FPP_watch_noChatter",				"M_FPP_Watch.anm2",				0, 138, 30, 1, 0.3 )
+
+
+SeqTrack( "FPP_HandsUp",			"M_FPP_Unarmed_Relax.anm2",				0, 32, 30, 1, 0.3 )
+{
+}
+SeqTrack( "FPP_HandsUpLoop",		"M_FPP_Unarmed_Relax.anm2",				32, 100, 30, 1, 0.3 )
+SeqTrack( "FPP_HandsDown",			"M_FPP_Unarmed_Relax.anm2",				100, 112, 30, 1, 0.3 )
+SeqTrack( "Fpp_HeavyBreath",		"M_FPP_LowStamina.anm2",				0, 50, 30, 1, 0.3 )
+{
+	// Requested by T.Gruszka
+	// Event(5, HEAVY_BREATH, -1)
+}
+
+//===================================== Tackle ============================================
+
+SeqTrack( "FPP_Unarmed_Tackle",    		"M_FPP_Unarmed_Tackle.anm2",      0, 28, 25, 1, 0.1)
+{
+    Event(0, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_SoundPlayer, "berserker_empty_tackle.wav", 1, 3, "head", 1, [0,0,0], 0)
+    }
+	Event(15, END_ANIMATION, 1)
+}
+
+
+// ----------------------------------------------
+// -------------------- walk --------------------
+// ----------------------------------------------
+
+///FORWARD
+SeqTrack("FPP_Unarmed_WalkForward",	"m_tpp_player_unarmed_02_walk_f.anm2", 		0 , 53 , 60 , 1, 0.5 )
+{
+    Event(16, VIS_EVENT_STEP_RIGHT, -1)
+    Event(42, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("FPP_Unarmed_RunForward",	"m_tpp_player_unarmed_02_run_f.anm2", 		0 , 44 , 60 , 1, 0.5 )
+{
+    Event(11, VIS_EVENT_STEP_RIGHT, -1)
+    Event(33, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("FPP_Unarmed_SprintForward",	"M_FPP_Unarmed_Player_Sprint.anm2", 	0 , 34 , 60 , 1, 0.5 )
+{
+    Event(10, VIS_EVENT_STEP_RIGHT, -1)
+    Event(27, VIS_EVENT_STEP_LEFT, -1)
+}
+///BACKWARD
+SeqTrack("FPP_Unarmed_WalkBackward",	"m_tpp_player_unarmed_02_walk_b.anm2", 		0 , 82 , 60 , 1, 0.5 )
+{
+    Event(17, VIS_EVENT_STEP_LEFT, -1)
+    Event(58, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("FPP_Unarmed_RunBackward",	"m_tpp_player_unarmed_02_run_b.anm2", 		0 , 45 , 60 , 1, 0.5 )
+{
+    Event(14, VIS_EVENT_STEP_LEFT, -1)
+    Event(36, VIS_EVENT_STEP_RIGHT, -1)
+}
+/// RIGHT
+SeqTrack("FPP_Unarmed_WalkRight",	"m_tpp_player_unarmed_02_walk_r.anm2",		0 , 72 , 60 , 1, 0.5 )
+{
+    Event(18, VIS_EVENT_STEP_LEFT, -1)
+    Event(54, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("FPP_Unarmed_RunRight",	"m_tpp_player_unarmed_02_run_r.anm2", 		0 , 47 , 60 , 1, 0.5 )
+{
+    Event(14, VIS_EVENT_STEP_LEFT, -1)
+    Event(37, VIS_EVENT_STEP_RIGHT, -1)
+}
+/// LEFT
+SeqTrack("FPP_Unarmed_WalkLeft",	"m_tpp_player_unarmed_02_walk_l.anm2", 		0 , 65 , 60 , 1, 0.5 )
+{
+    Event(8, VIS_EVENT_STEP_RIGHT, -1)
+    Event(44, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("FPP_Unarmed_RunLeft",	"m_tpp_player_unarmed_02_run_l.anm2", 		0 , 46 , 60 , 1, 0.5 )
+{
+    Event(13, VIS_EVENT_STEP_RIGHT, -1)
+    Event(36, VIS_EVENT_STEP_LEFT, -1)
+}
+
+//SeqTrack( "FPP_Unarmed_Confused",    			"M_FPP_Stick_Confused.anm2",				0, 19, 30, 1, 0.0 )
+//===================================== FPP Breaking Door ============================================
+
+SeqTrack( "FPP_Unarmed_BreakingDoorCCW_Grab",		"M_FPP_Unarmed_BreakDoorCCW.anm2",           0, 31, 30, 1, 0.5)
+SeqTrack( "FPP_Unarmed_BreakingDoorCCW_Loop1",		"M_FPP_Unarmed_BreakDoorCCW_Idle.anm2",           0, 30, 30, 1, 0.5)
+SeqTrack( "FPP_Unarmed_BreakingDoorCCW_Pull",		"M_FPP_Unarmed_BreakDoorCCW.anm2",           61, 70, 30, 1, 0.5)
+SeqTrack( "FPP_Unarmed_BreakingDoorCCW_Loop2",		"M_FPP_Unarmed_BreakDoorCCW_Idle.anm2",           39, 69, 30, 1, 0.5)
+SeqTrack( "FPP_Unarmed_BreakingDoorCCW_BreakFail",		"M_FPP_Unarmed_BreakDoorCCW.anm2",           105, 144, 30, 1, 0.5)
+{
+	Event(12, EVENT_BREAK_DOOR_FAIL, -1)
+	Event(12, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_LoudSound, "door_wooden_breaking_fail_XX.wav", 1, 3, "head", 1, [0,0,0], 0)
+    }
+	Event(12, 0, 1)
+    {
+        PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "speech_door_breaking_fail_XX.wav", 1, 0, 0, 1)
+    }
+}
+SeqTrack( "FPP_Unarmed_BreakingDoorCCW_BreakSucces",		"M_FPP_Unarmed_BreakDoorCCW.anm2",           195, 219, 30, 1, 0.5)
+{
+	Event(1, 0, 1)
+    {
+        PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "speech_door_breaking_success.wav", 1, 0, 0, 1)
+    }
+	Event(12, EVENT_BREAK_DOOR_SUCCESS, -1)
+	Event(12, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_LoudSound, "door_wooden_breaking_success.wav", 1, 3, "head", 1, [0,0,0], 0)
+    }
+
+}
+SeqTrack( "FPP_Unarmed_BreakingDoorCCW_Open",		"M_FPP_Unarmed_BreakDoorCCW.anm2",           195, 256, 30, 1, 0.5)
+{
+	Event(10, 0, 1)
+    {
+        PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "speech_door_breaking_success.wav", 1, 0, 0, 1)
+    }
+	Event(20, EVENT_BREAK_DOOR_SUCCESS, -1)
+	Event(20, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_LoudSound, "door_wooden_breaking_success.wav", 1, 3, "head", 1, [0,0,0], 0)
+    }
+}
+
+SeqTrack( "FPP_Unarmed_BreakingDoorCW_Grab",		"M_FPP_Unarmed_BreakDoorCW.anm2",           0, 31, 30, 1, 0.5)
+SeqTrack( "FPP_Unarmed_BreakingDoorCW_Loop1",		"M_FPP_Unarmed_BreakDoorCW_Idle.anm2", 			0, 30, 30, 1, 0.5)
+SeqTrack( "FPP_Unarmed_BreakingDoorCW_Pull",		"M_FPP_Unarmed_BreakDoorCW.anm2",           61, 70, 30, 1, 0.5)
+SeqTrack( "FPP_Unarmed_BreakingDoorCW_Loop2",		"M_FPP_Unarmed_BreakDoorCW_Idle.anm2",           39, 69, 30, 1, 0.5)
+SeqTrack( "FPP_Unarmed_BreakingDoorCW_BreakFail",		"M_FPP_Unarmed_BreakDoorCW.anm2",           105, 144, 30, 1, 0.5)
+{
+	Event(11, EVENT_BREAK_DOOR_FAIL, -1)
+	Event(11, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_LoudSound, "door_wooden_breaking_fail_XX.wav", 1, 3, "head", 1, [0,0,0], 0)
+    }
+	Event(11, 0, 1)
+    {
+        PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "speech_door_breaking_fail_XX.wav", 1, 0, 0, 1)
+    }
+}
+SeqTrack( "FPP_Unarmed_BreakingDoorCW_BreakSucces",		"M_FPP_Unarmed_BreakDoorCW.anm2",           195, 219, 30, 1, 0.5)
+{
+	Event(3, 0, 1)
+    {
+        PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "speech_door_breaking_success.wav", 1, 0, 0, 1)
+    }
+	Event(13, EVENT_BREAK_DOOR_SUCCESS, -1)
+	Event(13, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_LoudSound, "door_wooden_breaking_success.wav", 1, 3, "head", 1, [0,0,0], 0)
+    }
+}
+SeqTrack( "FPP_Unarmed_BreakingDoorCW_Open",		"M_FPP_Unarmed_BreakDoorCW.anm2",           195, 256, 30, 1, 0.5)
+{
+	Event(10, 0, 1)
+    {
+        PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "speech_door_breaking_success.wav", 1, 0, 0, 1)
+    }
+	Event(20, EVENT_BREAK_DOOR_SUCCESS, -1)
+	Event(20, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_LoudSound, "door_wooden_breaking_success.wav", 1, 3, "head", 1, [0,0,0], 0)
+    }
+}
+
+//===================================== FPP Healing ============================================
+
+SeqTrack( "FPP_Unarmed_HealingCoop_V01",	"M_FPP_Unarmed_HealingCoop_V01.anm2",        0, 55, 30, 1, 0.5)
+SeqTrack( "FPP_Unarmed_HealingtSelf_V01",	"M_FPP_Unarmed_HealingtSelf_V01.anm2",       0, 58, 30, 1, 0.5)
+
+//===================================== PICKUP ================================================
+
+SeqTrack( "FPP_Unarmed_Pickup",    		"M_FPP_Unarmed_PickUp.anm2", 				0, 19, 30, 1, 0.05)
+{
+	Event(0, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_SoundPlayer, "clothes_pickup.wav", 1, 3, "head", 1, [0,0,0], 1)
+    }
+	Event(11, EXECUTE_TRIGGER, 1)
+	Event(11, PLAY_PICKUP_SOUND, -1)
+}
+
+SeqTrack("FPP_Unarmed_Pickup_Fast",    		"M_FPP_Unarmed_PickUp.anm2", 				0, 19, 45, 1, 0.1)
+{
+	Event(0, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_SoundPlayer, "clothes_pickup.wav", 1, 3, "head", 1, [0,0,0], 1)
+    }
+	Event(11, EXECUTE_TRIGGER, 1)
+	Event(11, PLAY_PICKUP_SOUND, -1)
+}
+//====================================== Spray Can ==================================================
+SeqTrack( "FPP_Unarmed_SprayCan",    		"M_FPP_Spraying.anm2", 				0, 84, 30, 1, 0.1)
+{
+	Event(10, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_SoundPlayer, "gas_tank_loop.wav", 1, 3, "head", 1, [0,0,0], 1)
+    }
+	Event(10, 0, 1)
+	{
+		PlayFx("paint_spray_sequence.fx", [0.0, 0.0, 1.0], "l_handholder", 1, [0.0, 0.1, -0.03], 1)
+	}
+	Event(0, EXECUTE_TRIGGER, 1)
+	Event(10, TRIGGER_HANDS_AIM_ON, 1)	
+	Event(60, TRIGGER_HANDS_AIM_OFF, 1)
+	Event(80, CAN_WALK, 1)	
+}
+
+//===================================== Universal Use ================================================
+SeqTrack( "FPP_UniversalUse",	"FPP_Common_Trigger_Use_01.anm2",	0, 45, 30, 1, 0.2)
+{
+	Event(1, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_SoundPlayer, "clothes_universal_use.wav", 1, 3, "head", 1, [0,0,0], 1)
+    }
+	Event(16, EXECUTE_TRIGGER, 1)
+
+}
+
+SeqTrack("FPP_Unarmed_BodyLoot",	"M_FPP_Unarmed_Looting.anm2", 0 , 45 , 30 , 1, 0.1 )
+{
+    Event(10, EXECUTE_TRIGGER, 1)
+	Event(10, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_SoundPlayer, "clothes_looting.wav", 1, 3, "head", 1, [0,0,0], 1)
+    }
+	Event(40, END_ANIMATION, 1)
+}
+
+SeqTrack("FPP_Unarmed_BodyLoot_Fast",	"M_FPP_Unarmed_LootingFast.anm2", 0 , 23 , 21 , 1, 0.1 )
+{
+    Event(7, EXECUTE_TRIGGER, 1)
+	Event(7, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_SoundPlayer, "clothes_looting.wav", 1, 3, "head", 1, [0,0,0], 1)
+    }
+	Event(18, END_ANIMATION, 1)
+}
+
+SeqTrack("M_FPP_Unarmed_Body_Search",	"M_FPP_Unarmed_Looting.anm2", 0 , 50 , 30 , 0, 0.3 )
+{
+    Event(0, 0, 0)
+}
+SeqTrack("M_FPP_Unarmed_Body_Harvest",	"M_FPP_Unarmed_Looting.anm2", 50 , 120 , 30 , 0, 0.0)
+{
+    Event(19, PUNCH_HIT, -1)
+	Event(19, 0, 1)
+	{
+		PlayFx("grab_player_bleeding_sequence.fx", [0, -1, 0], "r_handholder", 1, [0.1, 0, 0], 0)
+	}
+}
+
+SeqTrack( "FPP_Unarmed_LookBack",		"M_FPP_LookBack_01.anm2",		17, 25, 60, 1, 0.0 )
+SeqTrack( "FPP_Unarmed_LookBackLoop",		"M_FPP_LookBack_01.anm2",	26, 31, 30, 1, 0.0 )
+
+//SeqTrack( "FPP_Unarmed_ScreamReaction",		"M_FPP_Unarmed_ScreamDef.anm2",	0, 28, 30, 1, 0.1 )
+SeqTrack( "FPP_Unarmed_ScreamReaction",		"M_FPP_Unarmed_OnScreamReaction.anm2",	0, 28, 20, 1, 0.1 )
+
+//=================================  Lockpick =======================
+
+SeqTrack("FPP_Unarmed_Lockpick_Start", 		"M_FPP_Unarmed_Lockpick_Start.anm2",			0, 30, 30, 1, 0.25)
+
+SeqTrack("FPP_Unarmed_Lockpick_Loop", 		"M_FPP_Unarmed_Lockpick_Loop.anm2",			0, 120, 30, 1, 0.25)
+
+SeqTrack("FPP_Unarmed_Lockpick_End", 		"M_FPP_Unarmed_Lockpick_End.anm2",			0, 30, 30, 1, 0.25)
+
+
+
+
+SeqTrack("FPP_Lockpicking_minigame_pre_start",   "M_FPP_Unarmed_Lockpick.anm2"   , 0, 0, 1, 1, 0.5)
+{
+}
+SeqTrack("FPP_Lockpicking_minigame_start",   "M_FPP_Unarmed_Lockpick.anm2"   , 0, 21, 30, 1, 0.5)
+{
+}
+SeqTrack("FPP_Lockpicking_minigame_loop",   "M_FPP_Unarmed_Lockpick.anm2"   , 0, 29, 30, 1, 0.5)
+{
+}
+SeqTrack("FPP_Lockpicking_minigame_end",   "M_FPP_Unarmed_Lockpick.anm2"   , 0, 30, 43, 1, 0.5)
+{
+}
+
+SeqTrack("FPP_Unarmed_CoopHealing", "M_FPP_UniversalWeaponRepair.anm2", 0, 150, 30, 1, 0.3)
+SeqTrackAlias( "FPP_Unarmed_HelpGetUp", "FPP_Unarmed_CoopHealing")
+//=================================  Infection =======================
+/*
+SeqTrack("FPP_Unarmed_Infection", 				"M_FPP_Berserker_Fury.anm2"		  		, 430, 480, 15, 1, 0.0)
+{
+    
+}                           
+*/                          
+                            
+
+
+SeqTrack("FPP_Unarmed_Infection_FirstTime", 				"FPP_Unarmed_Infection.anm2"		  		, 0, 173, 30, 0, 0.5)
+{                           
+	Event(150, VIS_EVENT_STOPANIM, -1)
+}   
+
+SeqTrack("FPP_Unarmed_Infection1", 				"FPP_Unarmed_Infection.anm2"		  		, 0, 173, 30, 0, 0.5)
+{        
+	Event(150, VIS_EVENT_STOPANIM, -1)
+}    
+
+SeqTrack("FPP_Unarmed_Infection2", 				"M_FPP_Unarmed_PlayerInfection_v02.anm2"		  		, 0, 180, 30, 0, 0.5)
+{   
+	Event(160, VIS_EVENT_STOPANIM, -1)
+}  
+
+SeqTrack("FPP_Unarmed_Infection3", 				"M_FPP_Unarmed_PlayerInfection_v03.anm2"		  		, 0, 180, 30, 0, 0.5)
+{          
+	Event(160, VIS_EVENT_STOPANIM, -1)
+}                           
+
+SeqTrack("FPP_Unarmed_Infection_PowerUp_FirstTime", 				"M_FPP_Unarmed_StartInfection.anm2"		  		, 0, 398, 30, 0, 0.1) //173
+{   
+//	Event(170, VIS_EVENT_STOPANIM, -1)
+	Event(1, INFECTION_SHOW_ITEM, -1)
+    Event(154, BOSSFIGHT_SHOW_FLASHBACKS, -1)
+	Event(0, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_SoundPlayer, "player_infection_powerup.wav", 1, 3, "head", 1, [0,0,0], 0)
+    }
+//	Event(90, INFECTION_HIDE_ITEM, -1)
+}  
+
+SeqTrack("FPP_Unarmed_Infection_PowerUp", 				"FPP_Unarmed_Infection_PowerUp.anm2"		  		, 0, 150, 30, 0, 0.5)
+{   
+	Event(70, VIS_EVENT_STOPANIM, -1)
+}  
+
+// testowo SeqTrackAlias("FPP_Unarmed_Infection_FirstTime", "FPP_Unarmed_Infection_PowerUp")

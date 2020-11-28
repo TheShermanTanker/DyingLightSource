@@ -1,0 +1,30 @@
+!include("ai_data.def")
+!include("ai_timing.def")
+
+!include("ai_goals.def")
+
+StrongAttractor()
+PeriodBtwSpecialAnims(12)
+SnapDist(2)
+ReleaseDist(3)
+InteractionLevel(3)
+User("Man")
+
+Usage("ENCOUNTER")
+Usage("VIRTUAL_ATTRACTOR")
+
+Slot("", 1, 1, 1, 0, 0, 0, 0, 0, 1, 1.5)
+{
+    AiTypeDataSet("human")
+    {
+        Data("alarming:standing:none:calm:none:none:false", -2, "m_npc_melee_fighter_01_alarming_calm", -1, 1)
+        Data("alarming:standing:none:upset:0:none:false", -2, "m_npc_melee_fighter_01_prepare_alarming", -1, 1)
+        Data("idle:standing:upset:stand:none:none:none", -2, "m_npc_melee_fighter_01_alarming_idle", -1, 1)
+        Data("idle:standing:none:special:none:none:none", -2, "m_npc_melee_fighter_01_special", -1, 1)
+        Data("idle:standing:none:idle:none:none:none", -2, "m_npc_melee_fighter_01_idle", -1, 1)
+        Data("idle:standing:upset:idle:none:none:none", -2, "m_npc_melee_fighter_01_alarming_idle", -1, 1)
+        ParamBool("DISABLE_CHATTER_SYSTEM", 1)
+    }
+    DiscardOn(GoalAttack)
+}
+

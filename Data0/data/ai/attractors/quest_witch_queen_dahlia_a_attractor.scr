@@ -1,0 +1,38 @@
+!include("ai_data.def")
+!include("ai_timing.def")
+!include("ai_goals.def")
+
+ShortHeadRotation()
+StrongAttractor()
+InteractionDist(10)
+PeriodBtwSpecialAnims(2)
+SnapDist(0.8)
+ReleaseDist(1.5)
+InteractionLevel(2)
+User("Woman")
+
+
+DisabledTurnDuringActivity(ALL_INTERACT)
+EnableDialogAnimations()
+
+Slot("", 1, 1, 1, 0, 0, 0, 0, 0, 1, 1.5)
+{
+  DynamicMesh("ot_stall_a_stick_a.msh", "R_HandHolder", "", "", 1)
+    {
+        Scale(0.08, 0.08, 0.08)
+    }
+	  DynamicMesh("teddy_bear_a.msh", "L_HandHolder", "", "", 1)
+    {
+        Scale(0.3, 0.3, 0.3)
+    }
+    CanMoveOnAnimation()
+    AiTypeDataSet("human")
+    {
+        Data("idle:standing:none:stand:none:prepare:none", -2, "quest_witch_queen_dahlia_A_prepare", -1, 1)
+        Data("idle:standing:none:stand:none:none:none", -2, "quest_witch_queen_dahlia_A_nointeract", -1, 1)
+        Data("idle:standing:none:idle:none:none:none", -2, "quest_witch_queen_dahlia_A_nointeract", -1, 1)
+       // Data("idle:standing:none:to_dialog:none:none:none", -2, "quest_witch_queen_dahlia_A_to_dialog", -1, 1)
+        Data("idle:standing:none:dialog:none:none:none", -2, "quest_witch_queen_dahlia_A_dialog_1", -1, 1)
+    }
+}
+

@@ -1,0 +1,940 @@
+sub appearances()
+{
+    /* Syntax overview
+        Character(string id) - start section with appearances for a give character
+            Appearance(string head_name, string body_name, string appearance_id) - defines appearance
+                MeshFpp(string) - mesh used for fpp
+                MeshTpp(string) - mesh used for tpp
+                Skin(string) - skin name, used for both fpp and tpp
+                Perk(string) - id of perk associated with given appearance
+                FppSkinColor(vec3) - rgb component of mesh color to set on UserColor0 when using fpp mesh, don't specify this if you don't want mesh color to be set
+                ClothesColors() - starts section with available clothes colors
+                    Color(float) - alpha component of UserColor0 to set, in both fpp and tpp. Doesn't interfere with FppSkinColor.
+                AttachableSet() - starts section with set of attachables to use
+                    Attachable(string attachable_id) - Adds attachable with specifies id to the player character. Works only when using tpp mesh.
+                AvailableOnStart() - this appearance can be selected as a starting look when creating character
+                Hint() - name of hint that will be displayed during changing apppearance
+                Image() - image that will be displayed in the storage ("wardrobe") menu
+                Category() - category diplayed in menu_
+    */
+    Character("PlayerMan1")
+    {
+        //params: head_id, body_id, internal_id (used in unlock section below)      head_id and body_id are used as LocalizationID to be displayed in menu
+        Appearance("Antoine_Head", "Default_Body", "Default")
+        { 
+            MeshFpp("player_1_fpp.msh");
+            MeshTpp("player_1_tpp.msh");
+            Skin("default");
+            AvailableOnStart();
+            Default();
+            Image("hint_Tutorial_TimeFreeze_Outfit1");
+            Category(0);
+            ID(0);
+        }
+        
+        Appearance("Antoine_Head", "Training", "Training")
+        { 
+            MeshFpp("player_13_fpp.msh");
+            MeshTpp("player_13_tpp.msh");
+            Skin("default");
+            Hint("Tutorial_TimeFreeze_TrainingOutfit");
+            Image("hint_Tutorial_TimeFreeze_Outfit11");
+            Category(0);
+            ID(1);
+        }
+        
+        Appearance("Antoine_Head", "Athlete", "StatusOutfit_03")
+        {
+            MeshFpp("player_5_fpp.msh");
+            MeshTpp("player_5_tpp.msh");
+            Skin("default");
+            Hint("Tutorial_TimeFreeze_Outfit1");
+            Image("hint_Tutorial_TimeFreeze_Outfit5");
+            Category(0);
+            ID(2);
+        }
+        
+        Appearance("Antoine_Head", "Runner", "StatusOutfit_06")
+        {
+            MeshFpp("player_4_fpp.msh");
+            MeshTpp("player_4_tpp.msh");
+            Skin("default");
+            Hint("Tutorial_TimeFreeze_Outfit2");
+            Image("hint_Tutorial_TimeFreeze_Outfit4");
+            Category(0);
+            ID(3);
+        }
+        
+        Appearance("Antoine_Head", "Scout", "StatusOutfit_09")
+        {
+            MeshFpp("player_12_fpp.msh");
+            MeshTpp("player_12_tpp.msh");
+            Skin("default");
+            Hint("Tutorial_TimeFreeze_Outfit3");
+            Image("hint_Tutorial_TimeFreeze_Outfit12");
+            Category(0);
+            ID(4);
+        }
+        
+        Appearance("Antoine_Head", "Survivor", "StatusOutfit_12")
+        {
+            MeshFpp("player_3_fpp.msh");
+            MeshTpp("player_3_tpp.msh");
+            Skin("default");
+            Hint("Tutorial_TimeFreeze_Outfit4");
+            Image("hint_Tutorial_TimeFreeze_Outfit3");
+            Category(0);
+            ID(5);
+        }
+        
+        Appearance("Antoine_Head", "HeadHunter", "StatusOutfit_15")
+        {
+            MeshFpp("player_6_fpp.msh");
+            MeshTpp("player_6_tpp.msh");
+            Skin("default");
+            Hint("Tutorial_TimeFreeze_Outfit5");
+            Image("hint_Tutorial_TimeFreeze_Outfit6");
+            Category(0);
+            ID(6);
+        }
+        
+        Appearance("Antoine_Head", "Juggernaut", "StatusOutfit_18")
+        {
+            MeshFpp("player_7_fpp.msh");
+            MeshTpp("player_7_tpp.msh");
+            Skin("default");
+            Hint("Tutorial_TimeFreeze_Outfit6");
+            Image("hint_Tutorial_TimeFreeze_Outfit7");
+            Category(0);
+            ID(7);
+        }
+
+		Appearance("Antoine_Head", "Survivor_USA", "Survivor_USA")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("USA");
+            Hint("Tutorial_TimeFreeze_Outfit_USA");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_american");
+            Category(2);
+            ID(17);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_Brazil", "Survivor_Brazil")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("BRA");
+            Hint("Tutorial_TimeFreeze_Outfit_Brazil");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_brazilian");
+            Category(2);
+            ID(18);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_Canada", "Survivor_Canada")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("CAN");
+            Hint("Tutorial_TimeFreeze_Outfit_Canada");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_canadian");
+            Category(2);
+            ID(19);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_Dutch", "Survivor_Dutch")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("NED");
+            Hint("Tutorial_TimeFreeze_Outfit_Dutch");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_dutch");
+            Category(2);
+            ID(20);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_England", "Survivor_England")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("ENG");
+            Hint("Tutorial_TimeFreeze_Outfit_English");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_english");
+            Category(2);
+            ID(21);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_France", "Survivor_France")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("FRA");
+            Hint("Tutorial_TimeFreeze_Outfit_France");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_french");
+            Category(2);
+            ID(22);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_Italy", "Survivor_Italy")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("ITA");
+            Hint("Tutorial_TimeFreeze_Outfit_Italy");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_italian");
+            Category(2);
+            ID(23);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_Jamaica", "Survivor_Jamaica")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("JAM");
+            Hint("Tutorial_TimeFreeze_Outfit_Jamaica");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_jamaican");
+            Category(2);
+            ID(24);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_Japan", "Survivor_Japan")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("JAP");
+            Hint("Tutorial_TimeFreeze_Outfit_Japan");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_japanese");
+            Category(2);
+            ID(25);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_Korea", "Survivor_Korea")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("SC");
+            Hint("Tutorial_TimeFreeze_Outfit_Korea");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_korean");
+            Category(2);
+            ID(26);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_Poland", "Survivor_Poland")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("POL");
+            Hint("Tutorial_TimeFreeze_Outfit_Poland");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_polish");
+            Category(2);
+            ID(27);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_Portugal", "Survivor_Portugal")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("POR");
+            Hint("Tutorial_TimeFreeze_Outfit_Portugal");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_portuguese");
+            Category(2);
+            ID(28);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_Russia", "Survivor_Russia")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("RUS");
+            Hint("Tutorial_TimeFreeze_Outfit_Russia");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_russian");
+            Category(2);
+            ID(29);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_Scotland", "Survivor_Scotland")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("SCO");
+            Hint("Tutorial_TimeFreeze_Outfit_Scotland");
+            Image("hint_Tutorial_TimeFreeze_Outfit12_scottish");
+            Category(2);
+            ID(30);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_Spain", "Survivor_Spain")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("SPA");
+            Hint("Tutorial_TimeFreeze_Outfit_Spain");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_spanish");
+            Category(2);
+            ID(31);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_Sweden", "Survivor_Sweden")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("SWE");
+            Hint("Tutorial_TimeFreeze_Outfit_Sweden");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_swedish");
+            Category(2);
+            ID(32);
+        }
+		
+        Appearance("Antoine_Head", "GameFinished1", "GameFinished1")
+        {
+            MeshFpp("player_2_fpp.msh");
+            MeshTpp("player_2_tpp.msh");
+            Image("hint_Tutorial_TimeFreeze_Outfit2_zombie");
+            Skin("player_2_zombie");
+            Category(0);
+            AvailableOnPrologue(false);
+            ID(33);
+        }
+        
+        Appearance("Antoine_Head", "GameFinished2", "GameFinished2")
+        {
+            MeshFpp("player_4_fpp.msh");
+            MeshTpp("player_4_tpp.msh");
+            Image("hint_tutorial_timefreeze_outfit11_phosphor");
+            Skin("phosphor_paint_a");
+            Category(0);
+            AvailableOnPrologue(false);
+            ID(34);
+        }
+
+        Appearance("Antoine_Head", "GameFinished3", "GameFinished3")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Image("hint_tutorial_timefreeze_outfit11_coop_8");
+            Skin("Coop_08");
+            Category(0);
+            AvailableOnPrologue(false);
+            ID(35);
+        }
+
+        Appearance("Antoine_Head", "GameFinished4", "GameFinished4")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Image("hint_tutorial_timefreeze_outfit11_coop_10");
+            Skin("Coop_10");
+            Category(0);
+            AvailableOnPrologue(false);
+            ID(36);
+        }
+		
+		
+		Appearance("Antoine_Head", "Survivor_Argentine", "Survivor_Argentine")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("AR");
+            Hint("Tutorial_TimeFreeze_Outfit_Argentine");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_ar");
+            Category(2);
+            ID(37);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_Austria", "Survivor_Austria")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("AT");
+            Hint("Tutorial_TimeFreeze_Outfit_Austria");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_at");
+            Category(2);
+            ID(38);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_Australia", "Survivor_Australia")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("AU");
+            Hint("Tutorial_TimeFreeze_Outfit_Australia");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_au");
+            Category(2);
+            ID(39);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_Belgium", "Survivor_Belgium")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("BE");
+            Hint("Tutorial_TimeFreeze_Outfit_Belgium");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_be");
+            Category(2);
+            ID(40);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_Switzerland", "Survivor_Switzerland")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("CH");
+            Hint("Tutorial_TimeFreeze_Outfit_Switzerland");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_ch");
+            Category(2);
+            ID(41);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_Denmark", "Survivor_Denmark")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("DK");
+            Hint("Tutorial_TimeFreeze_Outfit_Denmark");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_dk");
+            Category(2);
+            ID(42);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_Fever", "Survivor_Fever")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("Fever");
+            Hint("Tutorial_TimeFreeze_Outfit_Fever");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_fever");
+            Category(0);
+            ID(43);
+            AvailableOnPrologue(false);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_Greece", "Survivor_Greece")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("GR");
+            Hint("Tutorial_TimeFreeze_Outfit_Greece");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_gr");
+            Category(2);
+            ID(44);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_Ireland", "Survivor_Ireland")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("IRL");
+            Hint("Tutorial_TimeFreeze_Outfit_Ireland");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_irl");
+            Category(2);
+            ID(45);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_Norway", "Survivor_Norway")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("NOR");
+            Hint("Tutorial_TimeFreeze_Outfit_Norway");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_nor");
+            Category(2);
+            ID(46);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_NewZeland", "Survivor_NewZeland")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("NZ");
+            Hint("Tutorial_TimeFreeze_Outfit_NewZeland");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_nz");
+            Category(2);
+            ID(47);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_SaudiArabia", "Survivor_SaudiArabia")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("SA");
+            Hint("Tutorial_TimeFreeze_Outfit_SaudiArabia");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_sa");
+            Category(2);
+            ID(48);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_SouthAfrica", "Survivor_SouthAfrica")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("SOAF");
+            Hint("Tutorial_TimeFreeze_Outfit_SouthAfrica");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_soaf");
+            Category(2);
+            ID(49);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_Turkey", "Survivor_Turkey")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("TR");
+            Hint("Tutorial_TimeFreeze_Outfit_Turkey");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_tr");
+            Category(2);
+            ID(50);
+        }
+		
+		
+		Appearance("Antoine_Head", "Survivor_Wales", "Survivor_Wales")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("WAL");
+            Hint("Tutorial_TimeFreeze_Outfit_Wales");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_wal");
+            Category(2);
+            ID(51);
+        }
+		
+		Appearance("Antoine_Head", "Survivor_FeverNight", "Survivor_FeverNight")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("Parkour_Instructor");
+            Hint("Tutorial_TimeFreeze_Outfit_FeverNight");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_parkour_instructor");
+            Category(0);
+            ID(52);
+            AvailableOnPrologue(false);
+        }
+
+        Appearance("Antoine_Head", "Survivor_GodDamn", "Survivor_GodDamn")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("God_Damn");
+            Hint("Tutorial_TimeFreeze_Outfit_GodDamn");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_god_damn");
+            Category(0);
+            ID(53);
+            AvailableOnPrologue(false);
+        }
+
+        Appearance("Antoine_Head", "Survivor_real_hunter", "Survivor_real_hunter")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("Real_hunter");
+            Hint("Tutorial_TimeFreeze_Outfit_Real_hunter");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_real_hunter");
+            Category(0);
+            ID(54);
+            AvailableOnPrologue(false);
+        }
+		
+		
+		
+		Appearance("Antoine_Head", "Reputation_01", "Reputation_01")
+        {
+            MeshFpp("player_2_fpp.msh");
+            MeshTpp("player_2_tpp.msh");
+            Skin("player_2_alternative");
+            Hint("Outfit_Farmland");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_Reputation_01");
+            Category(3);
+            ID(57);
+            AvailableOnPrologue(false);
+        }
+		
+		Appearance("Antoine_Head", "Reputation_02", "Reputation_02")
+        {
+            MeshFpp("player_2_fpp.msh");
+            MeshTpp("player_2_tpp.msh");
+            Skin("player_2_cult");
+            Hint("Tutorial_TimeFreeze_Outfit_Reputation_02");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_Reputation_02");
+            Category(3);
+            ID(58);
+            AvailableOnPrologue(false);
+        }
+		
+		Appearance("Antoine_Head", "Reputation_03", "Reputation_03")
+        {
+            MeshFpp("player_acolyte_fpp.msh");
+            MeshTpp("player_acolyte_tpp.msh");
+            Skin("default");
+            Hint("Tutorial_TimeFreeze_Outfit_Reputation_03");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_Reputation_03");
+            Category(3);
+            ID(59);
+            AvailableOnPrologue(false);
+        }
+
+        Appearance("Antoine_Head", "Legend_01", "Legend_01")
+        {
+            MeshFpp("player_survivor_fpp.msh");
+            MeshTpp("player_survivor_tpp.msh");
+            Skin("default");
+            Hint("Tutorial_TimeFreeze_NewLegendTier");
+            Image("hint_tutorial_timefreeze_outfit_legend1");
+            Category(4);
+            ID(63);
+            AvailableOnPrologue(false);
+        }
+        Appearance("Antoine_Head", "Legend_02", "Legend_02")
+        {
+            MeshFpp("player_brecken_fpp.msh");
+            MeshTpp("player_brecken_tpp.msh");
+            Skin("default");
+            Hint("Tutorial_TimeFreeze_NewLegendTier");
+            Image("hint_tutorial_timefreeze_outfit_legend2");
+            Category(4);
+            ID(64);
+            AvailableOnPrologue(false);
+        }
+        Appearance("Antoine_Head", "Legend_03", "Legend_03")
+        {
+            MeshFpp("player_7_fpp.msh");
+            MeshTpp("player_7_tpp.msh");
+            Skin("player_7_legendary_dark");
+            Hint("Tutorial_TimeFreeze_NewLegendTier");
+            Image("hint_tutorial_timefreeze_outfit_legend3");
+            Category(4);
+            ID(65);
+            AvailableOnPrologue(false);
+        }
+        Appearance("Antoine_Head", "Legend_04", "Legend_04")
+        {
+            MeshFpp("player_tahir_fpp.msh");
+            MeshTpp("player_tahir_tpp.msh");
+            Skin("default");
+            Hint("Tutorial_TimeFreeze_NewLegendTier");
+            Image("hint_tutorial_timefreeze_outfit_legend4");
+            Category(4);
+            ID(66);
+            AvailableOnPrologue(false);
+        }
+        Appearance("Antoine_Head", "Legend_05", "Legend_05")
+        {
+            MeshFpp("player_9_fpp.msh");
+            MeshTpp("player_9_tpp.msh");
+            Skin("player_9_legendary");
+            Hint("Tutorial_TimeFreeze_NewLegendTier");
+            Image("hint_tutorial_timefreeze_outfit_legend5");
+            Category(4);
+            ID(67);
+            AvailableOnPrologue(false);
+        }
+        Appearance("Antoine_Head", "Legend_06", "Legend_06")
+        {
+            MeshFpp("player_3_fpp.msh");
+            MeshTpp("player_3_tpp.msh");
+            Skin("player_3_demon");
+            Hint("Tutorial_TimeFreeze_NewLegendTier");
+            Image("hint_tutorial_timefreeze_outfit_legend6");
+            Category(4);
+            ID(68);
+            AvailableOnPrologue(false);
+        }
+        Appearance("Antoine_Head", "Legend_07", "Legend_07")
+        {
+            MeshFpp("player_rakim_fpp.msh");
+            MeshTpp("player_rakim_tpp.msh");
+            Skin("default");
+            Hint("Tutorial_TimeFreeze_NewLegendTier");
+            Image("hint_tutorial_timefreeze_outfit_legend7");
+            Category(4);
+            ID(69);
+            AvailableOnPrologue(false);
+        }
+		Appearance("Antoine_Head", "Legend_08", "Legend_08")
+        {
+            MeshFpp("player_12_fpp.msh");
+            MeshTpp("player_12_tpp.msh");
+            Skin("player_12_goldenboy");
+            Hint("Tutorial_TimeFreeze_NewLegendTier");
+            Image("hint_tutorial_timefreeze_outfit_legend8");
+            Category(4);
+            ID(70);
+            AvailableOnPrologue(false);
+        }
+        Appearance("Antoine_Head", "Legend_09", "Legend_09")
+        {
+            MeshFpp("player_10_fpp.msh");
+            MeshTpp("player_10_tpp.msh");
+            Skin("player_10_legendary");
+            Hint("Tutorial_TimeFreeze_NewLegendTier");
+            Image("hint_tutorial_timefreeze_outfit_legend9");
+            Category(4);
+            ID(71);
+            AvailableOnPrologue(false);
+        }
+        Appearance("Antoine_Head", "Legend_10", "Legend_10")
+        {
+            MeshFpp("player_rise_fpp.msh");
+            MeshTpp("player_rise_tpp.msh");
+            Skin("default");
+            Hint("Tutorial_TimeFreeze_NewLegendTier");
+            Image("hint_tutorial_timefreeze_outfit_legend10");
+            Category(4);
+            ID(72);
+            AvailableOnPrologue(false);
+        }
+
+		Appearance("Antoine_Head", "Collectable_Outfit_01", "Collectable_Outfit_01")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("COOP_01");
+            Hint("Outfit_COOP_01");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_coop_1");
+            Category(5);
+            ID(74);
+            AvailableOnPrologue(false);
+        }   
+		Appearance("Antoine_Head", "Collectable_Outfit_02", "Collectable_Outfit_02")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("COOP_02");
+            Hint("Outfit_COOP_02");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_coop_2");
+            Category(5);
+            ID(75);
+            AvailableOnPrologue(false);
+        }  
+		Appearance("Antoine_Head", "Collectable_Outfit_03", "Collectable_Outfit_03")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("COOP_03");
+            Hint("Outfit_COOP_03");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_coop_3");
+            Category(5);
+            ID(76);
+            AvailableOnPrologue(false);
+        }  
+		Appearance("Antoine_Head", "Collectable_Outfit_04", "Collectable_Outfit_04")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("COOP_04");
+            Hint("Outfit_COOP_04");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_coop_4");
+            Category(5);
+            ID(77);
+            AvailableOnPrologue(false);
+        }  
+		Appearance("Antoine_Head", "Collectable_Outfit_05", "Collectable_Outfit_05")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("COOP_05");
+            Hint("Outfit_COOP_05");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_coop_5");
+            Category(5);
+            ID(78);
+            AvailableOnPrologue(false);
+        }  
+		Appearance("Antoine_Head", "Collectable_Outfit_06", "Collectable_Outfit_06")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("COOP_06");
+            Hint("Outfit_COOP_06");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_coop_6");
+            Category(5);
+            ID(79);
+            AvailableOnPrologue(false);
+        }  
+		Appearance("Antoine_Head", "Collectable_Outfit_07", "Collectable_Outfit_07")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("COOP_07");
+            Hint("Outfit_COOP_07");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_coop_7");
+            Category(5);
+            ID(80);
+            AvailableOnPrologue(false);
+        }  
+		Appearance("Antoine_Head", "Collectable_Outfit_08", "Collectable_Outfit_08")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("COOP_09");
+            Hint("Outfit_COOP_09");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_coop_9");
+            Category(5);
+            ID(81);
+            AvailableOnPrologue(false);
+        }  
+		Appearance("Antoine_Head", "Collectable_Outfit_09", "Collectable_Outfit_09")
+        {
+            MeshFpp("player_6_fpp.msh");
+            MeshTpp("player_6_tpp.msh");
+            Skin("Forest");
+            Hint("Outfit_forest");
+            Image("hint_Tutorial_TimeFreeze_Outfit6_alt");
+            Category(5);
+            ID(82);
+            AvailableOnPrologue(false);
+        }  
+		Appearance("Antoine_Head", "Collectable_Outfit_10", "Collectable_Outfit_10")
+        {
+            MeshFpp("player_2_fpp.msh");
+            MeshTpp("player_2_tpp.msh");
+            Skin("Default");
+            Hint("Outfit_Default");
+            Image("hint_Tutorial_TimeFreeze_Outfit2");
+            Category(5);
+            ID(83);
+            AvailableOnPrologue(false);
+        }   
+
+		Appearance("Antoine_Head", "Collectable_Outfit_11", "Collectable_Outfit_11")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("TECHLAND_2");
+            Hint("Outfit_TECHLAND_2");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_5");
+            Category(5);
+            ID(85);
+        }	
+		
+		Appearance("Antoine_Head", "Collectable_Outfit_12", "Collectable_Outfit_12")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("POL_2");
+            Hint("Outfit_POL_2");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_polish2");
+            Category(5);
+            ID(86);
+        }	
+
+		Appearance("Antoine_Head", "GameFinished5", "GameFinished5")
+        {
+            MeshFpp("player_12_fpp.msh");
+            MeshTpp("player_12_tpp.msh");
+            Skin("player_12_zombie");
+            Hint("Outfit_player_12_zombie");
+            Image("hint_Tutorial_TimeFreeze_Outfit_12_zombie");
+            Category(0);
+            ID(87);
+        }		
+		
+		Appearance("Antoine_Head", "GameFinished6", "GameFinished6")
+        {
+            MeshFpp("player_1_fpp.msh");
+            MeshTpp("player_1_tpp.msh");
+            Skin("player_1_zombie");
+            Hint("Outfit_player_1_zombie");
+            Image("hint_Tutorial_TimeFreeze_Outfit1_zombie");
+            Category(0);
+            ID(88);
+        }
+    }
+}
+
+/*
+    StatusLevel(int, CharacterId, AppearanceId) - Appearance is unlocked after reching given status level
+    Chapter(int, CharacterId, AppearanceId) - Appearance is unlocked after reaching certain point in storyline
+    Item(ItemId, CharacterId, AppearanceId) - Appearance is unlocked after player finds given item in the game world
+*/
+sub unlock()
+{
+    PlayerLevel("Status", 0, "PlayerMan1", "Training");
+
+	PlayerLevel("Status", 3, "PlayerMan1", "Default");
+		
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_USA");
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_Brazil");
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_Canada");
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_Dutch");
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_England");
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_France");
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_Italy");
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_Jamaica");
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_Japan");
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_Poland");
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_Portugal");
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_Russia");
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_Spain");
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_Sweden");
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_Scotland");
+
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_Argentine");
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_Austria");
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_Australia");
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_Belgium");
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_Switzerland");
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_Denmark");
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_Greece");
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_Ireland");
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_Norway");
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_NewZeland");
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_SaudiArabia");
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_SouthAfrica");
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_Turkey");
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_Wales");
+	
+	PlayerLevel("Status", 3, "PlayerMan1", "Survivor_real_hunter");
+	
+    PlayerLevel("Status", 3, "PlayerMan1", "StatusOutfit_03");
+    PlayerLevel("Status", 6, "PlayerMan1", "StatusOutfit_06");
+    PlayerLevel("Status", 9, "PlayerMan1", "StatusOutfit_09");
+    PlayerLevel("Status", 12, "PlayerMan1", "StatusOutfit_12");
+    PlayerLevel("Status", 15, "PlayerMan1", "StatusOutfit_15");
+    PlayerLevel("Status", 18, "PlayerMan1", "StatusOutfit_18");
+    
+	GameFinished("PlayerMan1", "GameFinished1", "Nightmare");
+    GameFinished("PlayerMan1", "GameFinished2", "Nightmare");
+    GameFinished("PlayerMan1", "GameFinished3", "Nightmare");
+    GameFinished("PlayerMan1", "GameFinished4", "Nightmare");
+	GameFinished("PlayerMan1", "GameFinished5", "Nightmare");
+    GameFinished("PlayerMan1", "GameFinished6", "Nightmare");
+	GameFinished("PlayerMan1", "GameFinished1", "Hardcore");
+    GameFinished("PlayerMan1", "GameFinished2", "Hardcore");
+    GameFinished("PlayerMan1", "GameFinished3", "Hardcore");
+    GameFinished("PlayerMan1", "GameFinished4", "Hardcore");
+    GameFinished("PlayerMan1", "GameFinished3", "Normal");
+    GameFinished("PlayerMan1", "GameFinished4", "Normal");
+	
+	Achievement(51,"PlayerMan1", "Survivor_Fever"); 
+    Achievement(52,"PlayerMan1", "Survivor_FeverNight");
+	
+    PlayerLevel("Reputation", 2, "PlayerMan1", "Reputation_01");
+    PlayerLevel("Reputation", 4, "PlayerMan1", "Reputation_02");
+    PlayerLevel("Reputation", 6, "PlayerMan1", "Reputation_03");
+    
+    PlayerLevel("Legend", 25, "PlayerMan1", "Legend_01");
+    PlayerLevel("Legend", 50, "PlayerMan1", "Legend_02");
+    PlayerLevel("Legend", 75, "PlayerMan1", "Legend_03");
+    PlayerLevel("Legend", 100, "PlayerMan1", "Legend_04");
+    PlayerLevel("Legend", 125, "PlayerMan1", "Legend_05");
+    PlayerLevel("Legend", 150, "PlayerMan1", "Legend_06");
+    PlayerLevel("Legend", 175, "PlayerMan1", "Legend_07");
+    PlayerLevel("Legend", 200, "PlayerMan1", "Legend_08");
+    PlayerLevel("Legend", 225, "PlayerMan1", "Legend_09");
+    PlayerLevel("Legend", 250, "PlayerMan1", "Legend_10");
+	
+	Item("ZZZZ_Collectable_CollectableOutfit_01", "PlayerMan1", "Collectable_Outfit_01");
+	Item("ZZZZ_Collectable_CollectableOutfit_02", "PlayerMan1", "Collectable_Outfit_02");//community
+	Item("ZZZZ_Collectable_CollectableOutfit_03", "PlayerMan1", "Collectable_Outfit_03");
+	Item("ZZZZ_Collectable_CollectableOutfit_04", "PlayerMan1", "Collectable_Outfit_04");
+	Item("ZZZZ_Collectable_CollectableOutfit_05", "PlayerMan1", "Collectable_Outfit_05");
+	Item("ZZZZ_Collectable_CollectableOutfit_06", "PlayerMan1", "Collectable_Outfit_06");
+	Item("ZZZZ_Collectable_CollectableOutfit_07", "PlayerMan1", "Collectable_Outfit_07");
+	Item("ZZZZ_Collectable_CollectableOutfit_08", "PlayerMan1", "Collectable_Outfit_08");
+	Item("ZZZZ_Collectable_CollectableOutfit_09", "PlayerMan1", "Collectable_Outfit_09");
+	Item("ZZZZ_Collectable_CollectableOutfit_10", "PlayerMan1", "Collectable_Outfit_10");    
+	Item("ZZZZ_Collectable_CollectableOutfit_11", "PlayerMan1", "Collectable_Outfit_11");    
+	Item("ZZZZ_Collectable_CollectableOutfit_12", "PlayerMan1", "Collectable_Outfit_12");
+	
+	Item("ZZZZ_Collectable_Collectable_CultOutfit_01", "PlayerMan1", "Reputation_01");
+	Item("ZZZZ_Collectable_Collectable_CultOutfit_02", "PlayerMan1", "Reputation_02");
+	Item("ZZZZ_Collectable_Collectable_CultOutfit_03", "PlayerMan1", "Reputation_03");
+}

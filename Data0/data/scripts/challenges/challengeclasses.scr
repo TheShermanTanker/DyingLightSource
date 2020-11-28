@@ -1,0 +1,71 @@
+import "StatsStuff.scr"
+
+sub AutoCompetitionClass()
+{
+    Coop(true);
+    BlockQuestObjective(true);
+    ShowCountdown(false); 
+    Difficulty(Challenge_Diff_Easy);
+    DeathFailsChallengeSingle(false);
+    DeathFailsChallengeCoop(false);
+    RespawnLocalPlayerNearOtherCoopPlayer(true);
+    UsesQuestName(false);
+    IsStoryRelated(false);
+    IsCompetition(true);
+    ExcludedMaps("stadium");
+}
+
+sub StoryCompetitionClass()
+{
+    Coop(true);
+    BlockQuestObjective(false);
+    ShowCountdown(false);
+    Difficulty(Challenge_Diff_Medium);
+    DeathFailsChallengeSingle(false);
+    DeathFailsChallengeCoop(false);
+    RespawnLocalPlayerNearOtherCoopPlayer(true);
+    UsesQuestName(false);
+    IsStoryRelated(true);
+    IsCompetition(true);
+}
+
+sub AutostartingStoryCompetitionClass()
+{
+    use StoryCompetitionClass();
+    ShowCountdown(true);
+}
+
+sub SafeZoneCompetitionClass()
+{
+    use AutoCompetitionClass();
+    Type(Challenge_Type_SafeZone);
+    OnlyOnce(true);
+    Duration(240.0);
+    TextureName("chl_kill_icon");
+}
+
+sub QuestChallengeClass()
+{
+    Coop(false);
+    BlockQuestObjective(true);
+    ShowCountdown(true);
+    DeathFailsChallengeSingle(true);
+    DeathFailsChallengeCoop(false);
+    UsesQuestName(true);
+    IsStoryRelated(true);
+    IsCompetition(false);
+    DisableGamplayRewards(true);
+}
+
+sub DeadzoneChallengeClass()
+{
+    Type(Challenge_Type_DeadZone);
+    Difficulty(Challenge_Diff_Hard);
+    ShowPostprocess(false);
+    TextureName("chl_cleansing_icon");
+    OnlyOnceCompleted(true);
+    BlockQuestObjective(true);
+    ShowCountdown(false);
+    DeathFailsChallengeSingle(false);
+    DeathFailsChallengeCoop(false);
+}

@@ -1,0 +1,100 @@
+!include("MeshPartCloth.def")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+MeshPartCloth()
+{
+//----------------------------------------------
+// bones
+//----------------------------------------------
+    BonesGridSize(3, 2)
+
+    $XDIST(f, -1)
+    $YDIST(f, 0.08)
+
+/* ver 1 - bones have been changed :/
+    Bone(0, 0, "physical_strap_a", 1, XDIST, 0.05)
+    Bone(0, 1, "",                 0, XDIST, YDIST)
+
+    Bone(1, 0, "physical_strap_b", 1, XDIST, 0.06)
+    Bone(1, 1, "",                 0, XDIST, YDIST)
+
+    Bone(2, 0, "physical_strap_c", 1, XDIST, 0.12)
+    Bone(2, 1, "",                 0, XDIST, YDIST)
+
+    Bone(3, 0, "physical_strap_d", 1, XDIST, 0.13)
+    Bone(3, 1, "",                 0, XDIST, YDIST)
+
+    Bone(4, 0, "physical_strap_e", 1, XDIST, 0.1)
+    Bone(4, 1, "",                 0, XDIST, YDIST)
+*/
+
+    Bone(0, 0, "physical_strap_b", 1, XDIST, 0.05)
+    Bone(0, 1, "",                 0, XDIST, YDIST)
+
+    Bone(1, 0, "physical_strap_d", 1, XDIST, 0.06)
+    Bone(1, 1, "",                 0, XDIST, YDIST)
+
+    Bone(2, 0, "physical_strap_e", 1, XDIST, 0.12)
+    Bone(2, 1, "",                 0, XDIST, YDIST)
+
+    //?? Bone(3, 0, "physical_strap_c", 1, XDIST, 0.05)
+    //?? Bone(3, 1, "",                 0, XDIST, YDIST)
+    
+//----------------------------------------------
+// collisions 
+//----------------------------------------------
+
+    CollisionSlide(1)
+    CollisionSpeedMod(1)
+    CollisionBounce(0)
+    
+    CollisionShapesMoveInfluence(1)
+    
+    CollisionSegmentDivision(100)
+    CollisionNormalAngleThreshold(180)
+    
+    NodeCollisionSphereRadius(0.1)
+    ExternalCollisionAffectMul(0)
+
+	CollisionMaxDistance(0, 1, "root", [0.045, 1.05,  0.30], 0.065, 0)      // right swinging tape
+	CollisionMaxDistance(3, 1, "root", [0.045, 1.05,  -0.30], 0.065, 0)     // left swinging tape
+    
+	CollisionMaxDistance(1, 1, "root", [0.14, 0.95,  0.23], 0, 40)
+	CollisionMaxDistance(2, 1, "root", [0.14, 0.95, -0.23], 0, 40)
+    
+//----------------------------------------------
+// spring params 
+//----------------------------------------------
+
+    Viscous(0)
+    AirFriction(0)
+
+    StructuralStiffness(1000, 1000)
+    ShearStiffness(1000, 1000)
+    FlexionStiffness(1000, 1000)
+
+    HorizontSpringRatio(0)
+    
+    CheckLengthsStepsPerSec(0)
+
+//----------------------------------------------
+// physical params 
+//----------------------------------------------
+    
+    Mass(1)
+    GravityMul(0.8) 
+    WindInfluence(0.3)
+    //?? WindGust(0.04, 0.5)
+
+//----------------------------------------------
+// other params
+//----------------------------------------------
+
+    SynchroWithPhysics(0)
+    EnableAPBOut(1)
+    
+    ObjectMoveMul(0.994)
+    AnimationMoveMul(1)
+}
+
+

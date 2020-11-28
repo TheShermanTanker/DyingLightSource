@@ -1,0 +1,1661 @@
+// !include("ai_curves.def")
+!include("ai_data.def")
+!include("ai_timing.def")
+!include("vessel_sound_types.def")
+
+// USAGE EXAMPLE //////////////////////////////////////////////////////////////////////////////////
+// Data("token_0:token_1:...:token_n", duration, "anim_sequence_name", anim_group, weight)
+// token_0:token_1:...:token_n - it defines animation type
+// duration                    - animation duration in [s] from anim_sequence_name (default -2 -> take duration from sequence lenght)
+// anim_group                  - animation group which is taken into consideration while playing next animation
+//                               e.g. if animation with group 6 is played, then while playing next animation, 
+//                               animation with group 6 will be preffered to play (default -1 -> no group)
+// weight                      - it defines how often animation will be played if two or more animations are defined with same tokens (default 1)
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////// DATA ///////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//###############
+//#### DYING ####
+//###############
+//## die:pose:damage_type:body_part:direction:death_type
+//###############
+
+//Data("die:standing:::::::", 0.0, "", -1, 1)
+//Data("die:laying:::::::", 0.0, "", -1, 1)
+
+Data("die:standing::::burn:::", -2, "m_zombie_death_burn_01", -1, 1)
+Data("die:standing::::burn:::", -2, "m_zombie_death_burn_01_offset", -1, 1)
+Data("die:standing::::burn:::", -2, "m_zombie_death_burn_02", -1, 1)
+Data("die:standing::::burn:::", -2, "m_zombie_death_burn_02_offset", -1, 1)
+Data("die:standing::::burn:::", -2, "m_zombie_death_burn_03", -1, 1)
+Data("die:standing::::burn:::", -2, "m_zombie_death_burn_03_offset", -1, 1)
+Data("die:standing::::burn:::", -2, "m_zombie_death_burn_03", -1, 1)
+Data("die:standing::::burn:::", -2, "m_zombie_death_burn_03_offset", -1, 1)
+
+
+Data("die:standing::::poison:::", -2, "m_zombie_death_poison_01", -1, 1)
+Data("die:standing::::poison:::", -2, "m_zombie_death_poison_01_offset", -1, 1)
+Data("die:standing::::poison:::", -2, "m_zombie_death_poison_02", -1, 1)
+Data("die:standing::::poison:::", -2, "m_zombie_death_poison_02_offset", -1, 1)
+
+Data("die:standing::::heat:::", -2, "m_zombie_death_burn_01", -1, 1)
+Data("die:standing::::heat:::", -2, "m_zombie_death_burn_01_offset", -1, 1)
+Data("die:standing::::heat:::", -2, "m_zombie_death_burn_02", -1, 1)
+Data("die:standing::::heat:::", -2, "m_zombie_death_burn_02_offset", -1, 1)
+Data("die:standing::::heat:::", -2, "m_zombie_death_burn_03", -1, 1)
+Data("die:standing::::heat:::", -2, "m_zombie_death_burn_03_offset", -1, 1)
+
+Data("die:standing:::right:electrocution:::", -2, "m_zombie_death_electrocution_01", -1, 1)
+Data("die:standing:::left:electrocution:::", -2, "m_zombie_death_electrocution_02", -1, 1)
+Data("die:standing::::electrocution:::", -2, "m_zombie_death_electrocution_02", -1, 1)
+
+//Data("die:standing::::poison::", -2, "m_zombie_death_poison_01", -1, 1)
+
+
+Data("die:standing::::assassinated:::", -2, "m_zombie_death_decapitation_02", -1, 1)
+Data("die:standing::::assassinated:::", -2, "m_zombie_death_decapitation_01", -1, 1)
+Data("die:standing::::assassinated:::", -2, "m_zombie_death_decapitation_03", -1, 1)
+Data("die:standing::::assassinated:::", -2, "m_zombie_death_decapitation_04", -1, 1)
+Data("die:standing::::assassinated:::", -2, "m_zombie_death_decapitation_05", -1, 1)
+
+Data("die:standing::::decapitated:::", -2, "m_zombie_death_decapitation_02", -1, 1)
+Data("die:standing::::decapitated:::", -2, "m_zombie_death_decapitation_01", -1, 1)
+Data("die:standing::::decapitated:::", -2, "m_zombie_death_decapitation_03", -1, 1)
+Data("die:standing::::decapitated:::", -2, "m_zombie_death_decapitation_04", -1, 1)
+Data("die:standing::::decapitated:::", -2, "m_zombie_death_decapitation_05", -1, 1)
+
+Data("die:standing::::cut_in_half:::", -2, "m_zombie_death_decapitation_02", -1, 1)
+Data("die:standing::::neck_break:::", 0.0, "", -1, 1)    // not simulated - so blank anim
+
+//rem for optimization reason
+//Data("die:standing::::decapitated:::", -2, "mz_upset_stand_death_decapitated_v03", -1, 1) 
+//Data("die:standing::::decapitated:::", -2, "mz_upset_stand_death_decapitated_v04", -1, 1)
+//Data("die:standing::::assassinated:::", -2, "mz_upset_stand_death_decapitated_v04", -1, 1)
+//Data("die:standing::::cut_in_half:::", -2, "mz_upset_stand_death_decapitated_v04", -1, 1)
+//Data("die:standing::::cut_in_half:::", 0, "", -1, 3)
+//Data("die:standing::::burn:::", -2, "zombie_burn_death_02", -1, 1)
+
+ 
+
+/*Data("die:standing::head:left:", -2, "zombie_death_head_left_01", -1, 1)
+Data("die:standing::head:right:", -2, "zombie_death_head_right_01", -1, 1)
+Data("die:standing::torso:left:", -2, "zombie_death_head_left_01", -1, 1)
+Data("die:standing::torso:right:", -2, "zombie_death_head_right_01", -1, 1)
+Data("die:standing::head:up:", -2, "zombie_death_head_up_02", -1, 1)
+Data("die:standing::torso:up:", -2, "zombie_death_head_up_02", -1, 1)
+Data("die:standing::head:up:", -2, "zombie_death_head_up_01", -1, 1)
+Data("die:standing::torso:up:", -2, "zombie_death_head_up_01", -1, 1)
+Data("die:standing::head:backward:", -2, "zombie_death_head_up_01", -1, 1)
+Data("die:standing::torso:backward:", -2, "zombie_death_head_up_01", -1, 1)*/
+
+//#######################
+//#######################
+//#### HIT REACTIONS ####
+//#######################
+//## hit_reaction:pose:hit_reaction:item_type:damage_type:attacker_pos:body_part:direction:severity
+//#######################
+
+
+		//###############################
+		//#### HIT REACTIONS-RIFLE   ####
+		//###############################
+		//## hit_reaction:pose:hit_reaction:item_type:damage_type:attacker_pos:body_part:direction:severity
+
+		// rifle hit reactions template ///////////////////////////////////////////////////////////////////////
+
+		///////////
+		///front///
+		///////////
+
+		///////light////////////////////
+																									// player stoi naprzeciwko ai, ai odpala reakcje do tylu  
+		Data("hit_reaction:standing:pain::bullet:front:head:backward:", -2,      "mz_stand_hitreaction_head_up_light_machete_v01", -1, 1)                          
+		Data("hit_reaction:standing:pain::bullet:front:torso:backward:", -2,     "mz_stand_hitreaction_head_left_light_machete_v01", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:front:torso:backward:", -2,     "m_zombie_hitreaction_light_head_right_v01", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:front:torso:backward:", -2,     "m_zombie_hitreaction_kick_01", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:front:torso:backward:", -2,     "m_zombie_hitreaction_kick_02", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:front:torso:backward:", -2,     "m_zombie_hitreaction_kick_03", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:front:torso:backward:", -2,     "m_zombie_hitreaction_kick_04", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:front:torso:backward:", -2,     "mz_stand_hitreaction_torso_left_light_machete_v02", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:front:torso:backward:", -2,     "mz_stand_hitreaction_torso_right_light_machete_v01", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:front:torso:backward:", -2,     "mz_domino_front_collision_strong", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:front:legs:backward:", -2,      "mz_stand_hitreaction_legs_left_back_light_machete_v01", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:front:legs:backward:", -2,      "mz_stand_hitreaction_legs_right_back_light_machete_v01", -1, 1)
+
+		Data("hit_reaction:standing:pain::bullet:front:torso:backward:", -2,     		  "m_zombie_hitreaction_shot_torso_right_v01", -1, 1)
+		///////medium//////////////////
+		Data("hit_reaction:standing:pain::bullet:front:torso:backward:medium", -2,     "m_zombie_hitreaction_shot_torso_right_v01", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:front:torso:backward:medium", -2,     "m_zombie_hitreaction_shot_torso_left_v01", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:front:torso:backward:medium", -2,     "m_zombie_hitreaction_shot_torso_right_v02", -1, 1)
+
+		/*
+		Data("hit_reaction:standing:pain::bullet:front:head:backward:medium", -2,      "mz_stand_hitreaction_head_up_light_machete_v01", -1, 1)                    // to samo tylko severity medium
+		Data("hit_reaction:standing:pain::bullet:front:head:backward:medium", -2,      "mz_stand_hitreaction_head_up_light_machete_v01", -1, 1)                          
+		Data("hit_reaction:standing:pain::bullet:front:torso:backward:medium", -2,     "mz_stand_hitreaction_head_left_light_machete_v01", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:front:torso:backward:medium", -2,     "m_zombie_hitreaction_light_head_right_v01", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:front:torso:backward:medium", -2,     "m_zombie_hitreaction_kick_03", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:front:torso:backward:medium", -2,     "m_zombie_hitreaction_kick_04", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:front:torso:backward:medium", -2,     "mz_stand_hitreaction_torso_left_light_machete_v02", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:front:torso:backward:medium", -2,     "mz_stand_hitreaction_torso_right_light_machete_v01", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:front:torso:backward:medium", -2,     "mz_domino_front_collision_strong", -1, 1)
+		*/
+
+
+		Data("hit_reaction:standing:pain::bullet:front:legs:backward:medium", -2,      "mz_stand_hitreaction_legs_right_back_light_machete_v01", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:front:head:backward:heavy", -2,      "mz_upset_stand_hitreaction_head_right_heavy_v02", -1, 1)  
+		Data("hit_reaction:standing:pain::bullet:front:head:backward:heavy", -2,      "mz_upset_stand_hitreaction_head_left_heavy_v04", -1, 1)                     // to samo tylko severity heavy
+		Data("hit_reaction:standing:pain::bullet:front:torso:backward:heavy", -2,     "mz_upset_stand_hitreaction_head_left_heavy_v04", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:front:torso:backward:heavy", -2,     "mz_upset_stand_hitreaction_head_right_heavy_v02", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:front:legs:backward:heavy", -2,      "mz_stand_hitreaction_legs_left_back_heavy_machete_v01", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:front:legs:backward:heavy", -2,      "mz_domino_frontright_collision_strong", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:front:legs:backward:heavy", -2,      "mz_domino_frontleft_collision_strong", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:front:legs:backward:heavy", -2,      "m_zombie_hitreaction_heavy_legs_left_v01", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:front:legs:backward:heavy", -2,      "m_zombie_hitreaction_heavy_legs_right_v01", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:front:legs:backward:heavy", -2,      "mz_stand_hitreaction_legs_left_back_heavy_machete_v01", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:front:legs:backward:heavy", -2,      "mz_stand_hitreaction_legs_right_back_heavy_machete_v01", -1, 1)
+
+
+
+
+		//////// right ///////////
+		Data("hit_reaction:standing:pain::bullet:right:head:left:", -2,      "mz_stand_hitreaction_torso_right_light_machete_v01", -1, 1)       // 1) player stoi po prawej, ai odpala reakcje w lewo
+		Data("hit_reaction:standing:pain::bullet:right:torso:left:", -2,     "mz_stand_hitreaction_torso_right_heavy_machete_v01", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:right:legs:left:", -2,      "mz_stand_hitreaction_legs_right_back_light_machete_v01", -1, 1)
+
+		//////  left/////////// 																											2) player stoi po lewej, ai odpala reakcje w prawo
+		Data("hit_reaction:standing:pain::bullet:left:head:right:", -2,      "mz_stand_hitreaction_head_left_light_machete_v01", -1, 1)  
+		Data("hit_reaction:standing:pain::bullet:left:head:right:", -2,      "mz_stand_hitreaction_head_left_heavy_machete_v02", -1, 1)         
+		Data("hit_reaction:standing:pain::bullet:left:torso:right:", -2,     "mz_stand_hitreaction_head_left_light_machete_v01", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:left:torso:right:", -2,     "mz_stand_hitreaction_head_left_heavy_machete_v02", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:left:legs:right:", -2,      "mz_stand_hitreaction_legs_left_back_light_machete_v01", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:left:legs:right:", -2,      "mz_stand_hitreaction_legs_right_back_light_machete_v01", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:rear:head:forward:", -2,      "mz_stand_hitreaction_legs_right_back_light_machete_v01", -1, 1)       
+		///// front //////////  																											// 3) player stoi z tylu, ai odpala reakcje do przodu
+		Data("hit_reaction:standing:pain::bullet:rear:torso:forward:light",  -2, "mz_stand_hitreaction_torso_front_light_machete_v01", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:rear:torso:forward:light", -2,  "mz_domino_back_collision_soft", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:rear:torso:forward:medium", -2,     "mz_stand_hitreaction_torso_front_light_machete_v01", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:rear:torso:forward:medium", -2,     "mz_domino_back_collision_soft", -1, 1)
+
+		Data("hit_reaction:standing:pain::bullet:rear:torso:forward:heavy", -2,     "mz_stand_hitreaction_torso_front_heavy_machete_v01", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:rear:torso:forward:heavy", -2,     "mz_stand_hitreaction_legs_left_back_heavy_machete_v01", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:rear:torso:forward:heavy", -2,     "mz_domino_back_collision_strong", -1, 1)
+		Data("hit_reaction:standing:pain::bullet:rear:legs:forward:", -2,      "mz_stand_hitreaction_legs_right_back_heavy_machete_v01", -1, 1)
+
+
+		//Data("hit_reaction:standing:pain::bullet:front:left_arm:backward:", -2,  "corruptor_light_hit_reaction_02", -1, 1)    // nie ma niestety w tej chwili rozroznienia na lewa/prawa reke/noge (dla broni palnych byc moze bedzie to niewystarczajace)
+		//Data("hit_reaction:standing:pain::bullet:front:right_arm:backward:", -2, "corruptor_light_hit_reaction_01", -1, 1)    // nie ma niestety w tej chwili rozroznienia na lewa/prawa reke/noge 
+
+		// w przypadkach 1) 2) i 3) brakuje reakcji medium i heavy severity
+
+		// end of rifle reaction template /////////////////////////////////////////////////////////////////////
+		// wywalone do testowania strzelania pozostale reakcje
+
+
+		//Data("hit_reaction:laying:pain::::", -2, "_h_upset_crawl_reacthit_01", -1, 1) //missing animation
+
+	//###############################
+	//#### HIT REACTIONS-KICK    ####
+	//###############################
+
+		/// kick 
+		Data("hit_reaction:standing:pain::all::head:backward:medium", -2, "m_zombie_hitreaction_kick_01", -1, 1)
+		Data("hit_reaction:standing:pain::all::head:backward:medium", -2, "m_zombie_hitreaction_medium_torso_front_v01", -1, 1)
+		Data("hit_reaction:standing:pain::all::head:backward:medium", -2, "m_zombie_hitreaction_medium_torso_front_v02", -1, 1)
+
+		Data("hit_reaction:standing:pain::all::torso:backward:medium", -2, "m_zombie_hitreaction_kick_01", -1, 1)
+		Data("hit_reaction:standing:pain::all::torso:backward:medium", -2, "m_zombie_hitreaction_medium_torso_front_v01", -1, 1)
+		Data("hit_reaction:standing:pain::all::torso:backward:medium", -2, "m_zombie_hitreaction_medium_torso_front_v02", -1, 1)
+
+		Data("hit_reaction:standing:pain::all::torso:backward:medium", -2, "m_zombie_hitreaction_heavy_torso_front_v01", -1, 1)
+		Data("hit_reaction:standing:pain::all::torso:backward:medium", -2, "m_zombie_hitreaction_kick_09", -1, 1)
+		Data("hit_reaction:standing:pain::all::head:backward:medium", -2, "m_zombie_hitreaction_kick_10", -1, 1)
+		
+		/// air kick
+		Data("hit_reaction:standing:pain::all::torso:backward:heavy", -2, "m_zombie_hitreaction_kick_02", -1, 1)
+		Data("hit_reaction:standing:pain::all::torso:backward:heavy", -2, "m_zombie_hitreaction_kick_03", -1, 1)
+		Data("hit_reaction:standing:pain::all::torso:backward:heavy", -2, "m_zombie_hitreaction_kick_04", -1, 1)
+		Data("hit_reaction:standing:pain::all::torso:backward:heavy", -2, "m_zombie_hitreaction_kick_06", -1, 1)
+		Data("hit_reaction:standing:pain::all::torso:backward:heavy", -2, "m_zombie_hitreaction_kick_08", -1, 1)
+		Data("hit_reaction:standing:pain::all::torso:forward:heavy", -2, "m_zombie_hitreaction_medium_torso_back_v01", -1, 1)
+		Data("hit_reaction:standing:pain::all::head:backward:heavy", -2, "m_zombie_hitreaction_kick_02", -1, 1)
+		Data("hit_reaction:standing:pain::all::head:backward:heavy", -2, "m_zombie_hitreaction_kick_03", -1, 1)
+		Data("hit_reaction:standing:pain::all::head:backward:heavy", -2, "m_zombie_hitreaction_kick_04", -1, 1)
+		Data("hit_reaction:standing:pain::all::head:backward:heavy", -2, "m_zombie_hitreaction_kick_05", -1, 1)
+		Data("hit_reaction:standing:pain::all::head:backward:heavy", -2, "m_zombie_hitreaction_kick_06", -1, 1)
+		Data("hit_reaction:standing:pain::all::head:backward:heavy", -2, "m_zombie_hitreaction_kick_07", -1, 1)
+		Data("hit_reaction:standing:pain::all::head:backward:heavy", -2, "m_zombie_hitreaction_kick_08", -1, 1)
+		
+		Data("hit_reaction:standing:pain::all::legs:BACKWARD_LEFT:heavy", -2, "m_zombie_hitreaction_kick_02", -1, 1)
+		Data("hit_reaction:standing:pain::all::legs:BACKWARD_LEFT:heavy", -2, "m_zombie_hitreaction_kick_03", -1, 1)
+		Data("hit_reaction:standing:pain::all::legs:BACKWARD_LEFT:heavy", -2, "m_zombie_hitreaction_kick_04", -1, 1)
+		Data("hit_reaction:standing:pain::all::legs:BACKWARD_LEFT:heavy", -2, "m_zombie_hitreaction_kick_05", -1, 1)
+		Data("hit_reaction:standing:pain::all::legs:BACKWARD_LEFT:heavy", -2, "m_zombie_hitreaction_kick_06", -1, 1)
+		Data("hit_reaction:standing:pain::all::legs:BACKWARD_LEFT:heavy", -2, "m_zombie_hitreaction_kick_07", -1, 1)
+		Data("hit_reaction:standing:pain::all::legs:BACKWARD_LEFT:heavy", -2, "m_zombie_hitreaction_kick_08", -1, 1)
+		
+		Data("hit_reaction:standing:pain::all::legs:BACKWARD_RIGHT:heavy", -2, "m_zombie_hitreaction_kick_02", -1, 1)
+		Data("hit_reaction:standing:pain::all::legs:BACKWARD_RIGHT:heavy", -2, "m_zombie_hitreaction_kick_03", -1, 1)
+		Data("hit_reaction:standing:pain::all::legs:BACKWARD_RIGHT:heavy", -2, "m_zombie_hitreaction_kick_04", -1, 1)
+		Data("hit_reaction:standing:pain::all::legs:BACKWARD_RIGHT:heavy", -2, "m_zombie_hitreaction_kick_05", -1, 1)
+		Data("hit_reaction:standing:pain::all::legs:BACKWARD_RIGHT:heavy", -2, "m_zombie_hitreaction_kick_06", -1, 1)
+		Data("hit_reaction:standing:pain::all::legs:BACKWARD_RIGHT:heavy", -2, "m_zombie_hitreaction_kick_07", -1, 1)
+		Data("hit_reaction:standing:pain::all::legs:BACKWARD_RIGHT:heavy", -2, "m_zombie_hitreaction_kick_08", -1, 1)
+		
+		
+		Data("hit_reaction:standing:pain::all::head:backward:heavy", -2, "m_zombie_hitreaction_medium_head_front_v01", -1, 1)
+		Data("hit_reaction:standing:pain::all::head:forward:heavy", -2, "m_zombie_hitreaction_heavy_head_front_v01", -1, 1)
+
+		
+		
+	//###############################
+	//#### HIT REACTIONS-BLUNT   ####
+	//###############################
+	//## hit_reaction:pose:hit_reaction:item_type:damage_type:attacker_pos:body_part:direction:severity
+
+	//### LIGHT SEVERITY ###
+	
+		// --- head ---
+		Data("hit_reaction:standing:pain::all::head:forward:light", 		-2, "m_zombie_hitreaction_light_torso_back_v01",-1, 1)  // trzeba robic na glowe
+		Data("hit_reaction:standing:pain::all::head:forward:light", 		-2, "m_zombie_hitreaction_medium_torso_back_v01",-1, 1)  // trzeba robic na glowe
+		Data("hit_reaction:standing:pain::all::head:forward:light", 		-2, "m_zombie_hitreaction_blunt_light_head_forwad_01",-1, 1)  // trzeba robic na glowe  
+		Data("hit_reaction:standing:pain::all::head:backward:light", 		-2, "m_zombie_hitreaction_light_torso_front_v01",-1, 1)  // moze nie pasowac
+		Data("hit_reaction:standing:pain::all::head:backward:light", 		-2, "m_zombie_hitreaction_medium_head_front_v01",-1, 1)  // moze nie pasowac
+		
+		
+		Data("hit_reaction:standing:pain::all::head:down:light", 		    -2, "m_zombie_hitreaction_light_torso_back_v01",-1, 1)  // trzeba robic na glowe
+		Data("hit_reaction:standing:pain::all::head:down:light", 		    -2, "m_zombie_hitreaction_blunt_light_head_forwad_01",-1, 1)  // trzeba robic na glowe
+		
+		Data("hit_reaction:standing:pain::all::head:up:light", 		        -2, "m_zombie_hitreaction_light_torso_front_v01",-1, 1)  // moze nie pasowac
+		
+
+		Data("hit_reaction:standing:pain::all::head:right:light",		    -2, "m_zombie_hitreaction_blunt_light_head_right_02",-1, 1)
+		Data("hit_reaction:standing:pain::all::head:right:light",		    -2, "m_zombie_hitreaction_blunt_light_head_right_03",-1, 1)
+		Data("hit_reaction:standing:pain::all::head:left:light",		    -2, "m_zombie_hitreaction_blunt_light_head_left_03",-1, 1)
+		Data("hit_reaction:standing:pain::all::head:left:light",		    -2, "m_zombie_hitreaction_blunt_light_head_left_02",-1, 1)
+		Data("hit_reaction:standing:pain::all::head:right:light",		    -2, "m_zombie_hitreaction_blunt_light_head_right_04",-1, 1)
+
+		
+		// --- torso ---
+		Data("hit_reaction:standing:pain::all::torso:forward:light", 		-2, "m_zombie_hitreaction_light_torso_back_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:forward:light", 		-2, "m_zombie_hitreaction_medium_torso_back_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:forward:light", 		-2, "m_zombie_hitreaction_blunt_light_head_forwad_01",-1, 1)
+		
+		Data("hit_reaction:standing:pain::all::torso:backward:light",		-2, "m_zombie_hitreaction_light_torso_front_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:backward:light",		-2, "m_zombie_hitreaction_medium_torso_front_v01",-1, 1)
+		
+		Data("hit_reaction:standing:pain::all::torso:down:light", 		    -2, "m_zombie_hitreaction_light_torso_back_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:down:light", 		    -2, "m_zombie_hitreaction_blunt_light_head_forwad_01",-1, 1)
+		
+		Data("hit_reaction:standing:pain::all::torso:up:light",		        -2, "m_zombie_hitreaction_light_torso_front_v01",-1, 1)
+		//Data("hit_reaction:standing:pain::all::torso:left:light", 		    -2, "m_zombie_hitreaction_light_torso_right_v01",-1, 1)
+		//Data("hit_reaction:standing:pain::all::torso:right:light", 		    -2, "m_zombie_hitreaction_light_torso_left_v01",-1, 1)		
+		
+		Data("hit_reaction:standing:pain::all::torso:left:light", 		    -2, "m_zombie_hitreaction_blunt_light_torso_left_01",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:left:light", 		    -2, "m_zombie_hitreaction_blunt_light_torso_left_02",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:right:light", 		    -2, "m_zombie_hitreaction_blunt_light_torso_right_03",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:right:light", 		    -2, "m_zombie_hitreaction_blunt_light_torso_right_01",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:right:light", 		    -2, "m_zombie_hitreaction_blunt_light_torso_right_02",-1, 1)
+		
+		// --- legs ---
+		Data("hit_reaction:standing:pain::all::legs:left:light", 		-2, "m_zombie_hitreaction_light_legs_right_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::legs:right:light", 		-2, "m_zombie_hitreaction_light_legs_left_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::legs:left:light", 		-2, "m_zombie_hitreaction_light_legs_right_v02",-1, 1)
+		Data("hit_reaction:standing:pain::all::legs:right:light", 		-2, "m_zombie_hitreaction_light_legs_left_v02",-1, 1)
+		Data("hit_reaction:standing:pain::all::legs:forward:light", 	-2, "m_zombie_hitreaction_light_legs_right_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::legs:forward:light", 	-2, "m_zombie_hitreaction_light_legs_left_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::legs:forward:light", 	-2, "m_zombie_hitreaction_light_legs_right_v02",-1,  1)
+		Data("hit_reaction:standing:pain::all::legs:forward:light", 	-2, "m_zombie_hitreaction_light_legs_left_v02",-1, 1) 
+		Data("hit_reaction:standing:pain::all::legs:backward:light", 	-2, "m_zombie_hitreaction_light_torso_front_v01",-1, 1) 
+		Data("hit_reaction:standing:pain::all::legs:down:light", 	    -2, "m_zombie_hitreaction_light_legs_right_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::legs:down:light", 	    -2, "m_zombie_hitreaction_light_legs_left_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::legs:up:light", 	        -2, "m_zombie_hitreaction_light_torso_front_v01",-1, 1) 
+
+	//### MEDIUM SEVERITY ###
+	
+		// --- head ---
+		Data("hit_reaction:standing:pain::all::head:forward:medium", 	-2, "mz_stand_hitreaction_head_down_light_machete_v01",-1, 1) // do  ponownego retargetu
+		Data("hit_reaction:standing:pain::all::head:forward:medium", 	-2, "m_zombie_hitreaction_medium_torso_back_v01",-1, 1) // do  ponownego retargetu
+		Data("hit_reaction:standing:pain::all::head:forward:medium", 	-2, "m_zombie_hitreaction_blunt_light_head_forwad_01",-1, 1) // do  ponownego retargetu
+		
+		Data("hit_reaction:standing:pain::all::head:backward:medium", 	-2, "mz_upset_stand_hitreaction_head_up_medium_v01",-1, 1)  // do  ponownego retargetu
+		Data("hit_reaction:standing:pain::all::head:backward:medium", 	-2, "m_zombie_hitreaction_medium_head_front_v01",-1, 1) 
+		Data("hit_reaction:standing:pain::all::head:backward:medium", 	-2, "m_zombie_hitreaction_kick_05",-1, 1) 
+		
+		Data("hit_reaction:standing:pain::all::head:down:medium", 		-2, "mz_stand_hitreaction_head_down_light_machete_v01",-1, 1) // do  ponownego retargetu
+		Data("hit_reaction:standing:pain::all::head:down:medium", 		-2, "m_zombie_hitreaction_blunt_light_head_forwad_01",-1, 1) // do  ponownego retargetu
+		
+		Data("hit_reaction:standing:pain::all::head:up:medium", 		-2, "mz_upset_stand_hitreaction_head_up_medium_v01",-1, 1)  // do  ponownego retargetu
+		
+		Data("hit_reaction:standing:pain::all::head:left:medium",		-2, "m_zombie_hitreaction_blunt_medium_head_left_01",-1, 1)
+		Data("hit_reaction:standing:pain::all::head:left:medium",		-2, "m_zombie_hitreaction_blunt_medium_head_left_02",-1, 1)
+		
+		Data("hit_reaction:standing:pain::all::head:right:medium",		-2, "m_zombie_hitreaction_blunt_medium_head_right_02",-1, 1)
+		Data("hit_reaction:standing:pain::all::head:right:medium",		-2, "m_zombie_hitreaction_blunt_medium_head_right_03",-1, 1)
+		Data("hit_reaction:standing:pain::all::head:right:medium",		-2, "m_zombie_hitreaction_blunt_medium_head_right_01",-1, 1)
+		
+		
+		
+		// --- torso ---
+		Data("hit_reaction:standing:pain::all::torso:forward:medium", 	-2, "m_zombie_hitreaction_heavy_torso_back_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:forward:medium", 	-2, "m_zombie_hitreaction_blunt_light_head_forwad_01",-1, 1)
+		
+		Data("hit_reaction:standing:pain::all::torso:backward:medium",	-2, "m_zombie_hitreaction_heavy_torso_front_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:backward:medium",	-2, "m_zombie_hitreaction_medium_torso_front_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:backward:medium",	-2, "m_zombie_hitreaction_medium_torso_front_v02",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:backward:medium",	-2, "m_zombie_hitreaction_kick_06",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:backward:medium",	-2, "m_zombie_hitreaction_kick_03",-1, 1)
+		
+		Data("hit_reaction:standing:pain::all::torso:down:medium", 		-2, "m_zombie_hitreaction_heavy_torso_back_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:down:medium", 		-2, "m_zombie_hitreaction_blunt_light_head_forwad_01",-1, 1)
+		
+		Data("hit_reaction:standing:pain::all::torso:up:medium",		-2, "m_zombie_hitreaction_heavy_torso_front_v01",-1, 1)
+		
+		Data("hit_reaction:standing:pain::all::torso:right:medium", 	-2, "m_zombie_hitreaction_blunt_medium_torso_right_01",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:right:medium", 	-2, "m_zombie_hitreaction_blunt_medium_torso_right_02",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:right:medium", 	-2, "m_zombie_hitreaction_blunt_medium_torso_right_03",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:left:medium", 		-2, "m_zombie_hitreaction_blunt_medium_torso_left_03",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:left:medium", 		-2, "m_zombie_hitreaction_blunt_medium_torso_left_01",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:left:medium", 		-2, "m_zombie_hitreaction_blunt_medium_torso_left_02",-1, 1)
+		
+				
+		Data("hit_reaction:standing:pain::all::torso:BACKWARD_RIGHT:",	-2, "m_zombie_hitreaction_heavy_torso_front_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:BACKWARD_RIGHT:",	-2, "m_zombie_hitreaction_medium_torso_front_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:BACKWARD_RIGHT:",	-2, "m_zombie_hitreaction_medium_torso_front_v02",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:BACKWARD_RIGHT:",	-2, "m_zombie_hitreaction_kick_06",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:BACKWARD_RIGHT:",	-2, "m_zombie_hitreaction_kick_03",-1, 1)
+		
+		Data("hit_reaction:standing:pain::all::torso:BACKWARD_LEFT:",	-2, "m_zombie_hitreaction_heavy_torso_front_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:BACKWARD_LEFT:",	-2, "m_zombie_hitreaction_medium_torso_front_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:BACKWARD_LEFT:",	-2, "m_zombie_hitreaction_medium_torso_front_v02",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:BACKWARD_LEFT:",	-2, "m_zombie_hitreaction_kick_06",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:BACKWARD_LEFT:",	-2, "m_zombie_hitreaction_kick_03",-1, 1)
+		
+		
+		// --- legs ---
+		Data("hit_reaction:standing:pain::all::legs:right:medium", 		-2, "m_zombie_hitreaction_medium_legs_right_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::legs:left:medium", 		-2, "m_zombie_hitreaction_heavy_legs_right_v01",-1, 1)  // dla przodu i tylu 
+		Data("hit_reaction:standing:pain::all::legs:backward:medium", 	-2, "m_zombie_hitreaction_heavy_torso_front_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::legs:forward:medium",	-2, "m_zombie_hitreaction_heavy_torso_back_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::legs:up:medium", 	    -2, "m_zombie_hitreaction_heavy_torso_back_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::legs:down:medium", 	    -2, "m_zombie_hitreaction_heavy_torso_front_v01",-1, 1)                  
+        
+	//### HEAVY SEVERITY ###
+	
+		// --- head ---
+		Data("hit_reaction:standing:pain::all::head:forward:heavy", 	-2, "mz_stand_hitreaction_head_down_light_machete_v01",-1, 1) // do  ponownego retargetu
+		Data("hit_reaction:standing:pain::all::head:backward:heavy", 	-2, "mz_upset_stand_hitreaction_head_up_medium_v01",-1, 1)  // do  ponownego retargetu
+		Data("hit_reaction:standing:pain::all::head:up:heavy", 			-2, "mz_upset_stand_hitreaction_head_up_medium_v01",-1, 1)  // do  ponownego retargetu
+		Data("hit_reaction:standing:pain::all::head:down:heavy", 		-2, "mz_stand_hitreaction_head_down_light_machete_v01",-1, 1)  // do  ponownego retargetu
+		Data("hit_reaction:standing:pain::all::head:down:heavy", 	    -2, "m_zombie_hitreaction_heavy_legs_right_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::head:down:heavy", 	    -2, "m_zombie_hitreaction_heavy_legs_left_v01",-1, 1)
+		
+		Data("hit_reaction:standing:pain::all::head:left:heavy",		-2, "m_zombie_hitreaction_blunt_heavy_head_left_01",-1, 1)
+		Data("hit_reaction:standing:pain::all::head:left:heavy",		-2, "m_zombie_hitreaction_blunt_heavy_head_left_02",-1, 1)
+		Data("hit_reaction:standing:pain::all::head:left:heavy",		-2, "m_zombie_hitreaction_blunt_heavy_head_left_03",-1, 1)
+		Data("hit_reaction:standing:pain::all::head:right:heavy",		-2, "m_zombie_hitreaction_blunt_heavy_head_right_03",-1, 1)
+		Data("hit_reaction:standing:pain::all::head:right:heavy",		-2, "m_zombie_hitreaction_blunt_heavy_head_right_01",-1, 1)
+		Data("hit_reaction:standing:pain::all::head:right:heavy",		-2, "m_zombie_hitreaction_blunt_heavy_head_right_02",-1, 1)
+
+	// --- torso ---
+		
+		
+		Data("hit_reaction:standing:pain::all::torso:left:heavy", 		-2, "m_zombie_hitreaction_blunt_heavy_torso_left_01",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:right:heavy", 		-2, "m_zombie_hitreaction_blunt_heavy_torso_right_03",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:left:heavy", 		-2, "m_zombie_hitreaction_blunt_heavy_torso_left_02",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:right:heavy", 		-2, "m_zombie_hitreaction_blunt_heavy_torso_right_01",-1, 1)
+		//Data("hit_reaction:standing:pain::all::torso:right:heavy", 		-2, "m_zombie_hitreaction_blunt_heavy_torso_left_03",-1, 1) //wrong name
+		
+		Data("hit_reaction:standing:pain::all::torso:up:heavy", 			-2, "mz_upset_stand_hitreaction_head_up_medium_v01",-1, 1)  
+		Data("hit_reaction:standing:pain::all::torso:down:heavy", 		-2, "mz_stand_hitreaction_head_down_light_machete_v01",-1, 1) 
+		
+		Data("hit_reaction:standing:pain::all::head:forward:heavy", 	-2, "mz_stand_hitreaction_head_down_light_machete_v01",-1, 1) 
+		Data("hit_reaction:standing:pain::all::head:backward:heavy", 	-2, "m_zombie_hitreaction_heavy_head_front_v01",-1, 1)  
+		
+		/*
+		
+		Data("hit_reaction:standing:pain::all::torso:forward:heavy", 	-2, "m_zombie_hitreaction_heavy_legs_left_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:forward:heavy", 	-2, "m_zombie_hitreaction_heavy_legs_right_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:backward:heavy",	-2, "m_zombie_hitreaction_heavy_torso_front_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:up:heavy",			-2, "m_zombie_hitreaction_heavy_torso_front_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:down:heavy",		-2, "m_zombie_hitreaction_heavy_legs_left_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:down:heavy",		-2, "m_zombie_hitreaction_heavy_legs_right_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:left:heavy", 		-2, "m_zombie_hitreaction_heavy_torso_right_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:right:heavy", 		-2, "m_zombie_hitreaction_heavy_torso_left_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:down:heavy", 	    -2, "m_zombie_hitreaction_heavy_legs_right_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::torso:down:heavy", 	    -2, "m_zombie_hitreaction_heavy_legs_left_v01",-1, 1)
+		*/
+		// --- legs ---
+		Data("hit_reaction:standing:pain::all::legs:backward:heavy", 	-2, "m_zombie_hitreaction_heavy_legs_left_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::legs:backward:heavy", 	-2, "m_zombie_hitreaction_heavy_legs_right_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::legs:forward:heavy", 	-2, "m_zombie_hitreaction_heavy_legs_left_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::legs:forward:heavy", 	-2, "m_zombie_hitreaction_heavy_legs_right_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::legs:right:heavy", 		-2, "m_zombie_hitreaction_heavy_legs_left_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::legs:left:heavy", 		-2, "m_zombie_hitreaction_heavy_legs_right_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::legs:up:heavy", 	        -2, "m_zombie_hitreaction_heavy_legs_left_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::legs:up:heavy", 	        -2, "m_zombie_hitreaction_heavy_legs_right_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::legs:down:heavy", 	    -2, "m_zombie_hitreaction_heavy_legs_right_v01",-1, 1)
+		Data("hit_reaction:standing:pain::all::legs:down:heavy", 	    -2, "m_zombie_hitreaction_heavy_legs_left_v01",-1, 1)
+
+	//m_zombie_common //end
+// additional collision damage -> domino zombie
+Data("hit_reaction:standing:pain::other_hit:::forward:light", -2, 		"mz_domino_front_collision_soft", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:front::forward:light", -2, 	"mz_domino_front_collision_soft", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:front::up:light", -2, 		"mz_domino_front_collision_soft", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:front::down:light", -2,		"mz_domino_front_collision_soft", -1, 1)
+
+Data("hit_reaction:standing:pain::other_hit:::backward:light", -2, 		"mz_domino_back_collision_soft", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:rear::backward:light", -2, 	"mz_domino_back_collision_soft", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:rear::up:light", -2, 		"mz_domino_back_collision_soft", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:rear::down:light", -2, 		"mz_domino_back_collision_soft", -1, 1)
+
+Data("hit_reaction:standing:pain::other_hit:::right:light", -2, 		"mz_domino_right_collision_soft", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:left::right:light", -2, 	"mz_domino_right_collision_soft", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:left::up:light", -2, 		"mz_domino_right_collision_soft", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:left::down:light", -2, 		"mz_domino_right_collision_soft", -1, 1)
+
+Data("hit_reaction:standing:pain::other_hit:::left:light", -2, 			"mz_domino_left_collision_soft", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:right::left:light", -2, 	"mz_domino_left_collision_soft", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:right::up:light", -2, 		"mz_domino_left_collision_soft", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:right::down:light", -2, 	"mz_domino_left_collision_soft", -1, 1)
+
+// heavy reactions
+Data("hit_reaction:standing:pain::other_hit:::forward:heavy", -2, 		"mz_domino_front_collision_strong", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:front::forward:heavy", -2, 	"mz_domino_front_collision_strong", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:front::up:heavy", -2, 		"mz_domino_front_collision_strong", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:front::down:heavy", -2, 	"mz_domino_front_collision_strong", -1, 1)
+
+Data("hit_reaction:standing:pain::other_hit:::backward:heavy", -2, 		"mz_domino_back_collision_strong", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:rear::backward:heavy", -2, 	"mz_domino_back_collision_strong", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:rear::up:heavy", -2, 		"mz_domino_back_collision_strong", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:rear::down:heavy", -2, 		"mz_domino_back_collision_strong", -1, 1)
+
+Data("hit_reaction:standing:pain::other_hit:::right:heavy", -2, 		"mz_domino_right_collision_strong", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:left::right:heavy", -2, 	"mz_domino_right_collision_strong", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:left::up:heavy", -2, 		"mz_domino_right_collision_strong", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:left::down:heavy", -2, 		"mz_domino_right_collision_strong", -1, 1)
+
+Data("hit_reaction:standing:pain::other_hit:::left:heavy", -2, 			"mz_domino_left_collision_strong", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:right::left:heavy", -2, 	"mz_domino_left_collision_strong", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:right::up:heavy", -2, 		"mz_domino_left_collision_strong", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:right::down:heavy", -2, 	"mz_domino_left_collision_strong", -1, 1)
+
+// cross reactions
+Data("hit_reaction:standing:pain::other_hit:::backward_left:", -2, 		"mz_domino_backLeft_collision_soft", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:::backward_right:", -2, 	"mz_domino_backRight_collision_soft", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:::forward_left:", -2, 		"mz_domino_FrontLeft_collision_soft", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:::forward_right:", -2, 		"mz_domino_FrontRight_collision_soft", -1, 1)
+
+// heavy reactions
+Data("hit_reaction:standing:pain::other_hit:::backward_left:heavy", -2, "mz_domino_backLeft_collision_strong", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:::backward_right:heavy", -2, "mz_domino_BackRight_collision_strong", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:::forward_left:heavy", -2, "mz_domino_FrontLeft_collision_strong", -1, 1)
+Data("hit_reaction:standing:pain::other_hit:::forward_right:heavy", -2, "mz_domino_FrontRight_collision_strong", -1, 1)
+
+
+//###############################
+//#### HIT REACTIONS-CUT	 ####
+//###############################
+//## hit_reaction:pose:hit_reaction:item_type:damage_type:attacker_pos:body_part:direction:severity
+
+// head light severity
+Data("hit_reaction:standing:pain::cut::head:left:light", -2, 		"m_zombie_hitreaction_light_head_left_v01", 	-1, 1)
+Data("hit_reaction:standing:pain::cut::head:right:light", -2,		"m_zombie_hitreaction_light_head_right_v01", 	-1, 1)
+Data("hit_reaction:standing:pain::cut::head:left:light", -2, 		"MZ_Stand_Hitreaction_Head_Left_Light_Machete_V01", 	-1, 1)
+Data("hit_reaction:standing:pain::cut::head:right:light", -2,		"MZ_Stand_Hitreaction_Head_Right_Light_Machete_V01", 	-1, 1)
+
+Data("hit_reaction:standing:pain::cut::head:right:light", -2,		"m_zombie_hitreaction_cut_light_head_right_01", 	-1, 1)
+
+// head medium severity
+Data("hit_reaction:standing:pain::cut::head:up:medium", -2, 		"MZ_Stand_Hitreaction_Head_Up_Light_Machete_V01", 		-1, 1)
+Data("hit_reaction:standing:pain::cut::head:down:medium", -2, 		"MZ_Stand_Hitreaction_Head_Down_Light_Machete_V01", 	-1, 1)
+Data("hit_reaction:standing:pain::cut::head:left:medium", -2, 		"MZ_Stand_Hitreaction_Head_Left_Light_Machete_V01", 	-1, 1)
+Data("hit_reaction:standing:pain::cut::head:right:medium", -2,		"MZ_Stand_Hitreaction_Head_Right_Light_Machete_V01", 	-1, 1)
+Data("hit_reaction:standing:pain::cut::head:backward:medium", -2, 	"MZ_Stand_Hitreaction_Head_Up_Light_Machete_V01", 		-1, 1)
+Data("hit_reaction:standing:pain::cut::head:forward:medium", -2, 	"MZ_Stand_Hitreaction_Head_Down_Light_Machete_V01", 	-1, 1)
+
+Data("hit_reaction:standing:pain::cut::head:left:medium", -2, 		"m_zombie_hitreaction_cut_medium_head_left_01", 	-1, 1)
+Data("hit_reaction:standing:pain::cut::head:left:medium", -2, 		"m_zombie_hitreaction_cut_medium_head_left_02", 	-1, 1)
+
+Data("hit_reaction:standing:pain::cut::head:right:medium", -2,		"m_zombie_hitreaction_cut_medium_head_right_01", 	-1, 1)
+Data("hit_reaction:standing:pain::cut::head:right:medium", -2,		"m_zombie_hitreaction_cut_medium_head_right_02", 	-1, 1)
+Data("hit_reaction:standing:pain::cut::head:right:medium", -2,		"m_zombie_hitreaction_cut_medium_head_right_03", 	-1, 1)
+
+// head heavy severity
+Data("hit_reaction:standing:pain::cut::head:up:heavy", -2, 			"MZ_Stand_Hitreaction_Head_Up_Light_Machete_V01", 		-1, 1)
+Data("hit_reaction:standing:pain::cut::head:down:heavy", -2, 		"MZ_Stand_Hitreaction_Head_Down_Light_Machete_V01", 	-1, 1)
+Data("hit_reaction:standing:pain::cut::head:left:heavy", -2, 		"MZ_Stand_Hitreaction_Torso_Left_Light_Machete_V02", 	-1, 1)
+Data("hit_reaction:standing:pain::cut::head:right:heavy", -2, 		"MZ_Stand_Hitreaction_Torso_Right_Light_Machete_V02",	-1, 1)
+Data("hit_reaction:standing:pain::cut::head:right:heavy", -2,		"MZ_Stand_Hitreaction_Head_Right_Heavy_machete_v01", 	-1, 1)
+Data("hit_reaction:standing:pain::cut::head:backward:heavy", -2, 	"MZ_Stand_Hitreaction_Head_Up_Light_Machete_V01", 		-1, 1)
+Data("hit_reaction:standing:pain::cut::head:forward:heavy", -2, 	"MZ_Stand_Hitreaction_Head_Down_Light_Machete_V01", 	-1, 1)
+// torso light severity
+
+Data("hit_reaction:standing:pain::cut::torso:left:light", -2, 			"m_zombie_hitreaction_light_torso_left_v01", 	-1, 1)
+Data("hit_reaction:standing:pain::cut::torso:right:light", -2, 			"m_zombie_hitreaction_light_torso_right_v01",	-1, 1)
+Data("hit_reaction:standing:pain::cut::torso:right:light", -2, 			"m_zombie_hitreaction_blunt_medium_torso_right_03",	-1, 1)
+
+Data("hit_reaction:standing:pain::cut::torso:left:light", -2, 			"m_zombie_hitreaction_cut_light_torso_left_02", 	-1, 1)
+Data("hit_reaction:standing:pain::cut::torso:right:light", -2, 			"m_zombie_hitreaction_cut_light_torso_right_02",	-1, 1)
+
+Data("hit_reaction:standing:pain::cut::torso:forward:light", -2, 		"m_zombie_hitreaction_light_torso_back_v01",	-1, 1)
+Data("hit_reaction:standing:pain::cut::torso:backward:light", -2, 		"m_zombie_hitreaction_light_torso_front_v01",	-1, 1)
+// torso medium severity
+Data("hit_reaction:standing:pain::cut::torso:forward:medium", -2, 		"MZ_Stand_Hitreaction_Torso_Front_Light_Machete_V01",	-1, 1)
+Data("hit_reaction:standing:pain::cut::torso:backward:medium", -2, 		"MZ_Stand_Hitreaction_Torso_Back_Light_Machete_V01",	-1, 1)
+Data("hit_reaction:standing:pain::cut::torso:left:medium", -2, 			"MZ_Stand_Hitreaction_Torso_Left_Light_Machete_V01", 	-1, 1)
+Data("hit_reaction:standing:pain::cut::torso:left:medium", -2, 			"MZ_Stand_Hitreaction_Torso_Left_Light_Machete_V02", 	-1, 1)
+Data("hit_reaction:standing:pain::cut::torso:right:medium", -2, 		"MZ_Stand_Hitreaction_Torso_Right_Light_Machete_V01",	-1, 1)
+Data("hit_reaction:standing:pain::cut::torso:right:medium", -2, 		"MZ_Stand_Hitreaction_Torso_Right_Light_Machete_V02",	-1, 1)
+Data("hit_reaction:standing:pain::cut::torso:up:medium", -2, 			"MZ_Stand_Hitreaction_Head_Up_Light_Machete_V01", 		-1, 1)
+Data("hit_reaction:standing:pain::cut::torso:down:medium", -2, 			"MZ_Stand_Hitreaction_Head_Down_Light_Machete_V01", 	-1, 1)
+// torso heavy severity
+Data("hit_reaction:standing:pain::cut::torso:right:heavy", -2, 			"MZ_Stand_Hitreaction_Torso_Right_Heavy_machete_v01",	-1, 1)
+Data("hit_reaction:standing:pain::cut::torso:left:heavy", -2, 			"MZ_Stand_Hitreaction_Torso_Left_Heavy_machete_v01",	-1, 1)
+Data("hit_reaction:standing:pain::cut::torso:forward:heavy", -2, 		"MZ_Stand_Hitreaction_Head_Down_Light_Machete_V01",		-1, 1)
+Data("hit_reaction:standing:pain::cut::torso:backward:heavy", -2, 		"MZ_Stand_Hitreaction_Torso_Back_Light_Machete_V01",	-1, 1)
+// legs light severity
+Data("hit_reaction:standing:pain::cut::legs:right:light", -2, 		"m_zombie_hitreaction_light_legs_left_v01", -1, 1)
+Data("hit_reaction:standing:pain::cut::legs:right:light", -2, 		"m_zombie_hitreaction_light_legs_left_v02", -1, 1)
+Data("hit_reaction:standing:pain::cut::legs:left:light", -2, 		"m_zombie_hitreaction_light_legs_right_v01", -1, 1)
+// legs medium severity
+Data("hit_reaction:standing:pain::cut::legs:right:medium", -2, 		"MZ_Stand_Hitreaction_Legs_Left_Front_Light_machete_v01", -1, 1)
+Data("hit_reaction:standing:pain::cut::legs:right:medium", -2, 		"MZ_Stand_Hitreaction_Legs_Left_Front_Light_machete_v02", -1, 1)
+Data("hit_reaction:standing:pain::cut::legs:left:medium", -2, 		"MZ_Stand_Hitreaction_Legs_Right_Front_Light_Machete_v01", -1, 1)
+Data("hit_reaction:standing:pain::cut::legs:left:medium", -2, 		"MZ_Stand_Hitreaction_Legs_Right_Left_Light_Machete_v01", -1, 1)
+Data("hit_reaction:standing:pain::cut::legs:forward:medium", -2, 	"MZ_Stand_Hitreaction_Legs_Left_Front_Light_machete_v01", -1, 1)
+Data("hit_reaction:standing:pain::cut::legs:forward:medium", -2,	"MZ_Stand_Hitreaction_Legs_Left_Front_Light_machete_v02", -1, 1)
+Data("hit_reaction:standing:pain::cut::legs:forward:medium", -2, 	"MZ_Stand_Hitreaction_Legs_Right_Front_Light_Machete_v01", -1, 1)
+Data("hit_reaction:standing:pain::cut::legs:forward:medium", -2,	"MZ_Stand_Hitreaction_Legs_Right_Left_Light_Machete_v01", -1, 1)
+Data("hit_reaction:standing:pain::cut::legs:backward:medium", -2, 	"MZ_Stand_Hitreaction_Head_Up_Light_Machete_V01", 		-1, 1) // potrzebna lepsza reakcja
+// legs heavy severity
+Data("hit_reaction:standing:pain::cut::legs:left:heavy", -2, 		"MZ_Stand_Hitreaction_Legs_Right_Front_Heavy_Machete_v02", -1, 1)
+Data("hit_reaction:standing:pain::cut::legs:left:heavy", -2, 		"MZ_Stand_Hitreaction_Legs_Left_Back_Heavy_Machete_v01", -1, 1)
+Data("hit_reaction:standing:pain::cut::legs:right:heavy", -2, 		"MZ_Stand_Hitreaction_Legs_Right_Back_Heavy_Machete_v01", -1, 1)
+Data("hit_reaction:standing:pain::cut::legs:forward:heavy", -2, 	"MZ_Stand_Hitreaction_Legs_Right_Front_Heavy_Machete_v02", -1, 1)
+Data("hit_reaction:standing:pain::cut::legs:backward:heavy", -2, 	"MZ_Stand_Hitreaction_Legs_Left_Back_Heavy_Machete_v01", -1, 1)
+
+//################################
+//#### HIT REACTIONS-COUNTERS ####
+//################################
+//## hit_reaction:pose:hit_reaction:item_type:damage_type:attacker_pos:body_part:direction:severity
+
+Data("hit_reaction:standing:counter_grab::all:front:head:backward:", -2, 	"m_zombie_grab_counter_left_02", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:head:backward:", -2, 	"m_zombie_grab_counter_right_04", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:torso:backward:", -2,	"m_zombie_grab_counter_left_02", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:torso:backward:", -2, 	"m_zombie_grab_counter_right_04", -1, 1)
+
+Data("hit_reaction:standing:counter_grab::all:front:head:left:", -2, 		"m_zombie_grab_counter_left_01", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:head:left:", -2, 		"m_zombie_grab_counter_left_02", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:head:left:", -2, 		"m_zombie_grab_counter_left_03", -1, 1)
+
+Data("hit_reaction:standing:counter_grab::all:front:head:right:", -2, 		"m_zombie_grab_counter_right_01", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:head:right:", -2, 		"m_zombie_grab_counter_right_02", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:head:right:", -2, 		"m_zombie_grab_counter_right_03", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:head:right:", -2, 		"m_zombie_grab_counter_right_04", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:head:right:", -2, 		"m_zombie_grab_counter_right_05", -1, 1)
+
+Data("hit_reaction:standing:counter_grab::all:front:head:up:", -2, 			"m_zombie_grab_counter_left_01", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:head:up:", -2, 			"m_zombie_grab_counter_left_02", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:head:up:", -2, 			"m_zombie_grab_counter_left_03", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:head:up:", -2, 			"m_zombie_grab_counter_right_01", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:head:up:", -2, 			"m_zombie_grab_counter_right_02", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:head:up:", -2, 			"m_zombie_grab_counter_right_04", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:head:up:", -2, 			"m_zombie_grab_counter_right_05", -1, 1)
+
+Data("hit_reaction:standing:counter_grab::all:front:head:down:", -2, 		"m_zombie_grab_counter_down_01", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:head:down:", -2, 		"m_zombie_grab_counter_down_02", -1, 1)
+
+Data("hit_reaction:standing:counter_grab::all:front:torso:left:", -2, 		"m_zombie_grab_counter_left_01", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:torso:left:", -2, 		"m_zombie_grab_counter_left_02", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:torso:left:", -2, 		"m_zombie_grab_counter_left_03", -1, 1)
+
+Data("hit_reaction:standing:counter_grab::all:front:torso:right:", -2, 		"m_zombie_grab_counter_right_01", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:torso:right:", -2, 		"m_zombie_grab_counter_right_02", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:torso:right:", -2, 		"m_zombie_grab_counter_right_03", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:torso:right:", -2, 		"m_zombie_grab_counter_right_04", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:torso:right:", -2, 		"m_zombie_grab_counter_right_05", -1, 1)
+
+Data("hit_reaction:standing:counter_grab::all:front:torso:up:", -2, 		"m_zombie_grab_counter_left_01", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:torso:up:", -2, 		"m_zombie_grab_counter_left_02", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:torso:up:", -2, 		"m_zombie_grab_counter_left_03", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:torso:up:", -2, 		"m_zombie_grab_counter_right_01", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:torso:up:", -2, 		"m_zombie_grab_counter_right_02", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:torso:up:", -2, 		"m_zombie_grab_counter_right_04", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:torso:up:", -2, 		"m_zombie_grab_counter_right_04", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:torso:up:", -2, 		"m_zombie_grab_counter_right_05", -1, 1)
+
+Data("hit_reaction:standing:counter_grab::all:front:torso:down:", -2, 		"m_zombie_grab_counter_left_01", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:torso:down:", -2, 		"m_zombie_grab_counter_right_01", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:torso:down:", -2, 		"m_zombie_grab_counter_left_02", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:torso:down:", -2, 		"m_zombie_grab_counter_right_04", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:torso:down:", -2, 		"m_zombie_grab_counter_down_01", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:torso:down:", -2, 		"m_zombie_grab_counter_down_02", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:torso:down:", -2, 		"m_zombie_grab_counter_down_01", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:front:torso:down:", -2, 		"m_zombie_grab_counter_down_02", -1, 1)
+
+//----enemy back position----
+Data("hit_reaction:standing:counter_grab::all:rear:torso:forward:", -2, 	"m_zombie_grab_counter_back_right_01", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:rear:torso:forward:", -2, 	"m_zombie_grab_counter_back_left_01", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:rear:torso:right:", -2, 		"m_zombie_grab_counter_back_right_01", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:rear:torso:left:", -2, 		"m_zombie_grab_counter_back_left_01", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:rear:torso:up:", -2, 			"m_zombie_grab_counter_back_right_01", -1, 1) // less accurate
+Data("hit_reaction:standing:counter_grab::all:rear:torso:down:", -2, 		"m_zombie_grab_counter_back_right_01", -1, 1) // less accurate
+Data("hit_reaction:standing:counter_grab::all:left:torso:forward:", -2, 	"m_zombie_grab_counter_back_right_01", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:right:torso:forward:", -2, 	"m_zombie_grab_counter_back_left_01", -1, 1)
+
+Data("hit_reaction:standing:counter_grab::all:rear:head:forward:", -2, 		"m_zombie_grab_counter_back_right_01", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:rear:head:forward:", -2, 		"m_zombie_grab_counter_back_left_01", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:rear:head:right:", -2, 		"m_zombie_grab_counter_back_right_01", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:rear:head:left:", -2, 		"m_zombie_grab_counter_back_left_01", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:rear:head:up:", -2, 			"m_zombie_grab_counter_back_right_01", -1, 1) // less accurate
+Data("hit_reaction:standing:counter_grab::all:rear:head:down:", -2, 		"m_zombie_grab_counter_back_right_01", -1, 1) // less accurate
+Data("hit_reaction:standing:counter_grab::all:left:head:forward:", -2, 		"m_zombie_grab_counter_back_right_01", -1, 1)
+Data("hit_reaction:standing:counter_grab::all:right:head:forward:", -2, 	"m_zombie_grab_counter_back_left_01", -1, 1)
+
+
+//#############################
+//#### COLLISION REACTIONS ####
+//#############################
+//## collision_reaction:pose:direction:item_type:severity
+//#######################
+
+Data("collision_reaction:standing:::", -2, "mz_upset_stand_hitreaction_head_up_medium_v01", -1, 1)
+Data("collision_reaction:standing:::", -2, "mz_upset_stand_hitreaction_head_up_medium_v02", -1, 1)
+Data("collision_reaction:standing:::", -2, "mz_upset_stand_hitreaction_head_up_medium_v03", -1, 1)
+Data("collision_reaction:standing:down::", -2, "mzi_fall_from_edge", -1, 1)
+
+
+//######################################################################################################################################################
+//######################################################################################################################################################
+//########################     ###### ##########    ####################################################################################################
+//###################### ###### ##### ########## ###   #################################################################################################
+//##################### ######## #### ########## ###### ################################################################################################
+//##################### ######## #### ########## ###### ################################################################################################
+//###################### ####### #### ########## ##### #################################################################################################
+//#######################  #   ######        ###      ##################################################################################################
+//######################################################################################################################################################
+//######################################################################################################################################################
+
+/*  
+	Data("hit_reaction:standing:counter_attack::all::head:right:", -2, "m_zombie_hitreaction_counterattack_light_head_right_v01",-1, 1)
+	Data("hit_reaction:standing:counter_attack::all::head:left:", -2, "m_zombie_hitreaction_counterattack_light_head_left_v01",-1, 1)
+	Data("hit_reaction:standing:counter_attack::all::torso:right:", -2, "m_zombie_hitreaction_counterattack_light_torso_right_v01",-1, 1)
+	Data("hit_reaction:standing:counter_attack::all::torso:left:", -2, "m_zombie_hitreaction_counterattack_light_torso_left_v01",-1, 1)
+		
+*/
+	
+/*
+Data("hit_reaction:standing:pain::all:rear:head::", -2, "mz_upset_stand_hitreaction_back_v05", -1, 1)
+Data("hit_reaction:standing:pain::all:rear:head:right:", -2, "mz_upset_stand_hitreaction_torso_right_heavy_v01", -1, 1)
+Data("hit_reaction:standing:pain::all:rear:head:right:", -2, "mz_upset_stand_hitreaction_torso_right_heavy_v02", -1, 1)
+Data("hit_reaction:standing:pain::all::head:forward:", -2, "mz_upset_stand_hitreaction_torso_right_heavy_v02", -1, 1)
+Data("hit_reaction:standing:pain::all:front:head:backward:light", -2, "mz_upset_stand_hitreaction_head_up_light_v02", -1, 1)
+Data("hit_reaction:standing:pain::all:right:head:backward:light", -2, "mz_upset_stand_hitreaction_head_up_light_v02", -1, 1)
+Data("hit_reaction:standing:pain::all:front:head:backward:light", -2, "mz_upset_stand_hitreaction_head_up_light_v03", -1, 1)
+Data("hit_reaction:standing:pain::all:left:head:backward:light", -2, "mz_upset_stand_hitreaction_head_up_light_v03", -1, 1)
+Data("hit_reaction:standing:pain::all::head:forward:", -2, "mz_upset_stand_hitreaction_torso_right_heavy_v01", -1, 1)
+Data("hit_reaction:standing:pain::all::head:forward:", -2, "mz_upset_stand_hitreaction_back_v05", -1, 1)
+Data("hit_reaction:standing:pain::all:left:head:forward:", -2, "mz_upset_stand_hitreaction_back_v05", -1, 1)
+
+
+
+Data("hit_reaction:standing:pain::chainsaw::::", -2, "MZ_chainsow_death_loopB", -1, 1)
+
+Data("hit_reaction:standing:pain::all:rear:legs::medium", -2, "mz_upset_stand_hitreaction_back_v01", -1, 1)
+Data("hit_reaction:standing:pain::all:rear:legs::medium", -2, "mz_upset_stand_hitreaction_back_v02", -1, 1)
+Data("hit_reaction:standing:pain::all:rear:legs::light", -2, "mz_upset_stand_hitreaction_back_v03", -1, 1)
+Data("hit_reaction:standing:pain::all:rear:legs::light", -2, "mz_upset_stand_hitreaction_back_v04", -1, 1)
+
+Data("hit_reaction:standing:pain::all:rear:torso::", -2, "mz_upset_stand_hitreaction_back_v05", -1, 1)
+
+Data("hit_reaction:standing:pain::all:rear:torso:right:", -2, "mz_upset_stand_hitreaction_torso_right_heavy_v01", -1, 1)
+
+Data("hit_reaction:standing:pain::all:rear:torso:right:", -2, "mz_upset_stand_hitreaction_torso_right_heavy_v02", -1, 1)
+Data("hit_reaction:standing:pain::all:rear:legs::heavy", -2, "vessel_hit_reaction_forward_heavy_01", -1, 1)
+Data("hit_reaction:standing:pain::all:rear:legs::heavy", -2, "vessel_hit_reaction_forward_heavy_02", -1, 1)
+Data("hit_reaction:standing:pain::all:rear:legs::heavy", -2, "vessel_hit_reaction_forward_heavy_03", -1, 1)
+
+Data("hit_reaction:standing:pain::all::legs:forward:medium", -2, "mz_upset_stand_hitreaction_back_v01", -1, 1)
+Data("hit_reaction:standing:pain::all::legs:forward:medium", -2, "mz_upset_stand_hitreaction_back_v02", -1, 1)
+Data("hit_reaction:standing:pain::all::legs:forward:light", -2, "mz_upset_stand_hitreaction_back_v03", -1, 1)
+Data("hit_reaction:standing:pain::all::legs:forward:light", -2, "mz_upset_stand_hitreaction_back_v04", -1, 1)
+
+Data("hit_reaction:standing:pain::all::torso:forward:", -2, "mz_upset_stand_hitreaction_back_v05", -1, 1)
+
+
+Data("hit_reaction:standing:pain::all::torso:forward:", -2, "mz_upset_stand_hitreaction_torso_right_heavy_v01", -1, 1)
+Data("hit_reaction:standing:pain::all:left:torso:forward:", -2, "mz_upset_stand_hitreaction_back_v05", -1, 1)
+
+Data("hit_reaction:standing:pain::all::torso:forward:", -2, "mz_upset_stand_hitreaction_torso_right_heavy_v02", -1, 1)
+Data("hit_reaction:standing:pain::all::legs:forward:heavy", -2, "vessel_hit_reaction_forward_heavy_01", -1, 1)
+Data("hit_reaction:standing:pain::all::legs:forward:heavy", -2, "vessel_hit_reaction_forward_heavy_02", -1, 1)
+Data("hit_reaction:standing:pain::all::legs:forward:heavy", -2, "vessel_hit_reaction_forward_heavy_03", -1, 1)
+
+//Data("hit_reaction:standing:pain::all::head:backward:light", -2, "mz_upset_stand_hitreaction_head_up_light_v01", -1, 1)
+//Data("hit_reaction:standing:pain::all::torso:backward:light", -2, "mz_upset_stand_hitreaction_head_down_light_v01", -1, 1)
+Data("hit_reaction:standing:pain::all:front:torso:backward:light", -2, "mz_upset_stand_hitreaction_torso_right_light_v01", -1, 1)
+Data("hit_reaction:standing:pain::all:right:torso:backward:light", -2, "mz_upset_stand_hitreaction_torso_right_light_v01", -1, 1)
+Data("hit_reaction:standing:pain::all::torso:backward:light", -2, "mz_upset_stand_hitreaction_head_up_light_v03", -1, 1)
+Data("hit_reaction:standing:pain::all::legs:backward:light", -2, "mz_upset_stand_hitreaction_torso_left_light_v03", -1, 1)
+Data("hit_reaction:standing:pain::all::legs:backward:light", -2, "mz_upset_stand_hitreaction_torso_right_light_v01", -1, 1)
+
+Data("hit_reaction:standing:pain::all:::backward:medium", -2, "mz_upset_stand_hitreaction_head_up_medium_v01", -1, 1)
+Data("hit_reaction:standing:pain::all:::backward:medium", -2, "mz_upset_stand_hitreaction_head_up_medium_v02", -1, 1)
+
+
+
+Data("hit_reaction:standing:pain::all:::backward:heavy", -2, "mz_upset_stand_hitreaction_head_up_heavy_v01", -1, 1)
+Data("hit_reaction:standing:pain::all:::backward:heavy", -2, "mz_upset_stand_hitreaction_head_up_heavy_v02", -1, 1)
+Data("hit_reaction:standing:pain::all:::backward:heavy", -2, "mz_upset_stand_hitreaction_head_up_heavy_v03", -1, 1)
+Data("hit_reaction:standing:pain::all:::backward:heavy", -2, "mz_upset_stand_hitreaction_head_up_medium_v01", -1, 1)
+Data("hit_reaction:standing:pain::all:::backward:heavy", -2, "mz_upset_stand_hitreaction_head_up_medium_v02", -1, 1)
+Data("hit_reaction:standing:pain::all:::backward:heavy", -2, "mz_upset_stand_hitreaction_head_up_medium_v03", -1, 1)
+
+//Data("hit_reaction:standing:pain::all::head:up:light", -2, "mz_upset_stand_hitreaction_head_up_light_v01", -1, 1)
+//Data("hit_reaction:standing:pain::all::head:up:light", -2, "mz_upset_stand_hitreaction_head_up_light_v02", -1, 1)
+Data("hit_reaction:standing:pain::all::head:up:light", -2, "mz_upset_stand_hitreaction_head_up_light_v03", -1, 1)
+
+
+//Data("hit_reaction:standing:pain::all::head:down:light", -2, "mz_upset_stand_hitreaction_head_down_light_v01", -1, 1)
+//Data("hit_reaction:standing:pain::all::head:down:light", -2, "mz_upset_stand_hitreaction_head_down_light_v03", -1, 1)
+
+//Data("hit_reaction:standing:pain::all::head:right:light", -2, "mz_upset_stand_hitreaction_head_right_light_v01", -1, 1)
+Data("hit_reaction:standing:pain::all:front:head:right:light", -2, "mz_upset_stand_hitreaction_head_right_light_v02", -1, 1)
+//Data("hit_reaction:standing:pain::all:front:head:right:light", -2, "mz_upset_stand_hitreaction_head_right_light_v03", -1, 1)
+Data("hit_reaction:standing:pain::all:left:head:right:light", -2, "mz_upset_stand_hitreaction_head_right_light_v02", -1, 1)
+//Data("hit_reaction:standing:pain::all:left:head:right:light", -2, "mz_upset_stand_hitreaction_head_right_light_v03", -1, 1)
+Data("hit_reaction:standing:pain::all:right:head:right:light", -2, "mz_upset_stand_hitreaction_head_right_light_v02", -1, 1)
+//Data("hit_reaction:standing:pain::all:right:head:right:light", -2, "mz_upset_stand_hitreaction_head_right_light_v03", -1, 1)
+
+//Data("hit_reaction:standing:pain::all::head:left:light", -2, "mz_upset_stand_hitreaction_head_left_light_v01", -1, 1)
+//Data("hit_reaction:standing:pain::all:front:head:left:light", -2, "mz_upset_stand_hitreaction_head_left_light_v02", -1, 1)
+//Data("hit_reaction:standing:pain::all:front:head:left:light", -2, "mz_upset_stand_hitreaction_head_left_light_v03", -1, 1)
+Data("hit_reaction:standing:pain::all:front:head:left:light", -2, "mz_upset_stand_hitreaction_head_left_medium_v02", -1, 1)
+//Data("hit_reaction:standing:pain::all:left:head:left:light", -2, "mz_upset_stand_hitreaction_head_left_light_v02", -1, 1)
+//Data("hit_reaction:standing:pain::all:left:head:left:light", -2, "mz_upset_stand_hitreaction_head_left_light_v03", -1, 1)
+Data("hit_reaction:standing:pain::all:left:head:left:light", -2, "mz_upset_stand_hitreaction_head_left_medium_v02", -1, 1)
+//Data("hit_reaction:standing:pain::all:right:head:left:light", -2, "mz_upset_stand_hitreaction_head_left_light_v02", -1, 1)
+//Data("hit_reaction:standing:pain::all:right:head:left:light", -2, "mz_upset_stand_hitreaction_head_left_light_v03", -1, 1)
+Data("hit_reaction:standing:pain::all:right:head:left:light", -2, "mz_upset_stand_hitreaction_head_left_medium_v02", -1, 1)
+//Data("hit_reaction:standing:pain::all::torso:up:light", -2, "mz_upset_stand_hitreaction_head_up_light_v01", -1, 1)
+//Data("hit_reaction:standing:pain::all::torso:up:light", -2, "mz_upset_stand_hitreaction_head_up_light_v02", -1, 1)
+Data("hit_reaction:standing:pain::all::torso:up:light", -2, "mz_upset_stand_hitreaction_head_up_light_v03", -1, 1)
+//Data("hit_reaction:standing:pain::all::torso:down:light", -2, "mz_upset_stand_hitreaction_head_down_light_v01", -1, 1)
+//Data("hit_reaction:standing:pain::all::torso:down:light", -2, "mz_upset_stand_hitreaction_head_down_light_v03", -1, 1)
+//Data("hit_reaction:standing:pain::all:front:torso:right:light", -2, "mz_upset_stand_hitreaction_torso_right_light_v01", -1, 1)
+Data("hit_reaction:standing:pain::all:front:torso:right:light", -2, "mz_upset_stand_hitreaction_torso_right_light_v02", -1, 1)
+Data("hit_reaction:standing:pain::all:front:torso:right:light", -2, "mz_upset_stand_hitreaction_torso_right_light_v03", -1, 1)
+
+//Data("hit_reaction:standing:pain::all:left:torso:right:light", -2, "mz_upset_stand_hitreaction_torso_right_light_v01", -1, 1)
+Data("hit_reaction:standing:pain::all:left:torso:right:light", -2, "mz_upset_stand_hitreaction_torso_right_light_v02", -1, 1)
+Data("hit_reaction:standing:pain::all:left:torso:right:light", -2, "mz_upset_stand_hitreaction_torso_right_light_v03", -1, 1)
+
+//Data("hit_reaction:standing:pain::all:right:torso:right:light", -2, "mz_upset_stand_hitreaction_torso_right_light_v01", -1, 1)
+Data("hit_reaction:standing:pain::all:right:torso:right:light", -2, "mz_upset_stand_hitreaction_torso_right_light_v02", -1, 1)
+Data("hit_reaction:standing:pain::all:right:torso:right:light", -2, "mz_upset_stand_hitreaction_torso_right_light_v03", -1, 1)
+
+//Data("hit_reaction:standing:pain::all:front:torso:left:light", -2, "mz_upset_stand_hitreaction_torso_left_light_v01", -1, 1)
+Data("hit_reaction:standing:pain::all:front:torso:left:light", -2, "mz_upset_stand_hitreaction_torso_left_light_v03", -1, 1)
+
+//Data("hit_reaction:standing:pain::all:left:torso:left:light", -2, "mz_upset_stand_hitreaction_torso_left_light_v01", -1, 1)
+Data("hit_reaction:standing:pain::all:left:torso:left:light", -2, "mz_upset_stand_hitreaction_torso_left_light_v03", -1, 1)
+
+//Data("hit_reaction:standing:pain::all:right:torso:left:light", -2, "mz_upset_stand_hitreaction_torso_left_light_v01", -1, 1)
+Data("hit_reaction:standing:pain::all:right:torso:left:light", -2, "mz_upset_stand_hitreaction_torso_left_light_v03", -1, 1)
+
+Data("hit_reaction:standing:pain::all::legs:right:light", -2, "mz_upset_stand_hitreaction_legs_right_light_v01", -1, 1)
+
+Data("hit_reaction:standing:pain::all::legs:left:light", -2, "mz_upset_stand_hitreaction_legs_left_light_v01", -1, 1)
+
+//Data("hit_reaction:standing:pain::all:front::up:light", -2, "mz_upset_stand_hitreaction_head_up_light_v01", -1, 1)
+//Data("hit_reaction:standing:pain::all:front::up:light", -2, "mz_upset_stand_hitreaction_head_up_light_v02", -1, 1)
+Data("hit_reaction:standing:pain::all:front::up:light", -2, "mz_upset_stand_hitreaction_head_up_light_v03", -1, 1)
+Data("hit_reaction:standing:pain::all:front::up:light", -2, "mz_upset_stand_hitreaction_head_up_light_v04", -1, 1)
+
+Data("hit_reaction:standing:pain::all:front::up:medium", -2, "mz_upset_stand_hitreaction_head_up_medium_v01", -1, 1)
+Data("hit_reaction:standing:pain::all:front::up:medium", -2, "mz_upset_stand_hitreaction_head_up_medium_v02", -1, 1)
+Data("hit_reaction:standing:pain::all:front::up:medium", -2, "mz_upset_stand_hitreaction_head_up_medium_v03", -1, 1)
+
+Data("hit_reaction:standing:pain::all:front::up:heavy", -2, "mz_upset_stand_hitreaction_head_up_heavy_v01", -1, 1)
+Data("hit_reaction:standing:pain::all:front::up:heavy", -2, "mz_upset_stand_hitreaction_head_up_heavy_v02", -1, 1)
+Data("hit_reaction:standing:pain::all:front::up:heavy", -2, "mz_upset_stand_hitreaction_head_up_heavy_v03", -1, 1)
+Data("hit_reaction:standing:pain::all:front::up:heavy", -2, "mz_upset_stand_hitreaction_head_up_heavy_v04", -1, 1)
+
+//Data("hit_reaction:standing:pain::all:left::up:light", -2, "mz_upset_stand_hitreaction_torso_left_light_v01", -1, 1)
+Data("hit_reaction:standing:pain::all:left::up:light", -2, "mz_upset_stand_hitreaction_torso_left_light_v02", -1, 1)
+Data("hit_reaction:standing:pain::all:left::up:light", -2, "mz_upset_stand_hitreaction_torso_left_light_v03", -1, 1)
+
+Data("hit_reaction:standing:pain::all:left::up:medium", -2, "MZ_Stand_Hitreaction_Torso_Left_Light_Machete_V01", -1, 1)
+Data("hit_reaction:standing:pain::all:left::up:medium", -2, "MZ_Stand_Hitreaction_Torso_Left_Light_Machete_V01", -1, 1)
+Data("hit_reaction:standing:pain::all:left::up:medium", -2, "MZ_Stand_Hitreaction_Torso_Left_Light_Machete_V01", -1, 1)
+Data("hit_reaction:standing:pain::all:left::up:medium", -2, "MZ_Stand_Hitreaction_Torso_Left_Light_Machete_V01", -1, 1)
+
+Data("hit_reaction:standing:pain::all:left::up:heavy", -2, "mz_upset_stand_hitreaction_torso_left_heavy_v01", -1, 1)
+Data("hit_reaction:standing:pain::all:left::up:heavy", -2, "mz_upset_stand_hitreaction_torso_left_heavy_v02", -1, 1)
+
+//Data("hit_reaction:standing:pain::all:right::up:light", -2, "mz_upset_stand_hitreaction_torso_right_light_v01", -1, 1)
+Data("hit_reaction:standing:pain::all:right::up:light", -2, "mz_upset_stand_hitreaction_torso_right_light_v02", -1, 1)
+Data("hit_reaction:standing:pain::all:right::up:light", -2, "mz_upset_stand_hitreaction_torso_right_light_v03", -1, 1)
+
+Data("hit_reaction:standing:pain::all:right::up:medium", -2, "mz_upset_stand_hitreaction_torso_right_medium_v01", -1, 1)
+Data("hit_reaction:standing:pain::all:right::up:medium", -2, "mz_upset_stand_hitreaction_torso_right_medium_v02", -1, 1)
+
+Data("hit_reaction:standing:pain::all:right::up:heavy", -2, "mz_upset_stand_hitreaction_torso_right_heavy_v01", -1, 1)
+Data("hit_reaction:standing:pain::all:right::up:heavy", -2, "mz_upset_stand_hitreaction_torso_right_heavy_v02", -1, 1)
+Data("hit_reaction:standing:pain::all:right::up:heavy", -2, "mz_upset_stand_hitreaction_torso_right_heavy_v03", -1, 1)
+
+Data("hit_reaction:standing:pain::all::head:up:medium", -2, "mz_upset_stand_hitreaction_head_up_medium_v01", -1, 1)
+Data("hit_reaction:standing:pain::all::head:up:medium", -2, "mz_upset_stand_hitreaction_head_up_medium_v02", -1, 1)
+Data("hit_reaction:standing:pain::all::head:up:medium", -2, "mz_upset_stand_hitreaction_head_up_medium_v03", -1, 1)
+
+Data("hit_reaction:standing:pain::all::head:down:", -2, "mz_upset_stand_hitreaction_head_down_medium_v02", -1, 1)    // animacja do poprawy?
+Data("hit_reaction:standing:pain::all::head:down:", -2, "mz_upset_stand_hitreaction_head_down_medium_v04", -1, 1)    // animacja do poprawy?
+
+Data("hit_reaction:standing:pain::all::head:right:medium", -2, "mz_upset_stand_hitreaction_head_right_medium_v01", -1, 1)
+Data("hit_reaction:standing:pain::all::head:right:medium", -2, "MZ_Stand_Hitreaction_Torso_Left_Light_machete_v02", -1, 1)
+Data("hit_reaction:standing:pain::all::head:right:medium", -2, "mz_upset_stand_hitreaction_head_right_medium_v03", -1, 1)
+
+Data("hit_reaction:standing:pain::all::head:left:medium", -2, "mz_upset_stand_hitreaction_head_left_medium_v01", -1, 1)
+Data("hit_reaction:standing:pain::all::head:left:medium", -2, "MZ_Stand_Hitreaction_Torso_Left_Light_machete_v02", -1, 1)
+Data("hit_reaction:standing:pain::all::head:left:medium", -2, "mz_upset_stand_hitreaction_head_left_medium_v03", -1, 1)
+
+Data("hit_reaction:standing:pain::all::torso:up:medium", -2, "mz_upset_stand_hitreaction_head_up_medium_v01", -1, 1)
+Data("hit_reaction:standing:pain::all::torso:up:medium", -2, "mz_upset_stand_hitreaction_head_up_medium_v02", -1, 1)
+Data("hit_reaction:standing:pain::all::torso:up:medium", -2, "mz_upset_stand_hitreaction_head_up_medium_v03", -1, 1)
+
+Data("hit_reaction:standing:pain::all::torso:down:", -2, "mz_upset_stand_hitreaction_head_down_medium_v02", -1, 1)   // animacja do poprawy?
+Data("hit_reaction:standing:pain::all::torso:down:", -2, "mz_upset_stand_hitreaction_head_down_medium_v04", -1, 1)   // animacja do poprawy?
+
+Data("hit_reaction:standing:pain::all::torso:right:medium", -2, "MZ_Stand_Hitreaction_Torso_Right_Light_Machete_V01", -1, 1)
+Data("hit_reaction:standing:pain::all::torso:right:medium", -2, "MZ_Stand_Hitreaction_Torso_Right_Light_Machete_V01", -1, 1)
+
+Data("hit_reaction:standing:pain::all::torso:left:medium", -2, "MZ_Stand_Hitreaction_Torso_Left_Light_Machete_V01", -1, 1)
+Data("hit_reaction:standing:pain::all::torso:left:medium", -2, "MZ_Stand_Hitreaction_Torso_Left_Light_Machete_V01", -1, 1)
+Data("hit_reaction:standing:pain::all::torso:left:medium", -2, "MZ_Stand_Hitreaction_Torso_Left_Light_Machete_V01", -1, 1)
+Data("hit_reaction:standing:pain::all::torso:left:medium", -2, "MZ_Stand_Hitreaction_Torso_Left_Light_Machete_V01", -1, 1)
+
+Data("hit_reaction:standing:pain::all::legs:right:medium", -2, "mz_upset_stand_hitreaction_legs_right_medium_v01", -1, 1)
+Data("hit_reaction:standing:pain::all::legs:right:medium", -2, "mz_upset_stand_hitreaction_legs_right_medium_v02", -1, 1)
+
+Data("hit_reaction:standing:pain::all::legs:left:medium", -2, "mz_upset_stand_hitreaction_legs_left_medium_v01", -1, 1)
+Data("hit_reaction:standing:pain::all::legs:left:medium", -2, "mz_upset_stand_hitreaction_legs_left_medium_v02", -1, 1)
+
+Data("hit_reaction:standing:pain::all::head:up:heavy", -2, "mz_upset_stand_hitreaction_head_up_heavy_v01", -1, 1)
+Data("hit_reaction:standing:pain::all::head:up:heavy", -2, "mz_upset_stand_hitreaction_head_up_heavy_v02", -1, 1)
+Data("hit_reaction:standing:pain::all::head:up:heavy", -2, "mz_upset_stand_hitreaction_head_up_heavy_v03", -1, 1)
+Data("hit_reaction:standing:pain::all::head:up:heavy", -2, "mz_upset_stand_hitreaction_head_up_heavy_v04", -1, 1)
+
+Data("hit_reaction:standing:pain::all::head:down:heavy", -2, "mz_upset_stand_hitreaction_head_down_heavy_v01", -1, 1)
+Data("hit_reaction:standing:pain::all::head:down:heavy", -2, "mz_upset_stand_hitreaction_head_down_heavy_v02", -1, 1)
+Data("hit_reaction:standing:pain::all::head:down:heavy", -2, "mz_upset_stand_hitreaction_head_down_heavy_v03", -1, 1)
+Data("hit_reaction:standing:pain::all::head:down:heavy", -2, "mz_upset_stand_hitreaction_head_down_heavy_v04", -1, 1)
+Data("hit_reaction:standing:pain::all::head:down:heavy", -2, "mz_upset_stand_hitreaction_head_down_heavy_v05", -1, 1)
+
+Data("hit_reaction:standing:pain::all::head:right:heavy", -2, "mz_upset_stand_hitreaction_head_right_heavy_v02", -1, 1)
+Data("hit_reaction:standing:pain::all::head:right:heavy", -2, "mz_upset_stand_hitreaction_torso_right_heavy_v02", -1, 1)
+Data("hit_reaction:standing:pain::all::head:right:heavy", -2, "mz_upset_stand_hitreaction_torso_right_heavy_v03", -1, 1)
+
+Data("hit_reaction:standing:pain::all::head:left:heavy", -2, "mz_upset_stand_hitreaction_head_left_heavy_v01", -1, 1)
+Data("hit_reaction:standing:pain::all::head:left:heavy", -2, "mz_upset_stand_hitreaction_head_left_heavy_v02", -1, 1)
+Data("hit_reaction:standing:pain::all::head:left:heavy", -2, "mz_upset_stand_hitreaction_head_left_heavy_v03", -1, 1)
+Data("hit_reaction:standing:pain::all::head:left:heavy", -2, "mz_upset_stand_hitreaction_head_left_heavy_v04", -1, 1)
+
+Data("hit_reaction:standing:pain::all::torso:up:heavy", -2, "mz_upset_stand_hitreaction_head_up_heavy_v01", -1, 1)
+Data("hit_reaction:standing:pain::all::torso:up:heavy", -2, "mz_upset_stand_hitreaction_head_up_heavy_v02", -1, 1)
+Data("hit_reaction:standing:pain::all::torso:up:heavy", -2, "mz_upset_stand_hitreaction_head_up_heavy_v03", -1, 1)
+Data("hit_reaction:standing:pain::all::torso:up:heavy", -2, "mz_upset_stand_hitreaction_head_up_heavy_v04", -1, 1)
+
+Data("hit_reaction:standing:pain::all::torso:down:heavy", -2, "mz_upset_stand_hitreaction_head_down_heavy_v01", -1, 1)
+Data("hit_reaction:standing:pain::all::torso:down:heavy", -2, "mz_upset_stand_hitreaction_head_down_heavy_v02", -1, 1)
+Data("hit_reaction:standing:pain::all::torso:down:heavy", -2, "mz_upset_stand_hitreaction_head_down_heavy_v03", -1, 1)
+Data("hit_reaction:standing:pain::all::torso:down:heavy", -2, "mz_upset_stand_hitreaction_head_down_heavy_v04", -1, 1)
+Data("hit_reaction:standing:pain::all::torso:down:heavy", -2, "mz_upset_stand_hitreaction_head_down_heavy_v05", -1, 1)
+
+Data("hit_reaction:standing:pain::all::torso:right:heavy", -2, "mz_upset_stand_hitreaction_torso_right_heavy_v01", -1, 1)
+Data("hit_reaction:standing:pain::all::torso:right:heavy", -2, "mz_upset_stand_hitreaction_torso_right_heavy_v02", -1, 1)
+Data("hit_reaction:standing:pain::all::torso:right:heavy", -2, "mz_upset_stand_hitreaction_torso_right_heavy_v03", -1, 1)
+
+Data("hit_reaction:standing:pain::all::torso:left:heavy", -2, "mz_upset_stand_hitreaction_torso_left_heavy_v01", -1, 1)
+Data("hit_reaction:standing:pain::all::torso:left:heavy", -2, "mz_upset_stand_hitreaction_torso_left_heavy_v02", -1, 1)
+
+Data("hit_reaction:standing:pain::all::legs:right:heavy", -2, "mz_upset_stand_hitreaction_legs_right_medium_v01", -1, 1)
+Data("hit_reaction:standing:pain::all::legs:right:heavy", -2, "mz_upset_stand_hitreaction_legs_right_medium_v02", -1, 1)
+
+Data("hit_reaction:standing:pain::all::legs:left:heavy", -2, "mz_upset_stand_hitreaction_legs_left_medium_v01", -1, 1)
+
+Data("hit_reaction:standing:counter_attack::all::head:up:", -2, "mz_upset_stand_hitreaction_head_counterattack_v03", -1, 1)
+Data("hit_reaction:standing:counter_attack::all::head:up:", -2, "mz_upset_stand_hitreaction_head_counterattack_v04", -1, 1)
+
+Data("hit_reaction:standing:counter_attack::all::head:right:", -2, "mz_upset_stand_hitreaction_head_counterattack_v01", -1, 1)
+
+Data("hit_reaction:standing:counter_attack::all::head:left:", -2, "mz_upset_stand_hitreaction_head_counterattack_v02", -1, 1)
+
+Data("hit_reaction:standing:counter_attack::all::torso:right:", -2, "mz_upset_stand_hitreaction_torso_counterattack_v01", -1, 1)
+Data("hit_reaction:standing:counter_attack::all::torso:right:", -2, "mz_upset_stand_hitreaction_torso_counterattack_v02", -1, 1)
+Data("hit_reaction:standing:counter_attack::all::torso:right:", -2, "mz_upset_stand_hitreaction_torso_counterattack_v03", -1, 1)
+Data("hit_reaction:standing:counter_attack::all::torso:right:", -2, "mz_upset_stand_hitreaction_torso_counterattack_v05", -1, 1)
+
+Data("hit_reaction:standing:counter_attack::all::torso:left:", -2, "mz_upset_stand_hitreaction_torso_counterattack_v03", -1, 1)
+Data("hit_reaction:standing:counter_attack::all::torso:left:", -2, "mz_upset_stand_hitreaction_torso_counterattack_v05", -1, 1)
+
+Data("hit_reaction:standing:counter_attack::all::legs:right:", -2, "mz_upset_stand_hitreaction_legs_counterattack_v02", -1, 1)
+Data("hit_reaction:standing:counter_attack::all::legs:right:", -2, "mz_upset_stand_hitreaction_legs_counterattack_v04", -1, 1)
+
+Data("hit_reaction:standing:counter_attack::all::torso::", -2, "mz_upset_stand_hitreaction_torso_counterattack_v01", -1, 1)
+Data("hit_reaction:standing:counter_attack::all::torso::", -2, "mz_upset_stand_hitreaction_torso_counterattack_v02", -1, 1)
+Data("hit_reaction:standing:counter_attack::all::torso::", -2, "mz_upset_stand_hitreaction_torso_counterattack_v03", -1, 1)
+
+Data("hit_reaction:standing:counter_attack::all:front:head:up:", -2, "mz_upset_stand_hitreaction_head_counterattack_v03", -1, 1)
+Data("hit_reaction:standing:counter_attack::all:front:head:up:", -2, "mz_upset_stand_hitreaction_head_counterattack_v04", -1, 1)
+
+Data("hit_reaction:standing:counter_attack::all:front:head:left:", -2, "mz_upset_stand_hitreaction_head_counterattack_v02", -1, 1)
+Data("hit_reaction:standing:counter_attack::all:front:head:right:", -2, "mz_upset_stand_hitreaction_head_counterattack_v01", -1, 1)
+
+Data("hit_reaction:standing:counter_attack::all::head::", -2, "mz_upset_stand_hitreaction_head_counterattack_v01", -1, 1)
+Data("hit_reaction:standing:counter_attack::all::head::", -2, "mz_upset_stand_hitreaction_head_counterattack_v02", -1, 1)
+Data("hit_reaction:standing:counter_attack::all::head::", -2, "mz_upset_stand_hitreaction_head_counterattack_v03", -1, 1)
+Data("hit_reaction:standing:counter_attack::all::head::", -2, "mz_upset_stand_hitreaction_head_counterattack_v04", -1, 1)
+
+//Data("hit_reaction:standing:counter_attack::all::legs::", -2, "mz_upset_stand_hitreaction_legs_counterattack_v01", -1, 1)
+Data("hit_reaction:standing:counter_attack::all::legs::", -2, "mz_upset_stand_hitreaction_legs_counterattack_v02", -1, 1)
+Data("hit_reaction:standing:counter_attack::all::legs::", -2, "mz_upset_stand_hitreaction_legs_counterattack_v03", -1, 1)
+Data("hit_reaction:standing:counter_attack::all::legs::", -2, "mz_upset_stand_hitreaction_legs_counterattack_v04", -1, 1)
+
+Data("hit_reaction:standing:counter_attack::all::::", -2, "mz_upset_stand_hitreaction_torso_counterattack_v01", -1, 1)
+
+Data("hit_reaction:standing:counter_push::all:::left:", -2, "vessel_hit_reaction_left_counter_push_01", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::left:", -2, "vessel_hit_reaction_left_counter_push_02", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::right:", -2, "vessel_hit_reaction_right_counter_push_01", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::right:", -2, "vessel_hit_reaction_right_counter_push_02", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::backward:", -2, "vessel_hit_reaction_backward_counter_push_01", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::up:", -2, "vessel_hit_reaction_up_counter_push_03", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::up:", -2, "mz_vessel_hit_reaction_up_counter_push_04", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::backward:", -2, "vessel_hit_reaction_up_counter_push_03", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::backward:", -2, "mz_vessel_hit_reaction_up_counter_push_04", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::down:", -2, "mz_vessel_vessel_hit_reaction_down_counter_push_01", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::down:", -2, "mz_vessel_hit_reaction_down_counter_push_02", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::down:", -2, "mz_vessel_hit_reaction_down_counter_push_03", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::down:", -2, "mz_vessel_hit_reaction_down_counter_push_04", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::backward:", -2, "mz_vessel_vessel_hit_reaction_down_counter_push_01", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::backward:", -2, "mz_vessel_hit_reaction_down_counter_push_02", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::backward:", -2, "mz_vessel_hit_reaction_down_counter_push_03", -1, 1)
+Data("hit_reaction:standing:counter_push::all:::backward:", -2, "mz_vessel_hit_reaction_down_counter_push_04", -1, 1)
+
+Data("hit_reaction:standing:counter_attack_from_stand::all:::left:", -2, "mz_vessel_hit_reaction_left_counter_berserker_01", -1, 1)
+Data("hit_reaction:standing:counter_attack_from_stand::all:::left:", -2, "mz_vessel_hit_reaction_left_counter_berserker_02", -1, 1)
+Data("hit_reaction:standing:counter_attack_from_stand::all:::right:", -2, "mz_vessel_hit_reaction_right_counter_berserker_01", -1, 1)
+Data("hit_reaction:standing:counter_attack_from_stand::all:::down:", -2, "mz_vessel_hit_reaction_down_counter_berserker_01", -1, 1)
+Data("hit_reaction:standing:counter_attack_from_stand::all:::down:", -2, "mz_vessel_hit_reaction_down_counter_berserker_02", -1, 1)
+Data("hit_reaction:standing:counter_attack_from_stand::all:::backward:", -2, "mz_vessel_hit_reaction_down_counter_berserker_01", -1, 1)
+Data("hit_reaction:standing:counter_attack_from_stand::all:::backward:", -2, "mz_vessel_hit_reaction_down_counter_berserker_02", -1, 1)
+Data("hit_reaction:standing:counter_attack_from_stand::all:::up:", -2, "mz_vessel_hit_reaction_up_counter_berserker_01", -1, 1)
+Data("hit_reaction:standing:counter_attack_from_stand::all:::up:", -2, "mz_vessel_hit_reaction_up_counter_berserker_02", -1, 1)
+Data("hit_reaction:standing:counter_attack_from_stand::all:::backward:", -2, "mz_vessel_hit_reaction_up_counter_berserker_01", -1, 1)
+Data("hit_reaction:standing:counter_attack_from_stand::all:::backward:", -2, "mz_vessel_hit_reaction_up_counter_berserker_02", -1, 1)
+
+Data("hit_reaction:standing:counter_combo::all:::left:", -2, "mz_vessel_hit_reaction_left_counter_combo_01", -1, 1)
+Data("hit_reaction:standing:counter_combo::all:::left:", -2, "mz_vessel_hit_reaction_left_counter_combo_02", -1, 1)
+Data("hit_reaction:standing:counter_combo::all:::right:", -2, "mz_vessel_hit_reaction_right_counter_combo_01", -1, 1)
+Data("hit_reaction:standing:counter_combo::all:::right:", -2, "mz_vessel_hit_reaction_right_counter_combo_02", -1, 1)
+Data("hit_reaction:standing:counter_combo::all:::down:", -2, "mz_vessel_hit_reaction_down_counter_combo_01", -1, 1)
+Data("hit_reaction:standing:counter_combo::all:::backward:", -2, "mz_vessel_hit_reaction_down_counter_combo_01", -1, 1)
+Data("hit_reaction:standing:counter_combo::all:::up:", -2, "mz_vessel_hit_reaction_up_counter_combo_01", -1, 1)
+Data("hit_reaction:standing:counter_combo::all:::backward:", -2, "mz_vessel_hit_reaction_up_counter_combo_01", -1, 1)
+
+//Data("hit_reaction:standing:parallel::all:::left:light", 0.4, "mz_upset_stand_hitreaction_head_left_light_v01_parallel", -1, 1)
+//Data("hit_reaction:standing:parallel::all:::right:light", 0.4, "mz_upset_stand_hitreaction_head_right_light_v01_parallel", -1, 1)
+// Data("hit_reaction:standing:parallel::all:::left:light", -2, "MZ_upset_stand_attack_righthand_v01_additive_attackLeft", 10, 1)
+// Data("hit_reaction:standing:parallel::all:::right:light", -2, "MZ_upset_stand_attack_righthand_v01_additive_attackRight", 10, 1)
+// Data("hit_reaction:standing:parallel::all:::left:light", -2, "MZ_upset_stand_attack_righthand_v02_additive_attackLeft", 20, 1)
+// Data("hit_reaction:standing:parallel::all:::right:light", -2, "MZ_upset_stand_attack_righthand_v02_additive_attackRight", 20, 1)
+// Data("hit_reaction:standing:parallel::all:::left:light", -2, "MZ_upset_stand_attack_righthand_v03_additive_attackLeft", 30, 1)
+// Data("hit_reaction:standing:parallel::all:::right:light", -2, "MZ_upset_stand_attack_righthand_v03_additive_attackRight", 30, 1)
+// Data("hit_reaction:standing:parallel::all:::left:light", -2, "MZ_upset_stand_attack_lefthand_v01_additive_attackLeft", 40, 1)
+// Data("hit_reaction:standing:parallel::all:::right:light", -2, "MZ_upset_stand_attack_lefthand_v01_additive_attackRight", 40, 1)
+// Data("hit_reaction:standing:parallel::all:::left:light", -2, "MZ_upset_stand_attack_lefthand_v02_additive_attackLeft", 50, 1)
+// Data("hit_reaction:standing:parallel::all:::right:light", -2, "MZ_upset_stand_attack_lefthand_v02_additive_attackRight", 50, 1)
+// Data("hit_reaction:standing:parallel::all:::left:light", -2, "MZ_upset_stand_attack_lefthand_v03_additive_attackLeft", 60, 1)
+// Data("hit_reaction:standing:parallel::all:::right:light", -2, "MZ_upset_stand_attack_lefthand_v03_additive_attackRight", 60, 1)
+//Data("hit_reaction:standing:parallel::all:::up:light", -2, "mz_upset_stand_hitreaction_head_up_light_v01", -1, 1)
+//Data("hit_reaction:standing:parallel::all:::down:light", -2, "mz_upset_stand_hitreaction_head_down_light_v01", -1, 1)
+//Data("hit_reaction:standing:parallel::all:::forward:light", -2, "mz_upset_stand_hitreaction_back_v01", -1, 1)
+//Data("hit_reaction:standing:parallel::all:::backward:light", -2, "mz_upset_stand_hitreaction_head_up_light_v01", -1, 1)
+
+//Data("hit_reaction:standing:counter_attack::all:::left:", -2, "mz_upset_stand_counter_head_left_heavy_v01", -1, 1)
+//Data("hit_reaction:standing:counter_attack::all:::right:", -2, "mz_upset_stand_counter_head_right_heavy_v01", -1, 1)
+*/
+
+//#############################
+//#### GRAB FAIL REACTIONS ####
+//#############################
+//## grab_fail:pose
+//#######################
+
+Data("grab_fail:standing", -2, "m_zombie_grab_fail_01", -1, 1)
+Data("grab_fail:standing", -2, "m_zombie_grab_fail_02", -1, 1)
+Data("grab_fail:standing", -2, "m_zombie_grab_fail_03", -1, 1)
+
+//###########################
+//#### RECOVER FROM FALL ####
+//###########################
+//## recover_from_fall:pose:item_type
+//###########################
+
+Data("recover_from_fall:standing:", -2, "m_zombie_standup_fast_back_01", -1, 1)
+Data("recover_from_fall:standing:", -2, "m_zombie_standup_slow_back_01", -1, 1)
+Data("recover_from_fall:standing:", -2, "m_zombie_standup_fast_back_02", -1, 1)
+Data("recover_from_fall:standing:", -2, "m_zombie_standup_fast_back_03", -1, 1)
+Data("recover_from_fall:standing:", -2, "m_zombie_standup_fast_back_04", -1, 1)
+
+Data("recover_from_fall:standing:", -2, "m_zombie_standup_fast_front_01", 1, 1)
+Data("recover_from_fall:standing:", -2, "m_zombie_standup_fast_front_02", -1, 1)
+Data("recover_from_fall:standing:", -2, "m_zombie_standup_fast_front_03", 200, 1)
+Data("recover_from_fall:standing:", -2, "m_zombie_standup_fast_front_04", 1, 1)
+Data("recover_from_fall:standing:", -2, "m_zombie_standup_fast_front_05", 1, 1)
+
+Data("recover_from_fall:standing:", -2, "m_zombie_standup_fast_left_01", -1, 1)
+Data("recover_from_fall:standing:", -2, "m_zombie_standup_fast_left_02", -1, 1)
+Data("recover_from_fall:standing:", -2, "m_zombie_standup_fast_left_03", -1, 1)
+Data("recover_from_fall:standing:", -2, "m_zombie_standup_fast_left_04", -1, 1)
+
+Data("recover_from_fall:standing:", -2, "m_zombie_standup_fast_right_01", -1, 1)    
+Data("recover_from_fall:standing:", -2, "m_zombie_standup_fast_right_02", 1, 1)
+Data("recover_from_fall:standing:", -2, "m_zombie_standup_fast_right_03", -1, 1)
+Data("recover_from_fall:standing:", -2, "m_zombie_standup_fast_right_04", -1, 1)
+
+Data("recover_from_fall:standing:", -2, "M_zombie_common_standup_left_01", -1, 1)
+Data("recover_from_fall:standing:", -2, "M_zombie_common_standup_left_02", -1, 1)
+//Data("recover_from_fall:standing:", -2, "M_zombie_common_standup_front_01", -1, 1)    // actor is moving
+Data("recover_from_fall:standing:", -2, "M_zombie_common_standup_right_01", -1, 1)
+Data("recover_from_fall:standing:", -2, "M_zombie_common_standup_right_02", -1, 1)
+
+
+Data("recover_from_fall:laying:", -2, "mz_upset_standup_crawl_v01", -1, 1)
+//Data("recover_from_fall:laying:", -2, "mz_upset_standup_crawl_v02", -1, 1)
+//Data("recover_from_fall:laying:", -2, "mz_upset_standup_crawl_v03", -1, 1)
+//Data("recover_from_fall:laying:", -2, "mz_upset_standup_crawl_v03a", -1, 1)
+Data("recover_from_fall:laying:", -2, "mz_upset_standup_crawl_v09", -1, 1)
+Data("recover_from_fall:laying:", -2, "mz_upset_standup_crawl_v09_mirror", -1, 1)
+Data("recover_from_fall:laying_no_legs:", -2, "mz_recover_no_legs", 1, 1)
+//Data("recover_from_fall:laying_no_legs:", -2, "mz_recover_no_legs_back", 2, 1)
+
+
+//################
+//#### ATTACK ####
+//################
+//## attack:pose:item_type:attack_type:direction:attack_range:should_change_pose
+//################
+
+Data("attack:laying::grab_laying:::", -2, "Lurker_grab_zombie_begin_front", 1, 1)
+Data("attack:laying::grab_laying:::", -2, "Lurker_grab_zombie_begin_front", 200, 1)
+//Data("attack:laying::grab_laying:::", -2, "mz_upset_attack_stinger_no_legs_back", 2, 1)
+
+Data("attack:standing::left_arm_strike:::", -2, "mz_upset_stand_attack_lefthand_v01", -1, 1)
+Data("attack:standing::left_arm_strike:::", -2, "mz_upset_stand_attack_lefthand_v02", -1, 1)
+Data("attack:standing::left_arm_strike:::", -2, "mz_upset_stand_attack_lefthand_v03", -1, 1)
+Data("attack:standing::right_arm_strike:::", -2, "mz_upset_stand_attack_righthand_v01", -1, 1)
+Data("attack:standing::right_arm_strike:::", -2, "mz_upset_stand_attack_righthand_v02", -1, 1)
+Data("attack:standing::right_arm_strike:::", -2, "mz_upset_stand_attack_righthand_v03", -1, 1)
+
+Data("attack:standing::surrounding_right_arm_strike:::", -2, "m_zombie_attack_circle_right_01", -1, 1)
+Data("attack:standing::surrounding_left_arm_strike:::", -2, "m_zombie_attack_circle_left_01", -1, 1)
+
+Data("attack:standing::confusion:::", -2, "m_zombie_confusion_01", -1, 1)
+Data("attack:standing::confusion:::", -2, "m_zombie_confusion_02", -1, 1)
+Data("attack:standing::confusion:::", -2, "m_zombie_confusion_03", -1, 1)
+Data("attack:standing::confusion:::", -2, "m_zombie_idle_brainless_01", -1, 1)
+Data("attack:standing::confusion:::", -2, "m_zombie_b_idle_01", -1, 1)
+Data("attack:standing::confusion:::", -2, "m_zombie_a_idle_v02", -1, 1)
+
+
+
+Data("attack:standing::grab:::", -2, "m_zombie_grab_from_stand_front_01", 1, 1)
+Data("attack:standing::grab:::", -2, "m_zombie_grab_from_stand_front_02", 1, 1)
+Data("attack:standing::grab:::", -2, "m_zombie_grab_from_stand_front_03", 1, 1)
+Data("attack:standing::grab:::", -2, "m_zombie_grab_from_stand_front_04", 1, 1)
+Data("attack:standing::grab:left::", -2, "m_zombie_grab_from_stand_turn_left_01", 1, 1)
+//Data("attack:standing::grab:left::", -2, "m_zombie_grab_from_stand_turn_left_02", 1, 1)
+Data("attack:standing::grab:right::", -2, "m_zombie_grab_from_stand_turn_right_01", 1, 1)
+Data("attack:standing::grab:backward_left::", -2, "m_zombie_grab_from_stand_turn_left_180_01", 1, 1)
+Data("attack:standing::grab:backward_left::", -2, "m_zombie_grab_from_stand_turn_left_180_02", 1, 1)
+Data("attack:standing::grab:backward_right::", -2, "m_zombie_grab_from_stand_turn_right_180_01", 1, 1)
+Data("attack:standing::grab:backward_right::", -2, "m_zombie_grab_from_stand_turn_right_180_02", 1, 1)
+
+Data("attack:laying::left_arm_strike:::", -2, "mz_upset_crawl_attack_leftthand_v01", -1, 1)
+Data("attack:laying::left_arm_strike:::", -2, "mz_upset_crawl_attack_leftthand_v02", -1, 1)
+
+Data("attack:laying::right_arm_strike:::", -2, "mz_upset_crawl_attack_righthand_v01", -1, 1)
+Data("attack:laying::right_arm_strike:::", -2, "mz_upset_crawl_attack_righthand_v02", -1, 1)
+
+Data("attack:laying_no_legs::left_arm_strike:::", -2, "mz_upset_crawl_attack_leftthand_v01", -1, 1)
+Data("attack:laying_no_legs::left_arm_strike:::", -2, "mz_upset_crawl_attack_leftthand_v02", -1, 1)
+Data("attack:laying_no_legs::right_arm_strike:::", -2, "mz_upset_crawl_attack_righthand_v01", -1, 1)
+Data("attack:laying_no_legs::right_arm_strike:::", -2, "mz_upset_crawl_attack_righthand_v02", -1, 1)
+
+Data("attack:standing::bite:::", -2, "mz_upset_stand_attack_bite_v01", -1, 1)
+Data("attack:standing::bite:::", -2, "mz_upset_stand_attack_bite_v02", -1, 1)
+//Data("attack:standing::bite:::", -2, "mz_upset_stand_attack_bite_v03", -1, 1) //BAD
+Data("attack:standing::bite:::", -2, "m_zombie_common_bite_attack_01", -1, 1)
+Data("attack:standing::bite:::", -2, "m_zombie_common_bite_attack_02", -1, 1)
+Data("attack:standing::bite:::", -2, "m_zombie_common_standing_bite_attack_01", -1, 1)
+
+Data("attack:standing::fake_low:::", -2, "m_zombie_fakeattack_low_04", -1, 1)
+Data("attack:standing::fake_low:::", -2, "m_zombie_fakeattack_low_01", -1, 1)  
+Data("attack:standing::fake_low:::", -2, "m_zombie_fakeattack_high_02_short", -1, 1)
+Data("attack:standing::fake_low:::", -2, "m_zombie_fakeattack_high_03", -1, 1)  
+
+
+Data("attack:standing::fake_high:::", -2, "m_zombie_fakeattack_high_01", -1, 1)
+Data("attack:standing::fake_high:::", -2, "m_zombie_fakeattack_high_02", -1, 1)
+Data("attack:standing::fake_high:::", -2, "m_zombie_fakeattack_high_03", -1, 1)
+Data("attack:standing::fake_high:::", -2, "m_zombie_fakeattack_high_04", -1, 1)
+
+Data("attack:standing::fake_short:::", -2, "m_zombie_fakeattack_high_01_short", -1, 1)
+Data("attack:standing::fake_short:::", -2, "m_zombie_fakeattack_high_02_short", -1, 1)
+
+
+Data("attack:laying::fake_high:::", -2, "mz_calm_crawl_idle_helpless_v01", -1, 1)
+Data("attack:laying::fake_high:::", -2, "mz_calm_crawl_idle_helpless_v02", -1, 1)
+Data("attack:laying::fake_high:::", -2, "mz_calm_crawl_idle_helpless_v03", -1, 1)
+Data("attack:laying::fake_high:::", -2, "mz_calm_crawl_idle_helpless_v04", -1, 1)
+Data("attack:laying::fake_high:::", -2, "mz_calm_crawl_idle_helpless_v05", -1, 1)
+Data("attack:laying::fake_low:::", -2, "mz_calm_crawl_idle_helpless_v01", -1, 1)
+Data("attack:laying::fake_low:::", -2, "mz_calm_crawl_idle_helpless_v02", -1, 1)
+Data("attack:laying::fake_low:::", -2, "mz_calm_crawl_idle_helpless_v03", -1, 1)
+Data("attack:laying::fake_low:::", -2, "mz_calm_crawl_idle_helpless_v04", -1, 1)
+Data("attack:laying::fake_low:::", -2, "mz_calm_crawl_idle_helpless_v05", -1, 1)
+
+
+
+
+
+
+Data("attack:standing::stinger:::", -2, "mz_upset_attack_stinger_f_v01", -1, 1)
+Data("attack:laying::stinger:::", -2, "mz_standup_stinger_v01", -1, 1)
+Data("attack:laying::stinger:::", -2, "mz_upset_attack_stinger_sitting_standup", -1, 1)
+Data("attack:laying::stinger:::", -2, "MZ_Upset_Attack_Stinger_sitting_standup01", -1, 1)
+Data("attack:laying::stinger:::", -2, "mz_upset_attack_stinger_sitting_standup02", -1, 1)
+Data("attack:laying::stinger:::", -2, "mz_upset_attack_stinger_sitting_standup04", -1, 1)
+Data("attack:laying::stinger:::", -2, "MZ_Upset_Attack_Stinger_lying01", -1, 1)
+Data("attack:laying::stinger:::", -2, "mz_upset_attack_stinger_lying02", -1, 1)
+Data("attack:laying::stinger:::", -2, "mz_upset_attack_stinger_onwall_left", -1, 1)
+Data("attack:laying::stinger:::", -2, "mz_upset_attack_stinger_barrier", -1, 1)
+Data("attack:laying::stinger:::", -2, "mz_upset_attack_stinger_sitting_chair01", -1, 1)
+Data("attack:laying::stinger:::", -2, "mz_upset_attack_stinger_sitting_chair02", -1, 1)
+Data("attack:laying::stinger:::", -2, "mz_upset_attack_stinger_table01", -1, 1)
+Data("attack:laying::stinger:::", -2, "mz_upset_attack_stinger_wall01", -1, 1)
+Data("attack:laying::stinger:::", -2, "mz_upset_attack_stinger_chair", -1, 1)
+Data("attack:laying_no_legs::stinger:::", -2, "mz_grab_begin_attack_no_legs", 1, 1)
+//Data("attack:laying_no_legs::stinger:::", -2, "mz_upset_attack_stinger_no_legs_back", 2, 1)
+
+Data("attack:standing:stick:melee_weapon:::", -2, "m_zombie_attack_weapon_01", -1, 1)
+Data("attack:standing:stick:melee_weapon:::", -2, "m_zombie_attack_weapon_02", -1, 1)
+
+Data("attack:standing:stick:throw_weapon:::", -2, "mz_upset_stand_attack_cleaver_v01", -1, 1)
+
+// grab from stand
+Data("attack:standing::grab_from_stand:::", -2, "m_zombie_grab_from_stand_front_01", 1, 1)
+Data("attack:standing::grab_from_stand:::", -2, "m_zombie_grab_from_stand_front_02", 1, 1)
+Data("attack:standing::grab_from_stand:::", -2, "m_zombie_grab_from_stand_front_03", 1, 1)
+Data("attack:standing::grab_from_stand:::", -2, "m_zombie_grab_from_stand_front_04", 1, 1)
+Data("attack:standing::grab_from_stand:left::", -2, "m_zombie_grab_from_stand_turn_left_01", 1, 1)
+Data("attack:standing::grab_from_stand:left::", -2, "m_zombie_grab_from_stand_turn_left_02", 1, 1)
+Data("attack:standing::grab_from_stand:right::", -2, "m_zombie_grab_from_stand_turn_right_01", 1, 1)
+Data("attack:standing::grab_from_stand:right::", -2, "m_zombie_grab_from_stand_turn_right_02", 1, 1)
+Data("attack:standing::grab_from_stand:backward_left::", -2, "m_zombie_grab_from_stand_turn_left_180_01", 1, 1)
+Data("attack:standing::grab_from_stand:backward_left::", -2, "m_zombie_grab_from_stand_turn_left_180_02", 1, 1)
+Data("attack:standing::grab_from_stand:backward_right::", -2, "m_zombie_grab_from_stand_turn_right_180_01", 1, 1)
+Data("attack:standing::grab_from_stand:backward_right::", -2, "m_zombie_grab_from_stand_turn_right_180_02", 1, 1)
+
+// grab from standing up
+Data("attack:laying::grab_from_stand:forward::true", -2, "m_zombie_grab_from_bentpose_front_04", 1, 1)
+Data("attack:laying::grab_from_stand:forward::true", -2, "m_zombie_grab_from_bentpose_front_02", 1, 1)
+Data("attack:laying::grab_from_stand:left::true", -2, "m_zombie_grab_from_bentpose_turn_left_01", 1, 1)
+Data("attack:laying::grab_from_stand:right::true", -2, "m_zombie_grab_from_bentpose_turn_right_01", 1, 1)
+Data("attack:laying::grab_from_stand:backward_right::true", -2, "m_zombie_grab_from_bentpose_turn_right_180_01", 1, 1)
+Data("attack:laying::grab_from_stand:backward_left::true", -2, "m_zombie_grab_from_bentpose_turn_left_180_02", 1, 1)
+
+
+/*Data("attack:standing:two_handed_stick:melee_weapon:::", -2, "npc_stick2_melee_attack_dlr", -1, 1)
+Data("attack:standing:two_handed_stick:melee_weapon:::", -2, "npc_stick2_melee_attack_drl", -1, 1)
+Data("attack:standing:two_handed_stick:melee_weapon:::", -2, "npc_stick2_melee_attack_ldr", -1, 1)
+Data("attack:standing:two_handed_stick:melee_weapon:::", -2, "npc_stick2_melee_attack_lr", -1, 1)
+Data("attack:standing:two_handed_stick:melee_weapon:::", -2, "npc_stick2_melee_attack_rdl", -1, 1)
+Data("attack:standing:two_handed_stick:melee_weapon:::", -2, "npc_stick2_melee_attack_rl", -1, 1)*/
+
+//##############
+//#### IDLE ####
+//##############
+//## idle:pose:idle_type:item_type:scare_level:is_idle_prepare:is_idle_finish
+//##############
+
+Data("idle:standing::wait_for_stinger:::", -2, "mz_a_calm_stand_stinger", -1, 1)
+Data("idle:laying::wait_for_stinger:::", 10, "", -1, 1) // prevent lying zombies from playing animation
+Data("idle:laying_no_legs::wait_for_stinger:::", -2, "mz_grab_idle", 1, 1)
+//Data("idle:laying_no_legs::wait_for_stinger:::", -2, "mz_idle_no_legs_back", 2, 1)
+
+//Data("idle:standing::regenerate:::", -2, "fighter_regeneration2", -1, 1)
+
+Data("idle:standing::look_around:::", -2, "m_zombie_decoy_01", -1, 1)
+
+Data("idle:standing::look_around:::", -2, "m_zombie_idle_moving_01", -1, 1)
+Data("idle:standing::look_around:::", -2, "m_zombie_idle_moving_02", -1, 1)
+Data("idle:standing::look_around:::", -2, "m_zombie_idle_moving_03", -1, 1)
+Data("idle:standing::look_around:::", -2, "m_zombie_idle_moving_04", -1, 1)
+
+Data("idle:standing::transform:::", -2, "m_zombie_night_change_01", -1, 1)
+Data("idle:standing::transform:::", -2, "m_zombie_night_change_03", -1, 1)
+Data("idle:standing::transform:::", -2, "vessel_transformation_04", -1, 1)
+Data("idle:standing::transform:::", -2, "m_zombie_night_change_05", -1, 1)
+
+
+Data("idle:laying::stand:::", -2, "mz_calm_crawl_idle_v01", -1, 1)
+Data("idle:laying::stand:::", -2, "mz_calm_crawl_idle_v02", -1, 1)
+Data("idle:laying_no_legs::stand:::", -2, "mz_calm_crawl_idle_v01", -1, 1)
+Data("idle:laying_no_legs::stand:::", -2, "mz_calm_crawl_idle_v02", -1, 1)
+Data("idle:standing::confused:::", -2, "m_zombie_common_stun_01", -1, 1)
+Data("idle:standing::confused:::", -2, "m_zombie_common_stun_02", -1, 1)
+
+Data("idle:standing::scared:::", -2, "mz_blinded_idle", -1, 1)
+
+Data("idle:standing::react_on_night:::", -2, "m_zombie_NightIsComing_idle_01", -1, 1)
+Data("idle:standing::react_on_night:::", -2, "m_zombie_NightIsComing_idle_02", -1, 1)
+Data("idle:standing::react_on_night:::", -2, "m_zombie_NightIsComing_idle_03", -1, 1)
+
+Data("idle:laying::react_on_night:::", -2, "mz_calm_crawl_idle_v01", -1, 1)
+Data("idle:laying_no_legs::react_on_night:::", -2, "mz_calm_crawl_idle_v01", -1, 1)
+
+// decoy animations
+
+Data("idle:standing::attracted:::", -2, "mz_a_calm_stand_idle_v01", -1, 1)
+Data("idle:standing::attracted:::", -2, "m_zombie_decoy_01", -1, 1)
+Data("idle:standing::attracted:::", -2, "m_zombie_decoy_02", -1, 1)
+Data("idle:standing::attracted:::", -2, "m_zombie_decoy_03", -1, 1)
+Data("idle:standing::attracted:::", -2, "m_zombie_decoy_04", -1, 1)
+
+
+
+
+Data("idle:standing::scream_for_zombies:::", -2, "m_zombie_call_nw_01", -1, 1)
+Data("idle:standing::scream_for_zombies:::", -2, "m_zombie_call_nw_02", -1, 1)
+Data("idle:standing::scream_for_zombies:::", -2, "m_zombie_call_nw_03", -1, 1)
+
+Data("idle:standing::offensive:::", -2, "m_zombie_fakeattack_low_01", -1, 1)
+
+//##################
+//#### MOVEMENT ####
+//##################
+//## movement:is_standing:movement_type:movement_direction:alarm_level:item_type:ram_type:stairs_climbing_state
+//##################
+/*
+Data("movement:standing:walk:left::::", -2, "mz_walk_left_v01", -1, 1)
+Data("movement:standing:walk:right::::", -2, "mz_walk_right_v01", -1, 1)
+Data("movement:standing:walk:backward::::", -2, "mz_walk_backward", -1, 1)
+Data("movement:standing:run:left::::", -2, "mz_walk_left_v01", -1, 1)
+Data("movement:standing:run:right::::", -2, "mz_walk_right_v01", -1, 1)
+Data("movement:standing:run:backward::::", -2, "mz_walk_backward", -1, 1)
+*/
+Data("movement:standing:sprint:forward::::", -2, "infected_sprint_01", -1, 1)
+
+Data("movement:standing:jump_down:forward::::", -2, "mz_upset_jump_off_03", -1, 1)
+Data("movement:standing:jump_down:forward::::", -2, "m_zombie_obstacle_fall_02", -1, 1)
+Data("movement:standing:jump_down:forward::::", -2, "m_zombie_obstacle_fall_03", -1, 1)  //syf
+
+Data("movement:standing:jump_on:forward::::", -2, "mz_upset_jump_on_01", -1, 1)
+Data("movement:standing:jump_on:forward::::", -2, "m_zombie_low_obstacle_climb_on_01", -1, 1)
+//Data("movement:standing:jump_on:forward::::", -2, "m_zombie_high_obstacle_climb_on_01", -1, 1)    // fix it
+//Data("movement:standing:jump_on:forward::::", -2, "m_zombie_high_obstacle_climb_on_02", -1, 1)    // fix it
+Data("movement:standing:jump_on:forward::::", -2, "m_zombie_high_obstacle_climb_on_03", -1, 1)
+Data("movement:standing:jump_on:forward::::", -2, "m_zombie_high_obstacle_climb_on_04", -1, 1)
+
+Data("movement:standing:jump_off:forward::::", -2, "mz_upset_jump_off_03", -1, 1)
+Data("movement:standing:jump_off:forward::::", -2, "m_zombie_obstacle_fall_02", -1, 1)
+Data("movement:standing:jump_off:forward::::", -2, "m_zombie_obstacle_fall_03", -1, 1)
+
+//Data("movement:standing:jump_over_low:forward::::", -2, "mz_upset_jump_over_low_01", -1, 1)
+//Data("movement:standing:jump_over_low:forward::::", -2, "m_zombie_high_obstacle_climb_over_01", -1, 1)
+//Data("movement:standing:jump_over_low:forward::::", -2, "m_zombie_obstacle_climb_over_high_01", -1, 1)
+
+/*Data("movement:standing:jump_over_low:forward::::", -2, "m_zombie_obstacle_climb_over_high_02", -1, 1)
+Data("movement:standing:jump_over_low:forward::::", -2, "m_zombie_obstacle_climb_over_medium_01", -1, 1)
+Data("movement:standing:jump_over_low:forward::::", -2, "m_zombie_obstacle_climb_over_medium_02", -1, 1)*/
+Data("movement:standing:jump_over_low:forward::::", -2, "m_zombie_a_high_obstacle_climb_01", -1, 1)
+Data("movement:standing:jump_over_low:forward::::", -2, "m_zombie_a_high_obstacle_climb_02", -1, 1)
+
+Data("movement:standing:berserker_grab:forward::::", -2, "mz_berserker_grab", -1, 1)
+Data("movement:standing:berserker_grab:forward::::", -2, "m_zombie_common_berserker_grab_01_fast", -1, 1)
+Data("movement:standing:berserker_grab_end:forward::::", -2, "mz_berserker_grab_end", -1, 1)
+
+Data("movement:standing:berserker_grab:forward::::", -2, "mz_berserker_grab", -1, 1)
+Data("movement:standing:berserker_grab:forward::::", -2, "m_zombie_common_berserker_grab_01_fast", -1, 1)
+Data("movement:standing:berserker_grab_end:forward::::", -2, "mz_berserker_grab_end", -1, 1)
+
+Data("movement:standing:berserker_left_arm:forward::::", -2, "mz_upset_attack_berserker_lefthand_v01", -1, 1)
+Data("movement:standing:berserker_left_arm_strike:forward::::", -2, "mz_left_arm_strike_berserker_v01", -1, 1)
+
+Data("movement:standing:berserker_left_arm:forward::::", -2, "mz_upset_attack_berserker_lefthand_v02", -1, 1)
+Data("movement:standing:berserker_left_arm_strike:forward::::", -2, "mz_left_arm_strike_berserker_v02", -1, 1)
+
+Data("movement:standing:berserker_right_arm:forward::::", -2, "mz_upset_attack_berserker_righthand_v01", -1, 1)
+Data("movement:standing:berserker_right_arm_strike:forward::::", -2, "mz_upset_attack_berserker_strike_righthand_v01", -1, 1)
+
+Data("movement:laying:walk:forward::::", -2, "mz_upset_crawl_forward_v01", -1, 1)
+Data("movement:laying:run:forward::::", -2, "mz_upset_crawl_forward_v01", -1, 1)
+
+//####################
+//#### TRANSITION ####
+//####################
+//## movement:pose:source_movement_type:dest_movement_type:source_flags:dest_flags
+//##################
+
+// transitions not used
+
+//##############
+//#### TURN ####
+//##############
+//## turn:is_standing:alarm_level:item_type:direction:angle
+//##############
+
+
+//###############
+//#### START ####
+//###############
+//## start:is_standing:alarm_level:item_type:movement_type:angle:direction
+//##############
+
+
+//##############
+//#### STOP ####
+//##############
+//## stop:is_standing:alarm_level:item_type:movement_type:angle:direction
+//##############
+
+Data("stop:standing::::0::false:", -2, "mz_a_slow_walk_stop", -1, 1)
+Data("stop:standing::::0::false:", -2, "mz_a_slow_walk_stop_1", -1, 1)
+Data("stop:standing::::0::false:", -2, "mz_a_slow_walk_stop_2", -1, 1)
+
+//################
+//#### EFFECT ####
+//################
+//## effect:type:direction:pose
+//##############
+
+Data("effect:burn::standing", -2, "m_zombie_effect_burn_short_01", -1, 1)
+Data("effect:burn::standing", -2, "m_zombie_effect_burn_short_02", -1, 1)
+Data("effect:burn::standing", -2, "m_zombie_effect_burn_short_03", -1, 1)
+Data("effect:burn::standing", -2, "m_zombie_effect_acid_01", -1, 1)
+/*
+Data("effect:heat::standing", -2, "m_zombie_effect_burn_short_01", -1, 1)
+Data("effect:heat::standing", -2, "m_zombie_effect_burn_short_02", -1, 1)
+Data("effect:heat::standing", -2, "m_zombie_effect_burn_short_03", -1, 1)
+Data("effect:heat::standing", -2, "m_zombie_effect_acid_01", -1, 1)
+*/
+//Data("effect:electrocution::standing", -2, "zombie_electrified_loop_01", -1, 1)
+Data("effect:electrocution::standing", -2, "m_zombie_death_electrocution_01", -1, 1)
+Data("effect:electrocution:left:standing", -2, "m_zombie_death_electrocution_02", -1, 1)
+
+Data("effect:poison::standing", -2, "m_zombie_effect_poison_01", -1, 1)
+Data("effect:poison::standing", -2, "m_zombie_effect_poison_01_offset", -1, 1)
+
+//################
+//##### GRAB #####
+//################
+//## grab:is_standing:is_holding:grabbed_phase:grab_type
+//################
+
+Data("grab:laying_no_legs:true:begin_front:leg_grab:", -2, "mz_grab_begin_no_legs", -1, 1)
+Data("grab:laying_no_legs:true:fight:leg_grab:", -2, "mz_grab_loop_no_legs", -1, 1)
+Data("grab:laying_no_legs:true:punch1:leg_grab:", -2, "mz_grab_kick_no_legs", -1, 1)
+Data("grab:laying_no_legs:true:finish_win:leg_grab:", -2, "mz_grab_finish_wins_no_legs", -1, 1)
+
+Data("grab:laying:true:begin_front:leg_grab:", -2, "mz_grab_begin_no_legs", -1, 1)
+Data("grab:laying:true:fight:leg_grab:", -2, "mz_grab_loop_no_legs", -1, 1)
+Data("grab:laying:true:punch1:leg_grab:", -2, "mz_grab_kick_no_legs", -1, 1)
+Data("grab:laying:true:finish_win:leg_grab:", -2, "mz_grab_finish_wins_no_legs", -1, 1)
+
+Data("grab:standing:true:begin_front:clench:", -2, "mz_unarmed_clench_begin", -1, 1)
+
+Data("grab:standing:true:fight:clench:", -2, "mz_unarmed_clench_loop", -1, 1)
+
+//Data("grab:standing:true:punch1:grab:", -2, "mz_unarmed_grabnew_punch1", -1, 1)
+Data("grab:standing:true:punch1:clench:", -2, "mz_unarmed_clench_punch1", -1, 1)
+
+
+//Data("grab:standing:true:punch2:grab:", -2, "mz_unarmed_grabnew_punch2", -1, 1)
+//Data("grab:standing:true:finish_win:grab:", -2, "mz_unarmed_grabnew_finishwins0", -1, 1)
+
+//Data("grab:standing:true:finish_win:grab:", -2, "mz_unarmed_grabnew_finishwins2", -1, 1)
+Data("grab:standing:true:finish_win:clench:", -2, "mz_unarmed_clench_finishwins", -1, 1)
+
+// grab start
+Data("grab:standing:true:begin_front:grab:", -2, "mz_grab_begin_front", -1, 1)
+Data("grab:standing:true:begin_right:grab:", -2, "mz_grab_begin_right", -1, 1)
+Data("grab:standing:true:begin_front_right:grab:", -2, "mz_grab_begin_front_right", -1, 1)
+Data("grab:standing:true:fight:grab:", -2, "mz_grab_loop", -1, 1)
+Data("grab:standing:true:punch1:grab:", -2, "mz_grab_punch", -1, 1)
+Data("grab:standing:true:fast_finish_win_front:grab:", -2, "mz_grab_begin_finish", -1, 1)
+Data("grab:standing:true:fast_finish_win_break:grab:", -2,  "mz_grab_fastkick", -1, 1)
+Data("grab:standing:true:finish_win:grab:", -2, "mz_grab_finish", -1, 1)
+
+Data("grab:standing:true:finish_lose:grab:", -2, "mz_grab_zombie_wins", -1, 1)
+
+
+Data("grab:standing:true:begin_front:grabweak:", -2, "mz_grab_begin_front", -1, 1)
+Data("grab:standing:true:begin_right:grabweak:", -2, "mz_grab_begin_right", -1, 1)
+Data("grab:standing:true:begin_front_right:grabweak:", -2, "mz_grab_begin_front_right", -1, 1)
+Data("grab:standing:true:fight:grabweak:", -2, "mz_grab_loop", -1, 1)
+Data("grab:standing:true:punch1:grabweak:", -2, "mz_grab_punch", -1, 1)
+Data("grab:standing:true:fast_finish_win_front:grabweak:", -2, "mz_grab_begin_finish", -1, 1)
+Data("grab:standing:true:fast_finish_win_break:grabweak:", -2, "mz_grab_fastkick", -1, 1)
+Data("grab:standing:true:finish_win:grabweak:", -2, "mz_weak_grab_finish", -1, 1)
+
+Data("grab:standing:true:finish_lose:grabweak:", -2, "mz_grab_zombie_wins", -1, 1)
+
+
+Data("grab:standing:true:begin_left:grableft:", -2, "mz_grableft_begin_left", -1, 1)
+Data("grab:standing:true:begin_front_left:grableft:", -2, "mz_grableft_begin_front", -1, 1)
+Data("grab:standing:true:fight:grableft:", -2, "mz_grableft_loop", -1, 1)
+Data("grab:standing:true:punch1:grableft:", -2, "mz_grableft_punch", -1, 1)
+Data("grab:standing:true:fast_finish_win_front:grableft:", -2, "mz_grab_begin_finish", -1, 1)
+Data("grab:standing:true:fast_finish_win_break:grableft:", -2, "mz_grab_fastkick", -1, 1)
+Data("grab:standing:true:finish_win:grableft:", -2, "mz_grab_finish", -1, 1)
+
+Data("grab:standing:true:finish_lose:grableft:", -2, "mz_grab_zombie_wins_left", -1, 1)
+
+
+Data("grab:standing:true:begin_left:grabweakleft:", -2, "mz_grableft_begin_left", -1, 1)
+Data("grab:standing:true:begin_front_left:grabweakleft:", -2, "mz_grableft_begin_front", -1, 1)
+Data("grab:standing:true:fight:grabweakleft:", -2, "mz_grableft_loop", -1, 1)
+Data("grab:standing:true:punch1:grabweakleft:", -2, "mz_grableft_punch", -1, 1)
+Data("grab:standing:true:fast_finish_win_front:grabweakleft:", -2, "mz_grab_begin_finish", -1, 1)
+Data("grab:standing:true:fast_finish_win_break:grabweakleft:", -2, "mz_grab_fastkick", -1, 1)
+Data("grab:standing:true:finish_win:grabweakleft:", -2, "mz_weak_grab_finish", -1, 1)
+
+Data("grab:standing:true:finish_lose:grabweakleft:", -2, "mz_grab_zombie_wins_left", -1, 1)
+
+//second grab set
+Data("grab:standing:true:begin_front:grab:_1", -2, "mz_grab2_begin_front", -1, 1)
+Data("grab:standing:true:begin_right:grab:_1", -2, "mz_grab2_begin_right", -1, 1)
+Data("grab:standing:true:begin_front_right:grab:_1", -2, "mz_grab2_begin_front_right", -1, 1)
+Data("grab:standing:true:fight:grab:_1", -2, "mz_grab2_loop", -1, 1)
+Data("grab:standing:true:punch1:grab:_1", -2, "mz_grab2_punch", -1, 1)
+Data("grab:standing:true:fast_finish_win_front:grab:_1", -2, "mz_grab_begin_finish", -1, 1)
+Data("grab:standing:true:fast_finish_win_break:grab:_1", -2,  "mz_grab_fastkick", -1, 1)
+Data("grab:standing:true:finish_win:grab:_1", -2, "mz_grab2_finish", -1, 1)
+
+Data("grab:standing:true:finish_lose:grab:_1", -2, "mz_grab_zombie_wins", -1, 1)
+
+
+Data("grab:standing:true:begin_front:grabweak:_1", -2, "mz_grab2_begin_front", -1, 1)
+Data("grab:standing:true:begin_right:grabweak:_1", -2, "mz_grab2_begin_right", -1, 1)
+Data("grab:standing:true:begin_front_right:grabweak:_1", -2, "mz_grab2_begin_front_right", -1, 1)
+Data("grab:standing:true:fight:grabweak:_1", -2, "mz_grab2_loop", -1, 1)
+Data("grab:standing:true:punch1:grabweak:_1", -2, "mz_grab2_punch", -1, 1)
+Data("grab:standing:true:fast_finish_win_front:grabweak:_1", -2, "mz_grab_begin_finish", -1, 1)
+Data("grab:standing:true:fast_finish_win_break:grabweak:_1", -2, "mz_grab_fastkick", -1, 1)
+Data("grab:standing:true:finish_win:grabweak:_1", -2, "mz_weak_grab2_finish", -1, 1)
+
+Data("grab:standing:true:finish_lose:grabweak:_1", -2, "mz_grab_zombie_wins", -1, 1)
+
+
+Data("grab:standing:true:begin_left:grableft:_1", -2, "mz_grab2left_begin_left", -1, 1)
+Data("grab:standing:true:begin_front_left:grableft:_1", -2, "mz_grab2left_begin_front", -1, 1)
+Data("grab:standing:true:fight:grableft:_1", -2, "mz_grab2left_loop", -1, 1)
+Data("grab:standing:true:punch1:grableft:_1", -2, "mz_grab2left_punch", -1, 1)
+Data("grab:standing:true:fast_finish_win_front:grableft:_1", -2, "mz_grab_begin_finish", -1, 1)
+Data("grab:standing:true:fast_finish_win_break:grableft:_1", -2, "mz_grab_fastkick", -1, 1)
+Data("grab:standing:true:finish_win:grableft:_1", -2, "mz_grab2_finish", -1, 1)
+
+Data("grab:standing:true:finish_lose:grableft:_1", -2, "mz_grab_zombie_wins_left", -1, 1)
+
+
+Data("grab:standing:true:begin_left:grabweakleft:_1", -2, "mz_grab2left_begin_left", -1, 1)
+Data("grab:standing:true:begin_front_left:grabweakleft:_1", -2, "mz_grab2left_begin_front", -1, 1)
+Data("grab:standing:true:fight:grabweakleft:_1", -2, "mz_grab2left_loop", -1, 1)
+Data("grab:standing:true:punch1:grabweakleft:_1", -2, "mz_grab2left_punch", -1, 1)
+Data("grab:standing:true:fast_finish_win_front:grabweakleft:_1", -2, "mz_grab_begin_finish", -1, 1)
+Data("grab:standing:true:fast_finish_win_break:grabweakleft:_1", -2, "mz_grab_fastkick", -1, 1)
+Data("grab:standing:true:finish_win:grabweakleft:_1", -2, "mz_weak_grab2_finish", -1, 1)
+
+Data("grab:standing:true:finish_lose:grabweakleft:_1", -2, "mz_grab_zombie_wins_left", -1, 1)
+
+
+// Third grab set
+Data("grab:standing:true:begin_front:grab:_2", -2, "mz_grab_begin_front", -1, 1)
+Data("grab:standing:true:begin_right:grab:_2", -2, "mz_grab_begin_right", -1, 1)
+Data("grab:standing:true:begin_front_right:grab:_2", -2, "mz_grab_begin_front_right", -1, 1)
+Data("grab:standing:true:fight:grab:_2", -2, "mz_grab_loop", -1, 1)
+Data("grab:standing:true:punch1:grab:_2", -2, "mz_grab3_punch", -1, 1)
+Data("grab:standing:true:fast_finish_win_front:grab:_2", -2, "mz_grab3_begin_finish", -1, 1)
+Data("grab:standing:true:fast_finish_win_break:grab:_2", -2,  "mz_grab_fastkick", -1, 1)
+Data("grab:standing:true:finish_win:grab:_2", -2, "mz_grab3_finish", -1, 1)
+
+Data("grab:standing:true:finish_lose:grab:_2", -2, "mz_grab_zombie_wins", -1, 1)
+
+Data("grab:standing:true:begin_front:grabweak:_2", -2, "mz_weak_grab3_begin_front", -1, 1)
+Data("grab:standing:true:begin_right:grabweak:_2", -2, "mz_weak_grab3_begin_right", -1, 1)
+Data("grab:standing:true:begin_front_right:grabweak:_2", -2, "mz_weak_grab3_begin_front_right", -1, 1)
+Data("grab:standing:true:fight:grabweak:_2", -2, "mz_weak_grab3_loop", -1, 1)
+Data("grab:standing:true:punch1:grabweak:_2", -2, "mz_weak_grab3_punch", -1, 1)
+Data("grab:standing:true:fast_finish_win_front:grabweak:_2", -2, "mz_grab_begin_finish", -1, 1)
+Data("grab:standing:true:fast_finish_win_break:grabweak:_2", -2, "mz_weak_grab3_begin_finish", -1, 1)
+Data("grab:standing:true:finish_win:grabweak:_2", -2, "mz_weak_grab3_finish", -1, 1)
+
+Data("grab:standing:true:finish_lose:grabweak:_2", -2, "mz_grab_zombie_wins", -1, 1)
+
+Data("grab:standing:true:begin_front:grableft:_2", -2, "mz_grab_begin_front", -1, 1)
+Data("grab:standing:true:begin_right:grableft:_2", -2, "mz_grab_begin_right", -1, 1)
+Data("grab:standing:true:begin_front_right:grableft:_2", -2, "mz_grab_begin_front_right", -1, 1)
+Data("grab:standing:true:fight:grableft:_2", -2, "mz_grab_loop", -1, 1)
+Data("grab:standing:true:punch1:grableft:_2", -2, "mz_grab3_punch", -1, 1)
+Data("grab:standing:true:fast_finish_win_front:grableft:_2", -2, "mz_grab3_begin_finish", -1, 1)
+Data("grab:standing:true:fast_finish_win_break:grableft:_2", -2,  "mz_grab_fastkick", -1, 1)
+Data("grab:standing:true:finish_win:grableft:_2", -2, "mz_grab3_finish", -1, 1)
+
+Data("grab:standing:true:finish_lose:grableft:_2", -2, "mz_grab_zombie_wins", -1, 1)
+
+Data("grab:standing:true:finish_lose:clench:", -2, "mz_unarmed_clench_finishlose", -1, 1)
+
+// scalping
+Data("grab:standing:true:begin_front:scalping:", -2, "mz_scalping_begin", -1, 1)
+Data("grab:laying:true:begin_front:scalping:", -2, "mz_scalping_begin", -1, 1)
+Data("grab:standing:false:begin_front:scalping:", -2, "mz_scalping_begin", -1, 1)
+Data("grab:laying:false:begin_front:scalping:", -2, "mz_scalping_begin", -1, 1)
+Data("grab:standing:true:finish_win:scalping:", -2, "mz_scalping", -1, 1)
+Data("grab:laying:true:finish_win:scalping:", -2, "mz_scalping", -1, 1)
+//scalping 1
+Data("grab:standing:true:begin_front:scalping:_1", -2, "mz_begin_scalping_1", -1, 1)
+Data("grab:laying:true:begin_front:scalping:_1", -2, "mz_begin_scalping_1", -1, 1)
+Data("grab:standing:false:begin_front:scalping:_1", -2, "mz_begin_scalping_1", -1, 1)
+Data("grab:laying:false:begin_front:scalping:_1", -2, "mz_begin_scalping_1", -1, 1)
+Data("grab:standing:true:finish_win:scalping:_1", -2, "mz_finishwins_scalping_1", -1, 1)
+Data("grab:laying:true:finish_win:scalping:_1", -2, "mz_finishwins_scalping_1", -1, 1)
+//scalping 2
+Data("grab:standing:true:begin_front:scalping:_2", -2, "mz_begin_scalping_2", -1, 1)
+Data("grab:laying:true:begin_front:scalping:_2", -2, "mz_begin_scalping_2", -1, 1)
+Data("grab:standing:false:begin_front:scalping:_2", -2, "mz_begin_scalping_2", -1, 1)
+Data("grab:laying:false:begin_front:scalping:_2", -2, "mz_begin_scalping_2", -1, 1)
+Data("grab:standing:true:finish_win:scalping:_2", -2, "mz_finishwins_scalping_2", -1, 1)
+Data("grab:laying:true:finish_win:scalping:_2", -2, "mz_finishwins_scalping_2", -1, 1)
+//scalping 3
+Data("grab:standing:true:begin_front:scalping:_3", -2, "mz_begin_scalping_3", -1, 1)
+Data("grab:laying:true:begin_front:scalping:_3", -2, "mz_begin_scalping_3", -1, 1)
+Data("grab:standing:false:begin_front:scalping:_3", -2, "mz_begin_scalping_3", -1, 1)
+Data("grab:laying:false:begin_front:scalping:_3", -2, "mz_begin_scalping_3", -1, 1)
+Data("grab:standing:true:finish_win:scalping:_3", -2, "mz_finishwins_scalping_3", -1, 1)
+Data("grab:laying:true:finish_win:scalping:_3", -2, "mz_finishwins_scalping_3", -1, 1)
+
+Data("grab:standing:true:finish_win:deadly_finish:", -2, "mz_deadly_finish", -1, 1)
+Data("grab:standing:true:begin_front:deadly_finish:", -2, "mz_begin_deadly_finish", -1, 1)
+Data("grab:laying:true:finish_win:deadly_finish:", -2, "mz_deadly_finish", -1, 1)
+Data("grab:laying:true:begin_front:deadly_finish:", -2, "mz_begin_deadly_finish", -1, 1)
+
+Data("grab:standing:true:begin_front:deadly_finish_blunt:", -2, "mz_begin_deadly_finish_blunt", -1, 1)
+Data("grab:standing:false:begin_front:deadly_finish_blunt:", -2, "mz_begin_deadly_finish_blunt", -1, 1)
+Data("grab:standing:true:finish_win:deadly_finish_blunt:", -2, "mz_deadly_finish_blunt", -1, 1)
+Data("grab:laying:true:begin_front:deadly_finish_blunt:", -2, "mz_begin_deadly_finish_blunt", -1, 1)
+Data("grab:laying:false:begin_front:deadly_finish_blunt:", -2, "mz_begin_deadly_finish_blunt", -1, 1)
+Data("grab:laying:true:finish_win:deadly_finish_blunt:", -2, "mz_deadly_finish_blunt", -1, 1)
+
+Data("grab:standing:true:begin_front:finisherback:", -2, "mz_finisherback_begin", -1, 1)
+Data("grab:laying:true:begin_front:finisherback:", -2, "mz_finisherback_begin", -1, 1)
+Data("grab:standing:false:begin_front:finisherback:", -2, "mz_finisherback_begin", -1, 1)
+Data("grab:laying:false:begin_front:finisherback:", -2, "mz_finisherback_begin", -1, 1)
+Data("grab:standing:true:finish_win:finisherback:", -2, "mz_finisherback", -1, 1)
+Data("grab:laying:true:finish_win:finisherback:", -2, "mz_finisherback", -1, 1)
+
+Data("grab:standing:true:begin_front:finisherbackfast:", -2, "mz_finisherbackfast_begin", -1, 1)
+Data("grab:laying:true:begin_front:finisherbackfast:", -2, "mz_finisherbackfast_begin", -1, 1)
+Data("grab:standing:false:begin_front:finisherbackfast:", -2, "mz_finisherbackfast_begin", -1, 1)
+Data("grab:laying:false:begin_front:finisherbackfast:", -2, "mz_finisherbackfast_begin", -1, 1)
+Data("grab:standing:true:finish_win:finisherbackfast:", -2, "mz_finisherbackfast", -1, 1)
+Data("grab:laying:true:finish_win:finisherbackfast:", -2, "mz_finisherbackfast", -1, 1)
+
+Data("grab:standing:true:begin_front:nagewazaback:", -2, "m_zombie_nagewaza_begin_back", -1, 1)
+Data("grab:laying:true:begin_front:nagewazaback:", -2, "m_zombie_nagewaza_begin_back", -1, 1)
+Data("grab:standing:false:begin_front:nagewazaback:", -2, "m_zombie_nagewaza_begin_back", -1, 1)
+Data("grab:laying:false:begin_front:nagewazaback:", -2, "m_zombie_nagewaza_begin_back", -1, 1)
+Data("grab:standing:true:finish_win:nagewazaback:", -2, "m_zombie_nagewaza_finish_back", -1, 1)
+Data("grab:laying:true:finish_win:nagewazaback:", -2, "m_zombie_nagewaza_finish_back", -1, 1)
+
+Data("grab:standing:true:begin_front:nagewazaright:", -2, "m_zombie_nagewaza_begin_right", -1, 1)
+Data("grab:laying:true:begin_front:nagewazaright:", -2, "m_zombie_nagewaza_begin_right", -1, 1)
+Data("grab:standing:false:begin_front:nagewazaright:", -2, "m_zombie_nagewaza_begin_right", -1, 1)
+Data("grab:laying:false:begin_front:nagewazaright:", -2, "m_zombie_nagewaza_begin_right", -1, 1)
+Data("grab:standing:true:finish_win:nagewazaright:", -2, "m_zombie_nagewaza_finish_right", -1, 1)
+Data("grab:laying:true:finish_win:nagewazaright:", -2, "m_zombie_nagewaza_finish_right", -1, 1)
+
+Data("grab:standing:true:begin_front:nagewazaleft:", -2, "m_zombie_nagewaza_begin_left", -1, 1)
+Data("grab:laying:true:begin_front:nagewazaleft:", -2, "m_zombie_nagewaza_begin_left", -1, 1)
+Data("grab:standing:false:begin_front:nagewazaleft:", -2, "m_zombie_nagewaza_begin_left", -1, 1)
+Data("grab:laying:false:begin_front:nagewazaleft:", -2, "m_zombie_nagewaza_begin_left", -1, 1)
+Data("grab:standing:true:finish_win:nagewazaleft:", -2, "m_zombie_nagewaza_finish_left", -1, 1)
+Data("grab:laying:true:finish_win:nagewazaleft:", -2, "m_zombie_nagewaza_finish_left", -1, 1)
+
+Data("grab:standing:true:begin_front:nagewazafront:", -2, "mz_begin_nagewazafront", -1, 1)
+Data("grab:laying:true:begin_front:nagewazafront:", -2, "mz_begin_nagewazafront", -1, 1)
+Data("grab:standing:false:begin_front:nagewazafront:", -2, "mz_begin_nagewazafront", -1, 1)
+Data("grab:laying:false:begin_front:nagewazafront:", -2, "mz_begin_nagewazafront", -1, 1)
+Data("grab:standing:true:finish_win:nagewazafront:", -2, "mz_finish_nagewazafront", -1, 1)
+Data("grab:laying:true:finish_win:nagewazafront:", -2, "mz_finish_nagewazafront", -1, 1)
+
+//################
+//#### MIMIC #####
+//################
+//## mimic:type:is_speech_played
+//##############
+
+Data("mimic:normal:", -2, "mz_mimic_normal1", 1, 1)
+Data("mimic:normal:", -2, "mz_mimic_normal2", 1, 1)
+Data("mimic:angry:", -2, "mz_mimic_angry0", 1, 1)
+Data("mimic:angry:", -2, "mz_mimic_angry1", 1, 1)
+Data("mimic:grab:", -2, "mz_mimic_grab", 1, 1)
+Data("mimic:hit_reaction:", -2, "mz_mimic_hit_reaction0", 1, 1)
+Data("mimic:hit_reaction:", -2, "mz_mimic_hit_reaction1", 1, 1)
+Data("mimic:hit_reaction:", -2, "mz_mimic_hit_reaction2", 1, 1)
+
+!include("zombie_data_params.scr")

@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- Lullaby -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=      -->
+    <!-- quest Lullaby -parent=Q_Demolition05 -difficulty=medium -reward_set=Lullaby_reward -quest_giver=Maalik -->
+    <!--  -->
+        <!-- ,cnd-quest-started _ Q_Intruders01 -finished=false -show=false -->
+        <!-- ,show _ AppearGroup Lullaby_AG_TIR -->
+        <!-- ,use-lp _ NPCLifePlace Maalik_wounded_LP -teleport=true -->
+            <!-- ,ai HumanAI Maalik -->
+            <!--  -->
+        <!-- -= Showing Bodies near the Tower -->
+        <!-- ,show _ GroupingObject Lullaby_Massacre -= AppearGroup Lullaby_AG_Massacre_001 -->
+        <!-- ,enable _ QuestEnableGroup Lullaby_QEG_Masscare_Enemies_001 -->
+        <!-- ,enable _ SpawnBlocker Lullaby_SpawnBlocker_Massacre_001 -->
+        <!--  -->
+        <!-- -= Showing Selen in the house near the Fisherman's Village -->
+        <!-- ,enable _ SpawnBlocker Lullaby_SpawnBlocker_House_001 -->
+        <!-- ,enable _ Encounter::EncounterBlockArea Lullaby_EncounterBlocker_House_001 -->
+        <!-- ,show _ HumanAI Selen -->
+        <!-- ,hide _ DoorDI Fisher_house_Lullaby::Fisher_door  -->
+        <!-- ,use-lp _ NPCLifePlace Lullaby_LP_Selen_Door_001 -teleport=true -->
+            <!-- ,ai HumanAI Selen  -->
+        <!-- ,set-lp _ NPCLifePlace Lullaby_LP_Selen_Door_001 -interact_level=blocked -->
+        <!--  -->
+        <!-- ,talk <<Lullaby - START>> Maalik Maalik_Lullaby_USE01 -show=false -questgiver_indicator=true -= follow=maalik_lullaby_inp01 -->
+            <!-- ,debugpos SpawnPoint Lullaby_SP_TIR_001 -->
+            <!--  -->
+        <!-- -= Malik dies after talk -->
+        <!-- ,disable _ NPCLifePlace Maalik_wounded_LP -->
+        <!-- ,enable _ AllLethalObject Kill_Maalik -->
+        <!-- ,wait _ 1 -->
+        <!-- ,disable _ AllLethalObject Kill_Maalik -->
+        <!--  -->
+        <!-- ,checkpoint _ SpawnPoint Lullaby_SP_TIR_001 -->
+        <!--  -->
+    <!-- quest __Lullaby_HidingMalik -parent=Lullaby -->
+        <!-- ,gather _ HumanAI Maalik -distance=-200 -show=false -->
+        <!-- -= ,hide _ HumanAI Maalik -->
+        <!-- ,hide _ AppearGroup Lullaby_AG_TIR -->
+        <!-- ,checkpoint _ SpawnPoint Lullaby_SP_TIR_001 -->
+        <!--  -->
+    <!-- quest Lullaby_02 -parent=Lullaby -glued=true -->
+        <!-- ,BLOCK _ -obj=&Lullaby_OBJ_TalkToAndy& -->
+            <!-- ,talk <<Lullaby - Talk to Andy>> andy Andy_Lullaby_02USE01 -->
+                <!-- ,debugpos SpawnPoint Lullaby_SP_Village_001 -->
+            <!-- ,enable _ SoundEmitterSimple Lullaby_SES_Far_001 -->
+        <!-- ,checkpoint _ SpawnPoint Lullaby_SP_Village_001 -->
+    <!--  -->
+        <!-- ,BLOCK _ -obj=&Lullaby_OBJ_Find& -->
+            <!-- ,AND <<Lullaby - Find Andy's wife and his child>> -->
+                <!-- ,debugpos SpawnPoint Lullaby_SP_Selen_House_001 -->
+                <!--  -->
+                <!-- path -->
+                    <!-- ,use _ PhysicalSwitchDI Lullaby_knocking_door::trigger_knocking_01 -state=on -show=false -->
+                        <!-- ,area ZoneBox Lullaby_ZB_Selen_House_001 -->
+                <!-- path -->
+                    <!-- ,goto _ HumanAI Selen  -distance=15 -show=false -->
+                    <!-- ,talk _ voice2d Player_Lullaby_01DLG01 -auto=true -show=false -->
+            <!-- ,wait _ 1 -->
+            <!-- ,disable _ SoundEmitterSimple Lullaby_SES_Far_001 -->
+            <!--  -->
+            <!-- ,set-lp _ NPCLifePlace Lullaby_LP_Selen_Door_001 -interact_level=just_play_role -->
+            <!-- ,talk _ Selen Suzan_Lullaby_03USE01 -->
+            <!-- ,set-lp _ NPCLifePlace Lullaby_LP_Selen_Door_001 -interact_level=blocked -->
+            <!--  -->
+            <!-- ,checkpoint _ SpawnPoint Lullaby_SP_Selen_House_001 -->
+    <!--  -->
+    <!-- quest __Lullaby_Massacre -parent=Lullaby -->
+        <!--  -->
+        <!-- ,AND _ -->
+            <!-- path -->
+                <!-- ,goto _ SensorGoTo Lullaby_GoTo_Massacre_001 -distance=0 -show=false -->
+                <!-- ,talk _ voice2d Player_Lullaby_02DLG01 -auto=true -show=false -->
+            <!-- path -->
+                <!-- ,use _ PhysicalSwitchDI selLullaby_Massacre::Lullaby_Dead_Survivor_01 -state=on -show=false -->
+                <!-- ,talk _ voice2d Player_Lullaby_03DLG01 -auto=true -show=false -->
+            <!-- path -->
+                <!-- ,use _ PhysicalSwitchDI selLullaby_Massacre::Lullaby_Dead_Survivor_02 -state=on -show=false -->
+            <!-- path -->
+                <!-- ,use _ PhysicalSwitchDI selLullaby_Massacre::Lullaby_Dead_Survivor_03 -state=on -show=false -->
+                <!-- ,talk _ voice2d Player_Lullaby_04DLG01 -auto=true -show=false -->
+        <!-- ,checkpoint _ SpawnPoint Lullaby_SP_Massacre_001 -->
+    <!--  -->
+    <!-- quest Lullaby_03 -parent=Lullaby_02 -glued=true -->
+        <!-- ,BLOCK _ -obj=&Lullaby_OBJ_FindTeddy& -->
+            <!-- ,take <<Lullaby - Find teddy bear>> QuestInventoryItemDI selLullaby_Massacre::Lullaby_QII_Teddy_001 -show=false -->
+                <!-- ,debugpos SpawnPoint Lullaby_SP_Massacre_001 -->
+                <!-- ,area ZoneBox Lullaby_ZB_Massacre_001 -->
+                <!--  -->
+            <!-- ,use-lp _ NPCLifePlace Lullaby_LP_Selen_001 -teleport=true -->
+                <!-- ,ai HumanAI Selen -->
+            <!-- ,show _ DoorDI Fisher_house_Lullaby::Fisher_door -->
+            <!-- ,show _ AppearGroup Lullaby_AG_Rami_001 -->
+                <!--  -->
+            <!-- ,checkpoint _ SpawnPoint Lullaby_SP_Massacre_001 -->
+            <!--  -->
+        <!-- ,BLOCK _ -obj=&Lullaby_OBJ_BringTeddy& -->
+            <!-- ,use <<Lullaby - Bring the teddy bear to Selen>> PhysicalSwitchDI Lullaby_knocking_door::trigger_knocking_01 -state=off  -->
+                <!-- ,debugpos SpawnPoint Lullaby_SP_Selen_House_001 -->
+            <!-- ,enable _ SoundEmitterSimple Lullaby_SES_Far_002 -->
+            <!-- ,wait _ 1 -->
+            <!-- ,enable _ DoorDI Fisher_house_Lullaby::Fisher_door -->
+            <!-- ,set _ DoorDI Fisher_house_Lullaby::Fisher_door  -state=closed -->
+            <!--  -->
+            <!-- ,use _ DoorDI Fisher_house_Lullaby::Fisher_door -state=opened -->
+            <!-- ,talk _ Selen Player_Lullaby_03ONC01 -auto=true -show=false -->
+            <!-- ,talk _ Selen Suzan_Lullaby_04USE01 -->
+            <!--  -->
+            <!-- ,reward _ -->
+            <!--  -->
+        <!-- ,checkpoint _ SpawnPoint Lullaby_SP_Selen_House_001 -->
+        <!--  -->
+    <!-- quest __Lullaby_TeddyBear -parent=Lullaby_03 -->
+        <!-- ,use _ InvisibleSwitchDI Lullaby_IS_TeddyBear_001 -state=on -show=false -->
+        <!-- ,show _ ModelObject Lullaby_TeddyBear_001 -->
+        <!-- ,checkpoint _ SpawnPoint Lullaby_SP_Selen_House_001 -->
+        <!--  -->
+    <!-- quest __Lullaby_HidingSelen -parent=Lullaby_03 -->
+        <!-- ,goto _ Marker Lullaby_Marker_Selen_House_001 -distance=-50 -show=false -->
+        <!-- ,hide _ HumanAI Selen -->
+        <!-- ,hide _ AppearGroup Lullaby_AG_Rami_001 -->
+        <!-- ,disable _ SoundEmitterSimple Lullaby_SES_Far_002 -->
+        <!--  -->
+        <!-- ,disable _ SpawnBlocker Lullaby_SpawnBlocker_House_001 -->
+        <!-- ,disable _ Encounter::EncounterBlockArea Lullaby_EncounterBlocker_House_001 -->
+        <!--  -->
+        <!-- ,set _ DoorDI Fisher_house_Lullaby::Fisher_door  -state=closed -->
+        <!-- ,checkpoint _ SpawnPoint Lullaby_SP_Selen_House_001 -->
+        <!--  -->
+    <!-- quest __Lullaby_HidingMassacre -parent=Lullaby_03 -->
+        <!-- ,gather _ SensorGoTo Lullaby_GoTo_Massacre_001 -distance=-10 -show=false -->
+        <!-- ,disable _ QuestEnableGroup Lullaby_QEG_Masscare_Enemies_001 -->
+        <!-- ,disable _ SpawnBlocker Lullaby_SpawnBlocker_Massacre_001 -->
+        <!-- ,hide _ GroupingObject Lullaby_Massacre -= AppearGroup Lullaby_AG_Massacre_001 -->
+        <!-- ,checkpoint _ SpawnPoint Lullaby_SP_Massacre_001 -->
+</QuestsDefinitions>

@@ -1,0 +1,6 @@
+Description("f_menu_desaturate", "f:EDIT;e:EDIT|SPINNER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0;s:100;c:Menu;d:Desaturate;" )
+Description("f_menu_digital_noise", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0;x:1.0;s:0.0001;c:Menu;d:Digital_noise;" )
+Description("f_menu_blur", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0;x:1.0;s:0.01;c:Menu;d:Blur;" )
+Description("i_menu_option_ao", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0;x:1;s:1;c:Menu;d:Ambient occlsion option;" )
+Description("i_menu_option_mb", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0;x:1;s:1;c:Menu;d:Motion blur option;" )
+Description("i_menu_option_aa", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0;x:1;s:1;c:Menu;d:Antialiasing option;" )

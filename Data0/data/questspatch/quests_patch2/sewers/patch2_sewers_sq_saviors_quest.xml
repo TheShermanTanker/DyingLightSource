@@ -1,0 +1,208 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="sewers"
+     pxsl_line="3">
+    <!-- quest ___Saviors_instruction -parent=Saviors -glued=false -->
+        <!-- ,use _ InvisibleSwitchDI Saviors_IS_TEMP_instruction -state=on -show=false -->
+        <!-- ,checkpoint _ SpawnPoint Saviors_Portal_OldTown_TO_Sewers -->
+    <!--  -->
+    <!-- quest Saviors_04 -parent=Saviors -glued=true -leading_portal=Saviors_Portal_OldTown_TO_Sewers -->
+        <!-- ,goto <<Saviors - Enter Sewers>> SpawnPoint Saviors_Portal_OldTown_TO_Sewers -distance=10 -show=true -obj=&Saviors01_OBJ_GoToTheTunnel& -->
+            <!-- ,debugpos SpawnPoint Saviors_Portal_OldTown_TO_Sewers -->
+        <!-- ,show _ AppearGroup Saviors_AG_Human -->
+        <!-- ,show _ AppearGroup saviors_barrier -->
+        <!-- ,enable _ QuestEnableGroup Saviors_Lamp_04::QEG -->
+        <!-- ,enable _ QuestEnableGroup Saviors_Lamp_09::QEG -->
+        <!-- ,enable _ NPCLifePlace LP_saviors_bandit02 -->
+        <!-- ,enable _ NPCLifePlace LP_saviors_bandit03 -->
+        <!-- ,checkpoint _ SpawnPoint Saviors_Portal_OldTown_TO_Sewers -->
+        <!-- ,BLOCK _  -->
+            <!-- ,goto <<Rendez-vous with Smugglers>> Marker Saviors_Marker_01 -distance=4 -show=false -->
+                <!-- ,debugpos SpawnPoint Saviors_SP_01 -->
+            <!-- ,talk _ SaviorsBandit02 SaviorsBandit02_Saviors_04DLG -auto=true -show=false -->
+        <!-- ,BLOCK _ -obj=&Saviors01_OBJ_RendezVousWithSmugglers& -->
+            <!-- ,AND << move and talk >> -->
+                <!-- path -->
+                    <!-- ,wait _ 13 -->
+                    <!-- ,talk _ SaviorsBandit02 SaviorsBandit02_Saviors_06DLG -auto=true -show=false -->
+                    <!-- ,wait _ 5 -->
+                    <!-- ,talk _ SaviorsBandit02 SaviorsBandit02_Saviors_06DLG_b -auto=true -show=false -->
+                    <!-- ,wait _ 8 -->
+                    <!-- ,talk _ SaviorsBandit02 SaviorsBandit02_Saviors_06DLG_c -auto=true -show=false -->
+                    <!-- ,wait _ 8 -->
+                    <!-- ,talk _ SaviorsBandit02 SaviorsBandit02_Saviors_08DLG01 -auto=true -show=false -->
+                <!-- path -->
+                    <!-- ,move _ Marker Saviors_HumanAI_Bandit02_02 -style=walk -->
+                        <!-- ,ai HumanAI Saviors_HumanAI_Bandit02 -->
+                        <!-- ,start AINode Saviors_HumanAI_Bandit02_01 -->
+                    <!-- ,teleport _ NPCLifePlace Saviors_LP_Bandit02_02a -->
+                        <!-- ,ai HumanAI Saviors_HumanAI_Bandit02 -->
+                    <!-- ,enable _ NPCLifePlace Saviors_LP_Bandit02_02a -->
+                    <!-- -= ,enable _ NPCLifeGraph saviors_lifegraf_01 -->
+            <!-- ,checkpoint _ SpawnPoint Saviors_SP_01 -->
+        <!-- ,BLOCK _  -obj=&Saviors01_OBJ_EscapeTheSewers&   -->
+            <!-- ,goto _ SensorGoTo saviors_talk_bigroom -show=false -distance=0 -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,talk _ SaviorsBandit02 SaviorsBandit02_Saviors_08DLG02 -auto=true -show=false -->
+                <!-- path -->
+                    <!-- ,goto << Slide_Init >> SensorGoTo Enemy_rais_bossbandit -show=true -distance=0 -->
+                        <!-- ,debugpos SpawnPoint saviors_04 -->
+                    <!-- ,wait _ 2     -->
+                    <!-- ,goto _ SensorGoTo Enemy_rais_dialog    -distance=0 -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,talk << Enemy - Rais >> SaviorsBandit02 SaviorsBandit02_Saviors_08DLG03 -auto=true -show=false -->
+                        <!-- ,debugpos SpawnPoint Saviors_SP_02 -->
+                <!-- path -->
+                    <!-- ,wait _ 2 -->
+                    <!-- ,enable _ AISpawnBoxCompound Enemy_Melee_saviors_01 -->
+                    <!-- ,enable _ AISpawnBoxCompound Enemy_Melee_saviors_02 -->
+                    <!-- ,enable _ AISpawnBoxCompound Enemy_Melee_saviors_03 -->
+                <!-- path -->
+                    <!-- ,goto _ SensorGoTo Enemy_rais_03 -show=true -distance=0 -->
+            <!-- ,wait _ 7 -->
+            <!-- ,hide _ AppearGroup saviors_barrier -->
+            <!-- ,OR _ -->
+                <!-- path -->
+                    <!-- ,AND _ -->
+                        <!-- path -->
+                            <!-- ,kill _ AISpawnBoxCompound Enemy_Melee_saviors_01 -->
+                        <!-- path -->
+                            <!-- ,kill _ AISpawnBoxCompound Enemy_Melee_saviors_03 -->
+                        <!-- path -->
+                            <!-- ,kill _ AISpawnBoxCompound Enemy_Melee_saviors_02 -->
+                        <!-- path -->
+                            <!-- ,wait _ 7 -->
+                            <!-- ,enable _ FXEmitter Fx_grenade_weak_01 -->
+                            <!-- ,enable _ FXEmitter Fx_grenade_weak_02 -->
+                        <!-- path -->
+                            <!-- ,wait _ 3 -->
+                            <!-- ,enable _ FXEmitter Fx_grenade_weak_03 -->
+                        <!-- path -->
+                            <!-- ,wait _ 2 -->
+                            <!-- ,enable _ QuestEnableGroup saviors_covergroup -->
+                <!-- path -->
+                    <!-- ,goto _ SensorGoTo saviors_or -distance=0 -show=false  -->
+            <!-- ,wait _ 2 -->
+            <!-- ,talk _ voice2d Player_Saviors_02 -auto=true -show=false -->
+            <!-- ,goto << Lockpick >> SensorGoTo Goto_bloodroom -show=true -distance=0 -->
+                <!-- ,debugpos SpawnPoint saviors_lockpick -->
+            <!-- ,wait _ 0.5 -->
+            <!-- ,OR _ -->
+                <!-- path -->
+                    <!-- ,talk _ voice2d Player_Saviors_01 -auto=true -show=false -->
+                <!-- path -->
+                    <!-- ,goto _ MapPortal Saviors_Portal_Sewers_TO_OldTown_END -distance=1 -->
+                    <!--  -->
+                <!-- path -->
+                    <!-- ,enable _ HumanAI Saviors_HumanAI_Toby -->
+                    <!-- ,fetch_activate <<activate fetch>> HumanAI Saviors_HumanAI_Toby -activate=true -->
+                    <!-- ,fetch _ -distance=2 -->
+                        <!-- ,dest Marker Saviors_Marker_Fetch_01 -->
+                        <!-- ,o HumanAI Saviors_HumanAI_Toby -->
+                    <!-- ,fetch_activate _ HumanAI Saviors_HumanAI_Toby -activate=false -->
+                    <!-- ,disable _ HumanAI Saviors_HumanAI_Toby -->
+                    <!-- ,teleport _ NPCLifePlace Saviors_LP_Toby02 -->
+                        <!-- ,ai HumanAI Saviors_HumanAI_Toby -->
+                <!-- path -->
+                    <!-- ,wait _ 4 -->
+                    <!-- ,talk _ voice2d Toby_Saviors_05DLG01 -auto=true -show=false -->
+            <!-- ,talk _ SaviorsBandit02 SaviorsBandit02_Saviors_12DLG -->
+            <!-- ,checkpoint _ SpawnPoint Saviors_SP_02 -->
+        <!-- ,BLOCK _ -obj=&Saviors_OBJ_OpenWaterGate& -->
+            <!-- ,use <<Open Floodgate A>> PhysicalSwitchDI Saviors_IT_Valve01 -state=on -show=false -->
+                <!-- ,debugpos SpawnPoint Saviors_SP_02 -->
+            <!-- ,wait _ 1 -->
+            <!-- ,enable _ QuestEnableGroup Saviors_Lamp_01::QEG -->
+            <!-- -= ,movie _ Saviors_CIN_Grating_01::CIN_Door -->
+            <!-- ,checkpoint _ SpawnPoint Saviors_SP_02 -->
+            <!--  -->
+        <!-- ,BLOCK _ -obj=&Saviors_OBJ_FollowSmugglers& -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,goto _ Marker Saviors_Marker_Fetch_01 -distance=6 -show=false -->
+                    <!-- ,AND _ -->
+                        <!-- path -->
+                            <!-- ,move _ AINode Saviors_HumanAI_Bandit02_04 -style=walk -->
+                                <!-- ,ai HumanAI Saviors_HumanAI_Bandit02 -->
+                                <!-- ,start AINode Saviors_HumanAI_Bandit02_03 -->
+                            <!-- ,teleport _ NPCLifePlace Saviors_LP_Bandit02_02 -->
+                                <!-- ,ai HumanAI Saviors_HumanAI_Bandit02 -->
+                        <!-- path -->
+                            <!-- ,wait _ 2 -->
+                            <!-- ,move _ AINode Saviors_Node_Bandit03_04 -style=walk -->
+                                <!-- ,ai HumanAI Saviors_HumanAI_Bandit03 -->
+                                <!-- ,start AINode Saviors_Node_Bandit03_03 -->
+                            <!-- ,teleport _ NPCLifePlace Saviors_LP_Bandit03_02 -->
+                                <!-- ,ai HumanAI Saviors_HumanAI_Bandit03 -->
+                    <!-- ,talk _ SaviorsBandit02 SaviorsBandit02_Saviors_06DLG -auto=true -show=false -->
+            <!-- ,checkpoint _ SpawnPoint Saviors_SP_03 -->
+            <!--  -->
+        <!-- ,BLOCK _ -obj=&Saviors_OBJ_WaitForSmugglers& -->
+            <!-- ,gather <<Wait for Smugglers>> SensorGoTo Saviors_GoTo_Gather01 -distance=0 -show=true -->
+                <!-- ,debugpos SpawnPoint Saviors_SP_03 -->
+            <!-- -= ,movie _ Saviors_CIN_Grating_close_01::CIN_Door -->
+            <!-- ,disable _ QuestEnableGroup Saviors_Lamp_04::QEG -->
+            <!-- ,checkpoint _ SpawnPoint Saviors_SP_03 -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,teleport _ NPCLifePlace Saviors_LP_Bandit02_03 -->
+                        <!-- ,ai HumanAI Saviors_HumanAI_Bandit02 -->
+                    <!-- ,teleport _ NPCLifePlace Saviors_LP_Bandit03_03 -->
+                        <!-- ,ai HumanAI Saviors_HumanAI_Bandit03 -->
+                    <!-- ,wait _ 15 -->
+                    <!-- ,AND _ -->
+                        <!-- path -->
+                            <!-- ,move _ NPCLifePlace Saviors_LP_Bandit02_04 -style=walk -->
+                                <!-- ,ai HumanAI Saviors_HumanAI_Bandit02 -->
+                            <!-- ,teleport _ NPCLifePlace Saviors_LP_Bandit02_04 -->
+                                <!-- ,ai HumanAI Saviors_HumanAI_Bandit02 -->
+                        <!-- path -->
+                            <!-- ,wait _ 2 -->
+                            <!-- ,move _ NPCLifePlace Saviors_LP_Bandit03_04 -style=walk -->
+                                <!-- ,ai HumanAI Saviors_HumanAI_Bandit03 -->
+                            <!-- ,teleport _ NPCLifePlace Saviors_LP_Bandit03_04 -->
+                                <!-- ,ai HumanAI Saviors_HumanAI_Bandit03 -->
+                    <!-- ,talk _ SaviorsBandit02 SaviorsBandit02_Saviors_08DLG01 -auto=true -show=false -->
+                    <!-- ,talk _ SaviorsBandit03 SaviorsBandit03_Saviors_08DLG02 -auto=true -show=false -->
+                    <!-- ,talk _ SaviorsBandit02 SaviorsBandit02_Saviors_08DLG03 -auto=true -show=false -->
+                    <!-- ,talk _ SaviorsBandit03 SaviorsBandit03_Saviors_08DLG04 -auto=true -show=false -->
+            <!-- ,checkpoint _ SpawnPoint Saviors_SP_03 -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,wait _ 1 -->
+                    <!-- ,enable _ QuestEnableGroup Saviors_Lamp_06::QEG -->
+                    <!-- -= ,movie _ Saviors_CIN_Grating_06::CIN_Door -->
+                <!-- path -->
+                    <!-- ,wait _ 2 -->
+                    <!-- ,enable _ QuestEnableGroup Saviors_Lamp_07::QEG -->
+                    <!-- -= ,movie _ Saviors_CIN_Grating_07::CIN_Door -->
+                <!-- path -->
+                    <!-- ,enable _ QuestEnableGroup Saviors_QEG_ZombieSound -->
+                    <!-- ,enable _ QuestEnableGroup Saviors_QEG_Zombie01 -->
+            <!-- ,checkpoint _ SpawnPoint Saviors_SP_03 -->
+            <!--  -->
+        <!-- ,BLOCK _ -obj=&Saviors_OBJ_EscapeFromATrap& -->
+            <!-- ,goto <<Escape from a trap>> Marker Saviors_Marker_02 -distance=2 -show=false -->
+                <!-- ,debugpos SpawnPoint Saviors_SP_03 -->
+            <!-- ,hide _ HumanAI Saviors_HumanAI_Bandit03 -->
+            <!-- ,hide _ HumanAI Saviors_HumanAI_Bandit02 -->
+            <!-- ,enable _ QuestEnableGroup Saviors_QEG_Melee01 -->
+            <!-- ,use _ DamageSwitchDI Saviors_DMGS_CentGrill::DMGS_VentGrill01 -state=on -show=false -->
+            <!-- ,enable _ QuestEnableGroup Saviors_DMGS_CentGrill::QEG_VentGrill01 -->
+            <!-- ,wait _ 0.4 -->
+            <!-- ,hide _ ModelObject Saviors_DMGS_CentGrill::Model_VentGrill01 -->
+            <!-- ,goto _ Marker Saviors_Marker_03 -distance=2 -show=false -->
+            <!-- ,checkpoint _ SpawnPoint Saviors_SP_04 -->
+            <!--  -->
+        <!-- ,BLOCK _ -obj=&Saviors_OBJ_KillSmuglers& -->
+            <!-- ,kill _ AISpawnBoxCompound Saviors_SBC_01 -->
+            <!-- ,enable _ MapPortal Saviors_Portal_Sewers_TO_OldTownHistoric -->
+            <!-- ,disable _ QuestEnableGroup Saviors_QEG_Zombie01 -->
+            <!-- ,disable _ QuestEnableGroup Saviors_QEG_Melee01 -->
+            <!-- ,checkpoint _ SpawnPoint Saviors_SP_04 -->
+            <!-- ,take _ QuestInventoryItemDI Saviors_QII_Keys01 -->
+            <!-- ,enable _ DoorDI Saviors_Door_01 -->
+        <!-- ,checkpoint _ SpawnPoint Saviors_SP_04 -->
+</QuestsDefinitions>

@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PhaseTypeDefinitions>
+   <PhaseType name="AND">
+      <attribute name="reward" optional="true" type="string"/>
+      <attribute name="objective" optional="true" type="string"/>
+      <attribute name="encounter" optional="true" type="bool"/>
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <QuestObject name="SpecificLocation" quantity="*"/>
+      <path name="Path" quantity="+"/>
+   </PhaseType>
+   <PhaseType name="OR">
+      <attribute name="reward" optional="true" type="string"/>
+      <attribute name="objective" optional="true" type="string"/>
+      <attribute name="encounter" optional="true" type="bool"/>
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <QuestObject name="SpecificLocation" quantity="*"/>
+      <path name="Path" quantity="+"/>
+   </PhaseType>
+   <PhaseType name="BLOCK_BTZ">
+      <attribute name="reward" optional="true" type="string"/>
+      <attribute name="objective" optional="true" type="string"/>
+      <attribute name="encounter" optional="true" type="bool"/>
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <QuestObject name="SpecificLocation" quantity="*"/>
+      <path name="Path" quantity="+"/>
+   </PhaseType>   
+   <PhaseType name="move_inventory">
+      <attribute name="from" optional="true" type="string"/>
+      <attribute name="to" optional="true" type="string"/>
+   </PhaseType>  
+   <PhaseType name="wait guard">
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <attribute name="time" type="float"/>
+   </PhaseType>
+   <PhaseType name="set lifeplace">
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <attribute name="desired_state" type="enum">
+         <value>on</value>
+         <value>off</value>
+      </attribute>
+      <QuestObject name="LifePlace" quantity="+"/>
+   </PhaseType>
+   <PhaseType name="set state">
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <attribute name="desired_state" type="enum">
+         <value>opened</value>
+         <value>closed</value>
+         <value>on</value>
+         <value>off</value>
+      </attribute>
+      <attribute name="remain_active" optional="true" type="bool"/>
+      <QuestObject name="Trigger" quantity="+"/>
+   </PhaseType>
+   <PhaseType name="appear">
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <attribute name="mode" type="enum">
+         <value>show</value>
+         <value>hide</value>
+      </attribute>
+      <QuestObject name="Object" quantity="+"/>
+   </PhaseType>
+   <PhaseType name="movie">
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <attribute name="movie" type="string"/>
+      <path name="PreMovie" quantity="?"/>
+      <path name="PostMovie" quantity="?"/>
+   </PhaseType>
+   <PhaseType name="sibling quests guard">
+      <attribute name="reward" optional="true" type="string"/>
+      <attribute name="objective" optional="true" type="string"/>
+      <attribute name="encounter" optional="true" type="bool"/>
+      <attribute name="show_locations" optional="true" type="bool"/>
+      <QuestObject name="SpecificLocation" quantity="*"/>
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <attribute name="required_siblings" optional="true" type="int"/>
+   </PhaseType>
+   <PhaseType name="checkpoint">
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <QuestObject name="Destination" quantity="1"/>
+   </PhaseType>
+   <PhaseType name="teleport into vehicle">
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <QuestObject name="Vehicle" quantity="1"/>
+   </PhaseType>
+   <PhaseType name="set unconscious">
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <attribute name="unconscious" optional="true" type="bool"/>
+      <QuestObject name="AI" quantity="1"/>
+   </PhaseType>
+   <PhaseType name="gather players guard">
+      <attribute name="reward" optional="true" type="string"/>
+      <attribute name="objective" optional="true" type="string"/>
+      <attribute name="encounter" optional="true" type="bool"/>
+      <attribute name="show_locations" optional="true" type="bool"/>
+      <QuestObject name="SpecificLocation" quantity="*"/>
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <QuestObject name="Destination" quantity="1"/>
+      <attribute name="distance" optional="true" type="float"/>
+   </PhaseType>
+   <PhaseType name="go to">
+      <attribute name="reward" optional="true" type="string"/>
+      <attribute name="objective" optional="true" type="string"/>
+      <attribute name="encounter" optional="true" type="bool"/>
+      <attribute name="show_locations" optional="true" type="bool"/>
+      <QuestObject name="SpecificLocation" quantity="*"/>
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <QuestObject name="Destination" quantity="1"/>
+      <attribute name="distance" optional="true" type="float"/>
+   </PhaseType>
+   <PhaseType name="escort">
+      <attribute name="reward" optional="true" type="string"/>
+      <attribute name="objective" optional="true" type="string"/>
+      <attribute name="encounter" optional="true" type="bool"/>
+      <attribute name="show_locations" optional="true" type="bool"/>
+      <QuestObject name="SpecificLocation" quantity="*"/>
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <QuestObject name="Destination" quantity="1"/>
+      <attribute name="distance" optional="true" type="float"/>
+      <QuestObject name="AI" quantity="1"/>
+      <QuestObject name="Node" quantity="?"/>
+      <attribute name="escort_nearby_distance" optional="true" type="float"/>
+      <attribute name="escort_too_far_distance" optional="true" type="float"/>
+      <attribute name="mode" optional="true" type="enum">
+         <value>follow</value>
+         <value>lead</value>
+      </attribute>
+      <attribute name="move_style" optional="true" type="enum">
+         <value>walk</value>
+         <value>run</value>
+      </attribute>
+   </PhaseType>
+   <PhaseType name="carry">
+      <attribute name="reward" optional="true" type="string"/>
+      <attribute name="objective" optional="true" type="string"/>
+      <attribute name="encounter" optional="true" type="bool"/>
+      <attribute name="show_locations" optional="true" type="bool"/>
+      <QuestObject name="SpecificLocation" quantity="*"/>
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <QuestObject name="Destination" quantity="1"/>
+      <attribute name="distance" optional="true" type="float"/>
+      <QuestObject name="AI" quantity="1"/>
+      <QuestObject name="Node" quantity="?"/>
+      <attribute name="getin_distance" optional="true" type="float"/>
+   </PhaseType>
+   <PhaseType name="drive ai">
+      <attribute name="reward" optional="true" type="string"/>
+      <attribute name="objective" optional="true" type="string"/>
+      <attribute name="encounter" optional="true" type="bool"/>
+      <attribute name="show_locations" optional="true" type="bool"/>
+      <QuestObject name="SpecificLocation" quantity="*"/>
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <QuestObject name="Destination" quantity="1"/>
+      <attribute name="distance" optional="true" type="float"/>
+      <QuestObject name="AI" quantity="1"/>
+      <QuestObject name="Node" quantity="?"/>
+      <attribute name="mode" optional="true" type="enum">
+         <value>normal</value>
+         <value>chasing_player</value>
+         <value>chased_by_player</value>
+      </attribute>
+      <attribute name="wait_for_players" optional="true" type="bool"/>
+      <QuestObject name="Vehicle" quantity="1"/>
+   </PhaseType>
+   <PhaseType name="move ai">
+      <attribute name="reward" optional="true" type="string"/>
+      <attribute name="objective" optional="true" type="string"/>
+      <attribute name="encounter" optional="true" type="bool"/>
+      <attribute name="show_locations" optional="true" type="bool"/>
+      <QuestObject name="SpecificLocation" quantity="*"/>
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <QuestObject name="Destination" quantity="1"/>
+      <attribute name="distance" optional="true" type="float"/>
+      <QuestObject name="AI" quantity="1"/>
+      <QuestObject name="Node" quantity="?"/>
+      <attribute name="teleport" optional="true" type="bool"/>
+      <attribute name="move_style" optional="true" type="enum">
+         <value>walk</value>
+         <value>run</value>
+      </attribute>
+   </PhaseType>
+   <PhaseType name="drive">
+      <attribute name="reward" optional="true" type="string"/>
+      <attribute name="objective" optional="true" type="string"/>
+      <attribute name="encounter" optional="true" type="bool"/>
+      <attribute name="show_locations" optional="true" type="bool"/>
+      <QuestObject name="SpecificLocation" quantity="*"/>
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <QuestObject name="Destination" quantity="1"/>
+      <attribute name="distance" optional="true" type="float"/>
+      <QuestObject name="Vehicle" quantity="1"/>
+   </PhaseType>
+   <PhaseType name="talk">
+      <attribute name="speaker" type="string"/>
+      <attribute name="reward" optional="true" type="string"/>
+      <attribute name="objective" optional="true" type="string"/>
+      <attribute name="encounter" optional="true" type="bool"/>
+      <attribute name="show_locations" optional="true" type="bool"/>
+      <QuestObject name="SpecificLocation" quantity="*"/>
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <attribute name="group" type="string"/>
+      <attribute name="auto_start" optional="true" type="bool"/>
+      <attribute name="following_group" optional="true" type="string"/>
+      <attribute name="brief_reward" optional="true" type="int"/>
+   </PhaseType>
+   <PhaseType name="set dialog">
+      <attribute name="speaker" type="string"/>
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <attribute name="group" optional="true" type="string"/>
+      <attribute name="subtitles" optional="true" type="bool"/>
+   </PhaseType>
+   <PhaseType name="set reward">
+      <attribute name="speaker" optional="true" type="string"/>
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <attribute name="item" optional="true" type="string"/>
+      <attribute name="count" optional="true" type="int"/>
+      <attribute name="item_color" optional="true" type="int"/>
+      <attribute name="item_level" optional="true" type="int"/>
+   </PhaseType>
+   <PhaseType name="bring item">
+      <attribute name="speaker" type="string"/>
+      <attribute name="reward" optional="true" type="string"/>
+      <attribute name="objective" optional="true" type="string"/>
+      <attribute name="encounter" optional="true" type="bool"/>
+      <attribute name="show_locations" optional="true" type="bool"/>
+      <QuestObject name="SpecificLocation" quantity="*"/>
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <attribute name="item_type" type="string"/>
+      <attribute name="count" optional="true" type="int"/>
+   </PhaseType>
+   <PhaseType name="use">
+      <attribute name="reward" optional="true" type="string"/>
+      <attribute name="objective" optional="true" type="string"/>
+      <attribute name="encounter" optional="true" type="bool"/>
+      <attribute name="show_locations" optional="true" type="bool"/>
+      <QuestObject name="SpecificLocation" quantity="*"/>
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <attribute name="desired_state" type="enum">
+         <value>opened</value>
+         <value>closed</value>
+         <value>on</value>
+         <value>off</value>
+      </attribute>
+      <attribute name="remain_active" optional="true" type="bool"/>
+      <QuestObject name="Trigger" quantity="+"/>
+   </PhaseType>
+   <PhaseType name="take item">
+      <attribute name="reward" optional="true" type="string"/>
+      <attribute name="objective" optional="true" type="string"/>
+      <attribute name="encounter" optional="true" type="bool"/>
+      <attribute name="show_locations" optional="true" type="bool"/>
+      <QuestObject name="SpecificLocation" quantity="*"/>
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <QuestObject name="Item" quantity="+"/>
+      <attribute name="required_count" optional="true" type="int"/>
+   </PhaseType>
+   <PhaseType name="fill container">
+      <attribute name="reward" optional="true" type="string"/>
+      <attribute name="objective" optional="true" type="string"/>
+      <attribute name="encounter" optional="true" type="bool"/>
+      <attribute name="show_locations" optional="true" type="bool"/>
+      <QuestObject name="SpecificLocation" quantity="*"/>
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <QuestObject name="Container" quantity="+"/>
+      <QuestObject name="ItemSpawner" quantity="*"/>
+   </PhaseType>
+   <PhaseType name="kill">
+      <attribute name="reward" optional="true" type="string"/>
+      <attribute name="objective" optional="true" type="string"/>
+      <attribute name="encounter" optional="true" type="bool"/>
+      <attribute name="show_locations" optional="true" type="bool"/>
+      <QuestObject name="SpecificLocation" quantity="*"/>
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <QuestObject name="Spawner" quantity="+"/>
+   </PhaseType>
+   <PhaseType name="actor dead guard">
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <QuestObject name="AI" quantity="1"/>
+   </PhaseType>
+   <PhaseType name="game over failer">
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+   </PhaseType>
+   <PhaseType name="WATCH">
+      <attribute name="reward" optional="true" type="string"/>
+      <attribute name="objective" optional="true" type="string"/>
+      <attribute name="encounter" optional="true" type="bool"/>
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <QuestObject name="SpecificLocation" quantity="*"/>
+      <path name="Path" quantity="1"/>
+      <path name="Fallback" quantity="1"/>
+   </PhaseType>
+   <PhaseType name="set chance">
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <attribute name="chance_name" type="string"/>
+      <attribute name="order" type="enum">
+         <value>start</value>
+         <value>finish</value>
+      </attribute>
+      <attribute name="order" type="string"/>
+      <attribute name="stake" type="int"/>
+   </PhaseType>
+   <PhaseType name="player control">
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <attribute name="weapon_use" optional="true" type="bool"/>
+      <attribute name="leave_vehicle" optional="true" type="bool"/>
+   </PhaseType>
+   <PhaseType name="player buff">
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <attribute name="buff" type="string"/>
+      <attribute name="remove" optional="true" type="bool"/>
+   </PhaseType>
+   <PhaseType name="tutorial">
+      <attribute name="reward" optional="true" type="string"/>
+      <attribute name="objective" optional="true" type="string"/>
+      <attribute name="encounter" optional="true" type="bool"/>
+      <attribute name="show_locations" optional="true" type="bool"/>
+      <QuestObject name="SpecificLocation" quantity="*"/>
+      <QuestObject name="DebugPlayerPosition" quantity="?"/>
+      <attribute name="tutorial_name" type="enum">
+         <value>Medkit</value>
+         <value>GrabEscape</value>
+         <value>MeleeFight</value>
+         <value>PickupWeapon</value>
+         <value>BreakDoor</value>
+         <value>Sprint</value>
+      </attribute>
+   </PhaseType>
+</PhaseTypeDefinitions>

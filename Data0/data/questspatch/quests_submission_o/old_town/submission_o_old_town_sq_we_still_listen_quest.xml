@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="old_town"
+     pxsl_line="3">
+    <!-- quest __sq_we_still_listen_before -parent=Q_Start02 -->
+        <!-- -= DEVICES -->
+        <!-- ,hide-multi _ -->
+            <!-- ,o AppearGroup sq_we_still_listen_antena1::antenna_ag_1 -->
+            <!-- ,o AppearGroup sq_we_still_listen_antena2::antenna_ag_1 -->
+            <!--  -->
+            <!-- ,o AppearGroup sq_we_still_listen_antena1::antenna_ag_2 -->
+            <!-- ,o AppearGroup sq_we_still_listen_antena2::antenna_ag_2 -->
+            <!--  -->
+        <!--  -->
+        <!-- ,disable _ QuestEnableGroup sq_we_still_listen_antena2::antenna_qeg_2 -->
+        <!-- ,enable _ QuestEnableGroup sq_we_still_listen_antena1::antenna_qeg_2 -->
+        <!--  -->
+    <!-- quest __sq_we_still_listen_set_ai -parent=sq_we_still_listen02 -->
+        <!-- ,enable _ AISpawnBoxCompound sq_we_still_listen_enemies01 -->
+        <!-- -= ,goto _ SensorGoTo sq_we_still_listen_sensorgoto1 -distance=0 -show=false -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- We Still Listen  -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- quest sq_we_still_listen01 -parent=sq_welisten -glued=false -reward_set=WeStillListen_reward -quest_giver=Loki -difficulty=hard -->
+        <!-- ,talk <<We Still Listen - START>> Loki loki_we_still_listen_USE -follow=loki_we_still_listen_INP -show=false -->
+            <!-- ,debugpos SpawnPoint sp_Loki_Newsroom_Table -->
+        <!-- ,checkpoint _ SpawnPoint sp_Loki_Newsroom_Table -->
+    <!--  -->
+        <!-- -= QUEST PHASES -->
+        <!-- ,BLOCK _ -obj=&sq_we_still_listen_OBJ_01& -->
+            <!-- ,use <<OPEN FIRST ANTENNA BOX>> InvisibleSwitchDI sq_we_still_listen_antena1::antenna_is -state=on -->
+                <!-- ,debugpos SpawnPoint sq_we_still_listen_antena1::antenna_sp -->
+            <!-- ,hide _ AppearGroup sq_we_still_listen_antena1::antenna_ag -->
+            <!-- ,show _ AppearGroup sq_we_still_listen_antena1::antenna_ag_1 -->
+            <!-- ,enable _ QuestEnableGroup sq_we_still_listen_antena1::antenna_qeg -->
+            <!-- ,use <<MOUNT FIRST ANTENNA BOX>> InvisibleSwitchDI sq_we_still_listen_antena1::antenna_is_1 -state=on -->
+                <!-- ,debugpos SpawnPoint sq_we_still_listen_antena1::antenna_sp -->
+            <!-- ,hide _ AppearGroup sq_we_still_listen_antena1::antenna_ag_1 -->
+            <!-- ,show _ AppearGroup sq_we_still_listen_antena1::antenna_ag -->
+            <!-- ,show _ AppearGroup sq_we_still_listen_antena1::antenna_ag_2 -->
+            <!-- ,disable _ QuestEnableGroup sq_we_still_listen_antena1::antenna_qeg_2 -->
+            <!-- ,enable _ QuestEnableGroup sq_we_still_listen_antena1::antenna_qeg_1 -->
+        <!-- ,radio-dialog _ voice2d Player_sq_we_still_listen_01DLG01 -->
+        <!--  -->
+        <!-- ,BLOCK _ -->
+            <!-- ,use <<OPEN SECOND ANTENNA BOX>> InvisibleSwitchDI sq_we_still_listen_antena2::antenna_is -state=on -->
+                <!-- ,debugpos SpawnPoint sq_we_still_listen_antena2::antenna_sp -->
+            <!-- ,hide _ AppearGroup sq_we_still_listen_antena2::antenna_ag -->
+            <!-- ,show _ AppearGroup sq_we_still_listen_antena2::antenna_ag_1 -->
+            <!-- ,enable _ QuestEnableGroup sq_we_still_listen_antena2::antenna_qeg -->
+            <!-- ,use <<MOUNT SECOND ANTENNA DEVICE>> InvisibleSwitchDI sq_we_still_listen_antena2::antenna_is_1 -state=on -->
+                <!-- ,debugpos SpawnPoint sq_we_still_listen_antena2::antenna_sp -->
+            <!-- ,hide _ AppearGroup sq_we_still_listen_antena2::antenna_ag_1 -->
+            <!-- ,show _ AppearGroup sq_we_still_listen_antena2::antenna_ag -->
+            <!-- ,show _ AppearGroup sq_we_still_listen_antena2::antenna_ag_2 -->
+            <!-- -= ,disable _ QuestEnableGroup sq_we_still_listen_antena2::antenna_qeg_2 -->
+            <!-- -= ,enable _ QuestEnableGroup sq_we_still_listen_antena2::antenna_qeg_1 -->
+            <!-- ,radio-dialog _ voice2d Player_sq_we_still_listen_02DLG01 -->
+            <!-- -= DIALOG - Player says that the device is out of power and he is going to the basement to turn the power on -->
+    <!--  -->
+    <!-- quest sq_we_still_listen03 -parent=sq_we_still_listen02 -glued=true -leading_portal=portal_sq_westilllisten_old_town_interior_a_to_old_town -->
+        <!--  -->
+        <!-- ,goto <<GO TO DEVICE>> Marker sq_we_still_listen_marker1 -distance=3 -->
+            <!-- ,debugpos SpawnPoint sp_sq_westilllisten_old_town_to_old_town_interior_a -->
+        <!--  -->
+        <!-- ,enable _ QuestEnableGroup sq_we_still_listen_antena2::antenna_qeg_1 -->
+        <!-- ,disable _ QuestEnableGroup sq_we_still_listen_antena1::antenna_qeg_1 -->
+        <!-- ,show _ AppearGroup sq_we_still_listen_antena1::antenna_ag_1 -->
+        <!-- ,hide _ AppearGroup sq_we_still_listen_antena1::antenna_ag -->
+        <!-- -= radio talk with Loki about device status. He lost signal from the first device and he's asking us to check it out -->
+        <!-- ,radio-dialog _ voice2d Loki_sq_we_still_listen_03DLG01 -->
+        <!-- ,wait _ 5 -->
+        <!--  -->
+        <!-- ,BLOCK _ -obj=&sq_we_still_listen_OBJ_04& -->
+        <!--  -->
+            <!-- ,goto _ SensorGoTo sq_we_still_listen_sensorgoto1 -distance=0 -->
+            <!-- ,set-lp _ NPCLifePlace sq_we_still_listen_lp2 -state=off -->
+            <!-- ,set-lp _ NPCLifePlace sq_we_still_listen_lp1 -state=off -->
+            <!-- ,kill _ AISpawnBoxCompound sq_we_still_listen_enemies01 -obj=&sq_we_still_listen_OBJ_05& -->
+        <!--  -->
+            <!-- ,use <<MOUNT FIRST ANTENNA BOX>> InvisibleSwitchDI sq_we_still_listen_antena1::antenna_is_1 -state=off -->
+                <!-- ,debugpos SpawnPoint sq_we_still_listen_antena1::antenna_sp -->
+            <!-- ,checkpoint _ SpawnPoint sq_we_still_listen_antena1::antenna_sp -->
+            <!-- ,hide _ AppearGroup sq_we_still_listen_antena1::antenna_ag_1 -->
+            <!-- ,show _ AppearGroup sq_we_still_listen_antena1::antenna_ag -->
+            <!-- ,enable _ QuestEnableGroup sq_we_still_listen_antena1::antenna_qeg_1 -->
+            <!-- ,radio-dialog _ voice2d Loki_sq_we_still_listen_05DLG01 -->
+        <!--  -->
+        <!-- ,talk <<We Still Listen - END>> Loki loki_we_still_listen_END -obj=&sq_we_still_listen_OBJ_END& -->
+            <!-- ,debugpos SpawnPoint sp_Loki_Newsroom_Table -->
+        <!--  -->
+        <!-- ,disable _ AISpawnBoxCompound sq_we_still_listen_enemies01 -->
+        <!-- ,checkpoint _ SpawnPoint sp_Loki_Newsroom_Table -->
+        <!--  -->
+        <!-- ,reward _ -->
+        <!-- ,checkpoint _ SpawnPoint sp_Loki_Newsroom_Table -->
+</QuestsDefinitions>

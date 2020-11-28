@@ -1,0 +1,62 @@
+//===================================== FPP Shield ============================================
+
+SeqTrack( "FPP_Shield_StandNoise",				"M_FPP_Stick_StandNoise.anm2", 		        0, 170, 30, 1, 0.3)
+SeqTrack( "FPP_Shield_SprintNoise", 			"M_FPP_Stick_MoveNoise.anm2",				0, 60, 45, 1, 0.5)
+SeqTrack( "FPP_Shield_MoveNoise",				"M_FPP_Stick_MoveNoise.anm2",				0, 60, 30, 1, 0.5)
+
+SeqTrack( "FPP_Shield_Stand",				    "M_FPP_Shield_Actions.anm2",                28, 88, 30, 1, 0.1)
+SeqTrackAlias( "FPP_Shield_Jump_Loop", "FPP_Shield_Stand")
+
+SeqTrack( "FPP_Shield_Attack",				    "M_FPP_Shield_Actions.anm2",                277, 293, 30, 1, 0.0)
+{
+	Event(0, SHIELD_BLOCK_HIT, -1)
+}
+SeqTrack( "FPP_Shield_AttackRest",				    "M_FPP_Shield_Actions.anm2",                293, 324, 30, 1, 0.0)
+
+SeqTrack( "FPP_Shield_Show",								"M_FPP_Shield_Actions.anm2",           0, 26, 90, 1, 0.0) // przygotowanie do ataku/bloku
+{
+	Event(0, MELEE_SWING_LEFT, -1)
+	Event(0, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_SpecialSound, "playerm1_clothes_crouch_start_XX.wav", 1, 3, "head", 1, [0,0,0], 0)
+    }	
+}
+
+SeqTrack( "FPP_Shield_TakeDamage0", 							"M_FPP_Shield_Actions.anm2",           90, 112, 30, 1, 0.1) // uderzenie w tarcze 1 
+{
+	Event(2, SHIELD_BLOCK_HIT, -1)
+}
+SeqTrack( "FPP_Shield_TakeDamage1", 							"M_FPP_Shield_Actions.anm2",           113, 135, 30, 1, 0.1) // uderzenie w tarcze 2
+{
+	Event(2, SHIELD_BLOCK_HIT, -1)
+}
+SeqTrack( "FPP_Shield_TakeDamage2", 							"M_FPP_Shield_Actions.anm2",           136, 158, 30, 1, 0.1) // uderzenie w tarcze 3
+{
+	Event(2, SHIELD_BLOCK_HIT, -1)
+}
+
+SeqTrack( "FPP_Shield_TakeDamageFinal",						"M_FPP_Shield_Actions.anm2",           166, 172, 30, 1, 0.1) // stracenie tarczy
+{
+	Event(0, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_SpecialSound, "playerm1_clothes_crouch_end_XX.wav", 1, 3, "head", 1, [0,0,0], 0)
+    }	
+}
+
+SeqTrack( "FPP_Shield_Hide",								"M_FPP_Shield_Actions.anm2",           166, 172, 90, 1, 0.1) // chowanie tarczy
+{
+	Event(0, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_SpecialSound, "playerm1_clothes_crouch_end_XX.wav", 1, 3, "head", 1, [0,0,0], 0)
+    }
+}
+
+SeqTrack( "FPP_Shield_Block",  								"M_FPP_Shield_Actions.anm2",           28, 88, 30, 1, 0.1)
+
+
+SeqTrack( "FPP_Shield_PushBackBegin",  					    	"M_FPP_Shield_StrongBlow.anm2",           0, 6, 30, 1, 0.1) 
+{
+	Event(2, SHIELD_BLOCK_HEAVY_HIT, -1)
+}
+SeqTrack( "FPP_Shield_PushBackLoop",  					    	"M_FPP_Shield_StrongBlow.anm2",           6, 15, 30, 1, 0.1) 
+SeqTrack( "FPP_Shield_PushBackEnd",  					    	"M_FPP_Shield_StrongBlow.anm2",           15, 30, 30, 1, 0.1) 

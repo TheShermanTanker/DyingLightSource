@@ -1,0 +1,22 @@
+sub ppfx()
+{
+	SetClearColor(1.0 , 0.5, 0.25, 1.0);
+
+    SetRenderTargetsView("_OPAQUE", "color depth stencil");
+    Scene("opq");
+    Scene("std");
+
+//    SetDispatchOutputView("_OPAQUE_CLR");
+    SetDispatchOutput("PRV");
+
+    SetTexture(7, "CLR");
+    SetTexture(8, "NRM");
+    SetTexture(9, "ZBUFFER");
+
+    DispatchScreen("copy_cs.mat", "std", 16, 16, 2);
+
+    SetRenderTarget("backbuffer", "color stencil depth");
+		SetTexture(16, "PRV");
+			Mesh("tri_screen.msh", "copy.mat", "std");
+
+}

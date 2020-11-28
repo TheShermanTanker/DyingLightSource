@@ -1,0 +1,1188 @@
+///////////////////////////////////////////////////////////////////////////////
+// Helper functions (common data)
+///////////////////////////////////////////////////////////////////////////////
+
+sub PlayerAnimation(string animation = "", string moveto_animation = "Stand", int axis = AXIS_X, float axis_dir = AXIS_NORMAL)
+{
+	User()
+	{
+		Animation(animation);
+		MoveToAnimation(moveto_animation);
+		StartElement("propsholder1");
+		RootElement("OffsetHelper");
+		CameraElement("FPP_Camera_Marker", axis, axis_dir);
+		ItemUseEvent(INTERACTION_TRIGGER_USE);
+		ItemAnimationEvent(INTERACTION_TRIGGER_ANIMATE_ITEM);
+		ItemAnimationSync(true);
+		PoseReleaseEvent(INTERACTION_TRIGGER_RELEASE_POSE);
+	}
+}
+
+sub ClampDeviation(float min_horz = 0.0, float max_horz = 0.0, float min_vert = 0.0, float max_vert = 0.0, float clamp_time = 0.0)
+{
+	// Commented out because of glitches ocurring at the end of interactions if the look direction has been changed.
+	//ClampDeviation(min_horz, max_horz, min_vert, max_vert, clamp_time);
+}
+
+sub ClampDeviationHSym(float horz = 0.0, float min_vert = 0.0, float max_vert = 0.0, float clamp_time = 0.2)
+{
+	use ClampDeviation(min_horz = -horz, max_horz = horz, min_vert = min_vert, max_vert = max_vert, clamp_time = clamp_time);
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Motion Builder helpers (camera forward = X)
+///////////////////////////////////////////////////////////////////////////////
+
+sub PlayerAnimationMB(string animation = "", string moveto_animation = "Stand")
+{
+	use PlayerAnimation(animation = animation, moveto_animation = moveto_animation, axis = AXIS_X, axis_dir = AXIS_NORMAL);
+}
+
+sub PlayerAnimationForActionMB(int action = 0, string animation = "", string moveto_animation = "Stand")
+{
+	Action(action)
+	{
+		Stage("Start")
+		{
+			use PlayerAnimationMB(animation = animation, moveto_animation = moveto_animation);
+			
+			Transition(SignalStageCompleted, "Finish");
+		}
+		
+		Stage("Finish")
+		{
+		}
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Max helpers (camera forward = -Y)
+///////////////////////////////////////////////////////////////////////////////
+
+sub PlayerAnimationMax(string animation = "", string moveto_animation = "Stand")
+{
+	use PlayerAnimation(animation = animation, moveto_animation = moveto_animation, axis = AXIS_Y, axis_dir = AXIS_REVERSED);
+}
+
+sub PlayerAnimationForActionMax(int action = 0, string animation = "", string moveto_animation = "Stand")
+{
+	Action(action)
+	{
+		Stage("Start")
+		{
+			use PlayerAnimationMax(animation = animation, moveto_animation = moveto_animation);
+			
+			Transition(SignalStageCompleted, "Finish");
+		}
+		
+		Stage("Finish")
+		{
+		}
+		
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+// Helper functions for certain classes of interactions
+///////////////////////////////////////////////////////////////////////////////
+
+sub SingleStageDynamicActionMax(int action = 0, string player_start = "", string item_start = "", string player_start_moveto = "", bool block_paths = false)
+{
+	Action(action)
+	{
+		Stage("Start")
+		{
+			use PlayerAnimationMax(animation = player_start, moveto_animation = player_start_moveto);
+
+			Item()
+			{
+				Animation(item_start);
+				BlockPaths(block_paths);
+			}
+			
+			Transition(SignalStageCompleted, "Finish");
+		}
+		
+		Stage("Finish")
+		{
+		}
+	}
+}
+
+sub SingleStageDynamicActionMB(int action = 0, string player_start = "", string item_start = "", string player_start_moveto = "", bool block_paths = false)
+{
+	Action(action)
+	{
+		Stage("Start")
+		{
+			use PlayerAnimationMB(animation = player_start, moveto_animation = player_start_moveto);
+
+			Item()
+			{
+				Animation(item_start);
+				BlockPaths(block_paths);
+			}
+			
+			Transition(SignalStageCompleted, "Finish");
+		}
+		
+		Stage("Finish")
+		{
+		}
+	}
+}
+
+sub SingleStageActionMax(int action = 0, string player_start = "", string item_start = "", string player_start_moveto = "")
+{
+	Action(action)
+	{
+		Stage("Start")
+		{
+			use PlayerAnimationMax(animation = player_start, moveto_animation = player_start_moveto);
+
+			Item()
+			{
+				Animation(item_start);
+			}
+			
+			Transition(SignalStageCompleted, "Finish");
+		}
+		
+		Stage("Finish")
+		{
+		}
+	}
+}
+
+sub SingleStageActionMB(int action = 0, string player_start = "", string item_start = "", string player_start_moveto = "")
+{
+	Action(action)
+	{
+		Stage("Start")
+		{
+			use PlayerAnimationMB(animation = player_start, moveto_animation = player_start_moveto);
+
+			Item()
+			{
+				Animation(item_start);
+			}
+			
+			Transition(SignalStageCompleted, "Finish");
+		}
+		
+		Stage("Finish")
+		{
+		}
+	}
+}
+
+sub SingleStageSymmetricActionMax(int action = 0, string player_start = "", string player_start_moveto = "")
+{
+	Action(action)
+	{
+		Symmetrical2D();
+		
+		Stage("Start")
+		{
+			use PlayerAnimationMax(animation = player_start, moveto_animation = player_start_moveto);
+			
+			Transition(SignalStageCompleted, "Finish");
+		}
+		
+		Stage("Finish")
+		{
+		}
+	}
+}
+
+sub SingleStageSymmetricActionMB(int action = 0, string player_start = "", string player_start_moveto = "")
+{
+	Action(action)
+	{
+		Symmetrical2D();
+		
+		Stage("Start")
+		{
+			use PlayerAnimationMB(animation = player_start, moveto_animation = player_start_moveto);
+			
+			Transition(SignalStageCompleted, "Finish");
+		}
+		
+		Stage("Finish")
+		{
+		}
+	}
+}
+
+sub SingleStageActionFailMax(int action = 0, string player_start = "", string item_start = "", string player_start_moveto = "")
+{
+	Action(action)
+	{
+		CompletionStage("Unused_Success");
+		
+		Stage("Start")
+		{
+			use PlayerAnimationMax(animation = player_start, moveto_animation = player_start_moveto);
+
+			Item()
+			{
+				Animation(item_start);
+			}
+			
+			Transition(SignalStageCompleted, "Finish");
+		}
+		
+		Stage("Unused_Success")
+		{
+		}
+		
+		Stage("Finish")
+		{
+		}
+	}
+}
+
+sub SingleStageActionFailMB(int action = 0, string player_start = "", string item_start = "", string player_start_moveto = "")
+{
+	Action(action)
+	{
+		CompletionStage("Unused_Success");
+		
+		Stage("Start")
+		{
+			use PlayerAnimationMB(animation = player_start, moveto_animation = player_start_moveto);
+
+			Item()
+			{
+				Animation(item_start);
+			}
+			
+			Transition(SignalStageCompleted, "Finish");
+		}
+		
+		Stage("Unused_Success")
+		{
+		}
+		
+		Stage("Finish")
+		{
+		}
+	}
+}
+
+sub SingleStageActionSkinChangeMax(int action = 0, string player_animation = "", string player_animation_moveto = "", string item_animation = "", string new_skin = "", string initial_skin = "")
+{
+	OnReset()
+	{
+		ChangeObjectSkin(initial_skin);
+	}
+	
+	Action(action)
+	{
+		Stage("Start")
+		{
+			use PlayerAnimationMax(animation = player_animation, moveto_animation = player_animation_moveto);
+			
+			Item()
+			{
+				Animation(item_animation);
+			}			
+			
+			OnEvent(INTERACTION_TRIGGER_SWITCH_VISUAL_STATE)
+			{
+				ChangeObjectSkin(new_skin);
+			}
+			
+			Transition(SignalStageCompleted, "Finish");
+			
+			// This section is really needed despite being the same as OnEvent as only OnEnter/OnLeave
+			// is called when object's state is changed from code e.g. quests.
+			OnLeave()
+			{
+				ChangeObjectSkin(new_skin);
+			}
+		}
+		
+		Stage("Finish")
+		{
+		}
+	}
+}
+
+sub SingleStageActionSkinChangeMB(int action = 0, string player_animation = "", string player_animation_moveto = "", string item_animation = "", string new_skin = "", string initial_skin = "")
+{
+	OnReset()
+	{
+		ChangeObjectSkin(initial_skin);
+	}
+	
+	Action(action)
+	{
+		Stage("Start")
+		{
+			use PlayerAnimationMB(animation = player_animation, moveto_animation = player_animation_moveto);
+			
+			Item()
+			{
+				Animation(item_animation);
+			}			
+			
+			OnEvent(INTERACTION_TRIGGER_SWITCH_VISUAL_STATE)
+			{
+				ChangeObjectSkin(new_skin);
+			}
+			
+			Transition(SignalStageCompleted, "Finish");
+			
+			// This section is really needed despite being the same as OnEvent as only OnEnter/OnLeave
+			// is called when object's state is changed from code e.g. quests.
+			OnLeave()
+			{
+				ChangeObjectSkin(new_skin);
+			}
+		}
+		
+		Stage("Finish")
+		{
+		}
+	}
+}
+
+sub SingleStageActionElementHidingMax(int action = 0, string player_animation = "", string player_animation_moveto = "", string item_animation = "", string element_a_name = "", string element_b_name = "")
+{
+	OnReset()
+	{
+		ShowElement(element_a_name);
+		ShowElement(element_b_name);
+	}
+	
+	Action(action)
+	{
+		Stage("Start")
+		{
+			use PlayerAnimationMax(animation = player_animation, moveto_animation = player_animation_moveto);
+			
+			Item()
+			{
+				Animation(item_animation);
+			}			
+			
+			OnEvent(INTERACTION_TRIGGER_SWITCH_VISUAL_STATE)
+			{
+				HideElement(element_a_name);
+				HideElement(element_b_name);
+			}
+			
+			Transition(SignalStageCompleted, "Finish");
+			
+			// This section is really needed despite being the same as OnEvent as only OnEnter/OnLeave
+			// is called when object's state is changed from code e.g. quests.
+			OnLeave()
+			{
+				HideElement(element_a_name);
+				HideElement(element_b_name);
+			}
+		}
+		
+		Stage("Finish")
+		{
+		}
+	}
+}
+
+sub SingleStageActionElementHidingMB(int action = 0, string player_animation = "", string player_animation_moveto = "", string item_animation = "", string element_a_name = "", string element_b_name = "")
+{
+	OnReset()
+	{
+		ShowElement(element_a_name);
+		ShowElement(element_b_name);
+	}
+	
+	Action(action)
+	{
+		Stage("Start")
+		{
+			use PlayerAnimationMB(animation = player_animation, moveto_animation = player_animation_moveto);
+			
+			Item()
+			{
+				Animation(item_animation);
+			}			
+			
+			OnEvent(INTERACTION_TRIGGER_SWITCH_VISUAL_STATE)
+			{
+				HideElement(element_a_name);
+				HideElement(element_b_name);
+			}
+			
+			Transition(SignalStageCompleted, "Finish");
+			
+			// This section is really needed despite being the same as OnEvent as only OnEnter/OnLeave
+			// is called when object's state is changed from code e.g. quests.
+			OnLeave()
+			{
+				HideElement(element_a_name);
+				HideElement(element_b_name);
+			}
+		}
+		
+		Stage("Finish")
+		{
+		}
+	}
+}
+
+sub MinigameActionMB(int action = 0, string minigame = "MinigameButtonTapping", string start_player = "", string start_player_moveto = "", string start_item = "", string idle_player = "", string idle_item = "", string struggle_player = "", string struggle_item = "", string success_player = "", string success_item = "")
+{
+	Action(action)
+	{
+		CompletionStage("Success");
+	
+		HandlerDefinition("Minigame", minigame);
+	
+		Stage("Start")
+		{
+			use PlayerAnimationMB(animation = start_player, moveto_animation = start_player_moveto);
+			
+			Item()
+			{
+				Animation(start_item);
+			}
+			
+			Transition(SignalStageCompleted, "Idle");
+		}
+		
+		Stage("Idle")
+		{
+			Handler("Minigame");
+		
+			use PlayerAnimationMB(animation = idle_player);
+			
+			Item()
+			{
+				Animation(idle_item);
+			}
+			
+			Transition(SignalGameInteracting, "Struggle");
+		}
+		
+		Stage("Struggle")
+		{
+			Handler("Minigame");
+		
+			use PlayerAnimationMB(animation = struggle_player);
+		
+			Item()
+			{
+				Animation(struggle_item);
+			}
+		
+			Transition(SignalGameIdle, "Idle");
+			Transition(SignalStageCompleted, "Success");
+		}
+		
+		Stage("Success")
+		{
+			use PlayerAnimationMB(animation = success_player);
+
+			Item()
+			{
+				Animation(success_item);
+			}
+			
+			Transition(SignalStageCompleted, "Finish");
+		}
+		
+		Stage("Finish")
+		{
+		}
+	}
+}
+
+sub MinigameActionMax(int action = 0, string minigame = "MinigameButtonTapping", string start_player = "", string start_player_moveto = "", string start_item = "", string idle_player = "", string idle_item = "", string struggle_player = "", string struggle_item = "", string success_player = "", string success_item = "")
+{
+	Action(action)
+	{
+		CompletionStage("Success");
+	
+		HandlerDefinition("Minigame", minigame);
+	
+		Stage("Start")
+		{
+			use PlayerAnimationMax(animation = start_player, moveto_animation = start_player_moveto);
+			
+			Item()
+			{
+				Animation(start_item);
+			}
+			
+			Transition(SignalStageCompleted, "Idle");
+		}
+		
+		Stage("Idle")
+		{
+			Handler("Minigame");
+		
+			use PlayerAnimationMax(animation = idle_player);
+			
+			Item()
+			{
+				Animation(idle_item);
+			}
+			
+			Transition(SignalGameInteracting, "Struggle");
+		}
+		
+		Stage("Struggle")
+		{
+			Handler("Minigame");
+		
+			use PlayerAnimationMax(animation = struggle_player);
+		
+			Item()
+			{
+				Animation(struggle_item);
+			}
+		
+			Transition(SignalGameIdle, "Idle");
+			Transition(SignalStageCompleted, "Success");
+		}
+		
+		Stage("Success")
+		{
+			use PlayerAnimationMax(animation = success_player);
+
+			Item()
+			{
+				Animation(success_item);
+			}
+			
+			Transition(SignalStageCompleted, "Finish");
+		}
+		
+		Stage("Finish")
+		{
+		}
+	}
+}
+
+sub MinigameActionWithElementHidingMax(int action = 0, string minigame = "MinigameButtonTapping", string start_player = "", string start_player_moveto = "", string start_item = "", string idle_player = "", string idle_item = "", string struggle_player = "", string struggle_item = "", string success_player = "", string success_item = "", string item_element_to_hide = "")
+{
+	Action(action)
+	{
+		CompletionStage("Success");
+	
+		HandlerDefinition("Minigame", minigame);
+	
+		Stage("Start")
+		{
+			use PlayerAnimationMax(animation = start_player, moveto_animation = start_player_moveto);
+			
+			Item()
+			{
+				Animation(start_item);
+			}
+			
+			Transition(SignalStageCompleted, "Idle");
+		}
+		
+		Stage("Idle")
+		{
+			Handler("Minigame");
+		
+			use PlayerAnimationMax(animation = idle_player);
+			
+			Item()
+			{
+				Animation(idle_item);
+			}
+			
+			Transition(SignalGameInteracting, "Struggle");
+		}
+		
+		Stage("Struggle")
+		{
+			Handler("Minigame");
+		
+			use PlayerAnimationMax(animation = struggle_player);
+		
+			Item()
+			{
+				Animation(struggle_item);
+			}
+		
+			Transition(SignalGameIdle, "Idle");
+			Transition(SignalStageCompleted, "Success");
+		}
+		
+		Stage("Success")
+		{
+			use PlayerAnimationMax(animation = success_player);
+
+			Item()
+			{
+				Animation(success_item);
+			}
+			
+			OnEvent(INTERACTION_TRIGGER_SWITCH_VISUAL_STATE)
+			{
+				HideElement(item_element_to_hide);
+			}
+			
+			OnLeave()
+			{
+				HideElement(item_element_to_hide);
+			}
+			
+			Transition(SignalStageCompleted, "Finish");
+		}
+		
+		Stage("Finish")
+		{
+		}
+	}
+}
+
+sub MinigameActionWithElementHidingMB(int action = 0, string minigame = "MinigameButtonTapping", string start_player = "", string start_player_moveto = "", string start_item = "", string idle_player = "", string idle_item = "", string struggle_player = "", string struggle_item = "", string success_player = "", string success_item = "", string item_element_to_hide = "")
+{
+	Action(action)
+	{
+		CompletionStage("Success");
+	
+		HandlerDefinition("Minigame", minigame);
+	
+		Stage("Start")
+		{
+			use PlayerAnimationMB(animation = start_player, moveto_animation = start_player_moveto);
+			
+			Item()
+			{
+				Animation(start_item);
+			}
+			
+			Transition(SignalStageCompleted, "Idle");
+		}
+		
+		Stage("Idle")
+		{
+			Handler("Minigame");
+		
+			use PlayerAnimationMB(animation = idle_player);
+			
+			Item()
+			{
+				Animation(idle_item);
+			}
+			
+			Transition(SignalGameInteracting, "Struggle");
+		}
+		
+		Stage("Struggle")
+		{
+			Handler("Minigame");
+		
+			use PlayerAnimationMB(animation = struggle_player);
+		
+			Item()
+			{
+				Animation(struggle_item);
+			}
+		
+			Transition(SignalGameIdle, "Idle");
+			Transition(SignalStageCompleted, "Success");
+		}
+		
+		Stage("Success")
+		{
+			use PlayerAnimationMB(animation = success_player);
+
+			Item()
+			{
+				Animation(success_item);
+			}
+			
+			OnEvent(INTERACTION_TRIGGER_SWITCH_VISUAL_STATE)
+			{
+				HideElement(item_element_to_hide);
+			}
+			
+			OnLeave()
+			{
+				HideElement(item_element_to_hide);
+			}
+			
+			Transition(SignalStageCompleted, "Finish");
+		}
+		
+		Stage("Finish")
+		{
+		}
+	}
+}
+
+sub MinigameActionWithElementShowingAndHidingMax(int action = 0, string minigame = "MinigameButtonTapping", string start_player = "", string start_player_moveto = "", string start_item = "", string idle_player = "", string idle_item = "", string struggle_player = "", string struggle_item = "", string success_player = "", string success_item = "", string item_element_to_showhide = "")
+{
+	Action(action)
+	{
+		CompletionStage("Success");
+	
+		HandlerDefinition("Minigame", minigame);
+	
+		Stage("Start")
+		{
+			use PlayerAnimationMax(animation = start_player, moveto_animation = start_player_moveto);
+			
+			Item()
+			{
+				Animation(start_item);
+			}
+			
+			OnEvent(INTERACTION_TRIGGER_SWITCH_VISUAL_STATE)
+			{
+				ShowElement(item_element_to_showhide);
+			}
+			
+			OnLeave()
+			{
+				ShowElement(item_element_to_showhide);
+			}
+			
+			Transition(SignalStageCompleted, "Idle");
+		}
+		
+		Stage("Idle")
+		{
+			Handler("Minigame");
+		
+			use PlayerAnimationMax(animation = idle_player);
+			
+			Item()
+			{
+				Animation(idle_item);
+			}
+			
+			Transition(SignalGameInteracting, "Struggle");
+		}
+		
+		Stage("Struggle")
+		{
+			Handler("Minigame");
+		
+			use PlayerAnimationMax(animation = struggle_player);
+		
+			Item()
+			{
+				Animation(struggle_item);
+			}
+		
+			Transition(SignalGameIdle, "Idle");
+			Transition(SignalStageCompleted, "Success");
+		}
+		
+		Stage("Success")
+		{
+			use PlayerAnimationMax(animation = success_player);
+
+			Item()
+			{
+				Animation(success_item);
+			}
+			
+			OnEvent(INTERACTION_TRIGGER_SWITCH_VISUAL_STATE)
+			{
+				HideElement(item_element_to_showhide);
+			}
+			
+			OnLeave()
+			{
+				HideElement(item_element_to_showhide);
+			}
+			
+			Transition(SignalStageCompleted, "Finish");
+		}
+		
+		Stage("Finish")
+		{
+		}
+	}
+}
+
+sub MinigameActionWithElementShowingAndHidingMB(int action = 0, string minigame = "MinigameButtonTapping", string start_player = "", string start_player_moveto = "", string start_item = "", string idle_player = "", string idle_item = "", string struggle_player = "", string struggle_item = "", string success_player = "", string success_item = "", string item_element_to_showhide = "")
+{
+	Action(action)
+	{
+		CompletionStage("Success");
+	
+		HandlerDefinition("Minigame", minigame);
+	
+		Stage("Start")
+		{
+			use PlayerAnimationMB(animation = start_player, moveto_animation = start_player_moveto);
+			
+			Item()
+			{
+				Animation(start_item);
+			}
+			
+			OnEvent(INTERACTION_TRIGGER_SWITCH_VISUAL_STATE)
+			{
+				ShowElement(item_element_to_showhide);
+			}
+			
+			OnLeave()
+			{
+				ShowElement(item_element_to_showhide);
+			}
+			
+			Transition(SignalStageCompleted, "Idle");
+		}
+		
+		Stage("Idle")
+		{
+			Handler("Minigame");
+		
+			use PlayerAnimationMB(animation = idle_player);
+			
+			Item()
+			{
+				Animation(idle_item);
+			}
+			
+			Transition(SignalGameInteracting, "Struggle");
+		}
+		
+		Stage("Struggle")
+		{
+			Handler("Minigame");
+		
+			use PlayerAnimationMB(animation = struggle_player);
+		
+			Item()
+			{
+				Animation(struggle_item);
+			}
+		
+			Transition(SignalGameIdle, "Idle");
+			Transition(SignalStageCompleted, "Success");
+		}
+		
+		Stage("Success")
+		{
+			use PlayerAnimationMB(animation = success_player);
+
+			Item()
+			{
+				Animation(success_item);
+			}
+			
+			OnEvent(INTERACTION_TRIGGER_SWITCH_VISUAL_STATE)
+			{
+				HideElement(item_element_to_showhide);
+			}
+			
+			OnLeave()
+			{
+				HideElement(item_element_to_showhide);
+			}
+			
+			Transition(SignalStageCompleted, "Finish");
+		}
+		
+		Stage("Finish")
+		{
+		}
+	}
+}
+
+sub SingleStageActionSkinChangeWithItemMB(int action = 0, string player_animation = "", string player_animation_moveto = "", string item_animation = "", string player_holder_element = "", string object_mesh_name = "", string object_skin_name = "", string object_animation = "", string object_holder = "", string new_skin = "", string initial_skin = "")
+{
+	OnReset()
+	{
+		DetachObject("item");
+		ChangeObjectSkin(initial_skin);
+	}
+	
+	Action(action)
+	{
+		Stage("Start")
+		{
+			OnEnter()
+			{
+				AttachObject("item", player_holder_element, object_holder)
+				{
+					NewObject("ModelObject", object_mesh_name, object_skin_name);
+					AnimateObject(object_animation);
+				}
+			}
+			
+			use PlayerAnimationMB(animation = player_animation, moveto_animation = player_animation_moveto);
+			
+			Item()
+			{
+				Animation(item_animation);
+			}
+			
+			OnEvent(INTERACTION_TRIGGER_SWITCH_VISUAL_STATE)
+			{
+				ChangeObjectSkin(new_skin);
+			}
+			
+			Transition(SignalStageCompleted, "Finish");
+			
+			// This section is really needed despite being the same as OnEvent as only OnEnter/OnLeave
+			// is called when object's state is changed from code e.g. quests.
+			OnLeave()
+			{
+				ChangeObjectSkin(new_skin);
+			}
+		}
+		
+		Stage("Finish")
+		{
+		}
+	}
+}
+
+sub SingleStageActionSkinChangeWithItemMax(int action = 0, string player_animation = "", string player_animation_moveto = "", string item_animation = "", string player_holder_element = "", string object_mesh_name = "", string object_skin_name = "", string object_animation = "", string object_holder = "", string new_skin = "", string initial_skin = "")
+{
+	OnReset()
+	{
+		DetachObject("item");
+		ChangeObjectSkin(initial_skin);
+	}
+	
+	Action(action)
+	{
+		Stage("Start")
+		{
+			OnEnter()
+			{
+				AttachObject("item", player_holder_element, object_holder)
+				{
+					NewObject("ModelObject", object_mesh_name, object_skin_name);
+					AnimateObject(object_animation);
+				}
+			}
+			
+			use PlayerAnimationMax(animation = player_animation, moveto_animation = player_animation_moveto);
+			
+			Item()
+			{
+				Animation(item_animation);
+			}
+			
+			OnEvent(INTERACTION_TRIGGER_SWITCH_VISUAL_STATE)
+			{
+				ChangeObjectSkin(new_skin);
+			}
+			
+			Transition(SignalStageCompleted, "Finish");
+			
+			// This section is really needed despite being the same as OnEvent as only OnEnter/OnLeave
+			// is called when object's state is changed from code e.g. quests.
+			OnLeave()
+			{
+				ChangeObjectSkin(new_skin);
+			}
+		}
+		
+		Stage("Finish")
+		{
+		}
+	}
+}
+
+sub SingleStageSymmetricActionWithTwoItemsMB(int action = 0, string player_animation = "", string player_animation_moveto = "", string item_animation = "", string player_holder_element_a = "", string object_a_mesh_name = "", string object_a_skin_name = "", string player_holder_element_b = "", string object_b_mesh_name = "", string object_b_skin_name = "")
+{
+	OnReset()
+	{
+		DetachObject("item_a");
+		DetachObject("item_b");
+	}
+	
+	Action(action)
+	{
+		Symmetrical2D();
+		
+		Stage("Start")
+		{
+			OnEnter()
+			{
+				AttachObject("item_a", player_holder_element_a, "")
+				{
+					NewObject("ModelObject", object_a_mesh_name, object_a_skin_name);
+				}
+				
+				AttachObject("item_b", player_holder_element_b, "")
+				{
+					NewObject("ModelObject", object_b_mesh_name, object_b_skin_name);
+				}
+			}
+			
+			use PlayerAnimationMB(animation = player_animation, moveto_animation = player_animation_moveto);
+			
+			Item()
+			{
+				Animation(item_animation);
+			}
+			
+			Transition(SignalStageCompleted, "Finish");
+		}
+		
+		Stage("Finish")
+		{
+		}
+	}
+}
+
+sub SingleStageSymmetricActionWithTwoItemsMax(int action = 0, string player_animation = "", string player_animation_moveto = "", string item_animation = "", string player_holder_element_a = "", string object_a_mesh_name = "", string object_a_skin_name = "", string object_a_holder = "", string player_holder_element_b = "", string object_b_mesh_name = "", string object_b_skin_name = "", string object_b_holder = "")
+{
+	OnReset()
+	{
+		DetachObject("item_a");
+		DetachObject("item_b");
+	}
+	
+	Action(action)
+	{
+		Symmetrical2D();
+		
+		Stage("Start")
+		{
+			OnEnter()
+			{
+				AttachObject("item_a", player_holder_element_a, object_a_holder)
+				{
+					NewObject("ModelObject", object_a_mesh_name, object_a_skin_name);
+				}
+				
+				AttachObject("item_b", player_holder_element_b, object_b_holder)
+				{
+					NewObject("ModelObject", object_b_mesh_name, object_b_skin_name);
+				}
+			}
+			
+			use PlayerAnimationMax(animation = player_animation, moveto_animation = player_animation_moveto);
+			
+			Item()
+			{
+				Animation(item_animation);
+			}
+			
+			Transition(SignalStageCompleted, "Finish");
+		}
+		
+		Stage("Finish")
+		{
+		}
+	}
+}
+
+sub CardReaderScanMB(string user_scan_animation = "", string user_scan_animation_moveto = "", string user_holder_element = "")
+{
+	use SingleStageActionSkinChangeWithItemMB(
+		action                  = TurnOn,
+		player_animation        = user_scan_animation,
+		player_animation_moveto = user_scan_animation_moveto,
+		item_animation          = "",
+		player_holder_element   = user_holder_element,
+		object_mesh_name        = "hotel_card.msh",
+		object_skin_name        = "",
+		new_skin                = "Default_green",
+		initial_skin            = "");
+}
+
+sub CircuitPanelActionMax(int action = 0, string player_animation = "", string player_animation_moveto = "", string item_animation = "", string new_skin = "")
+{
+	use SingleStageActionSkinChangeMax(action = action, player_animation = player_animation, player_animation_moveto = player_animation_moveto, item_animation = item_animation, new_skin = new_skin);
+}
+
+sub DoorUnlockingWithKeyMax(int action = 0, string user_animation = "", string user_animation_moveto = "", string key_animation = "", string user_holder_element = "")
+{
+	OnReset()
+	{
+		DetachObject("key");
+	}
+	
+	Action(action)
+	{
+		Stage("Start")
+		{
+			OnEnter()
+			{
+				AttachObject("key", user_holder_element, "")
+				{
+					NewObject("ModelObject", "keys_a_anim.msh", "");
+					AnimateObject(key_animation);
+				}
+				HideElement("keys_a", "Object", "key");
+			}
+			
+			OnEvent(INTERACTION_TRIGGER_SWITCH_VISUAL_STATE)
+			{
+				ShowElement("keys_a", "Object", "key");
+			}
+			
+			use PlayerAnimationMax(animation = user_animation, moveto_animation = user_animation_moveto);
+			
+			Transition(SignalStageCompleted, "Finish");
+		}
+		
+		Stage("Finish")
+		{
+		}
+	}
+}
+
+sub ContainerHackingMB(int action = 0, string player_animation = "", string player_animation_moveto = "", string item_animation = "", string player_holder_element = "", string object_mesh_name = "", string object_skin_name = "", string object_animation = "", string object_holder = "")
+{
+	OnReset()
+	{
+		DetachObject("item");
+	}
+	
+	Action(action)
+	{
+		Stage("Start")
+		{
+			OnEnter()
+			{
+				AttachObject("item", player_holder_element, object_holder)
+				{
+					NewObject("ModelObject", object_mesh_name, object_skin_name);
+					AnimateObject(object_animation);
+				}
+				HideElement("dlc_geiger_device_a", "Object", "item");
+			}
+			
+			use PlayerAnimationMB(animation = player_animation, moveto_animation = player_animation_moveto);
+			
+			Item()
+			{
+				Animation(item_animation);
+			}
+			
+			OnEvent(INTERACTION_TRIGGER_SWITCH_VISUAL_STATE)
+			{
+				ShowElement("dlc_geiger_device_a", "Object", "item");
+			}
+			
+			OnEvent(INTERACTION_TRIGGER_SWITCH_VISUAL_STATE_SECOND)
+			{
+				ChangeObjectSkin("HackingToolgreen", "Object", "item", object_mesh_name);
+			}
+			
+			Transition(SignalStageCompleted, "Finish");
+			
+			// This section is really needed despite being the same as OnEvent as only OnEnter/OnLeave
+			// is called when object's state is changed from code e.g. quests.
+			OnLeave()
+			{
+			}
+		}
+		
+		Stage("Finish")
+		{
+		}
+	}
+}

@@ -1,0 +1,57 @@
+!include("../Generic/ODEPhysicsRagdoll.phx")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+PhysicsParams()
+{
+    QuickStepNumIterations(15)
+    QuickStepSortingMethod(2)
+    
+    AllowContinuousCollisions(0, 0)
+    SetWaterFloat(1.7)
+    
+    SetVelsGate(0.03, 0.4)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+RagdollParams()
+{
+    Mass(10)
+    StiffenStartTime(-1)
+    ApplyForceMod(1)
+    ApplyForceAddUp(0)
+
+    BlendingOfNonPhysicalBonesTime(1)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+Bones()
+{
+    UseBone("r_thigh",   "capsule",  4)
+    UseBone("r_calf",    "capsule",  3)
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+Joints()
+{
+    // definicja jointow
+    DefineJoint("r_thigh", "r_calf",  "ball",  0,  1,  0,    1,  0,  0)
+    
+    Set3DOFStops("r_thigh r_calf", -0.15, 0.15,   -0.00, 0.20,   -0.15, 0.15,  0, 0, 0) 
+    
+    // sily tarcia stawow
+    SetFrictionForceAll(1)
+
+    // wspolczynniki dopuszczalnych bledow stopow
+    SetStopERPAll(0.3)
+
+    // wspolczynniki sprezystosci jointow po osiagnieciu stopow
+    SetStopCFMAll(0.03)
+
+    // wspolczynniki sprezystosci jointow
+    SetCFMAll(0)
+
+    // wspolczynniki tlumienia sily oddalajacej od stopu (1 - brak tlumienia, 0.5 - sila zmniejszona dwukrotnie)
+    SetFudgeFactorAll(0.1)
+}
+
+

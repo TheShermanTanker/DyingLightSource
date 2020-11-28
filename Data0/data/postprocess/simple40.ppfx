@@ -1,0 +1,140 @@
+import "main.ppfx"
+
+sub ppfx()
+{
+	int e_path = SM40;
+
+	use usermaps(e_path = e_path);
+
+	use opq_render(e_path = e_path, b_clear_depth_on = TRUE, b_clear_color_on = TRUE, b_sky_on = TRUE);
+
+	SetRenderTargetsView("_HDR_IMAGE", "");
+		SetBuffer(8, "CLR");
+		SetBuffer(9, "NRM");
+		If("f_ed_pp_gbuffer_normal_on", "f_ed_pp_gbuffer_normal_ws_on", "", "", "")
+		{
+			SetBuffer(8, "NRM");
+			If("f_ed_pp_gbuffer_normal_ws_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "gbuffer_normal_ws.mat", "std");
+			}
+		}
+			If("f_ed_pp_gbuffer_normal_ws_on", "", "", "", "not")
+			{
+				Mesh("quad_screen.msh", "copy_gamma_win.mat", "std"); //simple, gbuffer color, g-bufor color ranges
+			}
+            If("f_ed_pp_gbuffer_matid_on", "", "", "", "")
+            {
+                Mesh("quad_screen.msh", "gbuffer_matid.mat", "std");
+            }
+            If("f_ed_pp_gbuffer_roughness_on", "", "", "", "")
+            {
+                Mesh("quad_screen.msh", "gbuffer_roughness.mat", "std");
+            }
+            If("f_ed_pp_gbuffer_color_ranges_on", "", "", "", "")
+            {
+				Mesh("quad_screen.msh", "gbuffer_color_ranges.mat", "std");
+			}
+			If("f_ed_pp_gbuffer_zbuffer", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "gbuffer_zbuffer.mat", "std");
+			}
+			
+			Scene("std");//Helpers, UI
+			Scene("std2");
+	
+	SetRenderTargetsView("_OPAQUE_NRM", "stencil");
+			Scene("stencil_marker");
+
+		SetRenderTarget("1_RGBA16F_B", "");
+			SetBuffer(8, "1_RGBA16F_A");
+				Mesh("quad_screen.msh", "copy.mat", "std");
+
+		SetRenderTargetsView("_HDR_IMAGE", "");
+					SetBuffer(8, "1_RGBA16F_B");
+
+			If("f_ed_sm_0_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_0.mat", "std");
+			}
+
+			If("f_ed_sm_1_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_1.mat", "std");
+			}
+
+			If("f_ed_sm_2_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_2.mat", "std");
+			}
+
+			If("f_ed_sm_3_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_3.mat", "std");
+			}
+
+			If("f_ed_sm_4_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_4.mat", "std");
+			}
+
+			If("f_ed_sm_5_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_5.mat", "std");
+			}
+
+			If("f_ed_sm_6_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_6.mat", "std");
+			}
+
+			If("f_ed_sm_7_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_7.mat", "std");
+			}
+
+
+			If("f_ed_sm_8_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_8.mat", "std");
+			}
+
+			If("f_ed_sm_9_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_9.mat", "std");
+			}
+
+			If("f_ed_sm_10_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_10.mat", "std");
+			}
+
+			If("f_ed_sm_11_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_11.mat", "std");
+			}
+
+			If("f_ed_sm_12_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_12.mat", "std");
+			}
+
+			If("f_ed_sm_13_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_13.mat", "std");
+			}
+
+			If("f_ed_sm_14_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_14.mat", "std");
+			}
+
+			If("f_ed_sm_15_on", "", "", "", "")
+			{
+				Mesh("quad_screen.msh", "stencil_marker_15.mat", "std");
+			}
+	
+	SetRenderTarget("backbuffer", "");
+		SetBuffer(8, "1_RGBA16F_A");
+			Mesh("quad_screen.msh", "copy.mat", "std");
+}

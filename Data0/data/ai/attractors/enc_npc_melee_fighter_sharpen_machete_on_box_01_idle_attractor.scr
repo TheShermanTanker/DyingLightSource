@@ -1,0 +1,34 @@
+!include("ai_data.def")
+!include("ai_timing.def")
+
+!include("ai_goals.def")
+
+ShortHeadRotation()
+StrongAttractor()
+PeriodBtwSpecialAnims(10.34)
+SnapDist(2)
+ReleaseDist(3)
+InteractionLevel(4)
+User("Man")
+
+Usage("ENCOUNTER")
+
+Slot("", 1, 1, 1, 0, 0, 0, 0, 0, 1, 1.5)
+{
+    LockPosition()
+    DynamicMesh("wn_throwing_knife_b.msh", "L_HandHolder", "", "default", 1)
+    {
+        Scale(0.5, 0.5, 0.5)
+    }
+    DynamicMesh("wn_machete_a.msh", "R_HandHolder", "holder", "default", 1)
+    AiTypeDataSet("human")
+    {
+        Data("idle:standing:none:stand:none:none:none", -2, "m_npc_melee_fighter_sharpen_machete_on_box_01_idle", -1, 1)
+        Data("idle:standing:none:special:none:none:none", -2, "m_npc_melee_fighter_sharpen_machete_on_box_01_special", -1, 1)
+        Data("idle:standing:none:idle:none:none:none", -2, "m_npc_melee_fighter_sharpen_machete_on_box_01_idle", -1, 1)
+    }
+    DeactivateOn(GoalAttack)
+    DeactivateOn(GoalChangeAlarmLevel)
+    DiscardOn(GoalReactOnHit)
+}
+

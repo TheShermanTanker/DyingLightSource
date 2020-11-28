@@ -1,0 +1,242 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="sewers_prof"
+     pxsl_line="3">
+    <!-- quest Tourists -parent=ProjectMayhem07 -->
+        <!-- ,BLOCK _ -= -obj=<<Help Tourists get to the bunker>> -->
+            <!-- ,goto <<Tourists - START>> SpawnPoint Tourists_sp_01 -distance=100 -show=false -->
+                <!-- ,debugpos SpawnPoint Tourists_sp_01 -->
+            <!-- ,enable _ SpawnPoint Tourists_sp_01     -->
+            <!-- ,show-multi _  -->
+                <!-- ,o HumanAI Tourists_01 -->
+                <!-- ,o HumanAI Tourists_02 -->
+                <!-- ,o HumanAI Tourists_03 -->
+                <!-- ,o HumanAI Tourists_04     -->
+                <!--  -->
+            <!-- ,BLOCK _ -obj=<<Escort tourists to Bus A gate>>         -->
+                <!-- ,area ZoneBox Tourists_Start -->
+                <!-- ,use _ DoorDI Tourists_Start -state=opened -show=false -->
+                <!-- ,disable _ DoorDI Tourists_Start -->
+                <!-- ,talk _ voice2d Player_Tourists_10DLG01 -auto=true -show=false -->
+                <!-- -= ,AND _ -->
+                    <!-- -= path -->
+                        <!-- -= ,move _ AIEscortNode 01::Tourists_04Path__node_07 -style=run -->
+                            <!-- -= ,start AIEscortNode  01::Tourists_04Path__node_01 -->
+                            <!-- -= ,ai HumanAI Tourists_01 -->
+                        <!-- -= ,use-lp _ NPCLifePlace Tourists_04Path__lp_01 -wait_for_move_end=true -style=run -->
+                            <!-- -= ,ai HumanAI Tourists_01     -->
+                    <!-- -= path -->
+                        <!-- -= ,move _ AIEscortNode 02::Tourists_04Path__node_07 -style=run -->
+                            <!-- -= ,start AIEscortNode  02::Tourists_04Path__node_01 -->
+                            <!-- -= ,ai HumanAI Tourists_02 -->
+                        <!-- -= ,use-lp _ NPCLifePlace Tourists_02Path__lp_01 -wait_for_move_end=true -style=run -->
+                            <!-- -= ,ai HumanAI Tourists_02 -->
+                            <!--  -->
+                <!-- -= ,BLOCK _             -->
+                    <!-- -= ,talk _ Tourist04 Tourist04_Tourists_11DLG01 -auto=true -show=false -->
+                    <!-- -= ,wait _ 1     -->
+                    <!-- -= ,enable _ AISpawnBoxNumber Tourists_04Path__spanwer_01 -->
+                    <!-- -= ,disable _ NPCLifePlace Tourists_04Path__lp_01 -->
+                    <!-- -= ,disable _ NPCLifePlace Tourists_02Path__lp_01 -->
+                    <!-- -= ,wait _ 1 -->
+                    <!-- -= ,talk _ Tourist04 Tourist02_Tourists_12DLG02 -auto=true -show=false -->
+                    <!-- -= ,clear_area _ ClearArea Tourists_04Path__area_01 -show=false -->
+                    <!-- -= ,goto _ SensorGoTo Tourists_04Path___01 -show=false -->
+                    <!--  -->
+                <!-- -= ,AND _ -->
+                    <!-- -= path -->
+                        <!-- -= ,move _ AIEscortNode  01::Tourists_04Path__node_15 -style=run -->
+                            <!-- -= ,start AIEscortNode  01::Tourists_04Path__node_08 -->
+                            <!-- -= ,ai HumanAI Tourists_01 -->
+                    <!-- -= path -->
+                        <!-- -= ,move _ AIEscortNode  02::Tourists_04Path__node_15 -style=run -->
+                            <!-- -= ,start AIEscortNode  02::Tourists_04Path__node_08 -->
+                            <!-- -= ,ai HumanAI Tourists_02 -->
+                            <!-- -=  -->
+                <!-- -= ,goto _ SensorGoTo Tourists_04Path___02 -show=false     -->
+            <!--  -->
+                <!-- -= ,AND _ -->
+                    <!-- -= path -->
+                        <!-- -= ,move _ AIEscortNode  01::Tourists_04Path__node_28 -style=run -->
+                            <!-- -= ,start AIEscortNode  01::Tourists_04Path__node_16 -->
+                            <!-- -= ,ai HumanAI Tourists_01 -->
+                    <!-- -= path -->
+                        <!-- -= ,move _ AIEscortNode  02::Tourists_04Path__node_28 -style=run -->
+                            <!-- -= ,start AIEscortNode  02::Tourists_04Path__node_16 -->
+                            <!-- -= ,ai HumanAI Tourists_02 -->
+                <!-- ,BLOCK _     -->
+                    <!-- ,clear_area _ ClearArea Tourists_04Path__area_02 -show=false -->
+                    <!-- ,disable-multi _ -->
+                        <!-- ,o NPCLifePlace Tourists_lp_06 -->
+                        <!-- ,o NPCLifePlace Tourists_lp_08 -->
+                    <!-- ,enable _ SpawnPoint Tourists_04Path__sp_01 -->
+                    <!-- -= ,use-lp _ NPCLifePlace Tourists_04Path__lp_02 -style=walk -wait_for_move_end=false  -->
+                        <!-- -= ,ai HumanAI Tourists_01 -->
+                    <!-- -= Gather - teleporting tourists     -->
+                    <!-- ,gather <<Tourists - Gather Gate A>> PhysicalSwitchDI Tourists_Room1::Valve -distance=5   -->
+                        <!-- ,debugpos SpawnPoint Tourists_04Path__sp_01 -->
+                        <!--  -->
+                    <!-- ,teleport _ AIEscortNode Tourists_Tourist01_GateA -->
+                        <!-- ,ai HumanAI Tourists_01 -->
+                    <!-- ,teleport _ AIEscortNode Tourists_Tourist02_GateA -->
+                        <!-- ,ai HumanAI Tourists_02 -->
+                    <!-- ,use-lp _ NPCLifePlace Tourists_Tourist02_GateA -style=walk -wait_for_move_end=false -->
+                        <!-- ,ai HumanAI Tourists_02 -->
+                    <!-- ,use-lp _ NPCLifePlace Tourists_Tourist01_GateA -style=walk -wait_for_move_end=false -->
+                        <!-- ,ai HumanAI Tourists_01 -->
+                        <!--  -->
+                    <!-- ,AND _ -->
+                        <!-- path     -->
+                            <!-- ,use <<Open Bus Gate A>> PhysicalSwitchDI Tourists_Room1::Valve -state=on  -->
+                                <!-- ,debugpos SpawnPoint Tourists_04Path__sp_01 -->
+                            <!-- ,AND _ -->
+                                <!-- path -->
+                                    <!-- ,movie _ Tourists_Room1::cin_pipe_grating_a -->
+                                <!-- path -->
+                                    <!-- ,wait _ 1 -->
+                                    <!-- ,enable _ SoundEmitterSimple Tourists_Room1_Spitter -->
+                                    <!--  -->
+            <!-- ,BLOCK _ -obj=<<Clear Bus A Area>>     -->
+                <!-- ,AND _  -->
+                    <!-- path -->
+                        <!-- ,talk _ voice2d Tourist03_Tourists_04DLG01 -auto=true -show=false -->
+                    <!-- path -->
+                        <!-- ,kill-multi _ -show=false -->
+                            <!-- ,spawner AISpawnBoxNumber Tourists_Room1__spanwer_01 -->
+                            <!-- ,spawner AISpawnBoxNumber Tourists_Room1__spanwer_02 -->
+                            <!-- ,spawner AISpawnBoxNumber Tourists_Room1__spanwer_03 -->
+                            <!-- ,area ZoneBox Tourists_Room1__area_01 -->
+                        <!--  -->
+                    <!--  -->
+                <!-- ,BLOCK _ -obj=<<Escort tourists to Bus B gate>>      -->
+                    <!-- ,area ZoneBox Tourists_Room1__area_02 -->
+                    <!-- -= ,move _ AIEscortNode  01::Tourists_04Path__node_36  -style=run -->
+                        <!-- -= ,start AIEscortNode  01::Tourists_04Path__node_29 -->
+                        <!-- -= ,ai HumanAI Tourists_01                 -->
+                            <!-- -= ,AND _ -->
+                                <!-- -= path -->
+                                    <!-- -= ,move _ AIEscortNode  01::Tourists_04Path__node_51 -style=run -->
+                                        <!-- -= ,start AIEscortNode  01::Tourists_04Path__node_37 -->
+                                        <!-- -= ,ai HumanAI Tourists_01 -->
+                                <!-- -= path -->
+                                    <!-- -= ,move _ AIEscortNode  02::Tourists_04Path__node_51 -style=run -->
+                                        <!-- -= ,start AIEscortNode  02::Tourists_04Path__node_37 -->
+                                        <!-- -= ,ai HumanAI Tourists_02 -->
+                    <!-- ,enable _ SpawnPoint Tourists_sp_02    -->
+                    <!-- ,gather _ PhysicalSwitchDI Tourists_Room2::Valve -distance=5 -->
+                    <!-- ,talk _ Tourist02 Tourist02_Tourists_05DLG01 -auto=true -show=false -->
+                    <!--  -->
+                    <!-- ,teleport _ AIEscortNode Tourists_Tourist01_GateB -->
+                        <!-- ,ai HumanAI Tourists_01 -->
+                    <!-- ,teleport _ AIEscortNode Tourists_Tourist02_GateB -->
+                        <!-- ,ai HumanAI Tourists_02 -->
+                    <!-- ,use-lp _ NPCLifePlace Tourists_Tourist02_GateB -style=walk -wait_for_move_end=false -->
+                        <!-- ,ai HumanAI Tourists_02 -->
+                    <!-- ,use-lp _ NPCLifePlace Tourists_Tourist01_GateB -style=walk -wait_for_move_end=false -->
+                        <!-- ,ai HumanAI Tourists_01 -->
+                    <!--  -->
+                    <!-- ,enable _ SoundEmitterSimple Tourists_Room2_Bomber -->
+                    <!-- ,talk _ Tourist02 Tourist02_Tourists_02DLG01 -auto=true -show=false -->
+                    <!-- ,use _ PhysicalSwitchDI Tourists_Room2::Valve -state=on -->
+                    <!-- ,movie _ Tourists_Room2::cin_pipe_grating_a -->
+            <!--  -->
+            <!-- ,BLOCK _ -obj=<<Clear Bus B Area>> -->
+                <!-- ,disable _ SoundEmitterSimple Tourists_Room2_Bomber -->
+                <!-- ,kill-multi _ -show=false -->
+                    <!-- ,spawner AISpawnBoxNumber Tourists_Room2__spanwer_01 -->
+                    <!-- ,spawner AISpawnBoxNumber Tourists_Room2__spanwer_02 -->
+                    <!-- ,spawner AISpawnBoxNumber Tourists_Room2__spanwer_03 -->
+                    <!-- ,spawner AISpawnBoxNumber Tourists_Room2__spanwer_04 -->
+                    <!-- ,spawner AISpawnBoxNumber Tourists_Room2__spanwer_05 -->
+                    <!-- ,spawner AISpawnBoxNumber Tourists_Room2__spanwer_06 -->
+                    <!-- ,spawner AISpawnBoxNumber Tourists_Room2__spanwer_07 -->
+                    <!-- ,area ZoneBox Tourists_Room2__area_01 -->
+                <!-- ,enable _ SpawnPoint Tourists_sp_03     -->
+                <!--  -->
+            <!-- ,BLOCK _ -obj=<<Escort tourists to Bus C gate>>    -->
+                <!-- ,BLOCK _ -->
+                    <!-- ,area ZoneBox Tourists_Room2__area_02 -->
+                    <!-- -= ,AND _ -->
+                        <!-- -= path -->
+                            <!-- -= ,move _ AIEscortNode  01::Tourists_04Path__node_58  -style=run -->
+                                <!-- -= ,start AIEscortNode  01::Tourists_04Path__node_52 -->
+                                <!-- -= ,ai HumanAI Tourists_01 -->
+                            <!-- -= ,move _ AIEscortNode  01::Tourists_04Path__node_75  -style=run -->
+                                <!-- -= ,start AIEscortNode  01::Tourists_04Path__node_59 -->
+                                <!-- -= ,ai HumanAI Tourists_01 -->
+                        <!-- -= path -->
+                            <!-- -= ,move _ AIEscortNode  02::Tourists_04Path__node_58  -style=run -->
+                                <!-- -= ,start AIEscortNode  02::Tourists_04Path__node_52 -->
+                                <!-- -= ,ai HumanAI Tourists_02 -->
+                            <!-- -= ,move _ AIEscortNode  02::Tourists_04Path__node_75  -style=run -->
+                                <!-- -= ,start AIEscortNode  02::Tourists_04Path__node_59 -->
+                                <!-- -= ,ai HumanAI Tourists_02 -->
+                                <!-- -=  -->
+                    <!-- ,gather _ PhysicalSwitchDI Tourists_Room3::Valve -distance=5 -->
+                    <!-- ,enable _ SpawnPoint Tourists_sp_04 -->
+                    <!-- ,teleport _ AIEscortNode Tourists_Tourist01_GateC -->
+                        <!-- ,ai HumanAI Tourists_01 -->
+                    <!-- ,teleport _ AIEscortNode Tourists_Tourist02_GateC -->
+                        <!-- ,ai HumanAI Tourists_02 -->
+                    <!-- ,use-lp _ NPCLifePlace Tourists_Tourist02_GateC -style=walk -wait_for_move_end=false -->
+                        <!-- ,ai HumanAI Tourists_02 -->
+                    <!-- ,use-lp _ NPCLifePlace Tourists_Tourist01_GateC -style=walk -wait_for_move_end=false -->
+                        <!-- ,ai HumanAI Tourists_01 -->
+                    <!--  -->
+                    <!-- ,use _ PhysicalSwitchDI Tourists_Room3::Valve -state=on -->
+                    <!-- ,movie _ Tourists_Room3::cin_pipe_grating_a -->
+                    <!--  -->
+                <!-- ,BLOCK _     -->
+                    <!-- ,talk _ Tourist03 Tourist03_Tourists_09DLG01 -auto=true -show=false -->
+                    <!-- ,use _ PhysicalSwitchDI Tourists_Room3_valve -show=false -state=on -->
+                    <!-- ,area ZoneBox Tourists_Room2__area_03 -->
+                    <!-- ,movie _ cin_tourists_water -->
+                    <!-- ,kill-multi _ -->
+                        <!-- ,spawner AISpawnBoxNumber Tourists_Room3__spanwer_01 -->
+                        <!-- ,spawner AISpawnBoxNumber Tourists_Room3__spanwer_02 -->
+                        <!-- ,spawner AISpawnBoxNumber Tourists_Room3__spanwer_03 -->
+                        <!-- ,spawner AISpawnBoxNumber Tourists_Room3__spanwer_04 -->
+                        <!-- ,spawner AISpawnBoxNumber Tourists_Room3__spanwer_05 -->
+                    <!-- ,use _ DoorDI Tourists_Room3_Doors -state=opened -show=false -->
+                    <!-- -= ,AND _ -->
+                        <!-- -= path -->
+                            <!-- -= ,move _ AIEscortNode  01::Tourists_04Path__node_85  -style=run -->
+                                <!-- -= ,start AIEscortNode  01::Tourists_04Path__node_76 -->
+                                <!-- -= ,ai HumanAI Tourists_01 -->
+                        <!-- -= path         -->
+                            <!-- -= ,move _ AIEscortNode  02::Tourists_04Path__node_85  -style=run -->
+                                <!-- -= ,start AIEscortNode  02::Tourists_04Path__node_76 -->
+                                <!-- -= ,ai HumanAI Tourists_02 -->
+    <!-- quest Test -parent=AirDrop01 -->
+        <!-- ,show _ HumanAI Tourists_01 -->
+        <!-- ,teleport <<test flood>> AIEscortNode Tourists_node_01 -->
+            <!-- ,ai HumanAI Tourists_01 -->
+            <!-- ,debugpos SpawnPoint Tourists_sp_05 -->
+        <!-- ,use _ PhysicalSwitchDI Tourists_Room4::Valve -state=on -->
+        <!-- ,AND _ -->
+            <!-- path -->
+                <!-- ,wait _ 0.1 -->
+                <!-- ,enable-multi _ -->
+                    <!-- ,o FXEmitter Tourists_fx_01 -->
+                    <!-- ,o FXEmitter Tourists_fx_02 -->
+                    <!-- ,o FXEmitter Tourists_fx_03 -->
+                <!-- ,movie _ cin_tourist_water_opened -->
+            <!-- path         -->
+                <!-- ,movie _ Tourists_Room4::cin_pipe_grating_a -->
+                <!-- ,disable-multi _ -->
+                    <!-- ,o FXEmitter Tourists_fx_01 -->
+                    <!-- ,o FXEmitter Tourists_fx_02 -->
+                    <!-- ,o FXEmitter Tourists_fx_03 -->
+                <!--  -->
+        <!-- ,AND _  -->
+            <!-- path -->
+                <!-- ,move _ AIEscortNode Tourists_node_09 -style=walk -->
+                    <!-- ,ai HumanAI Tourists_01 -->
+                    <!-- ,start AIEscortNode Tourists_node_02 -->
+            <!-- path   -->
+                <!-- ,use _ DoorDI Room4 -state=opened -->
+                <!-- ,gather _ AIEscortNode Tourists_node_09 -distance=2 -show=false -->
+                <!-- ,move _ AIEscortNode Tourists_node_11 -->
+                    <!-- ,ai HumanAI Tourists_01 -->
+                    <!-- ,start AIEscortNode Tourists_node_10 -->
+</QuestsDefinitions>

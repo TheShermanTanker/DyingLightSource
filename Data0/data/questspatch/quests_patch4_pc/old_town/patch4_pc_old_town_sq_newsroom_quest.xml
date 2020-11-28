@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="old_town"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- Newsroom  -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=        -->
+    <!-- quest sq_Newsroom01 -parent=Q_FindCamden03 -reward_set=Newsroom_reward -quest_giver=Loki -difficulty=medium -->
+        <!-- ,AND <<Newsroom - START>> -->
+            <!-- path -->
+                <!-- ,talk _ Loki Loki_Newsroom_01USE -show=false -follow=Loki_Newsroom_01INP -->
+            <!-- path -->
+                <!-- ,enable _ SoundEmitterSimple Newsroom_SES_MusicLoki -->
+                <!-- ,enable _ QuestEnableGroup Newsroom_QEG_Music -->
+                <!-- ,enable _ QuestEnableGroup Newsroom_QEG_Enemies -->
+            <!-- ,debugpos SpawnPoint Newsroom_SP_01 -->
+        <!-- ,checkpoint _ SpawnPoint Newsroom_SP_01 -->
+        <!--  -->
+    <!--  -->
+    <!-- quest sq_Newsroom02 -parent=sq_Newsroom01 -glued=true -->
+        <!-- ,BLOCK _ -obj=&sq_Newsroom_OBJ_FindSource& -->
+            <!-- ,OR <<Find Police Station>> -->
+                <!-- path -->
+                    <!-- ,AND _  -->
+                        <!-- path -->
+                            <!-- ,goto _ SensorGoTo Newsroom_GoTo_PoliceStation02 -distance=0 -->
+                            <!-- ,talk _ voice2d Player_Newsroom_04DLG -auto=true -show=false -->
+                        <!-- path -->
+                            <!-- ,goto _ SensorGoTo Newsroom_GoTo_PoliceStation03 -distance=0 -->
+                            <!-- ,talk _ voice2d Player_Newsroom_05DLG -auto=true -show=false -->
+                        <!-- path -->
+                            <!-- ,goto _ SensorGoTo Newsroom_GoTo_PoliceStation01 -distance=0 -->
+                <!-- path -->
+                    <!-- ,goto _ SensorGoTo Newsroom_GoTo_PoliceStation01 -distance=0 -->
+                <!-- ,debugpos SpawnPoint Newsroom_SP_01 -->
+            <!-- ,checkpoint _ SpawnPoint Newsroom_SP_02 -->
+            <!-- ,talk <<Enter Police Station>> voice2d Player_Newsroom_06DLG01 -auto=true -show=false -->
+                <!-- ,debugpos SpawnPoint Newsroom_SP_02 -->
+            <!-- ,enable _ QuestEnableGroup Newsroom_QEG_Portal -->
+            <!-- ,checkpoint _ SpawnPoint Newsroom_SP_02 -->
+    <!--  -->
+    <!-- quest sq_Newsroom05 -parent=sq_Newsroom04 -glued=true -leading_portal=mp_Newsroom_From_Interior -->
+        <!-- ,BLOCK _ -obj=&sq_Newsroom_OBJ_TalkLoki& -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,goto _ SpawnPoint sp_Newsroom_From_Interior -distance=10 -->
+                <!-- path -->
+                    <!-- ,disable _ QuestEnableGroup Newsroom_QEG_Music -->
+                    <!-- ,disable _ QuestEnableGroup Newsroom_QEG_Enemies -->
+            <!-- ,talk <<Newsroom - END>> Loki Loki_Newsroom_01END -->
+                <!-- ,debugpos SpawnPoint Newsroom_SP_01 -->
+            <!-- ,checkpoint _ SpawnPoint Newsroom_SP_01 -->
+            <!--  -->
+        <!-- ,reward _ -->
+        <!-- ,checkpoint _ SpawnPoint Newsroom_SP_01 -->
+</QuestsDefinitions>

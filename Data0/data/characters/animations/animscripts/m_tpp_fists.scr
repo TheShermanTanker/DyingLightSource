@@ -1,0 +1,187 @@
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//++++++++++++++++++++WARNING THIS SCRIPT USES FPP ANIMS FIX THIS BEFORE RELEASE ;-)+++++++++++++++++++++++
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+//===================================== Bez broni ============================================
+//SeqTrack("TPP_Unarmed_Stand", 		            "M_TPP_Idle_Unarmed.anm2"			, 0, 753, 30, 1, 0.3)
+SeqTrack("TPP_Fist_Vigilent", "M_FPP_Unarmed_Stand_DW.anm2", 0, 10, 30, 2, 0.45)
+
+//===================================== Fight Trigger============================================
+// HORIZONTAL
+//===================================== RIGHT-LEFT ============================================
+//SeqTrack("TPP_Unarmed_Melee_Attack_RL_Begin", 			"TPP_Fists_Melee_Attack.anm2", 		0, 4, 30, 1, 0.0)
+SeqTrack("TPP_Fist_Melee_Attack_RL_Empty", 			"TPP_Fists_Melee_Attack.anm2", 		0, 15, 30, 1, 0.03)
+{
+	Event(5, MELEE_SWING_RIGHT, 1) 
+    Event(9, REPL_EARLY_ANIM_END, 1)
+}
+
+SeqTrack("TPP_Fist_Melee_Attack_RL_Empty_Rest", 			"TPP_Fists_Melee_Attack.anm2", 		15, 30, 30, 1, 0.0)
+
+//===================================== LEFT - RIGHT ============================================
+//SeqTrack("TPP_Unarmed_Melee_Attack_LR_Begin", 			"TPP_Fists_Melee_Attack.anm2", 		19, 23, 30, 1, 0.0)
+SeqTrack("TPP_Fist_Melee_Attack_LR_Empty", 			"TPP_Fists_Melee_Attack.anm2", 		52, 67, 30, 1, 0.1)
+{
+	Event(2, MELEE_SWING_RIGHT, 1) 
+    Event(9, REPL_EARLY_ANIM_END, 1)
+}
+
+SeqTrack("TPP_Fist_Melee_Attack_LR_Empty_Rest", 			"TPP_Fists_Melee_Attack.anm2", 		67, 82, 30, 1, 0.0)
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+/// Vertical
+//SeqTrackAlias("TPP_Fist_Melee_Attack_UD_Begin", 			"TPP_Unarmed_Melee_Attack_RL_Empty_Begin")
+SeqTrackAlias("TPP_Fist_Melee_Attack_UD_Empty", 				"TPP_Fist_Melee_Attack_RL_Empty")
+SeqTrackAlias("TPP_Fist_Melee_Attack_UD_Empty_Rest", 			"TPP_Fist_Melee_Attack_RL_Empty_Rest")
+
+//SeqTrackAlias("TPP_Fist_Melee_Attack_UD_Begin1", 			"TPP_Unarmed_Melee_Attack_LR_Empty_Begin")
+SeqTrackAlias("TPP_Fist_Melee_Attack_UD_Empty1", 				"TPP_Fist_Melee_Attack_LR_Empty")
+SeqTrackAlias("TPP_Fist_Melee_Attack_UD_Empty1_Rest", 			"TPP_Fist_Melee_Attack_LR_Empty_Rest")
+
+//=====================================Charge============================================
+SeqTrack("TPP_Fist_Melee_Attack_CH_RL_Begin", 			"TPP_Fists_Melee_Charge_loop.anm2"	, 37, 45, 30, 1, 0.2)
+{
+	Event(2, 0, 1)
+	{
+		PlaySound3D(GameVolumeSource_SoundPlayer, HAND_UP_LEFT_SOUND, 1, 3, "head", 1, [0, 0, 0], 1)             		
+	}	
+}
+SeqTrack("TPP_Fist_Melee_Attack_CH_RL_Loop", 			"TPP_Fists_Melee_Charge_loop.anm2"	, 0, 45, 30, 1, 0.0)
+SeqTrack("TPP_Fist_Melee_Attack_CH_RL_Empty",			"TPP_Fists_Melee_Charge_R_Attack.anm2"	, 0, 40, 30, 1, 0.1)
+{
+	Event(0, MELEE_SWING_RIGHT, 1) 
+}
+SeqTrack("TPP_Fist_Melee_Attack_CH_RL_Empty_Rest", 			"TPP_Fists_Melee_Charge_R_Attack.anm2"	, 40, 50, 30, 1, 0.1)
+
+
+SeqTrack("TPP_Fist_Melee_Attack_CH_LR_Begin", 			"TPP_Fists_Melee_Charge_loop.anm2"	, 37, 45, 30, 1, 0.2)
+{
+	Event(5, 0, 1)
+	{
+		PlaySound3D(GameVolumeSource_SoundPlayer, HAND_UP_RIGHT_SOUND, 1, 3, "head", 1, [0, 0, 0], 1)		
+	}	
+}
+SeqTrack("TPP_Fist_Melee_Attack_CH_LR_Loop", 			"TPP_Fists_Melee_Charge_loop.anm2"	, 0, 45, 30, 1, 0.0)
+SeqTrack("TPP_Fist_Melee_Attack_CH_LR_Empty",			"TPP_Fists_Melee_Charge_L_Attack.anm2"	, 0, 40, 30, 1, 0.1)
+{
+	Event(0, MELEE_SWING_RIGHT, 1) 
+}
+
+SeqTrack("TPP_Fist_Melee_Attack_CH_LR_Empty_Rest", 			"TPP_Fists_Melee_Charge_L_Attack.anm2"	, 40, 50, 30, 1, 0.1)
+
+//====================================== Exhausted =================================================
+
+SeqTrack("TPP_Fist_Melee_Attack_ExhaustedPunch", "TPP_player_attack_exhausted.anm2"	, 0, 47, 30, 1, 0.15)
+{
+	Event(0, MELEE_SWING_RIGHT, 1) 
+}
+
+SeqTrack("TPP_Fist_Melee_Attack_ExhaustedPunch_Rest", "TPP_player_attack_exhausted.anm2"	, 47, 92, 30, 1, 0.0)
+SeqTrack("TPP_Fist_Exhausted_Idle", "M_FPP_Unarmed_LowStamina_NoBreathing.anm2"	, 92, 142, 30, 1, 0.4)
+
+//===================================== Tackle ============================================
+
+SeqTrack( "TPP_Unarmed_Tackle",    		"M_TPP_Unarmed_Tackle.anm2",      0, 28, 30, 1, 0.0)
+{
+    Event(0, 0, 1)
+    {
+		PlaySound3D(GameVolumeSource_SoundPlayer, "berserker_empty_tackle.wav", 1, 3, "head", 1, [0, 0, 0], 1)        
+    }
+}
+SeqTrack( "TPP_Unarmed_Melee_Attack_Akimbo_Tackle_Empty",    		"M_TPP_Unarmed_Tackle.anm2",      0, 28, 30, 1, 0.0)
+
+//=================================================================================================
+SeqTrack( "TPP_Unarmed_Ram_Door",    		"M_TPP_Unarmed_Tackle.anm2",      0, 28, 30, 1, 0.0)
+{	
+	Event(4, 0, 1)
+    {
+		PlaySound3D(GameVolumeSource_LoudSound, "Hit_ram_XX.wav", 1, 3, "head", 1, [0, 0, 0], 1)        
+    }	
+	Event(0, CAN_WALK, 1)
+}
+
+//==================================================================================================
+
+SeqTrack("TPP_Unarmed_Melee_Throw_Aim", 			"TPP_player_attack_charge_RL.anm2"		, 0, 60, 60, 1, 0.3)
+{
+	Event(0, 0, 1)
+    {
+		PlaySound3D(GameVolumeSource_LoudSound, HAND_UP_RIGHT_SOUND, 1, 3, "head", 1, [0, 0, 0], 1)        
+    }
+}
+SeqTrack("TPP_Unarmed_Melee_Throw", 			"M_TPP_Universal_Throwing.anm2"		, 0, 30, 30, 1, 0.3)
+{
+	Event(7, PUNCH_HIT, -1)		
+	Event(0, MELEE_SWING_RIGHT, 1) 
+	Event(0, START_GIVE_DAMAGE, -1)		
+}
+
+SeqTrack( "TPP_Stick_Melee_RopeThrow_Aim",		"M_TPP_Hook_Throw.anm2",			0, 8, 30, 1, 0.2)
+{
+	Event(0, 0, 1)
+    {
+        PlaySound3D(GameVolumeSource_LoudSound, HAND_UP_RIGHT_SOUND, 1, 3, "head", 1, [0, 0, 0], 1)
+    }
+}
+
+SeqTrack( "TPP_Stick_Melee_RopeThrow",			"M_TPP_Hook_Throw.anm2",			8, 20, 30, 1, 0.0)
+{
+	Event(3, PUNCH_HIT, -1)
+	Event(3, ROPE_LOCOMOTION_ATTACH, 1)
+	Event(0, MELEE_SWING_RIGHT, 1) 
+	Event(0, START_GIVE_DAMAGE, -1)	
+	Event(0, 0, 1)
+    {
+		PlaySound3D(GameVolumeSource_LoudSound, "weapon_rope_throw.wav", 1, 3, "head", 1, [0, 0, 0], 1)        
+    }
+}
+
+
+SeqTrack( "TPP_Stick_Melee_RopeThrowBack",		"M_TPP_Hook_Throw_Return.anm2",			22, 45, 30, 1, 0.3)
+{
+	Event(0, 0, 1)
+    {
+		PlaySound3D(GameVolumeSource_LoudSound, "weapon_rope_throw_back.wav", 1, 3, "head", 1, [0, 0, 0], 1)                        
+    }
+	Event(9, PUNCH_HIT, -1)
+}
+SeqTrack( "TPP_Stick_Melee_RopeThrowBack_Rest",	"M_TPP_Hook_Throw_Return.anm2",			45, 50, 30, 1, 0.2)
+SeqTrack( "TPP_Stick_Melee_RopeClimb",		"M_TPP_Hook_Throw.anm2",			20, 110, 30, 1, 0.0)
+{
+	Event(0, 0, 1)
+    {
+		PlaySound3D(GameVolumeSource_LoudSound, "weapon_rope_throw_back.wav", 1, 3, "head", 1, [0, 0, 0], 1)                        
+    }
+	Event(9, PUNCH_HIT, -1)
+}
+
+
+SeqTracksBlend("TPP_Unarmed_Kick", 			"TPP_Fist_Exhausted_Idle", 0.5)
+SeqTracksBlend("TPP_Unarmed_KickMedium", 	"TPP_Fist_Exhausted_Idle", 0.5)
+SeqTracksBlend("TPP_Unarmed_KickLow", 		"TPP_Fist_Exhausted_Idle", 0.5)
+
+SeqTracksBlend("TPP_Unarmed_Kick", 			"TPP_Fist_Melee_Attack_ExhaustedPunch", 0.5)
+SeqTracksBlend("TPP_Unarmed_KickMedium", 	"TPP_Fist_Melee_Attack_ExhaustedPunch", 0.5)
+SeqTracksBlend("TPP_Unarmed_KickLow", 		"TPP_Fist_Melee_Attack_ExhaustedPunch", 0.5)
+
+SeqTracksBlend("TPP_Unarmed_Kick", 			"TPP_Fist_Melee_Attack_ExhaustedPunch_Rest", 0.5)
+SeqTracksBlend("TPP_Unarmed_KickMedium", 	"TPP_Fist_Melee_Attack_ExhaustedPunch_Rest", 0.5)
+SeqTracksBlend("TPP_Unarmed_KickLow", 		"TPP_Fist_Melee_Attack_ExhaustedPunch_Rest", 0.5)
+
+SeqTracksBlend("TPP_Fist_Exhausted_Idle", 	"TPP_Unarmed_Kick",			0.5)
+SeqTracksBlend("TPP_Fist_Exhausted_Idle", 	"TPP_Unarmed_KickMedium", 	0.5)
+SeqTracksBlend("TPP_Fist_Exhausted_Idle", 	"TPP_Unarmed_KickLow", 		0.5)
+
+SeqTracksBlend("TPP_Fist_Melee_Attack_ExhaustedPunch",	"TPP_Unarmed_Kick",			0.5)
+SeqTracksBlend("TPP_Fist_Melee_Attack_ExhaustedPunch", 	"TPP_Unarmed_KickMedium", 	0.5)
+SeqTracksBlend("TPP_Fist_Melee_Attack_ExhaustedPunch", 	"TPP_Unarmed_KickLow", 		0.5)
+
+SeqTracksBlend("TPP_Fist_Melee_Attack_ExhaustedPunch_Rest",	"TPP_Unarmed_Kick",			0.5)
+SeqTracksBlend("TPP_Fist_Melee_Attack_ExhaustedPunch_Rest", 	"TPP_Unarmed_KickMedium", 	0.5)
+SeqTracksBlend("TPP_Fist_Melee_Attack_ExhaustedPunch_Rest", 	"TPP_Unarmed_KickLow", 		0.5)
+
+SeqTrackAlias("TPP_Fist_Melee_Attack_UR_Empty", 			"TPP_Fist_Melee_Attack_RL_Empty")
+SeqTrackAlias("TPP_Fist_Melee_Attack_UR_Empty_Rest", 		"TPP_Fist_Melee_Attack_RL_Empty_Rest")
+SeqTrackAlias("TPP_Fist_Melee_Attack_UL_Empty", 			"TPP_Fist_Melee_Attack_LR_Empty")
+SeqTrackAlias("TPP_Fist_Melee_Attack_UL_Empty_Rest", 		"TPP_Fist_Melee_Attack_LR_Empty_Rest")

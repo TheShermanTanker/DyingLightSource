@@ -1,0 +1,72 @@
+!include("MeshPartCloth.def")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+MeshPartCloth()
+{
+//----------------------------------------------
+// bones
+//----------------------------------------------
+    BonesGridSize(1, 4)
+
+    $XDIST(f, 0.1)
+    $YDIST(f, -1)
+
+    Bone(0, 0, "bone_torso_b_01", 1, XDIST, YDIST)
+    Bone(0, 1, "bone_torso_b_02", 1, XDIST, YDIST)
+    Bone(0, 2, "",                0, XDIST, 0.08)
+    Hook(0, 3, "pelvis", [0, 0, -0.3], XDIST, YDIST)
+    
+//----------------------------------------------
+// collisions 
+//----------------------------------------------
+
+    CollisionSlide(1)
+    CollisionBounce(0)
+    CollisionSpeedMod(1)
+    
+    CollisionShapesMoveInfluence(1)
+    
+    CollisionSegmentDivision(0.1)
+    CollisionNormalAngleThreshold(180)
+    
+    NodeCollisionSphereRadius(0.1)
+    ExternalCollisionAffectMul(0)
+    
+    CollisionCapsule("l_thigh", -1, -1.3)
+    CollisionCapsule("l_calf", -1, -1.5)
+    
+//----------------------------------------------
+// spring params 
+//----------------------------------------------
+
+    Viscous(0.2)
+    AirFriction(0)
+
+    StructuralStiffness(1000, 0)
+    ShearStiffness(0, 0)
+    FlexionStiffness(0, 0)
+
+    HorizontSpringRatio(1)
+    
+    CheckLengthsStepsPerSec(0)
+
+//----------------------------------------------
+// physical params 
+//----------------------------------------------
+    
+    Mass(0.2)
+    GravityMul(1)
+    WindInfluence(1)
+
+//----------------------------------------------
+// other params
+//----------------------------------------------
+
+    SynchroWithPhysics(0)
+    EnableAPBOut(1)
+    
+    ObjectMoveMul(1)
+    AnimationMoveMul(0.4)
+}
+
+

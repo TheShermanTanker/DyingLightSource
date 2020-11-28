@@ -1,0 +1,81 @@
+!include("MeshPartCloth.def")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+MeshPartCloth()
+{
+//----------------------------------------------
+// bones
+//----------------------------------------------
+    BonesGridSize(2, 3)
+
+    $XDIST(f, -1.1)
+    $YDIST(f, -0.93)
+
+    Mode3D(1)
+    
+    Bone(0, 0, "bone_bandage_stripb_01", 1, XDIST, YDIST)
+    Bone(0, 1, "bone_bandage_stripb_02", 0, XDIST, YDIST)
+    Bone(0, 2, "bone_bandage_stripb_03", 0, XDIST, YDIST)
+    Hook(0, 3, "head", [-0.05, -0.03, 0.1], XDIST, YDIST)
+
+    Bone(1, 0, "bone_bandage_stripa_01", 1, XDIST, YDIST)
+    Bone(1, 1, "bone_bandage_stripa_02", 0, XDIST, YDIST)
+    Bone(1, 2, "bone_bandage_stripa_03", 0, XDIST, YDIST)
+    Hook(1, 3, "head", [-0.05, -0.1, 0.1], XDIST, YDIST)
+
+//----------------------------------------------
+// collisions 
+//----------------------------------------------
+
+    CollisionSlide(1)
+    CollisionSpeedMod(0.5)
+    CollisionBounce(0)
+    
+    CollisionShapesMoveInfluence(1)
+    
+    CollisionSegmentDivision(100)
+    CollisionNormalAngleThreshold(180)
+    
+    NodeCollisionSphereRadius(0.1)
+    ExternalCollisionAffectMul(0)
+    
+    CollisionSphere("head", 0.1)
+    CollisionSphere("neck1", 0.06)
+    CollisionSphere("spine3", 0.105)
+   
+//----------------------------------------------
+// spring params 
+//----------------------------------------------
+
+    Viscous(2)
+    AirFriction(1)
+
+    StructuralStiffness(2000, 4000)
+    ShearStiffness(2000, 4000)
+    FlexionStiffness(2000, 4000)
+
+    HorizontSpringRatio(0.3)
+    
+    CheckLengthsStepsPerSec(0)
+
+//----------------------------------------------
+// physical params 
+//----------------------------------------------
+    
+    Mass(0.1)
+    GravityMul(0.6)
+    WindInfluence(1)
+    WindGust(0.1, 0.3)
+
+//----------------------------------------------
+// other params
+//----------------------------------------------
+
+    SynchroWithPhysics(0)
+    EnableAPBOut(1)
+    
+    ObjectMoveMul(1)
+    AnimationMoveMul(0.7)
+}
+
+

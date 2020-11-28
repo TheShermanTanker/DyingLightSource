@@ -1,0 +1,21 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Fizyka typu Vehicle - pojazd
+// Ze skryptu korzysta CODEPhysicsVehicle.cpp 
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+!include("ODEPhysics.def")
+
+//-------------------------------------------------------------------------------------------------
+!VehicleParams()                        // parametry fizyki vehicle
+!Mass(f)                                // masa pojazdu
+!AddMainGeom(s,s)                       // dodaje geometrie kolizyjna (meshelement name, shape (na razie tylko "box"))
+                                        // gdy meshelement name == "" tworzy geometrie na podtawie extentow calego obiektu
+!AddWheel(s,f,f)	 					// dodaje kolo (meshelement name, radius (-1 auto), mass)
+!MassScale(v3)                          // skala masy pojazdu [x, y, z]
+!MassShift(v3)                          // znormalizowane w rozmiarach pojazdu przesuniecie masy (np. [0 -1 0] spowoduje przesuniecie masy pojazdu w dol o wysokosc pojazdu)
+!MainGeomsMu(f)                         // sets mu (friction param) applied only to main geoms	
+!EnableSynchroWheels(i)                 // if synchronizing of wheels will be performed while whole mesh synchronisation (ode pos/rot ---> mesh elements pos/rot)
+                                        // by default synchro wheels is turned on
+!MassInitialExtentsOverride(v3,v3)		// if specified, overrides mesh extents when calculating mass distribution; useful when extents of the mesh change
+										// at runtime
+

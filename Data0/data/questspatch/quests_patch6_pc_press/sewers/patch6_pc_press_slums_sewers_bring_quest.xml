@@ -1,0 +1,202 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="sewers"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- Bring Umair -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- disabled on Silent Review 3 -->
+    <!-- quest umair_Q01_InSewer -parent=TricklingDeath -glued=true -leading_portal=portal_Sewers_to_Slums_Pump_Station_umair1 -->
+        <!-- ,BLOCK _ -obj=&TricklingDeath_OBJ_FindFarid& -->
+            <!-- ,goto <<Chasing Farid>> SpawnPoint Bring_umair_sp_01 -distance=100 -->
+                <!-- ,debugpos SpawnPoint Bring_umair_sp_01 -->
+                <!--  -->
+            <!-- ,show _ HumanAI Farid -->
+            <!-- ,enable _ MapPortal portal_Sewers_to_Slums_Pump_Station_umair1 -->
+            <!-- ,checkpoint _ SpawnPoint Bring_umair_sp_01 -->
+        <!-- ,BLOCK _ -obj=&TricklingDeath_OBJ_StopFarid& -->
+            <!-- ,goto _ SensorGoTo Umair_escape_01 -distance=0 -show=false -->
+            <!-- ,dialog _ Farid Farid_TricklingDeath_01ONC01 -auto=true -->
+            <!-- ,disable _ NPCLifePlace Farid_LP_01 -->
+            <!-- ,move _ NPCLifePlace Farid_LP_02 -style=run -->
+                <!-- ,ai HumanAI Farid -->
+            <!-- ,set-lp _ NPCLifePlace Farid_LP_02 -state=on    -->
+            <!-- ,teleport _ NPCLifePlace Farid_LP_03 -->
+                <!-- ,ai HumanAI Farid -->
+            <!-- ,checkpoint _ SpawnPoint Bring_umair_sp_02 -->
+            <!-- ,goto _ SensorGoTo Umair_escape_02 -distance=0 -show=false -->
+            <!-- ,enable _ SoundEmitterSimple Umair_chain_lock -->
+            <!-- ,enable _ AISpawnBoxNumber Umair_2vessels -->
+            <!-- ,wait _ 1 -->
+            <!-- ,disable _ NPCLifePlace Farid_LP_03 -->
+            <!-- ,enable _ QuestEnableGroup Umair_lurker_2 -->
+            <!-- ,move _ NPCLifePlace Farid_LP_04 -style=run -->
+                <!-- ,ai HumanAI Farid -->
+            <!-- ,teleport _ NPCLifePlace Farid_LP_05 -->
+                <!-- ,ai HumanAI Farid -->
+            <!-- ,checkpoint _ SpawnPoint Bring_umair_sp_02 -->
+            <!-- ,goto _ SensorGoTo Umair_escape_03 -distance=0 -show=false -->
+            <!-- ,disable _ AISpawnBoxNumber Umair_2vessels -->
+            <!-- ,checkpoint _ SpawnPoint Bring_umair_sp_03 -->
+            <!-- ,enable _ SoundEmitterSimple Umair_chain_lock2 -->
+            <!-- ,wait _ 1 -->
+            <!-- ,disable _ NPCLifePlace Farid_LP_05 -->
+            <!-- ,move _ NPCLifePlace Farid_LP_06 -style=run -->
+                <!-- ,ai HumanAI Farid -->
+            <!-- ,teleport _ NPCLifePlace Farid_LP_07 -->
+                <!-- ,ai HumanAI Farid -->
+            <!-- ,checkpoint _ SpawnPoint Bring_umair_sp_03 -->
+            <!-- ,goto <<Before firecracker>> SensorGoTo Umair_escape_04 -distance=0 -show=false   -->
+                <!-- ,debugpos SpawnPoint Bring_umair_sp_04 -->
+            <!-- ,checkpoint _ SpawnPoint Bring_umair_sp_04 -->
+            <!-- ,AND _  -->
+                <!-- path -->
+                    <!-- ,disable _ NPCLifePlace Farid_LP_07 -->
+                    <!-- ,move _ NPCLifePlace Farid_LP_08 -style=run -->
+                        <!-- ,ai HumanAI Farid -->
+                    <!-- ,teleport _ NPCLifePlace Farid_LP_09 -->
+                        <!-- ,ai HumanAI Farid -->
+                    <!-- ,goto <<Before footbridge>> SensorGoTo BringUmair_foot_bridge_sensor -distance=0 -show=false  -->
+                    <!-- ,dialog _ Farid Farid_TricklingDeath_01ONC02 -auto=true -->
+                    <!-- ,disable _ NPCLifePlace Farid_LP_09 -->
+                    <!-- ,enable _ NPCLifePlace Farid_LP_10 -->
+                    <!-- ,wait _ 1 -->
+                    <!-- ,enable _ SoundEmitterSimple Umair_move_wood -->
+                    <!-- ,wait _ 1 -->
+                    <!-- -= ,disable _ NPCLifePlace Farid_LP_10 -->
+                    <!-- ,AND _  -->
+                        <!-- path -->
+                            <!-- ,movie _ Falling_wood_umair -->
+                            <!-- ,wait _ 2 -->
+                            <!-- -= ,enable _ SoundEmitterSimple Umair_alarm -->
+                        <!-- path -->
+                            <!-- ,disable _ NPCLifePlace Farid_LP_10 -->
+                            <!-- ,move _ NPCLifePlace Farid_LP_11 -style=run -->
+                                <!-- ,ai HumanAI Farid -->
+                            <!-- ,teleport _ NPCLifePlace Farid_LP_12 -->
+                                <!-- ,ai HumanAI Farid -->
+                        <!-- path -->
+                            <!-- ,wait _ 1.5 -->
+                            <!-- ,enable _ SoundEmitterSimple Umair_water_hit_wood -->
+                <!-- path -->
+                    <!-- ,goto _ SensorGoTo Umair_escape_05 -distance=0 -show=false -->
+                    <!-- ,enable _ SoundEmitterSimple petard_sound_01 -->
+                    <!-- ,wait _ 1 -->
+                    <!-- ,disable _ SoundEmitterSimple petard_sound_01 -->
+                    <!-- ,enable _ SoundEmitterSimple petard_sound_02 -->
+                    <!--  -->
+                    <!-- ,AND _  -->
+                        <!-- path -->
+                            <!-- ,wait _ 6 -->
+                            <!-- ,disable _ SoundEmitterSimple petard_sound_02 -->
+                        <!-- path  -->
+                            <!-- ,enable _ QuestEnableGroup petard_qeg -->
+                            <!-- ,wait _ 5 -->
+                            <!-- ,disable _ QuestEnableGroup petard_qeg -->
+                            <!-- ,hide _ ModelObject bring_umair_petard -->
+                        <!-- path -->
+                            <!-- ,enable _ FakeAITarget fake_petard -->
+                            <!-- ,wait _ 1 -->
+                            <!-- ,enable _ AISpawnBoxNumber bring_umair_spawn_vessels_01 -->
+                            <!-- ,enable _ AISpawnBoxNumber bring_umair_spawn_vessels_02 -->
+                            <!-- ,wait _ 5 -->
+                            <!-- ,disable _ FakeAITarget fake_petard -->
+                            <!-- ,disable _ AISpawnBoxNumber bring_umair_spawn_vessels_01 -->
+                            <!-- ,disable _ AISpawnBoxNumber bring_umair_spawn_vessels_02                      -->
+                <!-- path -->
+                    <!-- ,goto _ SensorGoTo umair_accident_sensor -distance=0 -show=false -->
+                    <!-- ,enable _ SoundEmitterSimple Umair_CrashSound_01 -->
+                    <!-- ,wait _ 1 -->
+                    <!-- ,dialog _ Farid Farid_TricklingDeath_01ONC03 -auto=true -->
+                    <!-- ,enable _ SoundEmitterSimple Umair_CrashSound_02 -->
+                    <!-- ,wait _ 3 -->
+                    <!-- ,disable _ SoundEmitterSimple Umair_CrashSound_01 -->
+                    <!-- ,disable _ SoundEmitterSimple Umair_CrashSound_02 -->
+                <!-- path  -->
+                    <!-- ,goto _ SensorGoTo umair_accident_sensor -distance=0 -show=false -->
+                    <!-- ,wait _ 1 -->
+            <!-- ,goto _ SensorGoTo Umair_talk_farid -distance=0 -show=false -->
+            <!-- ,dialog _ Farid Farid_TricklingDeath_01DLG01 -auto=true -->
+            <!-- ,wait _ 2 -->
+            <!-- ,talk _ Farid Player_TricklingDeath_01DLG02 -->
+            <!-- ,checkpoint _ SpawnPoint Umair_sp_02 -->
+    <!-- quest umair_Q01_InSewer2 -parent=umair_Q01_InSewer -glued=true  -->
+        <!-- ,BLOCK _     -->
+            <!-- ,AND _  -->
+                <!-- path -->
+                    <!-- ,use _ PhysicalSwitchDI Umair_valve::trigger_valve -state=on -obj=&TricklingDeath_OBJ_CutRoom& -->
+                    <!-- ,AND _  -->
+                        <!-- path -->
+                            <!-- ,movie _ Animate_valve_cut_water -->
+                        <!-- path -->
+                            <!-- ,enable _ SoundEmitterSimple Umair_metal_door_01 -->
+                            <!-- ,enable _ LampDI Umair_valve_lampdi -->
+                            <!-- ,disable _ LightObject Umair_valve_red -->
+                    <!-- ,disable _ SoundEmitterSimple Umair_metal_door_01 -->
+                    <!-- ,enable _ SoundEmitterSimple Umair_metal_door_02 -->
+                    <!-- ,disable _ QuestEnableGroup Umair_lurker_2 -->
+                    <!-- ,dialog _ Farid Farid_TricklingDeath_03DLG01 -auto=true -->
+                    <!-- -= path -->
+                    <!-- -= ,timer _ -time=90 -visualize=true -->
+                    <!-- -= ,semaphore _ -->
+                    <!-- -= path -->
+                        <!-- -= ,BLOCK _  -->
+                            <!-- -= ,wait _ 90 -->
+                            <!-- -= ,enable _ FXEmitter umair_water_gushing_big_01 -->
+                            <!-- -= ,enable _ SoundEmitterSimple Umair_Waterfall -->
+                            <!-- -= ,wait _ 3 -->
+                            <!-- -= ,disable _ QuestEnableGroup Umair_small_water_flow -->
+                            <!-- -= ,wait _ 1 -->
+                            <!-- -= ,AND _ -->
+                                <!-- -= path -->
+                                    <!-- -= ,movie _ Umair_water_rise -->
+                                    <!-- -= ,disable _ SoundEmitterSimple Umair_Water_drip -->
+                                    <!-- -= ,disable _ FXEmitter Umair_fx_relight_effect -->
+                                    <!-- -= ,disable _ LightObject Umair_redlight -->
+                                    <!-- -= -= ,disable _ SoundEmitterSimple Umair_alarm -->
+                                <!-- -= path -->
+                                    <!-- -= ,wait _ 3 -->
+                                    <!-- -= ,enable _ NPCLifePlace Farid_LP_13 -->
+                                    <!-- -= ,disable _ NPCLifePlace Farid_LP_12 -->
+                                    <!-- -= ,disable _ InvisibleSwitchDI Umair_help_farid -->
+                                    <!-- -= ,wait _ 2 -->
+                        <!-- -=  -->
+                        <!-- -= ,semaphore _ -->
+                    <!--  -->
+                    <!-- ,OR _ -obj=&TricklingDeath_OBJ_SaveFArid&  -->
+                        <!-- path -->
+                            <!-- ,use _ InvisibleSwitchDI Umair_help_farid  -->
+                        <!-- path -->
+                            <!-- ,BLOCK _  -->
+                                <!-- ,wait _ 15 -->
+                                <!-- ,enable _ FXEmitter umair_water_gushing_big_01 -->
+                                <!-- ,enable _ SoundEmitterSimple Umair_Waterfall -->
+                                <!-- ,wait _ 3 -->
+                                <!-- ,disable _ QuestEnableGroup Umair_small_water_flow -->
+                                <!-- ,wait _ 1 -->
+                                <!-- ,AND _ -->
+                                    <!-- path -->
+                                        <!-- ,movie _ Umair_water_rise -->
+                                        <!-- ,disable _ SoundEmitterSimple Umair_Water_drip -->
+                                        <!-- -= ,disable _ FXEmitter Umair_fx_relight_effect -->
+                                        <!-- -= ,disable _ LightObject Umair_redlight -->
+                                        <!-- -= ,disable _ SoundEmitterSimple Umair_alarm -->
+                                    <!-- path -->
+                                        <!-- ,wait _ 3 -->
+                                        <!-- ,enable _ NPCLifePlace Farid_LP_13 -->
+                                        <!-- ,disable _ NPCLifePlace Farid_LP_12 -->
+                                        <!-- ,disable _ InvisibleSwitchDI Umair_help_farid -->
+                                        <!-- ,wait _ 2 -->
+                                        <!-- ,dialog _ Farid Farid_TricklingDeath_END01 -auto=true                                 -->
+                                    <!--  -->
+            <!-- ,checkpoint _ SpawnPoint Umair_sp_02                 -->
+            <!-- ,BLOCK _ -obj=&TricklingDeath_OBJ_TalkUmair& -->
+                <!-- ,enable _ MapPortal portal_Sewers_to_Slums_Pump_Station_umair2 -->
+                <!-- ,goto _ MapPortal portal_Sewers_to_Slums_Pump_Station_umair2 -distance=3  -->
+                <!-- ,disable _ SoundEmitterSimple Umair_chain_lock -->
+                <!-- ,disable _ SoundEmitterSimple Umair_chain_lock2 -->
+                <!-- ,disable _ SoundEmitterSimple Umair_water_hit_wood -->
+                <!-- ,disable _ SoundEmitterSimple Umair_move_wood -->
+                <!-- ,disable _ SoundEmitterSimple Umair_metal_door_02 -->
+        <!-- ,checkpoint _ SpawnPoint Umair_sp_02 -->
+</QuestsDefinitions>

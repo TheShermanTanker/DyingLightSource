@@ -1,0 +1,134 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums_interior_a"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- Shopping Spree - VETER -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=       -->
+    <!-- quest Shoppingspree2 -parent=Shoppingspree -->
+        <!-- ,goto <<Shopping Spree - search the storage>> MapPortal portal_Interior_to_Slums_07 -distance=30 -->
+            <!-- ,debugpos SpawnPoint portal_Interior_to_Slums_07_spawn   -->
+            <!-- it was from here  -->
+    <!-- quest Shoppingspree2 -parent=Shoppingspree -glued=true -->
+        <!-- ,BLOCK _ -obj=&SQ_ShoppingSpree_OBJ_CheckMarketStorage& -->
+            <!-- ,enable _ QuestEnableGroup ShoppingSpree_biters_qeg -->
+            <!-- ,show _ HumanAI Convict_ShoppingSpree -->
+            <!-- -= ,disable _ BlackoutArea Set_light_on -->
+            <!-- -= ,set _ PhysicalSwitchDI Set_light_switch_1 -state=on -->
+            <!-- -= ,set _ PhysicalSwitchDI Set_light_vertical_lever -state=on -->
+            <!-- -= ,disable _ QuestEnableGroup magic_garden_qeg_lurkers -->
+            <!-- ,checkpoint _ SpawnPoint portal_Interior_to_Slums_07_spawn -->
+        <!-- ,AND _ -obj=&SQ_ShoppingSpree_OBJ_KillZombies&   -->
+            <!-- path  -->
+                <!-- ,kill _ AISpawnBoxNumber ShoppingSpree_biters_02 -show=false -->
+            <!-- path -->
+                <!-- ,goto _ HumanAI Convict_ShoppingSpree -distance=3 -show=false -->
+                <!-- ,AND _ -->
+                    <!-- path -->
+                        <!-- ,talk _ Convict_ShoppingSpree Convict_ShoppingSpree_PSP -auto=true -show=false -->
+                    <!-- path -->
+                        <!-- ,disable _ NPCLifePlace ShoppingSpree_Convict_staystill -->
+                        <!-- ,enable _ NPCLifePlace ShoppingSpree_Convict_staystill2 -->
+        <!-- ,checkpoint _ SpawnPoint portal_Interior_to_Slums_07_spawn -->
+        <!-- ,BLOCK _ -obj=&SQ_ShoppingSpree_OBJ_FindConvict& -->
+            <!-- ,talk _ Convict_ShoppingSpree Convict_ShoppingSpree_END01 -->
+            <!-- ,disable _ NPCLifePlace ShoppingSpree_Convict_staystill2 -->
+            <!-- ,kill-npc _ HumanAI Convict_ShoppingSpree -->
+            <!-- ,checkpoint _ SpawnPoint portal_Interior_to_Slums_07_spawn     -->
+    <!-- quest __Shoppingspree_hide_everything -parent=Shoppingspree2  -->
+        <!-- ,BLOCK _  -->
+            <!-- ,gather _ MapPortal portal_Interior_to_Slums_07 -distance=-300 -show=false -->
+            <!-- ,disable _ QuestEnableGroup ShoppingSpree_biters_qeg -->
+            <!-- ,hide _ HumanAI Convict_ShoppingSpree -->
+            <!-- ,checkpoint _ SpawnPoint portal_Interior_to_Slums_07_spawn -->
+            <!-- to there  -->
+        <!-- ,BLOCK _ -obj=&sq_shoppingspree_OBJ_FindMaiko& -->
+            <!-- ,goto <<Shopping Spree - Find Maiko>> Marker sq_shoppingspree_bandit -distance=15 -->
+                <!-- ,debugpos SpawnPoint sq_shoppingspree_maiko_sp -->
+            <!--                 -->
+            <!-- ,show _ AppearGroup sq_shoppingspree_maiko -->
+            <!-- ,teleport _ NPCLifePlace sq_shoppingspree_BanditLifeplace -->
+                <!-- ,ai HumanAI Amir -->
+            <!-- ,talk _ Amir Amir_shoppingspree_USE01 -->
+            <!-- ,AND _  -->
+                <!-- path -->
+                    <!-- ,OR _ -->
+                        <!-- path -->
+                            <!-- ,set-lp _ NPCLifePlace shopping_spree_lp_stop -state=off -->
+                            <!-- ,move _ Marker sq_shoppingspree_maiko -style=run -->
+                                <!-- ,ai HumanAI Maiko  -->
+                        <!-- path -->
+                            <!-- ,wait _ 8 -->
+                            <!--  -->
+                    <!-- ,teleport _ NPCLifePlace shopping_spree_maiko_behind_door_lp -->
+                        <!-- ,ai HumanAI Maiko -->
+                <!-- path -->
+                    <!-- ,wait _ 1 -->
+                    <!-- ,talk _ Maiko Maiko_shoppingspree_01DLG01 -auto=true -->
+                    <!-- ,wait _ 3 -->
+                    <!-- ,show _ HumanAI Racin -->
+                    <!-- ,enable _ HumanAI Racin -->
+                    <!-- ,set-lp _ NPCLifePlace shopping_spree_lp_stop_bandit -state=off -->
+                    <!-- ,OR _ -->
+                        <!-- path -->
+                            <!-- ,move _ Marker sq_shoppingspree_maiko -style=run -->
+                                <!-- ,ai HumanAI Racin -->
+                            <!-- ,talk _ Racin Racin_shoppingspree_DLG01 -auto=true -show=false   -->
+                        <!-- path -->
+                            <!-- ,wait _ 5 -->
+                    <!-- ,teleport _ NPCLifePlace shopping_spree_stand_guard -->
+                        <!-- ,ai HumanAI Racin -->
+                <!-- path -->
+                    <!-- ,wait _ 5    -->
+                    <!-- ,AND _  -->
+                        <!-- path -->
+                            <!-- ,talk _ Amir Amir_shoppingspree_DLG01 -auto=true -show=false -->
+                        <!-- path     -->
+                            <!-- ,set-lp _ NPCLifePlace sq_shoppingspree_BanditLifeplace -state=off -->
+                            <!-- ,set-lp _ NPCLifePlace sq_shoppingspree_BanditLifeplace2 -state=off -->
+                            <!-- ,enable _ DoorDI shopping_spree_door_after_maiko -->
+                            <!-- ,enable _ QuestEnableGroup sq_shoppingspree_bandit02_qeg -state=enabled -->
+            <!-- ,checkpoint _ SpawnPoint sq_shoppingspree_maiko_sp -->
+    <!-- quest sq_shoppingspree03_kill -parent=sq_shoppingspree03 -glued=true -->
+        <!-- ,BLOCK _ -obj=&sq_shoppingspree_OBJ_KillBandits& -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,kill-multi _  -->
+                        <!-- ,spawner AISpawnBoxCompound sq_shoppingspree_maiko_bandits02 -->
+                        <!-- ,spawner AISpawnBoxCompound sq_shoppingspree_maiko_bandits03 -->
+                <!-- path         -->
+                    <!-- ,goto _ Marker sq_shoppingspree_maiko -distance=5 -show=false -->
+                    <!-- ,disable _ NPCLifePlace shopping_spree_stand_guard  -->
+                <!-- path -->
+                    <!-- ,kill-npc _ HumanAI Amir  -->
+                    <!-- ,set _ DoorDI sq_shoppingspree_maikodoor2 -state=opened -->
+                    <!-- ,disable _ HumanAI Amir  -->
+                <!-- path -->
+                    <!-- ,goto _ HumanAI Racin -distance=9 -show=false -->
+                    <!-- ,talk _ Racin Racin_shoppingspree_DLG02 -auto=true -show=false -->
+                    <!-- -= ,kill-ai _ HumanAI Racin -->
+                    <!-- -= ,gather _ HumanAI Bandit_2 -distance=-7 -show=false -->
+                    <!-- -= ,hide _ HumanAI Bandit_2 -->
+                    <!-- ,disable _ HumanAI Racin -->
+                    <!--  -->
+        <!-- ,checkpoint _ SpawnPoint sq_shoppingspree_maiko_sp  -->
+        <!-- ,BLOCK _ -obj=&SQ_shoppingspree_OBJ_TalkMaiko& -->
+            <!-- ,use _ PhysicalSwitchDI shopping_spree_door_knock::trigger_knocking_01 -state=on  -->
+            <!-- ,disable _ PhysicalSwitchDI shopping_spree_door_knock::trigger_knocking_01 -->
+            <!-- ,hide _ PhysicalSwitchDI shopping_spree_door_knock::trigger_knocking_01 -->
+            <!-- ,AND _      -->
+                <!-- path -->
+                    <!-- ,talk _ Maiko Maiko_shoppingspree_02DLG01 -auto=true -show=false -->
+                    <!-- ,wait _ 1 -->
+                    <!-- ,enable _ SoundEmitterSimple shopping_spree_door_brake2 -->
+                    <!-- ,wait _ 1 -->
+                    <!-- ,enable _ SoundEmitterSimple shopping_spree_door_brake -->
+                    <!-- ,wait _ 2  -->
+                    <!-- ,disable _ SoundEmitterSimple shopping_spree_door_brake2 -->
+                    <!-- ,disable _ SoundEmitterSimple shopping_spree_door_brake -->
+                    <!-- ,enable _ DoorDI shopping_spree_open_door_after_maiko -->
+                    <!-- ,hide _ HumanAI Maiko  -->
+                    <!-- ,use _ DoorDI shopping_spree_open_door_after_maiko -show=true -->
+                    <!-- ,talk _ Maiko Maiko_shoppingspree_03DLG01 -auto=true -show=false                 -->
+            <!-- ,checkpoint _ SpawnPoint sq_shoppingspree_maiko_sp      -->
+</QuestsDefinitions>

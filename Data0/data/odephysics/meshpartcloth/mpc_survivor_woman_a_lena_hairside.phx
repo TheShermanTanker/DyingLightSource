@@ -1,0 +1,79 @@
+!include("MeshPartCloth.def")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+MeshPartCloth()
+{
+//----------------------------------------------
+// bones
+//----------------------------------------------
+    BonesGridSize(2, 3)
+
+    $XDIST(f, -1)
+    $YDIST(f, -1)
+    
+    Bone(0, 0, "bone_hairsidel_01", 1, XDIST, YDIST)
+    Bone(0, 1, "bone_hairsidel_02", 0, XDIST, YDIST)
+    Bone(0, 2, "",                  0, XDIST, YDIST)
+
+    Bone(1, 0, "bone_hairsider_01", 1, XDIST, YDIST)
+    Bone(1, 1, "bone_hairsider_02", 0, XDIST, YDIST)
+    Bone(1, 2, "",                  0, XDIST, YDIST)
+
+//----------------------------------------------
+// collisions 
+//----------------------------------------------
+
+    CollisionSlide(1)
+    CollisionBounce(0)
+    CollisionSpeedMod(1)
+    
+    CollisionShapesMoveInfluence(1)
+    
+    CollisionSegmentDivision(-1)
+    CollisionNormalAngleThreshold(180)
+    
+    NodeCollisionSphereRadius(0.1)
+    ExternalCollisionAffectMul(0)
+
+    // head
+    CollisionSphereShift("head", [-0.05, 0, 0.01], 0.08)
+
+    // left ear
+    CollisionSphereShift("head", [-0.04, 0.10, 0.01], 0.04)
+    
+//----------------------------------------------
+// spring params 
+//----------------------------------------------
+
+    Viscous(1)
+    AirFriction(1)
+
+    StructuralStiffness(10000, 0)
+    ShearStiffness(10000, 1000)
+    FlexionStiffness(10000, 5000)
+
+    HorizontSpringRatio(0)
+    
+    CheckLengthsStepsPerSec(0)
+
+//----------------------------------------------
+// physical params 
+//----------------------------------------------
+    
+    Mass(1)
+    GravityMul(0.5)
+    WindInfluence(1)
+    WindGust(0.2, 1)
+
+//----------------------------------------------
+// other params
+//----------------------------------------------
+
+    SynchroWithPhysics(0)
+    EnableAPBOut(1)
+    
+    ObjectMoveMul(1)
+    AnimationMoveMul(0.6)
+}
+
+

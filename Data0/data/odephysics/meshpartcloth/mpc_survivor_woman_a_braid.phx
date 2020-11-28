@@ -1,0 +1,86 @@
+!include("MeshPartCloth.def")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+MeshPartCloth()
+{
+//----------------------------------------------
+// bones
+//----------------------------------------------
+    BonesGridSize(3, 5)
+
+    $XDIST(f, 0.1)
+    $YDIST(f, -0.99)
+    $YDISTH(f, 0.1)
+    
+    Hook(0, 0, "head", [ 0.00, 0.1, 0.10], XDIST, YDISTH)
+    Hook(0, 1, "head", [-0.02, 0.1, 0.15], XDIST, YDISTH)
+    Hook(0, 2, "head", [-0.05, 0.1, 0.15], XDIST, YDISTH)
+    Hook(0, 3, "head", [-0.08, 0.1, 0.15], XDIST, YDISTH)
+    Hook(0, 4, "head", [-0.11, 0.1, 0.15], XDIST, YDISTH)
+    
+    Bone(1, 0, "bone_hair_02", 1, XDIST, YDIST)
+    Bone(1, 1, "bone_hair_03", 0, XDIST, YDIST)
+    Bone(1, 2, "bone_hair_04", 0, XDIST, YDIST)
+    Bone(1, 3, "bone_hair_05", 0, XDIST, YDIST)
+    Bone(1, 4, "",             0, XDIST, YDIST)
+
+    Hook(2, 0, "head", [ 0.00, -0.1, 0.10], XDIST, YDISTH)
+    Hook(2, 1, "head", [-0.02, -0.1, 0.15], XDIST, YDISTH)
+    Hook(2, 2, "head", [-0.05, -0.1, 0.15], XDIST, YDISTH)
+    Hook(2, 3, "head", [-0.08, -0.1, 0.15], XDIST, YDISTH)
+    Hook(2, 4, "head", [-0.11, -0.1, 0.15], XDIST, YDISTH)
+    
+//----------------------------------------------
+// collisions 
+//----------------------------------------------
+
+    CollisionSlide(1)
+    CollisionBounce(0)
+    CollisionSpeedMod(1)
+    
+    CollisionShapesMoveInfluence(1)
+    
+    CollisionSegmentDivision(-1)
+    CollisionNormalAngleThreshold(180)
+    
+    NodeCollisionSphereRadius(0.1)
+    ExternalCollisionAffectMul(0)
+    
+    CollisionSphereShift("spine3", [0, 0, -0.01], 0.1)
+    
+//----------------------------------------------
+// spring params 
+//----------------------------------------------
+
+    Viscous(1)
+    AirFriction(1)
+
+    StructuralStiffness(8000, 1000)
+    ShearStiffness(5000, 1000)
+    FlexionStiffness(5000, 1000)
+
+    HorizontSpringRatio(0.004)
+    
+    CheckLengthsStepsPerSec(0)
+
+//----------------------------------------------
+// physical params 
+//----------------------------------------------
+    
+    Mass(1)
+    GravityMul(0.7)
+    WindInfluence(1)
+    WindGust(0.3, 1)
+
+//----------------------------------------------
+// other params
+//----------------------------------------------
+
+    SynchroWithPhysics(0)
+    EnableAPBOut(1)
+    
+    ObjectMoveMul(1)
+    AnimationMoveMul(0.5)
+}
+
+

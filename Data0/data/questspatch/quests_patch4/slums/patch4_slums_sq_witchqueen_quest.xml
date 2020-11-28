@@ -1,0 +1,4278 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN - SAFEZONE -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__WitchQueen_SafeZoneEnabler"
+         parent="SchoolOfLife"
+         pxsl_line="7">
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="8">
+            <Object
+                 pxsl_line="9">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="witchqueen_hub_qeg"
+                     pxsl_line="9" />
+            </Object>
+        </Phase>
+        <Phase
+             type="wait guard"
+             name="_"
+             time="2"
+             pxsl_line="10" />
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="11">
+            <Destination
+                 pxsl_line="11">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="MapStart"
+                     pxsl_line="11" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="go to"
+             name="_"
+             distance="0"
+             show_locations="false"
+             pxsl_line="12">
+            <Destination
+                 pxsl_line="12">
+                <QuestObject
+                     class="SensorGoTo"
+                     name="WitchQueen_SafeZoneSensor"
+                     pxsl_line="12" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="13">
+            <Object
+                 pxsl_line="13">
+                <QuestObject
+                     class="MapMarker"
+                     name="witchqueen_hub_mapmarker"
+                     pxsl_line="13" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="14">
+            <Destination
+                 pxsl_line="14">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_SafeZone"
+                     pxsl_line="14" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__Witchqueen_Door"
+         parent="Q_Explosives05"
+         pxsl_line="16">
+        <Phase
+             type="set state"
+             name="_"
+             desired_state="closed"
+             pxsl_line="17">
+            <Trigger
+                 pxsl_line="17">
+                <QuestObject
+                     class="DoorDI"
+                     name="WitchQueen_Door_Dahlia001"
+                     pxsl_line="17" />
+            </Trigger>
+        </Phase>
+        <Phase
+             type="use"
+             name="_"
+             desired_state="opened"
+             show_locations="false"
+             pxsl_line="18">
+            <Trigger
+                 pxsl_line="18">
+                <QuestObject
+                     class="DoorDI"
+                     name="WitchQueen_Door_Dahlia001"
+                     pxsl_line="18" />
+            </Trigger>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="19">
+            <Object
+                 pxsl_line="19">
+                <QuestObject
+                     class="DoorDI"
+                     name="WitchQueen_Door_Dahlia001"
+                     pxsl_line="19" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="20">
+            <Destination
+                 pxsl_line="20">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="20" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN - HELPERS -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__WitchQueen_Helper02"
+         parent="Q_Explosives05"
+         pxsl_line="24">
+        <Phase
+             type="go to"
+             name="Witch Queen - Helper 02 - Jaul"
+             distance="10000000"
+             show_locations="false"
+             pxsl_line="25">
+            <Destination
+                 pxsl_line="25">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="QuestHelper_SP_Jaul"
+                     pxsl_line="25" />
+            </Destination>
+            <DebugPlayerPosition
+                 pxsl_line="26">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="QuestHelper_SP_Jaul"
+                     pxsl_line="26" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="OR"
+             name="_"
+             pxsl_line="27">
+            <Path
+                 pxsl_line="28">
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="Jaul"
+                     group="Jaul_WitchQueenHelper02_USE"
+                     show_locations="false"
+                     questgiver_indicator="true"
+                     pxsl_line="29" />
+            </Path>
+            <Path
+                 pxsl_line="30">
+                <Phase
+                     type="started quest guard"
+                     name="_"
+                     quest_name="WitchQueen"
+                     finished="true"
+                     pxsl_line="31" />
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="32">
+            <Destination
+                 pxsl_line="32">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="QuestHelper_SP_Jaul"
+                     pxsl_line="32" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_MapMarker"
+         parent="Q_Explosives05"
+         pxsl_line="33">
+        <Phase
+             type="OR"
+             name="_"
+             pxsl_line="34">
+            <Path
+                 pxsl_line="35">
+                <Phase
+                     type="started quest guard"
+                     name="_"
+                     quest_name="__WitchQueen_Helper01"
+                     finished="true"
+                     pxsl_line="36" />
+            </Path>
+            <Path
+                 pxsl_line="37">
+                <Phase
+                     type="started quest guard"
+                     name="_"
+                     quest_name="__WitchQueen_Helper02"
+                     finished="true"
+                     pxsl_line="38" />
+            </Path>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="39">
+            <Object
+                 pxsl_line="39">
+                <QuestObject
+                     class="MapMarker"
+                     name="WitchQueen_MapMarker_QuestHelper"
+                     pxsl_line="39" />
+            </Object>
+        </Phase>
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="WitchQueen"
+             finished="true"
+             pxsl_line="40" />
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="41">
+            <Object
+                 pxsl_line="41">
+                <QuestObject
+                     class="MapMarker"
+                     name="WitchQueen_MapMarker_QuestHelper"
+                     pxsl_line="41" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="42">
+            <Destination
+                 pxsl_line="42">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="QuestHelper_SP_Jaul"
+                     pxsl_line="42" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN - START -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="WitchQueen"
+         parent="Q_Explosives05"
+         difficulty="medium"
+         quest_giver="Dahlia"
+         reward_set="Witchqueen_reward"
+         show_quest_log_reminder="true"
+         pxsl_line="46">
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="47">
+            <Object
+                 pxsl_line="47">
+                <QuestObject
+                     class="HumanAI"
+                     name="Dahlia"
+                     pxsl_line="47" />
+            </Object>
+        </Phase>
+        <Phase
+             type="set lifeplace"
+             name="_"
+             interact_dist="5"
+             pxsl_line="48">
+            <LifePlace
+                 pxsl_line="48">
+                <QuestObject
+                     class="NPCLifePlace"
+                     name="WitchQueen_Dahlia_LP_QuestGiver_01"
+                     pxsl_line="48" />
+            </LifePlace>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="49">
+            <Object
+                 pxsl_line="49">
+                <QuestObject
+                     class="MapMarker"
+                     name="witchqueen_hub_mapmarker"
+                     pxsl_line="49" />
+            </Object>
+        </Phase>
+        <Phase
+             type="talk"
+             name="Witch Queen - START"
+             speaker="dahlia"
+             group="Dahlia_WitchQueen_USE"
+             show_locations="false"
+             following_group="Dahlia_WitchQueen_INP"
+             questgiver_indicator="true"
+             pxsl_line="50">
+            <DebugPlayerPosition
+                 pxsl_line="51">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="51" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="set lifeplace"
+             name="_"
+             interact_dist="0.1"
+             pxsl_line="52">
+            <LifePlace
+                 pxsl_line="52">
+                <QuestObject
+                     class="NPCLifePlace"
+                     name="WitchQueen_Dahlia_LP_QuestGiver_01"
+                     pxsl_line="52" />
+            </LifePlace>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="53">
+            <Destination
+                 pxsl_line="53">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="53" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN - ENEMIES IN THE CAVE (VOLATILES DURING THE DAY AND BITERS DURING THE NIGHT) -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__WitchQueen_Cave_Enemies_Enable"
+         parent="WitchQueen"
+         pxsl_line="57">
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="58">
+            <Object
+                 pxsl_line="58">
+                <QuestObject
+                     class="GroupingObject"
+                     name="WitchQueen_GroupingObject_Cave_Hub"
+                     pxsl_line="58" />
+            </Object>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="59">
+            <Object
+                 pxsl_line="59">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="WitchQueen_QEG_Cave_Enemies"
+                     pxsl_line="59" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="60">
+            <Destination
+                 pxsl_line="60">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Caves_001"
+                     pxsl_line="60" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_Cave_Enemies_01"
+         parent="__WitchQueen_Cave_Enemies_Enable"
+         pxsl_line="61">
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="62">
+            <Spawner
+                 pxsl_line="62">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_SNB_Cave_BiterPoison_001"
+                     pxsl_line="62" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="63">
+            <Object
+                 pxsl_line="63">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_SNB_Cave_BiterPoison_001"
+                     pxsl_line="63" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="64">
+            <Destination
+                 pxsl_line="64">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Caves_001"
+                     pxsl_line="64" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_Cave_Enemies_02"
+         parent="__WitchQueen_Cave_Enemies_Enable"
+         pxsl_line="65">
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="66">
+            <Spawner
+                 pxsl_line="66">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_SNB_Cave_BiterPoison_002"
+                     pxsl_line="66" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="67">
+            <Object
+                 pxsl_line="67">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_SNB_Cave_BiterPoison_002"
+                     pxsl_line="67" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="68">
+            <Destination
+                 pxsl_line="68">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Caves_001"
+                     pxsl_line="68" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_Cave_Enemies_03"
+         parent="__WitchQueen_Cave_Enemies_Enable"
+         pxsl_line="69">
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="70">
+            <Spawner
+                 pxsl_line="70">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_SNB_Cave_BiterPoison_003"
+                     pxsl_line="70" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="71">
+            <Object
+                 pxsl_line="71">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_SNB_Cave_BiterPoison_003"
+                     pxsl_line="71" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="72">
+            <Destination
+                 pxsl_line="72">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Caves_001"
+                     pxsl_line="72" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN - KITCHEN -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__WitchQueen_Kitchen"
+         parent="WitchQueen"
+         pxsl_line="76">
+        <!-- after finding mushrooms -->
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="WitchQueen_POTION"
+             finished="true"
+             pxsl_line="78" />
+        <Phase
+             type="gather players guard"
+             name="_"
+             distance="-48"
+             show_locations="false"
+             pxsl_line="79">
+            <Destination
+                 pxsl_line="79">
+                <QuestObject
+                     class="HumanAI"
+                     name="Dahlia"
+                     pxsl_line="79" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="appear"
+             name="_"
+             mode="hide"
+             pxsl_line="80">
+            <Object
+                 pxsl_line="80">
+                <QuestObject
+                     class="GroupingObject"
+                     name="WitchQueen_GroupingObject_Kitchen_0"
+                     pxsl_line="80" />
+            </Object>
+        </Phase>
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="81">
+            <Object
+                 pxsl_line="81">
+                <QuestObject
+                     class="GroupingObject"
+                     name="WitchQueen_GroupingObject_Kitchen_1"
+                     pxsl_line="81" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="82">
+            <Destination
+                 pxsl_line="82">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="82" />
+            </Destination>
+        </Phase>
+        <!-- after obtaining goons leaver -->
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="WitchQueen02_POTION"
+             finished="true"
+             pxsl_line="84" />
+        <Phase
+             type="gather players guard"
+             name="_"
+             distance="-48"
+             show_locations="false"
+             pxsl_line="85">
+            <Destination
+                 pxsl_line="85">
+                <QuestObject
+                     class="HumanAI"
+                     name="Dahlia"
+                     pxsl_line="85" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="appear"
+             name="_"
+             mode="hide"
+             pxsl_line="86">
+            <Object
+                 pxsl_line="86">
+                <QuestObject
+                     class="GroupingObject"
+                     name="WitchQueen_GroupingObject_Kitchen_1"
+                     pxsl_line="86" />
+            </Object>
+        </Phase>
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="87">
+            <Object
+                 pxsl_line="87">
+                <QuestObject
+                     class="GroupingObject"
+                     name="WitchQueen_GroupingObject_Kitchen_2"
+                     pxsl_line="87" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="88">
+            <Destination
+                 pxsl_line="88">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="88" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="WitchQueen03_POTION"
+             finished="true"
+             pxsl_line="89" />
+        <Phase
+             type="gather players guard"
+             name="_"
+             distance="-48"
+             show_locations="false"
+             pxsl_line="90">
+            <Destination
+                 pxsl_line="90">
+                <QuestObject
+                     class="HumanAI"
+                     name="Dahlia"
+                     pxsl_line="90" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="appear"
+             name="_"
+             mode="hide"
+             pxsl_line="91">
+            <Object
+                 pxsl_line="91">
+                <QuestObject
+                     class="GroupingObject"
+                     name="WitchQueen_GroupingObject_Kitchen_2"
+                     pxsl_line="91" />
+            </Object>
+        </Phase>
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="92">
+            <Object
+                 pxsl_line="92">
+                <QuestObject
+                     class="GroupingObject"
+                     name="WitchQueen_GroupingObject_Kitchen_3"
+                     pxsl_line="92" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="93">
+            <Destination
+                 pxsl_line="93">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="93" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN - GET TO THE CAVE -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="WitchQueen_CAVE"
+         parent="WitchQueen"
+         glued="true"
+         pxsl_line="97">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;WitchQueen_OBJ_GetToCaves&amp;"
+             pxsl_line="98">
+            <Path
+                 pxsl_line="98">
+                <Phase
+                     type="go to"
+                     name="Witch Queen - Get to the cave"
+                     distance="100000"
+                     show_locations="false"
+                     pxsl_line="99">
+                    <Destination
+                         pxsl_line="99">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Caves_001"
+                             pxsl_line="99" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="100">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Caves_001"
+                             pxsl_line="100" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="dahlia"
+                     group="Dahlia_WitchQueen_01DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="101" />
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="102">
+                    <Destination
+                         pxsl_line="102">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Market_01"
+                             pxsl_line="102" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="6"
+                     show_locations="false"
+                     pxsl_line="103">
+                    <Destination
+                         pxsl_line="103">
+                        <QuestObject
+                             class="Marker"
+                             name="WitchQueen_Marker_Caves_001"
+                             pxsl_line="103" />
+                    </Destination>
+                    <SpecificLocation
+                         pxsl_line="104">
+                        <QuestObject
+                             class="ZoneBox"
+                             name="WitchQueen_ZB_Cave_001"
+                             pxsl_line="104" />
+                    </SpecificLocation>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="105">
+                    <Destination
+                         pxsl_line="105">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Caves_001"
+                             pxsl_line="105" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="go to"
+                     name="Witch Queen - Collect all the mushrooms in the cave"
+                     distance="10000"
+                     show_locations="false"
+                     pxsl_line="106">
+                    <Destination
+                         pxsl_line="106">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Caves_002"
+                             pxsl_line="106" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="107">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Caves_002"
+                             pxsl_line="107" />
+                    </DebugPlayerPosition>
+                    <SpecificLocation
+                         pxsl_line="108">
+                        <QuestObject
+                             class="ZoneBox"
+                             name="WitchQueen_ZB_Cave_001"
+                             pxsl_line="108" />
+                    </SpecificLocation>
+                </Phase>
+                <Phase
+                     type="OR"
+                     name="_"
+                     pxsl_line="109">
+                    <SpecificLocation
+                         pxsl_line="110">
+                        <QuestObject
+                             class="ZoneBox"
+                             name="WitchQueen_ZB_Cave_001"
+                             pxsl_line="110" />
+                    </SpecificLocation>
+                    <Path
+                         pxsl_line="111">
+                        <Phase
+                             type="use life place"
+                             name="_"
+                             pxsl_line="112">
+                            <LifePlace
+                                 pxsl_line="112">
+                                <QuestObject
+                                     class="NPCLifePlace"
+                                     name="WitchQueen_Dahlia_LP_QuestGiver_02"
+                                     pxsl_line="112" />
+                            </LifePlace>
+                            <AI
+                                 pxsl_line="113">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Dahlia"
+                                     pxsl_line="113" />
+                            </AI>
+                        </Phase>
+                        <Phase
+                             type="semaphore"
+                             name="_"
+                             pxsl_line="114" />
+                    </Path>
+                    <Path
+                         pxsl_line="115">
+                        <Phase
+                             type="take item"
+                             name="_"
+                             show_locations="false"
+                             required_count="10"
+                             show_list="true"
+                             pxsl_line="116">
+                            <Item
+                                 pxsl_line="117">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="WitchQueen_QII_Mushroom_01_a::take_mushroom"
+                                     pxsl_line="117" />
+                            </Item>
+                            <Item
+                                 pxsl_line="118">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="WitchQueen_QII_Mushroom_01_b::take_mushroom"
+                                     pxsl_line="118" />
+                            </Item>
+                            <Item
+                                 pxsl_line="119">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="WitchQueen_QII_Mushroom_02_a::take_mushroom"
+                                     pxsl_line="119" />
+                            </Item>
+                            <Item
+                                 pxsl_line="120">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="WitchQueen_QII_Mushroom_03_a::take_mushroom"
+                                     pxsl_line="120" />
+                            </Item>
+                            <Item
+                                 pxsl_line="121">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="WitchQueen_QII_Mushroom_04_a::take_mushroom"
+                                     pxsl_line="121" />
+                            </Item>
+                            <Item
+                                 pxsl_line="122">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="WitchQueen_QII_Mushroom_04_b::take_mushroom"
+                                     pxsl_line="122" />
+                            </Item>
+                            <Item
+                                 pxsl_line="123">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="WitchQueen_QII_Mushroom_05_a::take_mushroom"
+                                     pxsl_line="123" />
+                            </Item>
+                            <Item
+                                 pxsl_line="124">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="WitchQueen_QII_Mushroom_05_b::take_mushroom"
+                                     pxsl_line="124" />
+                            </Item>
+                            <Item
+                                 pxsl_line="125">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="WitchQueen_QII_Mushroom_06_a::take_mushroom"
+                                     pxsl_line="125" />
+                            </Item>
+                            <Item
+                                 pxsl_line="126">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="WitchQueen_QII_Mushroom_06_b::take_mushroom"
+                                     pxsl_line="126" />
+                            </Item>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="127">
+                        <Phase
+                             type="AND"
+                             name="_"
+                             pxsl_line="128">
+                            <Path
+                                 pxsl_line="129">
+                                <Phase
+                                     type="take item"
+                                     name="_"
+                                     show_locations="false"
+                                     pxsl_line="130">
+                                    <Item
+                                         pxsl_line="130">
+                                        <QuestObject
+                                             class="QuestInventoryItemDI"
+                                             name="WitchQueen_QII_Mushroom_01_a::take_mushroom"
+                                             pxsl_line="130" />
+                                    </Item>
+                                </Phase>
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     state="disabled"
+                                     pxsl_line="131">
+                                    <Object
+                                         pxsl_line="131">
+                                        <QuestObject
+                                             class="LightObject"
+                                             name="WitchQueen_Light_Mushroom_01_a"
+                                             pxsl_line="131" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="132">
+                                <Phase
+                                     type="take item"
+                                     name="_"
+                                     show_locations="false"
+                                     pxsl_line="133">
+                                    <Item
+                                         pxsl_line="133">
+                                        <QuestObject
+                                             class="QuestInventoryItemDI"
+                                             name="WitchQueen_QII_Mushroom_01_b::take_mushroom"
+                                             pxsl_line="133" />
+                                    </Item>
+                                </Phase>
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     state="disabled"
+                                     pxsl_line="134">
+                                    <Object
+                                         pxsl_line="134">
+                                        <QuestObject
+                                             class="LightObject"
+                                             name="WitchQueen_Light_Mushroom_01_b"
+                                             pxsl_line="134" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="135">
+                                <Phase
+                                     type="take item"
+                                     name="_"
+                                     show_locations="false"
+                                     pxsl_line="136">
+                                    <Item
+                                         pxsl_line="136">
+                                        <QuestObject
+                                             class="QuestInventoryItemDI"
+                                             name="WitchQueen_QII_Mushroom_02_a::take_mushroom"
+                                             pxsl_line="136" />
+                                    </Item>
+                                </Phase>
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     state="disabled"
+                                     pxsl_line="137">
+                                    <Object
+                                         pxsl_line="137">
+                                        <QuestObject
+                                             class="QuestEnableGroup"
+                                             name="WitchQueen_QEG_Mushroom_02"
+                                             pxsl_line="137" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="138">
+                                <Phase
+                                     type="take item"
+                                     name="_"
+                                     show_locations="false"
+                                     pxsl_line="139">
+                                    <Item
+                                         pxsl_line="139">
+                                        <QuestObject
+                                             class="QuestInventoryItemDI"
+                                             name="WitchQueen_QII_Mushroom_03_a::take_mushroom"
+                                             pxsl_line="139" />
+                                    </Item>
+                                </Phase>
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     state="disabled"
+                                     pxsl_line="140">
+                                    <Object
+                                         pxsl_line="140">
+                                        <QuestObject
+                                             class="QuestEnableGroup"
+                                             name="WitchQueen_QEG_Mushroom_03"
+                                             pxsl_line="140" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="141">
+                                <Phase
+                                     type="take item"
+                                     name="_"
+                                     show_locations="false"
+                                     pxsl_line="142">
+                                    <Item
+                                         pxsl_line="142">
+                                        <QuestObject
+                                             class="QuestInventoryItemDI"
+                                             name="WitchQueen_QII_Mushroom_04_a::take_mushroom"
+                                             pxsl_line="142" />
+                                    </Item>
+                                </Phase>
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     state="disabled"
+                                     pxsl_line="143">
+                                    <Object
+                                         pxsl_line="143">
+                                        <QuestObject
+                                             class="LightObject"
+                                             name="WitchQueen_Light_Mushroom_04_a"
+                                             pxsl_line="143" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="144">
+                                <Phase
+                                     type="take item"
+                                     name="_"
+                                     show_locations="false"
+                                     pxsl_line="145">
+                                    <Item
+                                         pxsl_line="145">
+                                        <QuestObject
+                                             class="QuestInventoryItemDI"
+                                             name="WitchQueen_QII_Mushroom_04_b::take_mushroom"
+                                             pxsl_line="145" />
+                                    </Item>
+                                </Phase>
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     state="disabled"
+                                     pxsl_line="146">
+                                    <Object
+                                         pxsl_line="146">
+                                        <QuestObject
+                                             class="LightObject"
+                                             name="WitchQueen_Light_Mushroom_04_b"
+                                             pxsl_line="146" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="147">
+                                <Phase
+                                     type="take item"
+                                     name="_"
+                                     show_locations="false"
+                                     pxsl_line="148">
+                                    <Item
+                                         pxsl_line="148">
+                                        <QuestObject
+                                             class="QuestInventoryItemDI"
+                                             name="WitchQueen_QII_Mushroom_05_a::take_mushroom"
+                                             pxsl_line="148" />
+                                    </Item>
+                                </Phase>
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     state="disabled"
+                                     pxsl_line="149">
+                                    <Object
+                                         pxsl_line="149">
+                                        <QuestObject
+                                             class="LightObject"
+                                             name="WitchQueen_Light_Mushroom_05_a"
+                                             pxsl_line="149" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="150">
+                                <Phase
+                                     type="take item"
+                                     name="_"
+                                     show_locations="false"
+                                     pxsl_line="151">
+                                    <Item
+                                         pxsl_line="151">
+                                        <QuestObject
+                                             class="QuestInventoryItemDI"
+                                             name="WitchQueen_QII_Mushroom_05_b::take_mushroom"
+                                             pxsl_line="151" />
+                                    </Item>
+                                </Phase>
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     state="disabled"
+                                     pxsl_line="152">
+                                    <Object
+                                         pxsl_line="152">
+                                        <QuestObject
+                                             class="LightObject"
+                                             name="WitchQueen_Light_Mushroom_05_b"
+                                             pxsl_line="152" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="153">
+                                <Phase
+                                     type="take item"
+                                     name="_"
+                                     show_locations="false"
+                                     pxsl_line="154">
+                                    <Item
+                                         pxsl_line="154">
+                                        <QuestObject
+                                             class="QuestInventoryItemDI"
+                                             name="WitchQueen_QII_Mushroom_06_a::take_mushroom"
+                                             pxsl_line="154" />
+                                    </Item>
+                                </Phase>
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     state="disabled"
+                                     pxsl_line="155">
+                                    <Object
+                                         pxsl_line="155">
+                                        <QuestObject
+                                             class="LightObject"
+                                             name="WitchQueen_Light_Mushroom_06_a"
+                                             pxsl_line="155" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="156">
+                                <Phase
+                                     type="take item"
+                                     name="_"
+                                     show_locations="false"
+                                     pxsl_line="157">
+                                    <Item
+                                         pxsl_line="157">
+                                        <QuestObject
+                                             class="QuestInventoryItemDI"
+                                             name="WitchQueen_QII_Mushroom_06_b::take_mushroom"
+                                             pxsl_line="157" />
+                                    </Item>
+                                </Phase>
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     state="disabled"
+                                     pxsl_line="158">
+                                    <Object
+                                         pxsl_line="158">
+                                        <QuestObject
+                                             class="LightObject"
+                                             name="WitchQueen_Light_Mushroom_06_b"
+                                             pxsl_line="158" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="159">
+                    <Destination
+                         pxsl_line="159">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Caves_002"
+                             pxsl_line="159" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN - COLLECT MUSHROOMS -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="WitchQueen_MUSHROOMS"
+         parent="WitchQueen_CAVE"
+         glued="true"
+         pxsl_line="163">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;WitchQueen_OBJ_FindMushrooms&amp;"
+             pxsl_line="164">
+            <Path
+                 pxsl_line="164">
+                <Phase
+                     type="go to"
+                     name="Witch Queen - Return to Dahlia"
+                     distance="6"
+                     pxsl_line="165">
+                    <Destination
+                         pxsl_line="165">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Dahlia"
+                             pxsl_line="165" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="166">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Caves_002"
+                             pxsl_line="166" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="set dialog"
+                     name="_"
+                     speaker="dahlia"
+                     group="Dahlia_WitchQueen_02DLG01"
+                     auto_start="true"
+                     pxsl_line="167" />
+                <Phase
+                     type="talk"
+                     name="Witch Queen - Bring mushrooms to Dahlia"
+                     speaker="dahlia"
+                     group="Dahlia_WitchQueen_03DLG01"
+                     pxsl_line="168">
+                    <DebugPlayerPosition
+                         pxsl_line="169">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Market_01"
+                             pxsl_line="169" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="170">
+                    <Object
+                         pxsl_line="170">
+                        <QuestObject
+                             class="ModelObject"
+                             name="WitchQueen_MushRooms"
+                             pxsl_line="170" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="171">
+                    <Destination
+                         pxsl_line="171">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Market_01"
+                             pxsl_line="171" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN 01 - TAKE THE FIRST POTION -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="WitchQueen_POTION"
+         parent="WitchQueen_MUSHROOMS"
+         glued="true"
+         pxsl_line="175">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;WitchQueen_OBJ_TakePotion&amp;"
+             pxsl_line="176">
+            <Path
+                 pxsl_line="176">
+                <Phase
+                     type="go to"
+                     name="Witch Queen - Take the first mixture"
+                     distance="10000"
+                     show_locations="false"
+                     pxsl_line="177">
+                    <Destination
+                         pxsl_line="177">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Market_01"
+                             pxsl_line="177" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="178">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Market_01"
+                             pxsl_line="178" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="179">
+                    <Object
+                         pxsl_line="179">
+                        <QuestObject
+                             class="AppearGroup"
+                             name="WItchQueen_AG_Mixture_Inv"
+                             pxsl_line="179" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="OR"
+                     name="_"
+                     pxsl_line="180">
+                    <Path
+                         pxsl_line="181">
+                        <Phase
+                             type="bring item"
+                             name="_"
+                             speaker="dahlia"
+                             item_type="MixtureWQ_Inv"
+                             count="1"
+                             show_items="true"
+                             show_list="false"
+                             pxsl_line="182" />
+                        <Phase
+                             type="semaphore"
+                             name="_"
+                             pxsl_line="183" />
+                    </Path>
+                    <Path
+                         pxsl_line="184">
+                        <Phase
+                             type="have item guard"
+                             name="_"
+                             item_name="MixtureWQ_Inv"
+                             pxsl_line="185" />
+                    </Path>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="186">
+                    <Object
+                         pxsl_line="186">
+                        <QuestObject
+                             class="AppearGroup"
+                             name="WItchQueen_AG_Mixture_Inv"
+                             pxsl_line="186" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="set reward"
+                     name="_"
+                     pxsl_line="187" />
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="188">
+                    <Destination
+                         pxsl_line="188">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Market_01"
+                             pxsl_line="188" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN 01 - TEST THE FIRST POTION (WITHOUT OBJECTIVE AND LOCATION) -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__WitchQueen_TESTPOTION"
+         parent="WitchQueen_POTION"
+         pxsl_line="192">
+        <Phase
+             type="go to"
+             name="Witch Queen - Test the first mixture"
+             distance="10000"
+             show_locations="false"
+             pxsl_line="193">
+            <Destination
+                 pxsl_line="193">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="193" />
+            </Destination>
+            <DebugPlayerPosition
+                 pxsl_line="194">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="194" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="set dialog"
+             name="_"
+             speaker="dahlia"
+             group="Dahlia_WitchQueen_01TLK01"
+             auto_start="true"
+             pxsl_line="195" />
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="196">
+            <Destination
+                 pxsl_line="196">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="196" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             pxsl_line="197">
+            <Path
+                 pxsl_line="198">
+                <Phase
+                     type="player area guard"
+                     name="_"
+                     outside="true"
+                     pxsl_line="199">
+                    <SensorArea
+                         pxsl_line="199">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="WitchQueen_SafeZoneSensor"
+                             pxsl_line="199" />
+                    </SensorArea>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="200">
+                <Phase
+                     type="player used item"
+                     name="_"
+                     item="MixtureWQ_Inv"
+                     pxsl_line="201" />
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="12"
+                     pxsl_line="202" />
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_WitchQueen_04DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="203" />
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="12"
+                     pxsl_line="204" />
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_WitchQueen_05DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="205" />
+            </Path>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="206">
+            <Object
+                 pxsl_line="206">
+                <QuestObject
+                     class="MapMarker"
+                     name="WitchQueen_MapMarker_Goon"
+                     pxsl_line="206" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="207">
+            <Destination
+                 pxsl_line="207">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="207" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN 02 - START - GET BACK TO DAHLIA AFTER FIRST TEST -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="WitchQueen02"
+         parent="__WitchQueen_TESTPOTION"
+         difficulty="medium"
+         quest_giver="Dahlia"
+         reward_set="WitchQueen02_reward"
+         show_quest_log_reminder="true"
+         pxsl_line="211">
+        <Phase
+             type="talk"
+             name="Witch Queen 02 - START"
+             speaker="dahlia"
+             group="Dahlia_WitchQueen_END"
+             show_locations="false"
+             questgiver_indicator="true"
+             pxsl_line="212">
+            <DebugPlayerPosition
+                 pxsl_line="213">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="213" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="214">
+            <Object
+                 pxsl_line="214">
+                <QuestObject
+                     class="MapMarker"
+                     name="WitchQueen_MapMarker_Goon"
+                     pxsl_line="214" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="215">
+            <Destination
+                 pxsl_line="215">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="215" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN - LOOKING FOR GOONS LIVER - GOON'S ARENAS -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN - LOOKING FOR GOONS LIVER - GOON'S ARENA 01 -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__WitchQueen_GoonArena_001"
+         parent="WitchQueen02"
+         pxsl_line="222">
+        <Phase
+             type="gather players guard"
+             name="WitchQueen 02 - Goon Arena 01"
+             distance="-45"
+             show_locations="false"
+             pxsl_line="223">
+            <Destination
+                 pxsl_line="223">
+                <QuestObject
+                     class="Marker"
+                     name="WitchQueen_Marker_GoonArena_001"
+                     pxsl_line="223" />
+            </Destination>
+            <DebugPlayerPosition
+                 pxsl_line="224">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_GoonArena_001"
+                     pxsl_line="224" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="225">
+            <Object
+                 pxsl_line="226">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="WitchQueen_QEG_GoonArena_001"
+                     pxsl_line="226" />
+            </Object>
+            <Object
+                 pxsl_line="227">
+                <QuestObject
+                     class="SpawnBlocker"
+                     name="WitchQueen_GoonArena_SpawnBlocker"
+                     pxsl_line="227" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="228">
+            <Destination
+                 pxsl_line="228">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_GoonArena_001"
+                     pxsl_line="228" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_GoonArena_001_Goon01"
+         parent="__WitchQueen_GoonArena_001"
+         pxsl_line="229">
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="230">
+            <Spawner
+                 pxsl_line="230">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_GoonArena_001_SBN_Goon_001"
+                     pxsl_line="230" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="231">
+            <Object
+                 pxsl_line="231">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_GoonArena_001_SBN_Goon_001"
+                     pxsl_line="231" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="232">
+            <Destination
+                 pxsl_line="232">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_GoonArena_001"
+                     pxsl_line="232" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_GoonArena_001_Toad01"
+         parent="__WitchQueen_GoonArena_001"
+         pxsl_line="233">
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="234">
+            <Spawner
+                 pxsl_line="234">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_GoonArena_001_SBN_Toad_001"
+                     pxsl_line="234" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="235">
+            <Object
+                 pxsl_line="235">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_GoonArena_001_SBN_Toad_001"
+                     pxsl_line="235" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="236">
+            <Destination
+                 pxsl_line="236">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_GoonArena_001"
+                     pxsl_line="236" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_GoonArena_001_Toad02"
+         parent="__WitchQueen_GoonArena_001"
+         pxsl_line="237">
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="238">
+            <Spawner
+                 pxsl_line="238">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_GoonArena_001_SBN_Toad_002"
+                     pxsl_line="238" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="239">
+            <Object
+                 pxsl_line="239">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_GoonArena_001_SBN_Toad_002"
+                     pxsl_line="239" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="240">
+            <Destination
+                 pxsl_line="240">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_GoonArena_001"
+                     pxsl_line="240" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_GoonArena_001_Biter01"
+         parent="__WitchQueen_GoonArena_001"
+         pxsl_line="241">
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="242">
+            <Spawner
+                 pxsl_line="242">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_GoonArena_001_SBN_Biter_001"
+                     pxsl_line="242" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="243">
+            <Object
+                 pxsl_line="243">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_GoonArena_001_SBN_Biter_001"
+                     pxsl_line="243" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="244">
+            <Destination
+                 pxsl_line="244">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_GoonArena_001"
+                     pxsl_line="244" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_GoonArena_001_SpawnBlocker_Disable"
+         parent="__WitchQueen_GoonArena_001"
+         pxsl_line="245">
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="__WitchQueen_GoonArena_001_Goon01"
+             finished="true"
+             pxsl_line="246" />
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="247">
+            <Object
+                 pxsl_line="247">
+                <QuestObject
+                     class="SpawnBlocker"
+                     name="WitchQueen_GoonArena_SpawnBlocker"
+                     pxsl_line="247" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="248">
+            <Destination
+                 pxsl_line="248">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_GoonArena_001"
+                     pxsl_line="248" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_GoonArena_001_MapZone_001"
+         parent="WitchQueen02"
+         pxsl_line="249">
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="250">
+            <Object
+                 pxsl_line="250">
+                <QuestObject
+                     class="MapZone"
+                     name="WitchQueen_MapZone_GoonArena_001"
+                     pxsl_line="250" />
+            </Object>
+        </Phase>
+        <Phase
+             type="OR"
+             name="_"
+             pxsl_line="251">
+            <Path
+                 pxsl_line="252">
+                <Phase
+                     type="started quest guard"
+                     name="_"
+                     quest_name="__WitchQueen_GoonArena_001_Goon01"
+                     finished="true"
+                     pxsl_line="253" />
+            </Path>
+            <Path
+                 pxsl_line="254">
+                <Phase
+                     type="have item guard"
+                     name="_"
+                     item_name="Craft_PutrescentLiver"
+                     pxsl_line="255" />
+            </Path>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="256">
+            <Object
+                 pxsl_line="256">
+                <QuestObject
+                     class="MapZone"
+                     name="WitchQueen_MapZone_GoonArena_001"
+                     pxsl_line="256" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="257">
+            <Destination
+                 pxsl_line="257">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_GoonArena_001"
+                     pxsl_line="257" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN - LOOKING FOR GOONS LIVER - GOON'S ARENA 02 -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__WitchQueen_GoonArena_002"
+         parent="WitchQueen02"
+         pxsl_line="261">
+        <Phase
+             type="gather players guard"
+             name="WitchQueen 02 - Goon Arena 02"
+             distance="-40"
+             show_locations="false"
+             pxsl_line="262">
+            <Destination
+                 pxsl_line="262">
+                <QuestObject
+                     class="Marker"
+                     name="WitchQueen_Marker_GoonArena_002"
+                     pxsl_line="262" />
+            </Destination>
+            <DebugPlayerPosition
+                 pxsl_line="263">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_GoonArena_002"
+                     pxsl_line="263" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="264">
+            <Object
+                 pxsl_line="264">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="WitchQueen_QEG_GoonArena_002"
+                     pxsl_line="264" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="265">
+            <Destination
+                 pxsl_line="265">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_GoonArena_002"
+                     pxsl_line="265" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_GoonArena_002_Goon01"
+         parent="__WitchQueen_GoonArena_002"
+         pxsl_line="266">
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="267">
+            <Spawner
+                 pxsl_line="267">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_GoonArena_002_SBN_Goon_001"
+                     pxsl_line="267" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="268">
+            <Object
+                 pxsl_line="268">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_GoonArena_002_SBN_Goon_001"
+                     pxsl_line="268" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="269">
+            <Destination
+                 pxsl_line="269">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_GoonArena_002"
+                     pxsl_line="269" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_GoonArena_002_Biter01"
+         parent="__WitchQueen_GoonArena_002"
+         pxsl_line="270">
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="271">
+            <Spawner
+                 pxsl_line="271">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_GoonArena_002_SBN_Biter_001"
+                     pxsl_line="271" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="272">
+            <Object
+                 pxsl_line="272">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_GoonArena_002_SBN_Biter_001"
+                     pxsl_line="272" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="273">
+            <Destination
+                 pxsl_line="273">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_GoonArena_001"
+                     pxsl_line="273" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_GoonArena_002_Toad01"
+         parent="__WitchQueen_GoonArena_002"
+         pxsl_line="274">
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="275">
+            <Spawner
+                 pxsl_line="275">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_GoonArena_002_SBN_Toad_001"
+                     pxsl_line="275" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="276">
+            <Object
+                 pxsl_line="276">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_GoonArena_002_SBN_Toad_001"
+                     pxsl_line="276" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="277">
+            <Destination
+                 pxsl_line="277">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_GoonArena_002"
+                     pxsl_line="277" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_GoonArena_002_MapZone_001"
+         parent="WitchQueen02"
+         pxsl_line="278">
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="279">
+            <Object
+                 pxsl_line="279">
+                <QuestObject
+                     class="MapZone"
+                     name="WitchQueen_MapZone_GoonArena_002"
+                     pxsl_line="279" />
+            </Object>
+        </Phase>
+        <Phase
+             type="OR"
+             name="_"
+             pxsl_line="280">
+            <Path
+                 pxsl_line="281">
+                <Phase
+                     type="started quest guard"
+                     name="_"
+                     quest_name="__WitchQueen_GoonArena_002_Goon01"
+                     finished="true"
+                     pxsl_line="282" />
+            </Path>
+            <Path
+                 pxsl_line="283">
+                <Phase
+                     type="have item guard"
+                     name="_"
+                     item_name="Craft_PutrescentLiver"
+                     pxsl_line="284" />
+            </Path>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="285">
+            <Object
+                 pxsl_line="285">
+                <QuestObject
+                     class="MapZone"
+                     name="WitchQueen_MapZone_GoonArena_002"
+                     pxsl_line="285" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="286">
+            <Destination
+                 pxsl_line="286">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_GoonArena_002"
+                     pxsl_line="286" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN 02 - HUNTING GOON -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="WitchQueen02_Goon"
+         parent="WitchQueen02"
+         glued="true"
+         pxsl_line="290">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;WitchQueen02_OBJ_HuntGoon&amp;"
+             pxsl_line="291">
+            <Path
+                 pxsl_line="291">
+                <Phase
+                     type="go to"
+                     name="Witch Queen 02 - Find goon's purescent liver"
+                     distance="10000"
+                     show_locations="false"
+                     pxsl_line="292">
+                    <Destination
+                         pxsl_line="292">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Market_01"
+                             pxsl_line="292" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="293">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Market_01"
+                             pxsl_line="293" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="bring item"
+                     name="_"
+                     speaker="dahlia"
+                     item_type="Craft_PutrescentLiver"
+                     count="1"
+                     show_items="false"
+                     gather_radius="3"
+                     pxsl_line="294" />
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="dahlia"
+                     group="Dahlia_WitchQueen02_01DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="295" />
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="296">
+                    <Destination
+                         pxsl_line="296">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Market_01"
+                             pxsl_line="296" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN 02 - TAKE THE SECOND POTION -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="WitchQueen02_POTION"
+         parent="WitchQueen02_Goon"
+         glued="true"
+         pxsl_line="300">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;WitchQueen02_OBJ_TakePotion&amp;"
+             pxsl_line="301">
+            <Path
+                 pxsl_line="301">
+                <Phase
+                     type="go to"
+                     name="Witch Queen 02 - Take the second mixture"
+                     distance="1000"
+                     show_locations="false"
+                     pxsl_line="302">
+                    <Destination
+                         pxsl_line="302">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Market_01"
+                             pxsl_line="302" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="303">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Market_01"
+                             pxsl_line="303" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="304">
+                    <Object
+                         pxsl_line="304">
+                        <QuestObject
+                             class="AppearGroup"
+                             name="WItchQueen_AG_Mixture_Slomo"
+                             pxsl_line="304" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="OR"
+                     name="_"
+                     pxsl_line="305">
+                    <Path
+                         pxsl_line="306">
+                        <Phase
+                             type="bring item"
+                             name="_"
+                             speaker="dahlia"
+                             item_type="MixtureWQ_SloMo"
+                             count="1"
+                             show_items="true"
+                             show_list="false"
+                             pxsl_line="307" />
+                        <Phase
+                             type="semaphore"
+                             name="_"
+                             pxsl_line="308" />
+                    </Path>
+                    <Path
+                         pxsl_line="309">
+                        <Phase
+                             type="have item guard"
+                             name="_"
+                             item_name="MixtureWQ_SloMo"
+                             pxsl_line="310" />
+                    </Path>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="311">
+                    <Object
+                         pxsl_line="311">
+                        <QuestObject
+                             class="AppearGroup"
+                             name="WItchQueen_AG_Mixture_Slomo"
+                             pxsl_line="311" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="set reward"
+                     name="_"
+                     pxsl_line="312" />
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="313">
+                    <Destination
+                         pxsl_line="313">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Market_01"
+                             pxsl_line="313" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN 02 - TEST THE SECOND POTION -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__WitchQueen02_TESTPOTION"
+         parent="WitchQueen02_POTION"
+         pxsl_line="317">
+        <Phase
+             type="go to"
+             name="Witch Queen 02 - Test the second mixture"
+             distance="1000"
+             show_locations="false"
+             pxsl_line="318">
+            <Destination
+                 pxsl_line="318">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="318" />
+            </Destination>
+            <DebugPlayerPosition
+                 pxsl_line="319">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="319" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="set dialog"
+             name="_"
+             speaker="dahlia"
+             group="Dahlia_WitchQueen02_02DLG01"
+             auto_start="true"
+             pxsl_line="320" />
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="321">
+            <Destination
+                 pxsl_line="321">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="321" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             pxsl_line="322">
+            <Path
+                 pxsl_line="323">
+                <Phase
+                     type="player area guard"
+                     name="_"
+                     outside="true"
+                     pxsl_line="324">
+                    <SensorArea
+                         pxsl_line="324">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="WitchQueen_SafeZoneSensor"
+                             pxsl_line="324" />
+                    </SensorArea>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="325">
+                <Phase
+                     type="player used item"
+                     name="_"
+                     item="MixtureWQ_SloMo"
+                     pxsl_line="326" />
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="17"
+                     pxsl_line="327" />
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_WitchQueen02_03DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="328" />
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="18"
+                     pxsl_line="329" />
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_WitchQueen02_04DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="330" />
+            </Path>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="331">
+            <Object
+                 pxsl_line="331">
+                <QuestObject
+                     class="MapMarker"
+                     name="WitchQueen_MapMarker_Bomber"
+                     pxsl_line="331" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="332">
+            <Destination
+                 pxsl_line="332">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="332" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN 03 - START - GET BACK TO DAHLIA AFTER SECOND TEST -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="WitchQueen03"
+         parent="__WitchQueen02_TESTPOTION"
+         difficulty="medium"
+         quest_giver="Dahlia"
+         reward_set="WitchQueen03_reward"
+         show_quest_log_reminder="true"
+         pxsl_line="336">
+        <Phase
+             type="talk"
+             name="Witch Queen 03 - START"
+             speaker="dahlia"
+             group="Player_WitchQueen02_END"
+             show_locations="false"
+             following_group="Dahlia_WitchQueen02_INP"
+             questgiver_indicator="true"
+             pxsl_line="337">
+            <DebugPlayerPosition
+                 pxsl_line="338">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="338" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="339">
+            <Object
+                 pxsl_line="339">
+                <QuestObject
+                     class="MapMarker"
+                     name="WitchQueen_MapMarker_Bomber"
+                     pxsl_line="339" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="340">
+            <Destination
+                 pxsl_line="340">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="340" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN - LOOKING FOR BOMBER'S BRAIN - BOMBERS'S ARENA 01 -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__WitchQueen_BomberArena_001"
+         parent="WitchQueen03"
+         pxsl_line="344">
+        <Phase
+             type="go to"
+             name="WitchQueen 03 - Bomber Arena 01"
+             distance="48"
+             show_locations="false"
+             pxsl_line="345">
+            <Destination
+                 pxsl_line="345">
+                <QuestObject
+                     class="Marker"
+                     name="WitchQueen_Marker_BomberArena_001_BomberVan_001"
+                     pxsl_line="345" />
+            </Destination>
+            <DebugPlayerPosition
+                 pxsl_line="346">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_BomberArena_001"
+                     pxsl_line="346" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="347">
+            <Object
+                 pxsl_line="348">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="WitchQueen_QEG_BomberArena_001"
+                     pxsl_line="348" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="349">
+            <Destination
+                 pxsl_line="349">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_BomberArena_001"
+                     pxsl_line="349" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_BomberArena_001_Bomber01"
+         parent="__WitchQueen_BomberArena_001"
+         pxsl_line="350">
+        <Phase
+             type="go to"
+             name="_"
+             distance="9"
+             show_locations="false"
+             pxsl_line="351">
+            <Destination
+                 pxsl_line="351">
+                <QuestObject
+                     class="Marker"
+                     name="WitchQueen_Marker_BomberArena_001_BomberVan_001"
+                     pxsl_line="351" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="352">
+            <Spawner
+                 pxsl_line="352">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_BomberVan_001::Bomber"
+                     pxsl_line="352" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="353">
+            <Object
+                 pxsl_line="353">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_BomberVan_001::Bomber"
+                     pxsl_line="353" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="354">
+            <Destination
+                 pxsl_line="354">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_BomberArena_001"
+                     pxsl_line="354" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_BomberArena_001_Bomber02"
+         parent="__WitchQueen_BomberArena_001"
+         pxsl_line="355">
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="356">
+            <Spawner
+                 pxsl_line="356">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_BomberArena_001_SBN_Bomber_002"
+                     pxsl_line="356" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="357">
+            <Object
+                 pxsl_line="357">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_BomberArena_001_SBN_Bomber_002"
+                     pxsl_line="357" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="358">
+            <Destination
+                 pxsl_line="358">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_BomberArena_001"
+                     pxsl_line="358" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_BomberArena_001_Bomber03"
+         parent="__WitchQueen_BomberArena_001"
+         pxsl_line="359">
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="360">
+            <Spawner
+                 pxsl_line="360">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_BomberArena_001_SBN_Bomber_003"
+                     pxsl_line="360" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="361">
+            <Object
+                 pxsl_line="361">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_BomberArena_001_SBN_Bomber_003"
+                     pxsl_line="361" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="362">
+            <Destination
+                 pxsl_line="362">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_BomberArena_001"
+                     pxsl_line="362" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_BomberArena_001_Bomber04"
+         parent="__WitchQueen_BomberArena_001"
+         pxsl_line="363">
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="364">
+            <Spawner
+                 pxsl_line="364">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_BomberArena_001_SBN_Bomber_004"
+                     pxsl_line="364" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="365">
+            <Object
+                 pxsl_line="365">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_BomberArena_001_SBN_Bomber_004"
+                     pxsl_line="365" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="366">
+            <Destination
+                 pxsl_line="366">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_BomberArena_001"
+                     pxsl_line="366" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_BomberArena_001_Biter01"
+         parent="__WitchQueen_BomberArena_001"
+         pxsl_line="367">
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="368">
+            <Spawner
+                 pxsl_line="368">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_BomberArena_001_SBN_Biter_001"
+                     pxsl_line="368" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="369">
+            <Object
+                 pxsl_line="369">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_BomberArena_001_SBN_Biter_001"
+                     pxsl_line="369" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="370">
+            <Destination
+                 pxsl_line="370">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_BomberArena_001"
+                     pxsl_line="370" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_BomberArena_001_Biter02"
+         parent="__WitchQueen_BomberArena_001"
+         pxsl_line="371">
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="372">
+            <Spawner
+                 pxsl_line="372">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_BomberArena_001_SBN_Biter_002"
+                     pxsl_line="372" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="373">
+            <Object
+                 pxsl_line="373">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_BomberArena_001_SBN_Biter_002"
+                     pxsl_line="373" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="374">
+            <Destination
+                 pxsl_line="374">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_BomberArena_001"
+                     pxsl_line="374" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_BomberArena_001_Biter03"
+         parent="__WitchQueen_BomberArena_001"
+         pxsl_line="375">
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="376">
+            <Spawner
+                 pxsl_line="376">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_BomberArena_001_SBN_Biter_003"
+                     pxsl_line="376" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="377">
+            <Object
+                 pxsl_line="377">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_BomberArena_001_SBN_Biter_003"
+                     pxsl_line="377" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="378">
+            <Destination
+                 pxsl_line="378">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_BomberArena_001"
+                     pxsl_line="378" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_BomberArena_001_MapZone"
+         parent="WitchQueen03"
+         pxsl_line="379">
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="380">
+            <Object
+                 pxsl_line="381">
+                <QuestObject
+                     class="MapZone"
+                     name="WitchQueen_MapZone_BomberArena_001"
+                     pxsl_line="381" />
+            </Object>
+            <Object
+                 pxsl_line="382">
+                <QuestObject
+                     class="SpawnBlocker"
+                     name="WitchQueen_BomberArena_001_SpawnBlocker"
+                     pxsl_line="382" />
+            </Object>
+        </Phase>
+        <Phase
+             type="OR"
+             name="_"
+             pxsl_line="383">
+            <Path
+                 pxsl_line="384">
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="385">
+                    <Path
+                         pxsl_line="386">
+                        <Phase
+                             type="started quest guard"
+                             name="_"
+                             quest_name="__WitchQueen_BomberArena_001_Bomber01"
+                             finished="true"
+                             pxsl_line="387" />
+                    </Path>
+                    <Path
+                         pxsl_line="388">
+                        <Phase
+                             type="started quest guard"
+                             name="_"
+                             quest_name="__WitchQueen_BomberArena_001_Bomber02"
+                             finished="true"
+                             pxsl_line="389" />
+                    </Path>
+                    <Path
+                         pxsl_line="390">
+                        <Phase
+                             type="started quest guard"
+                             name="_"
+                             quest_name="__WitchQueen_BomberArena_001_Bomber03"
+                             finished="true"
+                             pxsl_line="391" />
+                    </Path>
+                    <Path
+                         pxsl_line="392">
+                        <Phase
+                             type="started quest guard"
+                             name="_"
+                             quest_name="__WitchQueen_BomberArena_001_Bomber04"
+                             finished="true"
+                             pxsl_line="393" />
+                    </Path>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="394">
+                <Phase
+                     type="have item guard"
+                     name="_"
+                     item_name="Craft_BomberKidney"
+                     pxsl_line="395" />
+            </Path>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="396">
+            <Object
+                 pxsl_line="397">
+                <QuestObject
+                     class="MapZone"
+                     name="WitchQueen_MapZone_BomberArena_001"
+                     pxsl_line="397" />
+            </Object>
+            <Object
+                 pxsl_line="398">
+                <QuestObject
+                     class="SpawnBlocker"
+                     name="WitchQueen_BomberArena_001_SpawnBlocker"
+                     pxsl_line="398" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="399">
+            <Destination
+                 pxsl_line="399">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_BomberArena_001"
+                     pxsl_line="399" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN - LOOKING FOR BOMBER'S BRAIN - BOMBERS'S ARENA 02 -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__WitchQueen_BomberArena_002"
+         parent="WitchQueen03"
+         pxsl_line="403">
+        <Phase
+             type="gather players guard"
+             name="WitchQueen 03 - Bomber Arena 02"
+             distance="-45"
+             show_locations="false"
+             pxsl_line="404">
+            <Destination
+                 pxsl_line="404">
+                <QuestObject
+                     class="Marker"
+                     name="WitchQueen_Marker_BomberArena_002"
+                     pxsl_line="404" />
+            </Destination>
+            <DebugPlayerPosition
+                 pxsl_line="405">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_BomberArena_002"
+                     pxsl_line="405" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="406">
+            <Object
+                 pxsl_line="406">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="WitchQueen_QEG_BomberArena_002"
+                     pxsl_line="406" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="407">
+            <Destination
+                 pxsl_line="407">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_BomberArena_002"
+                     pxsl_line="407" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_BomberArena_002_Bomber01"
+         parent="__WitchQueen_BomberArena_002"
+         pxsl_line="408">
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="409">
+            <Spawner
+                 pxsl_line="409">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_BomberArena_002_SBN_Bomber_001"
+                     pxsl_line="409" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="410">
+            <Object
+                 pxsl_line="410">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_BomberArena_002_SBN_Bomber_001"
+                     pxsl_line="410" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="411">
+            <Destination
+                 pxsl_line="411">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_BomberArena_002"
+                     pxsl_line="411" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_BomberArena_002_Bomber02"
+         parent="__WitchQueen_BomberArena_002"
+         pxsl_line="412">
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="413">
+            <Spawner
+                 pxsl_line="413">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_BomberArena_002_SBN_Bomber_002"
+                     pxsl_line="413" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="414">
+            <Object
+                 pxsl_line="414">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_BomberArena_002_SBN_Bomber_002"
+                     pxsl_line="414" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="415">
+            <Destination
+                 pxsl_line="415">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_BomberArena_002"
+                     pxsl_line="415" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_BomberArena_002_Bomber03"
+         parent="__WitchQueen_BomberArena_002"
+         pxsl_line="416">
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="417">
+            <Spawner
+                 pxsl_line="417">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_BomberArena_002_SBN_Bomber_003"
+                     pxsl_line="417" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="418">
+            <Object
+                 pxsl_line="418">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_BomberArena_002_SBN_Bomber_003"
+                     pxsl_line="418" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="419">
+            <Destination
+                 pxsl_line="419">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_BomberArena_002"
+                     pxsl_line="419" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_BomberArena_002_Bomber_Van"
+         parent="__WitchQueen_BomberArena_002"
+         pxsl_line="420">
+        <Phase
+             type="go to"
+             name="_"
+             distance="12"
+             show_locations="false"
+             pxsl_line="421">
+            <Destination
+                 pxsl_line="421">
+                <QuestObject
+                     class="Marker"
+                     name="WitchQueen_Marker_BomberArena_002"
+                     pxsl_line="421" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="422">
+            <Object
+                 pxsl_line="422">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_BomberVan_2::Bomber"
+                     pxsl_line="422" />
+            </Object>
+        </Phase>
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="423">
+            <Spawner
+                 pxsl_line="423">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_BomberVan_2::Bomber"
+                     pxsl_line="423" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="424">
+            <Object
+                 pxsl_line="424">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_BomberVan_2::Bomber"
+                     pxsl_line="424" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="425">
+            <Destination
+                 pxsl_line="425">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_BomberArena_002"
+                     pxsl_line="425" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_BomberArena_002_Goon"
+         parent="__WitchQueen_BomberArena_002"
+         pxsl_line="426">
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="427">
+            <Spawner
+                 pxsl_line="427">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_BomberArena_002_SBN_Goon_1"
+                     pxsl_line="427" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="428">
+            <Object
+                 pxsl_line="428">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_BomberArena_002_SBN_Goon_1"
+                     pxsl_line="428" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="429">
+            <Destination
+                 pxsl_line="429">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_BomberArena_002"
+                     pxsl_line="429" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_BomberArena_002_Biters"
+         parent="__WitchQueen_BomberArena_002"
+         pxsl_line="430">
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="431">
+            <Spawner
+                 pxsl_line="431">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_BomberArena_002_SBN_Biter_1"
+                     pxsl_line="431" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="432">
+            <Object
+                 pxsl_line="432">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="WitchQueen_BomberArena_002_SBN_Biter_1"
+                     pxsl_line="432" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="433">
+            <Destination
+                 pxsl_line="433">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_BomberArena_002"
+                     pxsl_line="433" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__WitchQueen_BomberArena_002_MapZone"
+         parent="WitchQueen03"
+         pxsl_line="434">
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="435">
+            <Object
+                 pxsl_line="435">
+                <QuestObject
+                     class="MapZone"
+                     name="WitchQueen_MapZone_BomberArena_002"
+                     pxsl_line="435" />
+            </Object>
+        </Phase>
+        <Phase
+             type="OR"
+             name="_"
+             pxsl_line="436">
+            <Path
+                 pxsl_line="437">
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="438">
+                    <Path
+                         pxsl_line="439">
+                        <Phase
+                             type="started quest guard"
+                             name="_"
+                             quest_name="__WitchQueen_BomberArena_002_Bomber01"
+                             finished="true"
+                             pxsl_line="440" />
+                    </Path>
+                    <Path
+                         pxsl_line="441">
+                        <Phase
+                             type="started quest guard"
+                             name="_"
+                             quest_name="__WitchQueen_BomberArena_002_Bomber02"
+                             finished="true"
+                             pxsl_line="442" />
+                    </Path>
+                    <Path
+                         pxsl_line="443">
+                        <Phase
+                             type="started quest guard"
+                             name="_"
+                             quest_name="__WitchQueen_BomberArena_002_Bomber03"
+                             finished="true"
+                             pxsl_line="444" />
+                    </Path>
+                    <Path
+                         pxsl_line="445">
+                        <Phase
+                             type="started quest guard"
+                             name="_"
+                             quest_name="__WitchQueen_BomberArena_002_Bomber_Van"
+                             finished="true"
+                             pxsl_line="446" />
+                    </Path>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="447">
+                <Phase
+                     type="have item guard"
+                     name="_"
+                     item_name="Craft_BomberKidney"
+                     pxsl_line="448" />
+            </Path>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="449">
+            <Object
+                 pxsl_line="449">
+                <QuestObject
+                     class="MapZone"
+                     name="WitchQueen_MapZone_BomberArena_002"
+                     pxsl_line="449" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="450">
+            <Destination
+                 pxsl_line="450">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_BomberArena_002"
+                     pxsl_line="450" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN 03 - HUNTING BOMBER -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="WitchQueen03_BOMBER"
+         parent="WitchQueen03"
+         glued="true"
+         pxsl_line="454">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;WitchQueen03_OBJ_GetBrain&amp;"
+             pxsl_line="455">
+            <Path
+                 pxsl_line="455">
+                <Phase
+                     type="go to"
+                     name="Witch Queen 03 - Find bomber's brain"
+                     distance="10000000"
+                     show_locations="false"
+                     pxsl_line="456">
+                    <Destination
+                         pxsl_line="456">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Market_01"
+                             pxsl_line="456" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="457">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Market_01"
+                             pxsl_line="457" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="bring item"
+                     name="_"
+                     speaker="dahlia"
+                     item_type="Craft_BomberKidney"
+                     count="1"
+                     show_items="false"
+                     gather_radius="3"
+                     pxsl_line="458" />
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="dahlia"
+                     group="Dahlia_WitchQueen03_01DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="459" />
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="460">
+                    <Destination
+                         pxsl_line="460">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Market_01"
+                             pxsl_line="460" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN 03 - TAKE THIRD POTION -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="WitchQueen03_POTION"
+         parent="WitchQueen03_BOMBER"
+         glued="true"
+         pxsl_line="464">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;WitchQueen03_OBJ_TakePotion&amp;"
+             pxsl_line="465">
+            <Path
+                 pxsl_line="465">
+                <Phase
+                     type="go to"
+                     name="Witch Queen 03 - Take the third mixture"
+                     distance="10000"
+                     show_locations="false"
+                     pxsl_line="466">
+                    <Destination
+                         pxsl_line="466">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Market_01"
+                             pxsl_line="466" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="467">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Market_01"
+                             pxsl_line="467" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="468">
+                    <Object
+                         pxsl_line="468">
+                        <QuestObject
+                             class="AppearGroup"
+                             name="WItchQueen_AG_Mixture_Rot"
+                             pxsl_line="468" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="OR"
+                     name="_"
+                     pxsl_line="469">
+                    <Path
+                         pxsl_line="470">
+                        <Phase
+                             type="bring item"
+                             name="_"
+                             speaker="dahlia"
+                             item_type="MixtureWQ_Rot"
+                             count="1"
+                             show_items="true"
+                             show_list="false"
+                             pxsl_line="471" />
+                        <Phase
+                             type="semaphore"
+                             name="_"
+                             pxsl_line="472" />
+                    </Path>
+                    <Path
+                         pxsl_line="473">
+                        <Phase
+                             type="have item guard"
+                             name="_"
+                             item_name="MixtureWQ_Rot"
+                             pxsl_line="474" />
+                    </Path>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="475">
+                    <Object
+                         pxsl_line="475">
+                        <QuestObject
+                             class="AppearGroup"
+                             name="WItchQueen_AG_Mixture_Rot"
+                             pxsl_line="475" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="set reward"
+                     name="_"
+                     pxsl_line="476" />
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="477">
+                    <Destination
+                         pxsl_line="477">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Market_01"
+                             pxsl_line="477" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN 03 - TEST THIRD POTION -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__WitchQueen03_TESTPOTION"
+         parent="WitchQueen03_POTION"
+         pxsl_line="481">
+        <Phase
+             type="go to"
+             name="Witch Queen 03 - Test the third mixture"
+             distance="10000"
+             show_locations="false"
+             pxsl_line="482">
+            <Destination
+                 pxsl_line="482">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="482" />
+            </Destination>
+            <DebugPlayerPosition
+                 pxsl_line="483">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="483" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             pxsl_line="484">
+            <Path
+                 pxsl_line="485">
+                <Phase
+                     type="player area guard"
+                     name="_"
+                     outside="true"
+                     pxsl_line="486">
+                    <SensorArea
+                         pxsl_line="486">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="WitchQueen_SafeZoneSensor"
+                             pxsl_line="486" />
+                    </SensorArea>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="487">
+                <Phase
+                     type="player used item"
+                     name="_"
+                     item="MixtureWQ_Rot"
+                     pxsl_line="488" />
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="22"
+                     pxsl_line="489" />
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_WitchQueen03_02DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="490" />
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="23"
+                     pxsl_line="491" />
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="dahlia"
+                     group="Player_WitchQueen03_03DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="492" />
+            </Path>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="493">
+            <Object
+                 pxsl_line="493">
+                <QuestObject
+                     class="MapMarker"
+                     name="WitchQueen_MapMarker_Prime"
+                     pxsl_line="493" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="494">
+            <Destination
+                 pxsl_line="494">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="494" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN 04 - START - GET BACK TO DAHLIA AFTER THIRD TEST -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="WitchQueen04"
+         parent="__WitchQueen03_TESTPOTION"
+         difficulty="medium"
+         quest_giver="Dahlia"
+         reward_set="WitchQueen04_reward"
+         show_quest_log_reminder="true"
+         pxsl_line="498">
+        <Phase
+             type="talk"
+             name="Witch Queen 04 - START"
+             speaker="dahlia"
+             group="Dahlia_WitchQueen03_END"
+             show_locations="false"
+             following_group="Dahlia_WitchQueen03_INP"
+             questgiver_indicator="true"
+             pxsl_line="499">
+            <DebugPlayerPosition
+                 pxsl_line="500">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="500" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="501">
+            <Object
+                 pxsl_line="501">
+                <QuestObject
+                     class="MapMarker"
+                     name="WitchQueen_MapMarker_Prime"
+                     pxsl_line="501" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="502">
+            <Destination
+                 pxsl_line="502">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="502" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN 04 - HUNT THE PRIME -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="WitchQueen04_PRIME"
+         parent="WitchQueen04"
+         glued="true"
+         pxsl_line="506">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;WitchQueen04_OBJ_GetPrimesBrain&amp;"
+             pxsl_line="507">
+            <Path
+                 pxsl_line="507">
+                <Phase
+                     type="go to"
+                     name="Witch Queen 04 - Find prime's brain"
+                     distance="10000"
+                     show_locations="false"
+                     pxsl_line="508">
+                    <Destination
+                         pxsl_line="508">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Market_01"
+                             pxsl_line="508" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="509">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Market_01"
+                             pxsl_line="509" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="bring item"
+                     name="_"
+                     speaker="dahlia"
+                     item_type="Craft_PrimeTissue"
+                     count="1"
+                     show_items="false"
+                     gather_radius="3"
+                     pxsl_line="510" />
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="dahlia"
+                     group="Dahlia_WitchQueen04_01DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     gather_radius="1000"
+                     pxsl_line="511" />
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="512">
+                    <Destination
+                         pxsl_line="512">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Market_01"
+                             pxsl_line="512" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="513">
+                    <Destination
+                         pxsl_line="513">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Market_01"
+                             pxsl_line="513" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN 04 - TAKE FOURTH POTION -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="WitchQueen04_POTION"
+         parent="WitchQueen04_PRIME"
+         glued="true"
+         pxsl_line="517">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;WitchQueen04_OBJ_TakePotion&amp;"
+             pxsl_line="518">
+            <Path
+                 pxsl_line="518">
+                <Phase
+                     type="go to"
+                     name="Witch Queen 04 - Take the last mixture"
+                     distance="10000"
+                     show_locations="false"
+                     pxsl_line="519">
+                    <Destination
+                         pxsl_line="519">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Market_01"
+                             pxsl_line="519" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="520">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Market_01"
+                             pxsl_line="520" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="521">
+                    <Object
+                         pxsl_line="521">
+                        <QuestObject
+                             class="AppearGroup"
+                             name="WItchQueen_AG_Mixture_Success"
+                             pxsl_line="521" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="OR"
+                     name="_"
+                     pxsl_line="522">
+                    <Path
+                         pxsl_line="523">
+                        <Phase
+                             type="bring item"
+                             name="_"
+                             speaker="dahlia"
+                             item_type="Cloak"
+                             count="1"
+                             show_items="true"
+                             show_list="false"
+                             pxsl_line="524" />
+                        <Phase
+                             type="semaphore"
+                             name="_"
+                             pxsl_line="525" />
+                    </Path>
+                    <Path
+                         pxsl_line="526">
+                        <Phase
+                             type="have item guard"
+                             name="_"
+                             item_name="Cloak"
+                             pxsl_line="527" />
+                    </Path>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="528">
+                    <Object
+                         pxsl_line="528">
+                        <QuestObject
+                             class="AppearGroup"
+                             name="WItchQueen_AG_Mixture_Success"
+                             pxsl_line="528" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="set reward"
+                     name="_"
+                     pxsl_line="529" />
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="530">
+                    <Destination
+                         pxsl_line="530">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="WitchQueen_SP_Market_01"
+                             pxsl_line="530" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN 04 - TEST THE FOURTH POTION (WITHOUT OBJECTIVE AND LOCATION) -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__WitchQueen04_TESTPOTION"
+         parent="WitchQueen04_POTION"
+         pxsl_line="534">
+        <Phase
+             type="go to"
+             name="Witch Queen - Test the final mixture"
+             distance="10000"
+             show_locations="false"
+             pxsl_line="535">
+            <Destination
+                 pxsl_line="535">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="535" />
+            </Destination>
+            <DebugPlayerPosition
+                 pxsl_line="536">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="536" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             pxsl_line="537">
+            <Path
+                 pxsl_line="538">
+                <Phase
+                     type="player area guard"
+                     name="_"
+                     outside="true"
+                     pxsl_line="539">
+                    <SensorArea
+                         pxsl_line="539">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="WitchQueen_SafeZoneSensor"
+                             pxsl_line="539" />
+                    </SensorArea>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="540">
+                <Phase
+                     type="player used item"
+                     name="_"
+                     item="Cloak"
+                     pxsl_line="541" />
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="13"
+                     pxsl_line="542" />
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_WitchQueen04_04DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="543" />
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="10"
+                     pxsl_line="544" />
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_WitchQueen04_05DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="545" />
+            </Path>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="546">
+            <Object
+                 pxsl_line="546">
+                <QuestObject
+                     class="MapMarker"
+                     name="WitchQueen_MapMarker_Reward"
+                     pxsl_line="546" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="547">
+            <Destination
+                 pxsl_line="547">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="547" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN 05 - TALK AND REWARD -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="WitchQueen05"
+         parent="__WitchQueen04_TESTPOTION"
+         difficulty="easy"
+         quest_giver="Dahlia"
+         reward_set="WitchQueen05_reward"
+         show_quest_log_reminder="true"
+         pxsl_line="551">
+        <Phase
+             type="talk"
+             name="WitchQueen 05 - START"
+             speaker="dahlia"
+             group="Dahlia_WitchQueen04_02DLG01"
+             show_locations="false"
+             questgiver_indicator="true"
+             pxsl_line="552">
+            <DebugPlayerPosition
+                 pxsl_line="553">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="553" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="554">
+            <Object
+                 pxsl_line="554">
+                <QuestObject
+                     class="MapMarker"
+                     name="WitchQueen_MapMarker_Reward"
+                     pxsl_line="554" />
+            </Object>
+        </Phase>
+        <Phase
+             type="set reward"
+             name="_"
+             pxsl_line="555" />
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="556">
+            <Destination
+                 pxsl_line="556">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="556" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- WITCH QUEEN 05 - DAHLIA -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__WitchQueen05_DAHLIA"
+         parent="WitchQueen05"
+         pxsl_line="560">
+        <Phase
+             type="wait guard"
+             name="_"
+             time="1"
+             pxsl_line="561" />
+        <Phase
+             type="talk"
+             name="_"
+             speaker="dahlia"
+             group="Player_WitchQueen04_03DLG01"
+             show_locations="false"
+             auto_start="true"
+             pxsl_line="562" />
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="563">
+            <Destination
+                 pxsl_line="563">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="563" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="gather players guard"
+             name="_"
+             distance="-30"
+             show_locations="false"
+             pxsl_line="564">
+            <Destination
+                 pxsl_line="564">
+                <QuestObject
+                     class="HumanAI"
+                     name="Dahlia"
+                     pxsl_line="564" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="use life place"
+             name="_"
+             pxsl_line="565">
+            <LifePlace
+                 pxsl_line="565">
+                <QuestObject
+                     class="NPCLifePlace"
+                     name="WitchQueen_Dahlia_LP_AfterQuest_05"
+                     pxsl_line="565" />
+            </LifePlace>
+            <AI
+                 pxsl_line="566">
+                <QuestObject
+                     class="HumanAI"
+                     name="Dahlia"
+                     pxsl_line="566" />
+            </AI>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="567">
+            <Destination
+                 pxsl_line="567">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="WitchQueen_SP_Market_01"
+                     pxsl_line="567" />
+            </Destination>
+        </Phase>
+    </Quest>
+</QuestsDefinitions>

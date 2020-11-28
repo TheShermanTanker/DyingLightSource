@@ -1,0 +1,757 @@
+// Params from xls
+!include("export_biter_params.scr")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////// CURVES //////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+Curve(CURVE_SOUND_GAIN_ENEMY_LO_FREQ, "zombie_eq_gain_lo_enemy")
+Curve(CURVE_SOUND_GAIN_ENEMY_HI_FREQ, "zombie_eq_gain_hi_enemy")
+Curve(CURVE_SOUND_GAIN_NO_ENEMY_LO_FREQ, "zombie_eq_gain_lo_no_enemy")
+Curve(CURVE_SOUND_GAIN_NO_ENEMY_HI_FREQ, "zombie_eq_gain_hi_no_enemy")
+Curve(CURVE_ACCELERATION_MULT, "human_acceleration_mult")
+Curve(CURVE_DECELERATION_MULT, "human_deceleration_mult")
+Curve(CURVE_MAX_SPEED, "human_max_speed")
+Curve(CURVE_TURN_SPEED, "zombie_turn_speed")
+Curve(CURVE_DIST_TO_START_WALK_PER_ANGLE, "dist_to_start_walk_per_angle")
+Curve(CURVE_AVOID_FORWARD_ROTATION_SPEED, "avoid_forward_rotation_speed")
+Curve(CURVE_DIFF_LEVEL_DISTRIBUTION, "diff_level_distribution")
+Curve(CURVE_EXPERIENCE_MUL_PER_LEVEL_DIFF, "experience_mul_per_level_diff")
+Curve(CURVE_HEALTH, "zombie_health")
+Curve(CURVE_MELEE_DAMAGE, "zombie_melee_damage")
+Curve(CURVE_EXPLOSION_DAMAGE, "zombie_explosion_damage")
+Curve(CURVE_KO_PROBABILITY, "zombie_ko_prob")
+Curve(CURVE_COMBO_PROBABILITY, "zombie_combo_prob")
+Curve(CURVE_COUNTER_ATTACK_PROB, "zombie_counter_attack_prob")
+Curve(CURVE_WEAPON_THROW_PROB, "zombie_weapon_throw_prob")
+Curve(CURVE_MAX_ADDITIONAL_DIFF_LEVEL, "max_additional_diff_level")
+Curve(CURVE_BURN_MESH_ATTRIBUTE, "burn_mesh_attribute")
+Curve(CURVE_SIGHT_RANGE_HEIGHT_REDUCTION_MUL, "zombie_sight_range_height_reduction_mul")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////// PARAMETERS ////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+ParamFloat("acceleration", 2.0) //[m]
+ParamFloat("deceleration", 2.0) //[m]
+ParamFloat("berserker_speed", 3.2) //[m]
+ParamFloat("crawl_turn_speed", 5.0)
+ParamFloat("move_turn_speed_mult", 1.0)
+ParamFloat("static_path_node_radius", 0.6) //[m]
+ParamFloat("dynamic_path_node_radius", 0.7) //[m]
+
+ParamFloat("turn_speed", 80.0)
+ParamFloat("attack_turn_speed", -1.0)
+ParamFloat("attack_anim_related_turn_speed_limit", 80.0)
+ParamFloat("max_default_movement_turn_speed", 80.0)
+ParamFloat("max_walk_movement_turn_speed", 80.0)
+ParamFloat("max_trot_movement_turn_speed", 80.0)
+ParamFloat("max_run_movement_turn_speed", 80.0)
+ParamFloat("max_sprint_movement_turn_speed", 80.0)
+ParamFloat("max_berserker_movement_turn_speed", 80.0)
+ParamFloat("calm_turn_speed", 80.0)
+
+ParamFloat("back_strafe_speed_mult", 0.75)
+ParamFloat("side_strafe_speed_mult", 0.65)
+ParamFloat("berserker_fall_prob", 100.0)
+ParamFloat("heavy_berserker_dist", 0.0)     //[m]
+ParamFloat("heavy_berserker_min_dist", 0.0)     //[m]
+ParamFloat("berserker_dist", 7.5)     //[m]
+ParamFloat("berserker_min_dist", 4.0) //[m]
+ParamFloat("berserker_right_arm_attack_dist", 2.0) //[m]
+ParamFloat("berserker_left_arm_attack_dist", 2.0) //[m]
+ParamFloat("berserker_grab_dist", 6.0) //[m]
+ParamFloat("berserker_grab_min_dist", 1.5) //[m]
+ParamFloat("berserker_ram_dist", 2.2) //[m]
+ParamFloat("berserker_ram_min_dist", 1.0) //[m]
+ParamFloat("berserker_hit_prob", 100.0)
+ParamBool("berserker_hit_only_if_arm_destroyed", 1)
+ParamFloat("berserker_grab_prob", 100.0)
+ParamFloat("berserker_grab_ai_prob", 33.0)
+ParamFloat("berserker_ram_prob", 0.0)
+ParamFloat("max_dist_to_grab_from_stand", 3.5)            //[m]
+ParamFloat("min_dist_to_grab_from_stand", 0.0)            //[m]
+ParamFloat("min_dist_to_grab", 2.5)            		      // grab from stand start min distance
+ParamFloat("max_dist_to_strike_from_stand", 4.0) //[m]
+ParamFloat("min_dist_to_strike_from_stand", 2.0) //[m]
+ParamFloat("min_time_btw_attack_from_stand_attempts", 0.0)    // min time (spawner borders) between grab attempts (0 in the center of normal spawner)
+ParamFloat("max_time_btw_attack_from_stand_attempts", 0.0)   // max time (spawner borders) between grab attempts (a distance from normal spawner)
+ParamFloat("max_dist_to_stinger", 3.0)                    //[m]
+ParamFloat("max_dist_to_stinger_laying", 1.4)                    //[m]
+ParamFloat("min_dist_to_stinger", 0.5)                     //[m]
+ParamFloat("max_angle_to_stinger", 180.0)
+ParamFloat("max_dist_to_grab", 1.65)                       //[m]
+ParamFloat("max_dist_to_grab_laying", 1.4)                       //[m]
+ParamFloat("time_btw_hit_berserkers", 0.0)                  // time between possible occurance of hit berserker attacks
+ParamFloat("time_btw_grab_berserkers", 0.0)                 // time between possible occurance of catch berserker attacks
+ParamFloat("time_btw_ai_grab_berserkers", 6.0)                 // time between possible occurance of catch berserker attacks
+ParamFloat("time_btw_ram_berserkers", 2.0)                  // time between possible occurance of ram berserker attacks
+ParamFloat("knock_down_duration", 3.0)
+ParamFloat("body_destroyed_knock_down_duration", 7.0)
+ParamFloat("medium_severity_threshold", 29.0)
+ParamFloat("heavy_severity_threshold", 60.0)
+ParamFloat("decapitation_prob", 50.0)
+ParamFloat("counter_attack_prob_mul", 1.0)
+ParamFloat("counter_attack_from_stand_prob_mul", 0.5)
+ParamFloat("counter_push_prob_mul", 0.0)
+ParamFloat("counter_combo_prob_mul", 0.0)
+ParamFloat("counterattack_dist", 1.8) //[m]
+ParamFloat("grab_counterattack_prob", 0.8)
+ParamFloat("grab_counterattack_ai_prob", 0.33)
+ParamFloat("grab_counterattack_dist", 3.0)
+ParamFloat("far_counterattack_dist", -1.0)
+ParamFloat("counterattack_angle", 30.0)
+ParamFloat("duck_sight_range_at_night_mul", 0.6)
+ParamFloat("hearing_sensitivity_calm", 1.0)
+ParamFloat("hearing_sensitivity", 1.0)
+ParamBool("can_hear_dying_ais", 0)
+
+// sight parameters /////////////////////////////////////
+ParamFloat("sight_range_calm", 10.0) //[m]
+ParamFloat("sight_range", 10.0) //[m]
+ParamFloat("sight_range_mul_at_night", 1.0)
+
+ParamFloat("sight_angle_at_min_dist_calm", 160)
+ParamFloat("sight_angle_at_max_dist_calm", 70)
+ParamFloat("sight_angle_min_dist_calm", 0.0)
+ParamFloat("sight_angle_max_dist_calm", 15.0)
+
+ParamFloat("sight_angle_at_min_dist", 160)
+ParamFloat("sight_angle_at_max_dist", 160)
+ParamFloat("sight_angle_min_dist", 15)
+ParamFloat("sight_angle_max_dist", 15)
+
+ParamFloat("sight_angle_at_min_dist_fake", 20.0)
+ParamFloat("sight_angle_at_max_dist_fake", 10.0)
+ParamFloat("sight_angle_min_dist_fake", 10.0)
+ParamFloat("sight_angle_max_dist_fake", 100.0)
+
+ParamFloat("sight_range_calm_interior", 10) //[m]
+ParamFloat("sight_range_interior", 10.0) //[m]
+ParamFloat("sight_range_mul_at_night_interior", 1.0)
+
+ParamFloat("sight_angle_at_min_dist_calm_interior", 120)
+ParamFloat("sight_angle_at_max_dist_calm_interior", 90)
+ParamFloat("sight_angle_min_dist_calm_interior", 5.0)
+ParamFloat("sight_angle_max_dist_calm_interior", 10.0)
+
+ParamFloat("sight_angle_at_min_dist_interior", 140)
+ParamFloat("sight_angle_at_max_dist_interior", 140)
+ParamFloat("sight_angle_min_dist_interior", 15)
+ParamFloat("sight_angle_max_dist_interior", 15)
+
+ParamFloat("sight_angle_at_min_dist_fake_interior", 20.0)
+ParamFloat("sight_angle_at_max_dist_fake_interior", 10.0)
+ParamFloat("sight_angle_min_dist_fake_interior", 5.0)
+ParamFloat("sight_angle_max_dist_fake_interior", 10.0)
+/////////////////////////////////////////////////////////
+
+ParamFloat("time_to_extinguish", 30)
+ParamFloat("move_time_before_berserker", 0.0)
+ParamFloat("gas_attack_cool_down", 5)
+ParamFloat("gas_attack_range", 0)
+ParamBool("can_counterattack_360", 0) // 360 degrees counter attack are used if counterattack_angle measured in code is bigger than the one defined above
+ParamBool("can_spit", 0)
+ParamBool("can_throw_projectile", 0)
+ParamFloat("spit_min_damage_range", 0.0)
+ParamFloat("spit_max_damage_range", 0.0)
+ParamFloat("throw_projectile_min_range", 0.0)
+ParamFloat("throw_projectile_max_range", 0.0)
+ParamFloat("min_time_btw_throws_projectile", -1.0)
+ParamFloat("max_time_btw_throws_projectile", -1.0)
+ParamFloat("max_time_btw_throws_projectile", -1.0)
+ParamFloat("throw_projectile_max_accuracy_range", 0.0)
+ParamFloat("throw_projectile_accuracy_degradation_dist", 0.0)
+ParamFloat("spit_min_range", 3.0) //[m]
+ParamFloat("spit_speed", 10.0) //[m]
+ParamFloat("activity_coef", 1.0)
+ParamFloat("zombivity_coef", 1.0)
+ParamFloat("activity_player_check_dist", 2.0) //[m]
+ParamFloat("max_grab_zombies_num", 4.0)
+ParamFloat("untouchable_time_after_release", 0.5)
+ParamFloat("untouchable_time_after_release_car", 0.0)
+ParamFloat("front_player_catch_angle", 60.0)
+ParamFloat("max_player_catch_angle", 90.0)
+ParamFloat("catch_player_walk_speed_mul", 0.35)
+ParamBool("grab_360_for_walking_player", 0)
+ParamFloat("grabbed_player_attackers_num", 2.0) // base number of AI attacking grabbed player; these AI should be more interested in other targets
+ParamFloat("base_player_attackers_num", 5.0) // base number of AI attacking player
+ParamFloat("max_player_attackers_num", 8.0) // max number of AI attacking player
+ParamFloat("max_dist_to_interest_attractor", 10.0) //[m]
+ParamFloat("interest_attractor_duration", 10.0)
+ParamFloat("hit_physics_effect_mul", 1.0)
+ParamFloat("overturn_depth", 2)
+ParamFloat("overturn_width", 0.01) //[m]
+ParamBool("hit_stops_player_anim", 0)
+ParamBool("directional_melee_attacks", 0)
+ParamBool("can_fall", 1)
+ParamBool("can_kick", 0)
+ParamBool("can_finish", 0)
+ParamBool("can_react_on_hit", 1)
+ParamBool("can_react_on_bullet", 0)
+ParamBool("can_react_on_light", 0)
+ParamFloat("humanity_time", 20.0)
+ParamFloat("humanity_hit_reaction_prob", 0.0)
+ParamFloat("time_to_enter_humanity_after_hit", -1.0)
+ParamFloat("below_health_ratio_to_enter_humanity", 1.0)
+ParamFloat("min_time_btw_humanity_hit_reaction", -1.0)
+ParamFloat("counter_attack_prob_in_humanity", 0.0)
+ParamBool("can_keep_distance_during_melee", 0)
+ParamFloat("min_fall_height", 0.7)
+ParamBool("can_dodge", 0)
+ParamBool("can_move_turn", 0)
+ParamBool("can_fall_on_low_obstacles", 0)
+ParamFloat("min_time_btw_hit_reactions", 0.5)
+ParamFloat("connection_cost_mul", 0.5)
+ParamFloat("navi_mesh_sight_range", 15.0) //[m]
+ParamFloat("navi_mesh_random_factor", 0.3)
+ParamFloat("navi_mesh_random_pass_max_deviation", 5.0)
+ParamFloat("dist_from_target_to_random_navi_pass", 3.0)
+ParamFloat("time_btw_path_recalc", 1.0)
+ParamFloat("melee_range", 1.8) //[m]
+ParamFloat("melee_range_vs_ai", 1.0)
+ParamFloat("max_melee_angle_when_cannot_stand", 30.0)
+ParamFloat("bite_range", 1.5) //[m]
+ParamFloat("melee_range_y", 1.2) //[m]
+ParamFloat("max_pitch_angle", 40.0)
+ParamFloat("rise_from_dead_dist", 15.0) //[m]
+ParamFloat("rise_from_dead_dist_stinger", 1.7) //[m]
+ParamFloat("avoid_time", 2.5)
+ParamFloat("avoid_distance", 0.7) //[m]
+ParamFloat("recalculate_dynamic_path_time", 0.3)
+ParamFloat("max_dynamic_path_angle", 90.0)
+ParamFloat("max_collision_angle_to_stop", 0.8581)
+ParamFloat("ram_damage_mul", 0.0)
+ParamFloat("ram_physics_damage", 1.8)
+ParamFloat("bullet_head_hit_damage_mult", 1.0)
+ParamFloat("bullet_body_hit_damage_mult", 1.0)
+ParamBool("unconscious_instead_of_killed", 0)
+ParamFloat("door_search_interval", 0.5)
+ParamBool("attack_enabled", 1)
+ParamFloat("fall_on_shot_prob", 0.0)
+ParamProb("taunt_prob", 0, 1)
+ParamFloat("taunt_prob_on_target_change", 0.0)
+ParamFloat("taunt_prob_on_take_damage", 0.0)
+ParamFloat("taunt_prob_on_alarm_level_change", 1.0)
+ParamFloat("min_time_btw_taunts", 5.0)
+ParamInt("zombie_type", 0)
+ParamFloat("ram_turn_speed_limit_far", 70.0)
+ParamFloat("ram_turn_speed_limit_close", 30.0)
+ParamFloat("after_ram_wait_time", 3.0)
+ParamFloat("ram_close_dist", 4.0) //[m]
+ParamFloat("explode_physical_damage", 1.3)
+ParamFloat("explode_range", 4.5) //[m]
+ParamFloat("time_to_explode", 2.0)
+ParamFloat("regeneration_rate", 0.4) // part of health restored per second (only for those with enabled regeneration)
+ParamFloat("no_regeneration_time", 2.0)
+ParamFloat("regeneration_probability", 0.0)
+ParamFloat("special_move_disable_time", 3.0) // ai doesn't perform special movement (like berserker) after electrocution
+ParamFloat("heel_height", 0.0) //[m]
+ParamBool("can_attack_from_move", 0)
+ParamBool("slowdown_player_after_hit_during_pursuit", 0)
+ParamBool("have_pursuit_attacks", 0)
+ParamBool("can_strike_from_stand", 0)
+ParamBool("always_react_on_bullet", 0)
+ParamBool("always_react_on_kick", 1)
+ParamFloat("air_kick_knockdown_prob", 1.0)
+ParamFloat("drowning_time", 2.0)
+ParamBool("can_react_on_hit_in_vehicle", 0)
+ParamBool("can_die_in_vehicle", 0)
+ParamBool("check_enemy_reachable", 1)
+ParamFloat("ellipsoid_size_mul", 1.0)
+ParamInt("max_level", 60)
+ParamFloat("experience_award", 0.0)
+ParamFloat("assist_experience_mul", 0.5)
+ParamFloat("nearby_experience_mul", 0.1)
+//ParamFloat("scream_damage_mul", 1.0)
+ParamFloat("scream_range", 0.0)
+ParamBool("scream_without_player", 0)
+ParamFloat("scream_spawning_request_speed", 0.0)
+ParamFloat("sight_additional_range", 10.0)
+ParamFloat("blast_damage_mul", 1.0)
+ParamFloat("physics_damage", 1.0)
+ParamFloat("damage_taken_mul_per_level_diff", 0.05)
+ParamFloat("dodge_prob_mul", 0.0)
+ParamFloat("dodge_jump_prob", 0.0)
+ParamFloat("combo_prob_mul", 1.0)
+ParamBool("limb_cut_by_direct_hit", 1)
+ParamBool("use_alt_physics_while_dying", 1)
+//ParamFloat("special_damage_mul", 0.5)
+ParamFloat("weapon_throw_prob_mul", 1.0)
+ParamFloat("throw_weapon_speed", 5.0)
+ParamFloat("throw_weapon_range", 20.0)
+ParamFloat("shooting_range", 4.5) //[m]
+ParamFloat("shooting_range_max", 10.0) //[m]
+ParamInt("max_severity", 3)
+ParamFloat("death_anim_prob", 0.3)
+ParamFloat("confusion_prob_mod", 1.0)
+ParamBool("one_shot", 0)
+ParamInt("min_body_hits_to_kill", -1)
+ParamInt("min_head_hits_to_kill", -1)
+ParamFloat("enemy_keep_time_alarmed", 20.0)
+ParamFloat("enemy_keep_time_upset", 20.0)
+ParamString("drop_item", "")
+ParamFloat("drop_item_prob", 0.0)
+ParamFloat("time_for_clench_check", -1.0)
+ParamFloat("time_to_dodge_attack", 0.5)
+ParamBool("grees_update_look", 1)
+ParamBool("can_roll_head", 0)
+ParamFloat("health_part_lost_unconscious", 0.0)
+ParamFloat("confused_on_unconscious_time", 0.0)
+ParamBool("always_strafe", 0)
+ParamBool("use_parallel_hit_reactions", 0)
+ParamBool("can_attack_enemy_in_vehicle", 1)
+ParamBool("fall_on_head_collision", 1)
+ParamBool("fall_on_players_ram", 1)
+ParamBool("increase_aggression_level_on_enemy_present", 0)
+ParamFloat("threat_level", 1)
+ParamFloat("time_after_attack_before_loiter", 0.0)
+ParamFloat("detect_enemy_delay", 2.5)
+ParamBool("apply_damage_in_cone", 1)
+ParamFloat("cone_damage_angle", 60.0)
+ParamBool("force_counter_on_kick", 0)
+ParamBool("enable_collisions_with_other_ai", 1)
+ParamBool("simple", 0)
+ParamFloat("jump_dist", 0.0) //[m]
+ParamFloat("min_time_btw_light_reactions", 8.0)
+ParamFloat("blinded_time", 1.0)
+ParamFloat("strong_light_mul", 2.0)
+//ParamFloat("light_vulnerable_time", 2.0)
+ParamFloat("light_reaction_start_range", 10.0) //[m]
+ParamFloat("light_reaction_stop_range", 15.0) //[m]
+ParamFloat("light_reaction_move_range", 12.0) //[m]
+ParamBool("can_lock_nav_connections", 0)
+ParamFloat("lock_nav_connection_time", 0.0)
+ParamBool("use_intermediate_point", 0)
+ParamBool("use_slots_to_attack", 0)
+ParamBool("can_stop_to_grab_from_stand", 1)
+ParamFloat("chase_time_to_spit", 0.0)
+ParamFloat("chase_spit_duration", 0.0)
+ParamFloat("spit_effect_duration", 0.0)
+ParamFloat("min_time_btw_spits", -1.0)
+ParamFloat("chase_time_to_scream", 100.0)
+ParamFloat("chase_scream_dist", 0.0)
+ParamBool("navigate_through_generic_nav_mesh_connections", 1)
+ParamBool("navigate_through_user_nav_mesh_connections", 0)
+ParamBool("can_move_through_low_obstacles", 1)
+ParamBool("can_move_through_high_obstacles", 0)
+ParamFloat("min_jump_on_height", 0.4) //[m]
+ParamFloat("max_jump_on_height", 1.4) //[m]
+ParamFloat("max_jump_over_dist", 0.5) //[m]
+ParamFloat("min_jump_down_height", 0.0) //[m]
+ParamFloat("max_connection_height_up", 1.4)
+ParamFloat("max_connection_height_down", 4.5)   // after climb can fall see (min_fall_height)
+ParamFloat("max_connection_horiz_dist", 1.0)
+ParamBool("stop_in_last_node_when_path_not_found", 1)
+ParamFloatRange("dist_for_attack_range_2_m", -1.0, 1.5)
+ParamFloatRange("dist_for_attack_range_2_m_in_move", -1.0, 0.5)
+ParamBool("attack_range_2_m_enabled", 1)
+ParamFloatRange("dist_for_attack_range_3_m", -1.0, 2.5)
+ParamFloatRange("dist_for_attack_range_3_m_in_move", -1.0, 1.5)
+ParamBool("attack_range_3_m_enabled", 1)
+ParamFloatRange("dist_for_attack_range_4_m", -1.0, 3.5)
+ParamFloatRange("dist_for_attack_range_4_m_in_move", -1.0, 2.5)
+ParamBool("attack_range_4_m_enabled", 1)
+ParamFloat("found_enemy_scream_range", 0.0)
+ParamBool("can_patrol", 0)
+ParamBool("can_react_to_sounds_during_night_patrol", 0)
+ParamBool("ignore_velocities_when_hearing_sound", 0)
+ParamBool("treat_any_nearby_sound_as_hostile", 0)
+ParamFloat("full_angle_sight_range", 3.0)
+ParamFloat("spit_force", 0.15)
+ParamBool("directional_collision_reactions", 0)
+ParamFloat("wander_dist", 5.0)
+ParamFloat("dist_to_chase_beyond_wander_dist", 0.0)
+ParamFloat("dist_from_target_to_chase_beyond_wander_dist", 15.0)
+ParamFloat("dist_from_target_to_chase_beyond_wander_dist_when_not_visible", 5.0)
+ParamInt("min_spits_to_recharge", -1)
+ParamInt("max_spits_to_recharge", -1)
+ParamFloat("dist_to_keep_from_target", 0.0)
+ParamFloat("max_dot_to_perform_attack_from_move", 0.8)
+ParamFloat("max_dot_to_perform_attack_from_stand", 0.8)
+ParamFloat("max_y_diff_from_target_to_perform_attack", 0.0)
+ParamBool("can_attack_objects_from_move", 0)
+ParamBool("can_use_fake_attacks", 1)
+ParamFloat("max_height_to_fake_attack_low", 1.0)    //[m]
+ParamFloat("min_height_to_fake_attack_high", 1.6)  //[m]
+ParamBool("can_be_poisoned", 1)
+ParamBool("disable_physics_damage_when_not_on_ragdoll", 1)
+ParamBool("cripple_bones_after_death_only", 0)
+ParamBool("cut_off_bones_after_death_only", 0)
+ParamBool("can_destroy_head_before_death", 1)
+ParamBool("pro_melee_fighter", 0)
+ParamFloat("alarm_enemy_visible_time_mul_when_driver", 1.)
+ParamFloat("alarm_after_enemy_visible_min_dist_time", -1.0)
+ParamFloat("alarm_after_enemy_visible_max_dist_time", -1.0)
+ParamFloat("alarm_when_enemy_close_min_distance", -1.0)
+ParamFloat("alarm_when_enemy_close_max_distance", -1.0)
+ParamFloat("group_behavior_keep_distance_optimal_dist", -1.0)
+ParamFloat("group_behavior_keep_distance_optimal_dist_ai", -1.0)
+ParamFloat("group_behavior_keep_distance_optimal_dist_vehicle", -1.0)
+ParamBool("allow_group_behaviors", 0)
+ParamBool("allow_group_broadcast_target_info", 0)
+ParamBool("allow_group_broadcast_attack", 0)
+ParamBool("allow_group_notifying_without_humanity", 0)
+ParamBool("disallow_group_behavior_preventing_attack", 0)
+ParamFloat("group_behavior_keep_distance_taunt_prob", -1.0)
+ParamFloat("group_behavior_keep_distance_litter_throw_prob", -1.0)
+ParamBool("update_async_arrival", 0)
+ParamFloat("push_physics_damage_light", 3.0)
+ParamFloat("push_physics_damage_medium", 6.0)
+ParamFloat("push_physics_damage_heavy", 9.0)
+ParamFloat("push_car_physics_damage_light", 100.0)
+ParamFloat("push_car_physics_damage_medium", 200.0)
+ParamFloat("push_car_physics_damage_heavy", 300.0)
+ParamFloat("jump_away_probability", 0.0)
+ParamFloat("time_to_throw_back_enemy", -1.0)
+ParamFloat("time_to_throw_back_ai_enemy", -1.0)
+ParamFloat("wait_prob_after_throwing_enemy_back", 0)
+ParamFloat("wait_prob_after_dodge_jump", 0)
+ParamFloat("throw_back_kick_angle", 180.0)
+ParamFloat("min_time_btw_dodge_jump", 0.0)
+ParamFloat("max_time_btw_dodge_jump", 0.0)
+ParamBool("arena_difficulty_scaling_enabled", 0)
+
+ParamBool("disable_chatter_system", 0)
+
+ParamBool("taunt_on_alarm_level_change_at_night", 1)
+ParamBool("fast_sprint_during_pursuit", 0)
+
+//---- those params are used to tweak how ai is rotating towards player ----//
+
+// head roation
+ParamFloat("head_distribution_change_time", 0.3)
+ParamFloat("head_dev_time", 1.0)
+ParamFloat("head_distribution_horz_commited", 0.732)
+ParamFloat("head_distribution_vert_up_commited", 0.8)
+ParamFloat("head_distribution_vert_down_commited", 0.2)
+ParamFloat("head_distribution_horz_commited_param", 2.221)
+ParamFloat("head_distribution_vert_up_commited_param", 1.6)
+ParamFloat("head_distribution_vert_down_commited_param", 1.0)
+ParamFloat("head_vert_min", -25.0)
+ParamFloat("head_vert_max", 50.0)
+ParamFloat("head_horz_clamp", 50.0)
+ParamFloat("head_vert_mul", 0.75)
+ParamFloat("head_vert_mul_time", 0.1)
+ParamFloat("head_horz_mul", 1.0)
+ParamFloat("head_horz_mul_time", 0.1)
+ParamFloat("head_enable_time", 1.0)
+ParamBool("head_enabled", 1)
+ParamBool("adaptive_head_tracking", 0)
+
+
+// arms rotation
+ParamFloat("arms_distribution_change_time", 0.3)
+ParamFloat("arms_dev_time", 0.5)
+ParamFloat("arms_distribution_horz_commited", 0.732)
+ParamFloat("arms_distribution_vert_up_commited", 0.8)
+ParamFloat("arms_distribution_vert_down_commited", 0.2)
+ParamFloat("arms_distribution_horz_commited_param", 2.221)
+ParamFloat("arms_distribution_vert_up_commited_param", 1.6)
+ParamFloat("arms_distribution_vert_down_commited_param", 1.0)
+ParamFloat("arms_vert_min", -25.0)
+ParamFloat("arms_vert_max", 50.0)
+ParamFloat("arms_horz_clamp", 50.0)
+ParamFloat("arms_vert_mul", 0.75)
+ParamFloat("arms_vert_mul_time", 0.1)
+ParamFloat("arms_horz_mul", 1.0)
+ParamFloat("arms_horz_mul_time", 0.1)
+ParamFloat("arms_enable_time", 1.0)
+ParamBool("arms_enabled", 1)
+
+ParamFloat("bone_rotation_lod_begin_range", 20.0)
+ParamFloat("bone_rotation_lod_end_range", 30.0)
+
+ParamBool("should_leave_unwanted_ai_region", 1)
+ParamFloat("avoid_hit_abuse_min_time", 0.0)
+
+ParamFloat("sight_range_height_threshold_min", 2.0)
+
+ParamFloat("defend_area_range", 10000.0)
+ParamFloat("warning_range", 1.0)
+ParamFloat("body_container_active_time", -1)
+
+ParamFloat("lost_target_search_dist_min", 8.0)
+ParamFloat("lost_target_search_dist_max", 20.0)
+ParamBool("take_damage_from_other_ai_impact", 1)
+
+//HEALTH, STAMINA AND DAMAGE
+
+//ParamFloat("health_mul", 1.0)							//amount of health in monster's body - value taken from curve: zombie_health
+//ParamFloat("head_health_mul", 1.0)						//amount of health in monster's head - if head dies, body dies too
+//ParamFloat("arms_health_mul", 0.4)						//amount of health in monster's arms
+//ParamFloat("legs_health_mul", 0.66)						//amount of health in monster's legs
+
+//ParamFloat("head_health_influence", 1.5)				//amount of damage dealt to body when hitting head
+//ParamFloat("left_arm_health_influence", 0.0)			//amount of damage dealt to body when hitting arm
+//ParamFloat("right_arm_health_influence", 0.0)			//amount of damage dealt to body when hitting arm
+//ParamFloat("left_leg_health_influence", 0.0)			//amount of damage dealt to body when hitting leg
+//ParamFloat("right_leg_health_influence", 0.0)			//amount of damage dealt to body when hitting leg
+//ParamFloat("torso_front_health_influence", 1.0)			//amount of damage dealt to body when hitting torso front
+//ParamFloat("torso_back_health_influence", 1.0)			//amount of damage dealt to body when hitting torso back
+
+//ParamFloat("head_damage_factor", 1.5)					//amount of damage dealt to head
+//ParamFloat("left_arm_damage_factor", 1.0)				//amount of damage dealt to arm
+//ParamFloat("right_arm_damage_factor", 1.0)				//amount of damage dealt to arm
+//ParamFloat("left_leg_damage_factor", 1.0)				//amount of damage dealt to leg
+//ParamFloat("right_leg_damage_factor", 1.0)				//amount of damage dealt to leg
+ParamFloat("arm_direct_hit_mul", 1.0)
+
+ParamFloat("fire_damage_health_influence_override", -1.0)
+
+//ParamFloat("stamina_to_health_ratio", 1.0)				//amount of stamina in monster's body - value is based on monster's health
+//ParamFloat("arm_stamina_containment", 0.0)				//amount of stamina in monster's arms
+//ParamFloat("leg_stamina_containment", 0.20)				//amount of stamina in monster's legs
+//ParamFloat("stamina_mul", 1.0)							//stamina multiplier
+//ParamFloat("hit_legs_stamina_mul", 1.5)
+//ParamFloat("stamina_regeneration_rate", 0.05)
+
+//ParamFloat("damage_mul", 1.0)							//amount of damage dealt to player - value taken from curve: zombie_melee_damage
+//ParamFloat("grab_bite_damage_mul", 2.0)					//amount of damage dealt to player in grab
+//ParamFloat("bite_damage_mul", 1.0)						//amount of damage dealt to player when zombie has no arms and can only bite
+//ParamFloat("damage_mul_vs_other_ai", 1.0)
+
+ParamFloat("attracted_reaction_dist_min", 1.0) // min distance to decoy that zombie is moving to (Attracted method)
+ParamFloat("attracted_reaction_dist_max", 4.0) // max distance to decoy that zombie is moving to (Attracted method)
+
+ParamFloat("pro_player_head_health_influence", 1.0)
+ParamBool("can_be_alarmed_by_flashlight", 0)
+ParamBool("can_sense_flashlight_light", 0)
+ParamFloat("flashlight_awareness_threshold", -1.0)
+ParamFloat("flashlight_max_awareness", -1.0)
+
+ParamFloat("fall_down_after_direct_head_hit_prob", 0.3) // probability of falling down after direct (weapon property) hit in the head
+
+ParamFloat("max_health_damage_mul_if_laying", 0.0) // if zombie is laying each damage amount will be at least = max_health_damage_mul_if_laying * init_ai_health
+
+ParamBool("react_on_hit_during_push", 0)
+
+ParamFloat("melee_weapon_target_prediction_time", 0.0)
+
+ParamFloat("round_attack_prob", 0.0)
+
+ParamBool("play_hit_reaction_during_recharge", 1)
+ParamInt("forced_ai_made_hit_reaction_severity", 3) // if other AI is hitting me, play heavy hit reaction
+
+ParamBool("can_head_be_smashed_after_burn_death", 1)   // this zombie can blow his head up if died by burn
+ParamFloat("max_ai_grab_angle", 240.0) // max angle that zombie can grab human
+
+
+ParamBool("can_be_night_patroler", 0)		  
+
+ParamBool("can_take_damage_from_zombie_player", 1) 
+ParamFloat("weapon_wearing_out_mul_if_poisoned", 3.0)
+ParamBool("can_turn_to_target_when_collide", 1)
+
+ParamFloat("turn_precision", 0.99)
+
+ParamBool("draw_on_radar_during_day", 0)
+ParamBool("has_glowing_eyes", 0)
+
+ParamBool("can_use_emergency_stop_controller", 0)
+ParamBool("allow_continuous_moving_when_path_shortened", 0)
+
+ParamBool("can_give_camouflage", 1)
+
+ParamFloat("health_mul_min_to_play_burn_reaction", 0.2)
+ParamFloat("health_mul_max_to_play_burn_reaction", -1.0)
+ParamFloat("health_perc_below_elem_impact_blow_on", 1.0)
+ParamFloat("health_perc_below_elem_paralyze_on", 1.0)
+
+ParamBool("can_land", 1)
+
+ParamBool("can_scream_for_zombies", 1)
+ParamBool("can_transform_when_taking_damage", 0)
+ParamBool("can_transform_when_noise_heard", 1)
+
+ParamBool("can_hear_steps", 0)
+
+ParamFloat("kick_damage", 10.0)
+ParamBool("explode_on_destination_reached", 0)
+ParamBool("explode_on_destination_unreachable", 0)
+ParamFloat("explode_on_destination_unreachable_delay", 0)
+
+ParamFloatRange("group_damage_factor", 1.0, 1.0)
+ParamFloatRange("group_damage_attackers_num", 1.0, 1.0)
+
+ParamFloat("bulletproof_vest_dmg_mul", 1.0)
+ParamFloat("xp_factor", 1.0)
+ParamBool("can_discard_force_attractor", 0)
+ParamBool("use_2d_angle_cone_check", 0)
+
+ParamBool("enable_2h_weapon_ik", 0)
+
+ParamFloatRange("height_to_take_damage", 1.0, 5.0)
+ParamFloatRange("height_to_take_damage_nightmare", 1.0, 6.0)
+ParamFloat("height_damage_exp_factor_nightmare", 7.0) 
+
+ParamFloatRange("speed_required_to_take_damage", 4.0, 12.0)         // [zachar] modified with code changes (average speed is taken instead of body speed)
+ParamFloatRange("speed_required_to_take_damage_nightmare", 4.0, 12.0)  
+ParamFloat("speed_damage_exp_factor_nightmare", 7.0)
+
+
+ParamBool("simple_turn_during_alarming", 1)
+ParamBool("react_on_light", 1)
+
+ParamBool("can_be_killed_silently", 1)
+ParamBool("play_reaction_on_elementals", 1)
+ParamBool("ignore_fake_targets", 0)
+
+ParamBool("react_on_hit_in_armor", 1)
+
+ParamBool("can_run_away", 0)
+ParamBool("should_always_run_away_when_possible", 0)
+
+ParamBool("can_react_on_blast", 0)
+
+ParamFloat("cone_max_spot_time", 5.0)
+
+ParamBool("react_on_spikes_during_counter_attack", 0)
+
+ParamBool("can_be_nagewazed", 1)
+ParamBool("can_be_finished", 1)
+
+ParamBool("high_alarm_level_on_sound_heard_weapon_use", 0)
+ParamFloat("min_time_to_keep_alarm_level_from_sound_heard_weapon_use", 0.0)
+
+ParamFloat("initial_blood_mask_value", 0.0)
+ParamFloat("max_blood_mask_value", 0.7)
+
+ParamBool("can_be_scared_multiple_times_when_escaping", 1)
+ParamFloat("max_dist_from_path_end_to_escape_point_during_escape", -1.0)
+
+ParamBool("can_see_player_in_safe_zone", 0)
+ParamFloat("fall_on_wrestle_kick_prob", 1.0)
+
+ParamBool("is_human", 0)
+ParamBool("get_extra_damage_after_wall_special_hit", 1)
+
+ParamBool("can_react_on_drowning", 0)
+
+ParamBool("play_slomo_on_death", 0)
+
+ParamBool("show_enemy_location_on_hostile_action", 0)
+ParamBool("treat_flare_as_dangerous_object", 0)
+ParamFloat("max_dist_treat_player_in_safe_zone_as_dangerous", -1.0)
+ParamFloat("safe_zone_halo_causing_runing_away_from_player", -1.0)
+ParamFloat("max_time_to_treat_player_in_safe_zone_as_dangerous", -1.0)
+
+ParamFloat("coop_damage_mul_2", 1.1) // damage multiplayer for 2 players coop
+ParamFloat("coop_damage_mul_3", 1.2) // damage multiplayer for 3 players coop
+ParamFloat("coop_damage_mul_4", 1.3) // damage multiplayer for 4 players coop
+
+ParamFloat("distance_to_force_fall_on_grenade_blast", -1.0)
+
+ParamFloat("max_dist_to_group_member_to_consider_near", -1.0)
+
+ParamFloat("parry_bullet_prob", 1.0)
+
+ParamFloat("inc_player_fitness_with_hit_perc", -1.0)
+
+ParamBool("can_react_on_knife", 0)
+
+ParamBool("dont_attack", 0)
+
+ParamFloat("melee_range_vs_vehicle", 2.5)
+ParamFloat("vehicle_physics_damage", 50.0)
+
+ParamBool("treat_vehicle_as_dangerous_object", 0)
+
+ParamBool("blast_using_scream", 0) // Available only for bosses
+ParamFloat("blast_using_scream_range", 0.0)
+ParamFloat("blast_using_scream_damage_modifier", 0.0)
+ParamFloat("blast_using_scream_cooldown", 0.0)
+
+ParamBool("force_run_away_rule", 0)
+ParamBool("force_run_away_rule_near_vehicle", 0)
+ParamFloat("force_run_away_rule_near_vehicle_distance", 0.0)
+ParamBool("run_away_using_sprint_only", 0)
+ParamFloat("run_away_allow_run_after_time", -1.0)
+ParamBool("run_away_dont_stop_when_reached", 0)
+ParamBool("run_away_reduce_dist_from_hot_pos_when_close", 0)
+ParamBool("run_away_consider_vehicle_vel", 0)
+
+ParamString("overwrite_spawner_location_type", "")
+ParamBool("use_3d_forced_location", 0)
+ParamBool("use_encounter_3d_location", 0)
+ParamBool("use_encounter_3d_forced_location", 0)
+
+ParamFloat("constrained_nav_mesh_max_dist_modifier", 1.0)
+
+///THE FOLLOWING
+
+ParamFloat("experience_run_over_award", 75.0)
+
+ParamFloat("min_angle_to_grab_vehicle", 10.0)
+ParamFloat("max_angle_to_grab_vehicle", 20.0)
+ParamFloat("min_vehicle_ang_speed_to_grab", 0.5)
+ParamFloat("max_vehicle_ang_speed_to_grab", 1.5)
+ParamFloat("min_vehicle_ang_speed_to_fall_after_grab", 0.5)
+ParamFloat("max_vehicle_ang_speed_to_fall_after_grab", 1.5)
+ParamFloat("max_impact_speed_to_grab_vehicle", 20.0)
+ParamFloat("max_vehicle_speed_to_grab", 12.5)
+ParamFloat("min_vehicle_speed_to_fall_after_grab", 12.5)
+ParamFloat("min_accel_to_break_vehicle_grab", 6.0)
+ParamFloat("min_accel_to_break_vehicle_grab_handbrake", 4.0)
+ParamFloat("min_vehicle_speed_to_break_grab", 5.55)
+ParamFloat("get_in_vehicle_give_damage_mult", 0.1)
+
+ParamFloat("jump_from_move_attack_prob", 0.0)
+ParamFloat("jump_from_stand_attack_prob", 0.0)
+
+ParamFloat("jump_from_move_attack_vehicle_prob", 0.0)
+ParamFloat("jump_from_stand_attack_vehicle_prob", 0.0)
+ParamBool("explosion_make_noise", 1)
+
+/// Nightmare Difficulty
+ParamFloat("pro_player_head_health_influence_nightmare", 1)
+ParamFloat("head_health_influence_nightmare", 1)
+ParamFloat("decapitation_prob_nightmare", 0)
+ParamFloat("bullet_head_hit_damage_mult_nightmare", 1)
+ParamFloat("head_health_mul_nightmare", 1)
+ParamFloat("head_damage_factor_nightmare", 1)
+
+ParamFloat("navmesh_min_path_width", -1.0)
+
+ParamBool("can_see_camouflaged_player", 0)
+
+ParamBool("taunt_on_running_away_target", 1)
+
+ParamFloat("overall_speed_factor", 1.0) // overall animations speed multiplayer (used for global increasing / decreasing AI animation speed)
+
+ParamBool("convert_damage_to_ko", 0)	// should ApplyDamage... events be converted to KO damage
+
+ParamFloat("ragdoll_speed_simulation_mul", 1.0) // sets speed of ragdoll simulation (lowering it makes feel that character is heavier)
+
+ParamFloat("stalk_prob_in_combat_idle", 0.1) 						// probability of stalking enemy in combat idle
+ParamFloat("stalk_prob_in_group", 0.0) 								// probability of stalking enemy in group
+
+ParamFloat("taunt_in_car_prob", 0.0)
+
+ParamBool("turn_off_physics_for_turns", 1)
+
+ParamFloat("attack_dist_treshold_limit", 0.15)
+
+ParamBool("treat_no_damage_as_armor_hit", 0)
+
+ParamFloat("min_time_btw_combat_idles", -1.0) 		// minimum time between combat idle behaviours (-1.0 means infinity)
+ParamInt("group_keeping_close_ais", -1) 			// how many ais in a group should attack target simultaneously (-1 means default = 2)
+
+ParamFloat("humanity_combat_idle_fail_dist", -1.0)				// if the distance is exceeded AI will try to short the distance
+ParamFloatRange("humanity_combat_idle_fail_approach", 4.0, 8.0)	// approach range (will be randomized between min and max)
+
+ParamBool("attack_tracking_uses_events_only", 0)
+
+ParamBool("can_attack_melee_vehicle", 1)
+
+ParamFloat("min_time_btw_front_vehicle_grabs", -1.0)
+ParamFloat("min_time_btw_back_vehicle_grabs", -1.0)
+
+ParamFloatRange("stop_vehicle_chase_dist", 150.0, 250.0)
+
+ParamFloat("fall_on_players_ram_force", -1.0)
+
+ParamBool("resistant_to_leg_breaker", 0)
+
+ParamFloatRange("pursuit_car_speed_kmh", 65.0, 74.0)

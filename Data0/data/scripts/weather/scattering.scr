@@ -1,0 +1,83 @@
+import "frame_script_def.scr"
+
+sub scattering()
+{
+    extern float f_scattering_input_on;
+    extern float f_scattering_input_v;
+    extern float f_scattering_input_mie_turbidity;
+	extern vec3 v_scattering_input_lambda;
+	extern vec3 v_scattering_input_K;
+    extern float f_scattering_input_c;
+    extern float f_scattering_input_mie_intensity;
+    extern float f_scattering_input_ray_intensity;
+    extern float f_scattering_input_z;
+    extern float f_scattering_input_n;
+    extern float f_scattering_input_m;
+    extern float f_scattering_input_pn;
+	extern float f_scattering_input_mie_g;
+	
+	extern float f_pp_scattering_input_v;
+	extern float f_pp_scattering_input_mie_turbidity;
+	extern vec3 v_pp_scattering_input_lambda;
+	extern vec3 v_pp_scattering_input_K;
+	extern float f_pp_scattering_input_c;
+	extern float f_pp_scattering_input_z;
+	extern float f_pp_scattering_input_n;
+	extern float f_pp_scattering_input_m;
+	extern float f_pp_scattering_input_pn;
+	extern float f_pp_scattering_input_mie_g;
+
+	extern float f_pp_scattering_input_mie_intensity;
+	extern float f_pp_scattering_input_ray_intensity;
+	
+	//current scattering values
+    extern float f_pp_scattering_ray_intensity;
+    extern float f_pp_scattering_mie_intensity;
+    extern float f_pp_scattering_mie_turbidity;
+
+	vec3 scattering_input_lambda = (f_scattering_input_on > 0.0) ? v_scattering_input_lambda : v_pp_scattering_input_lambda;
+    float scattering_input_z = (f_scattering_input_on > 0.0) ? f_scattering_input_z : f_pp_scattering_input_z;
+
+    float scattering_input_mie_intensity = (f_scattering_input_on > 0.0) ? f_scattering_input_mie_intensity : f_pp_scattering_input_mie_intensity;
+    float scattering_input_mie_turbidity = (f_scattering_input_on > 0.0) ? f_scattering_input_mie_turbidity : f_pp_scattering_input_mie_turbidity;
+	float scattering_input_mie_g = (f_scattering_input_on > 0.0) ? f_scattering_input_mie_g : f_pp_scattering_input_mie_g;
+    float scattering_input_v = (f_scattering_input_on > 0.0) ? f_scattering_input_v : f_pp_scattering_input_v;
+	vec3 scattering_input_K = (f_scattering_input_on > 0.0) ? v_scattering_input_K : v_pp_scattering_input_K;
+    float scattering_input_c = (f_scattering_input_on > 0.0) ? f_scattering_input_c : f_pp_scattering_input_c;
+
+    float scattering_input_ray_intensity = (f_scattering_input_on > 0.0) ? f_scattering_input_ray_intensity : f_pp_scattering_input_ray_intensity;
+    float scattering_input_n = (f_scattering_input_on > 0.0) ? f_scattering_input_n : f_pp_scattering_input_n; // refractive index of air
+    float scattering_input_m = (f_scattering_input_on > 0.0) ? f_scattering_input_m : f_pp_scattering_input_m; //number of molecules per unit volume for air at 288.15K and 1013mb (sea level -45 celsius)
+    float scattering_input_pn = (f_scattering_input_on > 0.0) ? f_scattering_input_pn : f_pp_scattering_input_pn; //depolatization factor for standard air
+
+// float scattering_input_m = 2.545 * pow(10.0, 25);
+    ///mie scattering
+   // vec3 lambda = scattering_input_lambda * 100.0 * pow(10.0, -9.0);
+vec3 lambda = scattering_input_lambda * pow(10.0, -7.0);
+    // float c = scattering_input_c * scattering_input_mie_turbidity * pow(10.0, -18.0);
+float c = (0.6544 * scattering_input_mie_turbidity - 0.6510) * pow(10.0, -16.0);
+    vec3 mie = scattering_input_K * 0.434 * c * 3.14159265359;
+    vec3 mie_den = [2.0 * 3.14159265359 / lambda.x, 2.0 * 3.14159265359 / lambda.y, 2.0 * 3.14159265359 / lambda.z];
+    vec3 mie_den = [pow(mie_den.x, scattering_input_v - 2.0), pow(mie_den.y, scattering_input_v - 2.0), pow(mie_den.z, scattering_input_v - 2.0)];
+    vec3 mie = mie * mie_den;
+    vec3 mie = mie * scattering_input_mie_intensity;
+    Set("v_pp_scattering_mie", mie);
+	
+    //rayleigh scattering
+    vec3 ray_den = pow(scattering_input_lambda, 4.0) * 3.0 * scattering_input_m * (6.0 - 7.0 * scattering_input_pn);
+    float ray_nom = 8.0 * pow(f_PI, 3.0) * pow(pow(scattering_input_n, 2.0) - 1.0, 2.0) * (6.0 + 3.0 * scattering_input_pn);
+    vec3 rayleigh = [ray_nom / ray_den.x, ray_nom / ray_den.y, ray_nom / ray_den.z];
+    vec3 rayleigh = rayleigh * scattering_input_ray_intensity;
+	
+    Set("v_pp_scattering_ray", rayleigh);
+	
+    Set("v_pp_scattering_betas", rayleigh + mie);
+
+    Set("f_pp_scattering_z_factor", scattering_input_z);
+    Set("f_pp_scattering_mie_g", scattering_input_mie_g);
+	Set("f_pp_scattering_mie_g_sun", scattering_input_mie_g);
+//    Set("f_pp_scattering_sunset_factor", min(1.0 - weight_dawn, 1.0 - weight_dusk) );
+Set("f_pp_scattering_sunset_factor", 1.0 );
+///////////////
+	
+}

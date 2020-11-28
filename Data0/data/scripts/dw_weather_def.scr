@@ -1,0 +1,152 @@
+import "daytime.def"
+
+export int EventType_Unknown                = 0;
+export int EventType_Sound                  = 1;
+export int EventType_WatchSeq               = 2;
+export int EventType_RefreshCrowd           = 3;
+export int EventType_DayTime_Night          = 4;
+export int EventType_DayTime_NightFinish    = 5;
+export int EventType_DayTime_Morning        = 6;
+export int EventType_DayTime_Day            = 7;
+export int EventType_DayTime_Evening        = 8;
+export int EventType_DayTime_NightIsComming = 9;
+export int EventType_DayTime_NightStart     = 10;
+export int EventType_DayTime_NightAttack    = 11;
+
+export int ForcedMusicType_NoMusic    = -1;
+export int ForcedMusicType_NightMusic =  0;
+
+export float WHOLE_DAY_DURATION__DAY      = 5760.0;// 1h in game daytime means 4 minutes of real time
+export float WHOLE_DAY_DURATION__NIGHT    = 1260.0;// 1h in game daytime means 0.875 minute of real time
+export float WHOLE_DAY_DURATION__INTERIOR = 8640.0;// 1h in game daytime means 6 minutes of real time
+
+sub main()
+{
+    event_def("hub_signal", EventType_Sound)
+    {
+        Duration(15, 1);
+        FadeOut(5);
+        Volume(5, 0);
+        SoundName("church_bell_loop_lft_01.wav");
+    }
+
+    event_def("watch_sequence", EventType_WatchSeq)
+    {
+        Duration(0, 0);
+        WatchParams(8, 2);
+    }
+
+    event_def("refresh_crowd", EventType_RefreshCrowd)
+    {
+        Duration(0, 0);
+    }
+
+    event_def("zombie_screams", EventType_Sound)
+    {
+        Type("sound");
+        Duration(37, 0);
+        Volume(0.9, 0.1);
+        SoundName("zombie_daynight_transformation.ogg");
+        InteriorExteriorDifferentVersions();
+    }
+	
+	event_def("zombie_screams_init_low", EventType_Sound)
+    {
+        Type("sound");
+        Duration(5, 0);
+        Volume(0.4, 0.01);
+        SoundName("infected_upset_low_level_01.wav");
+        InteriorExteriorDifferentVersions();
+    }
+
+	event_def("zombie_screams_init_high", EventType_Sound)
+    {
+        Type("sound");
+        Duration(15, 0);
+        Volume(0.6, 0.01);
+        SoundName("infected_upset_low_level_00.wav");
+        InteriorExteriorDifferentVersions();
+    }
+	
+    event_def("night", EventType_DayTime_Night)
+    {
+        ForceMusic(ForcedMusicType_NightMusic);
+    }
+
+    event_def("night_final", EventType_DayTime_NightFinish)
+    {
+        ForceMusic(ForcedMusicType_NightMusic);
+    }
+
+    event_def("morning", EventType_DayTime_Morning)
+    {
+    }
+
+    event_def("day", EventType_DayTime_Day)
+    {
+    }
+
+    event_def("evening", EventType_DayTime_Evening)
+    {
+        ForceMusic(ForcedMusicType_NoMusic)
+        {
+            Delay(150.0);
+        }
+    }
+
+    event_def("night_start", EventType_DayTime_NightStart)
+    {
+        ForceMusic(ForcedMusicType_NoMusic)
+        {
+        }
+        
+//         ForceMusic(ForcedMusicType_NightMusic)
+//         {
+//            Delay(12.0);
+//         }
+    }
+    
+    event_def("night_attack", EventType_DayTime_NightAttack)
+    {
+//         ForceMusic(ForcedMusicType_NoMusic)
+//         {
+//         }
+        
+        ForceMusic(ForcedMusicType_NightMusic)
+        {
+           Delay(0.0);
+        }
+    }
+	
+	event_def("night_is_comming", EventType_DayTime_NightIsComming)
+    {
+        ForceMusic(ForcedMusicType_NoMusic)
+        {
+        }
+        
+//         ForceMusic(ForcedMusicType_NightMusic)
+//         {
+//            Delay(12.0);
+//         }
+    }
+
+    events()
+    {
+        event("night",                      DAYTIME_NIGHT_START        ); // 22:00
+        event("night_final",                DAYTIME_NIGHT_END          ); // 5:00
+        event("morning",                    DAYTIME_DAWN_START         ); // 6:00
+        event("day",                        DAYTIME_DAWN_START+0.5     );   // 6:30
+        event("zombie_screams_init_low",    DAYTIME_DUSK_END - 1.25    );   //19:15
+        event("zombie_screams_init_high",   DAYTIME_DUSK_END - 0.75    );   //19:45
+        event("evening",                    DAYTIME_DUSK               );   //20:00
+        event("watch_sequence",             DAYTIME_DUSK_END - 0.0523  );   //20:26
+        event("zombie_screams",             DAYTIME_DUSK_END - 0.0520  );   //20:27
+        event("night_is_comming",           DAYTIME_DUSK_END - 0.5     );   //20:30
+        event("refresh_crowd",              DAYTIME_DUSK_END           );   //21:00
+        event("night_start",                DAYTIME_DUSK_END           );   //21:00
+        event("night_attack",               DAYTIME_DUSK_END + 0.0333  );   //21:02
+        interior_day_duration(WHOLE_DAY_DURATION__INTERIOR);
+        day_duration(WHOLE_DAY_DURATION__DAY);
+        night_duration(WHOLE_DAY_DURATION__NIGHT);
+    }
+}

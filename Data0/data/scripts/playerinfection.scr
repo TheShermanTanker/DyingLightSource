@@ -1,0 +1,233 @@
+sub main()
+{
+	/// GLOBAL PARAMS:
+	/// GlobalInfectionManagerParams(bool,		<<--- GLOBAL ACTIVATION SWITCH: if false, infection mechanism is turned off
+	///							     float);	<<--- time between infection manager updates
+
+	GlobalInfectionManagerParams(true, 0.5);
+
+	/// INFECTION LEVEL PARAMS:
+	/// VirusConcentrationParams(float,			<<--- how much does one infected byte raise the virus concentration
+	///							 float, 		<<--- virus level over which an attack should occur
+	///							 float,			<<--- hp level below which an attack can occur
+	///							 float,			<<--- virus level below which an ongoing attack should be stopped
+	///							 float,			<<--- virus level over which visual effects should start occuring (blinking, heartbeat)
+	///							 float,			<<--- virus level over which camera shaking should start occuring
+	///							 float);		<<--- virus level drop rate (per sec)
+	
+	/// SpeechBeforeActivate(float);			<<--- a number of seconds (in param here) from the attack start player talks to himself
+
+	/// Animation(string);						<<--- anim name
+    
+    /// Speech(string);                         <<--- speech file name
+	
+	/// AttackParams(float);					<<--- duration of the initial invisibility (in seconds)
+    
+    /// CamuflageParams(float)                  <<--- duration. if not defined then camuflage duration is the sama as attack duration.
+	
+	/// HearbeatEffects(float,			    	<<--- time between heartbeats (lowest rate)
+	///					float,				    <<--- time between heartbeats (max rate)
+	///					float,				    <<--- time between heartbeats (during attack)
+	///					float,				    <<--- time between blinks (lowest rate)
+	///					float,				    <<--- time between blinks (max rate)
+	///					float)				    <<--- time between blinks (during attack)
+				  
+	/// CameraShakeParams(float,			    <<--- update period
+	/// 			      float,			    <<--- length
+	/// 				  float,			    <<--- fade in
+	/// 				  float,			    <<--- fade out
+	/// 				  float,			    <<--- frequency
+	/// 				  float,			    <<--- move
+	/// 				  float,			    <<--- max yaw
+	/// 				  float,			    <<--- max pitch
+	/// 				  float)			    <<--- max roll
+				  
+	/// StaminaDegradeEffects(float,			<<--- drop duration
+    ///                       float,            <<--- lowest stamina state duration 
+	///				   		  float)			<<--- rise duration
+	
+	/// FitnessDegradeEffects(float,			<<--- drop duration
+    ///                       float,            <<--- lowest stamina state duration 
+	///				   		  float)			<<--- rise duration
+
+	/// DofEffects(float,						<<--- initial dof
+	///			   float,						<<--- dof change after each attack
+	///			   float)						<<--- minimum dof on this lvl
+	
+
+    InfectionLevel("first_time")
+	{
+		VirusConcentrationParams(0.3, 0.8, 0.45, 0.1, 0.45, 0.55, 0.01);
+		//SpeechBeforeActivate(5.5);
+		Animation("Unarmed_Infection_FirstTime");
+        Speech("Speech_Infection_Symptoms_First.wav");
+		HearbeatEffects(15.0, 10.0, 5.0, 15.0, 5.0, 1.0);
+		CameraShakeParams(0.2, 2.0, 0.05, 1.3, 0.1, [0.0, 0.0, 0.0], 22.0, 22.0, 15.0);
+		AttackParams(20.0);
+        //CamuflageParams(0.0);
+		StaminaDegradeEffects(1.0, 19.0, 10.0);
+		FitnessDegradeEffects(1.0, 19.0, 10.0);
+		DofEffects(100.0, -35.0, 30.0);
+		NoTutorial();
+	}
+	InfectionLevel("runaway_first")
+	{
+		VirusConcentrationParams(0.3, 0.8, 0.45, 0.1, 0.45, 0.55, 0.01);
+		//SpeechBeforeActivate(5.5);
+		Animation("Unarmed_Infection1");
+        Speech("Speech_Infection_Symptoms_XX.wav");
+		//CamuflageParams(0.0);
+		HearbeatEffects(15.0, 10.0, 5.0, 15.0, 5.0, 1.0);
+		CameraShakeParams(0.2, 2.0, 0.05, 1.3, 0.1, [0.0, 0.0, 0.0], 22.0, 22.0, 15.0);
+		AttackParams(10.0);
+		StaminaDegradeEffects(1.0, 9.0, 10.0);
+		FitnessDegradeEffects(1.0, 9.0, 10.0);
+		DofEffects(100.0, -35.0, 30.0);
+	}
+    InfectionLevel("runaway_second")
+	{
+		VirusConcentrationParams(0.3, 0.8, 0.45, 0.1, 0.45, 0.55, 0.01);
+		//SpeechBeforeActivate(5.5);
+		Animation("Unarmed_Infection2");
+        Speech("Speech_Infection_Symptoms_XX.wav");
+		//CamuflageParams(0.0);
+		HearbeatEffects(15.0, 10.0, 5.0, 15.0, 5.0, 1.0);
+		CameraShakeParams(0.2, 2.0, 0.05, 1.3, 0.1, [0.0, 0.0, 0.0], 22.0, 22.0, 15.0);
+		AttackParams(15.0);
+		StaminaDegradeEffects(1.0, 14.0, 10.0);
+		FitnessDegradeEffects(1.0, 14.0, 10.0);
+		DofEffects(100.0, -35.0, 30.0);
+	}
+    InfectionLevel("runaway_third")
+	{
+		VirusConcentrationParams(0.3, 0.8, 0.45, 0.1, 0.45, 0.55, 0.01);
+		//SpeechBeforeActivate(5.5);
+		Animation("Unarmed_Infection3");
+        Speech("Speech_Infection_Symptoms_XX.wav");
+		//CamuflageParams(0.0);
+		HearbeatEffects(15.0, 10.0, 5.0, 15.0, 5.0, 1.0);
+		CameraShakeParams(0.2, 2.0, 0.05, 1.3, 0.1, [0.0, 0.0, 0.0], 22.0, 22.0, 15.0);
+		AttackParams(20.0);
+		StaminaDegradeEffects(1.0, 19.0, 10.0);
+		FitnessDegradeEffects(1.0, 19.0, 10.0);
+		DofEffects(100.0, -35.0, 30.0);
+	}
+	InfectionLevel("default")
+	{
+		VirusConcentrationParams(0.3, 0.8, 0.45, 0.1, 0.45, 0.55, 0.01);
+		//SpeechBeforeActivate(5.5);
+		Animation("Unarmed_Infection1");
+        Speech("Speech_Infection_Symptoms_XX.wav");
+		HearbeatEffects(15.0, 10.0, 5.0, 15.0, 5.0, 1.0);
+		CameraShakeParams(0.2, 2.0, 0.05, 1.3, 0.1, [0.0, 0.0, 0.0], 22.0, 22.0, 15.0);
+		AttackParams(10.0);
+		StaminaDegradeEffects(1.0, 9.0, 10.0);
+		FitnessDegradeEffects(1.0, 9.0, 10.0);
+		DofEffects(100.0, -35.0, 30.0);
+	}
+    InfectionLevel("default2")
+	{
+		VirusConcentrationParams(0.3, 0.8, 0.45, 0.1, 0.45, 0.55, 0.01);
+		//SpeechBeforeActivate(5.5);
+		Animation("Unarmed_Infection2");
+        Speech("Speech_Infection_Symptoms_XX.wav");
+		HearbeatEffects(15.0, 10.0, 5.0, 15.0, 5.0, 1.0);
+		CameraShakeParams(0.2, 2.0, 0.05, 1.3, 0.1, [0.0, 0.0, 0.0], 22.0, 22.0, 15.0);
+		AttackParams(15.0);
+		StaminaDegradeEffects(1.0, 14.0, 10.0);
+		FitnessDegradeEffects(1.0, 14.0, 10.0);
+		DofEffects(100.0, -35.0, 30.0);
+	}
+    InfectionLevel("default3")
+	{
+		VirusConcentrationParams(0.3, 0.8, 0.45, 0.1, 0.45, 0.55, 0.01);
+		//SpeechBeforeActivate(5.5);
+		Animation("Unarmed_Infection3");
+        Speech("Speech_Infection_Symptoms_XX.wav");
+		HearbeatEffects(15.0, 10.0, 5.0, 15.0, 5.0, 1.0);
+		CameraShakeParams(0.2, 2.0, 0.05, 1.3, 0.1, [0.0, 0.0, 0.0], 22.0, 22.0, 15.0);
+		AttackParams(20.0);
+		StaminaDegradeEffects(1.0, 19.0, 10.0);
+		FitnessDegradeEffects(1.0, 19.0, 10.0);
+		DofEffects(100.0, -35.0, 30.0);
+	}
+    InfectionLevel("museum")
+	{
+		VirusConcentrationParams(0.3, 0.8, 0.45, 0.1, 0.45, 0.55, 0.01);
+		//SpeechBeforeActivate(5.5);
+		Animation("Unarmed_Infection3");
+        Speech("Speech_Infection_Symptoms_XX.wav");
+		HearbeatEffects(15.0, 10.0, 5.0, 15.0, 5.0, 1.0);
+		CameraShakeParams(0.2, 2.0, 0.05, 1.3, 0.1, [0.0, 0.0, 0.0], 22.0, 22.0, 15.0);
+		AttackParams(6.0);
+		//StaminaDegradeEffects(1.0, 5.0, 5.0);
+		//FitnessDegradeEffects(1.0, 5.0, 5.0);
+		DofEffects(100.0, -35.0, 30.0);
+	}
+    InfectionLevel("dream")
+	{
+		VirusConcentrationParams(0.3, 0.8, 0.45, 0.1, 0.45, 0.55, 0.01);
+		//SpeechBeforeActivate(5.5);
+		//Animation("Unarmed_Infection3");
+        Speech("Speech_Infection_Symptoms_XX.wav");
+		HearbeatEffects(15.0, 10.0, 5.0, 15.0, 5.0, 1.0);
+		CameraShakeParams(0.2, 2.0, 0.05, 1.3, 0.1, [0.0, 0.0, 0.0], 22.0, 22.0, 15.0);
+		AttackParams(6.0);
+		//StaminaDegradeEffects(1.0, 4.0, 5.0);
+		//FitnessDegradeEffects(1.0, 4.0, 5.0);
+		DofEffects(100.0, -35.0, 50.0);
+	}
+    InfectionLevel("after_onevial")
+	{
+		VirusConcentrationParams(0.1, 0.8, 0.45, 0.1, 0.45, 0.55, 0.01);
+		//SpeechBeforeActivate(5.5);
+		//Animation("Unarmed_Infection2");
+        //Speech("Speech_Infection_Symptoms_XX.wav");
+		HearbeatEffects(15.0, 10.0, 5.0, 15.0, 5.0, 1.0);
+		CameraShakeParams(0.2, 2.0, 0.05, 1.3, 0.1, [0.0, 0.0, 0.0], 22.0, 22.0, 15.0);
+		AttackParams(15.0);
+		StaminaDegradeEffects(1.0, 14.0, 15.0);
+		FitnessDegradeEffects(1.0, 14.0, 15.0);
+		DofEffects(100.0, -35.0, 30.0);
+	}
+    InfectionLevel("last_time")
+	{
+		VirusConcentrationParams(0.3, 0.8, 0.45, 0.1, 0.45, 0.55, 0.01);
+		//SpeechBeforeActivate(5.5);
+		//Animation("Unarmed_Infection3");
+        Speech("Speech_Infection_Symptoms_XX.wav");
+		HearbeatEffects(15.0, 10.0, 5.0, 15.0, 5.0, 1.0);
+		CameraShakeParams(0.2, 2.0, 0.05, 1.3, 0.1, [0.0, 0.0, 0.0], 22.0, 22.0, 15.0);
+		AttackParams(30.0);
+		StaminaDegradeEffects(1.0, 29.0, 25.0);
+		FitnessDegradeEffects(1.0, 29.0, 25.0);
+		DofEffects(100.0, -35.0, 30.0);
+	}
+    InfectionLevel("market_explosion")
+	{
+		VirusConcentrationParams(0.3, 0.8, 0.45, 0.1, 0.45, 0.55, 0.01);
+		//SpeechBeforeActivate(5.5);
+		//Animation("Unarmed_Infection3");
+        //Speech("Speech_Infection_Symptoms_XX.wav");
+		CamuflageParams(0.0);
+		HearbeatEffects(15.0, 10.0, 5.0, 15.0, 5.0, 1.0);
+		CameraShakeParams(0.2, 2.0, 0.05, 1.3, 0.1, [0.0, 0.0, 0.0], 22.0, 22.0, 15.0);
+		AttackParams(5.0);
+		StaminaDegradeEffects(1.0, 5.0, 5.0);
+		FitnessDegradeEffects(1.0, 5.0, 5.0);
+		DofEffects(100.0, -35.0, 30.0);
+	}
+    InfectionLevel("project_mayhem")
+	{
+		VirusConcentrationParams(0.3, 0.8, 0.45, 0.1, 0.45, 0.55, 0.01);
+		//SpeechBeforeActivate(5.5);
+		Animation("Unarmed_Infection3");
+        //Speech("Speech_Infection_Symptoms_XX.wav");
+		HearbeatEffects(15.0, 10.0, 5.0, 15.0, 5.0, 1.0);
+		CameraShakeParams(0.2, 2.0, 0.05, 1.3, 0.1, [0.0, 0.0, 0.0], 22.0, 22.0, 15.0);
+		AttackParams(25.0);
+		StaminaDegradeEffects(1.0, 24.0, 20.0);
+		FitnessDegradeEffects(1.0, 24.0, 20.0);
+		DofEffects(100.0, -35.0, 30.0);
+	}
+}

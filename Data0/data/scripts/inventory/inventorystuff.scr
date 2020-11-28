@@ -1,0 +1,757 @@
+import "damage_type.def"
+import "item_hit_fx_category.def"
+import "crafting_effect.def"
+import "item_color.def"
+
+export int OwnerType_None           = 0;
+export int OwnerType_Player         = 1;
+export int OwnerType_AI             = 2;
+
+export int UsageType_Normal         = 0;
+export int UsageType_Aim            = 1;
+export int UsageType_Akimbo         = 2;
+
+export int CategoryType_Unknown             = -1;
+export int CategoryType_Melee               = 0;
+export int CategoryType_Firearm             = 1;
+export int CategoryType_Throwable           = 2;
+export int CategoryType_Powerup             = 3;
+export int CategoryType_Ammo                = 4;
+export int CategoryType_Cash                = 5;
+export int CategoryType_Collectable         = 6;
+export int CategoryType_Medkit              = 7;
+export int CategoryType_CraftPart           = 8;
+export int CategoryType_InventoryItem       = 9;
+export int CategoryType_Other     	        = 10;
+export int CategoryType_RepairPart	        = 11;
+export int CategoryType_Flashlight	        = 12;
+export int CategoryType_ThrowableLiquid     = 13;
+export int CategoryType_ThrowableFlare      = 14;
+export int CategoryType_Fuel                = 15;
+export int CategoryType_Lockpick            = 16;
+export int CategoryType_ItemBundle          = 17;
+export int CategoryType_CraftComponent      = 18;
+export int CategoryType_SurvivorPack        = 19;
+export int CategoryType_Valuable            = 20;
+export int CategoryType_Voucher             = 21;
+export int CategoryType_VehicleUpgrade     	= 22;
+
+export int StatsType_None           = 0;
+export int StatsType_Blunt          = 1;
+export int StatsType_Cut            = 2;
+export int StatsType_Pistol         = 3;
+export int StatsType_Rifle          = 4;
+export int StatsType_Shotgun        = 5;
+export int StatsType_Explosive      = 6;
+export int StatsType_Special        = 7;
+export int StatsType_Flame          = 8;
+export int StatsType_Fists          = 9;
+
+export int AchType_None				= 0;
+export int AchType_Knuckles			= 1;
+export int AchType_Hammer			= 2;
+export int AchType_PoliceBaton		= 3;
+export int AchType_Baton			= 4;
+export int AchType_WoodenBaton		= 5;
+export int AchType_Stick			= 6;
+export int AchType_Tonfa			= 7;
+export int AchType_BaseballBat		= 8;
+export int AchType_Wrench			= 9;
+export int AchType_HeavyWrench		= 10;
+export int AchType_BigHammer		= 11;
+export int AchType_Bo				= 12;
+export int AchType_Mace				= 13;
+export int AchType_Crowbar			= 14;
+export int AchType_PickAxe			= 15;
+export int AchType_Kanabo			= 16;
+export int AchType_Knife			= 17;
+export int AchType_DoubleBlade		= 18;
+export int AchType_Cleaver			= 19;
+export int AchType_Machete			= 20;
+export int AchType_Sword			= 21;
+export int AchType_Axe				= 22;
+export int AchType_BigAxe			= 23;
+export int AchType_Revolver			= 24;
+export int AchType_Pistol			= 25;
+export int AchType_Rifle			= 26;
+export int AchType_Shotgun			= 27;
+export int AchType_Grenade			= 28;
+export int AchType_Molotov			= 29;
+export int AchType_Sickle           = 30;
+export int AchType_FryingPan        = 31;
+export int AchType_Branch           = 32;
+export int AchType_Hatstand         = 33;
+export int AchType_Shovel           = 34;
+export int AchType_Spade            = 35;
+export int AchType_Paddle           = 36;
+export int AchType_Plank            = 37;
+export int AchType_Pipe             = 38;
+
+export int LootType_None            = 0;
+export int LootType_Knuckles        = 1;
+export int LootType_Blunt           = 2;
+export int LootType_Sharp           = 3;
+export int LootType_Firearm_Short   = 4;
+export int LootType_Firearm_Long    = 5;
+export int LootType_Firearm_Auto    = 6;
+export int LootType_Throwable       = 7;
+export int LootType_Powerup         = 8;
+
+export int WeaponBuildType_Undefined         = -1;
+export int WeaponBuildType_Universal         = 0;
+export int WeaponBuildType_Metal             = 1;
+export int WeaponBuildType_Wood              = 2;
+
+export int DeathEffect_None					  =  -1;
+export int DeathEffect_Explode				  =  0;
+export int DeathEffect_Fire				  	  = 1;
+
+export int RagdollBehavior_None         	= 0;
+export int RagdollBehavior_BaseballBat  	= 1;
+export int RagdollBehavior_Shotgun      	= 2;
+export int RagdollBehavior_Fists        	= 3;
+export int RagdollBehavior_Machete     		= 4;
+export int RagdollBehavior_FireAxe      	= 5;
+export int RagdollBehavior_FistsInfected   	= 6;
+
+export int HandModification_Normal  = 0;
+export int HandModification_Custom  = 1;
+
+export int AmmoType_Unknown      = -1;
+export int AmmoType_Pistol       = 0;
+export int AmmoType_Revolver     = 1;
+export int AmmoType_Rifle        = 2;
+export int AmmoType_SubMachine   = 3;
+export int AmmoType_Shotgun      = 4;
+export int AmmoType_Sniper       = 5;
+export int AmmoType_LightMachine = 6;
+export int AmmoType_Rocket       = 7;
+export int AmmoType_Arrow        = 8;
+export int AmmoType_Bolt         = 9;
+
+export int BulletVis_None             = 0;     
+export int BulletVis_Arrow            = 1;
+export int BulletVis_ArrowElectricity = 2;
+export int BulletVis_ArrowFire        = 3;
+export int BulletVis_ArrowExploding   = 4;
+export int BulletVis_Bolt             = 5;
+export int BulletVis_BoltPoison		  = 6;
+export int BulletVis_BoltStunning	  = 7;
+export int BulletVis_BoltImpact		  = 8;
+
+export int ShotMode_None        = 0;
+export int ShotMode_Single      = 1;
+export int ShotMode_Burst       = 2;
+export int ShotMode_Automatic   = 3;
+
+export int HitSeverity_None     = 0;
+export int HitSeverity_Light    = 1;
+export int HitSeverity_Medium   = 2;
+export int HitSeverity_Heavy    = 3;
+
+export int SRF_Unknown        =  0 ;
+export int SRF_Flexible       =  1 ;
+export int SRF_Fire           =  2 ;
+export int SRF_Water          =  3 ;
+export int SRF_Snow           =  4 ;
+export int SRF_Sand           =  5 ;
+export int SRF_Gravel         =  6 ;
+export int SRF_Grass          =  7 ;
+export int SRF_Ground         =  8 ;
+export int SRF_Mud            =  9 ;
+export int SRF_Flesh          = 10 ;
+export int SRF_Rubber         = 11 ;
+export int SRF_Wood           = 12 ;
+export int SRF_Plastic        = 13 ;
+export int SRF_Tarmac         = 14 ;
+export int SRF_Glass          = 15 ;
+export int SRF_Ice            = 16 ;
+export int SRF_Metal          = 17 ;
+export int SRF_Stone          = 18 ;
+
+export int Gen_Damage = 0;
+export int Gen_Force = 1;
+export int Gen_Speed = 2;
+export int Gen_Durability = 3;
+
+export float Gen_NONE = -1.0;
+export float Gen_VERY_LOW = 0.0;
+export float Gen_LOW = 1.0;
+export float Gen_MEDIUM = 2.0;
+export float Gen_HIGH = 3.0;
+export float Gen_VERY_HIGH = 4.0;
+
+export float NONE = -1.0;
+export float VERY_LOW = 0.0;
+export float LOW = 1.0;
+export float MEDIUM = 2.0;
+export float HIGH = 3.0;
+export float VERY_HIGH = 4.0;
+
+export int GenType_None = -1;
+export int GenType_MeleeWeapon = 0;
+export int GenType_Firearm = 1;
+export int GenType_UpgradePart = 2;
+
+export int BulletFx_None  = -1;
+export int BulletFx_ZombieSpit = 0; //DI
+export int BulletFx_TracerAmmunition = 0;
+
+export int DetectorEquipment_Unknown = -1;
+export int DetectorEquipment_Proximity = 0;
+export int DetectorEquipment_ThermalVisOcclude = 1;
+export int DetectorEquipment_ThermalVisXRay = 2;
+
+export int CutTypesGroup_None = -1;
+export int CutTypesGroup_All = 0;
+export int CutTypesGroup_Sharp = 1;
+export int CutTypesGroup_SharpHeavy = 2;
+export int CutTypesGroup_Holes = 3;
+export int CutTypesGroup_SharpBodyCutsOnCharge = 4;
+
+export int CollectableAwardRunner = 98;
+export int CollectableAwardStatus = 99;
+export int CollectableAwardFighter = 100;
+
+export int VehicleSlot_Engine = 0;
+export int VehicleSlot_Turbo = 1;
+export int VehicleSlot_Suspension = 2;
+export int VehicleSlot_Tires = 3;
+export int VehicleSlot_Brakes = 4;
+export int VehicleSlot_Blueprints = 5;
+export int VehicleSlot_Equipment = 6;
+export int VehicleSlot_Upgrades = 7;
+export int VehicleSlot_Remote = 8;
+
+
+export int VehicleStats_Grip = 0;
+export int VehicleStats_Braking = 1;
+export int VehicleStats_Handling	= 2;
+export int VehicleStats_Acceleration = 3;
+export int VehicleStats_TopSpeed = 4;
+
+sub Precache()
+{
+    SeqFx("AsphaltHit_SG_sequence.fx");
+    SeqFx("DI_cutflesh_sequence.fx");
+    SeqFx("DI_hitflesh_sequence.fx");
+    SeqFx("DirtHit_SG_sequence.fx");
+    SeqFx("armorhit_small_sequence.fx");
+    SeqFx("gunshotBlood_sequence.fx");
+    SeqFx("MetalHit_SG_sequence.fx");
+    SeqFx("StoneHit_SG_sequence.fx");
+    SeqFx("WeaponHit_Water_sequence.fx");
+    SeqFx("WoodHit_Small_sequence.fx");
+    
+    SeqLodFx("AsphaltHit_SG_*_sequence.fx");
+    SeqLodFx("DI_cutflesh_*_sequence.fx");
+    SeqLodFx("DI_hitflesh_*_sequence.fx");
+    SeqLodFx("DirtHit_SG_*_sequence.fx");
+    SeqLodFx("armorhit_small_*_sequence.fx");
+    SeqLodFx("gunshotBlood_*_sequence.fx");
+    SeqLodFx("MetalHit_SG_*_sequence.fx");
+    SeqLodFx("StoneHit_SG_*_sequence.fx");
+    SeqLodFx("WeaponHit_Water_*_sequence.fx");
+    SeqLodFx("WoodHit_Small_*_sequence.fx");
+    
+    TraceFx("BulletTraceGlass_trace.fx");
+    TraceFx("BulletTraceGround_trace.fx");
+    TraceFx("BulletTraceMetal_trace.fx");
+    TraceFx("BulletTraceStone_trace.fx");
+    TraceFx("BulletTraceWater_trace.fx");
+    TraceFx("BulletTraceWood_trace.fx");
+    TraceFx("MeleeTraceGround_trace.fx");
+    TraceFx("MeleeTraceMetal_trace.fx");
+    TraceFx("MeleeTraceStone_trace.fx");
+    TraceFx("MeleeTraceWood_trace.fx");
+    TraceFx("SharpTraceMetal_trace.fx");
+}
+		
+sub HitEffects_Default()
+{
+    HitEffects(ItemHitFxCategory_Default)
+    {
+        Sound(SRF_Unknown,  "blunt_sand_XX.wav");
+        Sound(SRF_Flexible, "blunt_sand_XX.wav");
+        Sound(SRF_Fire,     "blunt_fire_XX.wav");
+        Sound(SRF_Water,    "blunt_water_XX.wav");
+        Sound(SRF_Snow,     "blunt_sand_XX.wav");
+        Sound(SRF_Sand,     "blunt_sand_XX.wav");
+        Sound(SRF_Gravel,   "blunt_gravel_XX.wav");
+        Sound(SRF_Grass,    "blunt_grass_XX.wav");
+        Sound(SRF_Ground,   "blunt_sand_XX.wav");
+        Sound(SRF_Mud,      "blunt_mood_XX.wav");
+        Sound(SRF_Flesh,    "hit_flesh_02.wav");
+        Sound(SRF_Rubber,   "blunt_gravel_XX.wav");
+        Sound(SRF_Wood,     "blunt_wood_XX.wav");
+        Sound(SRF_Plastic,  "hit_big_plastic_XX.wav");
+        Sound(SRF_Tarmac,   "blunt_gravel_XX.wav");
+        Sound(SRF_Glass,    "hit_big_glass_XX.wav");
+        Sound(SRF_Ice,      "hit_big_glass_XX.wav");
+        Sound(SRF_Metal,    "blunt_metal_XX.wav");
+        Sound(SRF_Stone,    "blunt_stone_XX.wav");
+        
+        Fx(SRF_Unknown,     "DirtHit_SG_sequence.fx");
+        Fx(SRF_Flexible,    "DirtHit_SG_sequence.fx");
+        Fx(SRF_Fire,        "DirtHit_SG_sequence.fx");
+        Fx(SRF_Water,       "melee_water_impact_sequence.fx");
+        Fx(SRF_Snow,        "armorhit_small_sequence.fx");
+        Fx(SRF_Sand,        "DirtHit_SG_sequence.fx");
+        Fx(SRF_Gravel,      "DirtHit_SG_sequence.fx");
+        Fx(SRF_Grass,       "DirtHit_SG_sequence.fx");
+        Fx(SRF_Ground,      "DirtHit_SG_sequence.fx");
+        Fx(SRF_Mud,         "DirtHit_SG_sequence.fx");
+        Fx(SRF_Flesh,       "DI_hitflesh_sequence.fx");
+        Fx(SRF_Rubber,      "DirtHit_SG_sequence.fx");
+        Fx(SRF_Wood,        "WoodHit_Small_sequence.fx");
+        Fx(SRF_Plastic,     "DirtHit_SG_sequence.fx");
+        Fx(SRF_Tarmac,      "AsphaltHit_SG_sequence.fx");
+        Fx(SRF_Glass,       "AsphaltHit_SG_sequence.fx");
+        Fx(SRF_Ice,         "DirtHit_SG_sequence.fx");
+        Fx(SRF_Metal,       "MetalHit_SG_sequence.fx");
+        Fx(SRF_Stone,       "StoneHit_SG_sequence.fx");
+        
+        Trace(SRF_Unknown,  "MeleeTraceGround_trace.fx");
+        Trace(SRF_Flexible, "MeleeTraceGround_trace.fx");
+        Trace(SRF_Fire,     "MeleeTraceGround_trace.fx");
+        Trace(SRF_Water,    "BulletTraceWater_trace.fx");
+        Trace(SRF_Snow,     "MeleeTraceGround_trace.fx");
+        Trace(SRF_Sand,     "MeleeTraceGround_trace.fx");
+        Trace(SRF_Gravel,   "MeleeTraceStone_trace.fx");
+        Trace(SRF_Grass,    "MeleeTraceGround_trace.fx");
+        Trace(SRF_Ground,   "MeleeTraceGround_trace.fx");
+        Trace(SRF_Mud,      "MeleeTraceGround_trace.fx");
+        Trace(SRF_Flesh,    "MeleeTraceGround_trace.fx");
+        Trace(SRF_Rubber,   "MeleeTraceGround_trace.fx");
+        Trace(SRF_Wood,     "MeleeTraceWood_trace.fx");
+        Trace(SRF_Plastic,  "MeleeTraceGround_trace.fx");
+        Trace(SRF_Tarmac,   "MeleeTraceStone_trace.fx");
+        //Trace(SRF_Glass,    "MeleeTraceGround_trace.fx");
+        Trace(SRF_Ice,      "MeleeTraceGround_trace.fx");
+        Trace(SRF_Metal,    "MeleeTraceMetal_trace.fx");
+        Trace(SRF_Stone,    "MeleeTraceStone_trace.fx");
+    }
+}
+
+sub HitEffects_Baseball_Metal()
+{
+    HitEffects(ItemHitFxCategory_Default)
+    {
+        Sound(SRF_Unknown,  "blunt_sand_XX.wav");
+        Sound(SRF_Flexible, "blunt_sand_XX.wav");
+        Sound(SRF_Fire,     "blunt_fire_XX.wav");
+        Sound(SRF_Water,    "blunt_water_XX.wav");
+        Sound(SRF_Snow,     "blunt_sand_XX.wav");
+        Sound(SRF_Sand,     "hit_ground_baseball_metal_XX.wav");
+        Sound(SRF_Gravel,   "hit_ground_baseball_metal_XX.wav");
+        Sound(SRF_Grass,    "hit_ground_baseball_metal_XX.wav");
+        Sound(SRF_Ground,   "hit_ground_baseball_metal_XX.wav");
+        Sound(SRF_Mud,      "blunt_mood_XX.wav");
+        Sound(SRF_Flesh,    "hit_flesh_02.wav");
+        Sound(SRF_Rubber,   "blunt_gravel_XX.wav");
+        Sound(SRF_Wood,     "hit_wood_baseball_metal_XX.wav");
+        Sound(SRF_Plastic,  "hit_big_plastic_XX.wav");
+        Sound(SRF_Tarmac,   "hit_stone_baseball_metal_XX.wav");
+        Sound(SRF_Glass,    "hit_stone_baseball_metal_XX.wav");
+        Sound(SRF_Ice,      "hit_stone_baseball_metal_XX.wav");
+        Sound(SRF_Metal,    "hit_stone_baseball_metal_XX.wav");
+        Sound(SRF_Stone,    "hit_stone_baseball_metal_XX.wav");
+        
+        Fx(SRF_Unknown,     "DirtHit_SG_sequence.fx");
+        Fx(SRF_Flexible,    "DirtHit_SG_sequence.fx");
+        Fx(SRF_Fire,        "DirtHit_SG_sequence.fx");
+        Fx(SRF_Water,       "melee_water_impact_sequence.fx");
+        Fx(SRF_Snow,        "armorhit_small_sequence.fx");
+        Fx(SRF_Sand,        "DirtHit_SG_sequence.fx");
+        Fx(SRF_Gravel,      "DirtHit_SG_sequence.fx");
+        Fx(SRF_Grass,       "DirtHit_SG_sequence.fx");
+        Fx(SRF_Ground,      "DirtHit_SG_sequence.fx");
+        Fx(SRF_Mud,         "DirtHit_SG_sequence.fx");
+        Fx(SRF_Flesh,       "DI_hitflesh_sequence.fx");
+        Fx(SRF_Rubber,      "DirtHit_SG_sequence.fx");
+        Fx(SRF_Wood,        "WoodHit_Small_sequence.fx");
+        Fx(SRF_Plastic,     "DirtHit_SG_sequence.fx");
+        Fx(SRF_Tarmac,      "AsphaltHit_SG_sequence.fx");
+        Fx(SRF_Glass,       "AsphaltHit_SG_sequence.fx");
+        Fx(SRF_Ice,         "DirtHit_SG_sequence.fx");
+        Fx(SRF_Metal,       "MetalHit_SG_sequence.fx");
+        Fx(SRF_Stone,       "StoneHit_SG_sequence.fx");
+        
+        Trace(SRF_Unknown,  "MeleeTraceGround_trace.fx");
+        Trace(SRF_Flexible, "MeleeTraceGround_trace.fx");
+        Trace(SRF_Fire,     "MeleeTraceGround_trace.fx");
+        Trace(SRF_Water,    "BulletTraceWater_trace.fx");
+        Trace(SRF_Snow,     "MeleeTraceGround_trace.fx");
+        Trace(SRF_Sand,     "MeleeTraceGround_trace.fx");
+        Trace(SRF_Gravel,   "MeleeTraceStone_trace.fx");
+        Trace(SRF_Grass,    "MeleeTraceGround_trace.fx");
+        Trace(SRF_Ground,   "MeleeTraceGround_trace.fx");
+        Trace(SRF_Mud,      "MeleeTraceGround_trace.fx");
+        Trace(SRF_Flesh,    "MeleeTraceGround_trace.fx");
+        Trace(SRF_Rubber,   "MeleeTraceGround_trace.fx");
+        Trace(SRF_Wood,     "MeleeTraceWood_trace.fx");
+        Trace(SRF_Plastic,  "MeleeTraceGround_trace.fx");
+        Trace(SRF_Tarmac,   "MeleeTraceStone_trace.fx");
+        //Trace(SRF_Glass,    "MeleeTraceGround_trace.fx");
+        Trace(SRF_Ice,      "MeleeTraceGround_trace.fx");
+        Trace(SRF_Metal,    "MeleeTraceMetal_trace.fx");
+        Trace(SRF_Stone,    "MeleeTraceStone_trace.fx");
+    }
+}
+
+sub HitEffects_Wooden()
+{
+    HitEffects(ItemHitFxCategory_Wooden)
+    {
+        Sound(SRF_Unknown,  "blunt_sand_XX.wav");
+        Sound(SRF_Flexible, "blunt_sand_XX.wav");
+        Sound(SRF_Fire,     "blunt_fire_XX.wav");
+        Sound(SRF_Water,    "blunt_water_XX.wav");
+        Sound(SRF_Snow,     "blunt_sand_XX.wav");
+        Sound(SRF_Sand,     "blunt_sand_XX.wav");
+        Sound(SRF_Gravel,   "blunt_gravel_XX.wav");
+        Sound(SRF_Grass,    "blunt_grass_XX.wav");
+        Sound(SRF_Ground,   "blunt_sand_XX.wav");
+        Sound(SRF_Mud,      "blunt_mood_XX.wav");
+        Sound(SRF_Flesh,    "hit_flesh_02.wav");
+        Sound(SRF_Rubber,   "blunt_gravel_XX.wav");
+        Sound(SRF_Wood,     "blunt_wood_XX.wav");
+        Sound(SRF_Plastic,  "hit_big_plastic_XX.wav");
+        Sound(SRF_Tarmac,   "blunt_gravel_XX.wav");
+        Sound(SRF_Glass,    "hit_big_glass_XX.wav");
+        Sound(SRF_Ice,      "hit_big_glass_XX.wav");
+        Sound(SRF_Metal,    "blunt_metal_XX.wav");
+        Sound(SRF_Stone,    "hit_big_stone_XX.wav");
+        
+        Fx(SRF_Unknown,     "DirtHit_SG_sequence.fx");
+        Fx(SRF_Flexible,    "DirtHit_SG_sequence.fx");
+        Fx(SRF_Fire,        "DirtHit_SG_sequence.fx");
+        Fx(SRF_Water,       "melee_water_impact_sequence.fx");
+        Fx(SRF_Snow,        "armorhit_small_sequence.fx");
+        Fx(SRF_Sand,        "DirtHit_SG_sequence.fx");
+        Fx(SRF_Gravel,      "DirtHit_SG_sequence.fx");
+        Fx(SRF_Grass,       "DirtHit_SG_sequence.fx");
+        Fx(SRF_Ground,      "DirtHit_SG_sequence.fx");
+        Fx(SRF_Mud,         "DirtHit_SG_sequence.fx");
+        Fx(SRF_Flesh,       "DI_hitflesh_sequence.fx");
+        Fx(SRF_Rubber,      "DirtHit_SG_sequence.fx");
+        Fx(SRF_Wood,        "WoodHit_Small_sequence.fx");
+        Fx(SRF_Plastic,     "DirtHit_SG_sequence.fx");
+        Fx(SRF_Tarmac,      "AsphaltHit_SG_sequence.fx");
+        Fx(SRF_Glass,       "AsphaltHit_SG_sequence.fx");
+        Fx(SRF_Ice,         "DirtHit_SG_sequence.fx");
+        Fx(SRF_Metal,       "MetalHit_SG_sequence.fx");
+        Fx(SRF_Stone,       "StoneHit_SG_sequence.fx");
+        
+        Trace(SRF_Unknown,  "MeleeTraceGround_trace.fx");
+        Trace(SRF_Flexible, "MeleeTraceGround_trace.fx");
+        Trace(SRF_Fire,     "MeleeTraceGround_trace.fx");
+        Trace(SRF_Water,    "BulletTraceWater_trace.fx");
+        Trace(SRF_Snow,     "MeleeTraceGround_trace.fx");
+        Trace(SRF_Sand,     "MeleeTraceGround_trace.fx");
+        Trace(SRF_Gravel,   "MeleeTraceStone_trace.fx");
+        Trace(SRF_Grass,    "MeleeTraceGround_trace.fx");
+        Trace(SRF_Ground,   "MeleeTraceGround_trace.fx");
+        Trace(SRF_Mud,      "MeleeTraceGround_trace.fx");
+        Trace(SRF_Flesh,    "MeleeTraceGround_trace.fx");
+        Trace(SRF_Rubber,   "MeleeTraceGround_trace.fx");
+        Trace(SRF_Wood,     "MeleeTraceWood_trace.fx");
+        Trace(SRF_Plastic,  "MeleeTraceGround_trace.fx");
+        Trace(SRF_Tarmac,   "MeleeTraceStone_trace.fx");
+        //Trace(SRF_Glass,    "MeleeTraceGround_trace.fx");
+        Trace(SRF_Ice,      "MeleeTraceGround_trace.fx");
+        Trace(SRF_Metal,    "MeleeTraceMetal_trace.fx");
+        Trace(SRF_Stone,    "MeleeTraceStone_trace.fx");
+    }
+}
+
+sub HitEffects_BuggyUpgrade()
+{
+    HitEffects(ItemHitFxCategory_BuggyUpgrade)
+    {
+        Sound(SRF_Unknown,  "blunt_sand_XX.wav");
+        Sound(SRF_Flexible, "blunt_sand_XX.wav");
+        Sound(SRF_Fire,     "blunt_fire_XX.wav");
+        Sound(SRF_Water,    "blunt_water_XX.wav");
+        Sound(SRF_Snow,     "blunt_sand_XX.wav");
+        Sound(SRF_Sand,     "blunt_sand_XX.wav");
+        Sound(SRF_Gravel,   "blunt_gravel_XX.wav");
+        Sound(SRF_Grass,    "blunt_grass_XX.wav");
+        Sound(SRF_Ground,   "blunt_sand_XX.wav");
+        Sound(SRF_Mud,      "blunt_mood_XX.wav");
+        Sound(SRF_Flesh,    "hit_flesh_02.wav");
+        Sound(SRF_Rubber,   "blunt_gravel_XX.wav");
+        Sound(SRF_Wood,     "blunt_wood_XX.wav");
+        Sound(SRF_Plastic,  "hit_big_plastic_XX.wav");
+        Sound(SRF_Tarmac,   "blunt_gravel_XX.wav");
+        Sound(SRF_Glass,    "hit_big_glass_XX.wav");
+        Sound(SRF_Ice,      "hit_big_glass_XX.wav");
+        Sound(SRF_Metal,    "blunt_metal_XX.wav");
+        Sound(SRF_Stone,    "blunt_stone_XX.wav");
+        
+        Fx(SRF_Unknown,     "DirtHit_SG_sequence.fx");
+        Fx(SRF_Flexible,    "DirtHit_SG_sequence.fx");
+        Fx(SRF_Fire,        "DirtHit_SG_sequence.fx");
+        Fx(SRF_Water,       "melee_water_impact_sequence.fx");
+        Fx(SRF_Snow,        "armorhit_small_sequence.fx");
+        Fx(SRF_Sand,        "DirtHit_SG_sequence.fx");
+        Fx(SRF_Gravel,      "DirtHit_SG_sequence.fx");
+        Fx(SRF_Grass,       "DirtHit_SG_sequence.fx");
+        Fx(SRF_Ground,      "DirtHit_SG_sequence.fx");
+        Fx(SRF_Mud,         "DirtHit_SG_sequence.fx");
+        Fx(SRF_Flesh,       "DI_hitflesh_sequence.fx");
+        Fx(SRF_Rubber,      "DirtHit_SG_sequence.fx");
+        Fx(SRF_Wood,        "WoodHit_Small_sequence.fx");
+        Fx(SRF_Plastic,     "DirtHit_SG_sequence.fx");
+        Fx(SRF_Tarmac,      "AsphaltHit_SG_sequence.fx");
+        Fx(SRF_Glass,       "AsphaltHit_SG_sequence.fx");
+        Fx(SRF_Ice,         "DirtHit_SG_sequence.fx");
+        Fx(SRF_Metal,       "MetalHit_SG_sequence.fx");
+        Fx(SRF_Stone,       "StoneHit_SG_sequence.fx");
+        
+        Trace(SRF_Unknown,  "MeleeTraceGround_trace.fx");
+        Trace(SRF_Flexible, "MeleeTraceGround_trace.fx");
+        Trace(SRF_Fire,     "MeleeTraceGround_trace.fx");
+        Trace(SRF_Water,    "BulletTraceWater_trace.fx");
+        Trace(SRF_Snow,     "MeleeTraceGround_trace.fx");
+        Trace(SRF_Sand,     "MeleeTraceGround_trace.fx");
+        Trace(SRF_Gravel,   "MeleeTraceStone_trace.fx");
+        Trace(SRF_Grass,    "MeleeTraceGround_trace.fx");
+        Trace(SRF_Ground,   "MeleeTraceGround_trace.fx");
+        Trace(SRF_Mud,      "MeleeTraceGround_trace.fx");
+        Trace(SRF_Flesh,    "MeleeTraceGround_trace.fx");
+        Trace(SRF_Rubber,   "MeleeTraceGround_trace.fx");
+        Trace(SRF_Wood,     "MeleeTraceWood_trace.fx");
+        Trace(SRF_Plastic,  "MeleeTraceGround_trace.fx");
+        Trace(SRF_Tarmac,   "MeleeTraceStone_trace.fx");
+        //Trace(SRF_Glass,    "MeleeTraceGround_trace.fx");
+        Trace(SRF_Ice,      "MeleeTraceGround_trace.fx");
+        Trace(SRF_Metal,    "MeleeTraceMetal_trace.fx");
+        Trace(SRF_Stone,    "MeleeTraceStone_trace.fx");
+    }
+}
+
+sub HitEffects_Sharp()
+{
+    HitEffects(ItemHitFxCategory_Sharp)
+    {
+        Sound(SRF_Unknown,  "sharp_sand_XX.wav");
+        Sound(SRF_Flexible, "hit_big_default_XX.wav");
+        Sound(SRF_Fire,     "blunt_fire_XX.wav");
+        Sound(SRF_Water,    "sharp_water_XX.wav");
+        Sound(SRF_Snow,     "hit_snow_XX.wav");
+        Sound(SRF_Sand,     "sharp_sand_XX.wav");
+        Sound(SRF_Gravel,   "sharp_gravel_XX.wav");
+        Sound(SRF_Grass,    "sharp_grass_XX.wav");
+        Sound(SRF_Ground,   "sharp_sand_XX.wav");
+        Sound(SRF_Mud,      "sharp_mood_XX.wav");
+        Sound(SRF_Flesh,    "hit_flesh_02.wav");
+        Sound(SRF_Rubber,   "sharp_gravel_XX.wav");
+        Sound(SRF_Wood,     "sharp_wood_XX.wav");
+        Sound(SRF_Plastic,  "hit_big_plastic_XX.wav");
+        Sound(SRF_Tarmac,   "sharp_gravel_XX.wav");
+        Sound(SRF_Glass,    "hit_big_glass_XX.wav");
+        Sound(SRF_Ice,      "hit_big_glass_XX.wav");
+        Sound(SRF_Metal,    "sharp_metal_XX.wav");
+        Sound(SRF_Stone,    "sharp_stone_XX.wav");
+        
+        Fx(SRF_Unknown,     "DirtHit_SG_sequence.fx");
+        Fx(SRF_Flexible,    "DirtHit_SG_sequence.fx");
+        Fx(SRF_Fire,        "DirtHit_SG_sequence.fx");
+        Fx(SRF_Water,       "melee_water_impact_sequence.fx");
+        Fx(SRF_Snow,        "armorhit_small_sequence.fx");
+        Fx(SRF_Sand,        "DirtHit_SG_sequence.fx");
+        Fx(SRF_Gravel,      "DirtHit_SG_sequence.fx");
+        Fx(SRF_Grass,       "DirtHit_SG_sequence.fx");
+        Fx(SRF_Ground,      "DirtHit_SG_sequence.fx");
+        Fx(SRF_Mud,         "DirtHit_SG_sequence.fx");
+        Fx(SRF_Flesh,       "DI_cutflesh_sequence.fx");
+        Fx(SRF_Rubber,      "DirtHit_SG_sequence.fx");
+        Fx(SRF_Wood,        "WoodHit_Small_sequence.fx");
+        Fx(SRF_Plastic,     "DirtHit_SG_sequence.fx");
+        Fx(SRF_Tarmac,      "AsphaltHit_SG_sequence.fx");
+        Fx(SRF_Glass,       "AsphaltHit_SG_sequence.fx");
+        Fx(SRF_Ice,         "DirtHit_SG_sequence.fx");
+        Fx(SRF_Metal,       "MetalHit_SG_sequence.fx");
+        Fx(SRF_Stone,       "StoneHit_SG_sequence.fx");
+        
+        Trace(SRF_Unknown,  "MeleeTraceGround_trace.fx");
+        Trace(SRF_Flexible, "MeleeTraceGround_trace.fx");
+        Trace(SRF_Fire,     "MeleeTraceGround_trace.fx");
+        Trace(SRF_Water,    "BulletTraceWater_trace.fx");
+        Trace(SRF_Snow,     "MeleeTraceGround_trace.fx");
+        Trace(SRF_Sand,     "MeleeTraceGround_trace.fx");
+        Trace(SRF_Gravel,   "MeleeTraceStone_trace.fx");
+        Trace(SRF_Grass,    "MeleeTraceGround_trace.fx");
+        Trace(SRF_Ground,   "MeleeTraceGround_trace.fx");
+        Trace(SRF_Mud,      "MeleeTraceGround_trace.fx");
+        Trace(SRF_Flesh,    "MeleeTraceGround_trace.fx");
+        Trace(SRF_Rubber,   "MeleeTraceGround_trace.fx");
+        Trace(SRF_Wood,     "MeleeTraceWood_trace.fx");
+        Trace(SRF_Plastic,  "MeleeTraceGround_trace.fx");
+        Trace(SRF_Tarmac,   "MeleeTraceStone_trace.fx");
+        //Trace(SRF_Glass,    "MeleeTraceGround_trace.fx");
+        Trace(SRF_Ice,      "MeleeTraceGround_trace.fx");
+        Trace(SRF_Metal,    "SharpTraceMetal_trace.fx");
+        Trace(SRF_Stone,    "MeleeTraceStone_trace.fx");
+    }
+}
+
+sub HitEffects_Sharp_Heavy()
+{
+    HitEffects(ItemHitFxCategory_Sharp)
+    {
+        Sound(SRF_Unknown,  "sharp_sand_XX.wav");
+        Sound(SRF_Flexible, "hit_big_default_XX.wav");
+        Sound(SRF_Fire,     "blunt_fire_XX.wav");
+        Sound(SRF_Water,    "sharp_water_XX.wav");
+        Sound(SRF_Snow,     "hit_snow_XX.wav");
+        Sound(SRF_Sand,     "sharp_heavy_ground_XX.wav");
+        Sound(SRF_Gravel,   "sharp_heavy_ground_XX.wav");
+        Sound(SRF_Grass,    "sharp_heavy_ground_XX.wav");
+        Sound(SRF_Ground,   "sharp_heavy_ground_XX.wav");
+        Sound(SRF_Mud,      "sharp_mood_XX.wav");
+        Sound(SRF_Flesh,    "hit_flesh_02.wav");
+        Sound(SRF_Rubber,   "sharp_gravel_XX.wav");
+        Sound(SRF_Wood,     "sharp_heavy_wood_XX.wav");
+        Sound(SRF_Plastic,  "hit_big_plastic_XX.wav");
+        Sound(SRF_Tarmac,   "sharp_heavy_stone_XX.wav");
+        Sound(SRF_Glass,    "sharp_heavy_stone_XX.wav");
+        Sound(SRF_Ice,      "sharp_heavy_stone_XX.wav");
+        Sound(SRF_Metal,    "sharp_metal_XX.wav");
+        Sound(SRF_Stone,    "sharp_heavy_stone_XX.wav");
+        
+        Fx(SRF_Unknown,     "DirtHit_SG_sequence.fx");
+        Fx(SRF_Flexible,    "DirtHit_SG_sequence.fx");
+        Fx(SRF_Fire,        "DirtHit_SG_sequence.fx");
+        Fx(SRF_Water,       "melee_water_impact_sequence.fx");
+        Fx(SRF_Snow,        "armorhit_small_sequence.fx");
+        Fx(SRF_Sand,        "DirtHit_SG_sequence.fx");
+        Fx(SRF_Gravel,      "DirtHit_SG_sequence.fx");
+        Fx(SRF_Grass,       "DirtHit_SG_sequence.fx");
+        Fx(SRF_Ground,      "DirtHit_SG_sequence.fx");
+        Fx(SRF_Mud,         "DirtHit_SG_sequence.fx");
+        Fx(SRF_Flesh,       "DI_cutflesh_sequence.fx");
+        Fx(SRF_Rubber,      "DirtHit_SG_sequence.fx");
+        Fx(SRF_Wood,        "WoodHit_Small_sequence.fx");
+        Fx(SRF_Plastic,     "DirtHit_SG_sequence.fx");
+        Fx(SRF_Tarmac,      "AsphaltHit_SG_sequence.fx");
+        Fx(SRF_Glass,       "AsphaltHit_SG_sequence.fx");
+        Fx(SRF_Ice,         "DirtHit_SG_sequence.fx");
+        Fx(SRF_Metal,       "MetalHit_SG_sequence.fx");
+        Fx(SRF_Stone,       "StoneHit_SG_sequence.fx");
+        
+        Trace(SRF_Unknown,  "MeleeTraceGround_trace.fx");
+        Trace(SRF_Flexible, "MeleeTraceGround_trace.fx");
+        Trace(SRF_Fire,     "MeleeTraceGround_trace.fx");
+        Trace(SRF_Water,    "BulletTraceWater_trace.fx");
+        Trace(SRF_Snow,     "MeleeTraceGround_trace.fx");
+        Trace(SRF_Sand,     "MeleeTraceGround_trace.fx");
+        Trace(SRF_Gravel,   "MeleeTraceStone_trace.fx");
+        Trace(SRF_Grass,    "MeleeTraceGround_trace.fx");
+        Trace(SRF_Ground,   "MeleeTraceGround_trace.fx");
+        Trace(SRF_Mud,      "MeleeTraceGround_trace.fx");
+        Trace(SRF_Flesh,    "MeleeTraceGround_trace.fx");
+        Trace(SRF_Rubber,   "MeleeTraceGround_trace.fx");
+        Trace(SRF_Wood,     "MeleeTraceWood_trace.fx");
+        Trace(SRF_Plastic,  "MeleeTraceGround_trace.fx");
+        Trace(SRF_Tarmac,   "MeleeTraceStone_trace.fx");
+        //Trace(SRF_Glass,    "MeleeTraceGround_trace.fx");
+        Trace(SRF_Ice,      "MeleeTraceGround_trace.fx");
+        Trace(SRF_Metal,    "SharpTraceMetal_trace.fx");
+        Trace(SRF_Stone,    "MeleeTraceStone_trace.fx");
+    }
+}
+
+sub PickupSounds_Default()
+{
+    PickupSounds("default")
+    {
+        Sound(SRF_Unknown,  "default_pickup_XX.wav");
+        Sound(SRF_Flexible, "default_pickup_XX.wav");
+        Sound(SRF_Fire,     "default_pickup_XX.wav");
+        Sound(SRF_Water,    "default_pickup_XX.wav");
+        Sound(SRF_Snow,     "default_pickup_XX.wav");
+        Sound(SRF_Sand,     "default_pickup_XX.wav");
+        Sound(SRF_Gravel,   "default_pickup_XX.wav");
+        Sound(SRF_Grass,    "default_pickup_XX.wav");
+        Sound(SRF_Ground,   "default_pickup_XX.wav");
+        Sound(SRF_Mud,      "default_pickup_XX.wav");
+        Sound(SRF_Flesh,    "default_pickup_XX.wav");
+        Sound(SRF_Rubber,   "default_pickup_XX.wav");
+        Sound(SRF_Wood,     "default_pickup_XX.wav");
+        Sound(SRF_Plastic,  "default_pickup_XX.wav");
+        Sound(SRF_Tarmac,   "default_pickup_XX.wav");
+        Sound(SRF_Glass,    "default_pickup_XX.wav");
+        Sound(SRF_Ice,      "hit_big_glass_XX.wav");
+        Sound(SRF_Metal,    "default_pickup_XX.wav");
+        Sound(SRF_Stone,    "default_pickup_XX.wav");
+    }
+}
+
+sub HitEffects_Firearm()
+{
+    HitEffects(ItemHitFxCategory_Firearm)
+    {
+        Sound(SRF_Unknown,  "RicGround_XX.wav");
+        Sound(SRF_Flexible, "RicWood_XX.wav");
+        Sound(SRF_Fire,     "RicGround_XX.wav");
+        Sound(SRF_Water,    "RicWater_XX.wav");
+        Sound(SRF_Snow,     "hit_snow_XX.wav");
+        Sound(SRF_Sand,     "RicGround_XX.wav");
+        Sound(SRF_Gravel,   "RicGround_XX.wav");
+        Sound(SRF_Grass,    "RicGround_XX.wav");
+        Sound(SRF_Ground,   "RicGround_XX.wav");
+        Sound(SRF_Mud,      "hit_big_mud_XX.wav");
+        Sound(SRF_Flesh,    "BulletHitBody_XX.wav");
+        Sound(SRF_Rubber,   "RicGround_XX.wav");
+        Sound(SRF_Wood,     "RicWood_XX.wav");
+        Sound(SRF_Plastic,  "hit_big_plastic_XX.wav");
+        Sound(SRF_Tarmac,   "RicStone_XX.wav");
+        Sound(SRF_Glass,    "crash_window_XX.wav");
+        Sound(SRF_Ice,      "RicMetal_XX.wav");
+        Sound(SRF_Metal,    "RicMetal_XX.wav");
+        Sound(SRF_Stone,    "RicStone_XX.wav");
+        
+        Fx(SRF_Unknown,     "DirtHit_SG_sequence.fx");
+        Fx(SRF_Flexible,    "DirtHit_SG_sequence.fx");
+        Fx(SRF_Fire,        "DirtHit_SG_sequence.fx");
+        Fx(SRF_Water,       "bullet_water_impact_sequence.fx");
+        Fx(SRF_Snow,        "armorhit_small_sequence.fx");
+        Fx(SRF_Sand,        "DirtHit_SG_sequence.fx");
+        Fx(SRF_Gravel,      "DirtHit_SG_sequence.fx");
+        Fx(SRF_Grass,       "DirtHit_SG_sequence.fx");
+        Fx(SRF_Ground,      "DirtHit_SG_sequence.fx");
+        Fx(SRF_Mud,         "DirtHit_SG_sequence.fx");
+        Fx(SRF_Flesh,       "gunshotBlood_sequence.fx");
+        Fx(SRF_Rubber,      "DirtHit_SG_sequence.fx");
+        Fx(SRF_Wood,        "WoodHit_Small_sequence.fx");
+        Fx(SRF_Plastic,     "DirtHit_SG_sequence.fx");
+        Fx(SRF_Tarmac,      "AsphaltHit_SG_sequence.fx");
+        Fx(SRF_Glass,       "GlassHit_SG_sequence.fx");
+        Fx(SRF_Ice,         "DirtHit_SG_sequence.fx");
+        Fx(SRF_Metal,       "MetalHit_SG_sequence.fx");
+        Fx(SRF_Stone,       "StoneHit_SG_sequence.fx");
+        
+        Trace(SRF_Unknown,  "BulletTraceGround_trace.fx");
+        Trace(SRF_Flexible, "BulletTraceGround_trace.fx");
+        Trace(SRF_Fire,     "BulletTraceGround_trace.fx");
+        Trace(SRF_Water,    "BulletTraceWater_trace.fx");
+        Trace(SRF_Snow,     "BulletTraceGround_trace.fx");
+        Trace(SRF_Sand,     "BulletTraceGround_trace.fx");
+        Trace(SRF_Gravel,   "BulletTraceGround_trace.fx");
+        Trace(SRF_Grass,    "BulletTraceGround_trace.fx");
+        Trace(SRF_Ground,   "BulletTraceGround_trace.fx");
+        Trace(SRF_Mud,      "BulletTraceGround_trace.fx");
+        Trace(SRF_Flesh,    "BulletTraceGround_trace.fx");
+        Trace(SRF_Rubber,   "BulletTraceGround_trace.fx");
+        Trace(SRF_Wood,     "BulletTraceWood_trace.fx");
+        Trace(SRF_Plastic,  "BulletTraceGround_trace.fx");
+        Trace(SRF_Tarmac,   "BulletTraceGround_trace.fx");
+        Trace(SRF_Glass,    "BulletTraceGlass_trace.fx");
+        Trace(SRF_Ice,      "BulletTraceGround_trace.fx");
+        Trace(SRF_Metal,    "BulletTraceMetal_trace.fx");
+        Trace(SRF_Stone,    "BulletTraceStone_trace.fx");
+    }
+}
+

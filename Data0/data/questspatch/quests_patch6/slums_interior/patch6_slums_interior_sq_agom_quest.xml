@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums_interior"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- MOTHER'S DAY - START -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <Quest
+         name="MothersDay"
+         parent="Blackout_2"
+         difficulty="medium"
+         reward_set="MothersDay_reward"
+         quest_giver="Elena"
+         show_quest_log_reminder="true"
+         pxsl_line="7">
+        <Phase
+             type="go to"
+             name="Mother's Day - START"
+             distance="1000000"
+             show_locations="false"
+             pxsl_line="8">
+            <Destination
+                 pxsl_line="8">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="cin_failed_mission_01_pos01"
+                     pxsl_line="8" />
+            </Destination>
+            <DebugPlayerPosition
+                 pxsl_line="9">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="cin_failed_mission_01_pos01"
+                     pxsl_line="9" />
+            </DebugPlayerPosition>
+        </Phase>
+        <!-- ,use-lp _ NPCLifePlace MothersDay_LP_Lena_001 -teleport=true -->
+            <!-- ,ai HumanAI Elena -->
+        <!-- ,OR _ -->
+            <!-- path -->
+                <!-- ,talk _ elena_mothersday Lena_MothersDay_USE -show=false -questgiver_indicator=true -auto=true -->
+            <!-- path -->
+                <!-- ,cnd-quest-started _ AirDrop01 -finished=true -->
+        <!-- ,use-lp _ NPCLifePlace MothersDay_LP_Lena_001_after -teleport=false -snap_lp_to_npc=true -->
+            <!-- ,ai HumanAI Elena -->
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="19">
+            <Destination
+                 pxsl_line="19">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="cin_failed_mission_01_pos01"
+                     pxsl_line="19" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- MOTHER'S DAY - 05 -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=  -->
+    <Quest
+         name="MothersDay_05"
+         parent="MothersDay_04"
+         glued="true"
+         pxsl_line="23">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;MothersDay_OBJ_BringMeds&amp;"
+             pxsl_line="24">
+            <Path
+                 pxsl_line="24">
+                <Phase
+                     type="go to"
+                     name="Mother's Day - END"
+                     distance="10000"
+                     pxsl_line="25">
+                    <Destination
+                         pxsl_line="25">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="MothersDay_SP_SickBay_001"
+                             pxsl_line="25" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="26">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="MothersDay_SP_SickBay_001"
+                             pxsl_line="26" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="elena_mothersday"
+                     group="Player_MothersDay_END"
+                     pxsl_line="27" />
+                <Phase
+                     type="set reward"
+                     name="_"
+                     speaker="elena"
+                     pxsl_line="28" />
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="29">
+                    <Destination
+                         pxsl_line="29">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="MothersDay_SP_SickBay_001"
+                             pxsl_line="29" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+</QuestsDefinitions>

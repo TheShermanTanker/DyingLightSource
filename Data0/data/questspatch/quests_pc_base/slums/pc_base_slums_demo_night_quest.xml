@@ -1,0 +1,4514 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST NAME : Blackout -->
+    <!-- AFTER QUEST: Going Outside -->
+    <!-- QUEST INFO : Pursuit Breakers -->
+    <!-- COMMENT    :  -->
+    <!-- FROM       : SLUMS -->
+    <!-- TO         : SLUMS -->
+    <!-- CHAPTER    : 00 -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="Blackout"
+         parent="Q_Start02"
+         reward_set="StorylineReward_Blackout_reward"
+         pxsl_line="15">
+        <Phase
+             type="AND"
+             name="Spikes Hut Actions"
+             objective="&amp;GoingOutside_OBJ_GetToSpike&amp;"
+             pxsl_line="16">
+            <Path
+                 pxsl_line="16">
+                <Phase
+                     type="talk"
+                     name="BLACKOUT - START"
+                     speaker="Spike"
+                     group="Player_Blackout_01DLG01"
+                     pxsl_line="17">
+                    <DebugPlayerPosition
+                         pxsl_line="18">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="demo_night_sp_01"
+                             pxsl_line="18" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="19">
+                    <Object
+                         pxsl_line="20">
+                        <QuestObject
+                             class="BarrierObject"
+                             name="blackout_spike_hut_barrier"
+                             pxsl_line="20" />
+                    </Object>
+                    <Object
+                         pxsl_line="21">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="blackout_weapons_qeg"
+                             pxsl_line="21" />
+                    </Object>
+                </Phase>
+                <!-- life places turned off to prevent walking with weapon. Normal teleport cycle on graph on. -->
+                <Phase
+                     type="use life place"
+                     name="_"
+                     move_style="walk"
+                     wait_for_move_end="false"
+                     pxsl_line="23">
+                    <LifePlace
+                         pxsl_line="23">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="blackout_spike_hut_guard_lp_b"
+                             pxsl_line="23" />
+                    </LifePlace>
+                    <AI
+                         pxsl_line="24">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Maalik"
+                             pxsl_line="24" />
+                    </AI>
+                </Phase>
+                <!-- SAFE ZONE ACTION SHOW / ENABLE  -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="26">
+                    <Object
+                         pxsl_line="27">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="First_Playfield_Safezone::Zomies_in_front_of_house_QEG"
+                             pxsl_line="27" />
+                    </Object>
+                    <Object
+                         pxsl_line="28">
+                        <QuestObject
+                             class="SpawnBlocker"
+                             name="First_Playfield_Safezone::Spawn_blocker"
+                             pxsl_line="28" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="29">
+                    <Object
+                         pxsl_line="29">
+                        <QuestObject
+                             class="DoorDI"
+                             name="SafeZone_doors_to_house"
+                             pxsl_line="29" />
+                    </Object>
+                </Phase>
+                <!-- BAG IN SZ -->
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="30">
+                    <Object
+                         pxsl_line="30">
+                        <QuestObject
+                             class="DepotContainer"
+                             name="First_Playfield_Safezone::FristPlayefield_sz_depot::bag"
+                             pxsl_line="30" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="31">
+                    <Destination
+                         pxsl_line="31">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_spike_sp"
+                             pxsl_line="31" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Blackout_OBJ_GetFirecrackers&amp;"
+             pxsl_line="32">
+            <Path
+                 pxsl_line="32">
+                <Phase
+                     type="AND"
+                     name="Take the firecrackers"
+                     pxsl_line="33">
+                    <Path
+                         pxsl_line="34">
+                        <Phase
+                             type="AND"
+                             name="_"
+                             pxsl_line="35">
+                            <Path
+                                 pxsl_line="35">
+                                <Phase
+                                     type="enable"
+                                     name="turn on weapons"
+                                     pxsl_line="36">
+                                    <Object
+                                         pxsl_line="36">
+                                        <QuestObject
+                                             class="QuestEnableGroup"
+                                             name="spike_weapons_qeg"
+                                             pxsl_line="36" />
+                                    </Object>
+                                </Phase>
+                                <!-- Player take first firecrackers -->
+                                <Phase
+                                     type="have item guard"
+                                     name="_"
+                                     item_name="Throwable_Decoy"
+                                     pxsl_line="37" />
+                            </Path>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="38">
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="0.5"
+                             pxsl_line="39" />
+                        <Phase
+                             type="talk"
+                             name="_"
+                             speaker="Spike"
+                             group="Spike_Blackout_02DLG01"
+                             show_locations="false"
+                             auto_start="true"
+                             pxsl_line="40" />
+                    </Path>
+                    <Path
+                         pxsl_line="41">
+                        <Phase
+                             type="OR"
+                             name="_"
+                             pxsl_line="42">
+                            <Path
+                                 pxsl_line="43">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="1"
+                                     show_locations="false"
+                                     pxsl_line="44">
+                                    <Destination
+                                         pxsl_line="44">
+                                        <QuestObject
+                                             class="NPCLifePlace"
+                                             name="blackout_spike_hut_guard_lp_b"
+                                             pxsl_line="44" />
+                                    </Destination>
+                                </Phase>
+                                <Phase
+                                     type="talk"
+                                     name="_"
+                                     speaker="Maalik"
+                                     group="Maalik_Blackout_30DLG01"
+                                     show_locations="false"
+                                     auto_start="true"
+                                     pxsl_line="45" />
+                            </Path>
+                            <Path
+                                 pxsl_line="46">
+                                <Phase
+                                     type="have item guard"
+                                     name="_"
+                                     item_name="Throwable_Decoy"
+                                     pxsl_line="47" />
+                            </Path>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <!-- TUTORIAL about inventory         -->
+                <Phase
+                     type="hint"
+                     name="_"
+                     hint_name="Tutorial_ChangeEquipment"
+                     show="true"
+                     enable="true"
+                     pxsl_line="48" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="49">
+                    <Object
+                         pxsl_line="49">
+                        <QuestObject
+                             class="BarrierObject"
+                             name="blackout_spike_hut_barrier"
+                             pxsl_line="49" />
+                    </Object>
+                </Phase>
+                <!-- life places turned off to prevent walking with weapon. Normal teleport cycle on graph on. -->
+                <Phase
+                     type="use life place"
+                     name="_"
+                     move_style="walk"
+                     wait_for_move_end="false"
+                     pxsl_line="51">
+                    <LifePlace
+                         pxsl_line="51">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="blackout_spike_hut_guard_lp_c"
+                             pxsl_line="51" />
+                    </LifePlace>
+                    <AI
+                         pxsl_line="52">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Maalik"
+                             pxsl_line="52" />
+                    </AI>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="53">
+                    <Object
+                         pxsl_line="53">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="blackout_spike_hut_guard_lp_b"
+                             pxsl_line="53" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="en 19 : 30"
+                     pxsl_line="54">
+                    <Object
+                         pxsl_line="54">
+                        <QuestObject
+                             class="ForceDayTimeObject"
+                             name="ForceDayTimeObject_Blackout_01_19_30"
+                             pxsl_line="54" />
+                    </Object>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="go to"
+             name="_"
+             distance="0"
+             pxsl_line="55">
+            <Destination
+                 pxsl_line="55">
+                <QuestObject
+                     class="SensorGoTo"
+                     name="blackout_spike_goto"
+                     pxsl_line="55" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="enable"
+             name="turn off weapons from Spike hut"
+             state="disabled"
+             pxsl_line="56">
+            <Object
+                 pxsl_line="56">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="spike_weapons_qeg"
+                     pxsl_line="56" />
+            </Object>
+        </Phase>
+        <Phase
+             type="appear"
+             name="hide weapons from Spike hut"
+             mode="hide"
+             pxsl_line="57">
+            <Object
+                 pxsl_line="57">
+                <QuestObject
+                     class="AppearGroup"
+                     name="spike_weapons_ag"
+                     pxsl_line="57" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="58">
+            <Destination
+                 pxsl_line="58">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="demo_night_sp_01"
+                     pxsl_line="58" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- BLACKOUT PURSUIT ACTIONS -->
+    <Quest
+         name="Blackout1_5"
+         parent="Blackout"
+         glued="true"
+         pxsl_line="62">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Blackout_OBJ_ArmCarTrap&amp;"
+             pxsl_line="63">
+            <Path
+                 pxsl_line="63">
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="77.5"
+                     pxsl_line="64">
+                    <Destination
+                         pxsl_line="64">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="demo_night_first_car::Sedan_Switch"
+                             pxsl_line="64" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="hint"
+                     name="_"
+                     hint_name="Tutorial_TimeFreeze_LootingIsTheKey"
+                     show="true"
+                     enable="true"
+                     pxsl_line="65" />
+                <Phase
+                     type="go to"
+                     name="BLACKOUT - Arm the first trap for infected"
+                     distance="15"
+                     pxsl_line="66">
+                    <Destination
+                         pxsl_line="66">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="demo_night_first_car::Sedan_Switch"
+                             pxsl_line="66" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="67">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="demo_night_sp_00"
+                             pxsl_line="67" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="68">
+                    <Destination
+                         pxsl_line="68">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="demo_night_sp_01"
+                             pxsl_line="68" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="69">
+                    <Path
+                         pxsl_line="70">
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Spike_Blackout_00DLG01"
+                             auto_start="true"
+                             pxsl_line="71" />
+                    </Path>
+                    <Path
+                         pxsl_line="72">
+                        <!-- change here -->
+                        <Phase
+                             type="use"
+                             name="_"
+                             desired_state="on"
+                             pxsl_line="73">
+                            <Trigger
+                                 pxsl_line="73">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="demo_night_first_car::Sedan_Switch"
+                                     pxsl_line="73" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="74">
+                            <Object
+                                 pxsl_line="74">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="demo_night_first_car::Light_Red"
+                                     pxsl_line="74" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <!-- FIRST SAFE ZONE IN GAME -->
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="2"
+                     pxsl_line="76" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="77">
+                    <Object
+                         pxsl_line="78">
+                        <QuestObject
+                             class="SpawnBlocker"
+                             name="Balckout_safehose_spawnblocker"
+                             pxsl_line="78" />
+                    </Object>
+                    <Object
+                         pxsl_line="79">
+                        <QuestObject
+                             class="MapMarker"
+                             name="First_Playfield_Safezone::First_Playfield_MapMarker_SafeZone_Inactive"
+                             pxsl_line="79" />
+                    </Object>
+                    <Object
+                         pxsl_line="80">
+                        <QuestObject
+                             class="GroupingMapMarker"
+                             name="First_Playfield_Safezone::Safezone_Slums_Blackout_Zooming"
+                             pxsl_line="80" />
+                    </Object>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="wait guard"
+             name="_"
+             time="2"
+             pxsl_line="81" />
+        <Phase
+             type="talk"
+             name="_"
+             speaker="voice2d"
+             group="Jade_Blackout_31DLG01"
+             show_locations="false"
+             auto_start="true"
+             pxsl_line="82" />
+        <!-- Help a trapped survivor. -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Blackout_OBJ_HelpJim&amp;"
+             pxsl_line="83">
+            <Path
+                 pxsl_line="83">
+                <Phase
+                     type="go to"
+                     name="BLACKOUT - Clear safe zone "
+                     distance="0"
+                     pxsl_line="84">
+                    <Destination
+                         pxsl_line="84">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="First_Playfield_Safezone::before_safezone_talk"
+                             pxsl_line="84" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="85">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="First_Playfield_Safezone::SafeZone_debugpos"
+                             pxsl_line="85" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="86">
+                    <Object
+                         pxsl_line="87">
+                        <QuestObject
+                             class="SoundEmitterSimple"
+                             name="First_Playfield_Safezone::SES_JimMoaning"
+                             pxsl_line="87" />
+                    </Object>
+                    <Object
+                         pxsl_line="88">
+                        <QuestObject
+                             class="SensorAmbientMusicArea"
+                             name="First_Playfield_Safezone::SAMA_First_Playfield_Fight_Music"
+                             pxsl_line="88" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="set dialog"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_Blackout_21DLG01"
+                     auto_start="true"
+                     pxsl_line="89" />
+                <Phase
+                     type="enable"
+                     name="RESPAWN - Blackout Filed - ON"
+                     pxsl_line="90">
+                    <Object
+                         pxsl_line="91">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="First_Playfield_Safezone::SafeZone_sp_First_playfield"
+                             pxsl_line="91" />
+                    </Object>
+                    <Object
+                         pxsl_line="92">
+                        <QuestObject
+                             class="HubZone"
+                             name="First_Playfield_Safezone::SafeZone_sp_First_playfield_fake_hub_zone"
+                             pxsl_line="92" />
+                    </Object>
+                </Phase>
+                <!-- CLEARING THE SAFEZONE -->
+                <Phase
+                     type="OR"
+                     name="_"
+                     pxsl_line="94">
+                    <Path
+                         pxsl_line="95">
+                        <Phase
+                             type="clear area"
+                             name="_"
+                             show_location="false"
+                             show="false"
+                             show_locations="false"
+                             visualize_count="-1"
+                             location_visible_on_map="false"
+                             pxsl_line="96">
+                            <Object
+                                 pxsl_line="96">
+                                <QuestObject
+                                     class="ClearArea"
+                                     name="First_Playfield_Safezone::SafeZone_ca"
+                                     pxsl_line="96" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="97">
+                        <Phase
+                             type="kill"
+                             name="_"
+                             show_locations="false"
+                             pxsl_line="98">
+                            <Spawner
+                                 pxsl_line="98">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="First_Playfield_Safezone::Zombies_in_front_of_house"
+                                     pxsl_line="98" />
+                            </Spawner>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="99">
+                    <Object
+                         pxsl_line="100">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="First_Playfield_Safezone::Zombies_in_front_of_house"
+                             pxsl_line="100" />
+                    </Object>
+                    <Object
+                         pxsl_line="101">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="First_Playfield_Safezone::Zomies_in_front_of_house_QEG"
+                             pxsl_line="101" />
+                    </Object>
+                    <Object
+                         pxsl_line="102">
+                        <QuestObject
+                             class="VirtualAttractor"
+                             name="First_Playfield_Safezone::VA_zombie_01"
+                             pxsl_line="102" />
+                    </Object>
+                    <Object
+                         pxsl_line="103">
+                        <QuestObject
+                             class="VirtualAttractor"
+                             name="First_Playfield_Safezone::VA_zombie_02"
+                             pxsl_line="103" />
+                    </Object>
+                    <Object
+                         pxsl_line="104">
+                        <QuestObject
+                             class="SensorAmbientMusicArea"
+                             name="First_Playfield_Safezone::SAMA_First_Playfield_Fight_Music"
+                             pxsl_line="104" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="on"
+                     pxsl_line="105">
+                    <Trigger
+                         pxsl_line="105">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="First_Playfield_Safezone::Blackout_safe_house_trigger_knocking_01"
+                             pxsl_line="105" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="106">
+                    <Object
+                         pxsl_line="106">
+                        <QuestObject
+                             class="SoundEmitterSimple"
+                             name="First_Playfield_Safezone::SES_JimMoaning"
+                             pxsl_line="106" />
+                    </Object>
+                </Phase>
+                <!-- KILL JIM -->
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="108">
+                    <Destination
+                         pxsl_line="108">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="First_Playfield_Safezone::SafeZone_sp_First_playfield"
+                             pxsl_line="108" />
+                    </Destination>
+                </Phase>
+                <!-- ,talk _ Jim Player_Blackout_03DLG01 -auto=true -show=false -= Removed by Sikorek according to Orkin notes. -->
+                <Phase
+                     type="set dialog"
+                     name="_"
+                     speaker="Jim"
+                     pxsl_line="110" />
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="111">
+                    <Path
+                         pxsl_line="112">
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="113">
+                            <Object
+                                 pxsl_line="113">
+                                <QuestObject
+                                     class="DoorDI"
+                                     name="SafeZone_doors_to_house"
+                                     pxsl_line="113" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="use"
+                             name="_"
+                             desired_state="opened"
+                             pxsl_line="114">
+                            <Trigger
+                                 pxsl_line="114">
+                                <QuestObject
+                                     class="DoorDI"
+                                     name="SafeZone_doors_to_house"
+                                     pxsl_line="114" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="alarm group"
+                             name="_"
+                             level="High"
+                             pxsl_line="115">
+                            <GroupMarker
+                                 pxsl_line="115">
+                                <QuestObject
+                                     class="AIGroupMarker"
+                                     name="blackout_jim_the_first_infected_ai"
+                                     pxsl_line="115" />
+                            </GroupMarker>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="116">
+                            <Object
+                                 pxsl_line="116">
+                                <QuestObject
+                                     class="DoorDI"
+                                     name="SafeZone_doors_to_house"
+                                     pxsl_line="116" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="117">
+                            <Object
+                                 pxsl_line="117">
+                                <QuestObject
+                                     class="SensorAmbientMusicArea"
+                                     name="First_Playfield_Safezone::SAMA_First_Playfield_Infected_Stinger"
+                                     pxsl_line="117" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="118">
+                        <!-- ,wait _ 1 -->
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="120">
+                            <Object
+                                 pxsl_line="120">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="blackout_jim_the_first_infected"
+                                     pxsl_line="120" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="4"
+                             pxsl_line="121" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="122">
+                            <Object
+                                 pxsl_line="122">
+                                <QuestObject
+                                     class="VirtualAttractor"
+                                     name="blackout_jim_the_first_infected_lp"
+                                     pxsl_line="122" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+            </Path>
+        </Phase>
+        <!-- Kill the infected runner. -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Blackout_OBJ_KillJim&amp;"
+             pxsl_line="123">
+            <Path
+                 pxsl_line="123">
+                <Phase
+                     type="set dialog"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_Blackout_22DLG01"
+                     auto_start="true"
+                     pxsl_line="124" />
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="125">
+                    <Path
+                         pxsl_line="126">
+                        <Phase
+                             type="clear area"
+                             name="_"
+                             show_location="false"
+                             show="false"
+                             show_locations="false"
+                             visualize_count="-1"
+                             location_visible_on_map="false"
+                             pxsl_line="127">
+                            <Object
+                                 pxsl_line="127">
+                                <QuestObject
+                                     class="ClearArea"
+                                     name="First_Playfield_Safezone::SafeZone_ca"
+                                     pxsl_line="127" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="128">
+                        <Phase
+                             type="kill"
+                             name="_"
+                             pxsl_line="129">
+                            <Spawner
+                                 pxsl_line="129">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="blackout_jim_the_first_infected"
+                                     pxsl_line="129" />
+                            </Spawner>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="130">
+                    <Object
+                         pxsl_line="131">
+                        <QuestObject
+                             class="SensorAmbientMusicArea"
+                             name="First_Playfield_Safezone::SAMA_First_Playfield_Infected_Stinger"
+                             pxsl_line="131" />
+                    </Object>
+                    <Object
+                         pxsl_line="132">
+                        <QuestObject
+                             class="AIGroupMarker"
+                             name="blackout_jim_the_first_infected_ai"
+                             pxsl_line="132" />
+                    </Object>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="talk"
+             name="_"
+             speaker="voice2d"
+             group="Player_Blackout_04DLG01"
+             show_locations="false"
+             auto_start="true"
+             pxsl_line="133" />
+        <!-- Turn the power on to unlock the safe zone. -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Blackout_OBJ_UnlockSafeZone&amp;"
+             pxsl_line="134">
+            <Path
+                 pxsl_line="134">
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="135">
+                    <Destination
+                         pxsl_line="135">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="First_Playfield_Safezone::SafeZone_sp_First_playfield"
+                             pxsl_line="135" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="on"
+                     pxsl_line="136">
+                    <Trigger
+                         pxsl_line="136">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="First_Playfield_Safezone::Safezone_Blackout_Circuit_box_Switching"
+                             pxsl_line="136" />
+                    </Trigger>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="wait guard"
+             name="_"
+             time="2"
+             pxsl_line="137" />
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="138">
+            <Object
+                 pxsl_line="139">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="First_Playfield_Safezone::SafeZone_qeg"
+                     pxsl_line="139" />
+            </Object>
+            <Object
+                 pxsl_line="140">
+                <QuestObject
+                     class="AIEscapeArea"
+                     name="First_Playfield_Safezone::first_playfield_safezone_escapearea"
+                     pxsl_line="140" />
+            </Object>
+            <Object
+                 pxsl_line="141">
+                <QuestObject
+                     class="SpawnBlocker"
+                     name="First_Playfield_Safezone::Spawn_blocker"
+                     pxsl_line="141" />
+            </Object>
+            <Object
+                 pxsl_line="142">
+                <QuestObject
+                     class="MapMarker"
+                     name="First_Playfield_Safezone::First_Playfield_MapMarker_SafeZone_Active"
+                     pxsl_line="142" />
+            </Object>
+            <!-- POLE Climb Tutorials -->
+            <Object
+                 pxsl_line="143">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="Tutorial_Pole_qeg"
+                     pxsl_line="143" />
+            </Object>
+            <Object
+                 pxsl_line="144">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="First_Playfield_Safezone_instant_light"
+                     pxsl_line="144" />
+            </Object>
+            <!-- enable DEPOT in First SZ -->
+            <Object
+                 pxsl_line="145">
+                <QuestObject
+                     class="DepotContainer"
+                     name="First_Playfield_Safezone::FristPlayefield_sz_depot::bag"
+                     pxsl_line="145" />
+            </Object>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="146">
+            <Object
+                 pxsl_line="147">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="blackout_jim_the_first_infected"
+                     pxsl_line="147" />
+            </Object>
+            <Object
+                 pxsl_line="148">
+                <QuestObject
+                     class="MapMarker"
+                     name="First_Playfield_Safezone::First_Playfield_MapMarker_SafeZone_Inactive"
+                     pxsl_line="148" />
+            </Object>
+            <Object
+                 pxsl_line="149">
+                <QuestObject
+                     class="Encounter::EncounterBlockArea"
+                     name="First_Playfield_Safezone::SafeZone_eba"
+                     pxsl_line="149" />
+            </Object>
+            <Object
+                 pxsl_line="150">
+                <QuestObject
+                     class="BlackoutArea"
+                     name="First_Playfield_Safezone::Safezone_Blackout_blackoutarea"
+                     pxsl_line="150" />
+            </Object>
+        </Phase>
+        <Phase
+             type="enable"
+             name="dis 19 : 30"
+             state="disabled"
+             pxsl_line="151">
+            <Object
+                 pxsl_line="151">
+                <QuestObject
+                     class="ForceDayTimeObject"
+                     name="ForceDayTimeObject_Blackout_01_19_30"
+                     pxsl_line="151" />
+            </Object>
+        </Phase>
+        <Phase
+             type="enable"
+             name="en 20 : 40"
+             pxsl_line="152">
+            <Object
+                 pxsl_line="152">
+                <QuestObject
+                     class="ForceDayTimeObject"
+                     name="ForceDayTimeObject_Blackout_02_20_40"
+                     pxsl_line="152" />
+            </Object>
+        </Phase>
+        <Phase
+             type="set day night time"
+             name="_"
+             day_time="19.5"
+             pxsl_line="153" />
+        <Phase
+             type="wait guard"
+             name="_"
+             time="3"
+             pxsl_line="154" />
+        <!-- GRE 02 Pre      -->
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="156">
+            <Object
+                 pxsl_line="156">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="GRE_02_pre_qeg"
+                     pxsl_line="156" />
+            </Object>
+        </Phase>
+        <Phase
+             type="use"
+             name="_"
+             desired_state="on"
+             show_locations="false"
+             pxsl_line="157">
+            <Trigger
+                 pxsl_line="157">
+                <QuestObject
+                     class="InvisibleSwitchDI"
+                     name="GRE_02_Calling_Trigger"
+                     pxsl_line="157" />
+            </Trigger>
+        </Phase>
+        <Phase
+             type="wait guard"
+             name="_"
+             time="1"
+             pxsl_line="158" />
+        <Phase
+             type="talk"
+             name="_"
+             speaker="voice2d"
+             group="Player_Blackout_25DLG01"
+             show_locations="false"
+             auto_start="true"
+             pxsl_line="159" />
+        <!-- END -= -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+        <!-- -->
+        <!-- GRE CONTACT 2 -->
+        <!--  -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Blackout_OBJ_GRE&amp;"
+             pxsl_line="164">
+            <Path
+                 pxsl_line="164">
+                <Phase
+                     type="go to"
+                     name="BLACKOUT - GRE 02 contact"
+                     distance="100000"
+                     pxsl_line="165">
+                    <Destination
+                         pxsl_line="165">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="First_Playfield_Safezone::SafeZone_sp_First_playfield"
+                             pxsl_line="165" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="166">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="First_Playfield_Safezone::SafeZone_sp_First_playfield"
+                             pxsl_line="166" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="167">
+                    <Destination
+                         pxsl_line="167">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="First_Playfield_Safezone::SafeZone_sp_First_playfield"
+                             pxsl_line="167" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="168">
+                    <Path
+                         pxsl_line="169">
+                        <Phase
+                             type="gather players guard"
+                             name="BLACKOUT - GRE 02"
+                             distance="0"
+                             pxsl_line="170">
+                            <Destination
+                                 pxsl_line="170">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="GRE_02_goto"
+                                     pxsl_line="170" />
+                            </Destination>
+                            <DebugPlayerPosition
+                                 pxsl_line="171">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="GRE_02_sp"
+                                     pxsl_line="171" />
+                            </DebugPlayerPosition>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="172">
+                        <Phase
+                             type="OR"
+                             name="_"
+                             pxsl_line="173">
+                            <Path
+                                 pxsl_line="174">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="-10"
+                                     show_locations="false"
+                                     pxsl_line="175">
+                                    <Destination
+                                         pxsl_line="175">
+                                        <QuestObject
+                                             class="SpawnPoint"
+                                             name="First_Playfield_Safezone::SafeZone_sp_First_playfield"
+                                             pxsl_line="175" />
+                                    </Destination>
+                                </Phase>
+                                <Phase
+                                     type="wait guard"
+                                     name="_"
+                                     time="2"
+                                     pxsl_line="176" />
+                                <Phase
+                                     type="set dialog"
+                                     name="_"
+                                     speaker="voice2d"
+                                     group="Jade_Blackout_26DLG01"
+                                     auto_start="true"
+                                     pxsl_line="177" />
+                            </Path>
+                            <Path
+                                 pxsl_line="178">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="0"
+                                     show_locations="false"
+                                     pxsl_line="179">
+                                    <Destination
+                                         pxsl_line="179">
+                                        <QuestObject
+                                             class="SensorGoTo"
+                                             name="GRE_02_goto"
+                                             pxsl_line="179" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="180">
+                    <Object
+                         pxsl_line="180">
+                        <QuestObject
+                             class="UseItemOnceZone"
+                             name="GRE_02_Dialog"
+                             pxsl_line="180" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="on"
+                     show_locations="false"
+                     pxsl_line="181">
+                    <Trigger
+                         pxsl_line="181">
+                        <QuestObject
+                             class="InvisibleSwitchDI"
+                             name="GRE_02_Dialog_Trigger"
+                             pxsl_line="181" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="player control"
+                     name="_"
+                     block_move="true"
+                     pxsl_line="182" />
+                <Phase
+                     type="hudgroup"
+                     name="_"
+                     group="HideRadarForGREContact"
+                     mode="hide"
+                     pxsl_line="183" />
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="6"
+                     pxsl_line="184" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="185">
+                    <Object
+                         pxsl_line="186">
+                        <QuestObject
+                             class="SensorAmbientMusicArea"
+                             name="GRE_02_Music"
+                             pxsl_line="186" />
+                    </Object>
+                    <Object
+                         pxsl_line="187">
+                        <QuestObject
+                             class="SensorVarlist"
+                             name="GRE_02_varlist_mod"
+                             pxsl_line="187" />
+                    </Object>
+                </Phase>
+                <!-- AGENCY 2 -->
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_Blackout_23DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="188" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="189">
+                    <Object
+                         pxsl_line="189">
+                        <QuestObject
+                             class="UseItemOnceZone"
+                             name="GRE_02_Dialog"
+                             pxsl_line="189" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="190">
+                    <Object
+                         pxsl_line="190">
+                        <QuestObject
+                             class="UseItemOnceZone"
+                             name="GRE_02_Dialog_Ending"
+                             pxsl_line="190" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="OR"
+                     name="_"
+                     pxsl_line="191">
+                    <Path
+                         pxsl_line="192">
+                        <Phase
+                             type="use"
+                             name="_"
+                             desired_state="on"
+                             show_locations="false"
+                             pxsl_line="193">
+                            <Trigger
+                                 pxsl_line="193">
+                                <QuestObject
+                                     class="InvisibleSwitchDI"
+                                     name="GRE_02_Dialog_Ending_Trigger"
+                                     pxsl_line="193" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="1"
+                             pxsl_line="194" />
+                    </Path>
+                    <Path
+                         pxsl_line="195">
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="3"
+                             pxsl_line="196" />
+                    </Path>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="197">
+                    <Object
+                         pxsl_line="198">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="GRE_02_pre_qeg"
+                             pxsl_line="198" />
+                    </Object>
+                    <Object
+                         pxsl_line="199">
+                        <QuestObject
+                             class="SensorVarlist"
+                             name="GRE_02_varlist_mod"
+                             pxsl_line="199" />
+                    </Object>
+                    <Object
+                         pxsl_line="200">
+                        <QuestObject
+                             class="SensorAmbientMusicArea"
+                             name="GRE_02_Music"
+                             pxsl_line="200" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="hudgroup"
+                     name="_"
+                     group="HideRadarForGREContact"
+                     mode="show"
+                     pxsl_line="201" />
+                <Phase
+                     type="player control"
+                     name="_"
+                     block_move="false"
+                     pxsl_line="202" />
+                <!-- ADDED Firecrackers -->
+                <Phase
+                     type="give weapon"
+                     name="_"
+                     weapon_id="Throwable_Decoy"
+                     count="3"
+                     pxsl_line="203" />
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="204">
+                    <Destination
+                         pxsl_line="204">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="GRE_02_sp"
+                             pxsl_line="204" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="wait guard"
+             name="_"
+             time="2"
+             pxsl_line="205" />
+    </Quest>
+    <Quest
+         name="Blackout1_5b"
+         parent="Blackout1_5"
+         glued="true"
+         pxsl_line="207">
+        <Phase
+             type="talk"
+             name="_"
+             speaker="voice2d"
+             group="Player_Blackout_20DLG01"
+             show_locations="false"
+             auto_start="true"
+             pxsl_line="208" />
+        <Phase
+             type="talk"
+             name="_"
+             speaker="voice2d"
+             group="Spike_Blackout_32DLG03"
+             show_locations="false"
+             auto_start="true"
+             pxsl_line="209" />
+        <!-- Arm the next car traps. -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Blackout_OBJ_ArmNextTrap&amp;"
+             pxsl_line="210">
+            <Path
+                 pxsl_line="210">
+                <!-- CHATTER ZONES NEED !!!! -->
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="211">
+                    <Path
+                         pxsl_line="212">
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="2"
+                             pxsl_line="213" />
+                        <Phase
+                             type="OR"
+                             name="_"
+                             pxsl_line="214">
+                            <Path
+                                 pxsl_line="215">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="0"
+                                     show_locations="false"
+                                     pxsl_line="216">
+                                    <Destination
+                                         pxsl_line="216">
+                                        <QuestObject
+                                             class="SensorGoTo"
+                                             name="demonight_first_talk"
+                                             pxsl_line="216" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="217">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="0"
+                                     show_locations="false"
+                                     pxsl_line="218">
+                                    <Destination
+                                         pxsl_line="218">
+                                        <QuestObject
+                                             class="SensorGoTo"
+                                             name="demonight_talk_car2"
+                                             pxsl_line="218" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                        <Phase
+                             type="talk"
+                             name="_"
+                             speaker="voice2d"
+                             group="Player_Blackout_05DLG01"
+                             show_locations="false"
+                             auto_start="true"
+                             pxsl_line="219" />
+                        <Phase
+                             type="talk"
+                             name="_"
+                             speaker="voice2d"
+                             group="Player_Blackout_05DLG01_b"
+                             show_locations="false"
+                             auto_start="true"
+                             pxsl_line="220" />
+                        <Phase
+                             type="give weapon"
+                             name="_"
+                             weapon_id="Throwable_Decoy"
+                             count="4"
+                             pxsl_line="221" />
+                        <Phase
+                             type="hint"
+                             name="_"
+                             hint_name="TutorialHints_BlackoutFirecrackers"
+                             show="true"
+                             enable="true"
+                             pxsl_line="222" />
+                    </Path>
+                    <Path
+                         pxsl_line="223">
+                        <!-- set second car -->
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="3"
+                             pxsl_line="225">
+                            <Destination
+                                 pxsl_line="225">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="demo_night_pursuit_braker_02::Sedan_Switch"
+                                     pxsl_line="225" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="use"
+                             name="BLACKOUT - Set the car breaker"
+                             desired_state="on"
+                             pxsl_line="226">
+                            <Trigger
+                                 pxsl_line="226">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="demo_night_pursuit_braker_02::Sedan_Switch"
+                                     pxsl_line="226" />
+                            </Trigger>
+                            <DebugPlayerPosition
+                                 pxsl_line="227">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="demo_night_sp_02"
+                                     pxsl_line="227" />
+                            </DebugPlayerPosition>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="228">
+                            <Object
+                                 pxsl_line="228">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="demo_night_pursuit_braker_02::Light_Red"
+                                     pxsl_line="228" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="229">
+                        <!-- set third car -->
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="3"
+                             pxsl_line="231">
+                            <Destination
+                                 pxsl_line="231">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="demo_night_pursuit_braker_03::Sedan_Switch"
+                                     pxsl_line="231" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="use"
+                             name="_"
+                             desired_state="on"
+                             pxsl_line="232">
+                            <Trigger
+                                 pxsl_line="232">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="demo_night_pursuit_braker_03::Sedan_Switch"
+                                     pxsl_line="232" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="233">
+                            <Object
+                                 pxsl_line="233">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="demo_night_pursuit_braker_03::Light_Red"
+                                     pxsl_line="233" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="talk"
+             name="_"
+             speaker="voice2d"
+             group="Player_Blackout_06DLG01"
+             show_locations="false"
+             auto_start="true"
+             pxsl_line="234" />
+        <!-- LAMPS BUBBLE -->
+        <!-- Arm the light traps. -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Blackout_OBJ_ArmLightTrap&amp;"
+             pxsl_line="236">
+            <Path
+                 pxsl_line="236">
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="237">
+                    <Destination
+                         pxsl_line="237">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="demo_night_sp_02"
+                             pxsl_line="237" />
+                    </Destination>
+                </Phase>
+                <!-- LAMP 01 -->
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="238">
+                    <Path
+                         pxsl_line="239">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="10"
+                             pxsl_line="240">
+                            <Destination
+                                 pxsl_line="240">
+                                <QuestObject
+                                     class="PBreakerActivator"
+                                     name="PursuitBraker_Lamp_Qblackout_01::Lamp_switch"
+                                     pxsl_line="240" />
+                            </Destination>
+                        </Phase>
+                        <!-- change here  -->
+                        <Phase
+                             type="use"
+                             name="BLACKOUT - Set first lamp PB"
+                             desired_state="on"
+                             pxsl_line="241">
+                            <Trigger
+                                 pxsl_line="241">
+                                <QuestObject
+                                     class="PBreakerActivator"
+                                     name="PursuitBraker_Lamp_Qblackout_01::Lamp_switch"
+                                     pxsl_line="241" />
+                            </Trigger>
+                            <DebugPlayerPosition
+                                 pxsl_line="242">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="demo_night_sp_03"
+                                     pxsl_line="242" />
+                            </DebugPlayerPosition>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="243">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="90"
+                             show_locations="false"
+                             pxsl_line="244">
+                            <Destination
+                                 pxsl_line="244">
+                                <QuestObject
+                                     class="Marker"
+                                     name="blackout_third_trap_loc"
+                                     pxsl_line="244" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Player_Blackout_07DLG01"
+                             auto_start="true"
+                             pxsl_line="245" />
+                    </Path>
+                    <Path
+                         pxsl_line="246">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="2"
+                             show_locations="false"
+                             pxsl_line="247">
+                            <Destination
+                                 pxsl_line="247">
+                                <QuestObject
+                                     class="Marker"
+                                     name="blackout_third_trap_loc"
+                                     pxsl_line="247" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Player_Blackout_09DLG15"
+                             auto_start="true"
+                             pxsl_line="248" />
+                    </Path>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="249">
+                    <Destination
+                         pxsl_line="249">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="demo_night_sp_03"
+                             pxsl_line="249" />
+                    </Destination>
+                </Phase>
+                <!-- LAMPS 2 FROM 3 -->
+                <Phase
+                     type="OR"
+                     name="_"
+                     objective="&amp;Blackout_OBJ_ArmSomeOfLightTraps&amp;"
+                     pxsl_line="251">
+                    <!-- 1 - 3 -->
+                    <Path
+                         pxsl_line="252">
+                        <Phase
+                             type="AND"
+                             name="_"
+                             pxsl_line="253">
+                            <Path
+                                 pxsl_line="254">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="10"
+                                     pxsl_line="255">
+                                    <Destination
+                                         pxsl_line="255">
+                                        <QuestObject
+                                             class="PBreakerActivator"
+                                             name="PursuitBraker_Lamp_Qblackout_03::Lamp_switch"
+                                             pxsl_line="255" />
+                                    </Destination>
+                                </Phase>
+                                <!-- change here  -->
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     pxsl_line="256">
+                                    <Trigger
+                                         pxsl_line="256">
+                                        <QuestObject
+                                             class="PBreakerActivator"
+                                             name="PursuitBraker_Lamp_Qblackout_03::Lamp_switch"
+                                             pxsl_line="256" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="257">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="10"
+                                     pxsl_line="258">
+                                    <Destination
+                                         pxsl_line="258">
+                                        <QuestObject
+                                             class="PBreakerActivator"
+                                             name="PursuitBraker_Lamp_Qblackout_05::Lamp_switch"
+                                             pxsl_line="258" />
+                                    </Destination>
+                                </Phase>
+                                <!-- change here  -->
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     pxsl_line="259">
+                                    <Trigger
+                                         pxsl_line="259">
+                                        <QuestObject
+                                             class="PBreakerActivator"
+                                             name="PursuitBraker_Lamp_Qblackout_05::Lamp_switch"
+                                             pxsl_line="259" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                    </Path>
+                    <!-- 1 - 4 -->
+                    <Path
+                         pxsl_line="260">
+                        <Phase
+                             type="AND"
+                             name="_"
+                             pxsl_line="261">
+                            <Path
+                                 pxsl_line="262">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="10"
+                                     pxsl_line="263">
+                                    <Destination
+                                         pxsl_line="263">
+                                        <QuestObject
+                                             class="PBreakerActivator"
+                                             name="PursuitBraker_Lamp_Qblackout_03::Lamp_switch"
+                                             pxsl_line="263" />
+                                    </Destination>
+                                </Phase>
+                                <!-- change here  -->
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     pxsl_line="264">
+                                    <Trigger
+                                         pxsl_line="264">
+                                        <QuestObject
+                                             class="PBreakerActivator"
+                                             name="PursuitBraker_Lamp_Qblackout_03::Lamp_switch"
+                                             pxsl_line="264" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="265">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="10"
+                                     pxsl_line="266">
+                                    <Destination
+                                         pxsl_line="266">
+                                        <QuestObject
+                                             class="PBreakerActivator"
+                                             name="PursuitBraker_Lamp_Qblackout_06::Lamp_switch"
+                                             pxsl_line="266" />
+                                    </Destination>
+                                </Phase>
+                                <!-- change here -->
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     pxsl_line="267">
+                                    <Trigger
+                                         pxsl_line="267">
+                                        <QuestObject
+                                             class="PBreakerActivator"
+                                             name="PursuitBraker_Lamp_Qblackout_06::Lamp_switch"
+                                             pxsl_line="267" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                    </Path>
+                    <!-- 3 - 4 -->
+                    <Path
+                         pxsl_line="268">
+                        <Phase
+                             type="AND"
+                             name="_"
+                             pxsl_line="269">
+                            <Path
+                                 pxsl_line="270">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="10"
+                                     pxsl_line="271">
+                                    <Destination
+                                         pxsl_line="271">
+                                        <QuestObject
+                                             class="PBreakerActivator"
+                                             name="PursuitBraker_Lamp_Qblackout_05::Lamp_switch"
+                                             pxsl_line="271" />
+                                    </Destination>
+                                </Phase>
+                                <!-- change here  -->
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     pxsl_line="272">
+                                    <Trigger
+                                         pxsl_line="272">
+                                        <QuestObject
+                                             class="PBreakerActivator"
+                                             name="PursuitBraker_Lamp_Qblackout_05::Lamp_switch"
+                                             pxsl_line="272" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="273">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="10"
+                                     pxsl_line="274">
+                                    <Destination
+                                         pxsl_line="274">
+                                        <QuestObject
+                                             class="PBreakerActivator"
+                                             name="PursuitBraker_Lamp_Qblackout_06::Lamp_switch"
+                                             pxsl_line="274" />
+                                    </Destination>
+                                </Phase>
+                                <!-- change here  -->
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     pxsl_line="275">
+                                    <Trigger
+                                         pxsl_line="275">
+                                        <QuestObject
+                                             class="PBreakerActivator"
+                                             name="PursuitBraker_Lamp_Qblackout_06::Lamp_switch"
+                                             pxsl_line="275" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <!-- POLES TUTORIALS OFF -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="276">
+                    <Object
+                         pxsl_line="276">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="Tutorial_Pole_qeg"
+                             pxsl_line="276" />
+                    </Object>
+                </Phase>
+                <!-- LAMP 02 - BLACKOUT -->
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="1"
+                     pxsl_line="279" />
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_Blackout_10DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="280" />
+                <Phase
+                     type="AND"
+                     name="_"
+                     objective="&amp;Blackout_OBJ_RepairNextTrap&amp;"
+                     pxsl_line="281">
+                    <Path
+                         pxsl_line="282">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="10"
+                             pxsl_line="283">
+                            <Destination
+                                 pxsl_line="283">
+                                <QuestObject
+                                     class="PBreakerActivator"
+                                     name="PursuitBraker_Lamp_Qblackout_02::Lamp_switch"
+                                     pxsl_line="283" />
+                            </Destination>
+                        </Phase>
+                        <!-- change here  -->
+                        <Phase
+                             type="use"
+                             name="BLACKOUT - Turn on the second lamp"
+                             desired_state="on"
+                             pxsl_line="284">
+                            <Trigger
+                                 pxsl_line="284">
+                                <QuestObject
+                                     class="PBreakerActivator"
+                                     name="PursuitBraker_Lamp_Qblackout_02::Lamp_switch"
+                                     pxsl_line="284" />
+                            </Trigger>
+                            <DebugPlayerPosition
+                                 pxsl_line="285">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="demo_night_sp_04"
+                                     pxsl_line="285" />
+                            </DebugPlayerPosition>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="286">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="-10"
+                             show_locations="false"
+                             pxsl_line="287">
+                            <Destination
+                                 pxsl_line="287">
+                                <QuestObject
+                                     class="Marker"
+                                     name="blackout_third_trap_loc"
+                                     pxsl_line="287" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="2"
+                             pxsl_line="288" />
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Rakim_Blackout_11DLG01"
+                             auto_start="true"
+                             pxsl_line="289" />
+                    </Path>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="dis 20 : 40"
+                     state="disabled"
+                     pxsl_line="290">
+                    <Object
+                         pxsl_line="290">
+                        <QuestObject
+                             class="ForceDayTimeObject"
+                             name="ForceDayTimeObject_Blackout_02_20_40"
+                             pxsl_line="290" />
+                    </Object>
+                </Phase>
+                <!-- ,set_day_time _ 20.5 -->
+                <Phase
+                     type="set state"
+                     name="_"
+                     desired_state="closed"
+                     pxsl_line="292">
+                    <Trigger
+                         pxsl_line="292">
+                        <QuestObject
+                             class="DoorDI"
+                             name="SafeZone_doors_to_house"
+                             pxsl_line="292" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="293">
+                    <Object
+                         pxsl_line="293">
+                        <QuestObject
+                             class="MovieActor"
+                             name="cin_prime_first_time_Door"
+                             pxsl_line="293" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="294">
+                    <Object
+                         pxsl_line="294">
+                        <QuestObject
+                             class="DoorDI"
+                             name="SafeZone_doors_to_house"
+                             pxsl_line="294" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="295">
+                    <Destination
+                         pxsl_line="295">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="demo_night_sp_04"
+                             pxsl_line="295" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <Quest
+         name="Blackout1_5c"
+         parent="Blackout1_5b"
+         glued="true"
+         pxsl_line="297">
+        <Phase
+             type="AND"
+             name="_"
+             pxsl_line="298">
+            <Path
+                 pxsl_line="298">
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="299">
+                    <Path
+                         pxsl_line="300">
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="301">
+                            <Object
+                                 pxsl_line="302">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="demo_night_lamp_shock_off"
+                                     pxsl_line="302" />
+                            </Object>
+                            <Object
+                                 pxsl_line="303">
+                                <QuestObject
+                                     class="SoundEmitterSimple"
+                                     name="night_demo_power_off"
+                                     pxsl_line="303" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="5"
+                             pxsl_line="304" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="305">
+                            <Object
+                                 pxsl_line="305">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="demo_night_lamp_shock_off"
+                                     pxsl_line="305" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="306">
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="4"
+                             pxsl_line="307" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="308">
+                            <Object
+                                 pxsl_line="309">
+                                <QuestObject
+                                     class="BlackoutArea"
+                                     name="demo_night_blackout_area_a"
+                                     pxsl_line="309" />
+                            </Object>
+                            <Object
+                                 pxsl_line="310">
+                                <QuestObject
+                                     class="BlackoutArea"
+                                     name="demo_night_blackout_area_b"
+                                     pxsl_line="310" />
+                            </Object>
+                            <Object
+                                 pxsl_line="311">
+                                <QuestObject
+                                     class="BlackoutArea"
+                                     name="demo_night_blackout_area_c"
+                                     pxsl_line="311" />
+                            </Object>
+                            <Object
+                                 pxsl_line="312">
+                                <QuestObject
+                                     class="FXEmitter"
+                                     name="demo_night_voltage_loop"
+                                     pxsl_line="312" />
+                            </Object>
+                            <Object
+                                 pxsl_line="313">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="Blackout_turn_off_red_light"
+                                     pxsl_line="313" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="314">
+                            <Object
+                                 pxsl_line="315">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="Lamp_on_after_power_on1"
+                                     pxsl_line="315" />
+                            </Object>
+                            <Object
+                                 pxsl_line="316">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="Lamp_on_after_power_on2"
+                                     pxsl_line="316" />
+                            </Object>
+                            <Object
+                                 pxsl_line="317">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="Whitelight_off_03"
+                                     pxsl_line="317" />
+                            </Object>
+                            <Object
+                                 pxsl_line="318">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="Whitelight_off_04"
+                                     pxsl_line="318" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="319">
+                    <Destination
+                         pxsl_line="319">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="demo_night_sp_04"
+                             pxsl_line="319" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_Blackout_13DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="320" />
+            </Path>
+        </Phase>
+        <!-- set the power switch back on - alarm -->
+        <!-- Find the power distribution panel and fix the light problem. -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Blackout_OBJ_FindPanel&amp;"
+             pxsl_line="323">
+            <Path
+                 pxsl_line="323">
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="324">
+                    <Destination
+                         pxsl_line="324">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="demo_night_sp_04"
+                             pxsl_line="324" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="325">
+                    <Path
+                         pxsl_line="326">
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="10"
+                             pxsl_line="327" />
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Spike_Blackout_14DLG01"
+                             auto_start="true"
+                             pxsl_line="328" />
+                    </Path>
+                    <Path
+                         pxsl_line="329">
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="5"
+                             pxsl_line="330" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="331">
+                            <Object
+                                 pxsl_line="331">
+                                <QuestObject
+                                     class="SoundEmitterSimple"
+                                     name="night_demo_power_off"
+                                     pxsl_line="331" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="332">
+                        <Phase
+                             type="go to"
+                             name="BLACKOUT - Turn on power"
+                             distance="15"
+                             pxsl_line="333">
+                            <Destination
+                                 pxsl_line="333">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="power_switch_01::demo_night_last_lever::trigger_vertical_lever"
+                                     pxsl_line="333" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="334">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="50"
+                             show_locations="false"
+                             pxsl_line="335">
+                            <Destination
+                                 pxsl_line="335">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="power_switch_01::demo_night_last_lever::trigger_vertical_lever"
+                                     pxsl_line="335" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="336">
+                            <Object
+                                 pxsl_line="336">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Balckout_one_eating_corpse"
+                                     pxsl_line="336" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="337">
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="338">
+                            <Object
+                                 pxsl_line="338">
+                                <QuestObject
+                                     class="SpawnBlocker"
+                                     name="Balckout_electric_house_spawnblocker"
+                                     pxsl_line="338" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="339">
+                    <Destination
+                         pxsl_line="339">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="demo_night_sp_05"
+                             pxsl_line="339" />
+                    </Destination>
+                </Phase>
+                <!-- -->
+                <!-- GOON PRESENTATION -->
+                <!-- -->
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="343">
+                    <SpecificLocation
+                         pxsl_line="344">
+                        <QuestObject
+                             class="ZoneBox"
+                             name="Blackout_searchzone"
+                             pxsl_line="344" />
+                    </SpecificLocation>
+                    <Path
+                         pxsl_line="345">
+                        <Phase
+                             type="go to"
+                             name="BLACKOUT - CIN - Goon's initiation"
+                             distance="30"
+                             pxsl_line="346">
+                            <Destination
+                                 pxsl_line="346">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="cin_goone_sp"
+                                     pxsl_line="346" />
+                            </Destination>
+                            <DebugPlayerPosition
+                                 pxsl_line="347">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="cin_goone_sp"
+                                     pxsl_line="347" />
+                            </DebugPlayerPosition>
+                        </Phase>
+                        <Phase
+                             type="checkpoint"
+                             name="_"
+                             pxsl_line="348">
+                            <Destination
+                                 pxsl_line="348">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="cin_goone_sp"
+                                     pxsl_line="348" />
+                            </Destination>
+                        </Phase>
+                        <!-- -->
+                        <!-- CIN - GOON Initiotaion -->
+                        <!--  -->
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="352">
+                            <Object
+                                 pxsl_line="352">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="cin_goone_trigger_qeg"
+                                     pxsl_line="352" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="use"
+                             name="CIN GOON"
+                             desired_state="on"
+                             show_locations="false"
+                             pxsl_line="353">
+                            <Trigger
+                                 pxsl_line="353">
+                                <QuestObject
+                                     class="InteractiveMovieTrigger"
+                                     name="cin_goone_trigger"
+                                     pxsl_line="353" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="354">
+                            <Object
+                                 pxsl_line="355">
+                                <QuestObject
+                                     class="SoundEmitterSimple"
+                                     name="SES_Goon_Idle"
+                                     pxsl_line="355" />
+                            </Object>
+                            <Object
+                                 pxsl_line="356">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="cin_goone_trigger_qeg"
+                                     pxsl_line="356" />
+                            </Object>
+                            <Object
+                                 pxsl_line="357">
+                                <QuestObject
+                                     class="NavMeshDynamicObject"
+                                     name="cin_goone_navmesh_before"
+                                     pxsl_line="357" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="358">
+                            <Object
+                                 pxsl_line="359">
+                                <QuestObject
+                                     class="NavMeshDynamicObject"
+                                     name="cin_goone_navmesh_after"
+                                     pxsl_line="359" />
+                            </Object>
+                            <Object
+                                 pxsl_line="360">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="blackout_fake_switch_01"
+                                     pxsl_line="360" />
+                            </Object>
+                            <Object
+                                 pxsl_line="361">
+                                <QuestObject
+                                     class="SensorAmbientMusicArea"
+                                     name="SAMA_Thug_Presentation"
+                                     pxsl_line="361" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="362">
+                            <Object
+                                 pxsl_line="363">
+                                <QuestObject
+                                     class="MovieActor"
+                                     name="cin_goone_Door_01"
+                                     pxsl_line="363" />
+                            </Object>
+                            <Object
+                                 pxsl_line="364">
+                                <QuestObject
+                                     class="MovieActor"
+                                     name="cin_goone_Door_02"
+                                     pxsl_line="364" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="AND"
+                             name="_"
+                             pxsl_line="365">
+                            <Path
+                                 pxsl_line="366">
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     pxsl_line="367">
+                                    <Object
+                                         pxsl_line="367">
+                                        <QuestObject
+                                             class="AISpawnBoxNumber"
+                                             name="courier_thug_boss"
+                                             pxsl_line="367" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="368">
+                                <Phase
+                                     type="wait guard"
+                                     name="_"
+                                     time="2"
+                                     pxsl_line="369" />
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     pxsl_line="370">
+                                    <Object
+                                         pxsl_line="370">
+                                        <QuestObject
+                                             class="BombSwitchDI"
+                                             name="courier_thug_boss_bomb"
+                                             pxsl_line="370" />
+                                    </Object>
+                                </Phase>
+                                <Phase
+                                     type="wait guard"
+                                     name="_"
+                                     time="1"
+                                     pxsl_line="371" />
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     state="disabled"
+                                     pxsl_line="372">
+                                    <Object
+                                         pxsl_line="372">
+                                        <QuestObject
+                                             class="BombSwitchDI"
+                                             name="courier_thug_boss_bomb"
+                                             pxsl_line="372" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                        <Phase
+                             type="AND"
+                             name="after movie gather actions"
+                             pxsl_line="373">
+                            <Path
+                                 pxsl_line="373">
+                                <!-- GOON -->
+                                <Phase
+                                     type="player control"
+                                     name="_"
+                                     spawn_system_progress="2"
+                                     pxsl_line="374" />
+                                <!-- TURN ON GOONS ENC FIGHTING GROUPS -->
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     state="disabled"
+                                     pxsl_line="375">
+                                    <Object
+                                         pxsl_line="375">
+                                        <QuestObject
+                                             class="QuestEnableGroup"
+                                             name="enc_goon_blocker_qeg"
+                                             pxsl_line="375" />
+                                    </Object>
+                                </Phase>
+                                <Phase
+                                     type="enable"
+                                     name="Enabling airdrops with goon"
+                                     pxsl_line="377">
+                                    <Object
+                                         pxsl_line="378">
+                                        <QuestObject
+                                             class="GameEventAirDrop"
+                                             name="encounter_airdrop_goon_01::place"
+                                             pxsl_line="378" />
+                                    </Object>
+                                    <Object
+                                         pxsl_line="379">
+                                        <QuestObject
+                                             class="GameEventAirDrop"
+                                             name="encounter_airdrop_goon_02::place"
+                                             pxsl_line="379" />
+                                    </Object>
+                                    <Object
+                                         pxsl_line="380">
+                                        <QuestObject
+                                             class="GameEventAirDrop"
+                                             name="encounter_airdrop_goon_03::place"
+                                             pxsl_line="380" />
+                                    </Object>
+                                    <Object
+                                         pxsl_line="381">
+                                        <QuestObject
+                                             class="GameEventAirDrop"
+                                             name="encounter_airdrop_goon_04::place"
+                                             pxsl_line="381" />
+                                    </Object>
+                                    <Object
+                                         pxsl_line="382">
+                                        <QuestObject
+                                             class="GameEventAirDrop"
+                                             name="encounter_airdrop_goon_05::place"
+                                             pxsl_line="382" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="383">
+                            <Destination
+                                 pxsl_line="383">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="blackout_sense_hint_goto"
+                                     pxsl_line="383" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="hint"
+                             name="_"
+                             hint_name="Tutorial_PrologueAwarness"
+                             show="true"
+                             enable="true"
+                             pxsl_line="384" />
+                        <Phase
+                             type="use"
+                             name="BLACKOUT - Turn the power back on"
+                             desired_state="on"
+                             show_locations="false"
+                             pxsl_line="385">
+                            <Trigger
+                                 pxsl_line="385">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="power_switch_01::demo_night_trigger_fuse_box"
+                                     pxsl_line="385" />
+                            </Trigger>
+                            <DebugPlayerPosition
+                                 pxsl_line="386">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="cin_goone_sp"
+                                     pxsl_line="386" />
+                            </DebugPlayerPosition>
+                        </Phase>
+                        <Phase
+                             type="use"
+                             name="_"
+                             desired_state="on"
+                             show_locations="false"
+                             pxsl_line="387">
+                            <Trigger
+                                 pxsl_line="387">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="power_switch_01::demo_night_last_lever::trigger_vertical_lever"
+                                     pxsl_line="387" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="set day night time"
+                             name="_"
+                             day_time="20.8"
+                             pxsl_line="388" />
+                    </Path>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="389">
+                    <Destination
+                         pxsl_line="389">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="cin_goone_sp"
+                             pxsl_line="389" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="390">
+                    <Object
+                         pxsl_line="391">
+                        <QuestObject
+                             class="LampDI"
+                             name="Blackout_turn_off_red_light"
+                             pxsl_line="391" />
+                    </Object>
+                    <Object
+                         pxsl_line="392">
+                        <QuestObject
+                             class="LampDI"
+                             name="Whitelight_off_01"
+                             pxsl_line="392" />
+                    </Object>
+                    <Object
+                         pxsl_line="393">
+                        <QuestObject
+                             class="LampDI"
+                             name="Blackout_turn_off_red_light_b"
+                             pxsl_line="393" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="394">
+                    <Object
+                         pxsl_line="395">
+                        <QuestObject
+                             class="LampDI"
+                             name="Lamp_on_after_power_on1"
+                             pxsl_line="395" />
+                    </Object>
+                    <Object
+                         pxsl_line="396">
+                        <QuestObject
+                             class="LampDI"
+                             name="Lamp_on_after_power_on2"
+                             pxsl_line="396" />
+                    </Object>
+                    <Object
+                         pxsl_line="397">
+                        <QuestObject
+                             class="SoundEmitterSimple"
+                             name="power_switch_01::Slums_SES_FuseBox_Electricity_loop"
+                             pxsl_line="397" />
+                    </Object>
+                    <Object
+                         pxsl_line="398">
+                        <QuestObject
+                             class="LampDI"
+                             name="Whitelight_off_03"
+                             pxsl_line="398" />
+                    </Object>
+                    <Object
+                         pxsl_line="399">
+                        <QuestObject
+                             class="LampDI"
+                             name="Whitelight_off_04"
+                             pxsl_line="399" />
+                    </Object>
+                    <Object
+                         pxsl_line="400">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="Blackout_electric_01::QeG_electric"
+                             pxsl_line="400" />
+                    </Object>
+                    <Object
+                         pxsl_line="401">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="Blackout_electric_02::QeG_electric"
+                             pxsl_line="401" />
+                    </Object>
+                    <Object
+                         pxsl_line="402">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="Blackout_electric_03::QeG_electric"
+                             pxsl_line="402" />
+                    </Object>
+                    <Object
+                         pxsl_line="403">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="Blackout_electric_04::QeG_electric"
+                             pxsl_line="403" />
+                    </Object>
+                    <Object
+                         pxsl_line="404">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="Blackout_electric_05::QeG_electric"
+                             pxsl_line="404" />
+                    </Object>
+                    <Object
+                         pxsl_line="405">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="Blackout_electric_06::QeG_electric"
+                             pxsl_line="405" />
+                    </Object>
+                    <Object
+                         pxsl_line="406">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="Blackout_electric_07::QeG_electric"
+                             pxsl_line="406" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="407">
+                    <Path
+                         pxsl_line="408">
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="2"
+                             pxsl_line="409" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="410">
+                            <Object
+                                 pxsl_line="410">
+                                <QuestObject
+                                     class="SoundEmitterSimple"
+                                     name="power_switch_01::demo_night_hangar_sound_effect_light_on"
+                                     pxsl_line="410" />
+                            </Object>
+                        </Phase>
+                        <!-- turn the lights back on -->
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="411">
+                            <Object
+                                 pxsl_line="412">
+                                <QuestObject
+                                     class="BlackoutArea"
+                                     name="demo_night_blackout_area_a"
+                                     pxsl_line="412" />
+                            </Object>
+                            <Object
+                                 pxsl_line="413">
+                                <QuestObject
+                                     class="BlackoutArea"
+                                     name="demo_night_blackout_area_b"
+                                     pxsl_line="413" />
+                            </Object>
+                            <Object
+                                 pxsl_line="414">
+                                <QuestObject
+                                     class="BlackoutArea"
+                                     name="demo_night_blackout_area_c"
+                                     pxsl_line="414" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="415">
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="416">
+                            <Object
+                                 pxsl_line="416">
+                                <QuestObject
+                                     class="SoundEmitterSimple"
+                                     name="power_switch_01::demo_night_electric_hit_end"
+                                     pxsl_line="416" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="417">
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="2"
+                             pxsl_line="418" />
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Spike_Blackout_15DLG01"
+                             auto_start="true"
+                             pxsl_line="419" />
+                    </Path>
+                    <Path
+                         pxsl_line="420">
+                        <Phase
+                             type="set state"
+                             name="_"
+                             desired_state="on"
+                             pxsl_line="421">
+                            <Trigger
+                                 pxsl_line="421">
+                                <QuestObject
+                                     class="PBreakerActivator"
+                                     name="PursuitBraker_Lamp_Qblackout_02::Lamp_switch"
+                                     pxsl_line="421" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="422">
+                            <Object
+                                 pxsl_line="422">
+                                <QuestObject
+                                     class="FXEmitter"
+                                     name="demo_night_voltage_loop"
+                                     pxsl_line="422" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="424">
+                    <Destination
+                         pxsl_line="424">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="demo_night_sp_05"
+                             pxsl_line="424" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+        <!-- RUN BACK TO THE SAFE ZONE -->
+        <!-- Run back to the safe house before it gets dark. -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Blackout_OBJ_RunBack&amp;"
+             pxsl_line="427">
+            <Path
+                 pxsl_line="427">
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="428">
+                    <Object
+                         pxsl_line="428">
+                        <QuestObject
+                             class="SoundEmitterSimple"
+                             name="power_switch_01::demo_night_electric_hit_end"
+                             pxsl_line="428" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="429">
+                    <Object
+                         pxsl_line="430">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="Balckout_standing_up_bodies"
+                             pxsl_line="430" />
+                    </Object>
+                    <Object
+                         pxsl_line="431">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="cin_prime_first_time_01_trigger_qeg"
+                             pxsl_line="431" />
+                    </Object>
+                    <Object
+                         pxsl_line="432">
+                        <QuestObject
+                             class="SensorAmbientMusicArea"
+                             name="First_Playfield_Safezone::SAMA_BackToSafezone"
+                             pxsl_line="432" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="use"
+                     name="BLACKOUT - CIN - Bolter's presentation"
+                     desired_state="on_pending"
+                     pxsl_line="433">
+                    <Trigger
+                         pxsl_line="433">
+                        <QuestObject
+                             class="InteractiveMovieTrigger"
+                             name="cin_prime_first_time_01_trigger"
+                             pxsl_line="433" />
+                    </Trigger>
+                    <DebugPlayerPosition
+                         pxsl_line="434">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="First_Playfield_Safezone::SafeZone_sp_First_playfield"
+                             pxsl_line="434" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <!-- turn on day time     -->
+                <Phase
+                     type="disable enable time freeze"
+                     name="_"
+                     should_freeze_time="false"
+                     pxsl_line="435" />
+                <Phase
+                     type="use"
+                     name="BLACKOUT - CIN - Bolter's presentation cd"
+                     desired_state="on"
+                     pxsl_line="436">
+                    <Trigger
+                         pxsl_line="436">
+                        <QuestObject
+                             class="InteractiveMovieTrigger"
+                             name="cin_prime_first_time_01_trigger"
+                             pxsl_line="436" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="437">
+                    <Object
+                         pxsl_line="438">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="cin_prime_first_time_01_trigger_qeg"
+                             pxsl_line="438" />
+                    </Object>
+                    <Object
+                         pxsl_line="439">
+                        <QuestObject
+                             class="SensorAmbientMusicArea"
+                             name="First_Playfield_Safezone::SAMA_BackToSafezone"
+                             pxsl_line="439" />
+                    </Object>
+                    <Object
+                         pxsl_line="440">
+                        <QuestObject
+                             class="SensorAmbientMusicArea"
+                             name="SAMA_Thug_Presentation"
+                             pxsl_line="440" />
+                    </Object>
+                </Phase>
+                <!-- turn on day time  -->
+                <Phase
+                     type="disable enable time freeze"
+                     name="_"
+                     should_freeze_time="true"
+                     pxsl_line="441" />
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="3"
+                     pxsl_line="442" />
+                <Phase
+                     type="hint"
+                     name="_"
+                     hint_name="TutorialHints_Sleeping"
+                     show="true"
+                     enable="true"
+                     pxsl_line="443" />
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="444">
+                    <Destination
+                         pxsl_line="444">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="cin_prime_first_time_01_sp"
+                             pxsl_line="444" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+        <!-- Sleep through the night. -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Blackout_OBJ_Sleep&amp;"
+             pxsl_line="445">
+            <Path
+                 pxsl_line="445">
+                <Phase
+                     type="go to"
+                     name="BLACKOUT - Sleeping for the first time"
+                     distance="100000"
+                     pxsl_line="446">
+                    <Destination
+                         pxsl_line="446">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="cin_prime_first_time_01_sp"
+                             pxsl_line="446" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="447">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="cin_prime_first_time_01_sp"
+                             pxsl_line="447" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <!-- ,rest _ RestingPlace First_Playfield_Safezone::restingplace_for_player -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="449">
+                    <Object
+                         pxsl_line="449">
+                        <QuestObject
+                             class="RestingPlace"
+                             name="First_Playfield_Safezone::restingplace_for_player"
+                             pxsl_line="449" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="player control"
+                     name="_"
+                     sleep_to_morning="true"
+                     pxsl_line="450" />
+                <Phase
+                     type="rest"
+                     name="_"
+                     pxsl_line="451" />
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="452">
+                    <Destination
+                         pxsl_line="452">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="cin_prime_first_time_01_sp"
+                             pxsl_line="452" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <Quest
+         name="Blackout1_6"
+         parent="Blackout1_5c"
+         glued="true"
+         new_chapter="Chapter01"
+         pxsl_line="454">
+        <Phase
+             type="AND"
+             name="_"
+             pxsl_line="455">
+            <Path
+                 pxsl_line="455">
+                <Phase
+                     type="set day night time"
+                     name="_"
+                     day_time="6.5"
+                     interpolate_time="0"
+                     pxsl_line="456" />
+                <Phase
+                     type="set weather"
+                     name="_"
+                     wanted_weather="0.1"
+                     duration="02:00"
+                     interpolation="00.00"
+                     pxsl_line="457" />
+                <Phase
+                     type="set state"
+                     name="BLACKOUT - After sleeping"
+                     desired_state="off"
+                     pxsl_line="458">
+                    <Trigger
+                         pxsl_line="458">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="demo_night_first_car::Sedan_Switch"
+                             pxsl_line="458" />
+                    </Trigger>
+                    <DebugPlayerPosition
+                         pxsl_line="459">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="First_Playfield_Safezone::SafeZone_sp_First_playfield"
+                             pxsl_line="459" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <!-- ,set _ PBreakerActivator demo_night_pursuit_braker_01::pursuitbreaker_switch -state=off -->
+                <!-- ,set _ PBreakerActivator demo_night_pursuit_braker_02::pursuitbreaker_switch -state=off -->
+                <!-- ,set _ PBreakerActivator demo_night_pursuit_braker_03::pursuitbreaker_switch -state=off -->
+                <!-- ,set _ PBreakerActivator demo_night_pursuit_braker_04::pursuitbreaker_switch -state=off -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="464">
+                    <Object
+                         pxsl_line="465">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="demo_night_first_car::Sedan_Switch"
+                             pxsl_line="465" />
+                    </Object>
+                    <!-- ,o PhysicalSwitchDI demo_night_pursuit_braker_01::Sedan_Switch -->
+                    <Object
+                         pxsl_line="467">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="demo_night_pursuit_braker_02::Sedan_Switch"
+                             pxsl_line="467" />
+                    </Object>
+                    <Object
+                         pxsl_line="468">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="demo_night_pursuit_braker_03::Sedan_Switch"
+                             pxsl_line="468" />
+                    </Object>
+                    <!-- ,o PhysicalSwitchDI demo_night_pursuit_braker_04::Sedan_Switch -->
+                </Phase>
+                <!-- changing BlackoutCars to burning car 01 -->
+                <Phase
+                     type="set skin"
+                     name="_"
+                     skin_name="Burned"
+                     pxsl_line="470">
+                    <ModelObject
+                         pxsl_line="471">
+                        <QuestObject
+                             class="ModelObject"
+                             name="demo_night_first_car::sedan_c_boot"
+                             pxsl_line="471" />
+                    </ModelObject>
+                    <ModelObject
+                         pxsl_line="472">
+                        <QuestObject
+                             class="ModelObject"
+                             name="demo_night_first_car::sedan_core"
+                             pxsl_line="472" />
+                    </ModelObject>
+                    <ModelObject
+                         pxsl_line="473">
+                        <QuestObject
+                             class="ModelObject"
+                             name="demo_night_first_car::sedan_door_l"
+                             pxsl_line="473" />
+                    </ModelObject>
+                    <ModelObject
+                         pxsl_line="474">
+                        <QuestObject
+                             class="ModelObject"
+                             name="demo_night_first_car::sedan_door_r"
+                             pxsl_line="474" />
+                    </ModelObject>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="475">
+                    <Object
+                         pxsl_line="476">
+                        <QuestObject
+                             class="FXEmitter"
+                             name="demo_night_first_car::sedan_fx_burning"
+                             pxsl_line="476" />
+                    </Object>
+                    <Object
+                         pxsl_line="477">
+                        <QuestObject
+                             class="FireEmitterDI"
+                             name="demo_night_first_car::Sedan_fire_emitter"
+                             pxsl_line="477" />
+                    </Object>
+                    <Object
+                         pxsl_line="478">
+                        <QuestObject
+                             class="RestingPlace"
+                             name="resting_place_the_tower::restingplace_for_player"
+                             pxsl_line="478" />
+                    </Object>
+                    <!-- Resting place at the Bazaar. -->
+                    <Object
+                         pxsl_line="479">
+                        <QuestObject
+                             class="RestingPlace"
+                             name="resting_place_black_serpent_bazaar::restingplace_for_player"
+                             pxsl_line="479" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="480">
+                    <Object
+                         pxsl_line="481">
+                        <QuestObject
+                             class="AppearGroup"
+                             name="demo_night_first_car::sedan_AG"
+                             pxsl_line="481" />
+                    </Object>
+                    <Object
+                         pxsl_line="482">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="demo_night_first_car::Sedan_Switch"
+                             pxsl_line="482" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="483">
+                    <Object
+                         pxsl_line="483">
+                        <QuestObject
+                             class="ModelObject"
+                             name="demo_night_first_car::sedan_bonnet_burned"
+                             pxsl_line="483" />
+                    </Object>
+                </Phase>
+                <!-- ,set-skin-multi _ Burned -= changing BlackoutCars to burning car 02 -->
+                    <!-- ,model_object ModelObject demo_night_pursuit_braker_01::sedan_c_boot -->
+                    <!-- ,model_object ModelObject demo_night_pursuit_braker_01::sedan_core -->
+                    <!-- ,model_object ModelObject demo_night_pursuit_braker_01::sedan_door_l -->
+                    <!-- ,model_object ModelObject demo_night_pursuit_braker_01::sedan_door_r -->
+                <!-- ,enable-multi _ -->
+                    <!-- ,o FXEmitter demo_night_pursuit_braker_01::sedan_fx_burning -->
+                    <!-- ,o FireEmitterDI demo_night_pursuit_braker_01::Sedan_fire_emitter -->
+                <!-- ,hide-multi _  -->
+                    <!-- ,o AppearGroup demo_night_pursuit_braker_01::sedan_AG -->
+                    <!-- ,o PhysicalSwitchDI demo_night_pursuit_braker_01::Sedan_Switch -->
+                <!-- ,show _ ModelObject demo_night_pursuit_braker_01::sedan_bonnet_burned -->
+                <!-- changing BlackoutCars to burning car 03 -->
+                <Phase
+                     type="set skin"
+                     name="_"
+                     skin_name="Burned"
+                     pxsl_line="496">
+                    <ModelObject
+                         pxsl_line="497">
+                        <QuestObject
+                             class="ModelObject"
+                             name="demo_night_pursuit_braker_02::sedan_c_boot"
+                             pxsl_line="497" />
+                    </ModelObject>
+                    <ModelObject
+                         pxsl_line="498">
+                        <QuestObject
+                             class="ModelObject"
+                             name="demo_night_pursuit_braker_02::sedan_core"
+                             pxsl_line="498" />
+                    </ModelObject>
+                    <ModelObject
+                         pxsl_line="499">
+                        <QuestObject
+                             class="ModelObject"
+                             name="demo_night_pursuit_braker_02::sedan_door_l"
+                             pxsl_line="499" />
+                    </ModelObject>
+                    <ModelObject
+                         pxsl_line="500">
+                        <QuestObject
+                             class="ModelObject"
+                             name="demo_night_pursuit_braker_02::sedan_door_r"
+                             pxsl_line="500" />
+                    </ModelObject>
+                </Phase>
+                <!-- ,enable _ FXEmitter demo_night_pursuit_braker_02::sedan_fx_burning -->
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="502">
+                    <Object
+                         pxsl_line="503">
+                        <QuestObject
+                             class="AppearGroup"
+                             name="demo_night_pursuit_braker_02::sedan_AG"
+                             pxsl_line="503" />
+                    </Object>
+                    <Object
+                         pxsl_line="504">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="demo_night_pursuit_braker_02::Sedan_Switch"
+                             pxsl_line="504" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="505">
+                    <Object
+                         pxsl_line="505">
+                        <QuestObject
+                             class="ModelObject"
+                             name="demo_night_pursuit_braker_02::sedan_bonnet_burned"
+                             pxsl_line="505" />
+                    </Object>
+                </Phase>
+                <!-- changing BlackoutCars to burning car 04 -->
+                <Phase
+                     type="set skin"
+                     name="_"
+                     skin_name="Burned"
+                     pxsl_line="506">
+                    <ModelObject
+                         pxsl_line="507">
+                        <QuestObject
+                             class="ModelObject"
+                             name="demo_night_pursuit_braker_03::sedan_c_boot"
+                             pxsl_line="507" />
+                    </ModelObject>
+                    <ModelObject
+                         pxsl_line="508">
+                        <QuestObject
+                             class="ModelObject"
+                             name="demo_night_pursuit_braker_03::sedan_core"
+                             pxsl_line="508" />
+                    </ModelObject>
+                    <ModelObject
+                         pxsl_line="509">
+                        <QuestObject
+                             class="ModelObject"
+                             name="demo_night_pursuit_braker_03::sedan_door_l"
+                             pxsl_line="509" />
+                    </ModelObject>
+                    <ModelObject
+                         pxsl_line="510">
+                        <QuestObject
+                             class="ModelObject"
+                             name="demo_night_pursuit_braker_03::sedan_door_r"
+                             pxsl_line="510" />
+                    </ModelObject>
+                </Phase>
+                <!-- ,enable _ FXEmitter demo_night_pursuit_braker_03::sedan_fx_burning -->
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="512">
+                    <Object
+                         pxsl_line="513">
+                        <QuestObject
+                             class="AppearGroup"
+                             name="demo_night_pursuit_braker_03::sedan_AG"
+                             pxsl_line="513" />
+                    </Object>
+                    <Object
+                         pxsl_line="514">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="demo_night_pursuit_braker_03::Sedan_Switch"
+                             pxsl_line="514" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="515">
+                    <Object
+                         pxsl_line="515">
+                        <QuestObject
+                             class="ModelObject"
+                             name="demo_night_pursuit_braker_03::sedan_bonnet_burned"
+                             pxsl_line="515" />
+                    </Object>
+                </Phase>
+                <!-- ,set-skin-multi _ Burned -= changing BlackoutCars to burning car 05 -->
+                    <!-- ,model_object ModelObject demo_night_pursuit_braker_04::sedan_c_boot -->
+                    <!-- ,model_object ModelObject demo_night_pursuit_braker_04::sedan_core -->
+                    <!-- ,model_object ModelObject demo_night_pursuit_braker_04::sedan_door_l -->
+                    <!-- ,model_object ModelObject demo_night_pursuit_braker_04::sedan_door_r -->
+                <!-- ,enable _ FXEmitter demo_night_pursuit_braker_04::sedan_fx_burning -->
+                <!-- ,hide-multi _  -->
+                    <!-- ,o AppearGroup demo_night_pursuit_braker_04::sedan_AG -->
+                    <!-- ,o PhysicalSwitchDI demo_night_pursuit_braker_04::Sedan_Switch -->
+                <!-- ,show _ ModelObject demo_night_pursuit_braker_04::sedan_bonnet_burned -->
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="526">
+                    <Object
+                         pxsl_line="526">
+                        <QuestObject
+                             class="MovieActor"
+                             name="cin_prime_first_time_Door"
+                             pxsl_line="526" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="528">
+                    <Object
+                         pxsl_line="528">
+                        <QuestObject
+                             class="DoorDI"
+                             name="SafeZone_doors_to_house"
+                             pxsl_line="528" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="529">
+                    <Object
+                         pxsl_line="529">
+                        <QuestObject
+                             class="DoorDI"
+                             name="SafeZone_doors_to_house"
+                             pxsl_line="529" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="use life place"
+                     name="_"
+                     teleport="true"
+                     pxsl_line="530">
+                    <LifePlace
+                         pxsl_line="530">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="demo_night_spike_LP_02_sends_to_jade"
+                             pxsl_line="530" />
+                    </LifePlace>
+                    <AI
+                         pxsl_line="531">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Spike"
+                             pxsl_line="531" />
+                    </AI>
+                </Phase>
+                <!-- open gate in electric house -->
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="534">
+                    <Object
+                         pxsl_line="535">
+                        <QuestObject
+                             class="ModelObject"
+                             name="blackout_house_gate_01_before"
+                             pxsl_line="535" />
+                    </Object>
+                    <Object
+                         pxsl_line="536">
+                        <QuestObject
+                             class="ModelObject"
+                             name="blackout_house_gate_02_before"
+                             pxsl_line="536" />
+                    </Object>
+                    <Object
+                         pxsl_line="537">
+                        <QuestObject
+                             class="ModelObject"
+                             name="blackout_house_gate_01_chain"
+                             pxsl_line="537" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="538">
+                    <Object
+                         pxsl_line="539">
+                        <QuestObject
+                             class="ModelObject"
+                             name="blackout_house_gate_01_after"
+                             pxsl_line="539" />
+                    </Object>
+                    <Object
+                         pxsl_line="540">
+                        <QuestObject
+                             class="ModelObject"
+                             name="blackout_house_gate_02_after"
+                             pxsl_line="540" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="541">
+                    <Object
+                         pxsl_line="541">
+                        <QuestObject
+                             class="NavMeshDynamicObject"
+                             name="blackout_house_gate_navmesh_before"
+                             pxsl_line="541" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="542">
+                    <Object
+                         pxsl_line="543">
+                        <QuestObject
+                             class="NavMeshDynamicObject"
+                             name="blackout_house_gate_navmesh_01_after"
+                             pxsl_line="543" />
+                    </Object>
+                    <Object
+                         pxsl_line="544">
+                        <QuestObject
+                             class="NavMeshDynamicObject"
+                             name="blackout_house_gate_navmesh_02_after"
+                             pxsl_line="544" />
+                    </Object>
+                </Phase>
+                <!-- Scout Shopkeeper -  -->
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="546">
+                    <Object
+                         pxsl_line="546">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Shopkeeper_Slums_Tower_Down"
+                             pxsl_line="546" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="set dialog"
+                     name="_"
+                     speaker="shopkeeper_slums_tower_down"
+                     group="shopkeeper_slums_tower_down_nf_dlg"
+                     pxsl_line="547" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="548">
+                    <Object
+                         pxsl_line="548">
+                        <QuestObject
+                             class="Trading::Shop"
+                             name="Shop_Slums_Scouts"
+                             pxsl_line="548" />
+                    </Object>
+                </Phase>
+                <!-- -->
+                <!-- THE TOWER CHANGES -->
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="550">
+                    <Path
+                         pxsl_line="550">
+                        <Phase
+                             type="enable"
+                             name="turn on The Tower portal"
+                             pxsl_line="551">
+                            <Object
+                                 pxsl_line="551">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="qeg_portal_The_Tower"
+                                     pxsl_line="551" />
+                            </Object>
+                        </Phase>
+                        <!-- ,dialog _ TheTower_Guard01 TheTower_Guard01_Near_01 -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="show"
+                             pxsl_line="553">
+                            <Object
+                                 pxsl_line="553">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="TheTower_Guard02"
+                                     pxsl_line="553" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="TheTower_Guard02"
+                             group="TheTower_Guard02_The_Tower_Welcome_01"
+                             pxsl_line="554" />
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="555">
+                            <Object
+                                 pxsl_line="555">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="slums_scout_room_door_before"
+                                     pxsl_line="555" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="show"
+                             pxsl_line="556">
+                            <Object
+                                 pxsl_line="556">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="slums_scout_room_after_ag"
+                                     pxsl_line="556" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="557">
+                    <Destination
+                         pxsl_line="557">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="First_Playfield_Safezone::SafeZone_sp_First_playfield"
+                             pxsl_line="557" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             pxsl_line="558">
+            <Path
+                 pxsl_line="559">
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="245"
+                     pxsl_line="560">
+                    <Destination
+                         pxsl_line="560">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="respawn_zeres_tir"
+                             pxsl_line="560" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="en 8 : 00"
+                     pxsl_line="561">
+                    <Object
+                         pxsl_line="561">
+                        <QuestObject
+                             class="ForceDayTimeObject"
+                             name="ForceDayTimeObject_Blackout_05_8_00"
+                             pxsl_line="561" />
+                    </Object>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="562">
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="2"
+                     pxsl_line="563" />
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="voice2d"
+                     group="Spike_Blackout_16DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="564" />
+                <!-- Get back to Spike. -->
+                <Phase
+                     type="AND"
+                     name="_"
+                     objective="&amp;Blackout_OBJ_GetBackToSpike&amp;"
+                     pxsl_line="565">
+                    <Path
+                         pxsl_line="565">
+                        <Phase
+                             type="go to"
+                             name="BLACKOUT - Talk with Spike after action"
+                             distance="1000000"
+                             pxsl_line="566">
+                            <Destination
+                                 pxsl_line="566">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="demo_night_sp_01"
+                                     pxsl_line="566" />
+                            </Destination>
+                            <DebugPlayerPosition
+                                 pxsl_line="567">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="demo_night_sp_01"
+                                     pxsl_line="567" />
+                            </DebugPlayerPosition>
+                        </Phase>
+                        <Phase
+                             type="hint"
+                             name="_"
+                             hint_name="Tutorial_TimeFreeze_Multiplayer_Enabled"
+                             show="true"
+                             enable="true"
+                             pxsl_line="568" />
+                        <Phase
+                             type="session param"
+                             name="_"
+                             param="MultiplayerGamePart"
+                             value="true"
+                             pxsl_line="569" />
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="245"
+                             pxsl_line="570">
+                            <Destination
+                                 pxsl_line="570">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="respawn_zeres_tir"
+                                     pxsl_line="570" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="talk"
+                             name="_"
+                             speaker="Spike"
+                             group="Spike_Blackout_18DLG01"
+                             pxsl_line="571" />
+                        <!-- ADDED UV Flashlight -->
+                        <Phase
+                             type="give weapon"
+                             name="_"
+                             weapon_id="Flashlight_Superlight"
+                             pxsl_line="572" />
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="0.2"
+                             pxsl_line="573" />
+                        <!-- Auto reward after quest. -->
+                        <Phase
+                             type="give weapon"
+                             name="_"
+                             weapon_id="Craftplan_Flare"
+                             pxsl_line="574" />
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="0.2"
+                             pxsl_line="575" />
+                        <Phase
+                             type="set reward"
+                             name="_"
+                             reward="StorylineReward_Blackout_reward"
+                             pxsl_line="576" />
+                        <Phase
+                             type="use life place"
+                             name="_"
+                             teleport="true"
+                             pxsl_line="577">
+                            <LifePlace
+                                 pxsl_line="577">
+                                <QuestObject
+                                     class="NPCLifePlace"
+                                     name="demo_night_spike_LP_03_sends_to_jade_after"
+                                     pxsl_line="577" />
+                            </LifePlace>
+                            <AI
+                                 pxsl_line="578">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Spike"
+                                     pxsl_line="578" />
+                            </AI>
+                        </Phase>
+                        <!-- enable Spike Quatermaster -->
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="579">
+                            <Object
+                                 pxsl_line="579">
+                                <QuestObject
+                                     class="Trading::QuartermasterSpike"
+                                     name="Shop_Spike_Quatermaster"
+                                     pxsl_line="579" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="580">
+            <Destination
+                 pxsl_line="580">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="demo_night_sp_01"
+                     pxsl_line="580" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="go to"
+             name="BLACKOUT - END"
+             distance="1000000"
+             pxsl_line="581">
+            <Destination
+                 pxsl_line="581">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="MapStart"
+                     pxsl_line="581" />
+            </Destination>
+            <DebugPlayerPosition
+                 pxsl_line="582">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="MapStart"
+                     pxsl_line="582" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="583">
+            <Object
+                 pxsl_line="584">
+                <QuestObject
+                     class="Encounter::EncounterBlockArea"
+                     name="NightShop_BlockArea_First_Playfield"
+                     pxsl_line="584" />
+            </Object>
+            <Object
+                 pxsl_line="585">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="courier_thug_boss"
+                     pxsl_line="585" />
+            </Object>
+        </Phase>
+        <Phase
+             type="enable"
+             name="dis 8 : 00"
+             state="disabled"
+             pxsl_line="586">
+            <Object
+                 pxsl_line="586">
+                <QuestObject
+                     class="ForceDayTimeObject"
+                     name="ForceDayTimeObject_Blackout_05_8_00"
+                     pxsl_line="586" />
+            </Object>
+        </Phase>
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="587">
+            <Object
+                 pxsl_line="587">
+                <QuestObject
+                     class="AppearGroup"
+                     name="Interior_01_SafeZone::Safezone_Interior01_Flag"
+                     pxsl_line="587" />
+            </Object>
+        </Phase>
+        <Phase
+             type="wait guard"
+             name="_"
+             time="3"
+             pxsl_line="588" />
+        <!-- -->
+        <!-- GRE CONTACT 2.5 -->
+        <!--  -->
+        <!-- Get to the building roof and contact the GRE. -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Blackout_OBJ_GREAgain&amp;"
+             pxsl_line="592">
+            <Path
+                 pxsl_line="592">
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="593">
+                    <Destination
+                         pxsl_line="593">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="demo_night_sp_05"
+                             pxsl_line="593" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="gather players guard"
+                     name="BLACKOUT - GRE 02_5"
+                     distance="0"
+                     pxsl_line="594">
+                    <Destination
+                         pxsl_line="594">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="GRE_02_5_goto"
+                             pxsl_line="594" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="595">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="GRE_02_5_sp"
+                             pxsl_line="595" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="596">
+                    <Object
+                         pxsl_line="597">
+                        <QuestObject
+                             class="UseItemOnceZone"
+                             name="GRE_02_5_Dialog"
+                             pxsl_line="597" />
+                    </Object>
+                    <Object
+                         pxsl_line="598">
+                        <QuestObject
+                             class="SafeArea"
+                             name="GRE_02_5_safe_area"
+                             pxsl_line="598" />
+                    </Object>
+                    <Object
+                         pxsl_line="599">
+                        <QuestObject
+                             class="SafeZone"
+                             name="GRE_02_5_safe_zone"
+                             pxsl_line="599" />
+                    </Object>
+                    <Object
+                         pxsl_line="600">
+                        <QuestObject
+                             class="SensorAmbientMusicArea"
+                             name="GRE_02_5_Music"
+                             pxsl_line="600" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="on"
+                     show_locations="false"
+                     pxsl_line="601">
+                    <Trigger
+                         pxsl_line="601">
+                        <QuestObject
+                             class="InvisibleSwitchDI"
+                             name="GRE_02_5_Dialog_Trigger"
+                             pxsl_line="601" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="player control"
+                     name="_"
+                     block_move="true"
+                     pxsl_line="602" />
+                <Phase
+                     type="hudgroup"
+                     name="_"
+                     group="HideRadarForGREContact"
+                     mode="hide"
+                     pxsl_line="603" />
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="6"
+                     pxsl_line="604" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="605">
+                    <Object
+                         pxsl_line="605">
+                        <QuestObject
+                             class="SensorVarlist"
+                             name="GRE_02_5_varlist_mod"
+                             pxsl_line="605" />
+                    </Object>
+                </Phase>
+                <!-- AGENCY - 2.5    -->
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_Blackout_19DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="606" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="607">
+                    <Object
+                         pxsl_line="607">
+                        <QuestObject
+                             class="UseItemOnceZone"
+                             name="GRE_02_5_Dialog"
+                             pxsl_line="607" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="608">
+                    <Object
+                         pxsl_line="608">
+                        <QuestObject
+                             class="UseItemOnceZone"
+                             name="GRE_02_5_Dialog_Ending"
+                             pxsl_line="608" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="OR"
+                     name="_"
+                     pxsl_line="609">
+                    <Path
+                         pxsl_line="610">
+                        <Phase
+                             type="use"
+                             name="_"
+                             desired_state="on"
+                             show_locations="false"
+                             pxsl_line="611">
+                            <Trigger
+                                 pxsl_line="611">
+                                <QuestObject
+                                     class="InvisibleSwitchDI"
+                                     name="GRE_02_5_Dialog_Ending_Trigger"
+                                     pxsl_line="611" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="1"
+                             pxsl_line="612" />
+                    </Path>
+                    <Path
+                         pxsl_line="613">
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="3"
+                             pxsl_line="614" />
+                    </Path>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="615">
+                    <Object
+                         pxsl_line="616">
+                        <QuestObject
+                             class="UseItemOnceZone"
+                             name="GRE_02_5_Dialog_Ending"
+                             pxsl_line="616" />
+                    </Object>
+                    <Object
+                         pxsl_line="617">
+                        <QuestObject
+                             class="SafeArea"
+                             name="GRE_02_5_safe_area"
+                             pxsl_line="617" />
+                    </Object>
+                    <Object
+                         pxsl_line="618">
+                        <QuestObject
+                             class="SafeZone"
+                             name="GRE_02_5_safe_zone"
+                             pxsl_line="618" />
+                    </Object>
+                    <Object
+                         pxsl_line="619">
+                        <QuestObject
+                             class="SensorVarlist"
+                             name="GRE_02_5_varlist_mod"
+                             pxsl_line="619" />
+                    </Object>
+                    <Object
+                         pxsl_line="620">
+                        <QuestObject
+                             class="SensorAmbientMusicArea"
+                             name="GRE_02_5_Music"
+                             pxsl_line="620" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="hudgroup"
+                     name="_"
+                     group="HideRadarForGREContact"
+                     mode="show"
+                     pxsl_line="621" />
+                <Phase
+                     type="player control"
+                     name="_"
+                     block_move="false"
+                     pxsl_line="622" />
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="623">
+                    <Destination
+                         pxsl_line="623">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="GRE_02_5_sp"
+                             pxsl_line="623" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-= -=  -->
+    <!-- SHOW THE CHANGED SAFEZONE -->
+    <Quest
+         name="__First_Playfield_Safezone_appear"
+         parent="Blackout"
+         pxsl_line="626">
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="Blackout1_6"
+             finished="true"
+             show_locations="false"
+             pxsl_line="627" />
+        <Phase
+             type="gather players guard"
+             name="_"
+             distance="-100"
+             show_locations="false"
+             pxsl_line="628">
+            <Destination
+                 pxsl_line="628">
+                <QuestObject
+                     class="SensorGoTo"
+                     name="First_Playfield_Safezone::safeplace_zombie_spawnDeadBodies"
+                     pxsl_line="628" />
+            </Destination>
+        </Phase>
+        <!-- ,show _ AppearGroup Playfield_Safezone::Playfield_Safezone_After_AG -->
+        <!-- ,hide _ AppearGroup Playfield_Safezone::Playfield_Safezone_Before_AG -->
+        <!-- ,enable _ QuestEnableGroup Playfield_Safezone::Playfield_Safezone_qeg -->
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="632">
+            <Destination
+                 pxsl_line="632">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Gas_Station_Safezone::SafeZone_debugpos"
+                     pxsl_line="632" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__Blackout_2"
+         parent="Blackout_2"
+         pxsl_line="634">
+        <Phase
+             type="go to"
+             name="BLACKOUT - END"
+             distance="10000"
+             show_locations="false"
+             pxsl_line="635">
+            <Destination
+                 pxsl_line="635">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="respawn_antenna_01"
+                     pxsl_line="635" />
+            </Destination>
+            <DebugPlayerPosition
+                 pxsl_line="636">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="respawn_antenna_01"
+                     pxsl_line="636" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="go to"
+             name="_"
+             distance="0"
+             show_locations="false"
+             pxsl_line="637">
+            <Destination
+                 pxsl_line="637">
+                <QuestObject
+                     class="SensorGoTo"
+                     name="demo_night_get_into_sensor"
+                     pxsl_line="637" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="638">
+            <Object
+                 pxsl_line="639">
+                <QuestObject
+                     class="FXEmitter"
+                     name="demo_night_voltage_loop"
+                     pxsl_line="639" />
+            </Object>
+            <Object
+                 pxsl_line="640">
+                <QuestObject
+                     class="CrowdSpawner"
+                     name="demo_night_crowd_back_00"
+                     pxsl_line="640" />
+            </Object>
+            <Object
+                 pxsl_line="641">
+                <QuestObject
+                     class="CrowdSpawner"
+                     name="demo_night_crowd_back_03"
+                     pxsl_line="641" />
+            </Object>
+            <Object
+                 pxsl_line="642">
+                <QuestObject
+                     class="CrowdSpawner"
+                     name="demo_night_crowd_back_009"
+                     pxsl_line="642" />
+            </Object>
+            <Object
+                 pxsl_line="643">
+                <QuestObject
+                     class="CrowdSpawner"
+                     name="demo_night_crowd_small"
+                     pxsl_line="643" />
+            </Object>
+            <Object
+                 pxsl_line="644">
+                <QuestObject
+                     class="SoundEmitterSimple"
+                     name="power_switch_01::Slums_SES_FuseBox_Electricity_loop"
+                     pxsl_line="644" />
+            </Object>
+            <Object
+                 pxsl_line="645">
+                <QuestObject
+                     class="SoundEmitterSimple"
+                     name="night_demo_power_off"
+                     pxsl_line="645" />
+            </Object>
+            <Object
+                 pxsl_line="646">
+                <QuestObject
+                     class="SoundEmitterSimple"
+                     name="power_switch_01::demo_night_hangar_sound_effect_light_on"
+                     pxsl_line="646" />
+            </Object>
+        </Phase>
+        <!-- ,disable _ SoundEmitterSimple demo_night_market_advertise1 -->
+        <!-- ,disable _ SoundEmitterSimple demo_night_market_advertise2 -->
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="649">
+            <Destination
+                 pxsl_line="649">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="respawn_the_tower"
+                     pxsl_line="649" />
+            </Destination>
+        </Phase>
+    </Quest>
+</QuestsDefinitions>

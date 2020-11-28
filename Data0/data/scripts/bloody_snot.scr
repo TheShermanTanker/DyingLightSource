@@ -1,0 +1,142 @@
+sub main()
+{
+    Snot()
+    {
+		Type("Relict")
+		{
+			MaxLength(0.65, 0.01);
+            Radius(0.015, 0.003);
+            LifeTime(0.8, 0.1);
+            SnotsCnt(30)
+			{
+				SLANT(50);					
+				WAIST(30);
+                CHEST_HORIZON(40);
+                CHEST_VERTICAL(80);
+				UPPERARM_LEFT(15);
+				FOREARM_LEFT(12);
+				UPPERARM_RIGHT(15);
+				FOREARM_RIGHT(12);
+				LEG_LEFT(18);
+				LEG_RIGHT(18);
+			}
+			
+			Joints()
+			{
+				Common()
+				{
+					PositionDeviation(0.02)
+					{
+						SLANT(0.18);			//28x18
+						WAIST(0.15);        	//18x15
+                        CHEST_HORIZON(0.16);
+                        CHEST_VERTICAL(0.2);
+						UPPERARM_LEFT(0.08);
+						FOREARM_LEFT(0.06);
+						UPPERARM_RIGHT(0.08);
+						FOREARM_RIGHT(0.06);
+						LEG_LEFT(0.12);
+						LEG_RIGHT(0.12);
+					}
+					
+					AdditionalLengthen(1.0);
+				}
+			}
+		}
+		
+		Type("Weapon")
+		{
+			MaxLength(0.3, 0.1);
+            Radius(0.010, 0.002);
+            LifeTime(0.5, 0.2);
+            SnotsCnt(3);
+            IgnoreInitialDistance(true);
+			
+			Joints()
+			{
+				PositionDeviation(0.01);
+			}
+		}
+		
+		Type("Electric")
+		{
+			MaxLength(1.5, 0.01);
+            Radius(1.2, 0.2);
+            LifeTime(1.5, 0.1);
+            SnotsCnt(4);
+            IgnoreInitialDistance(false);
+			
+			Joints()
+			{
+				PositionDeviation(0.01);
+			}
+		}
+		
+		Type("ElectricSpread")
+		{
+			MaxLength(4.0, 0.01);
+            Radius(1.5, 0.5);
+            LifeTime(2.0, 1.0);
+            SnotsCnt(2);
+            IgnoreInitialDistance(false);
+			
+			Joints()
+			{
+				PositionDeviation(0.1);
+			}
+		}
+		
+		Type("Lightning")
+		{
+			MaxLength(90.0, 0.01);
+            Radius(2.0, 0.0);
+            LifeTime(1.0, 0.5);
+            SnotsCnt(5);
+            IgnoreInitialDistance(false);
+			
+			Joints()
+			{
+				Common()
+				{
+					PositionDeviation(2.5);
+				}
+			}
+		}
+
+		Type("Debug")
+		{
+			MaxLength(-1.0);
+            Radius(0.015, 0.002);
+            LifeTime(-1.0);
+            SnotsCnt(1);
+            IgnoreInitialDistance(false);
+			
+			Joints()
+			{
+				Common()
+				{
+					PositionDeviation(0.0);
+				}
+				
+				BeginJoint()
+				{
+					AdditionalLengthen(10.0);
+				}
+				
+				EndJoint()
+				{
+					AdditionalLengthen(0.0);
+				}
+			}
+		}
+		
+		StretchProgress()
+		{
+			JointsOrientation()
+			{
+				MinimumJointsDistance(0.05);
+				PlaneDotThresholdValues(0.4, 0.8);
+			}
+		}
+	}			
+}

@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums_int_warehouse"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST NAME : Courier -->
+    <!-- QUEST INFO : Get things for Rais -->
+    <!-- AFTER QUEST: Antennas -->
+    <!-- COMMENT    :  -->
+    <!-- FROM       : >> SLUMS INT WAREHOUSE -->
+    <!-- TO         : >> SLUMS -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="Courier01"
+         parent="Antennas05"
+         quest_giver="karim_neutral"
+         glued="true"
+         pxsl_line="14">
+        <!-- Get the directions to the settlements. -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Courier_OBJ_TalkToKarim&amp;"
+             pxsl_line="15">
+            <Path
+                 pxsl_line="15">
+                <Phase
+                     type="talk"
+                     name="COURIER - START"
+                     speaker="karim_neutral"
+                     group="Karim_RaisCourier_USE"
+                     pxsl_line="16">
+                    <DebugPlayerPosition
+                         pxsl_line="17">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="warehouse_karim_room_sp"
+                             pxsl_line="17" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="18">
+                    <Object
+                         pxsl_line="19">
+                        <QuestObject
+                             class="BarrierObject"
+                             name="warehouse_shooting_door_close_barrier"
+                             pxsl_line="19" />
+                    </Object>
+                    <Object
+                         pxsl_line="20">
+                        <QuestObject
+                             class="SoundEmitterRandom"
+                             name="SER_Shooting_Range"
+                             pxsl_line="20" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="use life place"
+                     name="_"
+                     teleport="true"
+                     pxsl_line="21">
+                    <LifePlace
+                         pxsl_line="21">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Tahir_Neutral_lp_02"
+                             pxsl_line="21" />
+                    </LifePlace>
+                    <AI
+                         pxsl_line="22">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Tahir_Neutral"
+                             pxsl_line="22" />
+                    </AI>
+                </Phase>
+                <!-- ,use-lp _ NPCLifePlace antennas_karim_lp_a_after -->
+                    <!-- ,ai HumanAI Karim_Neutral     -->
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="25">
+                    <Object
+                         pxsl_line="26">
+                        <QuestObject
+                             class="ModelObject"
+                             name="warehouse_shooting_door_close"
+                             pxsl_line="26" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="27">
+                    <Destination
+                         pxsl_line="27">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="warehouse_karim_room_sp"
+                             pxsl_line="27" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <!-- GOTO - SLUMS  -->
+</QuestsDefinitions>

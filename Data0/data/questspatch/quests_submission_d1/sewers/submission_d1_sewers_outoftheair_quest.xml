@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="sewers"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST NAME : Q_OutOfTheAir -->
+    <!-- QUEST INFO : Out Of The Air -->
+    <!-- COMMENT    :  -->
+    <!-- FROM       : OLD TOWN -->
+    <!-- TO         : OLD TOWN -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- quest OutOfTheAir02 -parent=OutOfTheAir01  -glued=true -leading_portal=Out_Of_The_Air_Enter -->
+        <!-- ,BLOCK _ -obj=&OutOfTheAir_OBJ_EnterSewers& -->
+            <!-- ,goto << Start >> SpawnPoint sp_Portal_OutOfTheAir_OldTown_To_Sewers -distance=10 -show=true -->
+                <!-- ,debugpos   SpawnPoint sp_Portal_OutOfTheAir_OldTown_To_Sewers -->
+            <!-- ,enable _       SpawnPoint sp_Portal_OutOfTheAir_OldTown_To_Sewers -->
+        <!-- ,checkpoint _ SpawnPoint sp_Portal_OutOfTheAir_OldTown_To_Sewers -->
+        <!-- ,BLOCK _     -obj=&Radio_OBJ_FollowSigns_A& -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,dialog _ voice2d Entering_Sewers -auto=true -->
+                <!-- path -->
+                    <!-- ,goto _     SensorGoTo OutOfTheAir_Dialog_1     -distance=0     -show=false -->
+                    <!-- ,enable-multi _ -->
+                        <!-- ,o      DeadRagdoll Hanging_Zombie_1 -->
+            <!-- ,checkpoint _   SpawnPoint Checkpoint_Dialog_1 -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,dialog _ voice2d See_Signs -auto=true -->
+                <!-- path -->
+                    <!-- ,goto _     SensorGoTo OutOfTheAir_Dialog_2     -distance=0     -show=false -->
+            <!-- ,checkpoint _   SpawnPoint Checkpoint_Dialog_2 -->
+            <!-- ,dialog _ voice2d Path_Blocked -auto=true -->
+            <!-- ,wait _     5 -->
+        <!-- ,BLOCK _        -obj=&Radio_OBJ_FindWay& -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,goto _     SensorGoTo OutOfTheAir_Marker_1     -distance=0 -->
+        <!-- ,BLOCK _     -obj=&Radio_OBJ_FollowSigns_B& -->
+            <!-- ,enable _   SpawnPoint OutOTA_Respawn_2 -->
+            <!-- ,disable _       SpawnPoint sp_Portal_OutOfTheAir_OldTown_To_Sewers -->
+            <!-- ,goto << Floating Zombies >>     SensorGoTo OutOfTheAir_Dialog_4     -distance=0     -show=false -->
+                <!-- ,debugpos   SpawnPoint Checkpoint_Dialog_4 -->
+            <!-- ,show-multi _ -->
+                <!-- ,o      DeadRagdoll OutOfTheAir_Floating_Zombie_1 -->
+                <!-- ,o      DeadRagdoll OutOfTheAir_Floating_Zombie_2 -->
+                <!-- ,o      DeadRagdoll OutOfTheAir_Floating_Zombie_3 -->
+                <!-- ,o      DeadRagdoll OutOfTheAir_Floating_Zombie_5 -->
+            <!-- ,dialog _ voice2d Entering_Water_2 -auto=true -->
+            <!-- ,checkpoint _   SpawnPoint Checkpoint_Dialog_4 -->
+            <!-- ,goto _     SensorGoTo OutOfTheAir_Marker_2     -distance=0     -show=false -->
+            <!-- ,disable _      SpawnBlocker OutOfTA_SpawnBlocker -->
+            <!-- ,enable _   SpawnPoint OutOTA_Respawn_3 -->
+            <!-- ,checkpoint _   SpawnPoint OutOTA_Checkpoint_Fall -->
+            <!-- ,OR _ -->
+                <!-- path -->
+                    <!-- ,goto _     SensorGoTo OutOfTheAir_Fall_Marker_2  -distance=0  -show=false -->
+                    <!-- ,goto _     SensorGoTo OutOfTheAir_Semaphore_Marker     -distance=0  -show=false    -obj=&Radio_OBJ_FindWay_B& -->
+                    <!-- ,semaphore _ -->
+                <!-- path -->
+                    <!-- ,goto << Player_Falls >>     SensorGoTo OutOfTheAir_Fall_Marker_1  -distance=0  -show=false -->
+                        <!-- ,debugpos   SpawnPoint OutOTA_Checkpoint_Fall -->
+                <!--  -->
+                    <!-- ,goto _     SensorGoTo OutOfTheAir_Marker_Pipe      -distance=0     -show=false -->
+                    <!-- ,enable _   QuestEnableGroup OutOfTA_BigRoom_Zombies_Enable -->
+                    <!-- ,enable-multi _ -->
+                        <!-- ,o      AISpawnBoxNumber Screamer_Big_Room -->
+                        <!-- ,o      AISpawnBoxNumber Biters_Big_Room -->
+                        <!-- ,o      AIDeadBodySpawnBoxNumber Rising_Zombies_Big_Room -->
+                    <!-- ,goto _     SensorGoTo OutOfTheAir_Marker_3     -distance=0     -show=false -->
+                    <!-- ,wait _     1 -->
+                    <!-- ,enable _ SensorAmbientMusicArea OutOTAir_SAMA_Run -->
+                    <!-- ,dialog _ voice2d Entering_Nest -auto=true -->
+                    <!-- ,wait _     2 -->
+                    <!-- ,enable-multi _ -->
+                        <!-- ,o      QuestEnableGroup OutOfTA_Dynamic_Enable -->
+                        <!-- ,o      QuestEnableGroup OutOfTA_Crowd_Enable -->
+                        <!-- ,o      NightArea OutOfTA_NightArea -->
+                        <!-- ,o      SoundEmitterSimple Screamer_Init -->
+                        <!-- ,o      IntensityArea OutOfTA_Intensity -->
+                        <!--  -->
+        <!-- ,BLOCK _        -obj=&Radio_OBJ_EscapeSewers& -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,wait _     3 -->
+                    <!-- ,dialog _ voice2d See_Horde -auto=true -->
+                    <!-- ,enable-multi _ -->
+                        <!-- ,o      AISpawnBoxWaves Voletaile_Big_Room_3 -->
+                        <!-- ,o      AISpawnBoxWaves Voletaile_Big_Room_4 -->
+                        <!-- ,o      AISpawnBoxWaves Voletaile_Big_Room_5 -->
+                        <!-- ,o      NightAggressionTrigger OutOTAir_Agro_Level -->
+                <!-- path -->
+                    <!-- ,goto _     SensorGoTo OutOfTheAir_Marker_4     -distance=0        -show=false -->
+            <!-- ,dialog _ voice2d Sliding -auto=true -->
+            <!-- ,enable _   SpawnPoint OutOTA_Respawn_Slide -->
+            <!-- ,checkpoint _   SpawnPoint OutOTA_Respawn_Slide -->
+            <!-- ,goto << First_Jump >>     SensorGoTo OutOfTheAir_Marker_5     -distance=0  -show=false -->
+                <!-- ,debugpos   SpawnPoint OutOTA_Checkpoint_FirstJump -->
+            <!-- ,checkpoint _   SpawnPoint OutOTA_Checkpoint_FirstJump -->
+            <!-- ,enable _   SpawnPoint OutOTA_Respawn_4 -->
+            <!-- ,enable _   QuestEnableGroup OutOfTA_Next_Zombie_Activator -->
+            <!--  -->
+            <!-- ,goto _     SensorGoTo OutOfTheAir_Marker_5b     -distance=0 -->
+            <!-- ,dialog _ voice2d Player_OutOfTheAir_11DLG01 -auto=true -->
+            <!--  -->
+            <!-- ,goto _     SensorGoTo OutOfTheAir_Marker_6     -distance=0 -->
+            <!-- ,disable _  SensorAmbientMusicArea OutOTAir_SAMA_Run -->
+            <!-- ,disable _  IntensityArea OutOfTA_Intensity -->
+            <!-- ,enable _   SpawnPoint OutOTA_Respawn_5 -->
+        <!-- ,checkpoint _   SpawnPoint OutOTA_Checkpoint_3 -->
+        <!-- ,BLOCK _         -obj=&Radio_OBJ_FindExit& -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,goto << End >>     SensorGoTo OutOfTheAir_Marker_7     -distance=0     -show=false -->
+                        <!-- ,debugpos   SpawnPoint OutOTA_Checkpoint_3 -->
+                    <!-- ,enable _   MapPortal Portal_OutOfTheAir_Sewer_To_Nato -->
+                <!-- path -->
+                    <!-- ,wait _     5 -->
+                    <!-- ,dialog _ voice2d Escaped_Chase -auto=true -->
+        <!-- ,checkpoint _   SpawnPoint OutOTA_Checkpoint_3 -->
+</QuestsDefinitions>

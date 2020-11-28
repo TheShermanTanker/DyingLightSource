@@ -1,0 +1,185 @@
+//////////////////////////////////////////////////////////////////
+// Audio Commands
+//////////////////////////////////////////////////////////////////
+
+!AudioProc(s)
+!CallProc(s)
+!LoadAudioBanks(s)
+!LoadLocalisedAudioBank(s)
+!UnloadAllBanks()
+!UnloadNotUsedBanks()
+!LoadDefaultBanks()
+
+// auto reverb modes: 1 - use when there is no other reverb, 2 - override existing reverb, 3 - always use global/auto reverb
+!EnableAutoReverb(i)
+
+// sets auto reverb on/off on given bus. parameters: bus index, 1/0
+!SetAutoReverb(i,i)
+
+// sets auto reverb wet dry mix ratio
+!SetAutoReverbPower(f)
+
+// Sets impulse response to reverb preset
+!SetReverbIR(i,s)
+
+// 0 - no occlusion, 1 - only air occlusion, 2 - full occlusion
+!EnableOcclusion(i)
+
+// minimal LPF frequency
+!SetOcclusionLPFMin(f)
+
+// maximal LPF frequency
+!SetOcclusionLPFMax(f)
+
+// maximal distance impact (0-1)
+!SetOcclusionMaxAirImpact(f)
+
+// minimal volume multiplier for completely occluded sounds
+!SetOcclusionVolumeMin(f)
+
+!SoundAlias(s, s)
+
+// use listener cone
+!EnableListenerCone(i)
+
+// define listener cone parameters: inner angle, inner volume, outer angle, outer volume
+!SetListenerCone(f,f,f,f)
+
+// Reuse XAudio2 source voices (performance improvement)
+// Params: voice pool size 
+!ReuseSourceVoices(i)
+
+// HDR system parameters
+// Params: window size, lowest max amplitude, release time, use rms, rms treshold, hdr headroom
+!SetHDR(f,f,f,i,i,i)
+
+// executed after sctript reading
+!OnStart()
+// executed if proc is not found
+!DefaultProc()
+
+//////////////////////////////////////////////////////////////////
+// Audio Properties
+//////////////////////////////////////////////////////////////////
+
+!SoundProperties(s)
+!SoundGroup(s)
+!GroupProperties()
+!SetSoundProperties(s, s)
+!ResetProperties()
+!Sound(s)
+!Volume(f)
+!DistanceModel(i)
+!MinDistance(f)
+!RollOff(f)
+!Pitch(f)
+!PitchRange(f,f)
+!LFE(f)  // low frequency effects channel multiplier
+!SpreadStart(f)
+!SpreadEnd(f)
+!Compress(f, f, f, f)
+!SideChain()       // Mark as side chain for compression
+!DopplerEffect(i)  // Enable doppler effect
+!DopplerMax(f)     // max doppler factor (default 2)
+!DopplerMin(f)     // min doppler factor (default 0.5)
+!OcclusionMode(i)  // occlusion mode: 0 - off, 1 - distance, 2 - object, 3 - full 
+
+!DefineChannelMapping(i)
+!Default()
+!Bus(i)
+!SpeakerFL(i, f)
+!SpeakerFR(i, f)
+!SpeakerFC(i, f)
+!SpeakerLFE(i, f)
+!SpeakerRL(i, f)
+!SpeakerRR(i, f)
+!SpeakerEL(i, f)
+!SpeakerER(i, f)
+
+//////////////////////////////////////////////////////////////////
+// Bus Properties
+//////////////////////////////////////////////////////////////////
+!BusProperties(i)
+!VolumeMultiplier(f)
+!LFEMultiplier(f)
+!ReverbSendLevel(f)
+!ReverbMinLevel(f)
+!Category(i)
+!IgnoreListenerCone(i)
+!Name(s)
+
+//////////////////////////////////////////////////////////////////
+// Reverbs
+//////////////////////////////////////////////////////////////////
+
+!DefineCustomReverb(i)
+!Room(i)             // Attenuation of the room effect. Allowable values in hundredths of a decibel are from -10000 to 0.
+!RoomHF(i)           // Attenuation of the room high-frequency effect. Allowable values in hundredths of a decibel are from -10000 to 0.
+!DecayTime(f)        // Reverberation decay time at low frequencies. Allowable values in seconds are from 0.1 to 20.0.
+!DecayHFRatio(f)     // Ratio of the decay time at high frequencies to the decay time at low frequencies. Allowable values are from 0.1 to 2.0.
+!Reflections(i)      // Attenuation of early reflections relative to Room. Allowable values in hundredths of a decibel are from -10000 to 1000.
+!ReflectionsDelay(f) // Delay time of the first reflection relative to the direct path. Allowable values in seconds are from 0.0 to 0.3.
+!Reverb(i)           // Attenuation of late reverberation relative to Room. Allowable values in hundredths of a decibel are from -10000 to 2000.
+!ReverbDelay(f)      // Time limit between the early reflections and the late reverberation relative to the time of the first reflection. Allowable values in seconds are from 0.0 to 0.1.
+!Diffusion(f)        // Echo density in the late reverberation decay. Allowable values as a percentage are from 0 to 100.
+!Density(f)          // Modal density in the late reverberation decay. Allowable values as a percentage are from 0 to 100.
+!HFReference(f)      // Reference high frequency. Allowable values in Hz are from 20.0 to 20000.0.
+
+//////////////////////////////////////////////////////////////////
+// Audio Environments
+//////////////////////////////////////////////////////////////////
+
+!DefineAudioEnvironment()
+!EnvMaxAvgDistance(f)    // maximal avarage distance to objects (in cm)
+!EnvMaxMinDistance(f)    // maximal minimal distance to objects (in cm)
+!EnvMinSurface(i)        // Minimal surface id required when inside
+!EnvMinHitRatio(i)       // minimal hit ratio - objects density (percentage, 0-100)
+!EnvReverbPreset(i, f)   // reverb preset and wet-dry ratio
+!EnvEcho(f, f, f)        // echo - delay in ms, feedback 0-0.9 and wet-dry ratio
+!EnvInside()             // if it is inside environment
+!EnvName(s)              // environment name
+
+$_REVERB_Default            (i, 0)
+$_REVERB_Generic            (i, 1) 
+$_REVERB_PaddedCell         (i, 2)
+$_REVERB_Room               (i, 3)
+$_REVERB_Bathroom           (i, 4) 
+$_REVERB_LivingRoom         (i, 5)  
+$_REVERB_StoneRoom          (i, 6)  
+$_REVERB_Auditorium         (i, 7)  
+$_REVERB_ConcertHall        (i, 8)  
+$_REVERB_Cave               (i, 9)  
+$_REVERB_Arena              (i, 10)  
+$_REVERB_Hangar             (i, 11)  
+$_REVERB_CarpetedHallway    (i, 12)  
+$_REVERB_Hallway            (i, 13)  
+$_REVERB_StoneCorridor      (i, 14)  
+$_REVERB_Alley              (i, 15)  
+$_REVERB_Forest             (i, 16)  
+$_REVERB_City               (i, 17)  
+$_REVERB_Mountains          (i, 18)  
+$_REVERB_Quarry             (i, 19)  
+$_REVERB_Plain              (i, 20)  
+$_REVERB_ParkingLot         (i, 21)  
+$_REVERB_Sewerpipe          (i, 22)  
+$_REVERB_Underwater         (i, 23)  
+$_REVERB_SmallRoom          (i, 24)  
+$_REVERB_MediumRoom         (i, 25)  
+$_REVERB_LargeRoom          (i, 26) 
+$_REVERB_MediumHall         (i, 27)  
+$_REVERB_LargeHall          (i, 28)  
+$_REVERB_Plate              (i, 29)
+$_REVERB_Custom0            (i, 30)
+$_REVERB_Custom1            (i, 31)
+$_REVERB_Custom2            (i, 32)
+$_REVERB_Custom3            (i, 33)
+$_REVERB_Custom4            (i, 34)
+
+$_DM_InverseDistance         (i, 0)
+$_DM_InverseDistanceClamped  (i, 1)
+$_DM_InverseDistanceCut      (i, 2)
+$_DM_LinearDistance          (i, 3)
+$_DM_ExponentialDistance     (i, 4)
+$_DM_ExpDistanceClamped      (i, 5)
+
+

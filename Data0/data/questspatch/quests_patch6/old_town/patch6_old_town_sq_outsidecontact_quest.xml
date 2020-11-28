@@ -1,0 +1,120 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="old_town"
+     pxsl_line="3">
+    <!-- quest ___sq_outsidecontact01_pre -parent=Q_Start01 -->
+        <!-- ,hide _ AppearGroup sq_outsidecontact_AP_Cargo_Drop -->
+        <!-- ,hide _ AppearGroup sq_outsidecontact_AP_Cargo_Drop_Case_01 -->
+        <!-- ,hide _ AppearGroup sq_outsidecontact_AP_Cargo_Drop_Balloon_01 -->
+        <!-- ,hide _ AppearGroup sq_outsidecontact_movie_cargo_01::AP_Movie_Cargo -->
+        <!-- ,hide _ AppearGroup sq_outsidecontact_movie_cargo_02::AP_Movie_Cargo -->
+        <!-- ,enable _ SpawnBlocker sq_outsidecontact_SpawnBlocker_Cessna_01 -->
+        <!--  -->
+    <!-- quest ___sq_outsidecontact01_airdrop -parent=Q_Scavengers_Hub01 -->
+        <!-- ,goto <<Outside Contact - START>> SpawnPoint sq_outsidecontact_SP_Start -show=false -distance=100 -->
+            <!-- ,debugpos SpawnPoint sq_outsidecontact_SP_Start -->
+        <!-- ,checkpoint _ SpawnPoint sq_outsidecontact_SP_Start -->
+        <!-- ,enable _ SpawnBlocker sq_outsidecontact_SpawnBlocker_DropZone_01 -->
+        <!-- ,goto _ Marker sq_outsidecontact_Marker_Cessna_01 -show=false -distance=3 -->
+        <!-- ,show _ AppearGroup sq_outsidecontact_AP_Cargo_Drop -->
+        <!-- ,show _ AppearGroup sq_outsidecontact_AP_Cargo_Drop_Case_01 -->
+        <!-- ,show _ AppearGroup sq_outsidecontact_AP_Cargo_Drop_Balloon_01 -->
+        <!-- ,show _ AppearGroup sq_outsidecontact_movie_cargo_01::AP_Movie_Cargo -->
+        <!-- ,show _ AppearGroup sq_outsidecontact_movie_cargo_02::AP_Movie_Cargo -->
+        <!-- ,AND _ -->
+            <!-- path -->
+                <!-- ,movie _ sq_outsidecontact_Movie_Cessna_01 -->
+            <!-- path -->
+                <!-- ,enable _ SoundEmitterSimple sq_outsidecontact_SES_Cessna_Passing_01 -->
+            <!-- path -->
+                <!-- ,wait _ 10 -->
+                <!-- ,radio-dialog _ voice2d ScavRadio01_sq_OutsideContact_01DLG01 -->
+                <!-- ,enable _ QuestEnableGroup sq_outsidecontact_QEG_Cargo_Drop_Flare -->
+        <!-- ,AND _ -->
+            <!-- path -->
+                <!-- ,goto _ Marker sq_outsidecontact_Marker_Drop_01 -show=false -distance=48 -->
+                <!-- ,enable _ QuestEnableGroup sq_outsidecontact_QEG_GnR_Group_01 -->
+            <!-- path -->
+                <!-- ,goto _ Marker sq_outsidecontact_Marker_Drop_01 -show=false -distance=32 -->
+                <!-- ,talk _ Fake_GnR_01 Fake_GnR_01_sq_OutsideContact_02DLG01 -auto=true -show=false -->
+            <!-- path -->
+                <!-- ,goto _ Marker sq_outsidecontact_Marker_Drop_01 -show=false -distance=12 -->
+                <!-- ,enable _ QuestEnableGroup sq_outsidecontact_QEG_Wave_01 -->
+        <!-- ,use <<Open Cargo>> PhysicalSwitchDI outsidecontact_PS_Cargo_01 -state=on -show=false -->
+            <!-- ,debugpos SpawnPoint sq_outsidecontact_SP_Cargo_01 -->
+        <!-- ,disable _ QuestEnableGroup sq_outsidecontact_QEG_Wave_01 -->
+        <!-- ,checkpoint _ SpawnPoint sq_outsidecontact_SP_Cargo_01 -->
+            <!--  -->
+    <!-- quest sq_outsidecontact01 -parent=___sq_outsidecontact01_airdrop -reward_set=OutsideContact_reward -quest_giver=Box01 -difficulty=medium -->
+        <!-- ,talk <<Talk to quest giver>> Box01 Box01_sq_OutsideContact_01USE -auto=false -show=false -->
+            <!-- ,debugpos SpawnPoint sq_outsidecontact_SP_Cargo_02 -->
+        <!-- ,checkpoint _ SpawnPoint sq_outsidecontact_SP_Cargo_02 -->
+        <!-- ,AND _ -->
+            <!-- path -->
+                <!-- ,movie _ sq_outsidecontact_movie_cargo_01::sq_outsidecontact_Movie_Case_01 -->
+            <!-- path -->
+                <!-- ,show-multi _ -->
+                    <!-- ,o QuestInventoryItemDI sq_outsidecontact_QII_USB -->
+                    <!-- ,o QuestInventoryItemDI sq_outsidecontact_QII_GPS -->
+        <!-- ,BLOCK _ -obj=&sq_outsidecontact_OBJ_TakeGPS& -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,radio-dialog _ voice2d Box01_sq_OutsideContact_01DLG01 -->
+                <!-- path -->
+                    <!-- ,take _ QuestInventoryItemDI sq_outsidecontact_QII_GPS -show=true -->
+                <!-- path -->
+                    <!-- ,take _ QuestInventoryItemDI sq_outsidecontact_QII_USB -show=true -->
+        <!-- ,disable _ SpawnBlocker sq_outsidecontact_SpawnBlocker_DropZone_01 -->
+        <!-- ,disable _ QuestEnableGroup sq_outsidecontact_QEG_GnR_Group_01 -->
+        <!-- ,enable _ MapPortal sq_outsidecontact_Portal_Old_Town_To_Old_town_Interior_A -->
+        <!-- ,checkpoint _ SpawnPoint sq_outsidecontact_SP_Cargo_02 -->
+    <!--  -->
+    <!-- quest ___sq_outsidecontact02_post -parent=sq_outsidecontact02 -glued=false -->
+        <!-- ,disable _ QuestEnableGroup sq_outsidecontact_QEG_Cargo_Drop_Flare -->
+        <!--  -->
+    <!-- quest sq_outsidecontact03 -parent=sq_outsidecontact02 -glued=true -leading_portal=sq_outsidecontact_Portal_Old_Town_Interior_A_To_Old_town -->
+        <!-- ,BLOCK _ -obj=&sq_outsidecontact_OBJ_ReturnToDropZone& -->
+            <!-- ,goto _ SpawnPoint sq_outsidecontact_Portal_Old_Town_Interior_A_To_Old_town -show=true -distance=10 -->
+            <!-- ,goto _ Marker sq_outsidecontact_Marker_Drop_01 -distance=6 -show=true -->
+            <!-- ,enable _ SpawnBlocker sq_outsidecontact_SpawnBlocker_DropZone_01 -->
+        <!-- ,BLOCK _ -obj=&sq_outsidecontact_OBJ_PlaceDocuments& -->
+            <!-- ,use <<Place Documents>> InvisibleSwitchDI sq_outsidecontact_IS_Doc_01 -state=on -show=true -->
+                <!-- ,debugpos SpawnPoint sq_outsidecontact_SP_Cargo_02 -->
+            <!-- ,checkpoint _ SpawnPoint sq_outsidecontact_SP_Cargo_02 -->
+            <!-- ,talk _ Box01 Box01_sq_OutsideContact_02DLG01 -auto=true -show=false -->
+        <!-- ,BLOCK _ -obj=&sq_outsidecontact_OBJ_Wait& -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,movie _ sq_outsidecontact_Movie_Balloon_01 -->
+                <!-- path -->
+                    <!-- ,wait _ 3 -->
+                    <!-- ,talk _ Box01 Box01_sq_OutsideContact_03DLG01 -auto=true -show=false -->
+                <!-- path -->
+                    <!-- ,wait _ 16 -->
+                    <!-- ,enable _ SoundEmitterSimple sq_outsidecontact_SES_Cessna_Passing_02 -->
+                <!-- path -->
+                    <!-- ,OR _ -->
+                        <!-- path -->
+                            <!-- ,timer _ -time=120 -visualize=true -->
+                        <!-- path -->
+                            <!-- ,wait _ 119 -->
+                <!-- path -->
+                    <!-- ,wait _ 22 -->
+                    <!-- ,enable _ QuestEnableGroup sq_outsidecontact_Armored_01::qeg_spawner_Armored -->
+                    <!-- ,enable _ QuestEnableGroup sq_outsidecontact_QEG_Wave_02 -->
+                    <!-- ,wait _ 3 -->
+                    <!-- ,enable _ SensorAmbientMusicArea sq_outsidecontact_SAMA_Attack01 -->
+            <!-- ,disable-multi _ -->
+                <!-- ,o QuestEnableGroup sq_outsidecontact_Armored_01::qeg_spawner_Armored -->
+                <!-- ,o QuestEnableGroup sq_outsidecontact_QEG_Wave_02 -->
+            <!-- ,disable _ SensorAmbientMusicArea sq_outsidecontact_SAMA_Attack01 -->
+            <!-- ,talk _ Box01 Box01_sq_OutsideContact_04DLG01 -auto=true -show=false -->
+            <!-- ,checkpoint _ SpawnPoint sq_outsidecontact_SP_Cargo_02 -->
+        <!-- ,BLOCK _ -obj=&sq_outsidecontact_OBJ_TakeReward& -->
+            <!-- ,use _ PhysicalSwitchDI outsidecontact_PS_Cargo_02 -state=on -show=true -->
+            <!-- ,disable _ SpawnBlocker sq_outsidecontact_SpawnBlocker_DropZone_01 -->
+        <!-- ,checkpoint _ SpawnPoint sq_outsidecontact_SP_Cargo_02 -->
+        <!--  -->
+        <!-- ,reward _ -->
+        <!-- ,checkpoint _ SpawnPoint sq_outsidecontact_SP_Cargo_02 -->
+</QuestsDefinitions>

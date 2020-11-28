@@ -1,0 +1,1607 @@
+!include("AudioBus.def")
+
+// define audio effect with given name 
+!AudioEffect(s)
+
+// effect priority, higher number = higher priority
+!Priority(i)
+
+// effect layout, higher number = higher priority
+!Layer(i)
+
+// LPF for bus $1 with frequency from $2 to $3 and resonance from $4 to $5
+// WARNING: radian frequency (0-1) assumed!
+!LowPassFilter(i, f, f, f, f)
+
+// Volume for bus $1 multiplied by $2
+!Volume(i, f)
+
+// Effect fade in time in seconds
+!FadeIn(f)
+
+// Effect fade out time in seconds
+!FadeOut(f)
+
+// AcusticRoom settings
+!AcusticRoomPreset(s)
+!FadeDistance(f)
+!TailPreset(i)
+!ReverbPreset(i)
+!ReverbWetDryMix(f)
+// echo for bus $_1 with dealy $_2, feedback $_3 and wet-dry mix $_4
+!Echo(i, f, f, f)
+!BusMask(i)
+!Bus(i)
+!Interior()
+!GlobalFrequency(f)
+
+//copy of EGameVolumeSource
+$_BUS_Sound                    ( i, 0)
+$_BUS_Music                    ( i, 1)
+$_BUS_Speech                   ( i, 2)
+$_BUS_SpeechPlayer             ( i, 3)
+$_BUS_SoundPlayer              ( i, 4) 
+$_BUS_MusicConcentrationMode   ( i, 5) 
+$_BUS_SpecialMusic             ( i, 6) 
+$_BUS_SpecialSound             ( i, 7) 
+$_BUS_GUI                      ( i, 8) 
+$_BUS_RadioDialog              ( i, 9)
+$_BUS_QuestDialog              ( i, 10)
+$_BUS_LoudSound                ( i, 11)
+$_BUS_NightHorde               ( i, 12)
+$_BUS_Ambiences                ( i, 13)
+
+
+AudioEffect("Credits") 
+{
+    Priority(1000)
+	
+   // sound
+   Volume(_BUS_Sound, 0.0)
+   LowPassFilter(_BUS_Sound, 1.0, 0.8, 1.0, 1.0)
+   
+   // music
+   // Volume(_BUS_Music, 0.0)
+   
+   // speech
+   Volume(_BUS_Speech, 0.0)
+   
+   // speech player
+   Volume(_BUS_SpeechPlayer, 0.0)
+   
+   // sound player
+   Volume(_BUS_SoundPlayer, 0.0)
+   
+   // music c mode
+   Volume(_BUS_MusicConcentrationMode, 0.0)
+   
+   // special music
+   Volume(_BUS_SpecialMusic, 0.0)
+   
+   // special sound
+   Volume(_BUS_SpecialSound, 0.0)
+   
+   // UI
+   Volume(_BUS_GUI, 0.0)
+   
+   // Radio
+   Volume(_BUS_RadioDialog, 0.0)
+   
+   // speech coop
+   Volume(_BUS_QuestDialog, 0.0)
+   
+   // loud sound
+   Volume(_BUS_LoudSound, 0.1)
+   
+   // night horde
+   Volume(_BUS_NightHorde, 0.1)
+   
+   // ambiences
+   Volume(_BUS_Ambiences, 0.0)
+   
+   FadeIn(2.0)
+   FadeOut(2.0)
+}
+
+AudioEffect("Cinematic") 
+{
+    Priority(2)
+	
+   // sound
+   Volume(_BUS_Sound, 0.2)
+   LowPassFilter(_BUS_Sound, 1.0, 0.8, 1.0, 1.0)
+   
+   // music
+   // Volume(_BUS_Music, 0.0)
+   
+   // speech
+   // Volume(_BUS_Speech, 0.0)
+   
+   // speech player
+   // Volume(_BUS_SpeechPlayer, 0.0)
+   
+   // sound player
+   // Volume(_BUS_SoundPlayer, 0.0)
+   
+   // music c mode
+   // Volume(_BUS_MusicConcentrationMode, 0.0)
+   
+   // special music
+   // Volume(_BUS_SpecialMusic, 0.0)
+   
+   // special sound
+   // Volume(_BUS_SpecialSound, 0.0)
+   
+   // GUI
+   // Volume(_BUS_GUI, 0.0)
+   
+   // Radio
+   // Volume(_BUS_RadioDialog, 0.0)
+   
+   // speech coop
+   // Volume(_BUS_QuestDialog, 0.0)
+   
+   // loud sound
+   //Volume(_BUS_LoudSound, 0.1)
+   
+   // night horde
+   //Volume(_BUS_NightHorde, 0.1)
+   
+   // ambiences
+   Volume(_BUS_Ambiences, 0.4)
+   
+   FadeIn(2.0)
+   FadeOut(4.0)
+}
+
+AudioEffect("Screamer") 
+{
+   Priority(42)
+   
+   LowPassFilter(_BUS_Sound, 1.0, 0.1, 1.0, 1.0)
+   
+   LowPassFilter(_BUS_Speech, 1.0, 0.1, 1.0, 1.0)
+   
+   LowPassFilter(_BUS_SoundPlayer, 1.0, 0.1, 1.0, 1.0)
+   
+   LowPassFilter(_BUS_SpecialMusic, 1.0, 0.1, 1.0, 1.0)
+   
+   LowPassFilter(_BUS_MusicConcentrationMode, 1.0, 0.1, 1.0, 1.0)
+   
+   //LowPassFilter(_BUS_SpecialSound, 1.0, 0.13, 1.0, 1.0)
+   
+   LowPassFilter(_BUS_LoudSound, 1.0, 0.1, 1.0, 1.0)
+   
+   LowPassFilter(_BUS_NightHorde, 1.0, 0.3, 1.0, 1.0) 
+   
+   LowPassFilter(_BUS_Ambiences, 1.0, 0.1, 1.0, 1.0)
+   
+  
+   FadeIn(1.0)
+   FadeOut(1.0)
+}
+
+AudioEffect("Knockdown") //knockdown bez smierci
+{
+   Priority(22)
+   
+   LowPassFilter(_BUS_Sound, 1.0, 0.13, 1.0, 1.0)
+   
+   LowPassFilter(_BUS_Speech, 1.0, 0.13, 1.0, 1.0)
+   
+   LowPassFilter(_BUS_SoundPlayer, 1.0, 0.13, 1.0, 1.0)
+   
+   LowPassFilter(_BUS_SpecialMusic, 1.0, 0.13, 1.0, 1.0)
+   
+   LowPassFilter(_BUS_MusicConcentrationMode, 1.0, 0.13, 1.0, 1.0)
+   
+   LowPassFilter(_BUS_SpecialSound, 1.0, 0.13, 1.0, 1.0)
+   
+   LowPassFilter(_BUS_LoudSound, 1.0, 0.13, 1.0, 1.0)
+   
+   LowPassFilter(_BUS_NightHorde, 1.0, 0.13, 1.0, 1.0) 
+   
+   LowPassFilter(_BUS_Ambiences, 1.0, 0.13, 1.0, 1.0)
+   
+   
+   FadeIn(0.9)
+   FadeOut(2.0)
+}
+
+AudioEffect("KnockdownHeavy") //knockdown z minigierka
+{
+   Priority(35)
+   
+   Volume(_BUS_Sound, 0.0)
+   
+   LowPassFilter(_BUS_Music, 1.0, 0.11, 1.0, 1.0)
+   Volume(_BUS_Music, 0.3)
+   
+   LowPassFilter(_BUS_Speech, 1.0, 0.11, 1.0, 1.0)
+   
+   Volume(_BUS_MusicConcentrationMode, 0.0)
+   
+   Volume(_BUS_SpecialMusic, 0.0)
+   
+   Volume(_BUS_SpecialSound, 0.0)
+   
+   LowPassFilter(_BUS_QuestDialog, 1.0, 0.11, 1.0, 1.0)
+   
+   LowPassFilter(_BUS_LoudSound, 1.0, 0.11, 1.0, 1.0)
+   
+   LowPassFilter(_BUS_NightHorde, 1.0, 0.11, 1.0, 1.0) 
+   
+   Volume(_BUS_Ambiences, 0.0)
+   
+   FadeIn(0.5)
+   FadeOut(1.0)
+}
+
+
+AudioEffect("LowHealth")
+{
+   Priority(40)
+   
+   LowPassFilter(_BUS_Sound, 1.0, 0.18, 1.0, 1.0)
+   Volume(_BUS_Sound, 0.6)
+   
+   //LowPassFilter(_BUS_Music, 1.0, 0.18, 1.0, 1.0)
+   //Volume(_BUS_Music, 0.6)
+   
+   LowPassFilter(_BUS_Speech, 1.0, 0.18, 1.0, 1.0)
+   Volume(_BUS_Speech, 0.6)
+   
+   LowPassFilter(_BUS_SpeechPlayer, 1.0, 0.18, 1.0, 1.0)
+   Volume(_BUS_SpeechPlayer, 0.6)
+   
+   LowPassFilter(_BUS_SoundPlayer, 1.0, 0.18, 1.0, 1.0)
+   Volume(_BUS_SoundPlayer, 0.6)
+   
+   LowPassFilter(_BUS_SpecialMusic, 1.0, 0.18, 1.0, 1.0)
+   Volume(_BUS_SpecialMusic, 0.6)
+   
+   LowPassFilter(_BUS_SpecialSound, 1.0, 0.18, 1.0, 1.0)
+   Volume(_BUS_SpecialSound, 0.6)
+   
+   LowPassFilter(_BUS_LoudSound, 1.0, 0.18, 1.0, 1.0)
+   Volume(_BUS_LoudSound, 0.6)
+   
+   LowPassFilter(_BUS_NightHorde, 1.0, 0.18, 1.0, 1.0)
+   Volume(_BUS_NightHorde, 0.6)
+   
+   LowPassFilter(_BUS_Ambiences, 1.0, 0.18, 1.0, 1.0)
+   Volume(_BUS_Ambiences, 0.6)
+   
+   FadeIn(2.0)
+   FadeOut(1.5)
+}
+
+
+AudioEffect("InCar")
+{
+   //Priority(30)
+   // sound
+   //LowPassFilter(_BUS_Sound, 1.0, 0.4, 1.0, 1.0)
+   // speech
+   //LowPassFilter(_BUS_Speech, 1.0, 0.4, 1.0, 1.0)
+   
+   //Volume(_BUS_Sound, 0.7)
+   //Volume(_BUS_Speech, 0.7)
+}
+
+
+AudioEffect("Alcohol")
+{
+   Priority(23)
+   // Sound
+   LowPassFilter(_BUS_Sound, 1.0, 0.13, 1.0, 1.0)
+   // SoundPlayer
+   LowPassFilter(_BUS_SoundPlayer, 1.0, 0.13, 1.0, 1.0)
+   // Speech
+   LowPassFilter(_BUS_Speech, 1.0, 0.13, 1.0, 1.0)
+   // SpeechPlayer
+   LowPassFilter(_BUS_SpeechPlayer, 1.0, 0.13, 1.0, 1.0)
+   // Music
+   LowPassFilter(_BUS_Music, 1.0, 0.13, 1.0, 1.0)
+}
+
+
+AudioEffect("Fury")
+{
+   Priority(24)
+   // Sound
+   LowPassFilter(_BUS_Sound, 1.0, 0.013, 0.4, 0.4)
+   Volume(_BUS_Sound, 0.2)
+   // SoundPlayer
+   LowPassFilter(_BUS_SoundPlayer, 1.0, 0.013, 1.0, 1.0)
+   Volume(_BUS_SoundPlayer, 0.7)
+   // Speech
+   LowPassFilter(_BUS_Speech, 1.0, 0.013, 0.4, 0.4)
+   Volume(_BUS_Speech, 0.2)
+   // SpeechPlayer
+   Volume(_BUS_SpeechPlayer, 0.0)
+   // Music
+   //LowPassFilter(_BUS_Music, 1.0, 0.013, 0.4, 0.4)
+   Volume(_BUS_Music, 0.0)
+   // SpecialMusic
+   //LowPassFilter(_BUS_SpecialMusic, 1.0, 0.013, 1.0, 1.0)
+   Volume(_BUS_SpecialMusic, 0.5)
+   // SpecialSound
+   Volume(_BUS_SpecialSound, 1.0)
+
+}
+
+AudioEffect("FlashBang")
+{
+   Priority(26)
+   LowPassFilter(_BUS_Sound, 1.0, 0.4, 1.0, 1.0) // sound
+   LowPassFilter(_BUS_Speech, 1.0, 0.4, 1.0, 1.0) // speech
+   LowPassFilter(_BUS_SpeechPlayer, 1.0, 0.4, 1.0, 1.0) // speech player
+   LowPassFilter(_BUS_QuestDialog, 1.0, 0.4, 1.0, 1.0) // speech coop
+   LowPassFilter(_BUS_SoundPlayer, 1.0, 0.4, 1.0, 1.0) // sound player
+}
+
+AudioEffect("MissionFail")
+{
+   Priority(28)
+   // sound
+   Volume(_BUS_Sound, 0.0)
+   // speech
+   Volume(_BUS_Speech, 0.0)
+   // speech coop
+   Volume(_BUS_QuestDialog, 0.0)
+   // speech player
+   Volume(_BUS_SpeechPlayer, 0.0)
+   // SoundPlayer
+   Volume(_BUS_SoundPlayer, 0.0)
+   // SpecialSound
+   Volume(_BUS_SpecialSound, 0.0)
+}
+
+
+AudioEffect("NightHorde")
+{
+   Priority(29)
+
+}
+
+
+AudioEffect("NightHordeSense")
+{
+   Priority(19)
+   
+   Volume(_BUS_Sound, 0.0)
+   
+   Volume(_BUS_SoundPlayer, 0.0)
+   
+   Volume(_BUS_SpecialMusic, 0.0)
+   
+   Volume(_BUS_SpecialSound, 0.4)
+   
+   // Zombies
+   Volume(_BUS_LoudSound, 0.0)
+   
+   // VolatileSound
+   Volume(_BUS_NightHorde, 2.0)
+   
+   LowPassFilter(_BUS_Ambiences, 1.0, 0.1, 1.0, 1.0)
+   Volume(_BUS_Ambiences, 0.5)
+
+   
+   FadeIn(0.7)
+   FadeOut(2.0)
+}
+
+
+AudioEffect("Underwater")
+{
+   Priority(54)
+   
+   LowPassFilter(_BUS_Sound, 1.0, 0.05, 1.0, 1.0)
+
+   LowPassFilter(_BUS_Speech, 1.0, 0.05, 1.0, 1.0)
+   
+   LowPassFilter(_BUS_SpeechPlayer, 1.0, 0.05, 1.0, 1.0)
+   
+   LowPassFilter(_BUS_SoundPlayer, 1.0, 0.12, 1.0, 1.0)
+   
+   LowPassFilter(_BUS_MusicConcentrationMode, 1.0, 0.05, 1.0, 1.0)
+   
+   LowPassFilter(_BUS_SpecialSound, 1.0, 0.05, 1.0, 1.0)
+    
+   LowPassFilter(_BUS_LoudSound, 1.0, 0.05, 1.0, 1.0)
+   
+   LowPassFilter(_BUS_NightHorde, 1.0, 0.05, 1.0, 1.0)
+
+   Volume(_BUS_Ambiences, 0.5)
+   LowPassFilter(_BUS_Ambiences, 1.0, 0.01, 1.0, 1.0)
+
+   FadeIn(0.4)
+   FadeOut(1.0)
+}
+
+
+AudioEffect ("Grab1")
+{
+   Priority(17)
+   // Sound
+   LowPassFilter(_BUS_Sound, 1.0, 0.12, 1.0, 1.0)
+   Volume(_BUS_Sound, 0.1)
+   
+   // VolatileSound
+   LowPassFilter(_BUS_NightHorde, 1.0, 0.38, 1.0, 1.0)
+   Volume(_BUS_NightHorde, 0.5)
+   
+   // Ambiences
+   LowPassFilter(_BUS_Ambiences, 1.0, 0.12, 1.0, 1.0)
+   Volume(_BUS_Ambiences, 0.1)
+   
+   FadeIn(0.5)
+   FadeOut(0.5)
+}
+
+
+AudioEffect ("XRay")
+{
+   Priority(16)
+   
+   FadeIn(0.4)
+   FadeOut(1.0)
+   
+   //LowPassFilter(_BUS_Sound, 1.0, 0.4, 1.0, 1.0)
+   //Volume(_BUS_Sound, 0.5)
+   
+   //LowPassFilter(_BUS_Speech, 1.0, 0.4, 1.0, 1.0)
+   //Volume(_BUS_Speech, 0.5)
+   
+   //LowPassFilter(_BUS_SpeechPlayer, 1.0, 0.5, 1.0, 1.0)
+   //Volume(_BUS_SpeechPlayer, 0.0)
+   
+   //LowPassFilter(_BUS_SoundPlayer, 1.0, 0.5, 1.0, 1.0)
+   //Volume(_BUS_SoundPlayer, 0.0)
+   
+   //LowPassFilter(_BUS_SpecialSound, 1.0, 1.0, 1.0, 1.0)
+   //Volume(_BUS_SpecialSound, 1.0)
+   
+   //LowPassFilter(_BUS_LoudSound, 1.0, 0.5, 1.0, 1.0)
+   
+   //LowPassFilter(_BUS_NightHorde, 1.0, 0.5, 1.0, 1.0)
+   
+   //LowPassFilter(_BUS_Ambiences, 1.0, 0.4, 1.0, 1.0)
+   //Volume(_BUS_Ambiences, 0.5)   
+   
+}
+
+
+AudioEffect ("ControlTheHorde")
+{
+    Priority(15)
+   // Sound
+   LowPassFilter(_BUS_Sound, 1.0, 0.07, 1.0, 1.0)
+   // SoundPlayer
+   LowPassFilter(_BUS_SoundPlayer, 1.0, 0.07, 1.0, 1.0)
+          
+   // LoudSound
+   LowPassFilter(_BUS_LoudSound, 1.0, 0.38, 1.0, 1.0)
+   
+   // LoudSound
+   LowPassFilter(_BUS_SpecialSound, 1.0, 0.07, 1.0, 1.0)
+   
+   // Ambiences
+   LowPassFilter(_BUS_Ambiences, 1.0, 0.07, 1.0, 1.0)
+   Volume(_BUS_Ambiences, 0.2)
+   
+   // Music
+   //LowPassFilter(_BUS_Music, 1.0, 0.18, 1.0, 1.0)
+   Volume(_BUS_Music, 0.6)
+   
+   LowPassFilter(_BUS_SpecialMusic, 1.0, 0.18, 1.0, 1.0)
+   Volume(_BUS_SpecialMusic, 0.6)
+   
+}
+
+
+AudioEffect ("DuringQuestDialog")
+{
+   Priority(50)
+
+   FadeIn(0.5)
+   FadeOut(1.0)
+
+   Volume(_BUS_Sound, 0.5)
+   LowPassFilter(_BUS_Sound, 1.0, 0.9, 1.0, 1.0)//   LowPassFilter(_BUS_Sound, 1.0, 0.5, 1.0, 1.0)
+   
+   Volume(_BUS_Music, 0.9)
+   
+   Volume(_BUS_Speech, 0.2)
+   LowPassFilter(_BUS_Speech, 1.0, 0.8, 1.0, 1.0)//0.5
+   
+   Volume(_BUS_SpeechPlayer, 0.0)
+   
+   Volume(_BUS_SoundPlayer, 0.8)
+   LowPassFilter(_BUS_SoundPlayer, 1.0, 0.99, 1.0, 1.0)//0.8
+   
+   Volume(_BUS_MusicConcentrationMode, 1.0)
+   LowPassFilter(_BUS_MusicConcentrationMode, 1.0, 1.0, 1.0, 1.0)
+   
+   Volume(_BUS_SpecialMusic, 1.0)
+   LowPassFilter(_BUS_SpecialMusic, 1.0, 1.0, 1.0, 1.0)
+   
+   Volume(_BUS_SpecialSound, 0.8)
+   LowPassFilter(_BUS_SpecialSound, 1.0, 0.99, 1.0, 1.0)//0.8
+
+   Volume(_BUS_GUI, 0.5)
+   
+   Volume(_BUS_LoudSound, 0.6)
+   LowPassFilter(_BUS_LoudSound, 1.0, 0.9, 1.0, 1.0)//0.8
+   
+   Volume(_BUS_NightHorde, 0.8)
+   LowPassFilter(_BUS_NightHorde, 1.0, 0.9, 1.0, 1.0)//0.8
+   
+   Volume(_BUS_Ambiences, 0.7)
+   LowPassFilter(_BUS_Ambiences, 1.0, 0.9, 1.0, 1.0)//0.5
+}
+
+
+AudioEffect("NightStart")
+{
+   Priority(14)
+
+	// Sound
+   Volume(_BUS_Sound, 0.1)
+   LowPassFilter(_BUS_Sound, 1.0, 0.13, 1.0, 1.0)
+   
+	// Music
+   Volume(_BUS_Music, 1.0)
+   LowPassFilter(_BUS_Music, 1.0, 1.0, 1.0, 1.0)
+   
+   // Speech
+   Volume(_BUS_Speech, 1.0)
+   
+   // SpeechPlayer
+   Volume(_BUS_SpeechPlayer, 1.0)
+   
+   // SoundPlayer
+   Volume(_BUS_SoundPlayer, 1.0)
+   LowPassFilter(_BUS_SoundPlayer, 1.0, 1.0, 1.0, 1.0)
+   
+   // MusicConcentrationMode
+   Volume(_BUS_MusicConcentrationMode, 0.2)
+   
+   // SpecialMusic
+   Volume(_BUS_SpecialMusic, 0.2)
+   
+   // SpecialSound
+   Volume(_BUS_SpecialSound, 0.5)
+   LowPassFilter(_BUS_SpecialSound, 1.0, 1.0, 1.0, 1.0)   
+   
+   // GUI
+   Volume(_BUS_GUI, 1.0)
+   
+   // QuestDialog
+   Volume(_BUS_QuestDialog, 1.0)
+   
+   // LoudSound
+   Volume(_BUS_LoudSound, 0.3)
+   LowPassFilter(_BUS_LoudSound, 1.0, 0.2, 1.0, 1.0)
+   
+   // NightHordes
+   Volume(_BUS_NightHorde, 1.0)
+   LowPassFilter(_BUS_NightHorde, 1.0, 1.0, 1.0, 1.0)
+   
+   // Ambiences
+   Volume(_BUS_Ambiences, 0.4)
+   LowPassFilter(_BUS_Ambiences, 1.0, 0.4, 1.0, 1.0)
+   
+   
+   FadeIn(4.0)
+   FadeOut(3.0)
+}
+
+
+AudioEffect("Night")
+{
+   Priority(13)
+  
+   // Sound
+   Volume(_BUS_Sound, 0.6)
+   LowPassFilter(_BUS_Sound, 1.0, 1.0, 1.0, 1.0)
+   
+   // SpecialSound
+   Volume(_BUS_SpecialSound, 0.7)
+   
+   Volume(_BUS_LoudSound, 0.7)
+
+   FadeIn(3.5)
+   FadeOut(4.5)
+}
+
+
+AudioEffect("NightHordeSenseBTZ")
+{
+   Priority(12)
+   
+   // Sound
+   Volume(_BUS_Sound, 0.5)
+   LowPassFilter(_BUS_Sound, 1.0, 0.2, 1.0, 1.0)
+   
+   // Music
+   //Volume(_BUS_Music, 0.3)
+   //LowPassFilter(_BUS_Music, 1.0, 0.3, 1.0, 1.0)
+   
+   // Speech
+   Volume(_BUS_Speech, 1.0)
+   
+   // SpeechPlayer
+   Volume(_BUS_SpeechPlayer, 0.5)
+   LowPassFilter(_BUS_SoundPlayer, 1.0, 0.2, 1.0, 1.0)
+   
+   // SoundPlayer
+   Volume(_BUS_SoundPlayer, 1.0)
+   LowPassFilter(_BUS_SoundPlayer, 1.0, 0.2, 1.0, 1.0)
+   
+   // MusicConcentrationMode
+   Volume(_BUS_MusicConcentrationMode, 0.5)
+   
+   // SpecialMusic
+   Volume(_BUS_SpecialMusic, 0.5)
+   
+   // SpecialSound
+   Volume(_BUS_SpecialSound, 0.5) 
+   LowPassFilter(_BUS_SpecialSound, 1.0, 0.2, 1.0, 1.0)
+   
+   // GUI
+   Volume(_BUS_GUI, 0.3)
+   
+   // QuestDialog
+   Volume(_BUS_QuestDialog, 0.5)
+   
+   // LoudSound
+   Volume(_BUS_LoudSound, 1.0)
+   
+   // NightHordes
+   Volume(_BUS_NightHorde, 0.5)
+   LowPassFilter(_BUS_NightHorde, 1.0, 0.2, 1.0, 1.0)
+   
+   // Ambiences
+   Volume(_BUS_Ambiences, 0.5)
+   LowPassFilter(_BUS_Ambiences, 1.0, 0.2, 1.0, 1.0)
+   
+   // Sound
+   LowPassFilter(_BUS_Sound, 1.0, 0.1, 1.0, 1.0)
+   Volume(_BUS_Sound, 0.0)
+   
+    // VolatileSound
+   LowPassFilter(_BUS_NightHorde, 1.0, 1.0, 2.0, 1.0)
+   Volume(_BUS_NightHorde, 0.0)
+   
+   FadeIn(0.7)
+   FadeOut(3.0)
+}
+
+
+AudioEffect("Interior")
+{
+   Priority(1)
+
+   FadeIn(3.5)
+   FadeOut(4.5)
+}
+
+
+AudioEffect ("SlowMotion")
+{
+   Priority(11)
+
+   FadeIn(0.4)
+   FadeOut(2.0)
+   
+   //LowPassFilter(_BUS_Sound, 1.0, 0.5, 1.0, 1.0)
+   Volume(_BUS_Sound, 0.0)
+   
+   //LowPassFilter(_BUS_Speech, 1.0, 0.5, 1.0, 1.0)
+   Volume(_BUS_Speech, 0.0)
+   
+   //LowPassFilter(_BUS_SpeechPlayer, 1.0, 0.5, 1.0, 1.0)
+   //Volume(_BUS_SpeechPlayer, 1.0)
+   
+   //LowPassFilter(_BUS_SoundPlayer, 1.0, 0.5, 1.0, 1.0)
+   Volume(_BUS_SoundPlayer, 0.0)
+   
+   //LowPassFilter(_BUS_SpecialSound, 1.0, 0.5, 1.0, 1.0)
+   //Volume(_BUS_SpecialSound, 1.0)
+   
+   //LowPassFilter(_BUS_LoudSound, 1.0, 0.5, 1.0, 1.0)
+   
+   //LowPassFilter(_BUS_NightHorde, 1.0, 0.7, 1.0, 1.0)
+   
+   //LowPassFilter(_BUS_Ambiences, 1.0, 0.5, 1.0, 1.0)
+   Volume(_BUS_Ambiences, 0.0)
+   
+   GlobalFrequency(0.65)
+}
+
+
+AudioEffect("Fade")
+{
+   Priority(55)
+   // sound
+   Volume(_BUS_Sound, 0.0)
+   // music
+   Volume(_BUS_Music, 0.0)
+   // speech
+   Volume(_BUS_Speech, 0.0)
+   // speech player
+   Volume(_BUS_SpeechPlayer, 0.0)
+   // sound player
+   Volume(_BUS_SoundPlayer, 0.0)
+   // music c mode
+   // Volume(_BUS_MusicConcentrationMode, 0.0)
+   // special music
+   Volume(_BUS_SpecialMusic, 0.0)
+   // special sound
+   Volume(_BUS_SpecialSound, 0.0)
+   // UI
+   Volume(_BUS_GUI, 0.0)
+   // Radio
+   Volume(_BUS_RadioDialog, 0.0)
+   // speech coop
+   Volume(_BUS_QuestDialog, 0.0)
+   // loud sound
+   Volume(_BUS_LoudSound, 0.0)
+   // night horde
+   Volume(_BUS_NightHorde, 0.0)
+   // ambiences
+   Volume(_BUS_Ambiences, 0.0)
+   
+   FadeIn(0.3)
+   FadeOut(0.5)
+   
+}
+
+
+AudioEffect("DeathScreen")
+{
+   Priority(56)
+   // sound
+   Volume(_BUS_Sound, 0.0)
+   // music
+   Volume(_BUS_Music, 0.0)
+   // speech
+   Volume(_BUS_Speech, 0.0)
+   // speech player
+   Volume(_BUS_SpeechPlayer, 0.0)
+   // sound player
+   Volume(_BUS_SoundPlayer, 0.0)
+   // music c mode
+   //Volume(_BUS_MusicConcentrationMode, 0.0)
+   // special music
+   Volume(_BUS_SpecialMusic, 0.0)
+   // special sound
+   Volume(_BUS_SpecialSound, 0.0)
+   // UI
+   Volume(_BUS_GUI, 0.0)
+   // Radio
+   // Volume(_BUS_RadioDialog, 0.0)
+   // speech coop
+   // Volume(_BUS_QuestDialog, 0.0)
+   // loud sound
+   Volume(_BUS_LoudSound, 0.0)
+   // night horde
+   Volume(_BUS_NightHorde, 0.0)
+   // ambiences
+   Volume(_BUS_Ambiences, 0.0)
+   
+   FadeIn(0.3)
+   FadeOut(0.5)
+}
+
+AudioEffect ("DuringRadioDialog")
+{
+   Priority(51)
+
+   FadeIn(0.5)
+   FadeOut(1.0)
+   
+   Volume(_BUS_Sound, 0.5)
+   LowPassFilter(_BUS_Sound, 1.0, 0.9, 1.0, 1.0)
+   
+   Volume(_BUS_Music, 0.9)
+   
+   Volume(_BUS_Speech, 0.2)
+   LowPassFilter(_BUS_Speech, 1.0, 0.5, 1.0, 1.0)
+   
+   Volume(_BUS_SpeechPlayer, 0.0)
+   
+   Volume(_BUS_SoundPlayer, 0.8)
+   LowPassFilter(_BUS_SoundPlayer, 1.0, 0.9, 1.0, 1.0)
+   
+   Volume(_BUS_MusicConcentrationMode, 1.0)
+   LowPassFilter(_BUS_MusicConcentrationMode, 1.0, 1.0, 1.0, 1.0)
+   
+   Volume(_BUS_SpecialMusic, 1.0)
+   LowPassFilter(_BUS_SpecialMusic, 1.0, 1.0, 1.0, 1.0)
+   
+   Volume(_BUS_SpecialSound, 0.8)
+   LowPassFilter(_BUS_SpecialSound, 1.0, 0.9, 1.0, 1.0)
+
+   Volume(_BUS_GUI, 0.5)
+   
+   Volume(_BUS_LoudSound, 0.6)
+   LowPassFilter(_BUS_LoudSound, 1.0, 0.9, 1.0, 1.0)
+   
+   Volume(_BUS_NightHorde, 0.8)
+   LowPassFilter(_BUS_NightHorde, 1.0, 0.9, 1.0, 1.0)
+   
+   Volume(_BUS_Ambiences, 0.7)
+   LowPassFilter(_BUS_Ambiences, 1.0, 0.99, 1.0, 1.0)
+}
+
+AudioEffect ("DuringRadioDialogInBuggy")
+{
+   Priority(52)
+
+   FadeIn(0.5)
+   FadeOut(1.0)
+   
+   Volume(_BUS_Sound, 0.5)
+   LowPassFilter(_BUS_Sound, 1.0, 0.9, 1.0, 1.0)
+   
+   //Volume(_BUS_Music, 0.9)
+   
+   Volume(_BUS_Speech, 0.2)
+   LowPassFilter(_BUS_Speech, 1.0, 0.5, 1.0, 1.0)
+   
+   Volume(_BUS_SpeechPlayer, 0.0)
+   
+   Volume(_BUS_SoundPlayer, 0.5)
+   LowPassFilter(_BUS_SoundPlayer, 1.0, 0.9, 1.0, 1.0)
+   
+   Volume(_BUS_MusicConcentrationMode, 1.0)
+   LowPassFilter(_BUS_MusicConcentrationMode, 1.0, 1.0, 1.0, 1.0)
+   
+   Volume(_BUS_SpecialMusic, 1.0)
+   LowPassFilter(_BUS_SpecialMusic, 1.0, 1.0, 1.0, 1.0)
+   
+   Volume(_BUS_SpecialSound, 0.6)
+   LowPassFilter(_BUS_SpecialSound, 1.0, 0.7, 1.0, 1.0)
+
+   //Volume(_BUS_GUI, 0.5)
+   
+   Volume(_BUS_LoudSound, 0.5)
+   LowPassFilter(_BUS_LoudSound, 1.0, 0.8, 1.0, 1.0)
+   
+   Volume(_BUS_NightHorde, 0.7)
+   LowPassFilter(_BUS_NightHorde, 1.0, 0.8, 1.0, 1.0)
+   
+   Volume(_BUS_Ambiences, 0.4)
+   LowPassFilter(_BUS_Ambiences, 1.0, 0.99, 1.0, 1.0)
+}
+
+
+AudioEffect ("Infection")
+{
+   Priority(53)
+
+   FadeIn(0.5)
+   FadeOut(0.5)
+   
+   LowPassFilter(_BUS_Sound, 1.0, 0.13, 1.0, 1.0)
+   
+   LowPassFilter(_BUS_Speech, 1.0, 0.13, 1.0, 1.0)
+   
+   LowPassFilter(_BUS_MusicConcentrationMode, 1.0, 0.13, 1.0, 1.0)
+   
+   LowPassFilter(_BUS_SpecialMusic, 1.0, 0.13, 1.0, 1.0)
+   
+   LowPassFilter(_BUS_SpecialSound, 1.0, 0.13, 1.0, 1.0)
+    
+   LowPassFilter(_BUS_LoudSound, 1.0, 0.14, 1.0, 1.0)
+   
+   LowPassFilter(_BUS_NightHorde, 1.0, 0.14, 1.0, 1.0)
+   
+   LowPassFilter(_BUS_Ambiences, 1.0, 0.13, 1.0, 1.0)
+}
+
+
+AudioEffect ("GamescomSlowmo")
+{
+   Priority(100)
+
+   FadeIn(0.4)
+   FadeOut(2.0)
+   
+   //LowPassFilter(_BUS_Sound, 1.0, 0.5, 1.0, 1.0)
+   Volume(_BUS_Sound, 0.0)
+   
+   //LowPassFilter(_BUS_Speech, 1.0, 0.5, 1.0, 1.0)
+   Volume(_BUS_Speech, 0.0)
+   
+   //LowPassFilter(_BUS_SpeechPlayer, 1.0, 0.5, 1.0, 1.0)
+   //Volume(_BUS_SpeechPlayer, 1.0)
+   
+   //LowPassFilter(_BUS_SoundPlayer, 1.0, 0.5, 1.0, 1.0)
+   Volume(_BUS_SoundPlayer, 0.0)
+   
+   //LowPassFilter(_BUS_SpecialSound, 1.0, 0.5, 1.0, 1.0)
+   //Volume(_BUS_SpecialSound, 1.0)
+   
+   //LowPassFilter(_BUS_LoudSound, 1.0, 0.5, 1.0, 1.0)
+   
+   //LowPassFilter(_BUS_NightHorde, 1.0, 0.7, 1.0, 1.0)
+   
+   //LowPassFilter(_BUS_Ambiences, 1.0, 0.5, 1.0, 1.0)
+   Volume(_BUS_Ambiences, 0.0)
+   
+   GlobalFrequency(0.2)
+}
+
+AudioEffect("TimeFreezingTutorial") 
+{
+    Priority(900)
+	
+   // sound
+   Volume(_BUS_Sound, 0.0)
+   
+   // music
+   Volume(_BUS_Music, 0.0)
+   
+   // speech
+   Volume(_BUS_Speech, 0.0)
+   
+   // speech player
+   Volume(_BUS_SpeechPlayer, 0.0)
+   
+   // sound player
+   Volume(_BUS_SoundPlayer, 0.0)
+   
+   // music c mode
+   Volume(_BUS_MusicConcentrationMode, 0.0)
+   
+   // special music
+   Volume(_BUS_SpecialMusic, 0.0)
+   
+   // special sound
+   Volume(_BUS_SpecialSound, 0.0)
+   
+   // UI
+   // Volume(_BUS_GUI, 0.0)
+   
+   // Radio
+   Volume(_BUS_RadioDialog, 0.0)
+   
+   // speech coop
+   Volume(_BUS_QuestDialog, 0.0)
+   
+   // loud sound
+   Volume(_BUS_LoudSound, 0.0)
+   
+   // night horde
+   Volume(_BUS_NightHorde, 0.0)
+   
+   // ambiences
+   Volume(_BUS_Ambiences, 0.0)
+   
+   FadeIn(0.5)
+   FadeOut(0.5)
+}
+
+AudioEffect("PursuitInCar")
+{
+   Priority(47)
+   
+   Volume(_BUS_Sound, 0.6)
+   
+   Volume(_BUS_SoundPlayer, 0.6)
+   
+   Volume(_BUS_SpecialSound, 0.6)
+   
+   Volume(_BUS_Ambiences, 0.6)
+   
+   
+   FadeIn(2.0)
+   FadeOut(2.5)
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//========================================================================================
+
+// $_BUS_Sound              	( i, 0)        1
+// $_BUS_Music              	( i, 1)        2
+// $_BUS_Speech             	( i, 2)        4
+// $_BUS_SpeechPlayer	    	( i, 3)        8
+// $_BUS_SoundPlayer        	( i, 4)       16
+// $_BUS_MusicConcentrationMode ( i, 5)       32        
+// $_BUS_SpecialMusic       	( i, 6)       64
+// $_BUS_SpecialSound		    ( i, 7)      128       
+// $_BUS_GUI                	( i, 8)      256
+// $_BUS_RadioDialog          	( i, 9)      512
+// $_BUS_QuestDialog           	( i, 10)    1024
+// $_BUS_LoudSound           	( i, 11)    2048
+// $_BUS_NightHorde             ( i, 12)    4096
+// $_BUS_Ambiences            	( i, 13)    8192
+
+$_BUSMASK_DEFAULT     (i, 16061) // 1 + 4 + 8 + 16 + 32 + 128 + 512 + 1024 + 2048 + 4096 + 8192
+$_BUSMASK_NO_AI       (i, 14937) // 1 + 8 + 16 + 64  + 512 + 2048 + 4096 + 8192
+$_BUSMASK_NO_AMBIENCE (i, 07837) // 1 + 4 + 8 + 16 + 128 + 512 + 1024 + 2048 + 4096 
+
+
+$_TAIL_Default       (i, 0)
+$_TAIL_Room          (i, 1)
+$_TAIL_Hall          (i, 2)
+$_TAIL_NearBuildings (i, 3)
+$_TAIL_OpenArea      (i, 4)
+
+// $_REVERB_Default            (i, 0)
+// $_REVERB_Generic            (i, 1)
+// $_REVERB_PaddedCell         (i, 2)
+// $_REVERB_Room               (i, 3) 
+// $_REVERB_Bathroom           (i, 4)
+// $_REVERB_LivingRoom         (i, 5)
+// $_REVERB_StoneRoom          (i, 6)
+// $_REVERB_Auditorium         (i, 7)
+// $_REVERB_ConcertHall        (i, 8)
+// $_REVERB_Cave               (i, 9) 
+// $_REVERB_Arena              (i, 10)
+// $_REVERB_Hangar             (i, 11)
+// $_REVERB_CarpetedHallway    (i, 12) //klatka schodowa
+// $_REVERB_Hallway            (i, 13)
+// $_REVERB_StoneCorridor      (i, 14)
+// $_REVERB_Alley              (i, 15)
+// $_REVERB_Forest             (i, 16)
+// $_REVERB_City               (i, 17)
+// $_REVERB_Mountains          (i, 18)
+// $_REVERB_Quarry             (i, 19)
+// $_REVERB_Plain              (i, 20)
+// $_REVERB_ParkingLot         (i, 21)
+// $_REVERB_Sewerpipe          (i, 22) 
+// $_REVERB_Underwater         (i, 23)
+// $_REVERB_SmallRoom          (i, 24)
+// $_REVERB_MediumRoom         (i, 25)
+// $_REVERB_LargeRoom          (i, 26)
+// $_REVERB_MediumHall         (i, 27)
+// $_REVERB_LargeHall          (i, 28)
+// $_REVERB_Plate              (i, 29) //metalowe kontenery
+// $_REVERB_Custom0            (i, 30) //tunel
+// $_REVERB_Custom1            (i, 31) //dziedziniec
+// $_REVERB_Custom2            (i, 32) //tir
+// $_REVERB_Custom3            (i, 33) //wagon
+// $_REVERB_Custom4            (i, 34) //dream psycho
+
+AcusticRoomPreset("AirVent")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(0.3)
+    ReverbPreset(24)
+    ReverbWetDryMix(0.3)
+    TailPreset(_TAIL_Room)
+}
+
+AcusticRoomPreset("Arena")
+{
+    BusMask(_BUSMASK_DEFAULT)
+    // Bus Delay Feedback WetDryMix
+    Echo( 2, 500, 0.02, 0.1)
+    Echo( 3, 500, 0.02, 0.15)
+    FadeDistance(2.0)
+    ReverbPreset(10)
+    ReverbWetDryMix(0.9)
+	TailPreset(_TAIL_NearBuildings)
+}
+
+AcusticRoomPreset("Backalleys")
+{
+    BusMask(_BUSMASK_DEFAULT)
+    // Bus Delay Feedback WetDryMix
+    Echo( 2, 300, 0.02, 0.1)
+    Echo( 3, 300, 0.02, 0.1)
+    FadeDistance(1.0)
+    ReverbPreset(15)
+    ReverbWetDryMix(0.5)
+	TailPreset(_TAIL_NearBuildings)
+}
+
+AcusticRoomPreset("Balcony")
+{
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(1.0)
+    ReverbPreset(14)
+    ReverbWetDryMix(0.5)
+    TailPreset(_TAIL_NearBuildings)
+}
+
+AcusticRoomPreset("Basement")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(1.0)
+    ReverbPreset(14)
+    ReverbWetDryMix(0.5)
+    TailPreset(_TAIL_Room)
+}
+
+AcusticRoomPreset("Bathroom")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(1.0)
+    ReverbPreset(24)
+    ReverbWetDryMix(0.4)
+    TailPreset(_TAIL_Room)
+}
+
+AcusticRoomPreset("Cave")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(1.0)
+    ReverbPreset(8)
+    ReverbWetDryMix(1.4)
+    TailPreset(_TAIL_Hall)
+}
+
+AcusticRoomPreset("Cave_Reverberant")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(1.0)
+    ReverbPreset(8)
+    ReverbWetDryMix(2.0)
+	// Bus Delay Feedback WetDryMix
+    Echo(3, 700, 0.013, 0.1)
+    TailPreset(_TAIL_Hall)
+}
+
+AcusticRoomPreset("Cave_Big")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(1.0)
+    ReverbPreset(10)
+    ReverbWetDryMix(1.4)
+	// Bus Delay Feedback WetDryMix
+    Echo(3, 700, 0.013, 0.08)
+    TailPreset(_TAIL_Hall)
+}
+
+AcusticRoomPreset("City")
+{
+    BusMask(_BUSMASK_DEFAULT)
+    // Bus Delay Feedback WetDryMix
+    Echo(2, 320, 0.013, 0.03)
+    Echo(3, 320, 0.013, 0.025)
+    FadeDistance(1.0)
+    ReverbPreset(17)
+    ReverbWetDryMix(0.6)
+    TailPreset(_TAIL_NearBuildings)
+}
+
+AcusticRoomPreset("Corridors")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(1.0)
+    ReverbPreset(14)
+    ReverbWetDryMix(0.6)
+    TailPreset(_TAIL_Room)
+}
+
+AcusticRoomPreset("Courtyard")
+{
+    BusMask(_BUSMASK_DEFAULT)
+    // Bus Delay Feedback WetDryMix
+	Echo(2, 350, 0.015, 0.05)
+    Echo(3, 350, 0.015, 0.08)
+    FadeDistance(2.0)
+    ReverbPreset(7)
+    ReverbWetDryMix(0.5)
+    TailPreset(_TAIL_NearBuildings)
+}
+
+AcusticRoomPreset("Dream")
+{
+    BusMask(_BUSMASK_DEFAULT)
+    // Bus Delay Feedback WetDryMix
+	Echo( 2, 400, 0.1, 0.15)
+    Echo( 3, 400, 0.15, 0.15)
+	Echo( 10, 400, 0.15, 0.15)
+    FadeDistance(1.0)
+    ReverbPreset(10)
+    ReverbWetDryMix(1.0)
+    TailPreset(_TAIL_OpenArea)
+}
+
+AcusticRoomPreset("Elevator")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(0.3)
+    ReverbPreset(24)
+    ReverbWetDryMix(0.9)
+    TailPreset(_TAIL_Room)
+}
+
+AcusticRoomPreset("Hall_Large")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(1.0)
+    ReverbPreset(14)
+    ReverbWetDryMix(0.6)
+    TailPreset(_TAIL_Hall)
+}
+
+AcusticRoomPreset("Hall_Medium")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(1.0)
+    ReverbPreset(14)
+    ReverbWetDryMix(0.6)
+    TailPreset(_TAIL_Room)
+}
+
+AcusticRoomPreset("Hangar")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    // Bus Delay Feedback WetDryMix
+    //Echo(2, 400, 0.02, 0.1)
+    //Echo(3, 400, 0.02, 0.1)
+    FadeDistance(2.0)
+    ReverbPreset(11)
+    ReverbWetDryMix(0.75)
+    TailPreset(_TAIL_Hall)
+}
+
+AcusticRoomPreset("Highway")
+{
+    BusMask(_BUSMASK_DEFAULT)
+    // Bus Delay Feedback WetDryMix
+    Echo(2, 500, 0.02, 0.1)
+	Echo(3, 500, 0.02, 0.1)
+    FadeDistance(1.0)
+    ReverbPreset(21)
+    ReverbWetDryMix(0.5)
+    TailPreset(_TAIL_OpenArea)
+}
+
+AcusticRoomPreset("Mountains")
+{
+    BusMask(_BUSMASK_DEFAULT)
+    // Bus Delay Feedback WetDryMix
+	Echo(3, 500, 0.2, 0.1)
+    FadeDistance(1.0)
+    ReverbPreset(19)
+    ReverbWetDryMix(0.3)
+    TailPreset(_TAIL_OpenArea)
+}
+
+AcusticRoomPreset("MetalContainer")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(0.3)
+    ReverbPreset(4)
+    ReverbWetDryMix(0.5)
+    TailPreset(_TAIL_Room)
+}
+
+AcusticRoomPreset("OpenArea")
+{
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(1.0)
+    ReverbPreset(20)
+	Echo(3, 650, 0.02, 0.03)
+    ReverbWetDryMix(10.0)
+    TailPreset(_TAIL_OpenArea)
+}
+
+AcusticRoomPreset("ParkingLot")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(1.0)
+    ReverbPreset(8)
+    ReverbWetDryMix(0.7)
+    TailPreset(_TAIL_Hall)
+}
+
+AcusticRoomPreset("Passage_Concrete")
+{
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(1.0)
+    ReverbPreset(14)
+    ReverbWetDryMix(0.6)
+    TailPreset(_TAIL_NearBuildings)
+}
+
+AcusticRoomPreset("Patio")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    // Bus Delay Feedback WetDryMix
+	Echo(2, 350, 0.015, 0.05)
+    Echo(3, 350, 0.015, 0.08)
+    FadeDistance(2.0)
+    ReverbPreset(10)
+    ReverbWetDryMix(0.7)
+    TailPreset(_TAIL_NearBuildings)
+}
+
+AcusticRoomPreset("Pipe_Metal")
+{
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(1.0)
+    ReverbPreset(22)
+    ReverbWetDryMix(0.7)
+    TailPreset(_TAIL_Room)
+}
+
+AcusticRoomPreset("Ravine")
+{
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(1.0)
+    ReverbPreset(20)
+    ReverbWetDryMix(1.0)
+    TailPreset(_TAIL_NearBuildings)
+}
+
+AcusticRoomPreset("RockyCorridor")
+{
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(1.0)
+    ReverbPreset(14)
+    ReverbWetDryMix(0.8)
+    TailPreset(_TAIL_NearBuildings)
+}
+
+AcusticRoomPreset("Room")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(0.3)
+    ReverbPreset(3)
+    ReverbWetDryMix(0.7)
+    TailPreset(_TAIL_Room)
+}
+
+AcusticRoomPreset("Room_Medium")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(0.5)
+    ReverbPreset(25)
+    ReverbWetDryMix(0.6)
+    TailPreset(_TAIL_Room)
+}
+
+AcusticRoomPreset("Room_Big")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(1.0)
+    ReverbPreset(26)
+    ReverbWetDryMix(0.7)
+    TailPreset(_TAIL_Room)
+}
+
+AcusticRoomPreset("Room_Concrete_Small")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(1.0)
+    ReverbPreset(24)
+    ReverbWetDryMix(0.4)
+    TailPreset(_TAIL_Room)
+}
+
+AcusticRoomPreset("Room_Concrete_Medium")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(1.0)
+    ReverbPreset(25)
+    ReverbWetDryMix(0.8)
+    TailPreset(_TAIL_Room)
+}
+
+AcusticRoomPreset("Room_Concrete_Big")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(1.0)
+    ReverbPreset(14)
+    ReverbWetDryMix(1.0)
+    TailPreset(_TAIL_Room)
+}
+
+AcusticRoomPreset("Room_Soft")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(1.0)
+    ReverbPreset(3)
+    ReverbWetDryMix(0.5)
+    TailPreset(_TAIL_Room)
+}
+
+AcusticRoomPreset("Sewers_Corridor")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(1.0)
+    ReverbPreset(14)
+    ReverbWetDryMix(0.8)
+    TailPreset(_TAIL_Room)
+}
+
+AcusticRoomPreset("Shaft")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(0.5)
+    ReverbPreset(14)
+    ReverbWetDryMix(0.8)
+    TailPreset(_TAIL_Room)
+}
+
+AcusticRoomPreset("Stadium")
+{
+    BusMask(_BUSMASK_DEFAULT)
+    // Bus Delay Feedback WetDryMix
+	Echo(3, 550, 0.25, 0.11)
+    FadeDistance(1.0)
+    ReverbPreset(10)
+    ReverbWetDryMix(0.8)
+    TailPreset(_TAIL_Hall)
+}
+
+AcusticRoomPreset("Staircase")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(1.0)
+    ReverbPreset(14)
+    ReverbWetDryMix(0.6)
+    TailPreset(_TAIL_Room)
+}
+
+AcusticRoomPreset("Tir")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(0.3)
+    ReverbPreset(4)
+    ReverbWetDryMix(0.3)
+    TailPreset(_TAIL_Room)
+}
+
+AcusticRoomPreset("Tunnel")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(3.0)
+    ReverbPreset(14)
+    ReverbWetDryMix(0.8)
+    TailPreset(_TAIL_Hall)
+}
+
+AcusticRoomPreset("UnderTheBridge")
+{
+    BusMask(_BUSMASK_DEFAULT)
+	Echo(3, 500, 0.02, 0.10)
+    FadeDistance(3.0)
+    ReverbPreset(15)
+    ReverbWetDryMix(0.5)
+    TailPreset(_TAIL_OpenArea)
+}
+
+AcusticRoomPreset("Underwater")
+{
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(0.0)
+    ReverbPreset(27)
+    ReverbWetDryMix(0.0)
+    TailPreset(_TAIL_OpenArea)
+}
+
+AcusticRoomPreset("Van")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(0.3)
+    ReverbPreset(24)
+    ReverbWetDryMix(0.3)
+    TailPreset(_TAIL_Room)
+}
+
+AcusticRoomPreset("Wagon")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(0.3)
+    ReverbPreset(4)
+    ReverbWetDryMix(0.4)
+    TailPreset(_TAIL_Room)
+}
+
+AcusticRoomPreset("DZ_Apartments_Chopin_FAR")
+{
+    Interior()
+	BusMask(8192)
+    // Bus Delay Feedback WetDryMix
+	Echo( 13, 400, 0.15, 0.25)
+    FadeDistance(1.0)
+    ReverbPreset(34)
+    ReverbWetDryMix(0.75)
+    TailPreset(_TAIL_Room)
+}
+
+AcusticRoomPreset("DZ_Apartments_Chopin_MIDDLE")
+{
+    Interior()
+	BusMask(8192)
+    // Bus Delay Feedback WetDryMix
+    Echo( 13, 400, 0.15, 0.2)
+    FadeDistance(1.0)
+    ReverbPreset(34)
+    ReverbWetDryMix(0.8)
+    TailPreset(_TAIL_Room)
+}
+
+AcusticRoomPreset("DZ_Apartments_Chopin_CLOSE")
+{
+	Interior()
+	BusMask(8192)
+	Echo( 13, 400, 0.1, 0.2)
+    FadeDistance(1.0)
+    ReverbPreset(34)
+    ReverbWetDryMix(1.0)
+    TailPreset(_TAIL_Room)
+}
+
+AcusticRoomPreset("Industrial")
+{
+    BusMask(_BUSMASK_DEFAULT)
+	// Bus Delay Feedback WetDryMix
+	Echo(3, 200, 0.3, 0.1)
+    FadeDistance(1.0)
+    ReverbPreset(15)
+    ReverbWetDryMix(0.8)
+    TailPreset(_TAIL_OpenArea)
+}
+
+AcusticRoomPreset("Wacky_Reverb")
+{
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(1.0)
+    ReverbPreset(30)
+    ReverbWetDryMix(10.0)
+}
+
+AcusticRoomPreset("Temple")
+{
+    BusMask(_BUSMASK_DEFAULT)
+	// Bus Delay Feedback WetDryMix
+	Echo(3, 400, 0.1, 0.1)
+    FadeDistance(1.0)
+    ReverbPreset(19)
+    ReverbWetDryMix(0.3)
+    TailPreset(_TAIL_OpenArea)
+}
+
+AcusticRoomPreset("Lighthouse")
+{
+    Interior()
+    BusMask(_BUSMASK_DEFAULT)
+    FadeDistance(1.0)
+    ReverbPreset(4)
+    ReverbWetDryMix(1)
+    TailPreset(_TAIL_Room)
+}
+
+

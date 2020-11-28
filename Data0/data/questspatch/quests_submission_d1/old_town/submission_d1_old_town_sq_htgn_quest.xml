@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="old_town"
+     pxsl_line="3">
+    <!-- quest __sq_htgn_hide -parent=Q_Start01 -->
+        <!-- ,hide _ AppearGroup sq_htgn_freq_01::item -->
+        <!-- ,hide _ AppearGroup sq_htgn_freq_02::item -->
+        <!-- ,hide _ AppearGroup sq_htgn_freq_03::item -->
+        <!-- ,hide _ AppearGroup sq_htgn_freq_04::item -->
+        <!--  -->
+        <!--  -->
+        <!--  -->
+    <!--  -->
+    <!-- quest __sq_htgn_workshop -parent=sq_htgn_01 -->
+        <!--  -->
+        <!--  -->
+        <!-- ,enable _ QuestEnableGroup sq_htgn_qeg_01 -->
+        <!-- ,goto _ SensorGoTo sq_htgn_sensorgoto_01 -distance=0 -show=false -->
+        <!-- ,enable _ QuestEnableGroup sq_htgn_alarm_01::item -->
+        <!-- ,enable _ QuestEnableGroup sq_htgn_alarm_02::item -->
+        <!-- ,enable _ QuestEnableGroup sq_htgn_qeg_07 -->
+        <!-- -= ,enable _ AIDeadBodySpawnBoxAuto sq_htgn_deadbody_01 -->
+        <!-- ,wait _ 2 -->
+        <!-- ,enable _ QuestEnableGroup sq_htgn_qeg_05 -->
+            <!--  -->
+        <!--  -->
+            <!--  -->
+        <!--  -->
+        <!--  -->
+        <!-- ,OR _ -->
+            <!-- path -->
+                <!-- ,wait _ 30 -->
+                <!--  -->
+            <!-- path -->
+                <!-- ,use _ InvisibleSwitchDI sq_htgn_is_01 -state=on -show=false -->
+        <!--  -->
+        <!-- ,disable _ QuestEnableGroup sq_htgn_alarm_01::item -->
+        <!-- ,disable _ QuestEnableGroup sq_htgn_alarm_02::item -->
+        <!--  -->
+        <!--  -->
+        <!--  -->
+        <!--  -->
+            <!--  -->
+    <!--  -->
+    <!-- quest __sq_htgn_workshop_enemies -parent=sq_htgn_01 -->
+        <!--  -->
+        <!--  -->
+        <!-- ,goto _ SensorGoTo sq_htgn_sensorgoto_01 -distance=0 -show=false -->
+        <!-- ,wait _ 10 -->
+        <!-- ,enable-multi _ -->
+            <!-- ,o AISpawnBoxNumber sq_htgn_enemy_01 -->
+            <!-- ,o AISpawnBoxNumber sq_htgn_enemy_02 -->
+            <!-- ,o AISpawnBoxNumber sq_htgn_enemy_03 -->
+            <!-- ,o AISpawnBoxNumber sq_htgn_enemy_04 -->
+                <!--  -->
+    <!-- quest __sq_htgn_workshop_enemies1 -parent=sq_htgn_02 -->
+        <!--  -->
+        <!--  -->
+        <!-- ,goto _ Marker sq_htgn_marker_01 -distance=3 -show=false -->
+        <!-- ,wait _ 1 -->
+        <!-- ,enable _ QuestEnableGroup sq_htgn_qeg_06 -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- How To Get Noticed  -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- quest sq_htgn_01 -parent=sq_printingjob03 -glued=false -difficulty=medium -quest_giver=JakeSnapper -reward_set=sq_htgn_01_reward -->
+        <!-- ,talk <<How To Get Noticed - START>> JakeSnapper jakespanner_sq_htgn_USE -follow=jakespanner_sq_htgn_INP -show=false -->
+            <!-- ,debugpos SpawnPoint sp_Loki_Newsroom_Table -->
+        <!-- ,checkpoint _ SpawnPoint sp_Loki_Newsroom_Table -->
+        <!--  -->
+    <!-- quest sq_htgn_02 -parent=sq_htgn_01 -glued=true -->
+        <!-- -= QUEST PHASES -->
+        <!-- ,enable _ SpawnBlocker sq_htgn_spawnblocker_01 -->
+        <!-- ,goto _ SensorGoTo sq_htgn_sensorgoto_01 -distance=0 -->
+        <!-- ,disable _ SpawnBlocker sq_htgn_spawnblocker_01 -->
+        <!-- ,AND _ -= find spray can (temporary paint can) -->
+            <!-- path -->
+                <!-- ,take _ QuestInventoryItemDI sq_htgn_qii_01 -show=false -->
+                    <!-- ,area ZoneBox sq_htgn_qii_01_zonebox -->
+            <!-- path -->
+                <!-- ,take _ QuestInventoryItemDI sq_htgn_qii_02 -show=false -->
+                    <!-- ,area ZoneBox sq_htgn_qii_01_zonebox -->
+            <!-- path -->
+                <!-- ,take _ QuestInventoryItemDI sq_htgn_qii_03 -show=false -->
+                    <!-- ,area ZoneBox sq_htgn_qii_01_zonebox -->
+            <!-- path -->
+                <!-- ,take _ QuestInventoryItemDI sq_htgn_qii_04 -show=false -->
+                    <!-- ,area ZoneBox sq_htgn_qii_01_zonebox -->
+        <!--  -->
+        <!-- ,checkpoint _ SpawnPoint sq_htgn_spawner_01 -->
+        <!--  -->
+    <!-- quest sq_htgn_03 -parent=sq_htgn_02 -glued=true   -->
+        <!-- ,AND <<FIND BILLBOARDS>> -obj=&sq_sq_htgn_OBJ_02& -->
+            <!-- ,debugpos SpawnPoint sq_htgn_spawner_01 -->
+        <!--  -->
+            <!-- path -->
+                <!-- ,goto _ Marker sq_htgn_marker_01 -distance=10 -->
+                <!-- ,enable _ QuestEnableGroup sq_htgn_freq_03::item -->
+                <!-- ,use _ InvisibleSwitchDI sq_htgn_freq_03::item -state=on -->
+                <!-- ,show _ AppearGroup sq_htgn_freq_03::item -->
+                <!-- ,enable _ QuestEnableGroup sq_htgn_freq_03::item1 -->
+                <!-- ,checkpoint _ SpawnPoint sq_htgn_freq_03::item -->
+                <!--  -->
+            <!-- path -->
+                <!-- ,goto _ Marker sq_htgn_marker_02 -distance=10 -->
+                <!-- ,enable _ QuestEnableGroup sq_htgn_freq_04::item -->
+                <!-- ,use _ InvisibleSwitchDI sq_htgn_freq_04::item -state=on -->
+                <!-- ,show _ AppearGroup sq_htgn_freq_04::item -->
+                <!-- ,enable _ QuestEnableGroup sq_htgn_freq_04::item1 -->
+                <!-- -= ,checkpoint _ SpawnPoint sq_htgn_freq_04::item -->
+                <!--  -->
+            <!-- path -->
+                <!-- ,goto _ Marker sq_htgn_marker_03 -distance=10 -->
+                <!-- ,enable _ QuestEnableGroup sq_htgn_freq_02::item -->
+                <!-- ,use _ InvisibleSwitchDI sq_htgn_freq_02::item -state=on -->
+                <!-- ,show _ AppearGroup sq_htgn_freq_02::item -->
+                <!-- ,enable _ QuestEnableGroup sq_htgn_freq_02::item1 -->
+                <!-- -= ,checkpoint _ SpawnPoint sq_htgn_freq_02::item -->
+                <!--  -->
+                <!--  -->
+            <!-- path -->
+                <!-- ,goto _ Marker sq_htgn_marker_04 -distance=10 -->
+                <!-- ,enable _ QuestEnableGroup sq_htgn_freq_01::item -->
+                <!-- ,use _ InvisibleSwitchDI sq_htgn_freq_01::item -state=on -->
+                <!-- ,show _ AppearGroup sq_htgn_freq_01::item -->
+                <!-- ,enable _ QuestEnableGroup sq_htgn_freq_01::item1 -->
+                <!-- ,checkpoint _ SpawnPoint sq_htgn_freq_01::item -->
+        <!-- -obj=&sq_sq_htgn_OBJ_01& -->
+        <!-- ,use _ InvisibleSwitchDI htgn_paint_23::item -state=on -->
+        <!-- ,show _ AppearGroup htgn_paint_23::item -->
+        <!-- ,use _ InvisibleSwitchDI htgn_paint_01::item -state=on -->
+        <!-- ,show _ AppearGroup htgn_paint_01::item -->
+        <!-- ,talk <<How To Get Noticed - END>> JakeSnapper jakespanner_sq_htgn_END -obj=&sq_sq_htgn_OBJ_END& -->
+            <!-- ,debugpos SpawnPoint sp_Loki_Newsroom_Table -->
+        <!-- ,reward _ JakeSnapper -->
+        <!-- ,checkpoint _ SpawnPoint sp_Loki_Newsroom_Table -->
+</QuestsDefinitions>

@@ -1,0 +1,255 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="old_town_int_hotel"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST NAME : Q_FindCamden -->
+    <!-- QUEST INFO : Find Camden -->
+    <!-- COMMENT    :  -->
+    <!-- FROM       : OLD TOWN -->
+    <!-- TO         : OLD TOWN -->
+    <!-- CHAPTER    :  -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- quest EpicVolatile -parent=Q_FindCamden01 -->
+        <!-- ,BLOCK _ -obj=&FindCamden_OBJ_EnterTheHotel& -= <<Enter the Hotel>> -->
+            <!-- ,goto <<Test Hotel>> SpawnPoint EpicVolatile_sp_01 -distance=5 -show=false  -->
+                <!-- ,debugpos SpawnPoint EpicVolatile_sp_01 -->
+            <!--  -->
+        <!-- ,BLOCK _ -obj=&FindCamden_OBJ_FindTheRelic& -= <<Find the Relic>> -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,take _ QuestInventoryItemDI EpicVolatile_Item -show=false -->
+                <!-- -= path -->
+                    <!-- -= ,goto _ SensorGoTo EpicVolatile__02 -show=false -->
+                    <!-- -= ,enable _ AISpawnBoxNumber Volatile_Blister -->
+    <!-- quest Q_FindCamden02 -parent=Q_FindCamden01 -glued=true -->
+        <!-- ,BLOCK _ -obj=&FindCamden_OBJ_LookForCamdenInReception& -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- -= CHECKPOINT! -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                    <!-- ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Entrance -->
+                    <!-- -= CHECKPOINT! -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-                     -->
+                <!-- path -->
+                    <!-- ,goto <<Strange Guests - START>> SpawnPoint sp_FindCamden_Hotel_Entrance -distance=10 -->
+                        <!-- ,debugpos SpawnPoint sp_FindCamden_Hotel_Entrance -->
+                <!-- path -->
+                    <!-- ,enable _ QuestEnableGroup FindCamden_LampFloor1::QEG -->
+                    <!-- ,goto _ SpawnPoint sp_FindCamden_Hotel_Entrance -distance=-2 -show=false -->
+                    <!-- ,radio-dialog _ voice2d Player_FindCamden_99DLG01 -->
+                <!-- path -->
+                    <!-- ,use _ PhysicalSwitchDI is_FindCamden_ReceptionComputer -state=on -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,wait _ 0.4 -->
+                    <!-- ,enable _ ObjectSequenceController FindCamden_Hotel_Computer::IT_Keyboard_FindCamden_Search_Hotel -->
+                <!-- path -->
+                    <!-- ,wait _ 5 -->
+            <!--  -->
+            <!-- -= ,radio-dialog _ voice2d Murat_FindCamden_98DLG01 -= ,radio-dialog _ voice2d Player_FindCamden_09DLG01 -->
+            <!--  -->
+            <!-- -= CHECKPOINT! -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+            <!-- ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Entrance -->
+            <!-- -= CHECKPOINT! -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+            <!--  -->
+        <!-- ,BLOCK _ -obj=&FindCamden_OBJ_FindKeyTo306& -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,radio-dialog _ voice2d Murat_FindCamden_98DLG01 -= -auto=true -show=false         -->
+                <!-- path -->
+                    <!-- ,cnd-quest-started _ __Q_FindCamden02_KeyToRoom306 -finished=true -->
+                        <!-- ,area ZoneBox zone_FindCamden_Hotel_SecurityRoom -->
+            <!-- -= CHECKPOINT! -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-     -->
+            <!-- ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Entrance -->
+            <!-- -= CHECKPOINT! -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+        <!--  -->
+        <!-- ,BLOCK _ -obj=&FindCamden_OBJ_FindRoom306& -->
+            <!-- ,goto _ SensorGoTo sgt_FindCamden_Hotel_Room306 -distance=0 -show=false -->
+                <!-- -= ,area ZoneBox zone_FindCamden_Hotel_Hotel -->
+                <!-- -=  -->
+            <!-- -= CHECKPOINT! -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-     -->
+            <!-- ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Room306 -->
+            <!-- -= CHECKPOINT! -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+            <!--  -->
+        <!-- ,BLOCK _ -obj=&FindCamden_OBJ_FindCluesAboutCamden& -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- -= ,use _ DoorDI door_FindCamden_Hotel_Room306 -state=opened -->
+                    <!-- ,enable _ QuestInventoryItemDI item_FindCamden_Notes -->
+                    <!-- -= ,take _ NoteTrigger item_FindCamden_Notes -show=false -=  -->
+                    <!-- ,take _ QuestInventoryItemDI item_FindCamden_Notes -show=false -->
+                        <!-- ,area ZoneBox zone_FindCamden_Hotel_Room306 -->
+                    <!-- ,talk _ voice2d Player_FindCamden_96DLG01 -auto=true -show=false     -->
+                <!-- path -->
+                    <!-- ,goto _ SensorGoTo sgt_FindCamden_Room306 -distance=0 -show=false -->
+                    <!-- ,wait _ 2 -->
+                    <!-- ,radio-dialog _ voice2d Player_FindCamden_97DLG01 -= ,radio-dialog _ voice2d Player_FindCamden_09DLG04 -->
+            <!-- ,hide _ ModelObject item_Key_Room_203 -->
+            <!-- ,wait _ 2 -->
+            <!-- ,radio-dialog _ voice2d Player_FindCamden_95DLG01 -= -auto=true -show=false -->
+            <!-- -= ,radio-dialog _ voice2d Player_FindCamden_95DLG01 -= ,radio-dialog _ voice2d Player_FindCamden_11DLG01 -->
+            <!-- -= CHECKPOINT! -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+            <!-- ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Room306 -->
+            <!-- -= CHECKPOINT! -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+        <!--  -->
+        <!-- ,BLOCK <<Find Camden - Hotel - Check room 203>> -obj=&FindCamden_OBJ_CheckRoom203& -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,use <<FIND CAMDEN - Find room 203>> PhysicalSwitchDI FindCamden_Hotel_KeyRoom203_CardReader::Switch -state=on -show=false -->
+                        <!-- -= ,area ZoneBox zone_FindCamden_Hotel_Hotel -->
+                <!-- path -->
+                    <!-- ,goto _ SensorGoTo FindCamden_EnableZombiesOn2thFloor -show=false -distance=0 -->
+                    <!-- ,enable _ QuestEnableGroup FindCamden_EnableZombiesOn2thFloor -->
+            <!-- ,set _ DoorDI door_FindCamden_Hotel_Room203 -state=closed -->
+            <!-- ,enable _ AIDeadBodySpawnBoxAuto StrangeGuests_Biter -->
+            <!-- ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Entrance -->
+            <!-- -= ,goto _ SensorGoTo sgt_FindCamden_Hotel_Room203 -distance=0 -->
+            <!-- -= ,dialog _ Player_Radio Troy_FindCamden_10DLG01                     -->
+            <!--  -->
+            <!-- -= CHECKPOINT! -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+            <!-- ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Room203 -->
+            <!-- -= CHECKPOINT! -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+            <!--  -->
+            <!-- -= ,BLOCK _ -obj=&FindCamden_OBJ_TakeLaptop& -->
+                <!-- -= ,AND _  -->
+                    <!-- -= path -->
+                        <!-- -= ,take _ QuestInventoryItemDI item_FindCamden_Laptop -show=false -->
+                            <!-- -= ,area ZoneBox zone_FindCamden_Hotel_CamdensRoom -->
+            <!-- ,goto _ SensorGoTo Q_FindCamden__01 -distance=0 -show=false -->
+            <!-- ,enable _ NoteTrigger item_FindCamden_Notes2 -->
+            <!-- ,wait _ 1 -->
+            <!-- ,talk _ voice2d Murat_FindCamden_01END -auto=true -show=false -->
+            <!-- -= CHECKPOINT! -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+            <!-- ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Room203 -->
+            <!-- -= CHECKPOINT! -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+        <!--  -->
+    <!-- -= quest __Q_FindCamden02_SecurityRoom -parent=Q_FindCamden01 -->
+        <!-- -= ,use _ DoorDI door_FindCamden_Hotel_SecurityRoom -state=opened -show=false -->
+        <!-- -= ,disable _ VirtualAttractor attractor_FindCamden_Hotel_SecurityRoom -->
+        <!-- -= ,kill _ AISpawnBoxNumber spawner_FindCamden_Hotel_SecurityRoom -show=false -->
+        <!-- -= ,take _ QuestInventoryItemDI item_FindCamden_SecurityRoom_BackDoor -show=false -->
+        <!-- -= ,disable _ AISpawnBoxNumber spawner_FindCamden_Hotel_SecurityRoom -->
+        <!-- -= ,set _ DoorDI door_FindCamden_Hotel_SecurityRoom_BackDoor -state=closed -->
+        <!-- -= ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Entrance -->
+        <!--  -->
+    <!-- quest __FindCamden_EnableZombiesOn1thFloor -parent=Q_FindCamden01 -->
+        <!-- ,goto _ SensorGoTo FindCamden_EnableZombiesOn1thFloor -distance=0 -show=false -->
+        <!-- ,enable _ QuestEnableGroup FindCamden_EnableZombiesOn1thFloor -->
+        <!--  -->
+    <!-- quest __FindCamden_Hotel_Stairs_Floor_3 -parent=Q_FindCamden01 -->
+        <!-- ,use _ DoorDI FindCamden_Hotel_Stairs_Floor_3 -state=opened -show=false -->
+        <!-- ,disable _ VirtualAttractor FindCamden_Hotel_Stairs_Floor_3_attractor -->
+    <!-- quest __Q_FindCamden02_KeyToRoom306 -parent=Q_FindCamden01 -->
+        <!-- ,take _ QuestInventoryItemDI item_FindCamden_Hotel_KeyRoom306 -show=false -->
+        <!-- ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Entrance -->
+        <!--  -->
+    <!-- quest __Q_FindCamdne02_PlayerHasOpenedDoor306 -parent=__Q_FindCamden02_KeyToRoom306 -->
+        <!-- ,use _ PhysicalSwitchDI FindCamden_Hotel_KeyRoom306_CardReader::Switch -state=on -show=false -->
+        <!-- ,set _ DoorDI door_FindCamden_Hotel_Room306 -state=closed -->
+        <!-- ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Entrance -->
+    <!-- -= quest __Q_FindCamden02_Stairs_Floor1_blocade -parent=Q_FindCamden01 -->
+        <!-- -= ,take _ QuestInventoryItemDI FindCamden_Hotel_Stairs_Floor_1_Blocade -show=false -->
+        <!-- -= ,set _ DoorDI FindCamden_Hotel_Stairs_Floor_1 -state=closed -->
+        <!-- -= ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Room203 -->
+        <!--  -->
+        <!--  -->
+    <!-- quest __Q_FindCamden02_ZombieNearReception -parent=Q_FindCamden01 -->
+        <!-- ,goto _ Marker m_Hotel_ZombieNearReception -distance=6 -show=false -->
+        <!-- ,disable _ VirtualAttractor attractor_ZombieNearReception -->
+        <!-- ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Entrance -->
+    <!-- -= KEY  -->
+    <!--  -->
+    <!-- quest __Q_FindCamden02_KeyToRoom102 -parent=Q_FindCamden01 -->
+        <!-- ,take _ QuestInventoryItemDI item_FindCamden_Hotel_KeyRoom102 -show=false -->
+        <!-- ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Entrance -->
+        <!-- ,use _ PhysicalSwitchDI FindCamden_Hotel_KeyRoom102_CardReader::Switch -state=on -show=false -->
+        <!-- ,set _ DoorDI door_FindCamden_Hotel_Room102 -state=closed -->
+        <!-- ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Entrance -->
+        <!--  -->
+    <!--  -->
+    <!-- quest __Q_FindCamden02_KeyToRoom105 -parent=Q_FindCamden01 -->
+        <!-- ,take _ QuestInventoryItemDI item_FindCamden_Hotel_KeyRoom105 -show=false -->
+        <!-- ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Entrance -->
+        <!-- ,use _ PhysicalSwitchDI FindCamden_Hotel_KeyRoom105_CardReader::Switch -state=on -show=false -->
+        <!-- ,set _ DoorDI door_FindCamden_Hotel_Room105 -state=closed -->
+        <!-- ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Entrance -->
+    <!-- quest __Q_FindCamden02_KeyToRoom207 -parent=Q_FindCamden01 -->
+        <!-- ,take _ QuestInventoryItemDI item_FindCamden_Hotel_KeyRoom207 -show=false -->
+        <!-- ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Entrance -->
+        <!-- ,use _ PhysicalSwitchDI FindCamden_Hotel_KeyRoom207_CardReader::Switch -state=on -show=false -->
+        <!-- ,set _ DoorDI door_FindCamden_Hotel_Room207 -state=closed -->
+        <!-- ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Entrance -->
+    <!--  -->
+    <!-- quest __Q_FindCamden02_KeyToRoom301 -parent=Q_FindCamden01 -->
+        <!-- ,take _ QuestInventoryItemDI item_FindCamden_Hotel_KeyRoom301 -show=false -->
+        <!-- ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Entrance -->
+        <!-- ,use _ PhysicalSwitchDI FindCamden_Hotel_KeyRoom301_CardReader::Switch -state=on -show=false -->
+        <!-- ,set _ DoorDI door_FindCamden_Hotel_Room301 -state=closed -->
+        <!-- ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Entrance -->
+    <!-- -= DEPOSIT BOXES -->
+    <!-- quest __Q_FindCamden02_DepositBox01 -parent=Q_FindCamden01 -->
+        <!-- ,hide _ ModelObject Hotel_DepositBox01::actor_key -->
+        <!-- ,take _ QuestInventoryItemDI qii_Hotel_DepositBox_Key01 -show=false -->
+        <!-- ,use _ InvisibleSwitchDI Hotel_DepositBox01::is_locker -state=on -show=false -->
+        <!-- ,show _ ModelObject Hotel_DepositBox01::actor_key -->
+        <!-- ,movie _ Hotel_DepositBox01::mov_locker -->
+        <!-- ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Entrance -->
+    <!--  -->
+    <!-- quest __Q_FindCamden02_DepositBox02 -parent=Q_FindCamden01 -->
+        <!-- ,hide _ ModelObject Hotel_DepositBox02::actor_key -->
+        <!-- ,take _ QuestInventoryItemDI qii_Hotel_DepositBox_Key02 -show=false -->
+        <!-- ,use _ InvisibleSwitchDI Hotel_DepositBox02::is_locker -state=on -show=false -->
+        <!-- ,show _ ModelObject Hotel_DepositBox02::actor_key -->
+        <!-- ,movie _ Hotel_DepositBox02::mov_locker -->
+        <!-- ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Entrance -->
+    <!-- quest __Q_FindCamden02_DepositBox03 -parent=Q_FindCamden01 -->
+        <!-- ,hide _ ModelObject Hotel_DepositBox03::actor_key -->
+        <!-- ,take _ QuestInventoryItemDI qii_Hotel_DepositBox_Key03 -show=false -->
+        <!-- ,use _ InvisibleSwitchDI Hotel_DepositBox03::is_locker -state=on -show=false -->
+        <!-- ,show _ ModelObject Hotel_DepositBox03::actor_key -->
+        <!-- ,movie _ Hotel_DepositBox03::mov_locker -->
+        <!-- ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Entrance -->
+        <!--  -->
+    <!-- quest __Q_FindCamden02_DepositBox04 -parent=Q_FindCamden01 -->
+        <!-- ,hide _ ModelObject Hotel_DepositBox04::actor_key -->
+        <!-- ,take _ QuestInventoryItemDI qii_Hotel_DepositBox_Key04 -show=false -->
+        <!-- ,use _ InvisibleSwitchDI Hotel_DepositBox04::is_locker -state=on -show=false -->
+        <!-- ,show _ ModelObject Hotel_DepositBox04::actor_key -->
+        <!-- ,movie _ Hotel_DepositBox04::mov_locker -->
+        <!-- ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Entrance -->
+    <!-- quest __Q_FindCamden02_DepositBox05 -parent=Q_FindCamden01 -->
+        <!-- ,hide _ ModelObject Hotel_DepositBox05::actor_key -->
+        <!-- ,take _ QuestInventoryItemDI qii_Hotel_DepositBox_Key05 -show=false -->
+        <!-- ,disable _ AISpawnBoxNumber spawner_Hotel_DepositBox_Key05 -->
+        <!-- ,use _ InvisibleSwitchDI Hotel_DepositBox05::is_locker -state=on -show=false -->
+        <!-- ,show _ ModelObject Hotel_DepositBox05::actor_key -->
+        <!-- ,movie _ Hotel_DepositBox05::mov_locker -->
+        <!-- ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Entrance -->
+            <!--  -->
+    <!-- quest __Q_FindCamden02_DepositBox06 -parent=Q_FindCamden01 -->
+        <!-- ,hide _ ModelObject Hotel_DepositBox06::actor_key -->
+        <!-- ,take _ QuestInventoryItemDI qii_Hotel_DepositBox_Key06 -show=false -->
+        <!-- ,use _ InvisibleSwitchDI Hotel_DepositBox06::is_locker -state=on -show=false -->
+        <!-- ,show _ ModelObject Hotel_DepositBox06::actor_key -->
+        <!-- ,movie _ Hotel_DepositBox06::mov_locker -->
+        <!-- ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Entrance -->
+        <!--  -->
+    <!-- -= quest __Q_FindCamden02_DepositBox07 -parent=Q_FindCamden01 -->
+        <!-- -= ,take _ QuestInventoryItemDI qii_Hotel_DepositBox_Key07 -show=false -->
+        <!-- -= ,use _ InvisibleSwitchDI Hotel_DepositBox07::is_locker -state=on -show=false -->
+        <!-- -= ,movie _ Hotel_DepositBox07::mov_locker -->
+        <!-- -= ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Entrance -->
+    <!-- quest __Q_FindCamden02_DepositBox08 -parent=Q_FindCamden01 -->
+        <!-- ,hide _ ModelObject Hotel_DepositBox08::actor_key -->
+        <!-- ,take _ QuestInventoryItemDI qii_Hotel_DepositBox_Key08 -show=false -->
+        <!-- ,use _ InvisibleSwitchDI Hotel_DepositBox08::is_locker -state=on -show=false -->
+        <!-- ,show _ ModelObject Hotel_DepositBox08::actor_key -->
+        <!-- ,movie _ Hotel_DepositBox08::mov_locker -->
+        <!-- ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Entrance -->
+    <!-- quest __Q_FindCamden02_DepositBox09 -parent=Q_FindCamden01 -->
+        <!-- ,hide _ ModelObject Hotel_DepositBox09::actor_key -->
+        <!-- ,take _ QuestInventoryItemDI qii_Hotel_DepositBox_Key09 -show=false -->
+        <!-- ,use _ InvisibleSwitchDI Hotel_DepositBox09::is_locker -state=on -show=false -->
+        <!-- ,show _ ModelObject Hotel_DepositBox09::actor_key -->
+        <!-- ,movie _ Hotel_DepositBox09::mov_locker -->
+        <!-- ,checkpoint _ SpawnPoint sp_FindCamden_Hotel_Entrance -->
+</QuestsDefinitions>

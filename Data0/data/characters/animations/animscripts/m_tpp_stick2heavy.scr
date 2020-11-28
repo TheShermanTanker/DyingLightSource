@@ -1,0 +1,138 @@
+//----- animacje Stick2 - Bron dwureczna
+!include("W_TPP_Stick2Heavy.scr")
+
+
+
+SeqTrack("TPP_Stick2Heavy_Crunch", 		            "m_tpp_crouch_hands_position_stick2.anm2"			, 0, 5, 30, 1, 0.3)
+
+SeqTrack("TPP_Stick2Heavy_DuckPose",                "tpp_stick2heavy_crouch.anm2",             0, 103, 19, 1, 0.3)
+
+/*
+SeqTrackAlias( "TPP_Stick2Heavy_Stand", "TPP_Stick2_Stand")
+
+SeqTrackAlias( "TPP_Stick2Heavy_WalkForward", "TPP_Stick2_WalkForward")
+SeqTrackAlias( "TPP_Stick2Heavy_TrotForward", "TPP_Stick2_TrotForward")
+
+SeqTrackAlias( "TPP_Stick2Heavy_WalkBackward", "TPP_Stick2_WalkBackward")
+SeqTrackAlias( "TPP_Stick2Heavy_TrotBackward", "TPP_Stick2_TrotBackward")
+
+SeqTrackAlias( "TPP_Stick2Heavy_WalkLeft", "TPP_Stick2_WalkLeft")
+SeqTrackAlias( "TPP_Stick2Heavy_TrotLeft", "TPP_Stick2_TrotLeft")
+
+SeqTrackAlias( "TPP_Stick2Heavy_WalkRight", "TPP_Stick2_WalkRight")
+SeqTrackAlias( "TPP_Stick2Heavy_TrotRight", "TPP_Stick2_TrotRight")	
+
+
+*/
+
+SeqTrack("TPP_Stick2Heavy_Stand",				"TPP_stick2heavy_stand.anm2", 			0 , 192 , 40 , 1, 0.5 )
+///FORWARD
+SeqTrack("TPP_Stick2Heavy_WalkForward",			"TPP_Stick2Heavy_WalkForward.anm2", 			0 , 53 , 60 , 1, 0.5 )
+{
+    Event(20, VIS_EVENT_STEP_RIGHT, -1)
+    Event(45, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("TPP_Stick2Heavy_RunForward",			"TPP_Stick2Heavy_RunForward.anm2", 			0 , 44 , 60 , 1, 0.5 )
+{
+    Event(14, VIS_EVENT_STEP_RIGHT, -1)
+    Event(34, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("TPP_Stick2Heavy_SprintForward",		"TPP_Stick2Heavy_SprintForward.anm2", 		0 , 34 , 60 , 1, 0.5 )
+{
+    Event(10, VIS_EVENT_STEP_RIGHT, -1)
+    Event(25, VIS_EVENT_STEP_LEFT, -1)
+}
+///BACKWARD
+SeqTrack("TPP_Stick2Heavy_WalkBackward",		"TPP_Stick2Heavy_WalkBackward.anm2", 			0 , 82 , 60 , 1, 0.5 )
+{
+    Event(26, VIS_EVENT_STEP_LEFT, -1)
+    Event(62, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("TPP_Stick2Heavy_RunBackward",			"tpp_stick2heavy_runbackward.anm2", 			0 , 45 , 60 , 1, 0.5 )
+{
+    Event(15, VIS_EVENT_STEP_LEFT, -1)
+    Event(36, VIS_EVENT_STEP_RIGHT, -1)
+}
+/// RIGHT
+SeqTrack("TPP_Stick2Heavy_WalkRight",			"TPP_Stick2Heavy_WalkRight.anm2", 			0 , 72 , 60 , 1, 0.5 )
+{
+    Event(20, VIS_EVENT_STEP_LEFT, -1)
+    Event(52, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("TPP_Stick2Heavy_RunRight",			"TPP_Stick2Heavy_RunRight.anm2", 			0 , 47 , 60 , 1, 0.5 )
+{
+    Event(13, VIS_EVENT_STEP_LEFT, -1)
+    Event(37, VIS_EVENT_STEP_RIGHT, -1)
+}
+/// LEFT
+SeqTrack("TPP_Stick2Heavy_WalkLeft",			"tpp_stick2heavy_walkleft.anm2", 			0 , 65 , 60 , 1, 0.5 )
+{
+    Event(14, VIS_EVENT_STEP_RIGHT, -1)
+    Event(46, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("TPP_Stick2Heavy_RunLeft",				"TPP_Stick2Heavy_RunLeft.anm2", 			0 , 46 , 60 , 1, 0.5 )
+{
+    Event(17, VIS_EVENT_STEP_LEFT, -1)
+    Event(36, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+
+
+//===================================== Fight Trigger============================================
+SeqTrack("TPP_Stick2Heavy_Melee_Attack_RL_Begin", 			"TPP_Stick2heavy_Attack.anm2", 		15, 40, 80, 1, 0.2)
+SeqTrack("TPP_Stick2Heavy_Melee_Attack_RL_Empty", 			"TPP_Stick2heavy_Attack.anm2"	, 50, 91, 65, 1, 0.2)
+{
+	Event(22, MELEE_SWING_RIGHT, 1) 
+}
+SeqTrack("TPP_Stick2Heavy_Melee_Attack_RL_Empty_Rest", 	"TPP_Stick2heavy_Attack.anm2"	, 91, 209,60, 1, 0.0)
+
+SeqTrack("TPP_Stick2Heavy_Melee_Attack_UD_Begin", 			"tpp_stick2heavy_melee_attack_ud.anm2", 		0, 41, 60, 1, 0.2) // IS NOT PLAYED - USES TPP_Stick2Heavy_Melee_Attack_RL_Begin 
+SeqTrack("TPP_Stick2Heavy_Melee_Attack_UD_Empty", 			"M_TPP_GroundPound.anm2", 		40, 130, 55, 1, 0.15)
+{
+	Event(1, MELEE_SWING_RIGHT, 1)
+    Event(40, REPL_EARLY_ANIM_END, 1)
+	Event(45, END_ANIMATION, 1)
+}
+SeqTrack("TPP_Stick2Heavy_Melee_Attack_UD_Empty_Rest",		"M_TPP_GroundPound.anm2"		, 130, 145, 30, 1, 0.4)
+
+SeqTrack("TPP_Stick2Heavy_Melee_Attack_CH_RL_Loop", 			"tpp_stick2heavy_melee_attack_ch_rl_loop.anm2"	, 0, 80, 30, 1, 0.9)
+SeqTrack("TPP_Stick2Heavy_Melee_Attack_CH_RL_Empty",			"tpp_stick2heavy_melee_attack_ch_rl_empty.anm2"	, 0, 101, 60, 1, 0.2)
+SeqTrack("TPP_Stick2Heavy_Melee_Attack_CH_RL_Empty_Rest",		"tpp_stick2heavy_melee_attack_ch_rl_empty.anm2"	, 101, 200, 60, 1, 0.1)
+
+SeqTracksBlend("TPP_Stick2Heavy_Melee_Attack_RL_Begin", 			"TPP_Stick2Heavy_Melee_Attack_UD_Empty", 0.6)
+SeqTracksBlend("TPP_Stick2Heavy_Melee_Attack_UD_Empty", 			"TPP_Stick2Heavy_Melee_Attack_CH_RL_Empty", 0.5)
+SeqTracksBlend("TPP_Stick2Heavy_Melee_Attack_CH_RL_Empty_Rest", 			"TPP_Stick2Heavy_Stand", 0.6)
+
+SeqTrack("TPP_Stick2Heavy_Melee_Throw_Aim", 	"M_TPP_Stick2Heavy_Throw.anm2", 0, 57, 30, 1, 0.2)
+SeqTrack("TPP_Stick2Heavy_Melee_Throw",         "M_TPP_Stick2Heavy_Throw.anm2", 59, 118, 30, 1, 0.2)
+{
+	Event(27, PUNCH_HIT, 1)
+}
+
+SeqTrack("TPP_Stick2Heavy_Jump_Pose", 		        "M_TPP_Stick2_Jump_Kick_Empty.anm2"	        , 16, 49, 30, 1, 0.1)
+
+SeqTrack("TPP_Stick2Heavy_Melee_Attack_GP_Begin", 			"M_TPP_GroundPound.anm2" , 10, 60, 90, 0, 0.1)
+{
+	Event(1, EVENT_JUMP_ATTACK, 1)
+	{
+		PlaySound23D(GameVolumeSource_SoundPlayer, "hammer_heavy_gp_begin.wav", 1, 3, "head", 1, [0,0,0], 1)
+	}
+	Event(3, END_ANIMATION, 1)
+}
+SeqTrack("TPP_Stick2Heavy_Melee_Attack_GP_Empty", 			"M_TPP_GroundPound.anm2" , 60, 116, 30, 0, 0.1)
+{	
+	Event(6, SPECIAL_EFFECT, 1)
+	{		
+		PlaySound23D(GameVolumeSource_SoundPlayer, "hammer_heavy_gp_hit.wav", 1, 3, "head", 1, [0,0,0], 0)
+	}	
+	Event(52, END_ANIMATION, 1)
+}
+SeqTrack("TPP_Stick2Heavy_Melee_Attack_GP_Empty_Rest", 			"M_TPP_GroundPound.anm2" , 116, 145, 30, 0, 0.1)
+
+SeqTrack("TPP_Stick2Heavy_Melee_Attack_ExhaustedPunch", 		"tpp_stick2heavy_melee_attack_exhaustedpunch.anm2"	, 0, 70, 60, 1, 0.15)
+{
+	Event(25, MELEE_SWING_RIGHT, 1) 
+}
+SeqTrack("TPP_Stick2Heavy_Melee_Attack_ExhaustedPunch_Rest", 	"tpp_stick2heavy_melee_attack_exhaustedpunch.anm2"	, 70, 300, 60, 1, 0.0)
+
+SeqTrackAlias("TPP_Stick2Heavy_Exhausted_Idle", 						"TPP_Stick2Heavy_Stand")

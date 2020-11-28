@@ -1,0 +1,76 @@
+!include("MeshPartCloth.def")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+MeshPartCloth()
+{
+//----------------------------------------------
+// bones
+//----------------------------------------------
+    BonesGridSize(3, 2)
+
+    $XDIST(f, -0.8)
+    $YDIST(f, -1)
+
+    Mode3D(1)
+    
+    Hook(0, 0, "l_jaw00", [0.06, 0.05, 0], XDIST, YDIST)
+    Hook(0, 1, "l_jaw00", [0.12, 0.05, -0.03], XDIST, YDIST)
+
+    Bone(1, 0, "l_jaw01", 1, XDIST, YDIST)
+    Bone(1, 1, "",        0, XDIST, YDIST)
+
+    Hook(2, 0, "l_jaw00", [0.06, -0.05, 0], XDIST, YDIST)
+    Hook(2, 1, "l_jaw00", [0.12, -0.05, -0.03], XDIST, YDIST)
+
+    
+//----------------------------------------------
+// collisions 
+//----------------------------------------------
+
+    CollisionSlide(1)
+    CollisionBounce(0)
+    CollisionSpeedMod(1)
+    
+    CollisionShapesMoveInfluence(1)
+    
+    CollisionSegmentDivision(0.1)
+    CollisionNormalAngleThreshold(180)
+    
+    NodeCollisionSphereRadius(0.1)
+    ExternalCollisionAffectMul(0)
+    
+//----------------------------------------------
+// spring params 
+//----------------------------------------------
+
+    Viscous(5)
+    AirFriction(3)
+
+    StructuralStiffness(1000, 100)
+    ShearStiffness(1000, 100)
+    FlexionStiffness(1000, 100)
+
+    HorizontSpringRatio(1)
+    
+    CheckLengthsStepsPerSec(0)
+
+//----------------------------------------------
+// physical params 
+//----------------------------------------------
+    
+    Mass(0.2)
+    GravityMul(0)
+    WindInfluence(1)
+
+//----------------------------------------------
+// other params
+//----------------------------------------------
+
+    SynchroWithPhysics(0)
+    EnableAPBOut(1)
+    
+    ObjectMoveMul(1)
+    AnimationMoveMul(0.7)
+}
+
+

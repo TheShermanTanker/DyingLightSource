@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums"
+     pxsl_line="3">
+    <!---=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- Shopping Spree - VETER -->
+    <!---=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- quest Shoppingspree -parent=SaveTheTower02  -->
+        <!-- ,BLOCK _ -->
+            <!-- ,enable _ SpawnBlocker Shopping_spree_Sblock -->
+            <!-- ,show _ AppearGroup Shoppingspree_hangingman -->
+            <!-- ,checkpoint _ SpawnPoint shopping_spree_sp_01 -->
+            <!-- ,goto <<Shopping Spree - find crime scene>> SensorGoTo Shoppingspree_body_check -distance=0 -show=false -->
+                <!-- ,debugpos SpawnPoint shopping_spree_sp_01 -->
+            <!-- ,talk _ Convict_ShoppingSpree Convict_ShoppingSpree_USE01 -auto=true -show=false -->
+        <!-- ,checkpoint _ SpawnPoint shopping_spree_sp_01 -->
+        <!-- quest Shoppingspree -parent=Before_Shoppingspree -->
+        <!-- ,OR _ -->
+            <!-- path -->
+                <!-- ,use _ InvisibleSwitchDI ShoppingSpree_check_body -state=on -show=false -->
+                <!-- ,BLOCK _ -obj=&SQ_ShoppingSpree_OBJ_CheckMarketStorage& -->
+                    <!-- ,talk _ Convict_ShoppingSpree Convict_ShoppingSpree_USE01 -auto=true -show=false -->
+                    <!-- ,checkpoint _ SpawnPoint shopping_spree_sp_01 -->
+            <!-- path -->
+                <!-- ,use _ MapPortal portal_Slums_to_Interior_07 -show=false -->
+        <!-- ,checkpoint _ SpawnPoint shopping_spree_sp_01 -->
+        <!-- tutaj dialog -->
+        <!-- ,goto <<Before Wei Wan>>  SensorGoTo shopping_spree_me_no_dead -distance=0 -show=false -->
+            <!-- ,debugpos SpawnPoint shopping_spree_sp_01 -->
+        <!-- ,enable _ QuestEnableGroup shoppingspree_inhouse_rest_wei_wan -->
+        <!-- ,show _ HumanAI Wei_Wan -->
+        <!-- ,enable _ HumanAI Wei_Wan -->
+        <!-- ,talk _ wei_wan wei_wan_shoppingspree_01DLG -auto=true -show=false -->
+        <!-- ,checkpoint _ SpawnPoint shopping_spree_sp_01 -->
+        <!-- ,use _ DoorDI Shoppingspree_door_on_roof -->
+        <!-- ,enable _ QuestEnableGroup shoppingspree_vessel_inhouse -->
+        <!-- ,AND _  -->
+            <!-- path -->
+                <!-- ,goto _ HumanAI Wei_Wan -distance=3 -show=true -->
+            <!-- path -->
+                <!-- ,kill-multi _ -show=true -->
+                    <!-- ,spawner AISpawnBoxNumber shopping_spree_vessel_one -->
+                    <!-- ,spawner AISpawnBoxNumber shopping_spree_vessel_two -->
+        <!-- ,checkpoint _ SpawnPoint shopping_spree_sp_01 -->
+        <!-- ,disable _ NPCLifePlace shoppingspree_wei_LP -->
+        <!-- ,talk <<Shopping Spree - WeiWan Talk>> wei_wan wei_wan_shoppingspree_01USE -->
+        <!-- ,debugpos SpawnPoint shopping_spree_sp_01       -->
+    <!-- quest __sq_shoppingspree01_hide_wei -parent=Shoppingspree  -->
+        <!-- ,gather _ HumanAI Wei_Wan -distance=-30 -show=false -->
+        <!-- ,hide _ HumanAI Wei_Wan -->
+        <!-- ,checkpoint _ SpawnPoint shopping_spree_sp_01 -->
+    <!-- quest sq_shoppingspree02 -parent=Shoppingspree -glued=true -= -leading_portal=portal_Interior_to_Slums_07 -->
+        <!-- ,BLOCK _  -obj=&sq_shoppingspree_OBJ_FindBuilding& -->
+            <!-- ,goto _ SpawnPoint portal_Slums_to_Interior_07_spawn -distance=100 -show=false -->
+            <!-- ,enable <<Znajdz Maiko>> QuestEnableGroup portal_slums_to_slums_interior_a_shopspree01_qeg -state=enabled -->
+                <!-- ,debugpos SpawnPoint portal_slums_interior_a_to_slums_shopspree01_sp -->
+            <!-- ,checkpoint _ SpawnPoint portal_Slums_to_Interior_07_spawn -->
+    <!-- quest sq_shoppingspree04 -parent=sq_shoppingspree03_kill -glued=true -leading_portal=portal_slums_to_slums_interior_a_shopspree01  -->
+        <!-- ,BLOCK _ -obj=&SQ_shoppingspree_OBJ_TalkWeiWan2& -->
+            <!-- ,goto <<Zaprowadz Maiko do huba Breckena>> SpawnPoint portal_slums_interior_a_to_slums_shopspree01_sp -distance=500 -->
+                <!-- ,debugpos SpawnPoint portal_slums_interior_a_to_slums_shopspree01_sp -->
+            <!-- ,enable _ MapPortal portal_slums_to_slums_interior_a_shopspree02  -->
+            <!-- ,checkpoint _ SpawnPoint portal_slums_interior_a_to_slums_shopspree01_sp  -->
+            <!-- ,enable _ QuestEnableGroup ShoppingSpree_CarZombies -state=enabled -->
+            <!-- ,checkpoint _ SpawnPoint portal_slums_interior_a_to_slums_shopspree01_sp     -->
+            <!-- ,show _ HumanAI Maiko -->
+        <!-- ,BLOCK _ -obj=&sq_shoppingspree_OBJ_KillZombies& -->
+            <!-- ,enable _ HumanAI Maiko -state=disabled -->
+            <!-- ,clear_area _ ClearArea ShoppingSpree_ClearArea -->
+            <!-- ,enable _ HumanAI Maiko -state=enabled        -->
+        <!--  -->
+        <!-- ,BLOCK _ -obj=&sq_shoppingspree_OBJ_MaikoToSafe& -->
+            <!-- ,fetch _ -distance=2 -->
+                <!-- ,dest Marker ShoppingSpree_Fetch -->
+                <!-- ,o HumanAI Maiko -->
+            <!-- ,enable _ CarDI ShoppingSpree_Car -state=enabled -->
+            <!-- ,carry _ Marker ShoppingSpree_Carry -->
+                <!-- ,escortee HumanAI Maiko -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,fetch _ -distance=2 -->
+                        <!-- ,dest NPCLifePlace ShoppingSpree_Maiko_LP -->
+                        <!-- ,o HumanAI Maiko -->
+                    <!-- ,teleport _ NPCLifePlace ShoppingSpree_Maiko_LP -->
+                        <!-- ,ai HumanAI Maiko -->
+                    <!-- ,enable _ HumanAI Maiko -state=disabled -->
+                    <!-- ,enable _ QuestEnableGroup ShoppingSpree_CarZombies -state=disabled -->
+                <!-- path -->
+                    <!-- ,goto _ Marker m_Hub_LJ_Floor_0 -distance=12 -show=false -->
+                    <!-- ,talk _ Slums_NPC_02 sq_shoppingspree_slums_npc_02 -auto=true -->
+</QuestsDefinitions>

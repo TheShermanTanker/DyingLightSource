@@ -1,0 +1,51 @@
+import "StatsStuff.scr"
+
+sub main() 
+{
+    Challenge("debug_00")
+    {
+        Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            VictimType("ZOMBIE");
+            Count(0);
+            
+            HudDescription("HudChallenge_Kills");
+        }
+        ForcedItemName("chl_item_00");
+        Difficulty(Challenge_Diff_Medium);
+        Duration(60.0);
+        RewardXP(600);
+        Coop(true);
+        Requirements()
+        {
+            Level(0);
+			Chapter(0);
+        }
+    }
+    
+    Challenge("debug_01")
+    {
+        Type(Challenge_Type_Agility);
+        PositiveEvent("ReachPoint")
+        {
+			Point("point_00");
+            
+            HudDescription("HudChallenge_Checkpoints");
+        }
+		NegativeEvent("UseSkill")
+		{
+            Skill("GrapplingHook");  			
+        }
+        NegativeEvent("TakeDamage");
+        Difficulty(Challenge_Diff_Medium);
+        Duration(1000.0);
+        RewardXP(600);
+        Requirements()
+        {
+            Level(0);
+            Chapter(0);
+        }
+        Coop(true);
+    }
+}

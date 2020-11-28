@@ -1,0 +1,354 @@
+    export int MORPH_LINEAR = 0;
+export int MORPH_SIN = 1;
+export int MORPH_SLERP_LINEAR = 2;
+export int MORPH_SLERP_SIN = 3;
+
+export float PREV_STEP_PHASE = 1000.0;
+export float INV_PREV_STEP_PHASE = 2000.0;
+
+sub main()
+{
+///////////////////////
+// groups definition //
+///////////////////////
+    AnimGroup("jump_group")
+    {
+        AnimPattern("TPP_{Weapon}_Jump_Loop")
+        {
+            Weapon("Unarmed",  "Stick2Heavy", "M16", "Crossbow", "Beretta", "Walker", "Schofield", "Sixshooter", "Submachinegun", "Submachinegun_Alt");
+        }
+        
+        Anim("TPP_Unarmed_Jump_Loop_InMove");
+        Anim("TPP_Unarmed_Jump_Loop_InMove_Mirror");
+    }
+
+    AnimGroup("duck_group")
+    {
+        Anim("TPP_Unarmed_DuckPose");
+        Anim("TPP_Stick2Heavy_DuckPose");
+    }
+    
+    AnimGroup("stand_group")
+    {
+        AnimPattern("TPP_{Weapon}_Stand")
+        {
+            Weapon("Unarmed", "Stick", "Stick2Close", "Stick2Heavy", "Knife", "Shotgun", "Shotgun_PA", "Shotgun_SA", "M16", "Crossbow", "Beretta", "Walker", "Schofield", "Sixshooter", "Submachinegun", "Submachinegun_Alt");
+        }
+    }
+    
+    AnimGroup("dodge_left_group")
+    {
+        AnimPattern("TPP_{Weapon}_DodgeLeft")
+        {
+            Weapon("Unarmed", "Stick2Heavy");
+        }
+    }
+    
+    AnimGroup("dodge_right_group")
+    {
+        AnimPattern("TPP_{Weapon}_DodgeRight")
+        {
+            Weapon("Unarmed", "Stick2Heavy");
+        }
+    }
+    
+    AnimGroup("dodge_back_group")
+    {
+        AnimPattern("TPP_{Weapon}_DodgeBack")
+        {
+            Weapon("Unarmed", "Stick2Heavy");
+        }
+    }
+    
+    AnimGroup("move_forward_group")
+    {
+        AnimPattern("TPP_{Weapon}_{Speed}Forward")
+        {
+            Weapon("Unarmed", "Stick", "Stick2Close", "Stick2Heavy", "Knife", "Shotgun", "Shotgun_PA", "Shotgun_SA", "M16", "Crossbow",  "Beretta", "Walker", "Schofield", "Sixshooter", "Submachinegun", "Submachinegun_Alt");
+            Speed("Walk", "Run", "Sprint");
+        }
+    }
+
+    AnimGroup("move_backward_group")
+    {
+        AnimPattern("TPP_{Weapon}_{Speed}Backward")
+        {
+            Weapon("Unarmed", "Stick", "Stick2Close", "Stick2Heavy", "Knife", "Shotgun", "Shotgun_PA", "Shotgun_SA", "M16", "Crossbow",  "Beretta", "Walker", "Schofield", "Sixshooter", "Submachinegun", "Submachinegun_Alt");
+            Speed("Walk", "Run");
+        }
+    }
+
+    AnimGroup("move_left_group")
+    {
+        AnimPattern("TPP_{Weapon}_{Speed}Left")
+        {
+            Weapon("Unarmed", "Stick", "Stick2Close", "Stick2Heavy", "Knife", "Shotgun", "Shotgun_PA", "Shotgun_SA", "M16", "Crossbow",  "Beretta", "Walker", "Schofield", "Sixshooter", "Submachinegun", "Submachinegun_Alt");
+            Speed("Walk", "Run");
+        }
+    }
+
+    AnimGroup("move_right_group")
+    {
+        AnimPattern("TPP_{Weapon}_{Speed}Right")
+        {
+            Weapon("Unarmed", "Stick", "Stick2Close", "Stick2Heavy", "Knife", "Shotgun", "Shotgun_PA", "Shotgun_SA", "M16", "Crossbow",  "Beretta", "Walker", "Schofield", "Sixshooter", "Submachinegun", "Submachinegun_Alt");
+            Speed("Walk", "Run");
+        }
+    }
+    
+    AnimGroup("walk_group")
+    {
+        AnimPattern("TPP_{Weapon}_Walk{Dir}")
+        {
+            Weapon("Unarmed", "Stick", "Stick2Close", "Stick2Heavy", "Knife", "Shotgun", "Shotgun_PA", "Shotgun_SA", "M16", "Crossbow",  "Beretta", "Walker", "Schofield", "Sixshooter", "Submachinegun", "Submachinegun_Alt");
+            Dir("Forward", "Backward", "Left", "Right");
+        }
+    }
+	
+	AnimGroup("fpp_jump_loop_group")
+    {
+        AnimPattern("FPP_{Weapon}_Jump_Loop")
+        {
+            Weapon("Unarmed",  "Stick2Heavy", "M16", "Crossbow",  "Beretta", "Walker", "Schofield", "Sixshooter", "Stick", "Knife", "Submachinegun", "Submachinegun_Alt");
+        }        
+    }
+	
+	AnimGroup("fpp_unarmed_jumponlowstand_group")
+    {
+        Anim("FPP_Unarmed_JumpOnLowStand");
+        Anim("FPP_Unarmed_JumpOnLowStand_1");
+		Anim("FPP_Unarmed_JumpOnLowStand_2");
+    }
+
+////////////////////////////    
+// transitions definition //   
+////////////////////////////    
+    Transition("move_forward_group")
+    {
+        MorphTime(0.3);
+        MorphType(MORPH_SIN);
+        StepPhase(PREV_STEP_PHASE); 
+		
+		Spine()
+        {
+            MorphTime(0.4);
+			MorphType(MORPH_SIN);
+        }
+    }
+
+    Transition("move_backward_group")
+    {
+        MorphTime(0.3);
+        MorphType(MORPH_SIN);
+        StepPhase(PREV_STEP_PHASE); 
+		
+		Spine()
+        {
+            MorphTime(0.4);
+			MorphType(MORPH_SIN);
+        }
+    }
+    
+    Transition("move_left_group")
+    {
+        MorphTime(0.3);
+        MorphType(MORPH_SIN);
+        StepPhase(PREV_STEP_PHASE); 
+		
+		Spine()
+        {
+            MorphTime(0.4);
+			MorphType(MORPH_SIN);
+        }
+    }
+    
+    Transition("move_right_group")
+    {
+        MorphTime(0.3);
+        MorphType(MORPH_SIN);
+        StepPhase(PREV_STEP_PHASE); 
+		
+		Spine()
+        {
+            MorphTime(0.4);
+			MorphType(MORPH_SIN);
+        }
+    }
+    
+    //to right
+    Transition("any", "move_right_group")
+    {
+        MorphTime(0.2);
+        MorphType(MORPH_SIN);
+        StepPhase(0.85); 
+        StopPrev();
+		
+		Spine()
+        {
+            MorphTime(0.4);
+			MorphType(MORPH_SIN);
+        }
+    }
+    
+    //to left
+    Transition("any", "move_left_group")
+    {
+        MorphTime(0.2);
+        MorphType(MORPH_SIN);
+        StepPhase(0.25); 
+        StopPrev();
+		
+		Spine()
+        {
+            MorphTime(0.4);
+			MorphType(MORPH_SIN);
+        }
+	}
+    
+    //to forward
+    Transition("any", "move_forward_group")
+    {
+        MorphTime(0.15);
+        MorphType(MORPH_SIN);
+        StepPhase(0.21); 
+     //   StopPrev();
+	 
+		Spine()
+        {
+            MorphTime(0.4);
+			MorphType(MORPH_SIN);
+        }
+    }
+    
+    //to backward
+    Transition("any", "move_backward_group")
+    {
+        MorphTime(0.15);
+        MorphType(MORPH_LINEAR);
+        StepPhase(0.78); 
+        StopPrev();
+        
+        Spine()
+        {
+            MorphTime(0.4);
+			MorphType(MORPH_SIN);
+        }
+    }
+    
+    // from duck
+    Transition("duck_group", "stand_group")
+    {
+        MorphTime(0.2);
+        MorphType(MORPH_SIN);
+    }
+    
+    // jump
+    Transition("any", "jump_group")
+    {
+        MorphTime(0.2);
+        MorphType(MORPH_SIN);
+    }
+    
+    Transition("jump_group", "stand_group")
+    {
+        MorphTime(0.2);
+        MorphType(MORPH_SIN);
+    }
+    
+    Transition("jump_group", "move_forward_group")
+    {
+        MorphTime(0.1);
+        MorphType(MORPH_SIN);
+       StepPhase(PREV_STEP_PHASE); 
+    }
+    
+    
+    
+    Transition("dodge_right_group", "move_right_group")
+    {
+        MorphTime(0.2);
+        MorphType(MORPH_LINEAR);
+        StepPhase(0.46); 
+    }
+    Transition("dodge_left_group", "move_left_group")
+    {
+        MorphTime(0.2);
+        MorphType(MORPH_LINEAR);
+        StepPhase(0.0); 
+    }
+    Transition("dodge_back_group", "move_backward_group")
+    {
+        MorphTime(0.2);
+        MorphType(MORPH_LINEAR);
+        StepPhase(0.0); 
+    }
+	
+	Transition("move_forward_group", "stand_group")
+    {
+        MorphTime(0.50);
+        MorphType(MORPH_SIN);
+        StepPhase(0.2); 
+		//StopPrev(0.5, 0.7);
+		
+		Spine()
+        {
+            MorphTime(0.4);
+			MorphType(MORPH_SIN);
+        }
+    }
+	
+	Transition("fpp_unarmed_jumponlowstand_group", "fpp_jump_loop_group")
+    {
+        MorphTime(0.45);
+        MorphType(MORPH_SIN);
+    }
+    
+    
+    //Mimics
+    DefaultMimic("Default_Mimic");
+    
+    Mimic("Default_Idlle_Mimic")
+    {
+        AnimGroup("stand_group");
+        AnimGroup("duck_group");
+        AnimGroup("walk_group");
+    }
+	//BTZ Player Mimics
+
+//Pounce	
+Mimic("TPP_PVPHighRage_Victim_Pounce")
+{
+     Anim("TPP_PVPHighRage_Victim_Pounce");
+     Anim("TPP_PVPHighRage_Victim_Pounce_Above");
+     Anim("TPP_PVPHighRage_Victim_Pounce_Below");
+     Anim("TPP_PVPHighRage_Victim_Pounce_Slam");
+     Anim("TPP_PVPHighRage_Victim_Pounce_Above_Slam");
+     Anim("TPP_PVPHighRage_Victim_Pounce_Below_Slam");
+}
+Mimic("TPP_PVPHighRage_Victim_Tackle")
+{
+     Anim("TPP_PVPHighRage_Victim_Tackle");
+     Anim("TPP_PVPHighRage_Victim_Tackle_Above");
+     Anim("TPP_PVPHighRage_Victim_Tackle_Below");
+     Anim("TPP_PVPHighRage_Victim_Tackle_Slam");
+     Anim("TPP_PVPHighRage_Victim_Tackle_Above_Slam");
+     Anim("TPP_PVPHighRage_Victim_Tackle_Below_Slam");
+}
+Mimic("TPP_PVPHighRage_Victim_Fall")
+{
+     Anim("TPP_PVPHighRage_Victim_Fall");
+     Anim("TPP_PVPHighRage_Victim_Fall_Slam");
+}
+Mimic("TPP_PVPHighRage_Victim_Land")
+{
+     Anim("TPP_PVPHighRage_Victim_Land");
+     Anim("TPP_PVPHighRage_Victim_Land_Slam");
+}
+Mimic("TPP_PVPHighRage_Victim_Release")
+{
+     Anim("TPP_PVPHighRage_Victim_Release");
+     Anim("TPP_PVPHighRage_Victim_Release_Slam");
+}
+
+
+}

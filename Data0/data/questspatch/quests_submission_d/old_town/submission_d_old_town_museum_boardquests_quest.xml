@@ -1,0 +1,111 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="old_town"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- Wanted   -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- quest Wanted -parent=Q_WayToMykorians01 -difficulty=medium -reward_set=Wanted_reward -quest_giver=Salam -->
+        <!--  -->
+        <!-- -= -=-=-=-=-= -->
+        <!-- ,show _ QuestStartTrigger Wanted_QST -->
+        <!-- ,show _ HumanAI Salam -->
+        <!-- -= -=-=-=-=- -->
+    <!--  -->
+        <!-- ,take <<Take board quest>> QuestStartTrigger Wanted_QST -show=false -->
+            <!-- ,debugpos SpawnPoint sp_Emebrs_BoardQuests -->
+        <!-- ,hide _ QuestStartTrigger Wanted_QST -->
+        <!-- ,enable _ SpawnBlocker Wanted_SB_Hideout01 -->
+        <!-- ,show _ AppearGroup Wanted_AG_Human001 -->
+        <!-- ,checkpoint _ SpawnPoint sp_Emebrs_BoardQuests -->
+        <!--  -->
+        <!-- ,BLOCK _ -obj=&Wanted_OBJ_FindAlan& -->
+            <!-- ,goto <<Find Alana>> Marker Wanted_Marker_01 -distance=24 -show=false -->
+                <!-- ,area ZoneBox Wanted_ZB_01 -->
+                <!-- ,debugpos SpawnPoint Wanted_SP_01 -->
+            <!-- ,talk _ Alan WantedSurvivor01_Wanted_03DLG -auto=true -show=false -->
+            <!-- ,enable _ QuestEnableGroup Wanted_QEG_AlanaPrime001 -->
+            <!-- ,hide _ AppearGroup Wanted_AG_Human001 -->
+        <!-- ,checkpoint _ SpawnPoint Wanted_SP_01 -->
+            <!--  -->
+        <!-- ,BLOCK _ -obj=&Wanted_OBJ_KillAlan& -->
+            <!-- ,AND <<Kill Alan>> -->
+                <!-- path -->
+                    <!-- ,kill _ AISpawnBoxNumber Wanted_SBN_AlanaPrime001 -show=true -->
+                <!-- path -->
+                    <!-- ,wait _ 5 -->
+                <!-- ,debugpos SpawnPoint Wanted_SP_01 -->
+        <!-- ,checkpoint _ SpawnPoint Wanted_SP_01 -->
+        <!--  -->
+        <!-- ,BLOCK _ -obj=&Wanted_OBJ_ReturnToSalam& -->
+            <!-- ,talk <<Wanted - END>> Salam Salam_Wanted_END -->
+                <!-- ,debugpos SpawnPoint sp_Emebrs_BoardQuests -->
+        <!-- ,checkpoint _ SpawnPoint sp_Emebrs_BoardQuests -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- A Construction Scheme -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- quest Scheme -parent=Museum02 -difficulty=medium -reward_set=ConstructionScheme_reward -quest_giver=Rashid -->
+    <!--  -->
+        <!-- -= -=-=-=-=-= -->
+        <!-- ,show _ QuestStartTrigger Scheme_QST -->
+        <!-- ,show _ HumanAI Mughni -->
+        <!-- -= -=-=-=-=-= -->
+    <!--  -->
+        <!-- ,take <<Take board quest>> QuestStartTrigger Scheme_QST -show=false -->
+            <!-- ,debugpos SpawnPoint sp_Radiostation_BoardQuests -->
+        <!-- ,hide _ QuestStartTrigger Scheme_QST -->
+        <!-- ,enable _ ZoneBox Scheme_Zone_01 -->
+        <!-- ,checkpoint _ SpawnPoint sp_Radiostation_BoardQuests -->
+        <!--  -->
+        <!-- ,BLOCK _ -obj=&Scheme_OBJ_GoToMugnisOffice& -->
+            <!-- ,use <<Retrieve Scheme>>  PhysicalSwitchDI Scheme_IT_ShopShutter_001 -state=on -show=false -->
+                <!-- ,area ZoneBox Scheme_Zone_01 -->
+                <!-- ,debugpos SpawnPoint Scheme_SP_01 -->
+        <!-- ,checkpoint _ SpawnPoint Scheme_SP_01 -->
+            <!--  -->
+        <!-- ,BLOCK _ -obj=&Scheme_OBJ_PrintScheme& -->
+            <!-- ,AND <<Find Scheme>> -->
+                <!-- ,debugpos SpawnPoint Scheme_SP_01 -->
+                <!--  -->
+                <!-- path -->
+                    <!-- ,use _ DoorDI Scheme_DoorDI_001 -state=closed -show=false -->
+                    <!-- -= ,goto _ Marker Scheme_Marker_01 -distance=1 -show=false -->
+                    <!-- ,enable _ AISpawnBoxNumber Scheme_SBN_001 -->
+                    <!-- ,enable _ AISpawnBoxNumber Scheme_SBN_002 -->
+                <!-- path -->
+                    <!-- ,use _ PhysicalSwitchDI Scheme_PS_Computer_001 -state=on -show=false -->
+                        <!-- ,area ZoneBox Scheme_Zone_01 -->
+                <!--  -->
+            <!-- ,wait _ 2 -->
+            <!-- ,set-skin _ ModelObject Scheme_Monitor_001 -skin_name=login -->
+                <!--  -->
+            <!-- ,use _ PhysicalSwitchDI Scheme_PS_Computer_002 -state=on -->
+            <!-- ,wait _ 3 -->
+            <!-- ,set-skin _ ModelObject Scheme_Monitor_001 -skin_name=website -->
+            <!-- ,wait _ 1 -->
+        <!-- ,checkpoint _ SpawnPoint Scheme_SP_01 -->
+            <!--  -->
+        <!-- ,BLOCK _ -obj=&Scheme_OBJ_TakeScheme& -->
+            <!-- ,wait _ 5 -->
+            <!--  -->
+            <!-- ,enable _ SoundEmitterSimple Scheme_SES_Printer -->
+            <!-- ,movie _ Scheme_Movie_Plan -->
+            <!-- ,show _ AppearGroup Scheme_AG_Plan -->
+            <!-- ,wait _ 1 -->
+            <!-- ,disable _ SoundEmitterSimple Scheme_SES_Printer -->
+            <!--  -->
+            <!-- ,disable-multi _ -->
+                <!-- ,o AISpawnBoxNumber Scheme_SBN_001 -->
+                <!-- ,o AISpawnBoxNumber Scheme_SBN_002 -->
+                <!--  -->
+            <!-- ,take _ QuestInventoryItemDI Scheme_QII_Plan -show=false -->
+                <!-- ,area ZoneBox Scheme_Zone_01 -->
+                <!--  -->
+        <!-- ,checkpoint _ SpawnPoint Scheme_SP_01 -->
+            <!--  -->
+        <!-- ,BLOCK _ -obj=&Scheme_OBJ_BackToMughni& -->
+            <!-- ,talk <<A construction Scheme- END>> Mughni Mughni_Scheme_END -->
+                <!-- ,debugpos SpawnPoint sp_Radiostation_BoardQuests -->
+                <!--  -->
+        <!-- ,checkpoint _ SpawnPoint sp_Radiostation_BoardQuests -->
+</QuestsDefinitions>

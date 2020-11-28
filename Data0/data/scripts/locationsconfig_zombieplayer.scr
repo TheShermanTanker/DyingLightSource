@@ -1,0 +1,93 @@
+sub main()
+{
+    //LocationDef(type, default icon)
+
+    LocationDef("GameEvent", "map_encounter")
+    {
+        ShowPointOnRadar();
+    }
+
+    LocationDef("Waypoint", "map_objective_marker")
+    {
+        NeutralIcon("map_marker");
+        ShowPointOnRadar();
+    }
+
+    LocationDef("ZombieHive", "map_zombie_hive")
+    {
+        ShowPointOnRadar();
+    }
+
+    LocationDef("PursuitArea", "")
+    {
+        AreaColor([1.0, 1.0, 1.0, 0.4]);
+        ObjectiveAreaColor([1.0, 0.7, 0.0 , 0.4]);
+        EncounterAreaColor([0.0, 0.66, 1.0 , 0.4]);
+        ThreatAreaColor([0.95, 0.19, 0.33, 0.4]);
+
+        ShowOnRadar();
+        ShowOnMap("&MMap_BTZRestrictedArea&"); 
+
+        IgnoreFogOfWar();
+    }
+
+    LocationDef("BtZLightDamageArea", "")
+    {
+        ThreatAreaColor([0.5, 0.0, 1.0, 0.2]);
+
+        ShowOnRadar();
+
+        IgnoreFogOfWar();
+    }
+    LocationDef("SensorTutorial", "map_location")
+    {
+        ObjectiveIcon("map_objective_location");
+        AreaColor([1.0, 1.0, 1.0, 0.4]);
+        ObjectiveAreaColor([1.0, 0.7, 0.0 , 0.4]);
+        EncounterAreaColor([0.0, 0.66, 1.0 , 0.4]);
+        ThreatAreaColor([0.95, 0.19, 0.33, 0.4]);
+        ShowOnRadar();
+        IgnoreFogOfWar();
+        ShowOnMap("&MMap_CurrentObjective&");
+    }
+    LocationDef("EnemyZombie", "map_zombie")
+	{
+		ThreatIcon("map_zombie"); //we use white because it will be colored from SetAlertLevel
+		ObjectiveIcon("map_objective_zombie");
+		ShowPointOnRadar();
+        ShowOnMap("&MMap_EnemyZombie&");
+		ShowOnMapEdgeWhenObjective();
+		IgnoreFogOfWar();
+		DoNotClampToRadius();
+        VisibleRange(36);
+        PriorityModifier(10);
+		RotateToObject();
+	}
+	LocationDef("Enemy", "map_human")
+	{
+		ObjectiveIcon("map_objective_human");
+		ShowPointOnRadar();
+		ShowOnMap("&MMap_Enemy&");
+		ShowOnMapEdgeWhenObjective();
+		IgnoreFogOfWar();
+		RotateToObject();
+		DoNotClampToRadius();
+		VisibleRange(36);
+	}
+    
+     LocationDef("CoopPlayer", "map_icon_player_white")
+    {
+		ShowPointOnRadar();
+		IgnoreFogOfWar();
+        VisibleRange(36);      
+		RotateToObject();
+		
+    }   
+
+    LocationDef("Vehicle", "map_vehicle")
+    {
+		ShowPointOnRadar();
+		IgnoreFogOfWar();
+        VisibleRange(36);  
+    }    
+}

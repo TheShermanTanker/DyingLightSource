@@ -1,0 +1,615 @@
+//Roznica miedzy Cond a FrequentCnd to roznica miedzy wielokrotnoscia odpalenia chatteru - w Cond odpali go losowy AI, we FrequentCnd - wszyscy pasujacy.
+//FrequentCnd( 7.5000,  18.0000, true, 2000.) // fourth param is range
+//{
+//	Cond("SHOOTING_ENEMY_TAUNT");
+//  //enemy see player - dziala wtedy, gdy AI atakuje gracza, odpala sie w kolko
+//  Chatter("Chatter_Fight_01_Indian01");
+//}
+
+//     priority  	min_time,	can_play_during_dialog, range
+// Cnd( 10.0000,  	22.0000, 	true, 					2000.) // fourth param is range
+//
+
+// Cond("ENEMY_TYPE", 0); // 0 == Human, 1 == Zombie/Infected
+
+// Occlusion(0.0, 0.0);
+// RollOff(0.0)
+
+sub Shooters()
+{
+	Occlusion(0.0, 0.6);
+	RollOff(1.0);
+	
+	CharacterAlias("Bandit01", "Shooter01");
+    CharacterAlias("Bandit02", "Shooter01");
+    CharacterAlias("Bandit03", "Shooter01");
+    CharacterAlias("Bandit04", "Shooter01");
+    CharacterAlias("Bandit05", "Shooter01");
+    CharacterAlias("Bandit06", "Shooter01");
+    CharacterAlias("Bandit07", "Shooter01");
+    CharacterAlias("Bandit08", "Shooter01");
+    CharacterAlias("Bandit09", "Shooter01");
+    CharacterAlias("Bandit10", "Shooter01");
+    CharacterAlias("Bandit11", "Shooter01");
+    CharacterAlias("Bandit12", "Shooter01");
+    CharacterAlias("Bandit13", "Shooter01");
+    CharacterAlias("Bandit14", "Shooter01");
+    CharacterAlias("Bandit15", "Shooter01");
+    CharacterAlias("Bandit16", "Shooter01");
+    CharacterAlias("Bandit17", "Shooter01");
+    CharacterAlias("Bandit18", "Shooter01");
+    CharacterAlias("Bandit19", "Shooter01");
+    CharacterAlias("Bandit20", "Shooter01");
+
+	CharacterAlias("MaskedBandit01", "Shooter01");
+	CharacterAlias("MaskedBandit02", "Shooter01");
+	CharacterAlias("MaskedBandit03", "Shooter01");
+	CharacterAlias("MaskedBandit04", "Shooter01");
+	CharacterAlias("MaskedBandit05", "Shooter01");
+    CharacterAlias("MaskedBandit06", "Shooter01");
+    CharacterAlias("MaskedBandit07", "Shooter01");
+    CharacterAlias("MaskedBandit08", "Shooter01");
+    CharacterAlias("MaskedBandit09", "Shooter01");
+    CharacterAlias("MaskedBandit10", "Shooter01");
+    CharacterAlias("MaskedBandit11", "Shooter01");
+    CharacterAlias("MaskedBandit12", "Shooter01");
+    CharacterAlias("MaskedBandit13", "Shooter01");
+    CharacterAlias("MaskedBandit14", "Shooter01");
+    CharacterAlias("MaskedBandit15", "Shooter01");
+    CharacterAlias("MaskedBandit16", "Shooter01");
+    CharacterAlias("MaskedBandit17", "Shooter01");
+    CharacterAlias("MaskedBandit18", "Shooter01");
+    CharacterAlias("MaskedBandit19", "Shooter01");
+    CharacterAlias("MaskedBandit20", "Shooter01");
+	
+	
+	CndSet("target_noticing", 1.5)
+	{
+		Cnd( 90, 5.0000, true, 10.0 )
+		{
+			// Medium alarm level - AI heard something
+			Cond("HAS_FIREARM");
+			Cond("NOT_KNOCKED_DOWN");
+			Cond("AI_HEARD_ENEMY");
+			Cond("ENEMY_TYPE", 0);
+			Cond("SINGLE_AI_NEARBY");
+			//ShowSubtitles();
+			
+			Chatter("ChatterAlarmedGoingToCheckSingle_01_Shooter01.ogg");
+			Chatter("ChatterAlarmedGoingToCheckSingle_02_Shooter01.ogg");
+			Chatter("ChatterAlarmedGoingToCheckSingle_03_Shooter01.ogg");
+			
+			Chatter("ChatterAlarmedPlayerSpottedSingle_04_Shooter01.ogg");
+			Chatter("ChatterAlarmedPlayerSpottedSingle_05_Shooter01.ogg");
+			
+		}
+		
+		Cnd( 90, 5.0000, true, 10.0 )
+		{
+			// Medium alarm level - AI heard something
+			Cond("HAS_FIREARM");
+			Cond("NOT_KNOCKED_DOWN");
+			Cond("AI_HEARD_ENEMY");
+			Cond("ENEMY_TYPE", 0);
+			Cond("MANY_AIS_NEARBY");
+			//ShowSubtitles();
+			
+			//Chatter("ChatterAlarmedGoingToCheckGroup_01_Shooter01.ogg");
+			//Chatter("ChatterAlarmedGoingToCheckGroup_02_Shooter01.ogg");
+			//Chatter("ChatterAlarmedGoingToCheckGroup_03_Shooter01.ogg");
+			//Chatter("ChatterAlarmedGoingToCheckGroup_04_Shooter01.ogg");
+			//Chatter("ChatterAlarmedGoingToCheckGroup_05_Shooter01.ogg");
+			Chatter("ChatterAlarmedPlayerSpottedGroup_01_Shooter01.ogg");
+			
+		}
+		
+		Cnd( 80, 5.0000, true, 10.0 )
+		{
+			// Medium alarm level - AI goes to investigate
+			Cond("HAS_FIREARM");
+			Cond("NOT_KNOCKED_DOWN");
+			Cond("AI_GOING_TO_INVESTIGATE");
+			Cond("ENEMY_TYPE", 0);
+			Cond("SINGLE_AI_NEARBY");
+			//ShowSubtitles();
+			
+			//Chatter("ChatterAlarmedGoingToCheckSingle_01_Shooter01.ogg");
+			//Chatter("ChatterAlarmedGoingToCheckSingle_02_Shooter01.ogg");
+			//Chatter("ChatterAlarmedGoingToCheckSingle_03_Shooter01.ogg");
+			
+			//Chatter("ChatterAlarmedGoingToCheckGroup_01_Shooter01.ogg");
+			//Chatter("ChatterAlarmedGoingToCheckGroup_02_Shooter01.ogg");
+			//Chatter("ChatterAlarmedGoingToCheckGroup_03_Shooter01.ogg");
+			//Chatter("ChatterAlarmedGoingToCheckGroup_04_Shooter01.ogg");
+			//Chatter("ChatterAlarmedGoingToCheckGroup_05_Shooter01.ogg");
+			
+		}
+		
+		Cnd( 80, 5.0000, true, 10.0 )
+		{
+			// Medium alarm level - AI goes to investigate
+			Cond("HAS_FIREARM");
+			Cond("NOT_KNOCKED_DOWN");
+			Cond("AI_GOING_TO_INVESTIGATE");
+			Cond("ENEMY_TYPE", 0);
+			Cond("MANY_AIS_NEARBY");
+			Cond("GROUP_IS_NOT_FIGHTING");
+			//ShowSubtitles();
+			
+			//Chatter("ChatterAlarmedGoingToCheckSingle_01_Shooter01.ogg");
+			//Chatter("ChatterAlarmedGoingToCheckSingle_02_Shooter01.ogg");
+			//Chatter("ChatterAlarmedGoingToCheckSingle_03_Shooter01.ogg");
+			
+			Chatter("ChatterAlarmedGoingToCheckGroup_01_Shooter01.ogg");
+			Chatter("ChatterAlarmedGoingToCheckGroup_02_Shooter01.ogg");
+			Chatter("ChatterAlarmedGoingToCheckGroup_03_Shooter01.ogg");
+			Chatter("ChatterAlarmedGoingToCheckGroup_04_Shooter01.ogg");
+			//Chatter("ChatterAlarmedGoingToCheckGroup_05_Shooter01.ogg");(he must be up there)
+			
+		}
+		
+		Cnd( 30, 10.0000, true, 10.0 )
+		{
+			// Medium alarm level - AI is investigating at destination
+			Cond("HAS_FIREARM");
+			Cond("NOT_KNOCKED_DOWN");
+			Cond("AI_IDLE_INVESTIGATING");
+			Cond("ENEMY_TYPE", 0);
+			Cond("AI_WAS_ALARMED");
+			Cond("SINGLE_AI_NEARBY");
+			Cond("GROUP_IS_NOT_FIGHTING");
+			//ShowSubtitles();
+			
+			Chatter("ChatterAlarmedLookingForPlayerSingle_01_Shooter01.ogg");
+			Chatter("ChatterAlarmedLookingForPlayerSingle_02_Shooter01.ogg");
+			Chatter("ChatterAlarmedLookingForPlayerSingle_03_Shooter01.ogg");
+			//Chatter("ChatterAlarmedLookingForPlayerSingle_04_Shooter01.ogg");
+		}
+		
+		Cnd( 35, 10.0000, true, 10.0 )
+		{
+			// Medium alarm level - AI is investigating at destination
+			Cond("HAS_FIREARM");
+			Cond("NOT_KNOCKED_DOWN");
+			Cond("AI_IDLE_INVESTIGATING");
+			Cond("AI_WAS_FIGHTING");
+			Cond("ENEMY_TYPE", 0);
+			Cond("SINGLE_AI");
+			Cond("GROUP_IS_NOT_FIGHTING");
+			//ShowSubtitles();
+			
+			Chatter("ChatterAlarmedLookingForPlayerSingle_01_Shooter01.ogg");
+			Chatter("ChatterAlarmedLookingForPlayerSingle_02_Shooter01.ogg");
+			//Chatter("ChatterAlarmedLookingForPlayerSingle_03_Shooter01.ogg");
+			Chatter("ChatterAlarmedLookingForPlayerSingle_04_Shooter01.ogg");
+		}
+		
+		Cnd( 35, 10.0000, true, 10.0 )
+		{
+			// Medium alarm level - AI is investigating at destination
+			Cond("HAS_FIREARM");
+			Cond("NOT_KNOCKED_DOWN");
+			Cond("AI_IDLE_INVESTIGATING");
+			Cond("AI_WAS_FIGHTING");
+			Cond("ENEMY_TYPE", 0);
+			Cond("MANY_AIS");
+			Cond("GROUP_IS_NOT_FIGHTING");
+			//ShowSubtitles();
+			
+			Chatter("ChatterAlarmedLookingForPlayerSingle_01_Shooter01.ogg");
+			Chatter("ChatterAlarmedLookingForPlayerSingle_02_Shooter01.ogg");
+			//Chatter("ChatterAlarmedLookingForPlayerSingle_03_Shooter01.ogg");
+			Chatter("ChatterAlarmedLookingForPlayerSingle_04_Shooter01.ogg");
+			
+			Chatter("ChatterAlarmedLookingForPlayerGroup_01_Shooter01.ogg");
+			Chatter("ChatterAlarmedLookingForPlayerGroup_02_Shooter01.ogg");
+			Chatter("ChatterAlarmedLookingForPlayerGroup_03_Shooter01.ogg");
+		}
+		
+		Cnd( 50, 10.0000, true, 10.0 )
+		{
+			// Medium alarm level - AI was invetigating but didn't find anything
+			Cond("HAS_FIREARM");
+			Cond("NOT_KNOCKED_DOWN");
+			Cond("AI_STOPS_INVESTIGATING");
+			Cond("AI_WAS_ALARMED");
+			Cond("SINGLE_AI");
+			//ShowSubtitles();
+			
+			Chatter("ChatterAlarmedPlayerEscapedSingle_01_Shooter01.ogg");
+			Chatter("ChatterAlarmedPlayerEscapedSingle_02_Shooter01.ogg");
+			Chatter("ChatterAlarmedPlayerEscapedSingle_03_Shooter01.ogg");
+			//Chatter("ChatterAlarmedPlayerEscapedSingle_04_Shooter01.ogg");
+		}
+		
+		Cnd( 50, 5.0000, true, 10.0 )
+		{
+			// Medium alarm level - AI was invetigating but didn't find anything
+			Cond("HAS_FIREARM");
+			Cond("NOT_KNOCKED_DOWN");
+			Cond("AI_STOPS_INVESTIGATING");
+			Cond("AI_WAS_ALARMED");
+			Cond("MANY_AIS");
+			//ShowSubtitles();
+			
+			Chatter("ChatterAlarmedPlayerEscapedSingle_01_Shooter01.ogg");
+			Chatter("ChatterAlarmedPlayerEscapedSingle_02_Shooter01.ogg");
+			Chatter("ChatterAlarmedPlayerEscapedSingle_03_Shooter01.ogg");
+			//Chatter("ChatterAlarmedPlayerEscapedSingle_04_Shooter01.ogg");
+			
+			Chatter("ChatterAlarmedPlayerEscapedGroup_01_Shooter01.ogg");
+			Chatter("ChatterAlarmedPlayerEscapedGroup_02_Shooter01.ogg");
+			Chatter("ChatterAlarmedPlayerEscapedGroup_03_Shooter01.ogg");
+			Chatter("ChatterAlarmedPlayerEscapedGroup_04_Shooter01.ogg");
+		}
+		
+		Cnd( 60, 5.0000, true, 10.0 )
+		{
+			// Medium alarm level - AI was invetigating but didn't find anything
+			Cond("HAS_FIREARM");
+			Cond("NOT_KNOCKED_DOWN");
+			Cond("AI_STOPS_INVESTIGATING");
+			Cond("AI_WAS_FIGHTING");
+			Cond("SINGLE_AI");
+			//ShowSubtitles();
+			
+			Chatter("ChatterAlarmedPlayerEscapedSingle_01_Shooter01.ogg");
+			Chatter("ChatterAlarmedPlayerEscapedSingle_02_Shooter01.ogg");
+			Chatter("ChatterAlarmedPlayerEscapedSingle_03_Shooter01.ogg");
+			Chatter("ChatterAlarmedPlayerEscapedSingle_04_Shooter01.ogg");
+		}
+		Cnd( 60, 5.0000, true, 10.0 )
+		{
+			// Medium alarm level - AI was invetigating but didn't find anything
+			Cond("HAS_FIREARM");
+			Cond("NOT_KNOCKED_DOWN");
+			Cond("AI_STOPS_INVESTIGATING");
+			Cond("AI_WAS_FIGHTING");
+			Cond("MANY_AIS");
+			//ShowSubtitles();
+			
+			Chatter("ChatterAlarmedPlayerEscapedGroup_01_Shooter01.ogg");
+			Chatter("ChatterAlarmedPlayerEscapedGroup_02_Shooter01.ogg");
+			Chatter("ChatterAlarmedPlayerEscapedGroup_03_Shooter01.ogg");
+			Chatter("ChatterAlarmedPlayerEscapedGroup_04_Shooter01.ogg");
+		}
+		
+		Cnd( 100, 5.0000, true, 10.0 )
+		{
+			// Spotting enemy for the first time
+			Cond("HAS_FIREARM");
+			Cond("NOT_KNOCKED_DOWN");
+			Cond("AI_SAW_ENEMY");
+			Cond("ENEMY_TYPE", 0);
+			Cond("SINGLE_AI");
+			//ShowSubtitles();
+			
+			Chatter("ChatterAlarmedPlayerSpottedSingle_01_Shooter01.ogg");
+			Chatter("ChatterAlarmedPlayerSpottedSingle_02_Shooter01.ogg");
+			Chatter("ChatterAlarmedPlayerSpottedSingle_03_Shooter01.ogg");
+			//Chatter("ChatterAlarmedPlayerSpottedSingle_04_Shooter01.ogg");
+			//Chatter("ChatterAlarmedPlayerSpottedSingle_05_Shooter01.ogg");
+			
+		}
+		
+		Cnd( 100, 5.0000, true, 10.0 )
+		{
+			// Spotting enemy for the first time
+			Cond("HAS_FIREARM");
+			Cond("NOT_KNOCKED_DOWN");
+			Cond("AI_SAW_ENEMY");
+			Cond("ENEMY_TYPE", 0);
+			Cond("MANY_AIS");
+			//ShowSubtitles();
+			
+			Chatter("ChatterAlarmedPlayerSpottedSingle_01_Shooter01.ogg");
+			Chatter("ChatterAlarmedPlayerSpottedSingle_02_Shooter01.ogg");
+			Chatter("ChatterAlarmedPlayerSpottedSingle_03_Shooter01.ogg");
+			
+			Chatter("ChatterAlarmedPlayerSpottedGroup_02_Shooter01.ogg");
+			Chatter("ChatterAlarmedPlayerSpottedGroup_03_Shooter01.ogg");
+			Chatter("ChatterAlarmedPlayerSpottedGroup_04_Shooter01.ogg");
+		}
+	}
+	
+	Cnd(100, 5.0000, true, 10.0 )
+	{
+		Cond("HAS_FIREARM");
+		Cond("NOT_KNOCKED_DOWN");
+		Cond("AI_NOTICES_DEAD_ALLY");
+		Cond("AI_TARGET_INVISIBLE", 2);
+		Cond("AI_IS_ALARMED");
+		Cond("ENEMY_TYPE", 0);
+		Cond("SINGLE_AI");
+		
+		Chatter("ChatterAlarmedCorpseSpottedSingle_01_Shooter01.ogg");
+		Chatter("ChatterAlarmedCorpseSpottedSingle_02_Shooter01.ogg");
+	}
+	
+	Cnd(100, 5.0000, true, 10.0 )
+	{
+		Cond("HAS_FIREARM");
+		Cond("NOT_KNOCKED_DOWN");
+		Cond("AI_NOTICES_DEAD_ALLY");
+		Cond("AI_TARGET_INVISIBLE", 2);
+		Cond("AI_IS_ALARMED");
+		Cond("ENEMY_TYPE", 0);
+		Cond("MANY_AIS");
+				
+		Chatter("ChatterAlarmedCorpseSpottedGroup_01_Shooter01.ogg");
+		Chatter("ChatterAlarmedCorpseSpottedGroup_02_Shooter01.ogg");
+	}
+	
+	
+	CndSet("fight_chatters", 12.0)
+	{	
+		Cnd(120, 10.0000, true, 15.0 )
+		{
+			Cond("HAS_FIREARM");
+			Cond("NOT_KNOCKED_DOWN");
+			Cond("AI_STARTS_FIGHTING_ENEMY");
+			Cond("ENEMY_TYPE", 0);
+			Cond("SINGLE_AI");
+			
+			Chatter("ChatterFightingOpeningSingle_01_Shooter01.ogg");
+			Chatter("ChatterFightingOpeningSingle_02_Shooter01.ogg");
+			Chatter("ChatterFightingOpeningSingle_03_Shooter01.ogg");
+			Chatter("ChatterFightingOpeningSingle_04_Shooter01.ogg");
+			Chatter("ChatterFightingOpeningSingle_05_Shooter01.ogg");
+		}
+		
+		Cnd(120, 10.0000, true, 15.0 )
+		{
+			Cond("HAS_FIREARM");
+			Cond("NOT_KNOCKED_DOWN");
+			Cond("AI_STARTS_FIGHTING_ENEMY");
+			Cond("ENEMY_TYPE", 0);
+			Cond("MANY_AIS");
+			
+			Chatter("ChatterFightingOpeningSingle_01_Shooter01.ogg");
+			Chatter("ChatterFightingOpeningSingle_02_Shooter01.ogg");
+			Chatter("ChatterFightingOpeningSingle_03_Shooter01.ogg");
+			Chatter("ChatterFightingOpeningSingle_04_Shooter01.ogg");
+			Chatter("ChatterFightingOpeningSingle_05_Shooter01.ogg");
+			
+			Chatter("ChatterFightingOpeningGroup_01_Shooter01.ogg");
+			Chatter("ChatterFightingOpeningGroup_02_Shooter01.ogg");
+			Chatter("ChatterFightingOpeningGroup_03_Shooter01.ogg");
+			Chatter("ChatterFightingOpeningGroup_04_Shooter01.ogg");
+			Chatter("ChatterFightingOpeningGroup_05_Shooter01.ogg");
+		}
+		
+		Cnd(110, 10.0000, true, 15.0 )
+		{
+			// Re-Spotting invisible enemy
+			Cond("HAS_FIREARM");
+			Cond("NOT_KNOCKED_DOWN");
+			Cond("AI_NOTICES_INVISIBLE_ENEMY");
+			Cond("ENEMY_TYPE", 0);
+			Cond("SINGLE_AI");
+			//ShowSubtitles();
+			
+			Chatter("ChatterFightingPlayerFoundSingle_01_Shooter01.ogg");
+			Chatter("ChatterFightingPlayerFoundSingle_02_Shooter01.ogg");
+			Chatter("ChatterFightingPlayerFoundSingle_03_Shooter01.ogg");
+		}
+		
+		Cnd(110, 20.0000, true, 15.0 )
+		{
+			// Re-Spotting invisible enemy
+			Cond("HAS_FIREARM");
+			Cond("NOT_KNOCKED_DOWN");
+			Cond("AI_NOTICES_INVISIBLE_ENEMY");
+			Cond("ENEMY_TYPE", 0);
+			Cond("MANY_AIS");
+			//ShowSubtitles();
+			
+			Chatter("ChatterFightingPlayerFoundSingle_01_Shooter01.ogg");
+			Chatter("ChatterFightingPlayerFoundSingle_02_Shooter01.ogg");
+			Chatter("ChatterFightingPlayerFoundSingle_03_Shooter01.ogg");
+			
+			Chatter("ChatterFightingPlayerFoundGroup_01_Shooter01.ogg");
+			Chatter("ChatterFightingPlayerFoundGroup_02_Shooter01.ogg");
+			Chatter("ChatterFightingPlayerFoundGroup_03_Shooter01.ogg");
+			Chatter("ChatterFightingPlayerFoundGroup_04_Shooter01.ogg");
+		}
+		
+		
+		Cnd(40.0000,  	15.0000, 	true, 15.0)
+		{
+			// chatters after successful attack was performed (human enemy was hit)
+			Cond("HAS_FIREARM");
+			Cond("AFTER_SUCCESSFUL_ATTACK_AT_ENEMY", 2); // validity after attack in seconds
+			Cond("NOT_KNOCKED_DOWN");
+			Cond("ENEMY_TYPE", 0);
+			Cond("SINGLE_AI");
+			
+			Chatter("ChatterFightingPlayerHitSingle_01_Shooter01.ogg");
+			Chatter("ChatterFightingPlayerHitSingle_02_Shooter01.ogg");
+			Chatter("ChatterFightingPlayerHitSingle_03_Shooter01.ogg");
+			Chatter("ChatterFightingPlayerHitSingle_04_Shooter01.ogg");
+		} 
+		
+		Cnd(40.0000,  	20.0000, 	true, 15.0)
+		{
+			// chatters after successful attack was performed (human enemy was hit)
+			Cond("HAS_FIREARM");
+			Cond("AFTER_SUCCESSFUL_ATTACK_AT_ENEMY", 2); // validity after attack in seconds
+			Cond("NOT_KNOCKED_DOWN");
+			Cond("ENEMY_TYPE", 0);
+			Cond("MANY_AIS");
+
+			Chatter("ChatterFightingPlayerHitGroup_01_Shooter01.ogg");
+			Chatter("ChatterFightingPlayerHitGroup_02_Shooter01.ogg");
+			Chatter("ChatterFightingPlayerHitGroup_03_Shooter01.ogg");
+			Chatter("ChatterFightingPlayerHitGroup_04_Shooter01.ogg");
+			Chatter("ChatterFightingPlayerHitGroup_05_Shooter01.ogg");
+		
+			Chatter("ChatterFightingPlayerHitGroupScared_01_Shooter01.ogg");
+			Chatter("ChatterFightingPlayerHitGroupScared_02_Shooter01.ogg");
+			Chatter("ChatterFightingPlayerHitGroupScared_03_Shooter01.ogg");
+			
+			Chatter("ChatterFightingPlayerHitSingle_01_Shooter01.ogg");
+			Chatter("ChatterFightingPlayerHitSingle_02_Shooter01.ogg");
+			Chatter("ChatterFightingPlayerHitSingle_03_Shooter01.ogg");
+			Chatter("ChatterFightingPlayerHitSingle_04_Shooter01.ogg");
+		} 
+		Cnd(70.0000,  	10.0000, 	true, 15.0)
+		{
+			// chatters after getting damage from human target
+			Cond("HAS_FIREARM");
+			Cond("GOT_DAMAGE_FROM_TARGET", 2);
+			Cond("NOT_KNOCKED_DOWN");
+			Cond("ENEMY_TYPE", 0);
+			Cond("SINGLE_AI");
+			
+			Chatter("ChatterFightingAIHitSingle_01_Shooter01.ogg");
+			Chatter("ChatterFightingAIHitSingle_02_Shooter01.ogg");
+			Chatter("ChatterFightingAIHitSingle_03_Shooter01.ogg");
+			Chatter("ChatterFightingAIHitSingle_04_Shooter01.ogg");
+			Chatter("ChatterFightingAIHitSingle_05_Shooter01.ogg");			
+		} 
+		
+		Cnd(70.0000,  	15.0000, 	true, 15.0)
+		{
+			// chatters after getting damage from human target
+			Cond("HAS_FIREARM");
+			Cond("GOT_DAMAGE_FROM_TARGET", 2);
+			Cond("NOT_KNOCKED_DOWN");
+			Cond("ENEMY_TYPE", 0);
+			Cond("MANY_AIS");
+			
+			Chatter("ChatterFightingAIHitSingle_01_Shooter01.ogg");
+			Chatter("ChatterFightingAIHitSingle_02_Shooter01.ogg");
+			Chatter("ChatterFightingAIHitSingle_03_Shooter01.ogg");
+			Chatter("ChatterFightingAIHitSingle_04_Shooter01.ogg");
+			Chatter("ChatterFightingAIHitSingle_05_Shooter01.ogg");
+			
+			Chatter("ChatterFightingAIHitGroup_01_Shooter01.ogg");
+			Chatter("ChatterFightingAIHitGroup_02_Shooter01.ogg");
+			Chatter("ChatterFightingAIHitGroup_03_Shooter01.ogg");
+			Chatter("ChatterFightingAIHitGroup_04_Shooter01.ogg");
+			Chatter("ChatterFightingAIHitGroup_05_Shooter01.ogg");
+			Chatter("ChatterFightingAIHitGroup_06_Shooter01.ogg");
+			
+			Chatter("ChatterFightingAIHitGroupScared_01_Shooter01.ogg");
+			Chatter("ChatterFightingAIHitGroupScared_02_Shooter01.ogg");
+			Chatter("ChatterFightingAIHitGroupScared_03_Shooter01.ogg");
+			Chatter("ChatterFightingAIHitGroupScared_04_Shooter01.ogg");
+			Chatter("ChatterFightingAIHitGroupScared_05_Shooter01.ogg");
+			Chatter("ChatterFightingAIHitGroupScared_06_Shooter01.ogg");
+			
+		} 
+		
+		Cnd(70.0000,  20.0000, 	true, 15.0)
+		{
+			// chatters after AI gets killed
+			Cond("HAS_FIREARM");
+			Cond("AI_KILLED_BY_PLAYER");
+			Cond("NOT_KNOCKED_DOWN");
+			Cond("ENEMY_TYPE", 0);
+			
+			Chatter("ChatterFightingAIKilledSingle_01_Shooter01.ogg");
+			Chatter("ChatterFightingAIKilledSingle_02_Shooter01.ogg");
+			Chatter("ChatterFightingAIKilledSingle_03_Shooter01.ogg");
+			
+			Chatter("ChatterFightingAIKilledGroup_01_Shooter01.ogg");
+			Chatter("ChatterFightingAIKilledGroup_02_Shooter01.ogg");
+			Chatter("ChatterFightingAIKilledGroup_03_Shooter01.ogg");
+			Chatter("ChatterFightingAIKilledGroup_04_Shooter01.ogg");
+			Chatter("ChatterFightingAIKilledGroup_05_Shooter01.ogg");
+			
+			Chatter("ChatterFightingAIKilledGroupScared_01_Shooter01.ogg");
+			Chatter("ChatterFightingAIKilledGroupScared_02_Shooter01.ogg");
+			Chatter("ChatterFightingAIKilledGroupScared_03_Shooter01.ogg");
+			Chatter("ChatterFightingAIKilledGroupScared_04_Shooter01.ogg");
+			
+		}
+		
+		Cnd( 5, 30.0000, true, 15.0 )
+		{
+			// Shooting taunt
+			Cond("HAS_FIREARM");
+			Cond("NOT_KNOCKED_DOWN");
+			Cond("HAS_ATTACK_TARGET");
+			Cond("DIST_TO_TARGET_HIGHER_THAN", 5);
+			Cond("ENEMY_TYPE", 0);
+			Cond("SINGLE_AI");
+			
+			Chatter("ChatterFightingShootoutSingle_01_Shooter01.ogg");
+			Chatter("ChatterFightingShootoutSingle_02_Shooter01.ogg");
+			Chatter("ChatterFightingShootoutSingle_03_Shooter01.ogg");
+			Chatter("ChatterFightingShootoutSingle_04_Shooter01.ogg");
+			Chatter("ChatterFightingShootoutSingle_05_Shooter01.ogg");
+		}
+		
+		Cnd( 5, 60.0000, true, 15.0 )
+		{
+			// Shooting taunt
+			Cond("HAS_FIREARM");
+			Cond("NOT_KNOCKED_DOWN");
+			Cond("HAS_ATTACK_TARGET");
+			Cond("DIST_TO_TARGET_HIGHER_THAN", 5);
+			Cond("ENEMY_TYPE", 0);
+			Cond("MANY_AIS");
+			
+			Chatter("ChatterFightingShootoutGroup_01_Shooter01.ogg");
+			Chatter("ChatterFightingShootoutGroup_02_Shooter01.ogg");
+			Chatter("ChatterFightingShootoutGroup_03_Shooter01.ogg");
+			Chatter("ChatterFightingShootoutGroup_04_Shooter01.ogg");
+			Chatter("ChatterFightingShootoutGroup_05_Shooter01.ogg");
+			Chatter("ChatterFightingShootoutGroup_06_Shooter01.ogg");
+		}
+		
+		Cnd( 15, 15.0000, true, 15.0 )
+		{
+			Cond("HAS_FIREARM");
+			Cond("NOT_KNOCKED_DOWN");
+			Cond("AI_TARGET_INVISIBLE_INCLUDING_NEARBY", 12);
+			Cond("AI_IS_FIGHTING");
+			Cond("ENEMY_TYPE", 0);
+			Cond("SINGLE_AI");
+			
+			Chatter("ChatterFightingPlayerLostSingle_01_Shooter01.ogg");
+			Chatter("ChatterFightingPlayerLostSingle_02_Shooter01.ogg");
+			Chatter("ChatterFightingPlayerLostSingle_03_Shooter01.ogg");
+		}
+		
+		Cnd( 15, 30.0000, true, 15.0 )
+		{
+			Cond("HAS_FIREARM");
+			Cond("NOT_KNOCKED_DOWN");
+			Cond("AI_TARGET_INVISIBLE_INCLUDING_NEARBY", 20);
+			Cond("AI_IS_FIGHTING");
+			Cond("ENEMY_TYPE", 0);
+			Cond("MANY_AIS");
+			
+			Chatter("ChatterFightingPlayerLostGroup_01_Shooter01.ogg");
+			Chatter("ChatterFightingPlayerLostGroup_02_Shooter01.ogg");
+			Chatter("ChatterFightingPlayerLostGroup_03_Shooter01.ogg");
+		}
+	}
+	
+	Cnd( 100, 5.0000, true, 15.0 )
+	{
+		// Throwingh grenade
+		Cond("AI_THROWS_GRENADE");
+		Cond("SINGLE_AI");
+		//ShowSubtitles();
+        
+		Chatter("ChatterFightingThrowingGrenadeSingle_01_Shooter01.ogg");
+		Chatter("ChatterFightingThrowingGrenadeSingle_02_Shooter01.ogg");		
+	}
+	
+	Cnd( 100, 5.0000, true, 15.0 )
+	{
+		// Throwingh grenade
+		Cond("AI_THROWS_GRENADE");
+		Cond("MANY_AIS");
+		//ShowSubtitles();
+		
+		Chatter("ChatterFightingThrowingGrenadeGroup_01_Shooter01.ogg");
+		Chatter("ChatterFightingThrowingGrenadeGroup_02_Shooter01.ogg");
+		Chatter("ChatterFightingThrowingGrenadeGroup_03_Shooter01.ogg");		
+	}
+}

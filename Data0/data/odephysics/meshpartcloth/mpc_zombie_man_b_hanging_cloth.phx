@@ -1,0 +1,74 @@
+!include("MeshPartCloth.def")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+MeshPartCloth()
+{
+//----------------------------------------------
+// bones
+//----------------------------------------------
+    BonesGridSize(2, 3)
+
+    $XDIST(f, -1)
+    $YDIST(f, -0.94)
+
+    Bone(0, 0, "bone_hanging_clotha_00", 1, XDIST, YDIST)
+    Bone(0, 1, "bone_hanging_clotha_01", 0, XDIST, YDIST)
+    Bone(0, 2, "",                       0, XDIST, YDIST)
+    
+    Bone(1, 0, "bone_hanging_clothb_00", 1, XDIST, YDIST)
+    Bone(1, 1, "bone_hanging_clothb_01", 0, XDIST, YDIST)
+    Bone(1, 2, "",                       0, XDIST, YDIST)
+    
+//----------------------------------------------
+// collisions 
+//----------------------------------------------
+
+    CollisionSlide(1)
+    CollisionSpeedMod(1)
+    CollisionBounce(0)
+    
+    CollisionShapesMoveInfluence(1)
+    
+    CollisionSegmentDivision(100)
+    CollisionNormalAngleThreshold(180)
+    
+    NodeCollisionSphereRadius(0.1)
+    ExternalCollisionAffectMul(0)
+    
+    CollisionCapsule("l_calf", -1, 0.08)
+    
+//----------------------------------------------
+// spring params 
+//----------------------------------------------
+
+    Viscous(2)
+    AirFriction(1)
+
+    StructuralStiffness(8000, 1000)
+    ShearStiffness(5000, 1000)
+    FlexionStiffness(5000, 1000)
+
+    HorizontSpringRatio(0.01)
+    
+    CheckLengthsStepsPerSec(0)
+
+//----------------------------------------------
+// physical params 
+//----------------------------------------------
+    
+    Mass(0.2)
+    GravityMul(1)
+    WindInfluence(1)
+
+//----------------------------------------------
+// other params
+//----------------------------------------------
+
+    SynchroWithPhysics(0)
+    EnableAPBOut(1)
+    
+    ObjectMoveMul(1)
+    AnimationMoveMul(0.5)
+}
+
+

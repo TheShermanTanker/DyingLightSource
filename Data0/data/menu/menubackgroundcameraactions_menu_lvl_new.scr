@@ -1,0 +1,56 @@
+// Defines a single camera action.
+!CameraAction(s, 			// Name of the menu screen where the action takes place. 
+			  s,			// Element that sent the action request (e.g. name of the button that was pressed)
+			  s,			// Name of the last shown screen.
+			  s,			// Request type. Possible values: "On3DBackgroundActivate", "OnButtonPressed", "OnBack", "OnShowScreen".
+			  s,			// Request param. Additional stuff can be provided here.
+			  s,			// Name of the movie that should be played in reaction.
+			  s)			// Target menu name.
+!MenuWithCameraActions(s)
+
+MenuWithCameraActions("MenuMain")
+MenuWithCameraActions("MenuOptions")
+MenuWithCameraActions("MenuExtras")
+MenuWithCameraActions("MenuPlayGame")
+MenuWithCameraActions("MenuPlayGameOnInvite")
+MenuWithCameraActions("MenuCustomMap")
+			  
+// On scene activation.
+CameraAction("", 				"", 				"",				"On3DBackgroundActivate", 	"", 	"Movie_exit_out", 		"MenuMain")
+// Main menu.
+//CameraAction("MenuMain", 		"B_Options", 		"", 			"OnButtonPressed", 			"", 	"Movie_options_in", 	"MenuOptions")
+//action triggered manually (from method MenuMainDI::PerformOptions()) to switch menu from "main" to "options" screen.
+CameraAction("MenuMain", 		"Options", 	        "", 			"OnShowScreen", 			"", 	"Movie_options_in", 	"MenuOptions")
+CameraAction("MenuOptions", 	"", 				"MenuMain", 	"OnShowScreen", 			"", 	"Movie_options_in", 	"MenuOptions")
+
+CameraAction("MenuMain", 		"B_Extras", 		"", 			"OnButtonPressed", 			"", 	"Movie_extras_in", 		"MenuExtras")
+CameraAction("MenuExtras", 		"", 				"MenuMain", 	"OnShowScreen", 			"", 	"Movie_extras_in", 		"MenuExtras")
+
+CameraAction("MenuMain", 		"B_CustomGame", 	"", 			"OnButtonPressed", 			"", 	"Movie_new_game_in", 	"MenuCustomMap")
+CameraAction("MenuCustomMap", 	"", 				"MenuMain", 	"OnShowScreen", 			"", 	"Movie_new_game_in", 	"MenuCustomMap")
+CameraAction("MenuCustomMap", 	"", 				"", 			"OnBack", 					"", 	"Movie_new_game_out", 	"MenuMain")
+CameraAction("MenuMain", 		"", 				"MenuCustomMap","OnShowScreen", 			"", 	"Movie_new_game_out", 	"MenuMain")
+
+//CameraAction("MenuMain", 		"B_PlayGame", 		"", 			"OnButtonPressed", 			"", 	"Movie_new_game_in", 	"MenuPlayGame")
+//CameraAction("MenuMain", 		"B_PlayAsZombie", 	"", 			"OnButtonPressed", 			"", 	"Movie_zombie_in", 		"MenuPlayGame")
+//action triggered manually (from MenuMainDI::PerformPlayGame() method) to switch menu from "main" to "play campaign" screen.
+CameraAction("MenuMain", 		"PlayCampaign", 	"", 			"OnShowScreen", 			"", 	"Movie_new_game_in", 	"MenuPlayGame")
+//action triggered manually (from MenuMainDI::PerformPlayAsZombie() method) to switch menu from "main" to "play as zombie" screen.
+CameraAction("MenuMain", 		"PlayAsZombie", 	"", 			"OnShowScreen", 			"", 	"Movie_zombie_in", 		"MenuPlayGame")
+
+//Temp camera action when switching to invite screen.
+CameraAction("", 				"PlayGameOnInvite", "", 			"OnShowScreen", 			"", 	"Movie_invite_game_in", 	"MenuPlayGameOnInvite")
+CameraAction("", 				"PlayGameOnInvite", "", 			"OnShowScreenOnInvite", 	"", 	"Movie_invite_game_in", 	"MenuPlayGameOnInvite")
+CameraAction("", 				"PlayGameOnInvite", "MenuMain", 	"OnShowScreenOnInvite", 	"", 	"Movie_invite_game_in", 	"MenuPlayGameOnInvite")
+
+
+CameraAction("MenuOptions", 	"", 				"", 			"OnBack", 					"", 	"Movie_options_out", 	"MenuMain")
+CameraAction("MenuMain", 		"", 				"MenuOptions", 	"OnShowScreen", 			"", 	"Movie_options_out", 	"MenuMain")
+CameraAction("MenuExtras", 		"", 				"", 			"OnBack", 					"", 	"Movie_extras_out", 	"MenuMain")
+CameraAction("MenuMain", 		"", 				"MenuExtras", 	"OnShowScreen", 			"", 	"Movie_extras_out", 	"MenuMain")
+CameraAction("MenuPlayGame", 	"", 				"", 			"OnBack", 					"", 	"Movie_new_game_out", 	"MenuMain")
+CameraAction("MenuMain", 		"", 				"MenuPlayGame", "OnShowScreen", 			"", 	"Movie_new_game_out", 	"MenuMain")
+CameraAction("MenuPlayGame", 	"", 				"", 			"OnBack", 					"BTZ", 	"Movie_zombie_out", 	"MenuMain")
+CameraAction("MenuMain", 		"", 				"MenuPlayGame", "OnShowScreen", 			"BTZ", 	"Movie_zombie_out", 	"MenuMain")
+
+CameraAction("MenuPlayGameOnInvite", "", "", "OnBack", "", "Movie_invite_game_out", "MenuMain")

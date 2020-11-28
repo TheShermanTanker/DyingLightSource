@@ -1,0 +1,167 @@
+!include("ai_data.def")
+!include("infected_timing_events.def")
+!include("infected_data_params.scr")
+
+// hive_brood
+
+////////////////////////////////////////////// DATA ///////////////////////////////////////////////
+
+//#######################
+//#### HIT REACTIONS ####
+//#######################
+//## hit_reaction:pose:hit_reaction:item_type:damage_type:attacker_pos:body_part:direction:severity
+//#######################
+
+Data("hit_reaction:standing:pain::all:::up:", -2, "hivebrood_stand_hitreaction_down_01", -1, 1)
+Data("hit_reaction:standing:pain::all:::up:", -2, "hivebrood_stand_hitreaction_down_02", -1, 1)
+Data("hit_reaction:standing:pain::all:::down:", -2, "hivebrood_stand_hitreaction_down_01", -1, 1)
+Data("hit_reaction:standing:pain::all:::down:", -2, "hivebrood_stand_hitreaction_down_02", -1, 1)
+Data("hit_reaction:standing:pain::all:::left:", -2, "hivebrood_stand_hitreaction_left_01", -1, 1)
+Data("hit_reaction:standing:pain::all:::left:", -2, "hivebrood_stand_hitreaction_left_02", -1, 1)
+Data("hit_reaction:standing:pain::all:::right:", -2, "hivebrood_stand_hitreaction_right_01", -1, 1)
+Data("hit_reaction:standing:pain::all:::right:", -2, "hivebrood_stand_hitreaction_right_02", -1, 1)
+Data("hit_reaction:standing:pain::all:::backward:", -2, "hivebrood_stand_hitreaction_down_01", -1, 1)
+Data("hit_reaction:standing:pain::all:::backward:", -2, "hivebrood_stand_hitreaction_down_02", -1, 1)
+Data("hit_reaction:standing:pain::all:::forward:", -2, "hivebrood_stand_hitreaction_down_01", -1, 1)
+Data("hit_reaction:standing:pain::all:::forward:", -2, "hivebrood_stand_hitreaction_down_02", -1, 1)
+
+
+
+//##############
+//#### IDLE ####
+//##############
+//## idle:pose:idle_type:item_type:is_idle_prepare:is_idle_finish
+//##############
+
+Data("idle:standing::stand:::", -2, "hivebrood_stand_idle_01", -1, 1)
+Data("idle:standing:upset:look_at:::", -2, "hivebrood_stand_idle_01", -1, 1)
+Data("idle:standing::scared:::", -2, "hivebrood_stand_idle_01", -1, 1)
+Data("idle:standing::scared:::", -2, "hivebrood_stand_idle_01", -1, 1)
+Data("idle:standing::scared:::", -2, "hivebrood_stand_idle_01", -1, 1)
+Data("idle:standing::offensive:::", -2, "hivebrood_stand_idle_01", -1, 1)
+
+
+
+///////////////////////////////////////////// CURVES //////////////////////////////////////////////
+
+Curve(CURVE_COMBO_PROBABILITY, "volatile_combo_prob")
+Curve(CURVE_SIGHT_RANGE_HEIGHT_REDUCTION_MUL, "volatile_sight_range_height_reduction_mul")
+Curve(CURVE_HEALTH, "hive_brood_health")
+
+/////////////////////////////////////////// PARAMETERS ////////////////////////////////////////////
+
+ParamBool("can_be_night_patroler", 0)
+ParamBool("attack_enabled", 0)
+ParamBool("taunt_on_alarm_level_change_at_night", 0)
+ParamBool("can_spit", 0)
+ParamBool("can_attack_from_move", 0)
+ParamBool("can_dodge", 0)
+ParamFloat("health_mul", 1.5) 
+ParamFloat("stamina_mul", 2.0)
+ParamFloat("damage_mul", 1.5)
+ParamBool("can_fall", 0)
+ParamFloat("experience_award", 0.0)
+ParamFloat("dodge_prob_mul", 0.0)
+ParamFloat("dodge_jump_prob", 0.0)
+ParamProb("taunt_prob", 0, 1) // taunt probability after failed berserker grab or target notice
+ParamFloat("taunt_prob_on_target_change", 0.0)
+ParamFloat("chase_time_to_scream", 10.0)
+ParamFloat("chase_scream_dist", 14.0)
+ParamInt("zombie_type", 16)
+ParamBool("navigate_through_generic_nav_mesh_connections", 1)
+ParamBool("navigate_through_user_nav_mesh_connections", 1)
+ParamBool("can_move_through_low_obstacles", 1)
+ParamBool("can_move_through_high_obstacles", 1)
+ParamFloat("max_connection_height_up", 11.0)
+ParamFloat("max_connection_height_down", 11.0)
+ParamFloat("max_connection_horiz_dist", -1.0)
+ParamFloat("wander_dist", 0.0)
+ParamFloat("sight_range", 0.0)
+ParamFloat("sight_range_calm", 0.0)
+ParamFloat("sight_range_mul_at_night", 1.0)
+ParamFloat("sight_angle_min_dist_calm", 0.0)
+ParamFloat("sight_angle_at_min_dist_calm", 0)
+ParamFloat("sight_angle_max_dist_calm", 0.0)
+ParamFloat("sight_angle_at_max_dist_calm", 0)
+ParamFloat("sight_angle_min_dist", 0)
+ParamFloat("sight_angle_at_min_dist", 0)
+ParamFloat("sight_angle_max_dist", 0)
+ParamFloat("sight_angle_at_max_dist", 0)
+ParamFloat("enemy_keep_time_alarmed", 0.0)
+ParamFloat("enemy_keep_time_upset", 0.0)
+ParamBool("can_patrol", 0)
+ParamFloat("combo_prob_mul", 0.0)
+ParamFloat("full_angle_sight_range", 0.0)
+ParamBool("can_die_of_sunlight", 0)
+ParamFloat("dist_to_chase_beyond_wander_dist", 10.0)
+ParamFloat("dist_from_target_to_chase_beyond_wander_dist", 5.0)
+ParamFloat("dist_from_target_to_chase_beyond_wander_dist_when_not_visible", 5.0)
+
+
+
+ParamBool("attack_range_2_m_enabled", 1)
+ParamFloatRange("dist_for_attack_range_2_m", -1.0, 2.0)
+ParamFloatRange("dist_for_attack_range_2_m_in_move", -1.0, 2.0)
+
+ParamBool("attack_range_3_m_enabled", 1)
+ParamFloatRange("dist_for_attack_range_3_m", 3.0, 5.0)
+ParamFloatRange("dist_for_attack_range_3_m_in_move", -1.0, 5.0)
+
+ParamBool("attack_range_4_m_enabled", 1)
+ParamFloatRange("dist_for_attack_range_4_m", 6.0, 7.5)
+ParamFloatRange("dist_for_attack_range_4_m_in_move", -1.0, 8.0)
+
+ParamFloat("max_dot_to_perform_attack_from_move", 0.9)
+ParamFloat("max_dot_to_perform_attack_from_stand", 0.9)
+ParamFloat("max_y_diff_from_target_to_perform_attack", 2.0)
+ParamFloat("counter_attack_prob_mul", 0.0)
+ParamFloat("attack_anim_related_turn_speed_limit", 120.0)
+ParamBool("disable_physics_damage_when_not_on_ragdoll", 1)
+ParamBool("cripple_bones_after_death_only", 1)
+ParamBool("cut_off_bones_after_death_only", 0)  //there is no mesh for head cut off
+ParamBool("can_destroy_head_before_death", 0)
+ParamFloat("alarm_after_enemy_visible_min_dist_time", -1.0)
+ParamFloat("alarm_after_enemy_visible_max_dist_time", -1.0)
+ParamFloat("alarm_when_enemy_close_min_distance", -1.0)
+ParamFloat("alarm_when_enemy_close_max_distance", -1.0)
+ParamBool("can_react_on_light", 1)
+ParamFloat("hearing_sensitivity", 0.0)
+ParamFloat("push_physics_damage_light", 3.0)
+ParamFloat("push_physics_damage_medium", 6.0)
+ParamFloat("push_physics_damage_heavy", 9.0)
+ParamFloat("jump_away_probability", 0.0)
+ParamFloat("max_dist_to_grab", 5.5)            // grab from stand start max distance //converted
+ParamFloat("max_jump_on_height", 1.5)
+ParamFloat("min_dist_to_grab", 3.0)
+ParamFloat("humanity_hit_reaction_prob", 0.0)
+
+ParamFloat("lost_target_search_dist_min", 4.0)
+ParamFloat("lost_target_search_dist_max", 14.0)
+
+ParamFloat("head_health_influence", 1.0)
+ParamFloat("head_health_influence_nightmare", 1.0)
+ParamFloat("left_arm_health_influence", 1.0)
+ParamFloat("right_arm_health_influence", 1.0)
+ParamFloat("left_leg_health_influence", 1.0)
+ParamFloat("right_leg_health_influence", 1.0)
+ParamFloat("torso_front_health_influence", 1.0)
+ParamFloat("torso_back_health_influence", 1.0)
+
+ParamFloat("head_damage_factor", 0.0)
+ParamFloat("head_damage_factor_nightmare", 0.0)
+ParamFloat("left_arm_damage_factor", 0.0)
+ParamFloat("right_arm_damage_factor", 0.0)
+ParamFloat("left_leg_damage_factor", 0.0)
+ParamFloat("right_leg_damage_factor", 0.0)
+ParamFloat("damage_taken_mul_per_level_diff", 0.0)
+
+ParamFloat("bullet_head_hit_damage_mult", 0.003)
+ParamFloat("bullet_body_hit_damage_mult", 0.02)
+ParamBool("can_take_damage_from_zombie_player", 0)
+ParamBool("has_glowing_eyes", 0)
+ParamBool("can_react_on_blast", 1)
+
+ParamBool("can_react_on_knife", 1)
+
+ParamFloat("min_time_btw_hit_reactions", 0.1)
+ParamBool("can_attack_objects_from_move", 0)

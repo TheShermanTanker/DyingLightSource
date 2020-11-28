@@ -1,0 +1,2519 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="old_town"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST CHAIN: MAGIC KINGDOM -->
+    <!-- QUEST NAME : RUPERT THE GUNSMITH -->
+    <!-- QUEST INFO : find grate gunsmith on Old Town -->
+    <!-- AFTER QUEST:  -->
+    <!-- COMMENT    : start of quest was moved from Old Town Historical -->
+    <!-- FROM       : >> OLD TOWN -->
+    <!-- TO         : >> OLD TONW INTERIOR A (Kindergarden) -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- start RUPERT THE GUNSMITH quest -->
+    <Quest
+         name="sq_FindRupert01"
+         parent="University02"
+         quest_giver="Fidan"
+         difficulty="medium"
+         reward_set="FindRupert_reward"
+         show_quest_log_reminder="true"
+         pxsl_line="16">
+        <Phase
+             type="OR"
+             name="RUPERT THE GUNSMITH - START"
+             pxsl_line="17">
+            <DebugPlayerPosition
+                 pxsl_line="18">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="sp_FindRupert_Fidan"
+                     pxsl_line="18" />
+            </DebugPlayerPosition>
+            <Path
+                 pxsl_line="19">
+                <Phase
+                     type="set lifeplace"
+                     name="_"
+                     interact_dist="4"
+                     pxsl_line="20">
+                    <LifePlace
+                         pxsl_line="20">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="LP_Univeristy_Fidan_Talk"
+                             pxsl_line="20" />
+                    </LifePlace>
+                </Phase>
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="Fidan"
+                     group="Fidan_FindRupert_USE"
+                     show_locations="false"
+                     questgiver_indicator="true"
+                     pxsl_line="21" />
+                <Phase
+                     type="set lifeplace"
+                     name="_"
+                     interact_dist="0"
+                     pxsl_line="22">
+                    <LifePlace
+                         pxsl_line="22">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="LP_Univeristy_Fidan_Talk"
+                             pxsl_line="22" />
+                    </LifePlace>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="23">
+                <Phase
+                     type="talk"
+                     name="SIDE: Magic Fortress - Helper Lea"
+                     speaker="Lea"
+                     group="Lea_MagicFortressHelper01_USE"
+                     show_locations="false"
+                     auto_start="false"
+                     questgiver_indicator="true"
+                     pxsl_line="24">
+                    <DebugPlayerPosition
+                         pxsl_line="25">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="sp_FindRupert_Fidan"
+                             pxsl_line="25" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="semaphore"
+                     name="_"
+                     pxsl_line="26" />
+            </Path>
+        </Phase>
+        <Phase
+             type="AND"
+             name="start actions"
+             pxsl_line="27">
+            <Path
+                 pxsl_line="27">
+                <Phase
+                     type="set lifeplace"
+                     name="_"
+                     interact_dist="0"
+                     pxsl_line="28">
+                    <LifePlace
+                         pxsl_line="28">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="LP_Univeristy_Fidan_Talk"
+                             pxsl_line="28" />
+                    </LifePlace>
+                </Phase>
+                <Phase
+                     type="use life place"
+                     name="_"
+                     move_style="walk"
+                     wait_for_move_end="false"
+                     pxsl_line="29">
+                    <LifePlace
+                         pxsl_line="29">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="LEA_LP_01"
+                             pxsl_line="29" />
+                    </LifePlace>
+                    <AI
+                         pxsl_line="30">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Lea"
+                             pxsl_line="30" />
+                    </AI>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="31">
+                    <Object
+                         pxsl_line="32">
+                        <QuestObject
+                             class="Encounter::EncounterBlockArea"
+                             name="magickingdom_kindergarden_encounter_blocker"
+                             pxsl_line="32" />
+                    </Object>
+                    <Object
+                         pxsl_line="33">
+                        <QuestObject
+                             class="ZoneBox"
+                             name="FindRupert_Zone_RupertsWorkshop_001"
+                             pxsl_line="33" />
+                    </Object>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="34">
+            <Destination
+                 pxsl_line="34">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="sp_FindRupert_Fidan"
+                     pxsl_line="34" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__HideCourtains"
+         parent="FindTheEmbers"
+         pxsl_line="36">
+        <!-- ,hide _ ModelObject university_a::HubUniversity_Courtain_After -->
+        <!-- save ?? -->
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="sq_FindRupert01"
+             finished="true"
+             show_locations="false"
+             pxsl_line="39" />
+        <Phase
+             type="gather players guard"
+             name="_"
+             distance="-30"
+             show_locations="false"
+             pxsl_line="40">
+            <Destination
+                 pxsl_line="40">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="sp_Univeristy_Balcony"
+                     pxsl_line="40" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="appear"
+             name="_"
+             mode="hide"
+             pxsl_line="41">
+            <Object
+                 pxsl_line="41">
+                <QuestObject
+                     class="ModelObject"
+                     name="university_a::HubUniversity_Courtain_Beafore"
+                     pxsl_line="41" />
+            </Object>
+        </Phase>
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="42">
+            <Object
+                 pxsl_line="42">
+                <QuestObject
+                     class="ModelObject"
+                     name="university_a::HubUniversity_Courtain_After"
+                     pxsl_line="42" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="43">
+            <Destination
+                 pxsl_line="43">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="sp_FindRupert_Fidan"
+                     pxsl_line="43" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="sq_FindRupert02"
+         parent="sq_FindRupert01"
+         glued="true"
+         pxsl_line="46">
+        <!-- ,BLOCK _ -obj=&FindRupert_OBJ_FindOut& -->
+            <!-- ,take <<RUPERT THE GUNSMITH - Find Rupert>> QuestInventoryItemDI FindRupert_Coolectable_001 -->
+                <!-- ,debugpos SpawnPoint sp_Rupert_House -->
+            <!-- ,enable _ ZoneBox MagicKingdom_ZB_Kindergaten -->
+            <!-- ,dialog _ Fidan -->
+            <!-- ,talk _ voice2d Player_FindRupert_01DLG01 -auto=true -show=false -->
+        <!-- ,checkpoint _ SpawnPoint sp_Rupert_House -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;FindRupert_OBJ_GoToKindergarden&amp;"
+             pxsl_line="56">
+            <Path
+                 pxsl_line="56">
+                <Phase
+                     type="go to"
+                     name="_"
+                     show_locations="false"
+                     pxsl_line="57">
+                    <Destination
+                         pxsl_line="57">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="MagicKingdom_goto_Kindergaten"
+                             pxsl_line="57" />
+                    </Destination>
+                    <SpecificLocation
+                         pxsl_line="58">
+                        <QuestObject
+                             class="ZoneBox"
+                             name="MagicKingdom_ZB_Kindergaten"
+                             pxsl_line="58" />
+                    </SpecificLocation>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="59">
+                    <Object
+                         pxsl_line="59">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="sp_Kindergarten_Parking"
+                             pxsl_line="59" />
+                    </Object>
+                </Phase>
+                <!-- SpawnPoint sp_Kindergarten_Parking -->
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="60">
+                    <Destination
+                         pxsl_line="60">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="sp_MKingdom_Kindergarten_OldTown_Int_A_To_OldTown"
+                             pxsl_line="60" />
+                    </Destination>
+                </Phase>
+                <!-- ,BLOCK _ -obj=&FindRupert_OBJ_FindEntrance& -->
+                <!-- ,OR <<RUPERT THE GUNSMITH - Go to Kindergarden>> -->
+                    <!-- ,debugpos SpawnPoint sp_Kindergarten_Parking -->
+                    <!-- path -->
+                        <!-- ,use _ DoorDI FindRupert_DoorDI_Door_01 -state=locked_checked -show=false -->
+                            <!-- ,area ZoneBox MagicKingdom_ZB_Kindergaten -->
+                        <!-- ,wait _ 1 -->
+                        <!-- ,radio-dialog _ voice2d Player_FindRupert_04DLG01 -->
+                        <!-- ,goto _ Marker FindRupert_Marker_FAKE -show=false -distance=0.1 -->
+                            <!-- ,area ZoneBox MagicKingdom_ZB_KindergatenPortal -= MagicKingdom_ZB_Kindergaten -->
+                    <!-- path -->
+                <Phase
+                     type="go to"
+                     name="RUPERT THE GUNSMITH - Enter Kindergarten"
+                     distance="3"
+                     show_locations="false"
+                     pxsl_line="73">
+                    <Destination
+                         pxsl_line="73">
+                        <QuestObject
+                             class="Marker"
+                             name="sq_FindRupert_Marker_Door_01"
+                             pxsl_line="73" />
+                    </Destination>
+                    <SpecificLocation
+                         pxsl_line="74">
+                        <QuestObject
+                             class="ZoneBox"
+                             name="MagicKingdom_ZB_KindergatenPortal"
+                             pxsl_line="74" />
+                    </SpecificLocation>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="75">
+                    <Object
+                         pxsl_line="76">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="sp_MKingdom_Kindergarten_OldTown_Int_A_To_OldTown"
+                             pxsl_line="76" />
+                    </Object>
+                    <Object
+                         pxsl_line="77">
+                        <QuestObject
+                             class="MapPortal"
+                             name="portal_MKingdom_Kindergarten_OldTown_To_OldTown_Int_A"
+                             pxsl_line="77" />
+                    </Object>
+                    <Object
+                         pxsl_line="78">
+                        <QuestObject
+                             class="SafeZone"
+                             name="magickingdom_respawn"
+                             pxsl_line="78" />
+                    </Object>
+                    <Object
+                         pxsl_line="79">
+                        <QuestObject
+                             class="SpawnBlocker"
+                             name="magickingdom_kindergarden_spawn_blocker"
+                             pxsl_line="79" />
+                    </Object>
+                </Phase>
+                <!-- enabling quest hub kindergarten -->
+                <!-- SpawnPoint sp_Kindergarten_Parking -->
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="82">
+                    <Destination
+                         pxsl_line="82">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="sp_MKingdom_Kindergarten_OldTown_Int_A_To_OldTown"
+                             pxsl_line="82" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST CHAIN: MAGIC KINGDOM -->
+    <!-- QUEST NAME : Ugly Monsters -->
+    <!-- QUEST INFO : kill Goon and Demolisher from kindergarden parking -->
+    <!-- AFTER QUEST: RUPERT THE GUNSMITH -->
+    <!-- COMMENT    :  -->
+    <!-- FROM       : >> OLD TOWN INTERIOR A (Kindergarden) -->
+    <!-- TO         : >> OLD TONW -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="UglyMonster02"
+         parent="UglyMonster01"
+         glued="true"
+         leading_portal="portal_KMingdom_Kindergarten_OldTown_Int_A_To_OldTown"
+         pxsl_line="95">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;UglyMonster_OBJ_Troll&amp;"
+             pxsl_line="96">
+            <Path
+                 pxsl_line="96">
+                <Phase
+                     type="AND"
+                     name="UGLY MONSTER - Kill Zombies"
+                     pxsl_line="97">
+                    <DebugPlayerPosition
+                         pxsl_line="98">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="sp_MKingdom_Kindergarten_OldTown_Int_A_To_OldTown"
+                             pxsl_line="98" />
+                    </DebugPlayerPosition>
+                    <Path
+                         pxsl_line="100">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="100"
+                             pxsl_line="101">
+                            <Destination
+                                 pxsl_line="101">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="sp_MKingdom_Kindergarten_OldTown_Int_A_To_OldTown"
+                                     pxsl_line="101" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="103">
+                        <Phase
+                             type="AND"
+                             name="clear things from RUPERT THE GUNSMITH"
+                             pxsl_line="104">
+                            <Path
+                                 pxsl_line="104">
+                                <Phase
+                                     type="appear"
+                                     name="_"
+                                     mode="show"
+                                     pxsl_line="105">
+                                    <Object
+                                         pxsl_line="106">
+                                        <QuestObject
+                                             class="AIDeadBodySpawnBoxAuto"
+                                             name="magickingdom_um_deadbody_g1_01"
+                                             pxsl_line="106" />
+                                    </Object>
+                                    <Object
+                                         pxsl_line="107">
+                                        <QuestObject
+                                             class="AIDeadBodySpawnBoxAuto"
+                                             name="magickingdom_um_deadbody_g1_02"
+                                             pxsl_line="107" />
+                                    </Object>
+                                    <Object
+                                         pxsl_line="108">
+                                        <QuestObject
+                                             class="AIDeadBodySpawnBoxAuto"
+                                             name="magickingdom_um_deadbody_g2_01"
+                                             pxsl_line="108" />
+                                    </Object>
+                                    <Object
+                                         pxsl_line="109">
+                                        <QuestObject
+                                             class="AIDeadBodySpawnBoxAuto"
+                                             name="magickingdom_um_deadbody_g2_02"
+                                             pxsl_line="109" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="111">
+                            <Object
+                                 pxsl_line="112">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="qeg_UMosters_ZombieNearKindergarten_01"
+                                     pxsl_line="112" />
+                            </Object>
+                            <Object
+                                 pxsl_line="113">
+                                <QuestObject
+                                     class="Encounter::EncounterBlockArea"
+                                     name="magickingdom_uglymonster_eba"
+                                     pxsl_line="113" />
+                            </Object>
+                            <Object
+                                 pxsl_line="114">
+                                <QuestObject
+                                     class="SensorAmbientMusicArea"
+                                     name="magickingdom_SAMA_parkinglot"
+                                     pxsl_line="114" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="115">
+                            <Object
+                                 pxsl_line="116">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="HealthPotion_spawner_01"
+                                     pxsl_line="116" />
+                            </Object>
+                            <Object
+                                 pxsl_line="117">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="HealthPotion_spawner_02"
+                                     pxsl_line="117" />
+                            </Object>
+                            <Object
+                                 pxsl_line="118">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="HealthPotion_spawner_03"
+                                     pxsl_line="118" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="119">
+                    <Destination
+                         pxsl_line="119">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="sp_MKingdom_Kindergarten_OldTown_Int_A_To_OldTown"
+                             pxsl_line="119" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="121">
+                    <Path
+                         pxsl_line="122">
+                        <Phase
+                             type="kill"
+                             name="_"
+                             pxsl_line="123">
+                            <Spawner
+                                 pxsl_line="123">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="sbn_UMonsters_zombie_thug"
+                                     pxsl_line="123" />
+                            </Spawner>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="124">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="125">
+                            <Destination
+                                 pxsl_line="125">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="UglyMonster_GoTo_001"
+                                     pxsl_line="125" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="3"
+                             pxsl_line="126" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="127">
+                            <Object
+                                 pxsl_line="127">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="UglyMonster_QEG_Music_01"
+                                     pxsl_line="127" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <!-- SpawnPoint sp_Kindergarten_Parking -->
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="129">
+                    <Destination
+                         pxsl_line="129">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="sp_MKingdom_Kindergarten_OldTown_Int_A_To_OldTown"
+                             pxsl_line="129" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="1"
+                     pxsl_line="130" />
+                <Phase
+                     type="talk"
+                     name="UGLY MONSTER - After Goon"
+                     speaker="voice2d"
+                     group="Player_UglyMonster_03DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="131">
+                    <DebugPlayerPosition
+                         pxsl_line="132">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="sp_Kindergarten_Parking"
+                             pxsl_line="132" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <!-- enabling armored -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="135">
+                    <Object
+                         pxsl_line="135">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="spawner_UMonsters_zombie_04::qeg_spawner_Armored"
+                             pxsl_line="135" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="2"
+                     pxsl_line="137" />
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="voice2d"
+                     group="Rupert_UglyMonster_04DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="138" />
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="140">
+                    <Path
+                         pxsl_line="141">
+                        <Phase
+                             type="kill"
+                             name="_"
+                             pxsl_line="142">
+                            <Spawner
+                                 pxsl_line="142">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="spawner_UMonsters_zombie_04::spawner_Armored"
+                                     pxsl_line="142" />
+                            </Spawner>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="143">
+                            <Object
+                                 pxsl_line="144">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="spawner_UMonsters_zombie_04::qeg_spawner_Armored"
+                                     pxsl_line="144" />
+                            </Object>
+                            <Object
+                                 pxsl_line="145">
+                                <QuestObject
+                                     class="SensorAmbientMusicArea"
+                                     name="magickingdom_SAMA_parkinglot"
+                                     pxsl_line="145" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="146">
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="3"
+                             pxsl_line="147" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="148">
+                            <Object
+                                 pxsl_line="149">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="magickingdom_um_deadbody_g2_01"
+                                     pxsl_line="149" />
+                            </Object>
+                            <Object
+                                 pxsl_line="150">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="magickingdom_um_deadbody_g2_02"
+                                     pxsl_line="150" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="2"
+                     pxsl_line="152" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="153">
+                    <Object
+                         pxsl_line="154">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="UglyMonster_QEG_Music_01"
+                             pxsl_line="154" />
+                    </Object>
+                    <Object
+                         pxsl_line="155">
+                        <QuestObject
+                             class="Encounter::EncounterBlockArea"
+                             name="magickingdom_uglymonster_eba"
+                             pxsl_line="155" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_UglyMonster_05DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="156" />
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="1"
+                     pxsl_line="157" />
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="voice2d"
+                     group="Rupert_UglyMonster_06DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="158" />
+                <!-- CHECKPOINT! -= -->
+                <Phase
+                     type="checkpoint"
+                     name="UGLY MONSTER - Return to Rupert WorkShop"
+                     pxsl_line="161">
+                    <Destination
+                         pxsl_line="161">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="sp_MKingdom_Kindergarten_OldTown_Int_A_To_OldTown"
+                             pxsl_line="161" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="162">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="sp_MKingdom_Kindergarten_OldTown_Int_A_To_OldTown"
+                             pxsl_line="162" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <!-- CHECKPOINT! -= -->
+            </Path>
+        </Phase>
+    </Quest>
+    <Quest
+         name="UglyMonster03"
+         parent="UglyMonster02"
+         glued="true"
+         pxsl_line="165">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;UglyMonster_OBJ_ReturnToRupert&amp;"
+             pxsl_line="166">
+            <Path
+                 pxsl_line="166">
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="167">
+                    <Object
+                         pxsl_line="167">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="findrupert::QEG"
+                             pxsl_line="167" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="15"
+                     show_locations="true"
+                     pxsl_line="168">
+                    <Destination
+                         pxsl_line="168">
+                        <QuestObject
+                             class="DoorDI"
+                             name="door_RouperWorkShop"
+                             pxsl_line="168" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="clear area"
+                     name="_"
+                     show_location="false"
+                     show="false"
+                     show_locations="false"
+                     visualize_count="1"
+                     pxsl_line="169">
+                    <Object
+                         pxsl_line="169">
+                        <QuestObject
+                             class="ClearArea"
+                             name="RupertWorkShop_CA01"
+                             pxsl_line="169" />
+                    </Object>
+                    <SpecificLocation
+                         pxsl_line="170">
+                        <QuestObject
+                             class="ZoneBox"
+                             name="RupertWorkShop_CA01_Zone01"
+                             pxsl_line="170" />
+                    </SpecificLocation>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="171">
+                    <Object
+                         pxsl_line="172">
+                        <QuestObject
+                             class="HubZone"
+                             name="Workshop"
+                             pxsl_line="172" />
+                    </Object>
+                    <Object
+                         pxsl_line="173">
+                        <QuestObject
+                             class="SafeDestination"
+                             name="Rupert_SD"
+                             pxsl_line="173" />
+                    </Object>
+                    <Object
+                         pxsl_line="174">
+                        <QuestObject
+                             class="IntensityArea"
+                             name="RupertWorkShop_IA01"
+                             pxsl_line="174" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="175">
+                    <Object
+                         pxsl_line="175">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Rupert"
+                             pxsl_line="175" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="set state"
+                     name="_"
+                     desired_state="closed"
+                     pxsl_line="176">
+                    <Trigger
+                         pxsl_line="176">
+                        <QuestObject
+                             class="DoorDI"
+                             name="door_RouperWorkShop"
+                             pxsl_line="176" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="Rupert"
+                     group="Rupert_UglyMonster_END"
+                     pxsl_line="177" />
+                <Phase
+                     type="set reward"
+                     name="_"
+                     speaker="rupert"
+                     pxsl_line="178" />
+                <!-- CHECKPOINT! -= -->
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="180">
+                    <Destination
+                         pxsl_line="180">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="sp_MKingdom_Kindergarten_OldTown_Int_A_To_OldTown"
+                             pxsl_line="180" />
+                    </Destination>
+                </Phase>
+                <!-- CHECKPOINT! -= -->
+            </Path>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__UglyMonster_Rupert"
+         parent="UglyMonster03"
+         pxsl_line="183">
+        <Phase
+             type="gather players guard"
+             name="_"
+             distance="-50"
+             show_locations="false"
+             pxsl_line="184">
+            <Destination
+                 pxsl_line="184">
+                <QuestObject
+                     class="HumanAI"
+                     name="Rupert"
+                     pxsl_line="184" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="appear"
+             name="_"
+             mode="hide"
+             pxsl_line="185">
+            <Object
+                 pxsl_line="185">
+                <QuestObject
+                     class="HumanAI"
+                     name="Rupert"
+                     pxsl_line="185" />
+            </Object>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="186">
+            <Object
+                 pxsl_line="187">
+                <QuestObject
+                     class="HubZone"
+                     name="Workshop"
+                     pxsl_line="187" />
+            </Object>
+            <Object
+                 pxsl_line="188">
+                <QuestObject
+                     class="SafeDestination"
+                     name="Rupert_SD"
+                     pxsl_line="188" />
+            </Object>
+            <Object
+                 pxsl_line="189">
+                <QuestObject
+                     class="IntensityArea"
+                     name="RupertWorkShop_IA01"
+                     pxsl_line="189" />
+            </Object>
+            <Object
+                 pxsl_line="190">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="findrupert::QEG"
+                     pxsl_line="190" />
+            </Object>
+        </Phase>
+        <!-- CHECKPOINT! -= -->
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="194">
+            <Destination
+                 pxsl_line="194">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="sp_MKingdom_Kindergarten_OldTown_Int_A_To_OldTown"
+                     pxsl_line="194" />
+            </Destination>
+        </Phase>
+        <!-- CHECKPOINT! -= -->
+    </Quest>
+    <Quest
+         name="__UglyMonster_WeaponBoxes"
+         parent="UglyMonster02"
+         pxsl_line="197">
+        <Phase
+             type="AND"
+             name="_"
+             pxsl_line="198">
+            <Path
+                 pxsl_line="199">
+                <Phase
+                     type="loot container"
+                     name="_"
+                     show_locations="false"
+                     show_indicator="false"
+                     pxsl_line="200">
+                    <ComplexContainer
+                         pxsl_line="200">
+                        <QuestObject
+                             class="ComplexContainer"
+                             name="UglyMonster_Weapon1"
+                             pxsl_line="200" />
+                    </ComplexContainer>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="201">
+                    <Object
+                         pxsl_line="201">
+                        <QuestObject
+                             class="ComplexContainer"
+                             name="UglyMonster_Weapon1"
+                             pxsl_line="201" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="gather players guard"
+                     name="_"
+                     distance="-50"
+                     show_locations="false"
+                     pxsl_line="202">
+                    <Destination
+                         pxsl_line="202">
+                        <QuestObject
+                             class="ComplexContainer"
+                             name="UglyMonster_Weapon1"
+                             pxsl_line="202" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="203">
+                    <Object
+                         pxsl_line="203">
+                        <QuestObject
+                             class="ComplexContainer"
+                             name="UglyMonster_Weapon1"
+                             pxsl_line="203" />
+                    </Object>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="204">
+                <Phase
+                     type="loot container"
+                     name="_"
+                     show_locations="false"
+                     show_indicator="false"
+                     pxsl_line="205">
+                    <ComplexContainer
+                         pxsl_line="205">
+                        <QuestObject
+                             class="ComplexContainer"
+                             name="UglyMonster_Weapon2"
+                             pxsl_line="205" />
+                    </ComplexContainer>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="206">
+                    <Object
+                         pxsl_line="206">
+                        <QuestObject
+                             class="ComplexContainer"
+                             name="UglyMonster_Weapon2"
+                             pxsl_line="206" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="gather players guard"
+                     name="_"
+                     distance="-50"
+                     show_locations="false"
+                     pxsl_line="207">
+                    <Destination
+                         pxsl_line="207">
+                        <QuestObject
+                             class="ComplexContainer"
+                             name="UglyMonster_Weapon2"
+                             pxsl_line="207" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="208">
+                    <Object
+                         pxsl_line="208">
+                        <QuestObject
+                             class="ComplexContainer"
+                             name="UglyMonster_Weapon2"
+                             pxsl_line="208" />
+                    </Object>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="210">
+                <Phase
+                     type="loot container"
+                     name="_"
+                     show_locations="false"
+                     show_indicator="false"
+                     pxsl_line="211">
+                    <ComplexContainer
+                         pxsl_line="211">
+                        <QuestObject
+                             class="ComplexContainer"
+                             name="UglyMonster_Weapon3"
+                             pxsl_line="211" />
+                    </ComplexContainer>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="212">
+                    <Object
+                         pxsl_line="212">
+                        <QuestObject
+                             class="ComplexContainer"
+                             name="UglyMonster_Weapon3"
+                             pxsl_line="212" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="gather players guard"
+                     name="_"
+                     distance="-50"
+                     show_locations="false"
+                     pxsl_line="213">
+                    <Destination
+                         pxsl_line="213">
+                        <QuestObject
+                             class="ComplexContainer"
+                             name="UglyMonster_Weapon3"
+                             pxsl_line="213" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="214">
+                    <Object
+                         pxsl_line="214">
+                        <QuestObject
+                             class="ComplexContainer"
+                             name="UglyMonster_Weapon3"
+                             pxsl_line="214" />
+                    </Object>
+                </Phase>
+            </Path>
+        </Phase>
+        <!-- CHECKPOINT! -= -->
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="218">
+            <Destination
+                 pxsl_line="218">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="sp_MKingdom_Kindergarten_OldTown_Int_A_To_OldTown"
+                     pxsl_line="218" />
+            </Destination>
+        </Phase>
+        <!-- CHECKPOINT! -= -->
+    </Quest>
+    <Quest
+         name="sq_UglyMonster02_kill"
+         parent="FindTheEmbers"
+         glued="false"
+         pxsl_line="221">
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="222">
+            <Object
+                 pxsl_line="222">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="qeg_UMosters_ZombieNearKindergarten_02"
+                     pxsl_line="222" />
+            </Object>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             pxsl_line="223">
+            <Path
+                 pxsl_line="224">
+                <Phase
+                     type="kill"
+                     name="_"
+                     show_locations="false"
+                     pxsl_line="225">
+                    <Spawner
+                         pxsl_line="225">
+                        <QuestObject
+                             class="AIDeadBodySpawnBoxAuto"
+                             name="dbsba_UMonsters_zombie_01"
+                             pxsl_line="225" />
+                    </Spawner>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="226">
+                    <Object
+                         pxsl_line="226">
+                        <QuestObject
+                             class="AIDeadBodySpawnBoxAuto"
+                             name="dbsba_UMonsters_zombie_01"
+                             pxsl_line="226" />
+                    </Object>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="227">
+                <Phase
+                     type="kill"
+                     name="_"
+                     show_locations="false"
+                     pxsl_line="228">
+                    <Spawner
+                         pxsl_line="228">
+                        <QuestObject
+                             class="AIDeadBodySpawnBoxAuto"
+                             name="dbsba_UMonsters_zombie_03"
+                             pxsl_line="228" />
+                    </Spawner>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="229">
+                    <Object
+                         pxsl_line="229">
+                        <QuestObject
+                             class="AIDeadBodySpawnBoxAuto"
+                             name="dbsba_UMonsters_zombie_03"
+                             pxsl_line="229" />
+                    </Object>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="230">
+                <Phase
+                     type="kill"
+                     name="_"
+                     show_locations="false"
+                     pxsl_line="231">
+                    <Spawner
+                         pxsl_line="231">
+                        <QuestObject
+                             class="AIDeadBodySpawnBoxAuto"
+                             name="dbsba_UMonsters_zombie_04"
+                             pxsl_line="231" />
+                    </Spawner>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="232">
+                    <Object
+                         pxsl_line="232">
+                        <QuestObject
+                             class="AIDeadBodySpawnBoxAuto"
+                             name="dbsba_UMonsters_zombie_04"
+                             pxsl_line="232" />
+                    </Object>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="233">
+                <Phase
+                     type="kill"
+                     name="_"
+                     show_locations="false"
+                     pxsl_line="234">
+                    <Spawner
+                         pxsl_line="234">
+                        <QuestObject
+                             class="AIDeadBodySpawnBoxAuto"
+                             name="dbsba_UMonsters_zombie_05"
+                             pxsl_line="234" />
+                    </Spawner>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="235">
+                    <Object
+                         pxsl_line="235">
+                        <QuestObject
+                             class="AIDeadBodySpawnBoxAuto"
+                             name="dbsba_UMonsters_zombie_05"
+                             pxsl_line="235" />
+                    </Object>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="236">
+            <Object
+                 pxsl_line="236">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="qeg_UMosters_ZombieNearKindergarten_02"
+                     pxsl_line="236" />
+            </Object>
+        </Phase>
+        <!-- SpawnPoint sp_Kindergarten_Parking -->
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="237">
+            <Destination
+                 pxsl_line="237">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="sp_MKingdom_Kindergarten_OldTown_Int_A_To_OldTown"
+                     pxsl_line="237" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- GO TO - Old Town Interior A - Kindergarden -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST CHAIN: MAGIC KINGDOM -->
+    <!-- QUEST NAME : Health Potion -->
+    <!-- QUEST INFO : find drugs for sick kid -->
+    <!-- AFTER QUEST: Ugly Monsters -->
+    <!-- COMMENT    :  -->
+    <!-- FROM       : >> OLD TOWN INTERIOR A (Kindergarden) -->
+    <!-- TO         : >> OLD TONW -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="HealthPotion02"
+         parent="HealthPotion01"
+         glued="true"
+         leading_portal="portal_KMingdom_Kindergarten_OldTown_Int_A_To_OldTown"
+         pxsl_line="251">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;HealthPotion_OBJ_SearchForInsulin&amp;"
+             pxsl_line="252">
+            <Path
+                 pxsl_line="252">
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="253">
+                    <Path
+                         pxsl_line="254">
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="255">
+                            <Object
+                                 pxsl_line="255">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="HealthPotion_GO_Hide2"
+                                     pxsl_line="255" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="256">
+                            <Object
+                                 pxsl_line="256">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="sp_MKingdom_Kindergarten_OldTown_Int_A_To_OldTown"
+                                     pxsl_line="256" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="257">
+                            <Object
+                                 pxsl_line="257">
+                                <QuestObject
+                                     class="CrowdSpawner"
+                                     name="Arena_Crowd_Arena02"
+                                     pxsl_line="257" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="set state"
+                             name="_"
+                             desired_state="lockpick"
+                             pxsl_line="258">
+                            <Trigger
+                                 pxsl_line="258">
+                                <QuestObject
+                                     class="DoorDI"
+                                     name="HealtPotion_Pharmacy_Door"
+                                     pxsl_line="258" />
+                            </Trigger>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="259">
+                        <Phase
+                             type="go to"
+                             name="HEALTH POTION - Go to Pharmacy"
+                             distance="100"
+                             show_locations="true"
+                             pxsl_line="260">
+                            <Destination
+                                 pxsl_line="260">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="sp_MKingdom_Kindergarten_OldTown_Int_A_To_OldTown"
+                                     pxsl_line="260" />
+                            </Destination>
+                            <DebugPlayerPosition
+                                 pxsl_line="261">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="sp_MKingdom_Kindergarten_OldTown_Int_A_To_OldTown"
+                                     pxsl_line="261" />
+                            </DebugPlayerPosition>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="263">
+                    <Path
+                         pxsl_line="263">
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="264">
+                            <Object
+                                 pxsl_line="265">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="magickingdom_um_deadbody_g1_01"
+                                     pxsl_line="265" />
+                            </Object>
+                            <Object
+                                 pxsl_line="266">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="magickingdom_um_deadbody_g1_02"
+                                     pxsl_line="266" />
+                            </Object>
+                            <Object
+                                 pxsl_line="267">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="magickingdom_um_deadbody_g2_01"
+                                     pxsl_line="267" />
+                            </Object>
+                            <Object
+                                 pxsl_line="268">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="magickingdom_um_deadbody_g2_02"
+                                     pxsl_line="268" />
+                            </Object>
+                            <Object
+                                 pxsl_line="269">
+                                <QuestObject
+                                     class="SpawnBlocker"
+                                     name="magickingdom_kindergarden_spawn_blocker"
+                                     pxsl_line="269" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="270">
+                            <Object
+                                 pxsl_line="271">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="magickingdom_um_deadbody_g1_01"
+                                     pxsl_line="271" />
+                            </Object>
+                            <Object
+                                 pxsl_line="272">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="magickingdom_um_deadbody_g1_02"
+                                     pxsl_line="272" />
+                            </Object>
+                            <Object
+                                 pxsl_line="273">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="magickingdom_um_deadbody_g2_01"
+                                     pxsl_line="273" />
+                            </Object>
+                            <Object
+                                 pxsl_line="274">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="magickingdom_um_deadbody_g2_02"
+                                     pxsl_line="274" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="275">
+                            <Object
+                                 pxsl_line="276">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="HealthPotion_spawner_01"
+                                     pxsl_line="276" />
+                            </Object>
+                            <Object
+                                 pxsl_line="277">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="HealthPotion_spawner_02"
+                                     pxsl_line="277" />
+                            </Object>
+                            <Object
+                                 pxsl_line="278">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="HealthPotion_spawner_03"
+                                     pxsl_line="278" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="279">
+                    <Destination
+                         pxsl_line="279">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="sp_MKingdom_Kindergarten_OldTown_Int_A_To_OldTown"
+                             pxsl_line="279" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="280">
+                    <Path
+                         pxsl_line="280">
+                        <Phase
+                             type="AND"
+                             name="HEALTH POTION - Search Pharmacy"
+                             pxsl_line="282">
+                            <DebugPlayerPosition
+                                 pxsl_line="283">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="sp_Pharmacy"
+                                     pxsl_line="283" />
+                            </DebugPlayerPosition>
+                            <Path
+                                 pxsl_line="284">
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     pxsl_line="285">
+                                    <Object
+                                         pxsl_line="285">
+                                        <QuestObject
+                                             class="QuestEnableGroup"
+                                             name="qeg_MK_HeatlhPotion_01_zombies"
+                                             pxsl_line="285" />
+                                    </Object>
+                                </Phase>
+                                <Phase
+                                     type="AND"
+                                     name="Search Pharmacy01 at Blue"
+                                     pxsl_line="286">
+                                    <SpecificLocation
+                                         pxsl_line="287">
+                                        <QuestObject
+                                             class="ZoneBox"
+                                             name="sq_healthpotion_ZB_pharmacy_01"
+                                             pxsl_line="287" />
+                                    </SpecificLocation>
+                                    <Path
+                                         pxsl_line="288">
+                                        <Phase
+                                             type="use"
+                                             name="_"
+                                             show_locations="false"
+                                             pxsl_line="289">
+                                            <Trigger
+                                                 pxsl_line="289">
+                                                <QuestObject
+                                                     class="ComplexContainer"
+                                                     name="HealthPotion_Farmacy_Fridge01"
+                                                     pxsl_line="289" />
+                                            </Trigger>
+                                        </Phase>
+                                    </Path>
+                                    <Path
+                                         pxsl_line="290">
+                                        <Phase
+                                             type="use"
+                                             name="_"
+                                             show_locations="false"
+                                             pxsl_line="291">
+                                            <Trigger
+                                                 pxsl_line="291">
+                                                <QuestObject
+                                                     class="ComplexContainer"
+                                                     name="HealthPotion_Farmacy_MedBox"
+                                                     pxsl_line="291" />
+                                            </Trigger>
+                                        </Phase>
+                                    </Path>
+                                    <Path
+                                         pxsl_line="292">
+                                        <Phase
+                                             type="use"
+                                             name="_"
+                                             show_locations="false"
+                                             pxsl_line="293">
+                                            <Trigger
+                                                 pxsl_line="293">
+                                                <QuestObject
+                                                     class="ComplexContainer"
+                                                     name="HealthPotion_Farmacy_Fridge02"
+                                                     pxsl_line="293" />
+                                            </Trigger>
+                                        </Phase>
+                                    </Path>
+                                </Phase>
+                                <Phase
+                                     type="wait guard"
+                                     name="_"
+                                     time="2"
+                                     pxsl_line="294" />
+                                <Phase
+                                     type="talk"
+                                     name="_"
+                                     speaker="voice2d"
+                                     group="Player_HealthPotion_04DLG01"
+                                     show_locations="false"
+                                     auto_start="true"
+                                     pxsl_line="295" />
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     state="disabled"
+                                     pxsl_line="296">
+                                    <Object
+                                         pxsl_line="296">
+                                        <QuestObject
+                                             class="QuestEnableGroup"
+                                             name="qeg_MK_HeatlhPotion_01_zombies"
+                                             pxsl_line="296" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="297">
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     pxsl_line="298">
+                                    <Object
+                                         pxsl_line="298">
+                                        <QuestObject
+                                             class="QuestEnableGroup"
+                                             name="HealthPotion_QEG_Pharmacy02"
+                                             pxsl_line="298" />
+                                    </Object>
+                                </Phase>
+                                <Phase
+                                     type="set state"
+                                     name="_"
+                                     desired_state="lockpick"
+                                     pxsl_line="299">
+                                    <Trigger
+                                         pxsl_line="299">
+                                        <QuestObject
+                                             class="DoorDI"
+                                             name="door_HealthPotion_Pharmacy02"
+                                             pxsl_line="299" />
+                                    </Trigger>
+                                </Phase>
+                                <Phase
+                                     type="AND"
+                                     name="Search Pharmacy02 at Center"
+                                     pxsl_line="300">
+                                    <SpecificLocation
+                                         pxsl_line="301">
+                                        <QuestObject
+                                             class="ZoneBox"
+                                             name="sq_healthpotion_ZB_pharmacy_02"
+                                             pxsl_line="301" />
+                                    </SpecificLocation>
+                                    <Path
+                                         pxsl_line="302">
+                                        <Phase
+                                             type="use"
+                                             name="_"
+                                             show_locations="false"
+                                             pxsl_line="303">
+                                            <Trigger
+                                                 pxsl_line="303">
+                                                <QuestObject
+                                                     class="ComplexContainer"
+                                                     name="HealthPotion_Farmacy02_Fridge01"
+                                                     pxsl_line="303" />
+                                            </Trigger>
+                                        </Phase>
+                                    </Path>
+                                    <Path
+                                         pxsl_line="304">
+                                        <Phase
+                                             type="use"
+                                             name="_"
+                                             show_locations="false"
+                                             pxsl_line="305">
+                                            <Trigger
+                                                 pxsl_line="305">
+                                                <QuestObject
+                                                     class="ComplexContainer"
+                                                     name="HealthPotion_Farmacy02_Fridge02"
+                                                     pxsl_line="305" />
+                                            </Trigger>
+                                        </Phase>
+                                    </Path>
+                                </Phase>
+                                <Phase
+                                     type="wait guard"
+                                     name="_"
+                                     time="2"
+                                     pxsl_line="306" />
+                                <Phase
+                                     type="talk"
+                                     name="_"
+                                     speaker="voice2d"
+                                     group="Player_HealthPotion_01DLG02"
+                                     show_locations="false"
+                                     auto_start="true"
+                                     pxsl_line="307" />
+                            </Path>
+                        </Phase>
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="2"
+                             pxsl_line="309" />
+                        <Phase
+                             type="talk"
+                             name="_"
+                             speaker="voice2d"
+                             group="Player_HealthPotion_01DLG01"
+                             show_locations="false"
+                             auto_start="true"
+                             pxsl_line="310" />
+                    </Path>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;HealthPotion_OBJ_UseTheComputer&amp;"
+             pxsl_line="312">
+            <Path
+                 pxsl_line="312">
+                <Phase
+                     type="OR"
+                     name="HEALTH POTION - Use PC"
+                     pxsl_line="313">
+                    <DebugPlayerPosition
+                         pxsl_line="314">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="sp_Pharmacy"
+                             pxsl_line="314" />
+                    </DebugPlayerPosition>
+                    <Path
+                         pxsl_line="315">
+                        <Phase
+                             type="use"
+                             name="_"
+                             desired_state="on"
+                             show_locations="true"
+                             pxsl_line="316">
+                            <Trigger
+                                 pxsl_line="316">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="HealthPotion_PS_Keyboard01"
+                                     pxsl_line="316" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="1"
+                             pxsl_line="317" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="318">
+                            <Object
+                                 pxsl_line="318">
+                                <QuestObject
+                                     class="ObjectSequenceController"
+                                     name="HealthPotionMonitor01::IT_Keyboard_FindCamden_Search_Hotel"
+                                     pxsl_line="318" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="320">
+                        <Phase
+                             type="use"
+                             name="_"
+                             desired_state="on"
+                             show_locations="true"
+                             pxsl_line="321">
+                            <Trigger
+                                 pxsl_line="321">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="HealthPotion_PS_Keyboard02"
+                                     pxsl_line="321" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="1"
+                             pxsl_line="322" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="323">
+                            <Object
+                                 pxsl_line="323">
+                                <QuestObject
+                                     class="ObjectSequenceController"
+                                     name="HealthPotionMonitor02::IT_Keyboard_FindCamden_Search_Hotel"
+                                     pxsl_line="323" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="324">
+                            <Object
+                                 pxsl_line="324">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="HealthPotion_QEG_Pharmacy02"
+                                     pxsl_line="324" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="3"
+                     pxsl_line="325" />
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_HealthPotion_06DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="326" />
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="328">
+                    <Destination
+                         pxsl_line="328">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="sp_Pharmacy"
+                             pxsl_line="328" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <Quest
+         name="HealthPotion03"
+         parent="HealthPotion02"
+         glued="true"
+         pxsl_line="330">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;HealthPotion_OBJ_SearchApartment&amp;"
+             pxsl_line="331">
+            <Path
+                 pxsl_line="331">
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="332">
+                    <Path
+                         pxsl_line="333">
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="show"
+                             pxsl_line="334">
+                            <Object
+                                 pxsl_line="335">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="HealthPotion_car_GO"
+                                     pxsl_line="335" />
+                            </Object>
+                            <Object
+                                 pxsl_line="336">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="aurorashouse_curtain_GO"
+                                     pxsl_line="336" />
+                            </Object>
+                            <Object
+                                 pxsl_line="337">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="HealthPotion_Item"
+                                     pxsl_line="337" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="338">
+                            <Object
+                                 pxsl_line="338">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="HealthPotion_AurorasHouse_GO"
+                                     pxsl_line="338" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="339">
+                            <Object
+                                 pxsl_line="340">
+                                <QuestObject
+                                     class="FXEmitter"
+                                     name="HealthPotion_fx_01"
+                                     pxsl_line="340" />
+                            </Object>
+                            <Object
+                                 pxsl_line="341">
+                                <QuestObject
+                                     class="Encounter::EncounterBlockArea"
+                                     name="enc_Blocker_HealthPotion"
+                                     pxsl_line="341" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="342">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             pxsl_line="343">
+                            <Destination
+                                 pxsl_line="343">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="HealtPotion_Apartment_Window_sgt"
+                                     pxsl_line="343" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="take item"
+                     name="HEALTH POTION - Search Auroras Apartament"
+                     show_locations="false"
+                     pxsl_line="344">
+                    <Item
+                         pxsl_line="344">
+                        <QuestObject
+                             class="QuestInventoryItemDI"
+                             name="HealthPotion_Item"
+                             pxsl_line="344" />
+                    </Item>
+                    <DebugPlayerPosition
+                         pxsl_line="345">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="HealthPotion_sp_01"
+                             pxsl_line="345" />
+                    </DebugPlayerPosition>
+                    <SpecificLocation
+                         pxsl_line="346">
+                        <QuestObject
+                             class="ZoneBox"
+                             name="HealthPotion_area_01"
+                             pxsl_line="346" />
+                    </SpecificLocation>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="2"
+                     pxsl_line="347" />
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_HealthPotion_08DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="348" />
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="1"
+                     pxsl_line="349" />
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_HealthPotion_08DLG03"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="350" />
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="352">
+                    <Destination
+                         pxsl_line="352">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="HealthPotion_sp_01"
+                             pxsl_line="352" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="AND"
+             name="HEALTH POTION - Find Pizzeria"
+             objective="&amp;HealthPotion_OBJ_FindAlyasFather&amp;"
+             pxsl_line="354">
+            <Path
+                 pxsl_line="354">
+                <SpecificLocation
+                     pxsl_line="355">
+                    <QuestObject
+                         class="ZoneBox"
+                         name="HealthPotion_area_02"
+                         pxsl_line="355" />
+                </SpecificLocation>
+                <DebugPlayerPosition
+                     pxsl_line="356">
+                    <QuestObject
+                         class="SpawnPoint"
+                         name="HealthPotion_sp_02"
+                         pxsl_line="356" />
+                </DebugPlayerPosition>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="357">
+                    <Object
+                         pxsl_line="357">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="HealthPotion_swith_01"
+                             pxsl_line="357" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="358">
+                    <Object
+                         pxsl_line="358">
+                        <QuestObject
+                             class="Encounter::EncounterBlockArea"
+                             name="enc_Blocker_HealthPotion"
+                             pxsl_line="358" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="359">
+                    <Object
+                         pxsl_line="359">
+                        <QuestObject
+                             class="QuestInventoryItemDI"
+                             name="item_MK_HealtPotion_02"
+                             pxsl_line="359" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="on"
+                     show_locations="false"
+                     pxsl_line="360">
+                    <Trigger
+                         pxsl_line="360">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="HealthPotion_swith_01"
+                             pxsl_line="360" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="361">
+                    <Destination
+                         pxsl_line="361">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="HealthPotion_sp_02"
+                             pxsl_line="361" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;HealthPotion_OBJ_RecoverInsulin&amp;"
+             pxsl_line="363">
+            <Path
+                 pxsl_line="363">
+                <Phase
+                     type="take item"
+                     name="HEALTH POTION - Take insuline"
+                     pxsl_line="364">
+                    <Item
+                         pxsl_line="364">
+                        <QuestObject
+                             class="QuestInventoryItemDI"
+                             name="item_MK_HealtPotion_02"
+                             pxsl_line="364" />
+                    </Item>
+                    <DebugPlayerPosition
+                         pxsl_line="365">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="HealthPotion_sp_02"
+                             pxsl_line="365" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="366">
+                    <Destination
+                         pxsl_line="366">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="HealthPotion_sp_02"
+                             pxsl_line="366" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <!-- quest __HealthPotion_fridge -parent=HealthPotion01 -->
+        <!-- ,take _ QuestInventoryItemDI HealthPotion_Item2 -show=false -->
+        <!-- ,checkpoint _ SpawnPoint HealthPotion_sp_01 -->
+    <!-- HEALTH POTION ACTIONS -->
+    <Quest
+         name="__HealthPotion02_pharmacy01"
+         parent="HealthPotion01"
+         pxsl_line="376">
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="377">
+            <Object
+                 pxsl_line="377">
+                <QuestObject
+                     class="PhysicalSwitchDI"
+                     name="magickingdom_hp_gate_trigger"
+                     pxsl_line="377" />
+            </Object>
+        </Phase>
+        <Phase
+             type="use"
+             name="HEALTH POTION - enter pharmacy"
+             desired_state="on"
+             show_locations="false"
+             pxsl_line="378">
+            <Trigger
+                 pxsl_line="378">
+                <QuestObject
+                     class="PhysicalSwitchDI"
+                     name="magickingdom_hp_gate_trigger"
+                     pxsl_line="378" />
+            </Trigger>
+        </Phase>
+        <Phase
+             type="enable"
+             name="turn on stinger"
+             pxsl_line="379">
+            <Object
+                 pxsl_line="380">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="HealthPotion_QEG_FarmacyGateAlarm01"
+                     pxsl_line="380" />
+            </Object>
+            <Object
+                 pxsl_line="381">
+                <QuestObject
+                     class="AIDeadBodySpawnBoxAuto"
+                     name="magickingdom_hp_gate_stinger"
+                     pxsl_line="381" />
+            </Object>
+        </Phase>
+        <Phase
+             type="set skin"
+             name="_"
+             skin_name="Alarm_red"
+             pxsl_line="382">
+            <ModelObject
+                 pxsl_line="382">
+                <QuestObject
+                     class="ModelObject"
+                     name="HealthPotion_alarm"
+                     pxsl_line="382" />
+            </ModelObject>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="383">
+            <Destination
+                 pxsl_line="383">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="sp_Pharmacy"
+                     pxsl_line="383" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="OR"
+             name="_"
+             pxsl_line="384">
+            <Path
+                 pxsl_line="385">
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="1"
+                     pxsl_line="386" />
+                <Phase
+                     type="set dialog"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_HealthPotion_00DLG01"
+                     auto_start="true"
+                     pxsl_line="387" />
+                <Phase
+                     type="semaphore"
+                     name="_"
+                     pxsl_line="388" />
+            </Path>
+            <Path
+                 pxsl_line="389">
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="60"
+                     pxsl_line="390" />
+            </Path>
+            <Path
+                 pxsl_line="391">
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="on"
+                     show_locations="false"
+                     pxsl_line="392">
+                    <Trigger
+                         pxsl_line="392">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="HealthPotion_TriggerOff_FarmacyGateAlarm01"
+                             pxsl_line="392" />
+                    </Trigger>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="set skin"
+             name="_"
+             skin_name="Alarm_green"
+             pxsl_line="393">
+            <ModelObject
+                 pxsl_line="393">
+                <QuestObject
+                     class="ModelObject"
+                     name="HealthPotion_alarm"
+                     pxsl_line="393" />
+            </ModelObject>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="394">
+            <Object
+                 pxsl_line="395">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="HealthPotion_QEG_FarmacyGateAlarm01"
+                     pxsl_line="395" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="396">
+            <Destination
+                 pxsl_line="396">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="sp_Pharmacy"
+                     pxsl_line="396" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- Action when pleayer approach to screamer, volatiles spawn untill player will kill the bastard        -->
+    <Quest
+         name="__HealthPotion_VolatilesAction"
+         parent="HealthPotion02"
+         pxsl_line="399">
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="400">
+            <Object
+                 pxsl_line="401">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="HealthPotion_spanwer_screamer"
+                     pxsl_line="401" />
+            </Object>
+            <Object
+                 pxsl_line="402">
+                <QuestObject
+                     class="AIDeadBodySpawnBoxAuto"
+                     name="HealthPotion_Harika"
+                     pxsl_line="402" />
+            </Object>
+        </Phase>
+        <Phase
+             type="go to"
+             name="_"
+             distance="2"
+             show_locations="false"
+             pxsl_line="403">
+            <Destination
+                 pxsl_line="403">
+                <QuestObject
+                     class="Marker"
+                     name="HealthPotion__01"
+                     pxsl_line="403" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="404">
+            <Object
+                 pxsl_line="405">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="HealthPotion_qwg_01"
+                     pxsl_line="405" />
+            </Object>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             pxsl_line="406">
+            <Path
+                 pxsl_line="407">
+                <Phase
+                     type="kill"
+                     name="_"
+                     show_locations="false"
+                     pxsl_line="408">
+                    <Spawner
+                         pxsl_line="408">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="HealthPotion_spanwer_screamer"
+                             pxsl_line="408" />
+                    </Spawner>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="409">
+                <Phase
+                     type="kill"
+                     name="_"
+                     pxsl_line="410">
+                    <Spawner
+                         pxsl_line="410">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="HealthPotion_spanwer_01"
+                             pxsl_line="410" />
+                    </Spawner>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="411">
+            <Object
+                 pxsl_line="411">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="HealthPotion_qwg_01"
+                     pxsl_line="411" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="412">
+            <Destination
+                 pxsl_line="412">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="HealthPotion_sp_01"
+                     pxsl_line="412" />
+            </Destination>
+        </Phase>
+    </Quest>
+</QuestsDefinitions>

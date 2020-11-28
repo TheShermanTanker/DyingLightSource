@@ -1,0 +1,1326 @@
+!include("ai_curves.def")
+!include("ai_data.def")
+!include("ai_timing.def")
+!include("human_sound_types.def")
+
+// USAGE EXAMPLE //////////////////////////////////////////////////////////////////////////////////
+// Data("token_0:token_1:...:token_n", duration, "anim_sequence_name", anim_group, weight)
+// token_0:token_1:...:token_n - it defines animation type
+// duration                    - animation duration in [s] from anim_sequence_name (default -2 -> take duration from sequence lenght)
+// anim_group                  - animation group which is taken into consideration while playing next animation
+//                               e.g. if animation with group 6 is played, then while playing next animation, 
+//                               animation with group 6 will be preffered to play (default -1 -> no group)
+// weight                      - it defines how often animation will be played if two or more animations are defined with same tokens (default 1)
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////// DATA ///////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+//###############
+//#### DYING ####
+//###############
+//## die:pose:damage_type:body_part:direction:death_type:held_weapon:kill_weapon:run_dir
+//###############
+
+Data("die:standing::::burn:::", -2, "m_npc_burn_death_01", -1, 1)
+Data("die:standing::::electrocution:::", -2, "m_zombie_death_electrocution_01", -1, 1)
+Data("die:standing::::electrocution:::", -2, "m_zombie_death_electrocution_02", -1, 1)
+Data("die:standing:::left:electrocution:::", -2, "m_zombie_death_electrocution_01", -1, 1)
+Data("die:standing:::right:electrocution:::", -2, "m_zombie_death_electrocution_02", -1, 1)
+
+Data("die:standing:::right:normal:::", -2, "M_MELEE_FIGHTER_A_death_reaction_left_01", -1, 1)
+Data("die:standing:::left:normal:::", -2, "M_MELEE_FIGHTER_A_death_reaction_right_01", -1, 1)
+
+Data("die:standing:::backward:normal:::", -2, "M_MELEE_FIGHTER_A_death_reaction_abdomen_01", -1, 1)
+Data("die:standing:::backward_left:normal:::", -2, "M_MELEE_FIGHTER_A_death_reaction_abdomen_01", -1, 1)
+Data("die:standing:::backward_right:normal:::", -2, "M_MELEE_FIGHTER_A_death_reaction_abdomen_01", -1, 1)
+
+Data("die:standing:::backward:normal:::", -2, "M_MELEE_FIGHTER_A_death_reaction_head_01", -1, 1)
+Data("die:standing:::backward_right:normal:::", -2, "M_MELEE_FIGHTER_A_death_reaction_head_01", -1, 1)
+Data("die:standing:::backward_left:normal:::", -2, "M_MELEE_FIGHTER_A_death_reaction_head_01", -1, 1)
+
+Data("die:standing:::forward:normal:::", -2, "M_MELEE_FIGHTER_A_death_reaction_back_01", -1, 1)
+Data("die:standing:::forward_left:normal:::", -2, "M_MELEE_FIGHTER_A_death_reaction_back_01", -1, 1)
+Data("die:standing:::forward_right:normal:::", -2, "M_MELEE_FIGHTER_A_death_reaction_back_01", -1, 1)
+
+Data("die:standing:::down:normal:::", -2, "M_MELEE_FIGHTER_A_death_reaction_back_01", -1, 1)
+Data("die:standing:::up:normal:::", -2, "M_MELEE_FIGHTER_A_death_reaction_back_01", -1, 1)
+
+//##################
+//#### ALARMING ####
+//##################
+//## alarming:is_standing:alarm_level:angle:direction:was_moving
+//##################
+
+Data("alarming:standing::alarmed:0::false", 0, "", -1, 1)
+Data("alarming:standing::alarmed:45:right:false", 0, "m_npc_ak47_alarming_turn_90R", -1, 1)
+Data("alarming:standing::alarmed:45:left:false", 0, "m_npc_ak47_alarming_turn_90L", -1, 1)
+Data("alarming:standing::alarmed:90:right:false", 0, "m_npc_ak47_alarming_turn_90R", -1, 1)
+Data("alarming:standing::alarmed:90:left:false", 0, "m_npc_ak47_alarming_turn_90L", -1, 1)
+Data("alarming:standing::alarmed:180:right:false", 0, "m_npc_ak47_alarming_upset_180l", -1, 1)
+Data("alarming:standing::alarmed:180:left:false", 0, "m_npc_ak47_alarming_upset_180l", -1, 1)
+Data("alarming:standing::calm:::false", 0, "", -1, 1)
+
+//#######################
+//#### HIT REACTIONS ####
+//#######################
+//## hit_reaction:pose:hit_reaction:item_type:damage_type:attacker_pos:body_part:direction:severity
+//#######################
+/*
+// generic
+Data("hit_reaction:standing:pain::all:rear:::", -2, "m_npc_hit_reaction_back_01", -1, 1)
+Data("hit_reaction:standing:pain::all:rear:::", -2, "m_npc_human_hit_reaction_forward_01", -1, 1)
+Data("hit_reaction:standing:pain::all:rear:::", -2, "m_npc_human_hit_reaction_forward_02", -1, 1)
+
+Data("hit_reaction:standing:pain::all:::forward:", -2, "m_npc_hit_reaction_back_01", -1, 1)
+Data("hit_reaction:standing:pain::all:::forward:heavy", -2, "m_npc_human_hit_reaction_forward_01", -1, 1)
+Data("hit_reaction:standing:pain::all:::forward:heavy", -2, "m_npc_human_hit_reaction_forward_02", -1, 1)
+
+Data("hit_reaction:standing:pain::all:::up:", -2, "m_npc_hit_reaction_up_01", -1, 1)
+Data("hit_reaction:standing:pain::all:::up:", -2, "m_npc_hit_reaction_up_02", -1, 1)
+Data("hit_reaction:standing:pain::all::head:backward:", -2, "m_npc_hit_reaction_up_01", -1, 1)
+Data("hit_reaction:standing:pain::all::head:backward:", -2, "m_npc_hit_reaction_up_02", -1, 1)
+Data("hit_reaction:standing:pain::all::head:backward:", -2, "m_npc_hit_reaction_backward_02", -1, 1)
+Data("hit_reaction:standing:pain::all::head:backward:", -2, "m_npc_hit_reaction_backward_03", -1, 1)
+Data("hit_reaction:standing:pain::all::head:backward:", -2, "m_npc_hit_reaction_backward_04", -1, 1)
+Data("hit_reaction:standing:pain::all:::backward:", -2, "m_npc_hit_reaction_backward_02", -1, 1)
+Data("hit_reaction:standing:pain::all:::backward:", -2, "m_npc_hit_reaction_backward_03", -1, 1)
+Data("hit_reaction:standing:pain::all:::backward:", -2, "m_npc_hit_reaction_backward_04", -1, 1)
+Data("hit_reaction:standing:pain::all:::down:", -2, "m_npc_hit_reaction_backward_02", -1, 1)
+Data("hit_reaction:standing:pain::all:::down:", -2, "m_npc_hit_reaction_backward_03", -1, 1)
+Data("hit_reaction:standing:pain::all:::down:", -2, "m_npc_hit_reaction_backward_04", -1, 1)
+Data("hit_reaction:standing:pain::all::head:left:", -2, "m_npc_hit_reaction_up_01", -1, 1)
+Data("hit_reaction:standing:pain::all::head:left:", -2, "m_npc_hit_reaction_up_02", -1, 1)
+Data("hit_reaction:standing:pain::all::head:left:", -2, "m_npc_hit_reaction_left_01", -1, 1)
+Data("hit_reaction:standing:pain::all::head:left:", -2, "m_npc_hit_reaction_left_02", -1, 1)
+Data("hit_reaction:standing:pain::all::head:right:", -2, "m_npc_hit_reaction_up_01", -1, 1)
+Data("hit_reaction:standing:pain::all::head:right:", -2, "m_npc_hit_reaction_up_02", -1, 1)
+Data("hit_reaction:standing:pain::all::head:right:", -2, "m_npc_hit_reaction_right_01", -1, 1)
+Data("hit_reaction:standing:pain::all::head:right:", -2, "m_npc_hit_reaction_right_02", -1, 1)
+Data("hit_reaction:standing:pain::all:::left:", -2, "m_npc_hit_reaction_left_01", -1, 1)
+Data("hit_reaction:standing:pain::all:::left:", -2, "m_npc_hit_reaction_left_02", -1, 1)
+Data("hit_reaction:standing:pain::all:::right:", -2, "m_npc_hit_reaction_right_01", -1, 1)
+Data("hit_reaction:standing:pain::all:::right:", -2, "m_npc_hit_reaction_right_02", -1, 1)
+
+
+// bullet hits
+Data("hit_reaction:standing:pain:pistol:bullet::legs:left:", -2, "m_npc_1pistol_hit_front_left_leg", -1, 1)
+Data("hit_reaction:standing:pain:pistol:bullet::legs:right:", -2, "m_npc_1pistol_hit_front_right_leg", -1, 1)
+Data("hit_reaction:standing:pain:pistol:bullet::torso:backward:", -2, "m_npc_1pistol_hit_torso_back", -1, 1)
+Data("hit_reaction:standing:pain:pistol:bullet::torso:forward:", -2, "m_npc_1pistol_hit_torso_front", -1, 1)
+Data("hit_reaction:standing:pain:pistol:bullet::torso:left:", -2, "m_npc_1pistol_hit_torso_front_left", -1, 1)
+Data("hit_reaction:standing:pain:pistol:bullet::torso:right:", -2, "m_npc_1pistol_hit_torso_front_right", -1, 1)
+*/
+// rifle in hands
+Data("hit_reaction:standing:pain:rifle:all::head:up:", -2, "m_npc_hit_reaction_rifle_up_01", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::head:up:", -2, "m_npc_hit_reaction_rifle_up_02", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::head:backward:", -2, "m_npc_hit_reaction_rifle_backward_01", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::head:backward:", -2, "m_npc_hit_reaction_rifle_backward_02", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::head:backward:", -2, "m_npc_hit_reaction_rifle_backward_03", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::head:backward:", -2, "m_npc_hit_reaction_rifle_up_01", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::head:backward:", -2, "m_npc_hit_reaction_rifle_up_02", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::head:down:", -2, "m_npc_hit_reaction_rifle_down_01", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::head:down:", -2, "m_npc_hit_reaction_rifle_down_02", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::head:left:", -2, "m_npc_hit_reaction_rifle_left_01", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::head:left:", -2, "m_npc_hit_reaction_rifle_left_02", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::head:left:", -2, "m_npc_hit_reaction_rifle_left_03", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::head:left:", -2, "m_npc_hit_reaction_rifle_up_01", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::head:left:", -2, "m_npc_hit_reaction_rifle_up_02", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::head:right:", -2, "m_npc_hit_reaction_rifle_right_01", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::head:right:", -2, "m_npc_hit_reaction_rifle_right_02", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::head:right:", -2, "m_npc_hit_reaction_rifle_up_01", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::head:right:", -2, "m_npc_hit_reaction_rifle_up_02", -1, 1)
+
+Data("hit_reaction:standing:pain:rifle:all::torso:up:", -2, "m_npc_hit_reaction_rifle_up_01", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::torso:up:", -2, "m_npc_hit_reaction_rifle_up_02", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::torso:left:", -2, "m_npc_hit_reaction_rifle_left_01", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::torso:left:", -2, "m_npc_hit_reaction_rifle_left_02", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::torso:left:", -2, "m_npc_hit_reaction_rifle_left_03", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::torso:right:", -2, "m_npc_hit_reaction_rifle_right_01", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::torso:right:", -2, "m_npc_hit_reaction_rifle_right_02", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::torso:backward:", -2, "m_npc_hit_reaction_rifle_backward_01", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::torso:backward:", -2, "m_npc_hit_reaction_rifle_backward_02", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::torso:backward:", -2, "m_npc_hit_reaction_rifle_backward_03", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::torso:down:", -2, "m_npc_hit_reaction_rifle_down_01", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::torso:down:", -2, "m_npc_hit_reaction_rifle_down_02", -1, 1)
+
+Data("hit_reaction:standing:pain:rifle:all::legs:left:", -2, "m_npc_hit_reaction_rifle_left_01", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::legs:left:", -2, "m_npc_hit_reaction_rifle_left_02", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::legs:left:", -2, "m_npc_hit_reaction_rifle_left_03", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::legs:right:", -2, "m_npc_hit_reaction_rifle_right_01", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::legs:right:", -2, "m_npc_hit_reaction_rifle_right_02", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::legs:backward:", -2, "m_npc_hit_reaction_rifle_backward_01", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::legs:backward:", -2, "m_npc_hit_reaction_rifle_backward_02", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::legs:backward:", -2, "m_npc_hit_reaction_rifle_backward_03", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::legs:down:", -2, "m_npc_hit_reaction_rifle_down_01", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::legs:down:", -2, "m_npc_hit_reaction_rifle_down_02", -1, 1)
+
+//universal reactions - played when no other reactions fit
+/*
+Data("hit_reaction:standing:pain:rifle:all::::", -2, "m_npc_hit_reaction_rifle_left_03", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::::", -2, "m_npc_hit_reaction_rifle_down_02", -1, 1)
+*/
+
+
+/*
+Data("hit_reaction:standing:pain::all:::right:heavy", -2, "m_npc_human_hit_reaction_right_01", -1, 1)
+Data("hit_reaction:standing:pain::all:::right:heavy", -2, "m_npc_human_hit_reaction_right_02", -1, 1)
+Data("hit_reaction:standing:pain::all:::left:heavy", -2, "m_npc_human_hit_reaction_left_01", -1, 1)
+Data("hit_reaction:standing:pain::all:::left:heavy", -2, "m_npc_human_hit_reaction_left_02", -1, 1)
+Data("hit_reaction:standing:pain::all:::left:heavy", -2, "m_npc_human_hit_reaction_left_03", -1, 1)
+
+*/
+// hit reactions with counter attack (melee weapons)
+// potrzebne sa kontry z bronia melee
+
+//#############################
+//#### COLLISION REACTIONS ####
+//#############################
+//## collision_reaction:pose:direction:item_type:severity 
+//#######################
+ Data("collision_reaction:standing::rifle:", -2, "m_npc_ak47_patrol_hitreaction_back", -1, 1)
+// Data("collision_reaction:standing:::", -2, "m_npc_collision_front_01", -1, 1)
+// Data("collision_reaction:standing:forward_left::", -2, "m_npc_collision_front_01", -1, 1)
+// Data("collision_reaction:standing:forward_right::", -2, "m_npc_collision_front_01", -1, 1)
+ Data("collision_reaction:standing:backward::", -2, "m_npc_collision_back_turn_01", -1, 1)
+ Data("collision_reaction:standing:backward_left::", -2, "m_npc_collision_back_turn_01", -1, 1)
+ Data("collision_reaction:standing:backward_right::", -2, "m_npc_collision_back_turn_01", -1, 1)
+// Data("collision_reaction:standing:down::", -2, "M_MELEE_FIGHTER_A_land", -1, 1)
+//Data("collision_reaction:standing:::", -2, "m_npc_collision_back_turn_01", -1, 1)
+   Data("collision_reaction:standing:::", -2, "m_npc_collision_front_01", -1, 1)
+
+//###########################
+//#### RECOVER FROM FALL ####
+//###########################
+//## recover_from_fall:pose:item_type
+//###########################
+
+// npc standup anims
+Data("recover_from_fall:standing:", -2, "M_NPC_unarmed_standup_M_01", -1, 1)
+Data("recover_from_fall:standing:", -2, "M_NPC_unarmed_standup_M_02", -1, 1)
+Data("recover_from_fall:standing:", -2, "M_NPC_unarmed_standup_M_03", -1, 1)
+Data("recover_from_fall:standing:", -2, "M_NPC_unarmed_standup_M_04", -1, 1)
+
+
+Data("recover_from_fall:standing:stick", -2, "M_MELEE_FIGHTER_A_stand_up_back_01", -1, 1)
+Data("recover_from_fall:standing:stick", -2, "M_MELEE_FIGHTER_A_stand_up_front_01", -1, 1)
+Data("recover_from_fall:standing:stick", -2, "m_melee_fighter_a_stand_up_left_01", -1, 1)
+Data("recover_from_fall:standing:stick", -2, "m_melee_fighter_a_stand_up_right_01", -1, 1)
+
+
+//##############
+//#### IDLE ####
+//##############
+//## idle:pose:idle_type:item_type:scare_level:is_idle_prepare:is_idle_finish
+//##############
+/*
+Data("idle:standing::stand:::", -2, "design_c_idle_stand2", -1, 1)
+Data("idle:standing::stand:::", -2, "design_c_idle_stand2_rleg", -1, 1)
+Data("idle:standing::stand:::", -2, "design_c_idle_stand", -1, 1)
+Data("idle:standing::stand:::", -2, "design_c_idle_stand_rleg", -1, 1)
+Data("idle:carried::forced:::", -2, "m_npc_carried_idle", -1, 1)
+
+Data("idle:standing::look_around:::", -2, "design_c_idle_stand", -1, 1)
+Data("idle:standing::look_around:::", -2, "design_c_idle_stand_rleg", -1, 1)
+Data("idle:standing::look_around:::", -2, "design_c_idle_bulb_loop_3", -1, 1)
+*/
+Data("idle:standing::stand:::", -2, "m_npc_idle_01", -1, 1)
+Data("idle:standing::look_around:::", -2, "m_npc_idle_01", -1, 1)
+Data("idle:standing::look_at:::", -2, "m_npc_idle_01", -1, 1)
+Data("idle:standing::look_at:rifle::", -2, "m_npc_ak47_idle_upset", -1, 1)
+
+Data("idle:standing:upset:look_around:rifle::", -2, "m_npc_ak47_patrol_high_level_alarming_02", -1, 1)  // obrot ciala ale w malym zakresie, zwrocony w jednym kierunku
+Data("idle:standing:upset:look_around:rifle::", -2, "m_npc_ak47_patrol_high_level_alarming_03", -1, 1)  // kilka pelnych obrotow 180,90 stopni
+
+Data("idle:standing:alarmed:look_around:rifle::", -2, "m_npc_ak47_patrol_high_level_alarming_01", -1, 1)  // malo obrotow ,sama glowa , zmienia lekko pozycje
+Data("idle:standing:alarmed:look_around:rifle::", -2, "m_npc_ak47_patrol_high_level_alarming_02", -1, 1)  // obrot ciala ale w malym zakresie, zwrocony w jednym kierunku
+Data("idle:standing:alarmed:look_around:rifle::", -2, "m_npc_ak47_patrol_high_level_alarming_03", -1, 1)  // kilka pelnych obrotow 180,90 stopni
+
+Data("idle:standing::look_at_dead_body:rifle::", -2, "m_npc_ak47_patrol_body_noticing_01", -1, 1)  // zobaczenie ciala
+
+	
+Data("idle:standing::look_around:rifle::", -2, "m_npc_ak47_patrol_idles_01_d", -1, 1)	// // Ai is moving on this one
+Data("idle:standing::look_at:rifle::", -2, "m_npc_ak47_idle_upset", -1, 1)
+
+
+
+
+Data("idle:standing::offensive:stick::", -2, "M_MELEE_FIGHTER_A_attack_prepare_01", -1, 1)
+Data("idle:standing::offensive:stick::", -2, "M_MELEE_FIGHTER_A_attack_prepare_02", -1, 1)
+Data("idle:standing::offensive:stick::", -2, "M_MELEE_FIGHTER_A_attack_prepare_03", -1, 1)
+
+Data("idle:standing::stand:fists::", -2, "m_npc_idle_01", -1, 1)
+Data("idle:standing::stand:stick::", -2, "M_MELEE_FIGHTER_A_escort_idle", -1, 1)
+Data("idle:standing::stand:pistol::", -2, "npc_pistol_idle", -1, 1)
+Data("idle:standing::stand:rifle::", -2, "m_npc_ak47_patrol_idles_02", -1, 1)
+
+
+
+//Data("idle:standing::stand:stationary_cannon::", -2, "m_npc_stationarycannon_stand", -1, 1)
+//Data("idle:standing::stand:shotgun::", -2, "m_npc_spas_stand", -1, 1)
+
+Data("idle:crouching_right::cover_peek_right:::", -2, "mp_npc_ak47_crouchright_peekright_ak", -1, 1)
+Data("idle:crouching_right::cover:::", -2, "mp_npc_ak47_crouchright_idle_ak", -1, 1)
+Data("idle:crouching_right::cover_peek_right:rifle::", -2, "mp_npc_ak47_crouchright_peekright_ak", -1, 1)
+Data("idle:crouching_right::cover_peek_up:rifle::", -2, "mp_npc_ak47_crouchright_peekup_ak", -1, 1)
+Data("idle:crouching_right::cover:rifle::", -2, "mp_npc_ak47_crouchright_idle_ak", -1, 1)   // zbyt dluga animacja
+
+Data("idle:crouching_left::cover:::", -2, "mp_npc_ak47_crouchleft_idle_ak", -1, 1)
+Data("idle:crouching_left::cover_peek_left:rifle::", -2, "mp_npc_ak47_crouchleft_peekright_ak", -1, 1)
+Data("idle:crouching_left::cover_peek_up:rifle::", -2, "mp_npc_ak47_crouchleft_peekup_ak", -1, 1)
+Data("idle:crouching_left::cover:rifle::", -2, "mp_npc_ak47_crouchleft_idle_ak", -1, 1) // zbyt dluga animacja
+
+Data("idle:standing::confused:::", -2, "m_npc_idle_01", -1, 1) // TODO: potrzebna animacja confusion (tymczasowo idle)
+
+Data("idle:standing::killer_comment_killed_enemy:::", -2, "m_npc_fight_outro_01", -1, 1)
+Data("idle:standing::killer_comment_killed_enemy:::", -2, "m_npc_fight_outro_02", -1, 1)
+Data("idle:standing::comment_killed_enemy:::", -2, "m_npc_fight_outro_04", -1, 1)
+Data("idle:standing::comment_killed_enemy:::", -2, "m_npc_fight_outro_05", -1, 1)
+Data("idle:standing::comment_killed_enemy:::", -2, "m_npc_fight_outro_08", -1, 1)
+
+Data("idle:standing::hide_weapon:::", -2, "m_melee_fighter_a_hide_weapon_01", -1, 1)
+
+Data("idle:standing::start_wait_for_better_armed_enemy_action:::", -2, "M_MELEE_FIGHTER_A_Surrender_01_Begin", 1, 1)
+Data("idle:standing::wait_for_better_armed_enemy_action:::", -2, "M_MELEE_FIGHTER_A_Surrender_01_Loop", 1, 1)
+
+Data("idle:standing::start_wait_for_better_armed_enemy_action:::", -2, "M_MELEE_FIGHTER_A_Surrender_02_Begin", 2, 1)
+Data("idle:standing::wait_for_better_armed_enemy_action:::", -2, "M_MELEE_FIGHTER_A_Surrender_02_Loop", 2, 1)
+
+Data("idle:standing::start_wait_for_better_armed_enemy_action:::", -2, "M_MELEE_FIGHTER_A_Surrender_03_Begin", 3, 1)
+Data("idle:standing::wait_for_better_armed_enemy_action:::", -2, "M_MELEE_FIGHTER_A_Surrender_03_Loop", 3, 1)
+
+//########################
+//# DESIGNERS ANIMATIONS #
+//########################
+
+//Data("idle:standing::forced:::", -2, "design_c_idle_lying06", -1, 1)
+//Data("idle:standing::forced:::", -2, "design_c_idle_stand4", -1, 1)
+//Data("idle:standing::forced:::", -2, "design_c_idle_stand3", -1, 1)
+//Data("idle:standing::forced:::", -2, "design_c_idle_sitlookaround", -1, 1)
+//Data("idle:standing::forced:::", -2, "mz_c_calm_stand_idle_v03", -1, 1)
+//Data("idle:standing::forced:::", -2, "design_c_idle_arms", -1, 1)
+//Data("idle:standing::forced:::", -2, "design_c_idle_lookaround", -1, 1)
+//Data("idle:standing::forced:::", -2, "design_c_idle_sitdown_loop", -1, 1)
+//Data("idle:standing::forced:::", -2, "design_c_idle_sithandshead", -1, 1)
+Data("idle:standing::forced:::", -2, "design_c_idle_lookaround_nervous", -1, 1)
+//Data("idle:standing::forced:::", -2, "design_c_idle_cabinet_loop", -1, 1)
+//Data("idle:standing::forced:::", -2, "design_c_idle_talk03", -1, 1)
+//Data("idle:standing::forced:::", -2, "design_c_idle_sit", -1, 1)
+//Data("idle:standing::forced:::", -2, "design_c_idle_computer_loop", -1, 1)
+Data("idle:standing::forced:::", -2, "design_c_idle_lying04", -1, 1)
+Data("idle:standing::forced:::", -2, "m_npc_idle_to_carry", -1, 1)
+//Data("idle:standing::forced:::", -2, "design_c_idle_standtable", -1, 1)
+//Data("idle:standing::forced:::", -2, "design_tableidle2", -1, 1)
+//Data("idle:standing::forced:::", -2, "design_c_idles_lookingaround2", -1, 1)
+//Data("idle:standing::forced:::", -2, "design_c_idle_sitrelax", -1, 1)
+//Data("idle:standing::forced:::", -2, "design_c_idle_screw2", -1, 1)
+//Data("idle:standing::forced:::", -2, "design_c_idle_sitdown_loop", -1, 1)
+//Data("idle:standing::forced:::", -2, "design_c_idle_lying04", -1, 1) 
+//Data("idle:standing::forced:::", -2, "design_c_idle_disbelief", -1, 1)
+//Data("idle:standing::forced:::", -2, "design_c_idle_standphone", -1, 1)
+//Data("idle:standing::forced:::", -2, "design_c_idle_knees", -1, 1)
+//Data("idle:standing::forced:::", -2, "design_c_idle_wavehands01", -1, 1)
+//Data("idle:standing::forced:::", -2, "design_c_idle_wavehands02", -1, 1)
+//Data("idle:standing::forced:::", -2, "design_c_idle_lying05", -1, 1)
+//Data("idle:standing::forced:::", -2, "design_c_idle_lying03", -1, 1)
+//Data("idle:standing::forced:::", -2, "design_c_idle_bulb_loop", -1, 1)
+//Data("idle:standing::forced:::", -2, "m_npc_table_idle02_loop", -1, 1)
+
+//Data("idle:standing::stand:::", -2, "idle_funwithgun", -1, 1)
+//Data("idle:standing::stand:::", -2, "idle_funwithgun_2", -1, 1)
+//Data("idle:standing::stand:::", -2, "idle_bitesnails", -1, 1)
+//Data("idle:standing::stand:::", -2, "idle_boring", -1, 1)
+//Data("idle:standing::stand:::", -2, "idle_lookingaround", -1, 1)
+//Data("idle:standing::stand:::", -2, "idle_tired", -1, 1)
+//Data("idle:standing::stand:::", -2, "idle_tired_2", -1, 1)
+//Data("idle:standing::stand:::", -2, "idle_disbelief_loop", -1, 1)
+
+Data("idle:standing::cry_for_help:::", -2, "escort_call01", -1, 1)
+Data("idle:standing::cry_for_help:::", -2, "escort_call02", -1, 1)
+Data("idle:standing::cry_for_help:::", -2, "escort_call11", -1, 1)
+
+//Data("idle:standing::wait_for_escort:::", -2, "idle_hiding", -1, 1)
+//Data("idle:standing::wait_for_escort:::", -2, "idle_disbelief", -1, 1)
+//Data("idle:standing::wait_for_escort:::", -2, "idle_lookingaround", -1, 1)
+Data("idle:standing::wait_for_escort:::", -2, "escort_lookaround_1", -1, 1)
+
+Data("idle:standing::scared:::", -2, "m_npc_idle_01", -1, 1)
+//Data("idle:standing::scared:::", -2, "design_c_idle_bulb_special", -1, 1)
+
+//Data("idle:standing::talk:::", -2, "idle_talk01", -1, 1)
+//Data("idle:standing::talk:::", -2, "idle_talk02", -1, 1)
+//Data("idle:standing::talk:::", -2, "idle_talk03", -1, 1)
+//Data("idle:standing::talk:::", -2, "idle_talk04", -1, 1)
+//Data("idle:standing::talk:::", -2, "idle_talk05", -1, 1)
+//Data("idle:standing::talk:::", -2, "idle_talk06", -1, 1)
+//Data("idle:standing::talk:::", -2, "idle_talk07", -1, 1)
+
+//##################
+//#### MOVEMENT ####
+//##################
+//## movement:is_standing:movement_type:movement_direction:alarm_level:item_type:ram_type:stairs_climbing_state
+//##################
+
+// -- tired walk --
+Data("movement:standing:walk:forward::::", -2, "m_npc_tired_walk_loop_01", -1, 1)   
+
+
+
+//Data("movement:standing:walk:forward::::", -2, "m_npc_walk_loop_01", -1, 1)   //new  06.2013
+Data("movement:standing:walk:left::::", -2, "m_npc_unarmed_walk_left_v01", -1, 1)
+Data("movement:standing:walk:right::::", -2, "m_npc_unarmed_walk_right_v01", -1, 1)
+Data("movement:standing:walk:backward::::", -2, "m_npc_unarmed_walk_backward", -1, 1)
+
+Data("movement:standing:run:forward::::", -2, "m_npc_run_loop_01", -1, 1)
+
+
+Data("movement:standing:run:left::::", -2, "m_npc_unarmed_trot_l", -1, 1)
+Data("movement:standing:run:right::::", -2, "m_npc_unarmed_trot_r", -1, 1)
+Data("movement:standing:run:backward::::", -2, "m_npc_unarmed_trot_b", -1, 1)
+
+Data("movement:standing:trot:forward::::", -2, "m_npc_run_loop_01", -1, 1)
+Data("movement:standing:trot:left::::", -2, "m_npc_unarmed_trot_l", -1, 1)
+Data("movement:standing:trot:right::::", -2, "m_npc_unarmed_trot_r", -1, 1)
+Data("movement:standing:trot:backward::::", -2, "m_npc_unarmed_trot_b", -1, 1)
+
+Data("movement:standing:sprint:forward::::", -2, "m_npc_run_loop_01", -1, 1)
+
+Data("movement:standing:walk:forward::stick::", -2, "m_melee_fighter_a_patrol_walk_loop_01", -1, 1)
+Data("movement:standing:trot:left::stick::", -2, "m_melee_fighter_a_strafe_left_loop", -1, 1)  
+Data("movement:standing:trot:right::stick::", -2, "m_melee_fighter_a_strafe_right_loop", -1, 1)    
+Data("movement:standing:trot:backward::stick::", -2, "m_melee_fighter_a_strafe_back_loop", -1, 1)
+
+Data("movement:standing:trot:forward::stick::", -2, "M_MELEE_FIGHTER_A_Run_loop_01", -1, 1)  //new temporary run
+Data("movement:standing:trot:forward::stick::", -2, "M_MELEE_FIGHTER_A_Run_loop_02", -1, 1)  //new temporary run
+Data("movement:standing:run:forward::stick::", -2, "M_MELEE_FIGHTER_A_Run_loop_01", -1, 1)
+Data("movement:standing:run:forward::stick::", -2, "M_MELEE_FIGHTER_A_Run_loop_02", -1, 1)
+
+
+
+/*
+Data("movement:standing:walk:forward::pistol::", -2, "m_npc_pistol_trot_f", -1, 1)  // brakuje animacji walk, ta co jest przypomina bardziej run
+Data("movement:standing:walk:left::pistol::", -2, "m_npc_pistol_trot_l", -1, 1)
+Data("movement:standing:walk:right::pistol::", -2, "m_npc_pistol_trot_r", -1, 1)
+Data("movement:standing:walk:backward::pistol::", -2, "m_npc_pistol_trot_b", -1, 1)
+Data("movement:standing:run:forward::pistol::", -2, "m_npc_pistol_trot_f", -1, 1)   
+Data("movement:standing:run:left::pistol::", -2, "m_npc_pistol_trot_l", -1, 1)
+Data("movement:standing:run:right::pistol::", -2, "m_npc_pistol_trot_r", -1, 1)
+Data("movement:standing:run:backward::pistol::", -2, "m_npc_pistol_trot_b", -1, 1)
+*/
+//Data("movement:standing:walk:forward::rifle::", -2, "m_npc_ak47_patrol_walk_loop_01", -1, 1) - walk vigilant
+Data("movement:standing:walk:forward::rifle::", -2, "m_npc_ak47_patrol_walk_loop_02", -1, 1)
+Data("movement:standing:walk:forward::rifle::", -2, "m_npc_ak47_patrol_walk_loop_03", -1, 1)
+
+Data("movement:standing:walk:left::rifle::", -2, "m_npc_ak47_walk_l", -1, 1)
+Data("movement:standing:walk:right::rifle::", -2, "m_npc_ak47_walk_r", -1, 1)
+Data("movement:standing:walk:backward::rifle::", -2, "m_npc_ak47_walk_b", -1, 1)
+
+//Data("movement:standing:trot:left::rifle::", -2, "mp_npc_ak47_run_strafe_left_shooting02", -1, 1) //too fast
+Data("movement:standing:trot:left::rifle::", -2, "mp_npc_ak47_strafe_left_loop_01", -1, 1)
+
+Data("movement:standing:trot:right::rifle::", -2, "mp_npc_ak47_strafe_right_loop_01", -1, 1)
+//Data("movement:standing:trot:backward::rifle::", -2, "mp_npc_ak47_run_strafe_back_loop_01", -1, 1) //- toofast
+Data("movement:standing:trot:backward::rifle::", -2, "mp_npc_ak47_strafe_back_loop_01", -1, 1)
+Data("movement:standing:trot:backward::rifle::", -2, "mp_npc_ak47_strafe_back_loop_02", -1, 1)
+
+
+// trot strafe  mp_npc_ak47_strafe_trot_back_loop_02
+Data("movement:standing:trot:backward::rifle::", -2, "mp_npc_ak47_strafe_trot_back_loop_02", -1, 1)
+Data("movement:standing:trot:right::rifle::", -2, "mp_npc_ak47_strafe_trot_right_loop_01", -1, 1)
+Data("movement:standing:trot:left::rifle::", -2, "mp_npc_ak47_strafe_trot_left_loop_01", -1, 1)
+Data("movement:standing:trot:forward::rifle::", -2, "m_npc_ak47_strafe_run_front_01", -1, 1)
+// end---trot
+
+Data("movement:standing:run:forward::rifle::", -2, "mp_npc_AK_fast_run_underfire", -1, 1)
+Data("movement:standing:sprint:forward::rifle::", -2, "mp_npc_AK_fast_run_underfire", -1, 1)
+/*
+Data("movement:standing:walk:forward::shotgun::", -2, "m_npc_spas_walk_f", -1, 1)
+Data("movement:standing:walk:left::shotgun::", -2, "m_npc_spas_walk_l", -1, 1)
+Data("movement:standing:walk:right::shotgun::", -2, "m_npc_spas_walk_r", -1, 1)
+Data("movement:standing:walk:backward::shotgun::", -2, "m_npc_spas_walk_b", -1, 1)
+Data("movement:standing:run:forward::shotgun::", -2, "m_npc_spas_trot_f", -1, 1)
+Data("movement:standing:run:left::shotgun::", -2, "m_npc_spas_trot_l", -1, 1)
+Data("movement:standing:run:right::shotgun::", -2, "m_npc_spas_trot_r", -1, 1)
+Data("movement:standing:run:backward::shotgun::", -2, "m_npc_spas_trot_b", -1, 1)
+Data("movement:standing:sprint:forward::shotgun::", -2, "m_npc_spas_trot_f", -1, 1)
+*/
+Data("movement:standing:climb:forward::::", -2, "m_npc_upset_climb_01", -1, 1)
+Data("movement:standing:jump_down:forward::::", -2, "m_melee_fighter_a_jump_off_1m", -1, 1)
+Data("movement:standing:jump_on:forward::::", -2, "m_npc_upset_jump_on", -1, 1)
+Data("movement:standing:jump_off:forward::::", -2, "m_melee_fighter_a_jump_off_1m", -1, 1)
+
+Data("movement:standing:jump_over_high:forward::::", -2, "m_npc_upset_jump_over_high_01", -1, 1)
+Data("movement:standing:jump_over_high:forward::::", -2, "m_npc_upset_jump_over_high_02", -1, 1)
+Data("movement:standing:jump_over_high:forward::::", -2, "m_npc_upset_jump_over_high_03", -1, 1)
+
+Data("movement:standing:jump_over_low_high:forward::::", -2, "M_MELEE_FIGHTER_A_jump_over_low_02", -1, 1) 		
+Data("movement:standing:jump_over_low_high:forward::::", -2, "M_MELEE_FIGHTER_A_jump_over_low_02_mirror", -1, 1) 	
+
+Data("movement:standing:jump_over_low:forward::::", -2, "M_MELEE_FIGHTER_A_jump_over_low_02", -1, 1) 		
+Data("movement:standing:jump_over_low:forward::::", -2, "M_MELEE_FIGHTER_A_jump_over_low_02_mirror", -1, 1) 	
+
+Data("movement:standing:jump_through_window:forward::::", -2, "M_MELEE_FIGHTER_A_jump_over_low_02", -1, 1) 		
+Data("movement:standing:jump_through_window:forward::::", -2, "M_MELEE_FIGHTER_A_jump_over_low_02_mirror", -1, 1) 
+
+// WARNING! Section below contains TEMPORARY anims from INFECTED:
+
+Data("movement:standing:jump_05m:forward::::", -2, "infected_jump_05m_L", -1, 1)
+Data("movement:standing:jump_05m:forward::::", -2, "infected_jump_05m_R", -1, 1)
+
+Data("movement:standing:jump_1m:forward::::", -2, "infected_jump_1m_L", -1, 1)
+Data("movement:standing:jump_1m:forward::::", -2, "infected_jump_1m_R", -1, 1)
+
+Data("movement:standing:jump_05m_up:forward::::", -2, "mzi_upset_jump_on", -1, 1)
+Data("movement:standing:jump_1m_up:forward::::", -2, "infected_jump_up_1m_R", -1, 1)
+Data("movement:standing:jump_1m_up:forward::::", -2, "infected_jump_up_1m_L", -1, 1)
+Data("movement:standing:jump_1m_to_climb_up:forward::::", -2, "jump_1m_to_climb_up", -1, 1)
+
+Data("movement:standing:jump_05m_down:forward::::", -2, "infected_jump_1m_down", -1, 1)
+Data("movement:standing:jump_1m_down:forward::::", -2, "infected_jump_1m_down", -1, 1)
+Data("movement:standing:jump_1m_down:forward::::", -2, "infected_jump_1m_down", -1, 1)
+
+Data("movement:standing:jump_05m_to_climb:forward::::", -2, "mzi_upset_jump_on", -1, 1)
+
+// End of TEMPORARY infected anims
+
+
+//#########################
+//#### CUSTOM_MOVEMENT ####
+//#########################
+//## custom_movement:start_pose:end_pose:item_type:direction
+//###############
+
+// brakuje animacji chodzenia miedzy coverami z ak47 oraz shotgunem (ewentualnie moze starczylaby wersja do ak47)
+
+//##############
+//#### TURN ####
+//##############
+//## turn:pose:alarm_level:item_type:direction:angle
+//##############
+
+Data("turn:standing:::left:45", -2, "m_npc_Turn_45L", -1, 1)
+Data("turn:standing:::right:45", -2, "m_npc_Turn_45R", -1, 1)
+
+Data("turn:standing:::left:90", -2, "m_npc_Turn_90L", -1, 1)
+Data("turn:standing:::right:90", -2, "m_npc_Turn_90R", -1, 1)
+
+Data("turn:standing:::left:180", -2, "m_npc_Turn_180L", -1, 1)
+Data("turn:standing:::right:180", -2, "m_npc_Turn_180R", -1, 1)
+
+Data("turn:standing:::left:45", -2, "m_npc_Turn_45L", -1, 1)
+Data("turn:standing:::right:45", -2, "m_npc_Turn_45R", -1, 1)
+
+Data("turn:standing:::left:90", -2, "m_npc_Turn_90L", -1, 1)
+Data("turn:standing:::right:90", -2, "m_npc_Turn_90R", -1, 1)
+
+Data("turn:standing:::left:180", -2, "m_npc_Turn_180L", -1, 1)
+Data("turn:standing:::right:180", -2, "m_npc_Turn_180R", -1, 1)
+
+Data("turn:standing::rifle:left:45", -2, "mp_npc_ak47_aim_turn45l", -1, 1)
+Data("turn:standing::rifle:right:45", -2, "mp_npc_ak47_aim_turn45r", -1, 1)
+
+Data("turn:standing::rifle:left:90", -2, "m_npc_ak47_aim_rotate90l_lleg", -1, 1)
+Data("turn:standing::rifle:right:90", -2, "m_npc_ak47_aim_rotate90r_lleg", -1, 1)
+
+Data("turn:standing::rifle:left:180", -2, "m_npc_ak47_aim_rotate180l_lleg", -1, 1)
+Data("turn:standing::rifle:right:180", -2, "m_npc_ak47_aim_rotate180r_lleg", -1, 1)
+
+//###############
+//#### START ####
+//###############
+//## start:start_pose:alarm_level:item_type:movement_type:angle:direction:is_strafe
+//###############
+
+// ---- tired walk ---
+
+Data("start:standing:::walk:0::", -2, "m_npc_tired_walk_start_front_01", -1, 1)
+Data("start:standing:::walk:180:right:", -2, "m_npc_tired_walk_start_180R", -1, 1)
+Data("start:standing:::walk:180:left:",  -2, "m_npc_tired_walk_start_180L", -1, 1)
+Data("start:standing:::walk:90:right:", -2, "m_npc_tired_walk_start_90R", -1, 1)
+//Data("start:standing:::walk:90:right:", -2, "m_npc_tired_walk_start_90R_02", -1, 1)
+Data("start:standing:::walk:90:left:", -2, "m_npc_tired_walk_start_90L", -1, 1)
+
+Data("stop:standing:::walk:90:left:false:", -2, "m_npc_tired_walk_stop_90L", -1, 1)
+Data("stop:standing:::walk:90:right:false:", -2, "m_npc_tired_walk_stop_90R", -1, 1)
+
+Data("stop:standing:::walk:90:left:false:", -2, "m_npc_tired_walk_stop_90L_02", -1, 1)  // less decisive
+Data("stop:standing:::walk:90:right:false:", -2, "m_npc_tired_walk_stop_90R_02", -1, 1) // less decisive
+
+Data("stop:standing:::walk:0::false:", -2, "m_npc_tired_walk_stop_front_01", -1, 1)
+Data("stop:standing:::walk:0::false:", -2, "m_npc_tired_walk_stop_front_02", -1, 1)
+Data("stop:standing:::walk:180:right:false:", -2, "m_npc_tired_walk_stop_180R", -1, 1)
+Data("stop:standing:::walk:180:left:false:", -2, "m_npc_tired_walk_stop_180L", -1, 1)
+
+// ---- melee fighter patrol ---
+
+Data("start:standing::stick:walk:0::", -2, "m_melee_fighter_a_patrol_walk_start_front_01", -1, 1)
+Data("start:standing::stick:walk:180:right:", -2, "M_MELEE_FIGHTER_A_patrol_walk_start_180r", -1, 1)
+Data("start:standing::stick:walk:180:left:",  -2, "M_MELEE_FIGHTER_A_patrol_walk_start_180l", -1, 1)
+Data("start:standing::stick:walk:90:right:", -2, "M_MELEE_FIGHTER_A_patrol_walk_start_90r", -1, 1)
+Data("start:standing::stick:walk:90:left:", -2, "M_MELEE_FIGHTER_A_patrol_walk_start_90l", -1, 1)
+
+
+
+
+
+// ---- generic walk ---
+//Data("start:standing:::walk:90:left:", -2, 	"m_npc_walk_start_90L", -1, 1)
+//Data("start:standing:::walk:90:right:", -2, 	"m_npc_walk_start_90R", -1, 1)
+//Data("start:standing:::walk:0::", -2, 		"m_npc_walk_start_Front", -1, 1)
+//Data("start:standing:::walk:180:right:", -2, 	"m_npc_walk_start_180R", -1, 1)
+//Data("start:standing:::walk:180:left:", -2, 	"m_npc_walk_start_180L", -1, 1)
+
+
+Data("start:standing:::trot:90:left:", -2, 		"m_npc_run_start_90l", -1, 1)
+Data("start:standing:::trot:90:right:", -2, 	"m_npc_run_start_90r", -1, 1)
+Data("start:standing:::trot:0::", -2, 			"m_npc_run_start_front", -1, 1)
+Data("start:standing:::trot:180:right:", -2, 	"m_npc_run_start_180r", -1, 1)
+Data("start:standing:::trot:180:left:", -2, 	"m_npc_run_start_180l", -1, 1)
+
+Data("start:standing:::run:90:left:", -2, 	"m_npc_run_start_90l", -1, 1)
+Data("start:standing:::run:90:right:", -2, 	"m_npc_run_start_90r", -1, 1)
+Data("start:standing:::run:0::", -2, 		"m_npc_run_start_front", -1, 1)
+Data("start:standing:::run:180:right:", -2, "m_npc_run_start_180r", -1, 1)
+Data("start:standing:::run:180:left:", -2, 	"m_npc_run_start_180l", -1, 1)
+
+Data("start:standing::stick:run:90:left:", -2, 		"M_MELEE_FIGHTER_A_Run_Start_90L_01", 		-1, 1)
+Data("start:standing::stick:run:90:right:", -2, 	"M_MELEE_FIGHTER_A_Run_Start_90R_01", 		-1, 1)
+Data("start:standing::stick:run:0::", -2, 			"m_melee_fighter_a_trot_start_01", 		-1, 1)
+Data("start:standing::stick:run:0::", -2, 			"m_melee_fighter_a_trot_start_02", 		-1, 1)
+Data("start:standing::stick:run:180:left:", -2, 	"m_melee_fighter_a_run_start_180l_01", 		-1, 1)
+Data("start:standing::stick:run:180:right:", -2,	"m_melee_fighter_a_run_start_180r_01",		-1, 1)
+
+Data("start:standing::stick:trot:90:left:", -2, 		"m_melee_fighter_a_trot_start_90l", 		-1, 1)
+Data("start:standing::stick:trot:90:right:", -2, 		"m_melee_fighter_a_trot_start_90r", 		-1, 1)
+Data("start:standing::stick:trot:0::", -2, 				"m_melee_fighter_a_trot_start_01", 		-1, 1)
+Data("start:standing::stick:trot:180:left:", -2, 		"m_melee_fighter_a_trot_start_180l", 		-1, 1)
+Data("start:standing::stick:trot:180:right:", -2, 		"m_melee_fighter_a_trot_start_180r", 		-1, 1)
+
+Data("start:standing:::sprint:90:left:", -2,	"m_npc_run_start_90l", -1, 1)
+Data("start:standing:::sprint:90:right:", -2, 	"m_npc_run_start_90r", -1, 1)
+Data("start:standing:::sprint:0::", -2, 		"m_npc_run_start_front", -1, 1)
+Data("start:standing:::sprint:180::", -2, 		"m_npc_run_start_180l", -1, 1)
+Data("start:standing:::sprint:180::", -2, 		"m_npc_run_start_180r", -1, 1)
+
+Data("start:standing::rifle:trot:90:left:", -2, "mp_npc_ak47_strafe_start_front_01", -1, 1)
+Data("start:standing::rifle:trot:90:right:", -2, "mp_npc_ak47_strafe_start_front_01", -1, 1)
+Data("start:standing::rifle:trot:0::", -2, "mp_npc_ak47_strafe_start_front_01", -1, 1)
+Data("start:standing::rifle:trot:180:right:", -2, "mp_npc_ak47_strafe_start_front_01", -1, 1)
+Data("start:standing::rifle:trot:180:left:", -2, "mp_npc_ak47_strafe_start_front_01", -1, 1)
+
+//Data("start:standing::rifle:trot::left:true", -2, "mp_npc_ak47_run_strafe_start_left_shooting02", -1, 1) //too fast
+Data("start:standing::rifle:trot::left:true", -2, "mp_npc_ak47_strafe_start_left_01", -1, 1)
+Data("start:standing::rifle:trot::right:true", -2, "mp_npc_ak47_strafe_start_right_01", -1, 1)
+Data("stop:standing::rifle:trot::left:false:true", -2, "mp_npc_ak47_strafe_stop_left_01", -1, 1)
+Data("stop:standing::rifle:trot::right:false:true", -2, "mp_npc_ak47_strafe_stop_right_01", -1, 1)
+
+Data("start:standing::rifle:trot::forward:true", -2, "mp_npc_ak47_strafe_start_front_01", -1, 1)
+
+Data("stop:standing::rifle:trot::forward:false:true", -2, "mp_npc_ak47_strafe_stop_front_01", -1, 1)
+Data("start:standing::rifle:trot::backward:true", -2, "mp_npc_ak47_strafe_start_back_02", -1, 1)
+Data("stop:standing::rifle:trot::backward:false:true", -2, "mp_npc_ak47_strafe_stop_back_01", -1, 1)
+//Data("start:standing::rifle:trot::backward:true", -2, "mp_npc_ak47_strafe_start_back_01", -1, 1) //jumpy version
+
+
+//Data("start:standing::rifle:trot::forward:true", -2, "mp_npc_ak_start_run_underfire", -1, 1)
+//Data("start:standing::rifle:trot::backward:true", -2, "mp_npc_ak_start_180_right_run_underfire", -1, 1)
+
+Data("start:standing::rifle:run:90:left:", -2, 		"mp_npc_ak_start_90_left_run_underfire", -1, 1)
+Data("start:standing::rifle:run:90:right:", -2, 	"mp_npc_ak_start_90_right_run_underfire", -1, 1)
+Data("start:standing::rifle:run:0::", -2, 			"mp_npc_ak_start_run_underfire", -1, 1)
+Data("start:standing::rifle:run:180:right:", -2, 	"mp_npc_ak_start_180_right_run_underfire", -1, 1)
+Data("start:standing::rifle:run:180:left:", -2, 	"mp_npc_ak_start_180_left_run_underfire", -1, 1)
+
+Data("start:standing::rifle:sprint:90:left:", -2, 	"mp_npc_ak_start_run_underfire", -1, 1)
+Data("start:standing::rifle:sprint:90:right:", -2, 	"mp_npc_ak_start_run_underfire", -1, 1)
+Data("start:standing::rifle:sprint:0::", -2, 		"mp_npc_ak_start_run_underfire", -1, 1)
+Data("start:standing::rifle:sprint:180:right:", -2, "mp_npc_ak_start_180_right_run_underfire", -1, 1)
+Data("start:standing::rifle:sprint:180:left:", -2, 	"mp_npc_ak_start_180_left_run_underfire", -1, 1)
+
+
+Data("start:standing::rifle:walk:90:left:", -2, 	"m_npc_ak47_patrol_walk_start_left_01", -1, 1)
+Data("start:standing::rifle:walk:90:right:", -2, 	"m_npc_ak47_patrol_walk_start_right_01", -1, 1)
+//Data("start:standing::rifle:walk:0::", -2, 			"m_npc_ak47_patrol_walk_start_front_01", -1, 1) //(careful)
+Data("start:standing::rifle:walk:0::", -2, 			"m_npc_ak47_patrol_walk_start_front_02", -1, 1)//(confident)
+Data("start:standing::rifle:walk:180:right:", -2, 	"m_npc_ak47_patrol_walk_start_back_right_01", -1, 1)
+Data("start:standing::rifle:walk:180:left:", -2, 	"m_npc_ak47_patrol_walk_start_back_left_01", -1, 1)
+
+// Those starts are absolutely essential for shooting AIs!!
+/*
+Data("start:crouching::rifle:trot:0::", -2, "M_Upset_R_R_startrun_rifle_crouch_F_01", -1, 1)
+Data("start:crouching::rifle:trot:180:left:", -2, "M_Upset_R_R_startrun_rifle_crouch_B_01_RLeg", -1, 1)
+Data("start:crouching::rifle:trot:180:right:", -2, "M_Upset_R_R_startrun_rifle_crouch_B_01", -1, 1)
+Data("start:crouching::rifle:trot:90:left:", -2, "M_Upset_R_R_startrun_rifle_crouch_L_01", -1, 1)
+Data("start:crouching::rifle:trot:90:right:", -2, "M_Upset_R_R_startrun_rifle_crouch_R_01", -1, 1)
+*/
+Data("start:crouching::rifle:run:0::", -2, "M_Upset_R_R_startrun_rifle_crouch_F_01", -1, 1)
+Data("start:crouching::rifle:run:180:left:", -2, "M_Upset_R_R_startrun_rifle_crouch_B_01_RLeg", -1, 1)
+Data("start:crouching::rifle:run:180:right:", -2, "M_Upset_R_R_startrun_rifle_crouch_B_01", -1, 1)
+Data("start:crouching::rifle:run:90:left:", -2, "M_Upset_R_R_startrun_rifle_crouch_L_01", -1, 1)
+Data("start:crouching::rifle:run:90:right:", -2, "M_Upset_R_R_startrun_rifle_crouch_R_01", -1, 1)
+
+Data("start:crouching_left::rifle:trot:0::", -2, "mp_npc_ak47_left_start_lowcoverleft_to_fastrun_underfire", -1, 1)
+Data("start:crouching_left::rifle:trot:180:left:", -2, "mp_npc_ak47_right_start_lowcoverleft_to_fastrun_underfire", -1, 1)
+Data("start:crouching_left::rifle:trot:180:right:", -2, "mp_npc_ak47_right_start_lowcoverleft_to_fastrun_underfire", -1, 1)
+Data("start:crouching_left::rifle:trot:90:left:", -2, "mp_npc_ak47_back_start_lowcoverleft_to_fastrun_underfire", -1, 1)
+Data("start:crouching_left::rifle:trot:90:right:", -2, "mp_npc_ak47_front_start_lowcoverleft_to_fastrun_underfire", -1, 1)
+
+Data("start:crouching_right::rifle:trot:0::", -2, "M_Upset_R_R_startrun_rifle_crouch_F_01", -1, 1)
+Data("start:crouching_right::rifle:trot:180:left:", -2, "mp_npc_ak47_left_start_lowcoverright_to_fastrun_underfire", -1, 1)
+Data("start:crouching_right::rifle:trot:180:right:", -2, "mp_npc_ak47_left_start_lowcoverright_to_fastrun_underfire", -1, 1)
+Data("start:crouching_right::rifle:trot:90:left:", -2, "mp_npc_ak47_front_start_lowcoverright_to_fastrun_underfire02", -1, 1)
+Data("start:crouching_right::rifle:trot:90:right:", -2, "mp_npc_ak47_front_start_lowcoverright_to_fastrun_underfire", -1, 1)
+
+Data("start:crouching_left::rifle:run:0::", -2, "mp_npc_ak47_left_start_lowcoverleft_to_fastrun_underfire", -1, 1)
+Data("start:crouching_left::rifle:run:180:left:", -2, "mp_npc_ak47_right_start_lowcoverleft_to_fastrun_underfire", -1, 1)
+Data("start:crouching_left::rifle:run:180:right:", -2, "mp_npc_ak47_right_start_lowcoverleft_to_fastrun_underfire", -1, 1)
+Data("start:crouching_left::rifle:run:90:left:", -2, "mp_npc_ak47_back_start_lowcoverleft_to_fastrun_underfire", -1, 1)
+Data("start:crouching_left::rifle:run:90:right:", -2, "mp_npc_ak47_front_start_lowcoverleft_to_fastrun_underfire", -1, 1)
+
+Data("start:crouching_right::rifle:run:0::", -2, "M_Upset_R_R_startrun_rifle_crouch_F_01", -1, 1)
+Data("start:crouching_right::rifle:run:180:left:", -2, "mp_npc_ak47_left_start_lowcoverright_to_fastrun_underfire", -1, 1)
+Data("start:crouching_right::rifle:run:180:right:", -2, "mp_npc_ak47_left_start_lowcoverright_to_fastrun_underfire", -1, 1)
+Data("start:crouching_right::rifle:run:90:left:", -2, "mp_npc_ak47_front_start_lowcoverright_to_fastrun_underfire02", -1, 1)
+Data("start:crouching_right::rifle:run:90:right:", -2, "mp_npc_ak47_front_start_lowcoverright_to_fastrun_underfire", -1, 1)
+
+Data("start:crouching::rifle:walk:0::", -2, "mp_npc_ak47_left_start_lowcoverleft_to_fastrun_underfire", -1, 1)
+Data("start:crouching::rifle:walk:180:left:", -2, "mp_npc_ak47_right_start_lowcoverleft_to_fastrun_underfire", -1, 1)
+Data("start:crouching::rifle:walk:180:right:", -2, "mp_npc_ak47_right_start_lowcoverleft_to_fastrun_underfire", -1, 1)
+Data("start:crouching::rifle:walk:90:left:", -2, "mp_npc_ak47_back_start_lowcoverleft_to_fastrun_underfire", -1, 1)
+Data("start:crouching::rifle:walk:90:right:", -2, "mp_npc_ak47_front_start_lowcoverleft_to_fastrun_underfire", -1, 1)
+
+
+//##############
+//#### STOP ####
+//##############
+//## stop:end_pose:alarm_level:item_type:movement_type:angle:direction:sudden:is_strafe
+//##############
+
+// ---- melee fighter patrol ---
+Data("stop:standing::stick:walk:0::false:", -2, "m_melee_fighter_a_patrol_walk_stop_front_01", -1, 1)
+Data("stop:standing::stick:walk:0::false:", -2, "m_melee_fighter_a_patrol_walk_stop_front_02", -1, 1)
+Data("stop:standing::stick:walk:0::true:", -2, "m_melee_fighter_a_patrol_walk_stop_front_01", -1, 1)
+Data("stop:standing::stick:walk:0::true:", -2, "m_melee_fighter_a_patrol_walk_stop_front_02", -1, 1)
+
+Data("stop:standing::stick:walk:90:right:false:", -2, "m_melee_fighter_a_patrol_walk_stop_90r_01", -1, 1)
+Data("stop:standing::stick:walk:90:right:true:", -2, "m_melee_fighter_a_patrol_walk_stop_90r_01", -1, 1)
+Data("stop:standing::stick:walk:90:left:false:", -2, "m_melee_fighter_a_patrol_walk_stop_90l_01", -1, 1)
+Data("stop:standing::stick:walk:90:left:true:", -2, "m_melee_fighter_a_patrol_walk_stop_90l_01", -1, 1)
+
+Data("stop:standing::stick:walk:180:right:false:", -2, "m_melee_fighter_a_patrol_walk_stop_180r_01", -1, 1)
+Data("stop:standing::stick:walk:180:left:false:",  -2, "m_melee_fighter_a_patrol_walk_stop_180l_01", -1, 1)
+Data("stop:standing::stick:walk:180:right:true:", -2, "m_melee_fighter_a_patrol_walk_stop_180r_01", -1, 1)
+Data("stop:standing::stick:walk:180:left:true:",  -2, "m_melee_fighter_a_patrol_walk_stop_180l_01", -1, 1)
+
+/*
+Data("stop:standing::stick:walk:180:right:", -2, "M_MELEE_FIGHTER_A_patrol_walk_start_180r", -1, 1)
+Data("stop:standing::stick:walk:180:left:",  -2, "M_MELEE_FIGHTER_A_patrol_walk_start_180l", -1, 1)
+Data("stop:standing::stick:walk:90:right:", -2, "M_MELEE_FIGHTER_A_patrol_walk_start_90r", -1, 1)
+Data("stop:standing::stick:walk:90:left:", -2, "M_MELEE_FIGHTER_A_patrol_walk_start_90l", -1, 1)
+*/
+
+/*  using tired stops
+Data("stop:standing:::walk:90:left:false:", -2, "m_npc_walk_stop_90L", -1, 1)
+Data("stop:standing:::walk:90:right:false:", -2, "m_npc_walk_stop_90R", -1, 1)
+Data("stop:standing:::walk:0::false:", -2, "m_npc_walk_stop_front_01", -1, 1)
+Data("stop:standing:::walk:0::false:", -2, "m_npc_walk_stop_front_02", -1, 1)
+Data("stop:standing:::walk:180:right:false:", -2, "m_npc_walk_stop_180R", -1, 1)
+Data("stop:standing:::walk:180:left:false:", -2, "m_npc_walk_stop_180L", -1, 1)
+*/
+Data("stop:standing:::trot:90:left:false:", -2, "m_npc_run_stop_90l", -1, 1)
+Data("stop:standing:::trot:90:right:false:", -2, "m_npc_run_stop_90r", -1, 1)
+Data("stop:standing:::trot:0::false:", -2, "m_npc_run_stop_front", -1, 1)
+Data("stop:standing:::trot:180:right:false:", -2, "m_npc_run_stop_180r", -1, 1)
+Data("stop:standing:::trot:180:left:false:", -2, "m_npc_run_stop_180l", -1, 1)
+
+Data("stop:standing:::run:90:left:false:", -2, "m_npc_run_stop_90l", -1, 1)
+Data("stop:standing:::run:90:right:false:", -2, "m_npc_run_stop_90r", -1, 1)
+Data("stop:standing:::run:0::false:", -2, "m_npc_run_stop_front", -1, 1)
+Data("stop:standing:::run:180:right:false:", -2, "m_npc_run_stop_180r", -1, 1)
+Data("stop:standing:::run:180:left:false:", -2, "m_npc_run_stop_180l", -1, 1)
+
+Data("stop:standing:::sprint:90:left:false:", -2, "m_npc_run_stop_90l", -1, 1)
+Data("stop:standing:::sprint:90:right:false:", -2, "m_npc_run_stop_90r", -1, 1)
+Data("stop:standing:::sprint:0::false:", -2, "m_npc_run_stop_front", -1, 1)
+Data("stop:standing:::sprint:180:right:false:", -2, "m_npc_run_stop_180r", -1, 1)
+Data("stop:standing:::sprint:180:left:false:", -2, "m_npc_run_stop_180l", -1, 1)
+
+Data("stop:standing::rifle:trot:90:left:false:", -2, "mp_npc_AK_run_stop_underfire", -1, 1)
+Data("stop:standing::rifle:trot:90:right:false:", -2, "mp_npc_AK_run_stop_underfire", -1, 1)
+Data("stop:standing::rifle:trot:0::false:", -2, "mp_npc_AK_run_stop_underfire", -1, 1)
+Data("stop:standing::rifle:trot:180:left:false:", -2, "mp_npc_AK_run_stop_underfire", -1, 1)
+Data("stop:standing::rifle:trot:180:right:false:", -2, "mp_npc_AK_run_stop_underfire", -1, 1)
+
+Data("stop:standing::rifle:run:90:left:false:", -2, "mp_npc_AK_run_stop_underfire", -1, 1)
+Data("stop:standing::rifle:run:90:right:false:", -2, "mp_npc_AK_run_stop_underfire", -1, 1)
+Data("stop:standing::rifle:run:0::false:", -2, "mp_npc_AK_run_stop_underfire", -1, 1)
+Data("stop:standing::rifle:run:180:left:false:", -2, "mp_npc_AK_run_stop_underfire", -1, 1)
+Data("stop:standing::rifle:run:180:right:false:", -2, "mp_npc_AK_run_stop_underfire", -1, 1)
+
+
+
+Data("stop:standing::rifle:sprint:90:left:false:", -2, "mp_npc_AK_run_stop_underfire", -1, 1)
+Data("stop:standing::rifle:sprint:90:right:false:", -2, "mp_npc_AK_run_stop_underfire", -1, 1)
+Data("stop:standing::rifle:sprint:0::false:", -2, "mp_npc_AK_run_stop_underfire", -1, 1)
+Data("stop:standing::rifle:sprint:180:right:false:", -2, "mp_npc_AK_run_stop_underfire", -1, 1)
+Data("stop:standing::rifle:sprint:180:left:false:", -2, "mp_npc_AK_run_stop_underfire", -1, 1)
+
+Data("stop:standing::rifle:walk:0::false:", -2, "m_npc_ak47_patrol_walk_stop_front_01", -1, 1)
+Data("stop:standing::rifle:walk:0::false:", -2, "m_npc_ak47_patrol_walk_stop_front_02", -1, 1)
+Data("stop:standing::rifle:walk:90:right:false:", -2, "m_npc_ak47_patrol_walk_stop_right_01", -1, 1)
+Data("stop:standing::rifle:walk:90:left:false:", -2, "m_npc_ak47_patrol_walk_stop_left_01", -1, 1)
+Data("stop:standing::rifle:walk:180:right:false:", -2, "m_npc_ak47_patrol_walk_stop_BackRight_01", -1, 1)
+Data("stop:standing::rifle:walk:180:left:false:", -2, "m_npc_ak47_patrol_walk_stop_BackLeft_01", -1, 1)
+Data("stop:standing::rifle:walk:180:left:false:", -2, "m_npc_ak47_patrol_walk_stop_BackLeft_02", -1, 1)
+
+Data("stop:standing:upset:rifle:walk:0:forward:false:", -2, "m_npc_ak47_patrol_walk_alarmed_stop_front_01", -1, 1)
+Data("stop:standing:upset:rifle:walk:0:forward:false:", -2, "m_npc_ak47_patrol_walk_alarmed_stop_front_02", -1, 1)
+
+Data("stop:standing:alarmed:rifle:walk:0:forward:false:", -2, "m_npc_ak47_patrol_walk_alarmed_stop_front_01", -1, 1)
+Data("stop:standing:alarmed:rifle:walk:0:forward:false:", -2, "m_npc_ak47_patrol_walk_alarmed_stop_front_02", -1, 1)
+
+
+Data("stop:crouching_left::rifle:run:90:left:false:", -2, "mp_npc_ak47_back_stop_fastrun_underfire_to_lowcoverleft", -1, 1)
+Data("stop:crouching_left::rifle:run:90:right:false:", -2, "mp_npc_ak47_front_stop_fastrun_underfire_to_lowcoverleft", -1, 1)
+Data("stop:crouching_left::rifle:run:0::false:", -2, "mp_npc_ak47_right_stop_from_fastrun_underfire_to_lowcoverleft", -1, 1)
+Data("stop:crouching_left::rifle:run:180:right:false:", -2, "mp_npc_ak47_left_stop_from_fastrun_underfire_to_lowcoverleft", -1, 1)
+Data("stop:crouching_left::rifle:run:180:left:false:", -2, "mp_npc_ak47_left_stop_from_fastrun_underfire_to_lowcoverleft", -1, 1)
+
+Data("stop:crouching_right::rifle:run:90:left:false:", -2, "mp_npc_ak47_left_stop_from_fastrun_underfire_to_lowcoverright", -1, 1)
+Data("stop:crouching_right::rifle:run:90:right:false:", -2, "mp_npc_ak47_left_stop_from_fastrun_underfire_to_lowcoverright", -1, 1)
+Data("stop:crouching_right::rifle:run:0::false:", -2, "mp_npc_ak47_left_stop_from_fastrun_underfire_to_lowcoverright", -1, 1)
+Data("stop:crouching_right::rifle:run:180:right:false:", -2, "mp_npc_ak47_right_stop_from_fastrun_underfire_to_lowcoverright", -1, 1)
+Data("stop:crouching_right::rifle:run:180:left:false:", -2, "mp_npc_ak47_right_stop_from_fastrun_underfire_to_lowcoverright", -1, 1)
+
+
+//#######################
+//####  CHANGE POSE  ####
+//#######################
+//## change_pose:start_pose:end_pose:item_type
+//#######################
+
+// animacje obrotow, zamiast zmiany pozy
+Data("change_pose:standing:leaning_left:pistol", -2, "m_npc_pistol_rotate90L", -1, 1)
+Data("change_pose:leaning_left:standing:pistol", -2, "m_npc_pistol_rotate90R", -1, 1)
+
+Data("change_pose:standing:leaning_left:rifle", -2, "m_npc_ak47_aim_rotate45l_lleg", -1, 1)
+Data("change_pose:leaning_left:standing:rifle", -2, "m_npc_ak47_aim_rotate45r_lleg", -1, 1)
+
+Data("change_pose:standing:leaning_right:pistol", -2, "m_npc_pistol_rotate90R", -1, 1)
+Data("change_pose:leaning_right:standing:pistol", -2, "m_npc_pistol_rotate90L", -1, 1)
+
+Data("change_pose:standing:leaning_right:rifle", -2, "m_npc_ak47_aim_rotate45r_lleg", -1, 1)
+Data("change_pose:leaning_right:standing:rifle", -2, "m_npc_ak47_aim_rotate45l_lleg", -1, 1)
+
+Data("change_pose:crouching_left:standing:", -2, "mp_npc_ak47_crouchleft_to_stand", -1, 1)
+Data("change_pose:standing:crouching_left:", -2, "mp_npc_ak47_stand_to_crouchleft", -1, 1)
+
+Data("change_pose:crouching_right:standing:", -2, "mp_npc_ak47_crouchright_to_stand", -1, 1)
+Data("change_pose:standing:crouching_right:", -2, "mp_npc_ak47_stand_to_crouchright", -1, 1)
+
+Data("change_pose:crouching_right:crouching_left:", -2, "mp_npc_ak47_crouchingright_to_crouchingleft", -1, 1)
+Data("change_pose:crouching_left:crouching_right:", -2, "mp_npc_ak47_crouchingleft_to_crouchingright", -1, 1)
+
+Data("change_pose:crouching:standing:", -2, "mp_npc_ak47_CrouchShooting_from_Crouch_01", -1, 1)
+Data("change_pose:standing:crouching:", -2, "mp_npc_ak47_CrouchShooting_to_Crouch_01", -1, 1)
+
+Data("change_pose:standing:carried:", -2, "m_npc_carried_start", -1, 1)
+Data("change_pose:carried:standing:", -2, "m_npc_carried_stop", -1, 1)
+
+//#######################
+//#### MOVEMENT TURN ####
+//#######################
+//## movement_turn:pose:alarm_level:item_type:movement_type:angle:direction:sudden
+//#######################
+/*
+Data("movement_turn:standing:::walk:90:left:true", -2, "m_npc_unarmed_walk_sudden_turn_90_l", -1, 1)
+Data("movement_turn:standing:::walk:90:right:true", -2, "m_npc_unarmed_walk_sudden_turn_90_r", -1, 1)
+Data("movement_turn:standing:::walk:180:left:true", -2, "m_npc_unarmed_walk_sudden_turn_180_l", -1, 1)
+Data("movement_turn:standing:::walk:180:right:true", -2, "m_npc_unarmed_walk_sudden_turn_180_r", -1, 1)
+
+Data("movement_turn:standing:::run:90:left:false", -2, "m_npc_unarmed_run_turn_90_l", -1, 1)
+Data("movement_turn:standing:::run:90:left:false", -2, "m_npc_unarmed_run_turn_90_l_mirror", -1, 1)
+Data("movement_turn:standing:::run:90:left:true", -2, "m_npc_unarmed_run_sudden_turn_90_l", -1, 1)
+Data("movement_turn:standing:::run:90:right:false", -2, "m_npc_unarmed_run_turn_90_r", -1, 1)
+Data("movement_turn:standing:::run:90:right:false", -2, "m_npc_unarmed_run_turn_90_r_mirror", -1, 1)
+Data("movement_turn:standing:::run:90:right:true", -2, "m_npc_unarmed_run_sudden_turn_90_r", -1, 1)
+Data("movement_turn:standing:::run:180:left:false", -2, "m_npc_unarmed_run_turn_180_l", -1, 1)
+Data("movement_turn:standing:::run:180:left:false", -2, "m_npc_unarmed_run_turn_180_l_mirror", -1, 1)
+Data("movement_turn:standing:::run:180:left:true", -2, "m_npc_unarmed_run_sudden_turn_180_l", -1, 1)
+Data("movement_turn:standing:::run:180:right:false", -2, "m_npc_unarmed_run_turn_180_r", -1, 1)
+Data("movement_turn:standing:::run:180:right:false", -2, "m_npc_unarmed_run_turn_180_r_mirror", -1, 1)
+Data("movement_turn:standing:::run:180:right:true", -2, "m_npc_unarmed_run_sudden_turn_180_r", -1, 1)
+
+Data("movement_turn:standing:::sprint:90:left:false", -2, "m_npc_unarmed_sprint_turn_90_l", -1, 1)
+Data("movement_turn:standing:::sprint:90:left:false", -2, "m_npc_unarmed_sprint_turn_90_l_mirror", -1, 1)
+Data("movement_turn:standing:::sprint:90:right:false", -2, "m_npc_unarmed_sprint_turn_90_r", -1, 1)
+Data("movement_turn:standing:::sprint:90:right:false", -2, "m_npc_unarmed_sprint_turn_90_r_mirror", -1, 1)
+Data("movement_turn:standing:::sprint:180:left:false", -2, "m_npc_unarmed_sprint_turn_180_l", -1, 1)
+Data("movement_turn:standing:::sprint:180:left:false", -2, "m_npc_unarmed_sprint_turn_180_l_mirror", -1, 1)
+Data("movement_turn:standing:::sprint:180:right:false", -2, "m_npc_unarmed_sprint_turn_180_r", -1, 1)
+Data("movement_turn:standing:::sprint:180:right:false", -2, "m_npc_unarmed_sprint_turn_180_r_mirror", -1, 1)
+
+
+Data("movement_turn:standing:::walk:45:left:false", -2, "m_npc_walk_turn_45l_01", -1, 1)
+Data("movement_turn:standing:::walk:45:right:false", -2, "m_npc_walk_turn_45R_01", -1, 1)
+Data("movement_turn:standing:::walk:90:left:false", -2, "m_npc_walk_turn_45l_01", -1, 1)
+Data("movement_turn:standing:::walk:90:right:false", -2, "m_npc_walk_turn_45R_01", -1, 1)
+
+*/
+
+//--- movement turn ---
+
+//Data("movement_turn:standing::stick:walk:45:left:", -2, "m_melee_fighter_a_walk_turn_45l_01", -1, 1)
+//Data("movement_turn:standing::stick:walk:45:left:", -2, "m_melee_fighter_a_walk_turn_45l_02", -1, 1)
+Data("movement_turn:standing::stick:trot:45:left:", -2, "m_melee_fighter_a_trot_turn_45l_01", -1, 1)
+Data("movement_turn:standing::stick:trot:45:left:", -2, "m_melee_fighter_a_trot_turn_45l_02", -1, 1)
+Data("movement_turn:standing::stick:run:45:left:", -2, "m_melee_fighter_a_trot_turn_45l_01", -1, 1)
+Data("movement_turn:standing::stick:run:45:left:", -2, "m_melee_fighter_a_trot_turn_45l_02", -1, 1)
+
+//Data("movement_turn:standing::stick:walk:45:right:", -2, "m_melee_fighter_a_walk_turn_45r_01", -1, 1)
+//Data("movement_turn:standing::stick:walk:45:right:", -2, "m_melee_fighter_a_walk_turn_45r_02", -1, 1)
+Data("movement_turn:standing::stick:trot:45:right:", -2, "m_melee_fighter_a_trot_turn_45r_01", -1, 1)
+Data("movement_turn:standing::stick:trot:45:right:", -2, "m_melee_fighter_a_trot_turn_45r_02", -1, 1)
+Data("movement_turn:standing::stick:run:45:right:", -2, "m_melee_fighter_a_trot_turn_45r_01", -1, 1)
+Data("movement_turn:standing::stick:run:45:right:", -2, "m_melee_fighter_a_trot_turn_45r_02", -1, 1)
+
+
+Data("movement_turn:standing::stick:trot:90:left:", -2, "m_melee_fighter_a_trot_turn_45r_01", -1, 1)
+Data("movement_turn:standing::stick:trot:90:left:", -2, "m_melee_fighter_a_trot_turn_45r_02", -1, 1)
+Data("movement_turn:standing::stick:trot:90:right:", -2, "m_melee_fighter_a_trot_turn_45r_01", -1, 1)
+Data("movement_turn:standing::stick:trot:90:right:", -2, "m_melee_fighter_a_trot_turn_45r_02", -1, 1)
+
+
+/*Data("movement_turn:standing::stick:walk:90:left:", -2, "m_melee_fighter_a_walk_turn_90l_01", -1, 1)
+Data("movement_turn:standing::stick:walk:90:left:", -2, "m_melee_fighter_a_walk_turn_90l_02", -1, 1)
+Data("movement_turn:standing::stick:trot:90:left:", -2, "m_melee_fighter_a_trot_turn_90l_01", -1, 1)
+Data("movement_turn:standing::stick:trot:90:left:", -2, "m_melee_fighter_a_trot_turn_90l_02", -1, 1)
+Data("movement_turn:standing::stick:run:90:left:", -2, "m_melee_fighter_a_trot_turn_90l_01", -1, 1)
+Data("movement_turn:standing::stick:run:90:left:", -2, "m_melee_fighter_a_trot_turn_90l_02", -1, 1)
+
+Data("movement_turn:standing::stick:walk:90:right:", -2, "m_melee_fighter_a_walk_turn_90r_01", -1, 1)
+Data("movement_turn:standing::stick:walk:90:left:", -2, "m_melee_fighter_a_walk_turn_90l_02", -1, 1)
+Data("movement_turn:standing::stick:trot:90:right:", -2, "m_melee_fighter_a_trot_turn_90r_01", -1, 1)
+Data("movement_turn:standing::stick:trot:90:left:", -2, "m_melee_fighter_a_trot_turn_90l_02", -1, 1)
+Data("movement_turn:standing::stick:run:90:right:", -2, "m_melee_fighter_a_trot_turn_90r_01", -1, 1)
+Data("movement_turn:standing::stick:run:90:left:", -2, "m_melee_fighter_a_trot_turn_90l_02", -1, 1)
+*/
+
+//################
+//##### GRAB #####
+//################
+//## grab:is_standing:is_holding:grabbed_phase:grab_type
+//################
+
+// grab1
+Data("grab:standing:false:begin_front:grab:", -2, "M_NPC_Begin_Grab", -1, 1)
+Data("grab:standing:false:begin_right:grab:", -2, "M_NPC_BeginRight_Grab", -1, 1)
+Data("grab:standing:false:begin_left:grableft:", -2, "M_NPC_BeginLeft_GrabLeft", -1, 1)
+
+Data("grab:standing:false:fight:grab:", -2, "M_NPC_Loop_Grab", -1, 1)
+Data("grab:standing:false:fight:grableft:", -2, "TPP_Unarmed_Loop_GrabLeft", -1, 1)
+Data("grab:standing:false:finish_win:grab:", -2, "M_NPC_FinishWins_Grab", -1, 1)
+Data("grab:standing:false:finish_win:grableft:", -2, "M_NPC_FinishWins_Grab", -1, 1)
+Data("grab:standing:false:punch1:grab:", -2, "TPP_Unarmed_Punch1_Grab", -1, 1)
+Data("grab:standing:false:punch1:grableft:", -2, "TPP_Unarmed_Punch1_GrabLeft", -1, 1)
+
+Data("grab:standing:false:finish_lose:grab:", -2, "TPP_Unarmed_Grab_zombie_wins", -1, 1)
+Data("grab:standing:false:finish_lose:grableft:", -2, "TPP_Unarmed_Grab_zombie_wins_left", -1, 1)
+
+// grab weak
+Data("grab:standing:false:begin_front:grabweak:", -2, "TPP_Unarmed_Begin_GrabWeak", -1, 1)
+Data("grab:standing:false:begin_right:grabweak:", -2, "TPP_Unarmed_BeginRight_GrabWeak", -1, 1)
+Data("grab:standing:false:begin_left:grabweakleft:", -2, "TPP_Unarmed_BeginLeft_GrabWeakLeft", -1, 1)
+
+Data("grab:standing:false:fight:grabweak:", -2, "M_NPC_Loop_Grab", -1, 1)
+Data("grab:standing:false:fight:grabweakleft:", -2, "TPP_Unarmed_Loop_GrabWeakLeft", -1, 1)
+Data("grab:standing:false:finish_win:grabweak:", -2, "TPP_Unarmed_FinishWins_GrabWeak", -1, 1)
+Data("grab:standing:false:finish_win:grabweakleft:", -2, "TPP_Unarmed_FinishWins_GrabWeak", -1, 1)
+Data("grab:standing:false:punch1:grabweak:", -2, "TPP_Unarmed_Punch1_GrabWeak", -1, 1)
+Data("grab:standing:false:punch1:grabweakleft:", -2, "TPP_Unarmed_Punch1_GrabWeakLeft", -1, 1)
+
+Data("grab:standing:false:finish_lose:grabweak:", -2, "TPP_Unarmed_Grab_zombie_wins", -1, 1)
+Data("grab:standing:false:finish_lose:grabweakleft:", -2, "TPP_Unarmed_Grab_zombie_wins_left", -1, 1)
+
+Data("grab:standing:true:begin_front:deadly_finish:", -2, "m_ncp_begin_deadly_finish", -1, 1)
+Data("grab:laying:true:begin_front:deadly_finish:", -2, "m_ncp_begin_deadly_finish", -1, 1)
+Data("grab:standing:true:begin_front:deadly_finish:", -2, "m_ncp_begin_deadly_finish", -1, 1)
+Data("grab:laying:true:begin_front:deadly_finish:", -2, "m_ncp_begin_deadly_finish", -1, 1)
+
+//Data("grab:standing:false:finish_win:grab:", -2, "npc_unarmed_grabnew_finishwins0", -1, 1)
+//Data("grab:standing:false:finish_win:grab:", -2, "TPP_Unarmed_FinishWins_GrabWeak", -1, 1)
+//Data("grab:standing:false:finish_win:grab:", -2, "npc_unarmed_grabnew_finishwins2", -1, 1)
+
+Data("grab:standing:true:finish_win:deadly_finish:", -2, "m_ncp_deadly_finish", -1, 1)
+Data("grab:laying:true:finish_win:deadly_finish:", -2, "m_ncp_deadly_finish", -1, 1)
+
+Data("grab:standing:true:begin_front:deadly_finish_blunt:", -2, "m_npc_begin_deadly_finish_blunt", -1, 1)
+Data("grab:standing:true:finish_win:deadly_finish_blunt:", -2, "m_npc_deadly_finish_blunt", -1, 1)
+Data("grab:laying:true:finish_win:deadly_finish_blunt:", -2, "m_npc_deadly_finish_blunt", -1, 1)
+Data("grab:laying:true:begin_front:deadly_finish_blunt:", -2, "m_npc_begin_deadly_finish_blunt", -1, 1)
+
+//Data("grab:standing:true:punch1:grab:", 0, "", -1, 1)   // ??
+
+//Data("grab:standing:true:punch2:grab:", -2, "npc_unarmed_grabnew_punch2", -1, 1)// NOT USED
+// Finisherback
+Data("grab:standing:true:begin_front:finisherback:", -2, "m_finisherback_begin", -1, 1)
+Data("grab:laying:true:begin_front:finisherback:", -2, "m_finisherback_begin", -1, 1)
+Data("grab:standing:false:begin_front:finisherback:", -2, "m_finisherback_begin", -1, 1)
+Data("grab:laying:false:begin_front:finisherback:", -2, "m_finisherback_begin", -1, 1)
+Data("grab:standing:true:finish_win:finisherback:", -2, "m_finisherback", -1, 1)
+Data("grab:laying:true:finish_win:finisherback:", -2, "m_finisherback", -1, 1)
+
+Data("grab:standing:true:begin_front:finisherbackfast:", -2, "m_finisherbackfast_begin", -1, 1)
+Data("grab:laying:true:begin_front:finisherbackfast:", -2, "m_finisherbackfast_begin", -1, 1)
+Data("grab:standing:false:begin_front:finisherbackfast:", -2, "m_finisherbackfast_begin", -1, 1)
+Data("grab:laying:false:begin_front:finisherbackfast:", -2, "m_finisherbackfast_begin", -1, 1)
+Data("grab:standing:true:finish_win:finisherbackfast:", -2, "m_finisherbackfast", -1, 1)
+Data("grab:laying:true:finish_win:finisherbackfast:", -2, "m_finisherbackfast", -1, 1)
+
+// nagewaza
+Data("grab:standing:true:begin_front:nagewazaback:", -2, "m_begin_nagewazaback", -1, 1)
+Data("grab:laying:true:begin_front:nagewazaback:", -2, "m_begin_nagewazaback", -1, 1)
+Data("grab:standing:false:begin_front:nagewazaback:", -2, "m_begin_nagewazaback", -1, 1)
+Data("grab:laying:false:begin_front:nagewazaback:", -2, "m_begin_nagewazaback", -1, 1)
+Data("grab:standing:true:finish_win:nagewazaback:", -2, "m_finish_nagewazaback", -1, 1)
+Data("grab:laying:true:finish_win:nagewazaback:", -2, "m_finish_nagewazaback", -1, 1)
+
+Data("grab:standing:true:begin_front:nagewazaright:", -2, "m_begin_nagewazaright", -1, 1)
+Data("grab:laying:true:begin_front:nagewazaright:", -2, "m_begin_nagewazaright", -1, 1)
+Data("grab:standing:false:begin_front:nagewazaright:", -2, "m_begin_nagewazaright", -1, 1)
+Data("grab:laying:false:begin_front:nagewazaright:", -2, "m_begin_nagewazaright", -1, 1)
+Data("grab:standing:true:finish_win:nagewazaright:", -2, "m_finish_nagewazaright", -1, 1)
+Data("grab:laying:true:finish_win:nagewazaright:", -2, "m_finish_nagewazaright", -1, 1)
+
+Data("grab:standing:true:begin_front:nagewazaleft:", -2, "m_begin_nagewazaleft", -1, 1)
+Data("grab:laying:true:begin_front:nagewazaleft:", -2, "m_begin_nagewazaleft", -1, 1)
+Data("grab:standing:false:begin_front:nagewazaleft:", -2, "m_begin_nagewazaleft", -1, 1)
+Data("grab:laying:false:begin_front:nagewazaleft:", -2, "m_begin_nagewazaleft", -1, 1)
+Data("grab:standing:true:finish_win:nagewazaleft:", -2, "m_finish_nagewazaleft", -1, 1)
+Data("grab:laying:true:finish_win:nagewazaleft:", -2, "m_finish_nagewazaleft", -1, 1)
+
+Data("grab:standing:true:begin_front:nagewazafront:", -2, "m_begin_nagewazafront", -1, 1)
+Data("grab:laying:true:begin_front:nagewazafront:", -2, "m_begin_nagewazafront", -1, 1)
+Data("grab:standing:false:begin_front:nagewazafront:", -2, "m_begin_nagewazafront", -1, 1)
+Data("grab:laying:false:begin_front:nagewazafront:", -2, "m_begin_nagewazafront", -1, 1)
+Data("grab:standing:true:finish_win:nagewazafront:", -2, "m_finish_nagewazafront", -1, 1)
+Data("grab:laying:true:finish_win:nagewazafront:", -2, "m_finish_nagewazafront", -1, 1)
+
+
+
+//##############
+//#### STOP ####
+//##############
+//## stop:end_pose:alarm_level:item_type:movement_type:angle:direction
+//##############
+// only stops to cover, the rest is in human_data_base
+/*
+Data("stop:crouching:::run:0::false:", -2, "u_2p_h_duck_stop_forward", -1, 1)
+Data("stop:crouching:::run:180:left:false:", -2, "u_2p_h_duck_stop_backward_left", -1, 1)
+Data("stop:crouching:::run:180:right:false:", -2, "u_2p_h_duck_stop_backward_right", -1, 1)
+Data("stop:crouching:::run:90:left:false:", -2, "u_2p_h_duck_stop_left", -1, 1)
+Data("stop:crouching:::run:90:right:false:", -2, "u_2p_h_duck_stop_right", -1, 1)
+
+Data("stop:crouching:::sprint:0::false:", -2, "u_2p_h_duck_stop_forward", -1, 1)
+Data("stop:crouching:::sprint:180:left:false:", -2, "u_2p_h_duck_stop_backward_left", -1, 1)
+Data("stop:crouching:::sprint:180:right:false:", -2, "u_2p_h_duck_stop_backward_right", -1, 1)
+Data("stop:crouching:::sprint:90:left:false:", -2, "u_2p_h_duck_stop_left", -1, 1)
+Data("stop:crouching:::sprint:90:right:false:", -2, "u_2p_h_duck_stop_right", -1, 1)
+
+Data("stop:crouching:::walk:0::false:", -2, "u_2p_h_duck_stop_forward_walk", -1, 1)
+Data("stop:crouching:::walk:180:left:false:", -2, "u_2p_h_duck_stop_backward_left_walk", -1, 1)
+Data("stop:crouching:::walk:180:right:false:", -2, "u_2p_h_duck_stop_backward_right_walk", -1, 1)
+Data("stop:crouching:::walk:90:left:false:", -2, "u_2p_h_duck_stop_left_walk", -1, 1)
+Data("stop:crouching:::walk:90:right:false:", -2, "u_2p_h_duck_stop_right_walk", -1, 1)
+*/
+//################
+//#### ATTACK ####
+//################
+//## attack:pose:item_type:attack_type:direction:attack_range:should_change_pose
+//################
+
+// rifle
+Data("attack:crouching_right:rifle:reload:::", -2, "mp_npc_ak47_crouchingright_realod_ak", -1, 1)
+Data("attack:crouching_right:rifle:use_weapon:up::", -2, "mp_npc_ak47_crouchright_shoot_overcover_2", -1, 1)
+Data("attack:crouching_right:rifle:use_weapon:up::", -2, "mp_npc_ak47_crouchright_shoot_overcover_2", -1, 1)
+Data("attack:crouching_right:rifle:use_weapon:right::", -2, "mp_npc_ak47_crouchright_shootright_1", -1, 1)
+Data("attack:crouching_right:rifle:use_weapon:right::", -2, "mp_npc_ak47_crouchright_shootright_2", -1, 1)
+//Data("attack:crouching_right:rifle:use_weapon:right::", -2, "mp_npc_ak47_crouchright_shootright_3", -1, 1)
+
+
+Data("attack:crouching_left:rifle:reload:::", -2, "mp_npc_ak47_crouchingleft_realod_ak", -1, 1)
+Data("attack:crouching_left:rifle:use_weapon:up::", -2, "mp_npc_ak47_crouchleft_shootright_overcover_1", -1, 1)
+Data("attack:crouching_left:rifle:use_weapon:up::", -2, "mp_npc_ak47_crouchleft_shoot_overcover_2", -1, 1)
+Data("attack:crouching_left:rifle:use_weapon:up::", -2, "mp_npc_ak47_crouchleft_shoot_overcover_2", -1, 1)
+Data("attack:crouching_left:rifle:use_weapon:left::", -2, "mp_npc_ak47_crouchleft_shootleft_1", -1, 1)
+Data("attack:crouching_left:rifle:use_weapon:left::", -2, "mp_npc_ak47_crouchleft_shootleft_2", -1, 1)
+Data("attack:crouching_left:rifle:use_weapon:left::", -2, "mp_npc_ak47_crouchleft_shootleft_3", -1, 1)
+Data("attack:crouching_left:rifle:use_weapon:left::", -2, "mp_npc_ak47_crouchleft_shootleft_4", -1, 1)
+
+Data("attack:standing:rifle:use_weapon:::", -2, "mp_npc_ak47_stand_shot_3x", -1, 1)
+Data("attack:standing:rifle:use_weapon:::", -2, "mp_npc_ak47_stand_shot_5x", -1, 1)
+Data("attack:standing:rifle:use_weapon:::", -2, "mp_npc_ak47_stand_shot_CoveringFire", -1, 1)
+//Data("attack:standing:rifle:use_weapon:::", -2, "mp_npc_ak47_stand_shot_nervous_01", -1, 1)
+//Data("attack:standing:rifle:use_weapon:::", -2, "mp_npc_ak47_stand_shot_nervous_01", -1, 1)
+
+Data("attack:crouching:rifle:use_weapon:::", -2, "mp_npc_ak47_CrouchShooting_Loop_01", -1, 1)
+
+Data("attack:standing:stationary_cannon:use_weapon:::", -2, "m_npc_stationarycannon_shot", -1, 1)
+
+Data("attack:standing:rifle:reload:::", -2, "m_npc_ak47_reload", -1, 1)
+// brakuje uderzenia bronia melee z pozy stojacej
+
+// rifle
+Data("attack:standing:rifle:melee_weapon:::", -2, "mp_npc_ak47_melee_attack_01", -1, 1)
+Data("attack:standing:rifle:melee_weapon:::", -2, "mp_npc_ak47_melee_attack_02", -1, 1)
+
+Data("attack:crouching_left:rifle:throw_weapon:::", -2, "mp_npc_ak47_crouchleft_granade_throw_01", -1, 1)
+Data("attack:crouching_right:rifle:throw_weapon:::", -2, "mp_npc_ak47_crouchright_granade_throw_01", -1, 1)
+
+//Data("attack:crouching_left:rifle:use_weapon:up::", -2, "mp_npc_ak47_crouchleft_shoot_overcover_1", -1, 1)
+//Data("attack:crouching_left:rifle:use_weapon:up::", -2, "mp_npc_ak47_crouchleft_shoot_overcover_1", -1, 1)
+//Data("attack:crouching_left:rifle:use_weapon:up::", -2, "mp_npc_ak47_crouchleft_shootright_overcover_1", -1, 1)
+//Data("attack:crouching_left:rifle:use_weapon:up::", -2, "mp_npc_ak47_crouchleft_shootright_overcover_2", -1, 1)
+//Data("attack:crouching_left:rifle:use_weapon:left::", -2, "mp_npc_ak47_crouchleft_shootleft_1", -1, 1)
+//Data("attack:crouching_right:rifle:use_weapon:up::", -2, "mp_npc_ak47_crouchright_shoot_overcover_1", -1, 1)
+//Data("attack:crouching_right:rifle:use_weapon:up::", -2, "mp_npc_ak47_crouchright_shoot_overcover_1", -1, 1)
+//Data("attack:crouching_right:rifle:use_weapon:right::", -2, "mp_npc_ak47_crouchright_shootright_overcover_1", -1, 1)
+//Data("attack:crouching_right:rifle:use_weapon:up::", -2, "mp_npc_ak47_crouchright_shootright_overcover_2", -1, 1)
+//Data("attack:crouching_right:rifle:use_weapon:right::", -2, "mp_npc_ak47_crouchright_shootright_1", -1, 1)
+
+// shotgun
+/*
+Data("attack:standing:shotgun:use_weapon:::", -2, "m_npc_spas_shot", -1, 1)
+Data("attack:standing:shotgun:melee_weapon:::", -2, "m_upset_r_s_hitgun", -1, 1)
+Data("attack:standing:shotgun:reload:::", -2, "m_npc_spas_reload", -1, 1)
+
+// fists
+Data("attack:standing:fists:melee_weapon:::", -2, "npc_unarmed_melee_attack_dlr", -1, 1)
+Data("attack:standing:fists:melee_weapon:::", -2, "npc_unarmed_melee_attack_drl", -1, 1)
+Data("attack:standing:fists:melee_weapon:::", -2, "npc_unarmed_melee_attack_ldr", -1, 1)
+Data("attack:standing:fists:melee_weapon:::", -2, "npc_unarmed_melee_attack_lr", -1, 1)
+Data("attack:standing:fists:melee_weapon:::", -2, "npc_unarmed_melee_attack_rdl", -1, 1)
+Data("attack:standing:fists:melee_weapon:::", -2, "npc_unarmed_melee_attack_rl", -1, 1)
+*/
+// other 
+Data("attack:standing::push:::", -2, "npc_unarmed_melee_attack_push", -1, 1)
+Data("attack:standing::finisher:::", -2, "m_npc_unarmed_finisher_stomp1c", -1, 1)
+Data("attack:standing::kick:::", -2, "m_npc_unarmed_kick", -1, 1)
+Data("attack:standing::draw_weapon:::", -2, "M_MELEE_FIGHTER_A_Draw_weapon_01", -1, 1)  // !!!!!!!BRAK IK
+
+
+// stick
+Data("attack:standing:stick:melee_weapon:::", -2, "M_MELEE_FIGHTER_A_attack_Left_01", -1, 1)
+Data("attack:standing:stick:melee_weapon:::", -2, "M_MELEE_FIGHTER_A_attack_Left_02", -1, 1)
+Data("attack:standing:stick:melee_weapon:::", -2, "M_MELEE_FIGHTER_A_attack_right_01", -1, 1)
+Data("attack:standing:stick:melee_weapon:::", -2, "M_MELEE_FIGHTER_A_attack_right_02", -1, 1)
+
+Data("attack:standing:stick:strike_from_stand::3m:", -2, "M_MELEE_FIGHTER_A_melee_fighterberserker_right_3m_01", -1, 1)
+Data("attack:standing:stick:strike_from_stand::3m:", -2, "M_MELEE_FIGHTER_A_berserker_left_3m_01", -1, 1)
+Data("attack:standing:stick:strike_from_stand::3m:", -2, "M_MELEE_FIGHTER_A_berserker_left_3m_02", -1, 1)
+Data("attack:standing:stick:strike_from_stand::3m:", -2, "M_MELEE_FIGHTER_A_berserker_left_3m_03", -1, 1)
+Data("attack:standing:stick:strike_from_stand::2m:", -2, "M_MELEE_FIGHTER_A_berserker_right_3m_01", -1, 1)
+Data("attack:standing:stick:strike_from_stand::3m:", -2, "M_MELEE_FIGHTER_A_berserker_right_3m_02", -1, 1)
+Data("attack:standing:stick:strike_from_stand::3m:", -2, "M_MELEE_FIGHTER_A_berserker_right_3m_03", -1, 1)
+Data("attack:standing:stick:strike_from_stand::2m:", -2, "M_MELEE_FIGHTER_A_berserker_right_4m_01", -1, 1)
+Data("attack:standing:stick:strike_from_stand::2m:", -2, "M_MELEE_FIGHTER_A_berserker_right_4m_02", -1, 1)
+Data("attack:standing:stick:strike_from_stand::3m:", -2, "M_MELEE_FIGHTER_A_berserker_right_4m_03", -1, 1)
+
+//######################################
+//#### ITEM ACTIVATION/DEACTIVATION ####
+//######################################
+//## item_activation:pose:item_type:is_activation
+//######################################
+/*
+Data("item_activation::fists:activate", 0, "", -1, 1)
+Data("item_activation::stick:activate", -2, "npc_upset_p_s_readygun", -1, 1)
+Data("item_activation::pistol:activate", -2, "npc_upset_p_s_readygun", -1, 1)
+Data("item_activation::rifle:activate", -2, "npc_upset_p_s_readygun", -1, 1)
+Data("item_activation::shotgun:activate", -2, "npc_upset_p_s_readygun", -1, 1)
+
+Data("item_activation::fists:deactivate", 0, "", -1, 1)
+Data("item_activation::stick:deactivate", -2, "npc_upset_p_s_hidegun", -1, 1)
+Data("item_activation::pistol:deactivate", -2, "npc_upset_p_s_hidegun", -1, 1)
+Data("item_activation::rifle:deactivate", -2, "npc_upset_p_s_hidegun", -1, 1)
+Data("item_activation::shotgun:deactivate", -2, "npc_upset_p_s_hidegun", -1, 1)
+*/
+
+
+//##################
+//##### DIALOG #####
+//##################
+//## dialog:dialog_mental_state:pose:dialog_activity
+//##################
+
+/*
+//######################################
+//## M_CARING
+
+Data("dialog:m_caring:pose2:idle", -2, "m_caring_pose2_idle", -1, 1)
+Data("dialog:m_caring:pose2:use", -2, "m_caring_pose2_use", -1, 1)
+Data("dialog:m_caring:pose2:use_second", -2, "m_caring_pose2_usesecond", -1, 1)
+Data("dialog:m_caring:pose2:disagree", -2, "m_caring_pose2_disagree", -1, 1)
+Data("dialog:m_caring:pose2:player_spotted", -2, "m_caring_pose2_fartomiddle", -1, 1)
+
+
+// //######################################
+// //## M_TOUGH
+Data("dialog:m_tough:pose2:idle", -2, "m_tough_pose2_loop", -1, 1)
+Data("dialog:m_tough:pose2:use", -2, "m_tough_pose2_usea", -1, 1)
+Data("dialog:m_tough:pose2:use_second", -2, "m_tough_pose2_usesecond", -1, 1)
+Data("dialog:m_tough:pose2:disagree", -2, "m_tough_pose2_disagree", -1, 1)
+Data("dialog:m_tough:pose2:player_spotted", -2, "m_tough_pose2_extendtofar", -1, 1)
+Data("dialog:m_tough:pose2:far", -2, "m_tough_pose2_far", -1, 1)
+
+// //######################################
+// //## M_CRAFTY
+Data("dialog:m_crafty:pose2:idle", -2, "m_crafty_pose2_loop", -1, 1)
+Data("dialog:m_crafty:pose2:use", -2, "m_crafty_pose2_use", -1, 1)
+Data("dialog:m_crafty:pose2:use_second", -2, "m_crafty_pose2_usesecond", -1, 1)
+Data("dialog:m_crafty:pose2:disagree", -2, "m_crafty_pose2_disagree", -1, 1)
+Data("dialog:m_crafty:pose2:player_spotted", -2, "m_crafty_pose2_extendtofar", -1, 1)
+Data("dialog:m_crafty:pose2:far", -2, "m_crafty_pose2_far2", -1, 1)
+
+*/
+
+
+
+//################
+//#### EFFECT ####
+//################
+//## effect:type:direction:pose
+//##############
+
+Data("effect:burn::standing", -2, "m_npc_burn_loop_01", -1, 1)
+Data("effect:electrocution::standing", -2, "m_npc_electrified_loop_01", -1, 1)
+Data("effect:poison::standing", -2, "m_npc_poisoned_loop_01", -1, 1)
+
+
+
+
+
+//###############
+//##### AIM #####
+//###############
+//## aim:pose:item_id
+//###############
+
+//Data("aim:standing:rifle", 0.4, "mp_npc_ak47_stand_aim", -1, 1)
+//Data("aim:standing:rifle", 0.4, "mp_npc_ak47_stand_aim_02", -1, 1)
+Data("aim:standing:rifle", 0.4, "mp_npc_ak47_stand_shot_aim", -1, 1)
+
+
+
+
+
+
+// brakuje aim do shotguna
+
+//################
+//#### Carry #####
+//################
+//## carry:type:is_armed
+//##############
+
+Data("carry:wait_for_pickup:false", -2, "m_npc_idle_to_carry", -1, 1)
+Data("carry:start:false", -2, "m_npc_carried_sitting_start", -1, 1)
+Data("carry:idle:false", -2, "m_npc_carried_idle", -1, 1)
+Data("carry:move:false", -2, "m_npc_carried_walk", -1, 1)
+Data("carry:turnleft:false", -2, "m_npc_carried_turnleft", -1, 1)
+Data("carry:turnright:false", -2, "m_npc_carried_turnright", -1, 1)
+Data("carry:kickplayer:false", -2, "m_npc_carried_kick", -1, 1)
+Data("carry:drop:false", -2, "m_npc_carried_sitting_drop", -1, 1)
+Data("carry:put:false", -2, "m_npc_carried_stop", -1, 1)
+Data("carry:attack:false", -2, "m_npc_carried_idle", -1, 1)
+Data("carry:throwstart:false", -2, "m_npc_carried_sitting_drop", -1, 1)
+Data("carry:throwloop:false", -2, "m_npc_carried_sitting_loop", -1, 1)
+Data("carry:throwstop:false", -2, "m_npc_carried_sitting_start", -1, 1)
+
+Data("carry:wait_for_pickup:true", -2, "m_npc_idle_to_carry", -1, 1)
+Data("carry:start:true", -2, "m_npc_carried_sitting_start", -1, 1)
+Data("carry:idle:true", -2, "m_npc_carried_armed_idle", -1, 1)
+Data("carry:move:true", -2, "m_npc_carried_armed_walk", -1, 1)
+Data("carry:turnleft:true", -2, "m_npc_carried_turnleft", -1, 1)
+Data("carry:turnright:true", -2, "m_npc_carried_turnright", -1, 1)
+Data("carry:kickplayer:true", -2, "m_npc_carried_kick", -1, 1)
+Data("carry:drop:true", -2, "m_npc_carried_sitting_drop", -1, 1)
+Data("carry:put:true", -2, "m_npc_carried_stop", -1, 1)
+Data("carry:attack:true", -2, "m_npc_carried_armed_attack", -1, 1)
+Data("carry:throwstart:true", -2, "m_npc_carried_sitting_drop", -1, 1)
+Data("carry:throwloop:true", -2, "m_npc_carried_sitting_loop", -1, 1)
+Data("carry:throwstop:true", -2, "m_npc_carried_sitting_start", -1, 1)
+
+//################
+//#### MIMIC #####
+//################
+//## mimic:type:is_speech_played
+//##############
+
+Data("mimic:normal:false", -2, "human_mimic_neutral_idle_01", -1, 1)
+Data("mimic:normal:false", -2, "human_mimic_neutral_idle_02", -1, 1)
+Data("mimic:normal_chewing:false", -2, "human_mimic_neutral_chewing_01", -1, 1)
+
+Data("mimic:angry:false", -2, "human_mimic_angry_01", -1, 1)
+Data("mimic:angry:false", -2, "human_mimic_angry_02", -1, 1)
+Data("mimic:scared:false", -2, "human_mimic_scared_01", -1, 1)
+Data("mimic:scared:false", -2, "human_mimic_scared_02", -1, 1)
+Data("mimic:sad:false", -2, "human_mimic_sad_01", -1, 1)
+Data("mimic:sad:false", -2, "human_mimic_sad_02", -1, 1)
+Data("mimic:happy:false", -2, "human_mimic_happy_01", -1, 1)
+Data("mimic:happy:false", -2, "human_mimic_happy_02", -1, 1)
+
+
+Data("mimic:normal:true", -2, "human_mimic_neutral_idle_01_speech", -1, 1)
+Data("mimic:normal:true", -2, "human_mimic_neutral_idle_02_speech", -1, 1)
+Data("mimic:normal_chewing:true", -2, "human_mimic_neutral_chewing_01_speech", -1, 1)
+
+Data("mimic:angry:true", -2, "human_mimic_angry_01_speech", -1, 1)
+Data("mimic:angry:true", -2, "human_mimic_angry_02_speech", -1, 1)
+Data("mimic:scared:true", -2, "human_mimic_scared_01_speech", -1, 1)
+Data("mimic:scared:true", -2, "human_mimic_scared_02_speech", -1, 1)
+Data("mimic:sad:true", -2, "human_mimic_sad_01_speech", -1, 1)
+Data("mimic:sad:true", -2, "human_mimic_sad_02_speech", -1, 1)
+Data("mimic:happy:true", -2, "human_mimic_happy_01_speech", -1, 1)
+Data("mimic:happy:true", -2, "human_mimic_happy_02_speech", -1, 1)
+
+
+Data("mimic:dead:", -2, "human_mimic_dead_01_pose01", -1, 1)
+Data("mimic:dead:", -2, "human_mimic_dead_01_pose02", -1, 1)
+Data("mimic:dead:", -2, "human_mimic_dead_01_pose03", -1, 1)
+Data("mimic:dead:", -2, "human_mimic_dead_01_pose04", -1, 1)
+Data("mimic:dead:", -2, "human_mimic_dead_01_pose05", -1, 1)
+Data("mimic:dead:", -2, "human_mimic_dead_01_pose06", -1, 1)
+Data("mimic:dead:", -2, "human_mimic_dead_01_pose07", -1, 1)
+Data("mimic:dead:", -2, "human_mimic_dead_01_pose08", -1, 1)
+Data("mimic:dead:", -2, "human_mimic_dead_01_pose09", -1, 1)
+Data("mimic:dead:", -2, "human_mimic_dead_01_pose10", -1, 1)
+Data("mimic:dead:", -2, "human_mimic_dead_01_pose11", -1, 1)
+Data("mimic:dead:", -2, "human_mimic_dead_01_pose12", -1, 1)
+Data("mimic:dead:", -2, "human_mimic_dead_01_pose13", -1, 1)
+Data("mimic:dead:", -2, "human_mimic_dead_01_pose14", -1, 1)
+Data("mimic:dead:", -2, "human_mimic_dead_01_pose15", -1, 1)
+
+
+//Data("mimic:grab", -2, "mz_mimic_grab", -1, 1)
+Data("mimic:hit_reaction:", -2, "infected_reaction0", -1, 1)
+Data("mimic:hit_reaction:", -2, "infected_reaction1", -1, 1)
+Data("mimic:hit_reaction:", -2, "infected_reaction2", -1, 1)
+
+//#####################
+//#### THREATENING ####
+//################################################################################
+//## threatening:pose:threatening_role:threatening_action:item_type:is_prepare  ##
+//################################################################################
+
+Data("threatening:standing:leader:threaten:rifle:none", -2, "m_npc_ak47_idle_upset", -1, 1)
+Data("threatening:standing:leader:threaten:rifle:prepare", -2, "m_npc_ak47_alarming_upset_f", -1, 1)
+
+Data("threatening:standing:leader:threaten:stick:none", -2, "m_npc_melee_fighter_02_alarming_idle", -1, 1)
+Data("threatening:standing:leader:threaten:stick:prepare", -2, "m_npc_melee_fighter_02_prepare_alarming", -1, 1)
+
+
+!include("human_data_params.scr")
+!include("human_data_forced_anims.scr")

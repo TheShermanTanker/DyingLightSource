@@ -1,0 +1,394 @@
+////////////////////////////////////////////////////////////////////////////////
+// Bus properties
+////////////////////////////////////////////////////////////////////////////////
+$SOUND_VOLUME_MULTIPLIER( f, 0.46 )
+$ZOMBIE_VOLUME_MULTIPLIER( f, 0.9 )
+$SPEECH_VOLUME_MULTIPLIER( f, 0.7 )
+$MUSIC_VOLUME_MULTIPLIER( f, 0.45 )
+$SOUND_LFE_MULTIPLIER( f, 0.8 )
+$SPEECH_LFE_MULTIPLIER( f, 0.7 )
+$SFX_LFE_MULTIPLIER( f, 0.8 )
+
+$CATEGORY_MUSIC( i, 1 )
+
+BusProperties(0)
+{
+    Name("Level")
+    VolumeMultiplier(0.35)
+    LFEMultiplier(SOUND_LFE_MULTIPLIER)
+	ReverbMinLevel(0.9)
+	ReverbSendLevel(0.9)
+		
+}
+
+BusProperties(1)
+{
+    Name("Music")
+    VolumeMultiplier(0.55)
+    LFEMultiplier(SOUND_LFE_MULTIPLIER)
+    Category(CATEGORY_MUSIC)
+	ReverbSendLevel(0.0)
+    HDROn(0)
+	SoundPitchControl(0)
+}
+
+BusProperties(2)
+{
+    Name("SpeechAI")
+    VolumeMultiplier(0.5)
+    LFEMultiplier(SPEECH_LFE_MULTIPLIER)
+    ReverbMinLevel(0.6)
+	ReverbSendLevel(0.6)
+	HDROn(0)
+}
+
+BusProperties(3)
+{
+    Name("SpeechPlayer")
+    VolumeMultiplier(0.65)
+    LFEMultiplier(SOUND_LFE_MULTIPLIER)
+    ReverbMinLevel(0.6)
+	ReverbSendLevel(0.6)
+	HDROn(0)
+}
+
+BusProperties(4)
+{
+    Name("Player")
+    VolumeMultiplier(0.35)
+    LFEMultiplier(SOUND_LFE_MULTIPLIER)
+    ReverbMinLevel(1)
+	ReverbSendLevel(1)
+}
+
+BusProperties(5)
+{
+    Name("MusicConcentrationMode")
+    VolumeMultiplier(SOUND_VOLUME_MULTIPLIER)
+    LFEMultiplier(SOUND_LFE_MULTIPLIER)
+	ReverbSendLevel(0.0)
+    HDROn(0)
+}
+
+BusProperties(6)
+{
+    Name("SpecialMusic")
+    VolumeMultiplier(0.9)
+    LFEMultiplier(SOUND_LFE_MULTIPLIER)
+	ReverbSendLevel(0.0)
+	ReverbMinLevel(0.0)
+    HDROn(0)
+	SoundPitchControl(0)
+}
+
+BusProperties(7)
+{
+    Name("Weapon")
+    VolumeMultiplier(0.7)
+    LFEMultiplier(SOUND_LFE_MULTIPLIER)
+    ReverbMinLevel(1.0)
+	ReverbSendLevel(1.0)
+	MaxInstances(7)
+	HDROn(2)
+}
+
+BusProperties(8)
+{
+    Name("GUI") ////MENU SOUNDS
+    VolumeMultiplier(0.4)
+    LFEMultiplier(SOUND_LFE_MULTIPLIER)
+    HDROn(0)
+	ReverbMinLevel(0.0)
+	ReverbSendLevel(0.0)
+	SoundPitchControl(0)
+}
+
+BusProperties(9)
+{
+    Name("RadioDialog")
+    VolumeMultiplier(0.45)
+    LFEMultiplier(SOUND_LFE_MULTIPLIER)
+    ReverbMinLevel(0.1)//0
+	ReverbSendLevel(0.1)
+	SoundPitchControl(0)
+	HDROn(0)
+}
+
+BusProperties(10)
+{
+    Name("QuestDialog")
+    VolumeMultiplier(0.65)
+    LFEMultiplier(SPEECH_LFE_MULTIPLIER)
+    ReverbMinLevel(0.60)
+	ReverbSendLevel(0.60)
+	SoundPitchControl(0)
+	HDROn(0)
+}
+
+BusProperties(11)
+{
+    Name("LoudSound")
+    VolumeMultiplier(0.7)
+    LFEMultiplier(SOUND_LFE_MULTIPLIER)
+    ReverbMinLevel(0.9)
+    ReverbSendLevel(0.9)
+}
+
+BusProperties(12)
+{
+    Name("NightHorde")
+    VolumeMultiplier(0.8)
+    LFEMultiplier(SOUND_LFE_MULTIPLIER)
+    ReverbMinLevel(0.9)
+	ReverbSendLevel(0.9)
+}
+
+BusProperties(13)
+{
+    Name("Ambience")
+    VolumeMultiplier(1.0)
+    LFEMultiplier(SOUND_LFE_MULTIPLIER)
+    ReverbMinLevel(0.0)
+	ReverbSendLevel(0.0)
+	
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Channel Mapping for "2D" Sounds
+////////////////////////////////////////////////////////////////////////////////
+$SPEECH_PLAYER_FRONT( f,  0.33 )
+$SPEECH_PLAYER_FC( f, 0.33 )
+$SPEECH_PLAYER_FC_STEREO( f, 0.2475 )  // SPEECH_PLAYER_FC * 0.75
+$SPEECH_PLAYER_LFE( f, 0.4 )
+$SPEECH_PLAYER_BACK( f, 0.33 )
+$SPEECH_PLAYER_EXT( f, 0.1 )
+$SPEECH_FC( f, 0.9 )
+$SPEECH_FC_STEREO( f, 0.45 )  // SPEECH_FC * 0.5
+$SPEECH_LFE( f, 0.4 )
+$SOUND_PLAYER_LFE( f, 0.5 )
+$SOUND_PLAYER_BACK( f, 0.3 )
+$SOUND_PLAYER_EXT( f, 0.2 )
+$MUSIC_LFE( f, 0.25 )
+$MUSIC_BACK( f, 0.3 )
+$MUSIC_EXT( f, 0.1 )
+$DEFAULT_BACK( f, 0.5 )
+$DEFAULT_EXT( f, 0.2 )
+
+DefineChannelMapping(1)
+{
+        Default()
+        {
+            SpeakerFL(0, 1)
+            SpeakerFR(0, 1)
+        }
+
+        /*
+		Bus(2)
+        {
+            SpeakerFC(0, SPEECH_FC)
+            SpeakerLFE(0, SPEECH_LFE)
+        }
+
+        Bus(3)
+        {
+            SpeakerFC(0, SPEECH_FC)
+            SpeakerLFE(0, SPEECH_LFE)
+        }
+
+        Bus(10)
+        {
+            SpeakerFC(0, SPEECH_FC)
+            SpeakerLFE(0, SPEECH_LFE)
+        }
+		*/
+
+} 
+    
+DefineChannelMapping(2)
+{
+        Default()
+        {
+            SpeakerFL(0, 1)
+            SpeakerFR(1, 1)
+        }
+		
+		Bus(0)
+        {
+            SpeakerRL(0, DEFAULT_BACK)
+            SpeakerRR(1, DEFAULT_BACK) 
+            SpeakerEL(0, DEFAULT_EXT)
+            SpeakerER(1, DEFAULT_EXT)
+        }      
+
+        Bus(1)
+        {
+            SpeakerLFE(0, MUSIC_LFE)
+            SpeakerLFE(1, MUSIC_LFE)
+            SpeakerRL(0, MUSIC_BACK)
+            SpeakerRR(1, MUSIC_BACK)
+            SpeakerEL(0, MUSIC_EXT)
+            SpeakerER(1, MUSIC_EXT)
+        }      
+        
+        /*
+		Bus(2)
+        {
+            SpeakerFC(0, SPEECH_FC_STEREO)  
+            SpeakerFC(1, SPEECH_FC_STEREO)
+            SpeakerLFE(0, SPEECH_LFE)
+            SpeakerLFE(1, SPEECH_LFE)            
+        }
+
+        Bus(3)
+        {
+            SpeakerFC(0, SPEECH_FC_STEREO)
+            SpeakerFC(1, SPEECH_FC_STEREO)
+            SpeakerLFE(0, SPEECH_LFE)
+            SpeakerLFE(1, SPEECH_LFE)            
+        }
+
+        Bus(10)
+        {
+            SpeakerFC(0, SPEECH_FC_STEREO)  
+            SpeakerFC(1, SPEECH_FC_STEREO)
+            SpeakerLFE(0, SPEECH_LFE)
+            SpeakerLFE(1, SPEECH_LFE)            
+        }
+		*/
+		
+		Bus(13)
+        {
+            SpeakerRL(0, DEFAULT_BACK)
+            SpeakerRR(1, DEFAULT_BACK) 
+            SpeakerEL(0, DEFAULT_EXT)
+            SpeakerER(1, DEFAULT_EXT)
+        }      
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Custom reverb presets
+////////////////////////////////////////////////////////////////////////////////
+// Wacky reverb
+DefineCustomReverb(30) // There are 30 custom reverb slots starting from index 30 (ie 30, 31, 32 and so on)
+{
+	Room(-1000)         	// Attenuation of the room effect. Allowable values in hundredths of a decibel are from -10000 to 0.
+	RoomHF(-100)        	// Attenuation of the room high-frequency effect. Allowable values in hundredths of a decibel are from -10000 to 0.
+	DecayTime(15.0)      	// Reverberation decay time at low frequencies. Allowable values in seconds are from 0.1 to 20.0.
+	DecayHFRatio(0.5)   	// Ratio of the decay time at high frequencies to the decay time at low frequencies. Allowable values are from 0.1 to 2.0.
+	Reflections(-1000)   	// Attenuation of early reflections relative to Room. Allowable values in hundredths of a decibel are from -10000 to 1000.
+	ReflectionsDelay(0.3) 	// Delay time of the first reflection relative to the direct path. Allowable values in seconds are from 0.0 to 0.3.
+	Reverb(-100)           	// Attenuation of late reverberation relative to Room. Allowable values in hundredths of a decibel are from -10000 to 2000.
+	ReverbDelay(0.05)     	// Time limit between the early reflections and the late reverberation relative to the time of the first reflection. Allowable values in seconds are from 0.0 to 0.1.
+	Diffusion(100.0)      	// Echo density in the late reverberation decay. Allowable values as a percentage are from 0 to 100.
+	Density(100.0)          // Modal density in the late reverberation decay. Allowable values as a percentage are from 0 to 100.
+	HFReference(5000)      	// Reference high frequency. Allowable values in Hz are from 20.0 to 20000.0.
+}
+
+////////////////////////////////////////////////////////////////////////////////
+// Audio Environments
+////////////////////////////////////////////////////////////////////////////////
+/*
+// small room
+DefineAudioEnvironment()
+{
+   EnvName("SmallRoom")
+   EnvInside()
+   EnvMaxAvgDistance(200)
+   EnvReverbPreset(24, 1.0)
+}
+
+// medium room
+DefineAudioEnvironment()
+{
+   EnvName("MediumRoom")
+   EnvInside()
+   EnvMaxAvgDistance(400)
+   EnvReverbPreset(25, 1.0)
+}
+
+// large room
+DefineAudioEnvironment()
+{
+   EnvName("LargeRoom")
+   EnvInside()
+   EnvMaxAvgDistance(700)
+   EnvReverbPreset(26, 1.0)
+}
+
+// medium hall
+DefineAudioEnvironment()
+{
+   EnvName("MediumHall")
+   EnvInside()
+   EnvMaxAvgDistance(1000)
+   EnvReverbPreset(27, 1.0)
+}
+
+// large hall
+DefineAudioEnvironment()
+{
+   EnvName("LargeHall")
+   EnvInside()
+   EnvReverbPreset(28, 1.0)
+}
+*/
+// forest
+DefineAudioEnvironment()
+{
+   EnvName("Forest")
+   EnvMaxAvgDistance(5)
+   EnvMinHitRatio(60)
+   EnvReverbPreset(16, 1.0)
+   EnvEcho(270, 0.03, 0.037) 
+}
+
+// city
+DefineAudioEnvironment()
+{
+   EnvName("City")
+   EnvMaxAvgDistance(25)
+   EnvMaxMinDistance(10)
+   EnvReverbPreset(17, 0.3)
+   EnvEcho(270, 0.03, 0.05) 
+}
+
+// plain
+DefineAudioEnvironment()
+{
+   EnvName("Plain")
+   EnvEcho(270, 0.03, 0.037) 
+   EnvReverbPreset(20, 0.3)
+}
+
+DefineAudioEnvironment()
+{
+   EnvName("Forest")
+   EnvMaxAvgDistance(5)
+   EnvMinHitRatio(60)
+   EnvReverbPreset(16, 1.0)
+   EnvEcho(270, 0.03, 0.037) 
+   EnvInside()
+}
+
+// city
+DefineAudioEnvironment()
+{
+   EnvName("City")
+   EnvMaxAvgDistance(25)
+   EnvMaxMinDistance(10)
+   EnvReverbPreset(17, 0.3)
+   EnvEcho(270, 0.03, 0.05)
+   EnvInside() 
+}
+
+// plain
+DefineAudioEnvironment()
+{
+   EnvName("Plain")
+   EnvEcho(270, 0.03, 0.037) 
+   EnvReverbPreset(20, 0.3)
+   EnvInside()
+}
+
+!include("snd_groups.scr")
+

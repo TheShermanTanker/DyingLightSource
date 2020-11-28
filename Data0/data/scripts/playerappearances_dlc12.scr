@@ -1,0 +1,43 @@
+sub appearances()
+{
+    /* Syntax overview
+        Character(string id) - start section with appearances for a give character
+            Appearance(string head_name, string body_name, string appearance_id) - defines appearance
+                MeshFpp(string) - mesh used for fpp
+                MeshTpp(string) - mesh used for tpp
+                Skin(string) - skin name, used for both fpp and tpp
+                Perk(string) - id of perk associated with given appearance
+                FppSkinColor(vec3) - rgb component of mesh color to set on UserColor0 when using fpp mesh, don't specify this if you don't want mesh color to be set
+                ClothesColors() - starts section with available clothes colors
+                    Color(float) - alpha component of UserColor0 to set, in both fpp and tpp. Doesn't interfere with FppSkinColor.
+                AttachableSet() - starts section with set of attachables to use
+                    Attachable(string attachable_id) - Adds attachable with specifies id to the player character. Works only when using tpp mesh.
+                AvailableOnStart() - this appearance can be selected as a starting look when creating character
+                Hint() - name of hint that will be displayed during changing apppearance
+                Image() - image that will be displayed in the storage ("wardrobe") menu
+                Category() - category diplayed in menu
+    */
+    Character("PlayerMan1")
+    {
+        // DLC_TShirt_BoxOffStore
+        Appearance("Antoine_Head", "BoxOffStore", "BoxOffStore")
+        {
+            MeshFpp("player_11_fpp.msh");
+            MeshTpp("player_11_tpp.msh");
+            Skin("TECHLAND");
+            Image("hint_Tutorial_TimeFreeze_Outfit11_1");
+            Category(1);
+            ID(11);
+        }
+    }
+}
+
+/*
+    StatusLevel(int, CharacterId, AppearanceId) - Appearance is unlocked after reching given status level
+    Chapter(int, CharacterId, AppearanceId) - Appearance is unlocked after reaching certain point in storyline
+    Item(ItemId, CharacterId, AppearanceId) - Appearance is unlocked after player finds given item in the game world
+*/
+sub unlock()
+{
+    PlayerLevel("Status", 1, "PlayerMan1", "BoxOffStore");
+}

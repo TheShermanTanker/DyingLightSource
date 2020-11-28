@@ -1,0 +1,29 @@
+// check dw/postprocess for sprite.ppfx
+sub ppfx()
+{
+    // Render standard UI
+	If("i_pp_OculusEnable", "", "", "", "")
+	{
+		If("i_pp_OculusRightEye", "", "", "", "")
+		{
+			SetRenderTargetsView("_RIFT_R", "");
+		}
+		If("i_pp_OculusRightEye", "", "", "", "not")
+		{
+			SetRenderTargetsView("_RIFT_L", "");
+		}
+	}
+	If("i_pp_OculusEnable", "", "", "", "not")
+	{
+		SetRenderTarget("backbuffer", "");
+	}		
+
+		SetBuffer(15, "1_RGBA8_SRGB_A");
+		SetBuffer(16, "1_RGBA8_SRGB_A");
+			Scene("std");
+
+			If("f_gamma_screen_on", "", "", "", "")
+			{
+				Mesh("tri_screen.msh", "monitor_tester.mat", "std");
+			}
+}

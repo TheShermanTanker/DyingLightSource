@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="old_town_cleansing"
+     pxsl_line="3">
+    <!-- quest Old_Town_Cleansing_Sewer -parent=Q_Start01 -->
+        <!-- ,goto <<Start >> SpawnPoint SP_jump_pipe -distance=1 -show=false -->
+            <!-- ,debugpos SpawnPoint SP_jump_pipe -->
+        <!-- ,checkpoint _ SpawnPoint SP_jump_pipe -->
+        <!-- ,disable _ SafeZone SZ_before_pipe -->
+        <!-- -= ,enable _ Bloodbaths::Area BBA_Sewers_01 -->
+        <!-- -= ,enable _ Bloodbaths::Area BBA_Sewers_02 -->
+        <!-- ,AND _ -->
+            <!-- path -->
+                <!-- ,clear_area _ ClearArea CA_sewer_big_room_01 -->
+            <!-- path -->
+                <!-- ,clear_area _ ClearArea CA_sewer_big_room_02 -->
+        <!-- ,enable _ SafeZone SZ_before_pipe -->
+        <!-- ,disable _ Bloodbaths::Area BBA_Sewers_01 -->
+        <!-- ,disable _ Bloodbaths::Area BBA_Sewers_02 -->
+        <!-- ,bloodbaths_reward _ -->
+        <!-- ,checkpoint _ SpawnPoint SP_jump_pipe -->
+        <!--  -->
+        <!--  -->
+    <!-- quest _flow_water -parent=Q_Start01 -->
+        <!-- ,disable _ QuestEnableGroup QEG_start_water -->
+        <!-- ,hide _ AppearGroup AG_waterfall -->
+        <!-- ,enable _ QuestEnableGroup QEG_toxic_floor -->
+        <!-- ,AND _ -->
+            <!-- path -->
+                <!-- ,use _ PhysicalSwitchDI Water_Valve_01::trigger_valve -state=on -show=false -->
+            <!-- path -->
+                <!-- ,use _ PhysicalSwitchDI Water_Valve_02::trigger_valve -state=on -show=false -->
+        <!-- ,enable _ QuestEnableGroup QEG_start_water -->
+        <!-- ,show _ AppearGroup AG_waterfall -->
+        <!-- ,AND _ -->
+            <!-- path -->
+                <!-- ,wait _ 10 -->
+                <!-- ,disable _ QuestEnableGroup QEG_toxic_floor -->
+            <!-- path -->
+                <!-- ,movie _ Water_Sewers_Up -->
+            <!-- path -->
+                <!-- ,wait _ 15 -->
+                <!-- ,disable _ QuestEnableGroup QEG_start_water -->
+    <!--  -->
+</QuestsDefinitions>

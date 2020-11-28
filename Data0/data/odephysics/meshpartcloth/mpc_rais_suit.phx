@@ -1,0 +1,114 @@
+!include("MeshPartCloth.def")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+MeshPartCloth()
+{
+//----------------------------------------------
+// bones
+//----------------------------------------------
+    BonesGridSize(8, 3)
+
+    $XDIST(f, -0.95)
+    $YDIST(f, -0.95)
+
+    Bone(0, 0, "bone_suitl_front_02", 1, XDIST, YDIST)
+    Bone(0, 1, "bone_suitl_front_03", 0, XDIST, YDIST)
+    Bone(0, 2, "",                    0, XDIST, YDIST)
+
+    Bone(1, 0, "bone_suitl_sidea_02", 1, XDIST, YDIST)
+    Bone(1, 1, "bone_suitl_sidea_03", 0, XDIST, YDIST)
+    Bone(1, 2, "",                    0, XDIST, YDIST)
+
+    Bone(2, 0, "bone_suitl_sideb_02", 1, XDIST, YDIST)
+    Bone(2, 1, "bone_suitl_sideb_03", 0, XDIST, YDIST)
+    Bone(2, 2, "",                    0, XDIST, YDIST)
+    
+    Bone(3, 0, "bone_suitl_back_02", 1, XDIST, YDIST)
+    Bone(3, 1, "bone_suitl_back_03", 0, XDIST, YDIST)
+    Bone(3, 2, "",                   0, XDIST, YDIST)
+
+    Bone(4, 0, "bone_suitr_back_02", 1, XDIST, YDIST)
+    Bone(4, 1, "bone_suitr_back_03", 0, XDIST, YDIST)
+    Bone(4, 2, "",                   0, XDIST, YDIST)
+
+    Bone(5, 0, "bone_suitr_sideb_02", 1, XDIST, YDIST)
+    Bone(5, 1, "bone_suitr_sideb_03", 0, XDIST, YDIST)
+    Bone(5, 2, "",                    0, XDIST, YDIST)
+
+    Bone(6, 0, "bone_suitr_sidea_02", 1, XDIST, YDIST)
+    Bone(6, 1, "bone_suitr_sidea_03", 0, XDIST, YDIST)
+    Bone(6, 2, "",                    0, XDIST, YDIST)
+
+    Bone(7, 0, "bone_suitr_front_02", 1, XDIST, YDIST)
+    Bone(7, 1, "bone_suitr_front_03", 0, XDIST, YDIST)
+    Bone(7, 2, "",                    0, XDIST, YDIST)
+    
+//----------------------------------------------
+// collisions 
+//----------------------------------------------
+
+    CollisionSlide(1)
+    CollisionBounce(0)
+    CollisionSpeedMod(1)
+    
+    CollisionShapesMoveInfluence(1)
+    
+    CollisionSegmentDivision(0.02)
+    CollisionNormalAngleThreshold(130)
+    
+    NodeCollisionSphereRadius(0.1)
+    ExternalCollisionAffectMul(0)
+
+    CollisionCapsule("l_thigh", -1, -0.9)
+    CollisionCapsule("r_thigh", -1, -0.9)
+
+    CollisionCapsuleBetween("l_calf", 0, "pelvis", 1, 0.15)
+    CollisionCapsuleBetween("r_calf", 0, "pelvis", 1, 0.15)
+
+    CollisionMinDistance(2, 1, "spine", [0, 0, 0], 0.22, 0)
+    CollisionMinDistance(5, 1, "spine", [0, 0, 0], 0.22, 0)
+
+    CollisionMaxDistance(0, 2, "l_thigh", [0.05, -0.1, 0], 0.24, 0)
+    CollisionMaxDistance(2, 2, "l_thigh", [0.05, -0.1, 0], 0.24, 0)
+    CollisionMaxDistance(3, 2, "pelvis", [-0.3, 0, 0.2], 0.24, 0)
+    CollisionMaxDistance(4, 2, "pelvis", [-0.3, 0, 0.2], 0.24, 0)
+    CollisionMaxDistance(5, 2, "r_thigh", [0.05, 0.1, 0], 0.24, 0)
+    CollisionMaxDistance(7, 2, "r_thigh", [0.05, 0.1, 0], 0.24, 0)
+
+//----------------------------------------------
+// spring params 
+//----------------------------------------------
+
+    Viscous(4)
+    AirFriction(2)
+
+    StructuralStiffness(8000, 1000)
+    ShearStiffness(1000, 1000)
+    FlexionStiffness(1000, 1000)
+
+    HorizontSpringRatio(0.05)
+    
+    CheckLengthsStepsPerSec(0)
+
+//----------------------------------------------
+// physical params 
+//----------------------------------------------
+    
+    Mass(1)
+    GravityMul(1)
+    WindInfluence(1)
+
+//----------------------------------------------
+// other params
+//----------------------------------------------
+
+    StartStabilisation(50)
+    
+    SynchroWithPhysics(0)
+    EnableAPBOut(1)
+    
+    ObjectMoveMul(1)
+    AnimationMoveMul(0.9)
+}
+
+

@@ -1,0 +1,6 @@
+Description( "v_env_factor_global", "f:EDIT;e:EDIT|SPINNER|EXPANDABLE|BROWSE_COLOR|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0 0 0 0;x:1 1 1 100;s:0.05 0.05 0.05 0.05;c:Global Env;d:Factor;" )
+Description( "f_env_shadows_strength", "f:EDIT;e:EDIT|SPINNER|EXPANDABLE|BROWSE_COLOR|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0;x:1;s:0.05;c:Global Env;d:Strength in shadows;" )
+Description( "s_env", "f:EDIT|GATHER;e:EDIT|SHOW_DESCRIPTION|BROWSE_FILE;c:Reflections;d: Generic cubemap;" )
+Description( "f_env_strength", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION;m:0;x:1;s:0.1;c:Global Env;d:Dynamic env strength;" )
+Description( "f_env_nrm_strength", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION;m:0;x:1;s:0.1;c:Global Env;d:Dynamic env normal strength;" )
+Description( "f_env_rgh_threshold", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION;m:0;x:1;s:0.1;c:Global Env;d:Dynamic env roughness threshold;" )

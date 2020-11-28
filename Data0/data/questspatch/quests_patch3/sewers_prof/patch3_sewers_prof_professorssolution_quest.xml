@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="sewers_prof"
+     pxsl_line="3">
+    <!-- quest ProfessorsSolution02 -parent=ProfessorsSolution -glued=true -= -leading_portal=Portal_OldTown_To_Sewers_prof -->
+        <!-- ,BLOCK _ -obj=&ProfessorsSolution_OBJ_FindSewersEntrance& -->
+            <!-- ,goto <<SIDE: Professors Solution - START>> SensorGoTo Fuses_Entering_Sewers  -->
+                <!-- ,debugpos SpawnPoint portal_Sewers_prof_TO_OldTown -->
+            <!-- ,disable _ DoorDI trap3::SewerDoor -->
+            <!-- ,enable _ SpawnPoint Fuses_Respawn_Start     -->
+            <!-- ,enable _ ObjectSequenceController Fuses_Electric_Gate_Trap -->
+            <!--  -->
+            <!-- -= CHECKPOINT! -=-=-=-=-=-=-=-=-=-=-=-=-= -->
+            <!-- ,checkpoint _ SpawnPoint portal_Sewers_prof_TO_OldTown -->
+            <!-- -= CHECKPOINT! -=-=-=-=-=-=-=-=-=-=-=-=-= -->
+        <!--  -->
+        <!-- ,OR _ -obj=&ProfessorsSolution_OBJ_FindArtifacts& -->
+            <!-- path -->
+                <!-- ,take-multi <<SIDE: Professors Solution - Take The Relics>> -show=false -->
+                    <!-- ,item QuestInventoryItemDI relic1::Relic -->
+                    <!-- ,item QuestInventoryItemDI relic2::Relic -->
+                    <!-- ,item QuestInventoryItemDI relic3::Relic -->
+                    <!-- ,area ZoneBox Fuse_Search01 -->
+                    <!-- ,debugpos SpawnPoint Fuse_Take -->
+                    <!--  -->
+                <!-- ,disable-multi _ -->
+                    <!-- ,o NavMeshDynamicObject Fuses_NMDO -->
+                    <!-- ,o QuestEnableGroup Fuses_TurnOfZombieMeat -->
+                <!-- ,wait _ 0.5 -->
+                <!-- ,dialog _ voice2d Player_Fuses_03DLG01  -auto=true         -->
+                <!-- ,wait _ 1 -->
+                <!-- ,enable _ QuestEnableGroup Volletailes_Activator -->
+    <!-- quest __ProfessorsSolution02_fallingbody -parent=ProfessorsSolution -->
+        <!-- ,goto _ SensorGoTo ProfessorsSolution__01 -show=false -->
+        <!-- ,enable _ DeadRagdoll ProfessorsSolution_DR -->
+        <!-- ,checkpoint _ SpawnPoint Fuse_Take   -->
+        <!--  -->
+    <!-- quest __ProfessorsSolution02_viraljump -parent=ProfessorsSolution -->
+        <!-- ,goto _ SensorGoTo ProfessorsSolution__02 -show=false -->
+        <!-- ,enable _ AISpawnBoxNumber ProfessorsSolution_spanwer_01 -->
+        <!-- ,enable _ SpawnPoint Fuses_sp_04 -->
+        <!-- ,checkpoint _ SpawnPoint Fuse_Take   -->
+        <!--  -->
+    <!-- quest __ProfessorsSolution02_traps -parent=ProfessorsSolution -->
+        <!-- ,OR _ -->
+            <!-- path -->
+                <!-- -= FIRST TRAP - TUTORIAL -->
+                <!-- ,BLOCK _  -->
+                    <!-- ,AND _ -->
+                        <!-- path -->
+                            <!-- ,use _ PhysicalSwitchDI tutorial_trap_fuses::trigger_fuse_box -state=on -show=false -->
+                            <!-- ,disable _ Barrier tutorial_trap_fuses::Fuse_Barrier -->
+                            <!-- ,take _ QuestInventoryItemDI tutorial_trap_fuses::Fuse -show=false -->
+                            <!-- ,disable-multi _ -->
+                                <!-- ,o SoundEmitterSimple tutorial_trap_fuses::Fuses_SoundWorking -->
+                                <!-- ,o QuestEnableGroup tutorial_trap -->
+                            <!-- ,enable-multi _ -->
+                                <!-- ,o SoundEmitterSimple tutorial_trap_fuses::Fuses_ShutDown -->
+                                <!-- ,o BlackoutArea tutorial_trap -->
+                        <!-- path -->
+                            <!-- ,use _ PhysicalSwitchDI tutorial_trap_valve -state=on -show=false  -->
+                            <!-- ,movie _ tutorial_trap::cin_pipe_grating_a -->
+                        <!-- path -->
+                            <!-- ,goto _ Marker Fuses__01 -distance=5 -show=false -->
+            <!--  -->
+                <!-- -= SECOND TRAP - 'ELECTRICUTED' WATER -->
+                <!-- ,BLOCK _ -->
+                    <!-- ,AND <<Fuses - Test trap 2>> -->
+                        <!-- -= ,debugpos SpawnPoint Fuses_sp_01 -->
+                        <!-- path -->
+                            <!-- -= ,use _ PhysicalSwitchDI trap2::trigger_fuse_box -state=on -show=false -->
+                            <!-- ,hide _ PhysicalSwitchDI trap2::trigger_fuse_box -->
+                            <!-- ,disable _ Barrier trap2::Fuse_Barrier -->
+                            <!-- ,take _ QuestInventoryItemDI trap2::Fuse -show=false -->
+                            <!-- ,disable-multi _ -->
+                                <!-- ,o SoundEmitterSimple trap2::Fuses_SoundWorking -->
+                                <!-- ,o QuestEnableGroup trap2 -->
+                            <!-- ,enable-multi _ -->
+                                <!-- ,o SoundEmitterSimple trap2::Fuses_ShutDown -->
+                                <!-- ,o BlackoutArea trap2 -->
+                                <!-- ,o SpawnPoint Fuses_sp_01 -->
+                        <!-- path -->
+                            <!-- ,use _ PhysicalSwitchDI tutorial_trap2 -state=on -show=false -->
+                            <!-- ,movie _ trap2movie::cin_pipe_grating_a -->
+                        <!-- path -->
+                            <!-- ,goto _ Marker Fuses__02 -distance=5 -show=false -->
+            <!--  -->
+                <!-- -= THIRD TRAP - SEQUENCE TRAPS  -->
+                <!-- ,BLOCK _ -->
+                    <!-- ,AND <<Fuses - Test trap 3>> -->
+                        <!-- -= ,debugpos SpawnPoint Fuses_sp_02 -->
+                        <!-- path -->
+                            <!-- ,use _ PhysicalSwitchDI trap3::trigger_fuse_box -state=on -show=false -->
+                            <!-- ,disable _ Barrier trap3::Fuse_Barrier -->
+                            <!-- ,take _ QuestInventoryItemDI trap3::Fuse -show=false -->
+                            <!-- ,disable-multi _ -->
+                                <!-- ,o SoundEmitterSimple trap3::Fuses_SoundWorking -->
+                                <!-- ,o QuestEnableGroup trap3 -->
+                            <!-- ,enable-multi _ -->
+                                <!-- ,o SoundEmitterSimple trap3::Fuses_ShutDown -->
+                                <!-- ,o BlackoutArea trap3 -->
+                                <!-- ,o SpawnPoint Fuses_sp_03 -->
+                        <!-- path -->
+                            <!-- ,goto _ Marker Fuses__03 -distance=5 -show=false       -->
+                <!-- ,semaphore _  -->
+            <!-- path            -->
+                <!-- -= FOURTH TRAP - THE VOLATILE ROOM -->
+                <!-- ,BLOCK _ -->
+                    <!-- ,AND <<Fuses - Test trap 4>> -->
+                        <!-- -= ,debugpos SpawnPoint Fuse_Take -->
+                        <!-- path -->
+                            <!-- ,use _ PhysicalSwitchDI Fuse_trigger2::trigger_fuse_box -state=on  -show=false -->
+                            <!-- ,disable _ Barrier Fuse_trigger2::Fuse_Barrier -->
+                            <!-- ,take _ QuestInventoryItemDI Fuse_trigger2::Fuse -show=false -->
+                            <!-- ,enable _ BlackoutArea Fuse_trigger2 -->
+                            <!-- ,enable _ NightArea Fuses_NightArea -->
+                            <!-- -= ,enable _ QuestEnableGroup Volletailes_Activator -->
+                            <!-- ,disable-multi _                             -->
+                                <!-- ,o QuestEnableGroup Fuse_trigger2A::Fuses_qwg -->
+                                <!-- ,o QuestEnableGroup Fuse_trigger2B::Fuses_qwg -->
+                                <!-- ,o QuestEnableGroup ProfessorsSolution_qwg_01_LastRoomTrap -->
+                                <!-- ,o SoundEmitterSimple Fuse_trigger2::Fuses_SoundWorking -->
+                    <!-- ,checkpoint _ SpawnPoint Fuse_Take    -->
+                    <!-- ,enable _   SoundEmitterSimple Central_Electric      -->
+                    <!-- ,wait _     0.5     -->
+                    <!-- ,enable _ SoundEmitterSimple ProfessorsSolution_VolatileTaunt03 -->
+                    <!-- ,enable-multi _    -->
+                        <!-- ,o BlackoutArea Fuses_BlackOut_Total -->
+                        <!-- -= ,o SpawnBlocker Fuses_SB_ending -->
+                    <!-- ,enable-multi _ -->
+                        <!-- ,o SoundEmitterSimple Infected_Sound_2 -->
+                        <!-- ,o SpawnPoint Fuse_MainRoom -->
+                        <!-- ,o SoundEmitterSimple ProfessorsSolution_VolatileTaunt01 -->
+                    <!-- ,disable-multi _  -->
+                        <!-- ,o IntensityArea Fuses_Intensity_Day -->
+                        <!-- ,o AISpawnBoxNumber ProfessorsSolution_spanwer_02 -->
+                    <!-- ,enable-multi _ -->
+                        <!-- ,o SoundEmitterSimple Infected_Sound_1 -->
+                        <!-- ,o IntensityArea Fuses_Intensity -->
+                        <!-- ,o NightArea Fuses_NightArea -->
+                        <!-- ,o AISpawnBoxWaves Fuses_spanwer_01 -->
+                        <!-- ,o AISpawnBoxWaves Fuses_spanwer_01 -->
+                        <!-- ,o NavMeshDynamicObject TheProfessors_NMDO_01 -->
+                        <!-- ,o NavMeshDynamicObject TheProfessors_NMDO_02 -->
+                        <!-- ,o NavMeshDynamicObject TheProfessors_NMDO_03 -->
+                        <!-- ,o NavMeshDynamicObject TheProfessors_NMDO_04 -->
+                    <!-- ,wait _ 2 -->
+                    <!-- ,enable _ NightAggressionTrigger Fuses_Agro_Level -->
+                    <!-- ,enable _ SensorAmbientMusicArea Sewers_Fuses_Music -->
+                    <!-- ,enable _ SoundEmitterSimple ProfessorsSolution_VolatileTaunt02 -->
+                    <!--  -->
+        <!-- ,disable-multi _ -->
+            <!-- ,o SpawnPoint Fuses_sp_01 -->
+            <!-- ,o SpawnPoint Fuses_sp_02 -->
+            <!-- ,o QuestEnableGroup ProfessorsSolution_hubzones -->
+        <!-- ,enable _ SpawnBlocker Fuses_SB_ending -->
+            <!--  -->
+</QuestsDefinitions>

@@ -1,0 +1,211 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="sewers"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- Fuses -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=    -->
+    <!-- quest Fuses02 -parent=Fuses -glued=true -leading_portal=Fuse_MP_OldTown_TO_Sewers -->
+        <!-- ,BLOCK _ -obj=&Fuses_OBJ& -->
+            <!-- ,goto <<TABLE - Fuses - START>> SensorGoTo Fuses_Entering_Sewers  -distance=0  -->
+                <!-- ,debugpos SpawnPoint Fuse_MP_OldTown_TO_Sewers -->
+            <!-- -= ,disable _ DoorDI trap3::SewerDoor -->
+            <!-- ,enable _ SpawnPoint Fuses_Respawn_Start     -->
+            <!-- ,enable _ ObjectSequenceController Fuses_Electric_Gate_Trap -->
+            <!-- ,checkpoint _ SpawnPoint Fuse_MP_OldTown_TO_Sewers -->
+            <!--  -->
+            <!-- -= FIRST TRAP - TUTORIAL -->
+            <!-- ,BLOCK _  -->
+                <!-- ,AND _ -->
+                    <!-- path -->
+                        <!-- ,use _ PhysicalSwitchDI tutorial_trap_fuses::trigger_fuse_box -state=on -show=false -->
+                        <!-- ,disable _ Barrier tutorial_trap_fuses::Fuse_Barrier -->
+                        <!-- ,take _ QuestInventoryItemDI tutorial_trap_fuses::Fuse -show=false -->
+                        <!-- ,disable-multi _ -->
+                            <!-- ,o SoundEmitterSimple tutorial_trap_fuses::Fuses_SoundWorking -->
+                            <!-- ,o QuestEnableGroup tutorial_trap -->
+                        <!-- ,enable-multi _ -->
+                            <!-- ,o SoundEmitterSimple tutorial_trap_fuses::Fuses_ShutDown -->
+                            <!-- ,o BlackoutArea tutorial_trap -->
+                    <!-- path -->
+                        <!-- ,use _ PhysicalSwitchDI tutorial_trap_valve -state=on -show=false  -->
+                        <!-- ,movie _ tutorial_trap::cin_pipe_grating_a -->
+                    <!-- path -->
+                        <!-- ,goto _ Marker Fuses__01 -distance=5  -->
+                        <!--  -->
+            <!-- -= SECOND TRAP - 'ELECTRICUTED' WATER -->
+            <!-- ,BLOCK _ -->
+                <!-- ,AND <<Fuses - Test trap 2>> -->
+                    <!-- ,debugpos SpawnPoint Fuses_sp_01 -->
+                    <!-- path -->
+                        <!-- ,use _ PhysicalSwitchDI trap2::trigger_fuse_box -state=on -show=false -->
+                        <!-- ,disable _ Barrier trap2::Fuse_Barrier -->
+                        <!-- ,take _ QuestInventoryItemDI trap2::Fuse -show=false -->
+                        <!-- ,disable-multi _ -->
+                            <!-- ,o SoundEmitterSimple trap2::Fuses_SoundWorking -->
+                            <!-- ,o QuestEnableGroup trap2 -->
+                        <!-- ,enable-multi _ -->
+                            <!-- ,o SoundEmitterSimple trap2::Fuses_ShutDown -->
+                            <!-- ,o BlackoutArea trap2 -->
+                            <!-- ,o SpawnPoint Fuses_sp_01 -->
+                    <!-- path -->
+                        <!-- ,use _ PhysicalSwitchDI tutorial_trap2 -state=on -show=false -->
+                        <!-- ,movie _ trap2movie::cin_pipe_grating_a -->
+                    <!-- path -->
+                        <!-- ,goto _ Marker Fuses__02 -distance=5 -->
+            <!--  -->
+            <!-- -= THIRD TRAP - SEQUENCE TRAPS  -->
+            <!-- ,BLOCK _ -->
+                <!-- ,AND <<Fuses - Test trap 3>> -->
+                    <!-- ,debugpos SpawnPoint Fuses_sp_02 -->
+                    <!-- path -->
+                        <!-- ,use _ PhysicalSwitchDI trap3::trigger_fuse_box -state=on -show=false -->
+                        <!-- ,disable _ Barrier trap3::Fuse_Barrier -->
+                        <!-- ,take _ QuestInventoryItemDI trap3::Fuse -show=false -->
+                        <!-- ,disable-multi _ -->
+                            <!-- ,o SoundEmitterSimple trap3::Fuses_SoundWorking -->
+                            <!-- ,o QuestEnableGroup trap3 -->
+                        <!-- ,enable-multi _ -->
+                            <!-- ,o SoundEmitterSimple trap3::Fuses_ShutDown -->
+                            <!-- ,o BlackoutArea trap3 -->
+                            <!-- ,o SpawnPoint Fuses_sp_03 -->
+                            <!-- -= ,o DoorDI trap3::SewerDoor -->
+                    <!-- path -->
+                        <!-- ,goto _ Marker Fuses__03 -distance=5        -->
+                        <!--  -->
+            <!-- -= FOURTH TRAP - THE VOLATILE ROOM -->
+            <!-- ,BLOCK _ -->
+                <!-- ,AND <<Fuses - Test trap 4>> -->
+                    <!-- ,debugpos SpawnPoint Fuse_Take -->
+                    <!-- path -->
+                        <!-- ,use _ PhysicalSwitchDI Fuse_trigger1::trigger_fuse_box -state=on -->
+                        <!-- ,disable _ Barrier Fuse_trigger1::Fuse_Barrier -->
+                        <!-- ,take _ QuestInventoryItemDI Fuse_trigger1::Fuse -->
+                        <!-- ,enable _ BlackoutArea Fuse_trigger1 -->
+                        <!-- ,disable-multi _ -->
+                            <!-- ,o SoundEmitterSimple Fuse_trigger1::Fuses_SoundWorking -->
+                            <!-- -= ,o QuestEnableGroup Fuse_trigger1A::Fuses_qwg -->
+                            <!-- -= ,o QuestEnableGroup Fuse_trigger1B::Fuses_qwg -->
+                    <!-- path -->
+                        <!-- ,use _ PhysicalSwitchDI Fuse_trigger2::trigger_fuse_box -state=on -->
+                        <!-- ,disable _ Barrier Fuse_trigger2::Fuse_Barrier -->
+                        <!-- ,take _ QuestInventoryItemDI Fuse_trigger2::Fuse -->
+                        <!-- ,enable _ BlackoutArea Fuse_trigger2 -->
+                        <!-- ,disable-multi _                             -->
+                            <!-- ,o QuestEnableGroup Fuse_trigger2A::Fuses_qwg -->
+                            <!-- ,o QuestEnableGroup Fuse_trigger2B::Fuses_qwg -->
+                            <!-- ,o SoundEmitterSimple Fuse_trigger2::Fuses_SoundWorking -->
+                        <!--  -->
+                <!-- ,checkpoint _ SpawnPoint Fuse_Take    -->
+                <!-- ,enable _   SoundEmitterSimple Central_Electric      -->
+                <!-- ,wait _     0.5     -->
+                <!-- ,enable _   QuestEnableGroup Volletailes_Activator -->
+                <!-- ,enable-multi _    -->
+                    <!-- ,o BlackoutArea Fuses_BlackOut_Total -->
+                    <!-- ,o NightArea Fuses_NightArea -->
+                    <!-- ,o SpawnBlocker Fuses_SB_ending -->
+                <!-- ,disable-multi _ -->
+                    <!-- ,o NavMeshDynamicObject Fuses_NMDO -->
+                    <!-- ,o QuestEnableGroup Fuses_TurnOfZombieMeat -->
+                <!-- ,AND _  -->
+                    <!-- path -->
+                        <!-- ,enable-multi _ -->
+                            <!-- ,o SoundEmitterSimple Infected_Sound_2 -->
+                            <!-- ,o SpawnPoint Fuse_MainRoom -->
+                        <!-- ,disable-multi _  -->
+                            <!-- ,o IntensityArea Fuses_Intensity_Day -->
+                            <!-- ,o SpawnPoint Fuses_sp_01 -->
+                            <!-- ,o SpawnPoint Fuses_sp_02 -->
+                    <!-- path -->
+                        <!-- ,wait _ 1 -->
+                        <!-- ,enable-multi _ -->
+                            <!-- ,o SoundEmitterSimple Infected_Sound_1 -->
+                            <!-- ,o IntensityArea Fuses_Intensity -->
+                            <!-- ,o NightArea Fuses_NightArea -->
+                            <!-- ,o AISpawnBoxWaves Fuses_spanwer_01 -->
+                            <!-- ,o AISpawnBoxWaves Fuses_spanwer_01 -->
+                        <!-- ,dialog _ voice2d Player_Fuses_03DLG01  -auto=true -->
+                    <!-- path -->
+                        <!-- ,wait _     3 -->
+                        <!-- ,enable _   NightAggressionTrigger Fuses_Agro_Level -->
+                        <!-- ,enable _   SensorAmbientMusicArea Sewers_Fuses_Music -->
+            <!-- ,goto _     SensorGoTo Fuses_Dialog_1   -distance=0 -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,dialog _ voice2d Player_Fuses_01DLG01  -auto=true -->
+                <!-- path     -->
+                    <!-- ,goto _     SensorGoTo Fuses_Bridge_Marker  -distance=0 -->
+            <!-- ,enable _   SpawnPoint Fuses_Respawn_Bridge -->
+            <!-- ,goto << Fuse Take >>     SensorGoTo Fuses_MainRoom_Marker    -distance=0 -->
+                <!-- ,debugpos SpawnPoint Fuse_MainRoom -->
+            <!-- ,enable _   QuestEnableGroup Drowned_Zombies_Enable     -->
+            <!-- ,enable _   SpawnPoint Fuse_MainRoom -->
+            <!-- ,checkpoint _ SpawnPoint Fuse_MainRoom    -->
+            <!-- ,AND _ -->
+                <!-- ,area ZoneBox Fuse_Search01 -->
+                <!-- path -->
+                    <!-- -= fake to show item list -->
+                    <!-- ,take-multi _ -show_list=true -show=false  -->
+                        <!-- ,item QuestInventoryItemDI Fuse_1 -->
+                        <!-- ,item QuestInventoryItemDI Fuse_2 -->
+                        <!-- ,item QuestInventoryItemDI Fuse_3 -->
+                <!-- path -->
+                    <!-- ,use _ PhysicalSwitchDI trigger_fuse_box_1 -state=on -show=false -->
+                    <!-- ,disable _  Barrier Fuse_Barrier_1     -->
+                    <!-- ,take _ QuestInventoryItemDI Fuse_1 -show=true -->
+                    <!-- ,disable _  SoundEmitterSimple Fuses_SoundWorking_1 -->
+                    <!-- ,enable-multi _ -->
+                        <!-- ,o      FXEmitter Fuses_Sparks_1 -->
+                        <!-- ,o      SoundEmitterSimple Fuses_ShutDown_1 -->
+                        <!-- ,o      BlackoutArea Fuses_BlackOut_1 -->
+                <!-- path -->
+                    <!-- ,use _ PhysicalSwitchDI trigger_fuse_box_2 -state=on -show=false -->
+                    <!-- ,disable _  Barrier Fuse_Barrier_2     -->
+                    <!-- ,take _ QuestInventoryItemDI Fuse_2 -show=true -->
+                    <!-- ,disable _  SoundEmitterSimple Fuses_SoundWorking_2 -->
+                    <!-- ,enable-multi _ -->
+                        <!-- ,o      FXEmitter Fuses_Sparks_2 -->
+                        <!-- ,o      SoundEmitterSimple Fuses_ShutDown_2 -->
+                        <!-- ,o      BlackoutArea Fuses_BlackOut_2 -->
+                <!-- path -->
+                    <!-- ,use _ PhysicalSwitchDI trigger_fuse_box_3 -state=on -show=false -->
+                    <!-- ,disable _  Barrier Fuse_Barrier_3     -->
+                    <!-- ,take _ QuestInventoryItemDI Fuse_3 -show=true -->
+                    <!-- ,disable _  SoundEmitterSimple Fuses_SoundWorking_3 -->
+                    <!-- ,enable-multi _ -->
+                        <!-- ,o      FXEmitter Fuses_Sparks_3 -->
+                        <!-- ,o      SoundEmitterSimple Fuses_ShutDown_3 -->
+                        <!-- ,o      BlackoutArea Fuses_BlackOut_3 -->
+            <!-- ,checkpoint _ SpawnPoint Fuse_Take    -->
+            <!-- ,enable _   SoundEmitterSimple Central_Electric      -->
+            <!-- ,wait _     0.5     -->
+            <!-- ,enable _   QuestEnableGroup Volletailes_Activator -->
+            <!-- ,enable-multi _    -->
+                <!-- ,o  BlackoutArea Fuses_BlackOut_Total -->
+                <!-- ,o  NightArea Fuses_NightArea -->
+        <!-- ,BLOCK _ -obj=&Fuses_OBJ_ReturnToMuseum& -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,goto _     SensorGoTo Fuses_WayBack_HelpMarker_1   -distance=0     -show=true -->
+                    <!-- ,goto _     SensorGoTo Fuses_WayBack_HelpMarker_2   -distance=0     -show=true -->
+                    <!-- ,goto _     SensorGoTo Fuses_WayBack_HelpMarker_3   -distance=0     -show=true -->
+                    <!-- ,goto _     SensorGoTo Fuses_WayBack_HelpMarker_4   -distance=0     -show=true -->
+                    <!-- ,goto _     SensorGoTo Fuses_WayBack_HelpMarker_5   -distance=0     -show=true -->
+                    <!-- ,goto _     SensorGoTo Fuses_WayBack_HelpMarker_6   -distance=0     -show=true -->
+                    <!-- ,goto << Fuse End >> SensorGoTo Fuses_Entering_Sewers  -distance=0  -show=true -->
+                        <!-- ,debugpos  SpawnPoint Fuse_MP_OldTown_TO_Sewers -->
+                <!-- path -->
+                    <!-- ,enable _   SoundEmitterSimple Infected_Sound_2 -->
+                    <!-- ,disable _  IntensityArea Fuses_Intensity_Day -->
+                <!-- path -->
+                    <!-- ,wait _ 5 -->
+                    <!-- ,enable _   SoundEmitterSimple Infected_Sound_1 -->
+                    <!-- ,enable _   IntensityArea Fuses_Intensity -->
+                    <!-- ,enable _   NightArea Fuses_NightArea -->
+                    <!-- ,dialog _ voice2d Player_Fuses_03DLG01  -auto=true -->
+                <!-- path -->
+                    <!-- ,wait _     15 -->
+                    <!-- ,enable _   NightAggressionTrigger Fuses_Agro_Level -->
+                    <!-- ,enable _   SensorAmbientMusicArea Sewers_Fuses_Music -->
+            <!-- ,checkpoint _ SpawnPoint Fuse_MP_OldTown_TO_Sewers     -->
+</QuestsDefinitions>

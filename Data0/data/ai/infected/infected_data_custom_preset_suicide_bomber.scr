@@ -1,0 +1,70 @@
+!include("ai_data.def")
+!include("infected_timing_events.def")
+!include("export_suicider_bomber_params.scr")
+
+// suicide bomber
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////// CURVES //////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+Curve(CURVE_HEALTH, "suicider_bomber_health")
+
+////////////////////////////////////////////// DATA ///////////////////////////////////////////////
+
+//##################
+//#### ALARMING ####
+//##################
+//## alarming:is_standing:alarm_level:angle:direction:was_moving
+//##################
+
+Data("alarming:standing::alarmed:::", 0, "", -1, 1)
+
+//##################
+//#### MOVEMENT ####
+//##################
+//## movement:is_standing:movement_type:movement_direction:alarm_level:item_type:ram_type:stairs_climbing_state
+//##################
+
+Data("movement:standing:run:forward::::", -2, "suicide_bomber_upset_run", -1, 1)
+Data("movement:standing:sprint:forward::::", -2, "suicide_bomber_upset_run", -1, 1)
+
+/////////////////////////////////////////// PARAMETERS ////////////////////////////////////////////
+
+//ParamFloat("health_mul", 0.3)
+//ParamFloat("damage_mul", 1.0)
+ParamFloat("melee_range", 0.5)
+ParamBool("can_fall", 0)
+ParamBool("can_react_on_hit", 0)
+ParamBool("can_react_on_bullet", 0)
+ParamBool("can_attack_from_move", 0)
+ParamBool("can_strike_from_stand", 0)
+ParamProb("taunt_prob", 0, 1) // taunt probability after failed berserker grab or target notice
+ParamFloat("taunt_prob_on_target_change", 0.0) // taunt probability after failed berserker grab
+ParamFloat("taunt_prob_on_take_damage", 0.0)
+ParamBool("navigate_through_generic_nav_mesh_connections", 1)
+ParamBool("navigate_through_user_nav_mesh_connections", 0)
+ParamBool("can_move_through_low_obstacles", 1)
+ParamBool("can_move_through_high_obstacles", 0)
+ParamFloat("connection_cost_mul", 4.0)
+ParamFloat("min_jump_on_height", 0.5)
+ParamFloat("max_jump_on_height", 1.3)
+ParamFloat("max_jump_over_dist", 0.7)
+ParamFloat("min_jump_down_height", 0.0)
+ParamFloat("max_connection_height_up", 4.5)
+ParamFloat("max_connection_height_down", 4.5)
+ParamFloat("max_connection_horiz_dist", 1.0)
+ParamFloat("navi_mesh_sight_range", 200.0) //converted
+ParamBool("stop_in_last_node_when_path_not_found", 0)
+ParamInt("zombie_type", 8)
+ParamBool("update_async_arrival", 0)
+ParamBool("can_attack_enemy_in_vehicle", 0)
+ParamFloat("humanity_hit_reaction_prob", 0.0)
+ParamBool("explode_on_destination_reached", 0)
+ParamBool("explode_on_destination_unreachable", 1)
+
+ParamFloat("experience_award", 50.0)
+
+ParamFloat("bullet_head_hit_damage_mult", 10.)
+ParamFloat("bullet_body_hit_damage_mult", 10.)
+ParamBool("can_attack_objects_from_move", 0)

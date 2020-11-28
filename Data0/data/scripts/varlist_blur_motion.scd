@@ -1,0 +1,7 @@
+!include("varlist_blur_motion.scr")
+VarFloat("f_pp_blur_motion_camera", 1.0)
+VarFloat("f_pp_blur_motion_camera_near", 1.0)
+VarFloat("f_pp_blur_motion_camera_far", 2.0)
+VarFloat("f_pp_blur_motion_camera_mask_mul", 1.0)
+VarFloat("f_pp_blur_motion_camera_mask_add", 0.0)
+VarFloat("f_pp_blur_motion_object", 1.0)

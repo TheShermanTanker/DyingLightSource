@@ -1,0 +1,80 @@
+!include("MeshPartCloth.def")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+MeshPartCloth()
+{
+//----------------------------------------------
+// bones
+//----------------------------------------------
+    BonesGridSize(2, 5)
+
+    $XDIST(f, 0.1)
+    $YDIST(f, -0.9)
+
+    Bone(0, 0, "bone_bottle_detaila_02", 1, XDIST, YDIST)
+    Bone(0, 1, "bone_bottle_detaila_03", 0, XDIST, YDIST)
+    Bone(0, 2, "bone_bottle_detaila_04", 0, XDIST, YDIST)
+    Bone(0, 3, "bone_bottle_detaila_05", 0, XDIST, YDIST)
+    Bone(0, 4, "",                       0, XDIST, YDIST)
+
+    Bone(1, 0, "bone_bottle_detailb_02", 1, XDIST, YDIST)
+    Bone(1, 1, "bone_bottle_detailb_03", 0, XDIST, YDIST)
+    Bone(1, 2, "bone_bottle_detailb_04", 0, XDIST, YDIST)
+    Bone(1, 3, "bone_bottle_detailb_05", 0, XDIST, YDIST)
+    Bone(1, 4, "",                       0, XDIST, YDIST)
+    
+//----------------------------------------------
+// collisions 
+//----------------------------------------------
+
+    CollisionSlide(1)
+    CollisionSpeedMod(1)
+    CollisionBounce(0)
+    
+    CollisionShapesMoveInfluence(1)
+    
+    CollisionSegmentDivision(100)
+    CollisionNormalAngleThreshold(180)
+    
+    NodeCollisionSphereRadius(0.1)
+    ExternalCollisionAffectMul(0)
+    
+    CollisionCapsule("r_forearm", -1, -1.5)
+    CollisionSphereShift("pelvis", [0, 0, 0], 0.21)
+    
+//----------------------------------------------
+// spring params 
+//----------------------------------------------
+
+    Viscous(1)
+    AirFriction(1)
+
+    StructuralStiffness(8000, 1000)
+    ShearStiffness(5000, 1000)
+    FlexionStiffness(5000, 1000)
+
+    HorizontSpringRatio(0.02)
+    
+    CheckLengthsStepsPerSec(0)
+
+//----------------------------------------------
+// physical params 
+//----------------------------------------------
+    
+    Mass(1)
+    GravityMul(0.6)
+    WindInfluence(1)
+    WindGust(0.3, 1)
+
+//----------------------------------------------
+// other params
+//----------------------------------------------
+
+    SynchroWithPhysics(0)
+    EnableAPBOut(1)
+    
+    ObjectMoveMul(1)
+    AnimationMoveMul(0.6)
+}
+
+

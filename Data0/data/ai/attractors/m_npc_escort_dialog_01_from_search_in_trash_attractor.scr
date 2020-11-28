@@ -1,0 +1,31 @@
+!include("ai_data.def")
+!include("ai_timing.def")
+
+!include("ai_goals.def")
+
+ShortHeadRotation()
+PeriodBtwSpecialAnims(-1)
+SnapDist(2)
+ReleaseDist(3)
+User("Man")
+
+Usage("ENCOUNTER")
+Usage("VIRTUAL_ATTRACTOR")
+Usage("AI_USAGE_SYSTEM")
+
+Slot("", 1, 1, 1, 0, 0, 0, 0, 0, 1, 1.5)
+{
+    LockPosition()
+    AiTypeDataSet("human")
+    {
+			Data("idle:standing:none:stand:none:prepare:none", -2, "m_npc_search_in_trash_1_finish", -1, 1)
+	        Data("idle:standing:none:stand:none:none:none", -2, "m_npc_escort_dialog_01_dialog_calm", -1, 1)
+			Data("idle:standing:none:idle:none:none:none", -2, "m_npc_escort_dialog_01_dialog_calm", -1, 1)
+    }
+	DeactivateOn(GoalAttack)
+	DiscardOn(GoalReactOnBurn)
+	DiscardOn(GoalReactOnElectrocution)
+	DiscardOn(GoalReactOnPoison)
+	DiscardOn(GoalReactOnHit)
+}
+

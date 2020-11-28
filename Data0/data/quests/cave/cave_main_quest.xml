@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="cave"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST NAME : Power To Believe -->
+    <!-- QUEST INFO : Go to Wastland through the Cave -->
+    <!-- COMMENT    :  -->
+    <!-- FORM       : SLUMS -->
+    <!-- TO         : WASTLAND -->
+    <!-- CHAPTER    : 09 - Last Hope -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- quest Q_PowerToBelieve01 -parent=Q_AnotherDay -leading_portal=portal_slums_to_cave -reward_set=PowerToBelieve_Reward -difficulty=medium -new_chapter=Chapter06 -->
+        <!-- ,BLOCK _ -obj=&PowerToBelieve_OBJ_FindEntrance& -->
+            <!-- ,goto <<POWER TO BELIEVE - START>> SpawnPoint MapStart -distance=10000 -->
+                <!-- ,debugpos SpawnPoint MapStart -->
+            <!-- ,checkpoint _ SpawnPoint MapStart -->
+    <!--  -->
+    <!-- quest Q_PowerToBelieve02 -parent=Q_PowerToBelieve01 -glued=true  -->
+        <!-- ,BLOCK _ -obj=&Q_PowerToBelive_WayThroughTunnels& -->
+            <!-- ,goto <<POWER TO BELIEVE - END>> SpawnPoint sp_portal_cave_to_wasteland -distance=10 -->
+                <!-- ,debugpos SpawnPoint sp_portal_cave_to_wasteland -->
+            <!-- ,checkpoint _ SpawnPoint sp_portal_cave_to_wasteland -->
+    <!-- ENCOUNTERS  -->
+    <!-- quest    Q_Cave_drop_hiden     -parent=Q_PowerToBelieve01 -->
+        <!-- ,goto << Event cave >> SensorGoTo sensor_cave_event1_1 -distance=0 -show=false -->
+            <!-- ,debugpos SpawnPoint cave_drop_event -->
+        <!-- ,enable _ QuestEnableGroup earthqake_sound -->
+        <!-- ,movie _ cave_movie_rock_1stmove -->
+        <!-- ,wait _ 0.2 -->
+        <!-- ,enable _ QuestEnableGroup dust_on -->
+        <!-- ,goto << Event cave >> SensorGoTo sensor_cave_event1 -distance=0 -show=false -->
+        <!-- ,wait _ 0.2 -->
+        <!-- ,enable _ QuestEnableGroup earthqake_sound -->
+        <!-- ,disable _ QuestEnableGroup earthqake_off -->
+        <!-- ,movie _ cave_movie_rock_drop -->
+        <!-- ,wait _ 0.5  -->
+        <!-- ,enable _ QuestEnableGroup earthqake_sound_blast -->
+        <!-- ,wait _ 0.5  -->
+        <!-- ,disable _ QuestEnableGroup earthqake_sound_blast -->
+        <!--  -->
+    <!-- quest    event_cave_natural_special_1    -parent=Q_PowerToBelieve01 -->
+        <!-- ,goto _ Marker cave_natural_special_1_start -distance=6 -show=false -->
+        <!-- ,enable _ QuestEnableGroup cave_natural_special_1 -->
+        <!-- ,OR _  -->
+            <!-- path -->
+                <!-- ,kill _ AISpawnBoxNumber cave_natural_special_1 -show=true -->
+            <!-- path -->
+        <!-- ,goto _ Marker cave_natural_special_1_end -distance=6 -show=false -->
+        <!-- ,disable _ QuestEnableGroup cave_natural_special_1 -->
+        <!-- ,checkpoint _ SpawnPoint cave_natural_special_1 -->
+        <!--  -->
+    <!-- quest    event_cave_natural_special_2    -parent=Q_PowerToBelieve01 -->
+        <!-- ,goto _ Marker cave_natural_special_2_end -distance=6 -show=false -->
+        <!-- ,disable _ QuestEnableGroup cave_natural_special_2 -->
+        <!-- ,checkpoint _ SpawnPoint cave_natural_special_2 -->
+        <!--  -->
+    <!-- quest    event_cave_natural_special_4    -parent=Q_PowerToBelieve01 -->
+        <!-- ,goto _ Marker cave_natural_special_4_end -distance=6 -show=false -->
+        <!-- ,disable _ QuestEnableGroup cave_natural_special_4 -->
+        <!-- ,checkpoint _ SpawnPoint cave_natural_special_4 -->
+        <!--  -->
+    <!-- quest    event_cave_natural_special_4_1    -parent=Q_PowerToBelieve01 -->
+        <!-- ,goto _ Marker cave_natural_special_4_1_end -distance=6 -show=false -->
+        <!-- ,disable _ QuestEnableGroup cave_natural_special_4_1 -->
+        <!-- ,checkpoint _ SpawnPoint cave_natural_special_4_1 -->
+        <!--  -->
+    <!-- quest    __modul_test_natural_cave_01    -parent=Q_PowerToBelieve01 -->
+        <!-- ,goto <<Start modul NM A >> SensorGoTo modul_natural_cave_goto -distance=0 -show=false -->
+            <!-- ,debugpos SpawnPoint spawn_modul_01 -->
+        <!--  -->
+    <!-- quest    __modul_test_natural_cave_02    -parent=Q_PowerToBelieve01 -->
+        <!-- ,goto <<Start modul NM B >> SensorGoTo modul_natural_cave_goto_02 -distance=0 -show=false -->
+            <!-- ,debugpos SpawnPoint spawn_modul_02 -->
+</QuestsDefinitions>

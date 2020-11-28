@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="old_town"
+     pxsl_line="3">
+    <!-- quest __sq_kids_before -parent=Q_Start01 -->
+        <!-- ,hide _ MapPortal portal_OldTown_to_OldTownInetiorA_sq_kids -->
+        <!--  -->
+    <!-- -= -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- -= KIDS THEES DAYS - Start -->
+    <!-- -= -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- quest sq_kids00 -parent=Q_Scavengers_Hub01 -reward_set=Kids_reward -difficulty=medium -quest_giver=zied -->
+        <!-- ,goto <<Kids theese days - START>> SpawnPoint sq_kids_start -distance=20 -show=false -->
+            <!-- ,debugpos SpawnPoint sq_kids_start -->
+        <!-- ,checkpoint _ SpawnPoint sq_kids_start -->
+        <!-- ,talk _ zied Zied_sq_kids_01DLG01 -auto=true -->
+        <!-- ,talk _ mehdi Mehdi_sq_kids_01DLG01 -auto=true -->
+        <!-- ,talk _ zied Zied_sq_kids_01DLG03 -auto=true -->
+        <!-- ,talk _ mehdi Mehdi_sq_kids_01DLG04 -auto=true -->
+        <!-- ,talk _ zied Player_sq_kids01_USE01 -->
+        <!-- ,talk _ mehdi Mehdi_sq_kids01_USE03 -auto=true -->
+        <!-- ,talk _ zied Zied_sq_kids01_USE04 -auto=true -->
+        <!-- ,talk _ mehdi Mehdi_sq_kids01_USE05 -auto=true -->
+        <!-- ,talk _ zied Zied_sq_kids01_USE08 -->
+        <!-- ,checkpoint _ SpawnPoint sq_kids_start -->
+        <!--  -->
+    <!-- quest sq_kids01 -parent=sq_kids00 -glued=true -->
+        <!-- ,BLOCK _ -obj=<<Find Sami>> -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,goto <<Kids theese days 01 - START>> SensorGoTo sq_kids_sami_start -show=false -distance=0 -->
+                        <!-- ,area ZoneVCylinder sq_kids_sami_area -->
+                        <!-- ,debugpos SpawnPoint sq_kids01_start -->
+                    <!-- ,checkpoint _ SpawnPoint sq_kids01_start -->
+                <!-- path -->
+                    <!-- ,show _ AppearGroup sq_kids_objects -->
+                    <!-- ,set _ DoorDI sq_kids_staricasedoor -state=opened -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,move _ AIEscortNode sq_kids_samiinside -style=run -->
+                        <!-- ,ai HumanAI Sami -->
+                        <!-- ,start AIEscortNode sq_kids_sami_run -->
+                    <!-- ,set _ DoorDI sq_kids_staricasedoor -state=closed -->
+                    <!-- ,show _ MapPortal portal_OldTown_to_OldTownInetiorA_sq_kids -->
+                    <!-- ,hide _ DoorDI sq_kids_staricasedoor -->
+                <!-- path -->
+                    <!-- ,talk _ Sami Sami_sq_kids_03DLG01 -auto=true -->
+                <!--  -->
+    <!-- quest __sq_kids_aftet -parent=sq_kids03 -->
+        <!-- ,enable _ QuestEnableGroup portal_OldTown_to_OldTownInetiorA_sq_kids2 -state=enabled -->
+</QuestsDefinitions>

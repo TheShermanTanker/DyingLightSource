@@ -1,0 +1,156 @@
+// Preset() - section to place most often used classes
+!Preset()
+// PresetSingle( s ) - class names in section Present
+!PresetSingle( s )
+
+Preset()
+{
+   PresetSingle( "ModelObject" )
+}
+
+// --------------------------------------------------------
+
+// EdClassSelections() - section to store content od EdClassSelections.ini file
+!EdClassSelections()
+//ClassSelection( nazwa selekcji klas, jaka pojawi sie w combo )
+!ClassSelection( s )
+//Class( nazwa klasy, czy brac klasy pochodne: 1 -tak, inne - nie )
+!Class( s , n )
+
+EdClassSelections()
+{
+    ClassSelection("Simple meshes")
+	{
+		Class("ModelObject",0)
+	}
+ 
+    ClassSelection("Level")
+	{
+		Class("Level", 1)
+	}
+ 
+	ClassSelection("SoundEmitters")
+	{
+		Class("SoundEmitter", 1)
+	}
+
+    ClassSelection("Dynamic lights")
+    {
+        Class("LightObject", 1)
+    }
+
+	ClassSelection("Cameras")
+	{
+		Class("CameraEditorObject",0)
+		Class("CameraTargetEditorObject",0)
+	}
+
+	ClassSelection("Lightmap lights")
+	{
+		Class("LightEditorObject",0)
+	}
+
+	ClassSelection("Movies")
+	{
+		Class("Movie", 1)
+		Class("MovieActionExecutor", 1)
+		Class("CCameraTargetHelper", 1)
+		Class("CCameraPositionHelper", 1)
+	}
+
+	ClassSelection("Dialogs")
+	{
+		Class("Dialog",1)
+	}
+
+	ClassSelection("Triggers")
+	{
+		Class("Trigger",1)
+		Class("TriggerCyclic",1)
+	}
+
+	ClassSelection("Sensors")
+	{
+		Class("SensorArea",1)
+		Class("Sensor",1)
+	}
+
+	ClassSelection("FXEmitters")
+	{
+		Class("FXEmitter", 1)
+	}
+
+	ClassSelection("Markers")
+	{
+		Class("Marker", 1)
+		Class("Shooter", 1)
+	}
+
+	ClassSelection("Music")
+	{
+		Class("Music", 1)
+	}
+}
+
+///////////////////////////////////////////
+// maps protected from save operation
+
+!ProtectedMapWarning( s )
+!ProtectedMap( s )
+
+///////////////////////////////////////////
+// Resource packs section
+
+!Configurations()
+// dll to load
+!Configuration( s )
+
+Configurations()
+{
+   Configuration( "PCcfg.dll" )
+   Configuration( "DurangoCfg.dll" )
+   Configuration( "OrbisCfg.dll" )
+   Configuration( "LinuxCfg.dll" )
+}
+
+///////////////////////////////////////////
+// Normal map variable
+
+!NormalMapVariable( s )
+
+NormalMapVariable( "s_ter_nrm" )
+
+///////////////////////////////////////////
+// Varlists paired with action names. 
+// Those varlists are loaded and used when correspondive action is performed.
+// Syntax: Varlist( action_name, script_file )
+
+!Varlists()
+!Varlist( s, s )
+
+Varlists()
+{
+    Varlist( "post_process_simple", "chromedvarlistoverridessimple.scr" )
+    Varlist( "post_process_normal", "chromedvarlistoverrides.scr" )
+    Varlist( "edit_terrain", "" )
+    Varlist( "screenshots", "" )
+}
+
+///////////////////////////////////////////
+// Default class of newly created movies.
+// It is also used for movies being imported from MotionBuilder to ChromEd. 
+// Should be declared in ChromEdStartGame.scr file.
+!DefaultMovieClass( s )
+
+//////////////////////////////////////////
+// Script containing dependencies among meshes, materials and textures.
+// It is created during generation of previews (for .msh and .eds files).
+// This value should be synchronized with "generate_previews.jl" or other
+// files that are used during preview generation process.
+!MMTDependenciesScript( s )
+
+MMTDependenciesScript( "data/AssetDependencies.scr" )
+///////////////////////////////////////////
+// game section
+
+!include("ChromEdStartGame.scr")

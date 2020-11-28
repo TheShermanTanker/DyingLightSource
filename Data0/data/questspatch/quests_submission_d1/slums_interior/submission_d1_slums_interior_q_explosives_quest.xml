@@ -1,0 +1,834 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums_interior"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST NAME : Explosives -->
+    <!-- QUEST INFO : Retrive explosives -->
+    <!-- AFTER QUEST: Rais Courier -->
+    <!-- COMMENT    : END OF SIGLE PLAYER GAME -->
+    <!-- FROM       : >> SLUMS -->
+    <!-- TO         : >> SLUMS >> SLUMS INT SCHOOL -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="Q_Explosives01"
+         parent="SaveTheTower03"
+         leading_portal="portal_Hub_LJ_Floor_0"
+         glued="true"
+         pxsl_line="14">
+        <Phase
+             type="player control"
+             name="_"
+             night_announcement="NightReminderAYO"
+             pxsl_line="15" />
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="16">
+            <Object
+                 pxsl_line="16">
+                <QuestObject
+                     class="HumanAI"
+                     name="slums_thetower_guard_19th_02"
+                     pxsl_line="16" />
+            </Object>
+        </Phase>
+        <Phase
+             type="go to"
+             name="_"
+             distance="4"
+             show_locations="false"
+             pxsl_line="17">
+            <Destination
+                 pxsl_line="17">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="the_tower_brecken_room"
+                     pxsl_line="17" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="talk"
+             name="_"
+             speaker="voice2d"
+             group="Player_Courier_33DLG01"
+             show_locations="false"
+             auto_start="true"
+             pxsl_line="18" />
+        <!-- ,wait _ 0.5 -->
+        <!-- ,enable _ UseItemOnceZone GRE_07_PlayerCall -->
+        <!-- ,use _ InvisibleSwitchDI GRE_07_PlayerCall_Trigger -state=on -show=false -->
+        <!-- ,wait _ 0.25 -->
+        <!-- ,disable _ UseItemOnceZone GRE_07_PlayerCall -->
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="24">
+            <Object
+                 pxsl_line="24">
+                <QuestObject
+                     class="AppearGroup"
+                     name="cin_rahimroof_cans_ag"
+                     pxsl_line="24" />
+            </Object>
+        </Phase>
+        <Phase
+             type="wait guard"
+             name="_"
+             time="1"
+             pxsl_line="25" />
+        <!-- GET TO THE ROOF TO RAHIM -->
+        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+        <!-- Look for a private spot on the roof to contact GRE. -->
+        <Phase
+             type="AND"
+             name="Look for Rakim on the roof"
+             objective="&amp;Q_Explosives_OBJ_LookRakimOnTheRoof&amp;"
+             pxsl_line="29">
+            <Path
+                 pxsl_line="29">
+                <Phase
+                     type="go to"
+                     name="EXPLOSIVES - START"
+                     distance="0"
+                     pxsl_line="30">
+                    <Destination
+                         pxsl_line="30">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="the_tower_roof_goto_01"
+                             pxsl_line="30" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="31">
+                    <Object
+                         pxsl_line="31">
+                        <QuestObject
+                             class="AppearGroup"
+                             name="cin_rahimroof_cans_ag"
+                             pxsl_line="31" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="32">
+                    <Object
+                         pxsl_line="32">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Rakim"
+                             pxsl_line="32" />
+                    </Object>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <!-- CIN - Rahim on the Roof -->
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-    -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="36">
+                    <Object
+                         pxsl_line="36">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="cin_rahimroof_01_trigger_qeg"
+                             pxsl_line="36" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="use"
+                     name="EXPLOSIVES - CIN - On The Roof"
+                     desired_state="on"
+                     pxsl_line="37">
+                    <Trigger
+                         pxsl_line="37">
+                        <QuestObject
+                             class="InteractiveMovieTrigger"
+                             name="cin_rahimroof_01_trigger"
+                             pxsl_line="37" />
+                    </Trigger>
+                    <DebugPlayerPosition
+                         pxsl_line="38">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="the_tower_roof_before_cin_sp"
+                             pxsl_line="38" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="39">
+                    <Object
+                         pxsl_line="39">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="cin_rahimroof_01_trigger_qeg"
+                             pxsl_line="39" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="40">
+                    <Object
+                         pxsl_line="41">
+                        <QuestObject
+                             class="MovieActor"
+                             name="cin_bracken_dispair_Door_01"
+                             pxsl_line="41" />
+                    </Object>
+                    <Object
+                         pxsl_line="42">
+                        <QuestObject
+                             class="MovieActor"
+                             name="cin_bracken_dispair_Door_01_after"
+                             pxsl_line="42" />
+                    </Object>
+                    <Object
+                         pxsl_line="43">
+                        <QuestObject
+                             class="MovieActor"
+                             name="cin_bracken_dispair_Door_02_after"
+                             pxsl_line="43" />
+                    </Object>
+                    <Object
+                         pxsl_line="44">
+                        <QuestObject
+                             class="MovieActor"
+                             name="cin_bracken_dispair_Door_01_alt"
+                             pxsl_line="44" />
+                    </Object>
+                    <Object
+                         pxsl_line="45">
+                        <QuestObject
+                             class="MovieActor"
+                             name="cin_bracken_dispair_Door_02"
+                             pxsl_line="45" />
+                    </Object>
+                    <Object
+                         pxsl_line="46">
+                        <QuestObject
+                             class="MovieActor"
+                             name="cin_rahimroof_Door"
+                             pxsl_line="46" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="47">
+                    <Object
+                         pxsl_line="48">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Rakim"
+                             pxsl_line="48" />
+                    </Object>
+                    <Object
+                         pxsl_line="49">
+                        <QuestObject
+                             class="ModelObject"
+                             name="cin_meetjade_Door_static_01"
+                             pxsl_line="49" />
+                    </Object>
+                    <Object
+                         pxsl_line="50">
+                        <QuestObject
+                             class="ModelObject"
+                             name="cin_meetjade_Door_static_02"
+                             pxsl_line="50" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="use life place"
+                     name="_"
+                     teleport="true"
+                     wait_for_move_end="false"
+                     pxsl_line="51">
+                    <LifePlace
+                         pxsl_line="51">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="explosives_rakim_lp_after_cin"
+                             pxsl_line="51" />
+                    </LifePlace>
+                    <AI
+                         pxsl_line="52">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Rakim"
+                             pxsl_line="52" />
+                    </AI>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="53">
+            <Destination
+                 pxsl_line="53">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="the_tower_roof_before_cin_sp"
+                     pxsl_line="53" />
+            </Destination>
+        </Phase>
+        <!-- -->
+        <!-- GRE CONTACT 7 -->
+        <!-- -->
+        <!-- Look for a safe place to contact GRE. -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Explosives_OBJ_ContactGRE&amp;"
+             pxsl_line="57">
+            <Path
+                 pxsl_line="57">
+                <Phase
+                     type="gather players guard"
+                     name="EXPLOSIVES - GRE 07"
+                     distance="0"
+                     pxsl_line="58">
+                    <Destination
+                         pxsl_line="58">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="GRE_07_goto"
+                             pxsl_line="58" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="59">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="the_tower_roof_sp"
+                             pxsl_line="59" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="60">
+                    <Object
+                         pxsl_line="61">
+                        <QuestObject
+                             class="UseItemOnceZone"
+                             name="GRE_07_Dialog"
+                             pxsl_line="61" />
+                    </Object>
+                    <Object
+                         pxsl_line="62">
+                        <QuestObject
+                             class="SafeArea"
+                             name="GRE_07_Safe_Area"
+                             pxsl_line="62" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="on"
+                     show_locations="false"
+                     pxsl_line="63">
+                    <Trigger
+                         pxsl_line="63">
+                        <QuestObject
+                             class="InvisibleSwitchDI"
+                             name="GRE_07_Dialog_Trigger"
+                             pxsl_line="63" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="player control"
+                     name="_"
+                     block_move="true"
+                     pxsl_line="64" />
+                <Phase
+                     type="hudgroup"
+                     name="_"
+                     group="HideRadarForGREContact"
+                     mode="hide"
+                     pxsl_line="65" />
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="6"
+                     pxsl_line="66" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="67">
+                    <Object
+                         pxsl_line="68">
+                        <QuestObject
+                             class="SensorVarlist"
+                             name="GRE_07_Varlist_Mod"
+                             pxsl_line="68" />
+                    </Object>
+                    <Object
+                         pxsl_line="69">
+                        <QuestObject
+                             class="SensorAmbientMusicArea"
+                             name="GRE_07_Music"
+                             pxsl_line="69" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_Courier_34DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="70" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="71">
+                    <Object
+                         pxsl_line="71">
+                        <QuestObject
+                             class="UseItemOnceZone"
+                             name="GRE_07_Dialog"
+                             pxsl_line="71" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="72">
+                    <Object
+                         pxsl_line="72">
+                        <QuestObject
+                             class="UseItemOnceZone"
+                             name="GRE_07_Dialog_Ending"
+                             pxsl_line="72" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="on"
+                     show_locations="false"
+                     pxsl_line="73">
+                    <Trigger
+                         pxsl_line="73">
+                        <QuestObject
+                             class="InvisibleSwitchDI"
+                             name="GRE_07_Dialog_Trigger"
+                             pxsl_line="73" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="0.5"
+                     pxsl_line="74" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="75">
+                    <Object
+                         pxsl_line="76">
+                        <QuestObject
+                             class="SafeArea"
+                             name="GRE_07_Safe_Area"
+                             pxsl_line="76" />
+                    </Object>
+                    <Object
+                         pxsl_line="77">
+                        <QuestObject
+                             class="UseItemOnceZone"
+                             name="GRE_07_Dialog_Ending"
+                             pxsl_line="77" />
+                    </Object>
+                    <Object
+                         pxsl_line="78">
+                        <QuestObject
+                             class="SensorVarlist"
+                             name="GRE_07_Varlist_Mod"
+                             pxsl_line="78" />
+                    </Object>
+                    <Object
+                         pxsl_line="79">
+                        <QuestObject
+                             class="SensorAmbientMusicArea"
+                             name="GRE_07_Music"
+                             pxsl_line="79" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="hudgroup"
+                     name="_"
+                     group="HideRadarForGREContact"
+                     mode="show"
+                     pxsl_line="80" />
+                <Phase
+                     type="player control"
+                     name="_"
+                     block_move="false"
+                     pxsl_line="81" />
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="82">
+            <Destination
+                 pxsl_line="82">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="the_tower_roof_sp"
+                     pxsl_line="82" />
+            </Destination>
+        </Phase>
+        <!-- WAITING FOR JADE CONTACT -->
+        <Phase
+             type="AND"
+             name="_"
+             pxsl_line="83">
+            <Path
+                 pxsl_line="83">
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="84">
+                    <Object
+                         pxsl_line="84">
+                        <QuestObject
+                             class="MapPortal"
+                             name="portal_slums_interior_to_slums"
+                             pxsl_line="84" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="OR"
+                     name="_"
+                     pxsl_line="85">
+                    <Path
+                         pxsl_line="86">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="8"
+                             show_locations="false"
+                             pxsl_line="87">
+                            <Destination
+                                 pxsl_line="87">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="the_tower_roof_sp"
+                                     pxsl_line="87" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="88">
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="20"
+                             pxsl_line="89" />
+                    </Path>
+                </Phase>
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="voice2d"
+                     group="Jade_Explosives_35DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="90" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="91">
+                    <Object
+                         pxsl_line="91">
+                        <QuestObject
+                             class="MapPortal"
+                             name="portal_slums_interior_to_slums"
+                             pxsl_line="91" />
+                    </Object>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="set dialog"
+             name="_"
+             speaker="voice2d"
+             group="Jade_Explosives_35DLG01_b"
+             auto_start="true"
+             pxsl_line="92" />
+        <Phase
+             type="player control"
+             name="After Explosives mission initiation"
+             diff_level_progress="8"
+             pxsl_line="93" />
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="94">
+            <Destination
+                 pxsl_line="94">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="the_tower_roof_sp"
+                     pxsl_line="94" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- GOTO - SLUMS -->
+    <!-- FROM - SLUMS -->
+    <Quest
+         name="Q_Explosives05"
+         parent="Q_Explosives04b"
+         glued="true"
+         leading_portal="portal_Hub_LJ_Floor_0"
+         pxsl_line="99">
+        <!-- Talk to Rahim about the hive. -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Q_Explosives_OBJ_GiveRakimExplosives&amp;"
+             pxsl_line="100">
+            <Path
+                 pxsl_line="100">
+                <Phase
+                     type="go to"
+                     name="EXPLOSIVES - Back from Slums"
+                     distance="10000"
+                     pxsl_line="101">
+                    <Destination
+                         pxsl_line="101">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="MapStart"
+                             pxsl_line="101" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="102">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="MapStart"
+                             pxsl_line="102" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="clean actions"
+                     pxsl_line="103">
+                    <Path
+                         pxsl_line="103">
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="Rakim"
+                             pxsl_line="104" />
+                        <Phase
+                             type="use life place"
+                             name="_"
+                             teleport="true"
+                             wait_for_move_end="false"
+                             pxsl_line="105">
+                            <LifePlace
+                                 pxsl_line="105">
+                                <QuestObject
+                                     class="NPCLifePlace"
+                                     name="explosives_rakim_lp_01"
+                                     pxsl_line="105" />
+                            </LifePlace>
+                            <AI
+                                 pxsl_line="106">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Rakim"
+                                     pxsl_line="106" />
+                            </AI>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="107">
+                            <Object
+                                 pxsl_line="107">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Brecken"
+                                     pxsl_line="107" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <!-- PRIME HUNTING START -->
+                <Phase
+                     type="AND"
+                     name="Zeres Action"
+                     pxsl_line="108">
+                    <Path
+                         pxsl_line="108">
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="show"
+                             pxsl_line="109">
+                            <Object
+                                 pxsl_line="109">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Zere"
+                                     pxsl_line="109" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="use life place"
+                             name="_"
+                             teleport="true"
+                             pxsl_line="110">
+                            <LifePlace
+                                 pxsl_line="110">
+                                <QuestObject
+                                     class="NPCLifePlace"
+                                     name="Zere_lp_01"
+                                     pxsl_line="110" />
+                            </LifePlace>
+                            <AI
+                                 pxsl_line="111">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Zere"
+                                     pxsl_line="111" />
+                            </AI>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="112">
+                    <Destination
+                         pxsl_line="112">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="MapStart"
+                             pxsl_line="112" />
+                    </Destination>
+                </Phase>
+                <!-- EXPLOSIVES END AND REWARD -->
+                <Phase
+                     type="gather players guard"
+                     name="Rakim place"
+                     distance="6"
+                     pxsl_line="114">
+                    <Destination
+                         pxsl_line="114">
+                        <QuestObject
+                             class="Marker"
+                             name="explosives_rakim_pos_01"
+                             pxsl_line="114" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="115">
+                    <Object
+                         pxsl_line="115">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Jade"
+                             pxsl_line="115" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="talk"
+                     name="EXPLOSIVES - TALK TO RAHIM"
+                     speaker="Rakim"
+                     group="Rakim_Explosives_END"
+                     auto_execute_next_trigger="true"
+                     pxsl_line="116">
+                    <DebugPlayerPosition
+                         pxsl_line="117">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="the_tower_roof_sp"
+                             pxsl_line="117" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="set reward"
+                     name="_"
+                     reward="StorylineReward_Explosives_reward"
+                     pxsl_line="118" />
+            </Path>
+        </Phase>
+        <!-- Talk to Zere about the strange Infected at the school. -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Q_Explosives_OBJ_MeetZere&amp;"
+             pxsl_line="119">
+            <Path
+                 pxsl_line="119">
+                <Phase
+                     type="talk"
+                     name="EXPLOSIVES - END - TALK TO ZERE"
+                     speaker="Zere"
+                     group="PrimeHunting_USE"
+                     pxsl_line="120">
+                    <DebugPlayerPosition
+                         pxsl_line="121">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="cin_failed_mission_01_pos03"
+                             pxsl_line="121" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="122">
+                    <Object
+                         pxsl_line="122">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Rakim"
+                             pxsl_line="122" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="123">
+                    <Destination
+                         pxsl_line="123">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="MapStart"
+                             pxsl_line="123" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <!-- GOTO - SLUMS & SLUMS INTERIOR -->
+    <!-- NEXT QUEST - SIBLING 02 -->
+</QuestsDefinitions>

@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="old_town_interior"
+     pxsl_line="3">
+    <!-- quest SQ_Revenge02 -parent=SQ_Revenge01 -glued=true -->
+        <!-- ,BLOCK _ -obj=<<Find a way to the smuggler's safehouse>> -->
+            <!-- ,AND <<Find a way to the smuggler's safehouse>>  -->
+                <!-- path -->
+                    <!-- ,wait _ 2 -->
+                    <!-- ,talk _ Victor Victor_sq_revenge_DLG01 -auto=true -show=false -->
+                <!-- path -->
+                    <!-- ,goto _ Marker sq_revenge_interior_dialog01 -distance=3 -show=true -->
+                <!-- ,debugpos SpawnPoint portal_Interior_to_Old_Town_02_spawn -->
+            <!-- ,checkpoint _ SpawnPoint portal_Interior_to_Old_Town_02_spawn -->
+        <!-- ,BLOCK _ -obj=<<Kill the watchman>> -->
+            <!-- ,AND <<Kill the watchman>>  -->
+                <!-- path -->
+                    <!-- ,talk _ Fake_Smuggler01 Fake_Smuggler01_sq_revenge_DLG01 -show=false -auto=true -->
+                <!-- path -->
+                    <!-- ,kill _ AISpawnBoxCompound Enemy_09 -show=true -->
+                <!-- ,debugpos SpawnPoint sq_revenge_interior_01_spawn -->
+            <!-- ,checkpoint _ SpawnPoint sq_revenge_interior_02_spawn -->
+        <!-- ,BLOCK _ -obj=<<Take revenge on the smugglers>> -->
+            <!-- ,enable _ QuestEnableGroup qs_revenge_door01 -state=enabled  -->
+            <!-- ,goto _ Marker sq_revenge_marker02 -distance=1 -show=true -->
+            <!-- ,AND <<Take revenge on the smugglers>> -->
+                <!-- path -->
+                    <!-- ,talk _ Fake_Smuggler02 Fake_Smuggler02_sq_revenge_DLG01 -show=false -auto=true -->
+                    <!-- ,talk _ Fake_Smuggler02 Fake_Smuggler02_sq_revenge_DLG02 -show=false -auto=true -->
+                <!-- path -->
+                    <!-- ,kill-multi _ -show=true -->
+                        <!-- ,spawner AISpawnBoxCompound Enemy_07 -->
+                        <!-- ,spawner AISpawnBoxCompound Enemy_01 -->
+                        <!-- ,spawner AISpawnBoxCompound Enemy_08 -->
+                        <!-- ,spawner AISpawnBoxCompound Enemy_05 -->
+                        <!-- ,spawner AISpawnBoxCompound Enemy_06 -->
+                        <!-- ,spawner AISpawnBoxCompound Enemy_10 -->
+                        <!-- ,spawner AISpawnBoxCompound Enemy_04 -->
+                        <!-- ,spawner AISpawnBoxCompound Enemy_11 -->
+        <!-- ,BLOCK _ -obj=<<Go to second floor>> -->
+            <!-- ,enable _ QuestEnableGroup qs_revenge_prisondoor -state=enabled -->
+            <!-- ,use _ InvisibleSwitchDI sq_revenge_switch_door -state=on -show=true -->
+            <!-- ,movie _ qs_revenge_prisonddooropen -->
+        <!-- ,BLOCK _ -obj=<<Kill the rest of the smugglers>> -->
+            <!-- ,goto _ Marker sq_revenge_marker03 -distance=1 -show=true -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,talk _ Fake_Smuggler03 Fake_Smuggler03_sq_revenge_DLG01 -show=false -auto=true -->
+                    <!-- ,wait _ 1 -->
+                    <!-- ,movie _ sq_revenge_door_open                 -->
+                    <!-- ,talk _ Fake_Smuggler04 Fake_Smuggler04_sq_revenge_DLG01 -show=false -auto=true -->
+                <!-- path -->
+                    <!-- ,kill-multi _ -show=true -->
+                        <!-- ,spawner AISpawnBoxCompound Enemy_13 -->
+                        <!-- ,spawner AISpawnBoxCompound Enemy_13_02 -->
+            <!-- ,goto _ Marker sq_revenge_marker04 -distance=1 -show=true -->
+            <!-- ,OR <<Kill all enemies>> -->
+                <!-- path -->
+                    <!-- ,talk _ Fake_Smuggler05 Fake_Smuggler05_sq_revenge_DLG01 -show=false -auto=true -->
+                <!-- path -->
+                    <!-- ,goto _ Marker sq_revenge_marker05 -distance=2 -show=true -->
+                <!-- path -->
+                    <!-- ,goto _ Marker sq_revenge_marker06 -distance=2 -show=true -->
+                <!-- path -->
+                    <!-- ,goto _ Marker sq_revenge_marker07 -distance=2 -show=true -->
+                <!-- ,debugpos SpawnPoint sq_revenge_interior_02_spawn -->
+            <!-- ,AND _  -->
+                <!-- path -->
+                    <!-- ,talk _ Fake_Smuggler05 Fake_Smuggler05_sq_revenge_DLG02 -show=false -auto=true -->
+                <!-- path -->
+                    <!-- ,enable _ QuestEnableGroup sq_revenge_ambush01 -state=enabled -->
+                <!-- path -->
+                    <!-- ,enable _ QuestEnableGroup sq_revenge_ambush02 -state=disabled -->
+            <!-- ,kill-multi _ -show=true -->
+                <!-- ,spawner AISpawnBoxCompound Enemy_16 -->
+                <!-- ,spawner AISpawnBoxCompound Enemy_19 -->
+                <!-- ,spawner AISpawnBoxCompound Enemy_17 -->
+                <!-- ,spawner AISpawnBoxCompound Enemy_20 -->
+                <!-- ,spawner AISpawnBoxCompound Enemy_14 -->
+            <!-- ,checkpoint _ SpawnPoint sq_revenge_interior_01_spawn -->
+</QuestsDefinitions>

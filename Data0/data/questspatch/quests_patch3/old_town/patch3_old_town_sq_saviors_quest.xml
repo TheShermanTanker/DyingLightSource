@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="old_town"
+     pxsl_line="3">
+    <!-- quest Saviors -parent=Q_AnotherDay -reward_set=Saviors_reward -difficulty=medium -quest_giver=Umut -->
+        <!-- -= ,disable _ NPCLifePlace Lifeplace_zahra -->
+        <!-- -= ,enable _ NPCLifePlace Lifeplace_umut -->
+        <!-- ,AND <<Saviors - START>> -obj=<<TEMP: Talk to Umut>> -->
+            <!-- ,debugpos SpawnPoint Saviors_SP_01 -->
+            <!-- path -->
+                <!-- ,talk _ Umut Saviors01_USA01 -= -show=false            -->
+        <!-- ,BLOCK _ -obj=&Saviors01_OBJ_FindValuables&           -->
+            <!-- ,checkpoint _ SpawnPoint Saviors_SP_01  -->
+            <!-- ,enable _ AISpawnBoxNumber Saviors_viral -->
+            <!-- ,enable _ AISpawnBoxNumber Saviors_lurker2 -->
+            <!-- ,enable _ AISpawnBoxNumber Saviors_lurker -->
+            <!-- ,enable _ AISpawnBoxNumber Saviors_lurker2 -->
+            <!-- ,AND << Saviors Take >> -->
+                <!-- ,debugpos SpawnPoint Saviors_Take -->
+                <!-- path -->
+                    <!-- ,take _ QuestInventoryItemDI Saviors_QII_Money01 -show=false -->
+                        <!-- ,area ZoneBox saviors_search_take         -->
+        <!-- ,checkpoint _ SpawnPoint Saviors_Take        -->
+        <!-- ,BLOCK _ -obj=&Saviors01_OBJ_GetBackToUmut& -->
+            <!-- -= ,AND <<Go to Smugglers Hideout>> -->
+                <!-- -= path -->
+                    <!-- -= ,show _ AppearGroup Saviors_AG_Human -->
+                <!-- -= path -->
+                    <!-- -= ,goto _ Marker Saviors_Marker_01 -distance=3 -show=true -->
+                <!-- -= ,debugpos SpawnPoint Saviors_SP_02 -->
+            <!-- -= ,checkpoint _ SpawnPoint Saviors_SP_02 -->
+            <!-- ,talk << Saviors Talk Umut >> Umut Saviors01_01DLG01 -show=true -->
+                <!-- ,debugpos SpawnPoint Saviors_SP_01 -->
+            <!-- -= ,enable _ AISpawnBoxNumber saviors_viral -->
+            <!-- ,checkpoint _ SpawnPoint Saviors_SP_01     -->
+            <!-- -= ,enable _ DoorDI Saviors_DoorDI_SmuglersHideout01 -->
+            <!-- ,enable _ Encounter::EncounterBlockArea saviors_encounter_block -->
+            <!-- ,enable _ HumanAI saviors_bandit_01 -->
+            <!-- ,enable _ HumanAI saviors_bandit_02 -->
+            <!-- ,enable _ HumanAI saviors_bandit_03 -->
+        <!-- ,BLOCK _   -obj=&Saviors01_OBJ_GotoSmugglersHideout&    -->
+            <!-- ,talk <<Talk Saviors>> saviorsbandit01 Saviors01_Dimitri -show=true -->
+                <!-- ,debugpos SpawnPoint Saviors_SP_03 -->
+            <!-- ,disable _ NPCLifePlace LP_HumanAI_Dmitri_talk -->
+            <!-- ,enable _ MapPortal Saviors_Portal_OldTown_TO_Sewers -->
+            <!-- ,checkpoint _ SpawnPoint Saviors_SP_03 -->
+            <!--  -->
+    <!-- quest Saviors_05 -parent=Saviors_04 -glued=true -leading_portal=Saviors_Portal_Sewers_TO_OldTown_END -->
+        <!-- ,BLOCK _ -obj=&Saviors01_OBJ_GetBackToUmut2& -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,goto <<Return to Muzeum>> SpawnPoint Saviors_Portal_Sewers_TO_OldTown_END -distance=100 -show=true -->
+                        <!-- ,debugpos SpawnPoint Saviors_Portal_Sewers_TO_OldTown_END -->
+            <!-- ,hide _ HumanAI saviors_bandit_01 -->
+            <!-- ,hide _ HumanAI saviors_bandit_02 -->
+            <!-- ,hide _ HumanAI saviors_bandit_03 -->
+            <!-- ,hide _ HumanAI Saviors_HumanAI_Bari -->
+            <!-- ,hide _ HumanAI Saviors_HumanAI_Dmitri -->
+            <!-- ,hide _ HumanAI Saviors_HumanAI_Sam -->
+            <!-- ,disable _ Encounter::EncounterBlockArea saviors_encounter_block -->
+            <!-- ,checkpoint _ SpawnPoint Saviors_Portal_Sewers_TO_OldTown_END -->
+            <!-- ,talk <<Saviors - END>> Umut Saviors_end -show=true -->
+                <!-- ,debugpos SpawnPoint Saviors_SP_01    -->
+            <!-- ,reward _ Umut -->
+            <!-- ,checkpoint _ SpawnPoint Saviors_SP_01 -->
+</QuestsDefinitions>

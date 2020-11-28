@@ -1,0 +1,51 @@
+import "AISpawnBox.pre.def"
+
+sub main()
+{
+    NotEditable();
+    PresetDef("SpawningType")
+    {
+        Description("");
+
+        AddField("m_TimeBtwSpawns", "3.0");
+        AddField("m_MinWeight", "1100");
+        AddField("m_ActivationRange", "0.0", true);
+
+        Preset("Forced")
+        {
+            SetField("m_TimeBtwSpawns", "0.0");
+            SetField("m_MinWeight", "1000");
+            SetField("m_ActivationRange", "60.0");
+        }
+
+        Preset("Standard")
+        {
+            SetField("m_TimeBtwSpawns", "3.0");
+            SetField("m_MinWeight", "1100");
+            SetField("m_ActivationRange", "0.0");
+        }
+
+        Preset("Standard_Fast")
+        {
+            SetField("m_TimeBtwSpawns", "0.25");
+            SetField("m_MinWeight", "1100");
+            SetField("m_ActivationRange", "0.0");
+        }
+    }
+
+    PresetDef("AI Preset")
+    {
+        Description("");
+
+        AddField("m_AIPresets", "", false);
+        AddField("m_AIType", "zombie", false);
+		AddField("m_DiffLevelTables", "");
+
+        IgnoreField("m_BeforeSpawnSoundStartRange");
+        IgnoreField("m_BeforeSpawnSoundStartRangeMin");
+        IgnoreField("m_MinAIsToMakeSound");
+        IgnoreField("m_SpawnerBeforeSpawnSounds");
+
+        use declare_ai_presets();
+    }
+}

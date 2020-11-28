@@ -1,0 +1,83 @@
+!include("events.def")
+!include("anim_actions.def")
+////////////////////////////////////////////////////////////
+//Bow set
+////////////////////////////////////////////////////////////
+
+SeqTrack("FPP_Bow_StandNoise", 				"M_FPP_Bow_Walk_DW.anm2",				0, 28, 3, 1, 0.3)
+SeqTrack("FPP_Bow_MoveNoise", 				"M_FPP_Bow_Walk_DW.anm2", 	 			0, 28, 30, 1, 0.3)
+SeqTrack("FPP_Bow_Aim_MoveNoise", 			"M_FPP_Bow_AimWalk.anm2", 	 			0, 28, 30, 1, 0.3)
+SeqTrack("FPP_Bow_SprintNoise", 			"M_FPP_Bow_Sprint.anm2",				0, 20, 35, 1, 0.3)
+
+
+SeqTrack( "FPP_Bow_Empty",		        	"M_FPP_Bow_EmptyPose.anm2",         0, 5,  30, 1, 0.5)
+SeqTrack( "FPP_Bow_Stand",		        	"M_FPP_Bow_Stand_Pose_DW.anm2",         0, 5,  30, 1, 0.5)
+SeqTrack( "FPP_Bow_Begin",		        	"M_FPP_Bow_Stand_FastShot.anm2",         0, 16,  30, 1, 0.25)
+{	
+	Event(0, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_SoundPlayer, "bow_load.wav", 1, 3, "head", 1, [0,0,0], 1)
+    }
+}
+SeqTrack( "FPP_Bow_Cancel",		        	"M_FPP_Bow_Stand_FastShot_Cancel.anm2", 	0, 40,  30, 1, 0.1)
+{
+	Event(16, END_ANIMATION, 1)
+}
+SeqTrack( "FPP_Bow_Ready",		        	"M_FPP_Bow_Stand_FastShot.anm2",         17, 107,30, 1, 0.1)
+SeqTrack( "FPP_Bow_Shoot",		        	"M_FPP_Bow_Stand_FastShot.anm2",         108, 125,  30, 1, 0.0)
+{
+	Event(0, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_SoundPlayer, "bow_shot.wav", 1.7, 3, "head", 1, [0,0,0], 0)
+    }
+	Event(2.5, EVENT_THROWABLE_THROW, -1)
+}
+SeqTrack( "FPP_Bow_Reload",		    		"M_FPP_Bow_Stand_FastShot.anm2",        	125, 148,  30, 1, 0.0)
+{	
+	Event(0, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_SoundPlayer, "bow_reload.wav", 1.4, 3, "head", 1, [0,0,0], 0)
+    }
+}
+
+SeqTrack( "FPP_Bow_Aim_Empty",			    "M_FPP_Bow_AimActions.anm2",      			0, 3,  30, 1, 0.5)
+SeqTrack( "FPP_Bow_Aim_Stand",			    "M_FPP_Bow_AimActions.anm2",      			0, 3,  30, 1, 0.5)
+SeqTrack( "FPP_Bow_Aim_Begin",		        "M_FPP_Bow_AimActions.anm2",        		3, 28,  30, 1, 0.25)
+{
+	Event(0, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_SoundPlayer, "bow_load_aim.wav", 1.6, 3, "head", 1, [0,0,0], 1)
+    }
+}
+SeqTrack( "FPP_Bow_Aim_Cancel",		        "M_FPP_Bow_Aim_Cancel.anm2",		 		0, 40,  30, 1, 0.1)
+{
+	Event(16, END_ANIMATION, 1)
+}
+SeqTrack( "FPP_Bow_Aim_Ready",		        "M_FPP_Bow_AimIdle.anm2",					0, 180,  15, 1, 0.1)
+SeqTrack( "FPP_Bow_Aim_Shoot",		        "M_FPP_Bow_AimActions.anm2",       			28, 45,  30, 1, 0.0)
+{
+	Event(0, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_SoundPlayer, "bow_shot.wav", 1.7, 3, "head", 1, [0,0,0], 0)
+    }
+	Event(2.5, EVENT_THROWABLE_THROW, -1)
+}
+SeqTrack( "FPP_Bow_Aim_Reload",		    	"M_FPP_Bow_AimActions.anm2",       			45, 67,  30, 1, 0.0)
+{
+	Event(0, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_SoundPlayer, "bow_reload.wav", 1.4, 3, "head", 1, [0,0,0], 0)
+    }
+}
+SeqTrack( "FPP_Bow_PutArrow",				"M_FPP_Bow_Put_Arrow.anm2",        	0, 22,  30, 1, 0.1)
+
+SeqTracksBlend("FPP_Bow_Begin", 			"FPP_Bow_Aim_Begin", 	0.3)
+SeqTracksBlend("FPP_Bow_Aim_Begin", 		"FPP_Bow_Begin", 		0.3)
+SeqTracksBlend("FPP_Bow_PutArrow", 			"FPP_Bow_Stand",		1.0)
+SeqTracksBlend("FPP_Bow_Cancel", 			"FPP_Bow_Stand",		1.0)
+SeqTracksBlend("FPP_Bow_Aim_Cancel", 		"FPP_Bow_Aim_Stand",	1.0)
+SeqTracksBlend("FPP_Bow_Shoot", 			"FPP_Bow_Aim_Shoot",	0.5)
+SeqTracksBlend("FPP_Bow_Aim_Shoot",			"FPP_Bow_Shoot",		0.5)
+SeqTracksBlend("FPP_Bow_Reload", 			"FPP_Bow_Aim_Reload",	0.5)
+SeqTracksBlend("FPP_Bow_Aim_Reload",		"FPP_Bow_Reload",		0.5)
+///////////////////////////////////////////////////////////////////////////////////////////////////////

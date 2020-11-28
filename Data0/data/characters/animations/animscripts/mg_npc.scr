@@ -1,0 +1,91 @@
+!include("ai_timing.def")
+/*
+// Animacje gangster?w (aktor amin)
+//SeqTrack("mg_npc_lowleftcover_springshot", 			    "mg_npc_lowleftcover_springshot.anm2"		    , 0, 149, 30, 1, 0.3)
+
+SeqTrack("mg_npc_highleftcover_reload01", "mg_npc_highleftcover_reload01.anm2", 0, 90, 30, 1, 0.3) // dodane
+{
+	Event(0, EVENT_TURN_OFF_PHYSICS, -1)
+	Event(38, EVENT_RELOADED, -1)
+}
+SeqTrack("mg_npc_highleftcover_reload01_mirror", "mg_npc_highleftcover_reload01_mirror.anm2", 0, 90, 30, 1, 0.3) // dodane
+{
+	Event(0, EVENT_TURN_OFF_PHYSICS, -1)
+	Event(38, EVENT_RELOADED, -1)
+}
+
+SeqTrack("mg_npc_lowleftcover_slowlook", "mg_npc_lowleftcover_slowlook.anm2", 0, 74, 30, 1, 0.6) // podpiete
+{
+	Event(0, EVENT_TURN_OFF_PHYSICS, -1)
+}
+
+SeqTrack("mg_npc_sprint_stopright180", "mg_npc_sprint_stopright180.anm2", 0, 50, 30, 1, 0.3) // podpiete
+{
+	Event(6, VIS_EVENT_STEP_RIGHT, -1)
+    Event(11, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(11, VIS_EVENT_ROTATION_MOD_START, -1)	
+	Event(14, VIS_EVENT_STEP_LEFT, -1)
+	Event(19, VIS_EVENT_STEP_RIGHT, -1)
+	Event(28, VIS_EVENT_STEP_LEFT, -1)
+	Event(39, VIS_EVENT_STEP_RIGHT, -1)
+}
+
+SeqTrack("mg_npc_sprint_stopleft180", "mg_npc_sprint_stopleft180.anm2", 0, 47, 30, 1, 0.3) // podpiete
+{
+	Event(7, VIS_EVENT_STEP_RIGHT, -1)
+	Event(15, VIS_EVENT_STEP_LEFT, -1)
+    Event(13, VIS_EVENT_MAX_ANIM_CUT_TIME, -1)
+    Event(13, VIS_EVENT_ROTATION_MOD_START, -1)	
+	Event(20, VIS_EVENT_STEP_RIGHT, -1)
+	Event(26, VIS_EVENT_STEP_LEFT, -1)
+	Event(33, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("mg_npc_sprint_startleft180", "mg_npc_sprint_startleft180.anm2", 0, 59, 30, 1, 0.3) // podpiete
+{
+	Event(0, EVENT_STOOD_UP, -1)
+	Event(9, VIS_EVENT_STEP_RIGHT, -1)
+	Event(21, VIS_EVENT_STEP_LEFT, -1)
+	Event(25 ,VIS_EVENT_STOPANIM, -1)
+    Event(25, VIS_EVENT_ROTATION_MOD_END, -1)
+	Event(31, VIS_EVENT_STEP_RIGHT, -1)
+	Event(39, VIS_EVENT_STEP_LEFT, -1)
+	Event(48, VIS_EVENT_STEP_RIGHT, -1)
+	Event(56, VIS_EVENT_STEP_LEFT, -1)
+}
+
+SeqTrack("mg_npc_lowleftcover_blindfire_mirror", "mg_npc_lowleftcover_blindfire_mirror.anm2", 6, 107, 30, 1, 0.3)
+{
+	Event(0, EVENT_TRACK_DISABLE, -1)
+    Event(26, EVENT_APPLY_RANGED_DAMAGE_LEFT, -1)
+	Event(30, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(35, EVENT_APPLY_RANGED_DAMAGE_LEFT, -1)
+	Event(42, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(44, EVENT_APPLY_RANGED_DAMAGE_LEFT, -1)
+	Event(48, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(52, EVENT_APPLY_RANGED_DAMAGE_LEFT, -1)
+	Event(57, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(60, EVENT_APPLY_RANGED_DAMAGE_LEFT, -1)
+	Event(63, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(70, EVENT_APPLY_RANGED_DAMAGE_LEFT, -1)
+	Event(75, EVENT_APPLY_RANGED_DAMAGE, -1)
+    Event(77, EVENT_APPLY_RANGED_DAMAGE_LEFT, -1)
+	Event(82, EVENT_APPLY_RANGED_DAMAGE, -1)
+}
+
+// ------------- ANIMACJE AK47 --------------------------
+
+SeqTrack("mg_npc_AK47_lowcoverright_lookingup",               			"mg_npc_AK47_lowcoverright_lookingup.anm2",                 		 0, 90, 30, 1, 0.5)
+SeqTrack("mg_npc_AK47_lowcoverright_lookingaround",                 	"mg_npc_AK47_lowcoverright_lookingaround.anm2",             		 0, 180, 30, 1, 0.5)
+SeqTrack("mg_npc_AK47_lowcoverright_reload",                        	"mg_npc_AK47_lowcoverright_reload.anm2",             	    	 0, 150, 30, 1, 0.5)
+SeqTrack("mg_npc_AK47_lowcoverleft_lookingup",                        	"mg_npc_AK47_lowcoverleft_lookingup.anm2",             	    	 0, 60, 30, 1, 0.5)
+SeqTrack("mg_npc_AK47_lowcoverleft_lookingaround",                     	"mg_npc_AK47_lowcoverleft_lookingaround.anm2",          	    	 0, 300, 30, 1, 0.5)
+SeqTrack("mg_npc_AK47_lowcoverleft_reload",                          	"mg_npc_AK47_lowcoverleft_reload.anm2",          	         	 0, 120, 30, 1, 0.5)
+SeqTrack("mg_npc_AK47_lowcoverright_blindfiremedium",                  	"mg_npc_AK47_lowcoverright_blindfiremedium.anm2",               	 0, 120, 30, 1, 0.5)
+SeqTrack("mg_npc_AK47_lowcoverright_blindfireshort",                  	"mg_npc_AK47_lowcoverright_blindfireshort.anm2",               	 0, 60, 30, 1, 0.5)
+SeqTrack("mg_npc_AK47_lowcoverright_blindfirelong",                  	"mg_npc_AK47_lowcoverright_blindfirelong.anm2",               	 0, 150, 30, 1, 0.5)
+SeqTrack("mg_npc_AK47_lowcoverleft_blindfiremedium",                  	"mg_npc_AK47_lowcoverleft_blindfiremedium.anm2",               	 0, 120, 30, 1, 0.5)
+SeqTrack("mg_npc_AK47_lowcoverleft_blindfireshort",                  	"mg_npc_AK47_lowcoverleft_blindfireshort.anm2",               	 0, 90, 30, 1, 0.5)
+SeqTrack("mg_npc_AK47_lowcoverleft_blindfirelong",                  	"mg_npc_AK47_lowcoverleft_blindfirelong.anm2",               	 0, 120, 30, 1, 0.5)
+*/
+
+

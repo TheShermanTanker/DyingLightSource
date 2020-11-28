@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="old_town_townhall"
+     pxsl_line="3">
+    <!-- quest TheProfessor02 -parent=TheProfessor -leading_portal=portal_OldTown_To_TownHall -glued=true -->
+        <!-- ,BLOCK _ -obj=&TheProfessor_OBJ_FindProfessorShikari& -->
+            <!-- ,goto <<SIDE: The Professor - START>> SpawnPoint portal_TownHall_To_OldTown -distance=200 -->
+                <!-- ,debugpos SpawnPoint portal_TownHall_To_OldTown -->
+            <!-- -= CHECKPOINT! -=-=-=-=- -->
+            <!-- ,checkpoint _ SpawnPoint portal_TownHall_To_OldTown -->
+            <!-- -= CHECKPOINT! -=-=-=-=- -->
+                <!--  -->
+            <!-- -= Turning off lamps    -->
+            <!-- ,hide _ QuestInventoryItemDI HackingJob_QII_SewersPlan01 -->
+            <!-- ,disable-multi _ -->
+                <!-- ,o BlackoutArea TheProfessor_area_01 -->
+                <!-- ,o BlackoutArea TheProfessor_area_02 -->
+            <!-- ,enable-multi _  -->
+                <!-- ,o BlackoutArea TheProfessor_area_01 -->
+                <!-- ,o BlackoutArea TheProfessor_area_02 -->
+            <!-- ,disable-multi _ -->
+                <!-- ,o SoundEmitterSimple Radio -->
+                <!-- ,o LightObject VendingMachine -->
+                <!-- ,o LampDI Floor3Lamp_000::lamp -->
+                <!-- ,o LampDI Floor3Lamp_001::lamp -->
+                <!-- ,o LampDI Floor3Lamp_002::lamp -->
+                <!-- ,o LampDI Floor3Lamp_003::lamp -->
+                <!-- ,o LampDI Floor3Lamp_004::lamp -->
+                <!-- ,o LampDI Floor3Lamp_005::lamp -->
+                <!-- ,o LampDI Floor3Lamp_006::lamp -->
+                <!-- ,o LampDI Floor3Lamp_007::lamp -->
+                <!-- ,o LampDI Floor3Lamp_008::lamp -->
+                <!-- ,o LampDI Floor3Lamp_009::lamp -->
+            <!-- -= positioning shikari at the desk -->
+            <!-- ,use-lp _ NPCLifePlace TheProfessor_lp_01_desk -teleport=true -->
+                <!-- ,ai HumanAI Shikari -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,goto _ SensorGoTo suicider::sensor -show=false -->
+                    <!-- ,enable _ SoundEmitterSimple suicider::scream -->
+                    <!-- ,disable _ SoundEmitterSimple suicider::calm -->
+                    <!-- ,wait _ 1 -->
+                    <!-- ,disable _ SoundEmitterSimple suicider::scream -->
+                    <!-- ,enable-multi _ -->
+                        <!-- -= ,o DeadRagdoll suicider -->
+                        <!-- ,o SoundEmitterSimple suicider::explode -->
+                        <!-- ,o FXEmitter suicider::blood_myst -->
+                        <!-- ,o FXEmitter suicider::suicider_pop -->
+                <!-- path -->
+                    <!-- ,goto _ SensorGoTo TheProfessor__04 -show=false -->
+                    <!-- ,enable-multi _ -->
+                        <!-- ,o AISpawnBoxNumber TheProfessor_spanwer_011 -->
+                        <!-- ,o AISpawnBoxNumber TheProfessor_spanwer_02 -->
+                        <!-- ,o QuestEnableGroup TheProfessor_qwg_01_basementzombies -->
+                <!-- path -->
+                    <!-- ,AND _ -->
+                        <!-- ,area ZoneBox TheProfessor_area_01 -->
+                        <!-- ,area ZoneBox TheProfessor_area_02 -->
+                        <!-- ,area ZoneBox TheProfessor_area_03                         -->
+                        <!-- path -->
+                            <!-- -= ,use-lp _ NPCLifePlace TheProfessor_lp_01_desk -teleport=true -->
+                                <!-- -= ,ai HumanAI Shikari -->
+                            <!-- ,use-lp _ NPCLifePlace TheProfessor_lp_01_scared -wait_for_move_end=false -= -teleport=true  -->
+                                <!-- ,ai HumanAI Shikari      -->
+                                <!--  -->
+                            <!-- ,goto <<SIDE: The Professor - Talk with prof Shikari>> SensorGoTo TheProfessor__01 -show=false -->
+                                <!-- ,debugpos SpawnPoint TheProfessor_sp_01 -->
+                            <!-- ,enable _ SpawnPoint TheProfessor_sp_02         -->
+                            <!-- ,talk _ Shikari Shikari_TheProfessor_01DLG01 -auto=true -show=false     -->
+                            <!-- ,disable _ NPCLifePlace TheProfessor_lp_01_scared -->
+                            <!-- -= ,use-lp _ NPCLifePlace TheProfessor_lp_01_conversation -->
+                                <!-- -= ,ai HumanAI Shikari -->
+                            <!--  -->
+            <!-- ,disable-multi _ -->
+                <!-- -= ,o QuestEnableGroup TheProfessor_qwg_02_floor0zombies -->
+                <!-- -= ,o QuestEnableGroup TheProfessor_qwg_01_basementzombies -->
+                <!-- ,o HubZone TheProfessor_HZ_001 -->
+                <!-- ,o HubZone TheProfessor_HZ_003 -->
+                <!-- ,o HubZoneEntrance TheProfessor_HZ_000 -->
+                <!-- ,o HubZoneEntrance TheProfessor_HZ_002 -->
+            <!-- -= CHECKPOINT! -=-=-=-=- -->
+            <!-- ,checkpoint _ SpawnPoint portal_TownHall_To_OldTown     -->
+            <!-- -= CHECKPOINT! -=-=-=-=- -->
+</QuestsDefinitions>

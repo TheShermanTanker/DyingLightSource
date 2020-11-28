@@ -1,0 +1,356 @@
+!include("ai_data.def")
+!include("ai_timing.def")
+!include("export_goon_medium_params.scr")
+
+// thug medium diff
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////// DATA ///////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+//###############
+//#### DYING ####
+//###############
+//## die:pose:damage_type:body_part:direction:death_type
+//###############
+
+Data("die:standing:::::::", -2, "goon_death_01", -1, 1) //DONE
+Data("die:standing:::::::", -2, "goon_death_02", -1, 1) //done - podniesienie postaci
+
+Data("idle:standing::explode:::", -2,   "goon_explosion_reaction_01", -1, 1)
+Data("idle:standing::explode:::", -2,   "goon_explosion_reaction_02", -1, 1)
+
+
+
+
+
+//#######################
+//#### HIT REACTIONS ####
+//#######################
+//## hit_reaction:pose:hit_reaction:item_type:damage_type:attacker_pos:body_part:direction:severity
+//#######################
+
+
+// small generic hit reaction
+Data("hit_reaction:standing:pain::all::::", -2, "Goon_hitreacton_charge_front_01", -1, 1) 
+Data("hit_reaction:standing:pain::all:front:::", -2, "Goon_hitreacton_charge_front_01", -1, 1)
+Data("hit_reaction:standing:pain::all:left:::", -2, "Goon_hitreacton_charge_right_01", -1, 1)
+Data("hit_reaction:standing:pain::all:right:::",-2, "Goon_hitreacton_charge_left_01", -1, 1)
+Data("hit_reaction:standing:pain::all:rear:::", -2, "Goon_hitreacton_charge_back_01", -1, 1)
+
+Data("hit_reaction:standing:counter_attack_from_stand::all:front:::", -2, "Goon_hitreacton_counteraatack_front_01", -1, 1) //done
+Data("hit_reaction:standing:counter_attack_from_stand::all:left:::", -2, "Goon_hitreacton_counteraatack_left_01", -1, 1) //done
+Data("hit_reaction:standing:counter_attack_from_stand::all:right:::", -2, "Goon_hitreacton_counteraatack_right_01", -1, 1) //done
+Data("hit_reaction:standing:counter_attack_from_stand::all:rear:::", -2, "Goon_hitreacton_counteraatack_back_01", -1, 1) //done
+
+// temporary animations - change it
+
+Data("hit_reaction:standing:react_on_tackle::all:front:::", -2, "Goon_hitreacton_special_front_02", -1, 1) //done - rozwalone floor contacty lewa stopa
+Data("hit_reaction:standing:react_on_tackle::all:left:::", -2, "Goon_hitreacton_special_left_02", -1, 1) //done - prawa stopa czubek buta
+Data("hit_reaction:standing:react_on_tackle::all:right:::",-2, "Goon_hitreacton_special_right_02", -1, 1) //done lewa noga: palce poczatek, noga dziwnie sie ciagnie srodek
+Data("hit_reaction:standing:react_on_tackle::all:rear:::", -2, "Goon_hitreacton_special_back_02", -1, 1)  //done lewa stopa w ziemi
+
+Data("hit_reaction:standing:react_on_wrestle_kick::all:front:::", -2, "Goon_hitreacton_special_front_01", -1, 1) //done
+Data("hit_reaction:standing:react_on_wrestle_kick::all:left:::", -2, "Goon_hitreacton_special_right_01", -1, 1) //done
+Data("hit_reaction:standing:react_on_wrestle_kick::all:right:::",-2, "Goon_hitreacton_special_left_01", -1, 1) //done - staje w powietrzu
+Data("hit_reaction:standing:react_on_wrestle_kick::all:rear:::", -2, "Goon_hitreacton_special_back_01", -1, 1) //done - lewa stopa start slizg
+
+// pains on charge
+Data("hit_reaction:standing:react_on_charge::all:front:::", -2, "Goon_hitreacton_charge_front_01", -1, 1) //done
+Data("hit_reaction:standing:react_on_charge::all:left:::", -2, "Goon_hitreacton_charge_right_01", -1, 1) //done
+Data("hit_reaction:standing:react_on_charge::all:right:::",-2, "Goon_hitreacton_charge_left_01", -1, 1) //done
+Data("hit_reaction:standing:react_on_charge::all:rear:::", -2, "Goon_hitreacton_charge_back_01", -1, 1) //done
+// counter attacks on charge
+Data("hit_reaction:standing:react_on_charge::all:front:::", -2, "Goon_hitreacton_counteraatack_front_01", -1, 1) //done
+Data("hit_reaction:standing:react_on_charge::all:left:::", -2, "Goon_hitreacton_counteraatack_left_01", -1, 1) //done
+Data("hit_reaction:standing:react_on_charge::all:right:::", -2, "Goon_hitreacton_counteraatack_right_01", -1, 1) //done
+Data("hit_reaction:standing:react_on_charge::all:rear:::", -2, "Goon_hitreacton_counteraatack_back_01", -1, 1) //done
+
+
+Data("hit_reaction:standing:pain::blast:front:::", -2, "Goon_hitreacton_special_front_02", -1, 1)
+Data("hit_reaction:standing:pain::blast:left:::", -2, "Goon_hitreacton_special_left_02", -1, 1)
+Data("hit_reaction:standing:pain::blast:right:::",-2, "Goon_hitreacton_special_right_02", -1, 1)
+Data("hit_reaction:standing:pain::blast:rear:::", -2, "Goon_hitreacton_special_back_02", -1, 1)
+
+Data("hit_reaction:standing:react_on_ground_pound::all:front:::", -2, "Goon_hitreacton_special_front_01", -1, 1) //
+Data("hit_reaction:standing:react_on_ground_pound::all:front:::", -2, "Goon_hitreacton_special_front_02", -1, 1) //done - rozwalone floor contacty lewa stopa
+Data("hit_reaction:standing:react_on_ground_pound::all:left:::", -2, "Goon_hitreacton_special_right_01", -1, 1) //
+Data("hit_reaction:standing:react_on_ground_pound::all:left:::", -2, "Goon_hitreacton_special_left_02", -1, 1) //done - prawa stopa czubek buta
+Data("hit_reaction:standing:react_on_ground_pound::all:right:::", -2, "Goon_hitreacton_special_left_01", -1, 1) //
+Data("hit_reaction:standing:react_on_ground_pound::all:right:::", -2, "Goon_hitreacton_special_right_02", -1, 1) //done lewa noga: palce poczatek, noga dziwnie sie ciagnie srodek
+Data("hit_reaction:standing:react_on_ground_pound::all:rear:::", -2, "Goon_hitreacton_special_back_01", -1, 1) //
+Data("hit_reaction:standing:react_on_ground_pound::all:rear:::", -2, "Goon_hitreacton_special_back_02", -1, 1) //done lewa stopa w ziemi
+
+Data("hit_reaction:standing:react_on_slide::all:front:::", -2, "Goon_hitreacton_special_front_02", -1, 1) //done - rozwalone floor contacty lewa stopa
+Data("hit_reaction:standing:react_on_slide::all:left:::", -2, "Goon_hitreacton_special_left_02", -1, 1) //done - prawa stopa czubek buta
+Data("hit_reaction:standing:react_on_slide::all:right:::",-2, "Goon_hitreacton_special_right_02", -1, 1) //done lewa noga: palce poczatek, noga dziwnie sie ciagnie srodek
+Data("hit_reaction:standing:react_on_slide::all:rear:::", -2, "Goon_hitreacton_special_back_02", -1, 1)//done lewa stopa w ziemi
+// end of "temporary animations - change it"
+
+Data("hit_reaction:standing:parallel::all:::left:light", 0.4, "Goon_hitreacton_counteraatack_front_01", -1, 1) //done
+Data("hit_reaction:standing:parallel::all:::right:light", 0.4, "Goon_hitreacton_counteraatack_front_01", -1, 1) //done
+
+
+//##############
+//#### IDLE ####
+//############## 
+//## idle:pose:idle_type:item_type:scare_level:is_idle_prepare:is_idle_finish
+//##############
+
+Data("idle:standing::stand:::", -2, "goon_idle_01", -1, 1) //done
+Data("idle:standing::look_around:::", -2, "goon_idle_01", -1, 1)
+Data("idle:standing::look_at:::", -2, "goon_idle_01", -1, 1)
+Data("idle:standing::offensive:::", -2, "Goon_fake_attack_low_02", -1, 1)
+Data("idle:standing::offensive:::", -2, "Goon_fake_attack_low_01", -1, 1)
+Data("idle:standing::react_on_night:::", -2, "goon_idle_01", -1, 1)
+
+//################
+//#### ATTACK ####
+//################
+//## attack:is_standing:item_type:attack_type:attack_dir:attack_range:is_defending_head:is_holding
+//################
+
+Data("attack:standing:two_handed_heavy_stick:melee_weapon:::", -2, "Goon_Attack_LongRage_01", -1, 1) //done - lewa stopa w powietrzu
+Data("attack:standing:two_handed_heavy_stick:strike_from_stand:::", -2, "Goon_Attack_LongRage_01", -1, 1) //done - lewa stopa w powietrzu
+Data("attack:standing:two_handed_heavy_stick::::", -2, "Goon_Attack_LongRage_01", -1, 1) //done - lewa stopa w powietrzu
+
+Data("attack:standing:two_handed_heavy_stick:melee_weapon:::", -2, "Goon_Attack_LongRage_02", -1, 1) //done
+Data("attack:standing:two_handed_heavy_stick:strike_from_stand:::", -2, "Goon_Attack_LongRage_02", -1, 1)//done
+Data("attack:standing:two_handed_heavy_stick::::", -2, "Goon_Attack_LongRage_02", -1, 1)//done
+
+Data("attack:standing:two_handed_heavy_stick:left_arm_strike:::", -2, "goon_attack_shortrage_01", -1, 1) //done
+
+
+Data("attack:standing::taunt:::", -2, "goon_taunt_01", -1, 1) //done - nogi w powietrzu
+Data("attack:standing::taunt:::", -2, "goon_taunt_02", -1, 1) //done - cholernie brzydka
+Data("attack:standing::taunt:::", -2, "goon_taunt_04", -1, 1) //done - BRZYDKA!
+Data("attack:standing::taunt:::", -2, "Goon_fake_attack_low_02", -1, 1) //done - slizgi
+Data("attack:standing::taunt:::", -2, "goon_taunt_01", -1, 1) //done - nogi w powietrzu
+Data("attack:standing::taunt:::", -2, "goon_taunt_02", -1, 1) //done - cholernie brzydka
+Data("attack:standing::taunt:::", -2, "goon_taunt_04", -1, 1) //done - BRZYDKA!
+
+Data("attack:standing:two_handed_heavy_stick:attack_round:::", -2, "Goon_Attack_360_01", -1, 1) //done - stopy w ziemi
+
+Data("attack:standing:two_handed_heavy_stick:melee_weapon:backward::", -2, "Goon_Attack_LongRage_02", -1, 1) //done
+Data("attack:standing:two_handed_heavy_stick:strike_from_stand:backward::", -2, "Goon_Attack_LongRage_02", -1, 1)  //done
+Data("attack:standing:two_handed_heavy_stick::backward::", -2, "Goon_Attack_LongRage_02", -1, 1) //done
+
+Data("attack:standing:two_handed_heavy_stick:melee_weapon:left::", -2, "Goon_atack_left_01", -1, 1) //done
+Data("attack:standing:two_handed_heavy_stick:strike_from_stand:left::", -2, "Goon_atack_left_01", -1, 1)
+Data("attack:standing:two_handed_heavy_stick::left::", -2, "Goon_atack_left_01", -1, 1)
+
+Data("attack:standing:two_handed_heavy_stick:melee_weapon:right::", -2, "Goon_atack_right_01", -1, 1) //done - poczatkowy right land zrobic na polowie klatki
+Data("attack:standing:two_handed_heavy_stick:strike_from_stand:right::", -2, "Goon_atack_right_01", -1, 1)
+Data("attack:standing:two_handed_heavy_stick::right::", -2, "Goon_atack_right_01", -1, 1)
+
+// ordinary standing
+Data("attack:standing::fake:::", -2, "Goon_fake_attack_low_03", -1, 1) //done
+Data("attack:standing::fake:::", -2, "Goon_fake_attack_low_04", -1, 1) //done
+Data("attack:standing::fake:::", -2, "Goon_fake_attack_low_03", -1, 1) //done
+// taunts
+Data("attack:standing::fake:::", -2, "Goon_fake_attack_low_02", -1, 1) //done
+Data("attack:standing::fake:::", -2, "Goon_fake_attack_low_01", -1, 1) //done
+
+// ordinary standing
+Data("attack:standing::fake_high:::", -2, "Goon_fake_attack_low_03", -1, 1) //done
+Data("attack:standing::fake_high:::", -2, "Goon_fake_attack_low_04", -1, 1) //done
+Data("attack:standing::fake_high:::", -2, "Goon_fake_attack_low_03", -1, 1) //done
+// taunts
+Data("attack:standing::fake_high:::", -2, "Goon_fake_attack_low_02", -1, 1) //done
+Data("attack:standing::fake_high:::", -2, "Goon_fake_attack_low_01", -1, 1) //done
+
+Data("attack:standing::fake_short:::", -2, "Goon_fake_attack_low_02", -1, 1)
+Data("attack:standing::fake_short:::", -2, "Goon_fake_attack_low_01", -1, 1)
+
+// ordinary standing
+Data("attack:standing::fake_low:::", -2, "Goon_fake_attack_low_03", -1, 1) //done
+Data("attack:standing::fake_low:::", -2, "Goon_fake_attack_low_04", -1, 1) //done
+Data("attack:standing::fake_low:::", -2, "Goon_fake_attack_low_03", -1, 1) //done
+// taunts
+Data("attack:standing::fake_low:::", -2, "Goon_fake_attack_low_01", -1, 1) //done
+Data("attack:standing::fake_low:::", -2, "Goon_fake_attack_low_02", -1, 1) //done
+
+//##################
+//#### MOVEMENT ####
+//##################
+//## movement:is_standing:movement_type:movement_direction:alarm_level:item_type:ram_type:stairs_climbing_state
+//##################
+//Data("movement:standing:walk:forward::::", -2, "goon_walk_loop_01", -1, 1) //done lewa stopa palce
+//Data("movement:standing:run:forward::::", -2, "goon_walk_loop_01", -1, 1)  //done
+//Data("movement:standing:walk:forward::::", -2, "goon_walk_loop_02", -1, 1) //done lewa stopa palce
+//Data("movement:standing:run:forward::::", -2, "goon_walk_loop_02", -1, 1)  //done
+Data("movement:standing:walk:forward::::", -2, "goon_walk_loop_03", -1, 1) //done lewa stopa palce
+Data("movement:standing:run:forward::::", -2, "goon_walk_loop_03", -1, 1)  //done
+
+//Data("movement:standing:walk:forward::::", -2, "goon_walk_loop_02", -1, 1)
+//Data("movement:standing:run:forward::::", -2, "goon_walk_loop_02", -1, 1)
+
+
+//##############
+//#### TURN ####
+//##############
+//## turn:is_standing:alarm_level:item_type:direction:angle
+//##############
+
+Data("turn:standing:::left:45", -2, "Goon_turn_45l_01", -1, 1) //done
+Data("turn:standing:::right:45", -2, "Goon_turn_45r_01", -1, 1) //done
+
+Data("turn:standing:::left:90", -2, "Goon_turn_90l_01", -1, 1) //done
+Data("turn:standing:::right:90", -2, "Goon_turn_90r_01", -1, 1) //done
+
+Data("turn:standing:::left:180", -2, "Goon_turn_180l_01", -1, 1) //done
+Data("turn:standing:::right:180", -2, "Goon_turn_180r_01", -1, 1) //done
+
+//###############
+//#### START ####
+//###############
+//## start:is_standing:alarm_level:item_type:movement_type:angle:direction
+//##############
+
+Data("start:standing::::90:left:", -2, "GOON_walk_start_90L_01", -1, 1)  //done
+Data("start:standing::::90:right:", -2, "GOON_walk_start_90R_01", -1, 1) //done - koniec staje na powietrzu prawa noga
+Data("start:standing::::0::", -2, "goon_walk_start_front_01", -1, 1) //done
+Data("start:standing::::0::", -2, "Goon_walk_start_front_02", -1, 1) //done zle przyciete
+Data("start:standing::::0::", -2, "Goon_walk_start_front_03", -1, 1) //done
+
+Data("start:standing::::180:left:", -2, "goon_walk_start_180L_01", -1, 1) //done
+Data("start:standing::::180:right:", -2, "GOON_walk_start_180R_01", -1, 1) //done
+
+//##############
+//#### STOP ####
+//##############
+//## stop:is_standing:alarm_level:item_type:movement_type:angle:direction
+//##############
+
+Data("stop:standing::::90:left:false:", -2, "goon_walk_stop_90l_01", -1, 1) //done
+Data("stop:standing::::90:right:false:", -2, "goon_walk_stop_90R_01", -1, 1) //done
+Data("stop:standing::::0::false:", -2, "goon_walk_stop_front_01", -1, 1) //done - koniec dojezdza do pozy
+Data("stop:standing::::180:left:false:", -2, "Goon_walk_stop_180L_01", -1, 1) //done
+Data("stop:standing::::180:right:false:", -2, "Goon_walk_stop_180R_01", -1, 1) //done
+
+
+//#############################
+//#### COLLISION REACTIONS ####
+//#############################
+//## collision_reaction:pose:direction:item_type:severity
+//#######################
+
+Data("collision_reaction:standing:left:two_handed_heavy_stick:none", -2, "goon_attack_360_break_45_01", -1, 1) //done
+Data("collision_reaction:standing:down:two_handed_heavy_stick:none", -2, "Goon_fake_attack_high_01", -1, 1) //done
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////// CURVES //////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+Curve(CURVE_KO_PROBABILITY, "zombie_ko_prob_thug")
+Curve(CURVE_COUNTER_ATTACK_PROB, "thug_counter_attack_prob")
+Curve(CURVE_HEALTH, "thug_health")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////// PARAMETERS ////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+ParamFloat("turn_speed", 20.0)
+ParamFloat("attack_turn_speed", 120.0)
+ParamFloat("attack_anim_related_turn_speed_limit", 120.0)
+ParamFloat("melee_weapon_target_prediction_time", 1.25)
+ParamFloat("max_default_movement_turn_speed", 30.0)
+//ParamFloat("damage_mul", 2.5)							//amount of damage dealt to player - value taken from curve: zombie_melee_damage
+ParamFloat("damage_mul_vs_other_ai", 2.0)
+
+ParamFloat("medium_severity_threshold", 101.0) //disabled medium hit severity
+ParamFloat("heavy_severity_threshold", 101.0) //disabled heavy hit severity
+ParamBool("always_react_on_kick", 0)
+ParamFloat("decapitation_prob", 0.0)
+ParamFloat("berserker_hit_prob", 0.0)
+ParamFloat("berserker_grab_prob", 0.0)
+ParamFloat("berserker_ram_prob", 0.0)
+ParamBool("can_fall", 0)									//when set to 0, AI does not take any damage to stamina
+ParamBool("can_react_on_hit", 1)
+ParamFloat("melee_range", 1.8)
+ParamFloat("bite_range", 1.2)
+ParamFloat("min_time_btw_attack_from_stand_attempts", 1.0)    // min time (spawner borders) between grab attempts (0 in the center of normal spawner)
+ParamFloat("max_time_btw_attack_from_stand_attempts", 1.0)   // max time (spawner borders) between grab attempts (a distance from normal spawner)
+ParamProb("taunt_prob", 1, 0)
+ParamFloat("min_time_btw_taunts", 20.0)
+ParamFloat("taunt_prob_on_target_change", 1.0)
+ParamFloat("taunt_prob_on_take_damage", 50.0)
+ParamInt("zombie_type", 1)
+
+ParamFloat("physics_damage", 3.0)
+ParamInt("max_severity", 1)
+ParamFloat("min_time_btw_hit_reactions", 3.0)
+ParamBool("force_counter_on_kick", 1)
+ParamFloat("counter_push_prob_mul", 0.0)
+ParamFloat("counter_combo_prob_mul", 0.0)
+ParamFloat("max_health_damage_mul_if_laying", -1.0)
+ParamFloat("grab_counterattack_prob", 0.0)
+
+ParamBool("can_move_through_low_obstacles", 0)
+ParamBool("can_move_through_high_obstacles", 0)
+
+ParamFloat("counterattack_dist", 3.0)
+ParamFloat("counterattack_angle", 180.0)
+ParamFloat("counter_attack_from_stand_prob_mul", 1.0)
+
+ParamFloat("drop_item_prob", 0.0)
+ParamBool("directional_melee_attacks", 1)
+
+ParamFloat("sight_angle_at_min_dist", 360)
+ParamFloat("sight_angle_at_max_dist", 160)
+ParamFloat("sight_angle_min_dist", 10)
+ParamFloat("sight_angle_max_dist", 15)
+
+ParamFloat("cone_damage_angle", 30.0)
+
+ParamFloat("death_anim_prob", 1.0)
+ParamFloat("min_fall_height", -1.0)
+ParamFloat("health_part_lost_unconscious", -1.0)
+ParamBool("fall_on_head_collision", 0)
+
+ParamFloat("round_attack_prob", 0.2)
+
+ParamInt("forced_ai_made_hit_reaction_severity", 0)
+
+ParamFloat("health_mul_min_to_play_burn_reaction", 0.2)
+ParamFloat("health_perc_below_elem_impact_blow_on", 0.2)
+ParamFloat("health_perc_below_elem_paralyze_on", 0.2)
+
+ParamFloat("weapon_throw_prob_mul", 0.0)
+
+ParamFloat("grab_counterattack_prob", 0.0)  // goon cannot grab!
+ParamFloat("grab_counterattack_ai_prob", 0.0) // goon cannot grab!
+
+ParamBool("can_scream_for_zombies", 0)
+
+ParamFloat("confusion_prob_mod", 0.0)
+
+ParamFloat("sight_range_calm", 15.0) //[m]
+ParamFloat("sight_range", 15.0) //[m]
+
+ParamBool("play_reaction_on_elementals", 0)
+
+ParamFloat("health_mul", 2.5)
+
+ParamBool("can_react_on_blast", 1)
+ParamFloat("xp_factor", 2.0)
+
+ParamFloat("experience_award", 600.0)
+ParamFloat("fall_on_wrestle_kick_prob", 0.0)
+ParamBool("get_extra_damage_after_wall_special_hit", 0)
+
+ParamBool("visual_electrocution_effect", 1)
+ParamFloat("bullet_head_hit_damage_mult", 0.2)
+
+ParamFloat("bulletproof_vest_dmg_mul", 0.33)
+
+ParamFloat("coop_damage_mul_2", 1.2) // damage multiplayer for 2 players coop
+ParamFloat("coop_damage_mul_3", 1.4) // damage multiplayer for 3 players coop
+ParamFloat("coop_damage_mul_4", 1.8) // damage multiplayer for 4 players coop
+
+ParamFloat("navmesh_min_path_width", 1.0) // Only path width is guaranteed, not the actual passage
+
+ParamFloat("ragdoll_speed_simulation_mul", 0.9) 	// sets speed of ragdoll simulation (lowering it makes feel that character is heavier)
+
+ParamInt("min_body_hits_to_kill", 4)
+ParamInt("min_head_hits_to_kill", 2)

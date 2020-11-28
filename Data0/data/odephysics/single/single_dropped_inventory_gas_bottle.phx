@@ -1,0 +1,107 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Fizyka upadajacego ekwipunku
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+!include("../include/ODEPhysics.def")
+
+//-------------------------------------------------------------------------------------------------
+PhysicsParams()
+{
+    SetPhysicsSurfaceID(SRF_METAL)
+    NotCollisionDamageToMeMul(0.2)
+    SetVelsGate(0, 0)
+    SetWaterFloat(0.06)
+    SetAutoDisableVels(0.04, 0.1, 3)
+    SetAbsorbers(0.05, 0.05)
+    SetMaxVels(4000, 20)
+    SetMaxWatchingTime(0.8)
+    SynchroInterpolation(1)
+    AllowDepthCompression(1)
+    MaxLifeTime(20)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("Terrain")
+{
+    ZeroFlags()
+    Mu(0.3)                  
+    
+    //SetModeFlag("dContactSoftERP")
+    //SetModeFlag("dContactSoftCFM")
+    //SoftERP(0.35) 
+    //SoftCFM(0.0000001)
+
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("SimpleObjects")
+{
+    ZeroFlags()
+    Mu(0.3)                  
+    
+    //SetModeFlag("dContactSlip1")
+    //SetModeFlag("dContactSlip2")
+    //Slip1(1)                          
+    //Slip2(1)              
+
+    //SetModeFlag("dContactSoftERP")
+    //SetModeFlag("dContactSoftCFM")
+    //SoftERP(0.35) 
+    //SoftCFM(0.0000001)
+
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("NonODEObjects")
+{
+    ZeroFlags()
+    Mu(0.3)                  
+    
+    //SetModeFlag("dContactSoftERP")
+    //SetModeFlag("dContactSoftCFM")
+    //SoftERP(0.25) 
+    //SoftCFM(0.0000001)
+
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("ODEObjects")
+{
+    ZeroFlags()
+    Mu(0.3)
+    
+    //SetModeFlag("dContactSlip1")
+    //SetModeFlag("dContactSlip2")
+    //Slip1(1)                          
+    //Slip2(1)              
+
+    //SetModeFlag("dContactSoftERP")
+    //SetModeFlag("dContactSoftCFM")
+    //SoftERP(0.25) 
+    //SoftCFM(0.0000001)
+
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("Water")
+{
+    ZeroFlags()
+    Mu(10)                  
+    
+    //SetModeFlag("dContactSlip1")
+    //SetModeFlag("dContactSlip2")
+    //Slip1(1)                          
+    //Slip2(1)              
+
+    //SetModeFlag("dContactSoftERP")
+    //SetModeFlag("dContactSoftCFM")
+    //SoftERP(0.25) 
+    //SoftCFM(0.0000001)
+
+    Ignore(0)
+}
+

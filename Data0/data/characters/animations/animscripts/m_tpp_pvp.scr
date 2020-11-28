@@ -1,0 +1,402 @@
+// Human anims in BtZ -----------------------------------------------------------------------
+
+////////////////////////////////////////////////////////////
+//Player Zombie Grapple animations
+////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////
+//Human GroundPound
+////////////////////////////////////////////////////////////
+SeqTrack("TPP_PVPGroundPound_Victim_Tackle",             "M_FPP_Human_Knockdown_Standup.anm2",     0, 19, 30, 1, 0.0)
+{
+    MustSendEvent(0, PVP_GRAB_APPLY_TACKLE_IMPULSE, 1)
+    MustSendEvent(0, PVP_GRAB_APPLY_DAMAGE, 1) 
+    Event(0, PVP_GRAB_ORIENT_START, 1)
+    {
+        PlayPlayerSound10(GameVolumeSource_Speech, "Speech_Attack_Charge_XX.wav", -1, 0, 2, 1.0, 1.0, PlayerSoundPriority_Medium, 6.0, 200)
+    }
+    Event(6, PVP_GRAB_ORIENT_END, 1)
+    
+    
+}
+SeqTrack("TPP_SpikesHit_GroundPound",                "M_FPP_Human_Death_SpikeWall_Transition.anm2",      0, 90, 30, 1, 0.1)
+
+SeqTrack("TPP_PVPGroundPound_Victim_Release",            "M_FPP_Human_Knockdown_Standup.anm2",    19, 20, 30, 1, 0.1)
+
+
+SeqTrack("TPP_PVPGroundPound_Victim_Fall_VictimDied",    "M_FPP_Human_3rdparty_explosion.anm2",      30, 60, 30, 1, 0.2)
+SeqTrack("TPP_PVPGroundPound_Victim_Land_VictimDied",    "M_FPP_Unarmed_Knockdown_InPlace.anm2",     10, 20,  30, 1, 0.3)
+SeqTrack("TPP_PVPGroundPound_Victim_Release_VictimDied",  "M_FPP_Unarmed_Knockdown_InPlace.anm2",     20, 61,  30, 1, 0.0)
+{	
+	MustSendEvent(1, END_ANIMATION, 1)
+}
+
+SeqTrack("TPP_PVPGroundPound_Victim_Release_VictimWallHit", "M_TPP_Human_HitWall.anm2",   0, 20, 30, 1, 0.1)
+{
+    MustSendEvent(1, PVP_GRAB_CAN_MOVE, -1)
+}
+SeqTrack("TPP_PVPGroundPound_Victim_Release_VictimWallHit_VictimDied", "M_FPP_Unarmed_Knockdown_InPlace.anm2",     10, 60,  30, 1, 0.9)
+{	
+	MustSendEvent(8, END_ANIMATION, 1)
+}
+
+
+
+////////////////////////////////////////////////////////////
+//Human Charge
+////////////////////////////////////////////////////////////
+SeqTrack("TPP_PVPCharge_Victim_Pounce",             "M_FPP_Human_PVP_Charge_1_Pounce.anm2",      0, 45,  30, 1, 0.3)
+{
+    Event(0, PVP_GRAB_ORIENT_START, 1)   
+    Event(16, PVP_GRAB_ORIENT_END, 1)    
+}
+SeqTrack("TPP_PVPCharge_Victim_Tackle",             "M_FPP_Human_PVP_Charge_1.anm2",      16, 40, 30, 1, 0.0)
+{
+    MustSendEvent(0, PVP_GRAB_APPLY_DAMAGE, 1) 
+    Event(6, 0, 1)
+    {
+        PlayFx("sharp_hit_torso_heavy_sequence.fx", [0, -0, -1], "Head", 1, [0.0, 0.0, 0], 0)
+    }
+}
+SeqTrack("TPP_SpikesHit_Charge",                "M_FPP_Human_Death_SpikeWall_Transition.anm2",      0, 90, 30, 1, 0.1)
+
+SeqTrack("TPP_PVPCharge_Victim_Fall",               "M_FPP_Human_PVP_Charge_1.anm2",      40, 70, 30, 1, 0.3)
+SeqTrack("TPP_PVPCharge_Victim_Land",               "M_TPP_Human_Charge_Land.anm2",      0, 25, 30, 1, 0.1)
+SeqTrack("TPP_PVPCharge_Victim_Release",            "M_FPP_Human_PVP_Charge_standup.anm2",    0, 30, 30, 1, 0.3)
+{
+    MustSendEvent(1, PVP_GRAB_CAN_MOVE, -1)
+}
+SeqTrackAlias("TPP_PVPCharge_Victim_Fall_VictimDied",     "TPP_PVPCharge_Victim_Fall")
+SeqTrack("TPP_PVPCharge_Victim_Land_VictimDied",    "M_FPP_Unarmed_Knockdown_InPlace.anm2",     10, 20,  30, 1, 0.3)
+SeqTrack("TPP_PVPCharge_Victim_Release_VictimDied",  "M_FPP_Unarmed_Knockdown_InPlace.anm2",     20, 61,  30, 1, 0.0)
+{	
+	MustSendEvent(1, END_ANIMATION, 1)
+}  
+SeqTrack("TPP_PVPCharge_Victim_Release_VictimWallHit", "M_TPP_Human_HitWall.anm2",   0, 20, 30, 1, 0.1)
+{
+    MustSendEvent(1, PVP_GRAB_CAN_MOVE, -1)
+}
+SeqTrack("TPP_PVPCharge_Victim_Release_VictimWallHit_VictimDied", "M_FPP_Unarmed_Knockdown_InPlace.anm2",     10, 60,  30, 1, 0.9)
+{	
+	MustSendEvent(7, END_ANIMATION, 1)
+}  
+
+
+
+////////////////////////////////////////////////////////////
+//Human Charge Interrupt
+////////////////////////////////////////////////////////////
+SeqTrack("TPP_PVPCharge_Victim_Pounce_Interrupt",              "M_FPP_Human_PVP_Charge_Evade.anm2",        0, 16, 30, 1, 0.2)
+{
+    Event(0, PVP_GRAB_ORIENT_START, 1)  
+    Event(13, PVP_GRAB_ORIENT_END, 1)
+}
+SeqTrack("TPP_PVPCharge_Victim_Tackle_Interrupt",              "M_FPP_Human_PVP_Charge_Evade.anm2",        16, 31, 30, 1, 0.2)
+{
+    MustSendEvent(0, ACTIVATE_FLY_MODE, 1)
+    {
+        PlayPlayerSound10(GameVolumeSource_Speech, "Speech_Attack_Charge_XX.wav", -1, 0, 2, 1.0, 1.0, PlayerSoundPriority_Medium, 6.0, 200) 
+    }
+}
+SeqTrack("TPP_PVPCharge_Victim_Release_Interrupt",               "M_FPP_Human_PVP_Charge_Evade.anm2",        31, 40, 10, 1, 0.0)
+{
+    MustSendEvent(0, ACTIVATE_FLY_MODE, 1)
+    //MustSendEvent(5, PVP_GRAB_JUMP_RELEASE, 1)  
+    MustSendEvent(5, PVP_GRAB_CAN_MOVE, -1)    
+}
+
+////////////////////////////////////////////////////////////
+//Human Charge Interrupt NON OWNER
+////////////////////////////////////////////////////////////
+
+SeqTrack("TPP_PVPCharge_Victim_Tackle_NonOwner_Interrupt",              "M_TPP_NON_Human_PVP_Charge_Evade.anm2",        0, 54, 40, 1, 0.2)
+{
+    MustSendEvent(0, ACTIVATE_FLY_MODE, 1)
+    {
+        PlayPlayerSound10(GameVolumeSource_Speech, "Speech_Attack_Charge_XX.wav", -1, 0, 2, 1.0, 1.0, PlayerSoundPriority_Medium, 6.0, 200) 
+    }
+    MustSendEvent(29, PVP_GRAB_CAN_MOVE, -1)    
+}
+
+////////////////////////////////////////////////////////////
+//********POUNCE************
+////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////
+//Human HighRage
+////////////////////////////////////////////////////////////
+SeqTrackAlias("TPP_PVPHighRage_Victim_Pounce",               "TPP_PVPHighRage_Victim_Pounce_Slam")
+SeqTrackAlias("TPP_PVPHighRage_Victim_Tackle",               "TPP_PVPHighRage_Victim_Tackle_Slam")
+{
+    Event(0, PVP_GRAB_ORIENT_START, 1)	
+    Event(6, PVP_GRAB_ORIENT_END, 1)    
+}
+SeqTrackAlias("TPP_PVPHighRage_Victim_Fall",                 "TPP_PVPHighRage_Victim_Fall_Slam")
+SeqTrack("TPP_PVPHighRage_Victim_Land",                 "M_TPP_Human_Grab_Basic.anm2",      98, 186, 30, 1, 0.0)
+{
+    MustSendEvent(1, VIS_EVENT_BLOCK_GENERIC_MIMIC, -1)
+	MustSendEvent(28, 0, 1)
+    {
+        PlayPlayerSound10(GameVolumeSource_SpeechPlayer, "Speech_Btz_Reaction_Tackle_XX.wav", -1, 0, 2, 1.0, 1.0, PlayerSoundPriority_Medium, 6.0, 200) 
+    }
+    
+    MustSendEvent(55, 0, 1)
+    {
+        PlayFx("slomotion_gunshot_wound_sequence.fx", [0, 1, 0], "Neck1", 1, [0.0, -0.25, 0], 0)
+    }
+    MustSendEvent(69, PVP_GRAB_APPLY_DAMAGE, 1)
+}
+
+//SeqTrackAlias("TPP_PVPHighRage_Victim_ReleaseWait",          "TPP_PVPHighRage_Victim_ReleaseWait_Slam")
+SeqTrackAlias("TPP_PVPHighRage_Victim_Release",              "TPP_PVPHighRage_Victim_Release_Slam")
+
+
+
+
+//--Above
+
+SeqTrackAlias("TPP_PVPHighRage_Victim_Pounce_Above",      "TPP_PVPHighRage_Victim_Pounce_Above_Slam")
+SeqTrackAlias("TPP_PVPHighRage_Victim_Tackle_Above",      "TPP_PVPHighRage_Victim_Tackle_Above_Slam")
+
+
+
+//--Below
+SeqTrackAlias("TPP_PVPHighRage_Victim_Pounce_Below",      "TPP_PVPHighRage_Victim_Pounce_Below_Slam")
+SeqTrackAlias("TPP_PVPHighRage_Victim_Tackle_Below",      "TPP_PVPHighRage_Victim_Tackle_Below_Slam")
+
+//Pounce SLAM
+
+SeqTrack("TPP_PVPHighRage_Victim_Pounce_Slam",               "M_TPP_Human_Grab_Basic.anm2",      0, 50,  30, 1, 0.3)
+
+SeqTrack("TPP_PVPHighRage_Victim_Tackle_Slam",               "M_TPP_Human_Grab_Basic.anm2",      51, 68, 30, 1, 0.15)
+{
+    Event(0, PVP_GRAB_ORIENT_START, 1)
+	MustSendEvent(5, 0, 1)
+    {
+        PlayPlayerSound10(GameVolumeSource_SpeechPlayer, "Speech_Knockdown_Down_XX.wav", -1, 0, 2, 1.0, 1.0, PlayerSoundPriority_Medium, 6.0, 200) 
+    }		
+    Event(6, PVP_GRAB_ORIENT_END, 1)    
+}
+SeqTrack("TPP_PVPHighRage_Victim_Fall_Slam",                 "M_TPP_Human_Grab_Basic.anm2",      68, 98, 30, 1, 0.15)
+
+SeqTrack("TPP_PVPHighRage_Victim_Land_Slam",                 "M_TPP_Human_Grab_Basic.anm2",      98, 186, 30, 1, 0.15)
+{
+    Event(1, VIS_EVENT_BLOCK_GENERIC_MIMIC, -1)
+    Event(1, 0, 1)
+    {        
+        PlayFx("venom_shockwave_sequence.fx", [0, 0, 1], "pelvis", 0, [0.0, 0.0, -0.25], 0)
+    }
+	MustSendEvent(28, 0, 1)
+    {
+        PlayPlayerSound10(GameVolumeSource_SpeechPlayer, "Speech_Btz_Reaction_Tackle_XX.wav", -1, 0, 2, 1.0, 1.0, PlayerSoundPriority_Medium, 6.0, 200) 
+    }	
+    MustSendEvent(55, 0, 1)
+    {
+        PlayFx("slomotion_gunshot_wound_sequence.fx", [0, 1, 0], "Neck1", 1, [0.0, -0.25, 0], 0)
+    }
+    MustSendEvent(69, PVP_GRAB_APPLY_DAMAGE, 1)
+}
+//SeqTrack("TPP_PVPHighRage_Victim_ReleaseWait_Slam",          "M_TPP_Human_Grab_Basic.anm2",      153, 154, 1, 1, 0.1)
+SeqTrack("TPP_PVPHighRage_Victim_Release_Slam",              "M_TPP_Human_Grab_Basic.anm2",      186, 198, 30, 1, 0.1)
+
+
+SeqTrack("TPP_PVPHighRage_Victim_Pounce_Above_Slam",   "M_TPP_Human_Grab_Basic_Above.anm2",      0, 50,  30, 1, 0.3)
+SeqTrack("TPP_PVPHighRage_Victim_Tackle_Above_Slam",   "M_TPP_Human_Grab_Basic_Above.anm2",      51, 68, 30, 1, 0.15)
+{
+    Event(0, PVP_GRAB_ORIENT_START, 1)
+	MustSendEvent(5, 0, 1)
+    {
+        PlayPlayerSound10(GameVolumeSource_SpeechPlayer, "Speech_Knockdown_Down_XX.wav", -1, 0, 2, 1.0, 1.0, PlayerSoundPriority_Medium, 6.0, 200) 
+    }	
+    Event(6, PVP_GRAB_ORIENT_END, 1)    
+}
+SeqTrack("TPP_PVPHighRage_Victim_Pounce_Below_Slam",   "M_TPP_Human_Grab_Basic_Below.anm2",      0, 50,  30, 1, 0.3)
+SeqTrack("TPP_PVPHighRage_Victim_Tackle_Below_Slam",   "M_TPP_Human_Grab_Basic_Below.anm2",      51, 68, 30, 1, 0.15)
+{
+    Event(0, PVP_GRAB_ORIENT_START, 1)
+	MustSendEvent(5, 0, 1)
+    {
+        PlayPlayerSound10(GameVolumeSource_SpeechPlayer, "Speech_Knockdown_Down_XX.wav", -1, 0, 2, 1.0, 1.0, PlayerSoundPriority_Medium, 6.0, 200) 
+    }	
+    Event(6, PVP_GRAB_ORIENT_END, 1)    
+}
+
+
+
+////////////////////////////////////////////////////////////
+//Player Human Leapfrog
+////////////////////////////////////////////////////////////
+
+SeqTrackAlias("TPP_PVPHighRage_Victim_Pounce_Leapfrog",           "TPP_PVPHighRage_Victim_Pounce")
+SeqTrackAlias("TPP_PVPHighRage_Victim_Tackle_Leapfrog",           "TPP_PVPHighRage_Victim_Tackle")
+
+SeqTrackAlias("TPP_PVPHighRage_Victim_Fall_Leapfrog",             "TPP_PVPHighRage_Victim_Fall")
+SeqTrackAlias("TPP_PVPHighRage_Victim_Land_Leapfrog",             "TPP_PVPHighRage_Victim_Land")
+SeqTrackAlias("TPP_PVPHighRage_Victim_Release_Leapfrog",          "TPP_PVPHighRage_Victim_Release")
+//--Above
+SeqTrackAlias("TPP_PVPHighRage_Victim_Pounce_Above_Leapfrog",     "TPP_PVPHighRage_Victim_Pounce_Above")
+SeqTrackAlias("TPP_PVPHighRage_Victim_Tackle_Above_Leapfrog",     "TPP_PVPHighRage_Victim_Tackle_Above")
+
+//--Below
+SeqTrackAlias("TPP_PVPHighRage_Victim_Pounce_Below_Leapfrog",     "TPP_PVPHighRage_Victim_Pounce_Below")
+SeqTrackAlias("TPP_PVPHighRage_Victim_Tackle_Below_Leapfrog",     "TPP_PVPHighRage_Victim_Tackle_Below")
+
+/// slam
+SeqTrackAlias("TPP_PVPHighRage_Victim_Pounce_Slam_Leapfrog",           "TPP_PVPHighRage_Victim_Pounce_Leapfrog")
+SeqTrackAlias("TPP_PVPHighRage_Victim_Tackle_Slam_Leapfrog",           "TPP_PVPHighRage_Victim_Tackle_Leapfrog")
+
+SeqTrackAlias("TPP_PVPHighRage_Victim_Fall_Slam_Leapfrog",             "TPP_PVPHighRage_Victim_Fall_Leapfrog")
+SeqTrackAlias("TPP_PVPHighRage_Victim_Land_Slam_Leapfrog",             "TPP_PVPHighRage_Victim_Land_Slam")
+SeqTrackAlias("TPP_PVPHighRage_Victim_Release_Slam_Leapfrog",          "TPP_PVPHighRage_Victim_Release_Leapfrog")
+//--Above
+SeqTrackAlias("TPP_PVPHighRage_Victim_Pounce_Above_Slam_Leapfrog",     "TPP_PVPHighRage_Victim_Pounce_Above_Leapfrog")
+SeqTrackAlias("TPP_PVPHighRage_Victim_Tackle_Above_Slam_Leapfrog",     "TPP_PVPHighRage_Victim_Tackle_Above_Leapfrog")
+
+//--Below
+SeqTrackAlias("TPP_PVPHighRage_Victim_Pounce_Below_Slam_Leapfrog",     "TPP_PVPHighRage_Victim_Pounce_Below_Leapfrog")
+SeqTrackAlias("TPP_PVPHighRage_Victim_Tackle_Below_Slam_Leapfrog",     "TPP_PVPHighRage_Victim_Tackle_Below_Leapfrog")
+
+
+
+
+////////////////////////////////////////////////////////////
+//Human HighRage Interrupt
+////////////////////////////////////////////////////////////
+SeqTrack("TPP_PVPHighRage_Victim_Pounce_Interrupt",              "M_TPP_Human_Grab_Interrupt.anm2",        0, 40, 30, 1, 0.2)
+{
+    Event(0, PVP_GRAB_ORIENT_START, 1)   
+    Event(6, PVP_GRAB_ORIENT_END, 1)    
+}
+SeqTrack("TPP_PVPHighRage_Victim_Tackle_Interrupt",              "M_TPP_Human_Grab_Interrupt.anm2",        40, 43, 25, 1, 0.0)
+{
+    MustSendEvent(0, ACTIVATE_FLY_MODE, 1)
+}
+SeqTrack("TPP_PVPHighRage_Victim_Release_Interrupt",               "M_TPP_Human_Grab_Interrupt.anm2",        43, 90, 30, 1, 0.0)
+{
+	MustSendEvent(1, PVP_GRAB_CAN_MOVE, -1)
+}
+//--Above
+SeqTrack("TPP_PVPHighRage_Victim_Pounce_Above_Interrupt",              "M_TPP_Human_Grab_Interrupt_Above.anm2",        0, 40, 30, 1, 0.2)
+{
+    Event(0, PVP_GRAB_ORIENT_START, 1)   
+    Event(6, PVP_GRAB_ORIENT_END, 1)    
+}
+SeqTrack("TPP_PVPHighRage_Victim_Tackle_Above_Interrupt",              "M_TPP_Human_Grab_Interrupt_Above.anm2",        40, 43, 30, 1, 0.0)
+{
+    MustSendEvent(0, ACTIVATE_FLY_MODE, 1)
+}
+//--Below
+SeqTrack("TPP_PVPHighRage_Victim_Pounce_Below_Interrupt",              "M_TPP_Human_Grab_Interrupt_Below.anm2",        0, 40, 30, 1, 0.2)
+{
+    Event(0, PVP_GRAB_ORIENT_START, 1)   
+    Event(6, PVP_GRAB_ORIENT_END, 1)    
+}
+SeqTrack("TPP_PVPHighRage_Victim_Tackle_Below_Interrupt",              "M_TPP_Human_Grab_Interrupt_Below.anm2",        40, 43, 30, 1, 0.0)
+{
+    MustSendEvent(0, ACTIVATE_FLY_MODE, 1)
+}
+
+
+
+
+
+////////////////////////////////////////////////////////////
+//Human HighRage ThirdParty Interrupt
+////////////////////////////////////////////////////////////
+SeqTrack("TPP_PVPHighRage_Victim_Pounce_ThirdParty_Interrupt",               "M_TPP_Human_Grab_Interrupt_other.anm2",        0, 13, 30, 1, 0.2)
+SeqTrack("TPP_PVPHighRage_Victim_Tackle_ThirdParty_Interrupt",               "M_TPP_Human_Grab_Interrupt_other.anm2",        13, 16, 30, 1, 0.0)
+{
+    Event(0, ACTIVATE_FLY_MODE, 1)
+}
+SeqTrack("TPP_PVPHighRage_Victim_Release_ThirdParty_Interrupt",               "M_TPP_Human_Grab_Interrupt_other.anm2",        16, 40, 30, 1, 0.1)
+
+//--Above
+SeqTrackAlias("TPP_PVPHighRage_Victim_Pounce_Above_ThirdParty_Interrupt",     "TPP_PVPHighRage_Victim_Pounce_ThirdParty_Interrupt")
+SeqTrackAlias("TPP_PVPHighRage_Victim_Tackle_Above_ThirdParty_Interrupt",     "TPP_PVPHighRage_Victim_Tackle_ThirdParty_Interrupt")
+
+//--Below
+SeqTrackAlias("TPP_PVPHighRage_Victim_Pounce_Below_ThirdParty_Interrupt",     "TPP_PVPHighRage_Victim_Pounce_ThirdParty_Interrupt")
+SeqTrackAlias("TPP_PVPHighRage_Victim_Tackle_Below_ThirdParty_Interrupt",     "TPP_PVPHighRage_Victim_Tackle_ThirdParty_Interrupt")
+
+
+
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+//Human Grabs
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////
+
+
+////////////////////////////////////////////////////////////
+//Jump Attack
+////////////////////////////////////////////////////////////
+
+
+SeqTrack("TPP_PVPHumanJumpAttack_Attacker_Pounce",      "M_FPP_Human_PVP_DeathFromAbove.anm2",      0, 30,  30, 1, 0.0)
+{
+	Event(0, 0, 1)
+	{
+			PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_Heavy_Charge_XX.wav", -1, 0, 2, 1.0)
+	}
+	Event(1, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "player_jump_attack_hunter_start.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+}	
+
+SeqTrack("TPP_PVPHumanJumpAttack_Attacker_Tackle",      "M_FPP_Human_PVP_DeathFromAbove.anm2",      30, 40, 30, 1, 0.0)
+{
+    MustSendEvent(0, PVP_GRAB_APPLY_TACKLE_IMPULSE, 1)
+	Event(5, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "player_jump_attack_hunter_hit.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+}
+
+
+SeqTrack("TPP_PVPHumanJumpAttack_Attacker_Fall",        "M_FPP_Human_PVP_DeathFromAbove_Fall.anm2",      0, 30, 30, 1, 0.2)
+SeqTrack("TPP_PVPHumanJumpAttack_Attacker_Land",        "M_FPP_Human_PVP_DeathFromAbove.anm2",      40, 90, 30, 1, 0.0)
+
+SeqTrack("TPP_PVPHumanJumpAttack_Attacker_Release",     "M_FPP_Human_PVP_DeathFromAbove.anm2",      90, 120, 20, 1, 0.0)
+{
+	Event(20, PVP_GRAB_CAN_MOVE, -1)
+}
+SeqTracksBlend("TPP_PVPHumanJumpAttack_Attacker_Release", "TPP_Stick_Stand", 0.5)
+
+////////////////////////////////////////////////////////////
+//WrestlingKick
+////////////////////////////////////////////////////////////
+
+SeqTrack("TPP_PVPWrestlingKick_Attacker_Pounce",               "M_FPP_Human_PVP_WrestlingKick.anm2",        0, 23, 30, 1, 0.3)
+{
+    Event(0, 0, 1)
+	{
+			PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Attack_Heavy_Charge_XX.wav", -1, 0, 2, 1.0)
+	}
+	Event(1, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "player_dropkick_hunter_start.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }	
+	Event(13, PVP_GRAB_POUNCE_CAN_TACKLE, -1)    
+}
+SeqTrack("TPP_PVPWrestlingKick_Attacker_Tackle",            "M_FPP_Human_PVP_WrestlingKick.anm2",        23, 26, 30, 1, 0.0)
+{
+    Event(0, 0, 1)
+	{
+    	PlaySound23D(GameVolumeSource_SpecialSound, "player_dropkick_hunter_hit.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+    }
+    MustSendEvent(2, PVP_GRAB_APPLY_TACKLE_IMPULSE_AND_RELEASE, 1)
+}
+SeqTrack("TPP_PVPWrestlingKick_Attacker_Release",   "M_FPP_Human_PVP_WrestlingKick.anm2",        26, 70, 22, 1, 0.0)
+{
+	//Event(0, ACTIVATE_FLY_MODE, 1)
+	Event(15, PVP_GRAB_CAN_MOVE, -1)
+}
+SeqTrackAlias("TPP_PVPWrestlingKick_Attacker_Release_VictimDied",       "TPP_PVPWrestlingKick_Attacker_Release")
+
+//MIMIC
+

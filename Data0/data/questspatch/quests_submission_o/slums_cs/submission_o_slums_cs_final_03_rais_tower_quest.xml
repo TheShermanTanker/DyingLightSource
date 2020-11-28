@@ -1,0 +1,2999 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums_cs"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST NAME : FINAL -->
+    <!-- QUEST INFO : Road to final fight with Rais -->
+    <!-- AFTER QUEST: Contact GRE -->
+    <!-- COMMENT    : FINAL RAIS TOWER -->
+    <!-- FROM       : >> OLD TOWN -> SLUMS -->
+    <!-- TO         : >> SLUMS CS  -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- -final=true -->
+    <Quest
+         name="Final_End_03_Rais_Tower_1"
+         parent="Final_End_02_Sewer_End"
+         glued="true"
+         pxsl_line="14">
+        <!-- Meet Rais at the top of his building. -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Final_OBJ_FindRais&amp;"
+             pxsl_line="15">
+            <Path
+                 pxsl_line="15">
+                <!-- Arena - Rais Bazooka -->
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="17">
+                    <Path
+                         pxsl_line="18">
+                        <Phase
+                             type="player control"
+                             name="_"
+                             can_sprint="false"
+                             pxsl_line="19" />
+                        <!-- ,enable _ SensorAmbientMusicArea Final_SAMA_Stingers_Scary -->
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="3"
+                             pxsl_line="21" />
+                        <Phase
+                             type="talk"
+                             name="_"
+                             speaker="voice2d"
+                             group="Rais_Finale_10DLG01"
+                             show_locations="false"
+                             auto_start="true"
+                             pxsl_line="22" />
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="0.5"
+                             pxsl_line="23" />
+                        <Phase
+                             type="AND"
+                             name="_"
+                             pxsl_line="24">
+                            <Path
+                                 pxsl_line="25">
+                                <Phase
+                                     type="talk"
+                                     name="_"
+                                     speaker="voice2d"
+                                     group="Rais_Finale_11DLG01"
+                                     show_locations="false"
+                                     auto_start="true"
+                                     pxsl_line="26" />
+                            </Path>
+                            <Path
+                                 pxsl_line="27">
+                                <Phase
+                                     type="wait guard"
+                                     name="_"
+                                     time="3.5"
+                                     pxsl_line="28" />
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     pxsl_line="29">
+                                    <!-- Bazooka Target ON -->
+                                    <Object
+                                         pxsl_line="30">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="slums_cs_final_rais_bazooka_target"
+                                             pxsl_line="30" />
+                                    </Object>
+                                    <!-- Bazooka ON -->
+                                    <Object
+                                         pxsl_line="31">
+                                        <QuestObject
+                                             class="AutoCannon"
+                                             name="slums_cs_final_rais_bazooka_01"
+                                             pxsl_line="31" />
+                                    </Object>
+                                </Phase>
+                                <Phase
+                                     type="wait guard"
+                                     name="_"
+                                     time="1"
+                                     pxsl_line="32" />
+                                <Phase
+                                     type="player control"
+                                     name="_"
+                                     can_sprint="true"
+                                     pxsl_line="33" />
+                            </Path>
+                        </Phase>
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="15"
+                             pxsl_line="34">
+                            <Destination
+                                 pxsl_line="34">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="slums_cs_final_sp_05"
+                                     pxsl_line="34" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="35">
+                            <!-- Bazooka OFF -->
+                            <Object
+                                 pxsl_line="36">
+                                <QuestObject
+                                     class="AutoCannon"
+                                     name="slums_cs_final_rais_bazooka_01"
+                                     pxsl_line="36" />
+                            </Object>
+                            <!-- Bazooka Target OFF -->
+                            <Object
+                                 pxsl_line="37">
+                                <QuestObject
+                                     class="DamageSwitchDI"
+                                     name="slums_cs_final_rais_bazooka_target"
+                                     pxsl_line="37" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="10"
+                             pxsl_line="38">
+                            <Destination
+                                 pxsl_line="38">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="slums_cs_final_sp_05"
+                                     pxsl_line="38" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="39">
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="25"
+                             pxsl_line="40" />
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Rais_Finale_12DLG01"
+                             auto_start="true"
+                             pxsl_line="41" />
+                    </Path>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="42">
+                    <Destination
+                         pxsl_line="42">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_05"
+                             pxsl_line="42" />
+                    </Destination>
+                </Phase>
+                <!-- Elevator - -->
+                <Phase
+                     type="use"
+                     name="FINAL - FIRST BUILDING - Elevator"
+                     desired_state="on"
+                     pxsl_line="44">
+                    <Trigger
+                         pxsl_line="44">
+                        <QuestObject
+                             class="InvisibleSwitchDI"
+                             name="cin_final_elevator_trigger"
+                             pxsl_line="44" />
+                    </Trigger>
+                    <DebugPlayerPosition
+                         pxsl_line="45">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_05"
+                             pxsl_line="45" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="46">
+                    <Object
+                         pxsl_line="46">
+                        <QuestObject
+                             class="SensorAmbientMusicArea"
+                             name="Final_SAMA_Arena_Intro"
+                             pxsl_line="46" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="47">
+                    <Object
+                         pxsl_line="48">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="slums_cs_final_first_building_enemies_qeg_01"
+                             pxsl_line="48" />
+                    </Object>
+                    <Object
+                         pxsl_line="49">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="slums_cs_final_first_crane_enemies_qeg"
+                             pxsl_line="49" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="50">
+                    <Path
+                         pxsl_line="51">
+                        <Phase
+                             type="movie"
+                             name="_"
+                             movie="cin_final_elevator"
+                             pxsl_line="52" />
+                    </Path>
+                    <Path
+                         pxsl_line="53">
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="3"
+                             pxsl_line="54" />
+                        <Phase
+                             type="talk"
+                             name="_"
+                             speaker="voice2d"
+                             group="Rais_Finale_14DLG01"
+                             show_locations="false"
+                             auto_start="true"
+                             pxsl_line="55" />
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="2"
+                             pxsl_line="56" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="57">
+                            <Object
+                                 pxsl_line="57">
+                                <QuestObject
+                                     class="SoundEmitterSimple"
+                                     name="slums_cs_final_march_music"
+                                     pxsl_line="57" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="2"
+                             pxsl_line="58" />
+                        <Phase
+                             type="talk"
+                             name="_"
+                             speaker="voice2d"
+                             group="Rais_Finale_15DLG01"
+                             show_locations="false"
+                             auto_start="true"
+                             pxsl_line="59" />
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="4"
+                             pxsl_line="60" />
+                        <Phase
+                             type="talk"
+                             name="_"
+                             speaker="voice2d"
+                             group="Player_Finale_31DLG01"
+                             show_locations="false"
+                             auto_start="true"
+                             pxsl_line="61" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="62">
+                            <Object
+                                 pxsl_line="62">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_karims_infected_01"
+                                     pxsl_line="62" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="on"
+                     pxsl_line="63">
+                    <Trigger
+                         pxsl_line="63">
+                        <QuestObject
+                             class="InvisibleSwitchDI"
+                             name="cin_final_elevator_down_door_b_trigger"
+                             pxsl_line="63" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="64">
+                    <Object
+                         pxsl_line="64">
+                        <QuestObject
+                             class="AIDeadBodySpawnBoxAuto"
+                             name="slums_cs_final_karims_dead_body_01"
+                             pxsl_line="64" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="65">
+                    <Path
+                         pxsl_line="66">
+                        <Phase
+                             type="go to"
+                             name="FINAL - FIRST BUILDING - Rais Tower"
+                             distance="0"
+                             pxsl_line="67">
+                            <Destination
+                                 pxsl_line="67">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="slums_cs_final_first_building_enemies_goto_01"
+                                     pxsl_line="67" />
+                            </Destination>
+                            <DebugPlayerPosition
+                                 pxsl_line="68">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="slums_cs_final_sp_06"
+                                     pxsl_line="68" />
+                            </DebugPlayerPosition>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="69">
+                        <Phase
+                             type="movie"
+                             name="_"
+                             movie="cin_final_elevator_down_door_b"
+                             pxsl_line="70" />
+                    </Path>
+                </Phase>
+                <!-- KARIMS FLOOR - -->
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="72">
+                    <Object
+                         pxsl_line="72">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Karim"
+                             pxsl_line="72" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="use life place"
+                     name="_"
+                     teleport="true"
+                     pxsl_line="73">
+                    <LifePlace
+                         pxsl_line="73">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="slums_cs_final_Karim_lp_01_wounded"
+                             pxsl_line="73" />
+                    </LifePlace>
+                    <AI
+                         pxsl_line="74">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Karim"
+                             pxsl_line="74" />
+                    </AI>
+                </Phase>
+                <!-- ALL LETHAL IN AIR  -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="75">
+                    <Object
+                         pxsl_line="75">
+                        <QuestObject
+                             class="LethalObject"
+                             name="slums_cs_final_all_lethal_object"
+                             pxsl_line="75" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="76">
+                    <Destination
+                         pxsl_line="76">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_06"
+                             pxsl_line="76" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="77">
+                    <!-- LOCATION -->
+                    <Path
+                         pxsl_line="78">
+                        <Phase
+                             type="go to"
+                             name="FINAL - FIRST BUILDING - Karim"
+                             distance="0"
+                             pxsl_line="79">
+                            <Destination
+                                 pxsl_line="79">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="slums_cs_final_Karim_goto"
+                                     pxsl_line="79" />
+                            </Destination>
+                            <DebugPlayerPosition
+                                 pxsl_line="80">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="slums_cs_final_sp_06_01"
+                                     pxsl_line="80" />
+                            </DebugPlayerPosition>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="81">
+                        <Phase
+                             type="OR"
+                             name="_"
+                             pxsl_line="82">
+                            <Path
+                                 pxsl_line="83">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="4"
+                                     show_locations="false"
+                                     pxsl_line="84">
+                                    <Destination
+                                         pxsl_line="84">
+                                        <QuestObject
+                                             class="Marker"
+                                             name="slums_cs_first_building_loc_falling_infected"
+                                             pxsl_line="84" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="85">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="0"
+                                     pxsl_line="86">
+                                    <Destination
+                                         pxsl_line="86">
+                                        <QuestObject
+                                             class="SensorGoTo"
+                                             name="slums_cs_final_Karim_goto"
+                                             pxsl_line="86" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="87">
+                            <Object
+                                 pxsl_line="87">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_karims_infected_02"
+                                     pxsl_line="87" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="set day night time"
+                     name="_"
+                     day_time="17"
+                     pxsl_line="88" />
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="89">
+                    <Destination
+                         pxsl_line="89">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_06_01"
+                             pxsl_line="89" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="OR"
+                     name="_"
+                     pxsl_line="90">
+                    <!-- Mines -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                    <Path
+                         pxsl_line="92">
+                        <Phase
+                             type="OR"
+                             name="_"
+                             pxsl_line="93">
+                            <Path
+                                 pxsl_line="94">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="0"
+                                     show_locations="false"
+                                     pxsl_line="95">
+                                    <Destination
+                                         pxsl_line="95">
+                                        <QuestObject
+                                             class="SensorGoTo"
+                                             name="Final_GoTo_Bomb_1"
+                                             pxsl_line="95" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="96">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="97">
+                                    <Trigger
+                                         pxsl_line="97">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_1"
+                                             pxsl_line="97" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="98">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="99">
+                                    <Trigger
+                                         pxsl_line="99">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_2"
+                                             pxsl_line="99" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="100">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="101">
+                                    <Trigger
+                                         pxsl_line="101">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_3"
+                                             pxsl_line="101" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="102">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="103">
+                                    <Trigger
+                                         pxsl_line="103">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_4"
+                                             pxsl_line="103" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="104">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="105">
+                                    <Trigger
+                                         pxsl_line="105">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_5"
+                                             pxsl_line="105" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="106">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="107">
+                                    <Trigger
+                                         pxsl_line="107">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_6"
+                                             pxsl_line="107" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="108">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="109">
+                                    <Trigger
+                                         pxsl_line="109">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_7"
+                                             pxsl_line="109" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="110">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="111">
+                                    <Trigger
+                                         pxsl_line="111">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_8"
+                                             pxsl_line="111" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="112">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="113">
+                                    <Trigger
+                                         pxsl_line="113">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_9"
+                                             pxsl_line="113" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="114">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="115">
+                                    <Trigger
+                                         pxsl_line="115">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_10"
+                                             pxsl_line="115" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                        <Phase
+                             type="set state"
+                             name="_"
+                             desired_state="on"
+                             pxsl_line="116">
+                            <Trigger
+                                 pxsl_line="116">
+                                <QuestObject
+                                     class="BombSwitchDI"
+                                     name="Final_BombSwitch_Bomb_1"
+                                     pxsl_line="116" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="117">
+                            <Object
+                                 pxsl_line="117">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Final_QEG_Bomb_Explosion"
+                                     pxsl_line="117" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="2"
+                             pxsl_line="118" />
+                        <Phase
+                             type="set state"
+                             name="_"
+                             desired_state="off"
+                             pxsl_line="119">
+                            <Trigger
+                                 pxsl_line="119">
+                                <QuestObject
+                                     class="BombSwitchDI"
+                                     name="Final_BombSwitch_Bomb_1"
+                                     pxsl_line="119" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="120">
+                            <Object
+                                 pxsl_line="120">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Final_QEG_Bomb_Explosion"
+                                     pxsl_line="120" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="semaphore"
+                             name="_"
+                             pxsl_line="121" />
+                    </Path>
+                    <!-- Mines -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                    <Path
+                         pxsl_line="123">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             pxsl_line="124">
+                            <Destination
+                                 pxsl_line="124">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="slums_cs_final_Karim_goto_b"
+                                     pxsl_line="124" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="talk"
+                             name="_"
+                             speaker="Karim"
+                             group="Karim_Finale_17DLG01_a"
+                             show_locations="false"
+                             auto_start="true"
+                             pxsl_line="125" />
+                        <Phase
+                             type="use life place"
+                             name="_"
+                             wait_for_move_end="false"
+                             snap_lp_to_npc="true"
+                             pxsl_line="126">
+                            <LifePlace
+                                 pxsl_line="126">
+                                <QuestObject
+                                     class="NPCLifePlace"
+                                     name="slums_cs_final_Karim_lp_02_dead"
+                                     pxsl_line="126" />
+                            </LifePlace>
+                            <AI
+                                 pxsl_line="127">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Karim"
+                                     pxsl_line="127" />
+                            </AI>
+                        </Phase>
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="2"
+                             pxsl_line="128" />
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Karim_Finale_17DLG01_c"
+                             auto_start="true"
+                             pxsl_line="129" />
+                    </Path>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="130">
+                    <Destination
+                         pxsl_line="130">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_06_01"
+                             pxsl_line="130" />
+                    </Destination>
+                </Phase>
+                <!-- GET TO THE CRANE -->
+                <Phase
+                     type="OR"
+                     name="_"
+                     pxsl_line="132">
+                    <Path
+                         pxsl_line="133">
+                        <Phase
+                             type="go to"
+                             name="FINAL - FIRST BUILDING - Leap of Faith"
+                             distance="0"
+                             pxsl_line="134">
+                            <Destination
+                                 pxsl_line="134">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="slums_cs_final_jump_to_second_crane_01"
+                                     pxsl_line="134" />
+                            </Destination>
+                            <DebugPlayerPosition
+                                 pxsl_line="135">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="slums_cs_final_sp_06_02"
+                                     pxsl_line="135" />
+                            </DebugPlayerPosition>
+                        </Phase>
+                        <!-- TALK BEFORE JUMP -->
+                        <Phase
+                             type="talk"
+                             name="_"
+                             speaker="voice2d"
+                             group="Player_Finale_18DLG01"
+                             show_locations="false"
+                             auto_start="true"
+                             pxsl_line="136" />
+                    </Path>
+                    <!-- Mines -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                    <Path
+                         pxsl_line="138">
+                        <Phase
+                             type="OR"
+                             name="_"
+                             pxsl_line="139">
+                            <Path
+                                 pxsl_line="140">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="0"
+                                     show_locations="false"
+                                     pxsl_line="141">
+                                    <Destination
+                                         pxsl_line="141">
+                                        <QuestObject
+                                             class="SensorGoTo"
+                                             name="Final_GoTo_Bomb_1"
+                                             pxsl_line="141" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="142">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="143">
+                                    <Trigger
+                                         pxsl_line="143">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_1"
+                                             pxsl_line="143" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="144">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="145">
+                                    <Trigger
+                                         pxsl_line="145">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_2"
+                                             pxsl_line="145" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="146">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="147">
+                                    <Trigger
+                                         pxsl_line="147">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_3"
+                                             pxsl_line="147" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="148">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="149">
+                                    <Trigger
+                                         pxsl_line="149">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_4"
+                                             pxsl_line="149" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="150">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="151">
+                                    <Trigger
+                                         pxsl_line="151">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_5"
+                                             pxsl_line="151" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="152">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="153">
+                                    <Trigger
+                                         pxsl_line="153">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_6"
+                                             pxsl_line="153" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="154">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="155">
+                                    <Trigger
+                                         pxsl_line="155">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_7"
+                                             pxsl_line="155" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="156">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="157">
+                                    <Trigger
+                                         pxsl_line="157">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_8"
+                                             pxsl_line="157" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="158">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="159">
+                                    <Trigger
+                                         pxsl_line="159">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_9"
+                                             pxsl_line="159" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="160">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="161">
+                                    <Trigger
+                                         pxsl_line="161">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_10"
+                                             pxsl_line="161" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                        <Phase
+                             type="set state"
+                             name="_"
+                             desired_state="on"
+                             pxsl_line="162">
+                            <Trigger
+                                 pxsl_line="162">
+                                <QuestObject
+                                     class="BombSwitchDI"
+                                     name="Final_BombSwitch_Bomb_1"
+                                     pxsl_line="162" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="163">
+                            <Object
+                                 pxsl_line="163">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Final_QEG_Bomb_Explosion"
+                                     pxsl_line="163" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="2"
+                             pxsl_line="164" />
+                        <Phase
+                             type="set state"
+                             name="_"
+                             desired_state="off"
+                             pxsl_line="165">
+                            <Trigger
+                                 pxsl_line="165">
+                                <QuestObject
+                                     class="BombSwitchDI"
+                                     name="Final_BombSwitch_Bomb_1"
+                                     pxsl_line="165" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="166">
+                            <Object
+                                 pxsl_line="166">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Final_QEG_Bomb_Explosion"
+                                     pxsl_line="166" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="semaphore"
+                             name="_"
+                             pxsl_line="167" />
+                    </Path>
+                    <!-- Mines -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="169">
+                    <Destination
+                         pxsl_line="169">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_06_02"
+                             pxsl_line="169" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="OR"
+                     name="_"
+                     pxsl_line="170">
+                    <Path
+                         pxsl_line="171">
+                        <Phase
+                             type="go to"
+                             name="FINAL - FIRST BUILDING - First Crane"
+                             distance="0"
+                             pxsl_line="172">
+                            <Destination
+                                 pxsl_line="172">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="slums_cs_final_crane_a_goto_00"
+                                     pxsl_line="172" />
+                            </Destination>
+                            <DebugPlayerPosition
+                                 pxsl_line="173">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="slums_cs_final_sp_06_02"
+                                     pxsl_line="173" />
+                            </DebugPlayerPosition>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="174">
+                        <!-- FOR SAFETY -->
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="175">
+                            <Destination
+                                 pxsl_line="175">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="slums_cs_final_crane_a_goto_01"
+                                     pxsl_line="175" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                    <!-- Mines -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                    <Path
+                         pxsl_line="177">
+                        <Phase
+                             type="OR"
+                             name="_"
+                             pxsl_line="178">
+                            <Path
+                                 pxsl_line="179">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="0"
+                                     show_locations="false"
+                                     pxsl_line="180">
+                                    <Destination
+                                         pxsl_line="180">
+                                        <QuestObject
+                                             class="SensorGoTo"
+                                             name="Final_GoTo_Bomb_1"
+                                             pxsl_line="180" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="181">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="182">
+                                    <Trigger
+                                         pxsl_line="182">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_1"
+                                             pxsl_line="182" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="183">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="184">
+                                    <Trigger
+                                         pxsl_line="184">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_2"
+                                             pxsl_line="184" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="185">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="186">
+                                    <Trigger
+                                         pxsl_line="186">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_3"
+                                             pxsl_line="186" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="187">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="188">
+                                    <Trigger
+                                         pxsl_line="188">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_4"
+                                             pxsl_line="188" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="189">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="190">
+                                    <Trigger
+                                         pxsl_line="190">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_5"
+                                             pxsl_line="190" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="191">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="192">
+                                    <Trigger
+                                         pxsl_line="192">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_6"
+                                             pxsl_line="192" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="193">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="194">
+                                    <Trigger
+                                         pxsl_line="194">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_7"
+                                             pxsl_line="194" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="195">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="196">
+                                    <Trigger
+                                         pxsl_line="196">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_8"
+                                             pxsl_line="196" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="197">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="198">
+                                    <Trigger
+                                         pxsl_line="198">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_9"
+                                             pxsl_line="198" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="199">
+                                <Phase
+                                     type="use"
+                                     name="_"
+                                     desired_state="on"
+                                     show_locations="false"
+                                     pxsl_line="200">
+                                    <Trigger
+                                         pxsl_line="200">
+                                        <QuestObject
+                                             class="DamageSwitchDI"
+                                             name="Final_DMGSwitch_10"
+                                             pxsl_line="200" />
+                                    </Trigger>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                        <Phase
+                             type="set state"
+                             name="_"
+                             desired_state="on"
+                             pxsl_line="201">
+                            <Trigger
+                                 pxsl_line="201">
+                                <QuestObject
+                                     class="BombSwitchDI"
+                                     name="Final_BombSwitch_Bomb_1"
+                                     pxsl_line="201" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="202">
+                            <Object
+                                 pxsl_line="202">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Final_QEG_Bomb_Explosion"
+                                     pxsl_line="202" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="2"
+                             pxsl_line="203" />
+                        <Phase
+                             type="set state"
+                             name="_"
+                             desired_state="off"
+                             pxsl_line="204">
+                            <Trigger
+                                 pxsl_line="204">
+                                <QuestObject
+                                     class="BombSwitchDI"
+                                     name="Final_BombSwitch_Bomb_1"
+                                     pxsl_line="204" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="205">
+                            <Object
+                                 pxsl_line="205">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Final_QEG_Bomb_Explosion"
+                                     pxsl_line="205" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="semaphore"
+                             name="_"
+                             pxsl_line="206" />
+                    </Path>
+                    <!-- Mines -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="208">
+                    <Object
+                         pxsl_line="208">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="slums_cs_final_first_building_enemies_qeg_01"
+                             pxsl_line="208" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="209">
+                    <Object
+                         pxsl_line="209">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="slums_cs_final_first_building_enemies_qeg_02"
+                             pxsl_line="209" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="210">
+                    <Destination
+                         pxsl_line="210">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_06_03"
+                             pxsl_line="210" />
+                    </Destination>
+                </Phase>
+                <!-- GET TO THE SECOND BUILDING BY CRANE -->
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="212">
+                    <!-- LOCATION -->
+                    <Path
+                         pxsl_line="213">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             pxsl_line="214">
+                            <Destination
+                                 pxsl_line="214">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="slums_cs_final_second_building_goto_01"
+                                     pxsl_line="214" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="215">
+                            <Object
+                                 pxsl_line="215">
+                                <QuestObject
+                                     class="SoundEmitterSimple"
+                                     name="slums_cs_final_march_music"
+                                     pxsl_line="215" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="216">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="217">
+                            <Destination
+                                 pxsl_line="217">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="slums_cs_final_crane_a_goto_01"
+                                     pxsl_line="217" />
+                            </Destination>
+                        </Phase>
+                        <!-- RAIS TALK ABOUT KARIM -->
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Rais_Finale_19DLG01"
+                             auto_start="true"
+                             pxsl_line="218" />
+                    </Path>
+                    <Path
+                         pxsl_line="219">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="220">
+                            <Destination
+                                 pxsl_line="220">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="slums_cs_final_crane_a_goto_02"
+                                     pxsl_line="220" />
+                            </Destination>
+                        </Phase>
+                        <!-- RAIS TALK ABOUT WHAT HES DONE -->
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Rais_Finale_20DLG01"
+                             auto_start="true"
+                             pxsl_line="221" />
+                    </Path>
+                    <Path
+                         pxsl_line="222">
+                        <Phase
+                             type="OR"
+                             name="_"
+                             pxsl_line="223">
+                            <Path
+                                 pxsl_line="224">
+                                <Phase
+                                     type="kill"
+                                     name="_"
+                                     show_locations="false"
+                                     pxsl_line="225">
+                                    <Spawner
+                                         pxsl_line="225">
+                                        <QuestObject
+                                             class="AISpawnBoxNumber"
+                                             name="slums_cs_final_second_building_enemies_crane_02"
+                                             pxsl_line="225" />
+                                    </Spawner>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="226">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="0"
+                                     show_locations="false"
+                                     pxsl_line="227">
+                                    <Destination
+                                         pxsl_line="227">
+                                        <QuestObject
+                                             class="SensorGoTo"
+                                             name="slums_cs_final_second_building_goto_01"
+                                             pxsl_line="227" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="go to"
+                     name="FINAL - SECOND BUILDING - Entering Second Building"
+                     distance="10000"
+                     pxsl_line="228">
+                    <Destination
+                         pxsl_line="228">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_07"
+                             pxsl_line="228" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="229">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_07"
+                             pxsl_line="229" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="230">
+                    <Object
+                         pxsl_line="231">
+                        <QuestObject
+                             class="AIDeadBodySpawnBoxAuto"
+                             name="slums_cs_final_karims_dead_body_01"
+                             pxsl_line="231" />
+                    </Object>
+                    <Object
+                         pxsl_line="232">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_karims_infected_01"
+                             pxsl_line="232" />
+                    </Object>
+                    <Object
+                         pxsl_line="233">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_karims_infected_02"
+                             pxsl_line="233" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="234">
+                    <Object
+                         pxsl_line="234">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Karim"
+                             pxsl_line="234" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="235">
+                    <Object
+                         pxsl_line="235">
+                        <QuestObject
+                             class="SensorAmbientMusicArea"
+                             name="Final_SAMA_Second_Building"
+                             pxsl_line="235" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="236">
+                    <Destination
+                         pxsl_line="236">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_07"
+                             pxsl_line="236" />
+                    </Destination>
+                </Phase>
+                <!-- SECOND BUILDING - -->
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="238">
+                    <!-- LOCATION -->
+                    <Path
+                         pxsl_line="239">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             pxsl_line="240">
+                            <Destination
+                                 pxsl_line="240">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="slums_cs_final_second_building_goto_01_b"
+                                     pxsl_line="240" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="241">
+                            <Object
+                                 pxsl_line="242">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_second_building_enemies_viral_03"
+                                     pxsl_line="242" />
+                            </Object>
+                            <Object
+                                 pxsl_line="243">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_second_building_enemies_goon_01"
+                                     pxsl_line="243" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             pxsl_line="244">
+                            <Destination
+                                 pxsl_line="244">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="slums_cs_final_second_building_goto_01_c"
+                                     pxsl_line="244" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="245">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="246">
+                            <Destination
+                                 pxsl_line="246">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="slums_cs_final_second_building_goto_01_c"
+                                     pxsl_line="246" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="247">
+                            <Object
+                                 pxsl_line="248">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_second_building_enemies_viral_door_01::slums_cs_final_a_viral"
+                                     pxsl_line="248" />
+                            </Object>
+                            <Object
+                                 pxsl_line="249">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_second_building_enemies_viral_04"
+                                     pxsl_line="249" />
+                            </Object>
+                            <Object
+                                 pxsl_line="250">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_second_building_enemies_biters_01"
+                                     pxsl_line="250" />
+                            </Object>
+                            <Object
+                                 pxsl_line="251">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_second_building_enemies_biters_02"
+                                     pxsl_line="251" />
+                            </Object>
+                            <Object
+                                 pxsl_line="252">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_second_building_enemies_biters_04"
+                                     pxsl_line="252" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="go to"
+                     name="FINAL - SECOND BUILDING - Frog Jumping"
+                     distance="10000"
+                     pxsl_line="253">
+                    <Destination
+                         pxsl_line="253">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_07_b"
+                             pxsl_line="253" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="254">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_07_b"
+                             pxsl_line="254" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="255">
+                    <Destination
+                         pxsl_line="255">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_07_b"
+                             pxsl_line="255" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="go to"
+                     name="FINAL - SECOND BUILDING - Before Elevator"
+                     distance="0"
+                     pxsl_line="256">
+                    <Destination
+                         pxsl_line="256">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="slums_cs_final_first_building_enemies_goto_02"
+                             pxsl_line="256" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="257">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_08"
+                             pxsl_line="257" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="258">
+                    <Object
+                         pxsl_line="259">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="slums_cs_final_first_building_enemies_qeg_02"
+                             pxsl_line="259" />
+                    </Object>
+                    <Object
+                         pxsl_line="260">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_viral_03"
+                             pxsl_line="260" />
+                    </Object>
+                    <Object
+                         pxsl_line="261">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_goon_01"
+                             pxsl_line="261" />
+                    </Object>
+                    <Object
+                         pxsl_line="262">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_viral_door_01::slums_cs_final_a_viral"
+                             pxsl_line="262" />
+                    </Object>
+                    <Object
+                         pxsl_line="263">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_viral_04"
+                             pxsl_line="263" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="264">
+                    <Destination
+                         pxsl_line="264">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_08"
+                             pxsl_line="264" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="265">
+                    <Object
+                         pxsl_line="266">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_suicider_01"
+                             pxsl_line="266" />
+                    </Object>
+                    <Object
+                         pxsl_line="267">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_bomber_01"
+                             pxsl_line="267" />
+                    </Object>
+                    <Object
+                         pxsl_line="268">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_biters_03"
+                             pxsl_line="268" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="0"
+                     pxsl_line="269">
+                    <Destination
+                         pxsl_line="269">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="slums_cs_final_first_building_enemies_goto_02_b"
+                             pxsl_line="269" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="set day night time"
+                     name="_"
+                     day_time="19"
+                     pxsl_line="270" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="271">
+                    <Object
+                         pxsl_line="271">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_toad_01"
+                             pxsl_line="271" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="go to"
+                     name="FINAL - SECOND BUILDING - Second Crane"
+                     distance="0"
+                     pxsl_line="272">
+                    <Destination
+                         pxsl_line="272">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="slums_cs_final_first_building_enemies_goto_02_c"
+                             pxsl_line="272" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="273">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_09"
+                             pxsl_line="273" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="274">
+                    <Object
+                         pxsl_line="275">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_suicider_01"
+                             pxsl_line="275" />
+                    </Object>
+                    <Object
+                         pxsl_line="276">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_bomber_01"
+                             pxsl_line="276" />
+                    </Object>
+                    <Object
+                         pxsl_line="277">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_biters_01"
+                             pxsl_line="277" />
+                    </Object>
+                    <Object
+                         pxsl_line="278">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_biters_02"
+                             pxsl_line="278" />
+                    </Object>
+                    <Object
+                         pxsl_line="279">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_biters_03"
+                             pxsl_line="279" />
+                    </Object>
+                    <Object
+                         pxsl_line="280">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_biters_04"
+                             pxsl_line="280" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="281">
+                    <Destination
+                         pxsl_line="281">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_09"
+                             pxsl_line="281" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="0"
+                     pxsl_line="282">
+                    <Destination
+                         pxsl_line="282">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="slums_cs_final_first_building_enemies_goto_02_d"
+                             pxsl_line="282" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="283">
+                    <Object
+                         pxsl_line="284">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_armored"
+                             pxsl_line="284" />
+                    </Object>
+                    <Object
+                         pxsl_line="285">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_biters_06"
+                             pxsl_line="285" />
+                    </Object>
+                    <Object
+                         pxsl_line="286">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_biters_07"
+                             pxsl_line="286" />
+                    </Object>
+                    <Object
+                         pxsl_line="287">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_biters_08"
+                             pxsl_line="287" />
+                    </Object>
+                    <Object
+                         pxsl_line="288">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_biters_09"
+                             pxsl_line="288" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="289">
+                    <!-- LOCATION -->
+                    <Path
+                         pxsl_line="290">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             pxsl_line="291">
+                            <Destination
+                                 pxsl_line="291">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="slums_cs_final_first_building_enemies_goto_02_f"
+                                     pxsl_line="291" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="292">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="293">
+                            <Destination
+                                 pxsl_line="293">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="slums_cs_final_first_building_enemies_goto_02_e"
+                                     pxsl_line="293" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Rais_Finale_25DLG01"
+                             auto_start="true"
+                             pxsl_line="294" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="295">
+                            <Object
+                                 pxsl_line="295">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_second_building_enemies_toad_01"
+                                     pxsl_line="295" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="0"
+                     pxsl_line="296">
+                    <Destination
+                         pxsl_line="296">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="slums_cs_final_first_building_enemies_goto_02_f"
+                             pxsl_line="296" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="go to"
+                     name="FINAL - SECOND BUILDING - CIN - Crane Fall"
+                     distance="10000"
+                     pxsl_line="297">
+                    <Destination
+                         pxsl_line="297">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_10"
+                             pxsl_line="297" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="298">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_10"
+                             pxsl_line="298" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="299">
+                    <Destination
+                         pxsl_line="299">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_10"
+                             pxsl_line="299" />
+                    </Destination>
+                </Phase>
+                <!-- GET TO RAIS TOWER OVER CRANE -->
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="301">
+                    <!-- LOCATION -->
+                    <Path
+                         pxsl_line="302">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             pxsl_line="303">
+                            <Destination
+                                 pxsl_line="303">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="slums_cs_final_second_building_goto_07"
+                                     pxsl_line="303" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="304">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="305">
+                            <Destination
+                                 pxsl_line="305">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="sgt_Final_Crane_SecondPart_Destr_Cin"
+                                     pxsl_line="305" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="306">
+                            <Object
+                                 pxsl_line="307">
+                                <QuestObject
+                                     class="LadderDI"
+                                     name="slulms_cs_final_crane_ladder_01"
+                                     pxsl_line="307" />
+                            </Object>
+                            <Object
+                                 pxsl_line="308">
+                                <QuestObject
+                                     class="LadderDI"
+                                     name="slulms_cs_final_crane_ladder_02"
+                                     pxsl_line="308" />
+                            </Object>
+                            <Object
+                                 pxsl_line="309">
+                                <QuestObject
+                                     class="LadderDI"
+                                     name="slulms_cs_final_crane_ladder_03"
+                                     pxsl_line="309" />
+                            </Object>
+                        </Phase>
+                        <!-- ALL LETHAL IN AIR B -->
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="310">
+                            <Object
+                                 pxsl_line="310">
+                                <QuestObject
+                                     class="LethalObject"
+                                     name="slums_cs_final_all_lethal_object_b"
+                                     pxsl_line="310" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="311">
+                            <Object
+                                 pxsl_line="311">
+                                <QuestObject
+                                     class="LethalObject"
+                                     name="slums_cs_final_all_lethal_object"
+                                     pxsl_line="311" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="AND"
+                             name="_"
+                             pxsl_line="312">
+                            <Path
+                                 pxsl_line="313">
+                                <Phase
+                                     type="movie"
+                                     name="_"
+                                     movie="cin_crane_fall_01"
+                                     pxsl_line="314" />
+                            </Path>
+                            <Path
+                                 pxsl_line="315">
+                                <Phase
+                                     type="wait guard"
+                                     name="_"
+                                     time="13.56"
+                                     pxsl_line="316" />
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     pxsl_line="317">
+                                    <Object
+                                         pxsl_line="317">
+                                        <QuestObject
+                                             class="FXEmitter"
+                                             name="crane_big_dust_fx_01"
+                                             pxsl_line="317" />
+                                    </Object>
+                                </Phase>
+                                <Phase
+                                     type="wait guard"
+                                     name="_"
+                                     time="2.31"
+                                     pxsl_line="318" />
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     pxsl_line="319">
+                                    <Object
+                                         pxsl_line="319">
+                                        <QuestObject
+                                             class="FXEmitter"
+                                             name="crane_big_dust_fx_02"
+                                             pxsl_line="319" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <!-- Crane before movie -->
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="320">
+                    <Object
+                         pxsl_line="320">
+                        <QuestObject
+                             class="GroupingObject"
+                             name="slums_cs_final_crane_before_go"
+                             pxsl_line="320" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="321">
+                    <Path
+                         pxsl_line="322">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="true"
+                             pxsl_line="323">
+                            <Destination
+                                 pxsl_line="323">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="slums_cs_final_rais_tower_goto_01"
+                                     pxsl_line="323" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="324">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="325">
+                            <Destination
+                                 pxsl_line="325">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="slums_cs_final_rais_tower_goto_00A"
+                                     pxsl_line="325" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Rais_Finale_21DLG01_a"
+                             auto_start="true"
+                             pxsl_line="326" />
+                    </Path>
+                    <Path
+                         pxsl_line="327">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="328">
+                            <Destination
+                                 pxsl_line="328">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="slums_cs_final_rais_tower_goto_00B"
+                                     pxsl_line="328" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Rais_Finale_21DLG01_b"
+                             auto_start="true"
+                             pxsl_line="329" />
+                    </Path>
+                    <Path
+                         pxsl_line="330">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="331">
+                            <Destination
+                                 pxsl_line="331">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="slums_cs_final_rais_tower_goto_00C"
+                                     pxsl_line="331" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Rais_Finale_21DLG01_c"
+                             auto_start="true"
+                             pxsl_line="332" />
+                    </Path>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <Quest
+         name="Final_End_03_Rais_Tower_2"
+         parent="Final_End_03_Rais_Tower_1"
+         glued="true"
+         pxsl_line="334">
+        <!-- Meet Rais at the top of his building. -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Final_OBJ_FindRais&amp;"
+             pxsl_line="335">
+            <Path
+                 pxsl_line="335">
+                <Phase
+                     type="go to"
+                     name="FINAL - RAIS TOWER - Start"
+                     distance="0"
+                     pxsl_line="336">
+                    <Destination
+                         pxsl_line="336">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="slums_cs_final_rais_tower_goto_01"
+                             pxsl_line="336" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="337">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_11"
+                             pxsl_line="337" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <!-- Optimization by Sikorek - to be fixed by SiCK. -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="338">
+                    <Object
+                         pxsl_line="339">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies"
+                             pxsl_line="339" />
+                    </Object>
+                    <Object
+                         pxsl_line="340">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_armored"
+                             pxsl_line="340" />
+                    </Object>
+                    <Object
+                         pxsl_line="341">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_biters_01"
+                             pxsl_line="341" />
+                    </Object>
+                    <Object
+                         pxsl_line="342">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_biters_02"
+                             pxsl_line="342" />
+                    </Object>
+                    <Object
+                         pxsl_line="343">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_biters_03"
+                             pxsl_line="343" />
+                    </Object>
+                    <Object
+                         pxsl_line="344">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_biters_04"
+                             pxsl_line="344" />
+                    </Object>
+                    <Object
+                         pxsl_line="345">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_bomber_01"
+                             pxsl_line="345" />
+                    </Object>
+                    <Object
+                         pxsl_line="346">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_crane_02"
+                             pxsl_line="346" />
+                    </Object>
+                    <Object
+                         pxsl_line="347">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_goon_01"
+                             pxsl_line="347" />
+                    </Object>
+                    <Object
+                         pxsl_line="348">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_suicider_00"
+                             pxsl_line="348" />
+                    </Object>
+                    <Object
+                         pxsl_line="349">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_suicider_01"
+                             pxsl_line="349" />
+                    </Object>
+                    <Object
+                         pxsl_line="350">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_toad_01"
+                             pxsl_line="350" />
+                    </Object>
+                    <Object
+                         pxsl_line="351">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_viral_01"
+                             pxsl_line="351" />
+                    </Object>
+                    <Object
+                         pxsl_line="352">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_viral_02"
+                             pxsl_line="352" />
+                    </Object>
+                    <Object
+                         pxsl_line="353">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_viral_03"
+                             pxsl_line="353" />
+                    </Object>
+                    <Object
+                         pxsl_line="354">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_viral_04"
+                             pxsl_line="354" />
+                    </Object>
+                    <Object
+                         pxsl_line="355">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_biters_06"
+                             pxsl_line="355" />
+                    </Object>
+                    <Object
+                         pxsl_line="356">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_biters_07"
+                             pxsl_line="356" />
+                    </Object>
+                    <Object
+                         pxsl_line="357">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_biters_08"
+                             pxsl_line="357" />
+                    </Object>
+                    <Object
+                         pxsl_line="358">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_second_building_enemies_biters_09"
+                             pxsl_line="358" />
+                    </Object>
+                    <!-- ALL LETHAL IN AIR B OFF -->
+                    <Object
+                         pxsl_line="359">
+                        <QuestObject
+                             class="LethalObject"
+                             name="slums_cs_final_all_lethal_object_b"
+                             pxsl_line="359" />
+                    </Object>
+                    <Object
+                         pxsl_line="360">
+                        <QuestObject
+                             class="FXEmitter"
+                             name="crane_big_dust_fx_01"
+                             pxsl_line="360" />
+                    </Object>
+                    <Object
+                         pxsl_line="361">
+                        <QuestObject
+                             class="FXEmitter"
+                             name="crane_big_dust_fx_02"
+                             pxsl_line="361" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="362">
+                    <!-- ALL LETHAL IN AIR C -->
+                    <Object
+                         pxsl_line="363">
+                        <QuestObject
+                             class="LethalObject"
+                             name="slums_cs_final_all_lethal_object_c"
+                             pxsl_line="363" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="364">
+                    <Destination
+                         pxsl_line="364">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_11"
+                             pxsl_line="364" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <Quest
+         name="Final_End_03_Rais_Tower"
+         parent="Final_End_03_Rais_Tower_2"
+         glued="true"
+         final="true"
+         pxsl_line="366">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Final_OBJ_ConfrontRais&amp;"
+             pxsl_line="367">
+            <Path
+                 pxsl_line="367">
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="0"
+                     pxsl_line="368">
+                    <Destination
+                         pxsl_line="368">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="slums_cs_final_rais_tower_goto_05"
+                             pxsl_line="368" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="go to"
+                     name="FINAL - RAIS TOWER - After Deco"
+                     distance="0"
+                     pxsl_line="369">
+                    <Destination
+                         pxsl_line="369">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="slums_cs_final_rais_tower_goto_02"
+                             pxsl_line="369" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="370">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_12"
+                             pxsl_line="370" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="371">
+                    <Destination
+                         pxsl_line="371">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_12"
+                             pxsl_line="371" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="372">
+                    <Object
+                         pxsl_line="372">
+                        <QuestObject
+                             class="ForceDayTimeObject"
+                             name="FinalCinematicForcedTime"
+                             pxsl_line="372" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="0"
+                     pxsl_line="373">
+                    <Destination
+                         pxsl_line="373">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="slums_cs_final_rais_tower_goto_03"
+                             pxsl_line="373" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="set dialog"
+                     name="_"
+                     speaker="voice2d"
+                     group="Rais_Finale_26DLG01"
+                     auto_start="true"
+                     pxsl_line="374" />
+                <Phase
+                     type="go to"
+                     name="FINAL - RAIS TOWER - Almost Final"
+                     distance="0"
+                     pxsl_line="375">
+                    <Destination
+                         pxsl_line="375">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="slums_cs_final_rais_tower_goto_04"
+                             pxsl_line="375" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="376">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_13"
+                             pxsl_line="376" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="377">
+                    <Destination
+                         pxsl_line="377">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_13"
+                             pxsl_line="377" />
+                    </Destination>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <!-- CIN - FINAL FIGHT -->
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-             -->
+                <Phase
+                     type="go to"
+                     name="FINAL - RAIS TOWER - Final Cinematic"
+                     distance="17"
+                     pxsl_line="381">
+                    <Destination
+                         pxsl_line="381">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_14"
+                             pxsl_line="381" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="382">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_14"
+                             pxsl_line="382" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="383">
+                    <Object
+                         pxsl_line="383">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="cin_raisdeathoutro_01_sensor"
+                             pxsl_line="383" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="384">
+                    <Destination
+                         pxsl_line="384">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_15"
+                             pxsl_line="384" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="0"
+                     pxsl_line="385">
+                    <Destination
+                         pxsl_line="385">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="cin_raisdeathoutro_01_sensor"
+                             pxsl_line="385" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="386">
+                    <Object
+                         pxsl_line="386">
+                        <QuestObject
+                             class="SensorAmbientMusicArea"
+                             name="Final_SAMA_Second_Building"
+                             pxsl_line="386" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="hudgroup"
+                     name="_"
+                     group="HideRadarForMinigameCiematic"
+                     mode="hide"
+                     pxsl_line="387" />
+                <!-- ,enable _ QuestEnableGroup cin_raisdeathoutro_01_trigger_qeg -->
+                <!-- ,use _ InteractiveMovieTrigger cin_raisdeathoutro_01_trigger -state=on -show=false -->
+                <!-- ,disable _ QuestEnableGroup cin_raisdeathoutro_01_trigger_qeg -->
+                <Phase
+                     type="interactive movie"
+                     name="_"
+                     pxsl_line="391">
+                    <Scenario
+                         pxsl_line="391">
+                        <QuestObject
+                             class="InteractiveMovieScenario"
+                             name="cin_raisdeathoutro_01_scenario"
+                             pxsl_line="391" />
+                    </Scenario>
+                </Phase>
+                <!-- RE-ENABLE MULTIPLAYER (revert all the changes done to gameplay in disable-multiplayer) -->
+                <Phase
+                     type="enable multiplayer"
+                     name="_"
+                     state="true"
+                     pxsl_line="392" />
+                <!-- RE-ENABLE MULTIPLAYER (allow session to be Public etc. again) -->
+                <Phase
+                     type="session param"
+                     name="_"
+                     param="MultiplayerGamePart"
+                     value="true"
+                     pxsl_line="393" />
+                <Phase
+                     type="player control"
+                     name="_"
+                     block_hook="false"
+                     pxsl_line="394" />
+                <Phase
+                     type="hudgroup"
+                     name="_"
+                     group="HideRadarForMinigameCiematic"
+                     mode="show"
+                     pxsl_line="395" />
+            </Path>
+        </Phase>
+        <!-- ,goto <<FINAL - RAIS TOWER - After Final Cinematic>> SpawnPoint slums_cs_final_sp_15 -distance=-1 -= Sikorek - Temporary added Invoke for game final testing. -->
+            <!-- ,debugpos SpawnPoint slums_cs_final_sp_15 -->
+        <Phase
+             type="go to"
+             name="FINAL - RAIS TOWER - After CIN - Game Over"
+             distance="1000000"
+             pxsl_line="398">
+            <Destination
+                 pxsl_line="398">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="cin_raisdeathoutro_01_pos01"
+                     pxsl_line="398" />
+            </Destination>
+            <DebugPlayerPosition
+                 pxsl_line="399">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="cin_raisdeathoutro_01_pos01"
+                     pxsl_line="399" />
+            </DebugPlayerPosition>
+        </Phase>
+        <!-- ,reward _ -reward=StorylineReward_Final_reward -->
+        <!-- ,checkpoint _ SpawnPoint slums_cs_final_sp_15 -->
+        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+        <!-- THE END OF THE STORY -= -->
+        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    </Quest>
+</QuestsDefinitions>

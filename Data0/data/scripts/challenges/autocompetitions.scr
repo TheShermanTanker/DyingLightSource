@@ -1,0 +1,367 @@
+import "StatsStuff.scr"
+import "ChallengeClasses.scr"
+
+// BE CAREFUL: Order represents priority
+
+sub main() 
+{        
+    AutoChallenge("auto_marker")	// reach custom marker first
+    {
+        use AutoCompetitionClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("ReachPoint")
+        {
+            Marker(true);
+            Count(1);
+        }
+        Duration(120.0);
+		TextureName("chl_waypoint_icon"); // map_waypoint
+        Delay(0.0);
+        CanStartInSafeArea(true);
+		RequiresNoVehicle(true);
+    }
+    
+    AutoChallenge("auto_prime")	// kill prime first
+    {
+        use AutoCompetitionClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            VictimPresetName("Prime;PrimeNight");
+            Count(1);
+        }
+        Duration(150.0);
+        MinCount(1);
+        MinRange(100.0);
+        Requirements()
+        {
+            DayPhase("night");
+        }
+		TextureName("chl_prime_icon");
+        Delay(0.0);
+    }
+
+    AutoChallenge("auto_airdrop")	// open airdrop first
+    {
+        use AutoCompetitionClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("UseTrigger")
+        {
+            EncounterType("AirDrop_AirDrop");
+            AirDrop(true);
+            InOrder(false);
+        }
+        Duration(240.0);
+		TextureName("chl_encounter_airdrop_icon");
+        Delay(0.0);
+        CanStartInSafeArea(true);
+		RequiresNoVehicle(true);
+    }
+
+	/*AutoChallenge("auto_battle_area_encounter")	// deal the most damage to encounter enemies
+    {
+        use AutoCompetitionClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("GiveDamage")
+        {
+			EncounterType("BattleArea_Zombies;BattleArea_Infecteds;BattleArea_Armored;BattleArea_Thug");
+            Count(0);
+			CountXP(true);
+        }
+
+		// AreaRange(50.0);
+        Duration(60.0);
+		TextureName("chl_encounter_icon");
+        Delay(0.0);
+    }*/
+
+	AutoChallenge("auto_fighting_groups_encounter")	// deal the most damage to encounter enemies
+    {
+        use AutoCompetitionClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("GiveDamage")
+        {
+			EncounterType("FightingGroups_Zombies;FightingGroups_Infecteds;FightingGroups_Armored;FightingGroups_Thug");
+            Count(0);
+			CountXP(true);
+        }
+
+		// AreaRange(50.0);
+        Duration(180.0);
+		TextureName("chl_encounter_icon");
+        Delay(0.0);
+        CanStartInSafeArea(true);
+    }
+
+	AutoChallenge("auto_prisoners_encounter")	// deal the most damage to encounter enemies
+    {
+        use AutoCompetitionClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("GiveDamage")
+        {
+			EncounterType("Prisoners_Kidnapped;Prisoners_Kicking");
+            Count(0);
+			CountXP(true);
+        }
+
+		// AreaRange(50.0);
+        Duration(180.0);
+		TextureName("chl_encounter_icon");
+        Delay(0.0);
+        CanStartInSafeArea(true);
+    }
+
+	AutoChallenge("auto_patrol_encounter")	// deal the most damage to encounter enemies
+    {
+        use AutoCompetitionClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("GiveDamage")
+        {
+			EncounterType("Patrol_Door;Patrol_Door2;Patrol_Car;Patrol_Barrel;Patrol_Barrel2;Patrol_Fireplace;Patrol_Deadbody");
+            Count(0);
+			CountXP(true);
+        }
+
+		// AreaRange(50.0);
+        Duration(180.0);
+		TextureName("chl_encounter_icon");
+        Delay(0.0);
+        CanStartInSafeArea(true);
+    }
+
+	AutoChallenge("auto_help_save_npc")	// deal the most damage to encounter enemies
+    {
+        use AutoCompetitionClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("GiveDamage")
+        {
+			EncounterType("HelpSafeNPC_Ledge;HelpSafeNPC_Shop;HelpSafeNPC_House;HelpSafeNPC_Wardrobe;HelpSafeNPC_Bus");
+            Count(0);
+			CountXP(true);
+        }
+
+		// AreaRange(50.0);
+        Duration(180.0);
+		TextureName("chl_encounter_icon");
+        Delay(0.0);
+        CanStartInSafeArea(true);
+    }
+
+	AutoChallenge("auto_help_save_grabbed_npc")	// deal the most damage to encounter enemies
+    {
+        use AutoCompetitionClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("GiveDamage")
+        {
+			EncounterType("HelpGrabbedNPC_Grabbed");
+            Count(0);
+			CountXP(true);
+        }
+
+		// AreaRange(50.0);
+        Duration(180.0);
+		TextureName("chl_encounter_icon");
+        Delay(0.0);
+        CanStartInSafeArea(true);
+    }
+    
+    AutoChallenge("auto_demolisher_damage")	// deal the most damage to the demolisher
+    {
+        use AutoCompetitionClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            VictimPresetName("Demolisher;Demolisher_Arena;Demolisher_Wasteland;Demolisher_Indoor;Demolisher_Blister;Demolisher_SlumsAntenna");
+            Count(0);
+            CountDamage(true);
+        }
+        Duration(120.0);
+        MinCount(1);
+        MinRange(15.0);
+        Requirements()
+        {
+            DayPhase("day");
+        }
+		TextureName("chl_kill_icon");
+        ShowEnemyLocationsBeforeChallenge(true);
+        Delay(120.0);
+        Special(true);
+    }
+
+    /*
+    AutoChallenge("auto_demolisher")	// kill demolisher first
+    {
+        use AutoCompetitionClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            VictimPresetName("Demolisher;Demolisher_Arena;Demolisher_Wasteland;Demolisher_Indoor");
+            Count(1);
+        }
+        Duration(120.0);
+        MinCount(1);
+        MinRange(15.0);
+        Requirements()
+        {
+            DayPhase("day");
+        }
+		TextureName("chl_kill_icon");
+        ShowEnemyLocationsBeforeChallenge(true);
+        Delay(0.0);
+    }
+    */
+    
+    AutoChallenge("auto_goon_damage")	// deal the most damage to the goon
+    {
+        use AutoCompetitionClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            VictimPresetName("Goon_SlumsEncounters;Goon_Poison;Goon_Dream;Goon_Demolition;Goon_Blisters;Goon;Goon_lvl0;Goon_lvl1;Goon_lvl2;Goon_Slums;Goon_Hard;Goon_Wasteland;Goon_OldTown;Goon_OldTown_Int;Goon_DeadZone;Special_Thug_Armed_Easy;Special_Thug_Armed_Medium;Special_Thug_Armed_Hard;Goon_OldTown_Interior;Thug_Armed_Easy;Goon_OldTown_Interior");
+            Count(0);
+            CountDamage(true);
+        }
+        Duration(120.0);
+        MinCount(1);
+        MinRange(15.0);
+        Requirements()
+        {
+            DayPhase("day");
+        }
+		TextureName("chl_kill_icon");
+        ShowEnemyLocationsBeforeChallenge(true);
+        Delay(600.0);
+        Special(true);
+    }
+    
+    /*
+    AutoChallenge("auto_goon")	// kill goon first
+    {
+        use AutoCompetitionClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            VictimPresetName("Goon_Slums;Goon_Hard;Goon_Wasteland;Goon_OldTown;Goon_OldTown_Int;Goon_DeadZone;Special_Thug_Armed_Easy;Special_Thug_Armed_Medium;Special_Thug_Armed_Hard;Goon_OldTown_Interior;Thug_Armed_Easy;Goon_OldTown_Interior");
+            Count(1);
+        }
+        Duration(120.0);
+        MinCount(1);
+        MinRange(15.0);
+        Requirements()
+        {
+            DayPhase("day");
+        }
+		TextureName("chl_kill_icon");
+        ShowEnemyLocationsBeforeChallenge(true);
+        Delay(120.0);
+    }
+    */
+
+	AutoChallenge("auto_loot_on_sonar")	// loot bigger value of items than others
+    {
+        use AutoCompetitionClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("Loot")
+        {
+            Count(0);
+        }
+        Duration(60.0);
+        MinCount(3);
+        MinRange(20.0);
+		RequireSonarUsed(2.0);
+        Requirements()
+        {
+            DayPhase("day");
+        }
+		TextureName("chl_loot_icon");
+        Delay(90.0);
+        BlockLootFromDeadBodies(true);
+    }
+    
+    AutoChallenge("auto_loot")	// loot bigger value of items than others
+    {
+        use AutoCompetitionClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("Loot")
+        {
+            Count(0);
+        }
+        Duration(60.0);
+        MinCount(5);
+        MinRange(25.0);
+        AllowNextAfterDistance(40.0);
+        Requirements()
+        {
+            DayPhase("day");
+        }
+        AvailableMaps("slums;old_town");
+		TextureName("chl_loot_icon");
+        Delay(900.0);
+        BlockLootFromDeadBodies(true);
+    }
+
+    AutoChallenge("auto_kill")	// kill more enemies than others
+    {
+        use AutoCompetitionClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            Count(0);
+            VictimType("ZOMBIE");
+        }
+		// AreaRange(50.0);
+        Duration(60.0);
+        MinCount(7);
+        MinRange(8.0);
+        Requirements()
+        {
+            DayPhase("day");
+        }
+		RequiresNoVehicle(true);
+        ExcludedMaps("old_town;old_town_outposts_museum");
+		TextureName("chl_kill_icon");
+        Delay(900.0);
+        AllowNextAfterDistance(80.0);
+    }
+    
+    AutoChallenge("auto_kill_oldtown")	// kill more enemies than others - oldtown version
+    {
+        use AutoCompetitionClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            Count(0);
+            VictimType("ZOMBIE");
+        }
+        Duration(60.0);
+        MinCount(12);
+        MinRange(10.0);
+        Requirements()
+        {
+            DayPhase("day");
+        }
+		RequiresNoVehicle(true);
+        AvailableMaps("old_town");
+		TextureName("chl_kill_icon");
+        Delay(900.0);
+        AllowNextAfterDistance(80.0);
+    }
+
+    AutoChallenge("auto_kill_rais")	// kill more enemies than others
+    {
+        use AutoCompetitionClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            Count(0);
+            VictimType("HUMAN");
+        }
+        Duration(120.0);
+        MinCount(3);
+        MinRange(20.0);
+        // AllowNextAfterDistance(10.0);
+        AvailableMaps("old_town_outposts_radio");
+		TextureName("chl_kill_icon");
+        Delay(0.0);
+    }
+}

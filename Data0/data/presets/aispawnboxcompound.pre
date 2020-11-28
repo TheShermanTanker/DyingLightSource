@@ -1,0 +1,81 @@
+import "AISpawnBox.pre.def"
+
+sub main()
+{
+    NotEditable();
+    PresetDef("SpawningType")
+    {
+        Description("");
+
+        AddField("m_MinDistanceFromPlayer", "10.0");
+		AddField("m_MaxDistanceFromPlayer", "40.0");
+        AddField("m_TimeBtwSpawns", "3.0");
+        AddField("m_MinWeight", "1100");
+        AddField("m_ActivationRange", "0.0", true);
+        AddField("m_SpawnBehind", "0");
+        AddField("m_PreferMiddleDist", "0");
+
+        Preset("Forced")
+        {
+            SetField("m_TimeBtwSpawns", "0.0");
+            SetField("m_MinWeight", "1000");
+            SetField("m_ActivationRange", "60.0");
+        }
+
+        Preset("Standard")
+        {
+            SetField("m_TimeBtwSpawns", "3.0");
+            SetField("m_MinWeight", "1100");
+            SetField("m_ActivationRange", "0.0");
+        }
+
+        Preset("Standard_Fast")
+        {
+            SetField("m_TimeBtwSpawns", "0.25");
+            SetField("m_MinWeight", "1100");
+            SetField("m_ActivationRange", "0.0");
+        }
+		
+		Preset("StadiumForced")
+        {
+            SetField("m_TimeBtwSpawns", "0.9");
+            SetField("m_MinWeight", "1000");
+            SetField("m_ActivationRange", "60.0");
+        }
+		
+		Preset("WastelandBossFightClose")
+        {
+            SetField("m_TimeBtwSpawns", "3.0");
+            SetField("m_MinWeight", "1109");
+            SetField("m_ActivationRange", "0.0");
+            SetField("m_SpawnBehind", "1");
+			SetField("m_PreferMiddleDist", "1");
+			SetField("m_MinDistanceFromPlayer", "2.0");
+			SetField("m_MaxDistanceFromPlayer", "5.0");
+			SetField("m_IgnoreDistAndVisibility", "1");
+        }
+		
+		Preset("WastelandBossFightFar")
+        {
+            SetField("m_TimeBtwSpawns", "1.0");
+            SetField("m_MinWeight", "1100");
+            SetField("m_ActivationRange", "100.0");
+        }
+    }
+
+    PresetDef("AI Preset")
+    {
+        Description("");
+    
+        AddField("m_AIPresets", "", false);
+        AddField("m_AIType", "zombie", false);
+		AddField("m_DiffLevelTables", "");
+
+        IgnoreField("m_BeforeSpawnSoundStartRange");
+        IgnoreField("m_BeforeSpawnSoundStartRangeMin");
+        IgnoreField("m_MinAIsToMakeSound");
+        IgnoreField("m_SpawnerBeforeSpawnSounds");
+
+        use declare_ai_presets();
+    }
+}

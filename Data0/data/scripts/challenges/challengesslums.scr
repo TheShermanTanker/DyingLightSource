@@ -1,0 +1,622 @@
+import "StatsStuff.scr"
+import "ChallengeClasses.scr"
+
+sub main() 
+{
+///  Sparing partner part 4
+    Challenge("slums_00")
+    {
+        use QuestChallengeClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("ReachPoint")
+        {
+            Point("slums_00_chl_point_02");
+			Point("slums_00_chl_point_04");
+			Point("slums_00_chl_point_06");				
+			Point("slums_00_chl_point_09");			
+        }
+        NegativeEvent("TakeDamage");
+		NegativeEvent("UseSkill")
+		{
+            Skill("GrapplingHook");  			
+        }
+		Requirements()
+        {
+            DayPhase("day");
+        }
+        Difficulty(Challenge_Diff_Hard);
+        Duration(65.0);
+		
+		TextureName("chl_objective_icon");
+    }
+    
+/// - Dobiegnij do X punktow 00
+    Challenge("slums_01")
+    {
+        use QuestChallengeClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("ReachPoint")
+        {
+			Point("slums_01_chl_point_02");
+			Point("slums_01_chl_point_03");
+			Point("slums_01_chl_point_04");
+        }
+		NegativeEvent("UseSkill")
+		{
+            Skill("GrapplingHook");  			
+        }
+		Requirements()
+        {
+            DayPhase("day");
+        }
+        Difficulty(Challenge_Diff_Medium);
+        Duration(70.0);
+		
+		TextureName("chl_objective_icon");
+    }
+    
+/// The Jealous Runner part 2 
+    Challenge("slums_02")
+    {
+        use QuestChallengeClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("ReachPoint")
+        {
+			Point("slums_02_chl_point_02");
+			Point("slums_02_chl_point_04");
+			Point("slums_02_chl_point_08");
+			Point("slums_02_chl_point_10");
+        }
+		NegativeEvent("UseSkill")
+		{
+            Skill("GrapplingHook");  			
+        }
+		Requirements()
+        {
+            DayPhase("day");
+        }
+        Difficulty(Challenge_Diff_Medium);
+        Duration(70.0);
+		
+		TextureName("chl_objective_icon");
+    }
+    
+/// The Jealous Runner part 3
+    Challenge("slums_03")
+    {
+        use QuestChallengeClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("ReachPoint")
+        {
+			Point("slums_03_chl_point_01");
+			Point("slums_03_chl_point_05");
+			Point("slums_03_chl_point_10");
+        }
+		NegativeEvent("UseSkill")
+		{
+            Skill("GrapplingHook");  			
+        }
+		Requirements()
+        {
+            DayPhase("day");
+        }
+        Difficulty(Challenge_Diff_Hard);
+        Duration(65.0);
+		
+		TextureName("chl_objective_icon");
+    }
+    
+/// - Family Doctor 02
+    Challenge("slums_04")
+    {
+        use QuestChallengeClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("UseTrigger")
+        {
+            Trigger("slums_04_chl_point_00");
+			Trigger("slums_04_chl_point_01");
+			Trigger("slums_04_chl_point_02");
+			Trigger("slums_04_chl_point_03");
+			Trigger("slums_04_chl_point_04");
+			Trigger("slums_04_chl_point_05");
+			Trigger("slums_04_chl_point_06");
+			
+			HandleQEnable(true);
+            InOrder(false);
+            ShowLocations(true);
+			HandleVisibility (true);
+        }
+        NegativeEvent("UseSkill")
+		{
+            Skill("GrapplingHook");  			
+        }
+		Requirements()
+        {
+            DayPhase("day");
+        }
+        Difficulty(Challenge_Diff_Medium);
+        UseJointGoal(true);
+        Duration(140.0, 100.0, 80.0, 55.0);
+		
+		TextureName("chl_objective_icon");
+    }
+    
+/// - Family Doctor 01
+    Challenge("slums_05")
+    {
+        use QuestChallengeClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("UseTrigger")
+        {
+            Trigger("slums_05_chl_point_00");
+            Trigger("slums_05_chl_point_01");
+			Trigger("slums_05_chl_point_02");
+			Trigger("slums_05_chl_point_03");
+            
+            HandleQEnable(true);
+            InOrder(false);
+            ShowLocations(true);
+            HudDescription("");
+			HandleVisibility (true);
+        }
+        NegativeEvent("UseSkill")
+		{
+            Skill("GrapplingHook");  			
+        }
+		Requirements()
+        {
+            DayPhase("day");
+        }
+        Difficulty(Challenge_Diff_Easy);
+        UseJointGoal(true);
+        Duration(90.0, 75.0, 60.0, 55.0);
+		
+		TextureName("chl_objective_icon");
+    }
+    
+/// - Dostan sie na szczyt anteny 2
+//    Challenge("slums_06")
+//    {
+//        use QuestChallengeClass();
+//        Type(Challenge_Type_Agility);
+//        PositiveEvent("ReachPoint")
+//        {
+//            Point("slums_06_chl_point_00");
+//			Point("slums_06_chl_point_01");
+//			Point("slums_06_chl_point_02");
+//			Point("slums_06_chl_point_03");
+//			Point("slums_06_chl_point_04");
+//        }
+//		NegativeEvent("UseSkill")
+//		{
+//            Skill("GrapplingHook");  			
+//        }
+//        Difficulty(Challenge_Diff_Medium);
+//        Duration(75.0);
+//		
+//		TextureName("chl_destination_icon");
+//    }
+    
+/// - ULTIMATE WEAPON 01	Zabij X zombie uzywajac danej broni (gracz dostaje konkretna bron)
+    Challenge("slums_07")
+    {
+        use QuestChallengeClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            VictimType("ZOMBIE");
+			WeaponType("Stick");
+			Count(40);
+        }
+		Requirements()
+        {
+            DayPhase("day");
+        }
+		ForcedItem("Melee_MacheteChallenge_AGen", "Craftplan_LightingRod");
+        Difficulty(Challenge_Diff_Easy);
+		IntensityAreas("slums_07_IA_00");
+        UseJointGoal(true);
+        Duration(80.0, 40.0, 30.0, 30.0);
+		
+		TextureName("chl_kill_icon");
+    }
+    
+/// - Dostan sie na szczyt anteny
+  //   Challenge("slums_08")
+  //   {
+  //       use QuestChallengeClass();
+  //       Type(Challenge_Type_Agility);
+  //       PositiveEvent("ReachPoint")
+  //       {
+  //           Point("slums_08_chl_point_00");
+		// 	Point("slums_08_chl_point_01");
+		// 	Point("slums_08_chl_point_02");
+		// 	Point("slums_08_chl_point_03");
+  //       }
+		// NegativeEvent("UseSkill")
+		// {
+  //           Skill("GrapplingHook");  			
+  //       }
+  //       Difficulty(Challenge_Diff_Medium);
+  //       Duration(79.0);
+		
+		// TextureName("chl_destination_icon");
+  //   }
+    
+/// - ULTIMATE WEAPON 02 Zabij X zombie 00
+    Challenge("slums_09")
+    {
+        use QuestChallengeClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            VictimType("ZOMBIE");
+			WeaponType("Stick");
+            Count(50);
+        }
+		Requirements()
+        {
+            DayPhase("day");
+        }
+		ForcedItem("Melee_MacheteChallenge_AGen", "Craftplan_FlameBlade");
+        Difficulty(Challenge_Diff_Medium);
+		IntensityAreas("slums_09_IA_00");
+        
+        UseJointGoal(true);
+        Duration(100.0, 40.0, 30.0, 25.0);
+		
+		TextureName("chl_kill_icon");
+    }
+    
+/// - Zabij X zombie 01
+    Challenge("slums_10")
+    {
+        use QuestChallengeClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            VictimType("ZOMBIE");
+            WeaponType("TwoHandedCloseStick");
+            Count(40);
+        }
+		Requirements()
+        {
+            DayPhase("day");
+        }
+		ForcedItem("Melee_BaseballBatChallenge_BGen", "");
+        Difficulty(Challenge_Diff_Easy);
+		IntensityAreas("slums_10_IA_00");
+		UseJointGoal(true);
+        Duration(100.0, 45.0, 40.0, 35.0);
+		
+		TextureName("chl_kill_icon");
+    }
+    
+/// - Zabij X zombie uzywajac danej broni (gracz dostaje konkretna bron)
+    Challenge("slums_11")
+    {
+        use QuestChallengeClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            VictimType("ZOMBIE");
+            WeaponType("ThrowingStar");
+			Count(30);
+        }
+		Requirements()
+        {
+            DayPhase("day");
+        }
+        ForcedItem("Throwable_ShurikenChallengeAGen", "");
+        Difficulty(Challenge_Diff_Medium);
+		IntensityAreas("slums_11_IA_00");
+		UseJointGoal(true);
+        Duration(110.0, 65.0, 55.0, 45.0);
+		
+		TextureName("chl_kill_icon");
+    }
+    
+/// - Dobiegnij do celu z uzycim Grappling Hooka
+    Challenge("slums_12")
+    {
+        use QuestChallengeClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("ReachPoint")
+        {
+
+			Point("slums_12_chl_point_06");
+			Point("slums_12_chl_point_08");
+			Point("slums_12_chl_point_09");
+			Point("slums_12_chl_point_11");
+        }
+		Requirements()
+        {
+            DayPhase("day");
+        }
+		ForcedItem("Special_HookChallenge", "");
+        Difficulty(Challenge_Diff_Medium);
+        Duration(45.0);
+		
+		TextureName("chl_objective_icon");
+
+		ShowHintOnStart("ChallengeGrapplingHook");
+    }
+    
+/// - Dobiegnij do celu z uzycim Grappling Hooka 2
+    Challenge("slums_13")
+    {
+        use QuestChallengeClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("ReachPoint")
+        {
+			Point("slums_13_chl_point_03");
+			Point("slums_13_chl_point_05");
+			Point("slums_13_chl_point_07");
+			Point("slums_13_chl_point_10");
+        }
+		Requirements()
+        {
+            DayPhase("day");
+        }
+		ForcedItem("Special_HookChallenge", "");
+        Difficulty(Challenge_Diff_Easy);
+        Duration(87.0);
+		
+		TextureName("chl_objective_icon");
+
+		ShowHintOnStart("ChallengeGrapplingHook");
+    }
+    
+/// - Obetnij X rak
+    Challenge("slums_14")
+    {
+        use QuestChallengeClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("GiveDamage")
+        {
+            CutOff(true);
+            BodyPart("L_HAND;R_HAND");
+            Count(30);
+        }
+		Requirements()
+        {
+            DayPhase("day");
+        }
+		ForcedItem("Melee_MacheteChallenge_AGen", "");
+        Difficulty(Challenge_Diff_Medium);
+		IntensityAreas("slums_14_IA_00");
+        UseJointGoal(true);
+        Duration(90.0,80.0, 80.0, 60.0);
+		
+		TextureName("chl_kill_icon");
+    }
+    
+/// - Nabij na kolce X zombie
+    Challenge("slums_15")
+    {
+        use QuestChallengeClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            VictimType("ZOMBIE");
+            BySpikes(true);
+            Count(15);
+        }
+		Requirements()
+        {
+            DayPhase("day");
+        }
+        Difficulty(Challenge_Diff_Medium);
+		IntensityAreas("slums_15_IA_00");
+        
+        UseJointGoal(true);
+        Duration(100.0, 70.0, 60.0, 50.0);
+		
+		TextureName("chl_kill_icon");
+    }
+    
+/// - Dying Lunch 01
+    Challenge("slums_16")
+    {
+        use QuestChallengeClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            VictimType("ZOMBIE");
+			WeaponType("Shotgun");
+            Count(40);
+        }
+		Requirements()
+        {
+            DayPhase("day");
+        }
+		ForcedItem("Firearm_Challenge_ShotgunAGen", "");
+        Difficulty(Challenge_Diff_Medium);
+
+        UseJointGoal(true);
+        Duration(120.0, 40.0, 29.0, 25.0);
+		
+		TextureName("chl_kill_icon");
+    }
+    
+/// - Dying Lunch 03
+    Challenge("slums_23")
+    {
+        use QuestChallengeClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("GiveDamage")
+        {
+            WeaponType("Rifle");
+			BodyPart("HEAD");
+            Count(30);
+        }
+		Requirements()
+        {
+            DayPhase("day");
+        }
+		ForcedItem("Firearm_Challenge_RifleAGen", "");
+        Difficulty(Challenge_Diff_Hard);
+       
+        UseJointGoal(true);
+        Duration(90.0, 60.0, 50.0, 40.0);
+		
+		TextureName("chl_kill_icon");
+    }
+    
+/// - Zabij X zombie 05 - nie ma tego challanga na mapie
+  //   Challenge("slums_18")
+  //   {
+  //       use QuestChallengeClass();
+  //       Type(Challenge_Type_Combat);
+  //       PositiveEvent("Kill")
+  //       {
+  //           VictimType("ZOMBIE");
+		// 	WeaponType("Stick");
+  //           Count(20);
+  //       }
+		// /// ForcedItem("slums_chl_18_item", "");
+  //       Difficulty(Challenge_Diff_Medium);
+        
+  //       UseJointGoal(true);
+  //       Duration(50.0, 40.0, 30.0, 20.0);
+        	
+		// TextureName("chl_kill_icon");
+  //   }
+    
+/// - Dobiegnij do X punktow 06
+  //   Challenge("slums_19")
+  //   {
+  //       use QuestChallengeClass();
+  //       Type(Challenge_Type_Agility);
+  //       PositiveEvent("ReachPoint")
+  //       {
+  //           Point("slums_19_chl_point_00");
+		// 	Point("slums_19_chl_point_01");
+		// 	Point("slums_19_chl_point_02");
+		// 	Point("slums_19_chl_point_03");
+		// 	Point("slums_19_chl_point_04");
+		// 	Point("slums_19_chl_point_05");
+		// 	Point("slums_19_chl_point_06");
+		// 	Point("slums_19_chl_point_07");
+		// 	Point("slums_19_chl_point_08");
+		// 	Point("slums_19_chl_point_09");
+		// 	Point("slums_19_chl_point_10");
+		// 	Point("slums_19_chl_point_11");
+		// 	Point("slums_19_chl_point_12");
+		// 	Point("slums_19_chl_point_13");
+		// 	Point("slums_19_chl_point_14");
+		// 	Point("slums_19_chl_point_15");
+		// 	Point("slums_19_chl_point_16");
+		// 	Point("slums_19_chl_point_17");
+		// 	Point("slums_19_chl_point_18");
+		// 	Point("slums_19_chl_point_19");
+		// 	Point("slums_19_chl_point_20");
+  //       }
+		// NegativeEvent("UseSkill")
+		// {
+  //           Skill("GrapplingHook");  			
+  //       }
+  //       Difficulty(Challenge_Diff_Medium);
+  //       Duration(136.0);
+		
+		// TextureName("chl_destination_icon");
+  //   }
+    
+/// - Dobiegnij do celu z uzycim Grappling Hooka
+    Challenge("slums_20")
+    {
+        use QuestChallengeClass();
+        Type(Challenge_Type_Agility);
+        PositiveEvent("ReachPoint")
+        {
+			Point("slums_20_chl_point_06");
+			Point("slums_20_chl_point_11");
+			Point("slums_20_chl_point_14");
+			Point("slums_20_chl_point_18");
+        }
+		Requirements()
+        {
+            DayPhase("day");
+        }
+		ForcedItem("Special_HookChallenge", "");
+        Difficulty(Challenge_Diff_Medium);
+        Duration(75.0);
+		
+		TextureName("chl_objective_icon");
+
+		ShowHintOnStart("ChallengeGrapplingHook");
+    }
+	
+	/// - Opusc strefe nie rozpoczynajac poscigu 1
+    Challenge("slums_21")
+    {
+        use QuestChallengeClass();
+        Type(Challenge_Type_Agility);
+        Difficulty(Challenge_Diff_Medium);
+        Duration(40.0);
+		PositiveEvent("LeaveArea")
+        {
+            Area("slums_21_chl_area");
+        }
+        NegativeEvent("StartPursuit")
+        {
+            Level(2);
+			Skill("GrapplingHook");
+        }
+        Requirements()
+        {
+			AggressionLevel(0);
+            DayPhase("night");
+        }
+		
+		TextureName("chl_destination_icon");
+        FreezeTime(true);
+    }
+	
+	/// - Dobiegnij do X punktow TUTORIAL
+  //   Challenge("slums_22")
+  //   {
+  //       use QuestChallengeClass();
+  //       Type(Challenge_Type_Agility);
+  //       PositiveEvent("ReachPoint")
+  //       {
+  //           Point("slums_22_chl_point_00");
+		// 	Point("slums_22_chl_point_01");
+		// 	Point("slums_22_chl_point_02");
+		// 	Point("slums_22_chl_point_03");
+  //       }
+		// NegativeEvent("UseSkill")
+		// {
+  //           Skill("GrapplingHook");  			
+  //       }
+  //       Difficulty(Challenge_Diff_Easy);
+        
+  //       Duration(35.0);
+		
+		// TextureName("chl_destination_icon");
+  //   }
+	
+	/// - Dying Lunch 02
+    Challenge("slums_17")
+    {
+        use QuestChallengeClass();
+        Type(Challenge_Type_Combat);
+        PositiveEvent("Kill")
+        {
+            VictimType("ZOMBIE");
+			WeaponType("Rifle");
+            Count(60);
+        }
+		Requirements()
+        {
+            DayPhase("day");
+        }
+		ForcedItem("Firearm_Challenge_RifleBGen", "");
+        Difficulty(Challenge_Diff_Medium);
+       
+        UseJointGoal(true);
+        Duration(110.0, 50.0, 40.0, 30.0);
+		
+		TextureName("chl_kill_icon");
+    }
+}

@@ -1,0 +1,189 @@
+!include("ai_data.def")
+!include("infected_timing_events.def")
+!include("export_screamer_params.scr")
+
+
+// screamer
+
+////////////////////////////////////////////// DATA ///////////////////////////////////////////////
+//##############
+//#### IDLE ####
+//##############
+//## idle:pose:idle_type:item_type:scare_level:is_idle_prepare:is_idle_finish
+//##############d
+Data("idle:standing::special:::", -2, "screamer_attack_01",-1, 1)
+Data("idle:standing::special:::", -2, "screamer_attack_02",-1, 1)
+Data("idle:standing::stand:::", -2, "screamer_idle_01", -1, 1)
+Data("idle:standing::look_around:::", -2, "screamer_idle_01", -1, 1)
+Data("idle:standing::look_at:::", -2, "screamer_idle_01", -1, 1)
+
+//##############
+//#### TURN ####
+//##############
+//## turn:is_standing:alarm_level:item_type:direction:angle
+//##############
+
+Data("turn:standing:::left:45", -2, "screamer_attack_01_90L", -1, 1)
+Data("turn:standing:::right:45", -2, "screamer_attack_01_90R", -1, 1)
+Data("turn:standing:::left:90", -2, "screamer_attack_01_90L", -1, 1)
+Data("turn:standing:::right:90", -2, "screamer_attack_01_90R", -1, 1)
+Data("turn:standing:::left:180", -2, "screamer_attack_01_90L", -1, 1)
+Data("turn:standing:::right:180", -2, "screamer_attack_01_90R", -1, 1)
+
+ //##################
+//#### ALARMING ####
+//##################
+//## alarming:is_standing:alarm_level:angle:direction:was_moving
+//##################
+
+Data("alarming:standing::alarmed:0::false", -2, "screamer_taunt_01", -1, 1)
+Data("alarming:standing::alarmed:45:right:false", -2, "screamer_taunt_45R", -1, 1)
+Data("alarming:standing::alarmed:45:left:false", -2, "screamer_taunt_45L", -1, 1)
+Data("alarming:standing::alarmed:90:right:false", -2, "screamer_taunt_90R", -1, 1)
+Data("alarming:standing::alarmed:90:left:false", -2, "screamer_taunt_90L", -1, 1)
+Data("alarming:standing::alarmed:180:right:false", -2, "screamer_taunt_180R", -1, 1)
+Data("alarming:standing::alarmed:180:left:false", -2, "screamer_taunt_180L", -1, 1)
+
+Data("alarming:standing::calm:::false", 0, "", -1, 1)
+
+Data("grab:standing:true:begin_front:grabscreamer:", -2, "Screamer_begin_ScreamerKill", -1, 1)
+Data("grab:laying:true:begin_front:grabscreamer:", -2, "Screamer_begin_ScreamerKill", -1, 1)
+Data("grab:standing:false:begin_front:grabscreamer:", -2, "Screamer_begin_ScreamerKill", -1, 1)
+Data("grab:laying:false:begin_front:grabscreamer:", -2, "Screamer_begin_ScreamerKill", -1, 1)
+Data("grab:standing:true:finish_win:grabscreamer:", -2, "Screamer_finish_ScreamerKill", -1, 1)
+Data("grab:laying:true:finish_win:grabscreamer:", -2, "Screamer_finish_ScreamerKill", -1, 1)
+Data("grab:standing:true:finish_lose:grabscreamer:", 0, "", -1, 1)
+Data("grab:laying:true:finish_lose:grabscreamer:", 0, "", -1, 1)
+
+//#######################
+//#### HIT REACTIONS ####
+//#######################
+//## hit_reaction:pose:hit_reaction:item_type:damage_type:attacker_pos:body_part:direction:severity
+//#######################
+
+//Data("hit_reaction:standing:pain::::::", -2, "Screamer_Hit_Head_Left_Medium", -1, 1)
+Data("hit_reaction:standing:pain::::::", -2, "screamer_hitreaction_01", -1, 1)
+Data("hit_reaction:standing:pain::::::", -2, "screamer_hitreaction_02", -1, 1)
+
+
+//Data("hit_reaction:standing:pain:::::backward:", -2, "Screamer_Hit_Head_Right_Medium", -1, 1)
+//Data("hit_reaction:standing:pain:::::forward:", -2, "Screamer_Hit_Back", -1, 1)
+//Data("hit_reaction:standing:pain:::::left:", -2, "Screamer_Hit_Head_Left_Medium", -1, 1)
+//Data("hit_reaction:standing:pain:::::right:", -2, "Screamer_Hit_Head_Right_Medium", -1, 1)
+
+// screamer is not using base nor random data sets!
+!include("infected_data_params.scr")
+
+
+//###############
+//#### DYING ####
+//###############
+//## die:pose:damage_type:body_part:direction:death_type:carried_weapon:kill_weapon:run_dir
+//###############
+
+Data("die:standing::::normal:::", -2, "Screamer_death_left_01", -1, 1)
+Data("die:standing::::normal:::", -2, "Screamer_death_right_02", -1, 1)
+Data("die:standing::::normal:::", -2, "Screamer_death_left_01_F", -1, 1)
+Data("die:standing::::normal:::", -2, "Screamer_death_right_02_F", -1, 1)
+
+Data("die:standing:fire:::burn:::", -2, "screamer_death_burn_01", -1, 1) //IK disabled
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////// CURVES //////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+Curve(CURVE_SOUND_GAIN_ENEMY_LO_FREQ, "infected_eq_gain_lo_enemy")
+Curve(CURVE_SOUND_GAIN_ENEMY_HI_FREQ, "infected_eq_gain_hi_enemy")
+Curve(CURVE_SOUND_GAIN_NO_ENEMY_LO_FREQ, "infected_eq_gain_lo_no_enemy")
+Curve(CURVE_SOUND_GAIN_NO_ENEMY_HI_FREQ, "infected_eq_gain_hi_no_enemy")
+Curve(CURVE_ACCELERATION_MULT, "human_acceleration_mult")
+Curve(CURVE_DECELERATION_MULT, "human_deceleration_mult")
+Curve(CURVE_MAX_SPEED, "human_max_speed")
+Curve(CURVE_TURN_SPEED, "infected_turn_speed")
+Curve(CURVE_DIST_TO_START_WALK_PER_ANGLE, "dist_to_start_walk_per_angle")
+Curve(CURVE_AVOID_FORWARD_ROTATION_SPEED, "avoid_forward_rotation_speed")
+Curve(CURVE_DIFF_LEVEL_DISTRIBUTION, "diff_level_distribution")
+Curve(CURVE_MELEE_DODGE_PROB, "infected_melee_dodge_prob")
+Curve(CURVE_EXPERIENCE_MUL_PER_LEVEL_DIFF, "experience_mul_per_level_diff")
+Curve(CURVE_HEALTH, "screamer_health")
+Curve(CURVE_MELEE_DAMAGE, "infected_melee_damage")
+Curve(CURVE_KO_PROBABILITY, "infected_ko_prob")
+Curve(CURVE_COMBO_PROBABILITY, "infected_combo_prob")
+Curve(CURVE_COUNTER_ATTACK_PROB, "infected_counter_attack_prob")
+Curve(CURVE_WEAPON_THROW_PROB, "infected_weapon_throw_prob")
+Curve(CURVE_MAX_ADDITIONAL_DIFF_LEVEL, "max_additional_diff_level")
+Curve(CURVE_EXPLOSION_DAMAGE, "zombie_explosion_damage")
+Curve(CURVE_BURN_MESH_ATTRIBUTE, "burn_mesh_attribute")
+Curve(CURVE_SIGHT_RANGE_HEIGHT_REDUCTION_MUL, "infected_sight_range_height_reduction_mul")
+
+/////////////////////////////////////////// PARAMETERS ////////////////////////////////////////////
+
+ParamBool("force_counter_on_kick", 0)
+ParamFloat("counter_attack_prob_mul", 0.0)
+ParamFloat("counter_attack_from_stand_prob_mul", 0.0)
+ParamFloat("counterattack_dist", 0.0) //converted
+
+ParamBool("directional_melee_attacks", 0)
+
+ParamFloat("alarm_after_enemy_visible_min_dist_time", 0.0)
+ParamFloat("alarm_after_enemy_visible_max_dist_time", 0.0)
+
+ParamFloat("turn_speed", 90.0)
+ParamInt("zombie_type", 14)
+ParamBool("attack_enabled", 1)
+//ParamFloat("health_mul", 0.66)
+//ParamFloat("stamina_mul", 0.7)
+//ParamFloat("damage_mul", 1.0)
+ParamProb("taunt_prob", 0, 1) // taunt probability after failed berserker grab or target notice
+ParamFloat("taunt_prob_on_target_change", 0.0) // taunt probability after failed berserker grab
+ParamFloat("taunt_prob_on_take_damage", 0.0)
+ParamBool("navigate_through_generic_nav_mesh_connections", 0)
+ParamBool("navigate_through_user_nav_mesh_connections", 0)
+ParamBool("can_move_through_low_obstacles", 1)
+ParamBool("can_give_camouflage", 0)
+ParamBool("can_move_through_high_obstacles", 0)
+ParamFloat("max_connection_height_up", 1.5)
+ParamFloat("max_connection_height_down", 1.5)
+ParamFloat("max_connection_horiz_dist", 1.0)
+
+ParamFloat("alarm_when_enemy_close_min_distance", 5.0)
+ParamFloat("alarm_when_enemy_close_max_distance", 3.0)
+//ParamFloat("scream_damage_mul", 1.0)
+ParamFloat("hearing_sensitivity_calm", 0.0)
+ParamFloat("hearing_sensitivity", 0.0)
+// this range should be smaller than sight_range so screamer won't attack untill we are in this range
+// this range should be gratter than sight_range_calm so screamer will scream untill we are in this range
+// this is intensiony left smaller than sight range so altho we are outside his range he can call infecteds
+ParamFloat("scream_range", 5.0)
+ParamFloat("scream_without_player_range", 0.0)
+ParamBool("scream_without_player", 0)
+ParamFloat("sight_range_calm", 7.0) //converted
+ParamFloat("sight_range", 18.0) //converted
+ParamFloat("full_angle_sight_range", 3.0)
+ParamFloat("scream_spawning_request_speed", 3.0)
+ParamFloat("melee_range", 0.0) //converted
+ParamFloat("sight_additional_range", 0.4)
+ParamBool("deal_scream_damage_in_without_player_range", 1)
+
+//ParamFloat("head_health_influence", 1.3)
+//ParamFloat("left_arm_health_influence", 1.0)
+//ParamFloat("right_arm_health_influence", 1.0)
+//ParamFloat("left_leg_health_influence", 1.0)
+//ParamFloat("right_leg_health_influence", 1.0)
+//ParamFloat("torso_front_health_influence", 1.0)
+//ParamFloat("torso_back_health_influence", 1.0)
+
+//ParamFloat("head_damage_factor", 1.3)
+//ParamFloat("left_arm_damage_factor", 1.0)
+//ParamFloat("right_arm_damage_factor", 1.0)
+//ParamFloat("left_leg_damage_factor", 1.0)
+//ParamFloat("right_leg_damage_factor", 1.0)
+ParamFloat("humanity_hit_reaction_prob", 0.0)
+ParamFloat("turn_precision", 0.99)
+ParamBool("has_glowing_eyes", 0)
+ParamFloat("experience_award", 0.0)
+
+ParamBool("draw_on_radar_during_day", 0)
+ParamBool("can_attack_objects_from_move", 0)

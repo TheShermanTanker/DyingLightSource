@@ -1,0 +1,866 @@
+import "inventorystuff.scr" 
+sub main()
+{
+
+    Elemental(Elemental_ShockElectricity)
+    {
+        Name("&Elemental_ShockElectricity_N&");
+        Description("&Elemental_ShockElectricity_D&");
+        Icon("effect_inc_chance_for_shock_electricity");
+        EffectMenuColor([118.0,201.0,228.0]);
+        SkinTag("Weapon_Craft5");
+        DamageType(DamageType_Electric);
+        
+        Interaction(Elemental_ShockElectricity, Interaction_ModifySecond, -1) //effects boost
+        {
+            Modifier(InteractionProp_PropagateProb, 20.0);// 20%
+            Modifier(InteractionProp_Damage, 2.0);
+        }
+        Interaction(Elemental_Poison, Interaction_ModifySecond, -1) // effects boost
+        {
+            Modifier(InteractionProp_Probability, 2.0);//10% change of synergy
+        }
+        Interaction(Elemental_Poison, Interaction_Synergy, -1) //change to impact
+        {
+            Synergy(Elemental_ImpactElectricity, 3);
+        }
+
+        Interaction(Elemental_Burning, Interaction_ModifySecond, -1) // effects boost
+        {
+           Modifier(InteractionProp_Force, 999999.0);
+        }
+        Interaction(Elemental_Bleeding, Interaction_ModifySecond, -1) // effects boost
+        {
+            Modifier(InteractionProp_Probability, 2.0); // 10% change of electric
+        }
+        Interaction(Elemental_Water, Interaction_ModifySecond, -1) //spread increased
+        {
+            Modifier(InteractionProp_PropagateProb, 50.0);// 50% proc
+            Modifier(InteractionProp_Probability, 10.0);// 50% change of cricial
+        }
+        Interaction(Elemental_Rain, Interaction_ModifySecond, -1) //spread increased
+        {
+            Modifier(InteractionProp_PropagateProb, 25.0); //;// 25% proc
+            Modifier(InteractionProp_Probability, 5.0);// 25% change of cricial
+        }
+        Interaction(Elemental_Storm, Interaction_ModifySecond, -1) //spread increased
+        {
+            Modifier(InteractionProp_PropagateProb, 25.0);//;// 25% proc
+            Modifier(InteractionProp_Probability, 10.0);// 50% change of cricial
+        }
+    }
+
+    Elemental(Elemental_ImpactElectricity)
+    {
+        Name("&Elemental_ImpactElectricity_N&");
+        Description("&Elemental_ImpactElectricity_D&");
+        Icon("effect_inc_chance_for_impact_electricity");
+        EffectMenuColor([118.0,201.0,228.0]);
+        SkinTag("Weapon_Craft7");
+        DamageType(DamageType_Impact);
+        
+        //Interaction(Elemental_ShockElectricity, Interaction_Synergy, -1){} // shock explosion
+        //Interaction(Elemental_Poison, Interaction_Synergy, -1){} // poison explosion
+        //Interaction(Elemental_Bleeding, Interaction_Synergy, -1){} // dismemberment(impact x+2)
+        //Interaction(Elemental_Freezing, Interaction_Synergy, -1){} // rozjeb na kawalki
+    }
+
+    Elemental(Elemental_Poison)
+    {
+        Name("&Elemental_Poison_N&");
+        Description("&Elemental_Poison_D&");
+        Icon("effect_inc_chance_for_poison");
+        EffectMenuColor([138.0,183.0,18.0]);
+        SkinTag("Weapon_Craft8");
+        DamageType(DamageType_Poison);
+        
+        Interaction(Elemental_ShockElectricity, Interaction_ModifySecond, -1) // effects boost
+        {
+            Modifier(InteractionProp_Probability, 2.0);//
+        }
+        Interaction(Elemental_ShockElectricity, Interaction_Synergy, -1) //change to impact
+        {
+            Synergy(Elemental_ImpactElectricity, 3);
+        }
+        Interaction(Elemental_Poison, Interaction_ModifySecond, -1) // effects boost
+        {
+            Modifier(InteractionProp_Damage, 1.5);
+        }
+        Interaction(Elemental_Burning, Interaction_ModifySecond, -1) // effects boost
+        {
+            Modifier(InteractionProp_Probability, 2.0);
+        }
+        Interaction(Elemental_Burning, Interaction_ModifyFirst, -1) // effects boost
+        { 
+            Modifier(InteractionProp_Duration, 3.0);
+            Modifier(InteractionProp_Damage, 10.0);
+            Modifier(InteractionProp_DeathEffect, DeathEffect_Explode);
+            Modifier(InteractionProp_DieOnRagdoll, 4.0);
+        }
+        Interaction(Elemental_Bleeding, Interaction_ModifySecond, -1) // effects boost
+        {
+            Modifier(InteractionProp_Probability, 2.0);
+        }
+        Interaction(Elemental_Freezing, Interaction_NeutralizeSecond, -1);
+        Interaction(Elemental_Water, Interaction_ModifySecond, -1) //50% damage and time decrease
+        {
+            Modifier(InteractionProp_Damage, 0.2);
+            Modifier(InteractionProp_Duration, 0.2);
+        }
+        Interaction(Elemental_Rain, Interaction_ModifySecond, -1) //50% damage and time decrease
+        {
+            Modifier(InteractionProp_Damage, 0.8);
+            Modifier(InteractionProp_Duration, 0.8);
+        }
+        Interaction(Elemental_Storm, Interaction_ModifySecond, -1) //50% damage and time decrease
+        {
+            Modifier(InteractionProp_Damage, 0.5);
+            Modifier(InteractionProp_Duration, 0.5);
+        }
+        Interaction(Elemental_FuelFumes, Interaction_ModifySecond, -1) // prob +100%
+        {
+           Modifier(InteractionProp_Probability, 4);//
+        }
+    }
+
+    Elemental(Elemental_Burning)
+    {
+        Name("&Elemental_Burning_N&");
+        Description("&Elemental_Burning_D&");
+        Icon("effect_inc_chance_for_burning");
+        EffectMenuColor([203.0,61.0,60.0]);
+        SkinTag("Weapon_Craft6");
+        DamageType(DamageType_Fire);
+        SpreadDist(5.0);
+        
+        Interaction(Elemental_ShockElectricity, Interaction_ModifySecond, -1) // effects boost
+        {
+           Modifier(InteractionProp_Force, 999999.0);
+        }
+        Interaction(Elemental_Poison, Interaction_ModifySecond, -1) // effects boost
+        {
+            Modifier(InteractionProp_Probability, 2.0);
+        }
+        Interaction(Elemental_Poison, Interaction_ModifyFirst, -1) // effects boost
+        { 
+            Modifier(InteractionProp_Duration, 3.0);
+            Modifier(InteractionProp_Damage, 10.0);
+            Modifier(InteractionProp_DeathEffect, DeathEffect_Explode);
+            Modifier(InteractionProp_DieOnRagdoll, 4.0);
+        }
+        Interaction(Elemental_Burning, Interaction_ModifySecond, -1) // effects boost
+        {
+            Modifier(InteractionProp_Damage, 1.5);
+        }
+        Interaction(Elemental_Bleeding, Interaction_ModifySecond, -1) // effects boost
+        {
+            Modifier(InteractionProp_Probability, 2.0);
+        }
+        Interaction(Elemental_Freezing, Interaction_NeutralizeFirst, -1); // both effects neutralized
+        Interaction(Elemental_Freezing, Interaction_NeutralizeSecond, -1);//
+        Interaction(Elemental_Acid, Interaction_Synergy, -1) // acid burn new effect
+        {
+            Synergy(Elemental_AcidBurning);
+        }
+        Interaction(Elemental_Water, Interaction_NeutralizeSecond, -1); // burn neutralized
+        Interaction(Elemental_Rain, Interaction_ModifySecond, -1) // 50% damage and time decrease
+        {
+            Modifier(InteractionProp_Damage, 0.5);
+            Modifier(InteractionProp_Duration, 0.5);
+            Modifier(InteractionProp_Probability, 0.5);
+        }
+        Interaction(Elemental_Storm, Interaction_ModifySecond, -1) // 25% damage and time decrease
+        {
+            Modifier(InteractionProp_Damage, 0.25);
+            Modifier(InteractionProp_Duration, 0.25);
+            Modifier(InteractionProp_Probability, 0.25);
+        }
+        Interaction(Elemental_Night, Interaction_ModifySecond, -1) // damage +50%
+        {
+           Modifier(InteractionProp_Damage, 2.0);
+        }
+        Interaction(Elemental_FuelFumes, Interaction_ModifySecond, -1) 
+        {
+            Modifier(InteractionProp_Damage, 2.0);// damage x 2
+            Modifier(InteractionProp_Probability, 10.0);// prob 50%
+            Modifier(InteractionProp_DeathEffect, DeathEffect_Fire);
+        }
+    }
+
+    Elemental(Elemental_Bleeding)
+    {
+        Name("&Elemental_Bleeding_N&");
+        Description("&Elemental_Bleeding_D&");
+        Icon("effect_inc_chance_for_bleeding");
+        EffectMenuColor([203.0,61.0,60.0]);
+        SkinTag("Weapon_Craft3");
+        DamageType(DamageType_Bleeding);
+        
+        Interaction(Elemental_Freezing, Interaction_NeutralizeSecond, -1); //bleed neutralized
+    }
+
+    Elemental(Elemental_Freezing)
+    {
+        Name("&Elemental_Freezing_N&");
+        Description("&Elemental_Freezing_D&");
+        Icon("effect_inc_stun_chance");
+        EffectMenuColor([18.0,201.0,228.0]);
+        SkinTag("Weapon_Craft7");
+        DamageType(DamageType_Cold);
+        
+        Interaction(Elemental_ShockElectricity, Interaction_NeutralizeFirst, -1); //shock neutralized
+        Interaction(Elemental_Burning, Interaction_NeutralizeFirst, -1); // both effects neutralized
+        Interaction(Elemental_Burning, Interaction_NeutralizeSecond, -1);//
+        Interaction(Elemental_Freezing, Interaction_ModifySecond, -1) //effects boost
+        {
+            Modifier(InteractionProp_Damage, 1.1);
+        }
+        Interaction(Elemental_Water, Interaction_ModifySecond, -1) //freeze time +25%
+        {
+            Modifier(InteractionProp_Duration, 1.25);
+        }
+        Interaction(Elemental_Rain, Interaction_ModifySecond, -1) //freeze time +25%
+        {
+            Modifier(InteractionProp_Duration, 1.25);
+        }
+        Interaction(Elemental_Storm, Interaction_ModifySecond, -1) //freeze time +25%
+        {
+            Modifier(InteractionProp_Duration, 1.25);
+        }
+    }
+
+    Elemental(Elemental_Acid)
+    {
+        Name("&Elemental_Acid_N&");
+        Description("&Elemental_Acid_D&");
+        Icon("effect_inc_chance_for_acid");
+        EffectMenuColor([229.0,210.0,56.0]);
+        SkinTag("Weapon_Craft8");
+        DamageType(DamageType_Toxic);
+        
+        Interaction(Elemental_Freezing, Interaction_NeutralizeFirst, -1); //freeze neutralized
+        Interaction(Elemental_Acid, Interaction_ModifySecond, -1) //effects boost
+        {
+            Modifier(InteractionProp_Damage, 1.1);
+        }
+        Interaction(Elemental_Water, Interaction_NeutralizeSecond, -1); // burn neutralized
+        Interaction(Elemental_Rain, Interaction_ModifySecond, -1) //75% damage and time decrease
+        {
+            Modifier(InteractionProp_Damage, 0.75);
+            Modifier(InteractionProp_Duration, 0.75);
+        }
+        Interaction(Elemental_Storm, Interaction_ModifySecond, -1) //50% damage and time decrease
+        {
+            Modifier(InteractionProp_Damage, 0.5);
+            Modifier(InteractionProp_Duration, 0.5);
+        }
+        Interaction(Elemental_Night, Interaction_ModifySecond, -1) // effects boost
+        {
+            Modifier(InteractionProp_Probability, 0.0);//
+        }
+        Interaction(Elemental_Night, Interaction_ModifySecond, -1) // effects boost
+        {
+           Modifier(InteractionProp_Damage, 50.0);// damage x 2
+           Modifier(InteractionProp_Probability, 10.0);// prob x 4
+           Modifier(InteractionProp_DeathEffect, DeathEffect_Fire);
+        }
+    }
+
+    Elemental(Elemental_Explosive)
+    {
+        Name("&Elemental_Explosive_N&");
+        Description("&Elemental_Explosive_D&");
+        Icon("effect_inc_chance_for_explosive");
+        EffectMenuColor([229.0,210.0,56.0]);
+        DamageType(DamageType_Blast);
+        
+        //Interaction(Elemental_ShockElectricity, Interaction_Synergy, -1){} //shock explosion
+        //Interaction(Elemental_ShockElectricity, Elemental_Poison, -1){} //poison explosion
+        //Interaction(Elemental_ShockElectricity, Elemental_Burning, -1){} //burn explosion
+        //Interaction(Elemental_ShockElectricity, Elemental_Bleeding, -1){} //dismemberment(explosive x+2)
+        Interaction(Elemental_Freezing, Interaction_NeutralizeFirst, -1); //freeze neutralized
+        //Interaction(Elemental_Acid, Interaction_Synergy, -1){} //acid explosion
+        Interaction(Elemental_Night, Interaction_ModifySecond, -1) //damage +50%
+        {
+            Modifier(InteractionProp_Damage, 1.5);
+        }
+    }
+
+    Elemental(Elemental_Water)
+    {
+        Name("&Elemental_Water_N&");
+        Description("&Elemental_Water_D&");
+        Icon("effect_inc_chance_for_acid");
+        EffectMenuColor([118.0,201.0,228.0]);
+        DamageType(DamageType_Drowning);
+        
+        Interaction(Elemental_ShockElectricity, Interaction_ModifyFirst, -1) // effects boost
+        { 
+            Modifier(InteractionProp_Duration, 3.0);
+            Modifier(InteractionProp_Damage, 10.0);
+        }
+        Interaction(Elemental_Poison, Interaction_NeutralizeFirst, -1); // cleans poison
+        Interaction(Elemental_Burning, Interaction_NeutralizeFirst, -1); // cleans burn
+        Interaction(Elemental_Burning, Interaction_NeutralizeSecond, -1);// cleans wet
+        Interaction(Elemental_Freezing, Interaction_ModifyFirst, -1) // effects boost
+        { 
+            Modifier(InteractionProp_Duration, 4.0);
+        }
+    }
+
+    Elemental(Elemental_FuelFumes)
+    {
+        Name("&Elemental_FuelFumes_N&");
+        Description("&Elemental_FuelFumes_D&");
+        Icon("effect_inc_chance_for_acid");
+        EffectMenuColor([118.0,201.0,228.0]);
+        DamageType(DamageType_Fuel);
+        
+        Interaction(Elemental_Poison, Interaction_ModifyFirst, -1) // effects boost
+        { 
+            Modifier(InteractionProp_Duration, 3.0);
+            Modifier(InteractionProp_Damage, 10.0);
+        }
+        Interaction(Elemental_Burning, Interaction_ModifyFirst, -1) // effects boost
+        { 
+            Modifier(InteractionProp_Duration, 3.0);
+            Modifier(InteractionProp_Damage, 2.0);
+            Modifier(InteractionProp_DeathEffect, DeathEffect_Fire);
+        }
+        Interaction(Elemental_Freezing, Interaction_NeutralizeSecond, -1); //fumes neutralized
+        Interaction(Elemental_Water, Interaction_NeutralizeFirst, -1); //wet neutralized
+        Interaction(Elemental_Rain, Interaction_NeutralizeSecond, -1); //fumes neutralized
+        Interaction(Elemental_Storm, Interaction_NeutralizeSecond, -1); //fumes neutralized
+    }
+
+    Elemental(Elemental_Stunning)
+    {
+        Name("&Elemental_Stunning_N&");
+        Description("&Elemental_Stunning_D&");
+        Icon("effect_inc_chance_for_stunning");
+        EffectMenuColor([118.0,201.0,228.0]);
+        DamageType(DamageType_Stunning);
+    }
+
+    Elemental(Elemental_Stunning)
+    {
+        Level(1)
+        {
+            DamageMul(0.1);
+            DamageCriticalMul(0.05);
+            ProcProb(1.0);
+            ConfusionProb(1.0);
+            DamageDuration(10.0);
+            NightCreatureDmgMul(1.0);
+            DpsAccumulation(0.0);
+            StaminaReduction(0.0);
+            PhysicsDamageMul(0.1);
+            BlastRange(3.0);
+            BlastDamage(0.1);
+            BlastPhysicsDamage(0.0);
+        }
+    }
+
+    Elemental(Elemental_Stunning)
+    {
+        Level(2)
+        {
+            DamageMul(0.15);
+            DamageCriticalMul(0.05);
+            ProcProb(1.0);
+            ConfusionProb(1.0);
+            DamageDuration(10.0);
+            NightCreatureDmgMul(1.0);
+            DpsAccumulation(0.0);
+            StaminaReduction(0.0);
+            PhysicsDamageMul(0.1);
+            BlastRange(3.0);
+            BlastDamage(0.1);
+            BlastPhysicsDamage(0.0);
+        }
+    }
+
+    Elemental(Elemental_Stunning)
+    {
+        Level(3)
+        {
+            DamageMul(0.2);
+            DamageCriticalMul(0.05);
+            ProcProb(1.0);
+            ConfusionProb(1.0);
+            DamageDuration(10.0);
+            NightCreatureDmgMul(1.0);
+            DpsAccumulation(0.0);
+            StaminaReduction(0.0);
+            PhysicsDamageMul(0.1);
+            BlastRange(3.0);
+            BlastDamage(0.1);
+            BlastPhysicsDamage(0.0);
+        }
+    }
+
+    Elemental(Elemental_Stunning)
+    {
+        Level(4)
+        {
+            DamageMul(0.4);
+            DamageCriticalMul(1.0);
+            ProcProb(1.0);
+            ConfusionProb(1.0);
+            DamageDuration(10.0);
+            NightCreatureDmgMul(1.0);
+            DpsAccumulation(0.0);
+            StaminaReduction(0.0);
+            PhysicsDamageMul(0.1);
+            BlastRange(3.0);
+            BlastDamage(0.1);
+            BlastPhysicsDamage(0.0);
+        }
+    }
+
+    Elemental(Elemental_ShockElectricity)
+    {
+        Level(1)
+        {
+            DamageMul(0.1);
+            DamageCriticalMul(0.05);
+            ProcProb(0.05);
+            DamageDuration(4.0);
+            NightCreatureDmgMul(1.0);
+            DpsAccumulation(0.0);
+            StaminaReduction(0.0);
+            BlastRange(3.0);
+            BlastDamage(10.0);
+            BlastPhysicsDamage(1.0);
+            PropagateProb(0.01);
+            ElementalPower(0.9);
+            ElementalSecPower(1.05);
+        }
+    }
+
+    Elemental(Elemental_ShockElectricity)
+    {
+        Level(2)
+        {
+            DamageMul(0.15);
+            DamageCriticalMul(0.05);
+            ProcProb(0.05);
+            DamageDuration(6.0);
+            NightCreatureDmgMul(1.0);
+            DpsAccumulation(0.0);
+            StaminaReduction(0.0);
+            BlastRange(3.0);
+            BlastDamage(10.0);
+            BlastPhysicsDamage(2.0);
+            PropagateProb(0.01);
+            ElementalPower(0.9);
+            ElementalSecPower(1.05);
+        }
+    }
+
+    Elemental(Elemental_ShockElectricity)
+    {
+        Level(3)
+        {
+            DamageMul(0.01);
+            DamageCriticalMul(0.01);
+            ProcProb(1.0);
+            DamageDuration(8.0);
+            NightCreatureDmgMul(1.0);
+            DpsAccumulation(0.0);
+            StaminaReduction(0.0);
+            BlastRange(3.0);
+            BlastDamage(10.0);
+            BlastPhysicsDamage(2.0);
+            PropagateProb(1.0);
+            ElementalPower(0.9);
+            ElementalSecPower(1.05);
+        }
+    }
+
+    Elemental(Elemental_ImpactElectricity)
+    {
+        Level(1)
+        {
+            DamageMul(0.1);
+            DamageCriticalMul(0.05);
+            ProcProb(0.05);
+            NightCreatureDmgMul(1.0);
+            DpsAccumulation(0.0);
+            StaminaReduction(0.0);
+            PhysicsDamageMul(1.0);
+            BlastRange(2.0);
+            BlastDamage(10.0);
+            BlastPhysicsDamage(0.7);
+        }
+    }
+
+    Elemental(Elemental_ImpactElectricity)
+    {
+        Level(2)
+        {
+            DamageMul(0.15);
+            DamageCriticalMul(0.05);
+            ProcProb(0.05);
+            NightCreatureDmgMul(1.0);
+            DpsAccumulation(0.0);
+            StaminaReduction(0.0);
+            PhysicsDamageMul(2.0);
+            BlastRange(2.0);
+            BlastDamage(10.0);
+            BlastPhysicsDamage(1.0);
+        }
+    }
+
+    Elemental(Elemental_ImpactElectricity)
+    {
+        Level(3)
+        {
+            DamageMul(0.2);
+            DamageCriticalMul(0.05);
+            ProcProb(1.0);
+            NightCreatureDmgMul(1.0);
+            DpsAccumulation(0.0);
+            StaminaReduction(0.0);
+            PhysicsDamageMul(2.25);
+            BlastRange(2.0);
+            BlastDamage(10.0);
+            BlastPhysicsDamage(1.3);
+        }
+    }
+
+    Elemental(Elemental_ImpactElectricity)
+    {
+        Level(4)
+        {
+            DamageMul(0.4);
+            DamageCriticalMul(1.0);
+            ProcProb(1.0);
+            NightCreatureDmgMul(1.0);
+            DpsAccumulation(0.0);
+            StaminaReduction(0.0);
+            PhysicsDamageMul(2.25);
+            BlastRange(2.0);
+            BlastDamage(10.0);
+            BlastPhysicsDamage(2.0);
+        }
+    }
+
+    Elemental(Elemental_Poison)
+    {
+        Level(1)
+        {
+            DamageMul(0.1);
+            DamageCriticalMul(0.05);
+            ProcProb(0.05);
+            DamageDuration(3.0);
+            NightCreatureDmgMul(1.0);
+            DpsAccumulation(0.0);
+            StaminaReduction(0.0);
+            BlastRange(4.0);
+            BlastDamage(10.0);
+            BlastPhysicsDamage(0.5);
+            ElementalPower(0.8);
+            ElementalSecPower(0.95);
+        }
+    }
+
+    Elemental(Elemental_Poison)
+    {
+        Level(2)
+        {
+            DamageMul(0.15);
+            DamageCriticalMul(0.05);
+            ProcProb(0.05);
+            DamageDuration(5.0);
+            NightCreatureDmgMul(1.0);
+            DpsAccumulation(0.0);
+            StaminaReduction(0.0);
+            BlastRange(4.0);
+            BlastDamage(10.0);
+            BlastPhysicsDamage(0.7);
+            ElementalPower(0.8);
+            ElementalSecPower(0.95);
+        }
+    }
+
+    Elemental(Elemental_Poison)
+    {
+        Level(3)
+        {
+            DamageMul(0.2);
+            DamageCriticalMul(0.05);
+            ProcProb(0.1);
+            DamageDuration(8.0);
+            NightCreatureDmgMul(1.0);
+            DpsAccumulation(0.0);
+            StaminaReduction(0.0);
+            BlastRange(4.0);
+            BlastDamage(10.0);
+            BlastPhysicsDamage(1.0);
+            ElementalPower(0.8);
+            ElementalSecPower(0.95);
+        }
+    }
+
+    Elemental(Elemental_Poison)
+    {
+        Level(4)
+        {
+            DamageMul(1.0);
+            DamageCriticalMul(1.0);
+            ProcProb(0.5);
+            DamageDuration(10.0);
+            NightCreatureDmgMul(1.0);
+            DpsAccumulation(0.0);
+            StaminaReduction(0.0);
+            BlastRange(4.0);
+            BlastDamage(10.0);
+            BlastPhysicsDamage(1.25);
+            ElementalPower(0.8);
+            ElementalSecPower(0.95);
+        }
+    }
+
+    Elemental(Elemental_Burning)
+    {
+        Level(1)
+        {
+            DamageMul(0.1);
+            DamageCriticalMul(0.05);
+            ProcProb(0.05);
+            DamageDuration(10.0);
+            NightCreatureDmgMul(1.4);
+            DpsAccumulation(0.0);
+            StaminaReduction(0.0);
+            BlastRange(3.0);
+            BlastDamage(10.0);
+            BlastPhysicsDamage(2.0);
+        }
+    }
+
+    Elemental(Elemental_Burning)
+    {
+        Level(2)
+        {
+            DamageMul(0.15);
+            DamageCriticalMul(0.05);
+            ProcProb(0.05);
+            DamageDuration(12.5);
+            NightCreatureDmgMul(1.4);
+            DpsAccumulation(0.0);
+            StaminaReduction(0.0);
+            BlastRange(3.0);
+            BlastDamage(10.0);
+            BlastPhysicsDamage(2.0);
+        }
+    }
+
+    Elemental(Elemental_Burning)
+    {
+        Level(3)
+        {
+            DamageMul(0.17);
+            DamageCriticalMul(0.06);
+            ProcProb(0.1);
+            DamageDuration(15.0);
+            NightCreatureDmgMul(1.4);
+            DpsAccumulation(0.0);
+            StaminaReduction(0.0);
+            BlastRange(3.0);
+            BlastDamage(10.0);
+            BlastPhysicsDamage(2.0);
+        }
+    }
+
+    Elemental(Elemental_Burning)
+    {
+        Level(4)
+        {
+            DamageMul(0.2);
+            DamageCriticalMul(0.05);
+            ProcProb(0.1);
+            DamageDuration(15.0);
+            NightCreatureDmgMul(1.4);
+            DpsAccumulation(0.0);
+            StaminaReduction(0.0);
+        }
+    }
+
+    Elemental(Elemental_Bleeding)
+    {
+        Level(1)
+        {
+            DamageMul(0.1);
+            DamageCriticalMul(0.05);
+            ProcProb(0.05);
+            DamageDuration(3.0);
+            NightCreatureDmgMul(1.0);
+            DpsAccumulation(0.5);
+            StaminaReduction(0.0);
+            ElementalPower(1.1);
+        }
+    }
+
+    Elemental(Elemental_Bleeding)
+    {
+        Level(2)
+        {
+            DamageMul(0.15);
+            DamageCriticalMul(0.05);
+            ProcProb(0.05);
+            DamageDuration(5.0);
+            NightCreatureDmgMul(1.0);
+            DpsAccumulation(0.5);
+            StaminaReduction(0.0);
+            ElementalPower(1.1);
+        }
+    }
+
+    Elemental(Elemental_Bleeding)
+    {
+        Level(3)
+        {
+            DamageMul(0.15);
+            DamageCriticalMul(0.05);
+            ProcProb(0.1);
+            DamageDuration(8.0);
+            NightCreatureDmgMul(1.0);
+            DpsAccumulation(0.5);
+            StaminaReduction(0.0);
+            ElementalPower(1.1);
+        }
+    }
+
+    Elemental(Elemental_Bleeding)
+    {
+        Level(4)
+        {
+            DamageMul(0.075);
+            DamageCriticalMul(0.05);
+            ProcProb(1.0);
+            DamageDuration(10.0);
+            NightCreatureDmgMul(1.0);
+            DpsAccumulation(0.5);
+            StaminaReduction(0.0);
+            ElementalPower(1.1);
+        }
+    }
+
+    Elemental(Elemental_Freezing)
+    {
+        Level(1)
+        {
+            DamageMul(0.1);
+            DamageCriticalMul(0.05);
+            ProcProb(0.05);
+            DamageDuration(4.0);
+            NightCreatureDmgMul(1.0);
+            DpsAccumulation(0.0);
+            StaminaReduction(0.0);
+            ElementalPower(1.0);
+        }
+    }
+
+    Elemental(Elemental_Freezing)
+    {
+        Level(2)
+        {
+            DamageMul(0.02);
+            DamageCriticalMul(0.02);
+            ProcProb(1.0);
+            DamageDuration(8.0);
+            NightCreatureDmgMul(1.0);
+            DpsAccumulation(0.0);
+            StaminaReduction(0.0);
+            ElementalPower(1.0);
+        }
+    }
+
+    Elemental(Elemental_Freezing)
+    {
+        Level(3)
+        {
+            DamageMul(0.02);
+            DamageCriticalMul(0.02);
+            ProcProb(1.0);
+            DamageDuration(10.0);
+            NightCreatureDmgMul(1.0);
+            DpsAccumulation(0.0);
+            StaminaReduction(0.0);
+            ElementalPower(1.0);
+        }
+    }
+
+    Elemental(Elemental_Acid)
+    {
+        Level(1)
+        {
+            DamageMul(0.0);
+            DamageCriticalMul(1.0);
+            ProcProb(0.5);
+            DamageDuration(4.0);
+            NightCreatureDmgMul(1.0);
+            DpsAccumulation(0.0);
+            StaminaReduction(0.0);
+            ElementalPower(0.8);
+            ElementalSecPower(0.95);
+        }
+    }
+
+    Elemental(Elemental_Explosive)
+    {
+        Level(1)
+        {
+            ProcProb(1.0);
+            NightCreatureDmgMul(1.0);
+            DpsAccumulation(0.0);
+            StaminaReduction(60.0);
+            BlastRange(2.0);
+            BlastDamage(250.0);
+            BlastPhysicsDamage(1.0);
+        }
+    }
+
+    Elemental(Elemental_Explosive)
+    {
+        Level(2)
+        {
+            ProcProb(1.0);
+            NightCreatureDmgMul(1.0);
+            DpsAccumulation(0.0);
+            StaminaReduction(60.0);
+            BlastRange(3.0);
+            BlastDamage(500.0);
+            BlastPhysicsDamage(2.0);
+        }
+    }
+
+    Elemental(Elemental_Explosive)
+    {
+        Level(4)
+        {
+            ProcProb(1.0);
+            NightCreatureDmgMul(1.0);
+            DpsAccumulation(0.0);
+            StaminaReduction(60.0);
+            BlastRange(0.1);
+            BlastDamage(500.0);
+            BlastPhysicsDamage(2.0);
+        }
+    }
+
+    Elemental(Elemental_Water)
+    {
+        Level(1)
+        {
+        }
+    }
+
+    Elemental(Elemental_FuelFumes)
+    {
+        Level(1)
+        {
+        }
+    }
+}

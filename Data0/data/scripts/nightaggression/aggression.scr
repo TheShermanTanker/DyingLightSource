@@ -1,0 +1,779 @@
+import "StatsStuff.scr" 
+import "BTZ_Aggression.scr"
+
+sub main() 
+{
+    use BTZ();
+    
+    // zombie scream aggression
+    Stat("Aggression")
+    {
+        Name("AggresiveDrop");
+        UseStatDT();
+        ScreamPointsPerSecond(-0.05);    
+        
+        Event("Evn_GameDeltaTimePassed")
+        {}
+    }
+    
+    Stat("Aggression")
+    {
+        Name("LandingInCrowd");
+        ScreamPointsPerSecond(0.1);
+        
+        Event("Evn_AISpotting") 
+        {
+            BelowDistance(7);
+            MinNumber(5);
+        }
+    }
+    
+    Stat("Aggression")
+    {
+        Name("LandingInCrowd");
+        ScreamPointsPerSecond(0.02);
+        
+        Event("Evn_AISpotting") 
+        {
+            BelowDistance(7);
+            MinNumber(2);
+        }
+    }
+    
+    Stat("Aggression")
+    {
+        Name("LandingInCrowd");
+        ScreamPointsPerSecond(0.04);
+        
+        Event("Evn_AISpotting") 
+        {
+            BelowDistance(5);
+            MinNumber(1);
+        }
+    }
+    
+    //Level 2 spotting
+    Stat("Aggression")
+    {
+        Name("LandingInCrowd");
+        ScreamPointsPerSecond(0.2);
+        MinAggroLevel(1);
+        
+        Event("Evn_AISpotting") 
+        {
+            BelowDistance(12);
+            MinNumber(3);
+        }
+    }
+    
+    Stat("Aggression")
+    {
+        Name("LandingInCrowd");
+        ScreamPointsPerSecond(0.2);
+        MinAggroLevel(1);
+        
+        Event("Evn_AISpotting") 
+        {
+            BelowDistance(5);
+            MinNumber(1);
+        }
+    }
+    
+    Stat("Aggression")
+    {
+        Name("AggresiveDamaging");    
+        ScreamPoints(0.2);
+        
+        Event("Evn_GiveDamage")
+        {
+            Alive();
+            WillSurvive();
+            PlayerDamagerAiVictim();
+            DamageType("CUT;BULLET;BLAST;PUNCH1;PUNCH2;PUNCH3;PUNCH_BLOCKED;BLUNT;CUT;RAM;POISON;IMPACT;CAR_HIT;KICK;FLARE;TOXIC;COLD;SLIDE");
+        }    
+    }
+    
+    Stat("Aggression")
+    {
+        Name("AggresiveKIll");    
+        ScreamPoints(0.3);
+        
+        Event("Evn_Kill")
+        {
+            LocalPlayerDamager();
+        }    
+    }
+    
+    //Sneaking, level 0 aggression
+    Stat("Aggression")
+    {
+        Name("VolatileSpotted");
+        WhileBtzNotActive();
+        MaxAggroLevel(0);
+        ForceAggroLevel(1);
+        ForcePointsPercentage(0.5);        
+        
+        Event("Evn_SpottedByAI")
+        {
+            ZombiePlayerSpot();
+            BelowDistance(40);            
+            DisallowedZombieTypes("HORDE_ZOMBIE;DEFAULT;SCREAMER");
+            NoInfected();
+            LocalPlayerSpotted();
+			OnlyPatroler();
+        }
+        
+        Event("Evn_SpottedByAI")
+        {
+            ZombiePlayerSpot();
+            BelowDistance(40);   
+            DisallowedZombieTypes("SCREAMER");
+            OnlyInfected();            
+            LocalPlayerSpotted();
+			OnlyPatroler();
+        }
+    }
+    
+        
+    Stat("Aggression")
+    {
+        Name("AggresiveDrop");    
+        UseStatDT();
+        PointsPerSecond(-0.15); //MZM -0.1       
+        MaxAggroLevel(1);
+        WhileInvisible();
+        
+        Event("Evn_GameDeltaTimePassed")
+        {
+
+        }
+    }
+    
+	Stat("Aggression") //MZM
+    {
+        Name("AggresiveDrop");    
+        UseStatDT();
+        PointsPerSecond(-0.2);
+        MinAggroLevel(2);
+        MaxAggroLevel(2);
+        WhileInvisible();
+        
+        Event("Evn_GameDeltaTimePassed")
+        {
+
+        }
+    }
+
+	Stat("Aggression") //MZM
+    {
+        Name("AggresiveDrop");    
+        UseStatDT();
+        PointsPerSecond(-0.3);
+        MinAggroLevel(3);
+        MaxAggroLevel(3);
+        WhileInvisible();
+        
+        Event("Evn_GameDeltaTimePassed")
+        {
+
+        }
+    }
+
+	Stat("Aggression") //MZM
+    {
+        Name("AggresiveDrop");    
+        UseStatDT();
+        PointsPerSecond(-0.2);
+        MinAggroLevel(4);
+        WhileInvisible();
+        
+        Event("Evn_GameDeltaTimePassed")
+        {
+
+        }
+    }
+    
+    Stat("Aggression")
+    {
+        Name("DropUnderwater");    
+        UseStatDT();
+        PointsPerSecond(-0.5);
+        MinAggroLevel(1);    
+        
+        Event("Evn_GameDeltaTimePassed")
+        {
+            PlayerUnderwater();
+        }
+    }
+    
+        
+    Stat("Aggression")
+    {
+        Name("ZombieSpotting");            
+        UseStatMul();
+        WhileBtzNotActive();        
+        MinAggroLevel(1);        
+        
+        Event("Evn_AISpotting") //This way with point muls, full value is achieved only on < 10m
+        {
+            ZombiePlayerSpot();
+            BelowDistance(10);
+            PointMul(0.5);
+            MaxSpotCount(3);
+            LocalPlayerSpotted();
+        }
+        
+        Event("Evn_AISpotting")
+        {
+            ZombiePlayerSpot();
+            BelowDistance(15);
+            PointMul(0.5);
+            MaxSpotCount(3);
+            LocalPlayerSpotted();
+        }
+        
+        Event("Evn_AISpotting")
+        {
+            ZombiePlayerSpot();
+            BelowDistance(20);
+            PointMul(0.2);
+            MaxSpotCount(3);
+            LocalPlayerSpotted();
+        }
+    }
+    
+    
+    //End of sneaking, pursuit aggro levels follows
+    Stat("Aggression")
+    {
+        Name("LandingInCrowd");            
+        PointsPerSecond(0.2);
+        UseStatMul();
+        MinAggroLevel(1);
+        WhileBtzNotActive();
+        CannotIncreaseAbovePercent(0.7);
+        //TriggerVisibility();
+        
+        Event("Evn_AISpotting") 
+        {
+            ZombiePlayerSpot();
+            BelowDistance(10);
+            MinNumber(7);
+        }
+    }
+    
+    
+    Stat("Aggression")
+    {
+        Name("AggresiveKIll");    
+        Points(0.5);                
+        WhileBtzNotActive();
+        WhileVisible();
+        //TriggerVisibility();
+        MinAggroLevel(1);
+        MaxAggroLevel(2);
+        Event("Evn_Kill")
+        {            
+			AtNight();
+			LocalPlayerDamager();
+			Victim("Infected"); // 	Victim("Infected;Suicider;Berserker;Butcher;Corrupter");
+        }    
+    }
+    
+	Stat("Aggression")
+    {
+        Name("AggresiveKIll");    
+        Points(0.3);                
+        WhileBtzNotActive();
+        WhileVisible();
+        //TriggerVisibility();
+        MinAggroLevel(3);        
+        Event("Evn_Kill")
+        {
+			AtNight();
+			LocalPlayerDamager();
+			Victim("Infected"); //	Victim("Infected;Suicider;Berserker;Butcher;Corrupter");
+        }    
+    }
+
+    Stat("Aggression")
+    {
+        Name("NonWalkerSpotting");            
+        PointsPerSecond(0.05);
+        UseStatMul();
+        MinAggroLevel(1);
+        MaxAggroLevel(2); //Spotting will not increase our level above 2 - some kills are necessary
+        CannotIncreaseAbovePercent(0.9);    
+        WhileBtzNotActive();
+        
+        Event("Evn_AISpotting")
+        {
+            ZombiePlayerSpot();
+            BelowDistance(20);
+            MaxSpotCount(6);
+            DisallowedZombieTypes("HORDE_ZOMBIE;DEFAULT");
+            NoInfected();
+            LocalPlayerSpotted();
+        }
+        
+        Event("Evn_AISpotting")
+        {
+            ZombiePlayerSpot();
+            BelowDistance(20);
+            MaxSpotCount(6);
+            OnlyInfected();
+            LocalPlayerSpotted();
+        }
+    }
+        
+    Stat("Aggression")
+    {
+        Name("PlayerDamagedClamped");            
+        Points(0.1);        
+        MinAggroLevel(1);
+        CannotIncreaseAbovePercent(0.8);
+        WhileBtzNotActive();
+                
+        Event("Evn_GiveDamage")
+        {
+            VictimLocalPlayer();
+            DamageType("PUNCH1;PUNCH2;PUNCH3;PUNCH_KO;PUNCH_BLOCKED;BLUNT;CUT;RAM");
+        }
+    }
+    
+    Stat("Aggression")
+    {
+        Name("PlayerDamaged");            
+        Points(0.05);        
+        MinAggroLevel(1);
+        WhileBtzNotActive();
+                
+        Event("Evn_GiveDamage")
+        {
+            VictimLocalPlayer();
+            DamageType("PUNCH1;PUNCH2;PUNCH3;PUNCH_KO;PUNCH_BLOCKED;BLUNT;CUT;RAM");
+        }
+    }
+    
+	Stat("Aggression")
+    {
+        Name("AiDamaging");    
+        Points(0.3);
+        MinAggroLevel(1);
+		MaxAggroLevel(1);
+        WhileBtzNotActive();
+		
+        Event("Evn_GiveDamage")
+        {
+            Alive();
+            WillSurvive();
+            PlayerDamagerAiVictim();
+            DamageType("CUT;BULLET;BLAST;PUNCH1;PUNCH2;PUNCH3;PUNCH_BLOCKED;BLUNT;CUT;RAM;POISON;IMPACT;CAR_HIT;KICK;FLARE;TOXIC;COLD;SLIDE");
+			VictimNightZombie();
+        }    
+    }
+	
+    Stat("Aggression")
+    {
+        Name("PlayerBitten");            
+        Points(0.05);        
+        WhileBtzNotActive();
+        MinAggroLevel(1);
+                
+        Event("Evn_GiveDamage")
+        {
+            VictimLocalPlayer();
+            DamageType("BITE");
+        }
+    }
+    
+
+    Stat("Aggression")
+    {
+        Name("RageMeterIncrease");    
+		CarPursuit();
+        UseStatDT();
+        PointsPerSecond(0.05);
+        MinAggroLevel(1);
+        MinAggroTime(5);
+        WhileBtzNotActive();
+        
+        Event("Evn_GameDeltaTimePassed")
+        {
+
+        }
+    }    
+
+
+    //Rage timer increase level after 1 minute of pursuit
+    Stat("Aggression")
+    {
+        Name("RageMeterIncrease");    
+        UseStatDT();
+        PointsPerSecond(0.1);
+        MinAggroLevel(1);
+        MaxAggroLevel(2);
+        MinAggroTime(25);
+        WhileBtzNotActive();
+        
+        Event("Evn_GameDeltaTimePassed")
+        {
+
+        }
+    }    
+    
+    Stat("Aggression")
+    {
+        Name("RageMeterDrop");    
+        UseStatDT();
+        PointsPerSecond(-0.1);
+        MinAggroLevel(1);
+        MaxAggroLevel(2);
+        WhileInvisible();
+        MinAggroTime(25);        
+        WhileBtzNotActive();
+        
+        Event("Evn_GameDeltaTimePassed")
+        {
+            
+        }
+    }
+
+    
+    Stat("Aggression")
+    {
+        Name("RageMeterIncrease");    
+        UseStatDT();
+        PointsPerSecond(0.1);
+        MinAggroLevel(2);
+        MinAggroTime(40);
+        WhileBtzNotActive();
+        
+        Event("Evn_GameDeltaTimePassed")
+        {
+
+        }
+    }    
+    
+    Stat("Aggression")
+    {
+        Name("RageMeterDrop");    
+        UseStatDT();
+        PointsPerSecond(-0.1);
+        MinAggroLevel(2);        
+        WhileInvisible();
+        MinAggroTime(40);        
+        WhileBtzNotActive();
+        
+        Event("Evn_GameDeltaTimePassed")
+        {
+            
+        }
+    }    
+}
+
+sub aggro_levels() 
+{ 
+    AggressionLevel(0)
+    {
+        MaxAggroValue(1.0);
+        PursuitAreaRadius(20.0);
+        CrowdDensity(2);
+        PlayerHitSlowdown(0);
+        MinAggroLevelTime(10);
+        PursuitDiffLevel(0);
+		GroupDamageMultiplayer(0.0);
+    }
+    
+    AggressionLevel(1)
+    {
+        MaxAggroValue(3.0);
+        PursuitAreaRadius(250.0);
+        CrowdDensity(0);
+        PlayerHitSlowdown(0.3);
+        MinAggroLevelTime(5);
+        PursuitDiffLevel(0);
+		GroupDamageMultiplayer(0.0);
+    }
+    
+    AggressionLevel(2)
+    {
+        MaxAggroValue(5.0);
+        PursuitAreaRadius(250.0);
+        CrowdDensity(0);
+        PlayerHitSlowdown(0.4);
+        MinAggroLevelTime(5);
+        PursuitDiffLevel(1);
+		GroupDamageMultiplayer(0.5);
+    }
+    
+    AggressionLevel(3)
+    {
+        MaxAggroValue(9.0);
+        PursuitAreaRadius(350.0);
+        CrowdDensity(0);
+        PlayerHitSlowdown(0.6);
+        MinAggroLevelTime(5);
+        PursuitDiffLevel(2);
+		GroupDamageMultiplayer(0.7);
+    }
+    
+    AggressionLevel(4)
+    {
+        MaxAggroValue(10.0);
+        PursuitAreaRadius(390.0);
+        CrowdDensity(0);
+        PlayerHitSlowdown(0.6);
+        MinAggroLevelTime(5);
+        PursuitDiffLevel(2);
+		GroupDamageMultiplayer(1.0);
+    }
+    
+    PointsBlockedLevelName("dream");
+    PointsBlockedLevelName("forever_foundation");
+    PointsBlockedLevelName("mykorian_city");
+    PointsBlockedLevelName("old_town_cleansing");
+    PointsBlockedLevelName("old_town_int_hotel");
+    PointsBlockedLevelName("old_town_interior");
+    PointsBlockedLevelName("old_town_interior_a");
+    PointsBlockedLevelName("old_town_outposts");
+    PointsBlockedLevelName("slums_cleansing");
+    PointsBlockedLevelName("slums_cs");
+    PointsBlockedLevelName("slums_demolition");
+    PointsBlockedLevelName("slums_int_projmayhem");
+    PointsBlockedLevelName("slums_int_school");
+    PointsBlockedLevelName("slums_int_warehouse");
+    PointsBlockedLevelName("slums_interior");
+    PointsBlockedLevelName("slums_interior_a");
+}
+
+
+sub aggro_sounds() 
+{ 
+	ZombieAggressionGamerNoiseAnalysisParams(0.1, 1.5, 10, 50, 0.8);
+		
+    SoundType("EXPLOSION")
+    {
+        MaxLifeTime(30.0);
+        Radius(50.0);
+        MinAdd(90.0);
+        MaxAdd(250.0);
+        MaxPower(1000.0);
+        ShownOnRadar();
+        TransformRadius(10.0);
+        MaxTransformedZombies(4);
+    }
+
+    SoundType("SHOT")
+    {
+        MaxLifeTime(40.0);
+        Radius(60.0);
+        MinAdd(10.0);
+        MaxAdd(20.0);
+        MaxPower(400.0);
+        ShownOnRadar();
+    }
+	
+	
+	SoundType("LIGHT_SHOT")
+    {
+        MaxLifeTime(40.0);
+        Radius(60.0);
+        MinAdd(3.0);
+        MaxAdd(7.0);
+        MaxPower(400.0);
+        ShownOnRadar();
+    }
+	
+	
+	SoundType("HEAVY_SHOT")
+    {
+        MaxLifeTime(40.0);
+        Radius(60.0);
+        MinAdd(25.0);
+        MaxAdd(40.0);
+        MaxPower(400.0);
+        ShownOnRadar();
+    }
+
+    SoundType("WEAPON_MELEE_HIT")
+    {
+        MaxLifeTime(15.0);
+        Radius(10.0);
+        Power(5.0);
+        MaxPower(50.0);
+        RadiusAdd(5.0);
+        MaxRadius(25.0);
+		ForceInvestigating();
+    }
+    
+    SoundType("SCREAMER_SHOUT")
+    {
+        MaxLifeTime(30.0);
+        Radius(80.0);
+        Power(70.0); //power per second
+        MaxPower(900.0);
+        ShownOnRadar();
+        TransformRadius(10.0);
+        MaxTransformedZombies(4);
+    }
+    
+    SoundType("ENCOUNTER")
+    {
+        MaxLifeTime(300.0);
+        Radius(150.0);
+        Power(1000.0);
+        MaxPower(1000.0);
+        ShownOnRadar();
+    }
+    
+    SoundType("ZOMBIE_GRAB")
+    {
+        MaxLifeTime(10.0);
+        Radius(20.0);
+        Power(50.0);
+        MaxPower(90.0);
+    }
+    
+    SoundType("DESTROYABLE_SMALL")
+    {
+        MaxLifeTime(5.0);
+        Radius(10.0);
+        Power(50.0);
+        MaxPower(80.0);
+        TransformRadius(5.0);
+        MaxTransformedZombies(2);
+		ForceInvestigating();
+    }
+    
+    SoundType("DESTROYABLE_LARGE")
+    {
+        MaxLifeTime(10.0);
+        Radius(50.0);
+        Power(120.0);
+        MaxPower(220.0);
+        ShownOnRadar();
+        TransformRadius(10.0);
+        MaxTransformedZombies(4);
+    }
+    
+    SoundType("ZOMBIE_SCREAM")
+    {
+        MaxLifeTime(10.0);
+        Radius(40.0);
+        MinAdd(50.0);
+        MaxAdd(70.0);
+        MaxPower(200.0);
+        ShownOnRadar();
+        TransformRadius(5.0);
+        MaxTransformedZombies(2);
+    }
+    
+    SoundType("ELECTRIC_SHOCK")
+    {
+        MaxLifeTime(4.0);
+        Radius(7.0);
+        Power(80.0);
+        MaxPower(90.0);
+    }
+    
+    SoundType("CAR_ENGINE")
+    {
+        MaxLifeTime(1.0);
+        Radius(4.0);
+        Power(10.0);
+        MaxPower(20.0);
+		RadiusAdd(3.0);
+		ForceInvestigating();
+		MaxRadius(15.0);
+    }
+	    
+    SoundType("PLAYER_SPRINT")
+    {
+        MaxLifeTime(1.0);
+        Radius(4.0);
+        Power(10.0);
+        MaxPower(20.0);
+		RadiusAdd(3.0);
+		ForceInvestigating();
+		MaxRadius(8.0);
+    }
+    
+    SoundType("GAMER_SOUND_LVL_1")
+    {
+        MaxLifeTime(5.0);
+        Radius(50.0);
+        Power(10.0);
+        MaxPower(20.0);
+        GamerNoiseThreshold(0.3);
+        ShownOnRadar();
+		ForceInvestigating();
+    }
+    
+    SoundType("GAMER_SOUND_LVL_2")
+    {
+        MaxLifeTime(10.0);
+        Radius(150.0);
+        Power(60.0);
+        MaxPower(60.0);
+        GamerNoiseThreshold(0.95);
+		ForceInvestigating();
+        ShownOnRadar();
+    }
+    
+    SoundType("PLANE_APPROACHING")
+    {
+        MaxLifeTime(0.3);
+        Radius(30.0);
+        Power(20.0);
+        MaxPower(20.0);
+		ForceInvestigating();
+        ShownOnRadar();
+    }
+    
+    SoundType("QUIET_CHATTER")
+        {
+        MaxLifeTime(1.0);
+        Radius(1.0);
+        Power(5.0);
+        MaxPower(20.0);
+		ForceInvestigating();
+        //ShownOnRadar();
+    }
+    
+    SoundType("DECOY")
+    {
+        MaxLifeTime(0.5);
+        Radius(1.0);
+        Power(1.0);
+        MaxPower(20.0);
+        ShownOnRadar();
+    }
+    
+	SoundType("BURNING_GROUND")
+    {
+        MaxLifeTime(7.0);
+        Radius(60.0);
+        Power(10.0);
+        MaxPower(10.0);
+		//ShownOnRadar();
+    }
+	
+	SoundType("LIGHT_EXPLOSION")
+    {
+        MaxLifeTime(5.0);
+        Radius(25.0);
+        MinAdd(30.0);
+        MaxAdd(60.0);
+        MaxPower(80.0);
+        TransformRadius(10.0);
+        MaxTransformedZombies(4);
+    }
+	
+    //AggroLevel(level, points_to_get_level, min_time_before_level_drops(s) );    
+    AggroLevel(0, 50, 0.0);
+    AggroLevel(1, 100, 15.0);
+    AggroLevel(2, 300, 15.0);
+    AggroLevel(3, 600, 15.0);
+    AggroLevel(4, 900, 15.0);
+}

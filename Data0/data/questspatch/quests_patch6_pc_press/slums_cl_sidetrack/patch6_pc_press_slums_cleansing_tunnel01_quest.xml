@@ -1,0 +1,967 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums_cl_sidetrack"
+     source="dlc2"
+     quest_tree="tree2"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- TUNNELS MICHAL -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="Slums_Cleansing_Sidetrack_Start"
+         parent="Dlc2_Slums"
+         glued="true"
+         replayable="true"
+         pxsl_line="8">
+        <Phase
+             type="go to"
+             name="_"
+             objective="&amp;ChallengeDZObj_Explore&amp;"
+             distance="10000"
+             pxsl_line="9">
+            <Destination
+                 pxsl_line="9">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="MapStart"
+                     pxsl_line="9" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="Slums_Cleansing_Sidetrack"
+         parent="Slums_Cleansing_Sidetrack_Start"
+         leading_portal="portal_exit_slums_cleansing_02_tunnel"
+         glued="true"
+         pxsl_line="11">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;ChallengeDZObj_Explore&amp;"
+             pxsl_line="12">
+            <Path
+                 pxsl_line="12">
+                <Phase
+                     type="go to"
+                     name="Slums_Cleansing_sidetrack - Start "
+                     distance="0"
+                     show_locations="true"
+                     pxsl_line="13">
+                    <Destination
+                         pxsl_line="13">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="Tunnel_DeadZone_Marker_1"
+                             pxsl_line="13" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="14">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="sp_slums_interior_cleansing_02"
+                             pxsl_line="14" />
+                    </DebugPlayerPosition>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="16">
+            <Object
+                 pxsl_line="17">
+                <QuestObject
+                     class="SafeZone"
+                     name="Tunnel_SideTrack_SafeZone"
+                     pxsl_line="17" />
+            </Object>
+            <!-- ,o      SpawnPoint Respawn_Sidetrack_Tunnel       -->
+            <!-- ,o      NightArea Tunnel_Sidetrack                   -->
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             pxsl_line="20">
+            <Path
+                 pxsl_line="21">
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="10"
+                     pxsl_line="22" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="23">
+                    <Object
+                         pxsl_line="23">
+                        <QuestObject
+                             class="SensorAmbientMusicArea"
+                             name="Music_Tunnel_Sidetrack"
+                             pxsl_line="23" />
+                    </Object>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="24">
+                <Phase
+                     type="AND"
+                     name="_"
+                     objective="&amp;ChallengeDZObj_Sidetrack_Cleansing_1&amp;"
+                     pxsl_line="25">
+                    <Path
+                         pxsl_line="25">
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="26">
+                            <Object
+                                 pxsl_line="26">
+                                <QuestObject
+                                     class="IntensityArea"
+                                     name="Sidetrack_Intensity_End"
+                                     pxsl_line="26" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="AND"
+                             name="_"
+                             pxsl_line="27">
+                            <!-- for tracking purpose only -->
+                            <SpecificLocation
+                                 pxsl_line="28">
+                                <QuestObject
+                                     class="ZoneBox"
+                                     name="Sidtrack_FakeTracking_Zone"
+                                     pxsl_line="28" />
+                            </SpecificLocation>
+                            <Path
+                                 pxsl_line="29">
+                                <Phase
+                                     type="started quest guard"
+                                     name="_"
+                                     quest_name="__Sidetrack_Tunnel_Container_1"
+                                     finished="true"
+                                     pxsl_line="30" />
+                            </Path>
+                            <Path
+                                 pxsl_line="31">
+                                <Phase
+                                     type="started quest guard"
+                                     name="_"
+                                     quest_name="__Sidetrack_Tunnel_Container_2"
+                                     finished="true"
+                                     pxsl_line="32" />
+                            </Path>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="33">
+                            <Object
+                                 pxsl_line="33">
+                                <QuestObject
+                                     class="ZoneBox"
+                                     name="Sidtrack_FakeTracking_Zone"
+                                     pxsl_line="33" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="34">
+                    <Path
+                         pxsl_line="35">
+                        <Phase
+                             type="clear area"
+                             name="_"
+                             objective="&amp;ChallengeDZObj_Sidetrack_Cleansing_2&amp;"
+                             show_location="true"
+                             show="true"
+                             show_locations="true"
+                             visualize_count="10"
+                             pxsl_line="36">
+                            <Object
+                                 pxsl_line="36">
+                                <QuestObject
+                                     class="ClearArea"
+                                     name="Tunnel_ClearArea_1"
+                                     pxsl_line="36" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <!-- to prevent unlimited infected spawn                -->
+                    <Path
+                         pxsl_line="37">
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="10"
+                             pxsl_line="38" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="39">
+                            <Object
+                                 pxsl_line="40">
+                                <QuestObject
+                                     class="IntensityArea"
+                                     name="Sidetrack_Intensity_Vessel"
+                                     pxsl_line="40" />
+                            </Object>
+                            <Object
+                                 pxsl_line="41">
+                                <QuestObject
+                                     class="SpawnBlocker"
+                                     name="Tunnel_SpawnBlocker_1"
+                                     pxsl_line="41" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="42">
+                            <Object
+                                 pxsl_line="42">
+                                <QuestObject
+                                     class="IntensityArea"
+                                     name="Sidetrack_Intensity_End"
+                                     pxsl_line="42" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="43">
+                <Phase
+                     type="kill"
+                     name="_"
+                     show_locations="false"
+                     pxsl_line="44">
+                    <Spawner
+                         pxsl_line="44">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="Sidetrack_Zombie_1"
+                             pxsl_line="44" />
+                    </Spawner>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="45">
+                    <Object
+                         pxsl_line="45">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="Sidetrack_Zombie_1"
+                             pxsl_line="45" />
+                    </Object>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="46">
+            <Object
+                 pxsl_line="46">
+                <QuestObject
+                     class="SpawnBlocker"
+                     name="Tunnel_SpawnBlocker_1"
+                     pxsl_line="46" />
+            </Object>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="47">
+            <!-- ,o      IntensityArea Sidetrack_Intensity_End -->
+            <Object
+                 pxsl_line="49">
+                <QuestObject
+                     class="SensorAmbientMusicArea"
+                     name="Music_Tunnel_Sidetrack"
+                     pxsl_line="49" />
+            </Object>
+            <!-- ,o      NightArea Tunnel_Sidetrack -->
+        </Phase>
+    </Quest>
+    <Quest
+         name="__Sidetrack_Tunnel_Container_2"
+         parent="Slums_Cleansing_Sidetrack_Start"
+         pxsl_line="54">
+        <Phase
+             type="go to"
+             name="_"
+             distance="0"
+             show_locations="false"
+             pxsl_line="55">
+            <Destination
+                 pxsl_line="55">
+                <QuestObject
+                     class="SensorGoTo"
+                     name="Tunnel_DeadZone_Marker_1"
+                     pxsl_line="55" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="56">
+            <Object
+                 pxsl_line="56">
+                <QuestObject
+                     class="AISpawnBoxWaves"
+                     name="Sidetrack_Sewerage_Waves_2"
+                     pxsl_line="56" />
+            </Object>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="57">
+            <Object
+                 pxsl_line="57">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="Fake_Container_Navmesh_2"
+                     pxsl_line="57" />
+            </Object>
+        </Phase>
+        <Phase
+             type="use"
+             name="_"
+             desired_state="on"
+             pxsl_line="58">
+            <Trigger
+                 pxsl_line="58">
+                <QuestObject
+                     class="PhysicalSwitchDI"
+                     name="Container_Button_2"
+                     pxsl_line="58" />
+            </Trigger>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="59">
+            <Object
+                 pxsl_line="59">
+                <QuestObject
+                     class="AISpawnBoxWaves"
+                     name="Sidetrack_Sewerage_Waves_2"
+                     pxsl_line="59" />
+            </Object>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             pxsl_line="60">
+            <Path
+                 pxsl_line="61">
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="62">
+                    <Object
+                         pxsl_line="62">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="Fake_Container_Navmesh_2"
+                             pxsl_line="62" />
+                    </Object>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="63">
+                <Phase
+                     type="movie"
+                     name="_"
+                     movie="Movie_Container_Fall_2"
+                     pxsl_line="64" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="65">
+                    <Object
+                         pxsl_line="65">
+                        <QuestObject
+                             class="NavMeshDynamicObject"
+                             name="cl_sidetrack_navcut02"
+                             pxsl_line="65" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="66">
+                    <Object
+                         pxsl_line="66">
+                        <QuestObject
+                             class="NavMeshDynamicObject"
+                             name="cl_sidetrack_navcut04"
+                             pxsl_line="66" />
+                    </Object>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="67">
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="0.5"
+                     pxsl_line="68" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="69">
+                    <Object
+                         pxsl_line="69">
+                        <QuestObject
+                             class="EarthQuakeArea"
+                             name="Cotainer_Shake_Area_2"
+                             pxsl_line="69" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="1"
+                     pxsl_line="70" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="71">
+                    <Object
+                         pxsl_line="71">
+                        <QuestObject
+                             class="EarthQuakeArea"
+                             name="Cotainer_Shake_Area_2"
+                             pxsl_line="71" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="72">
+                    <Object
+                         pxsl_line="72">
+                        <QuestObject
+                             class="SpawnBlocker"
+                             name="Container_2_SpawnBlocker"
+                             pxsl_line="72" />
+                    </Object>
+                </Phase>
+            </Path>
+            <!-- path -->
+                <!-- ,wait _     3 -->
+                <!-- ,disable-multi _ -->
+                    <!-- ,o  AllLethalObject Damage_Container_2 -->
+                    <!-- ,o  Spikes Damage_Container_Spikes_2           -->
+        </Phase>
+    </Quest>
+    <Quest
+         name="__Sidetrack_Tunnel_Container_1"
+         parent="Slums_Cleansing_Sidetrack_Start"
+         pxsl_line="79">
+        <Phase
+             type="go to"
+             name="_"
+             distance="0"
+             show_locations="false"
+             pxsl_line="80">
+            <Destination
+                 pxsl_line="80">
+                <QuestObject
+                     class="SensorGoTo"
+                     name="Tunnel_DeadZone_Marker_1"
+                     pxsl_line="80" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="81">
+            <Object
+                 pxsl_line="81">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="Fake_Container_Navmesh_1"
+                     pxsl_line="81" />
+            </Object>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             pxsl_line="82">
+            <Path
+                 pxsl_line="83">
+                <Phase
+                     type="OR"
+                     name="_"
+                     pxsl_line="84">
+                    <Path
+                         pxsl_line="85">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="86">
+                            <Destination
+                                 pxsl_line="86">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="Volletaile_Hole_Init_1"
+                                     pxsl_line="86" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="87">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="88">
+                            <Destination
+                                 pxsl_line="88">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="Volletaile_Hole_Init_2"
+                                     pxsl_line="88" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="89">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="90">
+                            <Destination
+                                 pxsl_line="90">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="Volletaile_Hole_Init_3"
+                                     pxsl_line="90" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="2"
+                     pxsl_line="91" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="92">
+                    <Object
+                         pxsl_line="92">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="Sidetrack_Sewerage_Zombie_1"
+                             pxsl_line="92" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="3"
+                     pxsl_line="93" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="94">
+                    <Object
+                         pxsl_line="94">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="Sidetrack_Sewerage_Zombie_2"
+                             pxsl_line="94" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="3"
+                     pxsl_line="95" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="96">
+                    <Object
+                         pxsl_line="96">
+                        <QuestObject
+                             class="AISpawnBoxWaves"
+                             name="Sidetrack_Sewerage_Waves_1"
+                             pxsl_line="96" />
+                    </Object>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="97">
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="on"
+                     pxsl_line="98">
+                    <Trigger
+                         pxsl_line="98">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="Container_Button_1"
+                             pxsl_line="98" />
+                    </Trigger>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="99">
+            <Object
+                 pxsl_line="99">
+                <QuestObject
+                     class="AISpawnBoxWaves"
+                     name="Sidetrack_Sewerage_Waves_1"
+                     pxsl_line="99" />
+            </Object>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             pxsl_line="100">
+            <Path
+                 pxsl_line="101">
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="102">
+                    <Object
+                         pxsl_line="102">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="Fake_Container_Navmesh_1"
+                             pxsl_line="102" />
+                    </Object>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="103">
+                <Phase
+                     type="movie"
+                     name="_"
+                     movie="Movie_Container_Fall"
+                     pxsl_line="104" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="105">
+                    <Object
+                         pxsl_line="105">
+                        <QuestObject
+                             class="NavMeshDynamicObject"
+                             name="cl_sidetrack_navcut01"
+                             pxsl_line="105" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="106">
+                    <Object
+                         pxsl_line="106">
+                        <QuestObject
+                             class="NavMeshDynamicObject"
+                             name="cl_sidetrack_navcut03"
+                             pxsl_line="106" />
+                    </Object>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="107">
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="0.5"
+                     pxsl_line="108" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="109">
+                    <Object
+                         pxsl_line="109">
+                        <QuestObject
+                             class="EarthQuakeArea"
+                             name="Cotainer_Shake_Area_1"
+                             pxsl_line="109" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="1"
+                     pxsl_line="110" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="111">
+                    <Object
+                         pxsl_line="111">
+                        <QuestObject
+                             class="EarthQuakeArea"
+                             name="Cotainer_Shake_Area_1"
+                             pxsl_line="111" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="112">
+                    <Object
+                         pxsl_line="112">
+                        <QuestObject
+                             class="SpawnBlocker"
+                             name="Container_1_SpawnBlocker"
+                             pxsl_line="112" />
+                    </Object>
+                </Phase>
+            </Path>
+            <!-- path  -->
+                <!-- ,wait _     3 -->
+                <!-- ,disable-multi _ -->
+                    <!-- ,o  AllLethalObject Damage_Container_1 -->
+                    <!-- ,o  Spikes Damage_Container_Spikes_1                                                                                                   -->
+        </Phase>
+    </Quest>
+    <Quest
+         name="__Slums_Cleansing_Sidetrack_Pipe_1"
+         parent="Slums_Cleansing_Sidetrack_Start"
+         pxsl_line="119">
+        <Phase
+             type="go to"
+             name="_"
+             distance="0"
+             show_locations="false"
+             pxsl_line="120">
+            <Destination
+                 pxsl_line="120">
+                <QuestObject
+                     class="SensorGoTo"
+                     name="Tunnel_DeadZone_Marker_1"
+                     pxsl_line="120" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="use"
+             name="_"
+             desired_state="on"
+             show_locations="false"
+             pxsl_line="121">
+            <Trigger
+                 pxsl_line="121">
+                <QuestObject
+                     class="PhysicalSwitchDI"
+                     name="Sidetrack_Push_Pipe_1"
+                     pxsl_line="121" />
+            </Trigger>
+        </Phase>
+        <Phase
+             type="set skin"
+             name="_"
+             skin_name="Default"
+             pxsl_line="122">
+            <ModelObject
+                 pxsl_line="122">
+                <QuestObject
+                     class="PhysicalSwitchDI"
+                     name="Sidetrack_Push_Pipe_1"
+                     pxsl_line="122" />
+            </ModelObject>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             pxsl_line="123">
+            <Path
+                 pxsl_line="124">
+                <Phase
+                     type="movie"
+                     name="_"
+                     movie="Sidetrack_Movie_Rolling_Pipe_1"
+                     pxsl_line="125" />
+            </Path>
+            <Path
+                 pxsl_line="126">
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="4"
+                     pxsl_line="127" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="128">
+                    <Object
+                         pxsl_line="129">
+                        <QuestObject
+                             class="AllLethalObject"
+                             name="Sidetrack_Rolling_Pipe_DamageBox_1"
+                             pxsl_line="129" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="8"
+                     pxsl_line="130" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="131">
+                    <Object
+                         pxsl_line="132">
+                        <QuestObject
+                             class="AllLethalObject"
+                             name="Sidetrack_Rolling_Pipe_DamageBox_1"
+                             pxsl_line="132" />
+                    </Object>
+                    <Object
+                         pxsl_line="133">
+                        <QuestObject
+                             class="BoxObjectEnabler"
+                             name="Switch_enabler"
+                             pxsl_line="133" />
+                    </Object>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__Slums_Cleansing_Sidetrack_Pipe_2"
+         parent="Slums_Cleansing_Sidetrack_Start"
+         pxsl_line="135">
+        <Phase
+             type="go to"
+             name="_"
+             distance="0"
+             show_locations="false"
+             pxsl_line="136">
+            <Destination
+                 pxsl_line="136">
+                <QuestObject
+                     class="SensorGoTo"
+                     name="Tunnel_DeadZone_Marker_1"
+                     pxsl_line="136" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="use"
+             name="_"
+             desired_state="on"
+             show_locations="false"
+             pxsl_line="137">
+            <Trigger
+                 pxsl_line="137">
+                <QuestObject
+                     class="PhysicalSwitchDI"
+                     name="Sidetrack_Push_Pipe_2"
+                     pxsl_line="137" />
+            </Trigger>
+        </Phase>
+        <Phase
+             type="set skin"
+             name="_"
+             skin_name="Default"
+             pxsl_line="138">
+            <ModelObject
+                 pxsl_line="138">
+                <QuestObject
+                     class="PhysicalSwitchDI"
+                     name="Sidetrack_Push_Pipe_2"
+                     pxsl_line="138" />
+            </ModelObject>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             pxsl_line="139">
+            <Path
+                 pxsl_line="140">
+                <Phase
+                     type="movie"
+                     name="_"
+                     movie="Sidetrack_Movie_Rolling_Pipe_2"
+                     pxsl_line="141" />
+            </Path>
+            <Path
+                 pxsl_line="142">
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="4"
+                     pxsl_line="143" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="144">
+                    <Object
+                         pxsl_line="145">
+                        <QuestObject
+                             class="AllLethalObject"
+                             name="Sidetrack_Rolling_Pipe_DamageBox_2"
+                             pxsl_line="145" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="8"
+                     pxsl_line="146" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="147">
+                    <Object
+                         pxsl_line="148">
+                        <QuestObject
+                             class="AllLethalObject"
+                             name="Sidetrack_Rolling_Pipe_DamageBox_2"
+                             pxsl_line="148" />
+                    </Object>
+                    <Object
+                         pxsl_line="149">
+                        <QuestObject
+                             class="BoxObjectEnabler"
+                             name="switch_enabler_02"
+                             pxsl_line="149" />
+                    </Object>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+</QuestsDefinitions>

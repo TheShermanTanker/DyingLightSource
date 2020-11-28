@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="old_town"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST NAME : Birds on sky -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- quest OutPost_Test -parent=RayOfHope -->
+        <!-- ,goto <<Go to first Outpost>> ClearArea ca_Outpost_Patio -distance=10 -show=false -->
+            <!-- ,debugpos SpawnPoint sp_OldTown_Outpost_Test -->
+            <!--  -->
+        <!-- ,clear_area <<Kill all enemies>> ClearArea ca_Outpost_Patio -= -visualise=true -->
+            <!-- ,debugpos SpawnPoint sp_OldTown_Outpost_Test -->
+    <Quest
+         name="__OldTown_Birds_Loop"
+         parent="Q_AnotherDay"
+         pxsl_line="16">
+        <Phase
+             type="movie"
+             name="_"
+             movie="cin_loop_birds001"
+             pxsl_line="17" />
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="18">
+            <Destination
+                 pxsl_line="18">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="MapStart"
+                     pxsl_line="18" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -= -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- -= DEVICE -->
+    <!-- -= -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+        <!--  -->
+    <!-- quest Q_Device -parent=Q_FindCamden03 -glued=false -reward_set=Device_reward -quest_giver=Troy -difficulty=medium -= -new_chapter=Chapter12 -->
+        <!-- ,BLOCK _ -obj=&Device_OBJ_TalkToTroy& -->
+            <!-- ,talk <<Device - Talk to Troy - START>> troy Troy_Device_USE -follow=Troy_Device_INP -gather_radius=5 -->
+                <!-- ,debugpos SpawnPoint sp_Device_Start -->
+            <!-- ,enable _ SpawnPoint sp_Device_Parking -->
+        <!-- ,checkpoint _ SpawnPoint sp_Device_Start -->
+        <!-- ,BLOCK _ -obj=&Device_OBJ_SearchForAmplifiers& -->
+            <!-- ,OR <<Device - Look for amplifiers in TV Vans>>  -->
+                <!-- ,debugpos SpawnPoint sp_Device_Start -->
+                <!-- path -->
+                    <!-- ,use _ InvisibleSwitchDI is_TVVAN_Doors_A -state=on -show=false -->
+                    <!-- ,movie _ tvvan_A_doors::Movie_TVVAN_Doors -->
+                    <!-- ,take _ QuestInventoryItemDI Device_QII_Device_A -->
+                    <!-- ,radio-dialog _ voice2d Player_Device_02DLG01 -->
+                <!-- path -->
+                    <!-- ,use _ InvisibleSwitchDI is_TVVAN_Doors_B -state=on -show=false -->
+                    <!-- ,movie _ tvvan_B_doors::Movie_TVVAN_Doors -->
+                    <!-- ,semaphore _  -->
+                <!-- path -->
+                    <!-- ,goto _ SensorGoTo sgt_Device_TVVan_C -distance=0 -show=false -->
+                    <!-- ,semaphore _ -->
+                <!-- path -->
+                    <!-- ,goto _ SensorGoTo sgt_Device_TVVan_D -distance=0 -show=false -->
+                    <!-- ,semaphore _ -->
+                <!-- ,area ZoneBox OldTown_Zone_Cordon -->
+    <!--  -->
+        <!-- ,BLOCK _ -obj=&Device_OBJ_TakeDeviceToTroy& -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,talk <<Device - Talk to Troy - END>> Troy Troy_Device_END -->
+                <!-- path -->
+                    <!-- ,goto _ Marker m_Device_MilitaryZone -distance=-70 -show=false -->
+                    <!-- ,radio-dialog _ voice2d Player_Device_02DLG01 -->
+            <!-- ,reward _ Troy -->
+            <!-- ,disable _ SpawnPoint sp_Device_Parking -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- BENCHMARK AND VISTA -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <Quest
+         name="__OldTown_BenchmarkStreet"
+         parent="ContactGRE"
+         pxsl_line="65">
+        <Phase
+             type="go to"
+             name="BENCHMARK STREET - Start"
+             distance="5"
+             show_locations="false"
+             pxsl_line="66">
+            <Destination
+                 pxsl_line="66">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="sp_Street"
+                     pxsl_line="66" />
+            </Destination>
+            <DebugPlayerPosition
+                 pxsl_line="67">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="sp_Street"
+                     pxsl_line="67" />
+            </DebugPlayerPosition>
+        </Phase>
+    </Quest>
+</QuestsDefinitions>

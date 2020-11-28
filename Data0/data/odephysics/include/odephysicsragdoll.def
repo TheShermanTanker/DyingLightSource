@@ -1,0 +1,122 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+!include("ODEPhysics.def")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+!RagdollParams()                        // parametry fizyki Ragdoll
+!Mass(f)                                // masa ciala [kg]
+!StiffenStartTime(f)                    // time of physics life when joints start stiffen
+!ApplyForceMod(f)                       // external force mod
+!ApplyForceAddUp(f)                     // up force added to every external force
+!SynchroOwner(i)                        // if owner's position/orientation should be controlled by physics (default = 1)
+!AllowAnimationOfOtherElements(i)       // if animations of all other elements are allowed (default = 0)
+                                        // (animations of elements which are part of ragdoll are atomatically disabled)
+!ExtentsUpdateMode(s)                   // sets extents update mode:
+                                        // "whole_extents" - this ragdoll determines whole extents of owner
+                                        // "expand_existing" - existing extents will be expanded by extents of this ragdoll
+                                        // "none" - there will be no extents update from this physics
+!AnimationBlendingTimeAfterDisable(f)   // time of animation blending after physics disabling (default = 0)
+!BehaviorSet(s)                         // sets behavior set
+                                        // s - name of script where behavior set is defined
+!StartSpeedFromAnimMul(f)               // factor of start speed calculated from latest animation move applied to ragdoll on start (default: 1.0)
+!BlendingOfNonPhysicalBonesTime(f)      // defines time of blending matrices of all non-physical bones
+                                        // default value == -1 (blending disabled)
+                                        // if this blending is enabled all BoneSynchro pairs will be omitted
+!NPBoneSynchroExclusionMask(s)	        // set mask of non physical bones which will be omited in bones synchronization (see: BlendingOfNonPhysicalBonesTime())
+!NPBoneSynchroExclusionPropagate(s)	    // set root of non physical bones which will be omited in bones synchronization (see: BlendingOfNonPhysicalBonesTime())
+                                        // this bone and its every children will be excluded from "non physical bone synchro)
+!NPBoneSynchroHidePropagate(s)          // set root of non physical bones which will be hidden (see: BlendingOfNonPhysicalBonesTime())
+                                        // this bone and its every children will be hidden (by using scale)
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+!Bones()                                // definicja uzywanych kosci
+!UseBone(s,s,i)                         // definicja kosci (nazwa kosci, ksztalt {"box", "sphere", "ccylinder"}, masa wzgledna)
+!UseBoneScale(s,s,i,f)                  // definicja kosci (nazwa kosci, ksztalt {"box", "sphere", "ccylinder"}, masa wzgledna, skala (mnoznik promienia))
+!GeomFrictionMul(s,f)                   // sets friction multiplier of given physical bone
+!SelfCollisionGeom(s,s,f)               // define collision geometry attached to bone (s1) 
+                                        // with given shape (s2) {"box", "sphere", "ccylinder"} and scale (f)
+                                        // such geoms could not be connected with other bones and will be synchronized
+                                        // with given mesh element every frame
+!FixBone(s, f)                          // given physicall body will be fixed (attached to bone with no DOF) with f influence (if 0 velocity of bone has no influence on rest of bones)
+!CollisionHelper(s,s,f)                 // additional collision geometry:
+                                        // s - element name to which collision geom will be attached
+                                        // s - parent bone - collision helper geom will be attached to physical body of parent    
+                                        // f - scale used to determine size of geometry from element's size
+!NoCollidedPair(s,s)                    // para geometrii nie kolidujaca ze soba
+!FloatingGeom(s, f)                     // geom which floats on water surface f - float multiplier
+!RootSynchro(s1,s2)                     // defines bone (s1) that should be synchronized every frame on basis reference on (s2)
+!BoneSynchro(s1,s2)                     // defines bone (s2) that should be synchronized (orientation only) every frame on basis reference on (s1)
+                                        // s1 has to be defined by one of UseBone() definition
+!BoneIk(s1, s2, v3)                     // creates simple IK synchronization for s1 bone (non physical)
+                                        // x-axis of s1 bone will be aligned to "from s1 bone's pivot to point on s2 bone" direction
+                                        // s2 bone have to by physical one
+                                        // v3 is a point in s2 bone local coordinates
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+!Joints()
+!DefineJoint(s,s,s, f,f,f, f,f,f)       // definicja jointa:
+                                        // (nazwa kosci 1, nazwa kosci 2, typ jointa ("ball", "hinge"),
+                                        // axis 1 (x, y, z), axis 2 (x, y, z)) 
+                                        // kosc 1 musi stac w hierarchi wyzej niz kosc 2 (przewaznie kosc 1 jest parentem kosci 2)
+!Set3DOFStops(s,f,f,f,f,f,f,i,i,i)      // ustawienie parametrow stopu w joincie z 3 stopniami swobody (3 inty na koncu sluza do debugowania, 1 - motor w joincie w danym stopniu swobody)
+!Set2DOFStops(s,f,f,f,f,i,i)            // ustawienie parametrow stopu w joincie z 2 stopniami swobody (2 inty na koncu sluza do debugowania, 1 - motor w joincie w danym stopniu swobody)
+!Set1DOFStops(s,f,f,i)                  // ustawienie parametrow stopu w joincie z 1 stopniem swobody (int na koncu sluzy do debugowania, 1 - motor w joincie w danym stopniu swobody)
+!SetAnchorPosition(s,f,f,f)             // ustawia pozycje stawu (anchora jointa) na podstawie wektora odleglosci wzglednej od srodka kosci 2
+!SetFrictionRandomFactors(f1,f2)        // random factors (multipliers) of friction force applied to every joint
+                                        // friction force will be randomized from the range: base_friction_factor * [1 - f1, 1 + f2]
+!SetFrictionForce(s,f)                  // sila tarcia jointa - sila probujaca zatrzymac np. zgiecie reki
+!SetStopCFM(s,f)                        // parametr CFM w reakcji na osiagniecie stopu
+!SetStopERP(s,f)                        // parametr ERP w reakcji na osiagniecie stopu
+!SetCFM(s,f)                            // parametr CFM jointa
+!SetFudgeFactor(s,f)                    // parametr FudgeFactor - okreslajacy wspolczynnik zawrocenia jointa ze stopu
+!Tendon(s, i, s, i, f, f, i, f, f)      // defines tendon - a link between 2 joints. Angle of parent joint (of one defined DOF/axis) 
+                                        // can determine limit of tended joint
+                                        // s - parent joint name
+                                        // i - parent joint axis (0,1,2)
+                                        // s - tended joint name
+                                        // i - tended joint axis (0,1,2)
+                                        // f,f - parent angle "hot" range
+                                        // i - tended joint modified limit (0-lo stop, 1-hi stop)
+                                        // f,f - tended limit range
+                                        // current angle of parent joint will be mapped into tended joint's limit range linearly
+!DeleteAllTendons()                     // removes all tendons defined so far
+
+!SetFrictionForceAll(f)
+!SetStopCFMAll(f)
+!SetStopERPAll(f)
+!SetCFMAll(f)
+!SetFudgeFactorAll(f)
+
+
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Ragdoll Unconditioned Reflex
+!RagdollUnconditionedReflexes()         // Ragdoll Unconditioned Reflexes - some ragdoll activities applied if certain conditions are meet
+!Rur(i, s, s, f, i, v3, i, f, f, f, v3) // Add new Ragdoll Unconditioned Reflexes
+                                        // i - type of effect (RUR_FORCE_REFLEX (linear) or RUR_TORQUE_REFLEX (angular))
+                                        // s - name of bone a
+                                        // s - name of bone b
+                                        // f - multiplier of bone b reaction (force/torque is always aplied to bone a, this very same value can be applied to bone b using this multiplier)
+                                        // i - direction coordinate (if RUR_DIR_RANDOM, value will be randomized once per one ragdoll instance and simulation)
+                                        // v3 - force/torque direction
+                                        // i - steering mode: which value will be taken to obtain reflex power (linear vel, angular vel or vertical linear vel) - use RUR_SPEED_STEERING_* constants
+                                        // f - steering value multiplier. Force/torque will be calculated using steering value multiplied by this value.
+                                        // f - min value of steering value - e.g. min linear speed (as average speed of whole ragdoll)
+                                        // f - max scaled value of steering value - e.g. max linear speed used to scaling force/torque - if speed will be grater, rur will be applied also, but with max constant value
+                                        // v3 - debug renderer color, if [0, 0, 0] debug rendering of this rur is disabled
+                                        
+
+// please keep synchronized with ODEPhysicsRagdoll.h enims
+$RUR_FORCE_REFLEX(i, 0)
+$RUR_TORQUE_REFLEX(i, 1)
+
+$RUR_DIR_WORLD(i, 10)
+$RUR_DIR_LOCAL_A(i, 11)
+$RUR_DIR_LOCAL_B(i, 12)
+$RUR_DIR_A_TO_B(i, 13)
+$RUR_DIR_RANDOM(i, 14)
+
+$RUR_SPEED_STEERING_LINVEL(i, 20)
+$RUR_SPEED_STEERING_ANGVEL(i, 21)
+$RUR_SPEED_STEERING_VERTVEL(i, 22)
+
+///////////////////////////////////////////////////////////////////////////////////////////////////

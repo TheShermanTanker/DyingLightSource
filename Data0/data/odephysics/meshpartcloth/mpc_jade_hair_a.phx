@@ -1,0 +1,108 @@
+!include("MeshPartCloth.def")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+MeshPartCloth()
+{
+//----------------------------------------------
+// bones
+//----------------------------------------------
+    BonesGridSize(5, 5)
+
+    $XDIST(f, -1)
+    $YDIST(f, -0.95)
+	
+	Mode3D(1)
+	
+    Bone(0, 0, "bone_hair_a_01", 1,      XDIST, YDIST)
+	Bone(0, 1, "bone_hair_a_02", 0,      XDIST, YDIST)
+	Bone(0, 2, "bone_hair_a_03", 0,      XDIST, YDIST)
+	Bone(0, 3, "bone_hair_a_04", 0,      XDIST, YDIST)
+    Hook(0, 4, "head", [0.2, -0.1, 0.3], XDIST, YDIST)
+	
+	Bone(1, 0, "bone_hair_b_02", 1,       XDIST, YDIST)
+	Bone(1, 1, "bone_hair_b_03", 0,       XDIST, YDIST)
+	Bone(1, 2, "bone_hair_b_04", 0,       XDIST, YDIST)
+	Bone(1, 3, "bone_hair_b_05", 0,       XDIST, YDIST)
+    Hook(1, 4, "head", [0.2, -0.05, 0.3], XDIST, YDIST)
+	
+	Bone(2, 0, "bone_hair_c_01", 1,     XDIST, YDIST)
+	Bone(2, 1, "bone_hair_c_02", 0,     XDIST, YDIST)
+	Bone(2, 2, "bone_hair_c_03", 0,     XDIST, YDIST)
+	Bone(2, 3, "bone_hair_c_04", 0,     XDIST, YDIST)
+    Hook(2, 4, "head", [0.2, 0, 0.3],   XDIST, YDIST)
+	
+	Bone(3, 0, "bone_hair_d_02", 1,      XDIST, YDIST)
+	Bone(3, 1, "bone_hair_d_03", 0,      XDIST, YDIST)
+	Bone(3, 2, "bone_hair_d_04", 0,      XDIST, YDIST)
+	Bone(3, 3, "bone_hair_d_05", 0,      XDIST, YDIST)
+    Hook(3, 4, "head", [0.2, 0.05, 0.3], XDIST, YDIST)
+	
+	Bone(4, 0, "bone_hair_e_02", 1,     XDIST, YDIST)
+	Bone(4, 1, "bone_hair_e_03", 0,     XDIST, YDIST)
+	Bone(4, 2, "bone_hair_e_04", 0,     XDIST, YDIST)
+	Bone(4, 3, "bone_hair_e_05", 0,     XDIST, YDIST)
+    Hook(4, 4, "head", [0.2, 0.1, 0.3], XDIST, YDIST)
+	
+    
+//----------------------------------------------
+// collisions 
+//----------------------------------------------
+
+    CollisionSlide(1)
+    CollisionSpeedMod(1)
+    CollisionBounce(0)
+    
+    CollisionShapesMoveInfluence(1)
+    
+    CollisionSegmentDivision(100)
+    CollisionNormalAngleThreshold(180)
+    
+    NodeCollisionSphereRadius(0.1)
+    ExternalCollisionAffectMul(0)
+
+	
+	CollisionMaxDistance(0, 3, "head", [0.15, -0.01, 0.3], 0.14, 0)
+	CollisionMaxDistance(1, 3, "head", [-0.05, -0.012, 0.3], 0.19, 0)
+	CollisionMaxDistance(2, 3, "head", [0.03, -0.1, 0.25], 0.17, 0)
+	CollisionMaxDistance(3, 3, "head", [-0.05, -0.15, 0.24], 0.14, 0)
+	CollisionMaxDistance(4, 3, "head", [-0.1, -0.1, 0.3], 0.17, 0)
+	
+	CollisionSphereShift("head", [0.08, 0.0, 0.13], 0.055)
+	CollisionSphereShift("spine3", [-0.2, 0.0, -0.6], 0.75)
+//	CollisionMaxDistance(0, 2, "bone_collar_a_detail_00", [0.04, -0.03, -0.04], 0.035, 3000)
+    
+//----------------------------------------------
+// spring params 
+//----------------------------------------------
+
+    Viscous(8)
+    AirFriction(1)
+
+    StructuralStiffness(12000, 10000)
+    ShearStiffness(12000, 10000)
+    FlexionStiffness(12000, 10000)
+
+    HorizontSpringRatio(0.2)
+    
+    CheckLengthsStepsPerSec(0)
+
+//----------------------------------------------
+// physical params 
+//----------------------------------------------
+    
+    Mass(1)
+    GravityMul(0.8)
+    WindInfluence(0.5)
+
+//----------------------------------------------
+// other params
+//----------------------------------------------
+
+    SynchroWithPhysics(0)
+    EnableAPBOut(1)
+    
+    ObjectMoveMul(1)
+    AnimationMoveMul(0.8)
+}
+
+

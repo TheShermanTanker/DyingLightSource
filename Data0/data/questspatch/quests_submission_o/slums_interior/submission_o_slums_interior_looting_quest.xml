@@ -1,0 +1,2061 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums_interior"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST NAME : LOOTING -->
+    <!-- QUEST INFO : first task for player from Rakim - find few radio -->
+    <!-- AFTER QUEST: Prologue -->
+    <!-- COMMENT    :  -->
+    <!-- FROM       : >> SLUMS INTERIOR 19th Floor Command -->
+    <!-- TO         : >> SLUMS INTERIOR 13th Floor Looting -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="Looting"
+         parent="Prologue"
+         glued="true"
+         pxsl_line="14">
+        <Phase
+             type="go to"
+             name="LOOTING - After first talk with Rahim"
+             distance="4"
+             show_locations="false"
+             pxsl_line="15">
+            <Destination
+                 pxsl_line="15">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="the_tower_brecken_room"
+                     pxsl_line="15" />
+            </Destination>
+            <DebugPlayerPosition
+                 pxsl_line="16">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="the_tower_brecken_room"
+                     pxsl_line="16" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="set dialog"
+             name="_"
+             speaker="voice2d"
+             group="Player_Looting_00DLG01"
+             auto_start="true"
+             pxsl_line="17" />
+        <Phase
+             type="wait guard"
+             name="_"
+             time="2.5"
+             pxsl_line="18" />
+        <!-- Get to the 13th floor and find the lost survivor. -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Looting_OBJ_Elevator&amp;"
+             announce_objective="false"
+             pxsl_line="19">
+            <Path
+                 pxsl_line="19">
+                <!-- show miniradar and other stuf -->
+                <Phase
+                     type="hudgroup"
+                     name="_"
+                     group="HidePrologue"
+                     mode="show"
+                     pxsl_line="20" />
+                <!-- block on using healthpack -->
+                <Phase
+                     type="player control"
+                     name="_"
+                     block_item="Medkit_HealthPackLarge"
+                     pxsl_line="21" />
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="0"
+                     pxsl_line="22">
+                    <Destination
+                         pxsl_line="22">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="slums_thetower_guard_19th_02_goto"
+                             pxsl_line="22" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="set lifeplace"
+                     name="_"
+                     interact_dist="30"
+                     pxsl_line="23">
+                    <LifePlace
+                         pxsl_line="23">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="slums_thetower_guard_19th_02_lp_00"
+                             pxsl_line="23" />
+                    </LifePlace>
+                </Phase>
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="slums_thetower_guard_19th_02"
+                     group="19thFloorGuard02_Looting_02DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="24" />
+                <Phase
+                     type="set lifeplace"
+                     name="_"
+                     interact_dist="1"
+                     pxsl_line="25">
+                    <LifePlace
+                         pxsl_line="25">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="slums_thetower_guard_19th_02_lp_00"
+                             pxsl_line="25" />
+                    </LifePlace>
+                </Phase>
+                <Phase
+                     type="use life place"
+                     name="_"
+                     snap_lp_to_npc="true"
+                     pxsl_line="26">
+                    <LifePlace
+                         pxsl_line="26">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="slums_thetower_guard_19th_02_lp_00_after"
+                             pxsl_line="26" />
+                    </LifePlace>
+                    <AI
+                         pxsl_line="27">
+                        <QuestObject
+                             class="HumanAI"
+                             name="slums_thetower_guard_19th_02"
+                             pxsl_line="27" />
+                    </AI>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="28">
+                    <Object
+                         pxsl_line="28">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="portal_slums_interior_19th_to_slums_interior_13th_qeg"
+                             pxsl_line="28" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="go to"
+                     name="LOOTING - 13th Floor"
+                     distance="12"
+                     pxsl_line="29">
+                    <Destination
+                         pxsl_line="29">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="portal_slums_interior_19th_to_slums_interior_13th_sp"
+                             pxsl_line="29" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="30">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="portal_slums_interior_19th_to_slums_interior_13th_sp"
+                             pxsl_line="30" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <!-- CIN - Player on 13th floor and GRE 01 - NOW IT'S IN LocalPortal portal_slums_interior_19th_to_slums_interior_13th -->
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-     -->
+                <Phase
+                     type="AND"
+                     name="changes in the tower after go to 13th"
+                     pxsl_line="34">
+                    <Path
+                         pxsl_line="34">
+                        <!-- ,enable _ QuestEnableGroup cin_13_floor_trigger_qeg -->
+                        <!-- ,use _ InteractiveMovieTrigger cin_13_floor_trigger -state=on -= CIN PLAYER ON 13th FLOOR -->
+                        <!-- ,disable _ QuestEnableGroup cin_13_floor_trigger_qeg -->
+                        <Phase
+                             type="use life place"
+                             name="_"
+                             move_style="walk"
+                             wait_for_move_end="false"
+                             pxsl_line="38">
+                            <LifePlace
+                                 pxsl_line="38">
+                                <QuestObject
+                                     class="NPCLifePlace"
+                                     name="slums_thetower_guard_19th_02_lp_03"
+                                     pxsl_line="38" />
+                            </LifePlace>
+                            <AI
+                                 pxsl_line="39">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="slums_thetower_guard_19th_02"
+                                     pxsl_line="39" />
+                            </AI>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="RESPAWN 13th - ON"
+                             pxsl_line="40">
+                            <Object
+                                 pxsl_line="40">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="portal_slums_interior_19th_to_slums_interior_13th_sp"
+                                     pxsl_line="40" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="RESPAWN Waking up - OFF"
+                             state="disabled"
+                             pxsl_line="41">
+                            <Object
+                                 pxsl_line="41">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="cin_the_tower_waking_up_spawn"
+                                     pxsl_line="41" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="hudgroup"
+                             name="_"
+                             group="HidePrologueHealthIndicator"
+                             mode="show"
+                             pxsl_line="42" />
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="slums_thetower_guard_19th_02"
+                             pxsl_line="43" />
+                        <!-- CLOSE DOOR TO BRECKEN ROOM -->
+                        <Phase
+                             type="set state"
+                             name="_"
+                             desired_state="closed"
+                             pxsl_line="44">
+                            <Trigger
+                                 pxsl_line="44">
+                                <QuestObject
+                                     class="DoorDI"
+                                     name="slums_thetower_Brecken_door"
+                                     pxsl_line="44" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="45">
+                            <Object
+                                 pxsl_line="46">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Shopkeeper_Slums_Tower_Up"
+                                     pxsl_line="46" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="47">
+                            <Object
+                                 pxsl_line="48">
+                                <QuestObject
+                                     class="NPCLifePlace"
+                                     name="Slums_TheTower_M_19th_02_LP_Binoculars"
+                                     pxsl_line="48" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="49">
+                    <Destination
+                         pxsl_line="49">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="portal_slums_interior_19th_to_slums_interior_13th_sp"
+                             pxsl_line="49" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+        <!-- Looking for Mark - First Fight (kill Mark brother), Looting, Flashlight, Sens -->
+        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-            -->
+        <Phase
+             type="AND"
+             name="13th Floor - Find Mark"
+             pxsl_line="53">
+            <Path
+                 pxsl_line="53">
+                <!-- Help the survivor. -->
+                <Phase
+                     type="AND"
+                     name="_"
+                     objective="&amp;Looting_OBJ_FindMark&amp;"
+                     pxsl_line="54">
+                    <Path
+                         pxsl_line="54">
+                        <Phase
+                             type="go to"
+                             name="LOOTING - Helping the survivor"
+                             distance="100000"
+                             pxsl_line="55">
+                            <Destination
+                                 pxsl_line="55">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="cin_13_floor_GRE_Contact_sp"
+                                     pxsl_line="55" />
+                            </Destination>
+                            <DebugPlayerPosition
+                                 pxsl_line="56">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="cin_13_floor_GRE_Contact_sp"
+                                     pxsl_line="56" />
+                            </DebugPlayerPosition>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="57">
+                            <Object
+                                 pxsl_line="57">
+                                <QuestObject
+                                     class="SensorAmbientMusicArea"
+                                     name="SAMA_13th_Floor"
+                                     pxsl_line="57" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="58">
+                            <Object
+                                 pxsl_line="59">
+                                <QuestObject
+                                     class="SensorAmbientMusicArea"
+                                     name="SAMA_13th_Floor_Walk"
+                                     pxsl_line="59" />
+                            </Object>
+                            <Object
+                                 pxsl_line="60">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="looting_Mark_infected"
+                                     pxsl_line="60" />
+                            </Object>
+                            <Object
+                                 pxsl_line="61">
+                                <QuestObject
+                                     class="FXEmitter"
+                                     name="looting_flies_fx"
+                                     pxsl_line="61" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="TheTower_Mark"
+                             group="Mark_Looting_10DLG01"
+                             pxsl_line="62" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="63">
+                            <Object
+                                 pxsl_line="63">
+                                <QuestObject
+                                     class="SensorTutorialHint"
+                                     name="Tutorial_PrologueSprint"
+                                     pxsl_line="63" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="player control"
+                             name="_"
+                             block_run="false"
+                             pxsl_line="64" />
+                        <Phase
+                             type="player control"
+                             name="_"
+                             can_sprint="true"
+                             pxsl_line="65" />
+                        <Phase
+                             type="use"
+                             name="_"
+                             desired_state="on"
+                             pxsl_line="66">
+                            <Trigger
+                                 pxsl_line="66">
+                                <QuestObject
+                                     class="InvisibleSwitchDI"
+                                     name="cin_13_floor_door_switch"
+                                     pxsl_line="66" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="67">
+                            <Object
+                                 pxsl_line="67">
+                                <QuestObject
+                                     class="SensorTutorialHint"
+                                     name="Tutorial_PrologueSprint"
+                                     pxsl_line="67" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="AND"
+                             name="_"
+                             pxsl_line="68">
+                            <Path
+                                 pxsl_line="69">
+                                <Phase
+                                     type="movie"
+                                     name="_"
+                                     movie="cin_13_floor_door"
+                                     pxsl_line="70" />
+                                <!-- FIGHT TUTORIAL -->
+                                <Phase
+                                     type="hint"
+                                     name="_"
+                                     hint_name="ETutorialHints_FirstWeapon"
+                                     show="true"
+                                     enable="true"
+                                     pxsl_line="71" />
+                                <!-- SHOW PLAYER WEAPONRY -->
+                                <Phase
+                                     type="hudgroup"
+                                     name="_"
+                                     group="HidePrologueWeaponry"
+                                     mode="show"
+                                     pxsl_line="72" />
+                            </Path>
+                            <Path
+                                 pxsl_line="73">
+                                <Phase
+                                     type="wait guard"
+                                     name="_"
+                                     time="2"
+                                     pxsl_line="74" />
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     state="disabled"
+                                     pxsl_line="75">
+                                    <Object
+                                         pxsl_line="76">
+                                        <QuestObject
+                                             class="BarrierObject"
+                                             name="looting_Mark_infected_barrier"
+                                             pxsl_line="76" />
+                                    </Object>
+                                    <Object
+                                         pxsl_line="77">
+                                        <QuestObject
+                                             class="VirtualAttractor"
+                                             name="looting_Mark_infected_va"
+                                             pxsl_line="77" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="78">
+                                <Phase
+                                     type="wait guard"
+                                     name="_"
+                                     time="1"
+                                     pxsl_line="79" />
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     pxsl_line="80">
+                                    <Object
+                                         pxsl_line="80">
+                                        <QuestObject
+                                             class="SensorAmbientSoundArea"
+                                             name="SASA_Stinger_Help_Mark"
+                                             pxsl_line="80" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                        <Phase
+                             type="AND"
+                             name="_"
+                             pxsl_line="81">
+                            <Path
+                                 pxsl_line="82">
+                                <!-- Kill the zombie that's attacking Mark. -->
+                                <Phase
+                                     type="kill"
+                                     name="_"
+                                     objective="&amp;Looting_OBJ_Kill&amp;"
+                                     pxsl_line="83">
+                                    <Spawner
+                                         pxsl_line="83">
+                                        <QuestObject
+                                             class="AISpawnBoxNumber"
+                                             name="looting_Mark_infected"
+                                             pxsl_line="83" />
+                                    </Spawner>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="84">
+                            <Object
+                                 pxsl_line="84">
+                                <QuestObject
+                                     class="SensorAmbientSoundArea"
+                                     name="SASA_Stinger_Help_Mark"
+                                     pxsl_line="84" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="show"
+                             pxsl_line="85">
+                            <Object
+                                 pxsl_line="85">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="TheTower_Mark"
+                                     pxsl_line="85" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="use life place"
+                             name="_"
+                             teleport="true"
+                             pxsl_line="86">
+                            <LifePlace
+                                 pxsl_line="86">
+                                <QuestObject
+                                     class="NPCLifePlace"
+                                     name="looting_mark_lp_01"
+                                     pxsl_line="86" />
+                            </LifePlace>
+                            <AI
+                                 pxsl_line="87">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="TheTower_Mark"
+                                     pxsl_line="87" />
+                            </AI>
+                        </Phase>
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="TheTower_Mark"
+                             pxsl_line="88" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="89">
+                            <Object
+                                 pxsl_line="89">
+                                <QuestObject
+                                     class="DoorDI"
+                                     name="looting_Mark_door"
+                                     pxsl_line="89" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="use"
+                             name="_"
+                             desired_state="opening"
+                             pxsl_line="90">
+                            <Trigger
+                                 pxsl_line="90">
+                                <QuestObject
+                                     class="DoorDI"
+                                     name="looting_Mark_door"
+                                     pxsl_line="90" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="0.5"
+                             pxsl_line="91" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="92">
+                            <Object
+                                 pxsl_line="92">
+                                <QuestObject
+                                     class="DoorDI"
+                                     name="looting_Mark_door"
+                                     pxsl_line="92" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="93">
+                            <Object
+                                 pxsl_line="93">
+                                <QuestObject
+                                     class="SensorAmbientMusicArea"
+                                     name="SAMA_Music_Help_Mark"
+                                     pxsl_line="93" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="talk"
+                             name="_"
+                             speaker="TheTower_Mark"
+                             group="Player_Looting_13DLG01"
+                             show_locations="false"
+                             auto_start="true"
+                             pxsl_line="94" />
+                    </Path>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="2"
+                     pxsl_line="95" />
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_Looting_14DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="96" />
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="1"
+                     pxsl_line="97" />
+                <!-- Take care for Mark. -->
+                <Phase
+                     type="talk"
+                     name="_"
+                     objective="&amp;Looting_OBJ_TakeCare&amp;"
+                     speaker="TheTower_Mark"
+                     group="Mark_Looting_14DLG05"
+                     pxsl_line="98" />
+                <!-- ADDED MEDKIT CRAFTPLAN -->
+                <Phase
+                     type="give weapon"
+                     name="_"
+                     weapon_id="Craftplan_MedKit_Large_Healing"
+                     pxsl_line="99" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="100">
+                    <Object
+                         pxsl_line="100">
+                        <QuestObject
+                             class="SensorAmbientMusicArea"
+                             name="SAMA_Music_Help_Mark"
+                             pxsl_line="100" />
+                    </Object>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="AND"
+             name="13th Floor"
+             pxsl_line="101">
+            <Path
+                 pxsl_line="101">
+                <!-- LOOTING AND HINTS ACTIONS - SICK'o HARD CORE MODE -->
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="102">
+                    <Path
+                         pxsl_line="103">
+                        <!-- Find gauze and alcohol to stop the bleeding. -->
+                        <Phase
+                             type="AND"
+                             name="_"
+                             objective="&amp;Looting_OBJ_Find&amp;"
+                             pxsl_line="104">
+                            <Path
+                                 pxsl_line="105">
+                                <Phase
+                                     type="OR"
+                                     name="_"
+                                     pxsl_line="106">
+                                    <Path
+                                         pxsl_line="107">
+                                        <Phase
+                                             type="AND"
+                                             name="_"
+                                             pxsl_line="108">
+                                            <!-- Gauze -->
+                                            <Path
+                                                 pxsl_line="109">
+                                                <Phase
+                                                     type="loot container"
+                                                     name="_"
+                                                     show_locations="false"
+                                                     pxsl_line="110">
+                                                    <ComplexContainer
+                                                         pxsl_line="110">
+                                                        <QuestObject
+                                                             class="ComplexContainer"
+                                                             name="complexcontainer_03_a"
+                                                             pxsl_line="110" />
+                                                    </ComplexContainer>
+                                                    <SpecificLocation
+                                                         pxsl_line="111">
+                                                        <QuestObject
+                                                             class="ZoneBox"
+                                                             name="complexcontainer_03_a"
+                                                             pxsl_line="111" />
+                                                    </SpecificLocation>
+                                                </Phase>
+                                            </Path>
+                                            <!-- Alcohol -->
+                                            <Path
+                                                 pxsl_line="112">
+                                                <Phase
+                                                     type="loot container"
+                                                     name="_"
+                                                     show_locations="false"
+                                                     pxsl_line="113">
+                                                    <ComplexContainer
+                                                         pxsl_line="113">
+                                                        <QuestObject
+                                                             class="ComplexContainer"
+                                                             name="complexcontainer_04_a"
+                                                             pxsl_line="113" />
+                                                    </ComplexContainer>
+                                                    <SpecificLocation
+                                                         pxsl_line="114">
+                                                        <QuestObject
+                                                             class="ZoneBox"
+                                                             name="complexcontainer_04_a"
+                                                             pxsl_line="114" />
+                                                    </SpecificLocation>
+                                                </Phase>
+                                            </Path>
+                                        </Phase>
+                                    </Path>
+                                    <Path
+                                         pxsl_line="115">
+                                        <Phase
+                                             type="AND"
+                                             name="_"
+                                             pxsl_line="116">
+                                            <Path
+                                                 pxsl_line="117">
+                                                <Phase
+                                                     type="AND"
+                                                     name="_"
+                                                     pxsl_line="118">
+                                                    <!-- ,area ZoneBox looting_zone_01 -= this area is used to point LOCATION on the mini map -->
+                                                    <Path
+                                                         pxsl_line="120">
+                                                        <Phase
+                                                             type="loot container"
+                                                             name="_"
+                                                             show_locations="false"
+                                                             pxsl_line="121">
+                                                            <ComplexContainer
+                                                                 pxsl_line="121">
+                                                                <QuestObject
+                                                                     class="ComplexContainer"
+                                                                     name="complexcontainer_01_a"
+                                                                     pxsl_line="121" />
+                                                            </ComplexContainer>
+                                                            <!-- show room area -->
+                                                            <SpecificLocation
+                                                                 pxsl_line="122">
+                                                                <QuestObject
+                                                                     class="ZoneBox"
+                                                                     name="complexcontainer_01_a"
+                                                                     pxsl_line="122" />
+                                                            </SpecificLocation>
+                                                        </Phase>
+                                                    </Path>
+                                                    <Path
+                                                         pxsl_line="123">
+                                                        <Phase
+                                                             type="loot container"
+                                                             name="_"
+                                                             show_locations="false"
+                                                             pxsl_line="124">
+                                                            <ComplexContainer
+                                                                 pxsl_line="124">
+                                                                <QuestObject
+                                                                     class="ComplexContainer"
+                                                                     name="complexcontainer_01_b"
+                                                                     pxsl_line="124" />
+                                                            </ComplexContainer>
+                                                            <!-- show room area -->
+                                                            <SpecificLocation
+                                                                 pxsl_line="125">
+                                                                <QuestObject
+                                                                     class="ZoneBox"
+                                                                     name="complexcontainer_01_b1"
+                                                                     pxsl_line="125" />
+                                                            </SpecificLocation>
+                                                            <!-- show room area -->
+                                                            <SpecificLocation
+                                                                 pxsl_line="126">
+                                                                <QuestObject
+                                                                     class="ZoneBox"
+                                                                     name="complexcontainer_01_b2"
+                                                                     pxsl_line="126" />
+                                                            </SpecificLocation>
+                                                        </Phase>
+                                                    </Path>
+                                                    <Path
+                                                         pxsl_line="127">
+                                                        <Phase
+                                                             type="loot container"
+                                                             name="_"
+                                                             show_locations="false"
+                                                             pxsl_line="128">
+                                                            <ComplexContainer
+                                                                 pxsl_line="128">
+                                                                <QuestObject
+                                                                     class="ComplexContainer"
+                                                                     name="complexcontainer_01_c"
+                                                                     pxsl_line="128" />
+                                                            </ComplexContainer>
+                                                            <!-- show room area -->
+                                                            <SpecificLocation
+                                                                 pxsl_line="129">
+                                                                <QuestObject
+                                                                     class="ZoneBox"
+                                                                     name="complexcontainer_01_c"
+                                                                     pxsl_line="129" />
+                                                            </SpecificLocation>
+                                                        </Phase>
+                                                    </Path>
+                                                </Phase>
+                                            </Path>
+                                            <Path
+                                                 pxsl_line="130">
+                                                <Phase
+                                                     type="AND"
+                                                     name="_"
+                                                     pxsl_line="131">
+                                                    <!-- ,area ZoneBox looting_zone_03  -= this area is used to point LOCATION on the mini map -->
+                                                    <Path
+                                                         pxsl_line="133">
+                                                        <Phase
+                                                             type="loot container"
+                                                             name="_"
+                                                             show_locations="false"
+                                                             pxsl_line="134">
+                                                            <ComplexContainer
+                                                                 pxsl_line="134">
+                                                                <QuestObject
+                                                                     class="ComplexContainer"
+                                                                     name="complexcontainer_03_a"
+                                                                     pxsl_line="134" />
+                                                            </ComplexContainer>
+                                                            <SpecificLocation
+                                                                 pxsl_line="135">
+                                                                <QuestObject
+                                                                     class="ZoneBox"
+                                                                     name="complexcontainer_03_a"
+                                                                     pxsl_line="135" />
+                                                            </SpecificLocation>
+                                                        </Phase>
+                                                    </Path>
+                                                    <Path
+                                                         pxsl_line="136">
+                                                        <Phase
+                                                             type="loot container"
+                                                             name="_"
+                                                             show_locations="false"
+                                                             pxsl_line="137">
+                                                            <ComplexContainer
+                                                                 pxsl_line="137">
+                                                                <QuestObject
+                                                                     class="ComplexContainer"
+                                                                     name="complexcontainer_03_b"
+                                                                     pxsl_line="137" />
+                                                            </ComplexContainer>
+                                                            <SpecificLocation
+                                                                 pxsl_line="138">
+                                                                <QuestObject
+                                                                     class="ZoneBox"
+                                                                     name="complexcontainer_03_b1"
+                                                                     pxsl_line="138" />
+                                                            </SpecificLocation>
+                                                            <SpecificLocation
+                                                                 pxsl_line="139">
+                                                                <QuestObject
+                                                                     class="ZoneBox"
+                                                                     name="complexcontainer_03_b2"
+                                                                     pxsl_line="139" />
+                                                            </SpecificLocation>
+                                                            <SpecificLocation
+                                                                 pxsl_line="140">
+                                                                <QuestObject
+                                                                     class="ZoneBox"
+                                                                     name="complexcontainer_03_b3"
+                                                                     pxsl_line="140" />
+                                                            </SpecificLocation>
+                                                        </Phase>
+                                                    </Path>
+                                                </Phase>
+                                            </Path>
+                                            <Path
+                                                 pxsl_line="141">
+                                                <Phase
+                                                     type="AND"
+                                                     name="_"
+                                                     pxsl_line="142">
+                                                    <!-- ,area ZoneBox looting_zone_04 -= this area is used to point LOCATION on the mini map -->
+                                                    <Path
+                                                         pxsl_line="144">
+                                                        <Phase
+                                                             type="loot container"
+                                                             name="_"
+                                                             show_locations="false"
+                                                             pxsl_line="145">
+                                                            <ComplexContainer
+                                                                 pxsl_line="145">
+                                                                <QuestObject
+                                                                     class="ComplexContainer"
+                                                                     name="complexcontainer_04_a"
+                                                                     pxsl_line="145" />
+                                                            </ComplexContainer>
+                                                            <SpecificLocation
+                                                                 pxsl_line="146">
+                                                                <QuestObject
+                                                                     class="ZoneBox"
+                                                                     name="complexcontainer_04_a"
+                                                                     pxsl_line="146" />
+                                                            </SpecificLocation>
+                                                        </Phase>
+                                                    </Path>
+                                                    <Path
+                                                         pxsl_line="147">
+                                                        <Phase
+                                                             type="loot container"
+                                                             name="_"
+                                                             show_locations="false"
+                                                             pxsl_line="148">
+                                                            <ComplexContainer
+                                                                 pxsl_line="148">
+                                                                <QuestObject
+                                                                     class="ComplexContainer"
+                                                                     name="complexcontainer_04_b"
+                                                                     pxsl_line="148" />
+                                                            </ComplexContainer>
+                                                            <SpecificLocation
+                                                                 pxsl_line="149">
+                                                                <QuestObject
+                                                                     class="ZoneBox"
+                                                                     name="complexcontainer_04_b"
+                                                                     pxsl_line="149" />
+                                                            </SpecificLocation>
+                                                        </Phase>
+                                                    </Path>
+                                                    <Path
+                                                         pxsl_line="150">
+                                                        <Phase
+                                                             type="loot container"
+                                                             name="_"
+                                                             show_locations="false"
+                                                             pxsl_line="151">
+                                                            <ComplexContainer
+                                                                 pxsl_line="151">
+                                                                <QuestObject
+                                                                     class="ComplexContainer"
+                                                                     name="complexcontainer_04_c"
+                                                                     pxsl_line="151" />
+                                                            </ComplexContainer>
+                                                            <SpecificLocation
+                                                                 pxsl_line="152">
+                                                                <QuestObject
+                                                                     class="ZoneBox"
+                                                                     name="complexcontainer_04_c1"
+                                                                     pxsl_line="152" />
+                                                            </SpecificLocation>
+                                                            <SpecificLocation
+                                                                 pxsl_line="153">
+                                                                <QuestObject
+                                                                     class="ZoneBox"
+                                                                     name="complexcontainer_04_c2"
+                                                                     pxsl_line="153" />
+                                                            </SpecificLocation>
+                                                        </Phase>
+                                                    </Path>
+                                                </Phase>
+                                            </Path>
+                                        </Phase>
+                                    </Path>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                    </Path>
+                    <!-- FLASHLIGHT TUTORIAL -->
+                    <Path
+                         pxsl_line="154">
+                        <Phase
+                             type="OR"
+                             name="_"
+                             pxsl_line="155">
+                            <Path
+                                 pxsl_line="156">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="7.5"
+                                     show_locations="false"
+                                     pxsl_line="157">
+                                    <Destination
+                                         pxsl_line="157">
+                                        <QuestObject
+                                             class="Marker"
+                                             name="looting_room_01_loc"
+                                             pxsl_line="157" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="158">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="6.5"
+                                     show_locations="false"
+                                     pxsl_line="159">
+                                    <Destination
+                                         pxsl_line="159">
+                                        <QuestObject
+                                             class="Marker"
+                                             name="looting_room_04_loc"
+                                             pxsl_line="159" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="160">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="0"
+                                     show_locations="false"
+                                     pxsl_line="161">
+                                    <Destination
+                                         pxsl_line="161">
+                                        <QuestObject
+                                             class="SensorGoTo"
+                                             name="Tutorial_Flashlight_A_goto"
+                                             pxsl_line="161" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="162">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="0"
+                                     show_locations="false"
+                                     pxsl_line="163">
+                                    <Destination
+                                         pxsl_line="163">
+                                        <QuestObject
+                                             class="SensorGoTo"
+                                             name="Tutorial_Flashlight_B_goto"
+                                             pxsl_line="163" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="164">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="0"
+                                     show_locations="false"
+                                     pxsl_line="165">
+                                    <Destination
+                                         pxsl_line="165">
+                                        <QuestObject
+                                             class="SensorGoTo"
+                                             name="Tutorial_Flashlight_C_goto"
+                                             pxsl_line="165" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                        <!-- GIVE FLASHLIGHT TO PLAYER -->
+                        <Phase
+                             type="player control"
+                             name="_"
+                             has_flashlight="true"
+                             pxsl_line="166" />
+                        <!-- FLASHLIGHT TUTORIAL -->
+                        <Phase
+                             type="hint"
+                             name="_"
+                             hint_name="ETutorialHints_Torch"
+                             show="true"
+                             enable="true"
+                             pxsl_line="167" />
+                    </Path>
+                    <!-- SENSE TUTORIAL -->
+                    <Path
+                         pxsl_line="168">
+                        <Phase
+                             type="OR"
+                             name="_"
+                             pxsl_line="169">
+                            <Path
+                                 pxsl_line="170">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="0"
+                                     show_locations="false"
+                                     pxsl_line="171">
+                                    <Destination
+                                         pxsl_line="171">
+                                        <QuestObject
+                                             class="SensorGoTo"
+                                             name="Tutorial_PrologueAwarness_goto"
+                                             pxsl_line="171" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="172">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="0"
+                                     show_locations="false"
+                                     pxsl_line="173">
+                                    <Destination
+                                         pxsl_line="173">
+                                        <QuestObject
+                                             class="SensorGoTo"
+                                             name="Tutorial_PrologueAwarness_B_goto"
+                                             pxsl_line="173" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                        <!-- TUTORIAL SENSE -->
+                        <Phase
+                             type="hint"
+                             name="_"
+                             hint_name="Tutorial_PrologueAwarness"
+                             show="true"
+                             enable="true"
+                             pxsl_line="174" />
+                    </Path>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="175">
+                    <Destination
+                         pxsl_line="175">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="portal_slums_interior_19th_to_slums_interior_13th_sp"
+                             pxsl_line="175" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_Looting_15DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="176" />
+                <!-- TURN ON ALL CRAFTING -->
+                <Phase
+                     type="player control"
+                     name="_"
+                     no_crafting="false"
+                     pxsl_line="177" />
+                <!-- Use crafting to create a medkit for Mark. -->
+                <Phase
+                     type="tutorial"
+                     name="_"
+                     tutorial_name="CraftItem"
+                     objective="&amp;Looting_OBJ_Crafting&amp;"
+                     pxsl_line="178" />
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="179">
+                    <Destination
+                         pxsl_line="179">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="portal_slums_interior_19th_to_slums_interior_13th_sp"
+                             pxsl_line="179" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="go to"
+                     name="LOOTING - After looting 13th Floor"
+                     distance="10000"
+                     pxsl_line="180">
+                    <Destination
+                         pxsl_line="180">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="portal_slums_interior_19th_to_slums_interior_13th_sp"
+                             pxsl_line="180" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="181">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="portal_slums_interior_19th_to_slums_interior_13th_sp"
+                             pxsl_line="181" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <!-- After Lootin - Help Mark - and CIN with Lena -->
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-                     -->
+                <!-- Use medkit to help Mark. -->
+                <Phase
+                     type="AND"
+                     name="_"
+                     objective="&amp;Looting_OBJ_Help&amp;"
+                     pxsl_line="186">
+                    <Path
+                         pxsl_line="186">
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="187">
+                            <Object
+                                 pxsl_line="188">
+                                <QuestObject
+                                     class="HubZone"
+                                     name="thetower_hub_zone_13th"
+                                     pxsl_line="188" />
+                            </Object>
+                            <Object
+                                 pxsl_line="189">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="cin_lenahelpsmark_01_trigger_qeg"
+                                     pxsl_line="189" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="show"
+                             pxsl_line="190">
+                            <Object
+                                 pxsl_line="190">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="slums_thetower_guard_19th_02"
+                                     pxsl_line="190" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="use"
+                             name="LOOTING - CIN - Healing Mark"
+                             desired_state="on"
+                             pxsl_line="191">
+                            <Trigger
+                                 pxsl_line="191">
+                                <QuestObject
+                                     class="InteractiveMovieTrigger"
+                                     name="cin_lenahelpsmark_01_trigger"
+                                     pxsl_line="191" />
+                            </Trigger>
+                            <DebugPlayerPosition
+                                 pxsl_line="192">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="cin_lenahelpsmark_01_pos"
+                                     pxsl_line="192" />
+                            </DebugPlayerPosition>
+                        </Phase>
+                        <Phase
+                             type="player control"
+                             name="_"
+                             unblock_item="Medkit_HealthPackLarge"
+                             pxsl_line="193" />
+                        <Phase
+                             type="use life place"
+                             name="_"
+                             teleport="true"
+                             pxsl_line="194">
+                            <LifePlace
+                                 pxsl_line="194">
+                                <QuestObject
+                                     class="NPCLifePlace"
+                                     name="looting_lena_lp_01"
+                                     pxsl_line="194" />
+                            </LifePlace>
+                            <AI
+                                 pxsl_line="195">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Elena"
+                                     pxsl_line="195" />
+                            </AI>
+                        </Phase>
+                        <Phase
+                             type="use life place"
+                             name="_"
+                             teleport="true"
+                             pxsl_line="196">
+                            <LifePlace
+                                 pxsl_line="196">
+                                <QuestObject
+                                     class="NPCLifePlace"
+                                     name="Praising_man_LP_Drink"
+                                     pxsl_line="196" />
+                            </LifePlace>
+                            <AI
+                                 pxsl_line="197">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="slums_thetower_m_19th_02"
+                                     pxsl_line="197" />
+                            </AI>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="show"
+                             pxsl_line="198">
+                            <Object
+                                 pxsl_line="198">
+                                <QuestObject
+                                     class="MovieActor"
+                                     name="cin_elevator_on_13th_Door"
+                                     pxsl_line="198" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="199">
+                            <Object
+                                 pxsl_line="200">
+                                <QuestObject
+                                     class="MovieActor"
+                                     name="cin_13_floor_Lift_Door_02"
+                                     pxsl_line="200" />
+                            </Object>
+                            <Object
+                                 pxsl_line="201">
+                                <QuestObject
+                                     class="MovieActor"
+                                     name="cin_13_floor_Lift_Door"
+                                     pxsl_line="201" />
+                            </Object>
+                            <Object
+                                 pxsl_line="202">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="cin_13_floor_lift"
+                                     pxsl_line="202" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="set reward"
+                     name="_"
+                     reward="StorylineReward_HelpingMark_reward"
+                     pxsl_line="203" />
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="204">
+                    <Destination
+                         pxsl_line="204">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="cin_lenahelpsmark_01_pos"
+                             pxsl_line="204" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- BACK TO RAHIM -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="Looting_02"
+         parent="Looting"
+         glued="true"
+         pxsl_line="212">
+        <!-- Get back to Rahim. -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Looting_OBJ_BackToRakim&amp;"
+             announce_objective="false"
+             pxsl_line="213">
+            <Path
+                 pxsl_line="213">
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="214">
+                    <!-- LOCATION -->
+                    <Path
+                         pxsl_line="215">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="3"
+                             pxsl_line="216">
+                            <Destination
+                                 pxsl_line="216">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="portal_slums_interior_19th_to_slums_interior_13th_sp"
+                                     pxsl_line="216" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                    <!-- RADIO Talk with Rahim -->
+                    <Path
+                         pxsl_line="217">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="-10"
+                             show_locations="false"
+                             pxsl_line="218">
+                            <Destination
+                                 pxsl_line="218">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="cin_lenahelpsmark_01_pos"
+                                     pxsl_line="218" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="talk"
+                             name="_"
+                             speaker="voice2d"
+                             group="Rahim_Looting_18DLG01"
+                             show_locations="false"
+                             auto_start="true"
+                             pxsl_line="219" />
+                        <Phase
+                             type="enable"
+                             name="enable elevator to groundfloor"
+                             pxsl_line="220">
+                            <Object
+                                 pxsl_line="220">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="portal_slums_interior_19th_to_slums_interior_ground_qeg"
+                                     pxsl_line="220" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <!-- Alternative Talk with Timur (guard) -->
+                    <Path
+                         pxsl_line="221">
+                        <Phase
+                             type="OR"
+                             name="_"
+                             pxsl_line="222">
+                            <Path
+                                 pxsl_line="223">
+                                <Phase
+                                     type="wait guard"
+                                     name="_"
+                                     time="3"
+                                     pxsl_line="224" />
+                                <Phase
+                                     type="set dialog"
+                                     name="_"
+                                     speaker="slums_thetower_guard_19th_02"
+                                     group="19thFloorGuard02_Looting_01DLG01"
+                                     pxsl_line="225" />
+                            </Path>
+                            <Path
+                                 pxsl_line="226">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="-10"
+                                     show_locations="false"
+                                     pxsl_line="227">
+                                    <Destination
+                                         pxsl_line="227">
+                                        <QuestObject
+                                             class="SpawnPoint"
+                                             name="cin_lenahelpsmark_01_pos"
+                                             pxsl_line="227" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="set dialog"
+                     name="_"
+                     speaker="slums_thetower_guard_19th_02"
+                     pxsl_line="228" />
+                <Phase
+                     type="go to"
+                     name="LOOTING - Going back to Rahim"
+                     distance="5"
+                     pxsl_line="229">
+                    <Destination
+                         pxsl_line="229">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="MapStart"
+                             pxsl_line="229" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="230">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="MapStart"
+                             pxsl_line="230" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="RESPAWN - Map Start - ON"
+                     pxsl_line="231">
+                    <Object
+                         pxsl_line="231">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="MapStart"
+                             pxsl_line="231" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="232">
+                    <!-- RESPAWN - 13th - OFF -->
+                    <Object
+                         pxsl_line="233">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="portal_slums_interior_19th_to_slums_interior_13th_sp"
+                             pxsl_line="233" />
+                    </Object>
+                    <Object
+                         pxsl_line="234">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="portal_slums_interior_19th_to_slums_interior_ground_qeg"
+                             pxsl_line="234" />
+                    </Object>
+                    <Object
+                         pxsl_line="235">
+                        <QuestObject
+                             class="FXEmitter"
+                             name="looting_flies_fx"
+                             pxsl_line="235" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="236">
+                    <Object
+                         pxsl_line="236">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Rakim"
+                             pxsl_line="236" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="237">
+                    <Object
+                         pxsl_line="237">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="portal_slums_interior_19th_to_slums_interior_13th_qeg"
+                             pxsl_line="237" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="238">
+                    <Object
+                         pxsl_line="239">
+                        <QuestObject
+                             class="ModelObject"
+                             name="cin_meetjade_Door_static_01"
+                             pxsl_line="239" />
+                    </Object>
+                    <Object
+                         pxsl_line="240">
+                        <QuestObject
+                             class="ModelObject"
+                             name="cin_meetjade_Door_static_02"
+                             pxsl_line="240" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="241">
+                    <Object
+                         pxsl_line="242">
+                        <QuestObject
+                             class="ModelObject"
+                             name="cin_meetjade_Door_static_03"
+                             pxsl_line="242" />
+                    </Object>
+                    <Object
+                         pxsl_line="243">
+                        <QuestObject
+                             class="MovieActor"
+                             name="cin_meetjade_Door"
+                             pxsl_line="243" />
+                    </Object>
+                    <Object
+                         pxsl_line="244">
+                        <QuestObject
+                             class="ModelObject"
+                             name="rakim_brecken_room_chair_after"
+                             pxsl_line="244" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="245">
+                    <Object
+                         pxsl_line="245">
+                        <QuestObject
+                             class="NavMeshDynamicObject"
+                             name="slums_thetower_18th_quarantine_doors_navmesh"
+                             pxsl_line="245" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="246">
+                    <Destination
+                         pxsl_line="246">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="MapStart"
+                             pxsl_line="246" />
+                    </Destination>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-     -->
+                <!-- CIN - Jade and Rahim - -->
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="250">
+                    <Object
+                         pxsl_line="250">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="cin_meetjade_trigger_qeg"
+                             pxsl_line="250" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="use"
+                     name="LOOTING - CIN - Rakim and Jade meeting"
+                     desired_state="on"
+                     pxsl_line="251">
+                    <Trigger
+                         pxsl_line="251">
+                        <QuestObject
+                             class="InteractiveMovieTrigger"
+                             name="cin_meetjade_trigger"
+                             pxsl_line="251" />
+                    </Trigger>
+                    <DebugPlayerPosition
+                         pxsl_line="252">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="the_tower_brecken_room"
+                             pxsl_line="252" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="253">
+                    <Object
+                         pxsl_line="253">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="cin_meetjade_trigger_qeg"
+                             pxsl_line="253" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="254">
+                    <Object
+                         pxsl_line="255">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="cin_meetingjade_alfie_lp_after_movie"
+                             pxsl_line="255" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="256">
+                    <Object
+                         pxsl_line="257">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Rakim"
+                             pxsl_line="257" />
+                    </Object>
+                    <Object
+                         pxsl_line="258">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Ayo"
+                             pxsl_line="258" />
+                    </Object>
+                    <Object
+                         pxsl_line="259">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Alfie"
+                             pxsl_line="259" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="use life place"
+                     name="_"
+                     teleport="true"
+                     wait_for_move_end="false"
+                     pxsl_line="260">
+                    <LifePlace
+                         pxsl_line="260">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="rakim_lp_brecken_room_02"
+                             pxsl_line="260" />
+                    </LifePlace>
+                    <AI
+                         pxsl_line="261">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Rakim"
+                             pxsl_line="261" />
+                    </AI>
+                </Phase>
+                <Phase
+                     type="use life place"
+                     name="_"
+                     teleport="true"
+                     wait_for_move_end="false"
+                     pxsl_line="262">
+                    <LifePlace
+                         pxsl_line="262">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="cin_meetingjade_alfie_lp_after_movie"
+                             pxsl_line="262" />
+                    </LifePlace>
+                    <AI
+                         pxsl_line="263">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Alfie"
+                             pxsl_line="263" />
+                    </AI>
+                </Phase>
+                <!-- Maurice and Robin moved Wardrobe -->
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="264">
+                    <Path
+                         pxsl_line="264">
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="265">
+                            <Object
+                                 pxsl_line="265">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="MauriceRobin_Wardrobe_19th"
+                                     pxsl_line="265" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="266">
+                            <Object
+                                 pxsl_line="266">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Stairs_Barrier_Group"
+                                     pxsl_line="266" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="show"
+                             pxsl_line="267">
+                            <Object
+                                 pxsl_line="267">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="MauriceRobin_Wardrobe_20th_1"
+                                     pxsl_line="267" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="use life place"
+                             name="_"
+                             teleport="true"
+                             pxsl_line="268">
+                            <LifePlace
+                                 pxsl_line="268">
+                                <QuestObject
+                                     class="NPCLifePlace"
+                                     name="Robin_20th_LP_Wardrobe"
+                                     pxsl_line="268" />
+                            </LifePlace>
+                            <AI
+                                 pxsl_line="269">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Robin"
+                                     pxsl_line="269" />
+                            </AI>
+                        </Phase>
+                        <Phase
+                             type="use life place"
+                             name="_"
+                             teleport="true"
+                             pxsl_line="270">
+                            <LifePlace
+                                 pxsl_line="270">
+                                <QuestObject
+                                     class="NPCLifePlace"
+                                     name="Maurice_20th_LP_Wardrobe"
+                                     pxsl_line="270" />
+                            </LifePlace>
+                            <AI
+                                 pxsl_line="271">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Maurice"
+                                     pxsl_line="271" />
+                            </AI>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="272">
+                    <Destination
+                         pxsl_line="272">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="cin_meetjade_01_sp"
+                             pxsl_line="272" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-  -->
+        <!-- START of School of Life - get change your close -->
+        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-      -->
+        <!-- Talk to Rahim.                          -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;SchoolOfLife_OBJ_TalkBeforeRahim&amp;"
+             pxsl_line="276">
+            <Path
+                 pxsl_line="276">
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="Rakim"
+                     group="Rakim_BasementCleansing_02DLG01"
+                     pxsl_line="277" />
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="278">
+                    <Object
+                         pxsl_line="279">
+                        <QuestObject
+                             class="DepotContainer"
+                             name="thetower_player_room_depot_00"
+                             pxsl_line="279" />
+                    </Object>
+                    <Object
+                         pxsl_line="280">
+                        <QuestObject
+                             class="DoorDI"
+                             name="thetower_brecken_door_01"
+                             pxsl_line="280" />
+                    </Object>
+                    <Object
+                         pxsl_line="281">
+                        <QuestObject
+                             class="DoorDI"
+                             name="thetower_brecken_door_02"
+                             pxsl_line="281" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="282">
+                    <Object
+                         pxsl_line="283">
+                        <QuestObject
+                             class="ModelObject"
+                             name="cin_meetjade_Door_static_03"
+                             pxsl_line="283" />
+                    </Object>
+                    <Object
+                         pxsl_line="284">
+                        <QuestObject
+                             class="MovieActor"
+                             name="cin_meetjade_Door"
+                             pxsl_line="284" />
+                    </Object>
+                </Phase>
+                <!-- block doors for npc movement -->
+                <Phase
+                     type="set state"
+                     name="unlock player room"
+                     desired_state="opened_cw"
+                     pxsl_line="286">
+                    <Trigger
+                         pxsl_line="286">
+                        <QuestObject
+                             class="DoorDI"
+                             name="thetower_player_room_door"
+                             pxsl_line="286" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="287">
+                    <Object
+                         pxsl_line="287">
+                        <QuestObject
+                             class="DoorDI"
+                             name="thetower_player_room_door"
+                             pxsl_line="287" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="288">
+                    <!-- Brecken Room Doors -->
+                    <Object
+                         pxsl_line="289">
+                        <QuestObject
+                             class="DoorDI"
+                             name="thetower_brecken_door_01"
+                             pxsl_line="289" />
+                    </Object>
+                    <Object
+                         pxsl_line="290">
+                        <QuestObject
+                             class="DoorDI"
+                             name="thetower_brecken_door_02"
+                             pxsl_line="290" />
+                    </Object>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="291">
+            <Destination
+                 pxsl_line="291">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="cin_meetjade_01_sp"
+                     pxsl_line="291" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-     -->
+    <!-- NEXT QUEST - SCHOOL OF LIFE        -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+</QuestsDefinitions>

@@ -1,0 +1,5 @@
+Description("v_flashlight_color", "f:EDIT;e:EDIT|SPINNER|EXPANDABLE|BROWSE_COLOR|DONT_SERIALIZE;m:0 0 0;s:0.05 0.05;x:1 1 1;c:Flashlight;d:Color;" )
+Description("f_flashlight_pos_x", "f:EDIT;e:EDIT|SPINNER|DONT_SERIALIZE;s:0.1;c:Flashlight;d:Pos X;" )
+Description("f_flashlight_pos_y", "f:EDIT;e:EDIT|SPINNER|DONT_SERIALIZE;s:0.1;c:Flashlight;d:Pos Y;" )
+Description("f_flashlight_range", "f:EDIT;e:EDIT|SPINNER|DONT_SERIALIZE;m:0;s:50;c:Flashlight;d:Range;" )
+Description("f_flashlight_scale", "f:EDIT;e:EDIT|SPINNER|DONT_SERIALIZE;m:0;s:0.05;c:Flashlight;d:Scale;" )

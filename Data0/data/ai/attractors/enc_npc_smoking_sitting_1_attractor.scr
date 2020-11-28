@@ -1,0 +1,36 @@
+!include("ai_data.def")
+!include("ai_timing.def")
+
+!include("ai_goals.def")
+
+ShortHeadRotation()
+StrongAttractor()
+SnapDist(2)
+ReleaseDist(3)
+User("Man")
+
+Usage("ENCOUNTER")
+
+Slot("", 1, 1, 1, 0, 0, 0, 0, 0, 1, 1.5)
+{
+    LockPosition()
+    DynamicMesh("cigarette_a.msh", "R_HandHolder", "holder", "", 1)
+    {
+        DynamicFXToMesh("cigatettesmoke_sequence.fx", "ofx_lp", 0, 0, -0.01, 1, 0, 0)
+    }
+	
+    AiTypeDataSet("human")
+    {
+        Data("idle:standing:none:stand:none:none:none", -2, "m_npc_smoking_sitting_1_Idle", -1, 1)
+        Data("idle:standing:none:idle:none:none:none", -2, "m_npc_smoking_sitting_1_Idle", -1, 1)
+        Data("idle:standing:none:stand:none:prepare:none", -2, "m_npc_smoking_sitting_1_prepare", -1, 1)
+        Data("idle:standing:none:stand:none:none:finish", -2, "m_npc_smoking_sitting_1_finishing", -1, 1)
+    }
+	
+	DiscardOn(GoalAttack)
+	DiscardOn(GoalReactOnBurn)
+	DiscardOn(GoalReactOnElectrocution)
+	DiscardOn(GoalReactOnPoison)
+	DiscardOn(GoalReactOnHit)
+}
+

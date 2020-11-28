@@ -1,0 +1,80 @@
+// Once at the start of the game, and each time at 00:00 the system draws one of the scenarios of weather
+
+// Scenario::AddTask(f, f, f, f) f-wanted weather val, f-start interpolation hour(format hh::mm), f-end interpolation hour(format hh:mm), f-weather duration(format hh::mm)
+// QuestScenario::AddTask(f, f) f-wanted weather val, f-interpolation duration(format hh::mm)
+
+// How to set weather val:
+// if (val > 0.000 && val <= 0.125) = fog;
+// if (val > 0.125 && val <= 0.375) = clear;
+// if (val > 0.375 && val <= 0.625) = cloudy;
+// if (val > 0.625 && val <= 0.875) = rain;
+// if (val > 0.875 && val <= 1.000) = storm;
+
+sub main()
+{
+    // Duration of weather after sleep or map reload (in game time, format mm). If 0, the weather will be active till next event
+    RandomWeatherDuration(60.0); 
+
+    // Probability of changing weather after player's death
+    ProbabilityOfChangingWeatherAfterDeath(0.3);
+
+    // Possible weather values, chances and time boundaries
+    AddRandomWeather(0.08, 0.25, 6.00, 7.05); 
+    AddRandomWeather(0.25, 0.50); 
+    AddRandomWeather(0.8,  0.25, 15.00, 24.00); 
+    
+	Scenario("1") // Night storm
+    {
+         AddTask(1.0,   22.00,   22.13,  1.20);
+    }
+	
+	Scenario("2") // Night storm
+    {
+        AddTask(1.0,   00.55,   1.09,  0.45);      
+    }
+	
+	Scenario("3") // Night storm
+    {
+        AddTask(1.0,   2.10,   2.18,  0.40);				      
+    }
+	
+	Scenario("4") // Night storm
+    {
+        AddTask(1.0,   3.20,   3.33,  1.30);	      
+    }
+	
+	Scenario("5") // Night rain
+    {
+        AddTask(0.8,   22.00,   22.16,  1.10);		      
+    }
+	
+	Scenario("6") // Night rain
+    {
+        AddTask(0.8,   1.30,   1.47,  0.50);
+    }
+	
+	Scenario("7") // Night rain
+    {
+        AddTask(0.8,   5.00,   5.18,  1.10);	
+    }
+	
+	Scenario("8")
+    {
+        
+    }
+    
+    Scenario("9")
+    {
+        
+    }
+    
+    Scenario("10")
+    {
+        
+    }	
+    
+    QuestScenario("slums_start_weather")
+    {
+        AddTask(0.2, 0.20);       						
+    }
+}

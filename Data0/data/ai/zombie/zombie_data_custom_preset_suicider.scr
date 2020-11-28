@@ -1,0 +1,173 @@
+!include("ai_data.def")
+!include("ai_timing.def")
+// suicider is not using base nor random data sets!
+!include("zombie_data_params.scr")
+!include("export_suicider_params.scr")
+
+
+// suicider
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////// CURVES //////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+Curve(CURVE_HEALTH, "suicider_health")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////// DATA ///////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+//##############
+//#### IDLE ####
+//##############
+//## idle:pose:idle_type:item_type:scare_level:is_idle_prepare:is_idle_finish
+//##############
+
+Data("idle:standing::stand:::", -2,     "suicider_a_idle_1", -1, 1)
+// explosion (special idle)
+Data("idle:standing::special:::", -2,   "suicider_a_explosion_1", -1, 1) 
+Data("idle:standing::special:::", -2,   "suicider_a_explosion_2", -1, 1)
+
+//##################
+//#### MOVEMENT ####
+//##################
+//## movement:is_standing:movement_type:movement_direction:alarm_level:item_type:ram_type:stairs_climbing_state
+//##################
+
+Data("movement:standing:walk:forward::::", -2,		"Suicider_A_walk_loop_01", -1, 1)               
+Data("movement:standing:run:forward::::", -2,        "Suicider_A_run_loop_01", -1, 1)   // normal run
+
+//##############
+//#### TURN ####
+//##############
+//## turn:is_standing:alarm_level:item_type:direction:angle
+//##############
+
+Data("turn:standing:::left:45", -2, "Suicider_a_turn_45L", -1, 1)  
+Data("turn:standing:::right:45", -2, "Suicider_a_turn_45R", -1, 1)       
+
+Data("turn:standing:::left:90", -2,     "Suicider_a_turn_90L", -1, 1)     
+Data("turn:standing:::right:90", -2,    "Suicider_a_turn_90R", -1, 1)     
+
+Data("turn:standing:::left:180", -2,    "Suicider_a_turn_180L", -1, 1)    
+Data("turn:standing:::right:180", -2,   "Suicider_a_turn_180R", -1, 1)   
+
+//###############
+//#### START ####
+//###############
+//## start:is_standing:alarm_level:item_type:movement_type:angle:direction
+//##############
+
+Data("start:standing::::90:left:", -2,     "Suicider_A_walk_start90L", -1, 1)                         
+Data("start:standing::::90:right:", -2,    "Suicider_A_walk_start90R", -1, 1)                        
+Data("start:standing::::0::", -2, 		    "Suicider_A_walk_startF", -1, 1)                           
+Data("start:standing::::180:left:", -2,    "Suicider_A_walk_start180L", -1, 1)                     
+Data("start:standing::::180:right:", -2,   "Suicider_A_walk_start180R", -1, 1)                   
+
+Data("start:standing:::run:0::", -2, 		    "Suicider_A_run_startF", -1, 1)    
+Data("start:standing:::run:90:right:", -2, 	"Suicider_A_run_start90R", -1, 1)    	
+Data("start:standing:::run:90:left:", -2, 	    "Suicider_A_run_start90L", -1, 1)     
+Data("start:standing:::run:180:right:", -2,	"Suicider_A_run_start90R", -1, 1)   //brak animacji 180, dociaganie na kolku	
+Data("start:standing:::run:180:left:", -2, 	"Suicider_A_run_start90L", -1, 1)     
+
+//##############
+//#### STOP ####
+//##############
+//## stop:is_standing:alarm_level:item_type:movement_type:angle:direction
+//##############
+
+Data("stop:standing:::walk:0::false:", -2, "Suicider_A_walk_stopF", -1, 1)
+Data("stop:standing:::run:0::false:", -2, "Suicider_A_run_stopF", -1, 1)
+
+//#######################
+//#### HIT REACTIONS ####
+//#######################
+//## hit_reaction:pose:hit_reaction:item_type:damage_type:attacker_pos:body_part:direction:severity
+//#######################
+
+Data("hit_reaction:standing:pain::all::::", -2, "Suicider_A_Hitreaction_v01", -1, 1)     
+Data("hit_reaction:standing:pain::all::::", -2, "Suicider_A_Hitreaction_v02", -1, 1)        
+
+//################
+//#### ATTACK ####
+//################
+//## attack:pose:item_type:attack_type:direction:attack_range:should_change_pose
+//################
+
+Data("attack:standing::attack_from_move::4m:", -2, "suicider_a_Run_explosion_01", -1, 1)
+Data("attack:standing::attack_from_move:::", -2, "Suicider_A_walk_stop_explode", -1, 1)
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////// PARAMETERS ////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+ParamFloat("explode_physical_damage", 3.0)
+ParamFloat("explode_range", 8.0)
+ParamFloat("melee_range", 3.0)
+ParamBool("stationary_suicider", 0) 
+ParamBool("simple", 0)
+
+ParamBool("can_attack_from_move", 0)
+ParamFloat("time_to_explode", 2.95)
+ParamFloat("time_to_explode_after_hit", 10.0)
+ParamFloat("turn_speed", 240.0)
+//ParamFloat("stamina_regeneration_rate", 0.05)
+ParamFloat("sight_range_calm", 40.0) //converted
+ParamFloat("sight_range", 60.0) //converted
+ParamFloat("wander_dist", 40.0)
+ParamBool("can_fall", 1)
+ParamFloat("melee_range_vs_ai", 2.0)
+ParamFloat("melee_range_y", 1.0) //converted
+ParamInt("zombie_type", 3)
+ParamBool("check_enemy_reachable", 1)
+ParamFloat("berserker_hit_prob", 0.0)
+ParamFloat("berserker_grab_prob", 0.0)
+ParamFloat("berserker_ram_prob", 0.0)
+ParamFloat("combo_prob_mul", 0.0)
+ParamFloat("max_dist_to_grab_from_stand", 0.0) //converted
+ParamFloat("min_dist_to_grab_from_stand", 0.0) //converted
+ParamBool("limb_cut_by_direct_hit", 0)
+ParamFloat("time_for_clench_check", -1.0)
+ParamBool("can_roll_head", 0)
+//ParamFloat("health_mul", 1.0)
+//ParamFloat("head_health_influence", 1.5)
+//ParamFloat("left_arm_health_influence", 1.0)
+//ParamFloat("right_arm_health_influence", 1.0)
+//ParamFloat("left_leg_health_influence", 1.0)
+//ParamFloat("right_leg_health_influence", 1.0)
+//ParamFloat("torso_front_health_influence", 1.0)
+//ParamFloat("torso_back_health_influence", 1.0)
+ParamFloat("threat_level", 8)
+ParamBool("navigate_through_generic_nav_mesh_connections", 0)
+ParamBool("navigate_through_user_nav_mesh_connections", 0)
+ParamBool("can_move_through_low_obstacles", 0)
+ParamBool("can_move_through_high_obstacles", 0)
+ParamFloat("max_connection_height_up", 0.0)
+ParamFloat("max_connection_height_down", 0.0)
+ParamFloat("max_connection_horiz_dist", 1.0)
+ParamBool("attack_range_2_m_enabled", 1)
+ParamFloatRange("dist_for_attack_range_2_m", -1.0, 1.5)
+ParamFloatRange("dist_for_attack_range_2_m_in_move", -1.0, 3.0)
+ParamBool("attack_range_3_m_enabled", 0)
+ParamBool("attack_range_4_m_enabled", 1)
+ParamFloatRange("dist_for_attack_range_4_m", -1.0, 3.5)
+ParamFloatRange("dist_for_attack_range_4_m_in_move", -1.0, 4.0)
+ParamBool("can_attack_objects_from_move", 1)
+ParamBool("can_use_fake_attacks", 0)
+ParamFloat("max_default_movement_turn_speed", 150.0)
+ParamFloat("max_walk_movement_turn_speed", 180.0)
+ParamFloat("max_trot_movement_turn_speed", 180.0)
+ParamFloat("max_run_movement_turn_speed", 300.0)
+ParamFloat("max_sprint_movement_turn_speed", 300.0)
+ParamBool("can_be_poisoned", 0)
+
+//ParamFloat("head_damage_factor", 1.5)					//amount of damage dealt to head
+//ParamFloat("left_arm_damage_factor", 1.0)				//amount of damage dealt to arm
+//ParamFloat("right_arm_damage_factor", 1.0)				//amount of damage dealt to arm
+//ParamFloat("left_leg_damage_factor", 1.0)				//amount of damage dealt to leg
+//ParamFloat("right_leg_damage_factor", 1.0)				//amount of damage dealt to leg
+ParamFloat("arm_direct_hit_mul", 1.0)
+
+ParamFloat("experience_award", 0.0)
+ParamBool("can_scream_for_zombies", 0)
+ParamFloat("blast_damage_mul", 1.0)

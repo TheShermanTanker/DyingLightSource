@@ -1,0 +1,81 @@
+!include("MeshPartCloth.def")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+MeshPartCloth()
+{
+//----------------------------------------------
+// bones
+//----------------------------------------------
+    BonesGridSize(1, 7)
+
+    $XDIST(f, -1)
+    $YDIST(f, -0.97)
+    
+    Bone(0, 0,  "bone_stetoscope_00", 1, XDIST, YDIST)
+    Bone(0, 1,  "bone_stetoscope_01", 0, XDIST, YDIST)
+    Bone(0, 2,  "bone_stetoscope_02", 0, XDIST, YDIST)
+    Bone(0, 3,  "bone_stetoscope_03", 0, XDIST, YDIST)
+    Bone(0, 4,  "bone_stetoscope_04", 0, XDIST, YDIST)
+    Bone(0, 5,  "bone_stetoscope_05", 0, XDIST, YDIST)
+    Bone(0, 6,  "",                   0, XDIST, YDIST)
+    
+//----------------------------------------------
+// collisions 
+//----------------------------------------------
+
+    CollisionSlide(1)
+    CollisionSpeedMod(1)
+    CollisionBounce(0)
+    
+    CollisionShapesMoveInfluence(1)
+    
+    CollisionSegmentDivision(200)
+    CollisionNormalAngleThreshold(180)
+    
+    NodeCollisionSphereRadius(0.1)
+    ExternalCollisionAffectMul(0)
+
+    CollisionSphereShift("spine2", [-0.14, -0.1,  0.2], 0.356)
+    
+    CollisionSphereShift("spine2", [-0.07, -0.1,  0], 0.16)
+    CollisionSphereShift("spine2", [-0.07, 0,  0], 0.16)
+    CollisionSphereShift("spine2", [-0.07, 0.1,  0], 0.16)
+
+    CollisionCapsule("r_upperarm", -1, -1.3)
+    CollisionCapsule("r_forearm", -1, -1.3)
+    
+//----------------------------------------------
+// spring params 
+//----------------------------------------------
+
+    Viscous(4)
+    AirFriction(1)
+
+    StructuralStiffness(10000, 10000)
+    ShearStiffness(5000, 1000)
+    FlexionStiffness(10000, 10000)
+
+    HorizontSpringRatio(1)
+    
+    CheckLengthsStepsPerSec(0)
+
+//----------------------------------------------
+// physical params 
+//----------------------------------------------
+    
+    Mass(1)
+    GravityMul(1)
+    WindInfluence(0.1)
+
+//----------------------------------------------
+// other params
+//----------------------------------------------
+
+    SynchroWithPhysics(0)
+    EnableAPBOut(1)
+    
+    ObjectMoveMul(1)
+    AnimationMoveMul(0.95)
+}
+
+

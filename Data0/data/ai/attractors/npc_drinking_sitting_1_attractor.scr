@@ -1,0 +1,36 @@
+!include("ai_data.def")
+!include("ai_timing.def")
+
+!include("ai_goals.def")
+
+ShortHeadRotation()
+StrongAttractor()
+InteractionDist(1.3)
+SnapDist(2)
+ReleaseDist(3)
+User("Man")
+
+Usage("ENCOUNTER")
+Usage("VIRTUAL_ATTRACTOR")
+
+DisabledTurnDuringActivity(TO_INTERACT)
+DisabledTurnDuringActivity(FROM_INTERACT)
+
+Slot("", 1, 1, 1, 0, 0, 0, 0, 0, 1, 1.5)
+{
+    LockPosition()
+    DynamicMesh("cup_cola_a.msh", "R_HandHolder", "", "default", 1)
+	{
+		DynamicFXToMesh("hot_coffee_cup_sequence.fx", "cup_cola_a", 0, 0, 0, 0, 1, 0)
+	}	
+    AiTypeDataSet("human")
+    {
+        Data("idle:standing:none:stand:none:none:none", -2, "m_npc_drinking_sitting_1_Idle", -1, 1)
+        Data("idle:standing:none:special:none:none:none", -2, "m_npc_drinking_sitting_1_Special", -1, 1)
+        Data("idle:standing:none:idle:none:none:none", -2, "m_npc_drinking_sitting_1_Idle", -1, 1)
+        Data("idle:standing:none:interact:none:none:none", -2, "m_npc_drinking_sitting_1_React", -1, 1)
+        Data("idle:standing:none:from_interact:none:none:none", -2, "m_npc_drinking_sitting_1_To_Idle", -1, 1)
+        Data("idle:standing:none:to_interact:none:none:none", -2, "m_npc_drinking_sitting_1_To_React", -1, 1)
+    }
+}
+

@@ -1,0 +1,107 @@
+!include("ai_timing.def")
+
+
+
+
+SeqTrack( "TPP_M16_Shot", "tpp_m16_shot.anm2", 					0,   40,    60,   1,   0.0)
+SeqTrack( "TPP_M16_ShotEmpty", "tpp_m16_shot.anm2", 					0,   40,    60,   1,   0.0)
+
+SeqTrackAlias( "TPP_M16_Aim_Shot", "tpp_m16_shot")
+SeqTrackAlias( "TPP_M16_Aim_ShotEmpty", "TPP_M16_ShotEmpty")
+
+
+SeqTrack( "TPP_M16_Stand", 				"tpp_m16_stand.anm2", 				0,   192,   60,   1,   0.3)
+
+SeqTrackAlias( "TPP_M16_StandEmpty", "TPP_M16_Stand")
+SeqTrackAlias( "TPP_M16_Wall", "TPP_M16_Stand")
+SeqTrackAlias( "TPP_M16_Cover_StandPos", "TPP_M16_Stand")
+// Aim
+SeqTrackAlias( "TPP_M16_Aim_Stand", "TPP_M16_Stand")
+SeqTrackAlias( "TPP_M16_Aim_StandEmpty", "TPP_M16_Stand")
+
+// m16 - podstawowe
+SeqTrack("TPP_M16_ReloadBegin", 			"tpp_m16_reload.anm2", 				0,   50,   60,   1,   0.3)
+{	
+	Event(0, 0, 1)
+    {
+		PlaySound3D(GameVolumeSource_SoundPlayer, "m16_magazine_draw.wav", 1, 3, "head", 1, [0,0,0], 1)
+    }
+}
+SeqTrack("TPP_M16_ReloadManage", 			"tpp_m16_reload.anm2"			, 50, 50, 60, 1, 0.0)
+SeqTrack("TPP_M16_ReloadLoop", 				"tpp_m16_reload.anm2"			, 50, 70, 60, 1, 0.0)
+{
+	Event(2, 0, 1)
+    {
+		PlaySound3D(GameVolumeSource_SoundPlayer, "m16_magazine_load.wav", 1, 3, "head", 1, [0,0,0], 1)
+    }
+}
+SeqTrack("TPP_M16_ReloadFinish", 			"tpp_m16_reload.anm2",		70, 200, 60, 1, 0.0)
+{
+	Event(15, 0, 1)
+    {
+		PlaySound3D(GameVolumeSource_SoundPlayer, "m16_rack.wav", 1, 3, "head", 1, [0,0,0], 1)
+    } 
+}
+
+////////////
+////Walk////
+////////////
+
+ 
+ 
+//===================================== Jumping ============================================
+
+SeqTrack("TPP_M16_Jump_Pose", 		        "TPP_Player_rifle_idle.anm2"	        , 16, 49, 30, 1, 0.1)
+
+
+ ///FORWARD
+SeqTrack("TPP_M16_WalkForward",		"TPP_M16_WalkForward.anm2", 	0 , 53 , 60 , 1, 0.5 )
+{
+    Event(20, VIS_EVENT_STEP_RIGHT, -1)
+    Event(45, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("TPP_M16_RunForward",		"TPP_M16_RunForward.anm2", 	0 , 44 , 60 , 1, 0.5 )
+{
+  Event(14, VIS_EVENT_STEP_RIGHT, -1)
+    Event(34, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("TPP_M16_SprintForward",	"tpp_m16_sprintforward.anm2", 	0 , 34 , 60 , 1, 0.5 )
+{
+    Event(10, VIS_EVENT_STEP_RIGHT, -1)
+    Event(25, VIS_EVENT_STEP_LEFT, -1)
+}
+///BACKWARD
+SeqTrack("TPP_M16_WalkBackward",	"TPP_M16_WalkBackward.anm2", 	0 , 82 , 60 , 1, 0.5 )
+{
+    Event(26, VIS_EVENT_STEP_LEFT, -1)
+    Event(62, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("TPP_M16_RunBackward",		"TPP_M16_RunBackward.anm2", 	0 , 45 , 60 , 1, 0.5 )
+{
+    Event(15, VIS_EVENT_STEP_LEFT, -1)
+    Event(36, VIS_EVENT_STEP_RIGHT, -1)
+}
+/// RIGHT
+SeqTrack("TPP_M16_WalkRight",		"TPP_M16_WalkRight.anm2", 	0 , 72 , 60 , 1, 0.5 )
+{
+    Event(20, VIS_EVENT_STEP_LEFT, -1)
+    Event(52, VIS_EVENT_STEP_RIGHT, -1)
+}
+SeqTrack("TPP_M16_RunRight",		"TPP_M16_RunRight.anm2", 	0 , 47 , 60 , 1, 0.5 )
+{
+    Event(13, VIS_EVENT_STEP_LEFT, -1)
+    Event(37, VIS_EVENT_STEP_RIGHT, -1)
+}
+/// LEFT
+SeqTrack("TPP_M16_WalkLeft",		"TPP_M16_WalkLeft.anm2", 	0 , 65 , 60 , 1, 0.5 )
+{
+    Event(14, VIS_EVENT_STEP_RIGHT, -1)
+    Event(46, VIS_EVENT_STEP_LEFT, -1)
+}
+SeqTrack("TPP_M16_RunLeft",		"TPP_M16_RunLeft.anm2", 	0 , 46 , 60 , 1, 0.5 )
+{
+    Event(17, VIS_EVENT_STEP_LEFT, -1)
+    Event(36, VIS_EVENT_STEP_RIGHT, -1)
+}
+ 
+ 

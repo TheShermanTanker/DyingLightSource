@@ -1,0 +1,357 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- GUNSLINGER (Bring Dawud) - HELPERS -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- quest __BringDawud_HELPER_02 -parent=__BringDawud_Slums_Actions -->
+        <!-- ,goto <<Bring Dawud - Helper 02 - Blake>> SpawnPoint QuestHelper_SP_Blake -distance=10000 -show=false -->
+            <!-- ,debugpos SpawnPoint QuestHelper_SP_Blake -->
+        <!-- ,OR _ -->
+            <!-- path -->
+                <!-- ,talk _ Blake Blake_BringDawudHelper03_USE -show=false -questgiver_indicator=true -->
+            <!-- path -->
+                <!-- ,cnd-quest-started _ BringDawud1 -finished=true -->
+        <!-- ,checkpoint _ SpawnPoint QuestHelper_SP_Blake -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- GUNSLINGER -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- ENEMIES NEAR THE PAWNSHOP     -->
+    <Quest
+         name="__BringDawud_Slums_Enemies_PawnShop_001"
+         parent="BringDawud2"
+         pxsl_line="21">
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="22">
+            <Object
+                 pxsl_line="22">
+                <QuestObject
+                     class="CrowdSpawner"
+                     name="BringDawud_CrowdSpawner_Day"
+                     pxsl_line="22" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="23">
+            <Destination
+                 pxsl_line="23">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="BringDawud_SP_Tower_001"
+                     pxsl_line="23" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="BringDawud3"
+             finished="true"
+             pxsl_line="24" />
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="25">
+            <Object
+                 pxsl_line="25">
+                <QuestObject
+                     class="CrowdSpawner"
+                     name="BringDawud_CrowdSpawner_Day"
+                     pxsl_line="25" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="26">
+            <Destination
+                 pxsl_line="26">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="BringDawud_SP_Tower_001"
+                     pxsl_line="26" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- FROM SLUMS_INTERIOR TO SLUMS -->
+    <Quest
+         name="BringDawud3"
+         parent="BringDawud2"
+         glued="true"
+         pxsl_line="29">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;BringDawud_OBJ_BringPackage&amp;"
+             pxsl_line="30">
+            <Path
+                 pxsl_line="30">
+                <Phase
+                     type="go to"
+                     name="Gunslinger - Go to the pawnshop"
+                     distance="100000"
+                     pxsl_line="31">
+                    <Destination
+                         pxsl_line="31">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="BringDawud_SP_Tower_001"
+                             pxsl_line="31" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="32">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="BringDawud_SP_Tower_001"
+                             pxsl_line="32" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="33">
+                    <Object
+                         pxsl_line="33">
+                        <QuestObject
+                             class="ModelObject"
+                             name="BringDawud_Courtain_Before"
+                             pxsl_line="33" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="34">
+                    <Object
+                         pxsl_line="34">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="BringDawud_PS_Pawnshop_Curtain_001"
+                             pxsl_line="34" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="35">
+                    <Destination
+                         pxsl_line="35">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="BringDawud_SP_Tower_001"
+                             pxsl_line="35" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="use"
+                     name="Gunslinger - Find action figure"
+                     desired_state="on"
+                     show_locations="false"
+                     pxsl_line="36">
+                    <Trigger
+                         pxsl_line="36">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="BringDawud_PS_Pawnshop_Curtain_001"
+                             pxsl_line="36" />
+                    </Trigger>
+                    <SpecificLocation
+                         pxsl_line="37">
+                        <QuestObject
+                             class="ZoneBox"
+                             name="BringDawud_ZB_PawnShop_001"
+                             pxsl_line="37" />
+                    </SpecificLocation>
+                    <DebugPlayerPosition
+                         pxsl_line="38">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="BringDawud_SP_PawnShop_001"
+                             pxsl_line="38" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="opened"
+                     show_locations="false"
+                     pxsl_line="39">
+                    <Trigger
+                         pxsl_line="39">
+                        <QuestObject
+                             class="DoorDI"
+                             name="BringDawud_Door_0001"
+                             pxsl_line="39" />
+                    </Trigger>
+                    <SpecificLocation
+                         pxsl_line="40">
+                        <QuestObject
+                             class="ZoneBox"
+                             name="BringDawud_ZB_PawnShop_001"
+                             pxsl_line="40" />
+                    </SpecificLocation>
+                </Phase>
+                <Phase
+                     type="take item"
+                     name="_"
+                     show_locations="false"
+                     pxsl_line="41">
+                    <Item
+                         pxsl_line="41">
+                        <QuestObject
+                             class="QuestInventoryItemDI"
+                             name="BringDawud_QII_Ray_001"
+                             pxsl_line="41" />
+                    </Item>
+                    <SpecificLocation
+                         pxsl_line="42">
+                        <QuestObject
+                             class="ZoneBox"
+                             name="BringDawud_ZB_PawnShop_001"
+                             pxsl_line="42" />
+                    </SpecificLocation>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="43">
+            <Destination
+                 pxsl_line="43">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="BringDawud_SP_PawnShop_001"
+                     pxsl_line="43" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;BringDawud_OBJ_BringDoll&amp;"
+             pxsl_line="45">
+            <Path
+                 pxsl_line="45">
+                <Phase
+                     type="go to"
+                     name="Gunslinger - Get back to the Tower"
+                     distance="120"
+                     pxsl_line="46">
+                    <Destination
+                         pxsl_line="46">
+                        <QuestObject
+                             class="Marker"
+                             name="BringDawud_Marker_Tower_001"
+                             pxsl_line="46" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="47">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="BringDawud_SP_PawnShop_001"
+                             pxsl_line="47" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="voice2d"
+                     group="Brecken_BringDawud1_02DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="48" />
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="49">
+            <Destination
+                 pxsl_line="49">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="BringDawud_SP_Tower_001"
+                     pxsl_line="49" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__BringDawudItemSpawners"
+         parent="BringDawud2"
+         pxsl_line="51">
+        <Phase
+             type="go to"
+             name="_"
+             distance="2"
+             show_locations="false"
+             pxsl_line="52">
+            <Destination
+                 pxsl_line="52">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="Pawnshop_dawud_itemspawners"
+                     pxsl_line="52" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="gather players guard"
+             name="_"
+             distance="-50"
+             show_locations="false"
+             pxsl_line="53">
+            <Destination
+                 pxsl_line="53">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="Pawnshop_dawud_itemspawners"
+                     pxsl_line="53" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="54">
+            <Object
+                 pxsl_line="54">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="Pawnshop_dawud_itemspawners"
+                     pxsl_line="54" />
+            </Object>
+        </Phase>
+        <Phase
+             type="appear"
+             name="_"
+             mode="hide"
+             pxsl_line="55">
+            <Object
+                 pxsl_line="55">
+                <QuestObject
+                     class="AppearGroup"
+                     name="Pawnshop_dawud_itemspawners"
+                     pxsl_line="55" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="56">
+            <Destination
+                 pxsl_line="56">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="BringDawud_SP_PawnShop_001"
+                     pxsl_line="56" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- SLUMS TO SLUMS_INTERIOR -->
+</QuestsDefinitions>

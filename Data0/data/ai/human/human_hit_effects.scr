@@ -1,0 +1,102 @@
+import "damage_type.def"
+import "item_hit_fx_category.def"
+import "surface_id.def"
+
+export int AnyDamageType    	            = DamageType_Count;
+export int AnyItemHitFxCategory             = ItemHitFxCategory_Count;
+export int AnySurfaceId               		= SurfaceId_Count;
+
+export int BodyPart_Torso           = 0;
+export int BodyPart_Head            = 1;
+export int BodyPart_Count           = 8;
+export int AnyBodyPart              = BodyPart_Count;
+
+export int Reason_NoKill = 0;
+export int Reason_Kill   = 1;
+export int AnyReason     = 2;
+
+export int Hit_Normal		= 0;
+export int Hit_Critical		= 1;
+export int Hit_Any			= 2;
+
+export int Severity_Any		= 0;
+export int Severity_Light	= 1;
+export int Severity_Medium	= 2;
+export int Severity_Heavy	= 3;
+
+export int Damager_NoPlayer = 0;
+export int Damager_Player   = 1;
+export int AnyDamager       = 2;
+
+// parametry sa podawane zgodnie z poziomami w drzewie wyszukiwania, AnyParamValue definiuje wartosc 
+// pod ktora bedzie szukany efekt jezeli nie zdefinionwo go dla parametru podanego w zapytaniu sa one 
+// zdefinione osobno dla kazdego poziomu w drzewie
+sub ParamsInfo()
+{
+    AnyParamValue(AnyDamageType);
+    AnyParamValue(AnyItemHitFxCategory);
+    AnyParamValue(AnySurfaceId);
+    AnyParamValue(AnyBodyPart);
+    AnyParamValue(AnyReason);
+	AnyParamValue(Hit_Any);
+    AnyParamValue(Severity_Any);
+	AnyParamValue(AnyDamager);
+}
+
+sub Datas()
+{
+    Data(DamageType_Cut, AnyItemHitFxCategory, SurfaceId_Metal, AnyBodyPart, AnyReason, Hit_Any, Severity_Any, AnyDamager, "armored_armor_hit_sharp"); // armor hit
+    Data(DamageType_Blunt, AnyItemHitFxCategory, SurfaceId_Metal, AnyBodyPart, AnyReason, Hit_Any, Severity_Any, AnyDamager, "armored_armor_hit_blunt"); // armor hit
+    Data(DamageType_Kick, AnyItemHitFxCategory, SurfaceId_Metal, AnyBodyPart, AnyReason, Hit_Any, Severity_Any, AnyDamager, "armored_armor_hit_blunt"); // armor hit
+    Data(AnyDamageType, AnyItemHitFxCategory, SurfaceId_Metal, AnyBodyPart, AnyReason, Hit_Any, Severity_Any, AnyDamager, "armored_armor_hit_blunt"); // armor hit
+	Data(DamageType_Bullet, AnyItemHitFxCategory, SurfaceId_Metal, AnyBodyPart, AnyReason, Hit_Any, Severity_Any, AnyDamager, "armored_armor_hit_sharp");
+    
+    Data(DamageType_Punch1, AnyItemHitFxCategory, AnySurfaceId, AnyBodyPart, Reason_Kill, Hit_Any, Severity_Any, AnyDamager, "cuted_body_bleeding_final");
+    Data(DamageType_Kick, AnyItemHitFxCategory, AnySurfaceId, AnyBodyPart, AnyReason, Hit_Any, Severity_Any, AnyDamager, "dw_zombie_kick");
+    Data(DamageType_Kick, AnyItemHitFxCategory, AnySurfaceId, AnyBodyPart, Reason_Kill, Hit_Any, Severity_Any, AnyDamager, "cuted_body_bleeding_final");
+    Data(DamageType_Electric, AnyItemHitFxCategory, AnySurfaceId, AnyBodyPart, AnyReason, Hit_Critical, Severity_Any, AnyDamager, "electric_hit");
+	Data(DamageType_Electric, AnyItemHitFxCategory, AnySurfaceId, AnyBodyPart, AnyReason, Hit_Any, Severity_Any, AnyDamager, "dw_electric_cut");
+	Data(DamageType_Cold, AnyItemHitFxCategory, AnySurfaceId, AnyBodyPart, AnyReason, Hit_Any, Severity_Any, AnyDamager, "freeze_bullet_hit");
+	Data(DamageType_Blast, AnyItemHitFxCategory, AnySurfaceId, AnyBodyPart, AnyReason, Hit_Any, Severity_Any, AnyDamager, "explossive_bullet_hit");	
+	Data(DamageType_Fire, AnyItemHitFxCategory, AnySurfaceId, AnyBodyPart, AnyReason, Hit_Any, Severity_Any, AnyDamager, "burning_bullet_hit");	
+	Data(DamageType_Toxic, AnyItemHitFxCategory, AnySurfaceId, AnyBodyPart, AnyReason, Hit_Any, Severity_Any, AnyDamager, "toxic_bullet_hit");
+    
+    Data(DamageType_Impact, ItemHitFxCategory_BuggyUpgrade, AnySurfaceId, AnyBodyPart, AnyReason, Hit_Any, Severity_Any, AnyDamager, "buggy_impact_hit");
+    
+    Data(DamageType_Impact, AnyItemHitFxCategory, AnySurfaceId, AnyBodyPart, AnyReason, Hit_Critical, Severity_Any, Damager_Player, "baseball_bat_impact_hit");
+	
+	Data(DamageType_Weakness, AnyItemHitFxCategory, AnySurfaceId, AnyBodyPart, AnyReason, Hit_Critical, Severity_Any, AnyDamager, "weaknes_bullet_hit");	
+
+    Data(DamageType_Cut, AnyItemHitFxCategory, AnySurfaceId, AnyBodyPart, Reason_Kill, Hit_Any, Severity_Any, AnyDamager, "cuted_body_bleeding_final");
+    Data(DamageType_Blunt, AnyItemHitFxCategory, AnySurfaceId, AnyBodyPart, Reason_Kill, Hit_Any, Severity_Any, AnyDamager, "cuted_body_bleeding_final");
+	
+    //Data(DamageType_Cut, AnyItemHitFxCategory, SurfaceId_Flesh, AnyBodyPart, AnyReason, Hit_Any, Severity_Any, AnyDamager, "di_cutflesh");    
+    Data(DamageType_Cut, AnyItemHitFxCategory, SurfaceId_Flesh, AnyBodyPart, AnyReason, Hit_Any, Severity_Light, AnyDamager, "sharp_hit_torso_light");    
+    Data(DamageType_Cut, AnyItemHitFxCategory, SurfaceId_Flesh, AnyBodyPart, AnyReason, Hit_Any, Severity_Medium, AnyDamager, "sharp_hit_torso_heavy");    
+    Data(DamageType_Cut, AnyItemHitFxCategory, SurfaceId_Flesh, AnyBodyPart, AnyReason, Hit_Any, Severity_Heavy, AnyDamager, "sharp_hit_torso_heavy");    
+
+    //Data(DamageType_Cut, AnyItemHitFxCategory, SurfaceId_Flesh, BodyPart_Head, AnyReason, Hit_Any, Severity_Any, AnyDamager, "di_cutflesh");    
+    Data(DamageType_Cut, AnyItemHitFxCategory, SurfaceId_Flesh, BodyPart_Head, AnyReason, Hit_Any, Severity_Light, AnyDamager, "sharp_hit_head_light");    
+    Data(DamageType_Cut, AnyItemHitFxCategory, SurfaceId_Flesh, BodyPart_Head, AnyReason, Hit_Any, Severity_Medium, AnyDamager, "sharp_hit_head_heavy");    
+    Data(DamageType_Cut, AnyItemHitFxCategory, SurfaceId_Flesh, BodyPart_Head, AnyReason, Hit_Any, Severity_Heavy, AnyDamager, "sharp_hit_head_heavy");    
+	
+    //Data(DamageType_Blunt, AnyItemHitFxCategory, SurfaceId_Flesh, AnyBodyPart, AnyReason, Hit_Any, Severity_Any, AnyDamager, "zombie_baseball_hit");
+    Data(DamageType_Blunt, AnyItemHitFxCategory, SurfaceId_Flesh, AnyBodyPart, AnyReason, Hit_Any, Severity_Light, AnyDamager, "blunt_hit_torso_light");
+    Data(DamageType_Blunt, AnyItemHitFxCategory, SurfaceId_Flesh, AnyBodyPart, AnyReason, Hit_Any, Severity_Medium, AnyDamager, "blunt_hit_torso_heavy");
+    Data(DamageType_Blunt, AnyItemHitFxCategory, SurfaceId_Flesh, AnyBodyPart, AnyReason, Hit_Any, Severity_Heavy, AnyDamager, "blunt_hit_torso_heavy");
+
+    //Data(DamageType_Blunt, AnyItemHitFxCategory, SurfaceId_Flesh, BodyPart_Head, AnyReason, Hit_Any, Severity_Any, AnyDamager, "head_baseball_hit");
+    Data(DamageType_Blunt, AnyItemHitFxCategory, SurfaceId_Flesh, BodyPart_Head, AnyReason, Hit_Any, Severity_Light, AnyDamager, "blunt_hit_head_light");
+    Data(DamageType_Blunt, AnyItemHitFxCategory, SurfaceId_Flesh, BodyPart_Head, AnyReason, Hit_Any, Severity_Medium, AnyDamager, "blunt_hit_head_heavy");
+    Data(DamageType_Blunt, AnyItemHitFxCategory, SurfaceId_Flesh, BodyPart_Head, AnyReason, Hit_Any, Severity_Heavy, AnyDamager, "blunt_hit_head_heavy");
+	
+    Data(DamageType_Flare, AnyItemHitFxCategory, AnySurfaceId, AnyBodyPart, AnyReason, Hit_Any, Severity_Any, AnyDamager, "dw_flare_hit");
+    Data(DamageType_Bleeding, AnyItemHitFxCategory, AnySurfaceId, AnyBodyPart, AnyReason, Hit_Any, Severity_Any, AnyDamager, "bleed_hit_flesh");
+	Data(DamageType_Bleeding, ItemHitFxCategory_Sharp, AnySurfaceId, AnyBodyPart, AnyReason, Hit_Any, Severity_Any, AnyDamager, "bleed_cut_flesh"); 
+	Data(DamageType_Poison, AnyItemHitFxCategory, AnySurfaceId, AnyBodyPart, AnyReason, Hit_Any, Severity_Any, AnyDamager, "toxic_bullet_hit");
+    Data(DamageType_Ram, AnyItemHitFxCategory, AnySurfaceId, AnyBodyPart, AnyReason, Hit_Any, Severity_Any, AnyDamager, "Shoulder_hit");
+	Data(DamageType_Bullet, AnyItemHitFxCategory, AnySurfaceId, AnyBodyPart, AnyReason, Hit_Any, Severity_Any, AnyDamager, "dw_gunshot_pistol");
+    Data(DamageType_Light, AnyItemHitFxCategory, AnySurfaceId, AnyBodyPart, AnyReason, Hit_Any, Severity_Any, AnyDamager, "#"); // no fx for light damage
+    Data(AnyDamageType, AnyItemHitFxCategory, AnySurfaceId, BodyPart_Head, AnyReason, Hit_Any, Severity_Any, AnyDamager, "di_hitflesh");
+    Data(AnyDamageType, AnyItemHitFxCategory, AnySurfaceId, AnyBodyPart, AnyReason, Hit_Any, Severity_Any, AnyDamager, "di_hitfleshlight");
+}

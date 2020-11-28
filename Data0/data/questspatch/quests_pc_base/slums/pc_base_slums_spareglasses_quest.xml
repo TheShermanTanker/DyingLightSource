@@ -1,0 +1,776 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- SPARE GLASSES - ACTIONS -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <Quest
+         name="__SpareGlasses_Actions"
+         parent="Courier01"
+         pxsl_line="7">
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="8">
+            <Object
+                 pxsl_line="9">
+                <QuestObject
+                     class="QuestStartTrigger"
+                     name="A_tablequest::tablequest_05"
+                     pxsl_line="9" />
+            </Object>
+            <Object
+                 pxsl_line="10">
+                <QuestObject
+                     class="HumanAI"
+                     name="Khaliq"
+                     pxsl_line="10" />
+            </Object>
+            <Object
+                 pxsl_line="11">
+                <QuestObject
+                     class="GroupingObject"
+                     name="SpareGlasses_GO_Khaliqs_Stuff"
+                     pxsl_line="11" />
+            </Object>
+        </Phase>
+        <Phase
+             type="use life place"
+             name="_"
+             teleport="true"
+             pxsl_line="12">
+            <LifePlace
+                 pxsl_line="12">
+                <QuestObject
+                     class="NPCLifePlace"
+                     name="Khaliq_LP_SpareGlasses"
+                     pxsl_line="12" />
+            </LifePlace>
+            <AI
+                 pxsl_line="13">
+                <QuestObject
+                     class="HumanAI"
+                     name="Khaliq"
+                     pxsl_line="13" />
+            </AI>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="14">
+            <Destination
+                 pxsl_line="14">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="A_tablequest::sp_tablequest_board"
+                     pxsl_line="14" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- SPARE GLASSES - START -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <Quest
+         name="SpareGlasses"
+         parent="__SpareGlasses_Actions"
+         difficulty="easy"
+         reward_set="SpareGlasses_reward"
+         quest_giver="Khaliq"
+         show_quest_log_reminder="true"
+         pxsl_line="18">
+        <Phase
+             type="take item"
+             name="Spare Glasses - Start"
+             show_locations="false"
+             questgiver_indicator="true"
+             pxsl_line="19">
+            <Item
+                 pxsl_line="19">
+                <QuestObject
+                     class="QuestStartTrigger"
+                     name="A_tablequest::tablequest_05"
+                     pxsl_line="19" />
+            </Item>
+            <DebugPlayerPosition
+                 pxsl_line="20">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="A_tablequest::sp_tablequest_board"
+                     pxsl_line="20" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;SpareGlasses_OBJ_TalkKhaliq&amp;"
+             pxsl_line="21">
+            <Path
+                 pxsl_line="21">
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="22">
+                    <Destination
+                         pxsl_line="22">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="A_tablequest::sp_tablequest_board"
+                             pxsl_line="22" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- SPARE GLASSES - 02 -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <Quest
+         name="SpareGlasses02"
+         parent="SpareGlasses"
+         glued="true"
+         pxsl_line="26">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;SpareGlasses_OBJ_TalkKhaliq&amp;"
+             pxsl_line="27">
+            <Path
+                 pxsl_line="27">
+                <Phase
+                     type="go to"
+                     name="Spare Glasses - Talk to Khaliq"
+                     distance="1000000"
+                     show_locations="false"
+                     pxsl_line="28">
+                    <Destination
+                         pxsl_line="28">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="SpareGlasses_SP_Khaliq"
+                             pxsl_line="28" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="29">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="SpareGlasses_SP_Khaliq"
+                             pxsl_line="29" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="Khaliq"
+                     group="Player_SpareGlasses_02DLG01"
+                     pxsl_line="30" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="31">
+                    <Object
+                         pxsl_line="32">
+                        <QuestObject
+                             class="DoorDI"
+                             name="SpareGlasses_Door_01"
+                             pxsl_line="32" />
+                    </Object>
+                    <Object
+                         pxsl_line="33">
+                        <QuestObject
+                             class="DoorDI"
+                             name="SpareGlasses_Door_02"
+                             pxsl_line="33" />
+                    </Object>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="34">
+            <Destination
+                 pxsl_line="34">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="SpareGlasses_SP_Khaliq"
+                     pxsl_line="34" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- SPARE GLASSES - BOOKS -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <Quest
+         name="__SpareGlasses_Book"
+         parent="SpareGlasses02"
+         pxsl_line="38">
+        <Phase
+             type="take item"
+             name="_"
+             show_locations="false"
+             pxsl_line="39">
+            <Item
+                 pxsl_line="39">
+                <QuestObject
+                     class="QuestInventoryItemDI"
+                     name="SpareGlasses_book_fake"
+                     pxsl_line="39" />
+            </Item>
+        </Phase>
+        <Phase
+             type="talk"
+             name="_"
+             speaker="voice2d"
+             group="Player_SpareGlasses_03DLG01"
+             show_locations="false"
+             auto_start="true"
+             pxsl_line="40" />
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="41">
+            <Destination
+                 pxsl_line="41">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="SpareGlasses_SP_House_01"
+                     pxsl_line="41" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__SpareGlasses_Book02"
+         parent="SpareGlasses02"
+         pxsl_line="42">
+        <Phase
+             type="take item"
+             name="_"
+             show_locations="false"
+             pxsl_line="43">
+            <Item
+                 pxsl_line="43">
+                <QuestObject
+                     class="QuestInventoryItemDI"
+                     name="SpareGlasses_book_fake2"
+                     pxsl_line="43" />
+            </Item>
+        </Phase>
+        <Phase
+             type="talk"
+             name="_"
+             speaker="voice2d"
+             group="Player_SpareGlasses_04DLG01"
+             show_locations="false"
+             auto_start="true"
+             pxsl_line="44" />
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="45">
+            <Destination
+                 pxsl_line="45">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="SpareGlasses_SP_House_01"
+                     pxsl_line="45" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__SpareGlasses_Book03"
+         parent="SpareGlasses02"
+         pxsl_line="46">
+        <Phase
+             type="take item"
+             name="_"
+             show_locations="false"
+             pxsl_line="47">
+            <Item
+                 pxsl_line="47">
+                <QuestObject
+                     class="QuestInventoryItemDI"
+                     name="SpareGlasses_book_fake3"
+                     pxsl_line="47" />
+            </Item>
+        </Phase>
+        <Phase
+             type="talk"
+             name="_"
+             speaker="voice2d"
+             group="Player_SpareGlasses_05DLG01"
+             show_locations="false"
+             auto_start="true"
+             pxsl_line="48" />
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="49">
+            <Destination
+                 pxsl_line="49">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="SpareGlasses_SP_House_01"
+                     pxsl_line="49" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__SpareGlasses_Book04"
+         parent="SpareGlasses02"
+         pxsl_line="50">
+        <Phase
+             type="take item"
+             name="_"
+             show_locations="false"
+             pxsl_line="51">
+            <Item
+                 pxsl_line="51">
+                <QuestObject
+                     class="QuestInventoryItemDI"
+                     name="SpareGlasses_book_fake4"
+                     pxsl_line="51" />
+            </Item>
+        </Phase>
+        <Phase
+             type="talk"
+             name="_"
+             speaker="voice2d"
+             group="Player_SpareGlasses_06DLG01"
+             show_locations="false"
+             auto_start="true"
+             pxsl_line="52" />
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="53">
+            <Destination
+                 pxsl_line="53">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="SpareGlasses_SP_House_01"
+                     pxsl_line="53" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__SpareGlasses_Book05"
+         parent="SpareGlasses02"
+         pxsl_line="54">
+        <Phase
+             type="take item"
+             name="_"
+             show_locations="false"
+             pxsl_line="55">
+            <Item
+                 pxsl_line="55">
+                <QuestObject
+                     class="QuestInventoryItemDI"
+                     name="SpareGlasses_book_fake5"
+                     pxsl_line="55" />
+            </Item>
+        </Phase>
+        <Phase
+             type="talk"
+             name="_"
+             speaker="voice2d"
+             group="Player_SpareGlasses_07DLG01"
+             show_locations="false"
+             auto_start="true"
+             pxsl_line="56" />
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="57">
+            <Destination
+                 pxsl_line="57">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="SpareGlasses_SP_House_01"
+                     pxsl_line="57" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__SpareGlasses_Book06"
+         parent="SpareGlasses02"
+         pxsl_line="58">
+        <Phase
+             type="take item"
+             name="_"
+             show_locations="false"
+             pxsl_line="59">
+            <Item
+                 pxsl_line="59">
+                <QuestObject
+                     class="QuestInventoryItemDI"
+                     name="SpareGlasses_book_fake6"
+                     pxsl_line="59" />
+            </Item>
+        </Phase>
+        <Phase
+             type="talk"
+             name="_"
+             speaker="voice2d"
+             group="Player_SpareGlasses_08DLG01"
+             show_locations="false"
+             auto_start="true"
+             pxsl_line="60" />
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="61">
+            <Destination
+                 pxsl_line="61">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="SpareGlasses_SP_House_01"
+                     pxsl_line="61" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__SpareGlasses_Book07"
+         parent="SpareGlasses02"
+         pxsl_line="62">
+        <Phase
+             type="take item"
+             name="_"
+             show_locations="false"
+             pxsl_line="63">
+            <Item
+                 pxsl_line="63">
+                <QuestObject
+                     class="QuestInventoryItemDI"
+                     name="SpareGlasses_book_fake7"
+                     pxsl_line="63" />
+            </Item>
+        </Phase>
+        <Phase
+             type="talk"
+             name="_"
+             speaker="voice2d"
+             group="Player_SpareGlasses_09DLG01"
+             show_locations="false"
+             auto_start="true"
+             pxsl_line="64" />
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="65">
+            <Destination
+                 pxsl_line="65">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="SpareGlasses_SP_House_01"
+                     pxsl_line="65" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__SpareGlasses_Book08"
+         parent="SpareGlasses02"
+         pxsl_line="66">
+        <Phase
+             type="take item"
+             name="_"
+             show_locations="false"
+             pxsl_line="67">
+            <Item
+                 pxsl_line="67">
+                <QuestObject
+                     class="QuestInventoryItemDI"
+                     name="SpareGlasses_book_fake8"
+                     pxsl_line="67" />
+            </Item>
+        </Phase>
+        <Phase
+             type="talk"
+             name="_"
+             speaker="voice2d"
+             group="Player_SpareGlasses_10DLG01"
+             show_locations="false"
+             auto_start="true"
+             pxsl_line="68" />
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="69">
+            <Destination
+                 pxsl_line="69">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="SpareGlasses_SP_House_01"
+                     pxsl_line="69" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__SpareGlasses_Book09"
+         parent="SpareGlasses02"
+         pxsl_line="70">
+        <Phase
+             type="take item"
+             name="_"
+             show_locations="false"
+             pxsl_line="71">
+            <Item
+                 pxsl_line="71">
+                <QuestObject
+                     class="QuestInventoryItemDI"
+                     name="SpareGlasses_book_fake9"
+                     pxsl_line="71" />
+            </Item>
+        </Phase>
+        <Phase
+             type="talk"
+             name="_"
+             speaker="voice2d"
+             group="Player_SpareGlasses_11DLG01"
+             show_locations="false"
+             auto_start="true"
+             pxsl_line="72" />
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="73">
+            <Destination
+                 pxsl_line="73">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="SpareGlasses_SP_House_01"
+                     pxsl_line="73" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- SPARE GLASSES - 02 -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <Quest
+         name="SpareGlasses03"
+         parent="SpareGlasses02"
+         glued="true"
+         pxsl_line="77">
+        <Phase
+             type="go to"
+             name="Spare Glasses - Find the glasses and the book"
+             distance="100000000"
+             show_locations="false"
+             pxsl_line="78">
+            <Destination
+                 pxsl_line="78">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="SpareGlasses_SP_House_01"
+                     pxsl_line="78" />
+            </Destination>
+            <DebugPlayerPosition
+                 pxsl_line="79">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="SpareGlasses_SP_House_01"
+                     pxsl_line="79" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             pxsl_line="80">
+            <SpecificLocation
+                 pxsl_line="81">
+                <QuestObject
+                     class="ZoneBox"
+                     name="SpareGlasses_ZB_House"
+                     pxsl_line="81" />
+            </SpecificLocation>
+            <Path
+                 pxsl_line="82">
+                <Phase
+                     type="AND"
+                     name="_"
+                     objective="&amp;SpareGlasses_OBJ_FindGlasses&amp;"
+                     pxsl_line="83">
+                    <Path
+                         pxsl_line="83">
+                        <Phase
+                             type="take item"
+                             name="_"
+                             show_locations="false"
+                             pxsl_line="84">
+                            <Item
+                                 pxsl_line="84">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="SpareGlasses_QII_Glasses"
+                                     pxsl_line="84" />
+                            </Item>
+                        </Phase>
+                    </Path>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="85">
+                <Phase
+                     type="AND"
+                     name="_"
+                     objective="&amp;SpareGlasses_OBJ_FindBook&amp;"
+                     pxsl_line="86">
+                    <Path
+                         pxsl_line="86">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="87">
+                            <Destination
+                                 pxsl_line="87">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="SpareGlasses_GoTo_BookCase"
+                                     pxsl_line="87" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="talk"
+                             name="_"
+                             speaker="voice2d"
+                             group="Player_SpareGlasses_14DLG01"
+                             show_locations="false"
+                             auto_start="true"
+                             pxsl_line="88" />
+                        <Phase
+                             type="take item"
+                             name="_"
+                             show_locations="false"
+                             pxsl_line="89">
+                            <Item
+                                 pxsl_line="89">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="SpareGlasses_book"
+                                     pxsl_line="89" />
+                            </Item>
+                        </Phase>
+                        <Phase
+                             type="talk"
+                             name="_"
+                             speaker="voice2d"
+                             group="Player_SpareGlasses_13DLG01"
+                             show_locations="false"
+                             auto_start="true"
+                             pxsl_line="90" />
+                    </Path>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="91">
+            <Destination
+                 pxsl_line="91">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="SpareGlasses_SP_House_01"
+                     pxsl_line="91" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;SpareGlasses_OBJ2&amp;"
+             pxsl_line="92">
+            <Path
+                 pxsl_line="92">
+                <Phase
+                     type="talk"
+                     name="Spare Glasses - END"
+                     speaker="Khaliq"
+                     group="Khaliq_SpareGlasses_END"
+                     pxsl_line="93">
+                    <DebugPlayerPosition
+                         pxsl_line="94">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="SpareGlasses_SP_Khaliq"
+                             pxsl_line="94" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="set reward"
+                     name="_"
+                     pxsl_line="95" />
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="96">
+            <Destination
+                 pxsl_line="96">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="SpareGlasses_SP_Khaliq"
+                     pxsl_line="96" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__SpareGlasses_END"
+         parent="SpareGlasses03"
+         pxsl_line="98">
+        <Phase
+             type="wait guard"
+             name="_"
+             time="120"
+             pxsl_line="99" />
+        <Phase
+             type="gather players guard"
+             name="_"
+             distance="-60"
+             show_locations="false"
+             pxsl_line="100">
+            <Destination
+                 pxsl_line="100">
+                <QuestObject
+                     class="HumanAI"
+                     name="Khaliq"
+                     pxsl_line="100" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="appear"
+             name="_"
+             mode="hide"
+             pxsl_line="101">
+            <Object
+                 pxsl_line="102">
+                <QuestObject
+                     class="HumanAI"
+                     name="Khaliq"
+                     pxsl_line="102" />
+            </Object>
+            <Object
+                 pxsl_line="103">
+                <QuestObject
+                     class="GroupingObject"
+                     name="SpareGlasses_GO_Khaliqs_Stuff"
+                     pxsl_line="103" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="104">
+            <Destination
+                 pxsl_line="104">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="SpareGlasses_SP_Khaliq"
+                     pxsl_line="104" />
+            </Destination>
+        </Phase>
+    </Quest>
+</QuestsDefinitions>

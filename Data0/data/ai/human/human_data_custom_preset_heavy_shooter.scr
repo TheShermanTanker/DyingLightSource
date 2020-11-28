@@ -1,0 +1,170 @@
+!include("ai_data.def")
+!include("ai_timing.def")
+!include("human_shooter_heavy_params.scr")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////// CURVES //////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+Curve(CURVE_HEALTH, "heavy_shooter_health")
+
+// shooting npc for scripted actions - shoots with continuous fire
+
+Data("attack:standing:rifle:use_weapon:::", -2, "mp_npc_ak47_stand_shot_coveringfire", -1, 1)
+
+////////////////////////////////////////////// DATA ///////////////////////////////////////////////
+//##############
+//#### IDLE ####
+//##############
+//## idle:pose:idle_type:item_type:scare_level:is_idle_prepare:is_idle_finish
+//##############d
+
+Data("idle:standing::killer_comment_killed_enemy:::", -2, "m_npc_ak47_killer_comment_killed_1", -1, 1)
+Data("idle:standing::comment_killed_enemy:::", -2, "m_npc_ak47_comment_killed_1", -1, 1)
+Data("idle:standing::comment_killed_enemy:::", -2, "m_npc_ak47_comment_killed_2", -1, 1)
+
+//################
+//#### EFFECT ####
+//################
+//## effect:type:direction:pose
+//##############
+Data("effect:burn::standing", -2, "m_npc_ak47_reactions_burn_1", -1, 1)
+Data("effect:burn::standing", -2, "m_npc_ak47_reactions_burn_2", -1, 1)
+Data("effect:burn::standing", -2, "m_npc_ak47_reactions_burn_3", -1, 1)
+
+Data("effect:poison::standing", -2, "m_npc_ak47_reactions_posion_1", -1, 1)
+Data("effect:poison::standing", -2, "m_npc_ak47_reactions_posion_2", -1, 1)
+Data("effect:poison::standing", -2, "m_npc_ak47_reactions_posion_3", -1, 1)
+
+Data("effect:electrocution::standing", -2, "m_npc_ak47_reactions_electric_1", -1, 1)
+Data("effect:electrocution::standing", -2, "m_npc_ak47_reactions_electric_3", -1, 1)
+Data("effect:electrocution::standing", -2, "m_npc_ak47_reactions_electric_3", -1, 1)
+
+//#### DYING ####
+//###############
+//## die:pose:damage_type:body_part:direction:death_type:held_weapon:kill_weapon:run_dir
+//###############
+
+Data("die:standing::::burn:::", -2, "m_npc_ak47_reactions_burn_death_1", -1, 1)
+Data("die:standing::::burn:::", -2, "m_npc_ak47_reactions_burn_death_2", -1, 1)
+Data("die:standing::::burn:::", -2, "m_npc_ak47_reactions_burn_death_1_ragdoll", -1, 1)
+Data("die:standing::::burn:::", -2, "m_npc_ak47_reactions_burn_death_2_ragdoll", -1, 1)
+
+Data("die:standing::::electrocution:::", -2, "m_npc_ak47_reactions_electric_1", -1, 1)
+Data("die:standing::::electrocution:::", -2, "m_npc_ak47_reactions_electric_3", -1, 1)
+Data("die:standing:::left:electrocution:::", -2, "m_npc_ak47_reactions_electric_2", -1, 1)
+Data("die:standing:::right:electrocution:::", -2, "m_npc_ak47_reactions_electric_1", -1, 1)
+
+Data("die:standing::::poison:::", -2, "m_npc_ak47_reactions_posion_death_1", -1, 1) //IK disabled
+Data("die:standing::::poison:::", -2, "m_npc_ak47_reactions_posion_death_2", -1, 1) //IK disabled
+Data("die:standing::::poison:::", -2, "m_npc_ak47_reactions_posion_death_2_ragdoll", -1, 1) //IK disabled
+
+//##################
+//#### ALARMING ####
+//##################
+//## alarming:is_standing:alarm_level:angle:direction:was_moving
+//##################
+
+Data("alarming:standing:calm:alarmed:0::false",  -2, "m_npc_ak47_alarming_turn_front", -1, 1)
+Data("alarming:standing:calm:alarmed:90:right:false",  -2, "m_npc_ak47_alarming_turn_90R", -1, 1)
+Data("alarming:standing:calm:alarmed:90:left:false",  -2, "m_npc_ak47_alarming_turn_90L", -1, 1)
+Data("alarming:standing:calm:alarmed:180:right:false",  -2, "m_npc_ak47_alarming_turn_180R", -1, 1)
+Data("alarming:standing:calm:alarmed:180:left:false",  -2, "m_npc_ak47_alarming_turn_180L", -1, 1)
+Data("alarming:standing::calm:::false",  0, "", -1, 1)
+
+Data("alarming:standing:calm:upset:0::false",  -2, "m_npc_ak47_alarming_turn_front", -1, 1)
+Data("alarming:standing:calm:upset:90:right:false",  -2, "m_npc_ak47_alarming_turn_90R", -1, 1)
+Data("alarming:standing:calm:upset:90:left:false",  -2, "m_npc_ak47_alarming_turn_90L", -1, 1)
+Data("alarming:standing:calm:upset:180:right:false",  -2, "m_npc_ak47_alarming_turn_180R", -1, 1)
+Data("alarming:standing:calm:upset:180:left:false",  -2, "m_npc_ak47_alarming_turn_180L", -1, 1)
+
+Data("hit_reaction:standing:pain:rifle:all:::left:", -2, "m_npc_hit_reaction_rifle_left_01", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all:::left:", -2, "m_npc_hit_reaction_rifle_left_02", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all:::left:", -2, "m_npc_hit_reaction_rifle_left_03", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all:::right:", -2, "m_npc_hit_reaction_rifle_right_01", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all:::right:", -2, "m_npc_hit_reaction_rifle_right_02", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::::", -2, "m_npc_hit_reaction_rifle_backward_02", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all::::", -2, "m_npc_hit_reaction_rifle_backward_03", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all:::down:", -2, "m_npc_hit_reaction_rifle_down_01", -1, 1)
+Data("hit_reaction:standing:pain:rifle:all:::down:", -2, "m_npc_hit_reaction_rifle_down_02", -1, 1)
+
+Data("alarming:standing:alarmed:upset:::false",  0, "", -1, 1)
+
+//##########################
+//#### STAND FROM LYING ####
+//##########################
+
+Data("recover_from_fall:standing:", -2, "mp_npc_ak47_standup_front_01", -1, 1) //done
+//Data("recover_from_fall:standing:", -2, "mp_npc_ak47_standup_back_01", -1, 1) //done - 
+Data("recover_from_fall:standing:", -2, "mp_npc_ak47_standup_back_02", -1, 1) //done - 
+Data("recover_from_fall:standing:", -2, "mp_npc_ak47_standup_right_01", -1, 1) //done
+Data("recover_from_fall:standing:", -2, "mp_npc_ak47_standup_left_01", -1, 1) //done
+
+
+//################
+//#### ATTACK ####
+//################
+//## idle:pose:idle_type:item_type:scare_level:is_idle_prepare:is_idle_finish
+//##############d
+
+//Data("attack:standing::taunt:::", 0, "m_npc_ak47_taunt_reload", -1, 1)
+//Data("attack:standing::taunt:::", -2, "m_npc_ak47_alarming_turn_front", -1, 1)
+Data("attack:standing::taunt:::", -2, "m_npc_ak47_alarming_taunt", -1, 1)
+
+///////////////////////////////////////////// PARAMS //////////////////////////////////////////////
+
+ParamFloat("sight_range_calm", 20.0) //converted
+ParamFloat("sight_range", 40.0) //converted
+ParamFloat("sight_additional_range", 20.0) //converted
+
+ParamBool("can_use_fake_attacks", 0)
+
+ParamBool("allow_group_behaviors", 1)
+ParamBool("allow_group_broadcast_target_info", 1)
+ParamBool("allow_group_broadcast_attack", 1)
+
+ParamBool("always_strafe", 0)
+
+ParamBool("use_advanced_target_keeping_logic", 1)
+
+ParamFloat("stay_in_cover_time_min", 2.0)           // shortest time ai stays in cover before next shoot
+ParamFloat("stay_in_cover_time_max", 3.0)           // longest time ai stays in cover before next shoot
+ParamFloat("stay_in_cover_total_time_max", 10.0)
+
+//ParamFloat("health_mul", 10.0)										//Body health is set from CURVE_HEALTH and multiplied by this parameter
+//ParamFloat("head_health_mul", 2.0)									//Head health is a multiplier of body health - when head dies, AI dies.
+//ParamFloat("arms_health_mul", 3.0)									//Arms health is a multiplier of body health
+//ParamFloat("legs_health_mul", 3.0)									//Legs health is a multiplier of body health
+
+ParamFloat("max_time_target_invisible", 10.0)
+
+ParamFloat("base_hit_pause_time_rifle", 0.1)
+
+ParamFloat("arms_enable_time", 0.5)
+
+ParamFloat("full_angle_sight_range", 1.0)
+
+ParamFloat("sight_angle_at_min_dist_calm", 160)
+ParamFloat("sight_angle_at_max_dist_calm", 90)
+ParamFloat("sight_angle_min_dist_calm", 5.0)
+ParamFloat("sight_angle_max_dist_calm", 15.0)
+ParamFloat("sight_angle_at_min_dist", 160)
+ParamFloat("sight_angle_at_max_dist", 120)
+ParamFloat("sight_angle_min_dist", 1)
+ParamFloat("sight_angle_max_dist", 5)
+
+ParamFloat("enemy_keep_time_upset", 7)
+ParamFloat("enemy_keep_time_alarmed", 20)
+
+ParamFloat("alarm_after_enemy_visible_min_dist_time", 1.0)
+ParamFloat("alarm_after_enemy_visible_max_dist_time", 3.0)
+ParamFloat("alarm_when_enemy_close_min_distance", 5.0)
+ParamFloat("alarm_when_enemy_close_max_distance", 20.0)
+
+//ParamFloat("damage_mul", 1.0)
+ParamBool("can_fall", 0)
+ParamBool("can_discard_force_attractor", 1)
+
+ParamBool("enable_2h_weapon_ik", 1)
+
+ParamBool("can_destroy_head_before_death", 1)

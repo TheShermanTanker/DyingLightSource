@@ -1,0 +1,1507 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums_cs"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST NAME : FINAL -->
+    <!-- QUEST INFO : road to final fight with Rais -->
+    <!-- AFTER QUEST: Contact GRE -->
+    <!-- COMMENT    : FINAL START -->
+    <!-- FROM       : >> OLD TOWN -> SLUMS -->
+    <!-- TO         : >> SLUMS CS -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="Final_End_01_Start"
+         parent="Final"
+         glued="true"
+         leading_portal="Portal_Slums_TO_Slums_CS_Parking"
+         pxsl_line="14">
+        <!-- Confront Rais at the top of the building. -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Final_OBJ_GetToTheRaisHeadquarters&amp;"
+             pxsl_line="15">
+            <Path
+                 pxsl_line="15">
+                <Phase
+                     type="go to"
+                     name="FINAL - START"
+                     distance="10"
+                     pxsl_line="16">
+                    <Destination
+                         pxsl_line="16">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_01"
+                             pxsl_line="16" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="17">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_01"
+                             pxsl_line="17" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <!-- -->
+                <!-- START ACTIONS -->
+                <!--  -->
+                <Phase
+                     type="set weather"
+                     name="_"
+                     weather_type="clear"
+                     duration="-1"
+                     interpolation="00.00"
+                     pxsl_line="21" />
+                <!-- FORCE DAY TIME -->
+                <Phase
+                     type="set day night time"
+                     name="_"
+                     day_time="15"
+                     pxsl_line="22" />
+                <!-- STOP DAY TIME -->
+                <Phase
+                     type="disable enable time freeze"
+                     name="_"
+                     should_freeze_time="true"
+                     pxsl_line="23" />
+                <!-- REMOVED MULTIPLAYER (drop out from peers, alters some other systems e.g. mission fail like deaths) -->
+                <Phase
+                     type="enable multiplayer"
+                     name="_"
+                     state="false"
+                     pxsl_line="24" />
+                <!-- REMOVE MULTIPLAYER (change our session to singleplayer) -->
+                <Phase
+                     type="session param"
+                     name="_"
+                     param="MultiplayerGamePart"
+                     value="false"
+                     pxsl_line="25" />
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="26">
+                    <!-- HIDE ARENA THINGS -->
+                    <Object
+                         pxsl_line="27">
+                        <QuestObject
+                             class="GroupingObject"
+                             name="slums_cs_arena_before_go"
+                             pxsl_line="27" />
+                    </Object>
+                    <Object
+                         pxsl_line="28">
+                        <QuestObject
+                             class="MovieActor"
+                             name="cin_demolisher_Container_Base"
+                             pxsl_line="28" />
+                    </Object>
+                    <Object
+                         pxsl_line="29">
+                        <QuestObject
+                             class="MovieActor"
+                             name="cin_demolisher_Door_a_Left_front"
+                             pxsl_line="29" />
+                    </Object>
+                    <Object
+                         pxsl_line="30">
+                        <QuestObject
+                             class="MovieActor"
+                             name="cin_demolisher_Door_a_Right_front"
+                             pxsl_line="30" />
+                    </Object>
+                    <Object
+                         pxsl_line="31">
+                        <QuestObject
+                             class="MovieActor"
+                             name="cin_demolisher_Door_a_Right"
+                             pxsl_line="31" />
+                    </Object>
+                    <Object
+                         pxsl_line="32">
+                        <QuestObject
+                             class="MovieActor"
+                             name="cin_demolisher_Door_a_Left"
+                             pxsl_line="32" />
+                    </Object>
+                    <Object
+                         pxsl_line="33">
+                        <QuestObject
+                             class="MovieActor"
+                             name="cin_demolisher_Container_wall_01"
+                             pxsl_line="33" />
+                    </Object>
+                    <Object
+                         pxsl_line="34">
+                        <QuestObject
+                             class="MovieActor"
+                             name="cin_demolisher_Container_wall_02"
+                             pxsl_line="34" />
+                    </Object>
+                    <Object
+                         pxsl_line="35">
+                        <QuestObject
+                             class="MovieActor"
+                             name="cin_demolisher_Container_wall_03"
+                             pxsl_line="35" />
+                    </Object>
+                    <!-- Crane from movie before -= TEST -->
+                    <Object
+                         pxsl_line="36">
+                        <QuestObject
+                             class="GroupingObject"
+                             name="slums_cs_final_crane_before_go"
+                             pxsl_line="36" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="37">
+                    <!-- SHOW ARENA CHANGES -->
+                    <Object
+                         pxsl_line="38">
+                        <QuestObject
+                             class="GroupingObject"
+                             name="slums_cs_arena_after_go"
+                             pxsl_line="38" />
+                    </Object>
+                    <Object
+                         pxsl_line="39">
+                        <QuestObject
+                             class="ModelObject"
+                             name="slums_cs_final_doors_02"
+                             pxsl_line="39" />
+                    </Object>
+                    <!-- ,o GroupingObject slums_cs_final_crane_before_go -= Crane from movie before -->
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="41">
+                    <Object
+                         pxsl_line="41">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="runaway_respawn_03"
+                             pxsl_line="41" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="42">
+                    <Object
+                         pxsl_line="43">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_01"
+                             pxsl_line="43" />
+                    </Object>
+                    <Object
+                         pxsl_line="44">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="Playable_Area_Barrier_Object_QEG"
+                             pxsl_line="44" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="45">
+                    <Destination
+                         pxsl_line="45">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_01"
+                             pxsl_line="45" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="infection"
+                     name="_"
+                     mode="start"
+                     level_name="last_time"
+                     pxsl_line="46">
+                    <Object
+                         pxsl_line="46">
+                        <QuestObject
+                             pxsl_line="46" />
+                    </Object>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <!-- INFECTION ATTACK CIN -->
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="50">
+                    <Object
+                         pxsl_line="50">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="cin_infection_01_trigger_qeg"
+                             pxsl_line="50" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="on"
+                     show_locations="false"
+                     pxsl_line="51">
+                    <Trigger
+                         pxsl_line="51">
+                        <QuestObject
+                             class="InteractiveMovieTrigger"
+                             name="cin_infection_01_trigger"
+                             pxsl_line="51" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="52">
+                    <Object
+                         pxsl_line="52">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="cin_infection_01_trigger_qeg"
+                             pxsl_line="52" />
+                    </Object>
+                </Phase>
+                <!-- BLOCK GRAPPING HOOK -->
+                <Phase
+                     type="player control"
+                     name="_"
+                     block_hook="true"
+                     pxsl_line="53" />
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <!-- FIRST BUILD WAY TO OUTSIDE -->
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-    -->
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="2"
+                     pxsl_line="57">
+                    <Destination
+                         pxsl_line="57">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_02"
+                             pxsl_line="57" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="58">
+                    <Object
+                         pxsl_line="59">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_a_biters_01"
+                             pxsl_line="59" />
+                    </Object>
+                    <Object
+                         pxsl_line="60">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_a_biters_02"
+                             pxsl_line="60" />
+                    </Object>
+                    <Object
+                         pxsl_line="61">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_a_biters_03"
+                             pxsl_line="61" />
+                    </Object>
+                    <Object
+                         pxsl_line="62">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="slums_cs_final_a_armored_01"
+                             pxsl_line="62" />
+                    </Object>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <!-- CIN - Player Open Doors - Rais Talk -->
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-       -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="67">
+                    <Object
+                         pxsl_line="67">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="cin_rais_final_01_trigger_qeg"
+                             pxsl_line="67" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="use"
+                     name="FINAL - CIN - Open Door"
+                     desired_state="on"
+                     pxsl_line="68">
+                    <Trigger
+                         pxsl_line="68">
+                        <QuestObject
+                             class="InteractiveMovieTrigger"
+                             name="cin_rais_final_01_trigger"
+                             pxsl_line="68" />
+                    </Trigger>
+                    <DebugPlayerPosition
+                         pxsl_line="69">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_03_5"
+                             pxsl_line="69" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="70">
+                    <Object
+                         pxsl_line="70">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="cin_rais_final_01_trigger_qeg"
+                             pxsl_line="70" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="71">
+                    <Object
+                         pxsl_line="71">
+                        <QuestObject
+                             class="ModelObject"
+                             name="slums_cs_final_doors_02"
+                             pxsl_line="71" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="72">
+                    <Destination
+                         pxsl_line="72">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_03"
+                             pxsl_line="72" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             pxsl_line="73">
+            <Path
+                 pxsl_line="73">
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="74">
+                    <Object
+                         pxsl_line="74">
+                        <QuestObject
+                             class="SensorAmbientMusicArea"
+                             name="SAMA_Final_First_Building_Amb"
+                             pxsl_line="74" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="75">
+                    <Object
+                         pxsl_line="75">
+                        <QuestObject
+                             class="SensorAmbientMusicArea"
+                             name="Final_SAMA_Before_Sewers"
+                             pxsl_line="75" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="76">
+                    <Destination
+                         pxsl_line="76">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_03"
+                             pxsl_line="76" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="2"
+                     pxsl_line="77" />
+                <!-- Rais talk by loud speakers -->
+                <Phase
+                     type="talk"
+                     name="FINAL - FIRST ARENA - Start Running"
+                     speaker="voice2d"
+                     group="Rais_Finale_03DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="78">
+                    <DebugPlayerPosition
+                         pxsl_line="79">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="slums_cs_final_sp_03"
+                             pxsl_line="79" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="0.5"
+                     pxsl_line="80" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="81">
+                    <Object
+                         pxsl_line="81">
+                        <QuestObject
+                             class="SoundEmitterSimple"
+                             name="slums_cs_final_a_viral_tount_sfx_01"
+                             pxsl_line="81" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="1.0"
+                     pxsl_line="82" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="83">
+                    <Object
+                         pxsl_line="83">
+                        <QuestObject
+                             class="SoundEmitterSimple"
+                             name="slums_cs_final_a_viral_tount_sfx_02"
+                             pxsl_line="83" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="set dialog"
+                     name="_"
+                     speaker="voice2d"
+                     group="Rais_Finale_04DLG01"
+                     auto_start="true"
+                     pxsl_line="84" />
+                <Phase
+                     type="infection"
+                     name="_"
+                     mode="stop"
+                     pxsl_line="85" />
+                <Phase
+                     type="player control"
+                     name="_"
+                     block_infection="true"
+                     pxsl_line="86" />
+            </Path>
+        </Phase>
+        <!-- Run away from zombie horde. -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Final_OBJ_Runaway&amp;"
+             pxsl_line="87">
+            <Path
+                 pxsl_line="87">
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <!-- FIRST FIGHT AND RUN TO SECOND ARENA -->
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="91">
+                    <!-- LOCATION -->
+                    <Path
+                         pxsl_line="92">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="40"
+                             pxsl_line="93">
+                            <Destination
+                                 pxsl_line="93">
+                                <QuestObject
+                                     class="Marker"
+                                     name="slums_cs_final_loc_cin_final_first_fight_b"
+                                     pxsl_line="93" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="94">
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="95">
+                            <Object
+                                 pxsl_line="96">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_01"
+                                     pxsl_line="96" />
+                            </Object>
+                            <Object
+                                 pxsl_line="97">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_02"
+                                     pxsl_line="97" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="1"
+                             pxsl_line="98" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="99">
+                            <Object
+                                 pxsl_line="100">
+                                <QuestObject
+                                     class="SoundEmitterSimple"
+                                     name="slums_cs_final_a_viral_tount_sfx_03"
+                                     pxsl_line="100" />
+                            </Object>
+                            <Object
+                                 pxsl_line="101">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_14"
+                                     pxsl_line="101" />
+                            </Object>
+                            <Object
+                                 pxsl_line="102">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_15"
+                                     pxsl_line="102" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="2"
+                             pxsl_line="103" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="104">
+                            <Object
+                                 pxsl_line="104">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_00"
+                                     pxsl_line="104" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="105">
+                        <Phase
+                             type="OR"
+                             name="_"
+                             pxsl_line="106">
+                            <Path
+                                 pxsl_line="107">
+                                <Phase
+                                     type="wait guard"
+                                     name="_"
+                                     time="15"
+                                     pxsl_line="108" />
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     pxsl_line="109">
+                                    <Object
+                                         pxsl_line="109">
+                                        <QuestObject
+                                             class="AISpawnBoxNumber"
+                                             name="slums_cs_final_a_armored_wall::slums_armored_wall_spawner"
+                                             pxsl_line="109" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="110">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="55"
+                                     show_locations="false"
+                                     pxsl_line="111">
+                                    <Destination
+                                         pxsl_line="111">
+                                        <QuestObject
+                                             class="Marker"
+                                             name="slums_cs_final_loc_cin_final_first_fight_b"
+                                             pxsl_line="111" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="112">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="47"
+                             show_locations="false"
+                             pxsl_line="113">
+                            <Destination
+                                 pxsl_line="113">
+                                <QuestObject
+                                     class="Marker"
+                                     name="slums_cs_final_loc_cin_final_first_fight"
+                                     pxsl_line="113" />
+                            </Destination>
+                        </Phase>
+                        <!-- ARMORED 02 -->
+                        <Phase
+                             type="AND"
+                             name="_"
+                             pxsl_line="114">
+                            <Path
+                                 pxsl_line="115">
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     pxsl_line="116">
+                                    <Object
+                                         pxsl_line="117">
+                                        <QuestObject
+                                             class="SoundEmitterSimple"
+                                             name="slums_cs_final_a_armored_02_door::container_door_open_sfx"
+                                             pxsl_line="117" />
+                                    </Object>
+                                    <Object
+                                         pxsl_line="118">
+                                        <QuestObject
+                                             class="FXEmitter"
+                                             name="slums_cs_final_a_armored_02_door::container_door_open_fx"
+                                             pxsl_line="118" />
+                                    </Object>
+                                </Phase>
+                                <Phase
+                                     type="movie"
+                                     name="_"
+                                     movie="slums_cs_final_a_armored_02_door::cin_container_door"
+                                     pxsl_line="119" />
+                            </Path>
+                            <Path
+                                 pxsl_line="120">
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     pxsl_line="121">
+                                    <Object
+                                         pxsl_line="121">
+                                        <QuestObject
+                                             class="AISpawnBoxNumber"
+                                             name="slums_cs_final_a_armored_02"
+                                             pxsl_line="121" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="122">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="52"
+                             show_locations="false"
+                             pxsl_line="123">
+                            <Destination
+                                 pxsl_line="123">
+                                <QuestObject
+                                     class="Marker"
+                                     name="slums_cs_final_loc_cin_final_first_fight"
+                                     pxsl_line="123" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="124">
+                            <Object
+                                 pxsl_line="125">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_a_viral_door_05::slums_cs_final_a_viral"
+                                     pxsl_line="125" />
+                            </Object>
+                            <Object
+                                 pxsl_line="126">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_a_viral_door_01::slums_cs_final_a_viral"
+                                     pxsl_line="126" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="127">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="40"
+                             show_locations="false"
+                             pxsl_line="128">
+                            <Destination
+                                 pxsl_line="128">
+                                <QuestObject
+                                     class="Marker"
+                                     name="slums_cs_final_loc_cin_final_first_fight_b"
+                                     pxsl_line="128" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="129">
+                            <Object
+                                 pxsl_line="130">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_a_viral_door_04::slums_cs_final_a_viral"
+                                     pxsl_line="130" />
+                            </Object>
+                            <Object
+                                 pxsl_line="131">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_a_viral_door_02::slums_cs_final_a_viral"
+                                     pxsl_line="131" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <!-- GET TO SEWERS WITH VOLATILES -->
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-                  -->
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="135">
+                    <!-- LOCATION -->
+                    <Path
+                         pxsl_line="136">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             pxsl_line="137">
+                            <Destination
+                                 pxsl_line="137">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="slums_cs_final_goto_03_dlg"
+                                     pxsl_line="137" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Player_Finale_07DLG01"
+                             auto_start="true"
+                             pxsl_line="138" />
+                        <!-- ,set_day_time _ 7.5 -->
+                        <!-- ,weather _ -wanted_weather=0.17 -duration=-1 -interpolation=00.00 -->
+                        <!-- ,enable _ NightArea Final_Sewers_NightArea -->
+                    </Path>
+                    <Path
+                         pxsl_line="143">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="27"
+                             show_locations="false"
+                             pxsl_line="144">
+                            <Destination
+                                 pxsl_line="144">
+                                <QuestObject
+                                     class="Marker"
+                                     name="slums_cs_final_loc_cin_final_first_fight"
+                                     pxsl_line="144" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="145">
+                            <Object
+                                 pxsl_line="145">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_13"
+                                     pxsl_line="145" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="146">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="30"
+                             show_locations="false"
+                             pxsl_line="147">
+                            <Destination
+                                 pxsl_line="147">
+                                <QuestObject
+                                     class="Marker"
+                                     name="slums_cs_final_loc_cin_final_first_fight"
+                                     pxsl_line="147" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="148">
+                            <Object
+                                 pxsl_line="148">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_a_viral_door_06::slums_cs_final_a_viral"
+                                     pxsl_line="148" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="149">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="35"
+                             show_locations="false"
+                             pxsl_line="150">
+                            <Destination
+                                 pxsl_line="150">
+                                <QuestObject
+                                     class="Marker"
+                                     name="slums_cs_final_loc_cin_final_first_fight_b"
+                                     pxsl_line="150" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="151">
+                            <Object
+                                 pxsl_line="151">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_a_viral_door_03::slums_cs_final_a_viral"
+                                     pxsl_line="151" />
+                            </Object>
+                        </Phase>
+                        <!-- Run, Crane, run. You slaves are good at it... Run or die. -->
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Rais_Finale_30DLG01"
+                             auto_start="true"
+                             pxsl_line="152" />
+                    </Path>
+                    <Path
+                         pxsl_line="153">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="30"
+                             show_locations="false"
+                             pxsl_line="154">
+                            <Destination
+                                 pxsl_line="154">
+                                <QuestObject
+                                     class="Marker"
+                                     name="slums_cs_final_loc_cin_final_first_fight_b"
+                                     pxsl_line="154" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="155">
+                            <Object
+                                 pxsl_line="156">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_03"
+                                     pxsl_line="156" />
+                            </Object>
+                            <Object
+                                 pxsl_line="157">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_04"
+                                     pxsl_line="157" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="158">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="75"
+                             show_locations="false"
+                             pxsl_line="159">
+                            <Destination
+                                 pxsl_line="159">
+                                <QuestObject
+                                     class="Marker"
+                                     name="slums_cs_final_loc_sewers"
+                                     pxsl_line="159" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="160">
+                            <Object
+                                 pxsl_line="160">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_12"
+                                     pxsl_line="160" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="161">
+                            <Object
+                                 pxsl_line="162">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_a_armored_wall::slums_armored_wall_spawner"
+                                     pxsl_line="162" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="163">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="70"
+                             show_locations="false"
+                             pxsl_line="164">
+                            <Destination
+                                 pxsl_line="164">
+                                <QuestObject
+                                     class="Marker"
+                                     name="slums_cs_final_loc_sewers"
+                                     pxsl_line="164" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="165">
+                            <Object
+                                 pxsl_line="165">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_09"
+                                     pxsl_line="165" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="166">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="60"
+                             show_locations="false"
+                             pxsl_line="167">
+                            <Destination
+                                 pxsl_line="167">
+                                <QuestObject
+                                     class="Marker"
+                                     name="slums_cs_final_loc_sewers"
+                                     pxsl_line="167" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="168">
+                            <Object
+                                 pxsl_line="168">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_10"
+                                     pxsl_line="168" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="169">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="50"
+                             show_locations="false"
+                             pxsl_line="170">
+                            <Destination
+                                 pxsl_line="170">
+                                <QuestObject
+                                     class="Marker"
+                                     name="slums_cs_final_loc_sewers"
+                                     pxsl_line="170" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="171">
+                            <Object
+                                 pxsl_line="171">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_11"
+                                     pxsl_line="171" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="172">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="30"
+                             show_locations="false"
+                             pxsl_line="173">
+                            <Destination
+                                 pxsl_line="173">
+                                <QuestObject
+                                     class="Marker"
+                                     name="slums_cs_final_loc_sewers"
+                                     pxsl_line="173" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="174">
+                            <Object
+                                 pxsl_line="174">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_08"
+                                     pxsl_line="174" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="175">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="20"
+                             show_locations="false"
+                             pxsl_line="176">
+                            <Destination
+                                 pxsl_line="176">
+                                <QuestObject
+                                     class="Marker"
+                                     name="slums_cs_final_loc_sewers"
+                                     pxsl_line="176" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="177">
+                            <Object
+                                 pxsl_line="177">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_07"
+                                     pxsl_line="177" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="178">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="17"
+                             pxsl_line="179">
+                            <Destination
+                                 pxsl_line="179">
+                                <QuestObject
+                                     class="Marker"
+                                     name="slums_cs_final_loc_sewers"
+                                     pxsl_line="179" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="180">
+                            <Object
+                                 pxsl_line="181">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_05"
+                                     pxsl_line="181" />
+                            </Object>
+                            <Object
+                                 pxsl_line="182">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_06"
+                                     pxsl_line="182" />
+                            </Object>
+                            <Object
+                                 pxsl_line="183">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_16"
+                                     pxsl_line="183" />
+                            </Object>
+                            <Object
+                                 pxsl_line="184">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_17"
+                                     pxsl_line="184" />
+                            </Object>
+                            <Object
+                                 pxsl_line="185">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_18"
+                                     pxsl_line="185" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <!-- CLEAR FIRST FIGHT -->
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="186">
+                    <Path
+                         pxsl_line="186">
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="187">
+                            <Object
+                                 pxsl_line="188">
+                                <QuestObject
+                                     class="SoundEmitterSimple"
+                                     name="slums_cs_final_cin_armored_sfx"
+                                     pxsl_line="188" />
+                            </Object>
+                            <Object
+                                 pxsl_line="189">
+                                <QuestObject
+                                     class="SoundEmitterSimple"
+                                     name="slums_cs_final_a_viral_tount_sfx_01"
+                                     pxsl_line="189" />
+                            </Object>
+                            <Object
+                                 pxsl_line="190">
+                                <QuestObject
+                                     class="SoundEmitterSimple"
+                                     name="slums_cs_final_a_viral_tount_sfx_02"
+                                     pxsl_line="190" />
+                            </Object>
+                            <Object
+                                 pxsl_line="191">
+                                <QuestObject
+                                     class="SoundEmitterSimple"
+                                     name="slums_cs_final_a_viral_tount_sfx_03"
+                                     pxsl_line="191" />
+                            </Object>
+                            <Object
+                                 pxsl_line="192">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_a_biters_01"
+                                     pxsl_line="192" />
+                            </Object>
+                            <Object
+                                 pxsl_line="193">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_a_biters_02"
+                                     pxsl_line="193" />
+                            </Object>
+                            <Object
+                                 pxsl_line="194">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_a_biters_03"
+                                     pxsl_line="194" />
+                            </Object>
+                            <Object
+                                 pxsl_line="195">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_00"
+                                     pxsl_line="195" />
+                            </Object>
+                            <Object
+                                 pxsl_line="196">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_01"
+                                     pxsl_line="196" />
+                            </Object>
+                            <Object
+                                 pxsl_line="197">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_02"
+                                     pxsl_line="197" />
+                            </Object>
+                            <Object
+                                 pxsl_line="198">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_03"
+                                     pxsl_line="198" />
+                            </Object>
+                            <Object
+                                 pxsl_line="199">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_04"
+                                     pxsl_line="199" />
+                            </Object>
+                            <Object
+                                 pxsl_line="200">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_05"
+                                     pxsl_line="200" />
+                            </Object>
+                            <Object
+                                 pxsl_line="201">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_06"
+                                     pxsl_line="201" />
+                            </Object>
+                            <Object
+                                 pxsl_line="202">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_07"
+                                     pxsl_line="202" />
+                            </Object>
+                            <Object
+                                 pxsl_line="203">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_08"
+                                     pxsl_line="203" />
+                            </Object>
+                            <Object
+                                 pxsl_line="204">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_09"
+                                     pxsl_line="204" />
+                            </Object>
+                            <Object
+                                 pxsl_line="205">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_10"
+                                     pxsl_line="205" />
+                            </Object>
+                            <Object
+                                 pxsl_line="206">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_11"
+                                     pxsl_line="206" />
+                            </Object>
+                            <Object
+                                 pxsl_line="207">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_12"
+                                     pxsl_line="207" />
+                            </Object>
+                            <Object
+                                 pxsl_line="208">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_13"
+                                     pxsl_line="208" />
+                            </Object>
+                            <Object
+                                 pxsl_line="209">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_14"
+                                     pxsl_line="209" />
+                            </Object>
+                            <Object
+                                 pxsl_line="210">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_15"
+                                     pxsl_line="210" />
+                            </Object>
+                            <Object
+                                 pxsl_line="211">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_16"
+                                     pxsl_line="211" />
+                            </Object>
+                            <Object
+                                 pxsl_line="212">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_17"
+                                     pxsl_line="212" />
+                            </Object>
+                            <Object
+                                 pxsl_line="213">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="slums_cs_final_a_viral_18"
+                                     pxsl_line="213" />
+                            </Object>
+                            <Object
+                                 pxsl_line="214">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_a_armored_01"
+                                     pxsl_line="214" />
+                            </Object>
+                            <Object
+                                 pxsl_line="215">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_a_armored_02"
+                                     pxsl_line="215" />
+                            </Object>
+                            <Object
+                                 pxsl_line="216">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_cin_armored_spawner"
+                                     pxsl_line="216" />
+                            </Object>
+                            <Object
+                                 pxsl_line="217">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_a_viral_door_01::slums_cs_final_a_viral"
+                                     pxsl_line="217" />
+                            </Object>
+                            <Object
+                                 pxsl_line="218">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_a_viral_door_02::slums_cs_final_a_viral"
+                                     pxsl_line="218" />
+                            </Object>
+                            <Object
+                                 pxsl_line="219">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_a_viral_door_03::slums_cs_final_a_viral"
+                                     pxsl_line="219" />
+                            </Object>
+                            <Object
+                                 pxsl_line="220">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_a_viral_door_04::slums_cs_final_a_viral"
+                                     pxsl_line="220" />
+                            </Object>
+                            <Object
+                                 pxsl_line="221">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_a_viral_door_05::slums_cs_final_a_viral"
+                                     pxsl_line="221" />
+                            </Object>
+                            <Object
+                                 pxsl_line="222">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="slums_cs_final_a_viral_door_06::slums_cs_final_a_viral"
+                                     pxsl_line="222" />
+                            </Object>
+                            <Object
+                                 pxsl_line="223">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="slums_cs_final_a_crowd_qeg"
+                                     pxsl_line="223" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="224">
+            <Destination
+                 pxsl_line="224">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="slums_cs_final_sp_04"
+                     pxsl_line="224" />
+            </Destination>
+        </Phase>
+        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+        <!-- GOTO - SLUMS CS - ACTIONS IN SEWERS -->
+        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    </Quest>
+</QuestsDefinitions>

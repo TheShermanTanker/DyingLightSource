@@ -1,0 +1,719 @@
+/// Available conditions:
+/// CndKilledByHunter()
+/// CndNight()
+/// CndFall()
+/// CndNoStamina()
+/// CndJunkWeapon()
+/// CndKilledByAI(string)
+///		ANY	- any ai
+///		HMF
+///		VIRAL - any infected
+///		DEFAULT - biter
+///		THUG
+///		SUICIDER
+///		VOLATILE
+///		ARMORED - demolisher
+///		SPITTER
+///		SCREAMER
+///		PRIME
+/// CndKilledByDamageType(string)
+///     Any valid damage type can be specified here.
+/// BlockTime(seconds)
+/// ResetWhenAllUsed() - resets block time on all hints in hint set when every hint is blocked
+///
+/// Hint sets are evaluated top to bottom in the order they are listed in this
+/// file. Meaning, if all conditions for the first hint set are met, the next
+/// hint set will not be looked at.
+
+
+sub main()
+{
+
+    // Main game has added the concept of cycle hints. We are seeing general game hints during BTZ so 
+    // We need to evaluate BTZ specific cycled hints first since they are more context sensitive
+    
+    HintsSet()
+    {
+        CndWasteland();
+        CndCycledHints();
+        CndZombiePlayer();
+        Hint("&BtZ_Tut_HunterDeath_Wasteland_1&");
+        Hint("&BtZ_Tut_HunterDeath_Wasteland_2&");
+        Hint("&BtZ_Tut_HunterDeath_Wasteland_3&");
+        Hint("&BtZ_Tut_HunterDeath_Wasteland_4&");
+        Hint("&BtZ_Tut_HunterDeath_Wasteland_5&");
+        Hint("&BtZ_Tut_HunterDeath_Wasteland_6&");
+        Hint("&BtZ_Tut_HunterDeath_Wasteland_7&");
+    }
+	
+	HintsSet()
+    {
+        CndCycledHints();
+        CndZombiePlayer();
+        Hint("&BtZ_Tut_HunterDeath_Energy_1&");
+        Hint("&BtZ_Tut_HunterDeath_Energy_2&");
+        Hint("&BtZ_Tut_HunterDeath_Energy_3&");
+        Hint("&BtZ_Tut_HunterDeath_General_1&");
+        Hint("&BtZ_Tut_HunterDeath_General_2&");
+        Hint("&BtZ_Tut_HunterDeath_General_3&");
+        Hint("&BtZ_Tut_HunterDeath_General_4&");
+        Hint("&BtZ_Tut_HunterDeath_General_6&");
+        Hint("&BtZ_Tut_HunterDeath_General_7&");
+        Hint("&BtZ_Tut_HunterDeath_General_8&");
+        Hint("&BtZ_Tut_HunterDeath_Groundpound_2&");
+        Hint("&BtZ_Tut_HunterDeath_Groundpound_3&");
+        Hint("&BtZ_Tut_HunterDeath_Locomotion_1&");
+        Hint("&BtZ_Tut_HunterDeath_Locomotion_2&");
+        Hint("&BtZ_Tut_HunterDeath_Locomotion_3&");
+        Hint("&BtZ_Tut_HunterDeath_Pounce_1&");
+        Hint("&Tut_BTZZombieLight&");
+        Hint("&Tut_BTZZombieRopeLocomotion&");
+        Hint("&Tut_BTZZombieLowStamina&");
+    }
+    
+    HintsSet()
+	{
+        CndWasteland();
+        CndCycledHints();
+        CndBtZSession();
+        Hint("&BtZ_Tut_HumanDeath_Wasteland_1&");
+		Hint("&BtZ_Tut_HumanDeath_Wasteland_2&");
+		Hint("&BtZ_Tut_HumanDeath_Wasteland_3&");
+		Hint("&BtZ_Tut_HumanDeath_Wasteland_4&");
+		Hint("&BtZ_Tut_HumanDeath_Wasteland_5&");
+		Hint("&BtZ_Tut_HumanDeath_Wasteland_6&");
+		Hint("&BtZ_Tut_HumanDeath_Wasteland_7&");          
+	}
+    
+	HintsSet()
+	{
+        CndCycledHints();
+        CndBtZSession();
+		Hint("&BtZ_Tut_HumanDeath_General_1&");
+		Hint("&BtZ_Tut_HumanDeath_General_5&");
+		Hint("&BtZ_Tut_HumanDeath_General_6&");
+		Hint("&BtZ_Tut_HumanDeath_General_7&");
+		Hint("&BtZ_Tut_HumanDeath_General_8&");
+		Hint("&BtZ_Tut_HumanDeath_General_10&");
+        Hint("&BtZ_Tut_HumanDeath_General_11&");
+		Hint("&BtZ_Tut_HumanDeath_HunterCharge_1&");
+		Hint("&BtZ_Tut_HumanDeath_HunterCharge_2&");
+		Hint("&BtZ_Tut_HumanDeath_HunterControlTheHorde_1&");
+		Hint("&BtZ_Tut_HumanDeath_HunterEnergy_1&");
+		Hint("&BtZ_Tut_HumanDeath_HunterEnergy_2&");
+		Hint("&BtZ_Tut_HumanDeath_HunterEnergy_3&");
+		Hint("&BtZ_Tut_HumanDeath_HunterEnergy_4&");
+		Hint("&BtZ_Tut_HumanDeath_HunterEnergy_5&");
+		Hint("&BtZ_Tut_HumanDeath_HunterGroundpound_1&");
+		Hint("&BtZ_Tut_HumanDeath_HunterGroundpound_2&");
+		Hint("&BtZ_Tut_HumanDeath_HunterPounce_1&");
+		Hint("&BtZ_Tut_HumanDeath_HunterPounce_2&");
+		Hint("&BtZ_Tut_HumanDeath_HunterPounce_3&");
+		Hint("&BtZ_Tut_HumanDeath_HunterSpits_1&");
+		Hint("&BtZ_Tut_HumanDeath_UV_1&");
+		Hint("&BtZ_Tut_HumanDeath_UV_3&");
+		Hint("&BtZ_Tut_HumanDeath_UV_4&");
+		Hint("&Tut_BTZHumanControlTheHorde&");
+		Hint("&Tut_BTZHumanHiveDamage&");
+		Hint("&Tut_BTZHumanLight&");
+		Hint("&Tut_BTZHumanPing&");
+		Hint("&Tut_BTZHumanDrainedZombieFully&");
+	}
+	
+    HintsSet()
+    {
+        CndBtZSession();
+        CndZombiePlayer();
+        CndZombieUVHealEnabled();
+        CndZombiePlayerResourceAvailable("DefensiveSmoke");
+        BlockTime(180.0);
+        Hint("&BtZ_Tut_HunterDeath_UVHeal_1&");
+    }
+    
+    HintsSet()
+    {
+        CndBtZSession();
+        CndZombiePlayer();
+        CndZombiePlayerFullyDrained();
+        CndZombiePlayerDefesiveSmokeEnabled();
+        CndZombiePlayerResourceAvailable("DefensiveSmoke");
+        BlockTime(180.0);
+        Hint("&BtZ_Tut_HunterDeath_UVBlock_2&");
+    }
+    
+    HintsSet()
+    {
+        CndBtZSession();
+        CndZombiePlayer();
+        CndZombiePlayerFullyDrained();
+        BlockTime(180.0);
+        Hint("&BtZ_Tut_HunterDeath_Groundpound_1&");
+    }
+    
+    HintsSet()
+    {
+        CndBtZSession();
+        CndZombiePlayer();
+        CndZombiePlayerDefesiveSmokeEnabled();
+        BlockTime(180.0);
+        Hint("&BtZ_Tut_HunterDeath_UVBlock_1&");
+        Hint("&BtZ_Tut_HunterDeath_UVBlock_3&");
+    }
+
+    HintsSet()
+    {
+        CndBtZSession();
+        CndZombiePlayer();
+        CndZombiePlayerChargeEnabled();
+        BlockTime(180.0);
+        Hint("&BtZ_Tut_HunterDeath_Charge_1&");
+    }
+
+    HintsSet()
+    {
+        CndBtZSession();
+        CndZombiePlayer();
+        CndZombiePlayerAnyOffensiveSpitEnabled();
+        CndZombiePlayerSpitChargingEnabled();
+        BlockTime(180.0);
+        Hint("&BtZ_Tut_HunterDeath_Spits_1&");
+    }
+
+    HintsSet()
+    {
+        CndBtZSession();
+        CndZombiePlayer();
+        CndZombiePlayerAnyOffensiveSpitEnabled();
+        BlockTime(180.0);
+        Hint("&BtZ_Tut_HunterDeath_General_5&");
+        Hint("&BtZ_Tut_HunterDeath_Spits_2&");
+        Hint("&Tut_BTZZombieSpits&");
+    }
+    
+    HintsSet()
+    {
+        CndWasteland();
+        CndZombiePlayer();
+        Hint("&BtZ_Tut_HunterDeath_Wasteland_1&");
+        Hint("&BtZ_Tut_HunterDeath_Wasteland_2&");
+        Hint("&BtZ_Tut_HunterDeath_Wasteland_3&");
+        Hint("&BtZ_Tut_HunterDeath_Wasteland_4&");
+        Hint("&BtZ_Tut_HunterDeath_Wasteland_5&");
+        Hint("&BtZ_Tut_HunterDeath_Wasteland_6&");
+        Hint("&BtZ_Tut_HunterDeath_Wasteland_7&");
+    }
+    
+    HintsSet()
+    {
+        CndBtZSession();
+        CndZombiePlayer();
+        Hint("&BtZ_Tut_HunterDeath_Energy_1&");
+        Hint("&BtZ_Tut_HunterDeath_Energy_2&");
+        Hint("&BtZ_Tut_HunterDeath_Energy_3&");
+        Hint("&BtZ_Tut_HunterDeath_General_1&");
+        Hint("&BtZ_Tut_HunterDeath_General_2&");
+        Hint("&BtZ_Tut_HunterDeath_General_3&");
+        Hint("&BtZ_Tut_HunterDeath_General_4&");
+        Hint("&BtZ_Tut_HunterDeath_General_6&");
+        Hint("&BtZ_Tut_HunterDeath_General_7&");
+        Hint("&BtZ_Tut_HunterDeath_General_8&");
+        Hint("&BtZ_Tut_HunterDeath_Groundpound_2&");
+        Hint("&BtZ_Tut_HunterDeath_Groundpound_3&");
+        Hint("&BtZ_Tut_HunterDeath_Locomotion_1&");
+        Hint("&BtZ_Tut_HunterDeath_Locomotion_2&");
+        Hint("&BtZ_Tut_HunterDeath_Locomotion_3&");
+        Hint("&BtZ_Tut_HunterDeath_Pounce_1&");
+        Hint("&Tut_BTZZombieLight&");
+        Hint("&Tut_BTZZombieRopeLocomotion&");
+        Hint("&Tut_BTZZombieLowStamina&");
+    }
+
+	HintsSet()
+	{
+        CndBtZSession();
+        CndKilledByDamageType("CONTROL_THE_HORDE_ZOMBIE");
+        CndCoop();
+		BlockTime(180.0);
+		Hint("&BtZ_Tut_HumanDeath_HunterControlTheHorde_1&");
+		Hint("&BtZ_Tut_HumanDeath_HunterControlTheHorde_2_MP&");
+	}
+
+    HintsSet()
+	{
+        CndBtZSession();
+        CndKilledByDamageType("TOXIC_SPIT");
+		BlockTime(180.0);
+		Hint("&BtZ_Tut_HumanDeath_HunterSpits_3&");
+	}
+
+	HintsSet()
+	{
+        CndBtZSession();
+        CndKilledByDamageType("CONTROL_THE_HORDE_ZOMBIE");
+		BlockTime(180.0);
+		Hint("&BtZ_Tut_HumanDeath_HunterControlTheHorde_1&");
+	}
+
+	HintsSet()
+	{
+        CndBtZSession();
+        CndKilledByDamageType("HUNTER_CHARGE");
+		BlockTime(180.0);
+		Hint("&BtZ_Tut_HumanDeath_HunterCharge_1&");
+		Hint("&BtZ_Tut_HumanDeath_HunterCharge_2&");
+	}
+
+	HintsSet()
+	{
+        CndBtZSession();
+        CndKilledByDamageType("HUNTER_HIGHRAGE");
+		BlockTime(180.0);
+		Hint("&BtZ_Tut_HumanDeath_HunterPounce_1&");
+	}
+
+	HintsSet()
+	{
+        CndBtZSession();
+        CndKilledByDamageType("HUNTER_GROUNDPOUND");
+		BlockTime(180.0);
+		Hint("&BtZ_Tut_HumanDeath_HunterGroundpound_1&");
+		Hint("&BtZ_Tut_HumanDeath_HunterGroundpound_2&");
+        Hint("&BtZ_Tut_HumanDeath_HunterGroundpound_3&");
+	}
+
+	HintsSet()
+	{
+        CndBtZSession();
+        CndLightDisabled();
+		BlockTime(180.0);
+		Hint("&BtZ_Tut_HumanDeath_UV_1&");
+	}
+
+	HintsSet()
+    {
+        CndWasteland();
+        CndBtZSession();
+        Hint("&BtZ_Tut_HumanDeath_Wasteland_1&");
+		Hint("&BtZ_Tut_HumanDeath_Wasteland_2&");
+		Hint("&BtZ_Tut_HumanDeath_Wasteland_3&");
+		Hint("&BtZ_Tut_HumanDeath_Wasteland_4&");
+		Hint("&BtZ_Tut_HumanDeath_Wasteland_5&");
+		Hint("&BtZ_Tut_HumanDeath_Wasteland_6&");
+		Hint("&BtZ_Tut_HumanDeath_Wasteland_7&");        
+	}
+    
+	HintsSet()
+	{
+        CndBtZSession();
+        CndCoop();
+		Hint("&BtZ_Tut_HumanDeath_General_1&");
+		Hint("&BtZ_Tut_HumanDeath_General_2_MP&");
+		Hint("&BtZ_Tut_HumanDeath_General_3_MP&");
+		Hint("&BtZ_Tut_HumanDeath_General_4_MP&");
+		Hint("&BtZ_Tut_HumanDeath_General_5&");
+		Hint("&BtZ_Tut_HumanDeath_General_6&");
+		Hint("&BtZ_Tut_HumanDeath_General_7&");
+		Hint("&BtZ_Tut_HumanDeath_General_8&");
+		Hint("&BtZ_Tut_HumanDeath_General_9_MP&");
+        Hint("&BtZ_Tut_HumanDeath_General_11&");
+		Hint("&BtZ_Tut_HumanDeath_HunterCharge_1&");
+		Hint("&BtZ_Tut_HumanDeath_HunterCharge_2&");
+		Hint("&BtZ_Tut_HumanDeath_HunterControlTheHorde_1&");
+		Hint("&BtZ_Tut_HumanDeath_HunterControlTheHorde_2_MP&");
+		Hint("&BtZ_Tut_HumanDeath_HunterEnergy_1&");
+		Hint("&BtZ_Tut_HumanDeath_HunterEnergy_2&");
+		Hint("&BtZ_Tut_HumanDeath_HunterEnergy_3&");
+		Hint("&BtZ_Tut_HumanDeath_HunterEnergy_4&");
+		Hint("&BtZ_Tut_HumanDeath_HunterEnergy_5&");
+		Hint("&BtZ_Tut_HumanDeath_HunterGroundpound_1&");
+		Hint("&BtZ_Tut_HumanDeath_HunterGroundpound_2&");
+        Hint("&BtZ_Tut_HumanDeath_HunterGroundpound_3&");
+		Hint("&BtZ_Tut_HumanDeath_HunterPounce_1&");
+		Hint("&BtZ_Tut_HumanDeath_HunterPounce_2&");
+		Hint("&BtZ_Tut_HumanDeath_HunterPounce_3&");
+		Hint("&BtZ_Tut_HumanDeath_HunterSpits_1&");
+        Hint("&BtZ_Tut_HumanDeath_HunterSpits_2&");
+        Hint("&BtZ_Tut_HumanDeath_HunterSpits_3&");
+        Hint("&BtZ_Tut_HumanDeath_UV_1&");
+		Hint("&BtZ_Tut_HumanDeath_UV_2_MP&");
+		Hint("&BtZ_Tut_HumanDeath_UV_3&");
+		Hint("&BtZ_Tut_HumanDeath_UV_4&");
+		Hint("&Tut_BTZHumanControlTheHorde&");
+		Hint("&Tut_BTZHumanHiveDamage&");
+		Hint("&Tut_BTZHumanLight&");
+		Hint("&Tut_BTZHumanPing&");
+		Hint("&Tut_BTZHumanDrainedZombieFully&");
+        Hint("&BtZ_Tut_HumanDeath_RankReward_1&");
+	}
+
+	HintsSet()
+	{
+        CndBtZSession();
+		Hint("&BtZ_Tut_HumanDeath_General_1&");
+		Hint("&BtZ_Tut_HumanDeath_General_5&");
+		Hint("&BtZ_Tut_HumanDeath_General_6&");
+		Hint("&BtZ_Tut_HumanDeath_General_7&");
+		Hint("&BtZ_Tut_HumanDeath_General_8&");
+		Hint("&BtZ_Tut_HumanDeath_General_10&");
+        Hint("&BtZ_Tut_HumanDeath_General_11&");
+        Hint("&BtZ_Tut_HumanDeath_HunterCharge_1&");
+		Hint("&BtZ_Tut_HumanDeath_HunterCharge_2&");
+		Hint("&BtZ_Tut_HumanDeath_HunterControlTheHorde_1&");
+		Hint("&BtZ_Tut_HumanDeath_HunterEnergy_1&");
+		Hint("&BtZ_Tut_HumanDeath_HunterEnergy_2&");
+		Hint("&BtZ_Tut_HumanDeath_HunterEnergy_3&");
+		Hint("&BtZ_Tut_HumanDeath_HunterEnergy_4&");
+		Hint("&BtZ_Tut_HumanDeath_HunterEnergy_5&");
+		Hint("&BtZ_Tut_HumanDeath_HunterGroundpound_1&");
+		Hint("&BtZ_Tut_HumanDeath_HunterGroundpound_2&");
+        Hint("&BtZ_Tut_HumanDeath_HunterGroundpound_3&");
+        Hint("&BtZ_Tut_HumanDeath_HunterPounce_1&");
+		Hint("&BtZ_Tut_HumanDeath_HunterPounce_2&");
+		Hint("&BtZ_Tut_HumanDeath_HunterPounce_3&");
+		Hint("&BtZ_Tut_HumanDeath_HunterSpits_1&");
+        Hint("&BtZ_Tut_HumanDeath_HunterSpits_2&");
+        Hint("&BtZ_Tut_HumanDeath_HunterSpits_3&");
+		Hint("&BtZ_Tut_HumanDeath_UV_1&");
+		Hint("&BtZ_Tut_HumanDeath_UV_3&");
+		Hint("&BtZ_Tut_HumanDeath_UV_4&");
+		Hint("&Tut_BTZHumanControlTheHorde&");
+		Hint("&Tut_BTZHumanHiveDamage&");
+		Hint("&Tut_BTZHumanLight&");
+		Hint("&Tut_BTZHumanPing&");
+		Hint("&Tut_BTZHumanDrainedZombieFully&");
+        Hint("&BtZ_Tut_HumanDeath_RankReward_1&");
+	}
+    
+	HintsSet()
+    {
+        CndBozakArena();
+		CndFall();
+        BlockTime(120.0);
+        Hint("&Tut_Loading_Bozak_Ammortizers_Death&");		
+    }
+	
+	HintsSet()
+    {
+        CndBozakArena();
+        BlockTime(120.0);
+        Hint("&Tut_Loading_Bozak_TimeIsCrucial_Death&");
+		Hint("&Tut_Loading_Bozak_Weapons_Death&");
+		Hint("&Tut_Loading_Bozak_PrimeRewards_Death&");
+		Hint("&Tut_Loading_Bozak_AllforOne_Death&");
+		Hint("&Tut_Loading_Bozak_Enviro_Death&");
+		Hint("&Tut_Loading_Bozak_ParkourFever_Death&");	
+		Hint("&Tut_Loading_Bozak_Ammortizers_Death&");		
+		Hint("&Tut_Loading_Bozak_ListenTo_Death&");	
+		Hint("&Tut_Loading_Bozak_NotAllChests_Death&");	
+		Hint("&Tut_Loading_Bozak_ParkourFever_Death&");
+    }
+
+    HintsSet()
+    {
+        CndWastelandBossfight();
+        Hint("&Tut_Wasteland_Mother&");
+    }
+
+    HintsSet()
+    {
+        CndWastelandBossfight();
+        CndCycledHints();
+        Hint("&Tut_Wasteland_Mother&");
+    }
+
+	
+	HintsSet()
+    {
+        CndWasteland();
+		BlockTime(86400.0);
+        Hint("&Tut_Loading_FirstDeath&");		
+    }
+	
+	HintsSet()
+    {
+        CndWasteland();
+		CndNight();
+		BlockTime(240.0);
+        Hint("&Tut_Loading_FollowingVolatileAttack&");		
+    }
+	
+	HintsSet()
+    {
+        CndWasteland();
+		CndKilledByAI("VIRAL");
+		BlockTime(240.0);
+        Hint("&Tut_Loading_FollowingViralAttack&");		
+    }
+		
+	HintsSet()
+    {
+		CndWasteland();
+		BlockTime(480.0);
+        Hint("&Tut_Loading_FollowingAmortizer&");		
+		Hint("&Tut_Loading_FollowingBuggyRespawn&");		
+		Hint("&Tut_Loading_FollowingHuntingTower&");		
+		Hint("&Tut_Loading_FollowingMillitaryPlace&");		
+		Hint("&Tut_Loading_FollowingMissingPersons&");		
+		Hint("&Tut_Loading_FollowingPartsSource&");		
+		Hint("&Tut_Loading_FollowingSense&");		
+		Hint("&Tut_Loading_FollowingViralAttack&");		
+		Hint("&Tut_Loading_FollowingFuel&");
+		Hint("&Tut_Loading_FollowingChallenges&");		
+		Hint("&Tut_Loading_FollowingUpgrades&");		
+		//Hint("&Tut_Loading_FollowingRoadObstacles&");		
+		Hint("&Tut_Loading_FollowingHives&");
+		//Hint("&Tut_Loading_Fuel&");
+		Hint("&Tut_Loading_DriverPoints&");
+		Hint("&Tut_Loading_Components&");
+		Hint("&Tut_Loading_Parts&");
+		//Hint("&Tut_Loading_CarLooting&");
+		Hint("&Tut_Loading_Challenges&");
+		Hint("&Tut_Loading_SilasChests&");
+		Hint("&Tut_Loading_Offroad&");
+		Hint("&Tut_Loading_Speed&");
+		Hint("&Tut_Loading_LowAmmo&");
+		Hint("&Tut_Loading_CultRank&");		
+		Hint("&Tut_Loading_SeasideTown&");
+		Hint("&Tut_Loading_EncounterShops&");		
+		Hint("&Tut_Loading_MedkitsFollowing&");		
+		Hint("&Tut_Loading_Paintjobs&");		
+		Hint("&Tut_Loading_Charms&");		
+		Hint("&Tut_Loading_CultMarks&");		
+		Hint("&Tut_Loading_DismantleParts&");
+    }
+	
+	HintsSet()
+    {
+		CndWasteland();
+        CndCycledHints();
+		
+		BlockTime(480.0);
+        Hint("&Tut_Loading_FollowingAmortizer&");		
+		Hint("&Tut_Loading_FollowingBuggyRespawn&");		
+		Hint("&Tut_Loading_FollowingHuntingTower&");		
+		Hint("&Tut_Loading_FollowingMillitaryPlace&");		
+		Hint("&Tut_Loading_FollowingMissingPersons&");		
+		Hint("&Tut_Loading_FollowingPartsSource&");		
+		Hint("&Tut_Loading_FollowingSense&");		
+		Hint("&Tut_Loading_FollowingViralAttack&");		
+		Hint("&Tut_Loading_FollowingFuel&");
+		Hint("&Tut_Loading_FollowingChallenges&");		
+		Hint("&Tut_Loading_FollowingUpgrades&");		
+		//Hint("&Tut_Loading_FollowingRoadObstacles&");		
+		Hint("&Tut_Loading_FollowingHives&");
+		//Hint("&Tut_Loading_Fuel&");
+		Hint("&Tut_Loading_DriverPoints&");
+		Hint("&Tut_Loading_Components&");
+		Hint("&Tut_Loading_Parts&");
+		//Hint("&Tut_Loading_CarLooting&");
+		Hint("&Tut_Loading_Challenges&");
+		Hint("&Tut_Loading_SilasChests&");
+		Hint("&Tut_Loading_Offroad&");
+		Hint("&Tut_Loading_Speed&");
+		Hint("&Tut_Loading_LowAmmo&");
+		Hint("&Tut_Loading_CultRank&");		
+		Hint("&Tut_Loading_SeasideTown&");
+		Hint("&Tut_Loading_EncounterShops&");	
+		Hint("&Tut_Loading_MedkitsFollowing&");		
+		Hint("&Tut_Loading_Paintjobs&");		
+		Hint("&Tut_Loading_Charms&");		
+		Hint("&Tut_Loading_CultMarks&");		
+    }
+	
+	HintsSet()
+    {
+        CndCycledHints();
+        
+        Hint("&Tut_Loading_RegainSurvivor_Death&");
+        Hint("&Tut_Loading_SafeZonesShort_Death&");
+        Hint("&Tut_Loading_WeaponChests_Death&");
+        Hint("&Tut_Loading_Shops_Death&");
+        Hint("&Tut_Loading_SpecialKills_Death&");
+        Hint("&Tut_Loading_CraftItems_Death&");
+        Hint("&Tut_Loading_CraftPlans_Death&");
+        Hint("&Tut_Loading_WeaponUpgrades_Death&");
+		
+		Hint("&Tut_Loading_Skills_Death&");
+        Hint("&Tut_Loading_PrologueFightingProficiency_Death&");
+        Hint("&Tut_Loading_PrologueRunningProficiency_Death&");
+		Hint("&Tut_Loading_Status_Death&");
+		Hint("&Tut_Loading_PursuitAgility_Death&");
+		Hint("&Tut_Loading_SpecialKills_Death&");
+		
+		Hint("&Tut_Loading_Airdrops_Death&");
+		Hint("&Tut_AirdropRais&");
+        Hint("&Tut_Loading_Quartermaster_Death&");
+        Hint("&Tut_Loading_NightShop_Death&");
+        
+        Hint("&Tut_Loading_Consumables_Death&");
+        Hint("&Tut_Loading_Valuables_Death&");
+        Hint("&Tut_Loading_ItemColors_Death&");
+        Hint("&Tut_Loading_PlayerStash_Death&");
+        Hint("&Tut_Loading_RandomEvents_Death&");
+        
+        Hint("&Tut_Loading_WeatherEffects_Death&");
+        Hint("&Tut_Loading_LockPickEnd_Death&");
+        
+		Hint("&Tut_Loading_RepairWeapon_Death&");
+		Hint("&Tut_EscortRepairs&");
+        Hint("&Tut_Loading_Dismantle_Death&");		
+		Hint("&Tut_Loading_Throwables_Death&");
+        Hint("&Tut_Loading_Handling_Death&");		
+        Hint("&Tut_Loading_Damage_Death&");		
+		
+        Hint("&Tut_Loading_SurvivorSense_Death&");
+        Hint("&Tut_Loading_Noise_Death&");
+        Hint("&Tut_Loading_VerticalMovement_Death&");
+        
+        Hint("&Tut_Loading_Medkits_Death&");
+        
+        Hint("&Tut_FirearmIronsights_Death&");
+        Hint("&Tut_Lookback_Death&");
+        
+        Hint("&Tut_Loading_Collectables_Death&");        
+		Hint("&Tut_Loading_Hints_Death&");										
+        
+		Hint("&Tut_Loading_BitersShort_Death&");	
+        Hint("&Tut_Loading_HMF_Death&");
+		Hint("&Tut_Loading_Virals_Death&");
+		Hint("&Tut_Loading_ToadsShort_Death&");
+		Hint("&Tut_Loading_BombersShort_Death&");
+		Hint("&Tut_Loading_DemolishersShort_Death&");
+		
+		Hint("&Tut_Loading_VolatilesShort_Death&");
+		Hint("&Tut_PrimeHuntingFirecrackers_Death&");	
+		Hint("&Tut_Loading_UVFlares_Death&");
+        Hint("&Tut_Loading_Flares_Death&");		
+        Hint("&Tut_Loading_SurvivingtheNight_Death&");
+		Hint("&Tut_Sleeping_Death&");
+		
+        Hint("&Tut_TacticalCombat&");	
+        Hint("&Tut_ParkourRoutes&");	
+		
+		Hint("&Tut_Loading_Landing_Death&");
+		
+		Hint("&Tut_Loading_Spikes_Death&");		
+        Hint("&Tut_Loading_Oil_Death&");		
+        Hint("&Tut_Loading_ElectricPuddles_Death&");
+    }
+
+
+	HintsSet()
+	{
+		CndNight();
+		BlockTime(180.0);
+		Hint("&Tut_Loading_VolatilesShort_Death&");
+		Hint("&Tut_Loading_UVFlares_Death&");
+		Hint("&Tut_Loading_Flares_Death&");
+		Hint("&Tut_Loading_SurvivorSense_Death&");
+		Hint("&Tut_Pursuit_1_Death&");
+		Hint("&Tut_Pursuit_2_Death&");
+		Hint("&Tut_Pursuit_3_Death&");
+		Hint("&Tut_Pursuit_4_Death&");
+		Hint("&Tut_Pursuit_5_Death&");
+		Hint("&Tut_Loading_SafeZonesShort_Death&");
+		Hint("&Tut_PrimeHuntingFirecrackers_Death&");
+        Hint("&BtZ_Tut_HumanDeath_RankReward_1&");		
+	}
+	
+	HintsSet()
+	{
+		CndFall();
+		BlockTime(30.0);
+		Hint("&Tut_Loading_Landing_Death&");
+	}
+	
+	HintsSet()
+	{
+		CndKilledByAI("ANY");
+		CndJunkWeapon();
+		BlockTime(300.0);
+		Hint("&Tut_Loading_WeaponChests_Death&");
+		Hint("&Tut_Loading_ImprovisedWeapons_Death&");
+		Hint("&Tut_Loading_Shops_Death&");
+	}
+	
+	HintsSet()
+	{
+		CndKilledByAI("ARMORED");
+		BlockTime(300.0);
+		Hint("&Tut_Loading_DemolishersShort_Death&");
+	}
+
+	HintsSet()
+	{
+		CndKilledByAI("SUICIDER");
+		BlockTime(300.0);
+		Hint("&Tut_Loading_BombersShort_Death&");
+		Hint("&Tut_Loading_Throwables_Death&");
+	}
+	
+	HintsSet()
+	{
+		CndKilledByAI("VIRAL");
+		BlockTime(700.0);
+		Hint("&Tut_Loading_Virals_Death&");
+		Hint("&Tut_Loading_Noise_Death&");
+	}
+	
+	HintsSet()
+	{
+			BlockTime(720.0);
+            ResetWhenAllUsed();
+			Hint("&Tut_Loading_RegainSurvivor_Death&");
+			Hint("&Tut_Loading_SafeZonesShort_Death&");
+			Hint("&Tut_Loading_WeaponChests_Death&");
+			Hint("&Tut_Loading_Shops_Death&");
+			Hint("&Tut_Loading_SpecialKills_Death&");
+			Hint("&Tut_Loading_CraftItems_Death&");
+			Hint("&Tut_Loading_CraftPlans_Death&");
+			Hint("&Tut_Loading_Skills_Death&");
+			Hint("&Tut_Loading_Airdrops_Death&");
+			Hint("&Tut_Loading_Quartermaster_Death&");
+			Hint("&Tut_Loading_NightShop_Death&");
+			Hint("&Tut_Loading_WeaponUpgrades_Death&");
+			Hint("&Tut_Loading_Consumables_Death&");
+			Hint("&Tut_Loading_Valuables_Death&");
+			Hint("&Tut_Loading_ItemColors_Death&");
+			Hint("&Tut_Loading_PlayerStash_Death&");
+			Hint("&Tut_Loading_RandomEvents_Death&");
+			Hint("&Tut_Loading_Throwables_Death&");
+			Hint("&Tut_Loading_WeatherEffects_Death&");
+			Hint("&Tut_Loading_LockPickEnd_Death&");
+			Hint("&Tut_Loading_RepairWeapon_Death&");
+			Hint("&Tut_Loading_PrologueFightingProficiency_Death&");
+			Hint("&Tut_Loading_PrologueRunningProficiency_Death&");
+			Hint("&Tut_Loading_Status_Death&");
+			Hint("&Tut_Loading_SurvivorSense_Death&");
+			Hint("&Tut_Loading_Noise_Death&");
+			Hint("&Tut_Loading_VerticalMovement_Death&");
+			Hint("&Tut_Loading_UVFlares_Death&");
+			Hint("&Tut_Loading_Flares_Death&");
+			Hint("&Tut_Loading_SpecialKills_Death&");
+			Hint("&Tut_Loading_Medkits_Death&");
+			Hint("&Tut_Loading_Hints_Death&");										
+			Hint("&Tut_Loading_Dismantle_Death&");		
+			Hint("&Tut_Loading_Handling_Death&");		
+			Hint("&Tut_Loading_Damage_Death&");		
+			Hint("&Tut_Loading_Spikes_Death&");		
+			Hint("&Tut_Loading_Oil_Death&");		
+			Hint("&Tut_Loading_ElectricPuddles_Death&");
+			
+			Hint("&Tut_FirearmIronsights_Death&");
+			Hint("&Tut_Sleeping_Death&");
+			Hint("&Tut_Lookback_Death&");
+			Hint("&Tut_Loading_PursuitAgility_Death&");
+			Hint("&Tut_Loading_Collectables_Death&");
+			Hint("&Tut_Loading_Collectables_Death&");
+			Hint("&Tut_Loading_SurvivingtheNight_Death&");
+			Hint("&Tut_Loading_ToadsShort_Death&");
+			Hint("&Tut_Loading_BombersShort_Death&");
+			Hint("&Tut_Loading_BitersShort_Death&");	
+			Hint("&Tut_Loading_HMF_Death&");				
+			Hint("&Tut_TacticalCombat&");	
+			Hint("&Tut_ParkourRoutes&");	
+			Hint("&Tut_AirdropRais&");
+			Hint("&Tut_EscortRepairs&");
+            Hint("&BtZ_Tut_HumanDeath_RankReward_1&");
+	}
+}

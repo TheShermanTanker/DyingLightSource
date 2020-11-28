@@ -1,0 +1,6 @@
+Description("s_fade_pp_clr", "f:EDIT|GATHER;e:EDIT|SHOW_DESCRIPTION|BROWSE_FILE;c:Fade PP;d:Fade color texture;" )
+Description("s_fade_pp_msk", "f:EDIT|GATHER;e:EDIT|SHOW_DESCRIPTION|BROWSE_FILE;c:Fade PP;d:Fade mask texture;" )
+Description("f_fade_pp", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.0;s:0.01;x:1.0;c:Fade PP;d:Fade strength;" )
+Description("f_fade_pp_clr", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.0;s:0.01;x:1.0;c:Fade PP;d:Color texture strength;" )
+Description("f_fade_pp_msk", "f:EDIT;e:EDIT|SLIDER|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0.0;s:0.01;x:1.0;c:Fade PP;d:Mask texture smoothness;" )
+Description("v_fade_pp", "f:EDIT;e:EDIT|SLIDER|EXPANDABLE|BROWSE_COLOR|SHOW_DESCRIPTION|DONT_SERIALIZE;m:0 0 0;x:1 1 1;s:0.05 0.05 0.05;c:Fade PP;d:Fade color;" )

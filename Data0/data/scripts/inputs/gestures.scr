@@ -1,0 +1,400 @@
+// Gesture((s)id, (s)def)  
+
+sub main()
+{
+	TouchPadGesture("GESTURE_TOUCHPAD_UP",			[ 0.0, 1.0, 0.0],		0.75,	250.0);
+	TouchPadGesture("GESTURE_TOUCHPAD_DOWN",		[ 0.0,-1.0, 0.0],		0.75,	250.0);
+    TouchPadGesture("GESTURE_TOUCHPAD_LEFT",		[-1.0, 0.0, 0.0],		0.75,	250.0);
+	TouchPadGesture("GESTURE_TOUCHPAD_RIGHT",		[ 1.0, 0.0, 0.0],		0.75,	250.0);
+	
+	// Possible motion sensor node states:
+	// MotionGestureNodeTimeState(float, float, float)		 		<<--- desired time since last node, lower threshold, upper threshold
+	// MotionGestureNodeRotationState(vec3, vec3, vec3) 			<<--- desired rotation, lower threshold, upper threshold
+	// MotionGestureNodeAngVelState(vec3, vec3, vec3) 				<<--- desired ang vel, lower threshold, upper threshold
+	// MotionGestureNodeAccelState(vec3, vec3, vec3) 				<<--- desired acceleration, lower threshold, upper threshold
+	/*
+	MotionSensorGesture("MOTION_GESTURE_ROTATE_PAD_Z_CW_SIGNIFICANTLY", 4.0, false, 0.0)
+	{
+		MotionGestureNode()
+		{
+			MotionGestureNodeRotationState([0.0, 0.0, 0.0], [20.0, 20.0, 20.0], [20.0, 20.0, 20.0]);
+			MotionGestureNodeTimeState(0.0, 0.0, 0.0);
+		}
+		
+		MotionGestureNode()
+		{
+			MotionGestureNodeRotationState([0.0, 0.0, 60.0], [40.0, 30.0, 20.0], [40.0, 30.0, 20.0]);
+			MotionGestureNodeTimeState(0.6, 0.5, 0.3);
+		}
+	}
+	
+	MotionSensorGesture("MOTION_GESTURE_ROTATE_PAD_X_CCW_SIGNIFICANTLY", 4.0, false, 0.0)
+	{
+		MotionGestureNode()
+		{
+			MotionGestureNodeRotationState([0.0, 0.0, 0.0], [20.0, 20.0, 20.0], [20.0, 20.0, 20.0]);
+			MotionGestureNodeTimeState(0.0, 0.0, 0.0);
+		}
+		
+		MotionGestureNode()
+		{
+			MotionGestureNodeRotationState([-55.0, -20.0, 60.0], [20.0, 30.0, 20.0], [20.0, 30.0, 20.0]);
+			MotionGestureNodeTimeState(0.6, 0.5, 0.3);
+		}
+	}
+	
+	MotionSensorGesture("MOTION_GESTURE_ROTATE_PAD_X_CCW_SIGNIFICANTLY_2", 4.0, false, 0.0)
+	{
+		MotionGestureNode()
+		{
+			MotionGestureNodeRotationState([0.0, 0.0, 0.0], [20.0, 20.0, 20.0], [20.0, 20.0, 20.0]);
+			MotionGestureNodeTimeState(0.0, 0.0, 0.0);
+		}
+		
+		MotionGestureNode()
+		{
+			MotionGestureNodeRotationState([-110.0, -10.0, 20.0], [20.0, 30.0, 20.0], [20.0, 30.0, 20.0]);
+			MotionGestureNodeTimeState(0.6, 0.5, 0.3);
+		}
+	}
+	
+	MotionSensorGesture("MOTION_GESTURE_ROTATE_PAD_Z_CW_SIGNIFICANTLY_RETURN", -1.0, true, 0.0)
+	{
+		MotionGestureNode()
+		{
+			MotionGestureNodeRotationState([0.0, 0.0, 60.0], [40.0, 30.0, 20.0], [40.0, 30.0, 20.0]);
+			
+			MotionGestureNodeTimeState(0.0, 0.0, 0.0);
+		}
+		
+		MotionGestureNode()
+		{
+			MotionGestureNodeRotationState([0.0, 0.0, 0.0], [20.0, 20.0, 20.0], [20.0, 20.0, 20.0]);
+			MotionGestureNodeTimeState(0.6, 0.5, 0.3);
+		}
+	}
+	
+	MotionSensorGesture("MOTION_GESTURE_ROTATE_PAD_X_CCW_SIGNIFICANTLY_RETURN", -1.0, true, 0.0)
+	{
+		MotionGestureNode()
+		{
+			MotionGestureNodeRotationState([-55.0, -20.0, 60.0], [20.0, 30.0, 20.0], [20.0, 30.0, 20.0]);
+			MotionGestureNodeTimeState(0.0, 0.0, 0.0);
+		}
+		
+		MotionGestureNode()
+		{
+			MotionGestureNodeRotationState([0.0, 0.0, 0.0], [20.0, 20.0, 20.0], [20.0, 20.0, 20.0]);
+			MotionGestureNodeTimeState(0.6, 0.5, 0.3);
+		}
+	}
+	
+	MotionSensorGesture("MOTION_GESTURE_ROTATE_PAD_X_CCW_SIGNIFICANTLY_2_RETURN", 4.0, false, 0.0)
+	{
+		MotionGestureNode()
+		{
+			MotionGestureNodeRotationState([-110.0, -10.0, 20.0], [20.0, 30.0, 20.0], [20.0, 30.0, 20.0]);
+			MotionGestureNodeTimeState(0.0, 0.0, 0.0);
+		}
+		
+		MotionGestureNode()
+		{
+			MotionGestureNodeRotationState([0.0, 0.0, 0.0], [20.0, 20.0, 20.0], [20.0, 20.0, 20.0]);
+			MotionGestureNodeTimeState(0.6, 0.5, 0.3);
+		}
+	}
+	
+	MotionSensorGesture("MOTION_GESTURE_ROTATE_PAD_Z_CW_SIGNIFICANTLY_RETURN_2", -1.0, true, 0.0)
+	{
+		MotionGestureNode()
+		{
+			MotionGestureNodeRotationState([0.0, 0.0, 0.0], [10.0, 10.0, 10.0], [10.0, 10.0, 10.0]);
+			MotionGestureNodeTimeState(0.0, 0.0, 0.0);
+		}
+		
+		MotionGestureNode()
+		{
+			MotionGestureNodeRotationState([0.0, 0.0, -60.0], [40.0, 30.0, 20.0], [40.0, 30.0, 20.0]);
+			MotionGestureNodeTimeState(0.6, 0.5, 0.3);
+		}
+	}
+	
+	MotionSensorGesture("MOTION_GESTURE_ROTATE_PAD_X_CCW_SIGNIFICANTLY_RETURN_2", -1.0, true, 0.0)
+	{
+		MotionGestureNode()
+		{
+			MotionGestureNodeRotationState([0.0, 0.0, 0.0], [10.0, 10.0, 10.0], [10.0, 10.0, 21.0]);
+			MotionGestureNodeTimeState(0.0, 0.0, 0.0);
+		}
+		
+		MotionGestureNode()
+		{
+			MotionGestureNodeRotationState([55.0, 20.0, -60.0], [20.0, 30.0, 20.0], [20.0, 30.0, 20.0]);
+			MotionGestureNodeTimeState(0.6, 0.5, 0.3);
+		}
+	}
+	
+	MotionSensorGesture("MOTION_GESTURE_ROTATE_PAD_X_CCW_SIGNIFICANTLY_2_RETURN_2", 4.0, false, 0.0)
+	{
+		MotionGestureNode()
+		{
+			MotionGestureNodeRotationState([0.0, 0.0, 0.0], [20.0, 20.0, 20.0], [20.0, 20.0, 20.0]);
+			MotionGestureNodeTimeState(0.0, 0.0, 0.0);
+		}
+		
+		MotionGestureNode()
+		{
+			MotionGestureNodeRotationState([110.0, 10.0, -20.0], [20.0, 30.0, 20.0], [20.0, 30.0, 20.0]);
+			MotionGestureNodeTimeState(0.6, 0.5, 0.3);
+		}
+	}
+	
+	MotionSensorGesture("MOTION_GESTURE_ANY_SUDDEN_MOVE", 0.0, false, 0.0)
+	{
+		AnySuddenMove(0.2, 1.0);
+	}
+	
+	MotionSensorGesture("MOTION_GESTURE_SUDDEN_MOVE_LEFT", 0.0, false, 0.2)
+	{
+		MotionGestureNode()
+		{
+			MotionGestureNodeAccelState([0.0, 0.0, 0.0], [0.5, 0.5, 0.5], [0.5, 0.5, 0.5]);
+			MotionGestureNodeTimeState(0.0, 0.0, 0.0);
+		}
+		
+		MotionGestureNode()
+		{
+			MotionGestureNodeAccelState([-1.5, 0.0, 0.0], [3.0, 0.8, 0.7], [0.5, 0.8, 0.7]);
+			MotionGestureNodeTimeState(0.2, 0.14, 0.8);
+		}
+	}
+	
+	MotionSensorGesture("MOTION_GESTURE_SUDDEN_MOVE_RIGHT", 0.0, false, 0.2)
+	{
+		MotionGestureNode()
+		{
+			MotionGestureNodeAccelState([0.0, 0.0, 0.0], [0.5, 0.5, 0.5], [0.5, 0.5, 0.5]);
+			MotionGestureNodeTimeState(0.0, 0.0, 0.0);
+		}
+		
+		MotionGestureNode()
+		{
+			MotionGestureNodeAccelState([1.5, 0.0, 0.0], [0.5, 0.8, 0.7], [3.0, 0.8, 0.7]);
+			MotionGestureNodeTimeState(0.2, 0.14, 0.8);
+		}
+	}
+		
+	MotionSensorGesture("MOTION_GESTURE_SUDDEN_MOVE_UP", 0.0, false, 0.2)
+	{
+		MotionGestureNode()
+		{
+			MotionGestureNodeAccelState([0.0, 0.0, 0.0], [0.5, 0.5, 0.5], [0.5, 0.5, 0.5]);
+			MotionGestureNodeTimeState(0.0, 0.0, 0.0);
+		}
+		
+		MotionGestureNode()
+		{
+			MotionGestureNodeAccelState([0.0, -1.5, 0.0], [0.7, 3.0, 0.4], [0.7, 0.4, 0.7]);
+			MotionGestureNodeTimeState(0.2, 0.14, 0.8);
+		}
+	}
+	
+	MotionSensorGesture("MOTION_GESTURE_SUDDEN_MOVE_FRONT", 0.0, false, 0.2)
+	{
+		MotionGestureNode()
+		{
+			MotionGestureNodeAccelState([0.0, 0.0, 0.0], [0.5, 0.5, 0.5], [0.5, 0.5, 0.5]);
+			MotionGestureNodeTimeState(0.0, 0.0, 0.0);
+		}
+		
+		MotionGestureNode()
+		{
+			MotionGestureNodeAccelState([0.0, 0.0, -1.5], [0.7, 0.5, 3.0], [0.7, 0.7, 0.5]);
+			MotionGestureNodeTimeState(0.2, 0.14, 0.8);
+		}
+	}	
+    */
+	
+    /*
+	VisualBuilderKinectGesture("KINECT_GESTURE_LOOK_AT_WATCH", "LookAtWatch", "LookAtWatch.gba", 0.0)
+    {
+		KinectGestureNode()
+		{
+			KinectGestureNodeValueState(0.0, 0.0, 0.2);
+			KinectGestureNodeTimeState(0.0, 0.0, 0.0);
+		}
+		
+		KinectGestureNode()
+		{
+			KinectGestureNodeValueState(1.0, 0.2, 0.0);
+			KinectGestureNodeTimeState(0.6, 0.5, 1.0);
+		}
+	}
+    
+	VisualBuilderKinectGesture("KINECT_GESTURE_LOOK_AT_WATCH_RETURN", "LookAtWatch", "LookAtWatch.gba", 0.0)
+    {
+		KinectGestureNode()
+		{
+			KinectGestureNodeValueState(1.0, 0.2, 0.0);
+			KinectGestureNodeTimeState(0.0, 0.0, 0.0);
+		}
+		
+		KinectGestureNode()
+		{
+			KinectGestureNodeValueState(0.0, 0.0, 0.3);
+			KinectGestureNodeTimeState(0.6, 0.5, 1.5);
+		}
+	}
+	
+	VisualBuilderKinectGesture("KINECT_GESTURE_GRAB_PUSH_BACK_ENEMY", "GrabPush_Left", "GrabPush.gba", 1.0)
+    {
+		KinectGestureNode()
+		{
+			KinectGestureNodeValueState(0.0, 0.0, 0.2);
+			KinectGestureNodeTimeState(0.0, 0.0, 0.0);
+		}
+		
+		KinectGestureNode()
+		{
+			KinectGestureNodeValueState(1.0, 0.2, 0.0);
+			KinectGestureNodeTimeState(0.6, 0.5, 1.5);
+		}
+	}
+    */
+	
+	/*
+    VisualBuilderKinectGesture("KINECT_GESTURE_NAGE_WAZA_LEFT", "NageWazaProgress_Left", "NageWazaProgress_Left.gba", 1.0)
+    {
+		KinectGestureNode()
+		{
+			KinectGestureNodeValueState(0.0, 0.0, 0.2);
+			KinectGestureNodeTimeState(0.0, 0.0, 0.0);
+		}
+		
+		KinectGestureNode()
+		{
+			KinectGestureNodeValueState(1.0, 0.2, 0.0);
+			KinectGestureNodeTimeState(0.6, 0.5, 1.5);
+		}
+	}
+	
+	VisualBuilderKinectGesture("KINECT_GESTURE_NAGE_WAZA_RIGHT", "NageWazaProgress_Right", "NageWazaProgress_Right.gba", 1.0)
+    {
+		KinectGestureNode()
+		{
+			KinectGestureNodeValueState(0.0, 0.0, 0.2);
+			KinectGestureNodeTimeState(0.0, 0.0, 0.0);
+		}
+		
+		KinectGestureNode()
+		{
+			KinectGestureNodeValueState(1.0, 0.2, 0.0);
+			KinectGestureNodeTimeState(0.6, 0.5, 1.5);
+		}
+	}
+	
+	VisualBuilderKinectGesture("KINECT_GESTURE_NAGE_WAZA_FRONT", "NageWazaFront", "NageWazaFront.gba", 1.0)
+    {
+		KinectGestureNode()
+		{
+			KinectGestureNodeValueState(0.0, 0.0, 0.2);
+			KinectGestureNodeTimeState(0.0, 0.0, 0.0);
+		}
+		
+		KinectGestureNode()
+		{
+			KinectGestureNodeValueState(1.0, 0.2, 0.0);
+			KinectGestureNodeTimeState(0.6, 0.5, 1.5);
+		}
+	}
+	
+	VisualBuilderKinectGesture("KINECT_GESTURE_NAGE_WAZA_BACK", "NageWazaBack", "NageWazaBack.gba", 1.0)
+    {
+		KinectGestureNode()
+		{
+			KinectGestureNodeValueState(0.0, 0.0, 0.2);
+			KinectGestureNodeTimeState(0.0, 0.0, 0.0);
+		}
+		
+		KinectGestureNode()
+		{
+			KinectGestureNodeValueState(1.0, 0.2, 0.0);
+			KinectGestureNodeTimeState(0.6, 0.5, 1.5);
+		}
+	}
+    */
+    
+    /*
+    VisualBuilderKinectGesture("KinectStrafeLeft", "SteerProgress", "Gestures.gdb")
+    {
+        ValueModifiers()
+        {
+            Add(-0.5);
+            Mul(-2.0);
+            Clamp(0.0, 1.0);
+        }
+    }
+    
+    VisualBuilderKinectGesture("KinectStrafeRight", "SteerProgress", "Gestures.gdb")
+    {
+        ValueModifiers()
+        {
+            Add(-0.5);
+            Mul(2.0);
+            Clamp(0.0, 1.0);
+        }
+    }
+	*/
+
+    /*
+	PadPositionKinectGesture("PositionKinect_PadAnyMove")
+    {
+        AnyVelocity(1.0, 0.05, 0.5);
+    }
+
+    PadPositionKinectGesture("PositionKinect_PadMoveLeft")
+    {
+        Offset([1.0, 0.4, 0.0], 60.0, 0.05, 0.2);
+        Velocity([1.0, 0.4, 0.0], 45.0, 0.5, 0.5);
+		SuccessDelay(0.5);
+    }
+    
+    PadPositionKinectGesture("PositionKinect_PadMoveRight")
+    {
+        Offset([-1.0, 0.4, 0.0], 60.0, 0.05, 0.2);
+        Velocity([-1.0, 0.4, 0.0], 45.0, 0.5, 0.5);
+		SuccessDelay(0.5);
+    }
+
+    PadPositionKinectGesture("PositionKinect_PadMoveForward")
+    {
+        Offset([0.0, 0.0, 1.0], 70.0, 0.1, 0.2);
+        Velocity([0.0, 0.0, 1.0], 45.0, 0.5, 0.5);
+		SuccessDelay(0.5);
+    }
+
+    PadPositionKinectGesture("PositionKinect_PadMoveDown")
+    {
+        Velocity([0.0, -1.0, 0.0], 50.0, 0.0, 0.5);
+    }
+    
+    PadPositionKinectGesture("PositionKinect_PadMoveUpBack")
+    {
+        Offset([0.0, 1.0, -0.5], 45.0, 0.1, 0.3);
+        Velocity([0.0, 1.0, -0.5], 60.0, 0.5, 0.5);
+		SuccessDelay(0.5);
+    }
+	 
+    PadPositionKinectGesture("PositionKinect_PadMoveBack")
+    {
+		// It's almost any move back, after PositionKinect_PadMoveForward.
+        Velocity([0.0, 0.0, -1.0], 75.0, 0.2, 0.2);
+		SuccessDelay(0.5);
+    }
+							
+    PadPositionKinectGesture("PositionKinect_PadPosUpBackRight")
+    {
+        Offset([0.5, 1.0, -0.5], 45.0, 0.1, 0.3);
+    }
+    */
+}

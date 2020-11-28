@@ -1,0 +1,98 @@
+/*sub BodySemantics()
+{
+	Body();
+	//{
+    	BonesStructureInfo();
+    	//{
+    	    SetSpinesCount(0);
+    	    SetNecksCount(0);
+    	    SetForearmsTwistCount(0);
+    	    SetUpperarmsTwistCount(0);
+    	//}
+
+    	BoneInfo(0, "bone name", -1);
+
+    	//kntroler obrotow
+    	RotationController(0);		
+    	//{
+    	    AddBoneToPath(0, false);		//dodaje kosc do sciezki rotacji
+    	    SetVertRotationAxis([1.0, 0.0, 0.0]);
+    	    SetHorzRotationAxis([0.0, 1.0, 0.0]);
+    	    SetHorzBodyCommitment(0.0);
+    	    SetHorzBodyCommitmentParam(0.0);
+    	    SetVertBodyCommitment(0.0);
+    	    SetVertBodyCommitmentParam(0.0);
+    	//}
+    //}
+}
+
+sub semantics()
+{
+    use BodySemantics();
+}*/
+
+export float _FLT_MAX		= 100000000.0;
+export float _PREV_VALUE	= -1.0;
+
+export int _BONE_UNKNOWN			=  -1 ;		
+export int _BONE_ROOT			    =   0 ;		// glowna kosc 
+export int _BONE_PELVIS			    =   1 ;		// miednica
+export int _BONE_HSPINE				=   2 ;		
+export int _BONE_SPINE_0			=   3 ;		// kregoslup 0
+export int _BONE_SPINE_1			=   4 ;		// kregoslup 1 
+export int _BONE_SPINE_2			=   5 ;		// kregoslup 2
+export int _BONE_SPINE_3			=   6 ;		// kregoslup 3 
+export int _BONE_SPINE_4			=   7 ;		// kregoslup 4 
+export int _BONE_HSPINE1      		=   8 ;
+export int _BONE_NECK_0			    =   9 ;		// szyja
+export int _BONE_NECK_1			    =   10;		// szyja 1
+export int _BONE_NECK_2			    =   11;		// szyja 2
+export int _BONE_NECK_3			    =   12 ;	// szyja 3
+export int _BONE_HEAD			    =   13 ;	// glowa
+export int _BONE_FACE			    =   14 ;    // twarz
+export int _BONE_L_HOLDER			=   15 ;		
+export int _BONE_L_CLAVICLE		    =   16 ;	// obojczyk L
+export int _BONE_L_UPPERARM		    =   17 ;	// ramie L
+export int _BONE_L_UPPERARM_TWIST_0	=   18 ;	// ramie L (kosc skretna 0;
+export int _BONE_L_UPPERARM_TWIST_1	=   19 ;	// ramie L (kosc skretna 1;
+export int _BONE_L_FOREARM		    =   20 ;	// przedramie L
+export int _BONE_L_FOREARM_TWIST_0	=   21 ;	// przedramie L (kosc skretna 0;
+export int _BONE_L_FOREARM_TWIST_1	=   22 ;	// przedramie L (kosc skretna 1;
+export int _BONE_L_FOREARM_TWIST_2	=   23 ;	// przedramie L (kosc skretna 2;
+export int _BONE_L_FOREARM_TWIST_3	=   24 ;	// przedramie L (kosc skretna 3;
+export int _BONE_L_FOREARM_TWIST_4	=   25 ;	// przedramie L (kosc skretna 4;
+export int _BONE_L_HAND			    =   26 ;	// dlon L
+export int _BONE_L_THIGH			=   27 ;	// udo L
+export int _BONE_L_CALF			    =   28 ;	// lydka L
+export int _BONE_L_FOOT			    =   29 ;	// stopa L
+export int _BONE_L_TOE			    =   30 ;	// palce L
+export int _BONE_R_HOLDER			=   31 ;		
+export int _BONE_R_CLAVICLE		    =   32 ;	// obojczyk R
+export int _BONE_R_UPPERARM		    =   33 ;	// ramie R
+export int _BONE_R_UPPERARM_TWIST_0	=   34 ;	// ramie R (kosc skretna 0;
+export int _BONE_R_UPPERARM_TWIST_1	=   35 ;	// ramie R (kosc skretna 1;
+export int _BONE_R_FOREARM		    =   36 ;	// przedramie R
+export int _BONE_R_FOREARM_TWIST_0	=   37 ;	// przedramie R (kosc skretna 0;
+export int _BONE_R_FOREARM_TWIST_1	=   38 ;	// przedramie R (kosc skretna 1;
+export int _BONE_R_FOREARM_TWIST_2	=   39 ;	// przedramie R (kosc skretna 2;
+export int _BONE_R_FOREARM_TWIST_3	=   40 ;	// przedramie R (kosc skretna 3;
+export int _BONE_R_FOREARM_TWIST_4	=   41 ;	// przedramie R (kosc skretna 4;
+export int _BONE_R_HAND			    =   42 ;	// dlon R
+export int _BONE_R_THIGH			=   43 ;	// udo R
+export int _BONE_R_CALF			    =   44 ;	// lydka R
+export int _BONE_R_FOOT			    =   45 ;	// stopa R
+export int _BONE_R_TOE			    =   46 ;	// palce R
+export int _BONE_EYE_CAMERA		    =   47 ;	
+export int _BONE_REF_CAMERA	        =   48 ;	
+export int _BONE_ITEM_ROOT1	        =   49 ;
+export int _BONE_ITEM_HOLDER11	    =   50 ;
+export int _BONE_ITEM_HOLDER12	    =   51 ;
+export int _BONE_ITEM_HOLDER13	    =   52 ;
+export int _BONE_ITEM_HOLDER14	    =   53 ;
+export int _BONE_ITEM_HOLDER15	    =   54 ;
+
+export int _PATH_LOOK_AT			= 0;		//kontroler sterowania obrotem glowy
+export int _PATH_LEFT_AIM_AT		= 1;		//kontroler sterowania kierunkiem celowania dla lewej reki
+export int _PATH_RIGHT_AIM_AT	= 2;		//kontroler sterowania kierunkiem celowania dla prawej reki
+export int _PATH_LEGS			= 3;		//kontroler sterowania kierunkiem poruszania
+

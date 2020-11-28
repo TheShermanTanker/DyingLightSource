@@ -1,0 +1,218 @@
+!include("events.def")
+!include("anim_actions.def")
+//===================================== Grenade ============================================
+
+//SeqTrack("FPP_Grenade_Stand", 		"M_FPP_Molotov.anm2"				, 0, 60, 30, 1, 0.5)
+SeqTrack("FPP_Grenade_ThrowBegin", 	"M_FPP_Molotov.anm2"				, 234, 270, 30, 1, 0.1)
+{
+	Event(1, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_SoundPlayer, "flare_prepare.wav", 1, 3, "head", 1, [0,0,0], 0)
+    }
+}
+
+SeqTrack("FPP_Grenade_ThrowReady", 	"M_FPP_Molotov.anm2"				, 272, 317, 30, 1, 0.5)
+{
+	Event(1, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_SoundPlayer, "clothes_throw_ready.wav", 1, 3, "head", 1, [0,0,0], 0)
+    }
+}
+
+SeqTrack("FPP_Grenade_ThrowAttack", 	"M_FPP_Molotov.anm2"				, 320, 356, 30, 1, 0.1)
+{
+	Event(1, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_SoundPlayer, "clothes_throw.wav", 1, 3, "head", 1, [0,0,0], 0)
+    }
+	Event(13, 0, 1)
+	{
+			PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Throw_Item_XX.wav", 1, 0, 0, 0.7)
+	}
+    Event(19, EVENT_THROWABLE_THROW, -1)
+}
+
+SeqTrack("FPP_Grenade_BackThrowAttack", 			"M_FPP_LookBack_01.anm2",		32, 67, 30, 1, 0.0 )
+{
+	Event(1, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_SoundPlayer, "clothes_throw.wav", 1, 3, "head", 1, [0,0,0], 0)
+    }
+    Event(6, EVENT_THROWABLE_THROW, -1)
+	//Event(17, END_ANIMATION, 1)
+}
+
+SeqTrack("FPP_Grenade_FastThrow", 	"M_FPP_Molotov.anm2"				, 93, 146, 30, 1, 0.0)
+{
+	Event(1, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_SoundPlayer, "clothes_throw.wav", 1, 3, "head", 1, [0,0,0], 0)
+    }
+	Event(26, EVENT_THROWABLE_THROW, -1)
+}
+//==================================== Flare ===================================================
+//SeqTrack("FPP_Flare_Stand", 		        "M_FPP_Grenade_Loop.anm2"				, 0, 10, 30, 1, 0.5)
+SeqTrack("FPP_Flare_SetInFire", 		    "M_FPP_Flare.anm2"				, 0, 77, 30, 1, 0.5)
+{
+    Event(19, EVENT_THROWABLE_PREPARE, -1)
+}
+SeqTrackAlias("FPP_Flare_ThrowBegin",       "FPP_Grenade_ThrowBegin")
+SeqTrackAlias("FPP_Flare_ThrowReady",       "FPP_Grenade_ThrowReady")
+SeqTrackAlias("FPP_Flare_ThrowAttack",      "FPP_Grenade_ThrowAttack")
+SeqTrackAlias("FPP_Flare_FastThrow",        "FPP_Grenade_FastThrow")
+SeqTrackAlias("FPP_Flare_BackThrowAttack",  "FPP_Grenade_BackThrowAttack")
+
+//==================================== Decoys ==================================================
+SeqTrack("FPP_Decoy_Stand", 	            "M_FPP_Petard_Loop.anm2"				, 0, 10, 30, 1, 0.5)
+SeqTrackAlias("FPP_Decoy_ThrowBegin",       "FPP_Grenade_ThrowBegin")
+SeqTrackAlias("FPP_Decoy_ThrowReady",       "FPP_Grenade_ThrowReady")
+SeqTrackAlias("FPP_Decoy_ThrowAttack",      "FPP_Grenade_ThrowAttack")
+SeqTrackAlias("FPP_Decoy_FastThrow",        "FPP_Grenade_FastThrow")
+SeqTrackAlias("FPP_Decoy_BackThrowAttack", "FPP_Grenade_BackThrowAttack")
+
+SeqTrack("FPP_Thrower_Stand", 				"M_FPP_Unarmed_Stand_DW.anm2"		,	 0, 10, 30, 1, 0.1) 
+SeqTrack("FPP_Thrower_ThrowReady",			"M_FPP_Unarmed_Stand_DW.anm2"		,	 0, 10, 30, 1, 0.1) 
+SeqTrackAlias( "FPP_Thrower_ThrowBegin", "FPP_Thrower_Stand")
+SeqTrack( "FPP_Thrower_ThrowAttack", 		"M_FPP_KnifeThrow.anm2"		, 0, 18, 30, 1, 0.1)
+{
+	Event(3.5, EVENT_THROWABLE_THROW, 1)	
+	{
+		PlaySound23D(GameVolumeSource_SoundPlayer, "clothes_throw.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(5, 0, 1)
+	{
+			PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Throw_Item_XX.wav", 1, 0, 0, 0.7)
+	}
+	Event(14, END_ANIMATION, -1)
+	
+}
+SeqTrackAlias( "FPP_Thrower_FastThrow", "FPP_Thrower_ThrowAttack")
+SeqTracksBlend("FPP_Thrower_ThrowAttack", "FPP_Thrower_Stand", 0.3)
+SeqTrack("FPP_Thrower_BackThrowAttack", 			"M_FPP_LookBack_KnifeThrow_01.anm2",		0, 25, 30, 1, 0.0 )
+{
+	Event(1, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_SoundPlayer, "clothes_throw.wav", 1, 3, "head", 1, [0,0,0], 0)
+    }
+    Event(6, EVENT_THROWABLE_THROW, -1)
+	Event(17, END_ANIMATION, 1)
+}
+
+//===================================== Molotov ============================================
+
+SeqTrack("FPP_Molotov_Stand", 	"M_FPP_Unarmed_Stand_DW.anm2"		,	 0, 10, 30, 1, 0.1) 
+
+SeqTrack("FPP_Molotov_ThrowBegin", 	"M_FPP_Molotov.anm2"				, 234, 270, 30, 1, 0.0)
+{
+	Event(7, EVENT_MOLOTOV_LIGHT, -1)
+}
+
+SeqTrack("FPP_Molotov_ThrowReady", 	"M_FPP_Molotov.anm2"				, 272, 317, 30, 1, 0.5)
+
+
+SeqTrack("FPP_Molotov_ThrowAttack", 	"M_FPP_Molotov.anm2"				, 320, 371, 30, 1, 0.1)
+{
+    Event(19, EVENT_THROWABLE_THROW, -1)
+	{
+		PlaySound23D(GameVolumeSource_SoundPlayer, "clothes_throw.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+	Event(13, 0, 1)
+	{
+			PlayPlayerSound6(GameVolumeSource_SpeechPlayer, "Speech_Throw_Item_XX.wav", 1, 0, 0, 0.7)
+	}
+}
+
+SeqTrack("FPP_Molotov_FastThrow", 	"M_FPP_Molotov.anm2"				, 93, 146, 30, 1, 0.0)
+{
+	Event(7, EVENT_MOLOTOV_LIGHT, -1)
+	Event(26, EVENT_THROWABLE_THROW, -1)
+}
+SeqTrackAlias("FPP_Molotov_BackThrowAttack",  "FPP_Grenade_BackThrowAttack")
+
+//===================================== Water ============================================
+
+SeqTrack("FPP_Water_Stand", 	"M_FPP_Unarmed_Stand_DW.anm2"		,	 0, 10, 30, 1, 0.1) 
+SeqTrackAlias("FPP_Water_ThrowBegin",  "FPP_Water_Stand")
+
+SeqTrack("FPP_Water_ThrowReady", 	"M_FPP_Molotov.anm2"				, 272, 317, 30, 1, 0.5)
+SeqTrack("FPP_Water_ThrowAttack", 	"M_FPP_Molotov.anm2"				, 320, 371, 30, 1, 0.1)
+{
+    Event(19, EVENT_THROWABLE_THROW, -1)
+	{
+		PlaySound23D(GameVolumeSource_SoundPlayer, "clothes_throw.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+}
+
+SeqTrack("FPP_Water_FastThrow", 	"M_FPP_Molotov.anm2"				, 93, 146, 30, 1, 0.0)
+{	
+	Event(26, EVENT_THROWABLE_THROW, -1)
+}
+SeqTrackAlias("FPP_Water_BackThrowAttack",  "FPP_Grenade_BackThrowAttack")
+
+//===================================== SquirrelSuit ============================================
+
+SeqTrack("FPP_SquirrelSuit_Stand", 	"M_FPP_Unarmed_Stand_DW.anm2", 				0, 10, 90, 1, 0.5) 
+SeqTrackAlias("FPP_SquirrelSuit_ThrowBegin",  "FPP_Water_Stand")
+
+SeqTrack("FPP_SquirrelSuit_ThrowReady", 	"M_FPP_Swim_Floating.anm2"	, 5, 5, 30, 1, 0.7)
+SeqTrack("FPP_SquirrelSuit_ThrowAttack", 	"M_FPP_Swim_Floating.anm2"	, 0, 5, 90, 1, 0.5)
+{
+    Event(19, EVENT_THROWABLE_THROW, -1)
+}
+
+SeqTrack("FPP_SquirrelSuit_FastThrow", 	"M_FPP_Swim_Floating.anm2"	, 0, 5, 90, 1, 0.7)
+{	
+	Event(26, EVENT_THROWABLE_THROW, -1)
+}
+SeqTrackAlias("FPP_SquirrelSuit_BackThrowAttack",  "FPP_Grenade_BackThrowAttack")
+
+//===================================== fireball ============================================
+
+SeqTrack("FPP_fireball_Stand", 	"FPP_fireball.anm2", 				0, 30, 60, 1, 0.5) 
+
+SeqTrack("FPP_fireball_ThrowBegin", 	"FPP_fireball.anm2",  0, 20, 60, 1, 0.3) 
+SeqTrack("FPP_fireball_ThrowReady", 	"FPP_fireball.anm2"	, 20, 66, 30, 1, 0.2)
+SeqTrack("FPP_fireball_ThrowAttack", 	"FPP_fireball.anm2"	, 66, 150, 60, 1, 0.1)
+{
+    Event(45, EVENT_THROWABLE_THROW, -1)
+	{
+		PlaySound23D(GameVolumeSource_SoundPlayer, "clothes_throw.wav", 1, 3, "head", 1, [0, 0, 0], 0)
+	}
+}
+
+SeqTrack("FPP_fireball_FastThrow", 	"FPP_fireball.anm2"	, 66, 110, 60, 1, 0.5)
+{	
+	Event(45, EVENT_THROWABLE_THROW, -1)
+}
+SeqTrackAlias("FPP_fireball_BackThrowAttack",  "FPP_Grenade_BackThrowAttack")
+
+//===================================== proximity ============================================
+SeqTrack("FPP_Proximity_Stand", 	            "M_FPP_Petard_Loop.anm2"						, 0, 10, 30, 1, 0.5)
+SeqTrack("FPP_Proximity_ThrowReady",       		"M_FPP_Petard_Loop.anm2"						, 0, 10, 30, 1, 0.5)
+{
+	Event(1, 0, 1)
+    {
+        PlaySound23D(GameVolumeSource_SoundPlayer, "clothes_throw.wav", 1, 3, "head", 1, [0,0,0], 0)
+    }
+    Event(10, EVENT_THROWABLE_THROW, -1)
+}
+SeqTrackAlias("FPP_Proximity_ThrowBegin",       "FPP_Proximity_ThrowReady")
+SeqTrack("FPP_Proximity_ThrowAttack",     		"M_FPP_Destroyed_Weapon_Throw.anm2"		  		, 0, 30, 30, 1, 0.1)
+SeqTrackAlias("FPP_Proximity_FastThrow",        "FPP_Proximity_ThrowAttack")
+SeqTrackAlias("FPP_Proximity_BackThrowAttack", 	"FPP_Grenade_BackThrowAttack")
+
+//==================================== Mine ===================================================
+SeqTrackAlias("FPP_Mine_ThrowBegin",      "FPP_Grenade_ThrowBegin")
+SeqTrackAlias("FPP_Mine_ThrowReady",      "FPP_Grenade_ThrowReady")
+SeqTrack("FPP_Mine_ThrowAttack", 		  "M_FPP_Destroyed_Weapon_Throw.anm2", 0, 30, 30, 1, 0.1)
+{
+	Event(2, EVENT_THROWABLE_THROW, -1)
+}
+SeqTrack("FPP_Mine_FastThrow", 		  "M_FPP_Destroyed_Weapon_Throw.anm2", 0, 30, 30, 1, 0.1)
+{
+	Event(2, EVENT_THROWABLE_THROW, -1)
+}
+SeqTrack("FPP_Mine_BackThrowAttack", 		  "M_FPP_Destroyed_Weapon_Throw.anm2", 0, 30, 30, 1, 0.1)
+{
+	Event(2, EVENT_THROWABLE_THROW, -1)
+}

@@ -1,0 +1,2924 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST NAME : Voltage -->
+    <!-- QUEST INFO : Volatge Quests Chain (Voltage and Searchlights) -->
+    <!-- AFTER QUEST: Blackout (Main) -->
+    <!-- COMMENT    :  -->
+    <!-- FROM       : >> SLUMS -->
+    <!-- TO         : >> SLUMS -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- VOLTAGE - HELPERS -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__Voltage_helper_02"
+         parent="AirDrop02"
+         pxsl_line="17">
+        <Phase
+             type="go to"
+             name="Voltage - Helper 02 - Blake"
+             distance="10000"
+             show_locations="false"
+             pxsl_line="18">
+            <Destination
+                 pxsl_line="18">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="QuestHelper_SP_Blake"
+                     pxsl_line="18" />
+            </Destination>
+            <DebugPlayerPosition
+                 pxsl_line="19">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="QuestHelper_SP_Blake"
+                     pxsl_line="19" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="OR"
+             name="_"
+             pxsl_line="20">
+            <Path
+                 pxsl_line="21">
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="Blake"
+                     group="Blake_VoltageHelper02_USE"
+                     show_locations="false"
+                     questgiver_indicator="true"
+                     pxsl_line="22" />
+            </Path>
+            <Path
+                 pxsl_line="23">
+                <Phase
+                     type="started quest guard"
+                     name="_"
+                     quest_name="Voltage"
+                     finished="true"
+                     pxsl_line="24" />
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="25">
+            <Destination
+                 pxsl_line="25">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="QuestHelper_SP_Blake"
+                     pxsl_line="25" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__Voltage_MapMarker"
+         parent="AirDrop02"
+         pxsl_line="26">
+        <Phase
+             type="OR"
+             name="_"
+             pxsl_line="27">
+            <Path
+                 pxsl_line="28">
+                <Phase
+                     type="started quest guard"
+                     name="_"
+                     quest_name="__Voltage_helper_01"
+                     finished="true"
+                     pxsl_line="29" />
+            </Path>
+            <Path
+                 pxsl_line="30">
+                <Phase
+                     type="started quest guard"
+                     name="_"
+                     quest_name="__Voltage_helper_02"
+                     finished="true"
+                     pxsl_line="31" />
+            </Path>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="32">
+            <Object
+                 pxsl_line="32">
+                <QuestObject
+                     class="MapMarker"
+                     name="Voltage_MapMarker_QuestHelper"
+                     pxsl_line="32" />
+            </Object>
+        </Phase>
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="Voltage"
+             finished="true"
+             pxsl_line="33" />
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="34">
+            <Object
+                 pxsl_line="34">
+                <QuestObject
+                     class="MapMarker"
+                     name="Voltage_MapMarker_QuestHelper"
+                     pxsl_line="34" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="35">
+            <Destination
+                 pxsl_line="35">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="QuestHelper_SP_Blake"
+                     pxsl_line="35" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- VOLTAGE - ACTIONS -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__Voltage_Actions"
+         parent="AirDrop02"
+         pxsl_line="39">
+        <!-- ENABLING BLACKOUT AREA ON THE HIGHWAY -->
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="41">
+            <Object
+                 pxsl_line="42">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="Voltage_QEG_Highway_Blackout"
+                     pxsl_line="42" />
+            </Object>
+            <Object
+                 pxsl_line="43">
+                <QuestObject
+                     class="BlackoutArea"
+                     name="Voltage_BlackoutArea_Substation_A"
+                     pxsl_line="43" />
+            </Object>
+            <Object
+                 pxsl_line="44">
+                <QuestObject
+                     class="BlackoutArea"
+                     name="Voltage_BlackoutArea_Substation_B"
+                     pxsl_line="44" />
+            </Object>
+            <Object
+                 pxsl_line="45">
+                <QuestObject
+                     class="BlackoutArea"
+                     name="Voltage_BlackoutArea_Substation_Main"
+                     pxsl_line="45" />
+            </Object>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="46">
+            <Object
+                 pxsl_line="46">
+                <QuestObject
+                     class="AIEscapeArea"
+                     name="SearchLights_EscapeArea_Bridge_01"
+                     pxsl_line="46" />
+            </Object>
+        </Phase>
+        <!-- enabling zombies in the substation -->
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="48">
+            <Object
+                 pxsl_line="48">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="Voltage_QEG_MainSubstation_Enemies_001"
+                     pxsl_line="48" />
+            </Object>
+        </Phase>
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="49">
+            <Object
+                 pxsl_line="49">
+                <QuestObject
+                     class="HumanAI"
+                     name="Alfie"
+                     pxsl_line="49" />
+            </Object>
+        </Phase>
+        <Phase
+             type="use life place"
+             name="_"
+             teleport="true"
+             pxsl_line="50">
+            <LifePlace
+                 pxsl_line="50">
+                <QuestObject
+                     class="NPCLifePlace"
+                     name="ALfie_LP_QuestGiver_001"
+                     pxsl_line="50" />
+            </LifePlace>
+            <AI
+                 pxsl_line="51">
+                <QuestObject
+                     class="HumanAI"
+                     name="Alfie"
+                     pxsl_line="51" />
+            </AI>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="52">
+            <Destination
+                 pxsl_line="52">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Voltage_SP_001"
+                     pxsl_line="52" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- VOLTAGE - ENEMIES -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__Voltage_Subtsation_A_Zombie"
+         parent="__Voltage_Actions"
+         pxsl_line="56">
+        <Phase
+             type="go to"
+             name="_"
+             distance="100"
+             show_locations="false"
+             pxsl_line="57">
+            <Destination
+                 pxsl_line="57">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Voltage_SP_Substation_A"
+                     pxsl_line="57" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="58">
+            <Object
+                 pxsl_line="58">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="Voltage_QEG_Substation_A_Zombie"
+                     pxsl_line="58" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="59">
+            <Destination
+                 pxsl_line="59">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Voltage_SP_Substation_A"
+                     pxsl_line="59" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__Voltage_Subtsation_A_Zombie_001"
+         parent="__Voltage_Subtsation_A_Zombie"
+         pxsl_line="60">
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="61">
+            <Spawner
+                 pxsl_line="61">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="Voltage_SBN_Substation_A_Zombie_001"
+                     pxsl_line="61" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="62">
+            <Object
+                 pxsl_line="62">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="Voltage_SBN_Substation_A_Zombie_001"
+                     pxsl_line="62" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="63">
+            <Destination
+                 pxsl_line="63">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Voltage_SP_Substation_A"
+                     pxsl_line="63" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__Voltage_Subtsation_A_Zombie_002"
+         parent="__Voltage_Subtsation_A_Zombie"
+         pxsl_line="64">
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="65">
+            <Spawner
+                 pxsl_line="65">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="Voltage_SBN_Substation_A_Zombie_002"
+                     pxsl_line="65" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="66">
+            <Object
+                 pxsl_line="66">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="Voltage_SBN_Substation_A_Zombie_002"
+                     pxsl_line="66" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="67">
+            <Destination
+                 pxsl_line="67">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Voltage_SP_Substation_A"
+                     pxsl_line="67" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__Voltage_Subtsation_A_Zombie_003"
+         parent="__Voltage_Subtsation_A_Zombie"
+         pxsl_line="68">
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="69">
+            <Spawner
+                 pxsl_line="69">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="Voltage_SBN_Substation_A_Zombie_003"
+                     pxsl_line="69" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="70">
+            <Object
+                 pxsl_line="70">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="Voltage_SBN_Substation_A_Zombie_003"
+                     pxsl_line="70" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="71">
+            <Destination
+                 pxsl_line="71">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Voltage_SP_Substation_A"
+                     pxsl_line="71" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__Voltage_Subtsation_A_Zombie_004"
+         parent="__Voltage_Subtsation_A_Zombie"
+         pxsl_line="72">
+        <Phase
+             type="kill"
+             name="_"
+             show_locations="false"
+             pxsl_line="73">
+            <Spawner
+                 pxsl_line="73">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="Voltage_SBN_Substation_A_Zombie_004"
+                     pxsl_line="73" />
+            </Spawner>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="74">
+            <Object
+                 pxsl_line="74">
+                <QuestObject
+                     class="AISpawnBoxNumber"
+                     name="Voltage_SBN_Substation_A_Zombie_004"
+                     pxsl_line="74" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="75">
+            <Destination
+                 pxsl_line="75">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Voltage_SP_Substation_A"
+                     pxsl_line="75" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- VOLTAGE - START -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="Voltage"
+         parent="__Voltage_Actions"
+         quest_giver="Alfie"
+         difficulty="medium"
+         show_quest_log_reminder="true"
+         pxsl_line="79">
+        <Phase
+             type="talk"
+             name="Voltage - Start"
+             speaker="Alfie"
+             group="Alfie_Voltage_USE"
+             show_locations="false"
+             following_group="Alfie_Voltage_INP"
+             questgiver_indicator="true"
+             pxsl_line="80">
+            <DebugPlayerPosition
+                 pxsl_line="81">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Voltage_SP_001"
+                     pxsl_line="81" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="82">
+            <Destination
+                 pxsl_line="82">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Voltage_SP_001"
+                     pxsl_line="82" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- VOLTAGE - Turning power on in the first substation (A) -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__Voltage_Substation_A"
+         parent="Voltage"
+         pxsl_line="86">
+        <Phase
+             type="use"
+             name="_"
+             desired_state="on"
+             show_locations="false"
+             pxsl_line="87">
+            <Trigger
+                 pxsl_line="87">
+                <QuestObject
+                     class="PhysicalSwitchDI"
+                     name="Voltage_PS_Substation_A"
+                     pxsl_line="87" />
+            </Trigger>
+        </Phase>
+        <Phase
+             type="set skin"
+             name="_"
+             skin_name="Emissive"
+             pxsl_line="88">
+            <ModelObject
+                 pxsl_line="88">
+                <QuestObject
+                     class="PhysicalSwitchDI"
+                     name="Voltage_PS_Substation_A"
+                     pxsl_line="88" />
+            </ModelObject>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="89">
+            <Object
+                 pxsl_line="89">
+                <QuestObject
+                     class="BlackoutArea"
+                     name="Voltage_BlackoutArea_Substation_A"
+                     pxsl_line="89" />
+            </Object>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="90">
+            <Object
+                 pxsl_line="90">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="Voltage_QEG_ElectricalSubstation_A"
+                     pxsl_line="90" />
+            </Object>
+        </Phase>
+        <Phase
+             type="wait guard"
+             name="_"
+             time="1"
+             pxsl_line="91" />
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="92">
+            <Destination
+                 pxsl_line="92">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Voltage_SP_Substation_A"
+                     pxsl_line="92" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- VOLTAGE - Turning power on in the second substation (B) -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__Voltage_Substation_B"
+         parent="Voltage"
+         pxsl_line="96">
+        <Phase
+             type="use"
+             name="_"
+             desired_state="on"
+             show_locations="false"
+             pxsl_line="97">
+            <Trigger
+                 pxsl_line="97">
+                <QuestObject
+                     class="PhysicalSwitchDI"
+                     name="Voltage_PS_Substation_B"
+                     pxsl_line="97" />
+            </Trigger>
+        </Phase>
+        <Phase
+             type="set skin"
+             name="_"
+             skin_name="Emissive"
+             pxsl_line="98">
+            <ModelObject
+                 pxsl_line="98">
+                <QuestObject
+                     class="PhysicalSwitchDI"
+                     name="Voltage_PS_Substation_B"
+                     pxsl_line="98" />
+            </ModelObject>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="99">
+            <Object
+                 pxsl_line="99">
+                <QuestObject
+                     class="BlackoutArea"
+                     name="Voltage_BlackoutArea_Substation_B"
+                     pxsl_line="99" />
+            </Object>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="100">
+            <Object
+                 pxsl_line="100">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="Voltage_QEG_ElectricalSubstation_B"
+                     pxsl_line="100" />
+            </Object>
+        </Phase>
+        <Phase
+             type="wait guard"
+             name="_"
+             time="1"
+             pxsl_line="101" />
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="102">
+            <Destination
+                 pxsl_line="102">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Voltage_SP_Substation_B"
+                     pxsl_line="102" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- VOLTAGE - Radio Dailog with Alfie after reaching the first substation (A or B)  -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__Voltage_RadioDialog"
+         parent="Voltage"
+         pxsl_line="106">
+        <Phase
+             type="OR"
+             name="_"
+             pxsl_line="107">
+            <Path
+                 pxsl_line="108">
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="0"
+                     show_locations="false"
+                     pxsl_line="109">
+                    <Destination
+                         pxsl_line="109">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="Voltage_GoTo_Substation_A"
+                             pxsl_line="109" />
+                    </Destination>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="110">
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="0"
+                     show_locations="false"
+                     pxsl_line="111">
+                    <Destination
+                         pxsl_line="111">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="Voltage_GoTo_Substation_B"
+                             pxsl_line="111" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="set dialog"
+             name="_"
+             speaker="voice2d"
+             group="Player_Voltage_01DLG01"
+             auto_start="true"
+             pxsl_line="112" />
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="113">
+            <Destination
+                 pxsl_line="113">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Voltage_SP_001"
+                     pxsl_line="113" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- VOLTAGE - Radio Dailog with Alfie after first substation (A or B)  -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__Voltage_RadioDialog_01"
+         parent="Voltage"
+         pxsl_line="117">
+        <Phase
+             type="OR"
+             name="_"
+             pxsl_line="118">
+            <Path
+                 pxsl_line="119">
+                <Phase
+                     type="started quest guard"
+                     name="_"
+                     quest_name="__Voltage_Substation_A"
+                     finished="true"
+                     show_locations="false"
+                     pxsl_line="120" />
+            </Path>
+            <Path
+                 pxsl_line="121">
+                <Phase
+                     type="started quest guard"
+                     name="_"
+                     quest_name="__Voltage_Substation_B"
+                     finished="true"
+                     show_locations="false"
+                     pxsl_line="122" />
+            </Path>
+        </Phase>
+        <Phase
+             type="set dialog"
+             name="_"
+             speaker="voice2d"
+             group="Player_Voltage_02DLG01"
+             auto_start="true"
+             pxsl_line="123" />
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="124">
+            <Destination
+                 pxsl_line="124">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Voltage_SP_001"
+                     pxsl_line="124" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- VOLTAGE - 02 -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="Voltage_02"
+         parent="Voltage"
+         glued="true"
+         pxsl_line="128">
+        <Phase
+             type="go to"
+             name="Voltage - Reboot Power in the substations"
+             distance="100000"
+             show_locations="false"
+             pxsl_line="129">
+            <Destination
+                 pxsl_line="129">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Voltage_SP_001"
+                     pxsl_line="129" />
+            </Destination>
+            <DebugPlayerPosition
+                 pxsl_line="130">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Voltage_SP_001"
+                     pxsl_line="130" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             pxsl_line="131">
+            <Path
+                 pxsl_line="132">
+                <Phase
+                     type="AND"
+                     name="_"
+                     objective="&amp;Voltage_OBJ_EasternSubstation&amp;"
+                     pxsl_line="133">
+                    <Path
+                         pxsl_line="133">
+                        <Phase
+                             type="started quest guard"
+                             name="_"
+                             quest_name="__Voltage_Substation_A"
+                             finished="true"
+                             show_locations="false"
+                             pxsl_line="134">
+                            <SpecificLocation
+                                 pxsl_line="135">
+                                <QuestObject
+                                     class="ZoneBox"
+                                     name="Voltage_ZB_Substation_A"
+                                     pxsl_line="135" />
+                            </SpecificLocation>
+                        </Phase>
+                    </Path>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="136">
+                <Phase
+                     type="AND"
+                     name="_"
+                     objective="&amp;Voltage_OBJ_NorthernSubstation&amp;"
+                     pxsl_line="137">
+                    <Path
+                         pxsl_line="137">
+                        <Phase
+                             type="started quest guard"
+                             name="_"
+                             quest_name="__Voltage_Substation_B"
+                             finished="true"
+                             show_locations="false"
+                             pxsl_line="138">
+                            <SpecificLocation
+                                 pxsl_line="139">
+                                <QuestObject
+                                     class="ZoneBox"
+                                     name="Voltage_ZB_Substation_B"
+                                     pxsl_line="139" />
+                            </SpecificLocation>
+                        </Phase>
+                    </Path>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="wait guard"
+             name="_"
+             time="1"
+             pxsl_line="140" />
+        <Phase
+             type="talk"
+             name="_"
+             speaker="voice2d"
+             group="Player_Voltage_05DLG01"
+             show_locations="false"
+             auto_start="true"
+             pxsl_line="141" />
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="142">
+            <Destination
+                 pxsl_line="142">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Voltage_SP_001"
+                     pxsl_line="142" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- VOLTAGE - 03 -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="Voltage_03"
+         parent="Voltage_02"
+         glued="true"
+         pxsl_line="146">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Voltage_OBJ_CentralStation&amp;"
+             pxsl_line="147">
+            <Path
+                 pxsl_line="147">
+                <Phase
+                     type="go to"
+                     name="Voltage - Go to the central substacion"
+                     distance="0"
+                     pxsl_line="148">
+                    <Destination
+                         pxsl_line="148">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="Voltage_GoTo_ElectricalSubstation_002"
+                             pxsl_line="148" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="149">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Voltage_SP_001"
+                             pxsl_line="149" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_Voltage_06DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="150" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="151">
+                    <Object
+                         pxsl_line="151">
+                        <QuestObject
+                             class="SensorAmbientMusicArea"
+                             name="SAMA_Voltage_Central_Substation_Music"
+                             pxsl_line="151" />
+                    </Object>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="152">
+            <Destination
+                 pxsl_line="152">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Voltage_SP_001"
+                     pxsl_line="152" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Voltage_OBJ_FindPanel&amp;"
+             pxsl_line="154">
+            <Path
+                 pxsl_line="154">
+                <Phase
+                     type="go to"
+                     name="Voltage - Find main panel in the substation"
+                     distance="0"
+                     show_locations="false"
+                     pxsl_line="155">
+                    <Destination
+                         pxsl_line="155">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="Voltage_GoTo_ElectricalSubstation_001"
+                             pxsl_line="155" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="156">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Voltage_SP_ElectricalSubstation_001"
+                             pxsl_line="156" />
+                    </DebugPlayerPosition>
+                    <SpecificLocation
+                         pxsl_line="157">
+                        <QuestObject
+                             class="ZoneBox"
+                             name="Voltage_ZB_ElectricalSubstation_001"
+                             pxsl_line="157" />
+                    </SpecificLocation>
+                </Phase>
+                <!-- ,radio-dialog _ voice2d Alfie_Voltage_07DLG01     -->
+                <Phase
+                     type="set state"
+                     name="_"
+                     desired_state="closed"
+                     pxsl_line="159">
+                    <Trigger
+                         pxsl_line="159">
+                        <QuestObject
+                             class="DoorDI"
+                             name="Voltage_Door_ElectricalSubstation_001"
+                             pxsl_line="159" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="160">
+                    <Destination
+                         pxsl_line="160">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Voltage_SP_001"
+                             pxsl_line="160" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="use"
+                     name="Voltage - Open door in electrical substation"
+                     desired_state="opened"
+                     show_locations="false"
+                     pxsl_line="162">
+                    <Trigger
+                         pxsl_line="162">
+                        <QuestObject
+                             class="DoorDI"
+                             name="Voltage_Door_ElectricalSubstation_001"
+                             pxsl_line="162" />
+                    </Trigger>
+                    <DebugPlayerPosition
+                         pxsl_line="163">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Voltage_SP_ElectricalSubstation_001"
+                             pxsl_line="163" />
+                    </DebugPlayerPosition>
+                    <SpecificLocation
+                         pxsl_line="164">
+                        <QuestObject
+                             class="ZoneBox"
+                             name="Voltage_ZB_ElectricalSubstation_001"
+                             pxsl_line="164" />
+                    </SpecificLocation>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="165">
+                    <Destination
+                         pxsl_line="165">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Voltage_SP_ElectricalSubstation_001"
+                             pxsl_line="165" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="use"
+                     name="Voltage - Change voltage in distribution substation"
+                     desired_state="on"
+                     pxsl_line="167">
+                    <Trigger
+                         pxsl_line="167">
+                        <QuestObject
+                             class="PhysicalSwitchDayTime"
+                             name="Voltage_PS_MainPanel_001"
+                             pxsl_line="167" />
+                    </Trigger>
+                    <DebugPlayerPosition
+                         pxsl_line="168">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Voltage_SP_ElectricalSubstation_001"
+                             pxsl_line="168" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="set skin"
+                     name="_"
+                     skin_name="Emissive"
+                     pxsl_line="169">
+                    <ModelObject
+                         pxsl_line="169">
+                        <QuestObject
+                             class="PhysicalSwitchDayTime"
+                             name="Voltage_PS_MainPanel_001"
+                             pxsl_line="169" />
+                    </ModelObject>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="171">
+                    <Object
+                         pxsl_line="172">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="Voltage_QEG_ElectricalSubstation_001_ElectricEmitters"
+                             pxsl_line="172" />
+                    </Object>
+                    <Object
+                         pxsl_line="173">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="Voltage_QEG_ElectricalSubstation_001_Sound"
+                             pxsl_line="173" />
+                    </Object>
+                    <Object
+                         pxsl_line="174">
+                        <QuestObject
+                             class="AIEscapeArea"
+                             name="SearchLights_EscapeArea_Bridge_01"
+                             pxsl_line="174" />
+                    </Object>
+                    <Object
+                         pxsl_line="175">
+                        <QuestObject
+                             class="AIEscapeArea"
+                             name="SafeZone_ElectricalSubstation_EscapeArea"
+                             pxsl_line="175" />
+                    </Object>
+                    <Object
+                         pxsl_line="176">
+                        <QuestObject
+                             class="SoundEmitterRandom"
+                             name="SER_Volatile_Pain_01"
+                             pxsl_line="176" />
+                    </Object>
+                    <Object
+                         pxsl_line="177">
+                        <QuestObject
+                             class="SoundEmitterRandom"
+                             name="SER_Volatile_Pain_02"
+                             pxsl_line="177" />
+                    </Object>
+                </Phase>
+                <!-- DISABLING BLACKOUT AREA ON THE HIGHWAY -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="179">
+                    <Object
+                         pxsl_line="180">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="Voltage_QEG_Highway_Blackout"
+                             pxsl_line="180" />
+                    </Object>
+                    <Object
+                         pxsl_line="181">
+                        <QuestObject
+                             class="BlackoutArea"
+                             name="Voltage_BlackoutArea_Substation_Main"
+                             pxsl_line="181" />
+                    </Object>
+                    <Object
+                         pxsl_line="182">
+                        <QuestObject
+                             class="SensorAmbientMusicArea"
+                             name="SAMA_Voltage_Central_Substation_Music"
+                             pxsl_line="182" />
+                    </Object>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="183">
+            <Destination
+                 pxsl_line="183">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Voltage_SP_ElectricalSubstation_001"
+                     pxsl_line="183" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- SAFE ZONE BRIDGE -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__SafeZone_InfamyBridge"
+         parent="Voltage_03"
+         pxsl_line="187">
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="188">
+            <Object
+                 pxsl_line="189">
+                <QuestObject
+                     class="AppearGroup"
+                     name="Searchlights_SafeZone::AG"
+                     pxsl_line="189" />
+            </Object>
+            <Object
+                 pxsl_line="190">
+                <QuestObject
+                     class="DepotContainer"
+                     name="Searchlights_SafeZone::SearchLights_sz_depot::bag"
+                     pxsl_line="190" />
+            </Object>
+        </Phase>
+        <Phase
+             type="OR"
+             name="_"
+             pxsl_line="191">
+            <Path
+                 pxsl_line="192">
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="0"
+                     show_locations="false"
+                     pxsl_line="193">
+                    <Destination
+                         pxsl_line="193">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="Searchlights_SafeZone::GoTo"
+                             pxsl_line="193" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="194">
+                    <Object
+                         pxsl_line="195">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="Searchlights_SafeZone::QEG"
+                             pxsl_line="195" />
+                    </Object>
+                    <Object
+                         pxsl_line="196">
+                        <QuestObject
+                             class="DepotContainer"
+                             name="Searchlights_SafeZone::SearchLights_sz_depot::bag"
+                             pxsl_line="196" />
+                    </Object>
+                    <Object
+                         pxsl_line="197">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Searchlights_SafeZone::SP_searchlight_hubzone_01"
+                             pxsl_line="197" />
+                    </Object>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="198">
+                <Phase
+                     type="started quest guard"
+                     name="_"
+                     quest_name="Searchlights"
+                     finished="true"
+                     pxsl_line="199" />
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="200">
+            <Destination
+                 pxsl_line="200">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Searchlights_SafeZone::SP_searchlight_hubzone_01"
+                     pxsl_line="200" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="Searchlights"
+             finished="true"
+             pxsl_line="201" />
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="202">
+            <Object
+                 pxsl_line="202">
+                <QuestObject
+                     class="ModelObject"
+                     name="Searchlights_Door_Spawn_1"
+                     pxsl_line="202" />
+            </Object>
+        </Phase>
+        <Phase
+             type="appear"
+             name="_"
+             mode="hide"
+             pxsl_line="203">
+            <Object
+                 pxsl_line="203">
+                <QuestObject
+                     class="ModelObject"
+                     name="Searchlights_Door_1"
+                     pxsl_line="203" />
+            </Object>
+        </Phase>
+        <Phase
+             type="set state"
+             name="_"
+             desired_state="closed"
+             pxsl_line="204">
+            <Trigger
+                 pxsl_line="204">
+                <QuestObject
+                     class="DoorDI"
+                     name="Searchlights_Door_Bolts_1"
+                     pxsl_line="204" />
+            </Trigger>
+        </Phase>
+        <Phase
+             type="set door behaviour"
+             name="_"
+             behaviour="ClosedUnlockable"
+             pxsl_line="205">
+            <Door
+                 pxsl_line="205">
+                <QuestObject
+                     class="DoorDI"
+                     name="Searchlights_Door_Bolts_1"
+                     pxsl_line="205" />
+            </Door>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="206">
+            <Object
+                 pxsl_line="206">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Searchlights_SafeZone::SP_searchlight_hubzone_01"
+                     pxsl_line="206" />
+            </Object>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             pxsl_line="207">
+            <Path
+                 pxsl_line="208">
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="3"
+                     show_locations="false"
+                     pxsl_line="209">
+                    <Destination
+                         pxsl_line="209">
+                        <QuestObject
+                             class="Marker"
+                             name="Searchlights_Marker_Viral_1"
+                             pxsl_line="209" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="210">
+                    <Object
+                         pxsl_line="211">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="Searchlights_Viral_1"
+                             pxsl_line="211" />
+                    </Object>
+                    <Object
+                         pxsl_line="212">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="Searchlights_Biter_1"
+                             pxsl_line="212" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="6"
+                     pxsl_line="213" />
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="214">
+                    <Object
+                         pxsl_line="214">
+                        <QuestObject
+                             class="ModelObject"
+                             name="Searchlights_Door_Spawn_1"
+                             pxsl_line="214" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="215">
+                    <Object
+                         pxsl_line="215">
+                        <QuestObject
+                             class="ModelObject"
+                             name="Searchlights_Door_1"
+                             pxsl_line="215" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="216">
+                    <Object
+                         pxsl_line="217">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="Searchlights_Viral_1"
+                             pxsl_line="217" />
+                    </Object>
+                    <Object
+                         pxsl_line="218">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="Searchlights_Biter_1"
+                             pxsl_line="218" />
+                    </Object>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="219">
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="opening"
+                     show_locations="false"
+                     pxsl_line="220">
+                    <Trigger
+                         pxsl_line="220">
+                        <QuestObject
+                             class="DoorDI"
+                             name="Searchlights_Door_Bolts_1"
+                             pxsl_line="220" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="221">
+                    <Object
+                         pxsl_line="221">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="Searchlights_Bomber_1"
+                             pxsl_line="221" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="6"
+                     pxsl_line="222" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="223">
+                    <Object
+                         pxsl_line="223">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="Searchlights_Bomber_1"
+                             pxsl_line="223" />
+                    </Object>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="224">
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="0"
+                     show_locations="false"
+                     pxsl_line="225">
+                    <Destination
+                         pxsl_line="225">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="SearchLights_GoTo_Checkpoint_1"
+                             pxsl_line="225" />
+                    </Destination>
+                </Phase>
+                <!-- Enabling first respawn point on the infamy -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="227">
+                    <Object
+                         pxsl_line="228">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Searchlights_SafeZone::SP_searchlight_hubzone_02"
+                             pxsl_line="228" />
+                    </Object>
+                    <Object
+                         pxsl_line="229">
+                        <QuestObject
+                             class="SpawnPointsCapsule"
+                             name="SearchLights_SpawnPointCapsule_Bridge_001"
+                             pxsl_line="229" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="0"
+                     show_locations="false"
+                     pxsl_line="230">
+                    <Destination
+                         pxsl_line="230">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="SearchLights_GoTo_Checkpoint_003"
+                             pxsl_line="230" />
+                    </Destination>
+                </Phase>
+                <!-- Enabling second respawn point on the infamy -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="232">
+                    <Object
+                         pxsl_line="233">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="Searchlights_SafeZone::QEG"
+                             pxsl_line="233" />
+                    </Object>
+                    <Object
+                         pxsl_line="234">
+                        <QuestObject
+                             class="DepotContainer"
+                             name="Searchlights_SafeZone::SearchLights_sz_depot::bag"
+                             pxsl_line="234" />
+                    </Object>
+                    <Object
+                         pxsl_line="235">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Searchlights_SafeZone::SP_searchlight_hubzone_01"
+                             pxsl_line="235" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="236">
+                    <Object
+                         pxsl_line="236">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Searchlights_SafeZone::SP_searchlight_hubzone_02"
+                             pxsl_line="236" />
+                    </Object>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="237">
+            <Destination
+                 pxsl_line="237">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Searchlights_SafeZone::SP_searchlight_hubzone_01"
+                     pxsl_line="237" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="Searchlights_02"
+             finished="true"
+             pxsl_line="238" />
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="239">
+            <Object
+                 pxsl_line="239">
+                <QuestObject
+                     class="SpawnPointsCapsule"
+                     name="SearchLights_SpawnPointCapsule_Bridge_001"
+                     pxsl_line="239" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="240">
+            <Destination
+                 pxsl_line="240">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Searchlights_SafeZone::SP_searchlight_hubzone_01"
+                     pxsl_line="240" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- PLAYERS BAG at SEARCHLIGHTS -->
+    <Quest
+         name="__PlayersDepotAtSearchLights"
+         parent="__SafeZone_InfamyBridge"
+         pxsl_line="243">
+        <!-- Show progress itemst -->
+        <Phase
+             type="gather players guard"
+             name="_"
+             distance="-30"
+             show_locations="false"
+             pxsl_line="245">
+            <Destination
+                 pxsl_line="245">
+                <QuestObject
+                     class="DepotContainer"
+                     name="Searchlights_SafeZone::SearchLights_sz_depot::bag"
+                     pxsl_line="245" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="AirDrop03"
+             finished="true"
+             show_locations="false"
+             pxsl_line="246" />
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="247">
+            <Object
+                 pxsl_line="247">
+                <QuestObject
+                     class="ModelObject"
+                     name="Searchlights_SafeZone::SearchLights_sz_depot::Item01"
+                     pxsl_line="247" />
+            </Object>
+        </Phase>
+        <!-- checkpoints between quests should be used with caution -->
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="SaveTheTower03"
+             finished="true"
+             show_locations="false"
+             pxsl_line="249" />
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="250">
+            <Object
+                 pxsl_line="250">
+                <QuestObject
+                     class="ModelObject"
+                     name="Searchlights_SafeZone::SearchLights_sz_depot::Item02"
+                     pxsl_line="250" />
+            </Object>
+        </Phase>
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="Q_Demolition05"
+             finished="true"
+             show_locations="false"
+             pxsl_line="251" />
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="252">
+            <Object
+                 pxsl_line="252">
+                <QuestObject
+                     class="ModelObject"
+                     name="Searchlights_SafeZone::SearchLights_sz_depot::Item03"
+                     pxsl_line="252" />
+            </Object>
+        </Phase>
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="Q_AnotherDay"
+             finished="true"
+             show_locations="false"
+             pxsl_line="254" />
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="255">
+            <Object
+                 pxsl_line="255">
+                <QuestObject
+                     class="ModelObject"
+                     name="Searchlights_SafeZone::SearchLights_sz_depot::Item04"
+                     pxsl_line="255" />
+            </Object>
+        </Phase>
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="ProjectMayhem07"
+             finished="true"
+             show_locations="false"
+             pxsl_line="257" />
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="258">
+            <Object
+                 pxsl_line="258">
+                <QuestObject
+                     class="ModelObject"
+                     name="Searchlights_SafeZone::SearchLights_sz_depot::Item05"
+                     pxsl_line="258" />
+            </Object>
+        </Phase>
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="Museum05"
+             finished="true"
+             show_locations="false"
+             pxsl_line="260" />
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="261">
+            <Object
+                 pxsl_line="261">
+                <QuestObject
+                     class="ModelObject"
+                     name="Searchlights_SafeZone::SearchLights_sz_depot::Item06"
+                     pxsl_line="261" />
+            </Object>
+        </Phase>
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="Contact_05"
+             finished="true"
+             show_locations="false"
+             pxsl_line="263" />
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="264">
+            <Object
+                 pxsl_line="264">
+                <QuestObject
+                     class="ModelObject"
+                     name="Searchlights_SafeZone::SearchLights_sz_depot::Item07"
+                     pxsl_line="264" />
+            </Object>
+        </Phase>
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="Clinic02"
+             finished="true"
+             show_locations="false"
+             pxsl_line="266" />
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="267">
+            <Object
+                 pxsl_line="267">
+                <QuestObject
+                     class="ModelObject"
+                     name="Searchlights_SafeZone::SearchLights_sz_depot::Item08"
+                     pxsl_line="267" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="268">
+            <Destination
+                 pxsl_line="268">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="MapStart"
+                     pxsl_line="268" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- VOLTAGE - 04 -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="Voltage_04"
+         parent="Voltage_03"
+         glued="true"
+         pxsl_line="274">
+        <Phase
+             type="talk"
+             name="_"
+             speaker="voice2d"
+             group="Player_Voltage_03DLG01"
+             show_locations="false"
+             auto_start="true"
+             pxsl_line="275" />
+        <Phase
+             type="wait guard"
+             name="_"
+             time="1"
+             pxsl_line="276" />
+        <Phase
+             type="talk"
+             name="_"
+             speaker="voice2d"
+             group="Alfie_Voltage_08DLG01"
+             show_locations="false"
+             auto_start="true"
+             pxsl_line="277" />
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="278">
+            <Destination
+                 pxsl_line="278">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Voltage_SP_ElectricalSubstation_001"
+                     pxsl_line="278" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="OR"
+             name="_"
+             pxsl_line="279">
+            <Path
+                 pxsl_line="280">
+                <Phase
+                     type="started quest guard"
+                     name="_"
+                     quest_name="Courier03"
+                     finished="true"
+                     pxsl_line="281" />
+            </Path>
+            <Path
+                 pxsl_line="282">
+                <Phase
+                     type="started quest guard"
+                     name="_"
+                     quest_name="Courier03"
+                     finished="false"
+                     started="false"
+                     pxsl_line="283" />
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="voice2d"
+                     group="Alfie_Voltage_10DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="284" />
+            </Path>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="285">
+            <Object
+                 pxsl_line="286">
+                <QuestObject
+                     class="SoundEmitterRandom"
+                     name="SER_Volatile_Pain_01"
+                     pxsl_line="286" />
+            </Object>
+            <Object
+                 pxsl_line="287">
+                <QuestObject
+                     class="SoundEmitterRandom"
+                     name="SER_Volatile_Pain_02"
+                     pxsl_line="287" />
+            </Object>
+        </Phase>
+        <Phase
+             type="set reward"
+             name="_"
+             reward="VoltageExp_reward"
+             pxsl_line="288" />
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="289">
+            <Destination
+                 pxsl_line="289">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Voltage_SP_ElectricalSubstation_001"
+                     pxsl_line="289" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- VOLTAGE - END -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__Voltage_END"
+         parent="Voltage_04"
+         pxsl_line="293">
+        <Phase
+             type="gather players guard"
+             name="_"
+             distance="-15"
+             show_locations="false"
+             pxsl_line="294">
+            <Destination
+                 pxsl_line="294">
+                <QuestObject
+                     class="HumanAI"
+                     name="Alfie"
+                     pxsl_line="294" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="appear"
+             name="_"
+             mode="hide"
+             pxsl_line="295">
+            <Object
+                 pxsl_line="295">
+                <QuestObject
+                     class="HumanAI"
+                     name="Alfie"
+                     pxsl_line="295" />
+            </Object>
+        </Phase>
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="Courier03"
+             finished="true"
+             pxsl_line="296" />
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="297">
+            <Object
+                 pxsl_line="297">
+                <QuestObject
+                     class="HumanAI"
+                     name="Alfie"
+                     pxsl_line="297" />
+            </Object>
+        </Phase>
+        <Phase
+             type="talk"
+             name="_"
+             speaker="voice2d"
+             group="Alfie_Voltage_09DLG01"
+             show_locations="false"
+             auto_start="true"
+             pxsl_line="298" />
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="299">
+            <Destination
+                 pxsl_line="299">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Voltage_SP_ElectricalSubstation_001"
+                     pxsl_line="299" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- SEARCHLIGHTS - SHOW TOWER HUB DEFENCE -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__Searchlights_PursuitBreaker_Show"
+         parent="Voltage_04"
+         pxsl_line="303">
+        <Phase
+             type="gather players guard"
+             name="_"
+             distance="-64"
+             show_locations="false"
+             pxsl_line="304">
+            <Destination
+                 pxsl_line="304">
+                <QuestObject
+                     class="Marker"
+                     name="SearchLights_TowerHub_Defence_Lights::Marker"
+                     pxsl_line="304" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="appear"
+             name="Searchlights - TowerHub Defence - Show"
+             mode="show"
+             pxsl_line="305">
+            <Object
+                 pxsl_line="305">
+                <QuestObject
+                     class="GroupingObject"
+                     name="SearchLights_GroupingObject_TowerHub_Defence_Lights"
+                     pxsl_line="305" />
+            </Object>
+            <DebugPlayerPosition
+                 pxsl_line="306">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="SearchLights_SP_001"
+                     pxsl_line="306" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="307">
+            <Destination
+                 pxsl_line="307">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="SearchLights_SP_001"
+                     pxsl_line="307" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- SEARCHLIGHTS - START -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="Searchlights"
+         parent="__Voltage_END"
+         quest_giver="Alfie"
+         difficulty="medium"
+         show_quest_log_reminder="true"
+         pxsl_line="311">
+        <Phase
+             type="talk"
+             name="Searchlights - START"
+             speaker="Alfie"
+             group="Alfie_Searchlights_USE"
+             show_locations="false"
+             following_group="Alfie_Searchlights_INP"
+             questgiver_indicator="true"
+             pxsl_line="312">
+            <DebugPlayerPosition
+                 pxsl_line="313">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="SearchLights_SP_001"
+                     pxsl_line="313" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="set reward"
+             name="_"
+             speaker="Alfie"
+             reward="VoltageCraftplan_reward"
+             pxsl_line="314" />
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="315">
+            <Object
+                 pxsl_line="316">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="Searchlights_QEG_Volatiles"
+                     pxsl_line="316" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="317">
+            <Destination
+                 pxsl_line="317">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="SearchLights_SP_001"
+                     pxsl_line="317" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- SEARCHLIGHTS - BROKEN LAMPS -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__Searchlights_BrokenLamp_001"
+         parent="Searchlights"
+         pxsl_line="321">
+        <Phase
+             type="AND"
+             name="_"
+             pxsl_line="322">
+            <Path
+                 pxsl_line="323">
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="on"
+                     show_locations="false"
+                     pxsl_line="324">
+                    <Trigger
+                         pxsl_line="324">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="SearchLights_Lamp_Broken_001::Switch"
+                             pxsl_line="324" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="325">
+                    <Object
+                         pxsl_line="326">
+                        <QuestObject
+                             class="FXEmitter"
+                             name="SearchLights_Lamp_Broken_001::FX"
+                             pxsl_line="326" />
+                    </Object>
+                    <Object
+                         pxsl_line="327">
+                        <QuestObject
+                             class="ElectricityEmitterDI"
+                             name="SearchLights_Lamp_Broken_001::ElectricEmitter"
+                             pxsl_line="327" />
+                    </Object>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="328">
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="on"
+                     show_locations="false"
+                     pxsl_line="329">
+                    <Trigger
+                         pxsl_line="329">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="SearchLights_Lamp_Broken_002::Switch"
+                             pxsl_line="329" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="330">
+                    <Object
+                         pxsl_line="331">
+                        <QuestObject
+                             class="FXEmitter"
+                             name="SearchLights_Lamp_Broken_002::FX"
+                             pxsl_line="331" />
+                    </Object>
+                    <Object
+                         pxsl_line="332">
+                        <QuestObject
+                             class="ElectricityEmitterDI"
+                             name="SearchLights_Lamp_Broken_002::ElectricEmitter"
+                             pxsl_line="332" />
+                    </Object>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="333">
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="on"
+                     show_locations="false"
+                     pxsl_line="334">
+                    <Trigger
+                         pxsl_line="334">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="SearchLights_Lamp_Broken_003::Switch"
+                             pxsl_line="334" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="335">
+                    <Object
+                         pxsl_line="336">
+                        <QuestObject
+                             class="FXEmitter"
+                             name="SearchLights_Lamp_Broken_003::FX"
+                             pxsl_line="336" />
+                    </Object>
+                    <Object
+                         pxsl_line="337">
+                        <QuestObject
+                             class="ElectricityEmitterDI"
+                             name="SearchLights_Lamp_Broken_003::ElectricEmitter"
+                             pxsl_line="337" />
+                    </Object>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="338">
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="on"
+                     show_locations="false"
+                     pxsl_line="339">
+                    <Trigger
+                         pxsl_line="339">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="SearchLights_Lamp_Broken_004::Switch"
+                             pxsl_line="339" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="340">
+                    <Object
+                         pxsl_line="341">
+                        <QuestObject
+                             class="FXEmitter"
+                             name="SearchLights_Lamp_Broken_004::FX"
+                             pxsl_line="341" />
+                    </Object>
+                    <Object
+                         pxsl_line="342">
+                        <QuestObject
+                             class="ElectricityEmitterDI"
+                             name="SearchLights_Lamp_Broken_004::ElectricEmitter"
+                             pxsl_line="342" />
+                    </Object>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="343">
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="on"
+                     show_locations="false"
+                     pxsl_line="344">
+                    <Trigger
+                         pxsl_line="344">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="SearchLights_Lamp_Broken_005::Switch"
+                             pxsl_line="344" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="345">
+                    <Object
+                         pxsl_line="346">
+                        <QuestObject
+                             class="FXEmitter"
+                             name="SearchLights_Lamp_Broken_005::FX"
+                             pxsl_line="346" />
+                    </Object>
+                    <Object
+                         pxsl_line="347">
+                        <QuestObject
+                             class="ElectricityEmitterDI"
+                             name="SearchLights_Lamp_Broken_005::ElectricEmitter"
+                             pxsl_line="347" />
+                    </Object>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="348">
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="on"
+                     show_locations="false"
+                     pxsl_line="349">
+                    <Trigger
+                         pxsl_line="349">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="SearchLights_Lamp_Broken_006::Switch"
+                             pxsl_line="349" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="350">
+                    <Object
+                         pxsl_line="351">
+                        <QuestObject
+                             class="FXEmitter"
+                             name="SearchLights_Lamp_Broken_006::FX"
+                             pxsl_line="351" />
+                    </Object>
+                    <Object
+                         pxsl_line="352">
+                        <QuestObject
+                             class="ElectricityEmitterDI"
+                             name="SearchLights_Lamp_Broken_006::ElectricEmitter"
+                             pxsl_line="352" />
+                    </Object>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="353">
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="on"
+                     show_locations="false"
+                     pxsl_line="354">
+                    <Trigger
+                         pxsl_line="354">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="SearchLights_Lamp_Broken_007::Switch"
+                             pxsl_line="354" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="355">
+                    <Object
+                         pxsl_line="356">
+                        <QuestObject
+                             class="FXEmitter"
+                             name="SearchLights_Lamp_Broken_007::FX"
+                             pxsl_line="356" />
+                    </Object>
+                    <Object
+                         pxsl_line="357">
+                        <QuestObject
+                             class="ElectricityEmitterDI"
+                             name="SearchLights_Lamp_Broken_007::ElectricEmitter"
+                             pxsl_line="357" />
+                    </Object>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="358">
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="on"
+                     show_locations="false"
+                     pxsl_line="359">
+                    <Trigger
+                         pxsl_line="359">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="SearchLights_Lamp_Broken_008::Switch"
+                             pxsl_line="359" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="360">
+                    <Object
+                         pxsl_line="361">
+                        <QuestObject
+                             class="FXEmitter"
+                             name="SearchLights_Lamp_Broken_008::FX"
+                             pxsl_line="361" />
+                    </Object>
+                    <Object
+                         pxsl_line="362">
+                        <QuestObject
+                             class="ElectricityEmitterDI"
+                             name="SearchLights_Lamp_Broken_008::ElectricEmitter"
+                             pxsl_line="362" />
+                    </Object>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="363">
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="on"
+                     show_locations="false"
+                     pxsl_line="364">
+                    <Trigger
+                         pxsl_line="364">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="SearchLights_Lamp_Broken_009::Switch"
+                             pxsl_line="364" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="365">
+                    <Object
+                         pxsl_line="366">
+                        <QuestObject
+                             class="FXEmitter"
+                             name="SearchLights_Lamp_Broken_009::FX"
+                             pxsl_line="366" />
+                    </Object>
+                    <Object
+                         pxsl_line="367">
+                        <QuestObject
+                             class="ElectricityEmitterDI"
+                             name="SearchLights_Lamp_Broken_009::ElectricEmitter"
+                             pxsl_line="367" />
+                    </Object>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="368">
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="on"
+                     show_locations="false"
+                     pxsl_line="369">
+                    <Trigger
+                         pxsl_line="369">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="SearchLights_Lamp_Broken_010::Switch"
+                             pxsl_line="369" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="370">
+                    <Object
+                         pxsl_line="371">
+                        <QuestObject
+                             class="FXEmitter"
+                             name="SearchLights_Lamp_Broken_010::FX"
+                             pxsl_line="371" />
+                    </Object>
+                    <Object
+                         pxsl_line="372">
+                        <QuestObject
+                             class="ElectricityEmitterDI"
+                             name="SearchLights_Lamp_Broken_010::ElectricEmitter"
+                             pxsl_line="372" />
+                    </Object>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="373">
+            <Destination
+                 pxsl_line="373">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="SearchLights_SP_Bridge_001"
+                     pxsl_line="373" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- SEARCHLIGHTS - 02 -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="Searchlights_02"
+         parent="Searchlights"
+         glued="true"
+         pxsl_line="377">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Searchlights_OBJ_GetToBridge&amp;"
+             pxsl_line="378">
+            <Path
+                 pxsl_line="378">
+                <Phase
+                     type="go to"
+                     name="Searchlights - Get to the bridge"
+                     distance="16"
+                     pxsl_line="379">
+                    <Destination
+                         pxsl_line="379">
+                        <QuestObject
+                             class="Marker"
+                             name="SearchLights_Marker_Bridge_001"
+                             pxsl_line="379" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="380">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="SearchLights_SP_001"
+                             pxsl_line="380" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="381">
+                    <Destination
+                         pxsl_line="381">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="SearchLights_SP_Bridge_001"
+                             pxsl_line="381" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Searchlights_OBJ_TakeSearchlights&amp;"
+             pxsl_line="383">
+            <Path
+                 pxsl_line="383">
+                <Phase
+                     type="go to"
+                     name="Searchlights - Collect light bulbs"
+                     distance="10000000"
+                     show_locations="false"
+                     pxsl_line="384">
+                    <Destination
+                         pxsl_line="384">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="SearchLights_SP_Bridge_001"
+                             pxsl_line="384" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="385">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="SearchLights_SP_Bridge_001"
+                             pxsl_line="385" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <!-- Climbing the bridge - START -->
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="387">
+                    <SpecificLocation
+                         pxsl_line="388">
+                        <QuestObject
+                             class="ZoneBox"
+                             name="Searchlights_ZB_Lamp_001"
+                             pxsl_line="388" />
+                    </SpecificLocation>
+                    <Path
+                         pxsl_line="389">
+                        <Phase
+                             type="use"
+                             name="_"
+                             desired_state="on"
+                             show_locations="false"
+                             pxsl_line="390">
+                            <Trigger
+                                 pxsl_line="390">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="SearchLights_Lamp_001::Switch"
+                                     pxsl_line="390" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="391">
+                            <Object
+                                 pxsl_line="391">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="SearchLights_Lamp_001::LAMP"
+                                     pxsl_line="391" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="392">
+                        <Phase
+                             type="use"
+                             name="_"
+                             desired_state="on"
+                             show_locations="false"
+                             pxsl_line="393">
+                            <Trigger
+                                 pxsl_line="393">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="SearchLights_Lamp_002::Switch"
+                                     pxsl_line="393" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="394">
+                            <Object
+                                 pxsl_line="394">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="SearchLights_Lamp_002::LAMP"
+                                     pxsl_line="394" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="395">
+                        <Phase
+                             type="use"
+                             name="_"
+                             desired_state="on"
+                             show_locations="false"
+                             pxsl_line="396">
+                            <Trigger
+                                 pxsl_line="396">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="SearchLights_Lamp_003::Switch"
+                                     pxsl_line="396" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="397">
+                            <Object
+                                 pxsl_line="397">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="SearchLights_Lamp_003::LAMP"
+                                     pxsl_line="397" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="398">
+                        <Phase
+                             type="use"
+                             name="_"
+                             desired_state="on"
+                             show_locations="false"
+                             pxsl_line="399">
+                            <Trigger
+                                 pxsl_line="399">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="SearchLights_Lamp_004::Switch"
+                                     pxsl_line="399" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="400">
+                            <Object
+                                 pxsl_line="400">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="SearchLights_Lamp_004::LAMP"
+                                     pxsl_line="400" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="401">
+                        <Phase
+                             type="use"
+                             name="_"
+                             desired_state="on"
+                             show_locations="false"
+                             pxsl_line="402">
+                            <Trigger
+                                 pxsl_line="402">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="SearchLights_Lamp_005::Switch"
+                                     pxsl_line="402" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="403">
+                            <Object
+                                 pxsl_line="403">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="SearchLights_Lamp_005::LAMP"
+                                     pxsl_line="403" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="404">
+                        <Phase
+                             type="use"
+                             name="_"
+                             desired_state="on"
+                             show_locations="false"
+                             pxsl_line="405">
+                            <Trigger
+                                 pxsl_line="405">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="SearchLights_Lamp_006::Switch"
+                                     pxsl_line="405" />
+                            </Trigger>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="406">
+                            <Object
+                                 pxsl_line="406">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="SearchLights_Lamp_006::LAMP"
+                                     pxsl_line="406" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <!--  -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="408">
+                    <Object
+                         pxsl_line="409">
+                        <QuestObject
+                             class="AIEscapeArea"
+                             name="SearchLights_EscapeArea_Bridge_01"
+                             pxsl_line="409" />
+                    </Object>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="410">
+            <Destination
+                 pxsl_line="410">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="SearchLights_SP_Bridge_001"
+                     pxsl_line="410" />
+            </Destination>
+        </Phase>
+        <!-- Climbing the bridge - END -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Searchlights_OBJ_TakeSearchlightsToAlfie&amp;"
+             pxsl_line="413">
+            <Path
+                 pxsl_line="413">
+                <Phase
+                     type="talk"
+                     name="Searchlights - END"
+                     speaker="Alfie"
+                     group="Player_Searchlights_END"
+                     pxsl_line="414">
+                    <DebugPlayerPosition
+                         pxsl_line="415">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="SearchLights_SP_001"
+                             pxsl_line="415" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="set reward"
+                     name="_"
+                     speaker="Alfie"
+                     reward="Searchlights_reward"
+                     pxsl_line="416" />
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="417">
+            <Destination
+                 pxsl_line="417">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="SearchLights_SP_001"
+                     pxsl_line="417" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- SEARCHLIGHTS - END -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__Searchlights_END"
+         parent="Searchlights_02"
+         pxsl_line="421">
+        <Phase
+             type="started quest guard"
+             name="Searchlights - enabling pursuit braker"
+             quest_name="__Searchlights_PursuitBreaker_Show"
+             finished="true"
+             pxsl_line="422">
+            <DebugPlayerPosition
+                 pxsl_line="423">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="SearchLights_SP_001"
+                     pxsl_line="423" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="424">
+            <Object
+                 pxsl_line="425">
+                <QuestObject
+                     class="PursuitBreaker"
+                     name="SearchLights_TowerHub_Defence_Lights::PursuitBreaker_Tower_Hub_Light::Lamp_pursuit_breaker"
+                     pxsl_line="425" />
+            </Object>
+            <Object
+                 pxsl_line="426">
+                <QuestObject
+                     class="PBreakerActivator"
+                     name="SearchLights_TowerHub_Defence_Lights::PursuitBreaker_Tower_Hub_Light::Lamp_switch"
+                     pxsl_line="426" />
+            </Object>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="427">
+            <Object
+                 pxsl_line="428">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="Searchlights_QEG_Volatiles"
+                     pxsl_line="428" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="429">
+            <Destination
+                 pxsl_line="429">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="SearchLights_SP_001"
+                     pxsl_line="429" />
+            </Destination>
+        </Phase>
+    </Quest>
+</QuestsDefinitions>

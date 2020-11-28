@@ -1,0 +1,179 @@
+ !include("ai_data.def")
+!include("ai_timing.def")
+!include("human_sound_types.def")
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// npc woman
+///////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////// DATA ///////////////////////////////////////////////
+
+//################
+//#### ATTACK ####
+//################
+//## attack:pose:item_type:attack_type:direction:attack_range:should_change_pose
+//################
+
+Data("attack:standing::kick:::", 0, "", -1, 1)
+
+//#######################
+//#### HIT REACTIONS ####
+//#######################
+//## hit_reaction:pose:hit_reaction:item_type:damage_type:attacker_pos:body_part:direction:severity
+//#######################
+
+
+
+//##############
+//#### IDLE ####
+//##############
+//## idle:pose:idle_type:item_type:scare_level:is_idle_prepare:is_idle_finish
+//##############
+Data("idle:standing::stand:::", -2, "w_npc_standing_idle_01", -1, 1)
+
+
+//##################
+//#### MOVEMENT ####
+//##################
+//## movement:is_standing:movement_type:movement_direction:alarm_level:item_type:ram_type:stairs_climbing_state
+//##################
+
+//Data("movement:standing:walk:forward::::", -2, "W_npc_walk_loop_01",-1, 1) //test diable
+//Data("movement:standing:walk:forward::::", -2, "W_npc_walk_loop_02",-1, 1)  //bad quality
+
+Data("movement:standing:run:forward::::", -2, "w_npc_run_loop_01",-1, 1)
+
+//## tired ##
+Data("movement:standing:walk:forward::::", -2, "W_Npc_walk_tired_Loop_01",-1, 1) //tired
+
+//###############
+//#### START ####
+//###############
+//## start:start_pose:alarm_level:item_type:movement_type:angle:direction
+//###############
+/*
+//## walk  ##
+Data("start:standing:::walk:90:left:", -2, "W_npc_walk_start_90L", -1, 1)
+Data("start:standing:::walk:90:right:", -2, "W_npc_walk_start_90R", -1, 1)
+Data("start:standing:::walk:0::", -2, "W_npc_walk_start_front_01", -1, 1)
+Data("start:standing:::walk:180:left:", -2, "w_npc_walk_start_180l",-1, 1)
+Data("start:standing:::walk:180:right:", -2, "w_npc_walk_start_180r",-1, 1)
+*/
+
+//## walk Tired##
+
+Data("start:standing:::walk:90:left:", -2, "W_Npc_walk_tired_Start_90L_01", -1, 1)
+Data("start:standing:::walk:90:right:", -2, "W_Npc_walk_tired_Start_90R_01", -1, 1)
+Data("start:standing:::walk:0::", -2, "W_Npc_walk_tired_Start_Front_01", -1, 1)
+Data("start:standing:::walk:0::", -2, "W_Npc_walk_tired_Start_Front_02", -1, 1)
+Data("start:standing:::walk:180:left:", -2, "w_npc_walk_start_180l",-1, 1)
+Data("start:standing:::walk:180:right:", -2, "w_npc_walk_start_180r",-1, 1)
+
+
+
+//## RUN ##
+
+Data("start:standing:::run:0::", -2, "W_npc_run_start_front_01", -1, 1)
+Data("start:standing:::run:90:left:", -2, "w_npc_run_start_90l", -1, 1)
+Data("start:standing:::run:90:right:", -2, "w_npc_run_start_90r", -1, 1)
+Data("start:standing:::run:180:left:", -2, "w_npc_run_start_180l", -1, 1)
+Data("start:standing:::run:180:right:", -2, "w_npc_run_start_180r", -1, 1)
+
+
+
+//##############
+//#### STOP ####
+//##############
+//## stop:end_pose:alarm_level:item_type:movement_type:angle:direction
+//##############
+
+Data("stop:standing:::run:0::false:", -2, "W_npc_run_stop_front_01", -1, 1)
+Data("stop:standing:::run:0::false:", -2, "W_npc_run_stop_front_02", -1, 1)
+
+
+
+Data("stop:standing:::run:90:right:false:", -2, "W_npc_run_stop_90R", -1, 1)  //animation files are wrong l->r  r->l
+Data("stop:standing:::run:90:left:false:", -2, "W_npc_run_stop_90L", -1, 1)//animation files are wrong l->r  r->l
+Data("stop:standing:::run:180:right:false:", -2, "w_npc_run_stop_180r", -1, 1)
+Data("stop:standing:::run:180:left:false:", -2, "w_npc_run_stop_180l", -1, 1)
+
+/* FasT WALK
+Data("stop:standing:::walk:0::false:", -2, "W_npc_walk_stop_front_01", -1, 1)
+Data("stop:standing:::walk:0::false:", -2, "W_npc_walk_stop_front_02", -1, 1)
+Data("stop:standing:::walk:90:left:false:", -2, "W_npc_walk_stop_90L", -1, 1)
+Data("stop:standing:::walk:90:right:false:", -2, "W_npc_walk_stop_90R", -1, 1)
+Data("stop:standing:::walk:180:right:false:", -2, "W_npc_walk_stop_180R", -1, 1)
+Data("stop:standing:::walk:180:left:false:", -2, "W_npc_walk_stop_180L", -1, 1)
+*/
+Data("stop:standing:::walk:0::false:", -2, "W_Npc_walk_tired_Stop_Front_01", -1, 1)
+Data("stop:standing:::walk:0::false:", -2, "W_Npc_walk_tired_Stop_Front_02", -1, 1)
+Data("stop:standing:::walk:90:left:false:", -2, "W_Npc_walk_tired_Stop_90L_01", -1, 1)
+Data("stop:standing:::walk:90:right:false:", -2, "W_Npc_walk_tired_Stop_90R_01", -1, 1)
+Data("stop:standing:::walk:180:right:false:", -2, "W_npc_walk_stop_180R", -1, 1)
+Data("stop:standing:::walk:180:left:false:", -2, "W_npc_walk_stop_180L", -1, 1)
+
+
+//##################
+//##### DODGE ######
+//##################
+//## dodge:pose:item_type:type
+//##################
+
+
+
+//##############
+//#### TURN ####
+//##############
+//## turn:pose:alarm_level:item_type:direction:angle
+//##############
+
+Data("turn:standing:::left:45", -2, "W_npc_turn_45L_01", -1, 1)
+Data("turn:standing:::right:45", -2, "W_npc_turn_45R_01", -1, 1)
+
+Data("turn:standing:::left:90", -2, "W_npc_turn_90l_01", -1, 1)
+Data("turn:standing:::right:90", -2, "W_npc_turn_90R_01", -1, 1)
+
+Data("turn:standing:::left:180", -2, "W_npc_turn_180L_01", -1, 1)
+Data("turn:standing:::right:180", -2, "W_npc_turn_180R_01", -1, 1)
+
+//#######################
+//#### MOVEMENT TURN ####
+//#######################
+//## movement_turn:pose:alarm_level:item_type:movement_type:angle:direction:sudden
+//#######################
+
+
+Data("movement_turn:standing:::walk:90:left:true", -2, "W_npc_walk_turn_45L", -1, 1)
+Data("movement_turn:standing:::walk:90:right:true", -2, "W_npc_walk_turn_90R", -1, 1)
+
+
+//##################
+//##### DIALOG ##### old  style
+//##################
+//## dialog:dialog_mental_state:pose:dialog_activity
+//##################
+
+
+//######################################
+//## M_CARING  - default talk
+
+Data("dialog:m_caring:pose2:idle", -2, "w_npc_lp_dialog_01_idle", -1, 1)
+Data("dialog:m_caring:pose2:use", -2, "w_npc_lp_dialog_02_idle", -1, 1)
+Data("dialog:m_caring:pose2:use_second", -2, "w_npc_lp_dialog_02_idle", -1, 1)
+Data("dialog:m_caring:pose2:disagree", -2, "w_npc_lp_dialog_02_talk_02", -1, 1)
+Data("dialog:m_caring:pose2:player_spotted", -2, "w_npc_lp_dialog_02_talk_01", -1, 1)
+
+
+
+/////////////////////////////////////////// PARAMETERS ////////////////////////////////////////////
+ParamFloat("turn_speed", 120.0)
+ParamBool("can_use_emergency_stop_controller", 1)
+
+ParamFloat("head_horz_clamp", 45.0) 
+ParamFloat("head_vert_min", -30.0)
+ParamFloat("head_vert_max", 25.0)
+ParamFloat("head_enable_time", 1.)
+ParamFloat("head_disable_time", 2.5)
+ParamFloat("head_dev_time", 1.25)
+
+ParamBool("adaptive_head_tracking", 1)
+ParamBool("arms_enabled", 0)

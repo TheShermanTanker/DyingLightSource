@@ -1,0 +1,211 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="sewers"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST NAME : Saviors -->
+    <!-- QUEST INFO : Player is looking for Jade. Player is trying to escape from the zone through sewers. -->
+    <!-- AFTER QUEST:  -->
+    <!-- COMMENT    :  -->
+    <!-- FROM       : >> SLUMS -->
+    <!-- TO         : >> SLUMS -> SEWERS -> OLD TOWN -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- quest Saviors_02 -parent=Saviors -glued=true -leading_portal=Saviors_Portal_Slums_TO_Sewers -->
+        <!-- ,BLOCK _ -obj=<<Meet Saviors>> -->
+            <!-- ,goto <<Saviors_Test - START>> SpawnPoint Saviors_SP_Slums_TO_Sewers -distance=10 -->
+                <!-- ,debugpos SpawnPoint Saviors_SP_Slums_TO_Sewers -->
+            <!-- ,enable _ BlackoutArea Saviors_BlackOut_001 -->
+            <!-- ,hide-multi _ -->
+                <!-- ,o MovieActor Saviors_Movie_DoorClose_001::Door -->
+                <!-- ,o MovieActor Saviors_Movie_DoorOpen_002::Door -->
+                <!-- ,o MovieActor Saviors_Movie_DoorOpen_03::Door -->
+            <!-- ,checkpoint _ SpawnPoint Saviors_SP_Slums_TO_Sewers -->
+            <!-- ,use _ PhysicalSwitchDI Saviors_PS_Knocking_001 -state=on -->
+            <!-- ,wait _ 1 -->
+            <!-- ,movie _ Saviors_Movie_DoorOpen_001::Movie_01 -->
+            <!-- ,talk <<Meet Smuglers in the Tunnel>> Lip Lip_Saviors_01DLG01 -->
+                <!-- ,debugpos SpawnPoint Saviors_SP_Slums_TO_Sewers -->
+            <!-- ,hide _ MovieActor Saviors_Movie_DoorOpen_001::Door -->
+            <!-- ,show _ MovieActor Saviors_Movie_DoorClose_001::Door -->
+            <!-- ,movie _ Saviors_Movie_DoorClose_001::Movie_01 -->
+            <!-- ,talk _ lip_fake Lip_Saviors_01DLG02 -auto=true -show=false -->
+            <!-- ,hide _ MovieActor Saviors_Movie_DoorClose_001::Door -->
+            <!-- ,show _ MovieActor Saviors_Movie_DoorOpen_002::Door -->
+            <!-- ,movie _ Saviors_Movie_DoorOpen_002::Movie_01 -->
+            <!-- ,talk _ Lip Lip_Saviors_01DLG03 -->
+        <!-- ,checkpoint _ SpawnPoint Saviors_SP_Slums_TO_Sewers -->
+        <!-- ,BLOCK _ -obj=<<Go to the sewer's entrance>> -->
+            <!-- ,AND <<Sewer's Entrance>> -->
+                <!-- ,debugpos SpawnPoint Saviors_SP_001 -->
+                <!--  -->
+                <!-- path -->
+                    <!-- ,use-lp _ NPCLifePlace LP_Lip_002 -style=walk -->
+                        <!-- ,ai HumanAI Lip -->
+                <!-- path -->
+                    <!-- ,wait _ 1 -->
+                    <!-- ,hide _ MovieActor Saviors_Movie_DoorOpen_002::Door -->
+                    <!-- ,show _ MovieActor Saviors_Movie_DoorOpen_03::Door -->
+                    <!-- ,movie _ Saviors_Movie_DoorOpen_03::Movie_01 -->
+                <!-- path -->
+                    <!-- ,goto  _ Marker Saviors_Marker_Tunnel_001 -distance=6 -->
+            <!-- ,checkpoint _ SpawnPoint Saviors_SP_001 -->
+        <!-- ,BLOCK _ -obj=<<Go To Smuggler>> -->
+            <!-- ,goto <<Talk to Savior>> Marker Saviors_Marker_Move_001 -distance=4 -->
+                <!-- ,debugpos SpawnPoint Saviors_SP_002 -->
+            <!-- ,checkpoint _ SpawnPoint Saviors_SP_002 -->
+        <!-- ,BLOCK _ -obj=<<Follow the Smuggler>> -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,goto _ Marker Saviors_Marker_Move_LP_002 -distance=3 -->
+                <!-- path -->
+                    <!-- ,use-lp _ NPCLifePlace LP_Savior_002 -style=run -->
+                        <!-- ,ai HumanAI Savior -->
+                <!-- path -->
+                    <!-- ,wait _ 1 -->
+                    <!-- ,talk _ Savior Savior_Saviors_01DLG01 -auto=true -show=false -->
+        <!-- ,checkpoint _ SpawnPoint Saviors_SP_003 -->
+        <!-- ,BLOCK _ -obj=<<Open the Door from the other side>> -->
+            <!-- ,AND <<Open the Door from the other side>> -->
+                <!-- ,debugpos SpawnPoint Saviors_SP_003 -->
+                <!--  -->
+                <!-- path -->
+                    <!-- ,goto _ Marker Saviors_Marker_001 -distance=3 -show=false -->
+                    <!-- ,enable _ QuestEnableGroup Saviors_QEG_001 -->
+                <!-- path -->
+                    <!-- ,use _ DoorDI Saviors_Door_001 -state=opened -->
+        <!-- ,checkpoint _ SpawnPoint Saviors_SP_003 -->
+        <!-- ,BLOCK _ -obj=<<Follow the Smuggler>> -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,use-lp _ NPCLifePlace LP_Savior_003 -style=run -->
+                        <!-- ,ai HumanAI Savior -->
+                <!-- path -->
+                    <!-- ,goto _ Marker Saviors_Marker_Move_LP_003 -distance=3 -->
+                <!-- path -->
+                    <!-- ,wait _ 3 -->
+                    <!-- ,talk _ Savior Savior_Saviors_01DLG02 -auto=true -show=false -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,use-lp _ NPCLifePlace LP_Savior_004 -style=run -->
+                        <!-- ,ai HumanAI Savior -->
+                <!-- path -->
+                    <!-- ,goto _ Marker Saviors_Marker_Move_LP_004 -distance=3 -->
+        <!-- ,checkpoint _ SpawnPoint Saviors_SP_004 -->
+        <!-- ,BLOCK _ -obj=<<Escape from the quarantine zone>> -->
+            <!-- ,AND <<Open the Grate>> -->
+                <!-- ,debugpos SpawnPoint Saviors_SP_004 -->
+                <!--  -->
+                <!-- path -->
+                    <!-- ,use-lp _ NPCLifePlace LP_SaviorsBandit06_002 -style=walk -->
+                        <!-- ,ai HumanAI SaviorsBandit06 -->
+                <!-- path -->
+                    <!-- ,use-lp _ NPCLifePlace LP_SaviorsBandit07_002 -style=walk -->
+                        <!-- ,ai HumanAI SaviorsBandit07 -->
+                <!-- path -->
+                    <!-- ,use-lp _ NPCLifePlace LP_Savior_005 -style=walk -->
+                        <!-- ,ai HumanAI Savior -->
+            <!-- ,movie _ Saviors_Movie_Grating_001 -->
+            <!-- ,checkpoint _ SpawnPoint Saviors_SP_004     -->
+            <!--  -->
+            <!-- ,OR <<Escape from the quarantine zone>> -->
+                <!-- ,debugpos SpawnPoint Saviors_SP_004 -->
+                <!--  -->
+                <!-- path -->
+                    <!-- ,goto _ Marker Saviors_Marker_Final -distance=3 -->
+                <!-- path -->
+                    <!-- ,goto _ Marker Saviors_Marker_002 -distance=3 -show=false -->
+                    <!-- ,enable _ QuestEnableGroup Saviors_QEG_002 -->
+            <!-- ,checkpoint _ SpawnPoint Saviors_SP_005 -->
+            <!-- ,OR <<Open the water sluize>> -->
+                <!-- ,debugpos SpawnPoint Saviors_SP_006 -->
+                <!--  -->
+                <!-- path -->
+                    <!-- ,goto _ Marker Saviors_Marker_Final -distance=3 -->
+                <!-- path -->
+                    <!-- ,use _ PhysicalSwitchDI Saviors_PS_001 -state=on -show=false -->
+                    <!-- ,enable _ LightObject Saviors_Light_Green_001 -->
+                    <!-- ,disable _ LightObject Saviors_Light_Red_001 -->
+                    <!-- ,enable _ LightObject Saviors_Light_Green_002 -->
+                    <!-- ,disable _ LightObject Saviors_Light_Red_002 -->
+                    <!-- ,movie _ Saviors_Movie_Water_001 -->
+            <!-- ,checkpoint _ SpawnPoint Saviors_SP_006 -->
+            <!--  -->
+            <!-- ,OR <<Turn off the power>> -->
+                <!-- ,debugpos SpawnPoint Saviors_SP_011 -->
+                <!--  -->
+                <!-- path -->
+                    <!-- ,goto _ Marker Saviors_Marker_Final -distance=3 -->
+                <!-- path -->
+                    <!-- ,OR _ -->
+                        <!-- path -->
+                            <!-- ,use _ PhysicalSwitchDI Saviors_PS_Electric_Green -state=on -show=false -->
+                            <!-- ,disable-multi _  -->
+                                <!-- ,o LampDI Saviors_Lamp_Green_001::Lamp -->
+                                <!-- ,o LampDI Saviors_Lamp_Green_002::Lamp -->
+                            <!-- ,semaphore _ -->
+                        <!-- path -->
+                            <!-- ,use _ PhysicalSwitchDI Saviors_PS_Electric_Blue -state=on -show=false -->
+                            <!-- ,disable-multi _  -->
+                                <!-- ,o LampDI Saviors_Lamp_Blue_001::Lamp -->
+                            <!-- ,semaphore _ -->
+                        <!-- path -->
+                            <!-- ,use _ PhysicalSwitchDI Saviors_PS_Electric_Red -state=on -show=false -->
+                            <!-- ,disable-multi _  -->
+                                <!-- ,o LampDI Saviors_Lamp_Red_001::Lamp -->
+                                <!-- ,o LampDI Saviors_Lamp_Red_002::Lamp -->
+                                <!-- ,o LampDI Saviors_Lamp_Red_003::Lamp -->
+                                <!-- ,o LampDI Saviors_Lamp_Red_004::Lamp -->
+                                <!-- ,o LampDI Saviors_Lamp_Red_005::Lamp -->
+                                <!-- ,o FXEmitter Saviors_FX_Sparks_Red -->
+                    <!-- ,disable _ ElectricityEmitterDI Saviors_ElectricEmitter_001 -->
+                    <!-- ,disable _ QuestEnableGroup Saviors_QEG_Sparks_001 -->
+            <!-- ,checkpoint _ SpawnPoint Saviors_SP_011 -->
+            <!--  -->
+            <!-- ,OR <<Fight enemies>> -->
+                <!-- ,debugpos SpawnPoint Saviors_SP_007 -->
+                <!--  -->
+                <!-- path -->
+                    <!-- ,goto _ Marker Saviors_Marker_Final -distance=3 -->
+                <!-- path -->
+                    <!-- ,goto _ SensorGoTo Saviors_GoTo_Trap_001 -distance=0 -show=false -->
+                    <!-- ,enable _ QuestEnableGroup Saviors_QEG_003 -->
+                    <!-- ,wait _ 3 -->
+                    <!-- ,disable _ BlackoutArea Saviors_BlackOut_001 -->
+                    <!-- ,radio-dialog _ voice2d Lip_Saviors_02DLG01 -->
+        <!-- ,checkpoint _ SpawnPoint Saviors_SP_007 -->
+        <!--  -->
+        <!-- ,BLOCK _ -obj=<<Escape from the trap>> -->
+            <!-- ,kill <<Kill enemies in sewers>> AISpawnBoxCompound Saviors_Enemies_001 -->
+                <!-- ,debugpos SpawnPoint Saviors_SP_008 -->
+            <!-- ,checkpoint _ SpawnPoint Saviors_SP_008 -->
+                <!--  -->
+            <!-- ,AND <<Kill eniemies in Patio>> -->
+                <!-- ,debugpos SpawnPoint Saviors_SP_008 -->
+                <!--  -->
+                <!-- path -->
+                    <!-- ,wait _ 3 -->
+                    <!-- ,set _ DoorDI Saviors_Door_003 -state=opened -->
+                    <!-- ,enable _ AISpawnBoxCompound Saviors_Enemies_002 -->
+                    <!-- ,kill _ AISpawnBoxCompound Saviors_Enemies_002 -->
+                <!-- path -->
+                    <!-- ,goto _ Marker Saviors_Marker_005 -distance=6 -show=false -->
+                    <!-- ,enable _ QuestEnableGroup Saviors_QEG_Enemies_Patio_001 -->
+                    <!-- ,kill-multi _ -->
+                        <!-- ,spawner AISpawnBoxCompound Saviors_Enemies_003 -->
+                        <!-- ,spawner AISpawnBoxCompound Saviors_Enemies_004 -->
+            <!-- ,checkpoint _ SpawnPoint Saviors_SP_009 -->
+            <!-- ,OR <<Interrogate last enemie>> -->
+                <!-- ,debugpos SpawnPoint Saviors_SP_009 -->
+                <!--  -->
+                <!-- path -->
+                    <!-- ,goto _ Marker Saviors_Marker_Final -distance=3 -->
+                <!-- path -->
+                    <!-- ,use _ InvisibleSwitchDI is_CIN_Saviors -state=on -show=false -->
+            <!-- ,enable _ InteractiveMovieTrigger it_CIN_Saviors -->
+            <!-- ,use _ InteractiveMovieTrigger it_CIN_Saviors -state=on -->
+            <!-- ,checkpoint _ SpawnPoint Saviors_SP_010 -->
+            <!--  -->
+            <!-- ,goto _ Marker Saviors_Marker_Final -distance=3 -->
+            <!-- ,enable _ MapPortal Saviors_MP_Sewers_TO_OldTown -->
+            <!-- ,checkpoint _ SpawnPoint Saviors_SP_010 -->
+</QuestsDefinitions>

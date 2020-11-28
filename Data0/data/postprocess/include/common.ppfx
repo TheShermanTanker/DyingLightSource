@@ -1,0 +1,298 @@
+import "EngineDefs.mth"
+
+export int i_screen_size_x_x360 = 1024;
+export int i_screen_size_y_x360 = 576;
+export int i_screen_size_x2_x360 = i_screen_size_x_x360 / 2;
+export int i_screen_size_y2_x360 = i_screen_size_y_x360 / 2;
+export int i_screen_size_x4_x360 = i_screen_size_x_x360 / 4;
+export int i_screen_size_y4_x360 = i_screen_size_y_x360 / 4;
+export int i_screen_size_x8_x360 = i_screen_size_x_x360 / 8;
+export int i_screen_size_y8_x360 = i_screen_size_y_x360 / 8;
+export int i_screen_size_x16_x360 = i_screen_size_x_x360 / 16;
+export int i_screen_size_y16_x360 = i_screen_size_y_x360 / 16;
+export int i_screen_size_x32_x360 = i_screen_size_x_x360 / 32;
+export int i_screen_size_y32_x360 = i_screen_size_y_x360 / 32;
+export int i_screen_size_x64_x360 = i_screen_size_x_x360 / 64;
+export int i_screen_size_y64_x360 = i_screen_size_y_x360 / 64;
+export int i_overlay_size = 32;
+export int i_curves_size_x = 256;
+export int i_curves_size_y = 1;
+export int i_shoots_size = 128;
+
+//screen buffers
+sub Buffer(string s_name = "", string s_format = "A8R8G8B8", string s_flags = "temp rt", int e_path = -1)
+{
+	if(e_path == SM31 || e_path == SM32) { BufferFormat(s_name, i_screen_size_x_x360, i_screen_size_y_x360, s_format, s_flags); }
+	else { BufferScreenFormat(s_name, 1, s_format, s_flags); }
+}
+sub Buffer2(string s_name = "", string s_format = "A8R8G8B8", string s_flags = "temp rt", int e_path = -1)
+{
+	if(e_path == SM31 || e_path == SM32) { BufferFormat(s_name, i_screen_size_x2_x360, i_screen_size_y2_x360, s_format, s_flags); }
+	else { BufferScreenFormat(s_name, 2, s_format, s_flags); }
+}
+sub Buffer4(string s_name = "", string s_format = "A8R8G8B8", string s_flags = "temp rt", int e_path = -1)
+{
+	if(e_path == SM31 || e_path == SM32) { BufferFormat(s_name, i_screen_size_x4_x360, i_screen_size_y4_x360, s_format, s_flags); }
+	else { BufferScreenFormat(s_name, 4, s_format, s_flags); }
+}
+sub Buffer8(string s_name = "", string s_format = "A8R8G8B8", string s_flags = "temp rt", int e_path = -1)
+{
+	if(e_path == SM31 || e_path == SM32) { BufferFormat(s_name, i_screen_size_x8_x360, i_screen_size_y8_x360, s_format, s_flags); }
+	else { BufferScreenFormat(s_name, 8, s_format, s_flags); }
+}
+sub Buffer16(string s_name = "", string s_format = "A8R8G8B8", string s_flags = "temp rt", int e_path = -1)
+{
+	if(e_path == SM31 || e_path == SM32) { BufferFormat(s_name, i_screen_size_x16_x360, i_screen_size_y16_x360, s_format, s_flags); }
+	else { BufferScreenFormat(s_name, 16, s_format, s_flags); }
+}
+sub Buffer32(string s_name = "", string s_format = "A8R8G8B8", string s_flags = "temp rt", int e_path = -1)
+{
+	if(e_path == SM31 || e_path == SM32) { BufferFormat(s_name, i_screen_size_x32_x360, i_screen_size_y32_x360, s_format, s_flags); }
+	else { BufferScreenFormat(s_name, 32, s_format, s_flags); }
+}
+
+sub Buffer64(string s_name = "", string s_format = "A8R8G8B8", string s_flags = "temp rt", int e_path = -1)
+{
+	if(e_path == SM31 || e_path == SM32) { BufferFormat(s_name, i_screen_size_x64_x360, i_screen_size_y64_x360, s_format, s_flags); }
+	else { BufferScreenFormat(s_name, 64, s_format, s_flags); }
+}
+
+sub BuffersCommon(int e_path = -1)
+{
+    string s_format = (e_path == SM50 || e_path == SM53) ? "A16B16G16R16F" : "A8R8G8B8";
+	string s_rgba8_def = (e_path == SM51) ? "A8R8G8B8_GAMMA" : "A8R8G8B8";
+	string s_rgba8_gamma = (e_path == SM31) ? "A8R8G8B8_GAMMA_AS16" : s_rgba8_def;
+
+	string s_format_hdr = (e_path == SM31) ? "A16B16G16R16" : "A16B16G16R16F";
+
+	if((e_path == SM31) || (e_path == SM32)) { use Buffer(s_name = "ZBUFFER", e_path = e_path, s_format = "D24FS8", s_flags = "temp rt ds"); }
+	else {
+        if(e_path == SM50 || e_path == SM51 || e_path == SM52 || e_path == SM53) { use Buffer(s_name = "ZBUFFER", e_path = e_path, s_format = "D32FS8", s_flags = "temp rt ds esram"); }
+        else { use Buffer(s_name = "ZBUFFER_W", e_path = e_path, s_format = "D24S8", s_flags = "temp rt ds"); } }
+
+	use Buffer(s_name = "1_RGBA16F_A", e_path = e_path, s_format = s_format_hdr, s_flags = "temp rt esram");
+	if( e_path == SM50 || e_path == SM51 || e_path == SM52)
+	{
+		use Buffer(s_name = "1_RGBA16F_C", e_path = e_path, s_format = s_format_hdr, s_flags = "temp rt");
+		use Buffer(s_name = "1_RGBA16F_D", e_path = e_path, s_format = s_format_hdr, s_flags = "temp rt");
+	}
+	
+	if(e_path != SM31) { use Buffer(s_name = "1_RGBA16F_B", e_path = e_path, s_format = s_format_hdr); }
+	use Buffer(s_name = "CLR", e_path = e_path);
+	use Buffer(s_name = "NRM", e_path = e_path);
+	use Buffer(s_name = "1_RGBA8_A", e_path = e_path, s_format = s_rgba8_gamma);		
+	
+	if( e_path == SM30 || e_path == SM40 || e_path == SM50 || e_path == SM51 || e_path == SM52 || e_path == SM53 )
+	{
+		use Buffer(s_name = "1_RGBA8_B", e_path = e_path, s_format = s_rgba8_gamma);
+
+		if( e_path == SM50 || e_path == SM51 || e_path == SM52 || e_path == SM53 )
+		{
+			use Buffer(s_name = "1_RGBA8_C", e_path = e_path, s_format = s_rgba8_gamma, s_flags = "rt");
+			
+			use Buffer2(s_name = "2_RGBA16F_B", e_path = e_path, s_format = s_format_hdr, s_flags = "temp rt ua");			
+			use Buffer2(s_name = "2_RGBA16F_C", e_path = e_path, s_format = s_format_hdr, s_flags = "temp rt ua");
+			
+			use Buffer2(s_name = "2_RGBA32U_A", e_path = e_path, s_format = "R32_UINT", s_flags = "temp rt ua");
+			
+			use Buffer8(s_name = "8_RGBA16F_B", e_path = e_path, s_format = s_format_hdr);
+			use Buffer32(s_name = "32_RGBA16F_A", e_path = e_path, s_format = s_format_hdr);
+			use Buffer64(s_name = "64_RGBA16F_A", e_path = e_path, s_format = s_format_hdr);
+
+			use Buffer(s_name = "MB_A", e_path = e_path, s_flags = "rt", s_format = "G16R16F");
+			use Buffer2(s_name = "MB_2A", e_path = e_path, s_format = "G16R16F");
+			use Buffer4(s_name = "MB_4A", e_path = e_path, s_format = "G16R16F");
+			use Buffer8(s_name = "MB_8A", e_path = e_path, s_format = "G16R16F");
+
+			use Buffer16(s_name = "MB_16A", e_path = e_path, s_format = "G16R16F");
+			use Buffer16(s_name = "MB_16B", e_path = e_path, s_format = "G16R16F");
+		}
+	}
+
+	use Buffer2(s_name = "2_DPT", e_path = e_path, s_format = "A16B16G16R16F");
+	use Buffer2(s_name = "PRV", e_path = e_path, s_flags = "rt", s_format = s_format_hdr);
+
+	use Buffer2(s_name = "2_RGBA16F_A", e_path = e_path, s_format = s_format_hdr);
+
+	use Buffer4(s_name = "4_DPT", e_path = e_path, s_format = "A16B16G16R16F");
+    use Buffer4(s_name = "4_RGBA16F_A", e_path = e_path, s_format = s_format_hdr);
+	use Buffer4(s_name = "4_RGBA16F_B", e_path = e_path, s_format = s_format_hdr);
+	use Buffer4(s_name = "4_RGBA16F_C", e_path = e_path, s_format = s_format_hdr);
+
+	use Buffer4(s_name = "4_RGBA16F_D", e_path = e_path, s_format = s_format_hdr, s_flags = "rt");
+
+	use Buffer4(s_name = "4_RGBA8_A", e_path = e_path, s_format = "A8R8G8B8");
+	use Buffer4(s_name = "4_RGBA8_B", e_path = e_path, s_flags = "rt", s_format = s_rgba8_gamma);
+
+	use Buffer8(s_name = "8_RGBA8_A", e_path = e_path, s_format = s_format);
+	use Buffer8(s_name = "8_RGBA16F_A", e_path = e_path, s_format = s_format_hdr);
+
+	use Buffer16(s_name = "16_RGBA8_A", e_path = e_path, s_format = s_format);
+	use Buffer16(s_name = "16_RGBA16F_A", e_path = e_path, s_format = s_format_hdr);
+	use Buffer16(s_name = "16_RGBA16F_B", e_path = e_path, s_format = s_format_hdr);
+
+	if(e_path == SM31)
+	{
+		Alias("CLR", "1_RGBA8_A");
+	}
+	Alias("4_RGBA16F_A", "8_RGBA16F_A");
+
+	if(e_path != SM31) { use Buffer16(s_name = "16_RGBA16F_C", e_path = e_path, s_format = s_format_hdr); }
+
+    BufferFormat("LUM_32x16", 32, 16, "R32F", "temp rt");
+    BufferFormat("LUM_16x16_A", 16, 16, "R32F", "temp rt");
+    BufferFormat("LUM_16x16_PRV", 16, 16, "R32F", "rt");
+
+	BufferFormat("32x32_RGBA32F_P1024_POS", 32, 32, "A32B32G32R32F", "rt");
+	BufferFormat("32x32_RGBA32F_P1024_CLR", 32, 32, "A32B32G32R32F", "rt");
+	BufferFormat("32x32_RGBA32F_A", 32, 32, "A32B32G32R32F", "temp rt");
+	if(e_path != SM31)
+	{
+		BufferFormat("32x32_RGBA32F_B", 32, 32, "A32B32G32R32F", "temp rt");
+		BufferFormat("32x32_RGBA32F_C", 32, 32, "A32B32G32R32F", "temp rt");
+	}
+
+	BufferFormat("SHOOTS", i_shoots_size, i_shoots_size, "A8R8G8B8", "rt");
+	if(e_path != SM31) { BufferFormat("SHOOTS_TEMP", i_shoots_size, i_shoots_size, "A8R8G8B8", "temp rt"); }
+	BufferFormat("OVERLAY", i_overlay_size, i_overlay_size, s_rgba8_gamma, "temp rt");
+    BufferFormat("CURVES", i_curves_size_x, i_curves_size_y, "A8R8G8B8", "temp rt");
+
+	BufferFormat("AMBIENT", 64, 32, s_rgba8_gamma, "temp rt");
+}
+
+sub RenderTargetsViewCommon(int e_path = SM30)
+{
+	string zbuffer = (e_path == SM30 || e_path == SM40) ? "z:ZBUFFER_W " : "z:ZBUFFER ";
+	string rtv_opq = zbuffer + "CLR NRM";
+	string rtv_opq = (e_path == SM50 || e_path == SM51 || e_path == SM52 || e_path == SM53) ? rtv_opq + " MB_A" : rtv_opq;
+
+	//TEMP
+	string rtv_opq_nrm = zbuffer;
+	string rtv_opq_nrm = (e_path == SM31) ? rtv_opq_nrm + "o:CLR " : rtv_opq_nrm;
+	string rtv_opq_nrm = rtv_opq_nrm + "NRM";
+
+
+	string z_offset = (e_path == SM31) ? "o:ZBUFFER " : "";
+	string hdr_image_offset = (e_path == SM31) ? "o:ZBUFFER o:1_RGBA16F_A " : "";
+
+	string out_offset = (e_path == SM31) ? "o:ZBUFFER o:1_RGBA8_A " : "";
+
+	RenderTargetsView("_OPAQUE", rtv_opq);
+	RenderTargetsView("_OPAQUE_CLR", zbuffer + "CLR");
+	RenderTargetsView("_OPAQUE_NRM", rtv_opq_nrm);
+
+	RenderTargetsView("_HDR_IMAGE", zbuffer + "1_RGBA16F_A");
+		
+	
+	if(e_path == SM50 || e_path == SM51 || e_path == SM52)
+	{	
+		RenderTargetsView("_RGBA8_C_SRGB", "1_RGBA8_C f:srgb");
+		RenderTargetsView("_HDR_IMAGE_MRT", zbuffer + "1_RGBA16F_A 1_RGBA16F_B");
+		
+		RenderTargetsView("_SKIN_H", zbuffer + "1_RGBA16F_C");
+		RenderTargetsView("_SSSS", zbuffer + "1_RGBA16F_B");
+		RenderTargetsView("_SKIN", "z:ZBUFFER 1_RGBA16F_D 1_RGBA16F_B");
+		RenderTargetsView("_1_WATER_NORMALS", zbuffer + "1_RGBA16F_C");
+	}
+	
+	RenderTargetsView("_ZBUFFER", zbuffer);
+
+	RenderTargetsView("_RGBA8_A_SRGB", z_offset + "1_RGBA8_A f:srgb");
+	RenderTargetsView("_RGBA8_A_SRGB_Z", zbuffer + "1_RGBA8_A f:srgb");
+
+	RenderTargetsView("_2_DPT", z_offset + "2_DPT");
+
+	if(e_path != SM31)
+	{
+		RenderTargetsView("_2_VFB", z_offset + "2_RGBA16F_A");
+	}
+
+	RenderTargetsView("_2_BLUR_FAR", z_offset + "2_RGBA16F_A");
+	RenderTargetsView("_2_NORMALS", z_offset + "2_RGBA16F_A");
+	RenderTargetsView("_2_PRV", z_offset + "PRV");
+	RenderTargetsView("_4_RFL_PRV", hdr_image_offset + "4_RGBA16F_D");
+
+	if(e_path != SM50)
+	{
+		RenderTargetsView("_4_SSAO", z_offset + "4_RGBA16F_C");
+	}	
+	
+	
+	RenderTargetsView("_4_DPT", z_offset + "4_DPT");	
+	RenderTargetsView("_4_GLOW", z_offset + "4_RGBA16F_C"); 
+	RenderTargetsView("_4_BLUR", z_offset + "4_RGBA16F_B");
+	RenderTargetsView("_4_RAIN", "o:ZBUFFER o:CLR o:NRM 4_RGBA8_A");
+	RenderTargetsView("_4_OPAQUE_NRM_DIFF", z_offset + "4_RGBA8_A");
+	RenderTargetsView("_4_FILMGRAIN", z_offset + "o:1_RGBA8_A 4_RGBA8_A");
+	RenderTargetsView("_8_FILMGRAIN", z_offset + "o:1_RGBA8_A o:4_RGBA8_A 8_RGBA8_A");
+	RenderTargetsView("_16_FILMGRAIN", z_offset + "o:1_RGBA8_A o:4_RGBA8_A o:8_RGBA8_A 16_RGBA8_A");
+	RenderTargetsView("_4_HDR_IMAGE", z_offset + "4_RGBA16F_A");
+	RenderTargetsView("_4_WTR_RFL", hdr_image_offset + "4_RGBA16F_B");
+	RenderTargetsView("_4_WTR_CLR", hdr_image_offset + "4_RGBA16F_A");
+
+	if(e_path != SM31)
+	{
+		RenderTargetsView("_32x32_P1024_COPY", z_offset + "o:1_RGBA16F_A 32x32_RGBA32F_B 32x32_RGBA32F_C");
+	}
+	RenderTargetsView("_32x32_P1024_UPDATE", z_offset + "o:1_RGBA16F_A 32x32_RGBA32F_P1024_POS 32x32_RGBA32F_P1024_CLR 32x32_RGBA32F_A");
+	RenderTargetsView("_32x32_P1024_UPDATE", z_offset + "o:1_RGBA16F_A 32x32_RGBA32F_P1024_POS 32x32_RGBA32F_P1024_CLR 32x32_RGBA32F_A");
+	RenderTargetsView("_4_SCREEN_DROPS", z_offset + "o:1_RGBA16F_A 4_RGBA8_A");
+
+	if(e_path != SM31)
+	{
+		RenderTargetsView("_4_SHADOWS_TEMP", "4_RGBA16F_B");
+	}
+
+	RenderTargetsView("_4_MENU_BLUR", out_offset + "4_RGBA8_B f:srgb");
+
+	RenderTargetsView("_4_SHADOWS", hdr_image_offset + "4_RGBA16F_A");
+	RenderTargetsView("_8_SHADOWS", hdr_image_offset + "8_RGBA16F_A");
+
+	RenderTargetsView("_16_BLUR", z_offset + "16_RGBA16F_B");
+	RenderTargetsView("_16_SHADOWS", hdr_image_offset + "16_RGBA16F_A");
+
+	RenderTargetsView("_CURVES", z_offset + "CURVES");
+	RenderTargetsView("_OVERLAY", z_offset + "OVERLAY f:srgb");
+	RenderTargetsView("_AMBIENT", "AMBIENT f:srgb");
+
+	RenderTargetsView("_LUM_32x16", z_offset + "LUM_32x16");
+	RenderTargetsView("_LUM_16x16_PRV", z_offset + "LUM_16x16_PRV");
+	RenderTargetsView("_16_GLOW_LENS_FLARES_A", z_offset + "o:4_RGBA16F_C  16_RGBA16F_A");
+	RenderTargetsView("_16_GLOW_LENS_FLARES_B", z_offset + "o:4_RGBA16F_C  16_RGBA16F_B");
+	
+}
+
+sub BuffersDX9(int e_path = SM30)
+{
+	use BuffersCommon(e_path = e_path);
+    use Buffer(s_name = "ZBUFFER", e_path = e_path, s_format = "R32F", s_flags = "temp rt");
+
+    BufferFormat("LUM_16x16_B", 16, 16, "R32F", "temp rt");
+
+	use RenderTargetsViewCommon(e_path = e_path);
+
+	RenderTargetsView("_4_UFB", "4_RGBA16F_A");
+	RenderTargetsView("_4_FND", "4_RGBA16F_A");
+	RenderTargetsView("_4_FND_CURVE", "4_RGBA16F_B");
+	RenderTargetsView("_4_SUN_RAYS_BLUR", "4_RGBA8_A");
+	RenderTargetsView("_4_BLUR_CAMERA_MOTION_MASK", "4_RGBA16F_A");
+	RenderTargetsView("_4_GLOW_TEMP", "4_RGBA16F_B");
+	RenderTargetsView("_4_BLUR_TEMP", "4_RGBA16F_A");
+	RenderTargetsView("_4_RAIN_TEMP", "4_RGBA16F_B");
+	RenderTargetsView("_4_SSAO_TEMP", "4_RGBA16F_A");
+	RenderTargetsView("_4_WTR_CLR_TEMP", "4_RGBA16F_B");
+
+	RenderTargetsView("_16_BLUR_TEMP", "16_RGBA16F_C");
+
+    RenderTargetsView("_LUM_16x16_A", "LUM_16x16_A");
+    RenderTargetsView("_LUM_16x16_B", "LUM_16x16_B");
+
+	//RenderTargetsView("_MLAA", "z:ZBUFFER_W 1_RGBA8_B");
+    //RenderTargetsView("_MLAA_WEIGHTS", "z:ZBUFFER_W CLR");
+
+	RenderTargetsView("_4_MENU_BLUR_TEMP", "4_RGBA8_A f:srgb");
+
+	RenderTargetsView("_CLR__STD_RENDER", "z:ZBUFFER_W CLR f:srgb");
+	RenderTargetsView("_RGBA8_B_SRGB", "1_RGBA8_B f:srgb");
+	RenderTargetsView("_ZBUFFER_COPY", "ZBUFFER");
+}

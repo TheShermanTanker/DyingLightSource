@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums_interior"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST NAME : BASEMENT CLEANSING -->
+    <!-- QUEST INFO : second task for player from Rahim - tools from basement -->
+    <!-- AFTER QUEST: Looting -->
+    <!-- COMMENT    :  -->
+    <!-- FROM       : >> SLUMS INTERIOR 19th Floor Command -->
+    <!-- TO         : >> SLUMS INTERIOR Basement -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- quest BasementCleansing -parent=Looting -glued=true -->
+        <!-- ,BLOCK _ -obj=&BasementCleansing_OBJ_GetToTheBasement& -announce_objective=false                       -->
+            <!-- ,talk _ slums_thetower_guard_ground_01 Player_BasementCleansing_05DLG01 -->
+            <!-- ,set-lp _ NPCLifePlace slums_thetower_guard_ground_01_lp_02 -interact_level=just_play_role -->
+            <!-- ,enable _ DoorDI thetower_basement_door -->
+            <!-- ,player-has_flashlight _ true -= GIVE FLASHLIGHT TO PLAYER -->
+            <!-- ,player-no_hints _ false -= TURN ON AUTOMATIC HUNTS IN GAME -->
+            <!-- ,AND _ -->
+                <!-- path  -->
+                    <!-- ,goto <<BASEMENT CLEANSING - Start in basement>> SensorGoTo thetower_basment_enter_goto -distance=0 -->
+                        <!-- ,debugpos SpawnPoint thetower_basement_respawn   -->
+                <!-- path -->
+                    <!-- ,goto _ SensorGoTo thetower_basment_enter_tut_goto -distance=0 -show=false -->
+                    <!-- ,show-hint _ Tutorial_PrologueFlashlight -->
+            <!-- ,set _ DoorDI thetower_basement_door -state=closed -->
+            <!-- ,set _ DoorDI thetower_basement_door -state=locked -->
+            <!-- ,enable <<basement respawn on>> SpawnPoint thetower_basement_respawn -->
+            <!-- ,disable _ SpawnPoint MapStart -->
+            <!-- ,disable _ SpawnPoint portal_slums_interior_19th_to_slums_interior_ground_sp -->
+        <!-- ,BLOCK _ -obj=&BasementCleansing_OBJ_FindTools& -announce_objective=false -->
+            <!-- ,checkpoint _ SpawnPoint thetower_basement_respawn -->
+            <!-- ,BLOCK <<change situation on ground floor>> -->
+                <!-- ,hide-multi _ -->
+                    <!-- ,o ModelObject thetower_ground_box_01 -->
+                    <!-- ,o ModelObject thetower_ground_box_02 -->
+                    <!-- ,o HumanAI slums_thetower_M_ground_01 -->
+                    <!-- ,o HumanAI slums_thetower_M_ground_03 -->
+                <!-- ,set-lp _ NPCLifePlace slums_thetower_guard_ground_01_lp_02 -interact_level=blocked     -->
+            <!-- ,checkpoint _ SpawnPoint thetower_basement_respawn     -->
+            <!-- ,AND <<take tools>> -->
+                <!-- path -->
+                    <!-- ,AND _ -->
+                        <!-- path -->
+                            <!-- ,loot _ ComplexContainer complexcontainer_basement_01 -show=false -->
+                        <!-- path -->
+                            <!-- ,loot _ ComplexContainer complexcontainer_basement_02 -show=false -->
+                        <!-- path -->
+                            <!-- ,loot _ ComplexContainer complexcontainer_basement_03 -show=false -->
+                        <!-- path -->
+                            <!-- ,goto _ SensorGoTo thetower_basment_enter_tut_kick_goto -distance=0 -show=false -->
+                            <!-- ,show-hint _ Tutorial_PrologueKick -->
+                    <!-- ,tutorial _ RepairWeapon         -->
+                    <!-- ,wait _ 4 -->
+                    <!-- ,radio-dialog _ voice2d Rakim_BasementCleansing_04DLG01 -->
+                    <!-- ,use _ PhysicalSwitchDI basement_electric_trap_panel_door -state=on -->
+                <!-- ,area ZoneBox thetower_basement_zone -->
+        <!-- ,BLOCK _           -->
+            <!-- ,use _ PhysicalSwitchDI basement_electric_trap_panel -state=on -->
+            <!-- ,enable _ QuestEnableGroup the_tower_basements_lamps -->
+            <!-- ,set _ DoorDI thetower_basement_door -state=closed -->
+            <!-- ,hide _ HumanAI Rakim -->
+            <!-- ,disable <<disable elevator to 19th>> QuestEnableGroup portal_slums_interior_ground_to_slums_interior_19th_qeg -->
+            <!-- ,hide <<hide all cb radios on Rahim desk>> AppearGroup rakim_brecken_room_cb_ag -->
+            <!-- ,use _ PhysicalSwitchDI slums_thetower_basement_door_knocking::trigger_knocking_01 -state=on -->
+            <!-- ,set-lp _ NPCLifePlace slums_thetower_guard_ground_01_lp_02 -interact_level=only_head -->
+            <!-- ,disable <<basement respawn off>> SpawnPoint thetower_basement_respawn -->
+            <!-- ,enable <<enable elevator to 19th>> QuestEnableGroup portal_slums_interior_ground_to_slums_interior_19th_qeg -->
+            <!-- ,goto <<BASEMENT CLEANSING - back to 19th>> SpawnPoint MapStart -distance=10 -->
+                <!-- ,debugpos SpawnPoint MapStart -->
+            <!-- ,set_day_time _ -day_time=7 -->
+            <!-- ,enable_time_freeze _     -->
+            <!-- ,enable _ SpawnPoint MapStart     -->
+            <!-- ,checkpoint _ SpawnPoint MapStart -->
+            <!-- ,show _ HumanAI Rakim -->
+            <!-- ,use-lp _ NPCLifePlace thetower_gym_rahim_lp_01 -teleport=true -wait_for_move_end=false -->
+                <!-- ,ai HumanAI Rakim -->
+        <!-- ,checkpoint _ SpawnPoint MapStart        -->
+</QuestsDefinitions>

@@ -1,0 +1,24 @@
+sub time()
+{
+	extern float f_game_time;
+	
+	float time_day_n = clamp(f_game_time / 24.0);
+	float time_day = time_day_n * 24.0;
+	float time_day_h = floor(time_day);
+	float time_day_h_n = time_day_h / 24.0; //hours conversion form 24h to <0-1)
+	float time_day_ms = (time_day - time_day_h) * 60.0; //minutes conversion form 24h.100m100s to 60m.60s
+	float time_day_m = floor(time_day_ms); //minutes conversion form 60m.60s to 60m
+	float time_day_m_n = time_day_m / 60.0; //minutes conversion form 60m to <0-1)
+	float time_day_s = floor((time_day_ms - time_day_m) * 60.0); //second conversion form 60m.60s to 60s
+	float time_day_s_n = time_day_s / 60.0; //second conversion form 60m to <0-1)
+
+	
+	Set("f_pp_time_day", time_day);
+	Set("f_pp_time_day_n", time_day_n);
+	Set("f_pp_time_day_h", time_day_h);
+	Set("f_pp_time_day_h_n", time_day_h_n);
+	Set("f_pp_time_day_m", time_day_m);
+	Set("f_pp_time_day_m_n", time_day_m_n);
+	Set("f_pp_time_day_s", time_day_s);
+	Set("f_pp_time_day_s_n", time_day_s_n);
+}

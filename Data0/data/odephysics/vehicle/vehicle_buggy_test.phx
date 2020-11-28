@@ -1,0 +1,93 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// Fizyka Vehicle - ustawienia domyslne
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+!include("../Include/ODEPhysicsVehicle.def")
+
+//-------------------------------------------------------------------------------------------------
+PhysicsParams()
+{
+    QuickStepNumIterations(50)    // powinno byc 500 zeby sie nie zsuwal z gorek, ale wtedy jest za kosztowne - FIXIT
+    SetPhysicsSurfaceID(SRF_METAL)
+    SetVelsGate(0, 0)
+    SetWaterFloat(0.06)
+    SetAutoDisableVels(0.08, 1, 2)
+    SetAbsorbers(0.01, 0.01)
+    SetMaxVels(900, 300)          
+    SetMaxWatchingTime(5.1)
+    AllowDepthCompression(1)
+    AllowContinuousCollisions(1, 1)
+    EnablePlatformAutoMounting(0)
+	SetExtraGravity(0, -1.0, 0)
+    
+    CollisionSfx(0, 0)
+}
+
+//-------------------------------------------------------------------------------------------------
+VehicleParams()
+{
+    Mass(1700)
+
+    MainGeomsMu(0.1) 
+    
+    MassScale([1.2, 0.2, 1.2])
+    MassShift([0, -0.8, 0.0])
+
+    AddMainGeom("Top", "box")
+    AddMainGeom("Bottom", "box")
+	
+	EnableSynchroWheels(1)
+	
+    AddWheel("suspension_fl", 0.28, 10)
+    AddWheel("suspension_fr", 0.28, 10)
+    AddWheel("suspension_rl", 0.28, 10)
+    AddWheel("suspension_rr", 0.28, 10)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("Terrain")
+{
+    ZeroFlags()
+    Mu(100)                  
+    
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("SimpleObjects")
+{
+    ZeroFlags()
+    Mu(100)
+    
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("NonODEObjects")
+{
+    ZeroFlags()
+    Mu(100)                  
+    
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("ODEObjects")
+{
+    ZeroFlags()
+    Mu(0.1)
+    
+    Ignore(0)
+}
+
+//-------------------------------------------------------------------------------------------------
+ContactParams("Water")
+{
+    ZeroFlags()
+    Mu(10)                  
+    
+    Ignore(1)
+}
+
+
+

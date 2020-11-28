@@ -1,0 +1,38 @@
+!include("ai_data.def")
+!include("ai_timing.def")
+
+!include("ai_goals.def")
+
+StrongAttractor()
+EnemyRadius(5)
+PeriodBtwSpecialAnims(8)
+SnapDist(2)
+ReleaseDist(3)
+InteractionLevel(4)
+User("Man")
+
+Usage("ENCOUNTER")
+Usage("VIRTUAL_ATTRACTOR")
+
+DisableInteractAnim(TO_INTERACT)
+DisableInteractAnim(FROM_INTERACT)
+DisableInteractAnim(INTERACT)
+DisableInteractAnim(ALL_DIALOG)
+
+Slot("", 1, 1, 1, 0, 0, 0, 0, 0, 1, 1.5)
+{
+    DynamicMesh("anim_trytytka.msh", "R_HandHolder", "", "", 1)
+    {
+        Scale(1.04, 1.04, 1.04)
+    }
+    AiTypeDataSet("human")
+    {
+        Data("hit_reaction:standing:pain:none:all:none:none:none:none", -2, "encounter_prisoner_01_special_enemy", -1, 1)
+        Data("idle:standing:none:stand:none:none:none", -2, "encounter_prisoner_01_idle", -1, 1)
+        Data("idle:standing:none:special:none:none:none", -2, "encounter_prisoner_01_special", -1, 1)
+        Data("idle:standing:none:idle:none:none:none", -2, "encounter_prisoner_01_idle", -1, 1)
+        ParamFloat("MIN_TIME_BTW_HIT_REACTIONS", 0.1)
+        ParamBool("CAN_REACT_ON_DANGEROUS_OBJECTS", 0)
+    }
+}
+

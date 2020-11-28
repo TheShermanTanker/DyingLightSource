@@ -1,0 +1,32 @@
+!include("ai_data.def")
+!include("ai_timing.def")
+!include("ai_goals.def")
+
+ShortHeadRotation()
+PeriodBtwSpecialAnims(-1)
+SnapDist(2)
+ReleaseDist(3)
+InteractionLevel(3)
+User("Man")
+
+Usage("ENCOUNTER")
+Usage("AI_USAGE_SYSTEM")
+Usage("VIRTUAL_ATTRACTOR")
+
+Slot("", 1, 1, 1, 0, 0, 0, 0, 0, 1, 1.5)
+{
+    LockPosition()
+    AiTypeDataSet("human")
+    {
+        Data("idle:standing:none:stand:none:none:none", -2, "m_npc_melee_fighter_02_idle", -1, 1)
+        Data("idle:standing:none:idle:none:none:none", -2, "m_npc_melee_fighter_02_idle", -1, 1)
+        Data("idle:standing:none:stand:none:none:finish_enemy", -2, "m_npc_melee_fighter_intiation_front_02_No_Alarming", -1, 1)
+    }
+    DeactivateOn(GoalAttack)
+	DiscardOn(GoalReactOnBurn)
+	DiscardOn(GoalReactOnElectrocution)
+	DiscardOn(GoalReactOnPoison)
+	DiscardOn(GoalReactOnHit)
+    DeactivateOn(GoalChangeAlarmLevel)
+}
+

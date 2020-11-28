@@ -1,0 +1,31 @@
+///////////////////////////////////////////////////////////////////////////////
+// Kiosk demo configuration (woke only with #define KIOSK_DEMO in code).
+///////////////////////////////////////////////////////////////////////////////
+
+//      BlockedIngameTabs(s);				Block in game tabs (tab_name),
+//      KioskDemoTimeToEnd(f);				Time to restart game (time[sek]).
+//		ShowMenuInGameQuestState(b);		If quest state info should be visible in menu in-game.
+//		AllowAccessToDevelopersMenu(b);		If DevelopersMenu button should be visible in menu in-game.
+//		KioskDemoQuestAndPhaseName(s,s);	Quest and phase names used to perform invoke to kiosk demo start and loop.
+
+sub main()
+{
+	// 2 additional sec to fadeouts
+    KioskDemoTimeToEnd(302);
+
+	// Block all in-game gameplay tabs except Inventory:
+	BlockedIngameTabs("Map");
+	BlockedIngameTabs("Quests");
+	BlockedIngameTabs("Collectables");
+	BlockedIngameTabs("CraftItem");
+	BlockedIngameTabs("Skills");
+	BlockedIngameTabs("Players");
+	BlockedIngameTabs("Challenges");
+	//BlockedIngameTabs("Inventory");
+
+	ShowMenuInGameQuestState(false);
+	AllowAccessToDevelopersMenu(true);
+
+	KioskDemoQuestAndPhaseName("E3_Slums_Demo_Start", "");
+
+}

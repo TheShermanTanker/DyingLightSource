@@ -1,0 +1,1336 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums_interior_a"
+     pxsl_line="3">
+    <Quest
+         name="__BringGalib_Key"
+         parent="BringGalib_01"
+         pxsl_line="5">
+        <Phase
+             type="take item"
+             name="_"
+             show_locations="false"
+             pxsl_line="6">
+            <Item
+                 pxsl_line="6">
+                <QuestObject
+                     class="QuestInventoryItemDI"
+                     name="BringGalib_QII_Keys_001"
+                     pxsl_line="6" />
+            </Item>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="7">
+            <Destination
+                 pxsl_line="7">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="BringGalib_SP_Slums_TO_SlumsInterior"
+                     pxsl_line="7" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__BringGalib_Door"
+         parent="BringGalib_01"
+         pxsl_line="9">
+        <Phase
+             type="OR"
+             name="_"
+             pxsl_line="10">
+            <Path
+                 pxsl_line="11">
+                <Phase
+                     type="started quest guard"
+                     name="_"
+                     quest_name="__BringGalib_Key"
+                     finished="true"
+                     pxsl_line="12" />
+                <Phase
+                     type="set door behaviour"
+                     name="_"
+                     behaviour="ClosedUnlockableWithKey"
+                     pxsl_line="13">
+                    <Door
+                         pxsl_line="13">
+                        <QuestObject
+                             class="DoorDI"
+                             name="BringGalib_Door_Key_001"
+                             pxsl_line="13" />
+                    </Door>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="14">
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="opened"
+                     show_locations="false"
+                     pxsl_line="15">
+                    <Trigger
+                         pxsl_line="15">
+                        <QuestObject
+                             class="DoorDI"
+                             name="BringGalib_Door_Key_001"
+                             pxsl_line="15" />
+                    </Trigger>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="use"
+             name="_"
+             desired_state="opened"
+             show_locations="false"
+             pxsl_line="16">
+            <Trigger
+                 pxsl_line="16">
+                <QuestObject
+                     class="DoorDI"
+                     name="BringGalib_Door_Key_001"
+                     pxsl_line="16" />
+            </Trigger>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="17">
+            <Object
+                 pxsl_line="17">
+                <QuestObject
+                     class="DoorDI"
+                     name="BringGalib_Door_Key_001"
+                     pxsl_line="17" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="18">
+            <Destination
+                 pxsl_line="18">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="BringGalib_SP_Slums_TO_SlumsInterior"
+                     pxsl_line="18" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="BringGalib_02"
+         parent="BringGalib_01"
+         glued="true"
+         leading_portal="BringGalib_MP_Slums_TO_SlumsInterior"
+         pxsl_line="20">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;BringGalib_OBJ_FindBrother&amp;"
+             pxsl_line="21">
+            <Path
+                 pxsl_line="21">
+                <Phase
+                     type="go to"
+                     name="Bring Galib - Find Galib's brother"
+                     distance="25"
+                     pxsl_line="22">
+                    <Destination
+                         pxsl_line="22">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="BringGalib_SP_Slums_TO_SlumsInterior"
+                             pxsl_line="22" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="23">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="BringGalib_SP_Slums_TO_SlumsInterior"
+                             pxsl_line="23" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <!-- RESPAWN SUPPLY -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="25">
+                    <Object
+                         pxsl_line="25">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="BringGalib_SP_Supply"
+                             pxsl_line="25" />
+                    </Object>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="27">
+                    <Object
+                         pxsl_line="27">
+                        <QuestObject
+                             class="LampDI"
+                             name="BringGalib_Lamp_ForkLift_001::light"
+                             pxsl_line="27" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="28">
+                    <Destination
+                         pxsl_line="28">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="BringGalib_SP_Slums_TO_SlumsInterior"
+                             pxsl_line="28" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="OR"
+                     name="_"
+                     pxsl_line="29">
+                    <Path
+                         pxsl_line="30">
+                        <Phase
+                             type="started quest guard"
+                             name="_"
+                             quest_name="__BringGalib_Key"
+                             finished="true"
+                             pxsl_line="31">
+                            <SpecificLocation
+                                 pxsl_line="32">
+                                <QuestObject
+                                     class="ZoneBox"
+                                     name="BringGalib_ZB_Market_Toilet001"
+                                     pxsl_line="32" />
+                            </SpecificLocation>
+                        </Phase>
+                        <Phase
+                             type="semaphore"
+                             name="_"
+                             pxsl_line="33" />
+                    </Path>
+                    <Path
+                         pxsl_line="34">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="35">
+                            <Destination
+                                 pxsl_line="35">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="BringGalib_GoTo_Office001"
+                                     pxsl_line="35" />
+                            </Destination>
+                            <SpecificLocation
+                                 pxsl_line="36">
+                                <QuestObject
+                                     class="ZoneBox"
+                                     name="BringGalib_ZB_Market_Office001"
+                                     pxsl_line="36" />
+                            </SpecificLocation>
+                        </Phase>
+                        <Phase
+                             type="semaphore"
+                             name="_"
+                             pxsl_line="37" />
+                    </Path>
+                    <Path
+                         pxsl_line="38">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="39">
+                            <Destination
+                                 pxsl_line="39">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="BringGalib_GoTo_Office002"
+                                     pxsl_line="39" />
+                            </Destination>
+                            <SpecificLocation
+                                 pxsl_line="40">
+                                <QuestObject
+                                     class="ZoneBox"
+                                     name="BringGalib_ZB_Market_Office002"
+                                     pxsl_line="40" />
+                            </SpecificLocation>
+                        </Phase>
+                        <Phase
+                             type="semaphore"
+                             name="_"
+                             pxsl_line="41" />
+                    </Path>
+                    <Path
+                         pxsl_line="42">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="43">
+                            <Destination
+                                 pxsl_line="43">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="BringGalib_GoTo_CloakRoom001"
+                                     pxsl_line="43" />
+                            </Destination>
+                            <SpecificLocation
+                                 pxsl_line="44">
+                                <QuestObject
+                                     class="ZoneBox"
+                                     name="BringGalib_ZB_Market_CloakRoom001"
+                                     pxsl_line="44" />
+                            </SpecificLocation>
+                        </Phase>
+                        <Phase
+                             type="semaphore"
+                             name="_"
+                             pxsl_line="45" />
+                    </Path>
+                    <Path
+                         pxsl_line="46">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="47">
+                            <Destination
+                                 pxsl_line="47">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="BringGalib_GoTo_Hall001"
+                                     pxsl_line="47" />
+                            </Destination>
+                            <SpecificLocation
+                                 pxsl_line="48">
+                                <QuestObject
+                                     class="ZoneBox"
+                                     name="BringGalib_ZB_Market_Hall001"
+                                     pxsl_line="48" />
+                            </SpecificLocation>
+                        </Phase>
+                        <Phase
+                             type="semaphore"
+                             name="_"
+                             pxsl_line="49" />
+                    </Path>
+                    <Path
+                         pxsl_line="50">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="51">
+                            <Destination
+                                 pxsl_line="51">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="BringGalib_GoTo_Market_001"
+                                     pxsl_line="51" />
+                            </Destination>
+                            <SpecificLocation
+                                 pxsl_line="52">
+                                <QuestObject
+                                     class="ZoneBox"
+                                     name="BringGalib_ZB_Market_StorageRoom001"
+                                     pxsl_line="52" />
+                            </SpecificLocation>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="53">
+                    <Destination
+                         pxsl_line="53">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="BringGalib_SP_Vent_001"
+                             pxsl_line="53" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;BringGalib_OBJ_SearchMarket&amp;"
+             pxsl_line="55">
+            <Path
+                 pxsl_line="55">
+                <Phase
+                     type="go to"
+                     name="Bring Galib - Kill all enemies"
+                     distance="10000"
+                     show_locations="false"
+                     pxsl_line="56">
+                    <Destination
+                         pxsl_line="56">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="BringGalib_SP_Vent_001"
+                             pxsl_line="56" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="57">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="BringGalib_SP_Vent_001"
+                             pxsl_line="57" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <!-- RESPAWN VENT -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="59">
+                    <Object
+                         pxsl_line="59">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="BringGalib_SP_Vent_001"
+                             pxsl_line="59" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="60">
+                    <Object
+                         pxsl_line="60">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="BringGalib_SP_Supply"
+                             pxsl_line="60" />
+                    </Object>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="62">
+                    <Object
+                         pxsl_line="63">
+                        <QuestObject
+                             class="AISpawnBoxNumber"
+                             name="BringGalib_SBN_Viral_Init_001"
+                             pxsl_line="63" />
+                    </Object>
+                    <Object
+                         pxsl_line="64">
+                        <QuestObject
+                             class="SensorAmbientMusicArea"
+                             name="SAMA_BringGalib_Virals_Fight_Music"
+                             pxsl_line="64" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="65">
+                    <SpecificLocation
+                         pxsl_line="66">
+                        <QuestObject
+                             class="ZoneBox"
+                             name="BringGalib_ZB_Market_StorageRoom001"
+                             pxsl_line="66" />
+                    </SpecificLocation>
+                    <Path
+                         pxsl_line="67">
+                        <Phase
+                             type="kill"
+                             name="_"
+                             pxsl_line="68">
+                            <Spawner
+                                 pxsl_line="68">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="BringGalib_SBN_Viral_Init_001"
+                                     pxsl_line="68" />
+                            </Spawner>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="69">
+                            <Object
+                                 pxsl_line="69">
+                                <QuestObject
+                                     class="AISpawnBoxNumber"
+                                     name="BringGalib_SBN_Viral_Init_001"
+                                     pxsl_line="69" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="70">
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="1"
+                             pxsl_line="71" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="72">
+                            <Object
+                                 pxsl_line="72">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="BringGalib_SBW_Viral_Init_001"
+                                     pxsl_line="72" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="kill"
+                             name="_"
+                             pxsl_line="73">
+                            <Spawner
+                                 pxsl_line="73">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="BringGalib_SBW_Viral_Init_001"
+                                     pxsl_line="73" />
+                            </Spawner>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="74">
+                            <Object
+                                 pxsl_line="74">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="BringGalib_SBW_Viral_Init_001"
+                                     pxsl_line="74" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="75">
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="2"
+                             pxsl_line="76" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="77">
+                            <Object
+                                 pxsl_line="77">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="BringGalib_SBW_Viral_Init_002"
+                                     pxsl_line="77" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="kill"
+                             name="_"
+                             pxsl_line="78">
+                            <Spawner
+                                 pxsl_line="78">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="BringGalib_SBW_Viral_Init_002"
+                                     pxsl_line="78" />
+                            </Spawner>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="79">
+                            <Object
+                                 pxsl_line="79">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="BringGalib_SBW_Viral_Init_002"
+                                     pxsl_line="79" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="80">
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="4"
+                             pxsl_line="81" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="82">
+                            <Object
+                                 pxsl_line="82">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="BringGalib_SBW_Viral_Init_003"
+                                     pxsl_line="82" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="kill"
+                             name="_"
+                             pxsl_line="83">
+                            <Spawner
+                                 pxsl_line="83">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="BringGalib_SBW_Viral_Init_003"
+                                     pxsl_line="83" />
+                            </Spawner>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="84">
+                            <Object
+                                 pxsl_line="84">
+                                <QuestObject
+                                     class="AISpawnBoxWaves"
+                                     name="BringGalib_SBW_Viral_Init_003"
+                                     pxsl_line="84" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="set door behaviour"
+                     name="_"
+                     behaviour="Closed"
+                     pxsl_line="85">
+                    <Door
+                         pxsl_line="85">
+                        <QuestObject
+                             class="DoorDI"
+                             name="BringGalib_Door_StorageRoom_01"
+                             pxsl_line="85" />
+                    </Door>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="86">
+                    <Object
+                         pxsl_line="86">
+                        <QuestObject
+                             class="SensorAmbientMusicArea"
+                             name="SAMA_BringGalib_Virals_Fight_Music"
+                             pxsl_line="86" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="87">
+                    <Object
+                         pxsl_line="87">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Nazim"
+                             pxsl_line="87" />
+                    </Object>
+                </Phase>
+                <!-- RESPAWN NAZIM -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="89">
+                    <Object
+                         pxsl_line="89">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="BringGalib_SP_Nazim"
+                             pxsl_line="89" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="90">
+                    <Object
+                         pxsl_line="90">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="BringGalib_SP_Vent_001"
+                             pxsl_line="90" />
+                    </Object>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="92">
+                    <Destination
+                         pxsl_line="92">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="BringGalib_SP_Vent_001"
+                             pxsl_line="92" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;BringGalib_OBJ_TalkBrother&amp;"
+             pxsl_line="94">
+            <Path
+                 pxsl_line="94">
+                <Phase
+                     type="use"
+                     name="Bring Galib - Talk to Nazim"
+                     desired_state="opened"
+                     show_locations="false"
+                     gather_radius="3"
+                     pxsl_line="95">
+                    <Trigger
+                         pxsl_line="95">
+                        <QuestObject
+                             class="DoorDI"
+                             name="BringGalib_Door_StorageRoom_01"
+                             pxsl_line="95" />
+                    </Trigger>
+                    <DebugPlayerPosition
+                         pxsl_line="96">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="BringGalib_SP_Nazim"
+                             pxsl_line="96" />
+                    </DebugPlayerPosition>
+                    <SpecificLocation
+                         pxsl_line="97">
+                        <QuestObject
+                             class="ZoneBox"
+                             name="BringGalib_ZB_Market_StorageRoom002"
+                             pxsl_line="97" />
+                    </SpecificLocation>
+                </Phase>
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="Nazim"
+                     group="Nazim_BringGalib_01DLG01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="98" />
+                <Phase
+                     type="use life place"
+                     name="_"
+                     pxsl_line="99">
+                    <LifePlace
+                         pxsl_line="99">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Nazim_LP_After"
+                             pxsl_line="99" />
+                    </LifePlace>
+                    <AI
+                         pxsl_line="100">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Nazim"
+                             pxsl_line="100" />
+                    </AI>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="101">
+                    <Object
+                         pxsl_line="101">
+                        <QuestObject
+                             class="MapPortal"
+                             name="BringGalib_MP_SlumsInterior_TO_Slums_02"
+                             pxsl_line="101" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="102">
+                    <Destination
+                         pxsl_line="102">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="BringGalib_SP_Nazim"
+                             pxsl_line="102" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__BringGalib_Suicider"
+         parent="BringGalib_01"
+         pxsl_line="104">
+        <Phase
+             type="go to"
+             name="_"
+             distance="10000"
+             show_locations="false"
+             pxsl_line="105">
+            <Destination
+                 pxsl_line="105">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="BringGalib_SP_Vent_001"
+                     pxsl_line="105" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="appear"
+             name="_"
+             mode="hide"
+             pxsl_line="106">
+            <Object
+                 pxsl_line="107">
+                <QuestObject
+                     class="AppearGroup"
+                     name="Fuses_AG_Explosion_After_001"
+                     pxsl_line="107" />
+            </Object>
+            <Object
+                 pxsl_line="108">
+                <QuestObject
+                     class="AppearGroup"
+                     name="Fuses_AG_Explosion_Shelf_After_001"
+                     pxsl_line="108" />
+            </Object>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             pxsl_line="109">
+            <Path
+                 pxsl_line="110">
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="0"
+                     show_locations="false"
+                     pxsl_line="111">
+                    <Destination
+                         pxsl_line="111">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="BringGalib_GoTo_Suicider_001"
+                             pxsl_line="111" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="movie"
+                     name="_"
+                     movie="BringGalib_Movie_Suicider_001"
+                     pxsl_line="112" />
+            </Path>
+            <Path
+                 pxsl_line="113">
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="0"
+                     show_locations="false"
+                     pxsl_line="114">
+                    <Destination
+                         pxsl_line="114">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="BringGalib_GoTo_Suicider_003"
+                             pxsl_line="114" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="movie"
+                     name="_"
+                     movie="BringGalib_Movie_Suicider_003"
+                     pxsl_line="115" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="116">
+                    <Object
+                         pxsl_line="117">
+                        <QuestObject
+                             class="FXEmitter"
+                             name="BringGalib_FX_Explosion_001"
+                             pxsl_line="117" />
+                    </Object>
+                    <Object
+                         pxsl_line="118">
+                        <QuestObject
+                             class="SoundEmitterSimple"
+                             name="BringGalib_SES_Explosion_001"
+                             pxsl_line="118" />
+                    </Object>
+                    <Object
+                         pxsl_line="119">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="BringGalib_QEG_Fire_001"
+                             pxsl_line="119" />
+                    </Object>
+                    <Object
+                         pxsl_line="120">
+                        <QuestObject
+                             class="FXEmitter"
+                             name="BringGalib_FX_Explosion_Small"
+                             pxsl_line="120" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="121">
+                    <Object
+                         pxsl_line="122">
+                        <QuestObject
+                             class="AppearGroup"
+                             name="Fuses_AG_Explosion_After_001"
+                             pxsl_line="122" />
+                    </Object>
+                    <Object
+                         pxsl_line="123">
+                        <QuestObject
+                             class="AppearGroup"
+                             name="Fuses_AG_Explosion_Shelf_After_001"
+                             pxsl_line="123" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="124">
+                    <Object
+                         pxsl_line="125">
+                        <QuestObject
+                             class="AppearGroup"
+                             name="Fuses_AG_Explosion_Befor_001"
+                             pxsl_line="125" />
+                    </Object>
+                    <Object
+                         pxsl_line="126">
+                        <QuestObject
+                             class="AppearGroup"
+                             name="Fuses_AG_Explosion_Shelf_Befor_001"
+                             pxsl_line="126" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="set state"
+                     name="_"
+                     desired_state="on"
+                     pxsl_line="127">
+                    <Trigger
+                         pxsl_line="127">
+                        <QuestObject
+                             class="BombSwitchDI"
+                             name="BringGalib_Bombs"
+                             pxsl_line="127" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="infection"
+                     name="_"
+                     mode="start"
+                     level_name="market_explosion"
+                     pxsl_line="128">
+                    <Object
+                         pxsl_line="128">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="BringGalib_StartOnfection"
+                             pxsl_line="128" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="movie"
+                     name="_"
+                     movie="bringgalib_movie_ventilation_001"
+                     pxsl_line="129" />
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="1"
+                     pxsl_line="130" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="131">
+                    <Object
+                         pxsl_line="131">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="BringGalib_QEG_FireAlarm_001"
+                             pxsl_line="131" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="132">
+                    <Object
+                         pxsl_line="132">
+                        <QuestObject
+                             class="SensorAmbientMusicArea"
+                             name="SAMA_BringGalib_Market_AmbientMusic"
+                             pxsl_line="132" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="set skin"
+                     name="_"
+                     skin_name="red"
+                     pxsl_line="133">
+                    <ModelObject
+                         pxsl_line="133">
+                        <QuestObject
+                             class="ModelObject"
+                             name="BringGalib_AlarmSwitch001"
+                             pxsl_line="133" />
+                    </ModelObject>
+                </Phase>
+                <Phase
+                     type="set skin"
+                     name="_"
+                     skin_name="red"
+                     pxsl_line="134">
+                    <ModelObject
+                         pxsl_line="134">
+                        <QuestObject
+                             class="ModelObject"
+                             name="BringGalib_AlarmSwitch002"
+                             pxsl_line="134" />
+                    </ModelObject>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="1"
+                     pxsl_line="135" />
+                <Phase
+                     type="set dialog"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_Looting_12DLG01"
+                     auto_start="true"
+                     pxsl_line="136" />
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="137">
+            <Destination
+                 pxsl_line="137">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="BringGalib_SP_Vent_001"
+                     pxsl_line="137" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__BringGalib_Alarm"
+         parent="__BringGalib_Suicider"
+         pxsl_line="139">
+        <Phase
+             type="OR"
+             name="_"
+             pxsl_line="140">
+            <Path
+                 pxsl_line="141">
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="on"
+                     show_locations="false"
+                     pxsl_line="142">
+                    <Trigger
+                         pxsl_line="142">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="BringGalib_PS_FireButton_001"
+                             pxsl_line="142" />
+                    </Trigger>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="143">
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="on"
+                     show_locations="false"
+                     pxsl_line="144">
+                    <Trigger
+                         pxsl_line="144">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="BringGalib_PS_FireButton_002"
+                             pxsl_line="144" />
+                    </Trigger>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="145">
+            <Object
+                 pxsl_line="145">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="BringGalib_QEG_FireAlarm_001"
+                     pxsl_line="145" />
+            </Object>
+        </Phase>
+        <Phase
+             type="set skin"
+             name="_"
+             skin_name="green"
+             pxsl_line="146">
+            <ModelObject
+                 pxsl_line="146">
+                <QuestObject
+                     class="ModelObject"
+                     name="BringGalib_AlarmSwitch001"
+                     pxsl_line="146" />
+            </ModelObject>
+        </Phase>
+        <Phase
+             type="set skin"
+             name="_"
+             skin_name="green"
+             pxsl_line="147">
+            <ModelObject
+                 pxsl_line="147">
+                <QuestObject
+                     class="ModelObject"
+                     name="BringGalib_AlarmSwitch002"
+                     pxsl_line="147" />
+            </ModelObject>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="148">
+            <Destination
+                 pxsl_line="148">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="BringGalib_SP_Vent_001"
+                     pxsl_line="148" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__BringGalib_Water"
+         parent="__BringGalib_Suicider"
+         pxsl_line="150">
+        <Phase
+             type="wait guard"
+             name="_"
+             time="2"
+             pxsl_line="151" />
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="152">
+            <Object
+                 pxsl_line="153">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="BringGalib_Pipes_001::QEG_On"
+                     pxsl_line="153" />
+            </Object>
+            <Object
+                 pxsl_line="154">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="BringGalib_Pipes_002::QEG_On"
+                     pxsl_line="154" />
+            </Object>
+            <Object
+                 pxsl_line="155">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="BringGalib_Pipes_003::QEG_On"
+                     pxsl_line="155" />
+            </Object>
+            <Object
+                 pxsl_line="156">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="BringGalib_Pipes_004::QEG_On"
+                     pxsl_line="156" />
+            </Object>
+        </Phase>
+        <Phase
+             type="wait guard"
+             name="_"
+             time="1"
+             pxsl_line="157" />
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="158">
+            <Object
+                 pxsl_line="158">
+                <QuestObject
+                     class="SensorVarlist"
+                     name="BringGalib_Varlist_Water_001"
+                     pxsl_line="158" />
+            </Object>
+        </Phase>
+        <Phase
+             type="wait guard"
+             name="_"
+             time="3"
+             pxsl_line="159" />
+        <Phase
+             type="movie"
+             name="_"
+             movie="BringGalib_Movie_Water_001"
+             pxsl_line="160" />
+        <Phase
+             type="wait guard"
+             name="_"
+             time="45"
+             pxsl_line="161" />
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="162">
+            <Object
+                 pxsl_line="162">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="BringGalib_QEG_Fire_001"
+                     pxsl_line="162" />
+            </Object>
+        </Phase>
+        <Phase
+             type="wait guard"
+             name="_"
+             time="45"
+             pxsl_line="163" />
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="164">
+            <Object
+                 pxsl_line="165">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="BringGalib_Pipes_001::QEG_On"
+                     pxsl_line="165" />
+            </Object>
+            <Object
+                 pxsl_line="166">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="BringGalib_Pipes_002::QEG_On"
+                     pxsl_line="166" />
+            </Object>
+            <Object
+                 pxsl_line="167">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="BringGalib_Pipes_003::QEG_On"
+                     pxsl_line="167" />
+            </Object>
+            <Object
+                 pxsl_line="168">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="BringGalib_Pipes_004::QEG_On"
+                     pxsl_line="168" />
+            </Object>
+            <Object
+                 pxsl_line="169">
+                <QuestObject
+                     class="SensorVarlist"
+                     name="BringGalib_Varlist_Water_001"
+                     pxsl_line="169" />
+            </Object>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="170">
+            <Object
+                 pxsl_line="171">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="BringGalib_Pipes_001::QEG_Off"
+                     pxsl_line="171" />
+            </Object>
+            <Object
+                 pxsl_line="172">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="BringGalib_Pipes_002::QEG_Off"
+                     pxsl_line="172" />
+            </Object>
+            <Object
+                 pxsl_line="173">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="BringGalib_Pipes_003::QEG_Off"
+                     pxsl_line="173" />
+            </Object>
+            <Object
+                 pxsl_line="174">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="BringGalib_Pipes_004::QEG_Off"
+                     pxsl_line="174" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="175">
+            <Destination
+                 pxsl_line="175">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="BringGalib_SP_Vent_001"
+                     pxsl_line="175" />
+            </Destination>
+        </Phase>
+    </Quest>
+</QuestsDefinitions>

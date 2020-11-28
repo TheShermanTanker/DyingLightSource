@@ -1,0 +1,949 @@
+import "frame_script_def.scr"
+import "frame_script_game.scr"
+import "frame_script_hdr.scr"
+import "time.scr"
+import "weather.scr"
+import "scattering.scr"
+
+sub main()
+{
+	use weather_modify();
+
+	extern float TIME;
+	extern int SHADER_PATH;
+
+	float xone_res_x = 1536.0;
+	Set("f_screen_aspect_ratio_x_factor", (SHADER_PATH == 10) ? xone_res_x / 1920.0 : 1.0);
+
+	extern vec3 v_wind_dir;
+	Set("v_pp_wind_dir", v_wind_dir);
+	float f_wind_dir_length_inv = 1.0 / pow(v_wind_dir.x * v_wind_dir.x + v_wind_dir.z * v_wind_dir.z, 0.5);
+	Set("v_pp_wind_2d_xform", [v_wind_dir.x * f_wind_dir_length_inv, v_wind_dir.z * f_wind_dir_length_inv, -v_wind_dir.z * f_wind_dir_length_inv, 0.0]);
+
+	extern float f_lighting_indirect_factor;
+	Set("f_pp_lighting_indirect_factor", f_lighting_indirect_factor);
+
+	extern float f_ed_pp_dev_no_ambient_on;
+	extern float f_ed_pp_dev_ambient_on;
+	float lighting_indirect_on = 1.0 - f_ed_pp_dev_no_ambient_on;
+	float lighting_indirect_on = (f_ed_pp_dev_ambient_on > 0.0) ? 1.0 : lighting_indirect_on;
+	Set("f_pp_lighting_indirect_on", lighting_indirect_on);
+
+
+
+	//shadows
+	extern float f_shadows_offset;
+	extern int i_shadows_count;
+
+	extern float f_engine_shadows_slice_size;
+	extern float f_engine_shadows_slice_mul;
+
+	Set("f_pp_engine_shadows_offset", f_shadows_offset - 0.4); //near shadow clipping hack
+	Set("f_pp_engine_shadows_slice_size", f_engine_shadows_slice_size);
+	Set("f_pp_engine_shadows_slice_mul", f_engine_shadows_slice_mul);
+	Set("i_pp_engine_shadows_count", i_shadows_count);
+
+	//DOF bokeh
+	Set("f_bokeh_max_size", 16.0);
+	Set("f_bokeh_falloff", 1.0);
+	Set("f_bokeh_lum_threshold", 16.0);
+	Set("f_bokeh_size_threshold", 0.1);
+
+	extern vec4 GLOBAL_AMBIENT;
+	Set("f_ambient_def", GLOBAL_AMBIENT.w);
+
+	use SetHDR();
+	use time();
+	use weather();
+	use scattering();
+
+	//fog optimizations
+	//float3 v_pp_scattering_dist_factor;
+	//float f_pp_scattering_mie_g2;
+	//float3 v_pp_scattering_ray_scaled;
+	//float3 v_pp_scattering_mie_scaled;
+	//float f_pp_scattering_fm_scale;
+	//float f_pp_scattering_dn_scale;
+	//float f_pp_scattering_dn_bias;
+
+	float one_on_ln2 = 1.4426950408889634073599246810019;
+
+	extern vec3 v_pp_scattering_betas;
+	extern float f_pp_scattering_z_factor;
+	extern float f_pp_scattering_mie_g;
+	extern vec3 v_pp_scattering_ray;
+	extern vec3 v_pp_scattering_mie;
+	extern float f_pp_scattering_sun_brightness;
+	extern float f_scattering_ext_on;
+
+	float scattering_fm_scale = (1.0 - f_pp_scattering_mie_g * f_pp_scattering_mie_g) / (4.0 * 3.141592659);
+
+	Set("v_pp_scattering_dist_factor", -(v_pp_scattering_betas) * f_pp_scattering_z_factor * one_on_ln2 * f_scattering_ext_on);
+	Set("f_pp_scattering_mie_g2", f_pp_scattering_mie_g * f_pp_scattering_mie_g);
+	Set("v_pp_scattering_ray_scaled", v_pp_scattering_ray / (v_pp_scattering_betas) * f_pp_scattering_sun_brightness);
+	Set("v_pp_scattering_mie_scaled", v_pp_scattering_mie / (v_pp_scattering_betas) * f_pp_scattering_sun_brightness * scattering_fm_scale );
+	Set("f_pp_scattering_dn_scale", -2.0 * f_pp_scattering_mie_g);
+	Set("f_pp_scattering_dn_bias", 1.0 + f_pp_scattering_mie_g * f_pp_scattering_mie_g);
+	Set("f_pp_scattering_fm_scale", scattering_fm_scale );
+//remove
+//material id
+extern float f_mat_count;
+extern float f_row_per_mat;
+Set("f_pp_mat_count", f_mat_count);
+Set("f_pp_row_per_mat", f_row_per_mat);
+
+
+//modify input params (engine) /////////////////////////////////////////////////////////////////////////
+	extern float f_screen_drops_on;
+	Set("f_pp_screen_drops_on", f_screen_drops_on);
+
+	extern float f_screen_drops_water;
+	Set("f_pp_screen_drops_water", f_screen_drops_water);
+
+	extern float f_screen_drops_splat_time;
+	Set("f_pp_screen_drops_splat_time", f_screen_drops_splat_time);
+
+	extern float f_screen_drops_splat_emissive;
+	Set("f_pp_screen_drops_splat_emissive", f_screen_drops_splat_emissive);
+
+	extern vec4 v_screen_drops_splat_xform;
+	Set("v_pp_screen_drops_splat_xform", v_screen_drops_splat_xform);
+
+	extern float f_screen_drops_splat;
+	Set("f_pp_screen_drops_splat", f_screen_drops_splat);
+
+	extern float f_screen_drops_splat_move;
+	Set("f_pp_screen_drops_splat_move", f_screen_drops_splat_move);
+
+	extern float f_game_enemy_highlight_fade_far;
+	extern float f_game_enemy_highlight_fade_near;
+	extern vec4 v_game_enemy_highlight;
+
+	float enemy_hightlight_mul = 1.0 / (f_game_enemy_highlight_fade_far - f_game_enemy_highlight_fade_near);
+	float enemy_hightlight_add = -f_game_enemy_highlight_fade_near * enemy_hightlight_mul;
+	Set("v_pp_game_enemy_highlight_factors", [enemy_hightlight_mul, enemy_hightlight_add, v_game_enemy_highlight.w]);
+	Set("v_pp_game_enemy_highlight_color", v_game_enemy_highlight.xyz);
+
+	extern vec4 v_game_object_highlight;
+	Set("v_pp_game_object_highlight", [pow(v_game_object_highlight.x, 2.2), pow(v_game_object_highlight.y, 2.2), pow(v_game_object_highlight.z, 2.2), pow(v_game_object_highlight.w, 2.2)]);
+	extern float f_game_object_highlight_range;
+	extern float f_game_object_highlight_width_in;
+	extern float f_game_object_highlight_width_out;
+	extern float f_game_object_highlight_speed;
+
+	float object_highlight_time = TIME * f_game_object_highlight_speed;
+	float object_highlight_phase = object_highlight_time - floor(object_highlight_time);
+
+	float object_highlight_width_in2range = f_game_object_highlight_width_in / f_game_object_highlight_range;
+	float object_highlight_mask_in_bias = object_highlight_phase * (1.0 + 2.0 * object_highlight_width_in2range) - object_highlight_width_in2range;
+	float object_highlight_mask_in_scale = f_game_object_highlight_range / f_game_object_highlight_width_in;
+	float object_highlight_mask_in_mul = -object_highlight_mask_in_scale;
+	float object_highlight_mask_in_add = object_highlight_mask_in_scale * object_highlight_mask_in_bias;
+
+	float object_highlight_width_out2range = f_game_object_highlight_width_out / f_game_object_highlight_range;
+	float object_highlight_mask_out_bias = object_highlight_phase * (1.0 + 2.0 * object_highlight_width_out2range) - object_highlight_width_out2range;
+	float object_highlight_mask_out_scale = f_game_object_highlight_range / f_game_object_highlight_width_out;
+	float object_highlight_mask_out_mul = object_highlight_mask_out_scale;
+	float object_highlight_mask_out_add = 1.0 - object_highlight_mask_out_scale * object_highlight_mask_out_bias;
+
+	Set("v_pp_game_object_highlight_masks_factors", [object_highlight_mask_in_mul, object_highlight_mask_out_mul, object_highlight_mask_in_add, object_highlight_mask_out_add]);
+
+	float object_highlight_range_inv = 1.0 / f_game_object_highlight_range;
+
+	float object_highlight_dist_n_mul = object_highlight_range_inv;
+	float object_highlight_dist_n_add = 0.0;
+
+	float object_highlight_dist_mul = -object_highlight_range_inv * 2.0;
+	float object_highlight_dist_add = 2.0;
+
+	Set("v_pp_game_object_highlight_dist_factors", [object_highlight_dist_mul, object_highlight_dist_n_mul, object_highlight_dist_add, object_highlight_dist_n_add]);
+
+    extern float f_screen_scale_x;
+    extern float f_screen_scale_y;
+	Set("f_pp_screen_scaling_on", abs(1.0 - f_screen_scale_x * f_screen_scale_y));
+
+	//Scene rendering layers
+	extern float f_sky_distance;
+	Set("f_pp_sky_distance", f_sky_distance);
+
+	extern float f_env_strength;
+	Set("f_pp_env_strength", f_env_strength);
+
+	extern float f_env_nrm_strength;
+	Set("f_pp_env_nrm_strength", f_env_nrm_strength);
+
+	extern float f_env_rgh_threshold;
+	Set("f_pp_env_rgh_threshold", f_env_rgh_threshold);
+
+
+	//fade pp
+	extern float f_fade_pp;
+	extern vec3 v_fade_pp;
+	extern float f_fade_pp_clr;
+	extern float f_fade_pp_msk;
+
+	Set("f_pp_fade_pp", f_fade_pp);
+	Set("v_pp_fade_pp", v_fade_pp);
+	Set("f_pp_fade_pp_clr", f_fade_pp_clr);
+	Set("f_pp_fade_pp_msk", f_fade_pp_msk);
+
+	//SSAO
+	extern float f_ssao;
+	extern int i_menu_option_ao;
+	float ssao_on = f_ssao;
+	float ssao_on = (i_menu_option_ao >= 1) ? ssao_on : 0.0;
+	Set("f_pp_ssao", clamp(ssao_on));
+	Set("f_pp_ssdao", clamp(ssao_on - 1.0));
+
+	extern float f_ssss_correction;
+	extern float f_ssss_factor;
+	Set("f_pp_ssss_factor", f_ssss_factor);
+	Set("f_pp_ssss_correction", f_ssss_correction);
+
+	//exposure
+	extern float f_exposure_factor;
+	Set("f_pp_exposure_factor", f_exposure_factor);
+
+	extern float f_pp_dust_amount;
+	extern float f_underwater;
+	Set("f_pp_dust_amount", f_pp_dust_amount * (1.0 - f_underwater));
+
+    //wind
+    extern vec4 v_wind_wave_length;
+    extern float f_wind_sway_range;
+    extern float f_wind_wave_center;
+    extern float f_wind_speed;
+    extern float f_wind_phase_factor;
+    extern float f_wind_speed;
+    extern float f_wind_omni_range;
+    extern float f_wind_omni_power;
+    extern vec3  v_wind_omni_pos;
+    vec4 v_wind_wave_length = [1.0 / v_wind_wave_length.x, 1.0 / v_wind_wave_length.y, 1.0 / v_wind_wave_length.z, 1.0 / v_wind_wave_length.w];
+    float f_wind_omni_range = max(f_wind_omni_range, 0.01);
+    Set("v_pp_wind_params_0", v_wind_wave_length );
+    Set("v_pp_wind_params_1", [1.0/f_wind_wave_center, (1.0/(1.0-f_wind_wave_center)), (f_wind_sway_range + 1.0), -f_wind_sway_range ]);
+    Set("v_pp_wind_params_2", [TIME * f_wind_speed, 0.0, f_wind_omni_power, 0.0]);
+    Set("v_pp_wind_params_3", [ -v_wind_omni_pos / f_wind_omni_range, 1.0/f_wind_omni_range ] );
+
+    //Underwater
+    extern float f_underwater_surface_level;
+    Set("f_pp_underwater_surface_level", f_underwater_surface_level);
+
+    extern float f_underwater_extinction_factor;
+    extern vec3 v_underwater_extinction_dist;
+    extern vec3 v_underwater_inscattering_dist;
+    extern vec3 v_underwater_deep_clr;
+    extern vec4 v_underwater_nrm_waves_0;
+    extern vec4 v_underwater_nrm_waves_1;
+
+    vec3 v_underwater_extinction_dist = [ max(v_underwater_extinction_dist.x, 0.0001), max(v_underwater_extinction_dist.y, 0.0001), max(v_underwater_extinction_dist.z, 0.0001) ];
+    vec3 v_underwater_inscattering_dist = [ max(v_underwater_inscattering_dist.x, 0.0001), max(v_underwater_inscattering_dist.y, 0.0001), max(v_underwater_inscattering_dist.z, 0.0001) ];
+
+    vec3 v_underwater_extinction_dist = [ f_underwater_extinction_factor * v_underwater_extinction_dist.x, f_underwater_extinction_factor * v_underwater_extinction_dist.y, f_underwater_extinction_factor * v_underwater_extinction_dist.z ];
+    vec3 v_underwater_inscattering_dist = [ f_underwater_extinction_factor * v_underwater_inscattering_dist.x, f_underwater_extinction_factor * v_underwater_inscattering_dist.y, f_underwater_extinction_factor * v_underwater_inscattering_dist.z ];
+
+    Set("v_pp_underwater_extinction_factors", [1.0, 1.0, 1.0] / v_underwater_extinction_dist);
+    Set("v_pp_underwater_inscattering_factors", [1.0, 1.0, 1.0] /v_underwater_inscattering_dist);
+    Set("v_pp_underwater_deep_clr", pow(v_underwater_deep_clr, 2.2));
+    Set("v_pp_underwater_nrm_waves_0", [ v_underwater_nrm_waves_0.x, v_underwater_nrm_waves_0.y, TIME * v_underwater_nrm_waves_0.z - floor(TIME * v_underwater_nrm_waves_0.z), TIME * v_underwater_nrm_waves_0.w - floor(TIME * v_underwater_nrm_waves_0.w) ]);
+    Set("v_pp_underwater_nrm_waves_1", [ v_underwater_nrm_waves_1.x, v_underwater_nrm_waves_1.y, TIME * v_underwater_nrm_waves_1.z - floor(TIME * v_underwater_nrm_waves_1.z), TIME * v_underwater_nrm_waves_1.w - floor(TIME * v_underwater_nrm_waves_1.w) ]);
+
+	//sun color
+	extern vec3 v_shading_sun_color;
+	Set("v_pp_shading_sun_color", v_shading_sun_color);
+
+	//fog
+	extern float f_fog_near;
+	Set("f_pp_fog_near", f_fog_near);
+
+	extern float f_fog_far;
+	Set("f_pp_fog_far", f_fog_far);
+
+	extern float f_fog_opacity;
+	Set("f_pp_fog_opacity", f_fog_opacity);
+
+	extern vec3 v_fog_clr;
+	Set("v_pp_fog_clr", v_fog_clr);
+
+	extern float f_fog_bright;
+	//Set("v_pp_fog_bright", [0.2125, 0.7154, 0.0721] * pow(f_fog_bright, 2.2));
+    Set("v_pp_fog_bright", [1.0, 1.0, 1.0] * pow(f_fog_bright, 2.2));
+
+	//ambient color
+	extern vec3 v_ambient;
+	Set("v_pp_ambient_color", v_ambient);
+
+	extern float f_amb_saturation;
+	Set("f_pp_amb_saturation", f_amb_saturation);
+
+	//highlight color
+	extern vec3 v_highlight;
+	Set("v_pp_highlight", v_highlight);
+
+	extern float f_glow_factor;
+	extern float f_level_lighting_reference;
+    Set("f_pp_glow_factor", f_glow_factor * (1.0 - f_level_lighting_reference));
+
+    extern float f_glow_threshold;
+    Set("f_pp_glow_threshold", f_glow_threshold);
+
+
+	extern float f_heat_strength;
+	extern float f_pp_rain;
+	float f_pp_heat = f_heat_strength * (1.0 - clamp(f_pp_rain * 1000000.0));
+	Set("f_pp_heat", f_pp_heat);
+
+	//motion blur
+	//Disable blur motion while oculus rift is enabled
+	extern int i_pp_OculusEnable;
+	extern int i_menu_option_mb;
+	extern float f_blur_motion_object;
+	float blur_motion_object_on = f_blur_motion_object * (1 - i_pp_OculusEnable);
+	float blur_motion_object_on = (i_menu_option_mb >= 1) ? blur_motion_object_on : 0.0;
+	Set("f_pp_blur_motion_object", blur_motion_object_on);
+
+	extern float f_blur_motion_camera;
+	Set("f_pp_blur_motion_camera", f_blur_motion_camera);
+	extern float f_blur_motion_camera_near;
+	Set("f_pp_blur_motion_camera_near", f_blur_motion_camera_near);
+	extern float f_blur_motion_camera_far;
+	Set("f_pp_blur_motion_camera_far", f_blur_motion_camera_far);
+
+	// Previous frame
+	extern float f_blur_motion;
+	extern float f_prv_copy;
+	float f_pp_prv_copy = max(f_prv_copy, f_blur_motion);
+	float f_pp_prv_copy = max(f_pp_prv_copy, f_pp_heat);
+	Set("f_pp_prv_copy", f_pp_prv_copy);
+
+	extern float f_prv_lrp;
+	Set("f_pp_prv_lrp", max(f_prv_lrp, f_blur_motion));
+	extern float f_prv_add;
+	Set("f_pp_prv_add", f_prv_add);
+
+    //pp levels on/off
+    extern vec3 v_levels_rgb_in_black;
+    extern vec3 v_levels_rgb_in_gamma;
+    extern vec3 v_levels_rgb_in_white;
+    extern vec3 v_levels_rgb_out_black;
+    extern vec3 v_levels_rgb_out_white;
+    extern float f_levels;
+
+    Set("v_pp_levels_rgb_in_black", v_levels_rgb_in_black);
+    Set("v_pp_levels_rgb_in_gamma", v_levels_rgb_in_gamma);
+    Set("v_pp_levels_rgb_in_white", v_levels_rgb_in_white);
+    Set("v_pp_levels_rgb_out_black", v_levels_rgb_out_black);
+    Set("v_pp_levels_rgb_out_white", v_levels_rgb_out_white);
+    Set("f_pp_levels", f_levels);
+
+    //flashlight
+    extern vec3 v_flashlight_color;
+    extern float f_flashlight_pos_x;
+    extern float f_flashlight_pos_y;
+    extern float f_flashlight_range;
+    extern float f_flashlight_scale;
+
+    Set("v_pp_flashlight_color", v_flashlight_color);
+    Set("f_pp_flashlight_pos_x", f_flashlight_pos_x);
+    Set("f_pp_flashlight_pos_y", f_flashlight_pos_y);
+    Set("f_pp_flashlight_range", f_flashlight_range);
+    Set("f_pp_flashlight_scale", f_flashlight_scale);
+
+    //Blur radial mask
+    extern float f_blur_mask_radial_opacity;
+    extern float f_blur_mask_radial_bias;
+    extern float f_blur_mask_radial_scale;
+    extern float f_blur_mask_radial_center_offset_x;
+    extern float f_blur_mask_radial_center_offset_y;
+    extern float f_blur_mask_radial_scale_x;
+    extern float f_blur_mask_radial_scale_y;
+
+    Set("f_pp_blur_mask_radial_opacity", clamp(f_blur_mask_radial_opacity));
+    Set("f_pp_blur_mask_radial_bias", f_blur_mask_radial_bias);
+    Set("f_pp_blur_mask_radial_scale", f_blur_mask_radial_scale);
+    Set("f_pp_blur_mask_radial_center_offset_x", f_blur_mask_radial_center_offset_x);
+    Set("f_pp_blur_mask_radial_center_offset_y", f_blur_mask_radial_center_offset_y);
+    Set("f_pp_blur_mask_radial_scale_x", f_blur_mask_radial_scale_x);
+    Set("f_pp_blur_mask_radial_scale_y", f_blur_mask_radial_scale_y);
+
+    //blur camera motion
+    extern float f_blur_camera_motion_factor;
+	extern float f_game_player_camera_motion_blur;
+	Set("f_pp_blur_camera_motion_factor", max(f_blur_camera_motion_factor, f_game_player_camera_motion_blur));
+
+	extern float f_blur_camera_motion_near;
+	extern float f_game_player_camera_motion_blur_near;
+	float f_pp_blur_camera_motion_near = max(f_blur_camera_motion_near, f_game_player_camera_motion_blur_near);
+	Set("f_pp_blur_camera_motion_near", f_pp_blur_camera_motion_near);
+
+	extern float f_blur_camera_motion_far;
+	extern float f_game_player_camera_motion_blur_far;
+	float f_pp_blur_camera_motion_far = max(f_blur_camera_motion_far, f_game_player_camera_motion_blur_far);
+	Set("f_pp_blur_camera_motion_far", f_pp_blur_camera_motion_far);
+
+    //blur radial
+    extern float f_blur_radial_center_x;
+    extern float f_blur_radial_center_y;
+    extern float f_blur_radial_mask_bias;
+    extern float f_blur_radial_mask_scale;
+	extern float f_blur_radial_mask_opacity;
+    extern float f_blur_radial_power;
+    extern float f_blur_radial_range;
+
+    Set("f_pp_blur_radial_center_x", f_blur_radial_center_x);
+    Set("f_pp_blur_radial_center_y", f_blur_radial_center_y);
+    Set("f_pp_blur_radial_mask_bias", f_blur_radial_mask_bias);
+    Set("f_pp_blur_radial_mask_scale", f_blur_radial_mask_scale);
+	Set("f_pp_blur_radial_mask_opacity", f_blur_radial_mask_opacity);
+	Set("f_pp_blur_radial_power", f_blur_radial_power);
+    Set("f_pp_blur_radial_range", f_blur_radial_range);
+
+    extern float f_dof_near;
+    extern float f_dof_near_min;
+    extern float f_dof_near_max;
+    extern float f_dof_far_min;
+    extern float f_dof_far_max;
+    extern float f_dof_far;
+
+    //DOF - set variables
+    Set("f_pp_dof_near_1", clamp(f_dof_near * 4.0 - 1.0));
+    Set("f_pp_dof_near_2", clamp(f_dof_near * 4.0 - 2.0));
+    Set("f_pp_dof_near_3", clamp(f_dof_near * 4.0 - 3.0));
+
+    Set("f_pp_blur_near", f_dof_near);
+    Set("f_pp_blur_near_min", f_dof_near_min);
+    Set("f_pp_blur_near_max", f_dof_near_max);
+    Set("f_pp_blur_far_min", f_dof_far_min);
+    Set("f_pp_blur_far_max", f_dof_far_max);
+    Set("f_pp_blur_far", f_dof_far);
+
+    //BLUR
+    extern float f_blur;
+    Set("f_pp_blur", f_blur);
+
+    //CURVES
+	extern float f_curves_sensor;
+	extern float f_curves_effect_0;
+	extern float f_curves_effect_1;
+	extern float f_curves_effect_2;
+	extern float f_curves_effect_3;
+	extern float f_curves_effect_4;
+	extern float f_curves_effect_5;
+	extern float f_curves_effect_6;
+	extern float f_curves_effect_7;
+	extern float f_curves_effect_8;
+	extern float f_curves_map_v;
+	extern float f_curves_sensor_v;
+	extern float f_curves_effect_0_v;
+	extern float f_curves_effect_1_v;
+	extern float f_curves_effect_2_v;
+	extern float f_curves_effect_3_v;
+	extern float f_curves_effect_4_v;
+	extern float f_curves_effect_5_v;
+	extern float f_curves_effect_6_v;
+	extern float f_curves_effect_7_v;
+	extern float f_curves_effect_8_v;
+
+	Set("f_pp_curves_sensor", f_curves_sensor);
+	Set("f_pp_curves_effect_0", f_curves_effect_0);
+	Set("f_pp_curves_effect_1", f_curves_effect_1);
+	Set("f_pp_curves_effect_2", f_curves_effect_2);
+	Set("f_pp_curves_effect_3", f_curves_effect_3);
+	Set("f_pp_curves_effect_4", f_curves_effect_4);
+	Set("f_pp_curves_effect_5", f_curves_effect_5);
+	Set("f_pp_curves_effect_6", f_curves_effect_6);
+	Set("f_pp_curves_effect_7", f_curves_effect_7);
+	Set("f_pp_curves_effect_8", f_curves_effect_8);
+	Set("f_pp_curves_map_v", f_curves_map_v);
+	Set("f_pp_curves_sensor_v", f_curves_sensor_v);
+	Set("f_pp_curves_effect_0_v", f_curves_effect_0_v);
+	Set("f_pp_curves_effect_1_v", f_curves_effect_1_v);
+	Set("f_pp_curves_effect_2_v", f_curves_effect_2_v);
+	Set("f_pp_curves_effect_3_v", f_curves_effect_3_v);
+	Set("f_pp_curves_effect_4_v", f_curves_effect_4_v);
+	Set("f_pp_curves_effect_5_v", f_curves_effect_5_v);
+	Set("f_pp_curves_effect_6_v", f_curves_effect_6_v);
+	Set("f_pp_curves_effect_7_v", f_curves_effect_7_v);
+	Set("f_pp_curves_effect_8_v", f_curves_effect_8_v);
+
+    //OVERLAYS
+    extern float f_overlay_map;
+    extern float f_overlay_game;
+    extern float f_overlay_weather_0;
+    extern float f_overlay_weather_1;
+    extern float f_overlay_weather_2;
+    extern float f_overlay_weather_3;
+    extern float f_overlay_sensor;
+    extern float f_overlay_movie;
+    extern float f_overlay_effect_0;
+    extern float f_overlay_effect_1;
+    extern float f_overlay_effect_2;
+    extern float f_overlay_effect_3;
+    extern float f_overlay_effect_4;
+    extern float f_overlay_effect_5;
+    extern float f_overlay_effect_6;
+    extern float f_overlay_effect_7;
+
+    Set("f_pp_overlay_map", f_overlay_map);
+    Set("f_pp_overlay_game", f_overlay_game);
+    Set("f_pp_overlay_weather_0", f_overlay_weather_0);
+    Set("f_pp_overlay_weather_1", f_overlay_weather_1);
+    Set("f_pp_overlay_weather_2", f_overlay_weather_2);
+    Set("f_pp_overlay_weather_3", f_overlay_weather_3);
+    Set("f_pp_overlay_sensor", f_overlay_sensor);
+    Set("f_pp_overlay_movie", f_overlay_movie);
+    Set("f_pp_overlay_effect_0", f_overlay_effect_0);
+    Set("f_pp_overlay_effect_1", f_overlay_effect_1);
+    Set("f_pp_overlay_effect_2", f_overlay_effect_2);
+    Set("f_pp_overlay_effect_3", f_overlay_effect_3);
+    Set("f_pp_overlay_effect_4", f_overlay_effect_4);
+    Set("f_pp_overlay_effect_5", f_overlay_effect_5);
+    Set("f_pp_overlay_effect_6", f_overlay_effect_6);
+    Set("f_pp_overlay_effect_7", f_overlay_effect_7);
+
+    //OVERLAY ADD
+    extern float f_overlay_add_effect_0;
+    Set("f_pp_overlay_add_effect_0", f_overlay_add_effect_0);
+
+    extern float f_saturation;
+    Set("f_pp_saturation", f_saturation);
+
+
+    //desaturation
+    extern float f_desaturate;
+    Set("f_pp_desaturate", f_desaturate);
+
+    extern vec3 v_desaturate_factor_lum;
+    Set("v_pp_desaturate_factor_lum", v_desaturate_factor_lum);
+
+	extern vec3 v_desaturate_factor_mask;
+    Set("v_pp_desaturate_factor_mask", v_desaturate_factor_mask);
+
+	extern vec3 v_desaturate_tint;
+    Set("v_pp_desaturate_tint", v_desaturate_tint);
+
+	extern vec3 v_desaturate_tint_masked;
+    Set("v_pp_desaturate_tint_masked", v_desaturate_tint_masked);
+
+
+	extern float f_desaturate_lum_mask;
+	Set("f_pp_desaturate_lum_mask", f_desaturate_lum_mask);
+
+	extern float f_desaturate_lum_mask_min;
+	Set("f_pp_desaturate_lum_mask_min", f_desaturate_lum_mask_min);
+
+	extern float f_desaturate_lum_mask_max;
+	Set("f_pp_desaturate_lum_mask_max", f_desaturate_lum_mask_max);
+
+    //screen border
+    extern float f_screen_border;
+    extern vec3 v_screen_border;
+
+    float f_screen_border = clamp(f_screen_border);
+    Set("f_pp_screen_border", f_screen_border);
+    Set("v_pp_screen_border", v_screen_border * f_screen_border);
+    Set("f_pp_screen_border_sum", f_screen_border);
+
+    //noise
+    extern float f_noise;
+    extern float f_noise_speed;
+    extern float f_noise_size;
+    extern float f_noise_color;
+
+
+
+	//4 = SM31
+	//6 = SM32
+	float noise = (SHADER_PATH == 4) ? 0.0 : (SHADER_PATH == 6 ? 0.0 : f_noise);
+    Set("f_pp_noise", max(noise, 0.0));
+    Set("f_pp_noise_speed", f_noise_speed);
+    Set("f_pp_noise_size", f_noise_size);
+    Set("f_pp_noise_color", f_noise_color);
+
+    //Luminance PreMultiply
+    extern float f_lum_pm;
+    extern vec3 v_lum_pm_factors;
+    extern vec3 v_lum_pm_weights;
+    extern float f_lum_pm_weights_factor;
+
+    Set("f_pp_lum_pm", f_lum_pm);
+    Set("v_pp_lum_pm_factors", v_lum_pm_factors);
+    Set("v_pp_lum_pm_weights", v_lum_pm_weights);
+    Set("f_pp_lum_pm_weights_factor", f_lum_pm_weights_factor);
+
+    //screen abberation
+    extern float f_aberration_scale;
+    extern float f_aberration_speed;
+    extern float f_aberration_strength;
+
+    Set("f_pp_aberration_scale", f_aberration_scale);
+    Set("f_pp_aberration_speed", f_aberration_speed);
+    Set("f_pp_aberration_strength", f_aberration_strength);
+
+    //screen shake
+    extern float f_shake_scale;
+    extern float f_shake_speed;
+    extern float f_shake_strength;
+
+    Set("f_pp_shake_scale", f_shake_scale);
+    Set("f_pp_shake_speed", f_shake_speed);
+    Set("f_pp_shake_strength", f_shake_strength);
+
+	extern float f_filmgrain_4;
+	extern float f_filmgrain_4_color;
+	extern float f_filmgrain_4_speed;
+	extern float f_filmgrain_8;
+	extern float f_filmgrain_8_color;
+	extern float f_filmgrain_8_speed;
+	extern float f_filmgrain_16;
+	extern float f_filmgrain_16_color;
+	extern float f_filmgrain_16_speed;
+
+	Set("f_pp_filmgrain_4", f_filmgrain_4);
+	Set("f_pp_filmgrain_4_color", f_filmgrain_4_color);
+	Set("f_pp_filmgrain_4_speed", f_filmgrain_4_speed);
+	Set("f_pp_filmgrain_8", f_filmgrain_8);
+	Set("f_pp_filmgrain_8_color", f_filmgrain_8_color);
+	Set("f_pp_filmgrain_8_speed", f_filmgrain_8_speed);
+	Set("f_pp_filmgrain_16", f_filmgrain_16);
+	Set("f_pp_filmgrain_16_color", f_filmgrain_16_color);
+	Set("f_pp_filmgrain_16_speed", f_filmgrain_16_speed);
+
+//modify input params (game) /////////////////////////////////////////////////////////////////////////
+    use game_modify();
+
+//set output params (engine) /////////////////////////////////////////////////////////////////////////
+    //overlay
+    extern float f_pp_overlay_map;
+    extern float f_pp_overlay_game;
+    extern float f_pp_overlay_weather_0;
+    extern float f_pp_overlay_weather_1;
+    extern float f_pp_overlay_weather_2;
+    extern float f_pp_overlay_weather_3;
+    extern float f_pp_overlay_sensor;
+    extern float f_pp_overlay_movie;
+    extern float f_pp_overlay_effect_0;
+    extern float f_pp_overlay_effect_1;
+    extern float f_pp_overlay_effect_2;
+    extern float f_pp_overlay_effect_3;
+    extern float f_pp_overlay_effect_4;
+    extern float f_pp_overlay_effect_5;
+    extern float f_pp_overlay_effect_6;
+    extern float f_pp_overlay_effect_7;
+
+    extern float f_pp_overlays;
+	float pp_overlays_mix = clamp(1000000.0 * max(f_pp_overlay_map, max(f_pp_overlay_game, max(f_pp_overlay_weather_0, max(f_pp_overlay_weather_1, max(f_pp_overlay_weather_2, max(f_pp_overlay_weather_3, max(f_pp_overlay_sensor, max(f_pp_overlay_movie, max(f_pp_overlay_effect_0, max(f_pp_overlay_effect_1, max(f_pp_overlay_effect_2, max(f_pp_overlay_effect_3, max(f_pp_overlay_effect_4, max(f_pp_overlay_effect_5, max(f_pp_overlay_effect_6, f_pp_overlay_effect_7))))))))))))))));
+    Set("f_pp_overlays_mix", pp_overlays_mix);
+	Set("f_pp_overlays", pp_overlays_mix);
+
+    //screen border
+    extern vec3 v_pp_screen_border;
+    extern float f_pp_screen_border_sum;
+
+    Set("v_pp_screen_border", v_pp_screen_border / max(f_pp_screen_border_sum, 0.00001));
+
+    //Blur radial
+    extern float f_pp_blur_radial_mask_scale;
+    extern float f_pp_blur_radial_power;
+    extern float f_pp_blur_radial_range;
+	extern int i_pp_OculusEnable;
+	float oculus_factor = 1.0 * (1 - i_pp_OculusEnable);
+
+    float f_pp_blur_radial_on = f_pp_blur_radial_range * f_pp_blur_radial_mask_scale * f_pp_blur_radial_power;
+    float f_pp_blur_radial_on = f_pp_blur_radial_on * oculus_factor;
+
+	Set("f_pp_blur_radial_on", f_pp_blur_radial_on);
+
+    extern float f_pp_blur_near;
+    extern float f_pp_blur;
+	extern float f_pp_blur_mask_radial_opacity;
+	extern float f_pp_screen_drops_on;
+
+	float pp_blur_on = f_pp_blur;
+	float pp_blur_on = max(pp_blur_on, f_pp_blur_near);
+	float pp_blur_on = max(pp_blur_on, f_pp_blur_mask_radial_opacity);
+	float pp_blur_on = max(pp_blur_on, f_pp_blur_radial_on);
+	float pp_blur_on = max(pp_blur_on, f_pp_screen_drops_on);
+	float pp_blur_on = pp_blur_on * oculus_factor;
+	Set("f_pp_blur_on", pp_blur_on);
+
+	extern float f_pp_blur_far;
+	Set("f_pp_blur_far", f_pp_blur_far * oculus_factor);
+
+    //screen abberation
+    extern float f_pp_aberration_scale;
+    extern float f_pp_aberration_speed;
+    extern float f_pp_aberration_strength;
+
+    float f_pp_aberration_on = f_pp_aberration_strength * clamp(f_pp_aberration_scale * 100000.0) * clamp(f_pp_aberration_speed * 100000.0);
+    Set("f_pp_aberration_on", abs(f_pp_aberration_on * pp_blur_on));
+
+    //screen shake
+    extern float f_pp_shake_scale;
+    extern float f_pp_shake_speed;
+    extern float f_pp_shake_strength;
+
+    float f_pp_shake_on = f_pp_shake_strength * clamp(f_pp_shake_scale * 100000.0) * clamp(f_pp_shake_speed * 100000.0);
+    Set("f_pp_shake_on", abs(f_pp_shake_on * pp_blur_on));
+
+    //lighting const
+    extern int i_indoor_on;
+    extern int i_lighting_sun_on;
+    extern int i_shadows_sun_on;
+	extern float f_pp_rain;
+
+    int i_pp_outdoor_on = clamp(1 - i_indoor_on);//i_indoor_on must be greater or equal 1, to disable lighting
+    Set("i_pp_outdoor_on", i_pp_outdoor_on);
+
+    int i_pp_lighting_sun_on = i_lighting_sun_on * i_pp_outdoor_on;
+    Set("i_pp_lighting_sun_on", i_pp_lighting_sun_on);
+
+	int i_pp_shadows_sun_on = max(i_pp_lighting_sun_on, int(f_pp_rain)) * i_shadows_sun_on;
+    Set("i_pp_shadows_sun_on", i_pp_shadows_sun_on);
+    Set("i_engine_shadows_sun_on", i_pp_shadows_sun_on);
+
+    Set("i_pp_stencil_sun_on", i_pp_outdoor_on);
+
+    //pp curves on/off
+	extern float f_pp_curves_sensor;
+	extern float f_pp_curves_effect_0;
+	extern float f_pp_curves_effect_1;
+	extern float f_pp_curves_effect_2;
+	extern float f_pp_curves_effect_3;
+	extern float f_pp_curves_effect_4;
+	extern float f_pp_curves_effect_5;
+	extern float f_pp_curves_effect_6;
+	extern float f_pp_curves_effect_7;
+	extern float f_pp_curves_effect_8;
+	extern float f_curves;
+
+    extern int i_pp_curves_edit;
+    float f_pp_curves_edit = float(i_pp_curves_edit);
+
+	Set("f_pp_curves", max(f_pp_curves_edit, f_curves * clamp(f_curves + f_pp_curves_sensor + f_pp_curves_effect_0 + f_pp_curves_effect_1 + f_pp_curves_effect_2 + f_pp_curves_effect_3 + f_pp_curves_effect_4 + f_pp_curves_effect_5 + f_pp_curves_effect_6 + f_pp_curves_effect_7 + f_pp_curves_effect_8)));
+    //direct rendering - pc only
+    extern int i_out_buffer_on;
+    extern int fullscreen;
+	Set("i_pp_direct_on", (SHADER_PATH == 10) ? 0 : min(fullscreen, 1-i_out_buffer_on)); //HACK
+
+
+	//exposure correction
+	extern float f_pp_exposure_factor;
+
+	//intensities
+	extern float f_pp_hdr_intensity_shading_sun;
+	float f_pp_hdr_intensity_shading_sun = pow(f_pp_hdr_intensity_shading_sun, 2.2) * (1.0 * i_pp_lighting_sun_on);
+	Set("f_pp_hdr_intensity_shading_sun", f_pp_hdr_intensity_shading_sun);
+
+	extern float f_pp_hdr_intensity_ambient;
+	float f_pp_hdr_intensity_ambient = pow(f_pp_hdr_intensity_ambient, 2.2);
+	Set("f_pp_hdr_intensity_ambient", f_pp_hdr_intensity_ambient);
+
+	extern float f_pp_hdr_intensity_fx_lerp;
+	Set("f_pp_hdr_intensity_fx_lerp", f_pp_hdr_intensity_fx_lerp);
+
+	extern float f_pp_hdr_intensity_fx_add;
+	Set("f_pp_hdr_intensity_fx_add", pow(f_pp_hdr_intensity_fx_add, 2.2));
+
+	extern float f_pp_hdr_intensity_shading_lights;
+	Set("f_pp_hdr_intensity_shading_lights", pow(f_pp_hdr_intensity_shading_lights, 2.2));
+
+	extern float f_pp_hdr_intensity_emissive;
+	Set("f_pp_hdr_intensity_emissive", pow(f_pp_hdr_intensity_emissive, 2.2));
+
+	extern float f_pp_hdr_intensity_sun_face;
+	Set("f_pp_hdr_intensity_sun_face", pow(f_pp_hdr_intensity_sun_face, 2.2));
+
+	extern float f_pp_hdr_intensity_helpers;
+	Set("f_pp_hdr_intensity_helpers", pow(f_pp_hdr_intensity_helpers, 2.2));
+
+	extern float f_pp_hdr_intensity_shading_lights_ambient;
+	Set("f_pp_hdr_intensity_shading_lights_ambient", pow(f_pp_hdr_intensity_shading_lights_ambient, 2.2));
+
+	extern float f_pp_hdr_intensity_sky;
+	Set("f_pp_hdr_intensity_sky", pow(f_pp_hdr_intensity_sky, 2.2));
+
+	extern float f_pp_hdr_intensity_fog;
+	Set("f_pp_hdr_intensity_fog", pow(f_pp_hdr_intensity_fog, 2.2));
+
+	extern float f_pp_hdr_intensity_flashlight;
+	float f_pp_hdr_intensity_flashlight = pow(f_pp_hdr_intensity_flashlight, 2.2);
+	Set("f_pp_hdr_intensity_flashlight", f_pp_hdr_intensity_flashlight);
+
+
+	extern float f_pp_hdr_intensity_max;
+	Set("v_pp_hdr_intensity_max", [0.2125, 0.7154, 0.0721, 1.0] / f_pp_hdr_intensity_max);
+
+	///Fog
+	extern float f_pp_hdr_intensity_fog;
+	extern vec3 v_pp_fog_clr;
+	Set("v_pp_fog_clr_glow", pow(v_pp_fog_clr, 2.2) * f_pp_hdr_intensity_fog);
+
+	extern float f_pp_fog_near;
+	extern float f_pp_fog_far;
+	float f_fog_mask_scale = 1.0 / (f_pp_fog_far - f_pp_fog_near);
+	float f_fog_mask_bias = -f_pp_fog_near * f_fog_mask_scale;
+	extern float f_pp_fog_opacity;
+	Set("v_pp_fog_scalebias", [f_pp_fog_opacity, 1.0 - f_pp_fog_opacity, -f_fog_mask_scale, 1.0-f_fog_mask_bias]);
+
+
+	//sun color
+	extern vec3 v_pp_shading_sun_color;
+	Set("v_pp_shading_sun_color", pow(v_pp_shading_sun_color, 2.2) * f_pp_hdr_intensity_shading_sun);
+
+	extern vec3 v_pp_shading_sun_color_only;
+	Set("v_pp_shading_sun_color_only", pow(v_pp_shading_sun_color_only, 2.2) * f_pp_hdr_intensity_shading_sun);
+
+	extern vec3 v_pp_shading_sun_color_clouds_fade;
+	Set("v_pp_shading_sun_color_clouds_fade", pow(v_pp_shading_sun_color_clouds_fade, 2.2) * f_pp_hdr_intensity_shading_sun);
+
+	extern vec3 v_pp_shading_sun_color_clouds_fade_only;
+	Set("v_pp_shading_sun_color_clouds_fade_only", pow(v_pp_shading_sun_color_clouds_fade_only, 2.2) * f_pp_hdr_intensity_shading_sun);
+
+	extern vec3 v_pp_shading_sun_color_clouds_off;
+	Set("v_pp_shading_sun_color_clouds_off", pow(v_pp_shading_sun_color_clouds_off, 2.2) * f_pp_hdr_intensity_shading_sun);
+
+	//ambient color
+	extern vec3 v_pp_ambient_color;
+	Set("v_pp_ambient_color", pow(v_pp_ambient_color, 2.2) * f_pp_hdr_intensity_ambient);
+
+	//flashlight
+	extern float f_pp_hdr_intensity_flashlight;
+	extern vec3 v_pp_flashlight_color;
+	vec3 v_pp_flashlight_color = pow(v_pp_flashlight_color, 2.2) * f_pp_hdr_intensity_flashlight;
+	Set("v_pp_flashlight_color", v_pp_flashlight_color);
+    extern float f_pp_flashlight_scale;
+    extern float f_pp_flashlight_range;
+    Set("f_pp_flashlight_on", clamp((v_pp_flashlight_color.x + v_pp_flashlight_color.y + v_pp_flashlight_color.z) * f_pp_flashlight_scale * f_pp_flashlight_range));
+
+	//sky_color
+	// extern float f_pp_hdr_intensity_sky;
+	// extern vec3 v_sky_color;
+	// Set("v_pp_sky_color", pow(v_sky_color, 2.2) * f_pp_hdr_intensity_sky);
+
+	//highlight color
+	extern vec3 v_pp_highlight;
+	Set("v_pp_highlight", pow(v_pp_highlight * f_pp_hdr_intensity_helpers, 2.2));
+
+	// sun glow/rays
+	extern float f_sun_glow_radius;
+	extern float f_sun_glow_range;
+	extern vec3 v_sun_glow_color;
+	extern float f_underwater;
+
+	Set("f_pp_sun_glow_on", clamp(f_sun_glow_radius * f_sun_glow_range * max(max(v_sun_glow_color.x, v_sun_glow_color.y), v_sun_glow_color.z)) * (1.0 - f_underwater));
+
+	//clouds
+    extern float f_clouds_opacity;
+	Set("f_pp_clouds_opacity", f_clouds_opacity);
+
+    extern vec3 v_clouds_clr;
+    extern float f_pp_clouds_intensity;
+    Set("v_pp_clouds_clr", pow(v_clouds_clr, 2.2) * f_pp_clouds_intensity);
+
+	extern float f_clouds_dynamic_height;
+	Set("f_pp_clouds_dynamic_height", f_clouds_dynamic_height);
+
+	extern float f_clouds_dynamic_height_scale;
+	Set("f_pp_clouds_dynamic_height_scale", f_clouds_dynamic_height_scale);
+
+	extern float f_clouds_dynamic_depth_blending;
+	Set("f_pp_clouds_dynamic_depth_blending", f_clouds_dynamic_depth_blending);
+
+    extern float f_clouds_scale;
+    Set("f_pp_clouds_scale", f_clouds_scale);
+
+    extern float f_clouds_speed;
+    Set("f_pp_clouds_speed", f_clouds_speed);
+
+	// camera motion blur limit
+	extern float f_pp_blur_camera_motion_factor;
+	extern float f_blur_camera_motion_max;
+	Set("f_pp_blur_camera_motion_factor", min(f_pp_blur_camera_motion_factor, f_blur_camera_motion_max));
+
+	extern float f_pp_blur_motion_camera_near;
+	extern float f_pp_blur_motion_camera_far;
+
+	float cmb_mul = 1.0 / (f_pp_blur_motion_camera_far - f_pp_blur_motion_camera_near);
+	float cmb_add = -f_pp_blur_motion_camera_near * cmb_mul;
+
+	Set("f_pp_blur_motion_camera_mask_mul", cmb_mul);
+	Set("f_pp_blur_motion_camera_mask_add", cmb_add);
+
+
+    //set desaturate vars
+    extern float f_pp_desaturate;
+	extern vec3 v_pp_desaturate_tint_masked;
+	Set("v_pp_desaturate_tint_masked", v_pp_desaturate_tint_masked * f_pp_desaturate);
+
+	extern vec3 v_pp_desaturate_tint;
+	Set("v_pp_desaturate_tint__weight", [v_pp_desaturate_tint * f_pp_desaturate, 1.0 - f_pp_desaturate]);
+    use game_set();
+
+	extern int i_nvidia_features_override;
+	extern int i_nvidia_features_on;
+	extern int i_nvidia_features_hbao;
+	extern int i_nvidia_features_dof_bokeh;
+	int i_nv_dof_on = (i_nvidia_features_override >= 0) ? i_nvidia_features_override : i_nvidia_features_on * i_nvidia_features_dof_bokeh;
+	int i_nv_hbao_on = (i_nvidia_features_override >= 0) ? i_nvidia_features_override : i_nvidia_features_on * i_nvidia_features_hbao;
+
+	Set("i_nvidia_dof_on", i_nv_dof_on);
+	Set("i_nvidia_hbao_on", i_nv_hbao_on);
+	
+
+	extern float f_temporal_effect_on;
+	extern float f_smaa_tx2_on;
+	extern int i_menu_option_aa;
+	float smaa_tx2_on = f_smaa_tx2_on * f_temporal_effect_on;
+	float smaa_tx2_on = (i_menu_option_aa >= 1) ? smaa_tx2_on : 0.0;
+	Set("f_pp_smaa_tx2_on", smaa_tx2_on);
+	Set("f_smaa_jitter_on", smaa_tx2_on);
+	extern float f_pp_blur_motion_object;
+	extern float f_pp_blur_motion_camera;
+	float motion_object = f_pp_blur_motion_object * f_temporal_effect_on;
+	float motion_camera = (max(motion_object, smaa_tx2_on) > 0.0) ? f_pp_blur_motion_camera : 0.0;
+	Set("f_pp_blur_motion_object", motion_object);
+	Set("f_pp_blur_motion_camera", motion_camera);
+
+	Set("f_nvdof_reduce_energy_factor", 1.0);
+	Set("f_nvdof_preblur_reduce_energy_factor", 0.0);
+	Set("f_nvdof_luminance_min", 4.0);
+	Set("f_nvdof_luminance_max", 8.0);
+	Set("f_nvdof_coc_scale", 16.0);
+	Set("f_nvdof_bokeh_size", 0.0);
+
+	Set("f_nvdof_bokeh_out_max_luminance", 0.0);
+	Set("f_nvdof_bokeh_out_color_saturation", 1.0);
+	Set("f_nvdof_bokeh_max_blur_size", 32.0);
+	Set("f_nvdof_bokeh_intensity", 0.0);
+	Set("f_nvdof_bokeh_exp_falloff", 0.5);
+	Set("f_nvdof_bokeh_area_factor", 0.0);
+
+    extern float f_pp_blur_far_min;
+    extern float f_pp_blur_far_max;
+	Set("f_nvdof_bokeh_start_blur_radius", 1.0 - 1.0 / max(f_dof_far_min, f_div_delta));
+	Set("f_nvdof_bokeh_fade_in_radius", 1.0 - 1.0 / max(f_dof_far_max - f_dof_far_min, f_div_delta));
+
+// LDR
+	// Set("f_nvdof_reduce_energy_factor", 0.0);
+	// Set("f_nvdof_preblur_reduce_energy_factor", 0.0);
+	// Set("f_nvdof_luminance_min", 0.0);
+	// Set("f_nvdof_luminance_max", 1.0);
+	// Set("f_nvdof_coc_scale", 4.0);
+	// Set("f_nvdof_bokeh_size", 18.0);
+
+	// Set("f_nvdof_bokeh_out_max_luminance", 1.0);
+	// Set("f_nvdof_bokeh_out_color_saturation", 1.0);
+	// Set("f_nvdof_bokeh_max_blur_size", 1.0);
+	// Set("f_nvdof_bokeh_intensity", 1.0);
+	// Set("f_nvdof_bokeh_exp_falloff", 0.5);
+	// Set("f_nvdof_bokeh_area_factor", 1.0);
+
+    // extern float f_pp_blur_far_min;
+    // extern float f_pp_blur_far_max;
+	// Set("f_nvdof_bokeh_start_blur_radius", 1.0 - 1.0 / f_dof_far_min);
+	// Set("f_nvdof_bokeh_fade_in_radius", 1.0 - 1.0 / (f_dof_far_max - f_dof_far_min));
+}
+
+
+

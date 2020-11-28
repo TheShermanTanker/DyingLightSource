@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums_interior_a"
+     pxsl_line="3">
+    <!--  -->
+    <!-- -= TROY - SCAVENGERS -->
+    <!-- quest __SQ_Anticipating_Attack03_action00 -parent=SQ_Anticipating_Attack01  -->
+        <!-- ,goto _ Marker BGG_playerspotted -distance=4 -show=false -->
+        <!-- ,talk _ gangmember1 gangmember1_sq_blackgasgang_01DLG01 -auto=true -->
+        <!-- ,move _ AICoverPoint BGG_bandit01 -style=run -->
+            <!-- ,ai HumanAI BGG_Bandit01 -->
+            <!-- ,start AIEscortNode banditrun -->
+        <!-- ,hide _ HumanAI BGG_Bandit01 -->
+        <!-- ,teleport _ AIEscortNode BGG_airun -->
+            <!-- ,ai HumanAI BGG_Bandit01 -->
+    <!--  -->
+    <!-- quest __SQ_Anticipating_Attack03_action01 -parent=SQ_Anticipating_Attack01  -->
+        <!-- ,enable _ QuestEnableGroup BGG_autocannon -->
+        <!-- ,goto _ Marker BGG_autocanonstart -distance=4 -show=false  -->
+        <!-- ,enable _ QuestEnableGroup BGG_autocannon -->
+        <!-- ,OR _ -->
+            <!-- path -->
+                <!-- ,kill _ AISpawnBoxCompound BBG_gang01 -show=false -->
+            <!-- path -->
+                <!-- ,goto _ SensorGoTo BBG_autocannon -show=false -->
+        <!-- ,enable _ QuestEnableGroup BGG_autocannon -->
+    <!-- quest __SQ_Anticipating_Attack03_action02 -parent=SQ_Anticipating_Attack01  -->
+        <!-- ,goto _ Marker BGG_gas -distance=4 -show=false -->
+        <!-- ,talk _ gangmember2 gangmember2_sq_blackgasgang_01DLG01 -auto=true -->
+        <!-- ,movie _ CIN_BGG_GAS -->
+        <!-- ,enable _ QuestEnableGroup BGG_gas -state=enabled -->
+        <!-- ,hide _ ModelObject BGG_gas_cylinder -->
+        <!-- ,movie _ CIN_BGG_GAS2 -->
+        <!-- ,wait _ 1 -->
+        <!-- ,enable _ QuestEnableGroup BGG_gas -state=disabled -->
+        <!--  -->
+    <!-- quest __SQ_Anticipating_Attack03_action03 -parent=SQ_Anticipating_Attack01       -->
+        <!-- ,goto _ SensorGoTo GBB_banditrunstart -distance=0 -show=false -->
+        <!-- ,show _ HumanAI BGG_Bandit01 -->
+        <!-- ,teleport _ AIEscortNode BGG_airun -->
+            <!-- ,ai HumanAI BGG_Bandit01 -->
+        <!-- ,move _ AICoverPoint BGG_bandit01 -->
+            <!-- ,ai HumanAI BGG_Bandit01 -->
+            <!-- ,start AIEscortNode BGG_airun -->
+        <!-- ,hide _ HumanAI BGG_Bandit01 -->
+            <!--  -->
+    <!-- -= quest __SQ_Anticipating_Attack03_action04 -parent=SQ_Anticipating_Attack02       -->
+        <!-- -= ,goto _ SensorGoTo bgg_bossfight -distance=0 -show=false     -->
+        <!-- -= ,talk _ gangmember3 gangmember3_sq_blackgasgang_01DLG01 -auto=true -->
+        <!--  -->
+    <!-- quest __SQ_Anticipating_Attack03_action05 -parent=SQ_Anticipating_Attack01              -->
+        <!-- ,goto _  SensorGoTo bgg_showboss -distance=0 -show=false -->
+        <!-- -= ,show _ HumanAI bgg_boss -->
+        <!-- ,kill _ AISpawnBoxNumber bgg_boss -show=true -->
+        <!-- -= ,talk _ gangmember3 gangmember3_sq_blackgasgang_02DLG01 -auto=true -->
+    <!--  -->
+        <!--  -->
+    <!--  -->
+    <!-- quest SQ_Anticipating_Attack03 -parent=SQ_Anticipating_Attack01 -glued=true -leading_portal=portal_temp_to_slums -->
+        <!-- -= -leading_portal=portal_Metro_to_SlumsInt_BBG_01 -->
+        <!-- ,BLOCK _ -obj=&sq_gnr_OBJ_gettohideout& -->
+            <!-- ,goto <<Black Gas Gang - START basement>> SpawnPoint portal_SlumsInt_to_Metro_BBG_02_sp -show=true -distance=3 -->
+                <!-- ,debugpos SpawnPoint portal_SlumsInt_to_Metro_BBG_02_sp -->
+            <!--  -->
+            <!-- ,goto <<Black Gas Gang - START action>> SpawnPoint BalconyOutsideSpawnPoint -show=true -distance=3 -->
+                <!-- ,debugpos SpawnPoint BalconyOutsideSpawnPoint -->
+    <!--  -->
+        <!-- ,BLOCK <<Kill all gang members>> -obj=&SQ_Anticipating_Attack08_OBJ_B& -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,kill-multi _ -show=true  -->
+                        <!-- ,spawner AISpawnBoxCompound BBG_gang01 -->
+                        <!-- ,spawner AISpawnBoxCompound BBG_gang02 -->
+                        <!-- ,spawner AISpawnBoxCompound BBG_gang04 -->
+                        <!-- ,spawner AISpawnBoxCompound BBG_gang05 -->
+                        <!-- ,spawner AISpawnBoxCompound BBG_gang06 -->
+                        <!-- ,spawner AISpawnBoxCompound BBG_gang07 -->
+                        <!-- ,spawner AISpawnBoxCompound BBG_gang08                                 -->
+                        <!-- ,spawner AISpawnBoxCompound BBG_gang09 -->
+                        <!--  -->
+                <!-- path -->
+                    <!-- ,goto _ SensorGoTo BBG_gang03 -->
+                    <!-- ,kill _ AISpawnBoxCompound BBG_gang03 -->
+                <!--  -->
+    <!--  -->
+        <!-- -= ,BLOCK _ -obj=<<Go out>> -->
+            <!-- -= ,goto <<Go to floor>> SpawnPoint FirstFloorSpawnPoint -distance=4 -show=true -->
+                <!-- -= ,debugpos SpawnPoint FirstFloorSpawnPoint -->
+</QuestsDefinitions>

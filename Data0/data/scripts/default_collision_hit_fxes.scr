@@ -1,0 +1,21 @@
+import "surface_id.def"
+import "collision_effect_speed.def"
+
+export int AnySurfaceId    	            = SurfaceId_Count;
+export int AnyCollisionEffectSpeed      = CollisionEffectSpeed_Count;
+
+sub ParamsInfo()
+{
+    AnyParamValue(AnySurfaceId);
+    AnyParamValue(AnySurfaceId);
+    AnyParamValue(AnyCollisionEffectSpeed);
+}
+
+// poniewaz dzwieki sa identyczne dla danej pary, przyjalem zalozenie ze kazda para surface id wystepuje tylko raz 
+// i pierwsze id jest mniejsze od drugiego
+sub Datas()
+{
+	Data(SurfaceId_Water, AnySurfaceId, AnyCollisionEffectSpeed, "hit_water");
+	Data(SurfaceId_Mud, AnySurfaceId, AnyCollisionEffectSpeed, "hit_mud");
+	Data(AnySurfaceId, AnySurfaceId, AnyCollisionEffectSpeed, "hit_ground");
+}

@@ -1,0 +1,48 @@
+///////////////////////////////////////////////////////////////////////////////////////////////////
+// ODE world settings - default values (could be changed from game world scripts)
+///////////////////////////////////////////////////////////////////////////////////////////////////
+ 
+!include("ODEWorld.def")
+
+//-------------------------------------------------------------------------------------------------
+WorldParams()
+{
+    EnableRenderOnStart(0)              // to debug rendering of ode on application start
+    SetGravity([0, -9.80, 0])           // CM2M
+
+    SetERP(1)
+    SetCFM(0)
+    
+    QuickStepNumIterations(8)
+    QuickStepOverRelaxation(0.9)
+    QuickStepSortSkip(4)
+    QuickStepSortingMethod(1)
+    
+    Step(0.02)
+    EnableSkipContactConnected(1)
+
+    DepthThreshold(0.001)               // CM2M
+    ContactDepthMul(0.14)
+
+    ContinuousCollisions(1)
+    MinMomentumToWakeUp(40)             // CM2M
+    PlodParams(150, 180, 1)             // CM2M
+
+    EnableMiniThreads(1)
+    EnableSpu(1)
+}
+ 
+//-------------------------------------------------------------------------------------------------
+CacheParams()              
+{
+    TerrainCacheParams(1, 1, 3)
+    StaticMeshCacheParams(1, 1, 3)
+    TreesCacheParams(1, 1, 3)
+
+    ScriptCache(1)
+}
+
+
+
+
+

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="old_town_historic"
+     pxsl_line="3">
+    <!-- quest sq_FindRupert01 -parent=Q_FindAntio01 -quest_giver=malloy -difficulty=medium -reward_set=FindRupert_reward -->
+        <!-- ,talk <<RUPERT THE GUNSMITH - START>> malloy Malloy_FindRupert_USE01 -follow=Malloy_FindRupert_INP01 -show=false -->
+            <!-- ,debugpos SpawnPoint sp___SQ_MagicKingdom_Rupert_01 -->
+        <!-- ,checkpoint _ SpawnPoint sp___SQ_MagicKingdom_Rupert_01 -->
+        <!-- ,BLOCK _ -obj=&sq_FindRupert01_OBJ_GoToHouse& -->
+            <!-- ,goto <<Rupert the Gunsmith - Enter Ruperts Apartment>> SensorGoTo sgt_MKingdom_Ruperts_Apartment -->
+                <!-- ,debugpos SpawnPoint sp_MKingdom_Rupert_OldTown -->
+            <!-- ,enable _ QuestEnableGroup FindRupert_IT_FuseBox::QEG -->
+            <!-- ,checkpoint _ SpawnPoint sp_MKingdom_Rupert_OldTown -->
+            <!--  -->
+    <!-- quest sq_FindRupert02_photo -parent=sq_FindRupert01 -glued=false -->
+        <!-- ,use _ InvisibleSwitchDI is_MK_Rupert_Kindergarten_photo_01 -state=on -show=false -->
+        <!-- ,dialog _ voice2d Player_FindRupert_01DLG01 -auto=true -->
+    <!-- quest sq_FindRupert02 -parent=sq_FindRupert01 -glued=true -->
+        <!-- ,BLOCK _ -obj=&sq_FindRupert01_OBJ_FindClues& -->
+            <!-- ,use _ PhysicalSwitchDI FindRupert_trigger_garage_shutter -state=on -show=false -->
+                <!-- ,area ZoneBox sq_FindRupert_ZB_House_01 -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,use _ PhysicalSwitchDI FindRupert_IT_FuseBox::trigger_fuse_box -state=on -show=false -->
+                        <!-- ,area ZoneBox sq_FindRupert_ZB_House_01 -->
+                    <!-- ,use _ PhysicalSwitchDI FindRupert_IT_Lever::trigger_vertical_lever -state=on -show=false -->
+                        <!-- ,area ZoneBox sq_FindRupert_ZB_House_01 -->
+                <!-- path     -->
+                    <!-- ,goto _ Marker FindRupert_Marker_Rupert_01 -distance=2 -show=false -->
+                    <!-- ,enable _ QuestEnableGroup FindRupert_QEG_Alarm -->
+                    <!-- ,enable _ QuestEnableGroup FindRupert_QEG_Rupert_01 -->
+            <!-- ,disable _ QuestEnableGroup FindRupert_IT_FuseBox::QEG -->
+            <!-- ,enable _ SoundEmitterSimple FindRupert_IT_FuseBox::SES_ShutDown -->
+            <!-- ,disable _ QuestEnableGroup FindRupert_QEG_Alarm -->
+            <!-- ,disable _ QuestEnableGroup FindRupert_QEG_Electric01 -->
+            <!-- ,enable _ DoorDI FindRupert_DoorDI_Apar_01 -->
+            <!-- ,use _ InvisibleSwitchDI is_MK_Rupert_Kindergarten_photo_02 -state=on -show=false -->
+                <!-- ,area ZoneBox sq_FindRupert_ZB_House_01 -->
+            <!-- ,talk _ voice2d Player_FindRupert_01DLG02 -auto=true -show=false -->
+        <!-- ,checkpoint _ SpawnPoint sp_MKingdom_Rupert_OldTown -->
+</QuestsDefinitions>

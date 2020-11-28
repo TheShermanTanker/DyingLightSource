@@ -1,0 +1,627 @@
+!include("ai_data.def")
+!include("infected_timing_events.def")
+!include("export_volatile_params.scr")
+!include("vehicle_grab_volatile.scr")
+
+// volatile
+
+////////////////////////////////////////////// DATA ///////////////////////////////////////////////
+//###################
+//#### JUMPS	 ####
+//###################
+
+Data("movement:standing:climb:forward::::", -2, "volatile_jump_up_01", -1, 1)  //done - nadgarstek prawy
+Data("movement:standing:climb:forward::::", -2, "volatile_climbing_up_3_3m", -1, 1)  //done - nadgarstek prawy
+Data("movement:standing:climb:forward::::", -2, "volatile_climbing_up_6_6m", -1, 1) //done
+Data("movement:standing:climb:forward::::", -2, "volatile_climbing_up_9_9m", -1, 1) //done
+
+Data("movement:standing:jump_down:forward::::", -2, "infected_jump_down_3m_01", -1, 1) //done
+Data("movement:standing:jump_down:forward::::", -2, "infected_jump_down_3m_02", -1, 1) //done
+Data("movement:standing:jump_down:forward::::", -2, "infected_jump_down_3m_03", -1, 1)  //done
+Data("movement:standing:jump_down:forward::::", -2, "mzi_upset_jump_down_01", -1, 1)  //done	
+Data("movement:standing:jump_down:forward::::", -2, "mzi_upset_jump_down_01", -1, 1)  //done
+Data("movement:standing:jump_down:forward::::", -2, "mzi_upset_jump_down_01", -1, 1)  //done
+
+Data("movement:standing:jump_down_from_move:forward::::", -2, "infected_jump_down_2m_R", -1, 1) //done
+Data("movement:standing:jump_down_from_move:forward::::", -2, "infected_jump_down_2m_L", -1, 1) //done
+Data("movement:standing:jump_down_from_move:forward::::", -2, "infected_climbing_down_6_6m", -1, 1) //done
+Data("movement:standing:jump_down_from_move:forward::::", -2, "infected_climbing_down_9_9m", -1, 1)  //done - lewa noga koncowka strzal
+
+Data("movement:standing:jump_down_from_stand:forward::::", -2, "infected_jump_down_3m_01", -1, 1)  //done
+Data("movement:standing:jump_down_from_stand:forward::::", -2, "infected_jump_down_3m_02", -1, 1)	//done
+Data("movement:standing:jump_down_from_stand:forward::::", -2, "infected_jump_down_3m_03", -1, 1)	//done
+Data("movement:standing:jump_down_from_stand:forward::::", -2, "mzi_upset_jump_down_01", -1, 1)	//done
+Data("movement:standing:jump_down_from_stand:forward::::", -2, "mzi_upset_jump_down_01", -1, 1)	//done
+Data("movement:standing:jump_down_from_stand:forward::::", -2, "mzi_upset_jump_down_01", -1, 1)	//done
+
+Data("movement:standing:jump_on:forward::::", -2, "mzi_upset_jump_on", -1, 1)  //done - barki 
+Data("movement:standing:jump_off:forward::::", -2, "mzi_upset_jump_off", -1, 1)  //done - wizualizacja 
+Data("movement:standing:jump_over_high:forward::::", -2, "mzi_upset_jump_over_high_01", -1, 1)	//done
+Data("movement:standing:jump_over_high:forward::::", -2, "mzi_upset_jump_over_high_02", -1, 1)  //done
+Data("movement:standing:jump_over_high:forward::::", -2, "mzi_upset_sprintclimb", -1, 1)	//done
+Data("movement:standing:jump_over_high_low:forward::::", -2, "mzi_upset_sprintbarrierjumpup", -1, 1) //done
+Data("movement:standing:jump_over_low:forward::::", -2, "mzi_upset_jump_over_low_02", -1, 1) //done
+Data("movement:standing:jump_over_low:forward::::", -2, "mzi_upset_jump_over_low_02_lleg", -1, 1) //done
+Data("movement:standing:jump_over_low_high:forward::::", -2, "mzi_upset_sprintbarrierjumpdown", -1, 1) //done
+
+Data("movement:standing:jump_05m:forward::::", -2, "infected_jump_05m_L", -1, 1)	//done
+Data("movement:standing:jump_05m:forward::::", -2, "infected_jump_05m_R", -1, 1)	//done
+
+Data("movement:standing:jump_1m:forward::::", -2, "infected_jump_1m_L", -1, 1)	//done - przyspieszenie po stopanimie
+Data("movement:standing:jump_1m:forward::::", -2, "infected_jump_1m_R", -1, 1)	//done
+
+Data("movement:standing:jump_3m:forward::::", -2, "volatile_jump_01", -1, 1) //done - lewa noga 42-43
+Data("movement:standing:jump_3m:forward::::", -2, "volatile_jump_01", -1, 1)
+Data("movement:standing:jump_5m:forward::::", -2, "volatile_jump_01", -1, 1) //noIK
+Data("movement:standing:jump_5m:forward::::", -2, "volatile_jump_01", -1, 1) //noIK
+
+Data("movement:standing:jump_5m_to_climb:forward::::", -2, "volatile_jump_01", -1, 1)  //don't touch
+
+Data("movement:standing:jump_05m_up:forward::::", -2, "volatile_jump_01", -1, 1) //done
+Data("movement:standing:jump_1m_up:forward::::", -2, "volatile_jump_01", -1, 1) //not sure 
+Data("movement:standing:jump_1m_up:forward::::", -2, "volatile_jump_01", -1, 1)  //done
+Data("movement:standing:jump_1m_to_climb_up:forward::::", -2, "volatile_jump_01", -1, 1)  //done
+
+Data("movement:standing:jump_3m_up:forward::::", -2, "volatile_jump_01", -1, 1) //done
+Data("movement:standing:jump_3m_up:forward::::", -2, "volatile_jump_01", -1, 1) //done
+Data("movement:standing:jump_5m_up:forward::::", -2, "volatile_jump_01", -1, 1) //done
+Data("movement:standing:jump_3m_to_climb_up:forward::::", -2, "volatile_jump_01", -1, 1)  //done
+
+Data("movement:standing:jump_05m_down:forward::::", -2, "volatile_jump_01", -1, 1) //done
+Data("movement:standing:jump_1m_down:forward::::", -2, "volatile_jump_01", -1, 1) //done
+Data("movement:standing:jump_1m_down:forward::::", -2, "volatile_jump_01", -1, 1) //done
+
+Data("movement:standing:jump_3m_down:forward::::", -2, "volatile_jump_01", -1, 1) //done
+Data("movement:standing:jump_3m_down:forward::::", -2, "volatile_jump_01", -1, 1) //done
+Data("movement:standing:jump_3m_down:forward::::", -2, "volatile_jump_01", -1, 1) //done
+
+Data("movement:standing:jump_5m_down:forward::::", -2, "volatile_jump_01", -1, 1) 
+Data("movement:standing:jump_5m_down:forward::::", -2, "volatile_jump_01", -1, 1)
+Data("movement:standing:jump_5m_down:forward::::", -2, "volatile_jump_01", -1, 1) //don't touch
+
+Data("movement:standing:jump_5m_to_climb_down:forward::::", -2, "volatile_jump_01", -1, 1) //don't touch
+Data("movement:standing:jump_5m_to_climb_up:forward::::", -2, "volatile_jump_01", -1, 1) //don't touch
+
+
+Data("movement:standing:jump_05m_to_climb:forward::::", -2, "volatile_jump_01", -1, 1) //done
+Data("movement:standing:jump_1m_to_climb:forward::::", -2, "volatile_jump_01", -1, 1) //done
+Data("movement:standing:jump_3m_to_climb:forward::::", -2, "volatile_jump_01", -1, 1) //done
+Data("movement:standing:jump_5m_to_climb:forward::::", -2, "volatile_jump_01", -1, 1) //done
+
+Data("movement:standing:jump_fail:forward::::", -2, "mzi_upset_jump_fail", -1, 1) //done
+Data("movement:standing:jump_through_window:forward::::", -2, "mzi_upset_jump_over_low_02", -1, 1) //done
+Data("movement:standing:jump_through_window:forward::::", -2, "mzi_upset_jump_over_low_02_lleg", -1, 1) //done
+Data("movement:standing:jump_through_car:forward::::", -2, "mzi_upset_jump_through_car", -1, 1) //not done - slomo
+Data("movement:standing:jump_through_car:forward::::", -2, "mzi_upset_jump_through_car_lleg", -1, 1) //not done - slomo
+
+
+//#######################
+//#### HIT REACTIONS ####
+//#######################
+//## hit_reaction:pose:hit_reaction:item_type:damage_type:attacker_pos:body_part:direction:severity
+//#######################
+
+Data("hit_reaction:standing:pain::light:::backward:", -2, "volatile_light_hit_reaction_01", -1, 1)
+Data("hit_reaction:standing:pain::light:::backward:", -2, "volatile_light_hit_reaction_01", -1, 1)
+Data("hit_reaction:standing:pain::light:::backward:", -2, "volatile_light_hit_reaction_03", -1, 1)
+Data("hit_reaction:standing:pain::light:::backward:", -2, "volatile_light_hit_reaction_04", -1, 1)
+Data("hit_reaction:standing:pain::all:::up:", -2, "volatile_stand_hitreaction_head_left_medium_01", -1, 1)
+
+Data("hit_reaction:standing:pain::all:::up:", -2, "volatile_stand_hitreaction_head_right_medium_01", -1, 1)
+Data("hit_reaction:standing:pain::all:::up:", -2, "volatile_stand_hitreaction_head_right_medium_02", -1, 1)
+Data("hit_reaction:standing:pain::all:::down:", -2, "volatile_stand_hitreaction_head_down_medium_01", -1, 1)
+Data("hit_reaction:standing:pain::all:::down:", -2, "volatile_stand_hitreaction_head_down_medium_02", -1, 1)
+Data("hit_reaction:standing:pain::all:::left:", -2, "volatile_counterreaction_head_left_01", -1, 1)
+Data("hit_reaction:standing:pain::all:::right:", -2, "volatile_counterreaction_head_right_01", -1, 1)
+Data("hit_reaction:standing:pain::all:::right:", -2, "volatile_counterreaction_head_right_02", -1, 1)
+Data("hit_reaction:standing:pain::all:::left:", -2, "volatile_hitreaction_left_01", -1, 1)
+Data("hit_reaction:standing:pain::all:::right:", -2, "volatile_hitreaction_right_01", -1, 1)
+
+
+Data("hit_reaction:standing:pain::all:::backward:", -2, "volatile_counterreaction_head_left_01", -1, 1)
+Data("hit_reaction:standing:pain::all:::backward:", -2, "volatile_counterreaction_head_right_01", -1, 1)
+
+Data("hit_reaction:standing:counter_attack::all:::backward:", -2, "volatile_counterreaction_head_back_01", -1, 1)
+Data("hit_reaction:standing:counter_attack::all:::backward:", -2, "volatile_counterreaction_head_back_02", -1, 1)
+Data("hit_reaction:standing:counter_attack::all:::right:", -2, "volatile_counterreaction_head_right_01", -1, 1)
+Data("hit_reaction:standing:counter_attack::all:::left:", -2, "volatile_counterreaction_head_left_01", -1, 1)
+
+Data("hit_reaction:standing:counter_attack_from_stand::all:::backward:", -2, "volatile_counterreaction_head_back_01", -1, 1)
+Data("hit_reaction:standing:counter_attack_from_stand::all:::backward:", -2, "volatile_counterreaction_head_back_02", -1, 1)
+Data("hit_reaction:standing:counter_attack_from_stand::all:::right:", -2, "volatile_counterreaction_head_right_01", -1, 1)
+Data("hit_reaction:standing:counter_attack_from_stand::all:::right:", -2, "volatile_counterreaction_head_right_02", -1, 1)
+
+Data("hit_reaction:standing:counter_attack_from_stand::all:::left:", -2, "volatile_counterreaction_head_left_01", -1, 1)
+
+Data("hit_reaction:standing:counter_attack::kick:front:torso:backward:", -2, "volatile_counterreaction_head_left_01", -1, 1)
+Data("hit_reaction:standing:counter_attack::kick:front:head:backward:", -2, "volatile_counterreaction_head_right_01", -1, 1)
+Data("hit_reaction:standing:counter_attack::kick:front:torso:backward:", -2, "volatile_counterreaction_head_left_01", -1, 1)
+Data("hit_reaction:standing:counter_attack::kick:front:head:backward:", -2, "volatile_counterreaction_head_right_01", -1, 1)
+
+Data("hit_reaction:standing:counter_attack::kick:front:head:backward:", -2, "volatile_counterreaction_head_right_01", -1, 1)
+Data("hit_reaction:standing:counter_attack::kick:front:head:backward:", -2, "volatile_counterreaction_head_left_01", -1, 1)
+
+Data("hit_reaction:standing:counter_attack::kick:front:head:backward:", -2, "volatile_counterreaction_head_back_01", -1, 1)
+Data("hit_reaction:standing:counter_attack::kick:front:torso:backward:", -2, "volatile_counterreaction_head_back_01", -1, 1)
+
+//bullet
+
+Data("hit_reaction:standing:pain::bullet:::backward:", -2, "volatile_hitreactions_shot_back_01", -1, 1)
+Data("hit_reaction:standing:pain::bullet:::backward:", -2, "volatile_hitreactions_shot_back_02", -1, 1)
+Data("hit_reaction:standing:pain::bullet:::left:", -2, "volatile_hitreaction_left_01", -1, 1)
+Data("hit_reaction:standing:pain::bullet:::right:", -2, "volatile_hitreaction_right_01", -1, 1)
+
+Data("hit_reaction:standing:pain::bullet:::backward:", -2, "volatile_light_hit_reaction_01", -1, 1)
+Data("hit_reaction:standing:pain::bullet:::backward:", -2, "volatile_light_hit_reaction_03", -1, 1)
+Data("hit_reaction:standing:pain::bullet:::backward:", -2, "volatile_light_hit_reaction_04", -1, 1)
+
+
+Data("hit_reaction:standing:pain::bullet:::up:", -2, "volatile_stand_hitreaction_head_left_medium_01", -1, 1)
+
+Data("hit_reaction:standing:pain::bullet:::up:", -2, "volatile_stand_hitreaction_head_right_medium_01", -1, 1)
+Data("hit_reaction:standing:pain::bullet:::up:", -2, "volatile_stand_hitreaction_head_right_medium_02", -1, 1)
+Data("hit_reaction:standing:pain::bullet:::down:", -2, "volatile_stand_hitreaction_head_down_medium_01", -1, 1)
+Data("hit_reaction:standing:pain::bullet:::down:", -2, "volatile_stand_hitreaction_head_down_medium_02", -1, 1)
+
+
+
+//##################
+//#### ALARMING ####
+//##################
+//## alarming:is_standing:alarm_level:angle:direction:was_moving
+//##################
+
+Data("alarming:standing::upset:0::true", -2, "volatile_alarming_upset_stop", -1, 1)
+Data("alarming:standing::upset:90:right:true", -2, "volatile_alarming_upset_stop_90r", -1, 1)
+Data("alarming:standing::upset:90:left:true", -2, "volatile_alarming_upset_stop_90l", -1, 1)
+Data("alarming:standing::upset:180:right:true", -2, "volatile_alarming_upset_stop_180r", -1, 1)
+Data("alarming:standing::upset:180:left:true", -2, "volatile_alarming_upset_stop_180l", -1, 1)
+
+Data("alarming:standing::alarmed:::false", -2, "volatile_alarming_alarmed_01", -1, 1)
+
+//################
+//#### ATTACK ####
+//################
+//## attack:pose:item_type:attack_type:direction:attack_range:should_change_pose
+//################
+
+Data("attack:standing::decoy_long:::", -2, "infected_taunt_02", -1, 1)
+Data("attack:standing::decoy_short:::", -2, "infected_taunt_04", -1, 1)
+Data("attack:standing::decoy_short_back_left:::", -2, "Infected_decoy_reaction_short_left_01", -1, 1)
+Data("attack:standing::decoy_short_back_right:::", -2, "Infected_decoy_reaction_short_right_01", -1, 1)
+
+Data("attack:standing::taunt:::", -2, "volatile_taunt_01", -1, 1)
+Data("attack:standing::taunt:::", -2, "volatile_taunt_02", -1, 1)
+Data("attack:standing::taunt:::", -2, "volatile_taunt_03", -1, 1)
+Data("attack:standing::taunt_short:::", -2, "volatile_taunt_short_01", -1, 1)
+Data("attack:standing::taunt_short:::", -2, "volatile_taunt_short_02", -1, 1)
+Data("attack:standing::taunt_short:::", -2, "volatile_taunt_short_03", -1, 1)
+Data("attack:standing::spit:::", -2, "volatile_spit_attack_01", -1, 1)
+
+Data("attack:standing::jump_away:::", -2, "volatile_jump_back_02", -1, 1)
+
+// jump attacks
+Data("attack:standing::jump_attack_from_move::3m:", -2, "volatile_jump_attack_8m_01", -1, 1)
+Data("attack:standing::jump_attack_from_move::3m:", -2, "volatile_jump_attack_8m_02", -1, 1)
+Data("attack:standing::jump_attack_from_move::3m:", -2, "volatile_jump_attack_8m_03", -1, 1)
+Data("attack:standing::jump_attack_from_move::3m:", -2, "volatile_jump_attack_8m_04", -1, 1)
+Data("attack:standing::jump_strike_from_stand::3m:", -2, "volatile_jump_attack_from_stand", -1, 1)
+Data("attack:standing::jump_strike_from_stand::2m:", -2, "volatile_jump_attack_short_from_stand", -1, 1)
+
+// vehicle jump attack
+Data("attack:standing::vehicle_jump_attack_from_move::3m:", -2, "volatile_jump_attack_vehicle", -1, 1)
+Data("attack:standing::vehicle_jump_attack_from_move::4m:", -2, "volatile_jump_attack_vehicle_long", -1, 1)
+
+Data("attack:standing::vehicle_jump_strike_from_stand::3m:", -2, "volatile_jump_attack_vehicle", -1, 1)
+Data("attack:standing::vehicle_jump_strike_from_stand::4m:", -2, "volatile_jump_attack_vehicle_long_from_stand", -1, 1)
+
+// normal attacks
+Data("attack:standing::right_arm_strike:::", -2, "volatile_attack_01", -1, 1)
+Data("attack:standing::left_arm_strike:::", -2, "volatile_attack_left_01", -1, 1)
+Data("attack:standing::right_arm_strike:::", -2, "volatile_attack_right_01", -1, 1)
+
+Data("attack:standing::attack_from_move::2m:", -2, "volatile_attack_right_01", -1, 1)
+Data("attack:standing::attack_from_move::2m:", -2, "volatile_attack_left_01", -1, 1)
+//Data("attack:standing::attack_from_move::2m:", -2, "volatile_attack_01", -1, 1)
+
+//Data("attack:standing::attack_from_move::3m:", -2, "infected_attack_from_move_Left_03", -1, 1)
+//Data("attack:standing::attack_from_move::3m:", -2, "infected_attack_from_move_Right_03", -1, 1)
+
+Data("attack:standing::strike_from_stand::2m:", -2, "volatile_attack_01", -1, 1)
+//Data("attack:standing::strike_from_stand::3m:", -2, "volatile_attack_01", -1, 1)
+Data("attack:standing::strike_from_stand::2m:", -2, "volatile_attack_left_01", -1, 1)
+//Data("attack:standing::strike_from_stand::3m:", -2, "volatile_attack_left_01", -1, 1)	
+Data("attack:standing::strike_from_stand::2m:", -2, "volatile_attack_right_01", -1, 1)
+//Data("attack:standing::strike_from_stand::3m:", -2, "volatile_attack_left_01", -1, 1)
+
+
+Data("attack:standing::pursuit_slow:::", -2, "volatile_attack_8m_from_sprint_slow_01", -1, 1)
+Data("attack:standing::pursuit_normal:::", -2, "volatile_attack_8m_from_sprint_normal_01", -1, 1)
+Data("attack:standing::pursuit_fast:::", -2, "volatile_attack_8m_from_sprint_fast_01", -1, 1)
+
+Data("attack:standing::fake_low:::", -2, "Infected_fake_attack_04", -1, 1)
+Data("attack:standing::fake_low:::", -2, "Infected_fake_attack_05", -1, 1)
+Data("attack:standing::fake_low:::", -2, "Infected_fake_attack_06_short", -1, 1)
+Data("attack:standing::fake_low:::", -2, "Infected_fake_attack_07", -1, 1)
+Data("attack:standing::fake_low:::", -2, "infected_taunt_06", -1, 1)
+Data("attack:standing::fake_low:::", -2, "infected_taunt_02", -1, 1)
+Data("attack:standing::fake_low:::", -2, "infected_taunt_04", -1, 1)
+Data("attack:standing::fake_high:::", -2, "Infected_fake_attack_04", -1, 1)
+Data("attack:standing::fake_high:::", -2, "Infected_fake_attack_05", -1, 1)
+Data("attack:standing::fake_high:::", -2, "Infected_fake_attack_06_short", -1, 1) 
+Data("attack:standing::fake_high:::", -2, "Infected_fake_attack_07", -1, 1)
+Data("attack:standing::fake_short:::", -2, "infected_taunt_06", -1, 1)
+
+//###############
+//#### DYING ####
+//###############
+//## die:pose:damage_type:body_part:direction:death_type
+//###############
+
+//Data("die:standing:::::::", 0.0, "", -1, 1)
+//Data("die:laying:::::::", 0.0, "", -1, 1)
+
+Data("die:standing::::sunlight_burn:::", -2, "volatile_sunlight_death_01", -1, 1)
+
+//##############
+//#### IDLE ####
+//##############
+//## idle:pose:idle_type:item_type:is_idle_prepare:is_idle_finish
+//##############
+
+Data("idle:standing::stand:::", -2, "volatile_idle_02", -1, 1) //done
+
+Data("idle:standing::look_around:::", -2, "volatile_idle_01", -1, 1) //done
+Data("idle:standing::look_around:::", -2, "volatile_idle_02", -1, 1) //done
+
+
+Data("idle:standing:upset:look_around:::", -2, "volatile_stand_idle_aggressive_01", -1, 1)
+
+Data("idle:standing::look_at:::", -2, "volatile_stand_look_at_01", -1, 1)
+Data("idle:standing::scared:::", -2, "volatile_run_into_light_reaction_01", -1, 1)
+Data("idle:standing::scared:::", -2, "volatile_run_into_light_reaction_02", -1, 1)
+Data("idle:standing::scared:::", -2, "volatile_run_into_light_reaction_04", -1, 1)
+Data("idle:standing::offensive:::", -2, "volatile_taunt_01", -1, 1)
+Data("idle:standing::offensive:::", -2, "volatile_taunt_02", -1, 1)
+Data("idle:standing::offensive:::", -2, "volatile_taunt_03", -1, 1)
+Data("idle:standing:::::", -2, "volatile_stand_idle_aggressive_01", -1, 1)
+Data("idle:standing:::::", -2, "volatile_idle_01", -1, 1)
+Data("idle:standing:::::", -2, "volatile_idle_02", -1, 1)
+
+
+Data("idle:standing::taunt:::", -2, "volatile_taunt_01", -1, 1)
+Data("idle:standing::taunt:::", -2, "volatile_taunt_02", -1, 1)
+Data("idle:standing::taunt:::", -2, "volatile_taunt_03", -1, 1)
+
+Data("idle:standing::blinded:::", -2, "volatile_light_reaction_loop_01", -1, 1) //done
+Data("idle:standing::blinded:::", -2, "infected_blinded_counter_reaction_01", -1, 1) //done
+
+//##################
+//##### DODGE #####
+//##################
+//## dodge:pose:item_type:type
+//##################
+Data("dodge:standing::jump_left", -2, "volatile_dodge_left_01", -1, 1) //IK disabled
+Data("dodge:standing::jump_right", -2, "volatile_dodge_right_01", -1, 1) //IK disabled
+Data("dodge:standing::jump_back", -2, "volatile_dodge_jump_back", -1, 1)
+
+//##################
+//#### MOVEMENT ####
+//##################
+//## movement:is_standing:movement_type:movement_direction:alarm_level:item_type:ram_type:stairs_climbing_state
+//##################
+
+//Data("movement:standing:walk:forward::::", -2, "volatile_walk_loop_v01", -1, 1)
+//Data("movement:standing:walk:forward::::", -2, "volatile_walk_loop_v02", -1, 1)
+//Data("movement:standing:walk:forward::::", -2, "volatile_walk_loop_v03", -1, 1)
+Data("movement:standing:walk:forward::::", -2, "volatile_walk_loop_v05", -1, 1)
+
+//Data("movement:standing:walk:forward::::", -2, "volatile_walk_looking_around_02", -1, 1)
+
+Data("movement:standing:run:forward::::", -2, "volatile_run_01", -1, 1)
+Data("movement:standing:sprint:forward::::", -2, "volatile_run_01", -1, 1)
+
+Data("movement:standing:pursuit_slow:forward::::", -2, "volatile_run_01", -1, 1)
+Data("movement:standing:pursuit_normal:forward::::", -2, "volatile_run_01", -1, 1)
+Data("movement:standing:pursuit_fast:forward::::", -2, "volatile_run_01", -1, 1)
+Data("movement:standing:pursuit_vehicle_slow:forward::::", -2, "volatile_run_loop_17m", -1, 1)
+Data("movement:standing:pursuit_vehicle_normal:forward::::", -2, "volatile_run_loop_22m", -1, 1)
+Data("movement:standing:pursuit_vehicle_fast:forward::::", -2, "volatile_run_loop_30m", -1, 1)
+
+//Data("movement:standing:climb:forward::::", -2, "volatile_jump_up_01", -1, 1)
+Data("movement:standing:climb:forward::::", -2, "volatile_run_jump_up_r", -1, 1)
+Data("movement:standing:climb:forward::::", -2, "volatile_run_jump_up_l", -1, 1)
+
+Data("movement:standing:climb:forward::::", -2, "volatile_climbing_up_3_3m", -1, 1)
+Data("movement:standing:climb:forward::::", -2, "volatile_climbing_up_3_3m_mirror", -1, 1)
+
+Data("movement:standing:climb:forward::::", -2, "volatile_climbing_up_6_6m", -1, 1)
+Data("movement:standing:climb:forward::::", -2, "volatile_climbing_up_9_9m", -1, 1)
+
+Data("movement:standing:jump_down:forward::::", -2, "mzi_upset_sprintjumpdown", -1, 1)
+//Data("movement:standing:jump_down:forward::::", -2, "volatile_climbing_down_3_3m", -1, 1) // za malo dyanmiczna dla volatile'a
+Data("movement:standing:jump_down:forward::::", -2, "infected_jump_down_3m_02", -1, 1)
+Data("movement:standing:jump_down:forward::::", -2, "infected_jump_down_3m_03", -1, 1)
+
+Data("movement:standing:jump_down:forward::::", -2, "volatile_climbing_down_9_9m", -1, 1)
+
+
+
+
+
+//###############
+//#### START ####
+//###############
+//## start:is_standing:alarm_level:item_type:movement_type:angle:direction
+//##############
+
+Data("start:standing:::walk:90:left:", -2, "volatile_walk_start90l_01", -1, 1)  
+Data("start:standing:::walk:90:right:", -2, "volatile_walk_start90r_01", -1, 1)  
+Data("start:standing:::walk:0::", -2, "volatile_walk_start", -1, 1)  
+Data("start:standing:::walk:180:left:", -2, "volatile_walk_start180l_01", -1, 1)  
+Data("start:standing:::walk:180:right:", -2, "volatile_walk_start180r_01", -1, 1)  
+
+
+Data("start:standing::::0::", -2, "volatile_run_start_front_01", -1, 1)	//done
+Data("start:standing::::90:left:", -2, "volatile_run_start_90L", -1, 1)  //done
+Data("start:standing::::90:right:", -2, "volatile_run_start_90R", -1, 1)	//done
+Data("start:standing::::180:left:", -2, "volatile_run_start_180L", -1, 1)	//done
+Data("start:standing::::180:right:", -2, "volatile_run_start_180R", -1, 1)  //done
+
+
+
+//##############
+//#### STOP ####
+//##############
+//## stop:is_standing:alarm_level:item_type:movement_type:angle:direction
+//##############
+
+Data("stop:standing:::walk:90:left:false:", -2, "volatile_walk_stop90l_01", -1, 1)  //done
+Data("stop:standing:::walk:90:right:false:", -2, "volatile_walk_stop90r_01", -1, 1) //done
+Data("stop:standing:::walk:90:left:false:", -2, "volatile_walk_stop90l_02", -1, 1)  //done
+Data("stop:standing:::walk:90:right:false:", -2, "volatile_walk_stop90r_02", -1, 1) //done
+
+Data("stop:standing:::walk:0::false:", -2, "volatile_walk_stop_01", -1, 1)	//done
+Data("stop:standing:::walk:0::false:", -2, "volatile_walk_stop_02", -1, 1)	//done
+Data("stop:standing:::walk:180:left:false:", -2, "volatile_walk_stop180l_01", -1, 1)  //done - lewa reka
+Data("stop:standing:::walk:180:right:false:", -2, "volatile_walk_stop180r_01", -1, 1)	//done - koncowka, lewa noga
+
+
+
+Data("stop:standing::::90:left:false:", -2, "volatile_run_stop_90l_01", -1, 1)	//done
+Data("stop:standing::::90:right:false:", -2, "volatile_run_stop_90r_01", -1, 1)	//done
+Data("stop:standing::::0::false:", -2, "volatile_run_stop_front_01", -1, 1) //done - sztywna gora
+Data("stop:standing::::180:left:false:", -2, "volatile_run_stop_180L_01", -1, 1)	//done
+Data("stop:standing::::180:right:false:", -2, "volatile_run_stop_90r_01", -1, 1)	//done
+
+
+//##############
+//#### TURN ####
+//##############
+//## turn:is_standing:alarm_level:item_type:direction:angle
+//##############
+
+// turn data taken from generic script
+
+//################
+//##### GRAB #####
+//################
+//## grab:is_standing:is_holding:grabbed_phase:grab_type
+//################
+
+// player grab
+Data("grab:standing:true:begin_front:volatile_grab:", -2, "volatile_VolatileGrab_begin", -1, 1)
+Data("grab:standing:false:begin_front:volatile_grab:", -2, "volatile_VolatileGrab_begin", -1, 1)
+Data("grab:standing:true:fight:volatile_grab:", -2, "volatile_VolatileGrab_loop", -1, 1)
+Data("grab:standing:true:fast_finish_win_front:volatile_grab:", -2, "volatile_VolatileGrab_fastwin", -1, 1)
+Data("grab:standing:true:finish_win:volatile_grab:", -2, "volatile_VolatileGrab_finishwin", -1, 1)
+Data("grab:standing:true:finish_lose:volatile_grab:", 0, "", -1, 1)
+
+///////////////////////////////////////////// CURVES //////////////////////////////////////////////
+
+Curve(CURVE_COMBO_PROBABILITY, "volatile_combo_prob")
+Curve(CURVE_SIGHT_RANGE_HEIGHT_REDUCTION_MUL, "volatile_sight_range_height_reduction_mul")
+Curve(CURVE_HEALTH, "volatile_health")
+Curve(CURVE_MELEE_DAMAGE, "volatile_melee_damage")
+
+/////////////////////////////////////////// PARAMETERS ////////////////////////////////////////////
+
+ParamBool("taunt_on_alarm_level_change_at_night", 0)
+ParamBool("can_spit", 1)
+ParamBool("can_attack_from_move", 1)
+ParamBool("can_dodge", 1)
+//ParamFloat("health_mul", 3.33)
+//ParamFloat("stamina_mul", 2.0)
+//ParamFloat("damage_mul", 1.5)
+ParamBool("can_fall", 0)
+ParamFloat("experience_award", 500.0)
+ParamFloat("dodge_prob_mul", 0.0)
+ParamFloat("dodge_jump_prob", 0.9)
+ParamFloat("melee_range", 2.0)
+ParamFloat("melee_range_y", 1.2)
+ParamFloat("spit_range", 100)
+ParamFloat("spit_min_range", 0.5)
+ParamFloat("dist_to_keep_from_target", 4.0) // must be equal to spit_min_range
+ParamFloat("spit_min_damage_range", 10.0)
+ParamFloat("spit_max_damage_range", 5.0) 
+ParamFloat("spit_speed", 35.0)
+ParamFloat("chase_time_to_spit", 7.0)
+ParamFloat("chase_spit_duration", 1.3)
+ParamFloat("spit_effect_duration", 2.5)
+ParamFloat("min_time_btw_taunts", 15.0)
+ParamFloat("min_time_btw_spits", 0.1)
+ParamProb("taunt_prob", 0, 1) // taunt probability after failed berserker grab or target notice
+ParamFloat("taunt_prob_on_target_change", 0.0)
+ParamFloat("taunt_prob_on_alarm_level_change", 1.0)
+ParamFloat("chase_time_to_scream", 10.0)
+ParamFloat("chase_scream_dist", 14.0)
+ParamInt("zombie_type", 5)
+ParamBool("navigate_through_generic_nav_mesh_connections", 1)
+ParamBool("navigate_through_user_nav_mesh_connections", 1)
+ParamBool("can_move_through_low_obstacles", 1)
+ParamBool("can_move_through_high_obstacles", 1)
+ParamFloat("max_connection_height_up", 11.0)
+ParamFloat("max_connection_height_down", 11.0)
+ParamFloat("max_connection_horiz_dist", -1.0)
+ParamFloat("wander_dist", 40.0)
+ParamFloat("sight_range", 35.0)
+ParamFloat("sight_range_calm", 20.0)
+ParamFloat("sight_range_mul_at_night", 1.0)
+ParamFloat("sight_angle_min_dist_calm", 10.0)
+ParamFloat("sight_angle_at_min_dist_calm", 120)
+ParamFloat("sight_angle_max_dist_calm", 20.0)
+ParamFloat("sight_angle_at_max_dist_calm", 100)
+ParamFloat("sight_angle_min_dist", 5)
+ParamFloat("sight_angle_at_min_dist", 60)
+ParamFloat("sight_angle_max_dist", 35)
+ParamFloat("sight_angle_at_max_dist", 45)
+ParamFloat("enemy_keep_time_alarmed", 60.0)
+ParamFloat("enemy_keep_time_upset", 5.0)
+ParamBool("can_patrol", 1)
+ParamFloat("combo_prob_mul", 0.0)
+ParamFloat("full_angle_sight_range", 15.0)
+ParamBool("can_die_of_sunlight", 0)
+ParamFloat("dist_to_chase_beyond_wander_dist", 10.0)
+ParamFloat("dist_from_target_to_chase_beyond_wander_dist", 5.0)
+ParamFloat("dist_from_target_to_chase_beyond_wander_dist_when_not_visible", 5.0)
+
+ParamBool("attack_range_2_m_enabled", 1)
+ParamFloatRange("dist_for_attack_range_2_m", 2.0, 3.0)
+ParamFloatRange("dist_for_attack_range_2_m_in_move", -1.0, 3.0)
+
+ParamBool("attack_range_3_m_enabled", 1)
+ParamFloatRange("dist_for_attack_range_3_m", 3.0, 7.0)
+ParamFloatRange("dist_for_attack_range_3_m_in_move", 3.0, 7.0)
+
+// used only for car attack
+ParamBool("attack_range_4_m_enabled", 1)
+ParamFloatRange("dist_for_attack_range_4_m", 6.0, 12.0)
+ParamFloatRange("dist_for_attack_range_4_m_in_move", 6.0, 12.0)
+
+ParamFloat("max_dot_to_perform_attack_from_move", 0.866)
+ParamFloat("max_dot_to_perform_attack_from_stand", 0.9)
+ParamFloat("max_y_diff_from_target_to_perform_attack", 2.0)
+ParamFloat("counter_attack_prob_mul", 1.0)
+ParamFloat("attack_anim_related_turn_speed_limit", 120.0)
+ParamBool("disable_physics_damage_when_not_on_ragdoll", 1)
+ParamBool("cripple_bones_after_death_only", 1)
+ParamBool("cut_off_bones_after_death_only", 0)  //there is no mesh for head cut off
+ParamBool("can_destroy_head_before_death", 0)
+ParamFloat("alarm_after_enemy_visible_min_dist_time", -1.0)
+ParamFloat("alarm_after_enemy_visible_max_dist_time", -1.0)
+ParamFloat("alarm_when_enemy_close_min_distance", -1.0)
+ParamFloat("alarm_when_enemy_close_max_distance", -1.0)
+ParamBool("can_react_on_light", 1)
+ParamFloat("hearing_sensitivity", 0.5)
+ParamFloat("push_physics_damage_light", 3.0)
+ParamFloat("push_physics_damage_medium", 6.0)
+ParamFloat("push_physics_damage_heavy", 9.0)
+ParamFloat("jump_away_probability", 0.33)
+ParamFloat("max_dist_to_grab", 5.5)            // grab from stand start max distance //converted
+ParamFloat("max_jump_on_height", 1.5)
+ParamFloat("min_dist_to_grab", 3.0)
+ParamFloat("humanity_hit_reaction_prob", 0.0)
+
+ParamFloat("lost_target_search_dist_min", 4.0)
+ParamFloat("lost_target_search_dist_max", 14.0)
+
+//ParamFloat("head_health_influence", 1.5)
+//ParamFloat("left_arm_health_influence", 1.0)
+//ParamFloat("right_arm_health_influence", 1.0)
+//ParamFloat("left_leg_health_influence", 1.0)
+//ParamFloat("right_leg_health_influence", 1.0)
+//ParamFloat("torso_front_health_influence", 1.0)
+//ParamFloat("torso_back_health_influence", 1.0)
+
+//ParamFloat("head_damage_factor", 1.5)
+//ParamFloat("left_arm_damage_factor", 1.0)
+//ParamFloat("right_arm_damage_factor", 1.0)
+//ParamFloat("left_leg_damage_factor", 1.0)
+//ParamFloat("right_leg_damage_factor", 1.0)
+
+ParamFloat("front_player_catch_angle", 120.0)
+ParamFloat("max_player_catch_angle", 180.0)
+ParamFloat("catch_player_walk_speed_mul", 1.0)
+ParamBool("grab_360_for_walking_player", 1)
+
+ParamBool("can_be_night_patroler", 1)
+ParamBool("has_glowing_eyes", 1)
+
+ParamFloat("jump_from_move_attack_prob", 1.0)
+ParamFloat("jump_from_stand_attack_prob", 1.0)
+
+ParamFloat("jump_from_move_attack_vehicle_prob", 1.0)
+ParamFloat("jump_from_stand_attack_vehicle_prob", 1.0)
+
+ParamFloat("health_mul_min_to_play_burn_reaction", 0.2)
+ParamFloat("health_perc_below_elem_impact_blow_on", 0.2)
+ParamFloat("health_perc_below_elem_paralyze_on", 0.2)
+
+ParamFloat("patrol_look_for_player_time", 4.0)
+ParamBool("use_2d_angle_cone_check", 1)
+ParamBool("react_on_light", 1)
+
+ParamFloat("counter_attack_from_stand_prob_mul", 1.0)
+ParamFloat("counterattack_dist", 2.8)
+ParamFloat("far_counterattack_dist", -1.0)
+
+ParamBool("fall_on_head_collision", 0) // don't fall down if head collided with an obstacle
+
+ParamFloat("outside_night_area_partial_visibility_dist", 10.0)
+
+ParamFloat("confusion_prob_mod", 0.0)
+
+ParamBool("react_on_spikes_during_counter_attack", 1)
+
+ParamBool("can_be_scared_multiple_times_when_escaping", 0)
+
+ParamBool("can_be_alarmed_by_flashlight", 1)
+ParamBool("can_sense_flashlight_light", 1)
+ParamFloat("flashlight_awareness_threshold", 1.0)
+ParamFloat("flashlight_max_awareness", 2.0)
+
+ParamBool("can_react_on_dangerous_objects", 1)
+
+ParamBool("treat_flare_as_dangerous_object", 1)
+ParamFloat("max_dist_treat_player_in_safe_zone_as_dangerous", 20.0)
+ParamFloat("safe_zone_halo_causing_runing_away_from_player", 0.3)
+ParamFloat("max_time_to_treat_player_in_safe_zone_as_dangerous", 15.0)
+
+ParamFloat("coop_damage_mul_2", 1.2) // damage multiplayer for 2 players coop
+ParamFloat("coop_damage_mul_3", 1.4) // damage multiplayer for 3 players coop
+ParamFloat("coop_damage_mul_4", 1.8) // damage multiplayer for 4 players coop
+
+ParamFloat("distance_to_force_fall_on_grenade_blast", 2.0)
+ParamFloat("bullet_head_hit_damage_mult", 0.2)
+ParamFloat("bullet_body_hit_damage_mult", 0.2)
+
+ParamFloat("drowning_time", 5.0)
+
+ParamBool("can_attack_objects_from_move", 1)
+
+ParamFloat("push_car_physics_damage_light", 100.0)
+ParamFloat("push_car_physics_damage_medium", 400.0)
+ParamFloat("push_car_physics_damage_heavy", 700.0)
+ParamFloat("vehicle_physics_damage", 0.0)
+
+ParamBool("treat_vehicle_as_dangerous_object", 1)
+
+ParamFloat("min_angle_to_grab_vehicle", 10.0)
+ParamFloat("max_angle_to_grab_vehicle", 20.0)
+ParamFloat("min_vehicle_ang_speed_to_grab", 0.5)
+ParamFloat("max_vehicle_ang_speed_to_grab", 1.5)
+ParamFloat("min_vehicle_ang_speed_to_fall_after_grab", 0.5)
+ParamFloat("max_vehicle_ang_speed_to_fall_after_grab", 1.5)
+ParamFloat("max_impact_speed_to_grab_vehicle", 20.0)
+ParamFloat("max_vehicle_speed_to_grab", 11.1)
+ParamFloat("min_vehicle_speed_to_fall_after_grab", 25.0)
+ParamFloat("min_accel_to_break_vehicle_grab", 8.0)
+ParamFloat("min_accel_to_break_vehicle_grab_handbrake", 4.0)
+ParamFloat("untouchable_time_after_release_car", 5.0)
+ParamFloat("get_in_vehicle_give_damage_mult", 0.1)
+
+ParamBool("can_see_camouflaged_player", 0)
+
+ParamBool("taunt_on_running_away_target", 1)
+
+ParamFloatRange("stop_vehicle_chase_dist", 250.0, 350.0)

@@ -1,0 +1,768 @@
+// Temp items defined for debug and testing purposes only.
+
+import "inventorystuff.scr" 
+sub main() 
+{
+    Item("SurvivorPack_Test", CategoryType_SurvivorPack)
+    {
+        ItemType(ItemType_SurvivorPack);
+        Mesh("box_plastic_closed_ho.msh");
+        Color(Color_White);
+        MaxStackCount(30);
+    }
+  
+    Item("Test_Weapon", CategoryType_Melee)
+    {
+        Skin("Rusty");
+        Visibility(true);
+        ItemType(ItemType_Stick);
+        PhysicsScript("single_dropped_inventory.phx");
+        UpgradeLevel(0);
+        Condition(35);
+        CriticalCondition(11);
+        Damage(200.0);
+        Force(30.0);
+        CriticalProb(0.0);
+        CriticalDamage(2.0);
+        DamageRange(155.0 *0.01);
+        DamageToPhysicsObjects(50.0);
+        PhysicsDamageMul(1.0);
+        StaminaUsage(0.2);
+        ConfusionProb(0.0);
+        HeadSmashProb(0.0);
+        HeadCutProb(1.0);
+        ArmsCutProb(1.0);
+        LegsCutProb(1.0);
+        WeaponBuildType(WeaponBuildType_Metal);
+        DamageType(DamageType_Cut);
+        CutTypesGroup(CutTypesGroup_SharpBodyCutsOnCharge);
+        Flags(3);
+        InventoryMeshHq("wn_machete_a.msh");
+        InventoryMesh("wn_machete_a.msh");
+        Mesh("wn_machete_a.msh");
+        SkinTag("Weapon_Craft0");
+        AnimPrefix("Stick");
+        HudIcon("weapon_machete");
+        MinHitSeverity(HitSeverity_Light);
+        MaxHitSeverity(HitSeverity_Medium);
+        HorizontalAttackDamageMul(1.0);
+        TwoHanded(false);
+        HolderElement("r_thigh");
+        HolderOffset([0.0,10.0,10.0] *[0.01, 0.01, 0.01]);
+        HolderAngle([0.0,0.0,-90.0]);
+        DestroySound("damaged_sharp_weapon_XX.wav");
+        AiHitSound("machete");
+        use HitEffects_Sharp();
+        use PickupSounds_Default();
+        DamageSize(4.0);
+        StatsType(StatsType_Cut);
+        FF_EffectName("Hit_Sharp");
+        FF_Left(0.6);
+        FF_Right(0.6);
+        FF_Duration(0.2);
+        FF_FadeOut(0.0);
+        Reparable(true);
+        RepairTags("Weapon_Craft4");
+        RepairPart("Craft_MetalScrap", 1);
+        AllowedRepairs(3);
+        SoundDamagedHit("damaged_sharp_weapon_XX.wav");
+        Color(Color_White);
+        GenLevelMin(1);
+        GenLevelMax(1);
+        AchType(AchType_Machete);
+        DismantleResultItem("Craft_MetalScrap");
+        DismantleResultItemCnt(1);
+        CraftingSlots(1,0);
+        UniqueFxNameBase("machete_a");
+        RestrictionFlags(0);
+        RagdollBehaviorPrefix("StickSharp");
+        HandInertiaFactor(1.8);
+        Price(3600);
+        GenType(GenType_MeleeWeapon);
+    }
+  
+	////BUGGY UPGRADES
+	Item("ZZZZ3_CarPart_Test_Ram_lv1", CategoryType_VehicleUpgrade)
+    {
+        GameVersion(8);
+        ItemType(ItemType_CarUpgrade);
+        Mesh("box_plastic_closed_ho.msh");
+        Color(Color_White);
+        MaxStackCount(1);
+		VehicleSlot(VehicleSlot_Upgrades , 0);
+		VehicleMeshPart("upgrade_ram_a");
+		VehicleParamModifier("slowdown_decrased_tempo", "Mul", "1.4");
+		VehicleParamModifier("slowdown_influence", "Mul", "0.75");
+		VehicleParamModifier("ai_damage_mult", "Add", "0.15");
+        VehicleParamModifier("pvp_ram_damage_mul", "Set", "1.3");
+		
+        HudIcon("driving_ramming_bar");
+        MenuIcon("driving_ramming_bar");
+        
+		Condition(-1);
+    }
+
+	Item("ZZZZ3_CarPart_Test_Ram_lv2", CategoryType_VehicleUpgrade)
+    {
+        GameVersion(8);
+        ItemType(ItemType_CarUpgrade);
+        Mesh("box_plastic_closed_ho.msh");
+        Color(Color_White);
+        MaxStackCount(1);
+		VehicleSlot(VehicleSlot_Upgrades , 0);
+		VehicleMeshPart("upgrade_ram_a");
+		VehicleMeshPart("upgrade_ram_b");
+		VehicleParamModifier("slowdown_decrased_tempo", "Mul", "1.8");
+		VehicleParamModifier("slowdown_influence", "Mul", "0.5");
+		VehicleParamModifier("ai_damage_mult", "Add", "0.15");
+          VehicleParamModifier("pvp_ram_damage_mul", "Set", "1.5");
+		VehicleParamModifier("ram_level", "Set", "1");
+		HudIcon("driving_ramming_bar");
+		MenuIcon("driving_ramming_bar");
+		Condition(-1);
+
+    }
+	
+	Item("ZZZZ3_CarPart_UV1", CategoryType_VehicleUpgrade)
+    {
+        GameVersion(8);
+        ItemType(ItemType_CarUpgrade);
+        Mesh("box_plastic_closed_ho.msh");
+        Color(Color_White);
+        MaxStackCount(1);
+		VehicleSlot(VehicleSlot_Equipment , 0,1);
+		VehicleMeshPart("upgrade_uv");
+		VehicleMeshPart("cluster_uv");
+		VehicleSkill("UV_Level1");
+		HudIcon("driving_uv");
+		MenuIcon("driving_uv");
+		Condition(1000);
+    }
+	
+	Item("ZZZZ3_CarPart_UV2", CategoryType_VehicleUpgrade)
+    {
+        GameVersion(8);
+        ItemType(ItemType_CarUpgrade);
+        Mesh("box_plastic_closed_ho.msh");
+        Color(Color_White);
+        MaxStackCount(1);
+		VehicleSlot(VehicleSlot_Equipment , 0,1);
+		VehicleMeshPart("upgrade_uv_b");
+		VehicleMeshPart("upgrade_uv");
+		VehicleMeshPart("cluster_uv");
+		
+		VehicleSkill("UV_Level2"); 
+		HudIcon("driving_uv_illumination");
+		MenuIcon("driving_uv_illumination");
+		Condition(1000);
+    }
+	
+	Item("ZZZZ3_CarPart_Test_Nitrov1", CategoryType_VehicleUpgrade)
+    {
+        GameVersion(8);
+        ItemType(ItemType_CarUpgrade);
+        Mesh("box_plastic_closed_ho.msh");
+        Color(Color_White);
+        MaxStackCount(1);
+		VehicleParamModifier("nitro_max", "Add", "100.0");
+		VehicleSlot(VehicleSlot_Upgrades  , 4);
+		VehicleMeshPart("upgrade_nitro_a");
+        VehicleSkill("Nitro_Level1");
+		HudIcon("driving_nitro");
+		MenuIcon("driving_nitro");
+		Condition(-1);
+    }
+    
+    Item("ZZZZ3_CarPart_Test_Nitrov2", CategoryType_VehicleUpgrade)
+    {
+        GameVersion(8);
+        ItemType(ItemType_CarUpgrade);
+        Mesh("box_plastic_closed_ho.msh");
+        Color(Color_White);
+        MaxStackCount(1);
+		VehicleParamModifier("nitro_max", "Add", "200.0");
+		VehicleSlot(VehicleSlot_Upgrades  , 4);
+		VehicleMeshPart("upgrade_nitro_a");
+		VehicleMeshPart("upgrade_nitro_b");
+        VehicleSkill("Nitro_Level2");
+        HudIcon("driving_improved_nitro");
+        MenuIcon("driving_improved_nitro");
+		
+		Condition(-1);
+
+    }
+
+	Item("ZZZZ3_CarPart_Audio", CategoryType_VehicleUpgrade)
+    {
+        GameVersion(8);
+        ItemType(ItemType_CarUpgrade);
+        Mesh("box_plastic_closed_ho.msh");
+        Color(Color_White);
+        MaxStackCount(1);
+		VehicleSlot(VehicleSlot_Equipment , 0,1);
+		VehicleMeshPart("upgrade_audio");
+		VehicleSkill("Audio");
+		HudIcon("driving_car_alarm");
+		MenuIcon("driving_car_alarm");
+		Condition(-1);
+
+    }
+	
+	Item("ZZZZ3_CarPart_RemoteModule", CategoryType_VehicleUpgrade)
+    {
+        GameVersion(8);
+        ItemType(ItemType_CarUpgrade);
+        Mesh("box_plastic_closed_ho.msh");
+        Color(Color_White);
+        MaxStackCount(1);
+		VehicleSlot(VehicleSlot_Remote , 0, 1);
+		//VehicleMeshPart("audio");
+		VehicleParamModifier("has_remote_module", "set", "true");
+		HudIcon("driving_car_alarm");
+		MenuIcon("driving_car_alarm");
+		Condition(-1);
+		VehicleMeshPart("basic_antenna");
+
+    }
+	
+	 Item("ZZZZ3_CarPart_Armor_Lvl1", CategoryType_VehicleUpgrade)
+    {
+        GameVersion(8);
+        ItemType(ItemType_CarUpgrade);
+        Mesh("box_plastic_closed_ho.msh");
+        Color(Color_White);
+        MaxStackCount(1);
+		VehicleSlot(VehicleSlot_Upgrades, 1);
+		VehicleMeshPart("armor_basic");
+		VehicleParamModifier("damage_reduction", "add", "0.15"); //Reduces damage taken by player (0 - no reduction, 1 - max reduction)
+		VehicleParamModifier("engine_damage_mult", "mul", "0.75");
+		VehicleParamModifier("turbo_damage_mult", "mul", "0.75");
+		VehicleParamModifier("suspension_damage_mult", "mul", "0.75");
+		VehicleParamModifier("tires_damage_mult", "mul", "0.75");
+		VehicleParamModifier("brakes_damage_mult", "mul", "0.75");
+		VehicleParamModifier("blueprints_damage_mult", "mul", "0.75");
+		HudIcon("driving_reinforced_cage_1");
+		MenuIcon("driving_reinforced_cage_1");
+		Condition(-1);
+
+    }
+
+    Item("ZZZZ3_CarPart_Armor_Lvl2", CategoryType_VehicleUpgrade)
+    {
+        GameVersion(8);
+        ItemType(ItemType_CarUpgrade);
+        Mesh("box_plastic_closed_ho.msh");
+        Color(Color_White);
+        MaxStackCount(1);
+		VehicleSlot(VehicleSlot_Upgrades , 1);
+		VehicleMeshPart("armor_basic");
+		VehicleMeshPart("armor_upgraded");
+		VehicleParamModifier("damage_reduction", "add", "0.15"); //Reduces damage taken by player (0 - no reduction, 1 - max reduction)
+        VehicleParamModifier("engine_damage_mult", "mul", "0.5");
+		VehicleParamModifier("turbo_damage_mult", "mul", "0.5");
+		VehicleParamModifier("suspension_damage_mult", "mul", "0.5");
+		VehicleParamModifier("tires_damage_mult", "mul", "0.5");
+		VehicleParamModifier("brakes_damage_mult", "mul", "0.5");
+		VehicleParamModifier("blueprints_damage_mult", "mul", "0.5");
+		
+		Condition(-1);
+        HudIcon("driving_reinforced_cage_2");
+        MenuIcon("driving_reinforced_cage_2");
+
+    }
+	
+	Item("ZZZZ3_CarPart_BasicWheels", CategoryType_VehicleUpgrade)
+    {
+        GameVersion(8);
+        ItemType(ItemType_CarUpgrade);
+        Mesh("box_plastic_closed_ho.msh");
+        Color(Color_White);
+        MaxStackCount(1);
+        
+		VehicleSlot(VehicleSlot_Upgrades , 2);
+		VehicleMeshPart("basic_damper_FR");
+		VehicleMeshPart("basic_damper_FL");
+		VehicleMeshPart("basic_damper_RL");
+		VehicleMeshPart("basic_damper_RR");
+		
+		VehicleMeshPart("wheel_basic_FL");
+		VehicleMeshPart("wheel_basic_FR");
+		VehicleMeshPart("wheel_basic_RL");
+		VehicleMeshPart("wheel_basic_RR");
+		
+        HudIcon("car_part_tyres");
+        MenuIcon("car_part_tyres_big");
+		Condition(-1);
+    }
+	
+	Item("ZZZZ3_CarPart_UpgradeWheels", CategoryType_VehicleUpgrade)
+    {
+        GameVersion(8);
+        ItemType(ItemType_CarUpgrade);
+        Mesh("box_plastic_closed_ho.msh");
+        Color(Color_White);
+        MaxStackCount(1);
+        
+		VehicleSlot(VehicleSlot_Upgrades , 2);
+
+		VehicleParamModifier("damage_reduction", "add", "0.15");
+		VehicleParamModifier("suspension_strength_mod", "add", "0.22");
+		VehicleParamModifier("physics_spring_rise", "add", "0.07");
+		
+		VehicleParamModifier("offroad_damage_factor_tires", "set", "0.0");
+		VehicleParamModifier("offroad_damage_factor_suspension", "set", "0.0");
+		VehicleParamModifier("acid_passenger_damage_mult", "mul", "0.5");
+
+		VehicleMeshPart("upgrade_damper_FL");
+		VehicleMeshPart("upgrade_damper_FR");
+		VehicleMeshPart("upgrade_damper_RL");
+		VehicleMeshPart("upgrade_damper_RR");
+		
+		VehicleMeshPart("wheel_upgrade_FL");
+		VehicleMeshPart("wheel_upgrade_FR");
+		VehicleMeshPart("wheel_upgrade_RL");
+		VehicleMeshPart("wheel_upgrade_RR");
+		
+	    HudIcon("driving_offroad_suspension");
+	    MenuIcon("driving_offroad_suspension");
+		Condition(-1);
+    }
+	
+	Item("ZZZZ3_CarPart_ElectricCage", CategoryType_VehicleUpgrade)
+    {
+        GameVersion(8);
+        ItemType(ItemType_CarUpgrade);
+        Mesh("box_plastic_closed_ho.msh");
+        Color(Color_White);
+        MaxStackCount(1);
+		VehicleSlot(VehicleSlot_Equipment , 0,1);
+		VehicleParamModifier("has_electric_cage", "set", "true");
+		VehicleMeshPart("upgrade_electrical_cage");
+        VehicleSkill("ElectricCage");
+		HudIcon("driving_electrical_cage");
+		MenuIcon("driving_electrical_cage");
+		Condition(-1);
+    }
+    
+	Item("ZZZZ3_CarPart_FlameThrower", CategoryType_VehicleUpgrade)
+    {
+        GameVersion(8);
+        ItemType(ItemType_CarUpgrade);
+        Mesh("box_plastic_closed_ho.msh");
+        Color(Color_White);
+        MaxStackCount(1);
+		VehicleSlot(VehicleSlot_Equipment, 0,1);
+		VehicleMeshPart("upgrade_flame_thrower");
+        VehicleSkill("FlameThrower");
+		HudIcon("driving_flamethrower");
+		MenuIcon("driving_flamethrower");
+		Condition(-1);
+    }
+	
+	Item("ZZZZ3_CarPart_MineDispenser", CategoryType_VehicleUpgrade)
+    {
+        GameVersion(8);
+        ItemType(ItemType_CarUpgrade);
+        Mesh("box_plastic_closed_ho.msh");
+        Color(Color_White);
+        MaxStackCount(1);
+		VehicleSlot(VehicleSlot_Equipment, 0,1);
+		VehicleMeshPart("upgrade_mine_dispenser");
+        VehicleSkill("MineDispenser");
+        HudIcon("driving_mine_dispenser");
+        MenuIcon("driving_mine_dispenser");
+		
+		Condition(-1);
+    }
+
+	////COMPONENTS	
+	Item("ZZZZ3_Component_NutsBolts", CategoryType_VehicleUpgrade)
+    {
+        GameVersion(8);
+        ItemType(ItemType_CraftComponent);
+        Visibility(true);
+        Price(50);
+        HudIcon("repair_part");
+        Mesh("loot_ok_metal_scraps.msh");
+        Skin("screws");
+        MaxStackCount(999999);
+        PhysicsScript("single_dropped_inventory.phx");
+        Color(Color_White);
+        GenType(GenType_None);
+		HudIcon("blueprint_b");
+    }
+	Item("ZZZZ3_Component_Wire", CategoryType_VehicleUpgrade)
+    {
+        GameVersion(8);
+        ItemType(ItemType_CraftComponent);
+        Visibility(true);
+        Price(200);
+        HudIcon("repair_part");
+        Mesh("loot_ok_string.msh");
+        Skin("buggy_craft_parts");
+        MaxStackCount(999999);
+        PhysicsScript("single_dropped_inventory.phx");
+        Color(Color_Green);
+        GenType(GenType_None);
+		HudIcon("blueprint_b");
+    }
+
+	Item("ZZZZ3_Component_SteelTubing", CategoryType_VehicleUpgrade)
+    {
+        GameVersion(8);
+        ItemType(ItemType_CraftComponent);
+        Visibility(true);
+        Price(200);
+        HudIcon("repair_part");
+        Mesh("loot_ok_pipe_a.msh");
+        Skin("buggy_car_parts_metal");
+        MaxStackCount(999999);
+        PhysicsScript("single_dropped_inventory.phx");
+        Color(Color_Green);
+        GenType(GenType_None);
+		HudIcon("blueprint_b");
+    }
+	Item("ZZZZ3_Component_Rubber", CategoryType_VehicleUpgrade)
+    {
+        GameVersion(8);
+        ItemType(ItemType_CraftComponent);
+        Visibility(true);
+        Price(200);
+        HudIcon("repair_part");
+        Mesh("loot_ok_pipe_a.msh");
+        Skin("buggy_car_parts_rubber");
+        MaxStackCount(999999);
+        PhysicsScript("single_dropped_inventory.phx");
+        Color(Color_Green);
+        GenType(GenType_None);
+		HudIcon("blueprint_b");
+    }
+	Item("ZZZZ3_Component_Lubricant", CategoryType_VehicleUpgrade)
+    {
+        GameVersion(8);
+        ItemType(ItemType_CraftComponent);
+        Visibility(true);
+        Price(500);
+        HudIcon("repair_part");
+        Mesh("loot_ok_cosmetics_a.msh");
+        Skin("buggy_car_parts");
+        MaxStackCount(999999);
+        PhysicsScript("single_dropped_inventory.phx");
+        Color(Color_Blue);
+        GenType(GenType_None);
+		HudIcon("blueprint_b");
+    }
+	Item("ZZZZ3_Component_Synthetic", CategoryType_VehicleUpgrade)
+    {
+        GameVersion(8);
+        ItemType(ItemType_CraftComponent);
+        Visibility(true);
+        Price(1000);
+        HudIcon("repair_part");
+        Mesh("loot_ok_bleach_a.msh");
+        Skin("buggy_car_parts");
+        MaxStackCount(999999);
+        PhysicsScript("single_dropped_inventory.phx");
+        Color(Color_Violet);
+        GenType(GenType_None);
+		HudIcon("blueprint_b");
+    }
+	
+	Item("ZZZZ3_Collectable_Buggy_01", CategoryType_Collectable)
+    {
+        GameVersion(8);
+        Name("&Collectable_Buggy_01&");
+        Description("&Collectable_Buggy_01&");
+        ItemType(ItemType_VehicleAppearance);
+        Mesh("envelope_blueprint_cutscene_a.msh");
+        Skin("Default");
+        Color(Color_White);
+    }
+	
+	Item("ZZZZ3_Collectable_Buggy_Decoration_01", CategoryType_Collectable)
+    {
+        GameVersion(8);
+        Name("&Collectable_Buggy_Decoration_01&");
+        Description("&Collectable_Decoration_Buggy_01&");
+        ItemType(ItemType_VehicleAppearance);
+        Mesh("envelope_blueprint_cutscene_a.msh");
+        Skin("Default");
+        Color(Color_White);
+    }
+	
+	Item("ZZZZ3_Collectable_Buggy_Decoration_02", CategoryType_Collectable)
+    {
+        GameVersion(8);
+        Name("&Collectable_Buggy_Decoration_02&");
+        Description("&Collectable_Decoration_Buggy_02&");
+        ItemType(ItemType_VehicleAppearance);
+        Mesh("envelope_blueprint_cutscene_a.msh");
+        Skin("Default");
+        Color(Color_White);
+    }
+    
+        
+    Item("ZZZZ3_TempFireCage", CategoryType_ThrowableLiquid)
+    {
+        GameVersion(8);
+		Name("TempFireCage");
+		ItemType(ItemType_CarUpgrade);
+        Visibility(false);
+        MaxStackCount(1);
+        Mesh("dummy_box.msh");
+        Skin("default");
+        AnimPrefix("Grenade");
+        PhysicsScript("single_dropped_inventory.phx");
+        Damage(300.0);
+        PhysicsDamageMul(1.0);
+        DamageType(DamageType_Fire);
+        DamageDuration(0.0);
+        DamageRange(10.0);
+        HeadCutProb(0.0);
+        ArmsCutProb(0.0);
+        LegsCutProb(0.0);
+        ExplodeDelay(10.0);
+        ThrowEndSound("");
+        StatsType(StatsType_Explosive);
+        NoiseType("EXPLOSION");
+		Color(Color_White);
+		ExplosionSound("buggy_fire_shot.wav");
+        ExplosionFx("flamethrower");
+        BuggyEquipment();
+		ExplosionDirFx("");
+    }
+    
+    Item("ZZZZ3_TempElectricCage", CategoryType_ThrowableLiquid)
+    {
+        GameVersion(8);
+		Name("TempElectricCage");
+		ItemType(ItemType_CarUpgrade);
+        Visibility(false);
+        MaxStackCount(1);
+        Mesh("dummy_box.msh");
+        Skin("default");
+        AnimPrefix("Grenade");
+        PhysicsScript("single_dropped_inventory.phx");
+        Damage(350.0);
+        PhysicsDamageMul(3.0);
+        DamageType(DamageType_Impact);
+        DamageDuration(0.0);
+        DamageRange(16.0);
+        HeadCutProb(0.0);
+        ArmsCutProb(0.0);
+        LegsCutProb(0.0);
+        ExplodeDelay(2.0);
+        ThrowEndSound("");
+        StatsType(StatsType_Explosive);
+        NoiseType("EXPLOSION");
+		Color(Color_White);
+		ExplosionSound("buggy_electro_shot.wav");
+        ExplosionFx("buggy_electric_impact_sequence.fx");
+		ExplosionDirFx("");
+        BuggyEquipment();
+        use HitEffects_BuggyUpgrade();
+    }
+	
+	Item("ZZZZ3_TempElectricCageShock", CategoryType_ThrowableLiquid)
+    {
+        GameVersion(8);
+		Name("TempElectricCageShock");
+		ItemType(ItemType_CarUpgrade);
+        Visibility(false);
+        MaxStackCount(1);
+        Mesh("dummy_box.msh");
+        Skin("default");
+        AnimPrefix("Grenade");
+        PhysicsScript("single_dropped_inventory.phx");
+        Damage(200.0);
+        PhysicsDamageMul(2.0);
+        DamageType(DamageType_Electric);
+        DamageDuration(0.0);
+        DamageRange(5.5);
+        HeadCutProb(0.0);
+        ArmsCutProb(0.0);
+        LegsCutProb(0.0);
+        ExplosionFx("");
+        ExplosionSound("");
+        ExplodeDelay(2.0);
+        ThrowEndSound("");
+        StatsType(StatsType_Explosive);
+        NoiseType("EXPLOSION");
+		ExplosionFx("electric_buggy_component_sequence.fx");
+        Color(Color_White);
+        BuggyEquipment();
+    }
+	
+    	
+	//////// POISON
+	
+	Item("ZZZZ3_Bullet_Bolt_Poison", CategoryType_Ammo)
+    {
+        GameVersion(8);
+        Name("&Bullet_Bolt_Poison_N&");
+        Description("&Bullet_Bolt_Poison_D&");
+        ItemType(ItemType_Bullet);
+        AmmoType(AmmoType_Bolt);
+        BulletVis(BulletVis_BoltPoison);
+        Elemental(Elemental_Poison, 4);
+        MaxAmmoCount(60);
+        HudIcon("ammo_bolt_poison");
+        Mesh("dlc_wn_crossbow_bolt_b.msh");
+        Skin("Default");
+		ExplosionFx("poison_bolt_explosion_sequence.fx");
+        NoiseType("LIGHT_EXPLOSION");
+    }
+	
+    Item("ZZZZ3_Ammo_Crossbow_Poison", CategoryType_Ammo)
+    {
+        GameVersion(8);
+        ItemType(ItemType_Ammo);
+        Visibility(true);
+        BulletId("ZZZZ3_Bullet_Bolt_Poison");
+        AmmoCount(15);
+        MaxStackCount(99);
+        Price(250);
+		HudIcon("ammo_bolt_poison");
+        Mesh("dlc_wn_crossbow_bolt_b.msh");
+        Skin("Default");
+        PhysicsScript("single_dropped_inventory.phx");
+		Color(Color_White);
+    }
+	
+	////////// STUNNING
+	
+	Item("ZZZZ3_Bullet_Bolt_Stunning", CategoryType_Ammo)
+    {
+        GameVersion(8);
+        Name("&Bullet_Bolt_Stunning_N&");
+        Description("&Bullet_Bolt_Stunning_D&");
+        ItemType(ItemType_Bullet);
+        AmmoType(AmmoType_Bolt);
+        BulletVis(BulletVis_BoltStunning);
+		Elemental(Elemental_Stunning, 1);
+        MaxAmmoCount(60);
+        HudIcon("ammo_bolt_stunning");
+        Mesh("dlc_wn_crossbow_bolt_c.msh");
+        Skin("Default");
+		ExplosionFx("stunning_bolt_explosion_sequence.fx");
+        NoiseType("LIGHT_EXPLOSION");
+        BulletForceMul(0.0);
+    }
+    
+    Item("ZZZZ3_Ammo_Crossbow_Stunning", CategoryType_Ammo)
+    {
+        GameVersion(8);
+        ItemType(ItemType_Ammo);
+        Visibility(true);
+        BulletId("ZZZZ3_Bullet_Bolt_Stunning");
+        AmmoCount(15);
+        MaxStackCount(99);
+        Price(250);
+		HudIcon("ammo_bolt_stunning");
+        Mesh("dlc_wn_crossbow_bolt_c.msh");
+        Skin("Default");
+        PhysicsScript("single_dropped_inventory.phx");
+		Color(Color_White);
+    }
+	
+	///////// IMPACT
+	
+	Item("ZZZZ3_Bullet_Bolt_Impact", CategoryType_Ammo)
+    {
+        GameVersion(8);
+        Name("&Bullet_Bolt_Impact_N&");
+        Description("&Bullet_Bolt_Impact_D&");
+        ItemType(ItemType_Bullet);
+        AmmoType(AmmoType_Bolt);
+        BulletVis(BulletVis_BoltImpact);
+        Elemental(Elemental_ImpactElectricity, 3);
+        MaxAmmoCount(60);
+        HudIcon("ammo_bolt_impact");
+        Mesh("dlc_wn_crossbow_bolt_d.msh");
+        Skin("Default");
+		PhysicsScript("single_dropped_inventory.phx");
+		ExplosionFx("impact_bolt_explosion_sequence.fx");
+        NoiseType("LIGHT_EXPLOSION");
+    }
+    
+    Item("ZZZZ3_Ammo_Crossbow_Impact", CategoryType_Ammo)
+    {
+        GameVersion(8);
+        ItemType(ItemType_Ammo);
+        Visibility(true);
+        BulletId("ZZZZ3_Bullet_Bolt_Impact");
+        AmmoCount(15);
+        MaxStackCount(99);
+        Price(250);
+		HudIcon("ammo_bolt_impact");
+        Mesh("dlc_wn_crossbow_bolt_d.msh");
+        Skin("Default");
+        PhysicsScript("single_dropped_inventory.phx");
+		Color(Color_White);
+    }
+
+		
+	Item("ZZZZ3_CarPart_FuelTank_L1", CategoryType_VehicleUpgrade)
+    {
+        GameVersion(8);
+        ItemType(ItemType_CarUpgrade);
+        Mesh("box_plastic_closed_ho.msh");
+        Color(Color_White);
+        MaxStackCount(1);
+        HudIcon("component_misc");
+		VehicleSlot(VehicleSlot_Upgrades, 3);
+		VehicleParamModifier("fuel_usage_base", "Add", "-0.0005");
+        VehicleParamModifier("fuel_max_amount", "Add", "1.0");
+		VehicleMeshPart("upgrade_fuel");
+		
+		HudIcon("driving_extended_tank");
+        MenuIcon("driving_extended_tank");
+		Condition(-1);
+    }
+	
+	Item("ZZZZ3_CarPart_FuelTank_L2", CategoryType_VehicleUpgrade)
+    {
+        GameVersion(8);
+        ItemType(ItemType_CarUpgrade);
+        Mesh("box_plastic_closed_ho.msh");
+        Color(Color_White);
+        MaxStackCount(1);
+        HudIcon("component_misc");
+		VehicleSlot(VehicleSlot_Upgrades, 3);
+		VehicleParamModifier("fuel_usage_base", "Add", "-0.0010");
+        VehicleParamModifier("fuel_max_amount", "Add", "2.0");
+		
+		VehicleMeshPart("upgrade_fuel");
+		VehicleMeshPart("upgrade_fuel_b");
+		
+		HudIcon("driving_extended_tank");
+        MenuIcon("driving_extended_tank");
+		Condition(-1);
+    }
+	
+	Item("ZZZZ3_CarPart_Armor_Lvl3", CategoryType_VehicleUpgrade)
+    {
+        GameVersion(8);
+        ItemType(ItemType_CarUpgrade);
+        Mesh("box_plastic_closed_ho.msh");
+        Color(Color_White);
+        MaxStackCount(1);
+        HudIcon("component_misc");
+		VehicleSlot(VehicleSlot_Upgrades , 1);
+		VehicleMeshPart("armor_basic");
+		VehicleMeshPart("armor_upgraded");
+		VehicleMeshPart("armor_upgraded_b");
+		VehicleParamModifier("damage_reduction", "add", "0.15"); //Reduces damage taken by player (0 - no reduction, 1 - max reduction)
+        VehicleParamModifier("engine_damage_mult", "mul", "0.5");
+		VehicleParamModifier("turbo_damage_mult", "mul", "0.5");
+		VehicleParamModifier("suspension_damage_mult", "mul", "0.5");
+		VehicleParamModifier("tires_damage_mult", "mul", "0.5");
+		VehicleParamModifier("brakes_damage_mult", "mul", "0.5");
+		VehicleParamModifier("blueprints_damage_mult", "mul", "0.5");
+		
+		HudIcon("driving_reinforced_cage_3");
+        MenuIcon("driving_reinforced_cage_3");
+		Condition(-1);
+    }
+}
+

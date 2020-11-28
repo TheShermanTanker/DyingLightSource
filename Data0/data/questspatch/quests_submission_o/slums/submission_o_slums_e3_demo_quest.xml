@@ -1,0 +1,644 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums"
+     pxsl_line="4">
+    <!-- quest   E3_Slums_Demo_Start   -parent=Q_AnotherDay_02    -->
+        <!-- ,BLOCK _    -obj=<< Training Ground >> -->
+            <!-- -= ,semaphore _   -->
+            <!-- -= ,set _ PBreakerActivator demo_e3_pursuit_car::pursuitbreaker_switch -state=on -->
+            <!-- ,show-multi _ -->
+                <!-- ,o AppearGroup E3_Demo_Entrance_Door -->
+                <!-- -= ,o AppearGroup slums_interior_barricade_b_ag -->
+                <!-- ,o  AppearGroup slums_interior_barricade_c_ag -->
+            <!-- ,enable-multi _ -->
+                <!-- ,o  Encounter::EncounterBlockArea E3_Demo_Encounter_Blocker_1 -->
+                <!-- ,o  SpawnBlocker E3_Demo_Spawn_Blocker_1 -->
+                <!-- ,o  SpawnBlocker E3_Demo_Spawn_Blocker_2 -->
+                <!-- ,o  SpawnBlocker E3_Demo_Spawn_Blocker_3 -->
+                <!-- ,o  SpawnBlocker E3_Demo_Spawn_Blocker_4 -->
+                <!-- ,o  Encounter::EncounterBlockArea E3_Demo_Encounter_Blocker_2 -->
+                <!-- ,o  Encounter::EncounterBlockArea E3_Demo_Encounter_Blocker_3 -->
+                <!-- -= area near baby is born -->
+                <!-- ,o  SpawnBlocker E3_Demo_Spawn_Blocker_5_baby -->
+                <!-- ,o  CrowdSpawner E3_Crowd_Horde_1 -->
+                <!-- ,o  CrowdSpawner E3_Crowd_Horde_2 -->
+                <!-- ,o  CrowdSpawner E3_Crowd_Horde_4 -->
+                <!-- -= zombies on road -->
+                <!-- ,o  QuestEnableGroup Demo_E3_Zombies_Enabler -->
+            <!-- ,hide-multi _ -->
+                <!-- ,o  MovieActor cin_slums_outgo_Door -->
+                <!-- ,o  ModelObject cin_slums_outgo_Door_02 -->
+                <!-- ,o  MovieActor cin_slums_outgo_Player -->
+                <!-- ,o  HumanAI slums_thetower_guard_ground_03 -->
+                <!-- ,o  DoorDI the_tower_main_door_normal -->
+                <!-- ,o  DoorDI the_tower_main_door_normal2 -->
+                <!-- -= ,o  AppearGroup slums_interior_barricade_b_dest_ag -->
+                <!-- ,o  AppearGroup slums_interior_barricade_c_dest_ag -->
+                <!-- -= ,o  ModelObject Entrance_Hub_Door_1 -->
+                <!-- -= ,o  ModelObject Entrance_Hub_Door_2 -->
+            <!-- -= ,actiondirector_event_group_control _ Air_Events  -block=true   -force=true -->
+            <!-- ,disable-multi _ -->
+                <!-- ,o  DoorDI the_tower_main_door_normal -->
+                <!-- ,o  DoorDI the_tower_main_door_normal2 -->
+                <!-- ,o  Encounter::EncounterBlockArea Voltage_Encounter_Blocker -->
+                <!-- ,o  Encounter::EncounterBlockArea airdrop_enc_blocker_02 -->
+            <!-- -= disable specific encounters -->
+            <!-- ,actiondirector_event_group_control _ EncounterPatrol  -block=true   -force=true -->
+            <!-- -= ,actiondirector_event_group_control _ EncounterPrisoners  -block=true   -force=true -->
+            <!-- -= ,actiondirector_event_group_control _ EncounterTrap  -block=true   -force=true -->
+            <!-- -= ,actiondirector_event_group_control _ EncounterShop  -block=true   -force=true -->
+                <!--  -->
+            <!-- ,goto << E3_Slums_Demo_Start >>     Marker E3_Demo_Marker_start -distance=100    -show=false -->
+                <!-- ,debugpos   SpawnPoint E3_Demo_Start -->
+            <!-- ,show _ HumanAI e3_slums_thetower_guard_ground_03        -->
+            <!-- ,set_day_time _ 17.5 -->
+            <!-- ,enable_time_freeze _   -->
+            <!-- -= ,enable _       PlayableAreaController E3_Demo_PlayableAreaController -->
+            <!-- ,use _ InteractiveMovieTrigger e3_cin_the_tower_slums_outside_presentation_trigger_outgo -state=on -->
+            <!-- ,hide _ HumanAI e3_slums_thetower_guard_ground_03 -->
+            <!-- ,disable _ InteractiveMovieTrigger e3_cin_the_tower_slums_outside_presentation_trigger_outgo -->
+            <!-- ,hide _ MovieActor e3_cin_slums_outgo_Door -->
+            <!-- ,hide _ ModelObject e3_cin_slums_outgo_Door_02 -->
+            <!-- ,show-multi _ -->
+                <!-- ,o  DoorDI the_tower_main_door_normal -->
+                <!-- ,o  DoorDI the_tower_main_door_normal2 -->
+            <!-- ,enable-multi _ -->
+                <!-- ,o  DoorDI the_tower_main_door_normal -->
+                <!-- ,o  DoorDI the_tower_main_door_normal2 -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,wait _ 50 -->
+                    <!-- ,talk _ voice2d E3_Demo_GuardTalk -auto=true -show=false  -->
+                <!-- path        -->
+                    <!-- ,goto _ SensorGoTo E3_Demo_NM_Area  -distance=0 -->
+            <!-- ,checkpoint _       SpawnPoint E3_Demo_Start -->
+        <!-- ,BLOCK _    -obj=&DemoE3_OBJ_SecureSafeZone&     -->
+            <!-- ,OR << E3_Slums_Demo_NaturalMovment >> -->
+                <!-- ,debugpos   SpawnPoint E3_Demo_NaturalMovment -->
+                <!-- path -->
+                    <!-- ,goto   _      Marker E3_Demo_Marker_DropInit_1     -distance=20    -show=false -->
+                <!-- path -->
+                    <!-- ,goto   _      Marker E3_Demo_Marker_DropInit_2     -distance=30    -show=false -->
+                <!-- path -->
+                    <!-- ,goto   _      Marker E3_Demo_Marker_DropInit_3     -distance=40    -show=false -->
+                <!-- path -->
+                    <!-- ,goto   _      Marker E3_Demo_Marker_DropInit_4     -distance=40    -show=false -->
+                <!-- path -->
+                    <!-- ,goto   _      Marker E3_Demo_Marker_DropInit_5     -distance=30 -->
+                    <!--  -->
+                    <!--  -->
+    <!-- quest   E3_Slums_Demo_Part_2   -parent=E3_Slums_Demo_Start      -glued=true -->
+        <!-- ,BLOCK _    -obj=&DemoE3_OBJ_SecureSafeZone& -->
+            <!-- ,BLOCK _    -->
+                <!-- ,AND _ -->
+                    <!-- path -->
+                        <!-- ,goto << E3_Slums_Demo_AirDrop >>     Marker E3_Demo_Marker_Drop  -distance=15  -->
+                            <!-- ,debugpos   SpawnPoint E3_Demo_AirDrop -->
+                        <!-- -= ,enable _   SensorWeather E3_Demo_Weather_Fog -->
+                        <!-- ,enable _   ForceDayTimeObject E3_Demo_TimeObject -->
+                        <!-- ,disable _  SpawnPoint respawn_the_tower -->
+                        <!-- ,enable _   SpawnPoint E3_Demo_Respawn_AirDrop -->
+                        <!-- -=  -->
+                    <!-- -= path                           -->
+                        <!-- -= ,goto _  SensorGoTo Interior_02_SafeZone::Safe_zone_interior2_sensor_goto -distance=0 -->
+            <!-- ,disable _  SpawnPoint E3_Demo_Respawn_AirDrop             -->
+            <!-- ,enable _   SpawnPoint E3_Demo_Respawn_SafeZone     -->
+            <!-- ,checkpoint _ SpawnPoint Interior_02_SafeZone::SafeZone_debugpos -->
+            <!-- ,OR _ -->
+                <!-- path -->
+                    <!-- ,wait _     20      -->
+                <!-- path -->
+                    <!-- ,goto _     SensorGoTo E3_Demo_Player_Comment_1 -distance=0     -show=false -->
+                    <!-- ,wait _     20                              -->
+            <!-- ,BLOCK _      -= -obj=&DemoE3_OBJ_ClearSafeZone& -->
+                <!-- ,goto _ SensorGoTo Interior_02_SafeZone::Safe_zone_interior2_sensor_goto -distance=0     -->
+                <!-- ,disable_time_freeze    << E3_Slums_Demo_GoSleep>> -->
+                    <!-- ,debugpos   SpawnPoint E3_Demo_SafeZone -->
+        <!-- ,BLOCK _    -obj=&DemoE3_OBJ_Sleep&      -->
+            <!-- ,rest  _ -->
+            <!-- ,set_day_time _ 22.5 -->
+            <!-- -= ,disable _  SensorWeather E3_Demo_Weather_Fog -->
+            <!-- -= ,actiondirector_encounter _ Interior_02_SafeZone::ScenarioNightShop -->
+            <!-- ,disable-multi _ -->
+                <!-- ,o  QuestEnableGroup Demo_E3_Zombies_Enabler -->
+                <!-- ,o  ForceDayTimeObject E3_Demo_TimeObject -->
+                <!-- ,o  CrowdSpawner E3_Crowd_Horde_4 -->
+                <!-- ,o  SpawnBlocker E3_Demo_Spawn_Blocker_2 -->
+            <!-- ,enable-multi _ -->
+                <!-- ,o      CrowdSpawner E3_Crowd_Horde_3_Night -->
+                <!-- ,o      QuestEnableGroup Demo_E3_Volletaile_Enabler -->
+            <!-- ,actiondirector_event_group_control _ EncounterPrisoners  -block=true   -force=true -->
+            <!-- ,actiondirector_event_group_control _   EncounterPatrol -block=true -force=true -->
+            <!-- ,disable _  Encounter::ScenarioPrisoners E3_Demo_Encounter_Prisoner::EncounterPrisoners -->
+            <!-- ,checkpoint _    SpawnPoint E3_Demo_SafeZone -->
+    <!--  -->
+    <!-- quest   E3_Slums_Demo_Part_3   -parent=E3_Slums_Demo_Part_2     -glued=true -->
+        <!-- ,BLOCK _  -obj=<< Secure the Safe Zone and turn electricity >>  -= -obj=&DemoE3_OBJ_ClearSafeZone&  -->
+            <!-- ,enable _ GroupingMapMarker Antenna_safezone_01::Antenna_SafeZone_GMM_Off -->
+            <!-- ,checkpoint _ SpawnPoint Antenna_safezone_01::SafeZone_debugpos -->
+            <!-- ,goto << E3_Demo_SecureAntena >> SensorGoTo Antenna_safezone_01::Safe_zone_Antenna_sensor_goto -distance=0 -->
+                <!-- ,debugpos   SpawnPoint E3_Demo_AirDrop -->
+            <!-- ,AND _   -->
+                <!-- path -->
+                    <!-- ,clear_area _   ClearArea E3_Demo_Antena_Area  -->
+                <!-- path -->
+                    <!-- ,use _ PhysicalSwitchDI Antenna_safezone_01::Interior_01_safezone_lamp_switch_00 -state=on -show=true -location_visible_on_map=false -->
+                    <!-- ,use _ PhysicalSwitchDI Antenna_safezone_01::Interior_01_safezone_lamp_switch_01 -state=on -show=true -location_visible_on_map=false -->
+                    <!-- -= ,enable-multi _  -->
+                        <!-- -= ,o LampDI Technical_house_lamp_01 -->
+                        <!-- -= ,o LampDI Technical_house_lamp_02 -->
+            <!-- ,checkpoint _ SpawnPoint Antenna_safezone_01::SafeZone_debugpos -->
+            <!-- ,use _ PhysicalSwitchDI Antenna_safezone_01::Interior_01_safezone_lamp_switch_02 -state=on -show=true -location_visible_on_map=false -->
+            <!-- ,enable-multi _  -->
+                <!-- ,o LampDI Antenna_safezone_01::Antenna_redlight_on_top_01::Redlight_antenna -->
+                <!-- ,o LampDI Antenna_safezone_01::Antenna_redlight_on_top_02::Redlight_antenna -->
+                <!-- ,o LampDI Antenna_safezone_01::Antenna_redlight_on_top_03::Redlight_antenna -->
+                <!-- ,o LampDI Antenna_safezone_01::Antenna_redlight_on_top_04::Redlight_antenna -->
+                <!-- ,o SensorAmbientMusicArea SAMA_E3_SafezoneUnlocked -->
+            <!-- ,disable-multi _  -->
+                <!-- ,o BlackoutArea Antenna_safezone_01::Interior_01_Blackout_Safezone -->
+            <!-- ,enable _ QuestEnableGroup Antenna_safezone_01::Antenna_Safezone_Lamps_QEG       -->
+            <!-- -= TO BE SURE THAT ALL ZOMBIES ARE KILLED -=  -->
+            <!-- ,checkpoint _ SpawnPoint Antenna_safezone_01::SafeZone_debugpos           -->
+            <!-- -= ,clear_area _ ClearArea Antenna_safezone_01::SafeZone_ca -show=true -show_location=true -visualize_count=-1 -location_visible_on_map=false -->
+            <!-- -= -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+            <!-- ,enable-multi _  -->
+                <!-- ,o QuestEnableGroup Antenna_safezone_01::SafeZone_qeg -->
+                <!-- ,o RestingPlace Antenna_safezone_01::restingplace_for_player -->
+                <!-- ,o GroupingMapMarker Antenna_safezone_01::Antenna_SafeZone_GMM_On -->
+                    <!--  -->
+            <!-- ,disable-multi _  -->
+                <!-- ,o Encounter::EncounterBlockArea Antenna_safezone_01::SafeZone_eba -->
+                <!-- ,o Encounter::EncounterBlockArea NightShop_BlockArea_Antenna -->
+                <!-- ,o CrowdSpawner Antenna_safezone_01::SafeZone_crowdspawner -->
+                <!-- ,o CrowdSpawner Antenna_safezone_01::SafeZone_crowdspawner2 -->
+                <!-- ,o CrowdSpawner Antenna_safezone_01::SafeZone_crowdspawner3 -->
+                <!-- ,o GroupingMapMarker Antenna_safezone_01::Antenna_SafeZone_GMM_Off -->
+            <!-- -= CHECKPOINT -=  -->
+            <!-- ,checkpoint _ SpawnPoint Antenna_safezone_01::SafeZone_debugpos -->
+            <!-- ,rest  _ -->
+            <!-- -= ,goto << E3_Slums_Demo_NightDrop>>    Marker E3_Demo_Marker_Drop_2  -distance=2   -->
+                <!-- -= ,debugpos   SpawnPoint E3_Demo_NightAirDrop -->
+            <!-- -= ,wait _     10  -->
+            <!-- -= ,talk _ voice2d E3_Demo_Spike_ShieldInfo -auto=true -show=false -->
+            <!-- -= ,disable _   PlayableAreaController E3_Demo_PlayableAreaController -->
+            <!-- ,checkpoint _   SpawnPoint E3_Demo_NightAirDrop -->
+    <!--  -->
+    <!--  -->
+    <!-- quest   __E3_Slums_Demo_Player_Talk_1   -parent=E3_Slums_Demo_Start -->
+        <!-- ,goto _ SensorGoTo E3_Demo_Player_Comment_1    -distance=0    -show=false -->
+        <!-- ,talk _ voice2d E3_Demo_PlayerReachAirDrop -auto=true -show=false -->
+        <!-- ,checkpoint _   SpawnPoint E3_Demo_NightAirDrop -->
+        <!--  -->
+    <!-- quest   __E3_Slums_Demo_Player_Talk_2   -parent=E3_Slums_Demo_Start -->
+        <!-- ,goto _ SensorGoTo E3_Demo_Player_Comment_1    -distance=0    -show=false -->
+        <!-- ,goto _ SensorGoTo E3_Demo_Player_Comment_2    -distance=0    -show=false -->
+        <!-- ,talk _ voice2d E3_Demo_Jade_NightInfo -auto=true -show=false   -->
+        <!-- ,checkpoint _   SpawnPoint E3_Demo_NightAirDrop -->
+        <!--  -->
+    <!--  -->
+    <!-- quest   __E3_Slums_Demo_Encounter_Prisoners   -parent=E3_Slums_Demo_Start -->
+        <!-- ,goto _ Marker E3_Demo_Marker_Drop    -distance=60    -show=false -->
+        <!-- ,actiondirector_encounter _  E3_Demo_Encounter_Prisoner::EncounterPrisoners -->
+        <!-- ,enable _ SensorAmbientMusicArea SAMA_E3_FightWithSoldiers -->
+        <!-- ,checkpoint _   SpawnPoint E3_Demo_AirDrop -->
+        <!-- ,goto _ SensorGoTo Interior_02_SafeZone::Safe_zone_interior2_sensor_goto -distance=0    -show=false -->
+        <!-- ,actiondirector_event_group_control _ EncounterPrisoners  -block=true   -force=true -->
+        <!-- ,actiondirector_event_group_control _   EncounterPatrol -block=true -force=true -->
+        <!-- ,disable _ Encounter::ScenarioPrisoners E3_Demo_Encounter_Prisoner::EncounterPrisoners -->
+        <!-- ,disable _ SensorAmbientMusicArea SAMA_E3_FightWithSoldiers -->
+        <!-- ,checkpoint _   SpawnPoint E3_Demo_SafeZone -->
+    <!--  -->
+    <!--  -->
+    <!-- quest   __E3_Slums_Demo_Encounter_Clinch   -parent=E3_Slums_Demo_Start -->
+        <!-- ,goto _ Marker E3_Demo_Encounter_Grab_Marker    -distance=40    -show=false -->
+        <!-- ,actiondirector_encounter _  E3_Demo_Encounter_Grab_1::ScenarioGrabbed -->
+        <!--  -->
+    <!-- -= quest   __E3_Slums_Demo_Encounter_FightGroup   -parent=E3_Slums_Demo_Start -->
+        <!-- -= ,goto _ Marker E3_Demo_Encounter_Fight_Marker    -distance=30    -show=false -->
+        <!-- -= ,actiondirector_encounter _  E3_Demo_Encounter_FightingZombies::FightingGroups_Zombies -->
+        <!--  -->
+    <!-- -= quest   __E3_Slums_Demo_Encounter_Wardrobe   -parent=E3_Slums_Demo_Start -->
+        <!-- -= ,goto _ Marker E3_Demo_Encounter_Wardrobe_Marker    -distance=30    -show=false -->
+        <!-- -= ,actiondirector_encounter _  E3_Demo_Encounter_Wardrobe::waredrobe_scenario -->
+        <!--  -->
+    <!-- -= quest   E3_Slums_Demo_WeatherControl   -parent=E3_Slums_Demo_Start    -->
+        <!-- -= ,goto _     Marker E3_Demo_Marker_Drop  -distance=15    -show=false        -->
+        <!-- -= ,weather _  -weather_type=fog   -duration=-1    -interpolation=5.0 -->
+    <!-- quest   E3_Slums_Demo_AirDrop_1   -parent=E3_Slums_Demo_Start -->
+        <!-- ,actiondirector_event_start _  AirDrop     e3_drop::place -->
+        <!-- -= ,actiondirector_event_group_control _ Air_Events  -block=true   -force=true -->
+        <!--   -->
+    <!-- quest   E3_Slums_Demo_AirDrop_2   -parent=E3_Slums_Demo_Part_2 -->
+        <!-- -= ,actiondirector_event_start _  AirDrop     e3_drop_2::place -->
+        <!-- ,goto _ SensorGoTo Interior_02_SafeZone::Safe_zone_interior2_sensor_goto -distance=-10  -show=false  -->
+        <!-- ,actiondirector_event_start _  AirDrop     e3_drop::place    -->
+    <!--  -->
+        <!--  -->
+    <!-- quest   __E3_BabyIsBorn_Init   -parent=E3_Slums_Demo_Start -->
+        <!-- ,goto _    Marker E3_Demo_Marker_Drop  -distance=16 -->
+        <!-- ,checkpoint _   SpawnPoint E3_Demo_AirDrop -->
+        <!-- ,enable-multi _  -->
+            <!-- ,o NPCLifePlace BabyIsBorn_AmanLP -->
+            <!-- ,o IntensityArea BabyIsBorn_IA -->
+            <!-- ,o SpawnBlocker BabyIsBorn_SB -->
+            <!-- ,o AISpawnBoxNumber BabyisBorn_spanwer_01 -->
+            <!-- ,o Encounter::EncounterBlockArea BabyIsBorn_EBA -->
+            <!-- ,o SoundEmitterSimple BabyIsBorn_female_screaming -->
+            <!-- ,o Barrier BabyisBorn_barrier_01            -->
+        <!-- ,goto _ Marker BabyisBorn__01 -distance=6 -show=false -->
+            <!-- ,area ZoneBox BabyBorn_IngaSearchArea      -->
+        <!-- ,AND _ -->
+            <!-- path -->
+                <!-- ,talk _ voice2d Player_DemoE3_Coming -auto=true -show=false -->
+            <!-- path -->
+                <!-- ,clear_area _  ClearArea E3_Demo_ClearArea_Baby -->
+            <!-- path    -->
+                <!-- ,kill _ AISpawnBoxNumber BabyisBorn_spanwer_01   -->
+        <!-- ,enable _         DoorDI E3_Demo_BabyIsBorn_Door   -->
+        <!-- -= ,use _  DoorDI E3_Demo_BabyIsBorn_Door   -state=locked_checked -->
+        <!-- ,use _  InteractiveMovieTrigger cin_babyborn_01_trigger     -state=on -->
+        <!-- ,goto _ SensorGoTo Antenna_safezone_01::Safe_zone_Antenna_sensor_goto -distance=0 -->
+        <!-- ,disable _  SoundEmitterSimple BabyIsBorn_female_screaming -->
+        <!-- ,checkpoint _   SpawnPoint E3_Demo_AirDrop  -->
+            <!--  -->
+    <!-- quest   __E3_SafeZone_Unlocked   -parent=Q_AnotherDay_02  -->
+        <!-- ,BLOCK _            -->
+            <!-- -= unlocked safezone -->
+            <!-- ,enable-multi _  -->
+                <!-- ,o QuestEnableGroup Interior_02_SafeZone::SafeZone_qeg -->
+                <!-- ,o RestingPlace Interior_02_SafeZone::restingplace_for_player -->
+                <!-- ,o MapMarker Interior_02_SafeZone::Interior_02_MapMarker_SafeZone_Active -->
+            <!-- ,disable-multi _  -->
+                <!-- ,o MapMarker Interior_02_SafeZone::Interior_02_MapMarker_SafeZone_Inactive -->
+                <!-- ,o Encounter::EncounterBlockArea Interior_02_SafeZone::SafeZone_eba -->
+                <!-- ,o Encounter::EncounterBlockArea NightShop_BlockArea_Interior_02    -->
+            <!-- ,disable-multi _  -->
+                <!-- ,o BlackoutArea Interior_02_SafeZone::Interior_01_Blackout_Safezone -->
+            <!-- ,enable _ QuestEnableGroup Interior_02_SafeZone::Interior_02_Safezone_lamps_QEG               -->
+            <!-- ,checkpoint _ SpawnPoint Interior_02_SafeZone::SafeZone_debugpos -->
+            <!-- ,cnd-quest-started _    Interior_02_Site_Safezone -finished=true -->
+            <!-- ,enable << E3_Slums_Demo_SafeZone >> MapMarker Interior_02_SafeZone::Interior_02_MapMarker_SafeZone_Inactive -->
+                <!-- ,debugpos   SpawnPoint E3_Demo_SafeZone -->
+            <!-- ,checkpoint _ SpawnPoint Interior_02_SafeZone::SafeZone_debugpos -->
+            <!-- ,AND _  -->
+                <!-- path -->
+                    <!-- ,goto _ SensorGoTo Interior_02_SafeZone::Safe_zone_interior2_sensor_goto -distance=0  -->
+                <!-- path -->
+                    <!-- ,goto _ SensorGoTo Interior_02_SafeZone::safeplace_zombie_spawnDeadBodies -show=false -distance=0 -->
+                    <!-- ,enable-multi _ -->
+                        <!-- ,o  AISpawnBoxNumber Interior_02_SafeZone::E3_Demo_SafeZone_Lurker -->
+                        <!-- ,o  AISpawnBoxNumber Interior_02_SafeZone::E3_Demo_SafeZone_Biter           -->
+            <!-- ,checkpoint _ SpawnPoint Interior_02_SafeZone::SafeZone_debugpos -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,clear_area _ ClearArea Interior_02_SafeZone::SafeZone_ca -show=true -show_location=true -visualize_count=-1 -location_visible_on_map=false                        -->
+                    <!-- ,disable-multi _ -->
+                        <!-- ,o  AISpawnBoxNumber Interior_02_SafeZone::E3_Demo_SafeZone_Lurker -->
+                        <!-- ,o  AISpawnBoxNumber Interior_02_SafeZone::E3_Demo_SafeZone_Biter -->
+                <!-- path -->
+                    <!-- ,AND _ -->
+                        <!-- path -->
+                            <!-- ,use _  PhysicalSwitchDI E3_Safe_Zone_Barricade_1::Push_wardrobe    -state=on -->
+                            <!-- ,movie _    E3_Safe_Zone_Barricade_1::Movie_Safeplace_Barricade_Push -->
+                            <!--  -->
+                <!-- path -->
+                    <!-- ,use _ PhysicalSwitchDI Interior_02_SafeZone::Interior_01_safezone_lamp_switch -state=on -show=true -location_visible_on_map=false -->
+                    <!-- ,disable-multi _  -->
+                        <!-- ,o BlackoutArea Interior_02_SafeZone::Interior_01_Blackout_Safezone -->
+                    <!-- ,enable _ QuestEnableGroup Interior_02_SafeZone::Interior_02_Safezone_lamps_QEG -->
+            <!-- ,enable-multi _  -->
+                <!-- ,o QuestEnableGroup Interior_02_SafeZone::SafeZone_qeg -->
+                <!-- ,o RestingPlace Interior_02_SafeZone::restingplace_for_player -->
+                <!-- ,o MapMarker Interior_02_SafeZone::Interior_02_MapMarker_SafeZone_Active -->
+            <!-- ,disable-multi _  -->
+                <!-- ,o MapMarker Interior_02_SafeZone::Interior_02_MapMarker_SafeZone_Inactive -->
+                <!-- ,o Encounter::EncounterBlockArea Interior_02_SafeZone::SafeZone_eba -->
+                <!-- ,o Encounter::EncounterBlockArea NightShop_BlockArea_Interior_02    -->
+                    <!--  -->
+            <!-- -= TO BE SURE THAT ALL ZOMBIES ARE KILLED -=    -->
+            <!-- -= ,checkpoint _ SpawnPoint Interior_02_SafeZone::SafeZone_debugpos         -->
+            <!-- -= ,clear_area _ ClearArea Interior_02_SafeZone::SafeZone_ca -show=true -show_location=true -visualize_count=-1 -location_visible_on_map=false       -->
+            <!-- ,checkpoint _ SpawnPoint Interior_02_SafeZone::SafeZone_debugpos -->
+    <!-- quest   E3_Slums_Demo_Part1   -parent=E3_Slums_Demo_Start   -glued=true -->
+        <!-- ,goto _     Marker E3_Demo_Marker_Drop  -distance=10 -->
+    <!-- quest   E3_Slums_Demo_End   -parent=E3_Slums_Demo_Start -->
+        <!-- ,goto << E3_Slums_Demo_End >>     Marker E3_Demo_Marker_start -distance=10    -show=false -->
+            <!-- ,debugpos   SpawnPoint E3_Demo_Start -->
+        <!-- ,disable _       PlayableAreaController E3_Demo_PlayableAreaController -->
+            <!-- FAVELA -->
+            <!-- ,goto <<E3 - To Favela>> SpawnPoint e3_008_to_favela -distance=8   -->
+                <!-- ,debugpos SpawnPoint e3_008_to_favela -->
+            <!-- ,set_day_time _ -day_time=18.7 -interpolate_time=10 -->
+            <!-- -= ,disable _ AISpawnBoxNumber E3_Infected_01   -->
+            <!-- ,disable _ AISpawnBoxNumber e3_vessel_02 -->
+            <!-- ,disable <<E3 Infecteds B Waves Off>> QuestEnableGroup e3_infected_b_qeg -->
+            <!-- ,show _ ActorDI e3_survivor_01 -->
+            <!-- ,show _ ActorDI e3_survivor_02 -->
+            <!-- ,show _ ActorDI e3_survivor_03 -->
+            <!-- ,show _ ActorDI e3_survivor_04 -->
+            <!-- -= ,enable _ AISpawnBoxNumber E3_Gas_tank_01 -->
+            <!-- ,enable _ AISpawnBoxNumber e3_vessel_03 -->
+            <!-- ,radio-dialog _ voice2d Q_E3_Jade_09DLG02 -->
+            <!-- ,goto _ Marker e3_sun_goes_down -distance=12 -->
+            <!-- ,disable _ SensorAmbientSoundArea Slums_SASA_Music_Armored -->
+            <!-- ,set_day_time _ -day_time=19.7 -interpolate_time=20 -->
+            <!-- ,enable _ FXEmitter e3_aridrop_fx_02 -->
+            <!-- ,enable _ SoundEmitterSimple Slums_SES_Flare_Drop02 -->
+            <!-- ,goto _ Marker e3_sun_goes_down -distance=5 -->
+            <!-- ,wait _ 2 -->
+            <!-- ,radio-dialog _ voice2d Q_E3_Jade_12DLG01 -->
+            <!-- ,wait _ 3 -->
+            <!-- ,goto _ SensorGoTo e3_dlg_flare_spotet -distance=0 -show=false -->
+            <!-- ,radio-dialog _ voice2d Q_E3_Player_12DLG03 -->
+            <!-- AIRDROP -->
+            <!-- ,OR _ -->
+                <!-- path -->
+                    <!-- ,goto <<E3 - Before Second Airdrop>> SpawnPoint e3_009_second_airdrop -distance=10  -->
+                        <!-- ,debugpos SpawnPoint e3_009_second_airdrop -->
+                <!-- path -->
+                    <!-- ,goto _ Marker e3_marker_switch_04 -distance=15 -show=false -->
+            <!-- ,set_day_time _ -day_time=20.5 -interpolate_time=10 -->
+            <!-- ,OR _  -->
+                <!-- path -->
+                    <!-- ,goto _ Marker e3_009_second_airdrop_flara_off -distance=2.5 -show=false -->
+                <!-- path -->
+                    <!-- ,goto _ Marker e3_marker_switch_04 -distance=8 -show=false -->
+            <!-- ,disable _ FXEmitter e3_aridrop_fx_02 -->
+            <!-- ,disable _ SoundEmitterSimple Slums_SES_Flare_Drop02 -->
+            <!-- ,goto _ Marker e3_evening_start -distance=10 -->
+            <!-- ,set_day_time _ -day_time=21.0 -interpolate_time=5 -->
+            <!-- ,set_day_time _ -day_time=21.0 -interpolate_time=1 -->
+            <!-- ,enable _ SensorAmbientSoundArea e3_music_area_001_night_start_v2 -->
+            <!-- ,enable <<night music no>> SensorAmbientMusicArea e3_music_area_001_night_start -->
+            <!-- ,wait _ 7 -->
+            <!-- ,wait _ 3 -->
+            <!-- ,radio-dialog _ voice2d Q_E3_Player_14DLG01 -->
+            <!-- ,goto <<E3 - Second Airdrop>> SpawnPoint e3_010_second_airdrop -distance=10  -->
+                <!-- ,debugpos SpawnPoint e3_010_second_airdrop -->
+            <!-- ,set_day_time _ -day_time=21.5 -interpolate_time=5 -->
+            <!-- ,hide _ ActorDI e3_survivor_01 -->
+            <!-- ,hide _ ActorDI e3_survivor_02 -->
+            <!-- ,hide _ ActorDI e3_survivor_03 -->
+            <!-- ,hide _ ActorDI e3_survivor_04 -->
+            <!-- ,use <<E3 - open box>> PhysicalSwitchDI e3_second_aridrop_box -state=on -->
+            <!-- ,take <<E3 - take airdrop supplies>> QuestInventoryItemDI e3_second_aridrop_item -->
+            <!-- ,set_day_time _ -day_time=22.0 -interpolate_time=5 -->
+            <!-- ,disable <<night music off>> SensorAmbientMusicArea e3_music_area_001_night_start -->
+            <!-- ,disable _ SensorAmbientSoundArea e3_music_area_001_night_start_v2 -->
+            <!-- ,enable <<empty music on>> SensorAmbientMusicArea e3_music_area_002_empty -->
+            <!-- ,AND _  -->
+                <!-- path -->
+                    <!-- ,use _ PhysicalSwitchDI e3_anim_gate -state=on -->
+                <!-- path -->
+                    <!-- ,wait _ 1 -->
+                    <!-- ,radio-dialog _ voice2d Q_E3_Jade_15DLG02 -->
+            <!-- ,disable _ AISpawnBoxNumber e3_vessel_03 -->
+            <!-- ,disable _ AISpawnBoxNumber E3_Gas_tank_01 -->
+            <!-- BACK TO THE TOWER -->
+        <!-- ,BLOCK _ -obj=<<Back to Jade in The Tower>> -->
+            <!-- ,AND _  -->
+                <!-- path -->
+                    <!-- ,goto <<E3 - Creep>> SpawnPoint e3_011_creep -distance=13 -->
+                        <!-- ,debugpos SpawnPoint e3_011_creep_spawn -->
+                    <!-- ,set_day_time _ -day_time=22.0 -->
+                    <!-- ,disable <<empty music off>> SensorAmbientMusicArea e3_music_area_002_empty -->
+                    <!-- ,enable _ SensorAmbientSoundArea Slums_SASA_Music_Suspense  -->
+                    <!-- ,enable _ AISpawnBoxNumber e3_volatile_01_patrol -->
+                    <!-- ,goto _ SpawnPoint e3_011_creep -distance=2 -show=false -->
+                    <!-- ,enable _ AISpawnBoxNumber e3_volatile_02_patrol -->
+                    <!-- ,goto _ Marker e3_marker_switch_07 -distance=6 -show=false -->
+                    <!-- ,enable _ AISpawnBoxNumber e3_volatile_03_patrol -->
+                    <!-- ,goto <<E3 - Run Start>> SensorGoTo e3_012_run_sensor -distance=0 -->
+                        <!-- ,debugpos SpawnPoint e3_012_run -->
+                    <!-- ,set_day_time _ -day_time=22.2 -->
+                <!-- path -->
+                    <!-- ,goto _ Marker e3_creep_01 -distance=13 -show=false -->
+                    <!-- ,show _ ZombieAI e3_volatile_scout_a -->
+                    <!-- ,move _ AIEscortNode e3_volatile_scout_a_node_02 -style=walk -->
+                        <!-- ,ai ZombieAI e3_volatile_scout_a -->
+                        <!-- ,start AIEscortNode e3_volatile_scout_a_node_01 -->
+                    <!-- ,wait _ 5 -->
+                    <!-- ,move _ AIEscortNode e3_volatile_scout_a_node_04 -style=walk -->
+                        <!-- ,ai ZombieAI e3_volatile_scout_a -->
+                        <!-- ,start AIEscortNode e3_volatile_scout_a_node_03 -->
+                    <!--  -->
+                <!-- path -->
+                    <!-- ,goto _ Marker e3_creep_01 -distance=3 -show=false -->
+                    <!-- ,show _ ZombieAI e3_volatile_scout_b -->
+                    <!-- ,move _ AIEscortNode e3_volatile_scout_b_node_02 -style=walk -->
+                        <!-- ,ai ZombieAI e3_volatile_scout_b -->
+                        <!-- ,start AIEscortNode e3_volatile_scout_b_node_01 -->
+                    <!-- ,hide _ ZombieAI e3_volatile_scout_b -->
+                <!-- path -->
+                    <!-- ,goto _ Marker e3_marker_switch_07 -distance=4 -show=false -->
+                    <!-- ,show _ ZombieAI e3_volatile_scout_c -->
+                    <!-- ,move _ AIEscortNode e3_volatile_scout_c_node_02 -style=walk -->
+                        <!-- ,ai ZombieAI e3_volatile_scout_c -->
+                        <!-- ,start AIEscortNode e3_volatile_scout_c_node_01 -->
+                    <!-- ,hide _ ZombieAI e3_volatile_scout_c -->
+            <!-- ,enable _ AISpawnBoxNumber e3_vessel_10 -->
+            <!-- ,enable _ AISpawnBoxNumber e3_volatile_01d -->
+            <!-- ,AND _  -->
+                <!-- path -->
+                    <!-- powinno byc -->
+                    <!-- ,show _ ZombieAI e3_volatile_alarm -->
+                    <!-- ,move _ AIEscortNode e3_volatile_alarm_node_01 -style=walk -->
+                    <!--     ,ai ZombieAI e3_volatile_alarm     -->
+                <!-- path -->
+                    <!-- ,wait _ 6 -->
+                    <!-- ,radio-dialog _ voice2d Q_E3_Player_17DLG01 -->
+                    <!-- ,disable _ SensorAmbientSoundArea Slums_SASA_Music_Suspense -->
+                    <!-- ,enable <<run music>> SensorAmbientMusicArea e3_music_area_001_night_run -->
+                    <!-- ,enable _ AISpawnBoxNumber e3_volatile_01a -->
+                    <!-- ,enable _ AISpawnBoxNumber e3_volatile_01b -->
+                    <!-- ,enable _ AISpawnBoxNumber e3_volatile_01c -->
+                    <!-- ,goto _ Marker e3_shop_door_marker -distance=13 -->
+                    <!-- ,radio-dialog _ voice2d Q_E3_Player_16DLG01 -->
+                    <!-- ,goto _ Marker e3_shop_door_marker -distance=4 -->
+                    <!-- ,enable _ Barrier e3_barrier_shop -->
+                    <!-- ,enable _ SteamEmitter e3_shop_lethal -->
+                    <!-- ,show _ ModelObject e3_shop_door -->
+                    <!-- ,show _ ModelObject e3_shop_door_dummy -->
+                    <!-- ,goto _ Marker e3_run_huse_02 -distance=4 -->
+                    <!-- ,enable _ AISpawnBoxNumber e3_vessel_06 -->
+                    <!-- ,goto _ Marker e3_run_street_02 -distance=6 -->
+                    <!-- ,disable _ AISpawnBoxNumber e3_volatile_01a -->
+                    <!-- ,disable _ AISpawnBoxNumber e3_volatile_01b -->
+                    <!-- ,disable _ AISpawnBoxNumber e3_volatile_01c -->
+                    <!-- ,disable _ AISpawnBoxNumber e3_volatile_01d -->
+                    <!-- ,disable _ AISpawnBoxNumber e3_vessel_10 -->
+                    <!-- ,enable _ AISpawnBoxNumber e3_volatile_02a -->
+                    <!-- ,enable _ AISpawnBoxNumber e3_volatile_02b -->
+                    <!-- ,enable _ AISpawnBoxNumber e3_volatile_02c -->
+                    <!-- ,goto _ Marker e3_run_street_02a -distance=6 -->
+                    <!-- ,enable _ AISpawnBoxNumber e3_volatile_02d -->
+            <!-- ,AND _ -->
+                <!-- path -->
+                    <!-- ,goto _ Marker e3_run_street_02b -distance=-4 -show=false -->
+                    <!-- ,movie _ cin_e3_volateil_01 -->
+                <!-- path -->
+                    <!-- ,goto _ Marker e3_run_street_03 -distance=7 -->
+                    <!-- ,enable _ AISpawnBoxNumber e3_volatile_03 -->
+                    <!-- ,disable _ AISpawnBoxNumber e3_vessel_06 -->
+                    <!-- ,enable _ AISpawnBoxNumber e3_vessel_12 -->
+                    <!-- ,goto _ Marker e3_run_street_04 -distance=8 -->
+                    <!-- ,enable _ AISpawnBoxNumber e3_volatile_04 -->
+                    <!-- ,goto _ Marker e3_run_street_05 -distance=6 -->
+                    <!-- ,enable _ AISpawnBoxNumber e3_volatile_05 -->
+            <!-- ,goto _ Marker e3_run_street_06 -distance=7 -->
+            <!-- ,disable _ AISpawnBoxNumber e3_vessel_12 -->
+            <!-- ,enable _ AISpawnBoxNumber e3_volatile_06 -->
+            <!-- END  -->
+        <!-- ,OR _  -->
+            <!-- path -->
+                <!-- ,goto <<E3 - End>> SpawnPoint e3_013_end -distance=2 -->
+                    <!-- ,debugpos SpawnPoint e3_013_end -->
+            <!-- path -->
+                <!-- ,goto _ Marker e3_run_street_07 -distance=6 -show=false -->
+        <!-- ,set_day_time _ -day_time=22.3 -->
+        <!-- ,enable _ QuestEnableGroup cin_volatile_grab_qeg -->
+        <!-- ,use _ InteractiveMovieTrigger cin_volatile_grab_trigger -state=on -->
+        <!-- ,disable _ QuestEnableGroup cin_volatile_grab_qeg -->
+        <!-- ,actiondirector_event_group_control _ Air_Events  -block=false   -force=false -->
+        <!-- ,actiondirector_event_group_control _ NpcHelp  -block=false   -force=false -->
+        <!-- ,actiondirector_event_group_control _ EncounterPrime  -block=false   -force=false -->
+        <!-- ,actiondirector_event_group_control _ NpcGrabbedHelp  -block=false   -force=false -->
+        <!-- ,actiondirector_event_group_control _ EncounterFightingGroups  -block=false   -force=false -->
+        <!-- ,actiondirector_event_group_control _ EncounterPatrol  -block=false   -force=false -->
+        <!-- ,actiondirector_event_group_control _ DeadBodiesEvent -block=false   -force=false -->
+    <!-- quest __E3_switches -parent=sq_01_DEMO_E3_A -->
+        <!-- ,AND _ -->
+            <!-- path -->
+                <!-- ,goto _ Marker e3_marker_switch_01 -distance=3 -show=false -->
+                <!-- ,enable _ AIDeadBodySpawnBoxAuto e3_deadbody_01 -->
+                <!-- ,enable _ AIDeadBodySpawnBoxAuto e3_deadbody_01a -->
+                <!-- ,enable _ AIDeadBodySpawnBoxAuto e3_deadbody_01b -->
+                <!-- ,wait _ 3 -->
+                <!-- ,radio-dialog <<Many zombies on highway>> voice2d Q_E3_Player_06DLG01 -->
+                <!-- ,goto _ Marker e3_marker_switch_01 -distance=-20 -show=false -->
+                <!-- ,disable _ AIDeadBodySpawnBoxAuto e3_deadbody_01 -->
+                <!-- ,disable _ AIDeadBodySpawnBoxAuto e3_deadbody_01a -->
+                <!-- ,disable _ AIDeadBodySpawnBoxAuto e3_deadbody_01b -->
+            <!-- path -->
+                <!-- ,goto _ Marker e3_marker_switch_03 -distance=5 -show=false -->
+                <!-- ,enable _ AIDeadBodySpawnBoxAuto e3_deadbody_03 -->
+                <!-- ,enable _ AIDeadBodySpawnBoxAuto e3_deadbody_03a -->
+                <!-- ,goto _ Marker e3_marker_switch_03 -distance=-20 -show=false -->
+                <!-- ,disable _ AIDeadBodySpawnBoxAuto e3_deadbody_03 -->
+                <!-- ,disable _ AIDeadBodySpawnBoxAuto e3_deadbody_03a -->
+            <!-- path -->
+                <!-- ,goto _ Marker e3_marker_switch_04 -distance=8 -show=false -->
+                <!-- ,enable _ AIDeadBodySpawnBoxAuto e3_deadbody_04 -->
+                <!-- ,goto _ Marker e3_marker_switch_04 -distance=-20 -show=false -->
+                <!-- ,disable _ AIDeadBodySpawnBoxAuto e3_deadbody_04 -->
+            <!-- path -->
+                <!-- ,goto _ Marker e3_marker_switch_05 -distance=4 -show=false -->
+                <!-- ,kill _ AISpawnBoxNumber e3_vessel_04 -->
+                <!-- ,wait _ 1.5 -->
+                <!-- ,radio-dialog _ voice2d Q_E3_Player_15DLG01 -->
+                <!-- ,goto _ Marker e3_marker_switch_05 -distance=-20 -show=false -->
+                <!-- ,disable _ AISpawnBoxNumber e3_vessel_04 -->
+            <!-- path -->
+                <!-- ,goto _ Marker e3_marker_switch_06 -distance=10 -show=false -->
+                <!-- ,enable _ AISpawnBoxNumber e3_vessel_under_01 -->
+                <!-- ,goto _ Marker e3_marker_switch_06 -distance=-15 -show=false -->
+                <!-- ,disable _ AISpawnBoxNumber e3_vessel_under_01 -->
+            <!-- path -->
+                <!-- ,goto _ Marker e3_run_street_05 -distance=5 -show=false -->
+                <!-- ,enable _ AISpawnBoxNumber e3_volatile_07 -->
+            <!-- path -->
+                <!-- ,goto _ Marker e3_marker_switch_08 -distance=3 -show=false -->
+                <!-- ,enable _ AISpawnBoxNumber e3_vessel_08 -->
+                <!-- ,goto _ Marker e3_marker_switch_08 -distance=-12 -show=false -->
+                <!-- ,disable _ AISpawnBoxNumber e3_vessel_08 -->
+            <!-- path -->
+                <!-- ,goto _ Marker e3_marker_switch_13 -distance=2 -show=false -->
+                <!-- ,enable _ AISpawnBoxNumber e3_vessel_05 -->
+                <!-- ,goto _ Marker e3_marker_switch_09 -distance=-10 -show=false -->
+                <!-- ,disable _ AISpawnBoxNumber e3_vessel_05 -->
+            <!-- path -->
+                <!-- ,goto _ Marker e3_marker_switch_11 -distance=8 -show=false -->
+                <!-- ,enable _ AIDeadBodySpawnBoxAuto e3_deadbody_05 -->
+                <!-- ,goto _ Marker e3_marker_switch_11 -distance=-20 -show=false -->
+                <!-- ,disable _ AIDeadBodySpawnBoxAuto e3_deadbody_05 -->
+            <!-- path -->
+                <!-- ,goto _ Marker e3_run_street_03a -distance=9 -show=false -->
+                <!-- ,movie _ cin_e3_volateil_02 -->
+            <!-- path -->
+                <!-- ,goto _ Marker e3_run_street_06 -distance=12 -show=false -->
+                <!-- ,movie _ cin_e3_volateil_03 -->
+            <!-- path -->
+                <!-- ,goto _ Marker e3_creep_01 -distance=13 -show=false -->
+                <!-- ,show _ ZombieAI e3_volatile_scout_a -->
+                <!-- ,move _ AIEscortNode e3_volatile_scout_a_node_02 -style=walk -->
+                    <!-- ,ai ZombieAI e3_volatile_scout_a -->
+                    <!-- ,start AIEscortNode e3_volatile_scout_a_node_01 -->
+                <!-- ,wait _ 8 -->
+                <!-- ,move _ AIEscortNode e3_volatile_scout_a_node_04 -style=walk -->
+                    <!-- ,ai ZombieAI e3_volatile_scout_a -->
+                    <!-- ,start AIEscortNode e3_volatile_scout_a_node_03 -->
+            <!-- path -->
+                <!-- ,goto _ Marker e3_creep_01 -distance=3 -show=false -->
+                <!-- ,show _ ZombieAI e3_volatile_scout_b -->
+                <!-- ,move _ AIEscortNode e3_volatile_scout_b_node_02 -style=walk -->
+                    <!-- ,ai ZombieAI e3_volatile_scout_b -->
+                    <!-- ,start AIEscortNode e3_volatile_scout_b_node_01 -->
+                <!-- ,hide _ ZombieAI e3_volatile_scout_b -->
+            <!-- path -->
+                <!-- ,goto _ Marker e3_marker_switch_07 -distance=4 -show=false -->
+                <!-- ,show _ ZombieAI e3_volatile_scout_c -->
+                <!-- ,move _ AIEscortNode e3_volatile_scout_c_node_02 -style=walk -->
+                    <!-- ,ai ZombieAI e3_volatile_scout_c -->
+                    <!-- ,start AIEscortNode e3_volatile_scout_c_node_01 -->
+                <!-- ,hide _ ZombieAI e3_volatile_scout_c -->
+    <!-- quest __E3_Tv_debate -parent=sq_01_DEMO_E3_A -->
+        <!-- ,hide _ ModelObject e3_tv_off -->
+        <!-- ,goto _ Marker e3_marker_TV_and_girl -distance=16 -show=false -->
+        <!-- ,enable _ QuestEnableGroup e3_tv_debate_qeg -->
+        <!-- ,goto _ Marker e3_marker_TV_and_girl -distance=14 -show=false -->
+        <!-- ,enable _ SoundEmitterSimple e3_sound_girl_cry_v2 -->
+        <!-- ,goto _ Marker e3_marker_TV_and_girl -distance=9 -show=false -->
+        <!-- ,use _ InvisibleSwitchDI e3_tv_debate_switch -state=off -show=false -->
+        <!-- ,enable <<hide player weapon>> SafeArea e3_tv_house_safe_area -->
+        <!-- ,disable _ QuestEnableGroup e3_tv_debate_qeg -->
+        <!-- ,enable _ SoundEmitterSimple e3_sound_girl_cry_wardrobe -->
+        <!-- ,show _ ModelObject e3_tv_off -->
+        <!-- ,wait _ 1 -->
+        <!-- ,hide _ ModelObject e3_tv_on -->
+        <!-- ,disable _ SoundEmitterSimple e3_sound_girl_cry -->
+        <!-- ,disable _ SoundEmitterSimple e3_sound_girl_cry_v2 -->
+        <!-- ,goto _ Marker cin_girl_in_wardrobe_MovieCenter -distance=1 -show=false -->
+        <!-- ,wait _ 2 -->
+        <!-- ,disable _ SoundEmitterSimple e3_sound_girl_cry_wardrobe -->
+        <!--  -->
+    <!-- quest __E3_hide_things_on_game_start -parent=game_root -->
+        <!-- ,hide _ ActorDI e3_survivor_01 -->
+        <!-- ,hide _ ActorDI e3_survivor_02 -->
+        <!-- ,hide _ ActorDI e3_survivor_03 -->
+        <!-- ,hide _ ActorDI e3_survivor_04 -->
+    <!-- quest __E3_door_not_opened -parent=sq_01_DEMO_E3_A -->
+        <!-- ,use _ InvisibleSwitchDI cin_e3_door_switch -state=on -show=false -->
+        <!-- ,AND _ -->
+            <!-- path -->
+                <!-- ,movie _ cin_e3_door -->
+            <!-- path -->
+                <!-- ,enable _ FXEmitter cin_e3_door_fx -->
+                <!-- ,enable _ SoundEmitterSimple cin_e3_door_sound -->
+        <!-- ,wait _ 5 -->
+        <!-- ,disable _ FXEmitter cin_e3_door_fx -->
+        <!-- ,disable _ SoundEmitterSimple cin_e3_door_sound -->
+    <!-- quest __E3_workshop -parent=sq_01_DEMO_E3_A -->
+        <!-- ,use _ InvisibleSwitchDI cin_e3_workshop_curtine_switch -state=on -show=false -->
+        <!-- ,AND _ -->
+            <!-- path -->
+                <!-- ,movie _ cin_e3_workshop_curtinne -->
+            <!-- path -->
+                <!-- ,enable _ FXEmitter cin_e3_workshop_curtine_fx_01 -->
+                <!-- ,enable _ FXEmitter cin_e3_workshop_curtine_fx_02 -->
+                <!-- ,enable _ SoundEmitterSimple cin_e3_workshop_curtine_sound -->
+        <!-- ,wait _ 6 -->
+        <!-- ,disable _ FXEmitter cin_e3_workshop_curtine_fx_01 -->
+        <!-- ,disable _ FXEmitter cin_e3_workshop_curtine_fx_02 -->
+        <!-- ,disable _ SoundEmitterSimple cin_e3_workshop_curtine_sound -->
+</QuestsDefinitions>

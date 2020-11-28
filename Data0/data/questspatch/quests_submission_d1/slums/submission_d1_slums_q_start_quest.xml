@@ -1,0 +1,3838 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="slums"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST NAME : GOING OUTSIDE -->
+    <!-- QUEST INFO : first time go out from The Tower -->
+    <!-- AFTER QUEST: School of Life -->
+    <!-- COMMENT    :  -->
+    <!-- FROM       : >> SLUMS INTERIOR -->
+    <!-- TO         : >> SLUMS -->
+    <!-- CHAPTER    : 1 -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="Q_Start01"
+         parent="SchoolOfLife"
+         glued="true"
+         pxsl_line="15">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;GoingOutside_OBJ_GetToGroundFloor&amp;"
+             pxsl_line="16">
+            <Path
+                 pxsl_line="16">
+                <Phase
+                     type="go to"
+                     name="GOING OUTSIDE - START"
+                     distance="10000"
+                     pxsl_line="17">
+                    <Destination
+                         pxsl_line="17">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="MapStart"
+                             pxsl_line="17" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="18">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="MapStart"
+                             pxsl_line="18" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=- -->
+                <!-- GAME START ACTIONS -= -->
+                <!-- -=-=-=-=-=-=-=-=-=-=- -->
+                <Phase
+                     type="AND"
+                     name="start actions all"
+                     pxsl_line="22">
+                    <Path
+                         pxsl_line="22">
+                        <!-- ,challenge-lock _ slums_all -->
+                        <!-- ,challenge-lock _ oldtown_all -->
+                        <!-- ,challenge-lock _ bad_challenges -->
+                        <Phase
+                             type="set day night time"
+                             name="_"
+                             day_time="18.5"
+                             pxsl_line="26" />
+                        <!-- TAKE PB PILOT FROM PLAYER -->
+                        <Phase
+                             type="player control"
+                             name="_"
+                             no_pursuitbreakers="true"
+                             pxsl_line="27" />
+                        <Phase
+                             type="disable enable time freeze"
+                             name="_"
+                             should_freeze_time="true"
+                             pxsl_line="28" />
+                        <!-- BITER, LURKER, HUMAN MELEE -->
+                        <Phase
+                             type="player control"
+                             name="_"
+                             spawn_system_progress="1"
+                             pxsl_line="29" />
+                        <Phase
+                             type="player control"
+                             name="Prologue Start"
+                             diff_level_progress="0"
+                             pxsl_line="30" />
+                    </Path>
+                </Phase>
+                <!-- ALL ENCOUNTERS BLOCK ON START GAME    -->
+                <Phase
+                     type="AND"
+                     name="encounters block"
+                     pxsl_line="31">
+                    <Path
+                         pxsl_line="31">
+                        <Phase
+                             type="group block unblock"
+                             name="_"
+                             group_name="Air_Events"
+                             block="true"
+                             force="true"
+                             pxsl_line="32" />
+                        <Phase
+                             type="group block unblock"
+                             name="_"
+                             group_name="NpcHelp"
+                             block="true"
+                             force="true"
+                             pxsl_line="33" />
+                        <Phase
+                             type="group block unblock"
+                             name="_"
+                             group_name="EncounterPrimeNight"
+                             block="true"
+                             force="true"
+                             pxsl_line="34" />
+                        <Phase
+                             type="group block unblock"
+                             name="_"
+                             group_name="NpcGrabbedHelp"
+                             block="true"
+                             force="true"
+                             pxsl_line="35" />
+                        <Phase
+                             type="group block unblock"
+                             name="_"
+                             group_name="EncounterFightingGroups"
+                             block="true"
+                             force="true"
+                             pxsl_line="36" />
+                        <Phase
+                             type="group block unblock"
+                             name="_"
+                             group_name="EncounterPatrol"
+                             block="true"
+                             force="true"
+                             pxsl_line="37" />
+                        <Phase
+                             type="group block unblock"
+                             name="_"
+                             group_name="EncounterPrisoners"
+                             block="true"
+                             force="true"
+                             pxsl_line="38" />
+                        <Phase
+                             type="group block unblock"
+                             name="_"
+                             group_name="EncounterShop"
+                             block="true"
+                             force="true"
+                             pxsl_line="39" />
+                        <Phase
+                             type="group block unblock"
+                             name="_"
+                             group_name="EncounterNightShop"
+                             block="true"
+                             force="true"
+                             pxsl_line="40" />
+                    </Path>
+                </Phase>
+                <!-- -=-=-=-=-=-= -->
+                <!-- STORYLINE -= -->
+                <!-- -=-=-=-=-=-= -->
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="44">
+                    <Path
+                         pxsl_line="44">
+                        <!-- Going Outside -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="46">
+                            <Object
+                                 pxsl_line="47">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="slums_interior_barricade_a_ag"
+                                     pxsl_line="47" />
+                            </Object>
+                            <!-- Door to scout room on the ground of The Tower. -->
+                            <Object
+                                 pxsl_line="48">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="slums_scout_room_after_ag"
+                                     pxsl_line="48" />
+                            </Object>
+                            <Object
+                                 pxsl_line="49">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Magic_Garden_after"
+                                     pxsl_line="49" />
+                            </Object>
+                            <Object
+                                 pxsl_line="50">
+                                <QuestObject
+                                     class="MovieActor"
+                                     name="cin_elevator_on_slums_Lift_b"
+                                     pxsl_line="50" />
+                            </Object>
+                            <Object
+                                 pxsl_line="51">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="Interior_01_SafeZone::Safezone_Interior01_Flag"
+                                     pxsl_line="51" />
+                            </Object>
+                            <!-- hiding depot and restingplace of gassed up safezone -->
+                            <Object
+                                 pxsl_line="52">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="GassedUp_Safezone_safeplace"
+                                     pxsl_line="52" />
+                            </Object>
+                            <!-- PLAYER RESTING PLACE TIR -->
+                            <Object
+                                 pxsl_line="53">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="resting_place_tir::resting_place_AG"
+                                     pxsl_line="53" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="show"
+                             pxsl_line="54">
+                            <Object
+                                 pxsl_line="55">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="slums_thetower_guard_ground_03"
+                                     pxsl_line="55" />
+                            </Object>
+                            <Object
+                                 pxsl_line="56">
+                                <QuestObject
+                                     class="MovieActor"
+                                     name="cin_slums_outgo_Door"
+                                     pxsl_line="56" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="57">
+                            <Object
+                                 pxsl_line="58">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="hideout_burning_car_01::demo_night_burning_car"
+                                     pxsl_line="58" />
+                            </Object>
+                        </Phase>
+                        <!-- Quatermaster -->
+                        <Phase
+                             type="use life place"
+                             name="_"
+                             teleport="true"
+                             pxsl_line="60">
+                            <LifePlace
+                                 pxsl_line="60">
+                                <QuestObject
+                                     class="NPCLifePlace"
+                                     name="Quatermaster_lp_01"
+                                     pxsl_line="60" />
+                            </LifePlace>
+                            <AI
+                                 pxsl_line="61">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Shopkeeper_Slums_Quatermaster"
+                                     pxsl_line="61" />
+                            </AI>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="62">
+                            <Object
+                                 pxsl_line="62">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="primehunting_quatermaster_map"
+                                     pxsl_line="62" />
+                            </Object>
+                        </Phase>
+                        <!-- Blackout -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="show"
+                             pxsl_line="64">
+                            <Object
+                                 pxsl_line="64">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Spike"
+                                     pxsl_line="64" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="use life place"
+                             name="_"
+                             teleport="true"
+                             pxsl_line="65">
+                            <LifePlace
+                                 pxsl_line="65">
+                                <QuestObject
+                                     class="NPCLifePlace"
+                                     name="demo_night_spike_LP_01_first_meet"
+                                     pxsl_line="65" />
+                            </LifePlace>
+                            <AI
+                                 pxsl_line="66">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Spike"
+                                     pxsl_line="66" />
+                            </AI>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="67">
+                            <!-- ,o MovieActor cin_goone_Door_01_after -->
+                            <!-- ,o MovieActor cin_goone_Door_02_after -->
+                            <Object
+                                 pxsl_line="70">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="blackout_house_gate_01_after"
+                                     pxsl_line="70" />
+                            </Object>
+                            <Object
+                                 pxsl_line="71">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="blackout_house_gate_02_after"
+                                     pxsl_line="71" />
+                            </Object>
+                            <Object
+                                 pxsl_line="72">
+                                <QuestObject
+                                     class="MovieActor"
+                                     name="cin_prime_first_time_Door"
+                                     pxsl_line="72" />
+                            </Object>
+                            <Object
+                                 pxsl_line="73">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="demo_night_first_car::sedan_bonnet_burned"
+                                     pxsl_line="73" />
+                            </Object>
+                            <!-- ,o ModelObject demo_night_pursuit_braker_01::sedan_bonnet_burned -->
+                            <Object
+                                 pxsl_line="75">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="demo_night_pursuit_braker_02::sedan_bonnet_burned"
+                                     pxsl_line="75" />
+                            </Object>
+                            <Object
+                                 pxsl_line="76">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="demo_night_pursuit_braker_03::sedan_bonnet_burned"
+                                     pxsl_line="76" />
+                            </Object>
+                            <!-- ,o ModelObject demo_night_pursuit_braker_04::sedan_bonnet_burned -->
+                        </Phase>
+                        <!-- Safezones -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="78">
+                            <Object
+                                 pxsl_line="79">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="First_Playfield_Safezone::FristPlayefield_sz_depot::AG"
+                                     pxsl_line="79" />
+                            </Object>
+                            <!-- ,o DepotContainer Antenna_safezone_01::SafeZone_Depot -->
+                            <!-- ,o DepotContainer Bar_Site_Safezone::SafeZone_Depot -->
+                            <!-- ,o DepotContainer Construction_Site_Safezone::SafeZone_Depot -->
+                            <!-- ,o DepotContainer First_Playfield_Safezone::FristPlayefield_sz_depot::bag -->
+                            <!-- ,o DepotContainer Gas_Station_Safezone::SafeZone_Depot -->
+                            <!-- ,o DepotContainer Gas_Station_Safezone_02::selSafezone_GasStation2_AFTER::SafeZone_Depot -->
+                            <!-- ,o DepotContainer Interior_01_SafeZone::SafeZone_Depot -->
+                            <!-- ,o DepotContainer Interior_02_SafeZone::SafeZone_Depot -->
+                            <!-- ,o DepotContainer Interior_03_Safezone::SafeZone_Depot -->
+                            <!-- ,o DepotContainer Playfield_Safezone::SafeZone_Depot -->
+                            <!-- ,o DepotContainer Playfield_Safezone2::SafeZone_Depot -->
+                            <!-- ,o DepotContainer Roof_Safezone::SafeZone_Depot -->
+                            <!-- ,o DepotContainer Tunnel_01_SafeZone::SafeZone_Depot -->
+                            <!-- ,o DepotContainer ElectricSubstation_RestingPlace -->
+                            <!-- ,o DepotContainer AnotherDayInParadise_Depot_001 -->
+                            <Object
+                                 pxsl_line="95">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="Antenna_safezone_01::Antenna_sz_depot::AG"
+                                     pxsl_line="95" />
+                            </Object>
+                            <Object
+                                 pxsl_line="96">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="Bar_Site_Safezone::BarSite_sz_depot::AG"
+                                     pxsl_line="96" />
+                            </Object>
+                            <Object
+                                 pxsl_line="97">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="Construction_Site_Safezone::ConstructionSite_sz_depot::AG"
+                                     pxsl_line="97" />
+                            </Object>
+                            <Object
+                                 pxsl_line="98">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="ElectricStation_sz_depot::AG"
+                                     pxsl_line="98" />
+                            </Object>
+                            <Object
+                                 pxsl_line="99">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="Gas_Station_Safezone::GasStation_sz_depot::AG"
+                                     pxsl_line="99" />
+                            </Object>
+                            <Object
+                                 pxsl_line="100">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="Gas_Station_Safezone_02::GasStation_02_sz_depot::AG"
+                                     pxsl_line="100" />
+                            </Object>
+                            <Object
+                                 pxsl_line="101">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="Interior_01_SafeZone::Interior_01_sz_depot::AG"
+                                     pxsl_line="101" />
+                            </Object>
+                            <Object
+                                 pxsl_line="102">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="Interior_02_SafeZone::Interior_02_sz_depot::AG"
+                                     pxsl_line="102" />
+                            </Object>
+                            <Object
+                                 pxsl_line="103">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="Interior_03_Safezone::Interior_03_sz_depot::AG"
+                                     pxsl_line="103" />
+                            </Object>
+                            <Object
+                                 pxsl_line="104">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="JunkYard_sz_depot::AG"
+                                     pxsl_line="104" />
+                            </Object>
+                            <Object
+                                 pxsl_line="105">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="Playfield_Safezone2::PlayFied_Safezone02_sz_depot::AG"
+                                     pxsl_line="105" />
+                            </Object>
+                            <Object
+                                 pxsl_line="106">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="Playfield_Safezone::PlayField_sz_depot::AG"
+                                     pxsl_line="106" />
+                            </Object>
+                            <Object
+                                 pxsl_line="107">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="Roof_Safezone::Roof_sz_depot::AG"
+                                     pxsl_line="107" />
+                            </Object>
+                            <Object
+                                 pxsl_line="108">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="Searchlights_SafeZone::SearchLights_sz_depot::AG"
+                                     pxsl_line="108" />
+                            </Object>
+                            <Object
+                                 pxsl_line="109">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="Tunnel_01_SafeZone::Tunnel_01_sz_depot::AG"
+                                     pxsl_line="109" />
+                            </Object>
+                            <Object
+                                 pxsl_line="110">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="gnb_sz_depot::AG"
+                                     pxsl_line="110" />
+                            </Object>
+                        </Phase>
+                        <!-- The Tower -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="111">
+                            <Object
+                                 pxsl_line="112">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="slums_interior_barricade_c_dest"
+                                     pxsl_line="112" />
+                            </Object>
+                            <Object
+                                 pxsl_line="113">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="slums_interior_barricade_a_dest_b_ag"
+                                     pxsl_line="113" />
+                            </Object>
+                            <Object
+                                 pxsl_line="114">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="slums_interior_barricade_a_dest_ag"
+                                     pxsl_line="114" />
+                            </Object>
+                        </Phase>
+                        <!-- Courier -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="115">
+                            <Object
+                                 pxsl_line="116">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="q_Courier_GateOpened_AG"
+                                     pxsl_line="116" />
+                            </Object>
+                            <Object
+                                 pxsl_line="117">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="courier_thug_arena_after_ag"
+                                     pxsl_line="117" />
+                            </Object>
+                            <!-- AppearGroup courier_fishermens_v_after_ag -->
+                            <Object
+                                 pxsl_line="118">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Courier_Fishermen_AFTER"
+                                     pxsl_line="118" />
+                            </Object>
+                            <Object
+                                 pxsl_line="119">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="slums_tunnels_block_a_after_ag"
+                                     pxsl_line="119" />
+                            </Object>
+                            <Object
+                                 pxsl_line="120">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="slums_tunnels_block_b_after_ag"
+                                     pxsl_line="120" />
+                            </Object>
+                            <Object
+                                 pxsl_line="121">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="slums_tunnels_block_c_after_ag"
+                                     pxsl_line="121" />
+                            </Object>
+                            <!-- ENCOUNTER ESCORTE TO THE TOWER -->
+                            <Object
+                                 pxsl_line="122">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="slums_courier_lost_patrol_encounter_go"
+                                     pxsl_line="122" />
+                            </Object>
+                            <Object
+                                 pxsl_line="123">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="van_doors"
+                                     pxsl_line="123" />
+                            </Object>
+                            <Object
+                                 pxsl_line="124">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="slums_courier_lost_patrol_group_01_go"
+                                     pxsl_line="124" />
+                            </Object>
+                            <Object
+                                 pxsl_line="125">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="slums_courier_lost_patrol_group_02_go"
+                                     pxsl_line="125" />
+                            </Object>
+                            <Object
+                                 pxsl_line="126">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="slums_courier_lost_patrol_item_ag"
+                                     pxsl_line="126" />
+                            </Object>
+                            <Object
+                                 pxsl_line="127">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="slums_courier_lost_patrol_bag"
+                                     pxsl_line="127" />
+                            </Object>
+                            <Object
+                                 pxsl_line="128">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="rais_warehouse_grating_gate_02"
+                                     pxsl_line="128" />
+                            </Object>
+                            <Object
+                                 pxsl_line="129">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="slums_jaffar_after_go"
+                                     pxsl_line="129" />
+                            </Object>
+                            <Object
+                                 pxsl_line="130">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="slums_jaffar_after_b_go"
+                                     pxsl_line="130" />
+                            </Object>
+                            <Object
+                                 pxsl_line="131">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="slums_courier_lost_patrol_item_container"
+                                     pxsl_line="131" />
+                            </Object>
+                            <Object
+                                 pxsl_line="132">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="slums_courier_lost_patrol_soldier_02"
+                                     pxsl_line="132" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="133">
+                            <Object
+                                 pxsl_line="134">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="warehouse_zones__small_qeg"
+                                     pxsl_line="134" />
+                            </Object>
+                        </Phase>
+                        <!-- Save The Tower -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="135">
+                            <Object
+                                 pxsl_line="136">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="pursuit_braker_electric_the_tower_a_phase_01_go"
+                                     pxsl_line="136" />
+                            </Object>
+                            <Object
+                                 pxsl_line="137">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="pursuit_braker_electric_the_tower_a_phase_02_go"
+                                     pxsl_line="137" />
+                            </Object>
+                            <Object
+                                 pxsl_line="138">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="pursuit_braker_electric_the_tower_b_phase_01_go"
+                                     pxsl_line="138" />
+                            </Object>
+                            <Object
+                                 pxsl_line="139">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="pursuit_braker_electric_the_tower_b_phase_02_go"
+                                     pxsl_line="139" />
+                            </Object>
+                            <Object
+                                 pxsl_line="140">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="electric_the_tower_a_ag"
+                                     pxsl_line="140" />
+                            </Object>
+                            <Object
+                                 pxsl_line="141">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="electric_the_tower_b_ag"
+                                     pxsl_line="141" />
+                            </Object>
+                        </Phase>
+                        <!-- Explosives -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="142">
+                            <Object
+                                 pxsl_line="143">
+                                <QuestObject
+                                     class="DoorDI"
+                                     name="explosives_school_door_B_01"
+                                     pxsl_line="143" />
+                            </Object>
+                            <Object
+                                 pxsl_line="144">
+                                <QuestObject
+                                     class="DoorDI"
+                                     name="explosives_school_door_B_02"
+                                     pxsl_line="144" />
+                            </Object>
+                            <Object
+                                 pxsl_line="145">
+                                <QuestObject
+                                     class="DoorDI"
+                                     name="explosives_school_door_D_02"
+                                     pxsl_line="145" />
+                            </Object>
+                            <Object
+                                 pxsl_line="146">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="explosives_school_zipline"
+                                     pxsl_line="146" />
+                            </Object>
+                            <!-- ,o MapPortal portal_Slums_TO_School_Int_02 -->
+                            <Object
+                                 pxsl_line="148">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="explosives_school_after_objects_ag"
+                                     pxsl_line="148" />
+                            </Object>
+                            <Object
+                                 pxsl_line="149">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="School_barricade_after"
+                                     pxsl_line="149" />
+                            </Object>
+                            <Object
+                                 pxsl_line="150">
+                                <QuestObject
+                                     class="MeshObjectOneAnim"
+                                     name="cin_execution_Prisoner01_after_cin"
+                                     pxsl_line="150" />
+                            </Object>
+                            <Object
+                                 pxsl_line="151">
+                                <QuestObject
+                                     class="MeshObjectOneAnim"
+                                     name="cin_execution_Prisoner02_after_cin"
+                                     pxsl_line="151" />
+                            </Object>
+                            <Object
+                                 pxsl_line="152">
+                                <QuestObject
+                                     class="MeshObjectOneAnim"
+                                     name="cin_execution_Prisoner03_after_cin"
+                                     pxsl_line="152" />
+                            </Object>
+                            <Object
+                                 pxsl_line="153">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="cin_prime_Door_before"
+                                     pxsl_line="153" />
+                            </Object>
+                        </Phase>
+                        <!-- Airdrop -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="154">
+                            <Object
+                                 pxsl_line="155">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Airdrop_A"
+                                     pxsl_line="155" />
+                            </Object>
+                            <Object
+                                 pxsl_line="156">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Airdrop_B"
+                                     pxsl_line="156" />
+                            </Object>
+                            <Object
+                                 pxsl_line="157">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Airdrop_C"
+                                     pxsl_line="157" />
+                            </Object>
+                            <Object
+                                 pxsl_line="158">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="airdrop_b_reward_ag"
+                                     pxsl_line="158" />
+                            </Object>
+                            <Object
+                                 pxsl_line="159">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="airdrop_workshop_gate_tire_01"
+                                     pxsl_line="159" />
+                            </Object>
+                            <Object
+                                 pxsl_line="160">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="airdrop_workshop_gate_tire_02"
+                                     pxsl_line="160" />
+                            </Object>
+                            <Object
+                                 pxsl_line="161">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="airdrop_workshop_gate_open"
+                                     pxsl_line="161" />
+                            </Object>
+                            <Object
+                                 pxsl_line="162">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="airdrop_goon_wall_after"
+                                     pxsl_line="162" />
+                            </Object>
+                            <Object
+                                 pxsl_line="163">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="airdrop_arena_shop_door_after"
+                                     pxsl_line="163" />
+                            </Object>
+                            <Object
+                                 pxsl_line="164">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="airdrop_warehouse_deadbody_01"
+                                     pxsl_line="164" />
+                            </Object>
+                            <Object
+                                 pxsl_line="165">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="airdrop_arena_deadbody_01"
+                                     pxsl_line="165" />
+                            </Object>
+                            <Object
+                                 pxsl_line="166">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="airdrop_arena_deadbody_02"
+                                     pxsl_line="166" />
+                            </Object>
+                            <Object
+                                 pxsl_line="167">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="airdrop_C_deabdoby_01"
+                                     pxsl_line="167" />
+                            </Object>
+                            <Object
+                                 pxsl_line="168">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="airdrop_C_deadbody_02"
+                                     pxsl_line="168" />
+                            </Object>
+                            <Object
+                                 pxsl_line="169">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="goon_arena_shop_gate_switch"
+                                     pxsl_line="169" />
+                            </Object>
+                            <Object
+                                 pxsl_line="170">
+                                <QuestObject
+                                     class="ActorDI"
+                                     name="airdrop_clara"
+                                     pxsl_line="170" />
+                            </Object>
+                            <Object
+                                 pxsl_line="171">
+                                <QuestObject
+                                     class="MovieActor"
+                                     name="MilitaryCargo"
+                                     pxsl_line="171" />
+                            </Object>
+                            <!-- EXP CAR -->
+                            <Object
+                                 pxsl_line="172">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="airdrop_exploding_car_go"
+                                     pxsl_line="172" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="173">
+                            <Object
+                                 pxsl_line="174">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="airdrop_burning_car_01::demo_night_burning_car"
+                                     pxsl_line="174" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="set skin"
+                             name="_"
+                             skin_name="Default"
+                             pxsl_line="175">
+                            <ModelObject
+                                 pxsl_line="175">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="airdrop_burning_car_01::demo_night_burning_car_ashes"
+                                     pxsl_line="175" />
+                            </ModelObject>
+                        </Phase>
+                        <!-- Intruders -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="176">
+                            <Object
+                                 pxsl_line="177">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="intruders_cars_and_barricade_ag"
+                                     pxsl_line="177" />
+                            </Object>
+                            <!-- AppearGroup tir_destroy_after -->
+                            <Object
+                                 pxsl_line="178">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Tir_Destroy_AFTER"
+                                     pxsl_line="178" />
+                            </Object>
+                            <Object
+                                 pxsl_line="179">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="After_intruders_AG"
+                                     pxsl_line="179" />
+                            </Object>
+                            <!-- Exploding car. -->
+                            <Object
+                                 pxsl_line="180">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Intruders_Exploding_Car_01"
+                                     pxsl_line="180" />
+                            </Object>
+                            <!-- Exploding car. -->
+                            <Object
+                                 pxsl_line="181">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Intruders_Exploding_Car_02"
+                                     pxsl_line="181" />
+                            </Object>
+                            <!-- The Tower Workshop doors closed. -->
+                            <Object
+                                 pxsl_line="182">
+                                <QuestObject
+                                     class="MovieActor"
+                                     name="cin_jade_despair_Door"
+                                     pxsl_line="182" />
+                            </Object>
+                        </Phase>
+                        <!-- Warehouse -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="183">
+                            <Object
+                                 pxsl_line="184">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="warehouse_gate_02"
+                                     pxsl_line="184" />
+                            </Object>
+                            <Object
+                                 pxsl_line="185">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="warehouse_van_ag"
+                                     pxsl_line="185" />
+                            </Object>
+                        </Phase>
+                        <!-- Demolition -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="186">
+                            <Object
+                                 pxsl_line="187">
+                                <QuestObject
+                                     class="AIDeadBodySpawnBoxAuto"
+                                     name="demolition_deadbody_02"
+                                     pxsl_line="187" />
+                            </Object>
+                            <Object
+                                 pxsl_line="188">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="demolition_highway_scene"
+                                     pxsl_line="188" />
+                            </Object>
+                            <Object
+                                 pxsl_line="189">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="slums_demolition_after_deco_go"
+                                     pxsl_line="189" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="smoke from Demolition building"
+                             pxsl_line="190">
+                            <Object
+                                 pxsl_line="190">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="qeg_Demolition_Building_FX"
+                                     pxsl_line="190" />
+                            </Object>
+                        </Phase>
+                        <!-- PowerToBelieve -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="191">
+                            <Object
+                                 pxsl_line="192">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="portal_slums_to_cave_gate_after"
+                                     pxsl_line="192" />
+                            </Object>
+                        </Phase>
+                        <!-- Another Day in Paradise -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="193">
+                            <Object
+                                 pxsl_line="194">
+                                <QuestObject
+                                     class="DepotContainer"
+                                     name="AnotherDayInParadise_Depot_001"
+                                     pxsl_line="194" />
+                            </Object>
+                            <Object
+                                 pxsl_line="195">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="AnotherDayInParadise_Depot_001_Item01"
+                                     pxsl_line="195" />
+                            </Object>
+                            <Object
+                                 pxsl_line="196">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="AnotherDayInParadise_Depot_001_Item02"
+                                     pxsl_line="196" />
+                            </Object>
+                            <Object
+                                 pxsl_line="197">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="AnotherDayInParadise_Depot_001_Item03"
+                                     pxsl_line="197" />
+                            </Object>
+                            <Object
+                                 pxsl_line="198">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="margaret_container_door_02"
+                                     pxsl_line="198" />
+                            </Object>
+                            <Object
+                                 pxsl_line="199">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Margaret_GO_Part_A_After"
+                                     pxsl_line="199" />
+                            </Object>
+                            <Object
+                                 pxsl_line="200">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Margaret_GO_ShopKeeper_After"
+                                     pxsl_line="200" />
+                            </Object>
+                        </Phase>
+                        <!-- Saviors -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="201">
+                            <Object
+                                 pxsl_line="202">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Saviors_GO_SafeZone_Cenk"
+                                     pxsl_line="202" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="shopkeeper_slums_margaret"
+                             group="shopkeeper_slums_margaret_nf_dlg"
+                             pxsl_line="203" />
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="slums_morgan_guard_2_light"
+                             group="slums_morgan_guard_2_light_NEA"
+                             pxsl_line="204" />
+                    </Path>
+                </Phase>
+                <!-- - - - - - - - - - - - - - - - -->
+                <!-- COLLECTABLES -->
+                <!-- - - - - - - - - - - - - - - - -->
+                <Phase
+                     type="AND"
+                     name=" Collecatbles "
+                     pxsl_line="208">
+                    <Path
+                         pxsl_line="208">
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="209">
+                            <Object
+                                 pxsl_line="210">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="Collectable_Note_BringGalib_01_AG"
+                                     pxsl_line="210" />
+                            </Object>
+                            <Object
+                                 pxsl_line="211">
+                                <QuestObject
+                                     class="CollectableObject"
+                                     name="Collectable_Note_WheresMyMother_01"
+                                     pxsl_line="211" />
+                            </Object>
+                            <Object
+                                 pxsl_line="212">
+                                <QuestObject
+                                     class="CollectableObject"
+                                     name="Collectable_Note_BringAntibiotics_01"
+                                     pxsl_line="212" />
+                            </Object>
+                            <Object
+                                 pxsl_line="213">
+                                <QuestObject
+                                     class="CollectableObject"
+                                     name="Collectable_Note_BringJeff_01"
+                                     pxsl_line="213" />
+                            </Object>
+                            <Object
+                                 pxsl_line="214">
+                                <QuestObject
+                                     class="CollectableObject"
+                                     name="Collectable_Note_BringJeff_02"
+                                     pxsl_line="214" />
+                            </Object>
+                            <Object
+                                 pxsl_line="215">
+                                <QuestObject
+                                     class="CollectableObject"
+                                     name="Collectable_Note_BringJeff_03"
+                                     pxsl_line="215" />
+                            </Object>
+                            <Object
+                                 pxsl_line="216">
+                                <QuestObject
+                                     class="CollectableObject"
+                                     name="Collectable_Note_TalesFromTheCrypt_01"
+                                     pxsl_line="216" />
+                            </Object>
+                            <Object
+                                 pxsl_line="217">
+                                <QuestObject
+                                     class="CollectableObject"
+                                     name="Collectable_Note_TalesFromTheCrypt_02"
+                                     pxsl_line="217" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <!-- - - - - - - - - - - - - - - - -->
+                <!-- SIDE QUESTS -->
+                <!-- - - - - - - - - - - - - - - - -->
+                <Phase
+                     type="AND"
+                     name="side quests start actions"
+                     pxsl_line="221">
+                    <Path
+                         pxsl_line="221">
+                        <!-- Scouts -->
+                        <Phase
+                             type="move ai"
+                             name="_"
+                             teleport="true"
+                             pxsl_line="223">
+                            <Destination
+                                 pxsl_line="223">
+                                <QuestObject
+                                     class="NPCLifePlace"
+                                     name="slums_guard_talk_lp"
+                                     pxsl_line="223" />
+                            </Destination>
+                            <AI
+                                 pxsl_line="224">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="slums_thetower_m_ground_03"
+                                     pxsl_line="224" />
+                            </AI>
+                        </Phase>
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <!-- BRING GALIB -->
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="228">
+                            <Object
+                                 pxsl_line="229">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="BringGalib_AG_PrisonGate_After"
+                                     pxsl_line="229" />
+                            </Object>
+                            <Object
+                                 pxsl_line="230">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="BringGalib_GroupingObject_GalibStuff"
+                                     pxsl_line="230" />
+                            </Object>
+                            <Object
+                                 pxsl_line="231">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="BringMusa_GO_Boat_A"
+                                     pxsl_line="231" />
+                            </Object>
+                        </Phase>
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <!-- BRING MUSA -->
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="235">
+                            <Object
+                                 pxsl_line="236">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="BringMusa_GroupingObject_MusaStuff"
+                                     pxsl_line="236" />
+                            </Object>
+                            <Object
+                                 pxsl_line="237">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="BringMusa_GO_QuddusHouse_AFTER"
+                                     pxsl_line="237" />
+                            </Object>
+                            <Object
+                                 pxsl_line="238">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="BringMusa_AG_ReishPlace_Gate"
+                                     pxsl_line="238" />
+                            </Object>
+                        </Phase>
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <!-- SPARE GLASSES -->
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="242">
+                            <Object
+                                 pxsl_line="243">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="SpareGlasses_GO_Khaliqs_Stuff"
+                                     pxsl_line="243" />
+                            </Object>
+                        </Phase>
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <!-- GOOD NIGHT MR BAHIR -->
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="247">
+                            <Object
+                                 pxsl_line="248">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="GoodNightBahir_GroupingObject_SafeZone_After"
+                                     pxsl_line="248" />
+                            </Object>
+                        </Phase>
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <!-- TWINS -->
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="252">
+                            <Object
+                                 pxsl_line="253">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Twins_GroupingObject_ZipLines_01"
+                                     pxsl_line="253" />
+                            </Object>
+                            <Object
+                                 pxsl_line="254">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Twins_GroupingObject_Jafar"
+                                     pxsl_line="254" />
+                            </Object>
+                            <Object
+                                 pxsl_line="255">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Twins_GroupingObject_GasStation"
+                                     pxsl_line="255" />
+                            </Object>
+                            <Object
+                                 pxsl_line="256">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Twins_GroupingObject_School"
+                                     pxsl_line="256" />
+                            </Object>
+                            <Object
+                                 pxsl_line="257">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Twins_GroupingObject_Playfield"
+                                     pxsl_line="257" />
+                            </Object>
+                            <Object
+                                 pxsl_line="258">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Twins_GroupingObject_Fishermans"
+                                     pxsl_line="258" />
+                            </Object>
+                            <Object
+                                 pxsl_line="259">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Twins_GroupingObject_BusStation"
+                                     pxsl_line="259" />
+                            </Object>
+                            <Object
+                                 pxsl_line="260">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Twins_GroupingObject_Warehouse_Catwalk_After"
+                                     pxsl_line="260" />
+                            </Object>
+                            <Object
+                                 pxsl_line="261">
+                                <QuestObject
+                                     class="ComplexContainer"
+                                     name="Twins_Container_Chest_1"
+                                     pxsl_line="261" />
+                            </Object>
+                        </Phase>
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <!-- SURVIVAL'S GUIDE TO ZOMBIE LAND -->
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="265">
+                            <Object
+                                 pxsl_line="266">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="SurvivalsGuide_AG_Sedan"
+                                     pxsl_line="266" />
+                            </Object>
+                            <Object
+                                 pxsl_line="267">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="SurvivalsGuide_GO_NeilsDesk"
+                                     pxsl_line="267" />
+                            </Object>
+                        </Phase>
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <!-- VOLTAGE -->
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="271">
+                            <Object
+                                 pxsl_line="272">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="SearchLights_GroupingObject_TowerHub_Defence_Lights"
+                                     pxsl_line="272" />
+                            </Object>
+                            <Object
+                                 pxsl_line="273">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="Searchlights_Door_Spawn_1"
+                                     pxsl_line="273" />
+                            </Object>
+                            <Object
+                                 pxsl_line="274">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="Searchlights_SafeZone::AG"
+                                     pxsl_line="274" />
+                            </Object>
+                            <Object
+                                 pxsl_line="275">
+                                <QuestObject
+                                     class="DepotContainer"
+                                     name="Searchlights_SafeZone::SearchLights_sz_depot::bag"
+                                     pxsl_line="275" />
+                            </Object>
+                            <Object
+                                 pxsl_line="276">
+                                <QuestObject
+                                     class="PhysicalSwitchDayTime"
+                                     name="Voltage_PS_Substation_B_Night"
+                                     pxsl_line="276" />
+                            </Object>
+                            <Object
+                                 pxsl_line="277">
+                                <QuestObject
+                                     class="PhysicalSwitchDayTime"
+                                     name="Voltage_PS_Substation_A_Night"
+                                     pxsl_line="277" />
+                            </Object>
+                        </Phase>
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <!-- BRING GALIB -->
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="281">
+                            <Object
+                                 pxsl_line="282">
+                                <QuestObject
+                                     class="BlackoutArea"
+                                     name="ElectricMachete_Inn_BlackOut"
+                                     pxsl_line="282" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="283">
+                            <Object
+                                 pxsl_line="284">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="BringGalib_GroupingObject_RaisVan_Market"
+                                     pxsl_line="284" />
+                            </Object>
+                            <Object
+                                 pxsl_line="285">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="BringGalib_GroupingObject_RaisVan_Tunnel"
+                                     pxsl_line="285" />
+                            </Object>
+                        </Phase>
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <!-- ELECTRIC MACHETE -->
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="289">
+                            <Object
+                                 pxsl_line="290">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Road_Inn_GroupingObject_AFTER_A"
+                                     pxsl_line="290" />
+                            </Object>
+                            <Object
+                                 pxsl_line="291">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Road_Inn_GroupingObject_AFTER_B"
+                                     pxsl_line="291" />
+                            </Object>
+                            <Object
+                                 pxsl_line="292">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="ElectricMachete_GroupingObject_RadioTower_AFTER"
+                                     pxsl_line="292" />
+                            </Object>
+                            <Object
+                                 pxsl_line="293">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="ElectricMachete_GroupingObject_RadioTower_AFTER_B"
+                                     pxsl_line="293" />
+                            </Object>
+                            <Object
+                                 pxsl_line="294">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="ElectricMachete_GroupingObject_RadioTower_AFTER_C"
+                                     pxsl_line="294" />
+                            </Object>
+                            <Object
+                                 pxsl_line="295">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="ElectricMachete_GroupingObject_AntennaCage_Opened"
+                                     pxsl_line="295" />
+                            </Object>
+                            <Object
+                                 pxsl_line="296">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="ElectricMachete_GO_Machetes"
+                                     pxsl_line="296" />
+                            </Object>
+                        </Phase>
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <!-- Dynamites -->
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="300">
+                            <Object
+                                 pxsl_line="301">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Dynamites_Barricade_After::Dynamites_DestCar_01::QEG"
+                                     pxsl_line="301" />
+                            </Object>
+                            <Object
+                                 pxsl_line="302">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Dynamites_Barricade_After::Dynamites_DestCar_02::QEG"
+                                     pxsl_line="302" />
+                            </Object>
+                            <Object
+                                 pxsl_line="303">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Dynamites_Barricade_After::Dynamites_DestCar_03::QEG"
+                                     pxsl_line="303" />
+                            </Object>
+                            <Object
+                                 pxsl_line="304">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Dynamites_Barricade_After::Dynamites_DestCar_04::QEG"
+                                     pxsl_line="304" />
+                            </Object>
+                            <Object
+                                 pxsl_line="305">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Dynamites_Barricade_After::Dynamites_DestCar_05::QEG"
+                                     pxsl_line="305" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="306">
+                            <Object
+                                 pxsl_line="307">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="Dynamites_QII_Bomb"
+                                     pxsl_line="307" />
+                            </Object>
+                            <Object
+                                 pxsl_line="308">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="Dynamites_Bomb_Ghost"
+                                     pxsl_line="308" />
+                            </Object>
+                            <Object
+                                 pxsl_line="309">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="Dynamites_Battery_Table"
+                                     pxsl_line="309" />
+                            </Object>
+                            <Object
+                                 pxsl_line="310">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="Dynamites_Bomb_Tunnel"
+                                     pxsl_line="310" />
+                            </Object>
+                            <Object
+                                 pxsl_line="311">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Dynamites_GroupingObject_VanRais_01"
+                                     pxsl_line="311" />
+                            </Object>
+                            <Object
+                                 pxsl_line="312">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Dynamites_GroupingObject_Barricade_After"
+                                     pxsl_line="312" />
+                            </Object>
+                        </Phase>
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <!-- Tunnel Vision -->
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="316">
+                            <Object
+                                 pxsl_line="317">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="TunnelVision_GroupingObject_Sedan_01"
+                                     pxsl_line="317" />
+                            </Object>
+                            <Object
+                                 pxsl_line="318">
+                                <QuestObject
+                                     class="NoteTrigger"
+                                     name="TunnelVision_NoteTrigger_01"
+                                     pxsl_line="318" />
+                            </Object>
+                        </Phase>
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <!-- Firebug -->
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="322">
+                            <Object
+                                 pxsl_line="323">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Firebug_GroupingObject_Airdrop_After"
+                                     pxsl_line="323" />
+                            </Object>
+                            <Object
+                                 pxsl_line="324">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Firebug_GroupingObject_Airdrop_Closed"
+                                     pxsl_line="324" />
+                            </Object>
+                            <Object
+                                 pxsl_line="325">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Firebug_GroupingObject_Airdrop_Looted"
+                                     pxsl_line="325" />
+                            </Object>
+                            <Object
+                                 pxsl_line="326">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Firebug_GO_Zinc"
+                                     pxsl_line="326" />
+                            </Object>
+                        </Phase>
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <!-- WITCH QUEEN -->
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="330">
+                            <Object
+                                 pxsl_line="331">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="WitchQueen_GroupingObject_Cave_Hub"
+                                     pxsl_line="331" />
+                            </Object>
+                            <Object
+                                 pxsl_line="332">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="WItchQueen_AG_Mixture_Inv"
+                                     pxsl_line="332" />
+                            </Object>
+                            <Object
+                                 pxsl_line="333">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="WItchQueen_AG_Mixture_Slomo"
+                                     pxsl_line="333" />
+                            </Object>
+                            <Object
+                                 pxsl_line="334">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="WItchQueen_AG_Mixture_Rot"
+                                     pxsl_line="334" />
+                            </Object>
+                            <Object
+                                 pxsl_line="335">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="WItchQueen_AG_Mixture_Success"
+                                     pxsl_line="335" />
+                            </Object>
+                            <Object
+                                 pxsl_line="336">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="WitchQueen_GroupingObject_Kitchen_1"
+                                     pxsl_line="336" />
+                            </Object>
+                            <Object
+                                 pxsl_line="337">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="WitchQueen_GroupingObject_Kitchen_2"
+                                     pxsl_line="337" />
+                            </Object>
+                            <Object
+                                 pxsl_line="338">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="WitchQueen_GroupingObject_Kitchen_3"
+                                     pxsl_line="338" />
+                            </Object>
+                            <Object
+                                 pxsl_line="339">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="WitchQueen_MushRooms"
+                                     pxsl_line="339" />
+                            </Object>
+                        </Phase>
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <!-- WHERES MY MOTHER -->
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="343">
+                            <Object
+                                 pxsl_line="344">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="WheresMyMother_Door_Workshop_Spawn"
+                                     pxsl_line="344" />
+                            </Object>
+                            <Object
+                                 pxsl_line="345">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="WheresMyMother_Door_Workshop_After"
+                                     pxsl_line="345" />
+                            </Object>
+                            <Object
+                                 pxsl_line="346">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="WheresMyMother_AG_Drawing"
+                                     pxsl_line="346" />
+                            </Object>
+                            <Object
+                                 pxsl_line="347">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="WheresMyMother_PS_Wardrobe"
+                                     pxsl_line="347" />
+                            </Object>
+                            <Object
+                                 pxsl_line="348">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="WheresMyMother_PS_Wardrobe_Slide"
+                                     pxsl_line="348" />
+                            </Object>
+                            <Object
+                                 pxsl_line="349">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="WheresMyMother_PS_Wardrobe_Slide_2"
+                                     pxsl_line="349" />
+                            </Object>
+                            <Object
+                                 pxsl_line="350">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="WheresMyMother_GO_AidasHouse_After"
+                                     pxsl_line="350" />
+                            </Object>
+                            <Object
+                                 pxsl_line="351">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="WheresMyMother_GO_Wardrobe"
+                                     pxsl_line="351" />
+                            </Object>
+                            <Object
+                                 pxsl_line="352">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="WheresMyMother_Wardrobe_Interior_01"
+                                     pxsl_line="352" />
+                            </Object>
+                        </Phase>
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <!-- MOTHER'S DAY -->
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="356">
+                            <Object
+                                 pxsl_line="357">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="MothersDay_PS_Shutter"
+                                     pxsl_line="357" />
+                            </Object>
+                        </Phase>
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <!-- SCHOOL CHAIN -->
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="361">
+                            <Object
+                                 pxsl_line="362">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="SchoolChain_GroupingObject_HubDoor_A"
+                                     pxsl_line="362" />
+                            </Object>
+                            <Object
+                                 pxsl_line="363">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="DeathNote_GroupingObject_RaisPatrol"
+                                     pxsl_line="363" />
+                            </Object>
+                            <Object
+                                 pxsl_line="364">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Insuline_GroupingObject_LandingZone"
+                                     pxsl_line="364" />
+                            </Object>
+                            <Object
+                                 pxsl_line="365">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="sq_manifestyourself_fake_mark_hide"
+                                     pxsl_line="365" />
+                            </Object>
+                            <Object
+                                 pxsl_line="366">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="sq_manifestyourself_fake_mark2_hide"
+                                     pxsl_line="366" />
+                            </Object>
+                            <Object
+                                 pxsl_line="367">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="sq_manifestyourself_fake_mark3_hide"
+                                     pxsl_line="367" />
+                            </Object>
+                            <Object
+                                 pxsl_line="368">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="sq_manifestyourself_fake_mark4_hide"
+                                     pxsl_line="368" />
+                            </Object>
+                            <Object
+                                 pxsl_line="369">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="sq_manifestyourself_fake_mark"
+                                     pxsl_line="369" />
+                            </Object>
+                            <Object
+                                 pxsl_line="370">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="sq_manifestyourself_fake_mark2"
+                                     pxsl_line="370" />
+                            </Object>
+                            <Object
+                                 pxsl_line="371">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="sq_manifestyourself_fake_mark3"
+                                     pxsl_line="371" />
+                            </Object>
+                            <Object
+                                 pxsl_line="372">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="sq_manifestyourself_fake_mark4"
+                                     pxsl_line="372" />
+                            </Object>
+                            <Object
+                                 pxsl_line="373">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="School_hub_light_01::Light_hide_appear"
+                                     pxsl_line="373" />
+                            </Object>
+                            <Object
+                                 pxsl_line="374">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="School_hub_light_02::Light_hide_appear"
+                                     pxsl_line="374" />
+                            </Object>
+                            <Object
+                                 pxsl_line="375">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="School_hub_light_03::Light_hide_appear"
+                                     pxsl_line="375" />
+                            </Object>
+                            <Object
+                                 pxsl_line="376">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="School_hub_light_06::Light_hide_appear"
+                                     pxsl_line="376" />
+                            </Object>
+                            <Object
+                                 pxsl_line="377">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="School_hub_light_07::Light_hide_appear"
+                                     pxsl_line="377" />
+                            </Object>
+                            <Object
+                                 pxsl_line="378">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="School_hub_light_08::Light_hide_appear"
+                                     pxsl_line="378" />
+                            </Object>
+                            <Object
+                                 pxsl_line="379">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="School_hub_light_09::Light_hide_appear"
+                                     pxsl_line="379" />
+                            </Object>
+                            <Object
+                                 pxsl_line="380">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="School_hub_light_10"
+                                     pxsl_line="380" />
+                            </Object>
+                            <Object
+                                 pxsl_line="381">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="School_hub_light_11"
+                                     pxsl_line="381" />
+                            </Object>
+                            <Object
+                                 pxsl_line="382">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="TalesFromTheCrypt_GroupingObject_ElectricInstallation"
+                                     pxsl_line="382" />
+                            </Object>
+                            <Object
+                                 pxsl_line="383">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="TalesFromTheCrypt_GroupingObject_RoofHub"
+                                     pxsl_line="383" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="385">
+                            <Object
+                                 pxsl_line="386">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="School_hub_light_01::Schoolhub_school_lights_LampDI"
+                                     pxsl_line="386" />
+                            </Object>
+                            <Object
+                                 pxsl_line="387">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="School_hub_light_02::Schoolhub_school_lights_LampDI"
+                                     pxsl_line="387" />
+                            </Object>
+                            <Object
+                                 pxsl_line="388">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="School_hub_light_03::Schoolhub_school_lights_LampDI"
+                                     pxsl_line="388" />
+                            </Object>
+                            <Object
+                                 pxsl_line="389">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="School_hub_light_06::Schoolhub_school_lights_LampDI"
+                                     pxsl_line="389" />
+                            </Object>
+                            <Object
+                                 pxsl_line="390">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="School_hub_light_07::Schoolhub_school_lights_LampDI"
+                                     pxsl_line="390" />
+                            </Object>
+                            <Object
+                                 pxsl_line="391">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="School_hub_light_08::Schoolhub_school_lights_LampDI"
+                                     pxsl_line="391" />
+                            </Object>
+                            <Object
+                                 pxsl_line="392">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="School_hub_light_09::Schoolhub_school_lights_LampDI"
+                                     pxsl_line="392" />
+                            </Object>
+                            <Object
+                                 pxsl_line="393">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="School_hub_light_10"
+                                     pxsl_line="393" />
+                            </Object>
+                            <Object
+                                 pxsl_line="394">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="School_hub_light_11"
+                                     pxsl_line="394" />
+                            </Object>
+                        </Phase>
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <!-- GASSED UP -->
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="398">
+                            <Object
+                                 pxsl_line="399">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="GassedUp_GroupingObject_House_AFTER"
+                                     pxsl_line="399" />
+                            </Object>
+                            <Object
+                                 pxsl_line="400">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="GassedUp_GroupingObject_House_Defence"
+                                     pxsl_line="400" />
+                            </Object>
+                            <Object
+                                 pxsl_line="401">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="GassedUp_GroupingObject_MainGasStation_Explosion_AFTER"
+                                     pxsl_line="401" />
+                            </Object>
+                            <Object
+                                 pxsl_line="402">
+                                <QuestObject
+                                     class="RestingPlace"
+                                     name="GassedUp_SafeZone_RestingPlace"
+                                     pxsl_line="402" />
+                            </Object>
+                        </Phase>
+                        <!-- SQ Anabolics -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="404">
+                            <Object
+                                 pxsl_line="404">
+                                <QuestObject
+                                     class="PhysicalSwitchDI"
+                                     name="anabolics_gate_after"
+                                     pxsl_line="404" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <!-- - - - - - - - - - - - - - - - -->
+                <!-- TABLE QUESTS -->
+                <!-- - - - - - - - - - - - - - - - -->
+                <Phase
+                     type="AND"
+                     name="table quests start actions"
+                     pxsl_line="408">
+                    <Path
+                         pxsl_line="408">
+                        <!-- -->
+                        <!-- SQ Tablequests -->
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="411">
+                            <Object
+                                 pxsl_line="412">
+                                <QuestObject
+                                     class="QuestStartTrigger"
+                                     name="A_tablequest::tablequest_01"
+                                     pxsl_line="412" />
+                            </Object>
+                            <Object
+                                 pxsl_line="413">
+                                <QuestObject
+                                     class="QuestStartTrigger"
+                                     name="A_tablequest::tablequest_02"
+                                     pxsl_line="413" />
+                            </Object>
+                            <Object
+                                 pxsl_line="414">
+                                <QuestObject
+                                     class="QuestStartTrigger"
+                                     name="A_tablequest::tablequest_03"
+                                     pxsl_line="414" />
+                            </Object>
+                            <Object
+                                 pxsl_line="415">
+                                <QuestObject
+                                     class="QuestStartTrigger"
+                                     name="A_tablequest::tablequest_04"
+                                     pxsl_line="415" />
+                            </Object>
+                            <Object
+                                 pxsl_line="416">
+                                <QuestObject
+                                     class="QuestStartTrigger"
+                                     name="A_tablequest::tablequest_05"
+                                     pxsl_line="416" />
+                            </Object>
+                            <Object
+                                 pxsl_line="417">
+                                <QuestObject
+                                     class="QuestStartTrigger"
+                                     name="A_tablequest::tablequest_06"
+                                     pxsl_line="417" />
+                            </Object>
+                            <Object
+                                 pxsl_line="418">
+                                <QuestObject
+                                     class="QuestStartTrigger"
+                                     name="A_tablequest::tablequest_07"
+                                     pxsl_line="418" />
+                            </Object>
+                            <Object
+                                 pxsl_line="419">
+                                <QuestObject
+                                     class="QuestStartTrigger"
+                                     name="A_tablequest::tablequest_08"
+                                     pxsl_line="419" />
+                            </Object>
+                            <Object
+                                 pxsl_line="420">
+                                <QuestObject
+                                     class="QuestStartTrigger"
+                                     name="A_tablequest::tablequest_09"
+                                     pxsl_line="420" />
+                            </Object>
+                            <Object
+                                 pxsl_line="421">
+                                <QuestObject
+                                     class="QuestStartTrigger"
+                                     name="A_tablequest::tablequest_10"
+                                     pxsl_line="421" />
+                            </Object>
+                            <Object
+                                 pxsl_line="422">
+                                <QuestObject
+                                     class="QuestStartTrigger"
+                                     name="A_tablequest::tablequest_11"
+                                     pxsl_line="422" />
+                            </Object>
+                            <Object
+                                 pxsl_line="423">
+                                <QuestObject
+                                     class="QuestStartTrigger"
+                                     name="A_tablequest::tablequest_12"
+                                     pxsl_line="423" />
+                            </Object>
+                            <Object
+                                 pxsl_line="424">
+                                <QuestObject
+                                     class="QuestStartTrigger"
+                                     name="A_tablequest::tablequest_13"
+                                     pxsl_line="424" />
+                            </Object>
+                            <Object
+                                 pxsl_line="425">
+                                <QuestObject
+                                     class="AppearGroup"
+                                     name="A_tablequest::Binoculars_AG"
+                                     pxsl_line="425" />
+                            </Object>
+                        </Phase>
+                        <!-- -->
+                        <!-- SQ A Table Quests -->
+                        <!-- ,disable _ LightObject A_tablequest::lamp_desk_a_light_khaliq -= khaliq -->
+                        <!-- ,disable _ LightObject A_tablequest::lamp_desk_a_light_khaliq2 -->
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="430">
+                            <Object
+                                 pxsl_line="431">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="A_tablequest::Poison_herb_temp_01"
+                                     pxsl_line="431" />
+                            </Object>
+                            <Object
+                                 pxsl_line="432">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="A_tablequest::Poison_herb_temp_02"
+                                     pxsl_line="432" />
+                            </Object>
+                            <Object
+                                 pxsl_line="433">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="A_tablequest::Poison_herb_temp_03"
+                                     pxsl_line="433" />
+                            </Object>
+                            <Object
+                                 pxsl_line="434">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="A_tablequest::Poison_herb_temp_04"
+                                     pxsl_line="434" />
+                            </Object>
+                            <Object
+                                 pxsl_line="435">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="A_tablequest::Poison_herb_temp_05"
+                                     pxsl_line="435" />
+                            </Object>
+                            <Object
+                                 pxsl_line="436">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="A_tablequest::Poison_herb_temp_06"
+                                     pxsl_line="436" />
+                            </Object>
+                            <Object
+                                 pxsl_line="437">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="A_tablequest::Poison_herb_temp_07"
+                                     pxsl_line="437" />
+                            </Object>
+                            <Object
+                                 pxsl_line="438">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="A_tablequest::medicalherb_temp_01"
+                                     pxsl_line="438" />
+                            </Object>
+                            <Object
+                                 pxsl_line="439">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="A_tablequest::medicalherb_temp_02"
+                                     pxsl_line="439" />
+                            </Object>
+                            <Object
+                                 pxsl_line="440">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="A_tablequest::medicalherb_temp_03"
+                                     pxsl_line="440" />
+                            </Object>
+                            <Object
+                                 pxsl_line="441">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="A_tablequest::medicalherb_temp_04"
+                                     pxsl_line="441" />
+                            </Object>
+                            <Object
+                                 pxsl_line="442">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="A_tablequest::medicalherb_temp_05"
+                                     pxsl_line="442" />
+                            </Object>
+                            <Object
+                                 pxsl_line="443">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="A_tablequest::medicalherb_temp_06"
+                                     pxsl_line="443" />
+                            </Object>
+                            <Object
+                                 pxsl_line="444">
+                                <QuestObject
+                                     class="QuestInventoryItemDI"
+                                     name="A_tablequest::medicalherb_temp_07"
+                                     pxsl_line="444" />
+                            </Object>
+                        </Phase>
+                        <!-- - - - - - - - - - - - - - - - -->
+                        <!-- Safezones -->
+                        <!-- - - - - - - - - - - - - - - - -->
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="448">
+                            <Object
+                                 pxsl_line="449">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Playfield_Safezone::selSafezone_Playfield_AFTER::Playfield_Safezone_qeg"
+                                     pxsl_line="449" />
+                            </Object>
+                            <Object
+                                 pxsl_line="450">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Playfield_Safezone2::selSafezone_Playfield2_AFTER::Playfield2_safezone_fire_QEG"
+                                     pxsl_line="450" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="451">
+                            <!-- ,o AppearGroup Construction_site_after_AG -->
+                            <Object
+                                 pxsl_line="452">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="SafeZone_ConstructionSite_AFTER"
+                                     pxsl_line="452" />
+                            </Object>
+                            <!-- AppearGroup Interior_01_SafeZone::Interior_01_after_AG -->
+                            <Object
+                                 pxsl_line="453">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Safezone_Interior01_AFTER"
+                                     pxsl_line="453" />
+                            </Object>
+                            <!-- AppearGroup Playfield_Safezone::Playfield_Safezone_After_AG -->
+                            <Object
+                                 pxsl_line="454">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Safezone_Playfield_AFTER"
+                                     pxsl_line="454" />
+                            </Object>
+                            <!-- AppearGroup Gas_Station_Safezone_after_AG -->
+                            <Object
+                                 pxsl_line="455">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Safezone_GasStation_AFTER"
+                                     pxsl_line="455" />
+                            </Object>
+                            <!-- AppearGroup Playfield_Safezone2::Safezone_Playfield2_after_AG -->
+                            <Object
+                                 pxsl_line="456">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Safezone_Playfield2_AFTER"
+                                     pxsl_line="456" />
+                            </Object>
+                            <!-- Gas_Station_Safezone_02::Safezone_GasStation_AFTER   -= AppearGroup Gas_Station_Safezone_02::Gas_Station_Safezone_after_AG -->
+                            <Object
+                                 pxsl_line="457">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Safezone_GasStation2_AFTER"
+                                     pxsl_line="457" />
+                            </Object>
+                            <Object
+                                 pxsl_line="458">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Safezone_GasStation2_AFTER_REMOVED"
+                                     pxsl_line="458" />
+                            </Object>
+                            <Object
+                                 pxsl_line="459">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="gas_station_safezone02_after_get_in_go"
+                                     pxsl_line="459" />
+                            </Object>
+                            <Object
+                                 pxsl_line="460">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="gas_station_safezone02_after_survivors_go"
+                                     pxsl_line="460" />
+                            </Object>
+                            <!-- AppearGroup Interior_02_SafeZone::Slums_favela_interior_02_AG_After -->
+                            <Object
+                                 pxsl_line="461">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Safezone_Interior02Favela_AFTER"
+                                     pxsl_line="461" />
+                            </Object>
+                            <!-- AppearGroup Antenna_safezone_01::Antenna_Safezone_01_AG_after -->
+                            <Object
+                                 pxsl_line="462">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Safezone_Antenna_AFTER"
+                                     pxsl_line="462" />
+                            </Object>
+                            <!-- AppearGroup Tunnel_01_SafeZone::Tunnel_Safezone_01_AG_after -->
+                            <Object
+                                 pxsl_line="463">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Safezone_Tunnel_AFTER"
+                                     pxsl_line="463" />
+                            </Object>
+                            <!-- AppearGroup Bar_Site_Safezone::Bar_01_Safezone_AG_after -->
+                            <Object
+                                 pxsl_line="464">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Safezone_Bar_AFTER"
+                                     pxsl_line="464" />
+                            </Object>
+                            <!-- AppearGroup Roof_Safezone::Roof_safezone_after_AG -->
+                            <Object
+                                 pxsl_line="465">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Safezone_Roof_AFTER"
+                                     pxsl_line="465" />
+                            </Object>
+                            <Object
+                                 pxsl_line="466">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Shopkeeper_Slums_Roof"
+                                     pxsl_line="466" />
+                            </Object>
+                            <!-- Roof Shop Deco -->
+                            <Object
+                                 pxsl_line="467">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="roof_safezone_shopkeeper_decoration_b_go"
+                                     pxsl_line="467" />
+                            </Object>
+                            <Object
+                                 pxsl_line="468">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Shopkeeper_Slums_Safezone_Gas_Station02"
+                                     pxsl_line="468" />
+                            </Object>
+                            <Object
+                                 pxsl_line="469">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Shopkeeper_Slums_Safezone_Playfield02"
+                                     pxsl_line="469" />
+                            </Object>
+                            <!-- AppearGroup Interior_03_Safezone::Interior_03_Safzone_after_AG -->
+                            <Object
+                                 pxsl_line="470">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="Safezone_Interior03_AFTER"
+                                     pxsl_line="470" />
+                            </Object>
+                            <Object
+                                 pxsl_line="471">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="SafeZone_ElectricalSubstation_GroupingObject_After"
+                                     pxsl_line="471" />
+                            </Object>
+                            <Object
+                                 pxsl_line="472">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="playfield_safezone_shopkeeper_decoration_a_go"
+                                     pxsl_line="472" />
+                            </Object>
+                            <Object
+                                 pxsl_line="473">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="playfield_safezone_shopkeeper_decoration_b_go"
+                                     pxsl_line="473" />
+                            </Object>
+                            <Object
+                                 pxsl_line="474">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="witchqueen_shopkeeper_decoration_a_go"
+                                     pxsl_line="474" />
+                            </Object>
+                            <Object
+                                 pxsl_line="475">
+                                <QuestObject
+                                     class="GroupingObject"
+                                     name="safezone_gasstation2_after_shop_deco_go"
+                                     pxsl_line="475" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="476">
+                            <Object
+                                 pxsl_line="477">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Construction_Site_Safezone::Construction_site_Safezone_lamps_QEG"
+                                     pxsl_line="477" />
+                            </Object>
+                            <Object
+                                 pxsl_line="478">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Bar_Site_Safezone::Bar_Safezone_lamps_QEG"
+                                     pxsl_line="478" />
+                            </Object>
+                            <!-- ,o QuestEnableGroup First_Playfield_Safezone::First_playfield_lamps_QEG -->
+                            <Object
+                                 pxsl_line="480">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Playfield_Safezone2::Playfield_Safezone_lamps_QEG"
+                                     pxsl_line="480" />
+                            </Object>
+                            <Object
+                                 pxsl_line="481">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Playfield_Safezone::Playfield_Safezone_lamps_QEG"
+                                     pxsl_line="481" />
+                            </Object>
+                            <Object
+                                 pxsl_line="482">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Tunnel_01_SafeZone::Tunnel_Safezone_lamps_QEG"
+                                     pxsl_line="482" />
+                            </Object>
+                            <Object
+                                 pxsl_line="483">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Interior_01_SafeZone::Interior_Safezone_lamps_QEG"
+                                     pxsl_line="483" />
+                            </Object>
+                            <Object
+                                 pxsl_line="484">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Interior_02_SafeZone::Interior_02_Safezone_lamps_QEG"
+                                     pxsl_line="484" />
+                            </Object>
+                            <Object
+                                 pxsl_line="485">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Antenna_safezone_01::Antenna_Safezone_Lamps_QEG"
+                                     pxsl_line="485" />
+                            </Object>
+                            <Object
+                                 pxsl_line="486">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Roof_Safezone::Roof_Safezone_lamps_QEG"
+                                     pxsl_line="486" />
+                            </Object>
+                            <Object
+                                 pxsl_line="487">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Interior_03_Safezone::Interior_03_Safezone_lamps_QEG"
+                                     pxsl_line="487" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <!-- - - - - - - - - - - - - - - - -->
+                <!-- SCRIPTED EVENTS -->
+                <!-- - - - - - - - - - - - - - - - -->
+                    <!--  -->
+                    <!-- SLUMS SCRIPTED EVENTS C -->
+                    <!--  -->
+                    <!-- GOON_ELECRICITY_01 -= -->
+                    <Phase
+                         type="appear"
+                         name=" hide arena at game start "
+                         mode="hide"
+                         pxsl_line="495">
+                        <!-- AppearGroup slums_arena_goon_elecrticity_airdrop_pole::slums_arena_goon_elecrticity_pole_a::slums_goon_arena -->
+                        <Object
+                             pxsl_line="496">
+                            <QuestObject
+                                 class="GroupingObject"
+                                 name="slums_arena_goon_elecrticity_airdrop_pole::slums_arena_goon_elecrticity_pole_a::slums_arena_goon_elecrticity_pole_a_obj_GO"
+                                 pxsl_line="496" />
+                        </Object>
+                        <!-- AppearGroup slums_arena_goon_elecrticity_airdrop_pole::slums_arena_goon_airdrop_a::slums_goon_arena_airdrop -->
+                        <Object
+                             pxsl_line="497">
+                            <QuestObject
+                                 class="GroupingObject"
+                                 name="slums_arena_goon_elecrticity_airdrop_pole::slums_arena_goon_airdrop_a_GO"
+                                 pxsl_line="497" />
+                        </Object>
+                        <!-- AppearGroup slums_arena_goon_elecrticity_airdrop_pole::slums_arena_goon_mainappear -->
+                        <Object
+                             pxsl_line="498">
+                            <QuestObject
+                                 class="GroupingObject"
+                                 name="slums_arena_goon_elecrticity_airdrop_pole::slums_arena_goon_mainappear_GO"
+                                 pxsl_line="498" />
+                        </Object>
+                        <Object
+                             pxsl_line="499">
+                            <QuestObject
+                                 class="PhysicalSwitchDI"
+                                 name="slums_arena_goon_elecrticity_airdrop_pole::slums_arena_goon_elecrticity_pole_a::Elecrtic_switch"
+                                 pxsl_line="499" />
+                        </Object>
+                        <!-- Scripted Events C -->
+                        <Object
+                             pxsl_line="500">
+                            <QuestObject
+                                 class="AppearGroup"
+                                 name="scripted_event_jump_through_window_infected_a::Burning"
+                                 pxsl_line="500" />
+                        </Object>
+                        <Object
+                             pxsl_line="501">
+                            <QuestObject
+                                 class="AppearGroup"
+                                 name="scripted_event_Van_suicider_a_S01::se_van_suicider_a"
+                                 pxsl_line="501" />
+                        </Object>
+                        <Object
+                             pxsl_line="502">
+                            <QuestObject
+                                 class="AppearGroup"
+                                 name="scripted_event_van_infected_a_s01::se_van_infected_a"
+                                 pxsl_line="502" />
+                        </Object>
+                        <Object
+                             pxsl_line="503">
+                            <QuestObject
+                                 class="AppearGroup"
+                                 name="scripted_event_van_infected_b_s01::se_van_infected_c"
+                                 pxsl_line="503" />
+                        </Object>
+                        <!-- 2 INFECTED JUMP THROUGH THE WINDOW - BURNING -->
+                        <Object
+                             pxsl_line="504">
+                            <QuestObject
+                                 class="AppearGroup"
+                                 name="scripted_event_jump_through_window_infected_a::Burning"
+                                 pxsl_line="504" />
+                        </Object>
+                    </Phase>
+                    <!-- Mountain Pass to Fisherman Village -->
+                    <Phase
+                         type="enable"
+                         name="_"
+                         state="disabled"
+                         pxsl_line="506">
+                        <Object
+                             pxsl_line="506">
+                            <QuestObject
+                                 class="QuestEnableGroup"
+                                 name="sel_slums_mountain_pass_logic_normal::mountain_pass_logic_normal_QEG"
+                                 pxsl_line="506" />
+                        </Object>
+                    </Phase>
+                    <Phase
+                         type="appear"
+                         name="_"
+                         mode="hide"
+                         pxsl_line="507">
+                        <Object
+                             pxsl_line="508">
+                            <QuestObject
+                                 class="ExplodingObject"
+                                 name="sel_slums_mountain_pass_logic_normal::Explosive_barrel_puddle"
+                                 pxsl_line="508" />
+                        </Object>
+                        <Object
+                             pxsl_line="509">
+                            <QuestObject
+                                 class="Puddle"
+                                 name="sel_slums_mountain_pass_logic_normal::Explosive_barrel_puddle02"
+                                 pxsl_line="509" />
+                        </Object>
+                    </Phase>
+                    <Phase
+                         type="enable"
+                         name="_"
+                         state="disabled"
+                         pxsl_line="510">
+                        <Object
+                             pxsl_line="510">
+                            <QuestObject
+                                 class="Puddle"
+                                 name="sel_slums_mountain_pass_logic_normal::Explosive_barrel_puddle02"
+                                 pxsl_line="510" />
+                        </Object>
+                    </Phase>
+                <!-- - - - - - - - - - - - - - - - -->
+                <!-- TESTS SLUMS START ACTION - - - TO REMOVED !!!!!!!!!!!!!!!! -->
+                <!-- - - - - - - - - - - - - - - - -->
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="514">
+                    <Object
+                         pxsl_line="515">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Starbuck"
+                             pxsl_line="515" />
+                    </Object>
+                    <Object
+                         pxsl_line="516">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Stubb"
+                             pxsl_line="516" />
+                    </Object>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <!-- DLC  -->
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="520">
+                    <Object
+                         pxsl_line="521">
+                        <QuestObject
+                             class="MapPortal"
+                             name="dlc_1_map_stadium"
+                             pxsl_line="521" />
+                    </Object>
+                    <Object
+                         pxsl_line="522">
+                        <QuestObject
+                             class="Decal"
+                             name="dlc_1_map_stadium_shadow"
+                             pxsl_line="522" />
+                    </Object>
+                    <Object
+                         pxsl_line="523">
+                        <QuestObject
+                             class="MapPortal"
+                             name="dlc_2_map_wasteland"
+                             pxsl_line="523" />
+                    </Object>
+                    <Object
+                         pxsl_line="524">
+                        <QuestObject
+                             class="Decal"
+                             name="dlc_2_map_wasteland_shadow"
+                             pxsl_line="524" />
+                    </Object>
+                    <Object
+                         pxsl_line="525">
+                        <QuestObject
+                             class="MapPortal"
+                             name="dlc_3_map"
+                             pxsl_line="525" />
+                    </Object>
+                    <Object
+                         pxsl_line="526">
+                        <QuestObject
+                             class="Decal"
+                             name="dlc_3_map_shadow"
+                             pxsl_line="526" />
+                    </Object>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="527">
+            <Destination
+                 pxsl_line="527">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="MapStart"
+                     pxsl_line="527" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST NAME : Going Outside -->
+    <!-- QUEST INFO : first time on exploration on slums  -->
+    <!-- AFTER QUEST: School Of Life -->
+    <!-- COMMENT    :  -->
+    <!-- FROM       : SLUMS INTERIOR - THE TOWER -->
+    <!-- TO         : SLUMS -->
+    <!-- CHAPTER    : 1 -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="Q_Start02"
+         parent="Q_Start01"
+         glued="true"
+         pxsl_line="539">
+        <!-- Get to the Quartermaster. -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;GoingOutside_OBJ_GetToTheQuartermaster&amp;"
+             announce_objective="false"
+             pxsl_line="540">
+            <Path
+                 pxsl_line="540">
+                <Phase
+                     type="talk"
+                     name="GOING OUTSIDE - Talk to quartermaster"
+                     speaker="Shopkeeper_02"
+                     group="Shopkeeper_GoingOutside_02DLG01"
+                     pxsl_line="541" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="542">
+                    <Object
+                         pxsl_line="542">
+                        <QuestObject
+                             class="ItemSpawner"
+                             name="Quatermaster_log"
+                             pxsl_line="542" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="use life place"
+                     name="_"
+                     teleport="true"
+                     pxsl_line="543">
+                    <LifePlace
+                         pxsl_line="543">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Quatermaster_lp_02"
+                             pxsl_line="543" />
+                    </LifePlace>
+                    <AI
+                         pxsl_line="544">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Shopkeeper_Slums_Quatermaster"
+                             pxsl_line="544" />
+                    </AI>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="1"
+                     pxsl_line="545" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="546">
+                    <Object
+                         pxsl_line="546">
+                        <QuestObject
+                             class="Trading::Quartermaster"
+                             name="Shops_Slums_Brecken"
+                             pxsl_line="546" />
+                    </Object>
+                </Phase>
+                <!-- ,show-hint _ Tutorial_TimeFreeze_Quartermaster -= TUTORIAL - SUPPLIES, AIRDROPS AND QUATERMASTER -->
+            </Path>
+        </Phase>
+        <!-- Take equipment from the Quartermaster.     -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;GoingOutside_OBJ_TakeEquipment&amp;"
+             pxsl_line="548">
+            <Path
+                 pxsl_line="548">
+                <Phase
+                     type="tutorial"
+                     name="_"
+                     tutorial_name="Quartermaster"
+                     tutorial_npc_assign="Shopkeeper_Slums_Quatermaster"
+                     pxsl_line="549">
+                    <SpecificLocation
+                         pxsl_line="550">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Shopkeeper_Slums_Quatermaster"
+                             pxsl_line="550" />
+                    </SpecificLocation>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="551">
+                    <Destination
+                         pxsl_line="551">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="MapStart"
+                             pxsl_line="551" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+        <!-- Get to Zere. -->
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;GoingOutside_OBJ_TalkToZere&amp;"
+             announce_objective="false"
+             pxsl_line="552">
+            <Path
+                 pxsl_line="552">
+                <Phase
+                     type="set dialog"
+                     name="_"
+                     speaker="slums_thetower_guard_ground_03"
+                     group="EntranceGuard_GoingOutside_05DLG01"
+                     pxsl_line="553" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="554">
+                    <Object
+                         pxsl_line="554">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="cin_slums_outgo_trigger_qeg"
+                             pxsl_line="554" />
+                    </Object>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <!-- CIN - Going Outside -->
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <Phase
+                     type="use"
+                     name="GOING OUTSIDE - CIN - Going Outside"
+                     desired_state="on"
+                     pxsl_line="558">
+                    <Trigger
+                         pxsl_line="558">
+                        <QuestObject
+                             class="InteractiveMovieTrigger"
+                             name="cin_slums_outgo_trigger"
+                             pxsl_line="558" />
+                    </Trigger>
+                    <DebugPlayerPosition
+                         pxsl_line="559">
+                        <QuestObject
+                             class="SpawnPointWithInteractiveMovie"
+                             name="sp_Hub_LJ_Floor_0"
+                             pxsl_line="559" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="RESPAWN - The Tower front respawn - temporary - ON"
+                     pxsl_line="560">
+                    <Object
+                         pxsl_line="560">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="cin_slums_outgo_sp"
+                             pxsl_line="560" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="RESPAWN - The Tower - OFF"
+                     state="disabled"
+                     pxsl_line="561">
+                    <Object
+                         pxsl_line="562">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="respawn_the_tower"
+                             pxsl_line="562" />
+                    </Object>
+                    <Object
+                         pxsl_line="563">
+                        <QuestObject
+                             class="HubZone"
+                             name="respawn_the_tower_fake_hub_zone"
+                             pxsl_line="563" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="564">
+                    <Destination
+                         pxsl_line="564">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="cin_slums_outgo_sp"
+                             pxsl_line="564" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="565">
+                    <Object
+                         pxsl_line="565">
+                        <QuestObject
+                             class="ItemSpawner"
+                             name="Quatermaster_log"
+                             pxsl_line="565" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="set dialog"
+                     name="_"
+                     speaker="slums_thetower_guard_ground_03"
+                     pxsl_line="566" />
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="567">
+                    <Object
+                         pxsl_line="567">
+                        <QuestObject
+                             class="HumanAI"
+                             name="slums_thetower_guard_ground_03"
+                             pxsl_line="567" />
+                    </Object>
+                </Phase>
+                <!-- UNLOCK PLAYER CHALLENGES -->
+                <Phase
+                     type="player control"
+                     name="_"
+                     no_challenges="false"
+                     pxsl_line="568" />
+                <!-- TURN ON PLAYER EXP -->
+                <Phase
+                     type="player control"
+                     name="_"
+                     no_xp="false"
+                     pxsl_line="569" />
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="570">
+                    <Object
+                         pxsl_line="570">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="cin_slums_outgo_trigger_qeg"
+                             pxsl_line="570" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="571">
+                    <Object
+                         pxsl_line="571">
+                        <QuestObject
+                             class="AppearGroup"
+                             name="slums_interior_barricade_a_ag"
+                             pxsl_line="571" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="572">
+                    <Object
+                         pxsl_line="573">
+                        <QuestObject
+                             class="MovieActor"
+                             name="cin_slums_outgo_Door"
+                             pxsl_line="573" />
+                    </Object>
+                    <Object
+                         pxsl_line="574">
+                        <QuestObject
+                             class="ModelObject"
+                             name="cin_slums_outgo_Door_02"
+                             pxsl_line="574" />
+                    </Object>
+                </Phase>
+                <!-- HUB THE TOWER CHANGES -->
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="575">
+                    <Path
+                         pxsl_line="575">
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="576">
+                            <Object
+                                 pxsl_line="577">
+                                <QuestObject
+                                     class="ConversationNode"
+                                     name="slums_faraj_akram_chatter_1"
+                                     pxsl_line="577" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <!-- ZERES TIR - DLGs -->
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="578">
+                    <Path
+                         pxsl_line="578">
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="npc01_tir"
+                             group="NPC01_Tir_0CHT01"
+                             pxsl_line="579" />
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="npc02_tir"
+                             group="NPC02_Tir_0CHT01"
+                             pxsl_line="580" />
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="npc03_tir"
+                             group="NPC03_Tir_0CHT01"
+                             pxsl_line="581" />
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="npc04_tir"
+                             group="NPC04_Tir_0CHT01"
+                             pxsl_line="582" />
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="npc05_tir"
+                             group="NPC05_Tir_0CHT01"
+                             pxsl_line="583" />
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="Maalik"
+                             group="Maalik_0CHT01"
+                             pxsl_line="584" />
+                    </Path>
+                </Phase>
+                <!-- IMPORTANT ACTIONS ON START -->
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="585">
+                    <Path
+                         pxsl_line="585">
+                        <Phase
+                             type="AND"
+                             name="Player changes"
+                             pxsl_line="586">
+                            <Path
+                                 pxsl_line="586">
+                                <Phase
+                                     type="player control"
+                                     name="_"
+                                     max_aggro_level="0"
+                                     pxsl_line="587" />
+                            </Path>
+                        </Phase>
+                        <!-- ,hide _ ModelObject Lamp_002::show_disable_1 -->
+                        <!-- ,hide _ ModelObject Lamp_002::show_disable_2 -->
+                        <!-- hide lamps DI -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-  -->
+                        <!-- ,hide-multi _  updated for new logic -->
+                            <Object
+                                 pxsl_line="592">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="Lamp_001::invisible_lampDI"
+                                     pxsl_line="592" />
+                            </Object>
+                            <Object
+                                 pxsl_line="593">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="Lamp_002::invisible_lampDI"
+                                     pxsl_line="593" />
+                            </Object>
+                            <Object
+                                 pxsl_line="594">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="Lamp_003::invisible_lampDI"
+                                     pxsl_line="594" />
+                            </Object>
+                            <Object
+                                 pxsl_line="595">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="Lamp_004::invisible_lampDI"
+                                     pxsl_line="595" />
+                            </Object>
+                            <Object
+                                 pxsl_line="596">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="Lamp_005::invisible_lampDI"
+                                     pxsl_line="596" />
+                            </Object>
+                            <Object
+                                 pxsl_line="597">
+                                <QuestObject
+                                     class="LampDI"
+                                     name="Lamp_006::invisible_lampDI"
+                                     pxsl_line="597" />
+                            </Object>
+                        <!-- ,disable-multi _ -= disabling the lamps for red light effect -=-=-=-=-=- -->
+                            <Object
+                                 pxsl_line="599">
+                                <QuestObject
+                                     class="PursuitBreaker"
+                                     name="Lamp_001::Lamp_pursuit_breaker"
+                                     pxsl_line="599" />
+                            </Object>
+                            <Object
+                                 pxsl_line="600">
+                                <QuestObject
+                                     class="PursuitBreaker"
+                                     name="Lamp_002::Lamp_pursuit_breaker"
+                                     pxsl_line="600" />
+                            </Object>
+                            <Object
+                                 pxsl_line="601">
+                                <QuestObject
+                                     class="PursuitBreaker"
+                                     name="Lamp_003::Lamp_pursuit_breaker"
+                                     pxsl_line="601" />
+                            </Object>
+                            <Object
+                                 pxsl_line="602">
+                                <QuestObject
+                                     class="PursuitBreaker"
+                                     name="Lamp_004::Lamp_pursuit_breaker"
+                                     pxsl_line="602" />
+                            </Object>
+                            <Object
+                                 pxsl_line="603">
+                                <QuestObject
+                                     class="PursuitBreaker"
+                                     name="Lamp_005::Lamp_pursuit_breaker"
+                                     pxsl_line="603" />
+                            </Object>
+                            <Object
+                                 pxsl_line="604">
+                                <QuestObject
+                                     class="PursuitBreaker"
+                                     name="Lamp_006::Lamp_pursuit_breaker"
+                                     pxsl_line="604" />
+                            </Object>
+                        <Phase
+                             type="AND"
+                             name="Spikes Hut Doors"
+                             pxsl_line="605">
+                            <Path
+                                 pxsl_line="605">
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     pxsl_line="606">
+                                    <Object
+                                         pxsl_line="606">
+                                        <QuestObject
+                                             class="DoorDI"
+                                             name="Spike_door"
+                                             pxsl_line="606" />
+                                    </Object>
+                                </Phase>
+                                <Phase
+                                     type="set state"
+                                     name="_"
+                                     desired_state="opened"
+                                     pxsl_line="607">
+                                    <Trigger
+                                         pxsl_line="607">
+                                        <QuestObject
+                                             class="DoorDI"
+                                             name="Spike_door"
+                                             pxsl_line="607" />
+                                    </Trigger>
+                                </Phase>
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     state="disabled"
+                                     pxsl_line="608">
+                                    <Object
+                                         pxsl_line="608">
+                                        <QuestObject
+                                             class="DoorDI"
+                                             name="Spike_door"
+                                             pxsl_line="608" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="609">
+                    <Destination
+                         pxsl_line="609">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="cin_slums_outgo_sp"
+                             pxsl_line="609" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="wait guard"
+                     name="_"
+                     time="1"
+                     pxsl_line="610" />
+                <!-- RAKIM Talk  -->
+                <Phase
+                     type="set dialog"
+                     name="_"
+                     speaker="voice2d"
+                     group="Rahim_GoingOutside_04DLG01"
+                     auto_start="true"
+                     pxsl_line="611" />
+                <Phase
+                     type="go to"
+                     name="Get to the Tir"
+                     distance="0"
+                     pxsl_line="612">
+                    <Destination
+                         pxsl_line="612">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="TIR_sensot_go_to"
+                             pxsl_line="612" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="613">
+                    <Destination
+                         pxsl_line="613">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Tir_Spawn_02"
+                             pxsl_line="613" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="RESPAWN - Zeres Tir - ON"
+                     pxsl_line="614">
+                    <Object
+                         pxsl_line="615">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="respawn_zeres_tir"
+                             pxsl_line="615" />
+                    </Object>
+                    <Object
+                         pxsl_line="616">
+                        <QuestObject
+                             class="HubZone"
+                             name="respawn_zeres_tir_fake_hub_zone"
+                             pxsl_line="616" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="RESPAWN - The Tower front respawn - temporary"
+                     state="disabled"
+                     pxsl_line="617">
+                    <Object
+                         pxsl_line="617">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="cin_slums_outgo_sp"
+                             pxsl_line="617" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="use"
+                     name="GOING OUTSIDE - CIN - Meeting Zere in Tir"
+                     desired_state="on"
+                     pxsl_line="618">
+                    <Trigger
+                         pxsl_line="618">
+                        <QuestObject
+                             class="PhysicalSwitchDI"
+                             name="Meeting_Zere_trigger_knock::trigger_knocking_01"
+                             pxsl_line="618" />
+                    </Trigger>
+                    <DebugPlayerPosition
+                         pxsl_line="619">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Tir_Spawn_02"
+                             pxsl_line="619" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <!-- CIN - First meeting with Zere in Truck -->
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-    -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="623">
+                    <Object
+                         pxsl_line="623">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="cin_meetingzere_Zere_trigger_qeg"
+                             pxsl_line="623" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="use"
+                     name="GOING OUTSIDE - CIN - Meeting Zere"
+                     desired_state="on"
+                     pxsl_line="624">
+                    <Trigger
+                         pxsl_line="624">
+                        <QuestObject
+                             class="InteractiveMovieTrigger"
+                             name="cin_meetingzere_Zere_trigger"
+                             pxsl_line="624" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="625">
+                    <Object
+                         pxsl_line="625">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="cin_meetingzere_Zere_trigger_qeg"
+                             pxsl_line="625" />
+                    </Object>
+                </Phase>
+                <!-- STOP FIRST INFECTION AFTER ZERE MAGIC -->
+                <Phase
+                     type="infection"
+                     name="_"
+                     mode="stop"
+                     pxsl_line="626" />
+                <!-- show doors after -->
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="627">
+                    <Object
+                         pxsl_line="627">
+                        <QuestObject
+                             class="MovieActor"
+                             name="cin_meetingzere_Zere_door_before"
+                             pxsl_line="627" />
+                    </Object>
+                </Phase>
+                <!-- THE TOWER -->
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="629">
+                    <Object
+                         pxsl_line="629">
+                        <QuestObject
+                             class="AppearGroup"
+                             name="slums_interior_barricade_a_dest_ag"
+                             pxsl_line="629" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="630">
+                    <Object
+                         pxsl_line="630">
+                        <QuestObject
+                             class="AppearGroup"
+                             name="slums_interior_barricade_a_ag"
+                             pxsl_line="630" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="631">
+                    <Object
+                         pxsl_line="631">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="Blackout_burn_car::demo_night_burning_car"
+                             pxsl_line="631" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="632">
+                    <Object
+                         pxsl_line="632">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Maalik"
+                             pxsl_line="632" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="use life place"
+                     name="_"
+                     pxsl_line="633">
+                    <LifePlace
+                         pxsl_line="633">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="blackout_spike_hut_guard_lp_a"
+                             pxsl_line="633" />
+                    </LifePlace>
+                    <AI
+                         pxsl_line="634">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Maalik"
+                             pxsl_line="634" />
+                    </AI>
+                </Phase>
+                <Phase
+                     type="AND"
+                     name="Tir dlg Second chatters"
+                     pxsl_line="635">
+                    <Path
+                         pxsl_line="635">
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="npc01_tir"
+                             group="NPC01_Tir_ACHT01"
+                             pxsl_line="636" />
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="npc02_tir"
+                             group="NPC02_Tir_ACHT01"
+                             pxsl_line="637" />
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="npc03_tir"
+                             group="NPC03_Tir_ACHT01"
+                             pxsl_line="638" />
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="npc04_tir"
+                             group="NPC04_Tir_ACHT01"
+                             pxsl_line="639" />
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="npc05_tir"
+                             group="NPC05_Tir_ACHT01"
+                             pxsl_line="640" />
+                        <!-- ,dialog _ npc06_tir NPC06_Tir_ACHT01 -->
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="Maalik"
+                             group="Maalik_ACHT01"
+                             pxsl_line="642" />
+                    </Path>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="wait guard"
+             name="_"
+             time="3"
+             pxsl_line="643" />
+        <Phase
+             type="talk"
+             name="_"
+             speaker="voice2d"
+             group="Player_Blackout_17DLG01"
+             show_locations="false"
+             auto_start="true"
+             pxsl_line="644" />
+        <Phase
+             type="set reward"
+             name="_"
+             reward="StorylineReward_NaturalMovementTutorial_reward"
+             pxsl_line="645" />
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="646">
+            <Destination
+                 pxsl_line="646">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Tir_Spawn"
+                     pxsl_line="646" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- NEXT QUEST - BLACKOUT -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <!-- START -= VIRALS HUMANITY JUMPS THROUGH WINDOW 01 -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= -->
+    <Quest
+         name="__SLUMS_TO_OT_PORTAL"
+         parent="FindTheEmbers"
+         pxsl_line="652">
+        <Phase
+             type="go to"
+             name=" Portal_Slums_To_OT "
+             distance="50"
+             show_locations="false"
+             pxsl_line="653">
+            <Destination
+                 pxsl_line="653">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Hub_Slums_MapPortal"
+                     pxsl_line="653" />
+            </Destination>
+            <DebugPlayerPosition
+                 pxsl_line="654">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Hub_Slums_MapPortal"
+                     pxsl_line="654" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="655">
+            <Object
+                 pxsl_line="655">
+                <QuestObject
+                     class="MapPortal"
+                     name="Hub_Slums_Map_Portal_Slums_to_OT"
+                     pxsl_line="655" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="656">
+            <Destination
+                 pxsl_line="656">
+                <QuestObject
+                     class="SpawnPointWithInteractiveMovie"
+                     name="sp_Hub_LJ_Floor_0"
+                     pxsl_line="656" />
+            </Destination>
+        </Phase>
+    </Quest>
+</QuestsDefinitions>

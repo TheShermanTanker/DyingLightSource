@@ -1,0 +1,3186 @@
+<?xml version="1.0"?>
+<QuestsDefinitions
+     level="sewers_saviors"
+     pxsl_line="3">
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- QUEST NAME : Saviors -->
+    <!-- QUEST INFO : Player is looking for Jade. Player is trying to escape from the zone through sewers. -->
+    <!-- AFTER QUEST:  -->
+    <!-- COMMENT    :  -->
+    <!-- FROM       : >> SLUMS -->
+    <!-- TO         : >> SLUMS -> SEWERS -> OLD TOWN -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- TEST GRATE OPENING -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__TEST_Grate_Opening"
+         parent="Saviors"
+         pxsl_line="16">
+        <Phase
+             type="use"
+             name="TEST - GRATE"
+             desired_state="on"
+             show_locations="false"
+             pxsl_line="17">
+            <Trigger
+                 pxsl_line="17">
+                <QuestObject
+                     class="PhysicalSwitchDI"
+                     name="TEST_GRATE_VALVE::Switch"
+                     pxsl_line="17" />
+            </Trigger>
+            <DebugPlayerPosition
+                 pxsl_line="18">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="TEST_GRATE_VALVE::SP"
+                     pxsl_line="18" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="wait guard"
+             name="_"
+             time="5.5"
+             pxsl_line="19" />
+        <Phase
+             type="movie"
+             name="_"
+             movie="TEST_GRATE_VALVE::Movie"
+             pxsl_line="20" />
+        <Phase
+             type="use"
+             name="_"
+             desired_state="on"
+             show_locations="false"
+             pxsl_line="21">
+            <Trigger
+                 pxsl_line="21">
+                <QuestObject
+                     class="PhysicalSwitchDI"
+                     name="TEST_GRATE_VALVE::Switch_Grate"
+                     pxsl_line="21" />
+            </Trigger>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="22">
+            <Destination
+                 pxsl_line="22">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="TEST_GRATE_VALVE::SP"
+                     pxsl_line="22" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- BRING DAWUD -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__BringDawud_DawudAndSammy"
+         parent="BringDawud4"
+         pxsl_line="26">
+        <Phase
+             type="go to"
+             name="Bring Dawud - Meeting Dawud and Sammy in the sewers"
+             distance="10000"
+             show_locations="false"
+             pxsl_line="27">
+            <Destination
+                 pxsl_line="27">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Saviors_SP_Sewers_01"
+                     pxsl_line="27" />
+            </Destination>
+            <DebugPlayerPosition
+                 pxsl_line="28">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Saviors_SP_Sewers_01"
+                     pxsl_line="28" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="29">
+            <Object
+                 pxsl_line="30">
+                <QuestObject
+                     class="HumanAI"
+                     name="Dawud"
+                     pxsl_line="30" />
+            </Object>
+            <Object
+                 pxsl_line="31">
+                <QuestObject
+                     class="HumanAI"
+                     name="Sammy"
+                     pxsl_line="31" />
+            </Object>
+            <Object
+                 pxsl_line="32">
+                <QuestObject
+                     class="HumanAI"
+                     name="SaviorsSuggler"
+                     pxsl_line="32" />
+            </Object>
+        </Phase>
+        <Phase
+             type="use life place"
+             name="_"
+             teleport="true"
+             pxsl_line="33">
+            <LifePlace
+                 pxsl_line="33">
+                <QuestObject
+                     class="NPCLifePlace"
+                     name="Dawud_LP"
+                     pxsl_line="33" />
+            </LifePlace>
+            <AI
+                 pxsl_line="34">
+                <QuestObject
+                     class="HumanAI"
+                     name="Dawud"
+                     pxsl_line="34" />
+            </AI>
+        </Phase>
+        <Phase
+             type="OR"
+             name="_"
+             pxsl_line="35">
+            <Path
+                 pxsl_line="36">
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="0"
+                     show_locations="false"
+                     pxsl_line="37">
+                    <Destination
+                         pxsl_line="37">
+                        <QuestObject
+                             class="SensorGoTo"
+                             name="BringDawud_GoTo_DawudAndSammy"
+                             pxsl_line="37" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="Dawud"
+                     group="Sammy_BringDawud1_06TLK01"
+                     show_locations="false"
+                     auto_start="true"
+                     pxsl_line="38" />
+                <Phase
+                     type="use life place"
+                     name="_"
+                     pxsl_line="39">
+                    <LifePlace
+                         pxsl_line="39">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Dawud_LP_1"
+                             pxsl_line="39" />
+                    </LifePlace>
+                    <AI
+                         pxsl_line="40">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Dawud"
+                             pxsl_line="40" />
+                    </AI>
+                </Phase>
+                <Phase
+                     type="talk"
+                     name="_"
+                     speaker="Dawud"
+                     group="Player_BringDawud1_07DLG01"
+                     show_locations="false"
+                     questgiver_indicator="true"
+                     pxsl_line="41" />
+                <Phase
+                     type="use life place"
+                     name="_"
+                     pxsl_line="42">
+                    <LifePlace
+                         pxsl_line="42">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="Dawud_LP"
+                             pxsl_line="42" />
+                    </LifePlace>
+                    <AI
+                         pxsl_line="43">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Dawud"
+                             pxsl_line="43" />
+                    </AI>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="44">
+                <Phase
+                     type="started quest guard"
+                     name="_"
+                     quest_name="Saviors06"
+                     finished="true"
+                     pxsl_line="45" />
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="46">
+            <Destination
+                 pxsl_line="46">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Saviors_SP_Sewers_01"
+                     pxsl_line="46" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="Saviors06"
+             finished="true"
+             pxsl_line="47" />
+        <Phase
+             type="appear"
+             name="_"
+             mode="hide"
+             pxsl_line="48">
+            <Object
+                 pxsl_line="49">
+                <QuestObject
+                     class="HumanAI"
+                     name="Dawud"
+                     pxsl_line="49" />
+            </Object>
+            <Object
+                 pxsl_line="50">
+                <QuestObject
+                     class="HumanAI"
+                     name="Sammy"
+                     pxsl_line="50" />
+            </Object>
+            <Object
+                 pxsl_line="51">
+                <QuestObject
+                     class="HumanAI"
+                     name="SaviorsSuggler"
+                     pxsl_line="51" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="52">
+            <Destination
+                 pxsl_line="52">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Saviors_SP_Sewers_01"
+                     pxsl_line="52" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- RUNNING SURVIVOR -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-     -->
+    <Quest
+         name="__Saviors_RunningSurvivor"
+         parent="Saviors"
+         pxsl_line="56">
+        <Phase
+             type="OR"
+             name="_"
+             pxsl_line="57">
+            <Path
+                 pxsl_line="58">
+                <Phase
+                     type="go to"
+                     name="_"
+                     distance="3"
+                     show_locations="false"
+                     pxsl_line="59">
+                    <Destination
+                         pxsl_line="59">
+                        <QuestObject
+                             class="Marker"
+                             name="Saviors_Marker_RuuningSurvivor_01"
+                             pxsl_line="59" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="movie"
+                     name="_"
+                     movie="Saviors_Movie_RuuningSurvivor_01"
+                     pxsl_line="60" />
+            </Path>
+            <Path
+                 pxsl_line="61">
+                <Phase
+                     type="started quest guard"
+                     name="_"
+                     quest_name="Saviors05"
+                     finished="true"
+                     pxsl_line="62" />
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="63">
+            <Destination
+                 pxsl_line="63">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Saviors_SP_Sewers_01"
+                     pxsl_line="63" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- SAVIORS 02 -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="Saviors02"
+         parent="Saviors"
+         glued="true"
+         leading_portal="Saviors_MP_Slums_TO_Sewers"
+         pxsl_line="67">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Saviors_OBJ_MeetSaviorsInTheTunnel&amp;"
+             pxsl_line="68">
+            <Path
+                 pxsl_line="68">
+                <Phase
+                     type="go to"
+                     name="Saviors - Meet Saviors in The Tunnel"
+                     distance="100000"
+                     pxsl_line="69">
+                    <Destination
+                         pxsl_line="69">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_SP_Slums_TO_Sewers"
+                             pxsl_line="69" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="70">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_SP_Slums_TO_Sewers"
+                             pxsl_line="70" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <!-- ,hide-hudgroup _ HideRadarForMissionSaviors -->
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <!-- ENABLING RESPAWN IN THE SERVICE TUNNEL -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="74">
+                    <Object
+                         pxsl_line="74">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_RESPAWN_ServiceTunnel_01"
+                             pxsl_line="74" />
+                    </Object>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="76">
+                    <Object
+                         pxsl_line="77">
+                        <QuestObject
+                             class="ActorDI"
+                             name="CIN_opening_hatch_survivor_after"
+                             pxsl_line="77" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="78">
+                    <Object
+                         pxsl_line="78">
+                        <QuestObject
+                             class="BlackoutArea"
+                             name="Saviors_BlackOut_001"
+                             pxsl_line="78" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="79">
+                    <Object
+                         pxsl_line="80">
+                        <QuestObject
+                             class="GroupingObject"
+                             name="Saviors_GO_OT_To_Slums_After"
+                             pxsl_line="80" />
+                    </Object>
+                    <Object
+                         pxsl_line="81">
+                        <QuestObject
+                             class="ModelObject"
+                             name="Saviors_Door_Ambush_After"
+                             pxsl_line="81" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="82">
+                    <Destination
+                         pxsl_line="82">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_SP_Slums_TO_Sewers"
+                             pxsl_line="82" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="use"
+                     name="_"
+                     desired_state="on"
+                     pxsl_line="83">
+                    <Trigger
+                         pxsl_line="83">
+                        <QuestObject
+                             class="InteractiveMovieTrigger"
+                             name="cin_hazan_01_movietrigger"
+                             pxsl_line="83" />
+                    </Trigger>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="84">
+                    <Object
+                         pxsl_line="84">
+                        <QuestObject
+                             class="InteractiveMovieTrigger"
+                             name="cin_hazan_01_movietrigger"
+                             pxsl_line="84" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="set day night time"
+                     name="_"
+                     day_time="10.40"
+                     pxsl_line="85" />
+                <Phase
+                     type="set weather"
+                     name="_"
+                     wanted_weather="0.2"
+                     duration="-1"
+                     interpolation="00.00"
+                     pxsl_line="86" />
+                <Phase
+                     type="disable enable time freeze"
+                     name="_"
+                     should_freeze_time="true"
+                     pxsl_line="87" />
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="show"
+                     pxsl_line="88">
+                    <Object
+                         pxsl_line="88">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Hazan"
+                             pxsl_line="88" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="use life place"
+                     name="_"
+                     teleport="true"
+                     pxsl_line="89">
+                    <LifePlace
+                         pxsl_line="89">
+                        <QuestObject
+                             class="NPCLifePlace"
+                             name="LP_Hazan_001"
+                             pxsl_line="89" />
+                    </LifePlace>
+                    <AI
+                         pxsl_line="90">
+                        <QuestObject
+                             class="HumanAI"
+                             name="Hazan"
+                             pxsl_line="90" />
+                    </AI>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <!-- ENABLING RESPAWN IN THE SEWERS -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="93">
+                    <Object
+                         pxsl_line="93">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_RESPAWN_Sewers_SaviorsHideout"
+                             pxsl_line="93" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="94">
+                    <Object
+                         pxsl_line="94">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_RESPAWN_ServiceTunnel_01"
+                             pxsl_line="94" />
+                    </Object>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="96">
+            <Destination
+                 pxsl_line="96">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Saviors_RESPAWN_Sewers_SaviorsHideout"
+                     pxsl_line="96" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- SAVIORS 03 -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-         -->
+    <Quest
+         name="Saviors03"
+         parent="Saviors02"
+         glued="true"
+         pxsl_line="100">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Saviors_OBJ_FollowHazan&amp;"
+             pxsl_line="101">
+            <Path
+                 pxsl_line="101">
+                <Phase
+                     type="go to"
+                     name="Saviors - Follow Hazan"
+                     distance="100000"
+                     pxsl_line="102">
+                    <Destination
+                         pxsl_line="102">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_SP_Slums_TO_Sewers"
+                             pxsl_line="102" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="103">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_SP_Slums_TO_Sewers"
+                             pxsl_line="103" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="OR"
+                     name="_"
+                     pxsl_line="104">
+                    <Path
+                         pxsl_line="105">
+                        <Phase
+                             type="use life place"
+                             name="_"
+                             move_style="walk"
+                             pxsl_line="106">
+                            <LifePlace
+                                 pxsl_line="106">
+                                <QuestObject
+                                     class="NPCLifePlace"
+                                     name="LP_Hazan_002"
+                                     pxsl_line="106" />
+                            </LifePlace>
+                            <AI
+                                 pxsl_line="107">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Hazan"
+                                     pxsl_line="107" />
+                            </AI>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="108">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0.1"
+                             pxsl_line="109">
+                            <Destination
+                                 pxsl_line="109">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Hazan"
+                                     pxsl_line="109" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="semaphore"
+                             name="_"
+                             pxsl_line="110" />
+                    </Path>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="111">
+            <Destination
+                 pxsl_line="111">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Saviors_SP_Sewers_01"
+                     pxsl_line="111" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Saviors_OBJ_TalkToHazan&amp;"
+             pxsl_line="112">
+            <Path
+                 pxsl_line="112">
+                <Phase
+                     type="talk"
+                     name="Saviors - Talk to Hazan"
+                     speaker="Hazan"
+                     group="Hazan_Saviors_03DLG01"
+                     pxsl_line="113">
+                    <DebugPlayerPosition
+                         pxsl_line="114">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_SP_Sewers_01"
+                             pxsl_line="114" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="appear"
+                     name="_"
+                     mode="hide"
+                     pxsl_line="115">
+                    <Object
+                         pxsl_line="115">
+                        <QuestObject
+                             class="ActorDI"
+                             name="CIN_opening_hatch_survivor_before"
+                             pxsl_line="115" />
+                    </Object>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="116">
+            <Destination
+                 pxsl_line="116">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Saviors_SP_Sewers_01"
+                     pxsl_line="116" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- SAVIORS HATCH -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__Saviors_Hatch"
+         parent="Saviors03"
+         pxsl_line="120">
+        <Phase
+             type="OR"
+             name="_"
+             pxsl_line="121">
+            <Path
+                 pxsl_line="122">
+                <Phase
+                     type="AND"
+                     name="_"
+                     pxsl_line="123">
+                    <Path
+                         pxsl_line="124">
+                        <Phase
+                             type="movie"
+                             name="_"
+                             movie="CIN_opening_hatch"
+                             pxsl_line="125" />
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="show"
+                             pxsl_line="126">
+                            <Object
+                                 pxsl_line="126">
+                                <QuestObject
+                                     class="ActorDI"
+                                     name="CIN_opening_hatch_survivor_after"
+                                     pxsl_line="126" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                    <Path
+                         pxsl_line="127">
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="5"
+                             pxsl_line="128" />
+                        <Phase
+                             type="talk"
+                             name="_"
+                             speaker="SaviorsBandit"
+                             group="SaviorsBandit_Saviors_01TLK01"
+                             show_locations="false"
+                             auto_start="true"
+                             pxsl_line="129" />
+                    </Path>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="130">
+                <Phase
+                     type="started quest guard"
+                     name="_"
+                     quest_name="Saviors04"
+                     finished="true"
+                     pxsl_line="131" />
+            </Path>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="132">
+            <Destination
+                 pxsl_line="132">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Saviors_SP_Sewers_01"
+                     pxsl_line="132" />
+            </Destination>
+        </Phase>
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="Saviors04"
+             finished="true"
+             pxsl_line="133" />
+        <Phase
+             type="appear"
+             name="_"
+             mode="hide"
+             pxsl_line="134">
+            <Object
+                 pxsl_line="134">
+                <QuestObject
+                     class="ActorDI"
+                     name="CIN_opening_hatch_survivor_after"
+                     pxsl_line="134" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="135">
+            <Destination
+                 pxsl_line="135">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Saviors_SP_Sewers_01"
+                     pxsl_line="135" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- SAVIORS GRATE 01 -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__Saviors_Grate_01"
+         parent="Saviors03"
+         pxsl_line="139">
+        <Phase
+             type="use"
+             name="_"
+             desired_state="on"
+             show_locations="false"
+             pxsl_line="140">
+            <Trigger
+                 pxsl_line="140">
+                <QuestObject
+                     class="PhysicalSwitchDI"
+                     name="Saviors_Movie_Grate_TunnelOpen_Open::Switch"
+                     pxsl_line="140" />
+            </Trigger>
+        </Phase>
+        <Phase
+             type="wait guard"
+             name="_"
+             time="5.5"
+             pxsl_line="141" />
+        <Phase
+             type="movie"
+             name="_"
+             movie="Saviors_Movie_Grate_TunnelOpen_Open::Movie"
+             pxsl_line="142" />
+        <Phase
+             type="use"
+             name="_"
+             desired_state="on"
+             show_locations="false"
+             pxsl_line="143">
+            <Trigger
+                 pxsl_line="143">
+                <QuestObject
+                     class="PhysicalSwitchDI"
+                     name="Saviors_Movie_Grate_TunnelOpen_Open::Switch_Grate"
+                     pxsl_line="143" />
+            </Trigger>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="144">
+            <Destination
+                 pxsl_line="144">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Saviors_SP_Tunnel_01"
+                     pxsl_line="144" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- SAVIORS GRATE 02 -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__Saviors_Grate_02"
+         parent="Saviors03"
+         pxsl_line="148">
+        <Phase
+             type="use"
+             name="_"
+             desired_state="on"
+             show_locations="false"
+             pxsl_line="149">
+            <Trigger
+                 pxsl_line="149">
+                <QuestObject
+                     class="PhysicalSwitchDI"
+                     name="Saviors_Movie_Grate_Open::Switch"
+                     pxsl_line="149" />
+            </Trigger>
+        </Phase>
+        <Phase
+             type="wait guard"
+             name="_"
+             time="5.5"
+             pxsl_line="150" />
+        <Phase
+             type="movie"
+             name="_"
+             movie="Saviors_Movie_Grate_Open::Movie"
+             pxsl_line="151" />
+        <Phase
+             type="use"
+             name="_"
+             desired_state="on"
+             show_locations="false"
+             pxsl_line="152">
+            <Trigger
+                 pxsl_line="152">
+                <QuestObject
+                     class="PhysicalSwitchDI"
+                     name="Saviors_Movie_Grate_Open::Switch_Grate"
+                     pxsl_line="152" />
+            </Trigger>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="153">
+            <Destination
+                 pxsl_line="153">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Saviors_SP_Ambush_01"
+                     pxsl_line="153" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- SAVIORS GRATE 03 -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__Saviors_Grate_03"
+         parent="Saviors05"
+         pxsl_line="157">
+        <Phase
+             type="use"
+             name="_"
+             desired_state="on"
+             show_locations="false"
+             pxsl_line="158">
+            <Trigger
+                 pxsl_line="158">
+                <QuestObject
+                     class="PhysicalSwitchDI"
+                     name="Saviors_Movie_Grate_Exterior_Open::Switch"
+                     pxsl_line="158" />
+            </Trigger>
+        </Phase>
+        <Phase
+             type="wait guard"
+             name="_"
+             time="5.5"
+             pxsl_line="159" />
+        <Phase
+             type="movie"
+             name="_"
+             movie="Saviors_Movie_Grate_Exterior_Open::Movie"
+             pxsl_line="160" />
+        <Phase
+             type="use"
+             name="_"
+             desired_state="on"
+             show_locations="false"
+             pxsl_line="161">
+            <Trigger
+                 pxsl_line="161">
+                <QuestObject
+                     class="PhysicalSwitchDI"
+                     name="Saviors_Movie_Grate_Exterior_Open::Switch_Grate"
+                     pxsl_line="161" />
+            </Trigger>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="162">
+            <Destination
+                 pxsl_line="162">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Saviors_SP_Ambush_01"
+                     pxsl_line="162" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- SAVIORS 04 -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="Saviors04"
+         parent="Saviors03"
+         glued="true"
+         pxsl_line="166">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Saviors_OBJ_FollowPath&amp;"
+             pxsl_line="167">
+            <Path
+                 pxsl_line="167">
+                <Phase
+                     type="OR"
+                     name="Saviors - Swimming and climbing"
+                     pxsl_line="168">
+                    <DebugPlayerPosition
+                         pxsl_line="169">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_SP_Sewers_01"
+                             pxsl_line="169" />
+                    </DebugPlayerPosition>
+                    <Path
+                         pxsl_line="170">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0.1"
+                             pxsl_line="171">
+                            <Destination
+                                 pxsl_line="171">
+                                <QuestObject
+                                     class="Marker"
+                                     name="Saviors_Marker_Final"
+                                     pxsl_line="171" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="semaphore"
+                             name="_"
+                             pxsl_line="172" />
+                    </Path>
+                    <Path
+                         pxsl_line="173">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="3"
+                             show_locations="false"
+                             pxsl_line="174">
+                            <Destination
+                                 pxsl_line="174">
+                                <QuestObject
+                                     class="Marker"
+                                     name="Saviors_Marker_Radio_001"
+                                     pxsl_line="174" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="3"
+                             show_locations="false"
+                             pxsl_line="175">
+                            <Destination
+                                 pxsl_line="175">
+                                <QuestObject
+                                     class="Marker"
+                                     name="Saviors_Marker_Radio_002"
+                                     pxsl_line="175" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Hazan_Saviors_04DLG01"
+                             auto_start="true"
+                             pxsl_line="176" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="177">
+                            <Object
+                                 pxsl_line="178">
+                                <QuestObject
+                                     class="SensorAmbientMusicArea"
+                                     name="SAMA_Saviors_OpenArea_Fight_Music"
+                                     pxsl_line="178" />
+                            </Object>
+                        </Phase>
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                        <!-- ENABLING RESPAWN IN THE SEWERS -->
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="181">
+                            <Object
+                                 pxsl_line="181">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="Saviors_RESPAWN_QuarantineWall_01"
+                                     pxsl_line="181" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="182">
+                            <Object
+                                 pxsl_line="182">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="Saviors_RESPAWN_Sewers_SaviorsHideout"
+                                     pxsl_line="182" />
+                            </Object>
+                        </Phase>
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                    </Path>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="184">
+                    <Destination
+                         pxsl_line="184">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_SP_Tunnel_01"
+                             pxsl_line="184" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="OR"
+                     name="Saviors - Crossing the Wall"
+                     pxsl_line="185">
+                    <DebugPlayerPosition
+                         pxsl_line="186">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_SP_Tunnel_01"
+                             pxsl_line="186" />
+                    </DebugPlayerPosition>
+                    <Path
+                         pxsl_line="187">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0.1"
+                             pxsl_line="188">
+                            <Destination
+                                 pxsl_line="188">
+                                <QuestObject
+                                     class="Marker"
+                                     name="Saviors_Marker_Final"
+                                     pxsl_line="188" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="semaphore"
+                             name="_"
+                             pxsl_line="189" />
+                    </Path>
+                    <Path
+                         pxsl_line="190">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="3"
+                             show_locations="false"
+                             pxsl_line="191">
+                            <Destination
+                                 pxsl_line="191">
+                                <QuestObject
+                                     class="Marker"
+                                     name="Saviors_Marker_002"
+                                     pxsl_line="191" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="192">
+                            <Object
+                                 pxsl_line="192">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Saviors_QEG_Zombies_Tunnel_01"
+                                     pxsl_line="192" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="9"
+                             show_locations="false"
+                             pxsl_line="193">
+                            <Destination
+                                 pxsl_line="193">
+                                <QuestObject
+                                     class="Marker"
+                                     name="Saviors_Marker_Virals_Tunnel_01"
+                                     pxsl_line="193" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="194">
+                            <Object
+                                 pxsl_line="194">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Saviors_QEG_Virals_Tunnel_01"
+                                     pxsl_line="194" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="3"
+                             show_locations="false"
+                             pxsl_line="195">
+                            <Destination
+                                 pxsl_line="195">
+                                <QuestObject
+                                     class="Marker"
+                                     name="Saviors_Marker_Zombies_Sewers_04"
+                                     pxsl_line="195" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="196">
+                            <Object
+                                 pxsl_line="196">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Saviors_QEG_Zombies_Sewers_04"
+                                     pxsl_line="196" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="2"
+                             show_locations="false"
+                             pxsl_line="197">
+                            <Destination
+                                 pxsl_line="197">
+                                <QuestObject
+                                     class="Marker"
+                                     name="Saviors_Marker_004"
+                                     pxsl_line="197" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="198">
+                            <Object
+                                 pxsl_line="199">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Saviors_QEG_Zombies_Sewers_05"
+                                     pxsl_line="199" />
+                            </Object>
+                        </Phase>
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                        <!-- ENABLING RESPAWN IN THE SEWERS -->
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="202">
+                            <Object
+                                 pxsl_line="202">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="Saviors_Respawn_Sewers_01"
+                                     pxsl_line="202" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="203">
+                            <Object
+                                 pxsl_line="203">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="Saviors_RESPAWN_QuarantineWall_01"
+                                     pxsl_line="203" />
+                            </Object>
+                        </Phase>
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                    </Path>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="205">
+                    <Destination
+                         pxsl_line="205">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_SP_003"
+                             pxsl_line="205" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="OR"
+                     name="Saviors - NM in sewer's room"
+                     pxsl_line="206">
+                    <DebugPlayerPosition
+                         pxsl_line="207">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_SP_003"
+                             pxsl_line="207" />
+                    </DebugPlayerPosition>
+                    <Path
+                         pxsl_line="208">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0.1"
+                             pxsl_line="209">
+                            <Destination
+                                 pxsl_line="209">
+                                <QuestObject
+                                     class="Marker"
+                                     name="Saviors_Marker_Final"
+                                     pxsl_line="209" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="semaphore"
+                             name="_"
+                             pxsl_line="210" />
+                    </Path>
+                    <Path
+                         pxsl_line="211">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="3"
+                             show_locations="false"
+                             pxsl_line="212">
+                            <Destination
+                                 pxsl_line="212">
+                                <QuestObject
+                                     class="Marker"
+                                     name="Saviors_Marker_005"
+                                     pxsl_line="212" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="213">
+                            <Object
+                                 pxsl_line="213">
+                                <QuestObject
+                                     class="SensorAmbientMusicArea"
+                                     name="SAMA_Saviors_OpenArea_Fight_Music"
+                                     pxsl_line="213" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="214">
+                    <Destination
+                         pxsl_line="214">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_SP_004"
+                             pxsl_line="214" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="OR"
+                     name="Saviors - Slide"
+                     pxsl_line="215">
+                    <DebugPlayerPosition
+                         pxsl_line="216">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_SP_Slide_01"
+                             pxsl_line="216" />
+                    </DebugPlayerPosition>
+                    <Path
+                         pxsl_line="217">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0.1"
+                             pxsl_line="218">
+                            <Destination
+                                 pxsl_line="218">
+                                <QuestObject
+                                     class="Marker"
+                                     name="Saviors_Marker_Final"
+                                     pxsl_line="218" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="semaphore"
+                             name="_"
+                             pxsl_line="219" />
+                    </Path>
+                    <Path
+                         pxsl_line="220">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="3"
+                             show_locations="false"
+                             pxsl_line="221">
+                            <Destination
+                                 pxsl_line="221">
+                                <QuestObject
+                                     class="Marker"
+                                     name="Saviors_Marker_Slide_01"
+                                     pxsl_line="221" />
+                            </Destination>
+                        </Phase>
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                        <!-- ENABLING RESPAWN BEFORE SLIDE -->
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="224">
+                            <Object
+                                 pxsl_line="224">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="Saviors_RESPAWN_Slide_01"
+                                     pxsl_line="224" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="225">
+                            <Object
+                                 pxsl_line="225">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="Saviors_Respawn_Sewers_01"
+                                     pxsl_line="225" />
+                            </Object>
+                        </Phase>
+                        <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                    </Path>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="227">
+                    <Destination
+                         pxsl_line="227">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_SP_Slide_01"
+                             pxsl_line="227" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="OR"
+                     name="_"
+                     pxsl_line="228">
+                    <Path
+                         pxsl_line="229">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0.1"
+                             pxsl_line="230">
+                            <Destination
+                                 pxsl_line="230">
+                                <QuestObject
+                                     class="Marker"
+                                     name="Saviors_Marker_Final"
+                                     pxsl_line="230" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="semaphore"
+                             name="_"
+                             pxsl_line="231" />
+                    </Path>
+                    <Path
+                         pxsl_line="232">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="3"
+                             show_locations="false"
+                             pxsl_line="233">
+                            <Destination
+                                 pxsl_line="233">
+                                <QuestObject
+                                     class="Marker"
+                                     name="Saviors_Marker_DialogSlide"
+                                     pxsl_line="233" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Hazan_Saviors_07DLG01"
+                             auto_start="true"
+                             pxsl_line="234" />
+                        <Phase
+                             type="go to"
+                             name="Saviors - After Slide"
+                             distance="6"
+                             show_locations="false"
+                             pxsl_line="235">
+                            <Destination
+                                 pxsl_line="235">
+                                <QuestObject
+                                     class="Marker"
+                                     name="Saviors_Marker_Ambush_01"
+                                     pxsl_line="235" />
+                            </Destination>
+                            <DebugPlayerPosition
+                                 pxsl_line="236">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="Saviors_SP_Ambush_01"
+                                     pxsl_line="236" />
+                            </DebugPlayerPosition>
+                        </Phase>
+                        <!-- GATHER DURING USE (SEWER GRATING) -->
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="238">
+                            <Object
+                                 pxsl_line="239">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Saviors_QEG_Virals_Tunnel_01"
+                                     pxsl_line="239" />
+                            </Object>
+                            <Object
+                                 pxsl_line="240">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Saviors_QEG_Zombies_Tunnel_01"
+                                     pxsl_line="240" />
+                            </Object>
+                            <Object
+                                 pxsl_line="241">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Saviors_QEG_Zombies_Sewers_04"
+                                     pxsl_line="241" />
+                            </Object>
+                            <Object
+                                 pxsl_line="242">
+                                <QuestObject
+                                     class="QuestEnableGroup"
+                                     name="Saviors_QEG_Zombies_Sewers_05"
+                                     pxsl_line="242" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="243">
+                            <Object
+                                 pxsl_line="244">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Savior_Survivor"
+                                     pxsl_line="244" />
+                            </Object>
+                            <Object
+                                 pxsl_line="245">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Savior_Survivor_2"
+                                     pxsl_line="245" />
+                            </Object>
+                            <Object
+                                 pxsl_line="246">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Savior_Survivor_3"
+                                     pxsl_line="246" />
+                            </Object>
+                            <Object
+                                 pxsl_line="247">
+                                <QuestObject
+                                     class="HumanAI"
+                                     name="Hazan"
+                                     pxsl_line="247" />
+                            </Object>
+                        </Phase>
+                        <!-- ENABLING RESPAWN AFTER SLIDE -->
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="248">
+                            <Object
+                                 pxsl_line="248">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="Saviors_RESPAWN_Ambush_01"
+                                     pxsl_line="248" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="249">
+                            <Object
+                                 pxsl_line="249">
+                                <QuestObject
+                                     class="SpawnPoint"
+                                     name="Saviors_RESPAWN_Slide_01"
+                                     pxsl_line="249" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="250">
+                            <Object
+                                 pxsl_line="250">
+                                <QuestObject
+                                     class="SensorAmbientMusicArea"
+                                     name="Sewers_saviors_ambush"
+                                     pxsl_line="250" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="251">
+                    <Destination
+                         pxsl_line="251">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_SP_Ambush_01"
+                             pxsl_line="251" />
+                    </Destination>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <!-- Saviors - Ambush Part  -->
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <Phase
+                     type="OR"
+                     name="Saviors - Ambush"
+                     pxsl_line="255">
+                    <DebugPlayerPosition
+                         pxsl_line="256">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_SP_Ambush_01"
+                             pxsl_line="256" />
+                    </DebugPlayerPosition>
+                    <Path
+                         pxsl_line="257">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0.1"
+                             pxsl_line="258">
+                            <Destination
+                                 pxsl_line="258">
+                                <QuestObject
+                                     class="Marker"
+                                     name="Saviors_Marker_Final"
+                                     pxsl_line="258" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="semaphore"
+                             name="_"
+                             pxsl_line="259" />
+                    </Path>
+                    <Path
+                         pxsl_line="260">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="261">
+                            <Destination
+                                 pxsl_line="261">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="Saviors_GoTo_Trap_001"
+                                     pxsl_line="261" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="262">
+                            <Object
+                                 pxsl_line="262">
+                                <QuestObject
+                                     class="AISpawnBoxCompound"
+                                     name="Saviors_Rais_Sewers_Enemies_001"
+                                     pxsl_line="262" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="alarm group"
+                             name="_"
+                             level="High"
+                             pxsl_line="263">
+                            <GroupMarker
+                                 pxsl_line="263">
+                                <QuestObject
+                                     class="AIGroupMarker"
+                                     name="Saviors_AGM_Ambush01"
+                                     pxsl_line="263" />
+                            </GroupMarker>
+                        </Phase>
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="1.5"
+                             pxsl_line="264" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="265">
+                            <Object
+                                 pxsl_line="266">
+                                <QuestObject
+                                     class="FlashlightArea"
+                                     name="Saviors_FA_Ambush01"
+                                     pxsl_line="266" />
+                            </Object>
+                            <!-- ,o SensorAmbientMusicArea Sewers_saviors_ambush -->
+                        </Phase>
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="2.5"
+                             pxsl_line="268" />
+                    </Path>
+                </Phase>
+            </Path>
+        </Phase>
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Saviors_OBJ_SurviveAmbush&amp;"
+             pxsl_line="270">
+            <Path
+                 pxsl_line="270">
+                <!-- COOP Challenge START -->
+                <Phase
+                     type="enable challengesensor"
+                     name="_"
+                     state="true"
+                     pxsl_line="271">
+                    <Object
+                         pxsl_line="271">
+                        <QuestObject
+                             class="SensorCoopChallengeTrigger"
+                             name="storyslums_17"
+                             pxsl_line="271" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="OR"
+                     name="_"
+                     pxsl_line="272">
+                    <SpecificLocation
+                         pxsl_line="273">
+                        <QuestObject
+                             class="ZoneBox"
+                             name="Saviors_ZB_Ambush"
+                             pxsl_line="273" />
+                    </SpecificLocation>
+                    <Path
+                         pxsl_line="274">
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="275">
+                            <Object
+                                 pxsl_line="275">
+                                <QuestObject
+                                     class="BlackoutArea"
+                                     name="Saviors_BlackOut_001"
+                                     pxsl_line="275" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="semaphore"
+                             name="_"
+                             pxsl_line="276" />
+                    </Path>
+                    <Path
+                         pxsl_line="277">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="278">
+                            <Destination
+                                 pxsl_line="278">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="Saviors_GoTo_Trap_002"
+                                     pxsl_line="278" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="279">
+                            <Object
+                                 pxsl_line="279">
+                                <QuestObject
+                                     class="SoundEmitterSimple"
+                                     name="saviors_ambush_chatter01"
+                                     pxsl_line="279" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="2"
+                             pxsl_line="280" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="281">
+                            <Object
+                                 pxsl_line="281">
+                                <QuestObject
+                                     class="SoundEmitterSimple"
+                                     name="saviors_ambush_chatter02"
+                                     pxsl_line="281" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="1"
+                             pxsl_line="282" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="283">
+                            <Object
+                                 pxsl_line="283">
+                                <QuestObject
+                                     class="SoundEmitterSimple"
+                                     name="saviors_ambush_chatter03"
+                                     pxsl_line="283" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="284">
+                            <Destination
+                                 pxsl_line="284">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="Saviors_GoTo_Trap_003"
+                                     pxsl_line="284" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="285">
+                            <Object
+                                 pxsl_line="286">
+                                <QuestObject
+                                     class="SoundEmitterSimple"
+                                     name="saviors_ambush_chatter01"
+                                     pxsl_line="286" />
+                            </Object>
+                            <Object
+                                 pxsl_line="287">
+                                <QuestObject
+                                     class="SoundEmitterSimple"
+                                     name="saviors_ambush_chatter02"
+                                     pxsl_line="287" />
+                            </Object>
+                            <Object
+                                 pxsl_line="288">
+                                <QuestObject
+                                     class="SoundEmitterSimple"
+                                     name="saviors_ambush_chatter03"
+                                     pxsl_line="288" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <!-- ENABLING RESPAWN - AMBUSH -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="291">
+                    <Object
+                         pxsl_line="291">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_RESPAWN_Ambush_02"
+                             pxsl_line="291" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="292">
+                    <Object
+                         pxsl_line="292">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_RESPAWN_Ambush_01"
+                             pxsl_line="292" />
+                    </Object>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="294">
+                    <Destination
+                         pxsl_line="294">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_SP_Ambush_02"
+                             pxsl_line="294" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="go to"
+                     name="Saviors - After Ambush, Shootout Start"
+                     distance="10000000"
+                     pxsl_line="296">
+                    <Destination
+                         pxsl_line="296">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_SP_Ambush_02"
+                             pxsl_line="296" />
+                    </Destination>
+                    <DebugPlayerPosition
+                         pxsl_line="297">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_SP_Ambush_02"
+                             pxsl_line="297" />
+                    </DebugPlayerPosition>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="298">
+                    <Object
+                         pxsl_line="298">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="Saviors_QEG_Ambush_Covers_01"
+                             pxsl_line="298" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="299">
+                    <Object
+                         pxsl_line="299">
+                        <QuestObject
+                             class="QuestEnableGroup"
+                             name="Saviors_QEG_Ambush_Covers_02"
+                             pxsl_line="299" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="OR"
+                     name="_"
+                     pxsl_line="300">
+                    <SpecificLocation
+                         pxsl_line="301">
+                        <QuestObject
+                             class="ZoneBox"
+                             name="Saviors_ZB_Ambush"
+                             pxsl_line="301" />
+                    </SpecificLocation>
+                    <Path
+                         pxsl_line="302">
+                        <Phase
+                             type="OR"
+                             name="_"
+                             pxsl_line="303">
+                            <Path
+                                 pxsl_line="304">
+                                <Phase
+                                     type="wait guard"
+                                     name="_"
+                                     time="2"
+                                     pxsl_line="305" />
+                                <Phase
+                                     type="set dialog"
+                                     name="_"
+                                     speaker="SaviorsBandit03"
+                                     group="Bandit01_Saviors_03TLK01"
+                                     auto_start="true"
+                                     pxsl_line="306" />
+                            </Path>
+                            <Path
+                                 pxsl_line="307">
+                                <Phase
+                                     type="group alarmed guard"
+                                     name="_"
+                                     level="High"
+                                     pxsl_line="308">
+                                    <GroupMarker
+                                         pxsl_line="308">
+                                        <QuestObject
+                                             class="AIGroupMarker"
+                                             name="Saviors_AGM_Ambush01"
+                                             pxsl_line="308" />
+                                    </GroupMarker>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                        <Phase
+                             type="semaphore"
+                             name="_"
+                             pxsl_line="309" />
+                    </Path>
+                    <Path
+                         pxsl_line="310">
+                        <Phase
+                             type="health level guard"
+                             name="_"
+                             health="50"
+                             pxsl_line="311">
+                            <Spawner
+                                 pxsl_line="312">
+                                <QuestObject
+                                     class="AISpawnBoxCompound"
+                                     name="Saviors_Rais_Sewers_Enemies_001"
+                                     pxsl_line="312" />
+                            </Spawner>
+                        </Phase>
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="SaviorsBandit03"
+                             pxsl_line="313" />
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="314">
+                            <Object
+                                 pxsl_line="315">
+                                <QuestObject
+                                     class="AISpawnBoxCompound"
+                                     name="Saviors_Rais_Sewers_Enemies_003"
+                                     pxsl_line="315" />
+                            </Object>
+                            <Object
+                                 pxsl_line="316">
+                                <QuestObject
+                                     class="AISpawnBoxCompound"
+                                     name="Saviors_Rais_Sewers_Enemies_002"
+                                     pxsl_line="316" />
+                            </Object>
+                        </Phase>
+                        <!-- COOP Challenge END -->
+                        <Phase
+                             type="complete challenge"
+                             name="_"
+                             challenge="storyslums_17"
+                             pxsl_line="317" />
+                        <!-- COOP Challenge END -->
+                        <Phase
+                             type="enable challengesensor"
+                             name="_"
+                             state="false"
+                             pxsl_line="318">
+                            <Object
+                                 pxsl_line="318">
+                                <QuestObject
+                                     class="SensorCoopChallengeTrigger"
+                                     name="storyslums_17"
+                                     pxsl_line="318" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="wait guard"
+                             name="_"
+                             time="4"
+                             pxsl_line="319" />
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="voice2d"
+                             group="Player_Saviors_08DLG01"
+                             auto_start="true"
+                             pxsl_line="320" />
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="hide"
+                             pxsl_line="321">
+                            <Object
+                                 pxsl_line="321">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="Saviors_Door_Ambush_Before"
+                                     pxsl_line="321" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="appear"
+                             name="_"
+                             mode="show"
+                             pxsl_line="322">
+                            <Object
+                                 pxsl_line="322">
+                                <QuestObject
+                                     class="ModelObject"
+                                     name="Saviors_Door_Ambush_After"
+                                     pxsl_line="322" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="323">
+                    <Destination
+                         pxsl_line="323">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_SP_Ambush_02"
+                             pxsl_line="323" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- SAVIORS - KILL ENEMIES -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__Saviors_Enemies01"
+         parent="Saviors04"
+         pxsl_line="327">
+        <Phase
+             type="OR"
+             name="_"
+             pxsl_line="328">
+            <Path
+                 pxsl_line="329">
+                <Phase
+                     type="kill"
+                     name="_"
+                     show_locations="false"
+                     pxsl_line="330">
+                    <Spawner
+                         pxsl_line="330">
+                        <QuestObject
+                             class="AISpawnBoxCompound"
+                             name="Saviors_Rais_Sewers_Enemies_001"
+                             pxsl_line="330" />
+                    </Spawner>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="331">
+                <Phase
+                     type="started quest guard"
+                     name="_"
+                     quest_name="Saviors05"
+                     finished="true"
+                     pxsl_line="332" />
+            </Path>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="333">
+            <Object
+                 pxsl_line="333">
+                <QuestObject
+                     class="AISpawnBoxCompound"
+                     name="Saviors_Rais_Sewers_Enemies_001"
+                     pxsl_line="333" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="334">
+            <Destination
+                 pxsl_line="334">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Saviors_SP_Ambush_02"
+                     pxsl_line="334" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__Saviors_Enemies02"
+         parent="Saviors04"
+         pxsl_line="335">
+        <Phase
+             type="OR"
+             name="_"
+             pxsl_line="336">
+            <Path
+                 pxsl_line="337">
+                <Phase
+                     type="kill"
+                     name="_"
+                     show_locations="false"
+                     pxsl_line="338">
+                    <Spawner
+                         pxsl_line="338">
+                        <QuestObject
+                             class="AISpawnBoxCompound"
+                             name="Saviors_Rais_Sewers_Enemies_002"
+                             pxsl_line="338" />
+                    </Spawner>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="339">
+                <Phase
+                     type="started quest guard"
+                     name="_"
+                     quest_name="Saviors05"
+                     finished="true"
+                     pxsl_line="340" />
+            </Path>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="341">
+            <Object
+                 pxsl_line="341">
+                <QuestObject
+                     class="AISpawnBoxCompound"
+                     name="Saviors_Rais_Sewers_Enemies_002"
+                     pxsl_line="341" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="342">
+            <Destination
+                 pxsl_line="342">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Saviors_SP_Ambush_02"
+                     pxsl_line="342" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__Saviors_Enemies03"
+         parent="Saviors04"
+         pxsl_line="343">
+        <Phase
+             type="OR"
+             name="_"
+             pxsl_line="344">
+            <Path
+                 pxsl_line="345">
+                <Phase
+                     type="kill"
+                     name="_"
+                     show_locations="false"
+                     pxsl_line="346">
+                    <Spawner
+                         pxsl_line="346">
+                        <QuestObject
+                             class="AISpawnBoxCompound"
+                             name="Saviors_Rais_Sewers_Enemies_003"
+                             pxsl_line="346" />
+                    </Spawner>
+                </Phase>
+            </Path>
+            <Path
+                 pxsl_line="347">
+                <Phase
+                     type="started quest guard"
+                     name="_"
+                     quest_name="Saviors05"
+                     finished="true"
+                     pxsl_line="348" />
+            </Path>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="349">
+            <Object
+                 pxsl_line="349">
+                <QuestObject
+                     class="AISpawnBoxCompound"
+                     name="Saviors_Rais_Sewers_Enemies_003"
+                     pxsl_line="349" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="350">
+            <Destination
+                 pxsl_line="350">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Saviors_SP_Ambush_02"
+                     pxsl_line="350" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__Saviors_Music"
+         parent="Saviors04"
+         pxsl_line="351">
+        <Phase
+             type="AND"
+             name="_"
+             pxsl_line="352">
+            <Path
+                 pxsl_line="353">
+                <Phase
+                     type="started quest guard"
+                     name="_"
+                     quest_name="__Saviors_Enemies01"
+                     finished="true"
+                     pxsl_line="354" />
+            </Path>
+            <Path
+                 pxsl_line="355">
+                <Phase
+                     type="started quest guard"
+                     name="_"
+                     quest_name="__Saviors_Enemies02"
+                     finished="true"
+                     pxsl_line="356" />
+            </Path>
+            <Path
+                 pxsl_line="357">
+                <Phase
+                     type="started quest guard"
+                     name="_"
+                     quest_name="__Saviors_Enemies03"
+                     finished="true"
+                     pxsl_line="358" />
+            </Path>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="359">
+            <Object
+                 pxsl_line="359">
+                <QuestObject
+                     class="SensorAmbientMusicArea"
+                     name="Sewers_saviors_ambush"
+                     pxsl_line="359" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="360">
+            <Destination
+                 pxsl_line="360">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Saviors_SP_Ambush_02"
+                     pxsl_line="360" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- SAVIORS 05 -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="Saviors05"
+         parent="Saviors04"
+         glued="true"
+         pxsl_line="364">
+        <Phase
+             type="AND"
+             name="_"
+             objective="&amp;Saviors01_OBJ_EscapeTheSewers&amp;"
+             pxsl_line="365">
+            <Path
+                 pxsl_line="365">
+                <Phase
+                     type="OR"
+                     name="Saviors - Ambush End, Sewers Part"
+                     pxsl_line="366">
+                    <DebugPlayerPosition
+                         pxsl_line="367">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_SP_Ambush_02"
+                             pxsl_line="367" />
+                    </DebugPlayerPosition>
+                    <Path
+                         pxsl_line="368">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0.1"
+                             pxsl_line="369">
+                            <Destination
+                                 pxsl_line="369">
+                                <QuestObject
+                                     class="Marker"
+                                     name="Saviors_Marker_Final"
+                                     pxsl_line="369" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="semaphore"
+                             name="_"
+                             pxsl_line="370" />
+                    </Path>
+                    <Path
+                         pxsl_line="371">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="372">
+                            <Destination
+                                 pxsl_line="372">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="Saviors_GoTo_AfterSewers_001"
+                                     pxsl_line="372" />
+                            </Destination>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <!-- ENABLING RESPAWN - AFTER AMBUSH - PATIO -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="375">
+                    <Object
+                         pxsl_line="375">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_RESPAWN_Patio_01"
+                             pxsl_line="375" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="376">
+                    <Object
+                         pxsl_line="376">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_RESPAWN_Ambush_02"
+                             pxsl_line="376" />
+                    </Object>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="378">
+                    <Destination
+                         pxsl_line="378">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_SP_Patio_01"
+                             pxsl_line="378" />
+                    </Destination>
+                </Phase>
+                <Phase
+                     type="OR"
+                     name="Saviors - Patio entry"
+                     pxsl_line="379">
+                    <DebugPlayerPosition
+                         pxsl_line="380">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_SP_Patio_01"
+                             pxsl_line="380" />
+                    </DebugPlayerPosition>
+                    <Path
+                         pxsl_line="381">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0.1"
+                             pxsl_line="382">
+                            <Destination
+                                 pxsl_line="382">
+                                <QuestObject
+                                     class="Marker"
+                                     name="Saviors_Marker_Final"
+                                     pxsl_line="382" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="semaphore"
+                             name="_"
+                             pxsl_line="383" />
+                    </Path>
+                    <Path
+                         pxsl_line="384">
+                        <Phase
+                             type="go to"
+                             name="_"
+                             distance="0"
+                             show_locations="false"
+                             pxsl_line="385">
+                            <Destination
+                                 pxsl_line="385">
+                                <QuestObject
+                                     class="SensorGoTo"
+                                     name="Saviors_GoTo_Patio_001"
+                                     pxsl_line="385" />
+                            </Destination>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             pxsl_line="386">
+                            <Object
+                                 pxsl_line="387">
+                                <QuestObject
+                                     class="AISpawnBoxCompound"
+                                     name="Saviors_Patio_Enemies_001"
+                                     pxsl_line="387" />
+                            </Object>
+                            <Object
+                                 pxsl_line="388">
+                                <QuestObject
+                                     class="AISpawnBoxCompound"
+                                     name="Saviors_Patio_Enemies_003"
+                                     pxsl_line="388" />
+                            </Object>
+                            <Object
+                                 pxsl_line="389">
+                                <QuestObject
+                                     class="AISpawnBoxCompound"
+                                     name="Saviors_Patio_Enemies_002"
+                                     pxsl_line="389" />
+                            </Object>
+                        </Phase>
+                        <Phase
+                             type="OR"
+                             name="_"
+                             pxsl_line="390">
+                            <Path
+                                 pxsl_line="391">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="0"
+                                     show_locations="false"
+                                     pxsl_line="392">
+                                    <Destination
+                                         pxsl_line="392">
+                                        <QuestObject
+                                             class="SensorGoTo"
+                                             name="Saviors_GoTo_Patio_002"
+                                             pxsl_line="392" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="393">
+                                <Phase
+                                     type="group alarmed guard"
+                                     name="_"
+                                     level="Medium"
+                                     pxsl_line="394">
+                                    <GroupMarker
+                                         pxsl_line="394">
+                                        <QuestObject
+                                             class="AIGroupMarker"
+                                             name="Saviors_AGM_Patio01"
+                                             pxsl_line="394" />
+                                    </GroupMarker>
+                                </Phase>
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     pxsl_line="395">
+                                    <Object
+                                         pxsl_line="395">
+                                        <QuestObject
+                                             class="SensorAmbientMusicArea"
+                                             name="SAMA_Saviors_Patio"
+                                             pxsl_line="395" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                        <Phase
+                             type="OR"
+                             name="_"
+                             pxsl_line="396">
+                            <Path
+                                 pxsl_line="397">
+                                <Phase
+                                     type="wait guard"
+                                     name="_"
+                                     time="1"
+                                     pxsl_line="398" />
+                                <Phase
+                                     type="set dialog"
+                                     name="_"
+                                     speaker="SaviorsBandit01"
+                                     group="Bandit01_Saviors_02TLK01"
+                                     auto_start="true"
+                                     pxsl_line="399" />
+                                <Phase
+                                     type="wait guard"
+                                     name="_"
+                                     time="1"
+                                     pxsl_line="400" />
+                                <Phase
+                                     type="semaphore"
+                                     name="_"
+                                     pxsl_line="401" />
+                            </Path>
+                            <Path
+                                 pxsl_line="402">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="0"
+                                     show_locations="false"
+                                     pxsl_line="403">
+                                    <Destination
+                                         pxsl_line="403">
+                                        <QuestObject
+                                             class="SensorGoTo"
+                                             name="Saviors_GoTo_Patio_003a"
+                                             pxsl_line="403" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="404">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="0"
+                                     show_locations="false"
+                                     pxsl_line="405">
+                                    <Destination
+                                         pxsl_line="405">
+                                        <QuestObject
+                                             class="SensorGoTo"
+                                             name="Saviors_GoTo_Patio_003b"
+                                             pxsl_line="405" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                            <Path
+                                 pxsl_line="406">
+                                <Phase
+                                     type="group alarmed guard"
+                                     name="_"
+                                     level="Medium"
+                                     pxsl_line="407">
+                                    <GroupMarker
+                                         pxsl_line="407">
+                                        <QuestObject
+                                             class="AIGroupMarker"
+                                             name="Saviors_AGM_Patio01"
+                                             pxsl_line="407" />
+                                    </GroupMarker>
+                                </Phase>
+                                <Phase
+                                     type="enable"
+                                     name="_"
+                                     pxsl_line="408">
+                                    <Object
+                                         pxsl_line="408">
+                                        <QuestObject
+                                             class="SensorAmbientMusicArea"
+                                             name="SAMA_Saviors_Patio"
+                                             pxsl_line="408" />
+                                    </Object>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                        <Phase
+                             type="set dialog"
+                             name="_"
+                             speaker="SaviorsBandit01"
+                             pxsl_line="409" />
+                        <Phase
+                             type="alarm group"
+                             name="_"
+                             pxsl_line="410">
+                            <GroupMarker
+                                 pxsl_line="410">
+                                <QuestObject
+                                     class="AIGroupMarker"
+                                     name="Saviors_AGM_Patio01"
+                                     pxsl_line="410" />
+                            </GroupMarker>
+                        </Phase>
+                        <Phase
+                             type="OR"
+                             name="_"
+                             pxsl_line="411">
+                            <Path
+                                 pxsl_line="412">
+                                <Phase
+                                     type="kill"
+                                     name="_"
+                                     show_locations="false"
+                                     pxsl_line="413">
+                                    <Spawner
+                                         pxsl_line="414">
+                                        <QuestObject
+                                             class="AISpawnBoxCompound"
+                                             name="Saviors_Patio_Enemies_001"
+                                             pxsl_line="414" />
+                                    </Spawner>
+                                    <Spawner
+                                         pxsl_line="415">
+                                        <QuestObject
+                                             class="AISpawnBoxCompound"
+                                             name="Saviors_Patio_Enemies_002"
+                                             pxsl_line="415" />
+                                    </Spawner>
+                                    <Spawner
+                                         pxsl_line="416">
+                                        <QuestObject
+                                             class="AISpawnBoxCompound"
+                                             name="Saviors_Patio_Enemies_003"
+                                             pxsl_line="416" />
+                                    </Spawner>
+                                </Phase>
+                                <Phase
+                                     type="wait guard"
+                                     name="_"
+                                     time="2"
+                                     pxsl_line="417" />
+                            </Path>
+                            <Path
+                                 pxsl_line="418">
+                                <Phase
+                                     type="go to"
+                                     name="_"
+                                     distance="3"
+                                     show_locations="false"
+                                     pxsl_line="419">
+                                    <Destination
+                                         pxsl_line="419">
+                                        <QuestObject
+                                             class="Marker"
+                                             name="Saviors_Marker_PatioExit"
+                                             pxsl_line="419" />
+                                    </Destination>
+                                </Phase>
+                            </Path>
+                        </Phase>
+                        <Phase
+                             type="enable"
+                             name="_"
+                             state="disabled"
+                             pxsl_line="420">
+                            <Object
+                                 pxsl_line="420">
+                                <QuestObject
+                                     class="SensorAmbientMusicArea"
+                                     name="SAMA_Saviors_Patio"
+                                     pxsl_line="420" />
+                            </Object>
+                        </Phase>
+                    </Path>
+                </Phase>
+                <Phase
+                     type="set dialog"
+                     name="_"
+                     speaker="voice2d"
+                     group="Player_Saviors_10DLG01"
+                     auto_start="true"
+                     pxsl_line="421" />
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <!-- ENABLING RESPAWN - PATIO -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="424">
+                    <Object
+                         pxsl_line="424">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_RESPAWN_Patio_02"
+                             pxsl_line="424" />
+                    </Object>
+                </Phase>
+                <Phase
+                     type="enable"
+                     name="_"
+                     state="disabled"
+                     pxsl_line="425">
+                    <Object
+                         pxsl_line="425">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_RESPAWN_Patio_01"
+                             pxsl_line="425" />
+                    </Object>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <!-- ENABLING MAP PORTAL OT TO SEWERS -->
+                <Phase
+                     type="enable"
+                     name="_"
+                     pxsl_line="429">
+                    <Object
+                         pxsl_line="429">
+                        <QuestObject
+                             class="MapPortal"
+                             name="Saviors_MP_Sewers_TO_OldTown"
+                             pxsl_line="429" />
+                    </Object>
+                </Phase>
+                <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+                <Phase
+                     type="checkpoint"
+                     name="_"
+                     pxsl_line="431">
+                    <Destination
+                         pxsl_line="431">
+                        <QuestObject
+                             class="SpawnPoint"
+                             name="Saviors_SP_Patio_02"
+                             pxsl_line="431" />
+                    </Destination>
+                </Phase>
+            </Path>
+        </Phase>
+    </Quest>
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <!-- SAVIORS - END - ENABLING PATH FROM OLD TOWN TO SLUMS -->
+    <!-- -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- -->
+    <Quest
+         name="__Saviors_END"
+         parent="Saviors06"
+         pxsl_line="435">
+        <Phase
+             type="go to"
+             name="Saviors - From Old Town to Slums"
+             distance="100000000"
+             show_locations="false"
+             pxsl_line="436">
+            <Destination
+                 pxsl_line="436">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Saviors_SP_OldTown_TO_Sewers"
+                     pxsl_line="436" />
+            </Destination>
+            <DebugPlayerPosition
+                 pxsl_line="437">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Saviors_SP_OldTown_TO_Sewers"
+                     pxsl_line="437" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="go to"
+             name="Saviors - From Slums to Old Town"
+             distance="100000000"
+             show_locations="false"
+             pxsl_line="438">
+            <Destination
+                 pxsl_line="438">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Saviors_SP_Slums_TO_Sewers"
+                     pxsl_line="438" />
+            </Destination>
+            <DebugPlayerPosition
+                 pxsl_line="439">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Saviors_SP_Slums_TO_Sewers"
+                     pxsl_line="439" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="appear"
+             name="_"
+             mode="hide"
+             pxsl_line="440">
+            <Object
+                 pxsl_line="441">
+                <QuestObject
+                     class="GroupingObject"
+                     name="Saviors_GO_OT_To_Slums_Before"
+                     pxsl_line="441" />
+            </Object>
+            <Object
+                 pxsl_line="442">
+                <QuestObject
+                     class="MovieActor"
+                     name="Door_02_After_Cin"
+                     pxsl_line="442" />
+            </Object>
+            <Object
+                 pxsl_line="443">
+                <QuestObject
+                     class="MovieActor"
+                     name="Door_01_Before_Cin"
+                     pxsl_line="443" />
+            </Object>
+            <Object
+                 pxsl_line="444">
+                <QuestObject
+                     class="AppearGroup"
+                     name="RunningSurvivor_AG"
+                     pxsl_line="444" />
+            </Object>
+            <Object
+                 pxsl_line="445">
+                <QuestObject
+                     class="AppearGroup"
+                     name="Saviors_AG_SurvivorNearEntrance"
+                     pxsl_line="445" />
+            </Object>
+            <Object
+                 pxsl_line="446">
+                <QuestObject
+                     class="AppearGroup"
+                     name="Saviors_AG_SurvivorsSewers"
+                     pxsl_line="446" />
+            </Object>
+        </Phase>
+        <Phase
+             type="appear"
+             name="_"
+             mode="show"
+             pxsl_line="447">
+            <Object
+                 pxsl_line="448">
+                <QuestObject
+                     class="GroupingObject"
+                     name="Saviors_GO_OT_To_Slums_After"
+                     pxsl_line="448" />
+            </Object>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="449">
+            <Object
+                 pxsl_line="450">
+                <QuestObject
+                     class="AISpawnBoxCompound"
+                     name="Saviors_Patio_Enemies_001"
+                     pxsl_line="450" />
+            </Object>
+            <Object
+                 pxsl_line="451">
+                <QuestObject
+                     class="AISpawnBoxCompound"
+                     name="Saviors_Patio_Enemies_002"
+                     pxsl_line="451" />
+            </Object>
+            <Object
+                 pxsl_line="452">
+                <QuestObject
+                     class="AISpawnBoxCompound"
+                     name="Saviors_Patio_Enemies_003"
+                     pxsl_line="452" />
+            </Object>
+            <Object
+                 pxsl_line="453">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="Saviors_QEG_BurningCar_01"
+                     pxsl_line="453" />
+            </Object>
+            <Object
+                 pxsl_line="454">
+                <QuestObject
+                     class="SafeZone"
+                     name="Saviors_SafeZone"
+                     pxsl_line="454" />
+            </Object>
+            <Object
+                 pxsl_line="455">
+                <QuestObject
+                     class="SafeArea"
+                     name="Saviors_SafeArea"
+                     pxsl_line="455" />
+            </Object>
+            <Object
+                 pxsl_line="456">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="Saviors_QEG_Generator_Working"
+                     pxsl_line="456" />
+            </Object>
+            <Object
+                 pxsl_line="457">
+                <QuestObject
+                     class="ForceDayTimeObject"
+                     name="Saviors_ForceDayTime_Patio"
+                     pxsl_line="457" />
+            </Object>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="458">
+            <Object
+                 pxsl_line="459">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="Saviors_QEG_RESPAWNS"
+                     pxsl_line="459" />
+            </Object>
+            <Object
+                 pxsl_line="460">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="Saviors_QEG_EnemeisAfterQuest"
+                     pxsl_line="460" />
+            </Object>
+        </Phase>
+        <!-- ,show-hudgroup _ HideRadarForMissionSaviors -->
+        <Phase
+             type="disable enable time freeze"
+             name="_"
+             should_freeze_time="false"
+             pxsl_line="462" />
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="463">
+            <Destination
+                 pxsl_line="463">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Saviors_SP_OldTown_TO_Sewers"
+                     pxsl_line="463" />
+            </Destination>
+        </Phase>
+    </Quest>
+    <Quest
+         name="__Extraction_Sewers_Armored"
+         parent="__Saviors_END"
+         pxsl_line="465">
+        <Phase
+             type="go to"
+             name="Extraction - Swamp Arena"
+             distance="10000000"
+             show_locations="false"
+             pxsl_line="466">
+            <Destination
+                 pxsl_line="466">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Saviors_RESPAWN_Swamp"
+                     pxsl_line="466" />
+            </Destination>
+            <DebugPlayerPosition
+                 pxsl_line="467">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Saviors_RESPAWN_Swamp"
+                     pxsl_line="467" />
+            </DebugPlayerPosition>
+        </Phase>
+        <Phase
+             type="enable"
+             name="_"
+             pxsl_line="468">
+            <Object
+                 pxsl_line="468">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="Extraction_QEG_Enemies"
+                     pxsl_line="468" />
+            </Object>
+        </Phase>
+        <Phase
+             type="started quest guard"
+             name="_"
+             quest_name="Final"
+             finished="true"
+             pxsl_line="469" />
+        <Phase
+             type="enable"
+             name="_"
+             state="disabled"
+             pxsl_line="470">
+            <Object
+                 pxsl_line="470">
+                <QuestObject
+                     class="QuestEnableGroup"
+                     name="Extraction_QEG_Enemies"
+                     pxsl_line="470" />
+            </Object>
+        </Phase>
+        <Phase
+             type="checkpoint"
+             name="_"
+             pxsl_line="471">
+            <Destination
+                 pxsl_line="471">
+                <QuestObject
+                     class="SpawnPoint"
+                     name="Saviors_RESPAWN_Swamp"
+                     pxsl_line="471" />
+            </Destination>
+        </Phase>
+    </Quest>
+</QuestsDefinitions>
