@@ -1,0 +1,4 @@
+# DyingLightSource
+This repository contains the source code for all critical parts of the game logic of Dying Light, a Survival Horror Zombie Apocalypse game developed by Techland, in an effort to make modding for the game easier. The repository only focuses on game logic, so irrelavant parts like the filesystem dll files that are also found with the game are not included.
+# Files of interest
+In addition to the extracted scripts from the Data0.pak file, which is commonly used in modding the game, this repo also contains the source code for the files DyingLightGame.exe, engine_x64_rwdi.dll, and gamedll_x64_rwdi.dll. Of these 3, gamedll_x64_rwdi.dll contains the bulk of the game logic that can be modded, as DyingLightGame.exe is merely a Launcher for the actual game, while engine_x64_rwdi.dll is just the compiled Chrome Engine 6 runtime that the game runs on.
